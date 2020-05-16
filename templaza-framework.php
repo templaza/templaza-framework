@@ -19,6 +19,7 @@ namespace TemPlazaFramework;
 defined( 'ABSPATH' ) || exit;
 
 require_once dirname(__FILE__).'/includes/defines.php';
+require_once dirname(__FILE__).'/includes/functions.php';
 
 use TemPlazaFramework\Core\Framework;
 
