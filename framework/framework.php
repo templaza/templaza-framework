@@ -21,7 +21,7 @@ class Framework{
         $this -> enqueue_script();
         $this -> enqueue_style();
 
-        add_filter( 'redux/redux_demo/panel/templates_path', array($this, 'redux_panel_path') );
+//        add_filter( 'redux/redux_demo/panel/templates_path', array($this, 'redux_panel_path') );
     }
 
     public function redux_panel_path($tmpPath){
@@ -34,7 +34,7 @@ class Framework{
 
     public function enqueue_style(){
         wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__css', Functions::get_my_frame_url().'/assets/vendors/core/core.css');
-        wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__style', Functions::get_my_frame_url().'/assets/css/style.min.css');
+        wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__style', Functions::get_my_frame_url().'/assets/css/framework.min.css');
     }
 
 }

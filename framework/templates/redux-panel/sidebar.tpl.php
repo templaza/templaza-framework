@@ -11,14 +11,6 @@
 ?>
 <nav class="sidebar position-relative">
     <div class="sidebar-header">
-<!--        <a href="#" class="sidebar-brand">-->
-<!--            Noble<span>UI</span>-->
-<!--        </a>-->
-<!--        <div class="sidebar-toggler not-active">-->
-<!--            <span></span>-->
-<!--            <span></span>-->
-<!--            <span></span>-->
-<!--        </div>-->
         <?php $this->get_template( 'sidebar.header.tpl.php' ); ?>
     </div>
     <div class="sidebar-body">

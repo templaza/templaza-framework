@@ -49,7 +49,22 @@
                     }
                 }
                 if(preg_match('/(redux-group-tab-link-a)/i', $li)){
-                    $li = preg_replace('/(redux-group-tab-link-a)/i','nav-link $1', $li);
+                    $li = preg_replace('/(redux-group-tab-link-a)/i','nav-link text-wrap align-items-start h-auto $1', $li);
+                    if(preg_match('/(extraIconSubsections)/i', $li)){
+                        $li = preg_replace('/(extraIconSubsections)/i','$1 order-3 ml-auto', $li);
+                    }
+                    preg_match('/(ul.*?)(?!subsection)(.*?group_title)/i', $li, $match);
+//                    preg_match('/(?!subsection)(.*?group_title)/i', $li, $match);
+//                    var_export('<pre>');
+//                    var_dump($match);
+//                    die();
+                    if(preg_match('/(?!subsection)(.*?group_title)/i', $li, $match)){
+//                        var_dump($match);
+                        $li = preg_replace('/(?!subsection)(.*?group_title)/i','$1 link-title', $li);
+                    }
+                    if(preg_match('/(<i.*?class=")(.*?")/i', $li)){
+                        $li = preg_replace('/(<i.*?class=")(.*?")/i','$1position-absolute $2', $li);
+                    }
                 }
                 echo $li;
                 $skip_sec = false;
