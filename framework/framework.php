@@ -33,8 +33,8 @@ class Framework{
 
     public function enqueue_style(){
         wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__css', Functions::get_my_frame_url().'/assets/vendors/core/core.css');
-        wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__framework', Functions::get_my_frame_url().'/assets/css/framework.min.css');
         wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__style', Functions::get_my_frame_url().'/assets/css/style.css');
+        wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__templaza-options', Functions::get_my_frame_url().'/assets/scss/templaza-options.css');
     }
 
     protected function redux_init(){
