@@ -1,9 +1,8 @@
-.w-px-150 {
-  width: 150px !important;
+.redux-container.templaza-framework-options #redux-header .display_header {
+  margin: 0 10px;
 }
-
-.h-px-150 {
-  height: 150px !important;
+.redux-container.templaza-framework-options #redux-header .display_header h2 {
+  text-transform: uppercase;
 }
 
 /*# sourceMappingURL=templaza-options.css.map */
