@@ -2,22 +2,21 @@
 
 namespace TemPlazaFramework\Core;
 
-use Cassandra\Value;
 use TemPlazaFramework\Functions;
 
 defined( 'ABSPATH' ) || exit;
 
 class Framework{
+
+    protected $text_domain;
+
     public function init(){
 
-        $plgPath    = TEMPLAZA_FRAMEWORK_PLUGIN_DIR_PATH;
-        if ( !class_exists( 'ReduxFramework' ) && file_exists( $plgPath . '/redux-framework/ReduxCore/framework.php' ) ) {
-            require_once( $plgPath . '/redux-framework/ReduxCore/framework.php' );
-        }
-        if ( !isset( $redux_demo ) && file_exists( TEMPLAZA_FRAMEWORK_CORE_PATH. '/options/basic-config.php' ) ) {
-            require_once( TEMPLAZA_FRAMEWORK_CORE_PATH. '/options/basic-config.php' );
+        if(!$this -> text_domain) {
+            $this->text_domain = Functions::get_my_text_domain();
         }
 
+        $this -> redux_init();
         $this -> enqueue_script();
         $this -> enqueue_style();
 
@@ -34,7 +33,47 @@ class Framework{
 
     public function enqueue_style(){
         wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__css', Functions::get_my_frame_url().'/assets/vendors/core/core.css');
-        wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__style', Functions::get_my_frame_url().'/assets/css/framework.min.css');
+        wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__framework', Functions::get_my_frame_url().'/assets/css/framework.min.css');
+        wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__style', Functions::get_my_frame_url().'/assets/css/style.css');
+    }
+
+    protected function redux_init(){
+
+        $plgPath    = TEMPLAZA_FRAMEWORK_PLUGIN_DIR_PATH;
+        if ( !class_exists( 'ReduxFramework' ) && file_exists( $plgPath . '/redux-framework/ReduxCore/framework.php' ) ) {
+            require_once( $plgPath . '/redux-framework/ReduxCore/framework.php' );
+        }
+        if ( !isset( $redux_demo ) && file_exists( TEMPLAZA_FRAMEWORK_CORE_PATH. '/options/basic-config.php' ) ) {
+            require_once( TEMPLAZA_FRAMEWORK_CORE_PATH. '/options/basic-config.php' );
+        }
+
+        // Include basic options
+        $path = TEMPLAZA_FRAMEWORK_OPTION_PATH.'/basic';
+        if(is_dir($path)){
+            $files  = list_files($path, 1);
+            if(count($files)){
+                foreach($files as $file){
+                    if(file_exists($file)){
+                        require_once $file;
+                    }
+                }
+            }
+        }
+
+        // Read options by themes
+        $tmpOptionPath  = TEMPLAZA_FRAMEWORK_THEME_PATH_OPTION;
+        $tmpOptionPath  = trailingslashit($tmpOptionPath);
+        if(is_dir($tmpOptionPath)){
+            $files  = list_files($tmpOptionPath, 1);
+            if(count($files)){
+                foreach($files as $file){
+                    if(file_exists($file)){
+                        require_once $file;
+                    }
+                }
+            }
+        }
+
     }
 
 }

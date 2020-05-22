@@ -63,7 +63,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
             return $plugin['Version'];
         }
 
-        public static function get_my_text_domain_name(){
+        public static function get_my_text_domain(){
             $plugin = self::get_my_data();
 
             if(!$plugin){
