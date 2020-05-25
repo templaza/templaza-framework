@@ -1,9 +1,100 @@
-.redux-container.templaza-framework-options{
-  #redux-header{
-    .display_header{
-      margin:0 10px;
-      h2{
-        text-transform: uppercase;
+$all: all 0.3s ease-in-out;
+$circle: all 0.4s ease-in-out;
+@mixin transition($transition...) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+$tzline:#000;
+$tzbackground:#fff;
+$tzhover:rgb(251, 121, 6);
+.wp-admin {
+  .redux-container.templaza-framework-options {
+    background:#fff;
+    background-image: none;
+    #redux-header {
+      .display_header {
+        margin: 0 10px;
+        h2 {
+          text-transform: uppercase;
+        }
+      }
+    }
+    .redux-sidebar{
+      .redux-group-tab-link-a{
+        span.group_title{
+          padding-left:25px;
+        }
+        i{
+          font-size:12px;
+          top:13px;
+          &.el-chevron-down{
+            font-size:8px;
+            top:20px;
+          }
+        }
+      }
+      .redux-group-menu{
+        li{
+          &.activeChild.hasSubSections{
+            > a{
+              background: $tzbackground !important;
+              text-shadow: none !important;
+              color:$tzhover !important;
+              &:hover{
+                background:$tzbackground;
+                color:$tzhover;
+              }
+              i{
+                color:$tzhover;
+              }
+            }
+            ul{
+              li{
+                a{
+                  background: $tzbackground !important;
+                  text-shadow: none !important;
+                  padding: 5px 5px 5px 35px;
+                  font-size:12px;
+                  @include transition($all);
+                  &:before{
+                    content: '';
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background: transparent;
+                    border: 1px solid #a9b4ca;
+                    position: absolute;
+                    left: 17px;
+                    top: 12px;
+                    @include transition($circle);
+                  }
+                  &:hover{
+                    color:$tzhover !important;
+                    padding-left: 38px;
+                    text-shadow: none !important;
+                    &:before{
+                      background:$tzhover;
+                      border: 1px solid $tzhover;
+                      @include transition($circle);
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &.redux-group-tab-link-li{
+            a{
+              color:#000 !important;
+              &:hover{
+                background:$tzbackground;
+                color:$tzhover;
+              }
+            }
+          }
+        }
       }
     }
   }
