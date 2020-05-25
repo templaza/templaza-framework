@@ -1,8 +1,83 @@
-.redux-container.templaza-framework-options #redux-header .display_header {
+.wp-admin .redux-container.templaza-framework-options {
+  background: #fff;
+  background-image: none;
+}
+.wp-admin .redux-container.templaza-framework-options #redux-header .display_header {
   margin: 0 10px;
 }
-.redux-container.templaza-framework-options #redux-header .display_header h2 {
+.wp-admin .redux-container.templaza-framework-options #redux-header .display_header h2 {
   text-transform: uppercase;
+}
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-tab-link-a span.group_title {
+  padding-left: 25px;
+}
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-tab-link-a i {
+  font-size: 12px;
+  top: 13px;
+}
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-tab-link-a i.el-chevron-down {
+  font-size: 8px;
+  top: 20px;
+}
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections > a {
+  background: #fff !important;
+  text-shadow: none !important;
+  color: #fb7906 !important;
+}
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections > a:hover {
+  background: #fff;
+  color: #fb7906;
+}
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections > a i {
+  color: #fb7906;
+}
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul li a {
+  background: #fff !important;
+  text-shadow: none !important;
+  padding: 5px 5px 5px 35px;
+  font-size: 12px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul li a:before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid #a9b4ca;
+  position: absolute;
+  left: 17px;
+  top: 12px;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul li a:hover {
+  color: #fb7906 !important;
+  padding-left: 38px;
+  text-shadow: none !important;
+}
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul li a:hover:before {
+  background: #fb7906;
+  border: 1px solid #fb7906;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.redux-group-tab-link-li a {
+  color: #000 !important;
+}
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.redux-group-tab-link-li a:hover {
+  background: #fff;
+  color: #fb7906;
 }
 
 /*# sourceMappingURL=templaza-options.css.map */
