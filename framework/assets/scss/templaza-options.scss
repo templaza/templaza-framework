@@ -1,5 +1,6 @@
 $all: all 0.3s ease-in-out;
 $circle: all 0.4s ease-in-out;
+$butt: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 @mixin transition($transition...) {
   -webkit-transition: $transition;
   -moz-transition: $transition;
@@ -7,23 +8,103 @@ $circle: all 0.4s ease-in-out;
   -o-transition: $transition;
   transition: $transition;
 }
+$shadow_all:0 8px 10px 0 rgba(183, 192, 206, 0.2);
+@mixin box-shadow($box-shadow...) {
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  -ms-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+}
 $tzline:#000;
 $tzbackground:#fff;
-$tzhover:rgb(251, 121, 6);
+$tzhover:#727cf5;
 
 .wp-admin {
   .redux-container.templaza-framework-options {
-    background:#fff;
+    background:#f9fafb;
     background-image: none;
+    border:none;
+    #redux-intro-text{
+      display:none;
+    }
+    .redux_field_th{
+      font-size:13px;
+    }
+    .button{
+      padding:.5rem 1rem;
+      color:$tzhover;
+      background:$tzbackground;
+      border-color:$tzhover;
+      margin:0;
+      line-height: 1;
+      @include transition($butt);
+      &:hover{
+        background:$tzhover;
+        border-color:$tzhover;
+        color:#fff;
+      }
+      &.button-primary{
+        padding:.5rem 1rem;
+        color:#fff;
+        background:$tzhover;
+        border-color:$tzhover;
+        margin:0;
+        line-height: 1;
+      }
+    }
+
+    .redux-main{
+      margin-left:226px;
+      background:none;
+      border:none;
+      padding:0;
+      #redux-sticky{
+        border:none;
+        background:$tzbackground;
+        @include box-shadow($shadow_all);
+        margin: 0 0 25px;
+        #info_bar{
+          background:$tzbackground;
+          border:none;
+          height:32px;
+          padding:8px 10px 6px 6px;
+        }
+      }
+      #redux-footer-sticky{
+        margin:0;
+        #redux-footer{
+          background: $tzbackground !important;
+          border:none;
+          #redux-share a{
+            color:$tzhover;
+          }
+        }
+      }
+      .redux-group-tab{
+        background:$tzbackground;
+        padding:5px 20px 30px 20px;
+        @include box-shadow($shadow_all);
+      }
+    }
     #redux-header {
+      background:$tzbackground;
+      margin-bottom: 25px;
+      @include box-shadow($shadow_all);
+      border:none;
       .display_header {
         margin: 0 10px;
         h2 {
           text-transform: uppercase;
+          color:$tzhover;
+        }
+        span{
+          color:$tzhover;
         }
       }
     }
     .redux-sidebar{
+      background:$tzbackground;
+      @include box-shadow($shadow_all);
       .redux-group-tab-link-a{
         span.group_title{
           padding-left:25px;
