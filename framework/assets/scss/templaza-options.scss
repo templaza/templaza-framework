@@ -10,6 +10,7 @@ $circle: all 0.4s ease-in-out;
 $tzline:#000;
 $tzbackground:#fff;
 $tzhover:rgb(251, 121, 6);
+
 .wp-admin {
   .redux-container.templaza-framework-options {
     background:#fff;
@@ -38,7 +39,8 @@ $tzhover:rgb(251, 121, 6);
       }
       .redux-group-menu{
         li{
-          &.activeChild.hasSubSections{
+          &.activeChild.hasSubSections,
+          &.active.hasSubSections{
             > a{
               background: $tzbackground !important;
               text-shadow: none !important;
@@ -88,6 +90,7 @@ $tzhover:rgb(251, 121, 6);
           &.redux-group-tab-link-li{
             a{
               color:#000 !important;
+              background: #fff;
               &:hover{
                 background:$tzbackground;
                 color:$tzhover;

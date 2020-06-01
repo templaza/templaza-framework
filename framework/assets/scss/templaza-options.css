@@ -19,19 +19,19 @@
   font-size: 8px;
   top: 20px;
 }
-.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections > a {
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections > a, .wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.active.hasSubSections > a {
   background: #fff !important;
   text-shadow: none !important;
   color: #fb7906 !important;
 }
-.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections > a:hover {
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections > a:hover, .wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.active.hasSubSections > a:hover {
   background: #fff;
   color: #fb7906;
 }
-.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections > a i {
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections > a i, .wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.active.hasSubSections > a i {
   color: #fb7906;
 }
-.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul li a {
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul li a, .wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.active.hasSubSections ul li a {
   background: #fff !important;
   text-shadow: none !important;
   padding: 5px 5px 5px 35px;
@@ -42,7 +42,7 @@
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul li a:before {
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul li a:before, .wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.active.hasSubSections ul li a:before {
   content: "";
   width: 4px;
   height: 4px;
@@ -58,12 +58,12 @@
   -o-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
-.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul li a:hover {
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul li a:hover, .wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.active.hasSubSections ul li a:hover {
   color: #fb7906 !important;
   padding-left: 38px;
   text-shadow: none !important;
 }
-.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul li a:hover:before {
+.wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul li a:hover:before, .wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.active.hasSubSections ul li a:hover:before {
   background: #fb7906;
   border: 1px solid #fb7906;
   -webkit-transition: all 0.4s ease-in-out;
@@ -74,6 +74,7 @@
 }
 .wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.redux-group-tab-link-li a {
   color: #000 !important;
+  background: #fff;
 }
 .wp-admin .redux-container.templaza-framework-options .redux-sidebar .redux-group-menu li.redux-group-tab-link-li a:hover {
   background: #fff;
