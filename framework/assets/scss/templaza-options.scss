@@ -18,6 +18,7 @@ $shadow_all:0 8px 10px 0 rgba(183, 192, 206, 0.2);
 $tzline:#000;
 $tzbackground:#fff;
 $tzhover:#727cf5;
+$tzdelete:#ff3366;
 
 .wp-admin {
   .redux-container.templaza-framework-options {
@@ -50,6 +51,9 @@ $tzhover:#727cf5;
         border-color:$tzhover;
         margin:0;
         line-height: 1;
+        &:focus{
+          @include box-shadow(none);
+        }
       }
     }
 
@@ -84,6 +88,125 @@ $tzhover:#727cf5;
         background:$tzbackground;
         padding:5px 20px 30px 20px;
         @include box-shadow($shadow_all);
+      }
+      input[type="text"], input[type="password"]{
+        display: inline-block;
+        width: 55%;
+        height: 35px;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1;
+        color: #495057;
+        background-color: #ffffff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 2px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        margin-bottom: 5px;
+        &:focus{
+          color: #495057;
+          background-color: #fff;
+          border-color: #80bdff;
+          outline: 0;
+          outline: none;
+          outline-width: 0;
+          outline-color: transparent;
+          box-shadow: none;
+        }
+
+      }
+      .redux-container-multi_text{
+        .redux-multi-text{
+          li{
+            a{
+              &.deletion{
+                color: $tzdelete;
+                border:  1px solid $tzdelete;
+                display: inline-block;
+                font-weight: 600;
+                text-align: center;
+                vertical-align: middle;
+                cursor: pointer;
+                user-select: none;
+                background-color: transparent;
+                height: 33px;
+                padding: 0 1rem;
+                font-size: 0.875rem;
+                line-height: 33px;
+                text-decoration: none;
+                border-radius: 0.1875rem;
+                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                &:hover{
+                  background: $tzdelete;
+                  color:#fff;
+                }
+              }
+            }
+          }
+        }
+        .redux-multi-text-add{
+          margin-top:10px;
+        }
+      }
+      .wp-picker-container{
+        button{
+          &.wp-color-result{
+            &:hover{
+              background:$tzhover;
+              color:#fff !important;
+            }
+          }
+          .wp-color-result-text{
+            background:none;
+            color:$tzhover;
+            line-height: 12px;
+            border:none;
+          }
+        }
+        input.redux-color{
+          line-height: 12px;
+          font-size:11px;
+          height:auto;
+          margin-right:5px;
+        }
+      }
+      .input-append, .input-prepend{
+        .add-on{
+          height: 33px;
+          padding: 0 8px;
+          font-size: 0.875rem;
+          font-weight: 400;
+          line-height: 32px;
+        }
+      }
+      .upload_button_div .media_upload_button{
+        margin-right: 5px;
+      }
+      .ui-buttonset{
+        .ui-state-active{
+          background: $tzhover !important;
+          box-shadow: none !important;
+          border-color:$tzhover !important;
+        }
+      }
+      .redux-container-switch{
+        .cb-enable{
+          font-weight: normal;
+          &.selected{
+            background: $tzhover !important;
+            box-shadow: none !important;
+            border-color:$tzhover !important;
+          }
+          span{
+            font-weight:normal;
+          }
+        }
+        .cb-disable{
+          span{
+            font-weight:normal;
+          }
+        }
       }
     }
     #redux-header {
@@ -155,6 +278,18 @@ $tzhover:#727cf5;
                     @include transition($circle);
                   }
                   &:hover{
+                    color:$tzhover !important;
+                    padding-left: 38px;
+                    text-shadow: none !important;
+                    &:before{
+                      background:$tzhover;
+                      border: 1px solid $tzhover;
+                      @include transition($circle);
+                    }
+                  }
+                }
+                &.active{
+                  a{
                     color:$tzhover !important;
                     padding-left: 38px;
                     text-shadow: none !important;
