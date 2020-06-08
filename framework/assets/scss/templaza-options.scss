@@ -19,6 +19,7 @@ $tzline:#000;
 $tzbackground:#fff;
 $tzhover:#727cf5;
 $tzdelete:#ff3366;
+$tzspin: #007bff;
 
 .wp-admin {
   .redux-container.templaza-framework-options {
@@ -31,7 +32,7 @@ $tzdelete:#ff3366;
     .redux_field_th{
       font-size:13px;
     }
-    .button{
+    .button, .button-secondary{
       padding:.5rem 1rem;
       color:$tzhover;
       background:$tzbackground;
@@ -55,10 +56,27 @@ $tzdelete:#ff3366;
           @include box-shadow(none);
         }
       }
+      &.wp-color-result{
+        border:1px solid #ddd;
+        span{
+          color:rgba(255,255,255,0.8);
+        }
+      }
+    }
+    .button-primary{
+      padding:.5rem 1rem;
+      color:#fff;
+      background:$tzhover;
+      border-color:$tzhover;
+      margin:0;
+      line-height: 1;
+      &:focus{
+        @include box-shadow(none);
+      }
     }
 
     .redux-main{
-      margin-left:226px;
+      margin-left:305px;
       background:none;
       border:none;
       padding:0;
@@ -71,14 +89,19 @@ $tzdelete:#ff3366;
           background:$tzbackground;
           border:none;
           height:32px;
-          padding:8px 10px 6px 6px;
+          padding:25px;
+          .expand_options{
+            margin-left: 0;
+          }
         }
       }
       #redux-footer-sticky{
         margin:0;
+        @include box-shadow($shadow_all);
         #redux-footer{
           background: $tzbackground !important;
           border:none;
+          padding:25px;
           #redux-share a{
             color:$tzhover;
           }
@@ -86,10 +109,15 @@ $tzdelete:#ff3366;
       }
       .redux-group-tab{
         background:$tzbackground;
-        padding:5px 20px 30px 20px;
+        padding:5px 25px 30px 25px;
         @include box-shadow($shadow_all);
       }
-      input[type="text"], input[type="password"]{
+      .redux_spinner{
+        input[type="text"]{
+          padding:0.5rem;
+        }
+      }
+      input[type="text"], input[type="password"], textarea{
         display: inline-block;
         width: 55%;
         height: 35px;
@@ -114,7 +142,32 @@ $tzdelete:#ff3366;
           outline-color: transparent;
           box-shadow: none;
         }
-
+      }
+      textarea{
+        height:auto;
+        line-height: 1.2;
+        width:100%
+      }
+      select{
+        color: #495057;
+        background-color: #ffffff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 2px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        &:focus{
+          color: #495057;
+          background-color: #fff;
+          border-color: #80bdff;
+          outline: 0;
+          outline: none;
+          outline-width: 0;
+          outline-color: transparent;
+          box-shadow: none;
+        }
+        &.redux-typography{
+          line-height: 28px !important;
+        }
       }
       .redux-container-multi_text{
         .redux-multi-text{
@@ -159,7 +212,7 @@ $tzdelete:#ff3366;
           }
           .wp-color-result-text{
             background:none;
-            color:$tzhover;
+            color:#fff;
             line-height: 12px;
             border:none;
           }
@@ -169,12 +222,13 @@ $tzdelete:#ff3366;
           font-size:11px;
           height:auto;
           margin-right:5px;
+          padding:0.5rem;
         }
       }
       .input-append, .input-prepend{
         .add-on{
           height: 33px;
-          padding: 0 8px;
+          padding: 0 8px !important;
           font-size: 0.875rem;
           font-weight: 400;
           line-height: 32px;
@@ -208,12 +262,34 @@ $tzdelete:#ff3366;
           }
         }
       }
+      .redux-container-image_select{
+        .redux-image-select-selected,
+        .redux-image-select{
+          img, .tiles{
+            border-width: 3px;
+          }
+        }
+        .redux-image-select-selected{
+          img, .tiles{
+            border-color:$tzhover;
+          }
+        }
+      }
+      .redux-container-slider .redux-slider-container{
+        background: $tzspin !important;
+      }
+      .button-secondary{
+
+      }
     }
     #redux-header {
       background:$tzbackground;
       margin-bottom: 25px;
       @include box-shadow($shadow_all);
       border:none;
+      .rAds{
+        display:none;
+      }
       .display_header {
         margin: 0 10px;
         h2 {
@@ -228,6 +304,7 @@ $tzdelete:#ff3366;
     .redux-sidebar{
       background:$tzbackground;
       @include box-shadow($shadow_all);
+      width:280px;
       .redux-group-tab-link-a{
         span.group_title{
           padding-left:25px;
@@ -249,6 +326,7 @@ $tzdelete:#ff3366;
               background: $tzbackground !important;
               text-shadow: none !important;
               color:$tzhover !important;
+              padding:10px 25px;
               &:hover{
                 background:$tzbackground;
                 color:$tzhover;
@@ -262,7 +340,7 @@ $tzdelete:#ff3366;
                 a{
                   background: $tzbackground !important;
                   text-shadow: none !important;
-                  padding: 5px 5px 5px 35px;
+                  padding: 5px 5px 5px 45px;
                   font-size:12px;
                   @include transition($all);
                   &:before{
@@ -273,13 +351,13 @@ $tzdelete:#ff3366;
                     background: transparent;
                     border: 1px solid #a9b4ca;
                     position: absolute;
-                    left: 17px;
+                    left: 27px;
                     top: 12px;
                     @include transition($circle);
                   }
                   &:hover{
                     color:$tzhover !important;
-                    padding-left: 38px;
+                    padding-left: 48px;
                     text-shadow: none !important;
                     &:before{
                       background:$tzhover;
@@ -291,7 +369,7 @@ $tzdelete:#ff3366;
                 &.active{
                   a{
                     color:$tzhover !important;
-                    padding-left: 38px;
+                    padding-left: 48px;
                     text-shadow: none !important;
                     &:before{
                       background:$tzhover;
@@ -307,6 +385,8 @@ $tzdelete:#ff3366;
             a{
               color:#000 !important;
               background: #fff;
+              border:none;
+              padding:10px 15px 10px 25px;
               &:hover{
                 background:$tzbackground;
                 color:$tzhover;
