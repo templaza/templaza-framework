@@ -1,0 +1,143 @@
+/* Header Section */
+#templaza-header{
+  &.has-sidebar{
+    z-index: 1050;
+    .templaza-logo {
+      justify-content: flex-start;
+    }
+    .templaza-sidebar-block {
+      padding: 10px 0;
+    }
+  }
+  .templaza-sidebar-content {
+    padding: 15px 25px;
+  }
+  .templaza-sidebar-collapsed-logo {
+    margin: 15px 12px;
+    display: none;
+  }
+  @media(max-width: 1600px) {
+    .templaza-sidebar-menu {
+      li a {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+    .templaza-sidebar-content {
+      padding: 0;
+      > div.templaza-sidebar-menu, div.templaza-sidebar-block {
+        padding: 10px 20px;
+      }
+    }
+    &.has-sidebar {
+      .templaza-sidebar-logo {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+  }
+  @media(min-width: 1200px) and (max-width: 1600px) {
+    .templaza-sidebar-collapsed-logo {
+      display: flex;
+      justify-content: center;
+    }
+    &.expanded {
+      .templaza-sidebar-collapsed-logo {
+        display: none;
+      }
+    }
+  }
+  .moduletable {
+    width: 100%;
+  }
+}
+.templaza-header-section {
+  border-bottom: none;
+  box-shadow: none;
+  &.header-absolute {
+    position: absolute;
+    z-index: 1050;
+    width: 100%;
+    background-color: transparent !important;
+  }
+}
+/* Sidebar Header */
+.templaza-header {
+  &.has-sidebar {
+    -webkit-transition: .1s linear all;
+    -moz-transition: .1s linear all;
+    -ms-transition: .1s linear all;
+    -o-transition: .1s linear all;
+    @media(max-width: 1600px) {
+      width: $sidebar-header-mini-width;
+    }
+  }
+  @media (max-width: 1600px) {
+    &.has-sidebar {
+      display: block;
+      width: 100%;
+      position: relative;
+      padding: 15px 0;
+      .templaza-sidebar-logo {
+        display: flex;
+        padding: 0 15px;
+        align-items: center;
+      }
+    }
+  }
+  @media(max-width: 1600px) {
+    .templaza-sidebar-content {
+      > div.templaza-sidebar-menu {
+        display: none;
+      }
+      > div.templaza-sidebar-block {
+        display: none;
+      }
+    }
+    &.expanded {
+      width: $sidebar-header-width !important;
+      -webkit-transition: .1s linear all;
+      -moz-transition: .1s linear all;
+      -ms-transition: .1s linear all;
+      -o-transition: .1s linear all;
+      transition: .1s linear all;
+      .templaza-sidebar-collapsable {
+        > i {
+          &:before {
+            content: "\f00d";
+          }
+        }
+      }
+      .templaza-sidebar-logo {
+        display: block;
+      }
+      .templaza-sidebar-content > div.templaza-sidebar-menu {
+        display: block;
+      }
+      .templaza-sidebar-content > div.templaza-sidebar-block {
+        display: block;
+      }
+    }
+  }
+  @media(min-width: 1200px) and (max-width: 1600px) {
+    &.has-sidebar {
+      padding: 0;
+      position: fixed;
+      width: $header-sidebar-mini-width;
+      .templaza-sidebar-collapsable{
+        display: block;
+      }
+    }
+    &.has-sidebar:not(.expanded) .templaza-sidebar-logo {
+      display: none;
+    }
+  }
+}
+@media (min-width:1201px) {
+  body.header-sidebar-left{
+    margin-left: 0;
+  }
+  body.header-sidebar-right{
+    margin-right: 0;
+  }
+}

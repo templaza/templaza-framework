@@ -3,60 +3,451 @@
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
 // -> START Typography
-Redux::setSection( $opt_name, array(
+$this -> sections[]	= array(
     'title'  => __( 'Typography', $this -> text_domain ),
-    'id'     => 'typography',
-    'desc'   => __( 'For full documentation on this field, visit: ', $this -> text_domain ) . '<a href="//docs.reduxframework.com/core/fields/typography/" target="_blank">docs.reduxframework.com/core/fields/typography/</a>',
+    'id'     => 'typographies',
+    'desc'   => __( 'These settings control the typography', $this -> text_domain ),
     'icon'   => 'el el-font',
-    'fields' => array(
+    'fields' => array(        
+    )
+);
+
+// -> START Body Typography
+$this -> sections[] = array(
+    'title'      => __( 'Body Typography', $this -> text_domain ),
+    'id'         => 'typography-bodies',
+    'desc'       => __( 'These settings control the typography for all body text.', $this -> text_domain ),
+    'subsection' => true,
+    'fields'     => array(
         array(
-            'id'       => 'opt-typography-body',
-            'type'     => 'typography',
-            'title'    => __( 'Body Font', $this -> text_domain ),
-            'subtitle' => __( 'Specify the body font properties.', $this -> text_domain ),
-            'google'   => true,
-            'output' => array('h1, h2, h3, h4'),
-            'default'  => array(
-                'color'       => '#dd9933',
-                'font-size'   => '30px',
-                'font-family' => 'Arial,Helvetica,sans-serif',
-                'font-weight' => 'Normal',
-            ),
+            'id'       => 'typography-body',
+            'type'     => 'switch',
+            'title'    => __( 'Typography Properties', $this -> text_domain ),
+            'subtitle' => __( 'Choose typography properties for this section. If <code>Default</code> selected then properties will inherit from CSS code.', $this -> text_domain ),
+            'default'  => true,
+            'on'       => __('Default', $this -> text_domain),
+            'off'      => __('Custom', $this -> text_domain),
         ),
         array(
-            'id'          => 'opt-typography',
-            'type'        => 'typography',
-            'title'       => __( 'Typography h2.site-description', $this -> text_domain ),
-            //'compiler'      => true,  // Use if you want to hook in your own CSS compiler
-            //'google'      => false,
-            // Disable google fonts. Won't work if you haven't defined your google api key
-            'font-backup' => true,
-            // Select a backup non-google font in addition to a google font
-            //'font-style'    => false, // Includes font-style and weight. Can use font-style or font-weight to declare
-            //'subsets'       => false, // Only appears if google is true and subsets not set to false
-            //'font-size'     => false,
-            //'line-height'   => false,
-            //'word-spacing'  => true,  // Defaults to false
-            //'letter-spacing'=> true,  // Defaults to false
-            //'color'         => false,
-            //'preview'       => false, // Disable the previewer
-            'all_styles'  => true,
-            // Enable all Google Font style/weight variations to be added to the page
-            'output'      => array( '.site-description' ),
-            // An array of CSS selectors to apply this font style to dynamically
-            'compiler'    => array( 'site-description-compiler' ),
-            // An array of CSS selectors to apply this font style to dynamically
-            'units'       => 'px',
-            // Defaults to px
-            'subtitle'    => __( 'Typography option with each property can be called individually.', $this -> text_domain ),
-            'default'     => array(
-                'color'       => '#333',
-                'font-style'  => '700',
-                'font-family' => 'Abel',
-                'google'      => true,
-                'font-size'   => '33px',
-                'line-height' => '40px'
+            'id'        => 'typography-body-option',
+            'type'      => 'typography',
+            'title'     => __( 'Body Font', $this -> text_domain ),
+            'subtitle'  => __( 'Specify the body font properties.', $this -> text_domain ),
+            'required'  => array('typography-body', '=', '0'),
+            'color'          => false,
+            'text-align'     => false,
+            'preview'        => true, // Disable the previewer
+            'word-spacing'   => false,
+            'letter-spacing' => true,
+            'text-transform' => true,
+            'font-backup'    => true,
+            'default'        => array(
+                'color'          => '#000',
+                'font-weight'    => '400',
+                'letter-spacing' => '0',
+                'text-transform' => 'none',
+                'font-backup'    => 'Arial, Helvetica, sans-serif',
             ),
         ),
     )
-) );
+);
+
+// -> START Menu
+$this -> sections[] = array(
+    'title'      => __( 'Menu Typography', $this -> text_domain ),
+    'id'         => 'typography-menus',
+    'desc'       => __( 'These settings control the typography for menu.', $this -> text_domain ),
+    'subsection' => true,
+    'fields'     => array(
+        array(
+            'id'       => 'typography-menu',
+            'type'     => 'switch',
+            'title'    => __( 'Typography Properties', $this -> text_domain ),
+            'subtitle' => __( ' Choose typography properties for this section. If <code>inherit</code> selected then property will inherit its value from body typography properties.', $this -> text_domain ),
+            'default'  => true,
+            'on'       => __('Inherit', $this -> text_domain),
+            'off'      => __('Custom', $this -> text_domain),
+        ),
+        array(
+            'id'             => 'typography-menu-option',
+            'type'           => 'typography',
+            'title'          => __( 'Menu Font', $this -> text_domain ),
+            'subtitle'       => __( 'Specify the menu font properties.', $this -> text_domain ),
+            'required'       => array('typography-menu', '=', '0'),
+            'color'          => false,
+            'text-align'     => false,
+            'preview'        => true, // Disable the previewer
+            'word-spacing'   => false,
+            'letter-spacing' => true,
+            'text-transform' => true,
+            'font-backup'    => true,
+            'default'        => array(
+                'color'          => '#000',
+                'font-weight'    => '400',
+                'letter-spacing' => '0',
+                'text-transform' => 'none',
+                'font-backup'    => 'Arial, Helvetica, sans-serif',
+            ),
+        ),
+    )
+);
+
+// -> START Drop Down Menu
+$this -> sections[] = array(
+    'title'      => __( 'Drop Down Menu Typography', $this -> text_domain ),
+    'id'         => 'typography-submenus',
+    'desc'       => __( 'These settings control the typography for submenu.', $this -> text_domain ),
+    'subsection' => true,
+    'fields'     => array(
+        array(
+            'id'       => 'typography-submenu',
+            'type'     => 'switch',
+            'title'    => __( 'Typography Properties', $this -> text_domain ),
+            'subtitle' => __( ' Choose typography properties for this section. If <code>inherit</code> selected then property will inherit its value from body typography properties.', $this -> text_domain ),
+            'default'  => true,
+            'on'       => __('Inherit', $this -> text_domain),
+            'off'      => __('Custom', $this -> text_domain),
+        ),
+        array(
+            'id'        => 'typography-submenu-option',
+            'type'      => 'typography',
+            'title'     => __( 'Dropdown Menu Font', $this -> text_domain ),
+            'subtitle'  => __( 'Specify the dropdown menu font properties.', $this -> text_domain ),
+            'required'  => array('typography-submenu', '=', '0'),
+            'color'          => false,
+            'text-align'     => false,
+            'preview'        => true, // Disable the previewer
+            'word-spacing'   => false,
+            'letter-spacing' => true,
+            'text-transform' => true,
+            'font-backup'    => true,
+            'default'        => array(
+                'color'          => '#000',
+                'font-weight'    => '400',
+                'letter-spacing' => '0',
+                'text-transform' => 'none',
+                'font-backup'    => 'Arial, Helvetica, sans-serif',
+            ),
+        ),
+    )
+);
+
+// -> START H1
+$this -> sections[] = array(
+    'title'      => __( 'H1 Typography', $this -> text_domain ),
+    'id'         => 'typography-h1s',
+    'desc'       => __( 'These settings control the typography for submenu.', $this -> text_domain ),
+    'subsection' => true,
+    'fields'     => array(
+        array(
+            'id'       => 'typography-h1',
+            'type'     => 'switch',
+            'title'    => __( 'Typography Properties', $this -> text_domain ),
+            'subtitle' => __( ' Choose typography properties for this section. If <code>inherit</code> selected then property will inherit its value from body typography properties.', $this -> text_domain ),
+            'default'  => true,
+            'on'       => __('Inherit', $this -> text_domain),
+            'off'      => __('Custom', $this -> text_domain),
+        ),
+        array(
+            'id'        => 'typography-h1-option',
+            'type'      => 'typography',
+            'title'     => __( 'H1 Font', $this -> text_domain ),
+            'subtitle'  => __( 'Specify the h1 font properties.', $this -> text_domain ),
+            'required'  => array('typography-h1', '=', '0'),
+            'color'          => true,
+            'text-align'     => false,
+            'preview'        => true, // Disable the previewer
+            'word-spacing'   => false,
+            'letter-spacing' => true,
+            'text-transform' => true,
+            'font-backup'    => true,
+            'default'        => array(
+                'color'          => '#000',
+                'font-weight'    => '700',
+                'letter-spacing' => '0',
+                'text-transform' => 'none',
+                'font-backup'    => 'Arial, Helvetica, sans-serif',
+            ),
+        ),
+    )
+);
+
+// -> START H2
+$this -> sections[] = array(
+    'title'      => __( 'H2 Typography', $this -> text_domain ),
+    'id'         => 'typography-h2s',
+    'desc'       => __( 'These settings control the typography for submenu.', $this -> text_domain ),
+    'subsection' => true,
+    'fields'     => array(
+        array(
+            'id'       => 'typography-h2',
+            'type'     => 'switch',
+            'title'    => __( 'Typography Properties', $this -> text_domain ),
+            'subtitle' => __( ' Choose typography properties for this section. If <code>inherit</code> selected then property will inherit its value from body typography properties.', $this -> text_domain ),
+            'default'  => true,
+            'on'       => __('Inherit', $this -> text_domain),
+            'off'      => __('Custom', $this -> text_domain),
+        ),
+        array(
+            'id'        => 'typography-h2-option',
+            'type'      => 'typography',
+            'title'     => __( 'H2 Font', $this -> text_domain ),
+            'subtitle'  => __( 'Specify the h2 font properties.', $this -> text_domain ),
+            'required'  => array('typography-h2', '=', '0'),
+            'color'          => true,
+            'text-align'     => false,
+            'preview'        => true, // Disable the previewer
+            'word-spacing'   => false,
+            'letter-spacing' => true,
+            'text-transform' => true,
+            'font-backup'    => true,
+            'default'        => array(
+                'color'          => '#000',
+                'font-weight'    => '600',
+                'letter-spacing' => '0',
+                'text-transform' => 'none',
+                'font-backup'    => 'Arial, Helvetica, sans-serif',
+            ),
+        ),
+    )
+);
+
+// -> START H3
+$this -> sections[] = array(
+    'title'      => __( 'H3 Typography', $this -> text_domain ),
+    'id'         => 'typography-h3s',
+    'desc'       => __( 'These settings control the typography for submenu.', $this -> text_domain ),
+    'subsection' => true,
+    'fields'     => array(
+        array(
+            'id'       => 'typography-h3',
+            'type'     => 'switch',
+            'title'    => __( 'Typography Properties', $this -> text_domain ),
+            'subtitle' => __( ' Choose typography properties for this section. If <code>inherit</code> selected then property will inherit its value from body typography properties.', $this -> text_domain ),
+            'default'  => true,
+            'on'       => __('Inherit', $this -> text_domain),
+            'off'      => __('Custom', $this -> text_domain),
+        ),
+        array(
+            'id'        => 'typography-h3-option',
+            'type'      => 'typography',
+            'title'     => __( 'H3 Font', $this -> text_domain ),
+            'subtitle'  => __( 'Specify the h3 font properties.', $this -> text_domain ),
+            'required'  => array('typography-h3', '=', '0'),
+            'color'          => true,
+            'text-align'     => false,
+            'preview'        => true, // Disable the previewer
+            'word-spacing'   => false,
+            'letter-spacing' => true,
+            'text-transform' => true,
+            'font-backup'    => true,
+            'default'        => array(
+                'color'          => '#000',
+                'font-weight'    => '500',
+                'letter-spacing' => '0',
+                'text-transform' => 'none',
+                'font-backup'    => 'Arial, Helvetica, sans-serif',
+            ),
+        ),
+    )
+);
+
+// -> START H4
+$this -> sections[] = array(
+    'title'      => __( 'H4 Typography', $this -> text_domain ),
+    'id'         => 'typography-h4s',
+    'desc'       => __( 'These settings control the typography for submenu.', $this -> text_domain ),
+    'subsection' => true,
+    'fields'     => array(
+        array(
+            'id'       => 'typography-h4',
+            'type'     => 'switch',
+            'title'    => __( 'Typography Properties', $this -> text_domain ),
+            'subtitle' => __( ' Choose typography properties for this section. If <code>inherit</code> selected then property will inherit its value from body typography properties.', $this -> text_domain ),
+            'default'  => true,
+            'on'       => __('Inherit', $this -> text_domain),
+            'off'      => __('Custom', $this -> text_domain),
+        ),
+        array(
+            'id'        => 'typography-h4-option',
+            'type'      => 'typography',
+            'title'     => __( 'H4 Font', $this -> text_domain ),
+            'subtitle'  => __( 'Specify the h4 font properties.', $this -> text_domain ),
+            'required'  => array('typography-h4', '=', '0'),
+            'color'          => true,
+            'text-align'     => false,
+            'preview'        => true, // Disable the previewer
+            'word-spacing'   => false,
+            'letter-spacing' => true,
+            'text-transform' => true,
+            'font-backup'    => true,
+            'default'        => array(
+                'color'          => '#000',
+                'font-weight'    => '500',
+                'letter-spacing' => '0',
+                'text-transform' => 'none',
+                'font-backup'    => 'Arial, Helvetica, sans-serif',
+            ),
+        ),
+    )
+);
+
+// -> START H5
+$this -> sections[] = array(
+    'title'      => __( 'H5 Typography', $this -> text_domain ),
+    'id'         => 'typography-h5s',
+    'desc'       => __( 'These settings control the typography for submenu.', $this -> text_domain ),
+    'subsection' => true,
+    'fields'     => array(
+        array(
+            'id'       => 'typography-h5',
+            'type'     => 'switch',
+            'title'    => __( 'Typography Properties', $this -> text_domain ),
+            'subtitle' => __( ' Choose typography properties for this section. If <code>inherit</code> selected then property will inherit its value from body typography properties.', $this -> text_domain ),
+            'default'  => true,
+            'on'       => __('Inherit', $this -> text_domain),
+            'off'      => __('Custom', $this -> text_domain),
+        ),
+        array(
+            'id'        => 'typography-h5-option',
+            'type'      => 'typography',
+            'title'     => __( 'H5 Font', $this -> text_domain ),
+            'subtitle'  => __( 'Specify the h5 font properties.', $this -> text_domain ),
+            'required'  => array('typography-h5', '=', '0'),
+            'color'          => true,
+            'text-align'     => false,
+            'preview'        => true, // Disable the previewer
+            'word-spacing'   => false,
+            'letter-spacing' => true,
+            'text-transform' => true,
+            'font-backup'    => true,
+            'default'        => array(
+                'color'          => '#000',
+                'font-weight'    => '500',
+                'letter-spacing' => '0',
+                'text-transform' => 'none',
+                'font-backup'    => 'Arial, Helvetica, sans-serif',
+            ),
+        ),
+    )
+);
+
+// -> START H6
+$this -> sections[] = array(
+    'title'      => __( 'H6 Typography', $this -> text_domain ),
+    'id'         => 'typography-h6s',
+    'desc'       => __( 'These settings control the typography for submenu.', $this -> text_domain ),
+    'subsection' => true,
+    'fields'     => array(
+        array(
+            'id'       => 'typography-h6',
+            'type'     => 'switch',
+            'title'    => __( 'Typography Properties', $this -> text_domain ),
+            'subtitle' => __( ' Choose typography properties for this section. If <code>inherit</code> selected then property will inherit its value from body typography properties.', $this -> text_domain ),
+            'default'  => true,
+            'on'       => __('Inherit', $this -> text_domain),
+            'off'      => __('Custom', $this -> text_domain),
+        ),
+        array(
+            'id'        => 'typography-h6-option',
+            'type'      => 'typography',
+            'title'     => __( 'H6 Font', $this -> text_domain ),
+            'subtitle'  => __( 'Specify the h6 font properties.', $this -> text_domain ),
+            'required'  => array('typography-h6', '=', '0'),
+            'color'          => true,
+            'text-align'     => false,
+            'preview'        => true, // Disable the previewer
+            'word-spacing'   => false,
+            'letter-spacing' => true,
+            'text-transform' => true,
+            'font-backup'    => true,
+            'default'        => array(
+                'color'          => '#000',
+                'font-weight'    => '500',
+                'letter-spacing' => '0',
+                'text-transform' => 'none',
+                'font-backup'    => 'Arial, Helvetica, sans-serif',
+            ),
+        ),
+    )
+);
+
+// -> START Top Bar
+$this -> sections[] = array(
+    'title'      => __( 'Top Bar', $this -> text_domain ),
+    'id'         => 'typography-top-bars',
+    'desc'       => __( 'These settings control the typography for top bar section.', $this -> text_domain ),
+    'subsection' => true,
+    'fields'     => array(
+        array(
+            'id'       => 'typography-top-bar',
+            'type'     => 'switch',
+            'title'    => __( 'Typography Properties', $this -> text_domain ),
+            'subtitle' => __( ' Choose typography properties for this section. If <code>inherit</code> selected then property will inherit its value from body typography properties.', $this -> text_domain ),
+            'default'  => true,
+            'on'       => __('Inherit', $this -> text_domain),
+            'off'      => __('Custom', $this -> text_domain),
+        ),
+        array(
+            'id'        => 'typography-top-bar-option',
+            'type'      => 'typography',
+            'title'     => __( 'Top Bar Font', $this -> text_domain ),
+            'subtitle'  => __( 'Specify the top bar font properties.', $this -> text_domain ),
+            'required'  => array('typography-top-bar', '=', '0'),
+            'color'          => true,
+            'text-align'     => false,
+            'preview'        => true, // Disable the previewer
+            'font-backup'    => true,
+            'word-spacing'   => false,
+            'letter-spacing' => true,
+            'text-transform' => true,
+            'default'        => array(
+                'color'          => '#000',
+                'font-weight'    => '500',
+                'letter-spacing' => '0',
+                'text-transform' => 'none',
+                'font-backup'    => 'Arial, Helvetica, sans-serif',
+            ),
+        ),
+    )
+);
+
+// -> START Footer
+$this -> sections[] = array(
+    'title'      => __( 'Footer Typography', $this -> text_domain ),
+    'id'         => 'typography-footers',
+    'desc'       => __( 'These settings control the typography for Footer.', $this -> text_domain ),
+    'subsection' => true,
+    'fields'     => array(
+        array(
+            'id'       => 'typography-footer',
+            'type'     => 'switch',
+            'title'    => __( 'Typography Properties', $this -> text_domain ),
+            'subtitle' => __( 'Choose typography properties for this section. If <code>inherit</code> selected then property will inherit its value from body typography properties.', $this -> text_domain ),
+            'default'  => true,
+            'on'       => __('Inherit', $this -> text_domain),
+            'off'      => __('Custom', $this -> text_domain),
+        ),
+        array(
+            'id'        => 'typography-footer-option',
+            'type'      => 'typography',
+            'title'     => __( 'Top Bar Font', $this -> text_domain ),
+            'subtitle'  => __( 'Specify the top bar font properties.', $this -> text_domain ),
+            'required'  => array('typography-footer', '=', '0'),
+            'color'          => true,
+            'text-align'     => false,
+            'preview'        => true, // Disable the previewer
+            'word-spacing'   => false,
+            'letter-spacing' => true,
+            'text-transform' => true,
+            'font-backup'    => true,
+            'default'        => array(
+                'color'          => '#000',
+                'font-weight'    => '400',
+                'letter-spacing' => '0',
+                'text-transform' => 'none',
+                'font-backup'    => 'Arial, Helvetica, sans-serif',
+            ),
+        ),
+    )
+);

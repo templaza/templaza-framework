@@ -1,0 +1,31 @@
+
+// Sidebar Header
+$sidebar-header-shadow: 0 0 2px 0 rgba(56, 69, 84, .2) !default;
+$sidebar-header-width: 320px !default;
+$sidebar-header-mini-width: 54px !default;
+
+// Deprecated Variable
+$header-sidebar-mini-width: 54px !default;
+
+// Logo
+$logo-max-width: 250px !default;
+$logo-max-height: 65px !default;
+
+// Header Section
+$header-padding-y: 15px !default;
+$header-padding-x: 0 !default;
+$header-section-zindex: $zindex-dropdown !default;
+$header-border-bottom: 1px solid #dee2e6 !default;
+$header-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !default;
+
+// Sticky Header
+$sticky-header-zindex: $zindex-sticky !default;
+$sticky-header-animation-duration: .7s !default;
+$sticky-header-padding-x: 0 !default;
+$sticky-header-padding-y: 10px !default;
+$sticky-header-border-bottom: 1px solid #dee2e6 !default;
+$sticky-header-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !default;
+
+// Stacked Header
+$stacked-header-bg: #fff !default;
+$stacked-header-zindex: $zindex-dropdown !default;
