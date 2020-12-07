@@ -1,0 +1,40 @@
+body{
+  overflow-x: hidden;
+  .po_static{
+    position:static;
+  }
+  a{
+    &:hover{
+      text-decoration: none;
+    }
+  }
+  .templaza-content-element, .wpb_content_element{
+    margin:$element-margin;
+    p{
+      font-size:16px;
+      color:#7c859a;
+      line-height: 1.6em;
+    }
+  }
+  .align-left{
+    text-align: left;
+  }
+  .align-center{
+    text-align: center;
+  }
+  .align-right{
+    text-align: right;
+  }
+  .clr{
+    clear:both;
+  }
+  img{
+    max-width: 100%;
+    height:auto;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1320px;
+  }
+}

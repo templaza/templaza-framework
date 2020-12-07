@@ -1,0 +1,52 @@
+div.templaza-archive {
+  .templaza-archive-item{
+    margin-bottom:55px;
+  }
+  .templaza-news-image{
+    img{
+      width:100%;
+      height:auto;
+      @include border-radius(5px);
+    }
+  }
+  .templaza-news-info{
+    .info{
+      color: lighten($content-color, 19%);
+      > *:not(:last-child):after{
+        content: "";
+        top: 2px;
+        width: 1px;
+        height: 15px;
+        margin: 0 15px;
+        position: relative;
+        display: inline-block;
+        background: lighten($content-color, 19%);
+      }
+    }
+    .date{
+      //color:#9bacb5;
+      margin-top: 25px;
+      font-size:14px;
+      display: inline-block;
+    }
+    .title{
+      font-size:30px;
+      font-weight:700;
+      margin-top: 15px;
+    }
+    .excerpt{
+      margin-top: 15px;
+    }
+    .sub-info{
+      margin-top: 15px;
+      a{
+        font-size:14px;
+        color:$heading-color;
+        &:hover{
+          color:$global-color;
+        }
+      }
+    }
+  }
+
+}

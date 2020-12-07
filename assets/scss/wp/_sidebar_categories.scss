@@ -1,0 +1,39 @@
+div.templaza-sidebar {
+  ul{
+    padding-left:0;
+    li{
+      list-style: none;
+      padding:10px 0 0 15px;
+      position:relative;
+      color:$content-color;
+      @include transition($transition-all);
+      &:before{
+        content:"\f054";
+        font-size:8px;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position:absolute;
+        left:0;
+        top:10px;
+        @include transition($transition-all);
+      }
+      a{
+        color:$content-color;
+        display:inline-block;
+        @include transition($transition-all);
+      }
+      &:hover{
+        &:before{
+          color:$global-color;
+          left:10px;
+          @include transition($transition-all);
+        }
+        >a{
+          padding-left: 10px;
+          color:$global-color;
+          @include transition($transition-all);
+        }
+      }
+    }
+  }
+}

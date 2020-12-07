@@ -1,0 +1,40 @@
+.templaza-footer {
+  background: #21343b !important;
+  .container{
+    border-top:1px solid rgba(255,255,255,0.1);
+    padding-top: 80px;
+  }
+  div.templaza-sidebar{
+    .widget-area .widget{
+      h3{
+        color:#fff;
+        font-size:20px;
+        border-top:none;
+        padding-top:0;
+        margin-bottom: 10px;
+      }
+      i{
+        color:$global-color;
+        margin-right: 8px;
+        font-size:14px;
+      }
+      img{
+        padding-bottom: 15px;
+      }
+    }
+  }
+}
+.templaza-footer-bottom{
+  background:#182429;
+  font-size:14px;
+  padding: 20px 0;
+}
+.templaza-social{
+  a{
+    padding-right:15px;
+  }
+}
+#templaza-backtotop{
+  position:absolute;
+
+}

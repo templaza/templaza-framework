@@ -1,0 +1,41 @@
+.pagination {
+  .screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal !important;
+  }
+  .nav-links{
+    display:block;
+    text-align: center;
+    width:100%;
+    span,a{
+      display:inline-block;
+      padding:10px 15px;
+      background:#fff;
+      border:1px solid $border-color;
+      margin: 0 3px;
+      @include transition($transition-all);
+    }
+    a{
+      &:hover{
+        background:$global-color;
+        color:#fff;
+        @include transition($transition-all);
+      }
+    }
+    span{
+      &.current{
+        background:$global-color;
+        color:#fff;
+        @include transition($transition-all);
+      }
+    }
+  }
+}

@@ -1,3 +1,6 @@
+// Font awesome
+
+$fa-font-path:         "../../../../plugins/templaza-framework/assets/vendors/fontawesome/webfonts" !default;
 
 // Sidebar Header
 $sidebar-header-shadow: 0 0 2px 0 rgba(56, 69, 84, .2) !default;
@@ -23,9 +26,39 @@ $sticky-header-zindex: $zindex-sticky !default;
 $sticky-header-animation-duration: .7s !default;
 $sticky-header-padding-x: 0 !default;
 $sticky-header-padding-y: 10px !default;
-$sticky-header-border-bottom: 1px solid #dee2e6 !default;
+$sticky-header-border-bottom: 1px solid rgba(255,255,255,0.1) !default;
 $sticky-header-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !default;
 
 // Stacked Header
 $stacked-header-bg: #fff !default;
 $stacked-header-zindex: $zindex-dropdown !default;
+
+// Deprecated Variable
+$header-sidebar-width: 320px !default;
+$header-sidebar-mini-width: 54px !default;
+
+// Back to top
+$backtotop-right: 20px !default;
+$backtotop-bottom: 20px !default;
+$backtotop-padding: 10px !default;
+$backtotop-zindex: $zindex-sticky !default;
+$backtotop-rounded-radius: 4px !default;
+
+// Typography
+$heading-module-font:'Roboto Condensed', sans-serif;
+$heading-module-size:2em;
+
+$heading-sidebar-size:1.8em;
+
+$global-color:#5a83e4;
+$heading-color:#373f83;
+$content-color:#7c859a;
+
+// Elements
+$element-title-size:55px;
+$element-title-weight:800;
+$element-title-line-height:1.1em;
+$sub-title-font-size:16px;
+$element-margin:120px 0 0 0;
+
+$transition-all: all 0.3s linear;

@@ -12,6 +12,9 @@ class Fields{
     {
         $this -> args       = $args;
         $this -> section    = $section;
+
+        $this -> init();
+        $this -> hooks();
     }
 
     public function init(){
@@ -28,21 +31,46 @@ class Fields{
                         continue;
                     }
                     $fName  = basename($f);
-                    $fFile  = $f.'/field_'.$fName.'.php';
+
+                    $field_type = str_replace( '_', '-', $fName );
+
+                    // Register my fields to redux
+                    $fFile  = $f.'class-templaza-'.$field_type.'.php';
+
+                    if(!file_exists($fFile)) {
+                        $fFile = $f . 'field_' . $fName . '.php';
+                    }
+
                     if(file_exists($fFile)){
                         add_filter( 'redux/' . $this->args['opt_name'] . '/field/class/' . $fName,function($field) use ($fFile){
                             return $fFile;
                         }); // Adds the local field
 
                     }
+
+                    // Register my custom field override redux's fields
+                    $custom_file    = $f.'custom-redux-'.$field_type.'.php';
+                    if(file_exists($custom_file)){
+                        require_once $custom_file;
+                        $custom_class   = 'Templaza_Custom_Redux_'.ucfirst($field_type);
+                        if(class_exists($custom_class)){
+                            new $custom_class($this -> args, $this);
+                        }
+                    }
                 }
             }
         }
 
+//        do_action('templaza-framework-field-init');
+    }
+
+    public function hooks(){
+
+        // Override redux select field (with data is icon)
         add_action('redux/options/'.$this->args['opt_name'].'/field/select/register', array($this, 'custom_select'));
         add_action('redux/field/'.$this->args['opt_name'].'/select/render/before', array($this, 'add_class_select'));
 
-//        do_action('templaza-framework-field-init');
+        do_action('templaza-framework/field/hooks', $this);
     }
 
     public function add_class_select(&$field){

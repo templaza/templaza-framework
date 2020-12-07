@@ -1,0 +1,17 @@
+div.templaza-sidebar {
+  .widget-area{
+    .widget{
+      margin-bottom: 55px;
+      h3{
+        font-size:18px;
+        text-transform: uppercase;
+        border-top:2px solid $global-color;
+        padding-top:25px;
+        margin-bottom: 30px;
+        color:$heading-color;
+        font-family: inherit;
+        font-weight:700;
+      }
+    }
+  }
+}

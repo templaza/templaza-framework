@@ -23,7 +23,8 @@
             $(this).siblings('ul').slideToggle();
         });
         $('.templaza-sidebar-collapsable').click(function () {
-            $('#templaza-header').toggleClass('expanded');
+            $('header.templaza-header').toggleClass('expanded');
+            // $('#templaza-header').toggleClass('expanded');
         });
     };
     var initDisplay = function () {

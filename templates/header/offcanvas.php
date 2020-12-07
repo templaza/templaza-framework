@@ -10,6 +10,7 @@ $options                    = Functions::get_theme_options();
 
 $header                     = isset($options['enable-header'])?(bool) $options['enable-header']:true;
 $enable_offcanvas           = isset($options['enable-offcanvas'])?(bool) $options['enable-offcanvas']:false;
+$offcanvas_sidebar          = isset($options['offcanvas-sidebar'])?$options['offcanvas-sidebar']:'';
 $offcanvas_menu_location    = isset($options['offcanvas-menu-location'])?$options['offcanvas-menu-location']:'header';
 $offcanvas_menu_level       = isset($options['offcanvas-menu-level'])?(int) $options['offcanvas-menu-level']:0;
 $offcanvas_animation        = isset($options['offcanvas-animation'])?$options['offcanvas-animation']:'st-effect-1';
@@ -40,13 +41,20 @@ if (!$header || !$enable_offcanvas) {
         </div>
         <div class="templaza-offcanvas-inner">
 			<?php
-            Menu::get_nav_menu(array(
-                'theme_location'  => $offcanvas_menu_location,
-                'menu_class'      => implode(' ', $navClass),
-//                'container_class' => implode(' ', $navWrapperClass),
-                'menu_id'         => '',
-                'depth'           => $offcanvas_menu_level, // Level
-            ));
+//            Menu::get_nav_menu(array(
+//                'theme_location'  => $offcanvas_menu_location,
+//                'menu_class'      => implode(' ', $navClass),
+////                'container_class' => implode(' ', $navWrapperClass),
+//                'menu_id'         => '',
+//                'depth'           => $offcanvas_menu_level, // Level
+//            ));
+
+
+            if ($offcanvas_sidebar && is_active_sidebar($offcanvas_sidebar)){
+                echo '<div id="templaza-offcanvas-sidebar">';
+                dynamic_sidebar($offcanvas_sidebar);
+                echo '</div>';
+            }
              ?>
         </div>
     </div>

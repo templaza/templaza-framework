@@ -1,0 +1,32 @@
+div.templaza-sidebar {
+  form, form.wpcf7-form {
+    margin: 0;
+    position: relative;
+    input[type="text"], input[type="email"]{
+      line-height: 50px;
+      height:50px;
+    }
+    input.submit{
+      background: none;
+      border: none;
+      font-size: 0;
+      height: 50px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 50px;
+      z-index: 1;
+    }
+    i.i-search{
+      position: absolute;
+      right: 18px;
+      top: 15px;
+      color:$heading-color;
+    }
+    &.searchform{
+      input[type="text"], input[type="email"], input{
+        margin-bottom: 0;
+      }
+    }
+  }
+}

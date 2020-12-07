@@ -1,0 +1,26 @@
+div.templaza-sidebar {
+  table{
+    margin-bottom: 0;
+    width:100%;
+    &.wp-calendar-table{
+      text-align: center;
+    }
+    thead{
+      tr{
+        th{
+          background:#edeff0;
+          border: 1px solid #e2e4e7;
+          padding:8px;
+        }
+      }
+    }
+    tbody{
+      tr{
+        td{
+          border: 1px solid #e2e4e7;
+          padding:8px;
+        }
+      }
+    }
+  }
+}

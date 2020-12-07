@@ -1,0 +1,53 @@
+/*
+* Body Wrapper
+*/
+.templaza-content {
+	&.has-sidebar {
+		&.sidebar-dir-left {
+			padding-left: $header-sidebar-width;
+
+			@media(max-width: 1600px) {
+				padding-left: $header-sidebar-mini-width;
+			}
+
+			@media(max-width: 1200px) {
+				padding-left: 0;
+			}
+		}
+
+		&.sidebar-dir-right {
+			padding-right: $header-sidebar-width;
+
+			@media(max-width: 1600px) {
+				padding-right: $header-sidebar-mini-width;
+			}
+
+			@media(max-width: 1200px) {
+				padding-right: 0;
+			}
+		}
+	}
+}
+
+.templaza-layout{
+	position: relative;
+	.templaza-wrapper {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+	}
+	&.templaza-layout-boxed {
+		.templaza-wrapper {
+			margin: 0 auto;
+			box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+			background-color: $white;
+			max-width: map-get($container-max-widths, "xl") + 100;
+		}
+	}
+	.templaza-row{
+		> .templaza-column.col-lg-12{
+			padding-left:0;
+			padding-right:0;
+		}
+	}
+}

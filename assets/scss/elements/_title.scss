@@ -1,0 +1,53 @@
+.templaza-title{
+   .templaza-content{
+      color:#7c859a;
+      .text-box-desc{
+         margin-top: 30px;
+         strong{
+            font-size:18px;
+            color:$heading-color;
+         }
+      }
+   }
+   h2{
+      font-size:$element-title-size;
+      font-weight:$element-title-weight;
+      line-height: $element-title-line-height;
+      margin-bottom: 0;
+   }
+   span{
+      &.TemPlazaSubTitle{
+         display:block;
+         font-size:$sub-title-font-size;
+         color:$global-color;
+         position:relative;
+         margin-bottom: 20px;
+
+      }
+   }
+   .templaza-title-image{
+      text-align: right;
+      img{
+         max-width: 100%;
+         height:auto;
+      }
+   }
+   &.has_image{
+      span{
+         &.TemPlazaSubTitle{
+            margin-top:35px;
+         }
+      }
+   }
+   .templaza-title-signature{
+      float:right;
+      margin-top: 20px;
+   }
+}
+.vc_custom_1597683731228 {
+   .templaza-title{
+      h2,.TemPlazaSubTitle{
+         color:#fff;
+      }
+   }
+}

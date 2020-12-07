@@ -1,0 +1,23 @@
+.templaza-counter{
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: center;
+   .templaza-counter-number{
+      font-size:$element-title-size;
+      font-weight:$element-title-weight;
+      line-height: $element-title-line-height;
+      margin-right: 20px;
+   }
+   .templaza-counter-title{
+      font-weight: normal;
+      font-size:18px;
+      width:55%;
+   }
+   &.style2{
+      .templaza-counter-title{
+         width:100%;
+         font-family: inherit;
+      }
+   }
+}

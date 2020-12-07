@@ -28,7 +28,7 @@ $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options
 
 ?>
 <!-- header starts -->
-<header id="templaza-header" class="<?php echo implode(' ', $class); ?>">
+<!--<header id="templaza-header" class="--><?php //echo implode(' ', $class); ?><!--">-->
     <div class="templaza-sidebar-content h-100">
         <div class="templaza-sidebar-collapsable">
             <i class="fa"></i>
@@ -80,5 +80,5 @@ $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options
             </div>
 		<?php endif; ?>
     </div>
-</header>
+<!--</header>-->
 <!-- header ends -->

@@ -1,0 +1,14 @@
+.templaza-btn,input.wpcf7-submit{
+  display:inline-block;
+  padding:18px 35px;
+  color:#fff;
+  font-size:16px;
+  background:$global-color;
+  margin-top: 45px;
+  border:none;
+  @include border-radius(5px);
+  font-weight:bold;
+  &:hover{
+    color:#fff;
+  }
+}

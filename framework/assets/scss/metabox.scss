@@ -1,0 +1,124 @@
+
+#poststuff,
+#nav-menus-frame{
+  .hide{
+    display: none;
+  }
+  .wrap{
+    margin-right: 0;
+  }
+  .templaza-framework-options{
+    h2{
+      font-size: 1.3em;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  .postbox{
+
+    .templaza-framework-options{
+      border: none;
+      background: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      background-image: none;
+      .redux-main{
+        margin: 0;
+        padding: 0;
+        border: none;
+        min-height: 0;
+      }
+      .redux-group-tab{
+        padding: 0;
+        display: block;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+  }
+  #side-sortables{
+    .templaza-framework-options{
+      //border: none;
+      //background: none;
+      //-webkit-box-shadow: none;
+      //-moz-box-shadow: none;
+      //box-shadow: none;
+      //background-image: none;
+      select{
+        width: 100%;
+        min-width: 200px;
+      }
+      //.redux-main{
+      //  margin: 0;
+      //  padding: 0;
+      //  border: none;
+      //  min-height: 0;
+      //}
+      //.redux-group-tab{
+      //  padding: 0;
+      //  display: block;
+      //  -webkit-box-shadow: none;
+      //  -moz-box-shadow: none;
+      //  box-shadow: none;
+      //}
+    }
+    .form-table{
+      th, td{
+        display: block;
+        width: 100%;
+      }
+      th{
+        padding: 10px 0;
+      }
+      td{
+        padding: 0 0 10px;
+      }
+      span.description{
+        display: block;
+        font-style: normal;
+        font-weight: 400;
+      }
+      .regular-text{
+        width: 95%;
+      }
+      .field-desc{
+        clear: both;
+      }
+    }
+    .redux-container{
+      .redux-main .redux-field-container{
+        padding: 0;
+      }
+      .redux_field_th{
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+
+#nav-menus-frame{
+  .templaza-framework-options{
+    border: none;
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    background-image: none;
+    .redux-main{
+      margin: 0;
+      padding: 0;
+      border: none;
+      min-height: 0;
+    }
+    .redux-group-tab{
+      padding: 0;
+      display: block;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+}

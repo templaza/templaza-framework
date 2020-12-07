@@ -1,7 +1,13 @@
 @import "vendor/bootstrap/bootstrap.scss";
 @import "variables";
+//@import "vendor/fontawesome/regular";
+//@import "vendor/fontawesome/brands";
+//@import "vendor/fontawesome/solid";
+//@import "vendor/fontawesome/fontawesome";
 @import "utilities/utilities.scss";
+@import "layouts";
 @import "header_z";
 @import "header";
 @import "menu";
 @import "offcanvas";
+@import "backtotop";

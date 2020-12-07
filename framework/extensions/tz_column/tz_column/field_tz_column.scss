@@ -1,0 +1,46 @@
+.redux-main {
+    .redux-tz_column-container {
+        .redux-field-container{
+            padding-top: 0;
+            > label{
+                display: block;
+                //color: #999;
+                //+ .redux-field-container{
+                //    padding-top: 0;
+                //}
+            }
+        }
+    }
+
+    @media screen and (max-width: 540px) {
+        .redux-main {
+            .redux-tz_column-container {
+
+            }
+        }
+    }
+}
+
+//@media screen and (max-width: 360px) {
+//    .redux-main {
+//        .redux-typography-container .iris-picker .iris-square {
+//            margin-right: 3%;
+//        }
+//    }
+//}
+//
+//.wp-customizer {
+//    .redux-typography-container {
+//        .input_wrapper {
+//            width: 40%;
+//            max-width: 40%;
+//            min-width: 20%;
+//            input.mini {
+//                width: 70%;
+//            }
+//        }
+//        .select_wrapper {
+//            width: 100% !important;
+//        }
+//    }
+//}

@@ -1,0 +1,27 @@
+div.templaza-sidebar {
+  .widget_rss{
+    ul{
+      li{
+        padding-left:0;
+        padding-bottom:10px;
+        &:last-child{
+          padding-bottom:0;
+        }
+        &:before{
+          display:none;
+        }
+        a{
+          display:inline;
+        }
+        span{
+          font-style: italic;
+        }
+        &:hover{
+          a{
+            padding-left:0;
+          }
+        }
+      }
+    }
+  }
+}

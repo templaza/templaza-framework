@@ -1,0 +1,65 @@
+#comments{
+  margin-top: 55px;
+  h3.block_title{
+    margin-bottom: 35px;
+  }
+  .comment-notes{
+    margin-bottom: 20px;
+  }
+  .comment-form-cookies-consent{
+    margin-bottom: 20px;
+    label{
+      display:inline;
+      font-size: inherit;
+    }
+  }
+  .comment-form-comment{
+    &.login{
+      label{
+        display: block;
+        margin:10px 0 20px 0;
+      }
+    }
+  }
+  #submit{
+    margin-top: 0;
+  }
+}
+.comment-list {
+  padding:0;
+  list-style: none;
+  .comments{
+    padding-bottom: 30px;
+    margin-bottom: 25px;
+    border-bottom:1px solid rgba(55,63,131,0.1);
+    .comment-author{
+      float:left;
+      margin-right: 30px;
+      img{
+        width:70px;
+        height:auto;
+      }
+    }
+    .comment-content{
+      padding-left: 100px;
+      .comment-head{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        h5{
+          margin:0;
+          font-size:inherit;
+          font-weight:700;
+        }
+        .comment-info{
+          font-size:12px;
+          color:#b3b8c4;
+          font-style: italic;
+        }
+      }
+      .edit-reply{
+        font-size:12px;
+      }
+    }
+  }
+}

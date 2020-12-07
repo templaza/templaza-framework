@@ -21,9 +21,12 @@ $offcanvas_direction        = isset($options['offcanvas-direction'])?(bool) $opt
 $offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$options['offcanvas-togglevisibility']:'d-block';
 
 $dropdown_arrow             = isset($options['dropdown-arrow'])?(bool) $options['dropdown-arrow']:true;
-$dropdown_animation_speed   = isset($options['dropdown-animation-speed'])?(bool) $options['dropdown-animation-speed']:300;
-$dropdown_animation_ease    = isset($options['dropdown-animation-ease'])?(bool) $options['dropdown-animation-ease']:'linear';
+//$dropdown_animation_speed   = isset($options['dropdown-animation-speed'])?(bool) $options['dropdown-animation-speed']:300;
+//$dropdown_animation_ease    = isset($options['dropdown-animation-ease'])?(bool) $options['dropdown-animation-ease']:'linear';
 $dropdown_animation_type    = isset($options['dropdown-animation-type'])?(bool) $options['dropdown-animation-type']:'fade';
+$dropdown_animation_effect  = isset($options['dropdown-animation-effect'])?$options['dropdown-animation-effect']:'fade-down';
+$dropdown_animation_speed_1 = isset($options['dropdown-animation-speed-1'])?$options['dropdown-animation-speed-1']:300;
+$dropdown_animation_speed_2 = isset($options['dropdown-animation-speed-2'])?$options['dropdown-animation-speed-2']:300;
 $dropdown_trigger           = isset($options['dropdown-trigger'])?(bool) $options['dropdown-trigger']:'hover';
 
 $class = ['templaza-header', 'templaza-stacked-header', 'templaza-stacked-' . $mode . '-header'];
@@ -38,11 +41,17 @@ $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options
 $block_2_sidebar            = isset($options['header-block-2-sidebar'])?$options['header-block-2-sidebar']:'';
 $header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'';
 
+$navClass[] = $dropdown_animation_effect;
+$dropdown_style = '.templaza-nav.'.$dropdown_animation_effect.' .sub-menu {
+    transition-duration: '.$dropdown_animation_speed_1.'ms, '.$dropdown_animation_speed_2.'ms;
+}';
+Templates::add_inline_style($dropdown_style);
+
 // Chưa có options (cần xem xét)
 //$odd_menu_items = $params->get('odd_menu_items', 'left');
 
 ?>
-<header id="templaza-header" class="<?php echo implode(' ', $class); ?>">
+<!--<header id="templaza-header" class="--><?php //echo implode(' ', $class); ?><!--">-->
    <div class="d-flex">
       <div class="header-stacked-section d-flex justify-content-between flex-column w-100">
          <?php
@@ -156,21 +165,21 @@ $header_mobile_menu         = isset($options['header-mobile-menu'])?$options['he
                     ?>
                 <?php
                echo '</div>';
-               if ($enable_offcanvas) {
-                  ?>
-                  <div class="d-flex justify-content-end">
-                     <div class="header-offcanvas-trigger burger-menu-button align-self-center <?php
-                     echo $offcanvas_togglevisibility; ?>" data-offcanvas="#astroid-offcanvas" data-effect="<?php
-                     echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>">
-                        <button type="button" class="button">
-                           <span class="box">
-                              <span class="inner"></span>
-                           </span>
-                        </button>
-                     </div>
-                  </div>
-                  <?php
-               }
+//               if ($enable_offcanvas) {
+//                  ?>
+<!--                  <div class="d-flex justify-content-end">-->
+<!--                     <div class="header-offcanvas-trigger burger-menu-button align-self-center --><?php
+//                     echo $offcanvas_togglevisibility; ?><!--" data-offcanvas="#templaza-offcanvas" data-effect="--><?php
+//                     echo $offcanvas_animation; ?><!--" data-direction="--><?php //echo $offcanvas_direction; ?><!--">-->
+<!--                        <button type="button" class="button">-->
+<!--                           <span class="box">-->
+<!--                              <span class="inner"></span>-->
+<!--                           </span>-->
+<!--                        </button>-->
+<!--                     </div>-->
+<!--                  </div>-->
+<!--                  --><?php
+//               }
                ?>
             </div>
             <?php
@@ -284,4 +293,4 @@ $header_mobile_menu         = isset($options['header-mobile-menu'])?$options['he
          ?>
       </div>
    </div>
-</header>
+<!--</header>-->

@@ -11,7 +11,6 @@ class Templates{
     public static $_styles = ['desktop' => [], 'tablet' => [], 'mobile' => []];
 
     public static function locate_my_template($template_names, $load = false, $require_once = true){
-
         $located    = '';
         $base       = TEMPLAZA_FRAMEWORK.'/templates';
         foreach ( (array) $template_names as &$template_name ) {
@@ -22,11 +21,11 @@ class Templates{
             if(!preg_match('/\.php$/i', $template_name)){
                 $template_name  .= '.php';
             }
-            if ( file_exists( STYLESHEETPATH . '/' . $template_name ) ) {
-                $located = STYLESHEETPATH . '/' . $template_name;
+            if ( file_exists( get_stylesheet_directory() . '/' . $template_name ) ) {
+                $located = get_stylesheet_directory() . '/' . $template_name;
                 break;
-            } elseif ( file_exists( TEMPLATEPATH . '/' . $template_name ) ) {
-                $located = TEMPLATEPATH . '/' . $template_name;
+            } elseif ( file_exists( get_template_directory() . '/' . $template_name ) ) {
+                $located = get_template_directory() . '/' . $template_name;
                 break;
             } elseif ( file_exists( TEMPLAZA_FRAMEWORK_PLUGIN_DIR_PATH.'/'.$template_name ) ) {
                 $located   = TEMPLAZA_FRAMEWORK_PLUGIN_DIR_PATH.'/'.$template_name;
@@ -42,18 +41,17 @@ class Templates{
     }
 
     public static function load_my_layout($partial, $load = true, $require_once = true){
-
         $partial    = str_replace('.', '/', $partial);
         $located    = self::locate_my_template((array) $partial, $load, $require_once);
 
         return $located;
     }
 
-    public static function load_my_header($name = null){
+    public static function load_my_header($name = null, $require_once = true){
         if('' != $name){
-            self::load_my_layout($name, true);
+            self::load_my_layout($name, true, $require_once);
         }else {
-            self::load_my_layout('header', true);
+            self::load_my_layout('header', true, $require_once);
         }
     }
     public static function load_my_footer($name = 'footer'){
@@ -156,32 +154,13 @@ class Templates{
                     }
                 }
                 file_put_contents($theme_css_dir . '/' .$file_name, $css);
+                // Clear cache
+                self::clear_css_cache($theme_css_dir, $prefix);
             }
 
             $theme_css_uri = Functions::get_my_theme_css_uri();
-            wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-framework', $theme_css_uri.'/'.$file_name);
-
-//            $issetPreset = JFactory::getApplication()->input->get('preset', '');
-//            if (!empty($issetPreset)) {
-//                $prefix = 'preset-';
-//            }
-//            $template_dir = JPATH_SITE . '/templates/' . $this->template . '/css';
-//            if (!file_exists($template_dir . '/' . $prefix .$this->id . $version . '.css')) {
-//                if (empty($issetPreset)) {
-//                    JollyanyFrameworkHelper::clearCache($this->template, 'jollyany');
-//                }
-//                $styles = preg_grep('~^' . $prefix . '.*\.(css)$~', scandir($template_dir));
-//                foreach ($styles as $style) {
-//                    $space_time    =   time() - filemtime($template_dir . '/' .$style);
-//                    if ($space_time > 86400) {
-//                        unlink($template_dir . '/' . $style);
-//                    }
-//                }
-//                file_put_contents($template_dir . '/' . $prefix . $this->id . $version . '.css', $css);
-//            }
+            wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-framework', $theme_css_uri.'/'.$file_name, array());
         }
-//        $document = JFactory::getDocument();
-//        $document->addStyleSheet(JURI::root() . 'templates/' . $this->template . '/css/' . $prefix .$this->id . $version . '.css');
     }
 
 
@@ -202,6 +181,38 @@ class Templates{
             $version = md5($styles);
             self::build_inline_style($version, $styles);
         }
+    }
+
+    public static function get_layout_styles()
+    {
+        $styles             = [];
+        $options            = Functions::get_theme_options();
+        $template_layout    = (isset($options['layout-theme']) && (bool) $options['layout-theme'])?'wide':'boxed';
+        if ($template_layout != 'boxed') {
+            return false;
+        }
+        $layout_background  = isset($options['layout-background'])?$options['layout-background']:array();
+
+        if(count($layout_background)) {
+            $layout_background_color        = isset($layout_background['background-color'])?$layout_background['background-color']:'';
+            $layout_background_image        = isset($layout_background['background-image'])?$layout_background['background-image']:'';
+            $layout_background_size         = isset($layout_background['background-size'])?$layout_background['background-size']:'inherit';
+            $layout_background_repeat       = isset($layout_background['background-repeat'])?$layout_background['background-repeat']:'inherit';
+            $layout_background_position     = isset($layout_background['background-position'])?$layout_background['background-position']:'inherit';
+            $layout_background_attachment   = isset($layout_background['background-attachment'])?$layout_background['background-attachment']:'inherit';
+            if(!empty($layout_background_color)){
+                $styles[] = 'background-color: '.$layout_background_color;
+            }
+            if (!empty($layout_background_image)) {
+                $styles[] = 'background-image:url(' .get_home_url() . '/' . $layout_background_image . ')';
+                $styles[] = 'background-repeat:' . $layout_background_repeat;
+                $styles[] = 'background-size:' . $layout_background_size;
+                $styles[] = 'background-position:' . $layout_background_position;
+                $styles[] = 'background-attachment:' . $layout_background_attachment;
+            }
+            return implode(';', $styles);
+        }
+        return false;
     }
 
     public static function clear_css_cache($theme_dir = '', $prefix = 'style')
