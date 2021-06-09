@@ -11,7 +11,7 @@ div.templaza-portfolio-single {
   h1.title{
     font-size:44px;
     margin-bottom: 20px;
-    color:$heading-color;
+    color:$tztheme-heading-color;
   }
   .portfolio-single-content{
     margin-bottom: 50px;
@@ -23,7 +23,7 @@ div.templaza-portfolio-single {
         display:inline-block;
         &.label{
           font-weight: bold;
-          color:$heading-color;
+          color:$tztheme-heading-color;
           min-width: 150px;
         }
       }
@@ -43,12 +43,12 @@ div.templaza-portfolio-single {
       font-weight: 600;
       color:#b3b8c4;
       &:hover{
-        color:$global-color;
+        color:$tztheme-global-color;
       }
     }
     .all{
       a{
-        color:$global-color;
+        color:$tztheme-global-color;
       }
     }
   }

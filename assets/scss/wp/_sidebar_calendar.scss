@@ -8,17 +8,21 @@ div.templaza-sidebar {
     thead{
       tr{
         th{
-          background:#edeff0;
-          border: 1px solid #e2e4e7;
+          border: $tztheme-input-border;
           padding:8px;
+          background:$tztheme-table-heading-bg;
         }
       }
     }
     tbody{
       tr{
         td{
-          border: 1px solid #e2e4e7;
+          border: $tztheme-input-border;
           padding:8px;
+          &#today{
+            background:$tztheme-button_background;
+            color:$tztheme-button_text_color;
+          }
         }
       }
     }

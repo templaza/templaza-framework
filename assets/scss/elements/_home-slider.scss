@@ -27,7 +27,7 @@ div.templaza-home-slider{
             font-size:90px;
             width:60%;
             color:#fff;
-            line-height: $element-title-line-height;
+            line-height: $tztheme-element-title-line-height;
          }
          p{
             font-size:18px;
@@ -48,7 +48,7 @@ div.templaza-home-slider{
          width:50px;
          height:50px;
          @include border-radius(50%);
-         background: $global-color;
+         background: $tztheme-global-color;
          color:#fff;
          font-size:18px;
          display: inline-block;
@@ -77,11 +77,18 @@ div.templaza-home-slider{
          margin-top: -20px;
          color:#fff;
          left:0;
-         background: $heading-color;
+         background: $tztheme-heading-color;
          &.owl-next{
             left:auto;
             right:0;
          }
       }
+   }
+}
+.slider-title-info{
+   background:#fff;
+   padding:20px 30px 40px 30px;
+   a.templaza-btn{
+      margin-top: 20px;
    }
 }

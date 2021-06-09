@@ -1,0 +1,34 @@
+@mixin input-default {
+  height:$tztheme-input-height;
+  line-height: $tztheme-input-lineheight;
+  border:$tztheme-input-border;
+  padding:$tztheme-input-padding;
+  max-width:100%;
+}
+@mixin button-default {
+  background:$tztheme-button_background;
+  color:$tztheme-button_text_color;
+  @include transition($tztheme-transition-all);
+  cursor: pointer;
+  font-family: $tztheme-button-font;
+  padding:$tztheme-button_padding;
+  display:inline-block;
+  @include border-radius($tztheme-button_radius);
+  line-height: 1em;
+  &:hover{
+    background:$tztheme-button_background_hover;
+    color:$tztheme-button_text_color_hover;
+    @include transition($tztheme-transition-all);
+  }
+}
+@mixin button-slider-default {
+  background:$tztheme-button_background;
+  color:$tztheme-button_text_color;
+  @include transition($tztheme-transition-all);
+  cursor: pointer;
+  &:hover{
+    background:$tztheme-button_background_hover;
+    color:$tztheme-button_text_color_hover;
+    @include transition($tztheme-transition-all);
+  }
+}

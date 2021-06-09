@@ -11,7 +11,37 @@ Templaza_API::set_section('templaza_style',
         'title'     => esc_html__('General',$this -> text_domain),
         'desc'      => esc_html__('General theme options',$this -> text_domain),
         'icon'      => 'el-icon-home',
-        'fields'    => array(),
+        'fields'    => array(
+//            array(
+//                'id'               => 'editor-text',
+//                'type'             => 'editor',
+//                'title'            => __('Editor Text', 'redux-framework-demo'),
+//                'subtitle'         => __('Subtitle text would go here.', 'redux-framework-demo'),
+//                'default'          => 'Powered by Redux.',
+//                'args'   => array(
+//                    'teeny'            => true,
+//                    'textarea_rows'    => 10
+//                )
+//            ),
+        ),
+    )
+);
+
+// -> START Favicon
+Templaza_API::set_section('templaza_style',
+    array(
+        'title'   => __('Favicon', $this -> text_domain),
+        'id'      => 'section-favicons',
+        //    'desc'       => __( 'Enable or disable the footer copyright bar.', $this -> text_domain ),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'favicon',
+                'type'     => 'media',
+                'title'    => __( 'Favicon', $this -> text_domain ),
+                'subtitle' => __( 'Upload your browser URL icon. It\'s recommended to apply a size of 96x96 pixels to the favicon.png.', $this -> text_domain ),
+            ),
+        )
     )
 );
 
@@ -53,7 +83,8 @@ Templaza_API::set_section('templaza_style',
             ),
             array(
                 'id'       => 'preloader-fontawesome', /* Need create custom field */
-                'type'     => 'text',
+                'type'     => 'select',
+                'data'     => 'fontawesome',
                 'title'    => __( 'Preloader animation', $this -> text_domain ),
                 'subtitle' => __( 'Select a preloader animation.', $this -> text_domain ),
                 'default'  => 'spiner',

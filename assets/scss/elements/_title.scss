@@ -1,28 +1,78 @@
 .templaza-title{
    .templaza-content{
-      color:#7c859a;
       .text-box-desc{
-         margin-top: 30px;
          strong{
-            font-size:18px;
-            color:$heading-color;
+
+         }
+      }
+      &.align-left{
+         h2{
+            &.line-show{
+               &:before{
+                  left:0;
+                  margin-left:0;
+               }
+            }
+         }
+      }
+      &.align-right{
+         h2{
+            &.line-show{
+               &:before{
+                  right:0;
+                  margin-left:0;
+               }
+            }
+         }
+      }
+      p{
+         &:first-child{
+            margin-top:0;
+         }
+         &:last-child{
+            margin-bottom:0;
          }
       }
    }
    h2{
-      font-size:$element-title-size;
-      font-weight:$element-title-weight;
-      line-height: $element-title-line-height;
-      margin-bottom: 0;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 22px;
+      &.line-show{
+         &:before{
+            position: absolute;
+            content: "";
+            left: 50%;
+            width: 60px;
+            height: 4px;
+            border-top: 1px solid $tztheme-global-color;
+            border-bottom: 1px solid $tztheme-global-color;
+            margin-left: -30px;
+         }
+         &.line-under{
+            &:before{
+               bottom: 0;
+            }
+         }
+         &.line-above{
+            padding-bottom: 0;
+            &:before{
+               bottom: auto;
+               top:-22px;
+            }
+         }
+      }
+      &.line-hide{
+         margin-bottom:0;
+         padding-bottom:0
+      }
    }
    span{
       &.TemPlazaSubTitle{
          display:block;
-         font-size:$sub-title-font-size;
-         color:$global-color;
+         font-size:$tztheme-sub-title-font-size;
          position:relative;
          margin-bottom: 20px;
-
       }
    }
    .templaza-title-image{
@@ -43,11 +93,23 @@
       float:right;
       margin-top: 20px;
    }
-}
-.vc_custom_1597683731228 {
-   .templaza-title{
-      h2,.TemPlazaSubTitle{
-         color:#fff;
+   &.line-image{
+      h2.line-show{
+         margin:0;
+         padding-bottom:10px;
+         &:before{
+            display:none;
+         }
+         &.line-above{
+            margin-top:15px;
+         }
       }
+      .title-line-image{
+         margin-bottom:15px;
+      }
+   }
+   em{
+      font-style:normal;
+      color:$tztheme-global-color;
    }
 }

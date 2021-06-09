@@ -1,0 +1,34 @@
+.ui-buttonset{
+  .ui-state-active{
+    background: $tzhover !important;
+    box-shadow: none !important;
+    border-color:$tzhover !important;
+  }
+}
+.redux-container{
+  .ui-buttonset .ui-button + input + .ui-button{
+    margin-left: -1px !important;
+  }
+}
+.redux-container-button_set{
+  .ui-button{
+    background-image: none;
+    background-color: #fff;
+    text-shadow: none;
+    //  background-color: transparent;
+    border-color: $tz-border-color;
+    @include box-shadow(none);
+  }
+  .buttonset{
+    > .ui-button{
+      &:not(.ui-button:nth-last-child(1)){
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      ~ .ui-button{
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+}

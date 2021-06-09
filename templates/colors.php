@@ -2,18 +2,23 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
+use \TemPlazaFramework\CSS;
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 
 $options = Functions::get_theme_options();
 
 // Body
+$body_css        = '';
 $body_text_color        = isset($options['body-text-color'])?$options['body-text-color']:'';
 if(is_array($body_text_color) && isset($body_text_color['rgba'])) {
     if($body_text_color['alpha'] == 1){
         $body_text_color  = $body_text_color['color'];
     }else {
         $body_text_color    = $body_text_color['rgba'];
+    }
+    if(!empty($body_text_color)){
+        $body_css    .= 'color:'.$body_text_color.';';
     }
 }
 $body_link_color        = isset($options['body-link-color'])?$options['body-link-color']:'';
@@ -47,6 +52,15 @@ if(is_array($body_background_color) && isset($body_background_color['rgba'])) {
     }else {
         $body_background_color    = $body_background_color['rgba'];
     }
+    if(!empty($body_background_color)){
+        $body_css    .= 'background-color:'.$body_background_color.';';
+    }
+}
+$body_background_image  = isset($options['body-background-image'])?$options['body-background-image']:'';
+if(is_array($body_background_image) && !empty($body_background_image['background-image'])) {
+    $body_css   .= CSS::background('', $body_background_image['background-image'],
+        $body_background_image['background-repeat'], $body_background_image['background-attachment'],
+        $body_background_image['background-position'], $body_background_image['background-size'] );
 }
 
 // Header
@@ -232,14 +246,6 @@ if(is_array($dropdown_main_active_background_color) && isset($dropdown_main_acti
         $dropdown_main_active_background_color  = $dropdown_main_active_background_color['rgba'];
     }
 }
-$dropdown_menu_megamenu_border_color    = isset($options['dropdown-menu-megamenu-border-color'])?$options['dropdown-menu-megamenu-border-color']:'';
-if(is_array($dropdown_menu_megamenu_border_color) && isset($dropdown_menu_megamenu_border_color['rgba'])) {
-    if($dropdown_menu_megamenu_border_color['alpha'] == 1){
-        $dropdown_menu_megamenu_border_color  = $dropdown_menu_megamenu_border_color['color'];
-    }else {
-        $dropdown_menu_megamenu_border_color  = $dropdown_menu_megamenu_border_color['rgba'];
-    }
-}
 
 // Mobile OffCanvas
 $mobile_background_color        = isset($options['off-canvas-background-color'])?$options['off-canvas-background-color']:'';
@@ -341,11 +347,8 @@ if(is_array($contact_icon_color) && isset($contact_icon_color['rgba'])) {
 <?php
 // Body Coloring
 $body_styles = [];
-if (!empty($body_background_color)) {
-    $body_styles[] = 'body{background-color: ' . $body_background_color . ';}';
-}
-if (!empty($body_text_color)) {
-    $body_styles[] = 'body{color: ' . $body_text_color . ';}';
+if (!empty($body_css)) {
+    $body_styles[] = 'body{ ' . $body_css . '}';
 }
 if (!empty($body_heading_color)) {
     $body_styles[] = 'h1,h2,h3,h4,h5,h6{color: ' . $body_heading_color . ';}';
@@ -417,15 +420,15 @@ if (!empty($sidebar_separate_color)) {
 // Sticky Menu Coloring
 $sticky_menu_styles = [];
 if (!empty($sticky_link_color)) {
-	$sticky_menu_styles[] = '#templaza-sticky-header .templaza-nav .menu-item > a{ color: ' . $sticky_link_color . ' !important;}';
+	$sticky_menu_styles[] = '#templaza-sticky-header .templaza-nav > .menu-item > a{ color: ' . $sticky_link_color . ' !important;}';
 	$sticky_menu_styles[] = '#templaza-sticky-header .templaza-sidebar-menu .menu-item > a{ color: ' . $sticky_link_color . ' !important;}';
 }
 if (!empty($sticky_link_hover_color)) {
-	$sticky_menu_styles[] = '#templaza-sticky-header .templaza-nav .menu-item > a:hover, .templaza-nav .menu-item > a:focus{ color: ' . $sticky_link_hover_color . ' !important;}';
+	$sticky_menu_styles[] = '#templaza-sticky-header .templaza-nav > .menu-item > a:hover, .templaza-nav .menu-item > a:focus{ color: ' . $sticky_link_hover_color . ' !important;}';
 	$sticky_menu_styles[] = '#templaza-sticky-header .templaza-sidebar-menu .menu-item > a:hover, .templaza-sidebar-menu .menu-item > a:focus{ color: ' . $sticky_link_hover_color . ' !important;}';
 }
 if (!empty($sticky_link_active_color)) {
-	$sticky_menu_styles[] = '#templaza-sticky-header .templaza-nav .menu-item.current-menu-item > a{ color: ' . $sticky_link_active_color . ' !important;}';
+	$sticky_menu_styles[] = '#templaza-sticky-header .templaza-nav > .menu-item.current-menu-item > a{ color: ' . $sticky_link_active_color . ' !important;}';
 	$sticky_menu_styles[] = '#templaza-sticky-header .templaza-sidebar-menu .menu-item.current-menu-item > a{ color: ' . $sticky_link_active_color . ' !important;}';
 }
 if (!empty($sticky_off_canvas_button_color)) {
@@ -457,9 +460,6 @@ if (!empty($dropdown_main_hover_link_color)) {
 if (!empty($dropdown_main_hover_background_color)) {
    $dropdown_styles[] = '.templaza-nav .sub-menu .menu-item > a:hover{ background-color: ' . $dropdown_main_hover_background_color . ' !important;}';
 }
-//if (!empty($dropdown_menu_megamenu_border_color)) {
-//	$dropdown_styles[] = '.nav-item-megamenu .megamenu-container .col, .nav-item-megamenu .nav-submenu .item-link-heading.item-level-2, .nav-item-megamenu .nav-submenu .item-link-separator.item-level-2{ border-color: ' . $dropdown_menu_megamenu_border_color . ' !important;}';
-//}
 ?>
 
 <?php

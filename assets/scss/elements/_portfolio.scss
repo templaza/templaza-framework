@@ -5,7 +5,6 @@
   }
 }
 .templaza-page{
-  margin:40px 0 90px 0;
   .pagination{
     margin-top: 40px;
   }
@@ -31,10 +30,10 @@
           left:0;
           width:100%;
           height:100%;
-          background:$global-color;
+          background:$tztheme-global-color;
           opacity:0;
           z-index: 1;
-          @include transition($transition-all);
+          @include transition($tztheme-transition-all);
         }
         .tzlink-item{
           position:absolute;
@@ -59,7 +58,7 @@
           z-index: 2;
           width:100%;
           opacity: 0;
-          @include transition($transition-all);
+          @include transition($tztheme-transition-all);
           h3{
             a{
               color:#fff;
@@ -75,12 +74,12 @@
         &:hover{
           &:before{
             opacity:0.9;
-            @include transition($transition-all);
+            @include transition($tztheme-transition-all);
           }
           .tzPortfolio_hover{
             bottom:0;
             opacity:1;
-            @include transition($transition-all);
+            @include transition($tztheme-transition-all);
           }
         }
 
@@ -97,12 +96,12 @@
       color:#b3b8c4;
       &:before{
         content:"";
-        background:$global-color;
+        background:$tztheme-global-color;
         left:0;
         bottom:0;
         width:0;
         height:2px;
-        @include transition($transition-all);
+        @include transition($tztheme-transition-all);
         position:absolute;
       }
       &.selected{
@@ -112,7 +111,7 @@
         }
       }
       &:hover{
-        @include transition($transition-all);
+        @include transition($tztheme-transition-all);
         color:#373f83;
         &:before{
           width:30px;

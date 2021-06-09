@@ -1,0 +1,36 @@
+.redux-container {
+  input[type="text"]:not(.hide), input[type="password"]:not(.hide), textarea:not(.hide) {
+    display: inline-block;
+  }
+
+  input[type="text"], input[type="password"], textarea {
+    width: 55%;
+    height: 35px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #495057;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 2px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin-bottom: 5px;
+
+    &:focus {
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      outline: none;
+      outline-width: 0;
+      outline-color: transparent;
+      box-shadow: none;
+    }
+  }
+  .redux-main .mini, .redux-main input[type="text"].mini,
+  .redux-main .redux-typography-container .input_wrapper input.mini{
+    width: 55%;
+  }
+}

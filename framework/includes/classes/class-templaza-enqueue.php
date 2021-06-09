@@ -4,6 +4,9 @@ namespace TemPlazaFramework;
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
+//require_once \ReduxFramework::. '/inc/classes/class-redux-functions-ex.php';
+//var_dump(class_exists('Redux_Core'));
+
 class Enqueue extends \Redux_Enqueue{
 
     private $min = '';

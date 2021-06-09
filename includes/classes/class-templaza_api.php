@@ -101,6 +101,133 @@ if ( ! class_exists( 'Templaza_API', false ) ) {
             return $sections;
         }
 
+//        public static function set_section($opt_name = '', $section = array(), $replace = false, $position = 'last')
+//        {
+//            $result = false;
+//            $result = parent::set_section($opt_name, $section, $replace);
+////            var_dump($opt_name);
+////            var_dump(self::$sections[$opt_name]);
+//
+////            $result = parent::set_section($opt_name, $section, $replace);
+//            $prev_section_id = false;
+//            if($position == 'last'){
+////                $result = parent::set_section($opt_name, $section, $replace);
+//            }elseif($position != 'last' && $position != 'first'){
+//                $prev_section_id    = $position;
+//            }
+//
+////            if($prev_section_id){
+////                var_dump(self::$sections[$opt_name][$prev_section_id]);
+////            }
+////            var_dump($prev_section_id);
+//
+//
+//            if($prev_section_id) {
+//                $sections = self::$sections[$opt_name];
+//                $sec_keys   = array_keys($sections);
+//                $sec_key    = array_search($prev_section_id, $sec_keys);
+//                $first_array    = array_splice ($sections, 0, $sec_key + 1);
+////                $last_array    = array_splice ($sections, 0, $sec_key + 1);
+//                $last           = end($first_array);
+//
+//                $cur_section    = $sections[$section['id']];
+//                unset($sections[$section['id']]);
+//
+//                // Reorder priority of last array
+//                foreach ($sections as $k => &$val){
+//                    if(isset($val['priority'])) {
+//                        $val['priority']++;
+//                    }
+//                }
+//                var_dump($first_array);
+//                var_dump($sections);
+//                die();
+//
+//                $sections = array_merge ($first_array, $sections);
+//
+//                self::$sections[$opt_name] = $sections;
+//
+////                var_dump($sec_key);
+////                var_dump($first_array);
+////                var_dump('$sections');
+//            }
+//
+////            if($prev_section_id && self::$sections && isset(self::$sections[$opt_name])
+////                && isset(self::$sections[$opt_name][$prev_section_id])) {
+////                $sections   = self::$sections[$opt_name];
+////                $sec_keys   = array_keys($sections);
+////                $sec_key    = array_search($prev_section_id, $sec_keys);
+////
+//////                $cur_section    = $sections[$section['id']];
+//////                unset($sections[$section['id']]);
+////                $cur_section    = $sections[$prev_section_id];
+//////                unset($sections[$prev_section_id]);
+////
+////                if($sec_key !== false) {
+////                    $key_next   = $sec_key + 1;
+//////                    if($position != 'first'){
+////
+//////                        // Get next key
+//////                        if(isset($sec_keys[$sec_key + 1])){
+//////                            $key_next   = $sec_keys[$sec_key + 1];
+//////                        }
+////
+//////                        // Increase position if main section have subsections
+//////                        $i  = 0;
+//////                        while(isset($key_next) && isset($sections[$key_next]) && $sections[$key_next]){
+//////                            if(is_numeric($position) && $position == $i){
+//////                                break;
+//////                            }
+//////                            $sec_key++;
+//////                            $i++;
+//////                            if(isset($sec_keys[$sec_key + 1])){
+//////                                $key_next   = $sec_keys[$sec_key + 1];
+//////                            }
+//////                        }
+//////                        while(isset($key_next) && isset($sections[$key_next]['subsection']) && $sections[$key_next]['subsection']){
+//////                            if(is_numeric($position) && $position == $i){
+//////                                break;
+//////                            }
+//////                            $sec_key++;
+//////                            $i++;
+//////                            if(isset($sec_keys[$sec_key + 1])){
+//////                                $key_next   = $sec_keys[$sec_key + 1];
+//////                            }
+//////                        }
+//////                    }
+////
+////
+////                    // Extract sections to 2 parts
+////                    $first_array    = array_splice ($sections, 0, $sec_key + 1);
+////                    $last           = end($first_array);
+//////                    var_dump(__METHOD__);
+//////                    var_dump($sec_key);
+////                    var_dump($key_next);
+////                    var_dump($sections);
+////                    die();
+//////                    var_dump($first_array);
+////
+////                    $cur_section['priority']    = $last['priority'] + 1;
+////                    $_sec[$section['id']]       = $cur_section;
+////
+////                    // Reorder priority of last array
+////                    foreach ($sections as $k => &$val){
+////                        if(isset($val['priority'])) {
+////                            $val['priority']++;
+////                        }
+////                    }
+////
+////                    $sections = array_merge ($first_array, $_sec, $sections);
+////
+////                    self::$sections[$opt_name] = $sections;
+////                }
+////            }
+//
+//
+//            return $result;
+////            return parent::set_section($opt_name, $section, $replace); // TODO: Change the autogenerated stub
+//        }
+
 
         /**
          * Sets a single option panel section.

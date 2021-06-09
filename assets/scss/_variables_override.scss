@@ -1,0 +1,17 @@
+// UI Kit
+$base-body-color:           #686868 !default;
+
+// Bootstrap
+$enable-shadows:            true !default;
+$grid-gutter-width:         40px !default;
+$include-column-box-sizing: true !default;
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1140px,
+        xxl: 1370px
+) !default;
+
+// Font awesome
+$fa-font-path:              "../../../../plugins/templaza-framework/assets/vendors/fontawesome/webfonts" !default;

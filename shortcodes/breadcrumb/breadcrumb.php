@@ -16,6 +16,12 @@ if(!class_exists('TemplazaFramework_ShortCode_Breadcrumb')){
                 'param_title' => __('Breadcrumb settings'),
                 'admin_label' => true,
                 'params'      => array(
+                    array(
+                        'id'         => 'background',
+                        'type'       => 'background',
+//                                        'color_rgba' => true,
+                        'title'      => __('Background'),
+                    ),
 //                    array(
 //                        'id'    => 'customclass',
 //                        'type'  => 'text',

@@ -1,20 +1,47 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  word-break: break-word;
+  word-wrap: break-word;
+}
 body{
   overflow-x: hidden;
   .po_static{
     position:static;
   }
+  .alignright {
+    float: right;
+    margin: 0.5em 0 0.5em 1em;
+  }
+  .alignleft{
+    float:left;
+    margin:0.5em 1em 0.5em 0;
+  }
+  .aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .templaza-relative{
+    position:relative;
+  }
+  .templaza-absolute{
+    position:absolute;
+  }
   a{
+    color:$tztheme-heading-color;
+    @include transition($tztheme-transition-all);
     &:hover{
       text-decoration: none;
+      color:$tztheme-global-color;
+      @include transition($tztheme-transition-all);
     }
   }
-  .templaza-content-element, .wpb_content_element{
-    margin:$element-margin;
-    p{
-      font-size:16px;
-      color:#7c859a;
-      line-height: 1.6em;
-    }
+  .templaza-content-element,
+  .wpb_content_element{
+    margin:$tztheme-element-margin;
   }
   .align-left{
     text-align: left;
@@ -27,14 +54,22 @@ body{
   }
   .clr{
     clear:both;
+    height:0;
   }
   img{
     max-width: 100%;
     height:auto;
   }
-}
-@media only screen and (min-width: 1200px) {
-  .container-xl, .container-lg, .container-md, .container-sm, .container {
-    max-width: 1320px;
+  ul{
+    padding:0;
+    li{
+      list-style:none;
+    }
+  }
+  .templaza-background-color{
+    background:$tztheme-background-color;
+  }
+  em{
+    color:$tztheme-global-color;
   }
 }

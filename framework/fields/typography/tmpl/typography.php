@@ -8,6 +8,10 @@ if ( empty( $this -> field['units'] ) && ! empty( $this -> field['default']['uni
 
 $unit = $this -> field['units'];
 
+if(!empty($unit) && is_array($unit)){
+    $unit   = '';
+}
+
 
 ?>
 <div id="<?php echo esc_attr( $this -> field['id'] ); ?>" class="redux-typography-container" data-id="<?php
@@ -401,6 +405,7 @@ if ( true === $this -> field['font-size'] ) {
                 . esc_attr( $this -> field['name'] . $this -> field['name_suffix'] )
                 . '[font-size]['.$device.']" value="' . esc_attr( $value)
                 . '" data-id="' . esc_attr( $this -> field['id'] ) . '" data-device="'.$device.'"/>';
+
         $tab_pane  .= '</div>';
     }
         echo '<ul class="clearfix">';

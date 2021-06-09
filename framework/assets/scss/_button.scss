@@ -1,0 +1,64 @@
+.redux-container,
+.tzfrm-ui-dialog,
+&.tzfrm-postype{
+  .button{
+    margin:0;
+    line-height: 1;
+    text-shadow: none;
+    padding:.5rem 1rem;
+    background: #fff;
+    color: $tz-global-color;
+    border-color: $tz-global-color;
+    //-webkit-box-shadow: none;
+    //-moz-box-shadow: none;
+    //box-shadow: none;
+    @include box-shadow(none);
+    @include transition($butt);
+    &:hover{
+      color: $tzbackground;
+      background: $tz-global-color;
+    }
+    &:focus{
+      outline: none;
+    }
+    + .button{
+      margin-left: 0.5rem;
+    }
+  }
+  .button-primary{
+    color: $tzbackground;
+    background: $tz-global-color;
+    border-color: $tz-global-color;
+    @include transition($butt);
+    &:hover{
+      background: lighten($tz-global-color, 8%);
+      border-color: lighten($tz-global-color, 8%);
+    }
+  }
+  .wrap .page-title-action{
+    background: $tzbackground;
+    color: $tz-global-color;
+    border-color: $tz-global-color;
+    @include transition($butt);
+    &:hover{
+      color: $tzbackground;
+      background: $tz-global-color;
+    }
+  }
+  button{
+    &:focus{
+      outline: none;
+    }
+  }
+}
+
+//.redux-container .ui-button,
+//.control-section-redux .ui-button,
+//.control-panel-redux .ui-button,
+//.redux-metabox .ui-button{
+//  background-image: none;
+//  text-shadow: none;
+//  background-color: transparent;
+//  border-color: $tz-border-color;
+//  @include box-shadow(none);
+//}

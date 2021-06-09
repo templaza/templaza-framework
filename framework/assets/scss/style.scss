@@ -1,83 +1,153 @@
-@import "variables";
-@import "mixins";
-.w-100{
-  width: 100% !important;
-}
-.w-px-16{
-  width: 16px !important;
-}
-.w-px-150{
-  width: 150px !important;
-}
-.h-px-150{
-  height: 150px !important;
-}
-.h-px-103{
-  height: 103px !important;
-}
-.rotate-n45{
-  -webkit-transform: rotate(-45deg) !important;
-  -moz-transform: rotate(-45deg) !important;
-  -ms-transform: rotate(-45deg) !important;
-  -o-transform: rotate(-45deg) !important;
-  transform: rotate(-45deg) !important;
-}
-.rotate-n90{
-  -webkit-transform: rotate(-90deg) !important;
-  -moz-transform: rotate(-90deg) !important;
-  -ms-transform: rotate(-90deg) !important;
-  -o-transform: rotate(-90deg) !important;
-  transform: rotate(-90deg) !important;
-}
-.rotate-132{
-  -webkit-transform: rotate(132deg) !important;
-  -moz-transform: rotate(132deg) !important;
-  -ms-transform: rotate(132deg) !important;
-  -o-transform: rotate(132deg) !important;
-  transform: rotate(132deg) !important;
-}
-.rotate-135{
-  -webkit-transform: rotate(135deg) !important;
-  -moz-transform: rotate(135deg) !important;
-  -ms-transform: rotate(135deg) !important;
-  -o-transform: rotate(135deg) !important;
-  transform: rotate(135deg) !important;
-}
-.rotate-180{
-  -webkit-transform: rotate(180deg) !important;
-  -moz-transform: rotate(180deg) !important;
-  -ms-transform: rotate(180deg) !important;
-  -o-transform: rotate(180deg) !important;
-  transform: rotate(180deg) !important;
-}
-.rotate-x-180{
-  -webkit-transform: rotateX(180deg) !important;
-  -moz-transform: rotateX(180deg) !important;
-  -ms-transform: rotateX(180deg) !important;
-  -o-transform: rotateX(180deg) !important;
-  transform: rotateX(180deg) !important;
-}
-.rotate-y-180{
-  -webkit-transform: rotateY(180deg) !important;
-  -moz-transform: rotateY(180deg) !important;
-  -ms-transform: rotateY(180deg) !important;
-  -o-transform: rotateY(180deg) !important;
-  transform: rotateY(180deg) !important;
-}
-.wp-core-ui .button-micro{
-  min-height: 0;
-  padding: 4px 8px;
-  line-height: 1;
-  .dashicons{
-    width: 13px;
-    height: 13px;
-    font-size: 13px;
-    line-height: 13px;
+$grid-gutter-width:           2.5rem !default;
+.templaza-framework__body {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
-  .featured{
-    color: #ffb900;
+  @import "../../../assets/scss/vendor/bootstrap_grid/bootstrap-grid";
+  @import "../../../assets/scss/vendor/bootstrap_grid/bootstrap-utilities";
+
+  @import "variables";
+  @import "mixins";
+
+  $enable-shadows:              true !default;
+
+  .redux-container-tz_layout{
+    .container-fluid .field-tz_layout-content{
+      --#{$variable-prefix}gutter-x: #{$grid-gutter-width};
+      margin-right: calc(var(--#{$variable-prefix}gutter-x) / -2); // stylelint-disable-line function-disallowed-list
+      margin-left: calc(var(--#{$variable-prefix}gutter-x) / -2); // stylelint-disable-line function-disallowed-list
+    }
   }
+  &.tzfrm-postype{
+    a{
+      color: $tz-global-color;
+      &:hover{
+        color: lighten($tz-global-color, 7%);
+      }
+    }
+    .redux-container-tz_layout .fl_control,
+    .redux-container-tz_layout__dialog .fl_control,{
+      color: #71748d;
+      &:hover {
+        color: $tz-global-color;
+      }
+    }
+    .redux-container-tz_layout .fl_add-element-not-empty-button,
+    .redux-container-tz_layout__dialog .fl_add-element-not-empty-button{
+      color: #71748d;
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+  //background: $tz-body-background;
+  .w-100 {
+    width: 100% !important;
+  }
+
+  .w-px-16 {
+    width: 16px !important;
+  }
+
+  .w-px-150 {
+    width: 150px !important;
+  }
+
+  .h-px-150 {
+    height: 150px !important;
+  }
+
+  .h-px-103 {
+    height: 103px !important;
+  }
+
+  .rotate-n45 {
+    -webkit-transform: rotate(-45deg) !important;
+    -moz-transform: rotate(-45deg) !important;
+    -ms-transform: rotate(-45deg) !important;
+    -o-transform: rotate(-45deg) !important;
+    transform: rotate(-45deg) !important;
+  }
+
+  .rotate-n90 {
+    -webkit-transform: rotate(-90deg) !important;
+    -moz-transform: rotate(-90deg) !important;
+    -ms-transform: rotate(-90deg) !important;
+    -o-transform: rotate(-90deg) !important;
+    transform: rotate(-90deg) !important;
+  }
+
+  .rotate-132 {
+    -webkit-transform: rotate(132deg) !important;
+    -moz-transform: rotate(132deg) !important;
+    -ms-transform: rotate(132deg) !important;
+    -o-transform: rotate(132deg) !important;
+    transform: rotate(132deg) !important;
+  }
+
+  .rotate-135 {
+    -webkit-transform: rotate(135deg) !important;
+    -moz-transform: rotate(135deg) !important;
+    -ms-transform: rotate(135deg) !important;
+    -o-transform: rotate(135deg) !important;
+    transform: rotate(135deg) !important;
+  }
+
+  .rotate-180 {
+    -webkit-transform: rotate(180deg) !important;
+    -moz-transform: rotate(180deg) !important;
+    -ms-transform: rotate(180deg) !important;
+    -o-transform: rotate(180deg) !important;
+    transform: rotate(180deg) !important;
+  }
+
+  .rotate-x-180 {
+    -webkit-transform: rotateX(180deg) !important;
+    -moz-transform: rotateX(180deg) !important;
+    -ms-transform: rotateX(180deg) !important;
+    -o-transform: rotateX(180deg) !important;
+    transform: rotateX(180deg) !important;
+  }
+
+  .rotate-y-180 {
+    -webkit-transform: rotateY(180deg) !important;
+    -moz-transform: rotateY(180deg) !important;
+    -ms-transform: rotateY(180deg) !important;
+    -o-transform: rotateY(180deg) !important;
+    transform: rotateY(180deg) !important;
+  }
+
+  .button-micro {
+    min-height: 0;
+    padding: 4px 8px;
+    line-height: 1;
+
+    .dashicons {
+      width: 13px;
+      height: 13px;
+      font-size: 13px;
+      line-height: 13px;
+    }
+
+    .featured {
+      color: #ffb900;
+    }
+  }
+
+  .redux-container .ui-buttonset .ui-icon {
+    display: none;
+  }
+
+  @import "notices.scss";
+  @import "button.scss";
+  @import "form.scss";
+  @import "spinner.scss";
+  //@import "options.scss";
+  //@import "component/options.scss";
+  @import "ui_dialog";
+  @import "_ui_tooltip";
 }
-@import "options.scss";
-@import "ui_dialog";
 @import "ui_tab";
+@import "shortcode/widget";

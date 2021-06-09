@@ -183,7 +183,7 @@
     };
 
     var initPreloader = function () {
-        $("#templaza-preloader").removeClass('d-flex').addClass('d-none');
+        $("#templaza-preloader").addClass('d-none');
     };
 
     // Events

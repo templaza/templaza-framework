@@ -7,6 +7,23 @@ use TemPlazaFramework\Functions;
 if(!class_exists('TemplazaFramework_ShortCode_Section')){
     class TemplazaFramework_ShortCode_Section extends TemplazaFramework_ShortCode{
 
+        public function __construct($field_parent = array(), $value = '', $parent = '')
+        {
+            $this -> hooks();
+
+            parent::__construct($field_parent, $value, $parent);
+        }
+
+        public function hooks(){
+            add_filter('templaza-framework/layout/generate/shortcode/'.$this -> get_shortcode_name().'/prepare',
+                array($this, 'prepare_options'));
+        }
+
+        public function prepare_options($item){
+            $item['has_children_shortcode']    = true;
+            return $item;
+        }
+
         public function register()
         {
             return array(
@@ -26,6 +43,16 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                 'id' => 'settings',
                                 'title'  => esc_html__('General', $this -> text_domain),
                                 'fields' => array(
+                                    array(
+                                        'id'       => 'section_type',
+                                        'type'     => 'select',
+                                        'title'    => esc_html__('Section Type', $this -> text_domain),
+                                        'options'  => array(
+                                            'default'         => esc_html__('Default', $this -> text_domain),
+                                            'templaza-footer' => esc_html__('Footer', $this -> text_domain),
+                                        ),
+                                        'default' => 'default'
+                                    ),
                                     array(
                                         'id'       => 'title',
                                         'type'     => 'text',
@@ -60,8 +87,12 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                     array(
                                         'id'         => 'background',
                                         'type'       => 'background',
-//                                        'color_rgba' => true,
-                                        'title'      => esc_html__('Background'),
+                                        'title'      => esc_html__('Background', $this -> text_domain),
+                                    ),
+                                    array(
+                                        'id'         => 'border',
+                                        'type'       => 'border',
+                                        'title'      => __('Border', $this -> text_domain),
                                     ),
                                     array(
                                         'id'     => 'tab-custom_colors',
@@ -124,30 +155,42 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'type'     => 'switch',
                                         'title'    => esc_html__('Hide on Extra-Small Devices', $this -> text_domain),
                                         'subtitle' => esc_html__('Enable to hide this section on extra-small Devices', $this -> text_domain),
+                                        'default'  => false,
                                     ),
                                     array(
                                         'id'       => 'hideonsm',
                                         'type'     => 'switch',
                                         'title'    => esc_html__('Hide on Small Devices', $this -> text_domain),
                                         'subtitle' => esc_html__('Enable to hide this section on Small Devices.', $this -> text_domain),
+                                        'default'  => false,
                                     ),
                                     array(
                                         'id'       => 'hideonmd',
                                         'type'     => 'switch',
                                         'title'    => esc_html__('Hide on Medium Devices', $this -> text_domain),
                                         'subtitle' => esc_html__('Enable to hide this section on medium Devices.', $this -> text_domain),
+                                        'default'  => false,
                                     ),
                                     array(
                                         'id'       => 'hideonlg',
                                         'type'     => 'switch',
                                         'title'    => esc_html__('Hide on Large Devices', $this -> text_domain),
                                         'subtitle' => esc_html__('Enable to hide this section on Large Devices.', $this -> text_domain),
+                                        'default'  => false,
                                     ),
                                     array(
                                         'id'       => 'hideonxl',
                                         'type'     => 'switch',
                                         'title'    => esc_html__('Hide on Extra-Large Devices', $this -> text_domain),
                                         'subtitle' => esc_html__('Enable to hide this section on Extra-Large Devices.', $this -> text_domain),
+                                        'default'  => false,
+                                    ),
+                                    array(
+                                        'id'       => 'hideonxxl',
+                                        'type'     => 'switch',
+                                        'title'    => esc_html__('Hide on Extra-Extra-Large Devices', $this -> text_domain),
+                                        'subtitle' => esc_html__('Enable to hide this section on Extra-Extra-Large Devices.', $this -> text_domain),
+                                        'default'  => false,
                                     ),
                                     array(
                                         'id'       => 'tab-device-visibility-end',
@@ -162,52 +205,31 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
             );
         }
 
+
         public function prepare_params($params, $element){
-            $id = '';
-            if(isset($element['id'])){
-                $id = $element['id'];
-            }
-            if(isset($params['tz_customid'])) {
-                $custom_id = trim($params['tz_customid']);
-            }
             $params = parent::prepare_params($params, $element);
 
-            if(isset($id) && isset($params['title']) && !empty($params['title'])){
-                $params['tz_id']  = sanitize_title($params['title']).'-'.$id;
-            }else{
-                $params['tz_id']  = 'templaza-section-'.$id;
-            }
-            if(isset($custom_id) && !empty($custom_id)){
-                $params['tz_id']  = $custom_id;
+            if(!isset($params['tz_class'])){
+                $params['tz_class'] = '';
             }
 
-            // Custom class
-            if((isset($params['hideonxs']) && $params['hideonxs']) ||
-                (isset($params['hideonsm']) && $params['hideonsm'])){
-                if(!isset($params['customclass'])) {
-                    $params['tz_class'] = '';
-                }
-                if(isset($params['hideonxs']) && $params['hideonxs']){
-                    $params['tz_class']  .= 'd-none d-sm-block '.$params['customclass'];
-                    unset($params['hideonxs']);
-                }
-                if(isset($params['hideonsm']) && $params['hideonsm']){
-                    $params['tz_class']  .= 'd-sm-none d-md-block '.$params['customclass'];
-                    unset($params['hideonsm']);
-                }
+            if(isset($params['hideonxxl']) && (bool) $params['hideonxxl']){
+                $params['tz_class'] .= ' hideonxxl';
+            }            
+            if(isset($params['hideonxl']) && (bool) $params['hideonxl']){
+                $params['tz_class'] .= ' hideonxl';
             }
-
-            switch ($params['layout_type']) {
-                case '':
-                case 'container-with-no-gutters':
-                    $params['layout_type'] = 'container';
-                    break;
-                case 'no-container':
-                    $params['layout_type'] = '';
-                    break;
-                case 'container-fluid-with-no-gutters':
-                    $params['layout_type'] = 'container-fluid';
-                    break;
+            if(isset($params['hideonlg']) && (bool) $params['hideonlg']){
+                $params['tz_class'] .= ' hideonlg';
+            }
+            if(isset($params['hideonmd']) && (bool) $params['hideonmd']){
+                $params['tz_class'] .= ' hideonmd';
+            }
+            if(isset($params['hideonsm']) && (bool) $params['hideonsm']){
+                $params['tz_class'] .= ' hideonsm';
+            }
+            if(isset($params['hideonxs']) && (bool) $params['hideonxs']){
+                $params['tz_class'] .= ' hideonxs';
             }
 
             return $params;
@@ -217,7 +239,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
             if (!wp_script_is('templaza-shortcode-section-js')) {
                 wp_enqueue_script(
                     'templaza-shortcode-section-js',
-                    \TemPlazaFramework\Functions::get_my_url() . '/shortcodes/section/section.js',
+                    Functions::get_my_url() . '/shortcodes/section/section.js',
                     array( 'jquery', 'jquery-ui-tabs', 'wp-util', 'redux-js', TEMPLAZA_FRAMEWORK_NAME.'__js'),
                     time(),
                     'all'

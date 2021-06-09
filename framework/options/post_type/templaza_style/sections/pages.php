@@ -4,8 +4,8 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 
 // -> START Post type Section
 Templaza_API::set_section('templaza_style', array(
-        'title' => __( 'Post Type Options', $this -> text_domain),
-        'id'    => 'post-types',
+        'title' => __( 'Blog Options', $this -> text_domain),
+        'id'    => 'blog-options',
         'desc'  => __( '', $this -> text_domain ),
         'icon'  => 'el el-list-alt'
     )

@@ -1,36 +1,19 @@
-//$all: all 0.3s ease-in-out;
-//$circle: all 0.4s ease-in-out;
-//$butt: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-//@mixin transition($transition...) {
-//  -webkit-transition: $transition;
-//  -moz-transition: $transition;
-//  -ms-transition: $transition;
-//  -o-transition: $transition;
-//  transition: $transition;
-//}
-//$shadow_all:0 8px 10px 0 rgba(183, 192, 206, 0.2);
-//@mixin box-shadow($box-shadow...) {
-//  -webkit-box-shadow: $box-shadow;
-//  -moz-box-shadow: $box-shadow;
-//  -ms-box-shadow: $box-shadow;
-//  box-shadow: $box-shadow;
-//}
-//$tzline:#000;
-//$tzbackground:#fff;
-//$tzhover:#727cf5;
-//$tzdelete:#ff3366;
-//$tzspin: #007bff;
-
-.wp-admin {
-  &.post-type-templaza_style{
+//.templaza-framework__post-type {
+  //&.post-type-templaza_style{
     .select2-container{
       z-index: 9999;
     }
-  }
-  .redux-container.templaza-framework-options {
+  //}
+  .tzfrm-ui-dialog .redux-container.templaza-framework-options {
     background:#f9fafb;
-    background-image: none;
+  }
+  //.redux-container.templaza-framework-options {
+  .redux-container.templaza-framework-options {
+    background: none;
     border:none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
     #redux-intro-text{
       display:none;
     }
@@ -44,10 +27,13 @@
       border-color:$tzhover;
       margin:0;
       line-height: 1;
+      text-shadow: none;
+      @include box-shadow(none);
       @include transition($butt);
       &:hover{
+        //color: lighten($tzhover, 12%);
+        //border-color: lighten($tzhover, 12%);
         background:$tzhover;
-        border-color:$tzhover;
         color:#fff;
       }
       &.button-primary{
@@ -57,6 +43,8 @@
         border-color:$tzhover;
         margin:0;
         line-height: 1;
+        text-shadow: none;
+        @include box-shadow(none);
         &:focus{
           @include box-shadow(none);
         }
@@ -85,6 +73,9 @@
       background:none;
       border:none;
       padding:0;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
       #redux-sticky{
         border:none;
         background:$tzbackground;
@@ -232,15 +223,15 @@
           padding:0.5rem;
         }
       }
-      .input-append, .input-prepend{
-        .add-on{
-          height: 33px;
-          padding: 0 8px !important;
-          font-size: 0.875rem;
-          font-weight: 400;
-          line-height: 32px;
-        }
-      }
+      //.input-append, .input-prepend{
+      //  .add-on{
+      //    height: 33px;
+      //    padding: 0 8px !important;
+      //    font-size: 0.875rem;
+      //    font-weight: 400;
+      //    line-height: 32px;
+      //  }
+      //}
       .upload_button_div .media_upload_button{
         margin-right: 5px;
       }
@@ -282,9 +273,9 @@
           }
         }
       }
-      .redux-container-slider .redux-slider-container{
-        background: $tzspin !important;
-      }
+      //.redux-container-slider .redux-slider-container{
+      //  background: $tzspin !important;
+      //}
       .button-secondary{
 
       }
@@ -326,7 +317,11 @@
         }
       }
       .redux-group-menu{
+        background:$tzbackground;
         li{
+          .subsection{
+            background: $tzbackground;
+          }
           &.activeChild.hasSubSections,
           &.active.hasSubSections{
             > a{
@@ -389,14 +384,20 @@
             }
           }
           &.redux-group-tab-link-li{
+            &.active{
+              a{
+                background:$tzbackground !important;
+                color:$tzhover !important;
+              }
+            }
             a{
               color:#000 !important;
               background: #fff;
               border:none;
               padding:10px 15px 10px 25px;
               &:hover{
-                background:$tzbackground;
-                color:$tzhover;
+                background:$tzbackground !important;
+                color:$tzhover !important;
               }
             }
           }
@@ -441,4 +442,4 @@
   //    }
   //  }
   //}
-}
+//}

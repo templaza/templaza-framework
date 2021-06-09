@@ -1,0 +1,29 @@
+.wp-block-button{
+  margin:1em 0;
+  &.is-style-squared{
+    a{
+      @include border-radius(0);
+    }
+  }
+  .wp-block-button__link{
+    @include button-default;
+  }
+  &.is-style-outline{
+    .wp-block-button__link{
+      border-color:$tztheme-button_background;
+      &:hover{
+        border-color:$tztheme-button_background_hover;
+      }
+    }
+  }
+}
+.wp-block-file .wp-block-file__button{
+  @include button-default;
+}
+.wp-block-search .wp-block-search__button{
+  @include button-default;
+  border:none;
+}
+.templaza-btn{
+  @include button-default;
+}

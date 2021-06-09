@@ -51,6 +51,8 @@
                     $settings  = [];
                 }
 
+                el.trigger("templaza-framework/field/tz_layout/init", [$settings]);
+
                 redux.field_objects.tz_layout.init_elements(el, $settings);
 
                 redux.field_objects.tz_layout.init_tooltip(el);
@@ -58,6 +60,8 @@
                 // redux.field_objects.tz_layout.init_source(el);
                 redux.field_objects.tz_layout.init_control(el, $settings);
 
+
+                el.trigger("templaza-framework/field/tz_layout/init/after", [$settings]);
             });
     };
 
@@ -65,61 +69,151 @@
         if(settings){
             var $html = "";
 
-            var $tree_html = [];
-            var $level = 0;
+            // var $tree_html = [];
+            // var $level = 0;
+
+            var $m_tree_html = [];
+            var $m_level = -1;
+
             var tree_element = function(tree){
                 $.each(tree, function(index, item){
 
-                    var $item_tmp,
-                        $item_tmp_data = $.extend(true, {}, item);
-                        // $item_tmp_data = Object.assign({}, item);
+                    var $m_item_tmp,
+                        $m_item_tmp_data = $.extend(true, {}, item),
+                        $m_params = $m_item_tmp_data.params;
 
-                    delete $item_tmp_data.params;
-                    delete $item_tmp_data.elements;
+                    delete $m_item_tmp_data.params;
+                    delete $m_item_tmp_data.elements;
 
-                    $item_tmp_data.element  = "";
-
-                    // console.log("Line 67");
-                    // console.log(item['type']);
-                    // console.log($level);
-
-                    if(typeof item.elements !== typeof undefined && item.elements.length){
-                        if($level > 0){
-                            $level--;
-                        }
-                        tree_element(item.elements);
-                        $level++;
-
-                        $item_tmp_data.element  = $tree_html[$level - 1];
-                        $tree_html[$level - 1]   = "";
-                    }
-                    // else{
-                        //     $level = 0;
+                    // var $has_parent = false;
+                    // // Get element html template
+                    // if($("#tmpl-field-tz_layout-settings-" + item.type).length) {
+                    //     var $m_item_setting_tmp = $(wp.template("field-tz_layout-settings-" + item.type)()),
+                    //         $_parent = $m_item_setting_tmp.attr("data-fl-parent");
+                    //     if(typeof $_parent !== "undefined" && $_parent === "true"){
+                    //         $has_parent = true;
+                    //     }
                     // }
+                    // if(typeof item.parent !== "undefined" && item.parent && item.parent === "true") {
+                    //     $has_parent = true;
+                    // }
+
+
+                    // if(typeof item.parent !== "undefined" && item.parent) {
+                    // if($has_parent) {
+                        $m_level++;
+                    // }
+
+
+                    // var $item_tmp,
+                    //     $item_tmp_data = $.extend(true, {}, item),
+                    //     $params = $item_tmp_data.params;
+                    //     // $item_tmp_data = Object.assign({}, item);
+                    //
+                    // delete $item_tmp_data.params;
+                    // delete $item_tmp_data.elements;
+                    //
+                    // $item_tmp_data.element  = "";
+                    //
+                    //
+                    if(typeof item.elements !== typeof undefined && item.elements.length){
+                    //     if($level > 0){
+                    //         $level--;
+                    //     }
+                    //
+                        tree_element(item.elements);
+                    //     $level++;
+                    //
+                    //     $item_tmp_data.element  = $tree_html[$level - 1];
+                    //     $tree_html[$level - 1]   = "";
+                    }
+
 
                     // Get element html template
                     if($("#tmpl-field-tz_layout-template-" + item.type).length) {
-                        $item_tmp = wp.template("field-tz_layout-template-" + item.type);
+                        $m_item_tmp = wp.template("field-tz_layout-template-" + item.type);
                     }else{
-                        $item_tmp = wp.template("field-tz_layout-template__element");
+                        $m_item_tmp = wp.template("field-tz_layout-template__element");
                     }
 
-                    if(typeof $tree_html[$level] === typeof undefined) {
-                        $tree_html[$level] = $item_tmp($item_tmp_data);
+                    if(typeof $m_tree_html[$m_level + 1] !== "undefined"){
+                        $m_item_tmp_data.element  = $m_tree_html[$m_level + 1];
+                        $m_tree_html[$m_level + 1]  = "" ;
+                    }
+
+                    var $m_item_html = $m_item_tmp($m_item_tmp_data);
+
+                    var $m_item_html_prepare = selector.triggerHandler("templaza-framework/field/tz_layout/shortcode/" +
+                        item.type+"/prepare/html", [$m_item_html, $m_item_tmp_data, $m_params]);
+                    if(typeof $m_item_html_prepare !== "undefined"){
+                        $m_item_html  = $m_item_html_prepare;
+                    }
+                    if(typeof $m_tree_html[$m_level] === typeof undefined) {
+                        $m_tree_html[$m_level] = $m_item_html;
                     }else{
-                        $tree_html[$level] += $item_tmp($item_tmp_data);
+                        $m_tree_html[$m_level] += $m_item_html;
+                    }
+
+                    $m_level --;
+
+
+
+                    // if(!$tree_html.length && item.type === "column" && $level === 0){
+                    //     $level++;
+                    // }
+                    //
+                    // // Get element html template
+                    // if($("#tmpl-field-tz_layout-template-" + item.type).length) {
+                    //     $item_tmp = wp.template("field-tz_layout-template-" + item.type);
+                    // }else{
+                    //     $item_tmp = wp.template("field-tz_layout-template__element");
+                    // }
+                    //
+                    // var $item_html = $item_tmp($item_tmp_data);
+                    //
+                    // var $item_html_prepare = selector.triggerHandler("templaza-framework/field/tz_layout/shortcode/" +
+                    //     item.type+"/prepare/html", [$item_html, $item_tmp_data, $params]);
+                    // if(typeof $item_html_prepare !== "undefined"){
+                    //     $item_html  = $item_html_prepare;
+                    // }
+                    //
+                    // if(typeof $tree_html[$level] === typeof undefined) {
+                    //     $tree_html[$level] = $item_html;
+                    // }else{
+                    //     $tree_html[$level] += $item_html;
+                    // }
+
+
+                    // Prepare default setting from shortcode element
+                    if(typeof templaza.shortcode !== typeof undefined){
+                        var element_type = item.type,
+                            shortcode = templaza.shortcode;
+                        if(typeof shortcode[element_type] !== typeof undefined &&
+                            typeof shortcode[element_type]["init"] === "function"){
+                            shortcode[element_type]["init"]($m_item_tmp_data, $m_params);
+                        }
                     }
                 });
             };
             tree_element(settings);
-            if($tree_html.length) {
-                $html   = $tree_html.pop();
+            // if($tree_html.length) {
+            //     $html   = $tree_html.pop();
+            //     if($($html).find("[data-fl-element_type=section]").length) {
+            //         selector.find(".field-tz_layout-content").html($html);
+            //     }else{
+            //         selector.find(".field-tz_layout-content").html("<div class=\"fl_column-container fl_column-section-container\">" + $html + "</div>");
+            //     }
+            // }
+
+            if($m_tree_html.length) {
+                $html   = $m_tree_html.shift();
                 if($($html).find("[data-fl-element_type=section]").length) {
                     selector.find(".field-tz_layout-content").html($html);
                 }else{
                     selector.find(".field-tz_layout-content").html("<div class=\"fl_column-container fl_column-section-container\">" + $html + "</div>");
                 }
             }
+
         }
         // else{
         //     // Load elements when empty value
@@ -162,12 +256,22 @@
 
                     var $setting;
                     var form_setting_tmp = wp.template("field-tz_layout-settings-" + sub_element.data("fl-element_type"));
+
+                    // /* 29/04/2021 */
+                    // var _form_setting_obj   = $(form_setting_tmp());
+                    // /* End 29/04/2021 */
+
                     if(selector.find("[data-fl-element_type]").index(element) > -1){
                         $setting   = redux.field_objects.tz_layout.get_setting(sub_element, selector, settings);
                     }else{
                         $setting   = redux.field_objects.tz_layout.get_form_settings($(form_setting_tmp()), sub_element);
                     }
                     $setting["id"]  = redux.field_objects.tz_layout.generateID();
+
+                    // /* 29/04/2021 */
+                    // $setting["parent"]  = _form_setting_obj.attr("data-fl-parent");
+                    // /* End 29/04/2021 */
+
                     if(typeof sub_element.data("icon") !== typeof undefined) {
                         $setting["icon"] = sub_element.data("icon");
                     }
@@ -240,11 +344,14 @@
                //     console.log(field.closest("data-type"));
                // }
 
+                // if(f_name === "margin"){
+                // }
                if(f_name === "admin_label" && typeof $value[f_name] !== typeof undefined){
                    field.val($value[f_name]);
                }else{
                    if(f_name.match(/\[(.*?)\]/mg) !== null ){
                        var f_name_multi = f_name.split(/\[(.+?)\]/);
+
                        if(f_name_multi.length){
                            $.each(f_name_multi, function(index, _f_name){
                                if(_f_name.trim().length){
@@ -277,6 +384,9 @@
                                            //     console.log(_field);
                                            // }
 
+                                           // console.log(_f_name);
+                                           // console.log(f_value);
+                                           // console.log(field);
 
                                            field.val(f_value);
 
@@ -366,6 +476,13 @@
             elements: [],
             params: form.serializeForm()
         };
+
+        // /* 29/04/2021 */
+        // if(typeof form.attr("data-fl-parent") !== "undefined") {
+        //     default_setting["parent"] = form.attr("data-fl-parent");
+        // }
+        // /* End 29/04/2021 */
+
         if(typeof form.data("icon") !== typeof undefined){
             default_setting.icon    = form.data("icon");
         }
@@ -385,24 +502,48 @@
         return default_setting;
     };
 
-    redux.field_objects.tz_layout.insert_setting = function(src_setting, dest_setting = null, settings, selector, pos = "last"){
+    redux.field_objects.tz_layout.insert_setting = function(src_setting, dest_setting = null, settings, selector, pos = "last", replace = false){
         if(pos === "last"){
-            if(dest_setting !== null){
-                dest_setting.elements.push(src_setting);
-            }else{
-                settings.push(src_setting);
-            }
+                if(dest_setting !== null){
+                    if(replace){
+                        dest_setting.elements[dest_setting.elements.length] = src_setting;
+                    }else {
+                        dest_setting.elements.push(src_setting);
+                    }
+                }else{
+                    if(replace){
+                        settings[settings.length]   = src_setting;
+                    }else {
+                        settings.push(src_setting);
+                    }
+                }
         }else if(pos === "first"){
             if(dest_setting !== null){
-                dest_setting.elements.unshift(src_setting);
+                if(replace){
+                    dest_setting.elements[0]    = (src_setting);
+                }else {
+                    dest_setting.elements.unshift(src_setting);
+                }
             }else{
-                settings.unshift(src_setting);
+                if(replace){
+                    settings[0] = src_setting;
+                }else {
+                    settings.unshift(src_setting);
+                }
             }
         }else if(Number.isInteger(pos)){
             if(dest_setting !== null){
-                dest_setting.elements.splice(pos, 0, src_setting);
+                if(replace){
+                    dest_setting.elements.splice(pos, 1, src_setting);
+                }else {
+                    dest_setting.elements.splice(pos, 0, src_setting);
+                }
             }else{
-                settings.splice(pos, 0 , src_setting);
+                if(replace){
+                    settings.splice(pos, 1, src_setting);
+                }else {
+                    settings.splice(pos, 0, src_setting);
+                }
             }
         }
 
@@ -497,6 +638,7 @@
                     ui.placeholder.height(ui.item.outerHeight());
 
                     $(this).data("fl-ui-old-index", ui.item.index());
+                    // console.log(ui.item);
                     $(this).data("fl-ui-parent-old", ui.item.parents("[data-fl-element_type]").first());
                 },
                 stop: function( event, ui ) {
@@ -628,6 +770,12 @@
                         }
                         redux.field_objects.tz_layout.insert_setting(src_setting, dest_setting, settings, selector, ui.item.index());
                     }
+                    else{
+                        var old_item_index  = $(this).data("fl-ui-old-index");
+                        var src_setting = settings.splice(old_item_index, 1);
+
+                        redux.field_objects.tz_layout.insert_setting(src_setting[0], null, settings, selector, ui.item.index());
+                    }
 
                 },
             }).disableSelection();
@@ -689,7 +837,7 @@
                 'buttons'       : [
                     {
                         text: "Close",
-                        class: "button button-secondary ml-2",
+                        class: "button button-secondary ms-2",
                         click: function() {
                             $( this ).dialog( "close" );
                         },
@@ -733,6 +881,11 @@
                         dest_element,
                         src_setting = redux.field_objects.tz_layout.generate_setting_element(tmp_el, selector, settings);
 
+                    selector.trigger("templaza-framework/field/tz_layout/action/add/shortcode/before",
+                        [tmp_el, src_setting, element_dest, settings, selector]);
+                    element_selector.trigger("templaza-framework/field/tz_layout/action/add/shortcode/before",
+                        [tmp_el, src_setting, element_dest, settings, selector]);
+
                     if (typeof element_dest.attr("data-fl-control") !== typeof undefined
                         && element_dest.attr("data-fl-control") === "add") {
                         if(element_dest.closest(".fl_controls-column.bottom-controls").length) {
@@ -760,6 +913,11 @@
                     var dest_setting = redux.field_objects.tz_layout.get_setting(dest_element, selector, settings);
                     // Add setting
                     redux.field_objects.tz_layout.insert_setting(src_setting, dest_setting, settings, selector, pos);
+
+                    selector.trigger("templaza-framework/field/tz_layout/action/add/shortcode/after",
+                        [src_setting, element_dest, dest_setting]);
+                    element_selector.trigger("templaza-framework/field/tz_layout/action/add/shortcode/after",
+                        [src_setting, element_dest, dest_setting]);
 
                     element_selector.dialog("close");
 
@@ -827,15 +985,10 @@
                             element_click_event($(this), control);
                         },
                         "close": function (ev, ui) {
-                            button_cache   = null;
+                            $(this).remove();
                         }
                     }).removeClass("hide").dialog('open');
 
-                    // tzdialog($("[data-fl_tz_layout-elements]"), {
-                    //     "close": function (ev, ui) {
-                    //         button_cache   = null;
-                    //     }
-                    // }).removeClass("hide").dialog('open');
                 }
 
                 sortable(selector);
@@ -864,7 +1017,8 @@
                         element_click_event($(this), element_empty);
                     },
                     "close": function (ev, ui) {
-                        button_cache   = null;
+                        // button_cache   = null;
+                        $(this).remove();
                     }
                 }).removeClass("hide").dialog('open');
 
@@ -895,21 +1049,23 @@
                     pos = element.parent().find("[data-fl-element_type=section]").index(element) + 1;
                     element.after(section_new);
                 }else{
-                    if(!section_empty){
-                        if(!selector.find(".field-tz_layout-content .fl_column-container.fl_column-section-container").length) {
-                            var selector_child = $("<div>");
-                            selector_child.attr("class", "fl_column-container fl_column-section-container");
+                    if(!selector.find(".field-tz_layout-content > .fl_column-container.fl_column-section-container").length) {
+                        var selector_child = $("<div>");
+                        selector_child.attr("class", "fl_column-container fl_column-section-container");
 
+                        if(!section_empty) {
                             selector_child.append(section_new).appendTo(selector.find(".field-tz_layout-content"));
-                        }else {
-                            selector.find(".field-tz_layout-content .fl_column-container.fl_column-section-container").append(section_new);
+                        }else{
+                            selector_child.append(section_empty).appendTo(selector.find(".field-tz_layout-content"));
                         }
                     }else {
-                        selector.find(".field-tz_layout-content").append(section_new);
+                        selector.find(".field-tz_layout-content > .fl_column-container.fl_column-section-container").append(section_new);
                     }
                 }
 
                 redux.field_objects.tz_layout.insert_setting(src_setting, null, settings, selector, pos);
+
+                selector.trigger("templaza-framework/field/tz_layout/shortcode/section/add/after");
 
                 sortable(selector);
                 init_event();
@@ -955,6 +1111,9 @@
                     element  = control.closest("[data-fl-element_type]"),
                     parent  = element.parents("[data-fl-element_type]").first();
 
+                selector.trigger("templaza-framework/field/tz_layout/action/clone/before",
+                    [control, element, selector, settings]);
+
                 var pos = element.index() + 1;
                 // var pos = element.parent().find("[data-fl-element_type]").index(element) + 1;
                 var dest_setting = null;
@@ -964,11 +1123,30 @@
                 if(parent.length){
                     dest_setting    = redux.field_objects.tz_layout.get_setting(parent, selector, settings);
                 }
+                var clone   = element.clone();
+
+                var _src_setting = selector.triggerHandler("templaza-framework/field/tz_layout/action/clone/shortcode/setting/before",
+                    [element, clone, src_setting, dest_setting, selector, settings]);
+                src_setting = $.extend(true, src_setting, _src_setting);
 
                 redux.field_objects.tz_layout.insert_setting(src_setting, dest_setting, settings, selector, pos);
 
-                var clone   = element.clone();
+                selector.trigger("templaza-framework/field/tz_layout/action/clone/shortcode/setting/after",
+                    [element, clone, src_setting, dest_setting, selector, settings]);
+
+                selector.trigger("templaza-framework/field/tz_layout/action/clone/shortcode/html/before",
+                    [element, clone, src_setting, dest_setting, selector, settings]);
+
+                // var clone   = element.clone();
+
+                // clone   = selector.triggerHandler("templaza-framework/field/tz_layout/action/clone/shortcode/html/prepare",
+                //     [clone, element, src_setting, dest_setting, control]);
                 clone.insertAfter(element);
+
+                selector.trigger("templaza-framework/field/tz_layout/action/clone/shortcode/html/after",
+                    [element, clone, src_setting, selector, settings]);
+
+                selector.trigger("templaza-framework/field/tz_layout/action/clone/after", [element, clone, src_setting, selector, settings]);
 
                 // Re init sortable
                 sortable(selector);
@@ -997,7 +1175,12 @@
 
                         var element_index = element.index(),
                             parent_element = element.parents("[data-fl-element_type]").first(),
-                            parent_setting  = redux.field_objects.tz_layout.get_setting(parent_element, selector, settings);
+                            parent_setting  = redux.field_objects.tz_layout.get_setting(parent_element, selector, settings),
+                        element_setting = (typeof parent_setting !== typeof undefined && parent_setting.elements[element_index])?parent_setting.elements[element_index]:{};
+
+                        selector.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/setting/before",
+                                [element, element_setting, parent_setting]);
+                        control.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/setting/before", [element, element_setting, parent_setting]);
 
                         if(typeof parent_setting !== typeof undefined){
                             parent_setting.elements.splice(element_index, 1);
@@ -1007,6 +1190,9 @@
 
                         redux.field_objects.tz_layout.set_setting_to_field(settings, selector);
 
+                        selector.trigger("templaza-framework/field/tz_layout/action/delete/shortcode", [element, element_setting, parent_setting]);
+                        control.trigger("templaza-framework/field/tz_layout/action/delete/shortcode", [element, element_setting, parent_setting]);
+
                         element.remove();
 
                         if(parent.hasClass("fl_column-container fl_container_for_children") && !parent.find("[data-fl-element_type]").length){
@@ -1015,6 +1201,9 @@
                                 size: parent.closest("[data-fl-element_type]").attr("data-column-width")
                             })).remove();
                         }
+
+                        selector.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/after");
+                        control.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/after");
 
                         sortable(selector);
                         init_event();
@@ -1094,6 +1283,47 @@
             // });
 
             var tz_required = function(obj_selector) {
+                // console.log(obj_selector.find(".redux-container"));
+
+                // obj_selector.find(".redux-container").each(
+                //     function() {
+                //         var opt_name = $.redux.getOptName( this );
+                //         console.log(opt_name);
+                //         console.log(redux.optName.required);
+                //
+                //         // if ( $.inArray( opt_name, tempArr ) === -1 ) {
+                //         //     tempArr.push( opt_name );
+                //         $.redux.check_dependencies( this );
+                //             // $.redux.checkRequired( $( this ) );
+                //             // $.redux.initEvents( $( this ) );
+                //         // }
+                //     }
+                // );
+                // obj_selector.find(" select, radio, input[type=checkbox], input[type=hidden]")
+                //     .each(
+                //     function() {
+                //         // var opt_name = $.redux.getOptName( this );
+                //         // console.log(opt_name);
+                //         // console.log(redux.optName.required);
+                //         console.log(this);
+                //
+                //         // if ( $.inArray( opt_name, tempArr ) === -1 ) {
+                //         //     tempArr.push( opt_name );
+                //         $.redux.check_dependencies( this );
+                //             // $.redux.checkRequired( $( this ) );
+                //             // $.redux.initEvents( $( this ) );
+                //         // }
+                //     }
+                // );
+                // $( 'body' ).on(
+                //     'change',
+                //     '.redux-main select, .redux-main radio, .redux-main input[type=checkbox], .redux-main input[type=hidden]',
+                //     function() {
+                //         alert("44233");
+                //         $.redux.check_dependencies( this );
+                //     }
+                // );
+
 
                 // Hide the fold elements on load.
                 // It's better to do this by PHP but there is no filter in tr tag , so is not possible
@@ -1110,6 +1340,12 @@
                                 var fieldset = obj_selector.find( '#' + redux.opt_names[x] + '-' + i );
 
                                 fieldset.parents( 'tr:first, li:first' ).addClass( 'fold' );
+
+                                // // console.log(fieldset);
+                                // console.log(v);
+                                // // console.log(x);
+                                // console.log(redux.opt_names[x]);
+                                // // console.log(redux.opt_names);
 
                                 if ( 'hide' === v ) {
                                     fieldset.parents( 'tr:first, li:first' ).addClass( 'hide' );
@@ -1140,7 +1376,169 @@
                         );
                     }
                 );
+
+
+
+                // $( 'body' ).on(
+                //     'change',
+                //     '.redux-main select, .redux-main radio, .redux-main input[type=checkbox], .redux-main input[type=hidden], .redux-main input[type=text]',
+                //     function() {
+                //         alert("43243");
+                //         // $.redux.check_dependencies( this );
+                //         check_dependencies( this );
+                //     }
+                // );
+                //
+                // var check_parents_dependencies = function(id){
+                //     var show = '';
+                //
+                //     var current = obj_selector.find(".redux-field[data-id="+id+"]"),
+                //         optName = current.closest(".redux-container").attr("data-opt-name"),
+                //         optName_id = 'redux_' + optName.replace(/\-/g, '_');
+                //     console.log(current);
+                //     console.log(optName);
+                //
+                //     // if ( redux.optName.required_child.hasOwnProperty( id ) ) {
+                //     if ( window[optName_id].required_child.hasOwnProperty( id ) ) {
+                //         $.each(
+                //             window[optName_id].required_child[id],
+                //             function( i, parentData ) {
+                //                 var parentValue;
+                //
+                //                 i = null;
+                //
+                //                 if ( $( '#' + optName + '-' + parentData.parent ).parents( 'tr:first' ).hasClass( 'hide' ) ) {
+                //                     show = false;
+                //                 } else if ( $( '#' +optName + '-' + parentData.parent ).parents( 'li:first' ).hasClass( 'hide' ) ) {
+                //                     show = false;
+                //                 } else {
+                //                     if ( false !== show ) {
+                //                         parentValue = $.redux.getContainerValue( parentData.parent );
+                //
+                //                         show = $.redux.check_dependencies_visibility( parentValue, parentData );
+                //                     }
+                //                 }
+                //             }
+                //         );
+                //     } else {
+                //         show = true;
+                //     }
+                //
+                //     return show;
+                // };
+                //
+                // var check_dependencies = function(variable) {
+                //     // obj_selector.find(" select, radio, input[type=checkbox], input[type=hidden], input[type=text]")
+                //     //     .each(function () {
+                //             var current, container, isHidden;
+                //             current = $(variable);
+                //             var id = current.closest(".redux-field").attr("data-id");
+                //
+                //
+                //             var optName = current.closest(".redux-container").attr("data-opt-name");
+                //             container = current.parents('.redux-field-container:first');
+                //             isHidden = container.parents('tr:first').hasClass('hide');
+                //             $.each(
+                //                 window['redux_' + optName.replace(/\-/g, '_')].required[id],
+                //                 function (child) {
+                //                     var div;
+                //                     var rawTable;
+                //                     var tr;
+                //
+                //                     var current = $(this);
+                //                     var show = false;
+                //                     var childFieldset = obj_selector.find('#' + optName + '-' + child);
+                //
+                //                     tr = childFieldset.parents('tr:first');
+                //
+                //                     if (0 === tr.length) {
+                //                         tr = childFieldset.parents('li:first');
+                //                     }
+                //
+                //                     if (!isHidden) {
+                //                         // show = $.redux.check_parents_dependencies(child);
+                //                         show = check_parents_dependencies(child);
+                //                     }
+                //
+                //
+                //
+                //                     // // console.log(window['redux_' + optName.replace( /\-/g, '_' )].required[id]);
+                //                     // console.log(child);
+                //                     // console.log('#' + optName + '-' + child);
+                //                     // console.log(childFieldset);
+                //                     // console.log(show);
+                //                     // console.log(tr);
+                //
+                //                     if (true === show) {
+                //
+                //                         // Shim for sections.
+                //                         if (childFieldset.hasClass('redux-container-section')) {
+                //                             div = $('#section-' + child);
+                //
+                //                             if (div.hasClass('redux-section-indent-start') && div.hasClass('hide')) {
+                //                                 $('#section-table-' + child).fadeIn(300).removeClass('hide');
+                //                                 div.fadeIn(300).removeClass('hide');
+                //                             }
+                //                         }
+                //
+                //                         if (childFieldset.hasClass('redux-container-info')) {
+                //                             $('#info-' + child).fadeIn(300).removeClass('hide');
+                //                         }
+                //
+                //                         if (childFieldset.hasClass('redux-container-divide')) {
+                //                             $('#divide-' + child).fadeIn(300).removeClass('hide');
+                //                         }
+                //
+                //                         if (childFieldset.hasClass('redux-container-raw')) {
+                //                             rawTable = childFieldset.parents().find('table#' + redux.optName.args.opt_name + '-' + child);
+                //                             rawTable.fadeIn(300).removeClass('hide');
+                //                         }
+                //
+                //
+                //                         tr.fadeIn(
+                //                             300,
+                //                             function () {
+                //                                 $(this).removeClass('hide');
+                //                                 if (redux.optName.required.hasOwnProperty(child)) {
+                //                                     $.redux.check_dependencies($('#' + redux.optName.args.opt_name + '-' + child).children().first());
+                //                                 }
+                //
+                //                                 $.redux.initFields();
+                //                             }
+                //                         );
+                //
+                //                         if (childFieldset.hasClass('redux-container-section') || childFieldset.hasClass('redux-container-info')) {
+                //                             tr.css({display: 'none'});
+                //                         }
+                //                     } else if (false === show) {
+                //                         tr.fadeOut(
+                //                             100,
+                //                             function () {
+                //                                 $(this).addClass('hide');
+                //                                 if (redux.optName.required.hasOwnProperty(child)) {
+                //                                     $.redux.required_recursive_hide(child);
+                //                                 }
+                //                             }
+                //                         );
+                //                     }
+                //
+                //                     current.find('select, radio, input[type=checkbox]').trigger('change');
+                //                 }
+                //             );
+                //         // });
+                // }
+                //
+                // obj_selector.find(" select, radio, input[type=checkbox], input[type=hidden], input[type=text]")
+                //     .each(function () {
+                //         check_dependencies(this);
+                //     });
             };
+
+            // var org_iniFields   = $.redux.initFields;
+            // $.redux.initFields  = function(){
+            //     console.log("Redux Init Fields");
+            //   org_iniFields();
+            // };
 
             // Edit element setting
             selector.find("[data-fl-control=edit]").off("click").on("click",function(event){
@@ -1149,12 +1547,13 @@
                     main_wrap = control.closest(".redux-wrap-div"),
                     main_opt_name   = main_wrap.attr("data-opt-name"),
                     element = control.closest("[data-fl-element_type]"),
-                    form_setting = wp.template("field-tz_layout-settings-" + element.data("fl-element_type"));
+                    element_type = element.data("fl-element_type"),
+                    form_setting = wp.template("field-tz_layout-settings-" + element_type);
                 button_cache    = control;
 
                 $(main_wrap).removeData("opt-name");
 
-                if($("script#tmpl-field-tz_layout-settings-" + element.data("fl-element_type")).length) {
+                if($("script#tmpl-field-tz_layout-settings-" + element_type).length) {
                     form_setting = form_setting();
                     var setting_obj = $(form_setting),
                         fields = setting_obj.find(".redux-field-container");
@@ -1164,7 +1563,9 @@
                     tz_required( setting_obj );
                     selector.tooltip("destroy");
 
-                    // console.log(JSON.parse(selector.find("#"+selector.data("id")).val()));
+                    var obj_id  = redux.field_objects.tz_layout.generateID();
+                    setting_obj.attr("id", "modal-" + obj_id);
+
                     tzdialog(setting_obj, {
                         "title": setting_obj.data("fl-setting-title"),
                         "buttons": [
@@ -1172,6 +1573,8 @@
                                 text: "Save changes",
                                 class: "button button-primary",
                                 click: function () {
+                                    $(this).trigger("templaza-framework/setting/save/init", element, selector, settings);
+
                                     // Save change
                                     var setting = redux.field_objects.tz_layout.get_setting(element, selector, settings);
 
@@ -1186,34 +1589,52 @@
                                     }
 
                                     if (typeof templaza.shortcode !== typeof undefined) {
-                                        var element_type = element.data("fl-element_type"),
-                                            shortcode = templaza.shortcode;
+                                        var shortcode = templaza.shortcode;
                                         if (typeof shortcode[element_type] !== typeof undefined &&
                                             typeof shortcode[element_type]["save_setting"] !== typeof undefined) {
                                             shortcode[element_type]["save_setting"](setting, element, $(this));
                                         }
                                     }
+                                    $(this).trigger("templaza-framework/setting/save/before",[element, selector, settings]);
 
                                     redux.field_objects.tz_layout.set_setting_to_field(settings, selector);
 
-                                    $(this).dialog("close");
+                                    $(this).trigger("templaza-framework/setting/save/after",[element, selector, settings]);
+
+                                    $(this).dialog("close").dialog("destroy");
                                 },
                             },
                             {
                                 text: "Close",
-                                class: "button button-secondary ml-2",
+                                class: "button button-secondary ms-2",
                                 click: function () {
-                                    $(this).dialog("close");
+                                    $(this).trigger("templaza-framework/setting/close", [settings, selector]);
+                                    $(this).dialog("close").dialog("destroy");
                                 },
                             },
                         ],
                         "close": function (ev, ui) {
-                            $(this).remove();
+                            // $(this).remove();
                             redux.field_objects.tz_layout.init_tooltip(selector);
                         },
+                        "create": function(event, ui){
+                            if(!$(this).closest(".templaza-framework-options").length){
+                                $(this).wrapInner("<div class=\"redux-container templaza-framework-options\"><div class='redux-main'></div></div>");
+                            }
+                        },
                         "open": function (event, ui) {
+                            var shortcode = templaza.shortcode;
                             var _dialog = $(this);
                             fields  = _dialog.find(".redux-field-container");
+
+                            // Trigger of shortcode
+                            if(typeof shortcode !== typeof undefined){
+                                if(typeof shortcode[element_type] !== typeof undefined &&
+                                    typeof shortcode[element_type]["setting_edit_before_init_fields"] === "function"){
+                                    shortcode[element_type]["setting_edit_before_init_fields"](fields, _dialog, element);
+                                }
+                            }
+
                             if (fields.length) {
                                 main_wrap.data("opt-name", undefined);
                                 main_wrap.removeData("data-opt-name");
@@ -1221,41 +1642,52 @@
                                     var field = $(this),
                                         field_type = field.data("type"),
                                         tz_redux = redux.field_objects;
+
                                     if (typeof tz_redux[field_type] !== typeof undefined) {
-                                        var tz_redux_field;
+                                        // if(field_type === "select"){
+                                        //     field.find("select").data("dropdown-parent", _dialog.closest(".tzfrm-ui-dialog"));
+                                        // }
+
+                                        var tz_redux_field = tz_redux[field_type];
+
+                                        // Before init field in setting edit
+                                        // Trigger of shortcode (setting_edit_before_init_field)
+                                        if(typeof shortcode !== typeof undefined){
+                                            if(typeof shortcode[element_type] !== typeof undefined &&
+                                                typeof shortcode[element_type]["setting_edit_before_init_field"] === "function"){
+                                                shortcode[element_type]["setting_edit_before_init_field"](field, _dialog, element, selector, settings);
+                                            }
+                                        }
 
                                         // Before init field in setting edit
                                         // Trigger of field (setting_edit_before_init_field)
                                         if(field.length){
-                                            tz_redux_field  = tz_redux[field_type];
+                                            // tz_redux_field  = tz_redux[field_type];
                                             if(typeof tz_redux_field.templaza_methods !== typeof undefined
                                                 && typeof tz_redux_field.templaza_methods.setting_edit_before_init_field !== typeof undefined){
                                                 tz_redux_field.templaza_methods.setting_edit_before_init_field(field, _dialog);
                                             }
                                         }
 
-                                        tz_redux[field_type].init(field);
+                                        tz_redux_field.init(field);
 
                                         // After init field in setting edit
                                         // Trigger of field (setting_edit_after_init_field)
                                         if(field.length){
-                                            tz_redux_field  = tz_redux[field_type];
+                                            // tz_redux_field  = tz_redux[field_type];
                                             if(typeof tz_redux_field.templaza_methods !== typeof undefined
                                                 && typeof tz_redux_field.templaza_methods.setting_edit_after_init_field !== typeof undefined){
                                                 tz_redux_field.templaza_methods.setting_edit_after_init_field(field, _dialog);
                                             }
                                         }
-
-                                        // switch (field.attr("data-type")) {
-                                        //     case "switch":
-                                        //         var val = field.find(".checkbox-input").val();
-                                        //         if(val === "1"){
-                                        //             field.find(".cb-enable").trigger("click");
-                                        //         }else{
-                                        //             field.find(".cb-disable").trigger("click");
-                                        //         }
-                                        //         break;
-                                        // }
+                                        // After init field in setting edit
+                                        // Trigger of shortcode (setting_edit_after_init_field)
+                                        if(typeof shortcode !== typeof undefined){
+                                            if(typeof shortcode[element_type] !== typeof undefined &&
+                                                typeof shortcode[element_type]["setting_edit_after_init_field"] === "function"){
+                                                shortcode[element_type]["setting_edit_after_init_field"](field, _dialog, element);
+                                            }
+                                        }
                                     }
                                     main_wrap.removeData("opt-name");
                                     main_wrap.removeData("data-opt-name");

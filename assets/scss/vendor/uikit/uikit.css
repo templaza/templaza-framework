@@ -1,0 +1,19 @@
+/* Error: Undefined variable.
+ *     ,
+ * 606 | $inverse-base-color:                            $inverse-global-color !default;
+ *     |                                                 ^^^^^^^^^^^^^^^^^^^^^
+ *     '
+ *   components\base.scss 606:49  @import
+ *   components\_import.scss 4:9  @import
+ *   uikit.scss 5:9               root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined variable.\a     \2577 \a 606 \2502  $inverse-base-color:                            $inverse-global-color !default;\a     \2502                                                  ^^^^^^^^^^^^^^^^^^^^^\a     \2575 \a   components\\base.scss 606:49  @import\a   components\\_import.scss 4:9  @import\a   uikit.scss 5:9               root stylesheet";
+}

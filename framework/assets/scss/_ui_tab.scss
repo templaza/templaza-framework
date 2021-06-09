@@ -1,4 +1,6 @@
 .tzfrm-ui-tab{
+  padding: 0;
+  background: none;
   &.ui-widget-content{
     .redux-container.templaza-framework-options & {
       border: none;
@@ -6,6 +8,11 @@
     }
     .ui-tabs-panel{
       border: none;
+    }
+  }
+  .ui-widget-content{
+    .redux-container-tz_layout__dialog &{
+      padding: 0;
     }
   }
   .ui-widget-header{
@@ -106,6 +113,20 @@
     .redux-container.templaza-framework-options &{
       width: 60px;
       margin-right: 10px;
+    }
+  }
+
+  .ui-tabs-nav{
+    .tzfrm-ui-dialog .templaza-framework-options &{
+      background: #fff;
+    }
+  }
+  &.ui-tabs .ui-tabs-nav{
+    .ui-tabs-anchor{
+      padding: 0.5rem 1rem;
+    }
+    li.ui-tabs-active{
+      padding-bottom: 0;
     }
   }
 }

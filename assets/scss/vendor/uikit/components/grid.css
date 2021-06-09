@@ -1,0 +1,17 @@
+/* Error: Undefined variable.
+ *    ,
+ * 29 | $grid-gutter-horizontal:                         $global-gutter !default;
+ *    |                                                  ^^^^^^^^^^^^^^
+ *    '
+ *   grid.scss 29:50  root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined variable.\a    \2577 \a 29 \2502  $grid-gutter-horizontal:                         $global-gutter !default;\a    \2502                                                   ^^^^^^^^^^^^^^\a    \2575 \a   grid.scss 29:50  root stylesheet";
+}

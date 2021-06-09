@@ -105,16 +105,16 @@ if ( ! class_exists( 'ReduxFramework_TZ_Preloader' ) ) {
          * @since ReduxFramework 1.0.0
          */
         function render() {
-
+            
             $options        = isset($this -> field['options'])?(array) $this -> field['options']:array();
             $dialog_title   = isset($this -> field['dialog_title'])?$this -> field['dialog_title']:'';
 
-            if(isset($this -> field['default']) && !empty($this -> field['default'])){
-                $selected  = isset($options[$this -> field['default']])?$options[$this -> field['default']]:array();
-            }
             $value  = $this -> value;
-            if(!empty($this -> value) && isset($this -> field['default'])) {
+            if(empty($this -> value) && isset($this -> field['default'])) {
                 $value = $this -> field['default'];
+            }
+            if(!empty($value)){
+                $selected  = isset($options[$value])?$options[$value]:array();
             }
         ?>
         <div class="field-tz-preloader">

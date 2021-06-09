@@ -56,6 +56,8 @@ class Fields{
                         if(class_exists($custom_class)){
                             new $custom_class($this -> args, $this);
                         }
+
+//                        do_action('templaza-framework/field/'.$fName.'/init');
                     }
                 }
             }
@@ -86,18 +88,32 @@ class Fields{
 
         if(empty($field['options'])){
             if($field && isset($field['data']) && $field['data']){
+//                if($field['data'] == 'icons'){
+//                    add_filter('redux/options/'.$this->args['opt_name'].'/data/'.$field['data'], function($data)use ($field){
+//
+//                    });
+//                }else{
+
                 // Add Font Icons
                 $iconPath   = TEMPLAZA_FRAMEWORK_FIELD_PATH.'/select/font-icons/'.$field['data'].'.php';
                 if(file_exists($iconPath)){
                     add_filter('redux/options/'.$this->args['opt_name'].'/data/'.$field['data'], function($data) use ($field, $iconPath){
-                        require_once $iconPath;
-                        $icons  = apply_filters('templaza-framework/font-icons', $data);
+
+//                        if(isset($field['data-icons']) && $field['data-icons']){
+//                            $icons   = $field['data-icons'];
+////                            $data   = $field['data-icons'];
+////                            $icons  = apply_filters('templaza-framework/field/select/'.$field['id'].'/data-icons', $data);
+//                        }else{
+                            require_once $iconPath;
+                            $icons  = apply_filters('templaza-framework/field/select/font-icons', $data);
+//                        }
                         if($icons && count($icons)) {
                             $icons = array_combine($icons, $icons);
                         }
                         return $icons;
                     });
                 }
+//                }
             }
         }
     }

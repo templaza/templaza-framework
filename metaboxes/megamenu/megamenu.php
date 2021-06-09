@@ -3,6 +3,7 @@
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
 use TemPlazaFramework\Enqueue;
+use TemPlazaFramework\Functions;
 
 if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
 
@@ -11,109 +12,78 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
         public $layout_fields = array();
         public $template_html = '';
 
+        protected $redux;
+        protected $opt_name;
+
+        protected $loop_fields;
+
         public function __construct($post_type, &$framework = null)
         {
+            global $pagenow;
+
+//            $this -> opt_name                   = 'megamenu__layout';
+            $this -> opt_name                   = 'megamenu__item';
+
             parent::__construct($post_type, $framework);
 
-//            add_action('')
+            $ignores    = array('templaza_style');
+//            $post_type_name = $this -> post_type -> get_current_screen_post_type();
+            $post_type_name = $this -> post_type -> get_post_type();
 
-            $opt_name                           = 'megamenu__layout';
-//            $opt_name                           = 'menu-item[-1]';
-            $sections                           = $this -> layout_fields;
+            if($pagenow == 'nav-menus.php'){
 
-            $setting_args                       = $this -> post_type -> setting_args;
-            $setting_args                       = $setting_args[$this -> post_type -> get_post_type()];
-            $redux_args                         = $setting_args;
+                $opt_name                           = $this -> opt_name ;
+                $sections                           = $this -> layout_fields;
 
-            $redux_args['opt_name']             = $opt_name;
-            $redux_args['menu_type']            = 'hidden';
-            $redux_args['dev_mode']             = false;
-            $redux_args['ajax_save']            = false;
-            $redux_args['open_expanded']        = true;
-            $redux_args['shortcode_section']    = false;
-            $redux_args['show_import_export']   = false;
-            \Templaza_API::load_my_fields($opt_name);
+                $setting_args                       = $this -> post_type -> setting_args;
+                $setting_args                       = $setting_args[$post_type_name];
+                $redux_args                         = $setting_args;
 
-            Redux::set_args($opt_name, $redux_args);
-            Redux::set_sections($opt_name, $sections);
-            Redux::init($opt_name);
-
-            add_filter("redux/{$opt_name}/repeater", function($repeater_data) use($redux_args){
-                $repeater_data['opt_names'][]   = $redux_args['opt_name'];
-                return $repeater_data;
-            });
-            $redux  = \Redux::instance($opt_name );
-
-            // Set options
-            $redux -> options   = array();
-            $redux->_register_settings();
-
-            ob_start();
-            foreach ($redux -> sections as $k => $section) {
-
-                $section['class'] = isset($section['class']) ? ' ' . $section['class'] : '';
-
-                echo '<div id="metabox_'.$redux_args['opt_name'].'_' . $k . '_section_group' . '" class="redux-group-tab' . esc_attr($section['class']) . '" data-rel="metabox_'.$redux_args['opt_name'].'_' . $k . '">';
-
-                do_action("redux/page/{$redux->args['opt_name']}/section/before", $section);
-                do_settings_sections( $redux->args['opt_name'] . $k . '_section_group' );
-                do_action("redux/page/{$redux->args['opt_name']}/section/after", $section);
-
-                echo '</div>';
-            }
-//            $this -> template_html  = ob_get_contents();
-//            $this -> template_html  = ob_get_contents();
-            ob_end_clean();
-
-//            $menu = get_term( $locations[$theme_location], 'nav_menu' );
-            $menu_item_id   = 2580;
-            $terms = get_the_terms( $menu_item_id, 'nav_menu' );
-//            $menu_id = $terms[0]->term_id;
-            $menu_id = 215;
-            $menu_item = wp_get_nav_menu_object($menu_item_id);
+                $redux_args['opt_name']             = $opt_name;
+                $redux_args['menu_type']            = 'hidden';
+                $redux_args['dev_mode']             = false;
+                $redux_args['ajax_save']            = false;
+                $redux_args['open_expanded']        = false;
+                //            $redux_args['open_expanded']        = true;
+                $redux_args['shortcode_section']    = false;
+                $redux_args['show_import_export']   = false;
+//                $redux_args['showimportexport']   = false;
 
 
-            $items  = array();
-//            var_dump(__METHOD__);
-//            var_dump($_POST);
-//            var_dump($_REQUEST);
-//            var_dump($_GET);
-//            var_dump($menu_item);
-//            var_dump(array_keys($menu_items));
+                \Templaza_API::load_my_fields($opt_name);
 
-            // The menu id of the current menu being edited.
-            $nav_menu_selected_id = isset( $_REQUEST['menu'] ) ? (int) $_REQUEST['menu'] : 0;
-            // Get recently edited nav menu.
-            $recently_edited = absint( get_user_option( 'nav_menu_recently_edited' ) );
-            if ( empty( $recently_edited ) && is_nav_menu( $nav_menu_selected_id ) ) {
-                $recently_edited = $nav_menu_selected_id;
-            }
+                \Redux::set_args($opt_name, $redux_args);
+                \Redux::set_sections($opt_name, $sections);
+                \Redux::init($opt_name);
 
-            // Use $recently_edited if none are selected.
-            if ( empty( $nav_menu_selected_id ) && ! isset( $_GET['menu'] ) && is_nav_menu( $recently_edited ) ) {
-                $nav_menu_selected_id = $recently_edited;
-            }
-//            var_dump($nav_menu_selected_id);
-//            var_dump(is_nav_menu( $nav_menu_selected_id ));
-//            var_dump($recently_edited);
-            $menu_items = wp_get_nav_menu_items($nav_menu_selected_id);
-            if(count($menu_items)){
-                foreach ($menu_items as $i => $item){
-                    if(!isset($items[$i])){
-                        $items[$i]  = array();
-                    }
-                    $items[$i]['ID']            = $item -> ID;
-                    $items[$i]['title']         = $item -> post_title;
-                    $items[$i]['admin_label']   = $item -> post_title;
-//                    break;
+                add_filter("redux/{$opt_name}/repeater", function($repeater_data) use($redux_args){
+                    $repeater_data['opt_names'][]   = $redux_args['opt_name'];
+                    return $repeater_data;
+                });
+
+                $redux  = \Redux::instance($opt_name );
+
+                if(!($redux instanceof ReduxFramework)){
+                    return;
                 }
-            }
-//            var_dump($items);
-//            var_dump($menu_id);
-//            var_dump($menu_items);
 
-//            $enqueue    = new Enqueue($redux);
-//            $enqueue -> init();
+                // Set options
+                $redux -> options   = array();
+//                $redux ->_default_values();
+//                $redux ->check_dependencies();
+                //            if(method_exists($redux, '_register_settings')) {
+                $redux->_register_settings();
+                //            }
+
+                // Generate redux html to field call hook or filter
+                ob_start();
+                $redux->generate_panel();
+                ob_end_clean();
+
+                $this -> redux  = $redux;
+
+            }
+
         }
 
         /**
@@ -134,65 +104,98 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
         }
 
         public function register(){
+
+//            $locations              = get_nav_menu_locations();
+//            $theme_locations        = get_registered_nav_menus();
+            $menu_id                = $this -> get_selected_menu_id();
+            $tagged_menu_locations  = $this -> get_tagged_theme_locations_for_menu_id($menu_id);
+
+            $this -> loop_fields = $mloopFields    = array(
+                array(
+                    'id'    => 'enabled',
+                    'type'  => 'switch',
+                    'title' => esc_html__('Enable', $this -> text_domain),
+                    'default' => 1,
+                ),
+//                array(
+//                    'id'        => 'event',
+//                    'type'      => 'select',
+//                    'title'     => esc_html__('Event', $this -> text_domain),
+//                    'options'   => array(
+//                        'hover'  => esc_html__('Hover Intent', $this -> text_domain),
+//                        'hover_' => esc_html__('Hover', $this -> text_domain),
+//                        'click'  => esc_html__('Click', $this -> text_domain),
+//                    ),
+//                    'default' => 'hover'
+//                ),
+//                array(
+//                    'id'        => 'effect',
+//                    'type'      => 'select',
+//                    'title'     => esc_html__('Effect', $this -> text_domain),
+//                    'options'   => array(
+//                        'disabled' => esc_html__('None', $this -> text_domain),
+//                        'fade'     => esc_html__('Fade', $this -> text_domain),
+//                        'fade_up'  => esc_html__('Fade Up', $this -> text_domain),
+//                        'slide'    => esc_html__('Slide', $this -> text_domain),
+//                        'slide_up' => esc_html__('Slide Up', $this -> text_domain),
+//                    ),
+//                    'default' => 'fade_up'
+//                ),
+//                array(
+//                    'id'        => 'effect_speed',
+//                    'type'      => 'select',
+//                    'title'     => esc_html__('Effect Speed', $this -> text_domain),
+//                    'options'   => array(
+//                        '200' => esc_html__('Fast', $this -> text_domain),
+//                        '400'     => esc_html__('Med', $this -> text_domain),
+//                        '600'  => esc_html__('Slow', $this -> text_domain),
+//                    ),
+//                    'default' => '200'
+//                ),
+//                array(
+//                    'id'        => 'effect_mobile',
+//                    'type'      => 'select',
+//                    'title'     => esc_html__('Effect (Mobile)', $this -> text_domain),
+//                    'options'   => array(
+//                        'disabled' => esc_html__('None', $this -> text_domain),
+//                        'slide'     => esc_html__('Slide Down', $this -> text_domain),
+//                        'slide_left'  => esc_html__('Slide Left (Off Canvas)', $this -> text_domain),
+//                        'slide_right'    => esc_html__('Slide Right (Off Canvas)', $this -> text_domain),
+//                    ),
+//                    'default'   => 'disabled'
+//                ),
+//                array(
+//                    'id'        => 'effect_speed_mobile',
+//                    'type'      => 'select',
+//                    'title'     => esc_html__('Effect Speed (Mobile)', $this -> text_domain),
+//                    'options'   => array(
+//                        '200' => esc_html__('Fast', $this -> text_domain),
+//                        '400'     => esc_html__('Med', $this -> text_domain),
+//                        '600'  => esc_html__('Slow', $this -> text_domain),
+//                    ),
+//                    'default'   => '200'
+//                ),
+            );
+
             $metaboxes[] = array(
-                'id'            => 'tz_megamenu',
+                'id'            => 'tz_megamenu-main',
                 'title'         => __( 'TZ Mengamenu Options', $this -> text_domain ),
-                'post_types'    => array('nav-menus' ),
-//                'post_types'    => 'nav-menus',
-//                'position'      => 'side', // normal, advanced, side
+                'post_types'    => 'nav-menus',
                 'position'      => 'side', // normal, advanced, side
                 'priority'      => 'high', // high, core, default, low - Priorities of placement
                 'store_each'    => true, // Store value of each fields to each post meta
                 'sections'      => array(
                     array(
+                        'id'    => uniqid(),
+                        'title' => '',
                         'fields' => array(
                             array(
-//                                'id'    => 'megamenu_layout',
-                                'id'    => '_templaza_megamenu',
-                                'type'  => 'text',
-                                'class' => 'hide',
-                                'default' => '{"2580": [{"type":"row","elements":[{"type":"column","elements":[{"type":"megamenu_menu_item", "title":"Megamenu Menu Item", "admin_label": "New Style 2020 - Single Portfolio", "params":{}}],"params":{"tz_customclass":"","tz_customid":"","background":{"background-color":"","background-repeat":"","background-size":"","background-attachment":"","background-position":"","background-image":"","media":{"id":"","height":"","width":"","thumbnail":""}},"text_color":"","link_color":{"regular":"","hover":"","active":""},"xs_colum_size":"","xs_visibility":"","sm_colum_size":"","sm_visibility":"","md_colum_size":"","md_visibility":"","lg_colum_size":"","lg_visibility":"","xl_colum_size":"","xl_visibility":""},"size":12,"id":"291601538988002"}],"params":{"test":"","tz_customclass":"","tz_customid":"","background":{"background-color":"","background-repeat":"","background-size":"","background-attachment":"","background-position":"","background-image":"","media":{"id":"","height":"","width":"","thumbnail":""}},"hideonxs":"","hideonsm":"","hideonmd":"","hideonlg":"","hideonxl":""},"id":"951601538987998"}]}',
-//                                'title' => esc_html__('Mega Layout', $this -> text_domain),
-//                                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
-                                'attributes' => array(
-                                    'type'         => 'hidden',
-//                                    'readonly'     => 'readonly',
-//                                    'autocomplete' => 'off',
-//                                    'data-json' => array(
-//                                        'example' => 'json'
-//                                    )
-                                ),
+                                'id'           => 'tz_megamenu_meta',
+                                'type'         => 'tz_loop',
+                                'title'        => 'Main Options',
+                                'group_fields' => $tagged_menu_locations,
+                                'fields'       => $mloopFields,
                             ),
-                            array(
-                                'id'    => 'templaza-style',
-                                'type'  => 'select',
-                                'data' => 'posts',
-                                'title' => esc_html__('Templaza Style', $this -> text_domain),
-                                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
-                                'args'  => array(
-                                    'post_type'      => 'templaza_style',
-                                    'posts_per_page' => -1,
-                                    'orderby'        => 'title',
-                                    'order'          => 'ASC',
-                                    'meta_key'       => '_templaza_style_theme',
-                                    'meta_value'     => basename(get_template_directory()),
-                                ),
-                            ),
-//                            array(
-//                                'id'       => 'test-mega',
-//                                'type'     => 'switch',
-//                                'default'  => false,
-//                                'title'    => esc_html__('Default', $this -> text_domain),
-//                                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
-//                            ),
-//                            array(
-//                                'id'           => 'megamenu_layout-2',
-//                                'type'         => 'tz_layout',
-//                                'default'      => '[{"type":"section","elements":[{"type":"row","elements":[{"type":"column","elements":[],"params":{"tz_customclass":"","tz_customid":"","background":{"background-color":"","background-repeat":"","background-size":"","background-attachment":"","background-position":"","background-image":"","media":{"id":"","height":"","width":"","thumbnail":""}},"text_color":"","link_color":{"regular":"","hover":"","active":""},"xs_colum_size":"","xs_visibility":"","sm_colum_size":"","sm_visibility":"","md_colum_size":"","md_visibility":"","lg_colum_size":"","lg_visibility":"","xl_colum_size":"","xl_visibility":""},"size":12,"id":"291601538988002"}],"params":{"test":"","tz_customclass":"","tz_customid":"","background":{"background-color":"","background-repeat":"","background-size":"","background-attachment":"","background-position":"","background-image":"","media":{"id":"","height":"","width":"","thumbnail":""}},"hideonxs":"","hideonsm":"","hideonmd":"","hideonlg":"","hideonxl":""},"id":"951601538987998"}],"params":{"tz_admin_label":"","title":"","layout_type":"container","custom_container_class":"","tz_customclass":"","tz_customid":"","background":{"background-color":"","background-repeat":"","background-size":"","background-attachment":"","background-position":"","background-image":"","media":{"id":"","height":"","width":"","thumbnail":""}},"text_color":"","link_color":{"regular":"","hover":"","active":""},"margin":{"units":"","margin-top":"","margin-right":"","margin-bottom":"","margin-left":""},"padding":{"units":"","padding-top":"","padding-right":"","padding-bottom":"","padding-left":""},"hideonxs":"","hideonsm":"","hideonmd":"","hideonlg":"","hideonxl":""},"id":"231601538987996"}]',
-////                            'class'    => 'field-tz_layout-content',
-//                                'title'    => esc_html__('Layout', $this -> text_domain),
-////                            'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
-//                            ),
                         ),
                     ),
                 ),
@@ -200,18 +203,187 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
 
             $this -> layout_fields  = array(
                 array(
+                    'id'     => 'megamenu-layout-section',
+                    'icon'   => 'dashicons dashicons-welcome-widgets-menus',
+                    'title'  => esc_html__('Mega Menu', $this -> text_domain),
                     'fields' => array(
                         array(
                             'id'       => 'megamenu_layout',
                             'type'     => 'tz_layout',
-//                            'show_section' => true,
-//                            'default'  => '[{"type":"row","elements":[{"type":"column","elements":[],"params":{"tz_customclass":"","tz_customid":"","background":{"background-color":"","background-repeat":"","background-size":"","background-attachment":"","background-position":"","background-image":"","media":{"id":"","height":"","width":"","thumbnail":""}},"text_color":"","link_color":{"regular":"","hover":"","active":""},"xs_colum_size":"","xs_visibility":"","sm_colum_size":"","sm_visibility":"","md_colum_size":"","md_visibility":"","lg_colum_size":"","lg_visibility":"","xl_colum_size":"","xl_visibility":""},"size":12,"id":"291601538988002"}],"params":{"test":"","tz_customclass":"","tz_customid":"","background":{"background-color":"","background-repeat":"","background-size":"","background-attachment":"","background-position":"","background-image":"","media":{"id":"","height":"","width":"","thumbnail":""}},"hideonxs":"","hideonsm":"","hideonmd":"","hideonlg":"","hideonxl":""},"id":"951601538987998"}]',
-//                            'default'  => '[{"type":"section","elements":[{"type":"row","elements":[{"type":"column","elements":[],"params":{"tz_customclass":"","tz_customid":"","background":{"background-color":"","background-repeat":"","background-size":"","background-attachment":"","background-position":"","background-image":"","media":{"id":"","height":"","width":"","thumbnail":""}},"text_color":"","link_color":{"regular":"","hover":"","active":""},"xs_colum_size":"","xs_visibility":"","sm_colum_size":"","sm_visibility":"","md_colum_size":"","md_visibility":"","lg_colum_size":"","lg_visibility":"","xl_colum_size":"","xl_visibility":""},"size":12,"id":"291601538988002"}],"params":{"test":"","tz_customclass":"","tz_customid":"","background":{"background-color":"","background-repeat":"","background-size":"","background-attachment":"","background-position":"","background-image":"","media":{"id":"","height":"","width":"","thumbnail":""}},"hideonxs":"","hideonsm":"","hideonmd":"","hideonlg":"","hideonxl":""},"id":"951601538987998"}],"params":{"tz_admin_label":"","title":"","layout_type":"container","custom_container_class":"","tz_customclass":"","tz_customid":"","background":{"background-color":"","background-repeat":"","background-size":"","background-attachment":"","background-position":"","background-image":"","media":{"id":"","height":"","width":"","thumbnail":""}},"text_color":"","link_color":{"regular":"","hover":"","active":""},"margin":{"units":"","margin-top":"","margin-right":"","margin-bottom":"","margin-left":""},"padding":{"units":"","padding-top":"","padding-right":"","padding-bottom":"","padding-left":""},"hideonxs":"","hideonsm":"","hideonmd":"","hideonlg":"","hideonxl":""},"id":"231601538987996"}]',
-//                            'class'    => 'field-tz_layout-content',
-//                            'class'    => 'fl_column-container',
-                            'title'    => esc_html__('Layout', $this -> text_domain),
-//                            'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+                            'class'    => 'field-tz_layout-content',
                         ),
+
+                    ),
+                ),
+                array(
+                    'id'     => 'megamenu-settings-section',
+                    'title'  => esc_html__('Settings', $this -> text_domain),
+                    'fields' => array(
+                        array(
+                            'id'    => 'hide_text',
+                            'type'  => 'switch',
+                            'title' => esc_html__('Hide Text', $this -> text_domain)
+                        ),
+//                        array(
+//                            'id'    => 'hide_arrow',
+//                            'type'  => 'switch',
+//                            'title' => esc_html__('Hide Arrow', $this -> text_domain)
+//                        ),
+                        array(
+                            'id'    => 'disable_link',
+                            'type'  => 'switch',
+                            'title' => esc_html__('Disable Link', $this -> text_domain)
+                        ),
+                        array(
+                            'id'    => 'hide_on_mobile',
+                            'type'  => 'switch',
+                            'title' => esc_html__('Hide Item on Mobile', $this -> text_domain)
+                        ),
+                        array(
+                            'id'    => 'hide_on_desktop',
+                            'type'  => 'switch',
+                            'title' => esc_html__('Hide Item on Desktop', $this -> text_domain)
+                        ),
+                        array(
+                            'id'    => 'item_align',
+                            'type'  => 'select',
+                            'title' => esc_html__('Menu Item Align', $this -> text_domain),
+                            'options' => array(
+                                'float-left' => esc_html__('Left', $this -> text_domain),
+                                'left'       => esc_html__('Default', $this -> text_domain),
+                                'right'      => esc_html__('Right', $this -> text_domain),
+                            ),
+                            'default' => 'left'
+                        ),
+//                        array(
+//                            'id'    => 'submenu-section-start',
+//                            'title' => esc_html__('Sub Menu Settings', $this -> text_domain),
+//                            'type'  => 'section',
+//                            'indent' => true,
+//                            'subtitle' => __('With the "section" field you can create indent option sections.', 'redux-framework-demo'),
+//                        ),
+//                        array(
+//                            'id'    => 'width',
+//                            'type'  => 'text',
+//                            'title' => esc_html__('Sub Menu Width', $this -> text_domain),
+//                            'default' => '980px',
+//                        ),
+//                        array(
+//                            'id'    => 'align',
+//                            'type'  => 'select',
+//                            'title' => esc_html__('Sub Menu Align', $this -> text_domain),
+//                            'options' => array(
+//                                'bottom-left'  => esc_html__('Left edge of Parent', $this -> text_domain),
+//                                'bottom-right'   => esc_html__('Right edge of Parent', $this -> text_domain),
+//                            ),
+//                            'default' => 'bottom-left'
+//                        ),
+//                        array(
+//                            'id'    => 'hide_sub_menu_on_mobile',
+//                            'type'  => 'switch',
+//                            'title' => esc_html__('Hide Sub Menu on Mobile', $this -> text_domain),
+//                        ),
+//                        array(
+//                            'id'    => 'submenu-section-end',
+//                            'type'  => 'section',
+//                            'indent' => false,
+//                        ),
+                    ),
+                ),
+                array(
+                    'id'         =>'megamenu-submenu-setting-section',
+                    'title'      => __('Sub Menu Settings', $this -> text_domain),
+                    'desc'       => __('Configure Submenu settings.', $this -> text_domain),
+                    'subsection' => true,
+                    'fields'     => array(
+                        array(
+                            'id'      => 'submenu_direction',
+                            'type'    => 'select',
+                            'title'   => __('Sub Menu Alignment', $this -> text_domain),
+                            'options' => array(
+                                'left'   => esc_html__('Left', $this -> text_domain),
+                                'right'  => esc_html__('Right', $this -> text_domain),
+                                'center' => esc_html__('Center', $this -> text_domain),
+                                'full'   => esc_html__('Container', $this -> text_domain),
+                                'edge'   => esc_html__('Full', $this -> text_domain),
+                            ),
+                            'default' => 'left'
+                        ),
+                        array(
+                            'id'    => 'width',
+                            'type'  => 'text',
+                            'title' => __('Sub Menu Width', $this -> text_domain),
+                            'placeholder' => '980px',
+                            'required' => array(
+                                array('submenu_direction', '!=', 'full'),
+                                array('submenu_direction', '!=', 'edge')
+                            )
+                        ),
+//                        array(
+//                            'id'    => 'align',
+//                            'type'  => 'select',
+//                            'title' => __('Sub Menu Align', $this -> text_domain),
+//                            'options' => array(
+//                                'bottom-left'  => esc_html__('Left edge of Parent', $this -> text_domain),
+//                                'bottom-right'   => esc_html__('Right edge of Parent', $this -> text_domain),
+//                            ),
+//                            'default' => 'bottom-left'
+//                        ),
+                        array(
+                            'id'    => 'hide_sub_menu_on_mobile',
+                            'type'  => 'switch',
+                            'title' => __('Hide Sub Menu on Mobile', $this -> text_domain),
+                        ),
+                    ),
+                ),
+                array(
+                    'id'         => 'megamenu-icon-section',
+//                    'icon'       => 'dashicons dashicons-format-image',
+                    'title'      => esc_html__('Icon', $this -> text_domain),
+                    'subsection' => true,
+                    'fields'     => array(
+                        array(
+                            'id'    => 'icon_position',
+                            'type'  => 'select',
+                            'title' => esc_html__('Icon Position', $this -> text_domain),
+                            'options' => array(
+                                'left'   => esc_html__('Left', $this -> text_domain),
+                                'top'    => esc_html__('Top', $this -> text_domain),
+                                'right'  => esc_html__('Right', $this -> text_domain),
+                                'bottom' => esc_html__('Bottom', $this -> text_domain),
+                            ),
+                            'default' => 'left'
+                        ),
+                        array(
+                            'id'       => 'icon',
+                            'type'     => 'select',
+                            'title'    => __( 'Menu Item Icon', $this -> text_domain ),
+//                            'subtitle' => __( 'Select a Back to Top Icon from the list', $this -> text_domain ),
+                            'data'     => 'fontawesome',
+//                            'default'  => 'fas fa-arrow-up',
+//                            'required' => array('backtotop','=','1'),
+                        ),
+                        array(
+                            'id'         => 'dropdown-arrow-icon',
+                            'type'       => 'select',
+                            'title'      => __('Dropdown Arrow Icon', $this -> text_domain),
+                            'data'       => 'fontawesome',
+//                            'data'       => 'icons',
+//                            'data-icons' => array(
+//                                'fas fa-arrow-down',
+//                                'fas fa-arrow-circle-down',
+//                                'fas fa-arrow-alt-circle-down',
+//                                'fas fa-sort-down',
+//                                'fas fa-chevron-down',
+//                                'fas chevron-circle-down',
+//                                'fas fa-caret-square-down',
+//                                'far fa-caret-square-down',
+//                                'fas fa-caret-down',
+//                                'fas fa-angle-down',
+//                                'fas fa-angle-double-down',
+//                            ),
+                        ),
+
                     ),
                 ),
             );
@@ -222,296 +394,932 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
         public function hooks(){
             global $pagenow;
 
-//            var_dump(md5('admin'));
 //            parent::hooks();
 
-            if($pagenow == 'nav-menus.php') {
-//                add_action('init', array($this, 'add_meta_boxes'), 10, 2);
-                add_action('admin_init', array($this, 'add_meta_boxes'), 10, 2);
-//                add_action('setup_theme', array($this, 'add_meta_boxes'), 10, 2);
-//                add_action('after_setup_theme', array($this, 'add_meta_boxes'), 10, 2);
+            if(is_admin()){
+//                add_action('wp_nav_menu_item_custom_fields', function($item_id, $item){
+//                    echo '<input type="hidden" data-tz-menu-slug value="'.$item -> post_name.'" />';
+////                        var_dump($item_id);
+////                    if(isset($_POST['action']) && $_POST['action'] == 'add-menu-item') {
+////                        var_dump(sanitize_title($item->post_title));
+////                        var_dump($item);
+////                        die();
+////                    }
+//                }, 10, 2);
+                if($pagenow == 'nav-menus.php') {
+                    add_filter( 'hidden_meta_boxes', array($this, 'remove_hidden_meta_boxes'), 10, 2 );
+                    add_action('admin_init', array($this, 'add_meta_boxes'), 10, 2);
+                }
+                add_action('wp_ajax_templaza_megamenu_save_settings', array($this, 'save_settings'));
+                add_action( 'pre_update_option_nav_menu_options', array( $this, 'update_nav_menu' ), 10, 3 );
+
+                add_action('admin_footer', array($this, 'megamenu_enqueue'));
+                add_action('admin_footer', array($this, 'template'));
+
+                add_filter( 'redux/'.$this -> opt_name .'/panel/template/header.tpl.php' , function($path){
+                    return TEMPLAZA_FRAMEWORK_METABOXES_PATH.'/'.$this -> get_meta_box_name().'/tmpl/redux-panel/header.tpl.php';
+                });
+                add_filter( 'redux/'.$this -> opt_name .'/panel/template/footer.tpl.php' , function($path){
+                    return TEMPLAZA_FRAMEWORK_METABOXES_PATH.'/'.$this -> get_meta_box_name().'/tmpl/redux-panel/footer.tpl.php';
+                });
+
+                add_filter( 'redux/'.$this -> opt_name .'/panel/template/header-stickybar.tpl.php' , function($path){
+                    return TEMPLAZA_FRAMEWORK_METABOXES_PATH.'/'.$this -> get_meta_box_name().'/tmpl/redux-panel/header-stickybar.tpl.php';
+                });
+            }else {
+                add_filter('wp_nav_menu_args', array($this, 'modify_nav_menu_args'), 99999);
+                add_filter('wp_nav_menu_objects', array($this, 'setup_menu_items'), 99999, 2);
+                add_filter( 'wp_nav_menu_objects', array( $this, 'add_widgets_to_menu' ), 99999, 2 );
+                add_filter( 'templaza-framework/metabox/megamenu/nav_menu_objects_after', array( $this, 'set_descriptions_if_enabled' ), 8, 2 );
             }
-//            add_action( 'save_post', array( $this, 'save_meta_box' ), 10, 2 );
-//            add_action( 'wp_update_nav_menu', array( $this, 'update_nav_menu' ), 10, 2 );
-            add_action( 'pre_update_option_nav_menu_options', array( $this, 'update_nav_menu' ), 10, 3 );
 
-//            if(method_exists($this, 'enqueue')){
-////                $this -> enqueue();
-////            }
-//
-////            add_filter( 'page_attributes_meta_box', array($this, 'test'), 10, 2 );
-//
-//            add_action('admin_footer', array($this, 'template'));
+            do_action('templaza-framework/metabox/'.$this -> get_meta_box_name().'/hooks');
+        }
 
-            add_action('admin_footer', array($this, 'megamenu_enqueue'));
-            add_action('admin_footer', array($this, 'template'));
+        public function remove_hidden_meta_boxes($hidden, $screen ){
+            if($screen -> base == 'nav-menus'){
+                $index  = array_search($this -> prefix.'tz_megamenu-main', $hidden);
+                array_splice($hidden, $index, 1);
+            }
+            return $hidden;
+        }
+
+        public function modify_nav_menu_args($args){
+
+            if ( ! isset( $args['theme_location'] ) ) {
+                return $args;
+            }
+
+            // internal action to use as a counter
+            do_action('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                .'/megamenu_instance_counter_' . $args['theme_location']);
+
+            $num_times_called = did_action('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                .'/megamenu_instance_counter_' . $args['theme_location']);
+
+            $meta_options = get_option( 'templaza_megamenu_settings' );
+            $current_theme_location = $args['theme_location'];
+
+            $settings  = isset($meta_options['tz_megamenu_meta'])?json_decode($meta_options['tz_megamenu_meta'], true):array();
+
+            $active_instance = isset( $settings['instances'][$current_theme_location] ) ? $settings['instances'][$current_theme_location] : 0;
+
+            if ( $active_instance != '0' && strlen( $active_instance ) ) {
+
+                if ( strpos( $active_instance, "," ) || is_numeric( $active_instance ) ) {
+
+                    $active_instances = explode( ",", $active_instance );
+
+                    if ( ! in_array( $num_times_called, $active_instances )) {
+                        return $args;
+                    }
+
+                } else if ( isset( $args['container_id'] ) && $active_instance != $args['container_id'] ) {
+
+                    return $args;
+
+                }
+            }
+
+            $locations = get_nav_menu_locations();
+
+            if ( isset ( $settings[ $current_theme_location ]['enabled'] ) && $settings[ $current_theme_location ]['enabled'] == true ) {
+
+                if ( ! isset( $locations[ $current_theme_location ] ) ) {
+                    return $args;
+                }
+
+                $menu_id = $locations[ $current_theme_location ];
+
+                if ( ! $menu_id ) {
+                    return $args;
+                }
+
+                $menu_settings = $settings[ $current_theme_location ];
+
+                $effect = isset( $menu_settings['effect'] ) ? $menu_settings['effect'] : 'disabled';
+
+                // convert Pro JS based effect to CSS3 effect
+                if ( $effect == 'fadeUp' ) {
+                    $effect = 'fade_up';
+                }
+
+                // as set on the main settings page
+                $vertical_behaviour = isset( $settings['mobile_behaviour'] ) ? $settings['mobile_behaviour'] : 'standard';
+
+                if ( isset( $menu_settings['mobile_behaviour'] ) ) {
+                    $vertical_behaviour = $menu_settings['mobile_behaviour'];
+                }
+
+                // as set on the main settings page
+                $second_click = isset( $settings['second_click'] ) ? $settings['second_click'] : 'go';
+
+                if ( isset( $menu_settings['second_click'] ) ) {
+                    $second_click = $menu_settings['second_click'];
+                }
+
+                $unbind = isset( $settings['unbind'] ) ? $settings['unbind'] : 'enabled';
+
+                if ( isset( $menu_settings['unbind'] ) ) {
+                    $unbind = $menu_settings['unbind'];
+                }
+
+                $event = 'hover_intent';
+
+                if ( isset( $menu_settings['event'] ) ) {
+                    if ( $menu_settings['event'] == 'hover' ) {
+                        $event = 'hover_intent';
+                    } elseif ( $menu_settings['event'] == 'hover_' ) {
+                        $event = 'hover';
+                    } else {
+                        $event = $menu_settings['event'];
+                    }
+                }
+
+                $mobile_force_width = 'false';
+
+
+                $effect_mobile = 'disabled';
+
+                if ( isset( $menu_settings['effect_mobile'] ) ) {
+                    $effect_mobile = $menu_settings['effect_mobile'];
+                }
+
+                $effect_speed_mobile = 200;
+
+                if ( isset( $menu_settings['effect_speed_mobile'] ) ) {
+                    $effect_speed_mobile = $menu_settings['effect_speed_mobile'];
+                }
+
+                if ( $effect_mobile == 'disabled' ) {
+                    $effect_speed_mobile = 0;
+                }
+//                var_dump($menu_settings);
+//                die();
+
+                $hover_intent_params = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                    .'/megamenu_javascript_localisation', // backwards compatiblity
+                    array(
+                        "timeout" => 300,
+                        "interval" => 100
+                    )
+                );
+
+                $wrap_attributes = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                    .'/megamenu_wrap_attributes', array(
+                    "id" => '%1$s',
+                    "class" => '%2$s wsmenu-list',
+//                    "data-megamenu" => "megamenu",
+//                    "data-megamenu-class" => ".has-megamenu",
+//                    "data-megamenu-content-class" => ".mega-sub-menu",
+//                    "class" => '%2$s mega-no-js',
+//                    "data-event" => $event,
+//                    "data-effect" => $effect,
+//                    "data-effect-speed" => isset( $menu_settings['effect_speed'] ) ? $menu_settings['effect_speed'] : '200',
+//                    "data-effect-mobile" => $effect_mobile,
+//                    "data-effect-speed-mobile" => $effect_speed_mobile,
+//                    "data-panel-width" => preg_match('/^\d/', $menu_theme['panel_width']) !== 1 ? $menu_theme['panel_width'] : '',
+//                    "data-panel-inner-width" => substr( trim( $menu_theme['panel_inner_width'] ), -1 ) !== '%' ? $menu_theme['panel_inner_width'] : '',
+//                    "data-mobile-force-width" => $mobile_force_width,
+//                    "data-second-click" => $second_click,
+//                    "data-document-click" => 'collapse',
+//                    "data-vertical-behaviour" => $vertical_behaviour,
+//                    "data-breakpoint" => absint( $menu_theme['responsive_breakpoint'] ),
+//                    "data-unbind" => $unbind === "disabled" ? "false" : "true",
+//                    "data-hover-intent-timeout" => absint($hover_intent_params['timeout']),
+//                    "data-hover-intent-interval" => absint($hover_intent_params['interval'])
+                ), $menu_id, $menu_settings, $settings, $current_theme_location );
+
+                $attributes = "";
+
+                foreach( $wrap_attributes as $attribute => $value ) {
+                    if ( strlen( $value ) ) {
+                        $attributes .= " " . $attribute . '="' . esc_attr( $value ) . '"';
+                    }
+                }
+
+                $sanitized_location = str_replace( apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                    .'/megamenu_location_replacements', array("-", " ") ), "-", $current_theme_location );
+
+
+//                $walker_file    = TEMPLAZA_FRAMEWORK_METABOXES_PATH.'/'.$this -> get_meta_box_name().'/classes/walker.class.php';
+//
+//                if(file_exists($walker_file)) {
+//                    require_once $walker_file;
+//                }
+//
+//                $defaults = array(
+//                    'walker' => new TemplazaFramework_Mega_Menu_Walker()
+//                );
+//
+//                $args = array_merge( $args, apply_filters( 'templaza-framework/metabox/'.$this -> get_meta_box_name()
+//                    .'/megamenu_nav_menu_args', $defaults, $menu_id, $current_theme_location ) );
+            }
+
+            $walker_file    = TEMPLAZA_FRAMEWORK_METABOXES_PATH.'/'.$this -> get_meta_box_name().'/classes/walker.class.php';
+
+            if(file_exists($walker_file)) {
+                require_once $walker_file;
+            }
+
+            $defaults = array(
+                'walker' => new TemplazaFramework_Mega_Menu_Walker()
+            );
+
+            $args = array_merge( $args, apply_filters( 'templaza-framework/metabox/'.$this -> get_meta_box_name()
+                .'/megamenu_nav_menu_args', $defaults, $current_theme_location ) );
+
+            return $args;
+        }
+
+        public function add_widgets_to_menu($items, $args ){
+            $args   = (array) $args;
+//            if(!$args['theme_location']){
+//                return;
+//            }
+//
+            $meta_options = get_option( 'templaza_megamenu_settings' );
+            $current_theme_location = $args['theme_location'];
+
+            $settings  = isset($meta_options['tz_megamenu_meta'])?json_decode($meta_options['tz_megamenu_meta'], true):array();
+
+//            if ( isset ( $settings[ $current_theme_location ]['enabled'] ) && $settings[ $current_theme_location ]['enabled'] == true ) {
+
+            $rolling_dummy_id = 999999999;
+            $items_to_move  = array();
+
+            $items = apply_filters( "templaza-framework/metabox/megamenu/nav_menu_objects_before", $items, $args );
+
+//                if ( isset ( $settings[ $current_theme_location ]['enabled'] ) && $settings[ $current_theme_location ]['enabled'] == true ) {
+
+            foreach($items as $item) {
+                if(isset($item -> templaza_megamenu_saved_layout) && $item -> templaza_megamenu_saved_layout){
+                    $next_order = $this->menu_order_of_next_sibling($item->ID, $item->menu_item_parent, $items) - 999;
+
+                    $saved_layout   = $item -> templaza_megamenu_saved_layout;
+                    $this -> tree_element($saved_layout, $item, $items, $rolling_dummy_id, $next_order, $items_to_move);
+
+                }
+            }
+
+            if ( count( $items_to_move ) ) {
+                foreach ( $items_to_move as $id => $new_parent ) {
+                    $items_to_find[] = $id;
+                }
+
+                foreach ( $items as $item ) {
+                    if ( in_array( $item->ID, $items_to_find, true ) ) {
+//                        $item->menu_item_parent = $items_to_move[ $item->post_name ]['new_parent'];
+//                        $item->menu_order       = $items_to_move[ $item->post_name ]['new_order'];
+                        $item->menu_item_parent = $items_to_move[ $item->ID ]['new_parent'];
+                        $item->menu_order       = $items_to_move[ $item->ID ]['new_order'];
+                        $item -> templaza_moved  = true;
+                    }
+                }
+            }
+
+            $items = apply_filters( "templaza-framework/metabox/megamenu/nav_menu_objects_after", $items, $args );
+//            }
+
+            return $items;
+        }
+
+
+        /**
+         * If descriptions are enabled, create a new 'mega_description' property.
+         * This is for backwards compatibility for users who have used filters
+         * to display descriptions
+         *
+         * @param array $items
+         * @param array $args
+         * @return array
+         */
+        public function set_descriptions_if_enabled( $items, $args ) {
+
+//            $settings = get_option( 'templaza_megamenu_settings' );
+
+//            $descriptions = isset( $settings['descriptions'] ) ? $settings['descriptions'] : 'disabled';
+
+//            if ($descriptions == 'enabled') {
+            foreach ( $items as $item ) {
+                if (  property_exists( $item, 'description' ) && strlen( $item->description )  ) {
+                    $item->templaza_megamenu_description = $item->description;
+                    $item->classes[] = 'has-description';
+                }
+            }
+//            }
+
+            return $items;
+        }
+
+        private function tree_element($elements, $item, &$items, &$rolling_dummy_id, &$next_order,
+                                      &$items_to_move = array(), &$count = 0, $depth = 0, &$level = 0,
+                                      &$shortcode_tmp = array()){
+            foreach($elements as $element){
+
+                $rolling_dummy_id++;
+                $next_order++;
+                $subitems       = is_array($element) && isset($element['elements']) && !empty($element['elements']);
+
+                $layout = $element;
+                if($subitems){
+                    $layout['elements'] = array(array('type'=> '__megamenu_item'));
+                }
+                $shortcode_layout = $shortcode  = Functions::generate_option_to_shortcode(array($layout));
+
+                while(preg_match_all('/' . get_shortcode_regex() . '/', $shortcode, $matches, PREG_SET_ORDER)){
+                    $shortcode = do_shortcode($shortcode);
+                }
+
+                $menu_item_parent   = $item->ID;
+                if(isset($shortcode_tmp['__level']) && $level > $shortcode_tmp['__level']){
+                    $menu_item_parent   = $shortcode_tmp['__id'];
+                }
+
+                if(isset($shortcode_tmp['__tree']) && isset($shortcode_tmp['__tree'][$level - 1])){
+                    $menu_item_parent   = $shortcode_tmp['__tree'][$level - 1];
+                }
+
+                $layout_item = array(
+                    'menu_item_parent' => $menu_item_parent,
+                    'type' => '__templaza_mega_item',
+                    'title' => $element['type'],
+                    'parent_submenu_type' => '',
+                    'menu_order' => $next_order,
+                    'depth' => $depth,
+//                    'depth' => 0,
+                    'ID' => "{$item->ID}-{$count}",
+                    'templaza_shortcode_type' => $element['type'],
+                    'templaza_megamenu_html'  => $shortcode,
+                    'templaza_megamenu_layout'  => $shortcode_layout,
+                    'db_id' => $rolling_dummy_id,
+                );
+                if($element['type'] == 'megamenu_menu_item'){
+                    $layout_item['title']   = $element['admin_label'];
+                    $next_order++;
+//                    $items_to_move[$element['menu_slug']] = array(
+//                        'new_parent' => $menu_item_parent,
+//                        'new_order'  => $next_order,
+//                    );
+                    $items_to_move[$element['menu_id']] = array(
+                        'new_parent' => $menu_item_parent,
+                        'new_order'  => $next_order,
+                    );
+                }
+                $items[] = (object)$layout_item;
+
+                if(!isset($shortcode_tmp['__tree'])){
+                    $shortcode_tmp['__tree']   = array();
+                }
+                $shortcode_tmp['__tree'][$level]   = $rolling_dummy_id;
+
+                $shortcode_tmp['__id']  = $rolling_dummy_id;
+                $shortcode_tmp['__level']  = $level;
+                $element['__level'] = $level;
+
+                $count++;
+                if($subitems){
+//                    $depth++;
+                    $level++;
+                    $this -> tree_element($element['elements'], $item, $items, $rolling_dummy_id,
+                        $next_order, $items_to_move, $count, $depth, $level,$shortcode_tmp);
+                }
+                if(isset($shortcode_tmp['type']) && $element['type'] != $shortcode_tmp['type']){
+                    $level  = $element['__level'];
+                }
+                $shortcode_tmp['type']  = $element['type'];
+
+                if($level == 0){
+                    $shortcode_tmp['__tree']    = array();
+                }
+            }
+        }
+        private function menu_order_of_next_sibling( $item_id, $menu_item_parent, $items ) {
+
+            $get_order_of_next_item = false;
+
+            foreach ( $items as $key => $item ) {
+
+                if ( $menu_item_parent !== $item->menu_item_parent ) {
+                    continue;
+                }
+
+//                if ( 'widget' === $item->type ) {
+//                    continue;
+//                }
+                if ( '__templaza_mega_item' === $item->type ) {
+                    continue;
+                }
+
+                if ( $get_order_of_next_item ) {
+                    return $item->menu_order;
+                }
+
+                if ( $item->ID === $item_id ) {
+                    $get_order_of_next_item = true;
+                }
+
+                if ( isset( $item->menu_order ) ) {
+                    $rolling_last_menu_order = $item->menu_order;
+                }
+            }
+
+            // there isn't a next sibling.
+            return $rolling_last_menu_order + 1000;
+
+        }
+
+
+        /**
+         * Return the locations that a specific menu ID has been tagged to.
+         *
+         * @param $menu_id int
+         * @return array
+         */
+        public function get_tagged_theme_locations_for_menu_id( $menu_id ) {
+
+            $locations = array();
+
+            $nav_menu_locations = get_nav_menu_locations();
+
+            foreach ( get_registered_nav_menus() as $id => $name ) {
+
+                if ( isset( $nav_menu_locations[ $id ] ) && $nav_menu_locations[$id] == $menu_id )
+                    $locations[$id] = $name;
+
+            }
+
+            return $locations;
+        }
+        /**
+         * Get the current menu ID.
+         *
+         * Most of this taken from wp-admin/nav-menus.php (no built in functions to do this)
+         *
+         * @since 1.0
+         * @return int
+         */
+        public function get_selected_menu_id() {
+
+            $nav_menus = wp_get_nav_menus( array('orderby' => 'name') );
+
+            $menu_count = count( $nav_menus );
+
+            $nav_menu_selected_id = isset( $_REQUEST['menu'] ) ? (int) $_REQUEST['menu'] : 0;
+
+            $add_new_screen = ( isset( $_GET['menu'] ) && 0 == $_GET['menu'] ) ? true : false;
+
+            // If we have one theme location, and zero menus, we take them right into editing their first menu
+            $page_count = wp_count_posts( 'page' );
+            $one_theme_location_no_menus = ( 1 == count( get_registered_nav_menus() ) && ! $add_new_screen && empty( $nav_menus ) && ! empty( $page_count->publish ) ) ? true : false;
+
+            // Get recently edited nav menu
+            $recently_edited = absint( get_user_option( 'nav_menu_recently_edited' ) );
+            if ( empty( $recently_edited ) && is_nav_menu( $nav_menu_selected_id ) )
+                $recently_edited = $nav_menu_selected_id;
+
+            // Use $recently_edited if none are selected
+            if ( empty( $nav_menu_selected_id ) && ! isset( $_GET['menu'] ) && is_nav_menu( $recently_edited ) )
+                $nav_menu_selected_id = $recently_edited;
+
+            // On deletion of menu, if another menu exists, show it
+            if ( ! $add_new_screen && 0 < $menu_count && isset( $_GET['action'] ) && 'delete' == $_GET['action'] )
+                $nav_menu_selected_id = $nav_menus[0]->term_id;
+
+            // Set $nav_menu_selected_id to 0 if no menus
+            if ( $one_theme_location_no_menus ) {
+                $nav_menu_selected_id = 0;
+            } elseif ( empty( $nav_menu_selected_id ) && ! empty( $nav_menus ) && ! $add_new_screen ) {
+                // if we have no selection yet, and we have menus, set to the first one in the list
+                $nav_menu_selected_id = $nav_menus[0]->term_id;
+            }
+
+            return $nav_menu_selected_id;
+
+        }
+
+        /**
+         * Setup the mega menu settings for each menu item
+         *
+         * @param array $items - All menu item objects
+         * @param object $args
+         * @return array
+         */
+        public function setup_menu_items($items, $args){
+            $_args  = (array) $args;
+            if ( ! isset( $_args['theme_location'] ) ) {
+                return $items;
+            }
+
+            if(count($items)){
+
+                $meta_options = get_option( 'templaza_megamenu_settings' );
+                $current_theme_location = $_args['theme_location'];
+
+                $settings  = isset($meta_options['tz_megamenu_meta'])?json_decode($meta_options['tz_megamenu_meta'], true):array();
+//                if (!isset($settings[$current_theme_location]) ||
+//                    (isset ( $settings[ $current_theme_location ]['enabled'] ) && (bool) $settings[ $current_theme_location ]['enabled'] == false) ) {
+//                    return $items;
+//                }
+
+                // Hook to change menu id to menu slug of megamenu menu item element
+                add_filter('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                    .'/element/each', function($element){
+                    return $this -> change_to_menu_id($element);
+                }, 10);
+
+                foreach ( $items as $item ) {
+                    $saved_settings = array_filter( (array) get_post_meta( $item->ID, '_templaza_megamenu_settings', true ) );
+                    $item->templaza_megamenu_settings = $saved_settings;
+
+//                    if (!isset($settings[$current_theme_location]) ||
+//                        (isset ( $settings[ $current_theme_location ]['enabled'] ) && ((bool) $settings[ $current_theme_location ]['enabled']) == true) ) {
+                    if (isset ( $settings[ $current_theme_location ]['enabled'] ) && ((bool) $settings[ $current_theme_location ]['enabled']) == true ) {
+                        $saved_layout = array_filter((array)get_post_meta($item->ID, '_templaza_megamenu_layout', true));
+
+                        $this -> tree_element_main($saved_layout);
+
+                        $shortcode = Functions::generate_option_to_shortcode($saved_layout);
+
+                        $item->templaza_megamenu_layout = $shortcode;
+                        $item->templaza_megamenu_saved_layout = $saved_layout;
+                    }
+                }
+            }
+
+            return $items;
+        }
+
+        public function change_to_menu_id($element){
+            if($element['type'] == 'megamenu_menu_item' && isset($element['menu_slug'])){
+                $menu   = get_posts(array(
+                    'name'      => $element['menu_slug'],
+                    'post_type' => 'nav_menu_item',
+                    'numberposts' => 1
+                ));
+
+                if(count($menu) && $menu[0] -> post_name == $element['menu_slug']){
+                    $element['menu_id'] = $menu[0] -> ID;
+                    unset($element['menu_slug']);
+                }
+            }
+            return $element;
+        }
+
+        public function change_to_menu_slug($element){
+            if($element['type'] == 'megamenu_menu_item' && isset($element['menu_id'])){
+                $menu   = get_post($element['menu_id']);
+                if($menu && $menu -> ID == $element['menu_id']) {
+                    $element['menu_slug'] = $menu -> post_name;
+                    unset($element['menu_id']);
+                }
+            }
+            return $element;
         }
 
         public function update_nav_menu($value, $old_value, $option){
+            $megamenu   = isset($_POST['_templaza_megamenu_layout'])?sanitize_text_field($_POST['_templaza_megamenu_layout']):false;
 
-//            $nav_menu_option = (array) get_option( 'nav_menu_options' );
-            var_dump(__METHOD__);
-            var_dump(wp_get_nav_menus( array( 'fields' => 'ids' ) ));
-            var_dump($value);
-            var_dump($option);
-            var_dump($_POST);
-//            var_dump($_POST['tzfrm_metabox-tz_megamenu']);
-            die();
-////            var_dump($_GET);
-//            var_dump($_REQUEST);
+            $megamenu_settings = isset($_POST['_templaza_megamenu_settings'])?sanitize_text_field($_POST['_templaza_megamenu_settings']):false;
+
+            if(!$megamenu && !$megamenu_settings){
+                return;
+            }
+
+            $megamenu   = str_replace('\\', '', $megamenu);
+            $megamenu_settings   = str_replace('\\', '', $megamenu_settings);
+
+            $megamenu   = json_decode($megamenu, true);
+            $megamenu_settings   = json_decode($megamenu_settings, true);
+
+//            var_dump($megamenu); die();
+            if(count($megamenu)){
+
+                // Hook to change menu id to menu slug of megamenu menu item element
+                add_filter('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                    .'/element/each', function($element){
+                    return $this -> change_to_menu_slug($element);
+                }, 10);
+
+                foreach ($megamenu as $menu_id => &$layout){
+                    $this -> tree_element_main($layout);
+                    update_post_meta($menu_id, '_templaza_megamenu_layout', $layout);
+                }
+            }
+
+            if(count($megamenu_settings)){
+                foreach ($megamenu_settings as $_menu_id => $setting){
+                    update_post_meta($_menu_id, '_templaza_megamenu_settings', $setting);
+                }
+            }
+
+        }
+
+        public function tree_element_main(&$elements, $new_option = array()){
+            if(!$elements){
+                return;
+            }
+            do_action('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                .'/element/before', $elements);
+            foreach ($elements as &$element){
+
+//                $continue   = false;
+//                if($element['type'] != 'megamenu_menu_item'){
+//                    $continue   = true;
+//                }
+//
+//
+//                $continue   = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
+//                    .'/element/each/continue', $continue, $element, $elements);
+                $subitems   = is_array($element) && isset($element['elements']) && !empty($element['elements']);
+
+//                if($continue){
+//                    continue;
+//                }
+
+
+//                if($element['type'] == 'megamenu_menu_item'){
+//                    $menu   = get_post($element['menu_id']);
+//                    if($menu) {
+//                        $element['menu_slug'] = $menu -> post_name;
+//                        unset($element['menu_id']);
+//                    }
+//                }
+
+
+                $element = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                    .'/element/each', $element, $elements);
+
+                if($subitems){
+                    do_action('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                        .'/element/each/child/before', $element, $elements);
+                    $this -> tree_element_main($element['elements'], $new_option);
+                    do_action('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                        .'/element/each/child/after', $element, $elements);
+                }
+            }
+            do_action('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                .'/element/after', $elements);
+
+        }
+
+        public function save_settings(){
+            check_ajax_referer( 'templaza_megamenu_save_settings', 'nonce' );
+
+            if ( isset( $_POST['menu'] ) && $_POST['menu'] > 0 && is_nav_menu( $_POST['menu'] ) && isset( $_POST['megamenu_meta'] ) ) {
+                $submitted_settings = $_POST['megamenu_meta'];
+
+                if(count($submitted_settings)){
+                    $submitted_settings = array_shift($submitted_settings);
+                }
+
+                $submitted_settings['tz_megamenu_meta'] = is_string($submitted_settings['tz_megamenu_meta'])?stripslashes($submitted_settings['tz_megamenu_meta']):$submitted_settings['tz_megamenu_meta'];
+
+                $submitted_settings = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                    .'/megamenu_submitted_settings_meta', $submitted_settings);
+
+                if ( ! get_option( 'templaza_megamenu_settings' ) ) {
+                    update_option( 'templaza_megamenu_settings', $submitted_settings );
+                } else {
+                    $existing_settings = get_option( 'templaza_megamenu_settings' );
+                    $new_settings = array_merge( $existing_settings, $submitted_settings );
+
+                    update_option( 'templaza_megamenu_settings', $new_settings );
+                }
+
+                do_action( 'templaza-framework/metabox/'.$this -> get_meta_box_name()
+                    .'/megamenu_after_save_settings' );
+                do_action( 'templaza-framework/metabox/'.$this -> get_meta_box_name()
+                    .'/megamenu_delete_cache' );
+            }
+
+            wp_die();
         }
 
         public function megamenu_enqueue(){
-            if (!wp_script_is('templaza-metabox-megamenu-js')) {
-                wp_enqueue_script(
-                    'templaza-metabox-megamenu-js',
-                    \TemPlazaFramework\Functions::get_my_url() . '/metaboxes/megamenu/megamenu.js',
-                    array(  'redux-js', TEMPLAZA_FRAMEWORK_NAME.'__js'),
-                    time(),
-                    'all'
-                );
-            }
-        }
-
-        public function save_meta_box($post_id, $post)
-        {
-
-//            $metaboxes  = $this -> metaboxes;
-//            if(count($metaboxes)) {
-//                foreach ($metaboxes as $metabox) {
-//                    $mt_key = $this->prefix . $metabox['id'];
-//                }
-//            }
-
+            global $wp_query;
 
             // The menu id of the current menu being edited.
             $nav_menu_selected_id = isset( $_REQUEST['menu'] ) ? (int) $_REQUEST['menu'] : 0;
+
+
             // Get recently edited nav menu.
             $recently_edited = absint( get_user_option( 'nav_menu_recently_edited' ) );
             if ( empty( $recently_edited ) && is_nav_menu( $nav_menu_selected_id ) ) {
                 $recently_edited = $nav_menu_selected_id;
             }
-
             // Use $recently_edited if none are selected.
             if ( empty( $nav_menu_selected_id ) && ! isset( $_GET['menu'] ) && is_nav_menu( $recently_edited ) ) {
                 $nav_menu_selected_id = $recently_edited;
             }
 
-//            var_dump($nav_menu_selected_id); die();
 
-            $nav_menu_option = (array) get_option( 'nav_menu_options' );
-            var_dump($nav_menu_option);
-            $metaboxes  = $this -> metaboxes;
-            if(count($metaboxes)){
-                foreach ($metaboxes as $metabox){
-                    $mt_key  = $this -> prefix.$metabox['id'];
-                    var_dump($post_id);
-                    var_dump($post_id);
-                    var_dump(__METHOD__);
-                    var_dump($mt_key);
-                    var_dump(isset( $_POST[$mt_key] ));
-                    var_dump(isset( $_GET[$mt_key] ));
-                    var_dump(isset( $_REQUEST[$mt_key] ));
-//                    var_dump($this -> can_save($post_id, $post));
-                    die();
-                    if ( isset( $_POST[$mt_key] ) ) {
-                        $options    = $_POST[$mt_key];
-                        if(isset($metabox['store_each']) && $metabox['store_each']){
-                            foreach ($options as $key => $option){
-                                update_post_meta($post_id, $key, $option);
-                            }
-                        }else {
-                            update_post_meta($post_id, $mt_key, $options);
+            $data       = array();
+            $settings   = array();
+
+            if ( is_nav_menu( $nav_menu_selected_id ) ) {
+                $menu_items  = wp_get_nav_menu_items( $nav_menu_selected_id, array( 'post_status' => 'any' ) );
+                if($menu_items && count($menu_items)){
+
+                    // Hook to change menu slug to menu id of megamenu menu item element
+                    add_filter('templaza-framework/metabox/'.$this -> get_meta_box_name()
+                        .'/element/each', function($element){
+//                        if($element['type'] == 'megamenu_menu_item' && isset($element['menu_slug'])){
+//                            $menu   = get_posts(array(
+//                                'name'      => $element['menu_slug'],
+//                                'post_type' => 'nav_menu_item',
+//                                'numberposts' => 1
+//                            ));
+//
+//                            if(count($menu) && $menu[0] -> post_name == $element['menu_slug']){
+//                                $element['menu_id'] = $menu[0] -> ID;
+//                                unset($element['menu_slug']);
+//                            }
+//                        }
+//                        return $element;
+                        return $this -> change_to_menu_id($element);
+                    }, 10);
+                    foreach ($menu_items as $menu_item){
+                        if($mega_layout = get_post_meta($menu_item -> ID, '_templaza_megamenu_layout', true)) {
+                            $mlayout    = get_post_meta($menu_item->ID, '_templaza_megamenu_layout', true);
+
+                            // Change menu slug to menu id of megamenu menu item element
+                            $this -> tree_element_main($mlayout);
+
+                            $data[$menu_item->ID] = $mlayout;
+                        }
+
+                        if($mega_settings = get_post_meta($menu_item -> ID, '_templaza_megamenu_settings', true)) {
+                            $settings[$menu_item->ID] = get_post_meta($menu_item->ID, '_templaza_megamenu_settings', true);
                         }
                     }
                 }
             }
 
-//            parent::save_meta_box($post_id, $post);
+            if (!wp_script_is('templaza-metabox-megamenu-js')) {
+                wp_register_script(
+                    'templaza-metabox-megamenu-js',
+                    Functions::get_my_url() . '/metaboxes/megamenu/megamenu.js',
+                    array(  'redux-js', TEMPLAZA_FRAMEWORK_NAME.'__js'),
+                    time(),
+                    'all'
+                );
 
-//            $mt_key  = $this -> prefix.'basic';
-//            if ( isset( $_POST[$mt_key] ) ) {
-//                $options    = $_POST[$mt_key];
-//                if(isset($options['home']) && $options['home'] == 1){
-//                    $this -> _disable_home_without_post_id($post_id);
-//                }
-//            }
+                $data       = count($data)?json_encode($data):'';
+                $settings   = count($settings)?json_encode($settings):'';
+
+                $action = 'templaza_megamenu_save_settings';
+                wp_localize_script('templaza-metabox-megamenu-js', 'templaza_metabox_megamenu',
+                    array(
+                        '_templaza_megamenu_layout' => $data,
+                        '_templaza_megamenu_settings' => $settings,
+                        'admin_ajax_url' => admin_url('admin-ajax.php'),
+                        'admin_ajax_action' => $action,
+                        'admin_ajax_nonce'=> esc_attr( wp_create_nonce($action)),
+                        'l10nStrings'=> array(
+                            'megamenu' => esc_html__('TZ Mega Menu', $this -> text_domain),
+                            'menu_item' => esc_html__('Megamenu Menu Item', $this -> text_domain),
+                        )
+                    )
+                );
+                wp_enqueue_script('templaza-metabox-megamenu-js');
+            }
+            wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__css');
         }
 
-//        public function hooks()
-//        {
-//            parent::hooks(); // TODO: Change the autogenerated stub
-//
-//            add_filter("redux/options/{$this->prefix}templaza-options/wordpress_data/translate/post_type_value",
-//                array($this, 'meta_box_basic_post_type_value'), 10, 2);
-//
-//
-//            $post_type  = $this -> post_type -> get_post_type();
-//
-//            if(post_type_exists($post_type) && $this -> post_type ->  get_current_screen_post_type() == $post_type){
-//                // Add header column to post type list
-//                if(method_exists($this,'post_type_table_head')) {
-//                    add_filter('manage_'.$post_type.'_posts_columns', array($this, 'post_type_table_head'));
-//                }
-//                // Add content column to post type list
-//                if(method_exists($this,'post_type_table_content')) {
-//                    add_action( 'manage_'.$post_type.'_posts_custom_column', array($this, 'post_type_table_content'), 10, 2 );
-//                }
-//                // Ordering column
-//                if(method_exists($this,'post_type_table_sorting')) {
-//                    add_filter( 'manage_edit-'.$post_type.'_sortable_columns', array($this, 'post_type_table_sorting' ) );
-//                }
-//                // Order by column added
-//                if(method_exists($this,'post_type_orderby')) {
-//                    add_filter( 'request', array($this, 'post_type_orderby' ) );
-//                }
-//                // Duplicate post action
-//                add_action("templaza-framework/post-type/{$post_type}/duplicate", array($this, 'post_duplicate'), 11, 2);
-//                // Set home for post type
-//                add_action( 'admin_action_'.$post_type.'_set_default', array($this, 'post_type_set_default') );
-//
-////                // Duplicate post type
-////                add_action( 'admin_action_'.$post_type.'_set_default', array($this, 'post_type_set_default') );
-//
-////                // Create duplicate action
-////                add_filter('post_row_actions', array($this, 'duplicate_post_link'), 10, 2);
-////                // Order by column added
-////                if(method_exists($this,'restrict_manage_posts')) {
-////                    add_action( 'restrict_manage_posts', array($this, 'restrict_manage_posts' ) );
-////                }
-//            }
-//
-//        }
-//
-//        /*
-//         * Set home meta box field to 0
-//         * @param string|int $new_post_id
-//         * @param string|int $post_id
-//         * */
-//        public function post_duplicate($new_post_id, $post_id){
-//            update_post_meta($new_post_id, 'home', 0);
-//        }
-//
-//        /*
-//         * Add columns for header custom post type in list page
-//         * @param array $columns
-//         * */
-//        public function post_type_table_head($columns){
-//            $columns = array(
-//                "cb"                 => "<input type=\"checkbox\" />",
-//                "title"              => esc_html__("Title", $this -> text_domain),
-//                "home"             => esc_html__("Default",$this -> text_domain),
-//                "date"               => esc_html__("Date",$this -> text_domain)
-//            );
-//            return $columns;
-//        }
-//
-//        /*
-//         * Add columns for content custom post type in list page
-//         * @param string $column_name
-//         * @param string $post_id
-//         * */
-//        public function post_type_table_content($column_name, $post_id ){
-//            if ($column_name == 'home') {
-//                $home   = get_post_meta($post_id,'home', true);
-//                $action = $this -> post_type -> get_post_type().'_set_default';
-//                $nonce  = wp_create_nonce( $action );
-//                $href   = 'admin.php?action='.$action.'&post='.$post_id.'&_wpnonce='
-//                    .$nonce.'" class="button button-micro'.($home?' disabled':'');
-//                if($home){
-//                    $href   = 'javascript:void();';
-//                }
-//                echo '<a href="'.$href.'" class="button button-micro'.($home?' disabled':'').'"'.($home?' disabled':'').'>';
-//                if($home){
-//                    echo '<span class="dashicons dashicons-star-filled featured"></span>';
-//                }else{
-//                    echo '<span class="dashicons dashicons-star-empty"></span>';
-//                }
-//                echo '</a>';
-//            }
-//        }
-//
-//        /*
-//         * Sorting columns for custom post type in list page
-//         * @param array $columns
-//         * */
-//        public function post_type_table_sorting($columns ){
-//            $columns['home'] = 'home';
-//            return $columns;
-//        }
-//
-//        /*
-//         * Order by query for custom post type in list page
-//         * @param array $vars
-//         * */
-//        public function post_type_orderby( $vars ) {
-//            if ( isset( $vars['orderby'] ) && 'home' == $vars['orderby'] ) {
-//                $vars = array_merge( $vars, array(
-//                    'meta_key' => 'home',
-//                    'orderby' => 'meta_value'
-//                ) );
-//            }
-//
-//            return $vars;
-//        }
-//
-//        /*
-//         * Reset value of select field with data is post
-//         * */
-//        public function meta_box_basic_post_type_value($value, $post_type){
-//            if(is_array($value)){
-//                return array();
-//            }else{
-//                return '';
-//            }
-//        }
-//
-//        /*
-//         * Action set home for custom post type in list page
-//         * */
-//        public function post_type_set_default(){
-//            $post_type      = $this -> post_type -> get_post_type();
-//            $nonce_name     = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
-//            $nonce_action   = $post_type.'_set_default';
-//
-//            // Check if nonce is valid.
-//            if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
-//                wp_die('Security issue occure, Please try again!.');
-//            }
-//            $post_id    = isset($_GET['post'])?$_GET['post']:0;
-//            if(!$post_id){
-//                wp_die(__('Post or Page creation failed, could not find original post:', $this -> text_domain) . $post_id);
-//            }
-//
-//            $this -> _disable_home_without_post_id($post_id);
-//
-//            // Set post by post_id to home
-//            update_post_meta($post_id, 'home', 1);
-//
-//            wp_redirect(admin_url('edit.php?post_type='.$post_type));
-//            exit;
-//        }
-//
-//
-//        /*
-//         * Disable home for all posts without post_id
-//         * @param string|int $post_id
-//         * */
-//        protected function _disable_home_without_post_id($post_id){
-//            global $wpdb;
-//
-//            $subQuery   = 'SELECT post_id FROM (';
-//            $subQuery  .= 'SELECT m.post_id FROM '.$wpdb -> prefix.'postmeta AS m ';
-//            $subQuery  .= 'INNER JOIN '.$wpdb -> prefix.'posts AS p ON p.ID = m.post_id AND m.meta_key="_'.
-//                $this -> post_type -> get_post_type().'_theme" AND m.meta_value="'.basename(get_template_directory()).'" ';
-//            $subQuery  .= 'WHERE p.ID <> '.$post_id;
-//            $subQuery  .= ' AND m.meta_key="_'.$this -> post_type -> get_post_type()
-//                .'_theme" AND m.meta_value="'.basename(get_template_directory()).'" ';
-//            $subQuery  .= ') AS post_id';
-//
-//            $query  = 'UPDATE '.$wpdb -> prefix.'postmeta SET meta_value=0 ';
-//            $query .= 'WHERE meta_key="home" AND post_id IN('.$subQuery.')';
-//            $wpdb ->query($query);
-//        }
+        public function render($post, $metabox){
+
+            $menu_id                = $this -> get_selected_menu_id();
+            $tagged_menu_locations  = $this -> get_tagged_theme_locations_for_menu_id($menu_id);
+
+            if(count($tagged_menu_locations)){
+                $args   = $metabox['args'];
+
+                $_metabox   = null;
+                if(isset($args['metabox']) && $args['metabox']){
+                    $_metabox   = $args['metabox'];
+                }
+
+                if(!empty($_metabox) && isset($_metabox['sections']) && !empty($_metabox['sections'])) {
+                    $sections   = array();
+                    $sections   = apply_filters("templaza-framework/metabox/{$_metabox['id']}/sections/before", $sections, $_metabox);
+                    $sections   = array_merge((array) $sections, (array) $_metabox['sections']);
+                    $sections   = apply_filters("templaza-framework/metabox/{$_metabox['id']}/sections/after", $sections, $_metabox);
+
+
+                    $menu_id = $this->get_selected_menu_id();
+                    $tagged_menu_locations = $this->get_tagged_theme_locations_for_menu_id($menu_id);
+
+                    // Get mega menu settings
+                    $options    = get_option( 'templaza_megamenu_settings' , array());
+                    $meta_options = count($options)?$options['tz_megamenu_meta']:array();
+                    if(is_string($meta_options)){
+                        $meta_options   = json_decode($meta_options, true);
+                        foreach($meta_options as $mlocal => $mval){
+                            if(!isset($tagged_menu_locations[$mlocal])){
+                                unset($meta_options[$mlocal]);
+                            }
+                        }
+                        $options['tz_megamenu_meta']    = json_encode($meta_options);
+                    }
+
+                    // Set theme location assigned to tz_mega_menu field
+                    if(count($sections)) {
+
+                        $mdefault   = array();
+                        if($this -> loop_fields && count($this -> loop_fields)){
+                            $mfieldDefault   = array();
+                            foreach($this -> loop_fields as $mfield){
+                                if(isset($mfield['default'])){
+                                    $mfieldDefault[$mfield['id']]    = $mfield['default'];
+                                }
+                            }
+                            if(count($mfieldDefault) && count($tagged_menu_locations)){
+                                foreach($tagged_menu_locations as $mlocation => $mlocationName){
+                                    $mdefault[$mlocation]   = $mfieldDefault;
+                                }
+                            }
+                        }
+
+                        foreach($sections as $i => &$sec) {
+                            $fields = $sec['fields'];
+                            if(count($fields)) {
+                                foreach($fields as &$field) {
+                                    if($field['id'] == 'tz_megamenu_meta'){
+                                        $field['group_fields']  = $tagged_menu_locations;
+                                        $field['default']  = json_encode($mdefault);
+                                    }
+                                }
+                                $sec['fields']  = $fields;
+                            }
+                        }
+                    }
+
+                    $setting_args                       = $this -> post_type -> setting_args;
+                    $setting_args                       = $setting_args[$this -> post_type -> get_post_type()];
+                    $redux_args                         = $setting_args;
+
+                    $redux_args['opt_name']             = $metabox['id'];
+                    $redux_args['menu_type']            = 'hidden';
+                    $redux_args['dev_mode']             = false;
+                    $redux_args['ajax_save']            = false;
+                    $redux_args['open_expanded']        = true;
+                    $redux_args['show_import_export']   = false;
+
+                    \Templaza_API::load_my_fields($metabox['id']);
+
+                    Redux::set_args($metabox['id'], $redux_args);
+                    Redux::set_sections($metabox['id'], $sections);
+                    Redux::init($metabox['id']);
+
+                    add_filter("redux/{$setting_args['opt_name']}/repeater", function($repeater_data) use($redux_args){
+                        $repeater_data['opt_names'][]   = $redux_args['opt_name'];
+                        return $repeater_data;
+                    });
+                    $redux  = \Redux::instance($metabox['id']);
+
+                    // Set options
+                    $redux -> options   = $options;
+
+                    $redux->_register_settings();
+
+                    $enqueue    = new Enqueue($redux);
+                    $enqueue -> init();
+
+                    ?>
+                    <?php
+
+                    echo '<div class="redux-container templaza-framework-options">';
+                    echo '<div class="redux-main">';
+                    foreach ($redux -> sections as $k => &$section) {
+
+                        $section['class'] = isset($section['class']) ? ' ' . $section['class'] : '';
+                        echo '<div id="metabox_'.$metabox['id'].'_' . $k . '_section_group' . '" class="redux-group-tab'
+                            . esc_attr($section['class']) . '" data-rel="metabox_'.$metabox['id'].'_' . $k . '">';
+
+                        do_action("redux/page/{$redux->args['opt_name']}/section/before", $section);
+                        do_settings_sections( $redux->args['opt_name'] . $k . '_section_group' );
+                        do_action("redux/page/{$redux->args['opt_name']}/section/after", $section);
+
+                        echo '</div>';
+                    }
+
+                    echo '<a href="#" class="button button-primary button-micro megamenu-save-option" style="float:right;">'
+                        .'<i class="fas fa-save"></i> '
+                        .esc_html__('Save', $this -> text_domain).'</a>';
+                    echo '<span class="spinner"></span>';
+
+                    echo '</div>';
+                    echo '</div>';
+                }else{
+                    $this -> render_fields($post, $metabox);
+                }
+            }else{
+//                echo "<div style='padding: 15px;'>";
+                echo '<p>' . esc_html__( 'Please assign this menu to a theme location to enable the Mega Menu settings.', $this -> text_domain ) . '</p>';
+                echo '<p>' . esc_html__( "To assign this menu to a theme location, scroll to the bottom of this page and tag the menu to a 'Display location'.", $this -> text_domain ) . '</p>';
+//                echo "</div>";
+            }
+        }
     }
 }

@@ -41,16 +41,21 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
             $this -> metaboxes  = $this -> register();
             $this -> metaboxes  = apply_filters("templaza-framework/metabox/register", $this -> metaboxes, $post_type);
 
+            do_action('templaza-framework/metabox/'.$this -> get_meta_box_name().'/constructor');
+
             $this -> hooks();
         }
 
         public function hooks(){
 
             add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 2 );
+//            add_action( 'admin_init', array( $this, 'add_meta_boxes' ), 10, 2 );
             add_action( 'save_post', array( $this, 'save_meta_box' ), 10, 2 );
 
             if(method_exists($this, 'enqueue')){
-                $this -> enqueue();
+
+                add_action('admin_enqueue_scripts', array($this, 'enqueue'));
+//                $this -> enqueue();
             }
 
 //            add_filter( 'page_attributes_meta_box', array($this, 'test'), 10, 2 );

@@ -4,20 +4,33 @@
    justify-content: flex-start;
    align-items: center;
    .templaza-counter-number{
-      font-size:$element-title-size;
-      font-weight:$element-title-weight;
-      line-height: $element-title-line-height;
+      font-size:$tztheme-element-title-size;
+      font-weight:$tztheme-element-title-weight;
       margin-right: 20px;
    }
    .templaza-counter-title{
       font-weight: normal;
-      font-size:18px;
       width:55%;
    }
-   &.style2{
-      .templaza-counter-title{
-         width:100%;
-         font-family: inherit;
+   &.templaza-counter-style2{
+      display: flex;
+      justify-content: center;
+      .templaza-counter-icon {
+         margin-right: 30px;
+         i {
+            color: #242424;
+         }
+      }
+      .templaza-counter-content{
+         margin:0;
+         .templaza-counter-number {
+            color: $global_color;
+            font-weight: bold;
+         }
+         .templaza-counter-title{
+            width:100%;
+            margin: 0;
+         }
       }
    }
 }

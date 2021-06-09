@@ -2,17 +2,17 @@
 	display: none;
 	line-height: 0;
 	position: fixed;
-	right: $backtotop-right;
-	bottom: $backtotop-bottom;
-	padding: $backtotop-padding;
-	z-index: $backtotop-zindex;
+	right: $tztheme-backtotop-right;
+	bottom: $tztheme-backtotop-bottom;
+	padding: $tztheme-backtotop-padding;
+	z-index: $tztheme-backtotop-zindex;
 
 	&.circle {
 		border-radius: 100%;
 	}
 
 	&.rounded {
-		border-radius: $backtotop-rounded-radius;
+		border-radius: $tztheme-backtotop-rounded-radius;
 	}
 
 	&.square {
@@ -22,5 +22,5 @@
 
 .header-sidebar-right #templaza-backtotop {
 	right: auto;
-	left: $backtotop-right;
+	left: $tztheme-backtotop-right;
 }

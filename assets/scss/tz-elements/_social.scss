@@ -1,0 +1,8 @@
+.templaza-social{
+  li{
+    display:inline;
+    &:hover{
+      color:$tztheme-global-color;
+    }
+  }
+}

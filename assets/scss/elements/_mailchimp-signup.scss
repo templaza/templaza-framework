@@ -1,0 +1,61 @@
+.templaza-mailchimp-sign-up {
+   position: relative;
+   background: #f7f9fb;
+   .templaza-mailchimp-sign-up-box {
+      position: relative;
+      background: $tztheme-global-color;
+      padding: 30px 0 0;
+      h3.templaza-mailchimp-sign-up-title {
+         color: #ffffff;
+         text-align: center;
+      }
+      .templaza-mailchimp-sign-up-subtitle {
+         color: #ffffff;
+         text-align: center;
+         margin: 0;
+      }
+   }
+   .templaza-mailchimp-sign-up-triangle {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 40px 150px 0 150px;
+      border-color: $tztheme-global-color transparent transparent transparent;
+   }
+   .mc4wp-form {
+      width: 100%;
+      padding-top: 20px;
+      .mc4wp-form-fields {
+         padding: 0 20px 60px 20px;
+         margin: 0;
+         input {
+            width: 100%;
+            padding: 10px 16px;
+            background: #ffffff;
+            border: 1px solid $tztheme-border-color;
+            margin-bottom: 10px;
+         }
+         input[type="submit"] {
+            border: none;
+            background: $tztheme-global-color;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            text-transform: uppercase;
+            height:$tztheme-input-height-large;
+            position:absolute;
+            bottom:0;
+            left:0;
+            right:0;
+            line-height: $tztheme-input-lineheight-large;
+            margin-bottom: 0;
+            padding:0;
+         }
+      }
+   }
+   img {
+      position: absolute;
+      right: -115px;
+      top: -36px;
+   }
+}

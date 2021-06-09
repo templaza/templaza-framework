@@ -4,6 +4,8 @@ defined('ABSPATH') or exit();
 
 require_once __DIR__.'/defines.php';
 require_once __DIR__.'/functions.php';
+require_once __DIR__.'/css.php';
+require_once __DIR__.'/post_typefunctions.php';
 require_once __DIR__.'/menu.php';
 require_once __DIR__.'/templates.php';
 require_once __DIR__.'/fonts.php';

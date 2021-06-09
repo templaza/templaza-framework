@@ -52,7 +52,6 @@
   }
 }
 .templaza-header-section {
-  border-bottom: 1px solid rgba(255,255,255,0.1);
   box-shadow: none;
   &.header-absolute {
     position: absolute;
@@ -69,7 +68,7 @@
     -ms-transition: .1s linear all;
     -o-transition: .1s linear all;
     @media(max-width: 1600px) {
-      width: $sidebar-header-mini-width;
+      width: $tztheme-sidebar-header-mini-width;
     }
   }
   @media (max-width: 1600px) {
@@ -95,7 +94,7 @@
       }
     }
     &.expanded {
-      width: $sidebar-header-width !important;
+      width: $tztheme-sidebar-header-width !important;
       -webkit-transition: .1s linear all;
       -moz-transition: .1s linear all;
       -ms-transition: .1s linear all;
@@ -123,7 +122,7 @@
     &.has-sidebar {
       padding: 0;
       position: fixed;
-      width: $header-sidebar-mini-width;
+      width: $tztheme-header-sidebar-mini-width;
       .templaza-sidebar-collapsable{
         display: block;
       }

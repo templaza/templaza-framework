@@ -10,7 +10,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
 
     class Functions{
         protected static $cache         = array();
-        protected static $shortcode_tmp = '';
+        protected static $shortcode = '';
 
         public static function get_my_data(){
             $storeId    = md5(__METHOD__);
@@ -47,12 +47,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
             return false;
         }
 
-//        public static function get_my_name(){
-//            $plugin = self::get_my_plugin_data();
-//
-//            return $plugin['Name'];
-//        }
-
         public static function get_my_url(){
             return plugins_url().'/'.TEMPLAZA_FRAMEWORK_NAME;
         }
@@ -70,10 +64,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
             $plugin = self::get_my_data();
 
             $text_domain    = ($plugin && isset($plugin['TextDomain']))?$plugin['TextDomain']:'templaza-framework';
-//            if(!$plugin){
-//                return false;
-//            }
-//            return $plugin['TextDomain'];
             return $text_domain;
         }
 
@@ -85,15 +75,12 @@ if(!class_exists('TemPlazaFramework\Functions')){
             return 'tzfrm_'.basename(get_template_directory()).'_opt';
         }
 
-        public static function get_theme_options(){
-//            $theme_name     = basename(get_template_directory());
-//            $theme_options  = get_option(TEMPLAZA_FRAMEWORK_PREFIX.'_'.$theme_name.'_opt');
-//            return $theme_options;
-
+        public static function get_theme_options($post_type = ''){
             $the_ID = \get_the_ID();
 
             if(is_single() || is_archive()){
-                if($post_type = get_post_type($the_ID)){
+                $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
+                if(!empty($post_type)){
                     $key    = null;
                     if(is_single()){
                         $key    = $post_type.'-single-style';
@@ -106,10 +93,15 @@ if(!class_exists('TemPlazaFramework\Functions')){
                         }
                     }
                 }
+            }elseif(is_404()){
+                if($style_id = \Redux::get_option(self::get_theme_option_name(), '404-page-style')){
+                    return self::get_theme_option_by_id($style_id);
+                }
             }
 
             return self::get_theme_options_by_post_type_ID($the_ID);
         }
+
         public static function get_theme_options_by_post_type_ID($id){
             $store_id   = __METHOD__;
             $store_id  .= ':'.$id;
@@ -120,6 +112,20 @@ if(!class_exists('TemPlazaFramework\Functions')){
             }
 
             $style_id   = get_post_meta($id, 'templaza-style', true);
+
+//            $style_slug   = get_post_meta($id, 'templaza-style', true);
+
+            // Is slug
+            if($style_id && !is_numeric($style_id)) {
+                // Get style id by style slug
+                $style_args = array(
+                    'name' => $style_id,
+                    'post_type' => 'templaza_style',
+                    'numberposts' => 1
+                );
+                $posts = \get_posts($style_args);
+                $style_id = $posts[0]->ID;
+            }
 
             if(!$id || empty($style_id)){
                 // Get home post id
@@ -158,6 +164,18 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 return self::$cache[$store_id];
             }
 
+            // Is slug
+            if($style_id && !is_numeric($style_id)) {
+                // Get style id by style slug
+                $style_args = array(
+                    'name' => $style_id,
+                    'post_type' => 'templaza_style',
+                    'numberposts' => 1
+                );
+                $posts = \get_posts($style_args);
+                $style_id = $posts[0]->ID;
+            }
+
             // Get default style options if not style id
             if(!$style_id){
                 // Get home post id
@@ -189,7 +207,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
                         .TEMPLAZA_FRAMEWORK_NAME. '/theme_options/' . $file_id . '.json';
                     if(file_exists($file)){
                         $options    = $wp_filesystem -> get_contents($file);
-                        $options    = html_entity_decode(stripslashes ($options));
                         $options    = json_decode($options, true);
                         self::$cache[$store_id] = $options;
                         return $options;
@@ -248,28 +265,27 @@ if(!class_exists('TemPlazaFramework\Functions')){
             return $files;
         }
 
-//        public static function generateID() {
-//            $r  = rand() >= 0.5;
-//            if($r){
-//                $x  = floor(rand() * 10 + 1);
-//                $y  = floor(rand() * 100 + 1);
-//                $z  = floor(rand() * 10 + 1);
-//            }else{
-//                $x  = floor(rand() * 10 + 1);
-//                $y  = floor(rand() * 10 + 1);
-//                $z  = floor(rand() * 100 + 1);
-//            }
-//            //        $time   = time();
-//            return $x + $y + $z + time();
-//            //    return x + y + z + t.toString();
-//        }
+        /*
+         * @layout is json string|array
+         * */
+        public static function generate_option_to_shortcode($layout){
+            if(is_string($layout)){
+                $layout = json_decode($layout, true);
+            }
 
-        public static function generate_option_to_shortcode($layout, &$tree = array(), &$level = 0){
+            self::$shortcode    = '';
+            self::__generate_option_to_shortcode($layout);
+
+            return self::$shortcode;
+        }
+
+        protected static function __generate_option_to_shortcode($layout, &$level = 0, &$shortcode = array()){
             if(!$layout){
                 return;
             }
-            foreach($layout as $item){
-//                $item['id'] = self::generateID();
+
+            foreach($layout as $i => $item){
+                $item   = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/before_register', $item);
 
                 $shortcode_file = TEMPLAZA_FRAMEWORK_SHORTCODES_PATH.'/'.$item['type'].'/'.$item['type'].'.php';
                 if(file_exists($shortcode_file)){
@@ -283,17 +299,34 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 }
 
                 $item = apply_filters('templaza-framework/layout/generate/shortcode/prepare', $item);
+                $item = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/prepare', $item);
 
                 $shortcode_name = 'templaza_'.$item['type'];
                 $subitems       = is_array($item) && isset($item['elements']) && !empty($item['elements']);
 
-                if($subitems){
-                    self::generate_option_to_shortcode($item['elements'], $tree, $level);
+                // Init shortcode_tmp variable
+                if(!isset($shortcode['shortcode'])){
+                    $shortcode['shortcode']   = array();
+                }
+
+                if(!isset($shortcode['shortcode']['open'])) {
+                    $shortcode['shortcode']['open'] = array();
+                }
+                if(!isset($shortcode['shortcode']['close'])) {
+                    $shortcode['shortcode']['close'] = array();
+                }
+
+                if(!isset($shortcode['level'])){
+                    $shortcode['level']   = 0;
+                }
+
+                if($subitems) {
                     $level++;
-                }else{
-                    if($item['type'] !== self::$shortcode_tmp) {
-                        $level = 0;
-                    }
+                }
+
+                // Call back function if shortcode has child shortcode
+                if($subitems){
+                    self::__generate_option_to_shortcode($item['elements'],$level, $shortcode);
                 }
 
                 $attribs    = "";
@@ -311,30 +344,69 @@ if(!class_exists('TemPlazaFramework\Functions')){
                         }
                     }
                 }
-                if(!isset($tree[$level])) {
-                    if($subitems) {
-                        $tree[$level]       = '['.$shortcode_name.$attribs.']'.$tree[$level - 1].'[/'.$shortcode_name.']';
-                        $tree[$level - 1]   = '';
+
+                if($subitems) {
+                    $level--;
+                }
+
+                // Create open and close shortcode
+                $_shortcode = '['.$shortcode_name.$attribs.']';
+                $shortcode['shortcode']['close'][$level]  = '[/'.$shortcode_name.']';
+
+                // Push child shortcode to parent of it.
+                if($level > $shortcode['level'] && isset($shortcode['shortcode']['open'][$level])){
+                    $shortcode['shortcode']['open'][$shortcode['level']]    .= $shortcode['shortcode']['open'][$level];
+                    unset($shortcode['shortcode']['open'][$level]);
+                }
+
+                // Remove shortcode if the element is parent but it doesn't have children
+                // Should create has_children_shortcode option for element to remove
+                if(isset($item['has_children_shortcode']) && $item['has_children_shortcode']){
+                    if(empty($shortcode['shortcode']['open'][$level + 1])){
+                        if(!isset($shortcode['shortcode']['open'][$level])) {
+                            unset($shortcode['shortcode']['open'][$level]);
+                        }
                     }else{
-                        if($level > 0){
-                            $tree[$level]   = '['.$shortcode_name.$attribs.'][/'.$shortcode_name.']';
-                        }else {
-                            $tree[$level]   = '[' . $shortcode_name . $attribs . ']';
+                        if(!isset($shortcode['shortcode']['open'][$level])) {
+                            $shortcode['shortcode']['open'][$level] = $_shortcode;
+                        }else{
+                            $shortcode['shortcode']['open'][$level] .= $_shortcode;
                         }
                     }
                 }else{
-                    if($subitems) {
-                        $tree[$level]  .= '['.$shortcode_name.$attribs.']'.$tree[$level - 1].'[/'.$shortcode_name.']';
-                        $tree[$level - 1]   = '';
-                    }else {
-                        if($level > 0){
-                            $tree[$level]  .= '['.$shortcode_name.$attribs.'][/'.$shortcode_name.']';
-                        }else {
-                            $tree[$level] .= '[' . $shortcode_name . $attribs . ']';
-                        }
+                    // Create shortcode
+                    if(!isset($shortcode['shortcode']['open'][$level])) {
+                        $shortcode['shortcode']['open'][$level] = $_shortcode;
+                    }else{
+                        $shortcode['shortcode']['open'][$level] .= $_shortcode;
                     }
                 }
-                self::$shortcode_tmp   = $item['type'];
+
+                // Push shortcode to parent of it when next shortcode has level the same
+                if($level < $shortcode['level']){
+                    if(!empty($shortcode['shortcode']['open'][$level + 1])){
+                        $shortcode['shortcode']['open'][$level]   .= $shortcode['shortcode']['open'][$level+1]
+                            .$shortcode['shortcode']['close'][$level];
+                        unset($shortcode['shortcode']['open'][$level+1]);
+                    }
+                }
+
+                // Reset shortcode tree when level is zero
+                if($level == 0){
+                    self::$shortcode  .= $shortcode['shortcode']['open'][$level];
+                    $shortcode['shortcode']   = array();
+                }
+
+                if(!isset($shortcode['shortcode']['open'][$level])){
+                    $shortcode['shortcode']['open'][$level] = '';
+                }
+
+                $shortcode['shortcode']['open'][$level] = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/after_shortcode',
+                    $shortcode['shortcode']['open'][$level], $level, $params, $item);
+
+                // Store prev shortcode
+                $shortcode['item']    = $item;
+                $shortcode['level']   = $level;
             }
         }
 
@@ -367,21 +439,60 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 $file   = $path.'/'.$current_post_type.'-related.php';
                 if(file_exists($file)){
                     require_once $file;
-                }
-
-                $path   = TEMPLAZA_FRAMEWORK.'/theme_pages/single';
-                $file   = $path.'/'.$current_post_type.'-related.php';
-                if(file_exists($file)){
-                    require_once $file;
+                }else {
+                    $path = TEMPLAZA_FRAMEWORK . '/theme_pages/single';
+                    $file = $path . '/' . $current_post_type . '-related.php';
+                    if (file_exists($file)) {
+                        require_once $file;
+                    }
                 }
             }
         }
 
-//        public static function trim_excerpt( $text = '', $post = null, $excerpt_length = 55){
-//            add_filter('excerpt_length', function() use($excerpt_length){
-//                return $excerpt_length;
-//            });
-//            return wp_trim_excerpt($text, $post);
-//        }
+        public static function get_attribute_value($key='attribute', $attrib_key){
+            $attributes = self::get_attributes($key);
+
+            if(isset($attributes[$attrib_key])){
+                return $attributes[$attrib_key];
+            }
+
+            return false;
+        }
+        public static function get_attributes($key='attribute'){
+            $store_id   = __CLASS__;
+            $store_id  .= ':'.$key;
+            $store_id   = md5($store_id);
+            if(isset(self::$cache[$store_id])){
+                return self::$cache[$store_id];
+            }
+            return false;
+        }
+        public static function add_attributes($key='attribute', $attributes = array()){
+            $store_id   = __CLASS__;
+            $store_id  .= ':'.$key;
+            $store_id   = md5($store_id);
+
+            self::$cache[$store_id] = $attributes;
+        }
+
+        public static function get_templaza_style_by_slug(){
+        $args     = array(
+            'post_type'      => 'templaza_style',
+            'posts_per_page' => -1,
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+            'meta_key'       => '_templaza_style_theme',
+            'meta_value'     => basename(get_template_directory()),
+        );
+
+        $tz_posts = \get_posts($args);
+        if($tz_posts && count($tz_posts)){
+            $data    = array();
+            foreach($tz_posts as $_tz_post){
+                $data[$_tz_post -> post_name] = $_tz_post -> post_title;
+            }
+        }
+        return $data;
+    }
     }
 }

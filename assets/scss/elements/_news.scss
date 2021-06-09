@@ -8,16 +8,15 @@
     }
   }
   .templaza-news-info{
+    .post-meta{
+      color:$tztheme-postmeta;
+    }
     .date{
-      color:#9bacb5;
       margin-top: 25px;
-      font-size:12px;
-      display: block;
     }
     .title{
-      font-size:20px;
-      font-weight:700;
       margin-top: 15px;
+      margin-bottom: 10px;
     }
     .excerpt{
       margin-top: 15px;
@@ -25,12 +24,58 @@
     .sub-info{
       margin-top: 15px;
       a{
-        font-size:14px;
-        color:$heading-color;
         &:hover{
-          color:$global-color;
         }
       }
+    }
+  }
+  &.grid_style2{
+    color:#fff;
+    .title{
+      margin-bottom: 0;
+      a{
+        color:#fff;
+      }
+    }
+    .info-grid-style2{
+      opacity:0;
+      @include transition($tztheme-transition-all);
+      height:0;
+    }
+    .uk-position-bottom{
+      @include transition($tztheme-transition-all);
+      &:hover{
+        .info-grid-style2{
+          opacity:1;
+          @include transition($tztheme-transition-all);
+          height:auto;
+        }
+      }
+    }
+    a.readmore{
+      color:#fff;
+      text-transform: uppercase;
+    }
+  }
+  &.grid.grid_style3{
+    .templaza-news-info{
+      width:90%;
+      margin-top: -50px;
+      padding:20px 50px 30px 50px;
+    }
+  }
+  .post-meta{
+    span{
+      display:inline-block;
+      a{
+        color:$tztheme-global-color;
+      }
+
+    }
+    >:nth-child(n+2):not(:first-child)::before{
+      content: "|";
+      display: inline-block;
+      margin: 0 10px 0 10px;
     }
   }
 }

@@ -34,6 +34,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
             $defaults   = array(
                 'options' => array(
                     'behance' => array(
+                        'id'      => 'behance',
                         'title'   => __('Behance', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-behance', 'fab fa-behance-square'),
@@ -42,6 +43,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-behance'
                     ),
                     'dribbble' => array(
+                        'id'      => 'dribbble',
                         'title'   => __('Dribbble', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-dribbble','fab fa-dribbble-square'),
@@ -50,6 +52,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-dribbble'
                     ),
                     'facebook' => array(
+                        'id'      => 'facebook',
                         'title'   => __('Facebook', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-facebook-f', 'fab fa-facebook', 'fab fa-facebook-square'),
@@ -58,6 +61,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-facebook-f'
                     ),
                     'flickr' => array(
+                        'id'      => 'flickr',
                         'title'   => __('Flickr', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-flickr'),
@@ -66,6 +70,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-flickr'
                     ),
                     'gitHub' => array(
+                        'id'      => 'gitHub',
                         'title'   => __('GitHub', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-github', 'fab fa-github-square', 'fab fa-github-alt'),
@@ -74,6 +79,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-github'
                     ),
                     'instagram' => array(
+                        'id'      => 'instagram',
                         'title'   => __('Instagram', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-instagram'),
@@ -82,6 +88,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-instagram'
                     ),
                     'linkedIn' => array(
+                        'id'      => 'linkedIn',
                         'title'   => __('LinkedIn', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-linkedin-in', 'fab fa-linkedin'),
@@ -90,6 +97,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-linkedin-in'
                     ),
                     'messenger' => array(
+                        'id'      => 'messenger',
                         'title'   => __('Messenger', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-facebook-messenger'),
@@ -98,6 +106,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-facebook-messenger'
                     ),
                     'pinterest' => array(
+                        'id'      => 'pinterest',
                         'title'   => __('Pinterest', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-pinterest', 'fab fa-pinterest-square', 'fab fa-pinterest-p'),
@@ -106,6 +115,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-pinterest'
                     ),
                     'reddit' => array(
+                        'id'      => 'reddit',
                         'title'   => __('Reddit', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-reddit', 'fab fa-reddit-square', 'fab fa-reddit-alien'),
@@ -114,6 +124,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-reddit'
                     ),
                     'skype' => array(
+                        'id'               => 'skype',
                         'title'            => __('Skype', $this -> text_domain),
                         'link'             => '',
                         'icons'            => array('fab fa-skype'),
@@ -123,6 +134,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'link_placeholder' => 'johndeo'
                     ),
                     'slack' => array(
+                        'id'      => 'slack',
                         'title'   => __('Slack', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-slack', 'fab fa-slack-hash'),
@@ -131,6 +143,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-slack'
                     ),
                     'soundcloud' => array(
+                        'id'      => 'soundcloud',
                         'title'   => __('SoundCloud', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-soundcloud'),
@@ -139,6 +152,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-soundcloud'
                     ),
                     'spotify' => array(
+                        'id'      => 'spotify',
                         'title'   => __('Spotify', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-spotify'),
@@ -147,6 +161,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-spotify'
                     ),
                     'twitter' => array(
+                        'id'      => 'twitter',
                         'title'   => __('Twitter', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-twitter', 'fab fa-twitter-square'),
@@ -155,6 +170,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-twitter'
                     ),
                     'telegram' => array(
+                        'id'               => 'telegram',
                         'title'            => __('Telegram', $this -> text_domain),
                         'link'             => '',
                         'icons'            => array('fab fa-telegram-plane', 'fab fa-telegram'),
@@ -164,6 +180,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'link_placeholder' => 'johndeo'
                     ),
                     'tumblr' => array(
+                        'id'      => 'tumblr',
                         'title'   => __('Tumblr', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-tumblr', 'fab fa-tumblr-square'),
@@ -172,6 +189,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-tumblr'
                     ),
                     'vk' => array(
+                        'id'      => 'vk',
                         'title'   => __('VK', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-vk'),
@@ -180,6 +198,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'icon'    => 'fab fa-vk'
                     ),
                     'whatsapp' => array(
+                        'id'               => 'whatsapp',
                         'title'            => __('WhatsApp', $this -> text_domain),
                         'link'             => '',
                         'icons'            => array('fab fa-whatsapp', 'fab fa-whatsapp-square'),
@@ -189,6 +208,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'link_placeholder' => '919876543210'
                     ),
                     'youtube' => array(
+                        'id'      => 'youtube',
                         'title'   => __('YouTube', $this -> text_domain),
                         'link'    => '',
                         'icons'   => array('fab fa-youtube', 'fab fa-youtube-square'),
@@ -204,92 +224,19 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
             }
             $this -> field  = wp_parse_args($this -> field, $defaults);
 
+            $this -> hooks();
+
+        }
+
+        public function hooks(){
+
+            add_action('admin_footer', array($this, 'template'));
+
+            do_action('templaza-framework/fields/tz_social/hooks');
         }
 
         public function template(){
-            ?>
-            <script type="text/html" id="tmpl-tzfrm-field-tz_social__<?php echo $this -> field['id'];?>-source">
-                <#
-                var data_source = JSON.stringify(data);
-                #>
-                <div class="card mb-2 social-profile-item" data-source="{{data_source}}">
-                    <div class="border radius p-2 ng-binding"><i class="{{{data.icon}}}"></i> {{{data.title}}}</div>
-                </div>
-            </script>
-            <script type="text/html" id="tmpl-tzfrm-field-tz_social__<?php echo $this -> field['id'];?>-form">
-                <div class="card mb-2 tz-social-item">
-                    <#
-                    var title = (typeof data.title !== "undefined" && data.title.trim().length)?data.title:"<?php echo __('Custom social profile', $this -> text_domain);?>";
-                    #>
-                    <div class="card-header">
-                        <span><i class="<# if (data.icon){ #>{{{data.icon}}}<# }else if (data.icon_class){ #>{{{data.icon_class}}}<# } #>" style="<# if (data.color){ #>color: {{{data.color}}}<# } #>"></i> {{{title}}}</span>
-                        <span class="text-danger float-right" style="cursor: pointer" data-delete-form-item><i class="fa fa-trash"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row mb-2">
-                            <div class="col-sm-4">
-                                <label><?php echo __('Link', $this -> text_domain);?></label>
-                            </div>
-                            <div class="col-sm-8">
-                                <#
-                                var link_placeholder = 'https://example.com';
-                                if(typeof data.link_placeholder !== "undefined"){
-                                    link_placeholder = data.link_placeholder;
-                                }
-                                #>
-                                <input type="text" data-input="link" placeholder="{{{link_placeholder}}}" value="{{{data.link}}}"  class="form-control w-100" autocomplete="off" style=""/>
-                            </div>
-                        </div>
-                        <# if (data.icons && data.icons.length > 1){ #>
-                        <div class="row mb-2">
-                            <div class="col-sm-4">
-                                <label><?php echo __('Icon', $this -> text_domain);?></label>
-                            </div>
-                            <div class="col-sm-8">
-                                <ul class="list-inline m-0">
-                                    <# _.each( data.icons, function( value, key ) { #>
-                                    <li class="select-icon ng-scope<# if (value === data.icon){ #> active<# } #>"><i class="{{{value}}}"></i></li>
-                                    <# }); #>
-                                </ul>
-                            </div>
-                        </div>
-                        <# }else if(data.icon.length == 0 || (data.icon.length > 0 && data.icons.length == 0)){ #>
-                        <div class="row mt-2">
-                            <div class="col-sm-4">
-                                <label><?php echo __('Icon Class', $this -> text_domain); ?></label>
-                            </div>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control w-100" autocomplete="off" data-input="icon" value="{{{data.icon}}}" placeholder="fab fa-youtube"/>
-<!--                                <input type="text" class="form-control w-100" autocomplete="off" name="--><?php
-//                                echo $this -> field['name']; ?><!--[icon-class][]" value="{{{data.icon_class}}}" data-input-icon-class placeholder="fab fa-youtube">-->
-                            </div>
-                        </div>
-                        <div class="mt-2 row">
-                            <div class="col-sm-4">
-                                <label><?php echo __('Color', $this -> text_domain); ?></label>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="redux-color-rgba-container " data-id="color" data-show-input="1"
-                                     data-show-initial="" data-show-alpha="1" data-show-palette="" data-show-palette-only="" data-show-selection-palette="" data-max-palette-size="10" data-allow-empty="1" data-clickout-fires-change="" data-choose-text="Choose" data-cancel-text="Cancel" data-input-text="Select Color" data-show-buttons="1" data-palette="null">
-
-                                    <input type="text" data-input="color" data-block-id="<?php echo $this -> field['id'];
-                                    ?>-tz_social-{{{data.random_id}}}" class="form-control redux-color-rgba" autocomplete="off" id="<?php
-                                    echo $this -> field['id']; ?>-tz_social-color" data-current-color="{{{data.color}}}" data-color="{{{data.color}}}"/>
-                                    <input type="hidden" class="redux-hidden-alpha" data-id="<?php
-                                    echo $this -> field['id'].'-tz_social'; ?>-{{{data.random_id}}}-alpha" id="<?php
-                                    echo $this -> field['id'].'-tz_social'; ?>-{{{data.random_id}}}-alpha" value="">
-                                    <input type="hidden" class="redux-hidden-alpha" data-id="<?php
-                                    echo $this -> field['id'].'-tz_social'; ?>-{{{data.random_id}}}-rgba" id="<?php
-                                    echo $this -> field['id'].'-tz_social'; ?>-{{{data.random_id}}}-rgba" value=""/>
-                                </div>
-                            </div>
-                        </div>
-                        <# } #>
-                    </div>
-                </div>
-            </script>
-            <?php
+            require __DIR__.'/tmpl/tz_social.tpl.php';
         }
 
         /**
@@ -299,8 +246,6 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
          * @since ReduxFramework 1.0.0
          */
         function render() {
-            add_action('admin_footer', array($this, 'template'));
-
             $options        = isset($this -> field['options'])?(array) $this -> field['options']:array();
 
         ?>
@@ -332,8 +277,6 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
          * @since ReduxFramework 1.0.0
          */
         function enqueue() {
-
-            $this -> template();
 
             // Set up min files for dev_mode = false.
             $min = Redux_Functions::isMin();

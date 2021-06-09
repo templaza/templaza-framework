@@ -3,7 +3,7 @@
    padding: 40px 30px 30px;
    border: 2px solid #ecf2fa;
    @include border-radius(5px);
-   @include transition($transition-all);
+   @include transition($tztheme-transition-all);
    .templaza-service-title{
       font-size: 30px;
       font-weight: 800;
@@ -20,7 +20,7 @@
          height:1px;
          background:#7c859a;
          width:23px;
-         @include transition($transition-all);
+         @include transition($tztheme-transition-all);
          &:before,&:after{
             position:absolute;
             content:"";
@@ -30,7 +30,7 @@
             transform: rotate(45deg);
             bottom:4px;
             right:0;
-            @include transition($transition-all);
+            @include transition($tztheme-transition-all);
          }
          &:after{
             top: auto;
@@ -41,23 +41,23 @@
 
       &:hover{
          span{
-            background:$global-color;
-            @include transition($transition-all);
+            background:$tztheme-global-color;
+            @include transition($tztheme-transition-all);
             &:after,&:before{
-               background:$global-color;
-               @include transition($transition-all);
+               background:$tztheme-global-color;
+               @include transition($tztheme-transition-all);
             }
          }
       }
    }
    &:hover{
-      @include transition($transition-all);
+      @include transition($tztheme-transition-all);
       border-color:transparent;
       cursor: pointer;
       @include box-shadow(0px 0px 60px 0px rgba(0,0,0,0.2));
       .templaza-service-title{
-         color:$global-color !important;
-         @include transition($transition-all);
+         color:$tztheme-global-color ;
+         @include transition($tztheme-transition-all);
       }
    }
    &.style2{
@@ -66,10 +66,10 @@
       .templaza-service-icon{
          width:70px;
          height:70px;
-         background:$global-color;
+         background:$tztheme-global-color;
          color:#fff;
          text-align: center;
-         line-height: 85px;
+         line-height: 70px;
          @include border-radius(50%);
          float:left;
          i{
@@ -86,4 +86,20 @@
          margin-top: 15px;
       }
    }
+   &.style3{
+      padding:0;
+      .autoshowroom-service-title {
+         margin-bottom: 10px;
+      }
+      .autoshowroom-service-icon {
+         background: none;
+         width: 0;
+         height: 0;
+         :after {
+            display: none;
+         }
+      }
+   }
+
+
 }

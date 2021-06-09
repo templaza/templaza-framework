@@ -1,0 +1,17 @@
+.widget{
+  .templaza-framework-options &{
+    &.open{
+      .widget-inside{
+        display: block;
+      }
+    }
+
+  }
+  .templaza-framework-options.redux-container .redux-main &{
+    .widget-inside{
+       textarea[hidden]{
+         display: none;
+       }
+     }
+   }
+}

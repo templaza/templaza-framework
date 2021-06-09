@@ -12,19 +12,21 @@ use TemPlazaFramework\Templates;
 ?>
 <?php
 
-$options        = Functions::get_theme_options();
-$mode           = isset($options['header-mode'])?$options['header-mode']:'horizontal';
-$header_layout  = isset($options['header-layout'])?$options['header-layout']:'wide';
-$template_layout= isset($options['layout-theme'])?$options['layout-theme']:'wide';
+$options            = Functions::get_theme_options();
+$mode               = isset($options['header-mode'])?$options['header-mode']:'horizontal';
+$header             = isset($options['enable-header'])?(bool) $options['enable-header']:true;
+$header_layout      = isset($options['header-layout'])?$options['header-layout']:'wide';
+$template_layout    = isset($options['layout-theme'])?$options['layout-theme']:'wide';
+$dropdown_trigger   = isset($options['dropdown-trigger'])?$options['dropdown-trigger']:'hover';
 
 $menu_mode      = isset($options['header-'.$mode.'-menu-mode'])?$options['header-'.$mode.'-menu-mode']:($mode=='stacked'?'center':'left');
 
-$class  = ['templaza-'.$mode.'-header'];
+$class  = ['templaza-header','templaza-'.$mode.'-header'];
 switch ($mode) {
     default:
     case 'horizontal':
     case 'stacked':
-        $class = array_merge($class,['templaza-' . $mode . '-' . $menu_mode . '-header']);
+        $class[]    = 'templaza-' . $mode . '-' . $menu_mode . '-header';
         break;
     case 'sidebar':
         $class  = array_merge($class,['sidebar-dir-' . $menu_mode, 'h-100', 'has-sidebar']);
@@ -33,29 +35,40 @@ switch ($mode) {
 
 $class  = implode(' ', $class);
 
-if(isset($atts['tz_class'])){
-    $class  .= ' '.trim($atts['tz_class']);
-}
+//if(isset($atts['tz_class'])){
+//    $class  .= ' '.trim($atts['tz_class']);
+//}
+//if(isset($atts['tz_class'])){
+//    $main_class = ' '.trim($atts['tz_class']);
+//}
 
+// Add data attributes to use some places.
+$attribs = array(
+    'data-megamenu'               => '',
+    'data-header-offset'          => 'true',
+    'data-megamenu-class'         => '.has-megamenu',
+    'data-megamenu-trigger'       => $dropdown_trigger,
+    'data-megamenu-content-class' => '.megamenu-sub-menu',
+);
+Functions::add_attributes('header', $attribs);
+
+$attribs    = join(' ', array_map(function($v, $k){
+    return !empty($v)?$k . '="' . $v . '"':$k;
+}, $attribs, array_keys($attribs)));
+$attribs    = ' '.$attribs;
+
+if($header){
 ?>
-<header<?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="<?php echo $class; ?>">
-<?php Templates::load_my_header('header.' . $mode, false);?>
-</header>
-<?php
-$header_absolute = isset($options['header-absolute'])?(bool) $options['header-absolute']:false;
-if ($header_absolute) {
-    ?>
-    <script type="text/javascript">
-        jQuery(function($){
-            $(document).ready(function(){
-                $(".templaza-header-section").addClass("header-absolute");
-            });
-        });
-    </script>
+<div<?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="<?php echo $atts['tz_class']; ?>">
+    <header class="<?php echo $class; ?>"<?php
+    echo $mode == 'horizontal'?$attribs:''; ?>>
+        <?php Templates::load_my_header('header.' . $mode, false);?>
+    </header>
     <?php
-}
-$enable_sticky_menu = isset($options['enable-sticky'])?(bool) $options['enable-sticky']:false;
-if ($enable_sticky_menu) {
-    Templates::load_my_header('header.sticky', false);
-}
-?>
+    $enable_sticky_menu = isset($options['enable-sticky'])?(bool) $options['enable-sticky']:false;
+    if ($enable_sticky_menu) {
+        Templates::load_my_header('header.sticky', false);
+    }
+    ?>
+</div>
+<?php } ?>

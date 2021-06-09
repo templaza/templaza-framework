@@ -43,7 +43,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Content_Area')){
 //                        'default'  => 'bottom',
 //                    ),
                     array(
-                        'id'       => 'custom-container-class',
+                        'id'       => 'custom_container_class',
                         'type'     => 'text',
                         'title'    => esc_html__('Container Custom Class', $this -> text_domain),
                         'subtitle' => esc_html__('Custom class of container', $this -> text_domain),

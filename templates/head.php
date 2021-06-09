@@ -10,6 +10,8 @@ $plugin_uri = Functions::get_my_url();
 
 wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-fontawesome', $plugin_uri.'/assets/vendors/fontawesome/css/all.min.css');
 
+wp_enqueue_script( 'templaza-js__uikit', Functions::get_my_url().'/assets/js/vendor/uikit.min.js', array( 'jquery' ) );
+wp_enqueue_script( 'templaza-js__uikit-icons', Functions::get_my_url().'/assets/js/vendor/uikit-icons.min.js', array( 'jquery' ) );
 wp_enqueue_script( 'templaza-js__megamenu', Functions::get_my_url().'/assets/js/vendor/jquery.templazamegamenu.js', array( 'jquery' ) );
 wp_enqueue_script( 'templaza-js__mobilemenu', Functions::get_my_url().'/assets/js/vendor/jquery.templazamobilemenu.js', array( 'jquery' ) );
 wp_enqueue_script( 'templaza-js__offcanvas', Functions::get_my_url().'/assets/js/vendor/jquery.offcanvas.js', array( 'jquery' ) );
@@ -30,7 +32,6 @@ if($enable_smooth_scroll) {
     wp_add_inline_script('templaza-js__smooth-scroll', $smoothashell);
 }
 
-
 // Add Favicon
 add_action('wp_head', function() use($options){
     $favicon    = isset($options['favicon'])?$options['favicon']:array();
@@ -39,5 +40,6 @@ add_action('wp_head', function() use($options){
     }
 }, 3);
 
+Templates::load_my_layout('head.menus');
 Templates::load_my_layout('head.custom');
-Templates::load_my_layout('head.typography');
+Templates::load_my_layout('head.preloader');

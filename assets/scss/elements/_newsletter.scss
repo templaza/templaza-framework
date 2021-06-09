@@ -9,7 +9,7 @@
     }
     input[type="submit"]{
       font-weight:bold;
-      background: $global-color;
+      background: $tztheme-global-color;
       @include border-radius(5px);
       text-transform: uppercase;
       position: absolute;

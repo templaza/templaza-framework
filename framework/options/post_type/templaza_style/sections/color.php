@@ -2,7 +2,7 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
-// -> START Color Section
+// -> START Color Selection
 Templaza_API::set_section('templaza_style', array(
         'title' => __( 'Colors', $this -> text_domain),
         'id'    => 'colors',
@@ -23,6 +23,13 @@ Templaza_API::set_section('templaza_style',
                 'type'     => 'color_rgba',
                 'title'    => __( 'Background Color', $this -> text_domain ),
                 'subtitle' => __( 'Select the background color for boxed layout.', $this -> text_domain ),
+            ),
+            array(
+                'id'                => 'body-background-image',
+                'type'              => 'background',
+                'title'             => __( 'Background Image', $this -> text_domain ),
+                'subtitle'          => __( 'Select the background color for boxed layout.', $this -> text_domain ),
+                'background-color'  => false,
             ),
             array(
                 'id'       => 'body-text-color',
@@ -229,12 +236,6 @@ Templaza_API::set_section('templaza_style',
                 'type'     => 'color_rgba',
                 'title'    => __( 'Hover Background Color', $this -> text_domain ),
                 'subtitle' => __( 'Set the background color on hovering a sub menu item', $this -> text_domain ),
-            ),
-            array(
-                'id'       => 'dropdown-menu-megamenu-border-color',
-                'type'     => 'color_rgba',
-                'title'    => __( 'Border Color separate Mega Menu', $this -> text_domain ),
-                'subtitle' => __( 'Border Color separate on Mega Menu', $this -> text_domain ),
             ),
         ),
     )

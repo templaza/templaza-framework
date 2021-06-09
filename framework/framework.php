@@ -20,7 +20,9 @@ class Framework{
 
     public function __construct()
     {
-        $this -> init();
+//        if(is_admin()) {
+            $this->init();
+//        }
     }
 
     public function init(){
@@ -45,29 +47,47 @@ class Framework{
             require_once dirname(__FILE__).'/includes/autoloader.php';
         }
 
+//        $this -> hooks();
+
         // Register arguments
         $this -> register_arguments();
-
-//        $this -> initSettings();
         $this -> init_post_types();
         $this -> init_global_settings();
 
         $this -> hooks();
 
-//        $this -> register_script();
-//        $this -> register_style();
     }
-
+    
     public function hooks(){
+
 //        add_action('setup_theme', array($this, 'initSettings'));
 //        add_action('after_setup_theme', array($this, 'init_post_types'));
 //        add_action('init', array($this, 'enqueue'));
+
+        add_filter('admin_body_class', function($body_class){
+            global $typenow, $pagenow;
+
+            $_body_class    = ' templaza-framework__body';
+
+            if($pagenow == 'nav-menus.php'){
+                $body_class .= $_body_class;
+            }
+            elseif($typenow && count($this -> post_types) && array_key_exists($typenow, $this -> post_types)){
+                if($pagenow == 'post-new.php' || $pagenow == 'post.php') {
+                    $_body_class .= ' tzfrm-postype';
+                }
+                $body_class .= $_body_class;
+            }
+            return $body_class;
+        });
+
         add_action('admin_init', array($this, 'enqueue'));
 //        add_action('admin_init', array($this, 'megamenu'));
 
         // Filter to remove redux adv
         add_filter("redux/{$this -> args['opt_name']}/localize", array($this, 'redux_localize'));
 
+        do_action('templaza-framework/framework/hooks');
     }
 
 //    public function megamenu(){

@@ -1,31 +1,91 @@
 div.templaza-sidebar {
-  form, form.wpcf7-form {
+  form, form.wpcf7-form, form.woocommerce-product-search {
     margin: 0;
     position: relative;
-    input[type="text"], input[type="email"]{
-      line-height: 50px;
-      height:50px;
+    input[type="text"], input[type="email"],input[type="search"]{
+      @include input-default;
     }
     input.submit{
       background: none;
       border: none;
       font-size: 0;
-      height: 50px;
+      height: $tztheme-input-height;
       position: absolute;
       right: 0;
       top: 0;
-      width: 50px;
+      width: $tztheme-input-height;
       z-index: 1;
     }
     i.i-search{
       position: absolute;
       right: 18px;
       top: 15px;
-      color:$heading-color;
+      color:$tztheme-heading-color;
     }
     &.searchform{
       input[type="text"], input[type="email"], input{
         margin-bottom: 0;
+      }
+    }
+  }
+}
+aside .widget.widget_search,
+aside .widget.widget_product_search {
+  padding: 0;
+  h3 {
+    &:before {
+      content: none;
+    }
+  }
+  form{
+    &.searchform,
+    &.woocommerce-product-search{
+      width: 100%;
+      position: relative;
+      input{
+        &.Tzsearchform,&.search-field {
+          @include input-default;
+        }
+        &.searchsubmit{
+          background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+          border: medium none;
+          font-size: 0;
+          height: $tztheme-input-height;
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: $tztheme-input-height;
+          z-index: 1;
+        }
+      }
+      button[type="submit"]{
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        border: medium none;
+        font-size: 0;
+        height: $tztheme-input-height;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: $tztheme-input-height;
+        z-index: 1;
+        color:inherit;
+        padding:0;
+        &:before{
+          content:"\f002";
+          font-family: "Font Awesome 5 Free";
+          font-size:14px;
+          font-weight:700;
+          position:absolute;
+          top:50%;
+          left:50%;
+          margin-left: -7px;
+        }
+      }
+      .i-search {
+        font-size: 14px;
+        position: absolute;
+        right: 18px;
+        top: 15px;
       }
     }
   }

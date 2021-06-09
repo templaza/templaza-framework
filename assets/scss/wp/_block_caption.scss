@@ -1,0 +1,19 @@
+figcaption,
+.wp-caption,
+.wp-caption-text,
+.wp-block-embed figcaption {
+  color: inherit;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+  text-align: center;
+}
+.sticky .post-sticky {
+  color: inherit;
+}
+.gallery-caption {
+  display: block;
+  margin-top: 0.8em;
+}
+.bypostauthor .comment-footer-meta .by-post-author {
+  display: block;
+}

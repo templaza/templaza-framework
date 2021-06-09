@@ -7,67 +7,71 @@
 .templaza-header-section {
   width: 100%;
   left: 0;
-  z-index: $header-section-zindex;
-  border-bottom: $header-border-bottom;
-  box-shadow: $header-shadow;
+  z-index: $tztheme-header-section-zindex;
+  box-shadow: $tztheme-header-shadow;
 
-  /* Header Element */
-  header {
-    &.templaza-header {
-      padding: $header-padding-y $header-padding-x;
-      z-index: 1;
-    }
 
-    /* Stacked Header */
-    &.header-stacked {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      display: none;
-      background-color: $stacked-header-bg;
-      z-index: $stacked-header-zindex;
-    }
+}
+/* Header Element */
+header {
+  &.templaza-header {
+    padding: $tztheme-header-padding-y $tztheme-header-padding-x;
+    z-index: 1;
   }
 
-  /* Sticky Header */
-  .templaza-header-sticky {
+  /* Stacked Header */
+  &.header-stacked {
     position: fixed;
     top: 0;
     left: 0;
+    height: 100%;
     width: 100%;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-    z-index: $sticky-header-zindex;
-    -webkit-animation-duration: $sticky-header-animation-duration;
-    animation-duration: $sticky-header-animation-duration;
-    border-bottom: $sticky-header-border-bottom;
-    box-shadow: $sticky-header-shadow;
-    > div{
-      padding-top: $sticky-header-padding-y;
-      padding-bottom: $sticky-header-padding-y;
+    display: none;
+    background-color: $tztheme-stacked-header-bg;
+    z-index: $tztheme-stacked-header-zindex;
+  }
+}
+
+/* Sticky Header */
+.templaza-header-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  z-index: $tztheme-sticky-header-zindex;
+  -webkit-animation-duration: $tztheme-sticky-header-animation-duration;
+  animation-duration: $tztheme-sticky-header-animation-duration;
+  border-bottom: $tztheme-sticky-header-border-bottom;
+  box-shadow: $tztheme-sticky-header-shadow;
+  .container{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  > div{
+    padding-top: $tztheme-sticky-header-padding-y;
+    padding-bottom: $tztheme-sticky-header-padding-y;
+  }
+
+  &.d-flex {
+    -webkit-animation-name: slideInDown;
+    animation-name: slideInDown;
+  }
+
+  .templaza-logo {
+    .templaza-logo-default {
+      display: none !important;
     }
 
-    &.d-flex {
-      -webkit-animation-name: slideInDown;
-      animation-name: slideInDown;
-    }
-
-    .templaza-logo {
-      .templaza-logo-default {
-        display: none !important;
+    .templaza-logo-sticky {
+      @include media-breakpoint-up(lg) {
+        display: block !important;
       }
-
-      .templaza-logo-sticky {
-        @include media-breakpoint-between(lg, xl) {
-          display: block !important;
-        }
-      }
     }
-    #wpadminbar + .templaza-container &{
-      top: 32px;
-    }
+  }
+  .admin-bar .templaza-container &{
+    top: 32px;
   }
 }
 
@@ -79,8 +83,8 @@
   }
 
   img {
-    max-width: $logo-max-width;
-    max-height: $logo-max-height;
+    max-width: $tztheme-logo-max-width;
+    max-height: $tztheme-logo-max-height;
   }
 
   .templaza-logo-mobile {
@@ -121,14 +125,14 @@
 .templaza-header {
   &.has-sidebar {
     position: fixed;
-    width: $sidebar-header-width;
+    width: $tztheme-sidebar-header-width;
     top: 0;
     height: 100%;
     z-index: 1;
     transition: .1s linear all;
-    box-shadow: $sidebar-header-shadow;
+    box-shadow: $tztheme-sidebar-header-shadow;
     @media(max-width: 1200px) {
-      width: $sidebar-header-mini-width;
+      width: $tztheme-sidebar-header-mini-width;
     }
     &.sidebar-dir-left {
       left: 0 !important;
@@ -189,7 +193,7 @@
     }
   }
   .dropdown-menus {
-    max-width: $sidebar-header-width;
+    max-width: $tztheme-sidebar-header-width;
   }
   .templaza-sidebar-content {
     overflow-y: auto;
@@ -223,7 +227,7 @@
       }
     }
     &.expanded {
-      width: $sidebar-header-width !important;
+      width: $tztheme-sidebar-header-width !important;
       -webkit-transition: .1s linear all;
       -moz-transition: .1s linear all;
       -ms-transition: .1s linear all;
@@ -251,9 +255,9 @@
 
 @media (min-width:1201px) {
   body.header-sidebar-left{
-    margin-left: $sidebar-header-width;
+    margin-left: $tztheme-sidebar-header-width;
   }
   body.header-sidebar-right{
-    margin-right: $sidebar-header-width;
+    margin-right: $tztheme-sidebar-header-width;
   }
 }

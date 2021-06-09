@@ -27,3 +27,8 @@
 		display: none !important;
 	}
 }
+@media (max-width: 1200px) {
+	.row {
+		--#{$variable-prefix}gutter-x: #{$tztheme-grid-gutter-width-xl};
+	}
+}

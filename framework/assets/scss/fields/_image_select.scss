@@ -1,0 +1,13 @@
+.redux-container-image_select{
+  .redux-image-select-selected,
+  .redux-image-select{
+    img, .tiles{
+      border-width: 3px;
+    }
+  }
+  .redux-image-select-selected{
+    img, .tiles{
+      border-color:$tzhover;
+    }
+  }
+}

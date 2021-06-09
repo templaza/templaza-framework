@@ -20,14 +20,23 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
             $this -> theme      = \wp_get_theme();
             $this -> text_domain= Functions::get_my_text_domain();
 
-            $this -> init();
-
             if(method_exists($this, 'hooks')){
                 $this -> hooks();
             }
+
+            $this -> register_post_type();
+
+            if(method_exists($this, 'init')){
+                $this -> init();
+            }
+
+//            if(method_exists($this, 'hooks')){
+//                $this -> hooks();
+//            }
         }
 
-        public function init(){
+        public function register_post_type(){
+
             $post_type  = $this->get_post_type();
 
             if(!post_type_exists($post_type)){
@@ -35,16 +44,18 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
                 if(method_exists($this, 'register')) {
                     \register_post_type($this->get_post_type(), $this->register());
 
-                    do_action('templaza-framework/post_type/registered', $this);
+                    if($this -> my_post_type_exists()){
+                        do_action('templaza-framework/post_type/'.$post_type.'/registered', $post_type, $this);
+                    }
+                    do_action('templaza-framework/post_type/registered', $post_type, $this);
                 }
             }
-
-//            if(post_type_exists($this -> get_post_type()) && $this -> get_current_screen_post_type() == $post_type){
-//            }
         }
 
         public function hooks(){
             $post_type  = $this->get_post_type();
+
+//            add_filter('admin_body_class', array($this, 'admin_body_class'));
 
             if($this ->my_post_type_exists()){
                 if(method_exists($this,'parse_query')) {
@@ -55,6 +66,20 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
                 add_action('admin_enqueue_scripts', array($this, 'enqueue'));
             }
         }
+
+
+//        public function post_type_registered($post_type, $framework){
+//            add_filter('admin_body_class', array($this, 'admin_body_class'));
+//        }
+
+//        public function admin_body_class($body_class){
+//            global $typenow;
+//
+//            if($typenow == $this -> get_post_type()){
+//                $body_class .= ' templaza-framework__body ';
+//            }
+//            return $body_class;
+//        }
 
         // Register arguments for post type
 //        public function register(){return array();}

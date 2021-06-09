@@ -1,9 +1,22 @@
 
-$tzline:#000;
-$tzbackground:#fff;
-$tzhover:#727cf5;
+$tz-global-color: #727cf5;
+$tz-global-text-color: #686868;
+$tz-body-color: #f0f0f1;
+
+$tzline: #000;
+$tzbackground: #fff;
+$tzhover: $tz-global-color;
 $tzdelete:#ff3366;
 $tzspin: #007bff;
+
+$tz-danger-color: #f0506e;
+$tz-success-color: #32d296;
+$tz-secondary-color: #7987a1;
+$tz-body-background: #f9fafb;
+$tz-border-color: #ced4da;
+$tz-border-color-focus: #80bdff;
+$tz-white-border-color: #e8ebf1;
+$tz-process-background-color: #e9ecef;
 
 $btn-secondory: #7987a1;
 

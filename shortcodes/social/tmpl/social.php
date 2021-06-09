@@ -17,7 +17,7 @@ if(!empty($social_profiles)){
 echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
    <?php
    foreach ($social_profiles as $social_profile) {
-      switch ($social_profile->id) {
+      switch (isset($social_profile -> id) && $social_profile->id) {
          case 'whatsapp':
             $social_profile_link = 'https://wa.me/' . $social_profile->link;
             break;

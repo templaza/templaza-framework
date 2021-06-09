@@ -16,10 +16,9 @@
 	var org_redux_field_typography = redux.field_objects.typography.init;
 	redux.field_objects.typography.init	= function(selector) {
 
-		selector = $.redux.getSelector(selector, 'typography');
-
-
 		org_redux_field_typography(selector);
+
+		selector = $.redux.getSelector(selector, 'typography');
 
 
 		var tab_init_preview = function(panel, parent){
@@ -34,27 +33,42 @@
 			input.addClass(input_class);
 			input_hidden.addClass(input_hidden_class);
 
-			var mainID = $( selector ).parents( '.redux-container-typography:first' ).data( 'id' );
-			if ( undefined === mainID ) {
-				mainID = $( selector ).data( 'id' );
+			// var mainID = $( selector ).parents( '.redux-container-typography:first' ).data( 'id' );
+			// if ( undefined === mainID ) {
+			// 	mainID = $( selector ).data( 'id' );
+			// }
+			var main = parent.closest('.redux-container-typography');
+			var mainID = parent.closest('.redux-container-typography').data('id');
+			if (undefined === mainID) {
+				mainID = $(selector).data('id');
 			}
 
+			// console.log(main);
 			var unit	= panel.find(".redux-typography-unit").val();
 
 			var that   = $( '#' + mainID );
 			that.attr("data-units", unit).data( 'units', unit );
 
-			redux.field_objects.typography.select(parent);
+			// redux.field_objects.typography.select(main);
+			// redux.field_objects.typography.select(parent);
 
 			input.removeClass(input_class);
 			input_hidden.removeClass(input_hidden_class);
 		};
 
 		$(selector).each(function () {
+			// var el     = $( selector );
 			var el     = $( this );
 
+			var field_id = el.data("id");
+			el.find("#"+field_id).removeClass("typography-initialized");
+
 			if(el.find("[data-responsive]").length) {
-				el.each(function () {
+
+				el.find(".redux-typography-family").trigger("change");
+				redux.field_objects.typography.select(el);
+
+				// el.each(function () {
 					var _el = $(this);
 					$(this).find(".tabs").tabs({
 						create: function (event, ui) {
@@ -75,7 +89,7 @@
 					});
 
 					// Init when value is changed.
-					$(this).find('.typography-input').off("keyup").on("keyup", function () {
+					el.find('.typography-input').off("keyup").on("keyup", function () {
 						var parent = $(this).closest("[data-device]");
 
 						if (parent.length) {
@@ -95,7 +109,12 @@
 							// 	_el.find("input[type=hidden][data-device]").removeClass("typography-"+attr_class)
 							// 		.end()
 							// 		.find("input[type=hidden][data-device="+device+"]").addClass("typography-"+attr_class);
-							var mainID = $(selector).parents('.redux-container-typography:first').data('id');
+							// var mainID = $(selector).parents('.redux-container-typography:first').data('id');
+							// if (undefined === mainID) {
+							// 	mainID = $(selector).data('id');
+							// }
+							var main = _el.closest('.redux-container-typography');
+							var mainID = _el.closest('.redux-container-typography').data('id');
 							if (undefined === mainID) {
 								mainID = $(selector).data('id');
 							}
@@ -105,7 +124,9 @@
 							var that = $('#' + mainID);
 							that.attr("data-units", unit).data('units', unit);
 						}
-						redux.field_objects.typography.select($(this).parents('.redux-container-typography:first'));
+
+						redux.field_objects.typography.select(main);
+						// redux.field_objects.typography.select($(this).parents('.redux-container-typography:first'));
 
 						parent.find(".typography-input").removeClass(input_class)
 							.end().find("input[type=hidden][data-device=" + device + "]").removeClass(input_hidden_class);
@@ -121,6 +142,7 @@
 							parent.find(".typography-input").addClass(input_class)
 								.end().find("input[type=hidden][data-device=" + device + "]").addClass(input_hidden_class);
 
+
 							// var device = parent.attr("data-device");
 							// var attr_class = parent.find("input[type=text][data-hidden-name]").attr("data-hidden-name");
 							// _el.find("input[type=hidden][data-device]").removeClass("typography-"+attr_class)
@@ -130,7 +152,14 @@
 							// _el.find(".typography-input[data-hidden-name]").removeClass("redux-typography-"+$(this).attr("data-name"));
 							// parent.find(".typography-input[data-hidden-name]").addClass("redux-typography-"+$(this).attr("data-name"));
 							//
-							var mainID = $(selector).parents('.redux-container-typography:first').data('id');
+
+							// var mainID = $(selector).parents('.redux-container-typography:first').data('id');
+							// if (undefined === mainID) {
+							// 	mainID = $(selector).data('id');
+							// }
+
+							var main = _el.closest('.redux-container-typography');
+							var mainID = _el.closest('.redux-container-typography').data('id');
 							if (undefined === mainID) {
 								mainID = $(selector).data('id');
 							}
@@ -138,16 +167,21 @@
 							var unit = $(this).val();
 
 							var that = $('#' + mainID);
+
 							that.attr("data-units", unit).data('units', unit);
 
-							redux.field_objects.typography.select($(this).parents('.redux-container-typography:first'));
+							// var thisID = $( this ).attr( 'id' ), thisObj = _el.find( '#' + thisID );
+
+							redux.field_objects.typography.select(main);
+							// redux.field_objects.typography.select($(this).parents('.redux-container-typography:first'));
 
 							parent.find(".typography-input").removeClass(input_class)
 								.end().find("input[type=hidden][data-device=" + device + "]").removeClass(input_hidden_class);
 						}
 					});
-				});
+				// });
 			}
+
 		});
 
 		// org_redux_field_typography(selector);

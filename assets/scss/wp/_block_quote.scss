@@ -1,0 +1,44 @@
+.wp-block-quote, blockquote{
+  padding:20px;
+  background:$tztheme-quote-bg;
+  @include border-radius($tztheme-quote-radius);
+  cite{
+    font-size:0.8em;
+  }
+  p{
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  &.is-style-large{
+    padding:40px;
+  }
+}
+body{
+  code{
+    white-space: pre-line;
+    background:$tztheme-quote-bg;
+    @include border-radius($tztheme-quote-radius);
+    padding:20px;
+    display:block;
+    margin:15px 0;
+    line-height: 1.3em;
+  }
+  blockquote{
+    code{
+      display: inline;
+      padding:7px 10px;
+      @include border-radius(0);
+    }
+  }
+  pre{
+    code{
+      background:none;
+      margin:0;
+    }
+  }
+}
+.wp-block-pullquote{
+  blockquote{
+    background:none;
+  }
+}

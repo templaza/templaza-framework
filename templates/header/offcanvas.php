@@ -15,21 +15,15 @@ $offcanvas_menu_location    = isset($options['offcanvas-menu-location'])?$option
 $offcanvas_menu_level       = isset($options['offcanvas-menu-level'])?(int) $options['offcanvas-menu-level']:0;
 $offcanvas_animation        = isset($options['offcanvas-animation'])?$options['offcanvas-animation']:'st-effect-1';
 //$offcanvas_direction        = isset($options['offcanvas-direction'])?(bool) $options['offcanvas-direction']:true;
-$panelwidth                 = isset($options['offcanvas-panelwidth'])?$options['offcanvas-panelwidth']:'320px';
+$panelwidth                 = isset($options['offcanvas-panelwidth']) &&
+                                !empty($options['offcanvas-panelwidth'])?$options['offcanvas-panelwidth']:'320px';
 $offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$options['offcanvas-togglevisibility']:'d-block';
 
 $navClass                   = ['nav menu list-inline d-block'];
 
-//$header = $params->get('header', TRUE);
-//$enable_offcanvas = $params->get('enable_offcanvas', FALSE);
 if (!$header || !$enable_offcanvas) {
 	return;
 }
-//$module_position = 'offcanvas';
-//$togglevisibility = $params->get('offcanvas_togglevisibility', 'd-block');
-//$effect = $params->get('offcanvas_animation', 'st-effect-1');
-//$panelwidth = $params->get('offcanvas_panelwidth', '320px');
-//$openfrom = $params->get('offcanvas_openfrom', 'left');
 ?>
     <div class="templaza-offcanvas d-none d-init" id="templaza-offcanvas">
         <div class="burger-menu-button active">
@@ -41,18 +35,11 @@ if (!$header || !$enable_offcanvas) {
         </div>
         <div class="templaza-offcanvas-inner">
 			<?php
-//            Menu::get_nav_menu(array(
-//                'theme_location'  => $offcanvas_menu_location,
-//                'menu_class'      => implode(' ', $navClass),
-////                'container_class' => implode(' ', $navWrapperClass),
-//                'menu_id'         => '',
-//                'depth'           => $offcanvas_menu_level, // Level
-//            ));
-
-
             if ($offcanvas_sidebar && is_active_sidebar($offcanvas_sidebar)){
-                echo '<div id="templaza-offcanvas-sidebar">';
-                dynamic_sidebar($offcanvas_sidebar);
+                echo '<div id="templaza-offcanvas-sidebar" class="templaza-sidebar">';
+                    echo '<aside id="widget-area-'.uniqid().'" class="widget-area">';
+                        dynamic_sidebar($offcanvas_sidebar);
+                    echo '</aside>';
                 echo '</div>';
             }
              ?>

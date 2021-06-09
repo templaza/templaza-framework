@@ -17,26 +17,19 @@ if ($header && !empty($header_mode) && $header_mode == 'sidebar') {
     $content_classes[]  = 'has-sidebar';
     $content_classes[]  = 'sidebar-dir-' . $sidebar_dir;
 }
-
 ?>
 
 <div class="templaza-container">
+    <?php Templates::load_my_layout('preloader'); ?>
     <?php
     if($header && $mode != 'sidebar') {
         Templates::load_my_header('header.offcanvas');
     }
+    Templates::load_my_header('header.mobilemenu');
     ?>
     <div class="templaza-content<?php echo (!empty($content_classes) ? ' ' . implode(' ', $content_classes) : '');?>">
         <div class="templaza-layout templaza-layout-<?php echo $template_layout;?>" style="<?php echo Templates::get_layout_styles();?>">
             <div class="templaza-wrapper">
                 <?php
                 do_action('templaza-framework-header_open');
-
-//                Templates::load_my_layout('topsidebar');
-//
-//                if (!$header) {
-//                    return;
-//                }
-
-//                Templates::load_my_layout('body');
                 ?>

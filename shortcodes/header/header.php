@@ -7,6 +7,30 @@ use TemPlazaFramework\Functions;
 if(!class_exists('TemplazaFramework_ShortCode_Header')){
     class TemplazaFramework_ShortCode_Header extends TemplazaFramework_ShortCode {
 
+        public function __construct($field_parent = array(), $value = '', $parent = '')
+        {
+            $this -> hooks();
+
+            parent::__construct($field_parent, $value, $parent);
+        }
+
+        public function hooks(){
+            add_filter('templaza-framework/layout/generate/shortcode/'.$this -> get_shortcode_name().'/after_shortcode',
+                array($this, 'after_shortcode'));
+        }
+
+        public function after_shortcode($shortcode){
+
+            $options        = Functions::get_theme_options();
+            $header         = isset($options['enable-header'])?(bool) $options['enable-header']:true;
+
+            if(!$header){
+                return '';
+            }
+
+            return $shortcode;
+        }
+
         public function register(){
             return array(
                 'id'          => 'header',
@@ -31,12 +55,12 @@ if(!class_exists('TemplazaFramework_ShortCode_Header')){
                 )
             );
         }
-        public function prepare_params($params, $element){
-            $params = parent::prepare_params($params, $element);
-
-
-            return $params;
-        }
+//        public function prepare_params($params, $element){
+//            $params = parent::prepare_params($params, $element);
+//
+//
+//            return $params;
+//        }
     }
 
 }

@@ -1,0 +1,39 @@
+table{
+  border-spacing: 0;
+  border:$tztheme-input-border;
+  thead{
+    tr{
+      background:$tztheme-table-heading-bg;
+      th{
+        border-right:$tztheme-input-border;
+        border-bottom:$tztheme-input-border;
+        color:$tztheme-heading-color;
+        padding:5px 15px;
+        &:last-child{
+          border-right:none;
+        }
+      }
+      &:last-child{
+        th{
+          border-bottom:$tztheme-input-border;
+        }
+      }
+    }
+  }
+
+  td,th{
+    border-right:$tztheme-input-border;
+    border-bottom:$tztheme-input-border;
+    padding:5px 15px;
+    &:last-child{
+      border-right:none;
+    }
+  }
+  tr{
+    &:last-child{
+      td,th{
+        border-bottom:none;
+      }
+    }
+  }
+}

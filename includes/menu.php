@@ -15,68 +15,69 @@ class Menu{
         $mode    = isset($options['header-mode'])?$options['header-mode']:'horizontal';
         $header_stacked_menu_mode   = isset($options['header-stacked-menu-mode'])?$options['header-stacked-menu-mode']:'center';
         if($mode == 'stacked' && $header_stacked_menu_mode == 'seperated'){
-            add_filter('wp_nav_menu_items', array('TemPlazaFramework\Menu','seperated_nav_menu'), 10, 2);
+            add_filter( 'wp_nav_menu_objects', array( 'TemPlazaFramework\Menu', 'add_logo_to_menu' ), 10, 2 );
         }
 
         return wp_nav_menu($args);
     }
 
-    public static function seperated_nav_menu($items, $args){
-        if(!$items){
-            return $items;
-        }
-        $dom = new \DOMDocument();
-        $dom->loadHTML($items);
-        $find = $dom->getElementsByTagName('li');
-
-        $count  = $find -> count();
-
-        $new_el_logo = $dom->createElement('li', '');
-        $new_el_logo -> setAttribute('class', 'nav-item nav-stacked-logo text-center');
-//                        $img_el = $dom -> createElement('img');
-//                        $img_el -> setAttribute('src', '#');
-//                        $img_el -> setAttribute('alt', '');
-//                        $img_el -> setAttribute('title', '');
-//                        $new_el_logo -> appendChild($img_el);
-
-
-//                        $default_logo       = isset($options['default-logo'])?$options['default-logo']:false;
-//                        $mobile_logo        = isset($options['mobile-logo'])?$options['mobile-logo']:false;
-//                        $sticky_header_logo= isset($options['sticky-logo'])?$options['sticky-logo']:false;
-//                        var_dump($default_logo);
-////                        die;
-//
-//                        $logo_type                  = isset($options['logo-type'])?(bool) $options['logo-type']:true; // Logo Type
-//                        $header_mode                = isset($options['header-mode'])?$options['header-mode']:'horizontal';
-//                        $header_stacked_menu_mode   = isset($options['header-stacked-menu-mode'])?$options['header-stacked-menu-mode']:'center';
-//                        var_dump($logo_type);
-//                        var_dump($header_mode);
-//                        var_dump($header_stacked_menu_mode);
-//                        die();
-//
-
+    public static function add_logo_to_menu($items, $args){
         ob_start();
         Templates::load_my_layout('logo', true, false);
-        $img    = ob_get_contents();
+        $logo_html    = ob_get_contents();
         ob_end_clean();
-
-        if(!empty($img)) {
-            $fragment = $dom->createDocumentFragment();
-            $fragment->appendXML( $img);
-//                            $fragment->appendXML( Templates::load_my_layout('logo'));
-            //                        $fragment->appendXML('<div>This is a test element.</div>');
-            $new_el_logo -> appendChild($fragment);
-        }
-
-        foreach ($find as $i => $item ) {
-            if ($i == ceil($count / 2) + 1) {
-                $item->parentNode->insertBefore($new_el_logo, $item);
+        if(!empty($items)){
+            $remember  = array();
+            $root_count  = 0;
+            foreach($items as $i => $item){
+                if($item -> menu_item_parent == 0) {
+                    $remember[$item -> ID]    = $i;
+                    $root_count++;
+                }
             }
-        }
-//                        die();
-//                        var_dump($dom -> saveHTML());
-//                        die();
+            $count  = 0;
+            $split  = 0;
+            if($root_count % 2 != 0){
+                $options    = Functions::get_theme_options();
+                $odd_position   = isset($options['header-odd-menu-items'])?$options['header-odd-menu-items']:'left';
+                if($odd_position == 'right'){
+                    $count--;
+                }
+            }
+            foreach($items as $j => $item){
+                if($item -> menu_item_parent == 0) {
+                    if($count == (int)($root_count / 2)){
+                        $split  = $j;
+                        break;
+                    }
+                    $count++;
+                }
+            }
+            $layout_item = array(
+                'menu_item_parent' => 0,
+                'type' => '__templaza_mega_item',
+                'title' => 'Logo',
+                'parent_submenu_type' => '',
+                'menu_order' => $split+1,
+                'depth' => 0,
+                'ID' => "{$item->ID}-{$i}-{$count}",
+                'templaza_megamenu_html'  => $logo_html,
+                'templaza_megamenu_layout'  => '',
+            );
+            $layout_item    = (object) $layout_item;
 
-        return $dom->saveHTML();
+            $first_items    = array_slice($items, 0, $split-1);
+            $second_items    = array_slice($items, $split-1, count($items));
+
+            if(count($second_items)){
+                foreach ($second_items as &$second_item){
+                    $second_item -> menu_order++;
+                }
+            }
+
+            $items  = array_merge($first_items, array($layout_item), $second_items);
+        }
+        return $items;
     }
+
 }

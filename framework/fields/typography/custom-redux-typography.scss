@@ -31,11 +31,11 @@
             }
             .ui-state-default{
                 a{
-                    color: #999;
+                    color: lighten(#7987a1, 10%);
                 }
             }
             a{
-                color: #999;
+                color: lighten(#7987a1, 10%);
                 &:hover{
                     text-decoration: underline;
                 }
@@ -69,6 +69,9 @@
         }
         .input_wrapper, .select_wrapper{
             margin-bottom: 5px;
+        }
+        .ui-widget-content{
+            background: none;
         }
      }
 }

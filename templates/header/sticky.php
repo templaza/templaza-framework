@@ -10,6 +10,7 @@ use TemPlazaFramework\Menu;
 $options                    = Functions::get_theme_options();
 
 $header_menu                = isset($options['header-menu'])?$options['header-menu']:'header';
+$header_menu_level          = isset($options['header-menu-level'])?(int) $options['header-menu-level']:0;
 $enable_offcanvas           = isset($options['enable-offcanvas'])?(bool) $options['enable-offcanvas']:false;
 $offcanvas_animation        = isset($options['offcanvas-animation'])?$options['offcanvas-animation']:'st-effect-1';
 //$offcanvas_direction        = isset($options['offcanvas-direction'])?(bool) $options['offcanvas-direction']:true;
@@ -25,7 +26,7 @@ $class[]                    = 'header-' . $stickyheadermobile . '-mobile';
 $stickyheadertablet         = isset($options['sticky-tablet'])?$options['sticky-tablet']:'static';
 $class[]                    = 'header-' . $stickyheadermobile . '-tablet';
 
-$navClass                   = ['nav', 'templaza-nav', 'd-none', 'd-lg-flex'];
+$navClass                   = ['nav', 'navbar-nav', 'templaza-nav', 'd-none', 'd-lg-flex'];
 $navWrapperClass            = ['templaza-nav-wraper', 'align-self-center', 'px-2', 'd-none', 'd-lg-block'];
 $mode                       = isset($options['header-horizontal-menu-mode'])?$options['header-horizontal-menu-mode']:'left';
 $sticky_mode                = isset($options['sticky-menu-mode'])?$options['sticky-menu-mode']:'left';
@@ -38,7 +39,11 @@ $dropdown_arrow             = isset($options['dropdown-arrow'])?(bool) $options[
 $dropdown_animation_speed   = isset($options['dropdown-animation-speed'])?$options['dropdown-animation-speed']:300;
 $dropdown_animation_ease    = isset($options['dropdown-animation-ease'])?$options['dropdown-animation-ease']:'linear';
 $dropdown_animation_type    = isset($options['dropdown-animation-type'])?$options['dropdown-animation-type']:'fade';
+$dropdown_animation_effect  = isset($options['dropdown-animation-effect'])?$options['dropdown-animation-effect']:'fade-down';
+$dropdown_animation_effect  = $dropdown_animation_type == 'none'?'':$dropdown_animation_effect;
 $dropdown_trigger           = isset($options['dropdown-trigger'])?$options['dropdown-trigger']:'hover';
+
+$navClass[] = $dropdown_animation_effect;
 
 switch ($mode) {
     case 'left':
@@ -51,13 +56,15 @@ switch ($mode) {
         $navWrapperClass[] = 'mx-auto';
         break;
 }
+
+$attribs = $menu_datas = Functions::get_attributes('header');
+$attribs    = join(' ', array_map(function($v, $k){
+    return !empty($v)?$k . '="' . $v . '"':$k;
+}, $attribs, array_keys($attribs)));
+$attribs    = ' '.$attribs;
 ?>
-<!-- header starts -->
-<div id="templaza-sticky-header" data-megamenu data-megamenu-class=".has-megamenu" data-megamenu-content-class=".megamenu-container" data-dropdown-arrow="<?php
-echo $dropdown_arrow ? 'true' : 'false'; ?>" data-header-offset="true" data-transition-speed="<?php
-echo $dropdown_animation_speed; ?>" data-animation="<?php echo $dropdown_animation_type; ?>" data-easing="<?php
-echo $dropdown_animation_ease; ?>" data-templaza-trigger="<?php
-echo $dropdown_trigger; ?>" data-megamenu-submenu-class=".nav-submenu" class="<?php echo implode(' ', $class); ?> d-none">
+<?php /* header starts*/ ?>
+<div id="templaza-sticky-header" class="<?php echo implode(' ', $class); ?> d-none"<?php echo $attribs;?>>
     <div class="container d-flex flex-row justify-content-between">
         <?php if (!empty($header_mobile_menu)) { ?>
             <div class="d-flex d-lg-none justify-content-start">
@@ -77,7 +84,8 @@ echo $dropdown_trigger; ?>" data-megamenu-submenu-class=".nav-submenu" class="<?
                     'menu_class'      => implode(' ', $navClass),
                     'container_class' => implode(' ', $navWrapperClass),
                     'menu_id'         => '',
-                    'depth'           => $options['header-menu-level'], // Level
+                    'depth'           => $header_menu_level, // Level
+                    'templaza_megamenu_html_data' => $menu_datas
                 ));
                 // header nav ends
             }
@@ -92,7 +100,8 @@ echo $dropdown_trigger; ?>" data-megamenu-submenu-class=".nav-submenu" class="<?
                 'menu_class'      => implode(' ', $navClass),
                 'container_class' => implode(' ', $navWrapperClass),
                 'menu_id'         => '',
-                'depth'           => $options['header-menu-level'], // Level
+                'depth'           => $header_menu_level, // Level
+                'templaza_megamenu_html_data' => $menu_datas
             ));
             // header nav ends
             echo '</div>';
@@ -108,7 +117,8 @@ echo $dropdown_trigger; ?>" data-megamenu-submenu-class=".nav-submenu" class="<?
                         'menu_class'      => implode(' ', $navClass),
                         'container_class' => implode(' ', $navWrapperClass),
                         'menu_id'         => '',
-                        'depth'           => $options['header-menu-level'], // Level
+                        'depth'           => $header_menu_level, // Level
+                        'templaza_megamenu_html_data' => $menu_datas
                     ));
                     // header nav ends
                 }
@@ -122,26 +132,26 @@ echo $dropdown_trigger; ?>" data-megamenu-submenu-class=".nav-submenu" class="<?
                         </button>
                     </div>
                 <?php } ?>
-                <?php if ($block_1_type != 'blank'): ?>
-                    <div class="header-right-block d-none d-lg-block align-self-center px-2">
-                        <?php
-                        if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-                            echo '<div class="header-block-item">';
-                            echo '<ul id="sidebar">';
-                            dynamic_sidebar($block_1_sidebar);
-                            echo '</ul>';
-                            echo '</div>';
-                        }
-                        if ($block_1_type == 'custom') {
-                            echo '<div class="header-block-item">';
-                            echo $block_1_custom;
-                            echo '</div>';
-                        }
-                        ?>
-                    </div>
-                <?php endif; ?>
+<!--                --><?php //if ($block_1_type != 'blank'): ?>
+<!--                    <div class="header-right-block d-none d-lg-block align-self-center px-2">-->
+<!--                        --><?php
+//                        if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
+//                            echo '<div class="header-block-item">';
+//                            echo '<ul id="sidebar">';
+//                            dynamic_sidebar($block_1_sidebar);
+//                            echo '</ul>';
+//                            echo '</div>';
+//                        }
+//                        if ($block_1_type == 'custom') {
+//                            echo '<div class="header-block-item">';
+//                            echo $block_1_custom;
+//                            echo '</div>';
+//                        }
+//                        ?>
+<!--                    </div>-->
+<!--                --><?php //endif; ?>
             </div>
         <?php endif; ?>
     </div>
 </div>
-<!-- header ends -->
+<?php /* header ends*/ ?>

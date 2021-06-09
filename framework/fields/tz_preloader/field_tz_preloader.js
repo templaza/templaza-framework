@@ -37,6 +37,8 @@
                             $mcontent.find(".tz-preloader-select").off("click").on("click", function(e){
                                 var $sEl    = $(this);
                                 $("#" + $sEl.data("id") ).val($sEl.data("value"));
+                                // $("#" + $sEl.data("id") +"__html").val($sEl.data("html"));
+                                // $("#" + $sEl.data("id") +"__html").val($sEl.find(".tz-preloader-select-inner").html());
                                 $el.next(".select-preloader").html($sEl.html());
                                 $mcontent.dialog("close");
                             });

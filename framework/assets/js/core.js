@@ -10,6 +10,8 @@
         tzoptions.find("[name=_wp_http_referer]").remove();
        // console.log($("#poststuff .templaza-framework-options"));
 
-
+        $("#post").submit(function(){
+            window.onbeforeunload = null;
+        });
     });
 })(jQuery, window);

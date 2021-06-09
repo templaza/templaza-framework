@@ -1,3 +1,7 @@
+//@import "../../../assets/scss/vendor/bootstrap_grid/bootstrap-grid";
+
+@import "variables";
+@import "mixins";
 
 #poststuff,
 #nav-menus-frame{
@@ -97,6 +101,36 @@
       }
     }
   }
+  .menu-item{
+    .menu-item-handle{
+      .item-title{
+        margin-right: 0;
+      }
+      &:hover .tz_mm_launch{
+        opacity: 1;
+      }
+    }
+    .tz_mm_launch{
+      opacity: 0;
+      font-size: 12px;
+      line-height: 1.5;
+      min-height: 0;
+      font-weight: normal;
+      padding: 1px 5px 2px;
+      position: relative;
+      z-index: 1;
+      background: $tzhover;
+      border-color: $tzhover;
+      -webkit-transition: all 0.3s ease;
+      -moz-transition: all 0.3s ease;
+      -ms-transition: all 0.3s ease;
+      -o-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+      > .fa-box-open{
+        font-size: 80%;
+      }
+    }
+  }
 }
 
 #nav-menus-frame{
@@ -122,3 +156,7 @@
     }
   }
 }
+
+
+@import "shortcode/widget";
+@import "metabox/megamenu";

@@ -16,6 +16,7 @@ if ($enable_footer) {
     $find       = array('{year}', '{sitetitle}');
     $replace    = array($year, $site_title);
     $footertext = str_replace($find, $replace, $footer_copyright);
+
 }
 
 if(isset($footertext)){

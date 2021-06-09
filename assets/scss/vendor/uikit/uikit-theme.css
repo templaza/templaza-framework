@@ -1,0 +1,19 @@
+/* Error: Undefined variable.
+ *    ,
+ * 16 | $base-code-background:                           $global-muted-background !default;
+ *    |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^
+ *    '
+ *   theme\base.scss 16:50   @import
+ *   theme\_import.scss 3:9  @import
+ *   uikit-theme.scss 5:9    root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined variable.\a    \2577 \a 16 \2502  $base-code-background:                           $global-muted-background !default;\a    \2502                                                   ^^^^^^^^^^^^^^^^^^^^^^^^\a    \2575 \a   theme\\base.scss 16:50   @import\a   theme\\_import.scss 3:9  @import\a   uikit-theme.scss 5:9    root stylesheet";
+}

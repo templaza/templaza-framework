@@ -10,6 +10,11 @@ Templaza_API::set_section('templaza_style',
         'desc'   => __( 'These settings control the layout', $this -> text_domain ),
         'icon'   => 'el el-website',
         'fields'     => array(
+//            array(
+//                'id' => 'test-editor',
+//                'type' => 'editor',
+//                'title' => 'Test Editor',
+//            ),
             array(
                 'id'       => 'layout',
                 'type'     => 'tz_layout',

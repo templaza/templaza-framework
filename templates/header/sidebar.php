@@ -25,10 +25,11 @@ $navWrapperClass            = ['align-self-center', 'px-2', 'd-none', 'd-lg-bloc
 $header_menu                = isset($options['header-menu'])?$options['header-menu']:'header';
 $header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
 $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options['header-block-1-sidebar']:'';
+$header_menu_level          = isset($options['header-menu-level'])?(int) $options['header-menu-level']:0;
 
 ?>
 <!-- header starts -->
-<!--<header id="templaza-header" class="--><?php //echo implode(' ', $class); ?><!--">-->
+<header id="templaza-header" class="<?php echo implode(' ', $class); ?>">
     <div class="templaza-sidebar-content h-100">
         <div class="templaza-sidebar-collapsable">
             <i class="fa"></i>
@@ -57,7 +58,7 @@ $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options
                 'menu_class'      => implode(' ', $navClass),
                 'container_class' => implode(' ', $navWrapperClass),
                 'menu_id'         => '',
-                'depth'           => $options['header-menu-level'], // Level
+                'depth'           => $header_menu_level, // Level
             )); ?>
         </div>
 		<?php if ($block_1_type != 'blank'): ?>
@@ -80,5 +81,5 @@ $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options
             </div>
 		<?php endif; ?>
     </div>
-<!--</header>-->
+</header>
 <!-- header ends -->

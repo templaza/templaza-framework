@@ -1,0 +1,146 @@
+/* ========================================================================
+   Component: Transition
+ ========================================================================== */
+/* Toggle (Hover + Focus)
+ ========================================================================== */
+/*
+ * 1. Prevent tab highlighting on iOS.
+ */
+.uk-transition-toggle {
+  /* 1 */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*
+ * Remove outline for `tabindex`
+ */
+.uk-transition-toggle:focus {
+  outline: none;
+}
+
+/* Transitions
+ ========================================================================== */
+/*
+ * The toggle is triggered on touch devices by two methods:
+ * 1. Using `:focus` and tabindex
+ * 2. Using `:hover` and a `touchstart` event listener registered on the document
+ *    (Doesn't work on Surface touch devices)
+ *
+ * Note: Transitions don't work with `uk-postion-center-*` classes because they also use `transform`,
+ *       therefore it's recommended to use an extra `div` for the transition.
+ */
+.uk-transition-fade,
+[class*=uk-transition-scale],
+[class*=uk-transition-slide] {
+  transition: 0.3s ease-out;
+  transition-property: opacity, transform, filter;
+  opacity: 0;
+}
+
+/*
+ * Fade
+ */
+.uk-transition-toggle:hover .uk-transition-fade,
+.uk-transition-toggle:focus .uk-transition-fade,
+.uk-transition-active.uk-active .uk-transition-fade {
+  opacity: 1;
+}
+
+/*
+ * Scale
+ */
+.uk-transition-scale-up {
+  transform: scale(1, 1);
+}
+
+.uk-transition-scale-down {
+  transform: scale(1.03, 1.03);
+}
+
+/* Show */
+.uk-transition-toggle:hover .uk-transition-scale-up,
+.uk-transition-toggle:focus .uk-transition-scale-up,
+.uk-transition-active.uk-active .uk-transition-scale-up {
+  opacity: 1;
+  transform: scale(1.03, 1.03);
+}
+
+.uk-transition-toggle:hover .uk-transition-scale-down,
+.uk-transition-toggle:focus .uk-transition-scale-down,
+.uk-transition-active.uk-active .uk-transition-scale-down {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+
+/*
+ * Slide
+ */
+.uk-transition-slide-top {
+  transform: translateY(-100%);
+}
+
+.uk-transition-slide-bottom {
+  transform: translateY(100%);
+}
+
+.uk-transition-slide-left {
+  transform: translateX(-100%);
+}
+
+.uk-transition-slide-right {
+  transform: translateX(100%);
+}
+
+.uk-transition-slide-top-small {
+  transform: translateY(-10px);
+}
+
+.uk-transition-slide-bottom-small {
+  transform: translateY(10px);
+}
+
+.uk-transition-slide-left-small {
+  transform: translateX(-10px);
+}
+
+.uk-transition-slide-right-small {
+  transform: translateX(10px);
+}
+
+.uk-transition-slide-top-medium {
+  transform: translateY(-50px);
+}
+
+.uk-transition-slide-bottom-medium {
+  transform: translateY(50px);
+}
+
+.uk-transition-slide-left-medium {
+  transform: translateX(-50px);
+}
+
+.uk-transition-slide-right-medium {
+  transform: translateX(50px);
+}
+
+/* Show */
+.uk-transition-toggle:hover [class*=uk-transition-slide],
+.uk-transition-toggle:focus [class*=uk-transition-slide],
+.uk-transition-active.uk-active [class*=uk-transition-slide] {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Opacity modifier
+ ========================================================================== */
+.uk-transition-opaque {
+  opacity: 1;
+}
+
+/* Duration modifiers
+ ========================================================================== */
+.uk-transition-slow {
+  transition-duration: 0.7s;
+}
+
+/*# sourceMappingURL=transition.css.map */

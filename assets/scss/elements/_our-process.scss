@@ -1,0 +1,34 @@
+.templaza-our-process {
+  position: relative;
+  .templaza-counter-icon {
+    position: absolute;
+    left: 0;
+    top: 25px;
+    font-size: 120px;
+    z-index: -1;
+    i {
+      color: rgba(250, 250, 250, 0.1);
+    }
+  }
+  h4.templaza-number-process {
+    font-size: 30px;
+    color: $tztheme-global-color;
+    display: block;
+    margin-bottom: 10px;
+    margin-top:0;
+  }
+  h4.templaza-name-process {
+    color: $tztheme-heading-color;
+    margin-bottom: 15px;
+  }
+  p.templaza-description-process {
+    margin-bottom: 15px;
+  }
+  a.templaza_readmore {
+
+    @include transition($tztheme-transition-all);
+    &:hover{
+
+    }
+  }
+}

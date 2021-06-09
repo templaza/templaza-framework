@@ -14,14 +14,25 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
         protected $templates = array();
 
         function __construct( $field = array(), $value = '', $parent ) {
+
             $this -> text_domain    = Functions::get_my_text_domain();
+
+            $field['title'] = isset($field['title'])?$field['title']:'';
+
             $this->parent = $parent;
             $this->field  = $field;
             $this->value  = $value;
             $this -> elements  = array();
 //            $this -> templates = array();
 
-            $this -> load_element();
+
+            if(is_admin()) {
+                $this->load_element();
+            }
+
+//            $this -> hooks();
+
+//            var_dump("field_tz_layout line 27");
 
 //            $this -> field['core']  = array('section', 'row', 'column');
 
@@ -34,6 +45,10 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
 //                add_action( 'admin_init', array( $this, 'ajax_show_widget_form' ) );
 
         }
+
+//        public function hooks(){
+//            do_action('templaza-framework/fields/tz_layout/hooks');
+//        }
 
         protected function load_element(){
 
@@ -52,32 +67,52 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
                 $folders    = array_merge($folders, $theme_files);
             }
 
+//            var_dump($this -> parent -> args);
             foreach($folders as $folder){
                 $file_name  = basename($folder);
 
                 $show   = 'shortcode_'.$file_name;
+//                var_dump($file_name);
+//                var_dump((isset($this -> parent -> args[$show]) && !$this -> parent -> args[$show]));
+
                 if(isset($this -> parent -> args[$show]) && !$this -> parent -> args[$show]){
                     continue;
                 }
 
-                $class      = 'TemplazaFramework_ShortCode_'.$file_name;
+                $class      = 'TemplazaFramework_ShortCode_'.ucfirst($file_name);
                 if(!class_exists($class)){
-                    $file_path  = $folder.'/'.$file_name.'.php';
+                    $file_path  = $folder.$file_name.'.php';
 
                     if(file_exists($file_path)){
                         require_once $file_path;
                     }
                 }
                 if(class_exists($class)){
+//                    var_dump($theme_path.'/'.$file_name.'/config.php');
+                    if(file_exists($theme_path.'/'.$file_name.'/config.php')){
+                        require_once $theme_path.'/'.$file_name.'/config.php';
+                    }
+                    $element    = '';
                     $element    = new $class($this -> field, '', $this -> parent);
                     $this -> elements[$file_name]    = $element;
 
                     apply_filters('templaza-framework/field/tz_layout/element', $element, $this);
 
                     if(method_exists($element, 'enqueue')) {
+//                        if($file_name == 'section') {
+//                            var_dump($file_name);
+//                            var_dump($element);
+//                            var_dump(method_exists($element, 'enqueue'));
+//                        }
+
+//                        add_action('redux/options/'.$this -> parent -> args['opt_name'].'/tz_layout/register', function(){
+//
+//                        });
 
 //                        add_action('redux/page/'.$this->parent->args['opt_name'].'/enqueue', array($element, 'enqueue'));
-                        $element->enqueue();
+//                        $element->enqueue();
+                        add_action('admin_enqueue_scripts', array($element, 'enqueue'));
+//                        $element->enqueue();
                     }
                 }
             }
@@ -134,7 +169,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
             ?>
             <textarea class="hide" name="<?php echo $this -> field['name'];?>" id="<?php echo $this -> field['id'];
             ?>"><?php echo $this -> value; ?></textarea>
-            <div class="container-fluid">
+<!--            <div class="container-fluid">-->
                 <div class="field-tz_layout-content"></div>
 
                 <div>
@@ -147,7 +182,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
                     <a href="#" class="fl_add-element-not-empty-button"><i class="far fa-plus-square"></i> <?php echo __($text, $this -> text_domain); ?></a>
                 </div>
 
-            </div>
+<!--            </div>-->
         <?php
         }
 

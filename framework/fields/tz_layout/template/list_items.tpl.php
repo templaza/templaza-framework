@@ -22,7 +22,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
                             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 px-1 py-1">
                                 <div data-element="<?php echo $element['id']; ?>" class="fl-layout-element-button">
                                     <div class="media d-block d-sm-flex">
-                                        <i class="fl_element-icon mr-2 align-self-center <?php
+                                        <i class="fl_element-icon me-2 align-self-center <?php
                                         echo $icon; ?>" data-fl-element-icon="<?php echo $icon; ?>"></i>
                                         <div class="media-body">
                                             <h4 class="mt-0 mb-0" data-fl-element-name><?php echo $element['title']; ?></h4>

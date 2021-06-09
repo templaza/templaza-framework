@@ -1,17 +1,59 @@
 div.templaza-sidebar {
   .widget-area{
     .widget{
-      margin-bottom: 55px;
-      h3{
-        font-size:18px;
-        text-transform: uppercase;
-        border-top:2px solid $global-color;
-        padding-top:25px;
-        margin-bottom: 30px;
-        color:$heading-color;
-        font-family: inherit;
-        font-weight:700;
+      &.style1{
+        h3{
+          position:relative;
+          padding-top:0;
+          border-top:none;
+          padding-bottom:20px;
+          border-bottom:1px solid #ebebeb;
+          &.widget-title{
+            &:after {
+              content: '';
+              display: block;
+              width: 70px;
+              height: 1px;
+              background: #222222;
+              position: absolute;
+              bottom: -1px;
+              left: 0;
+              @include transition($tztheme-transition-ease-in-out);
+            }
+            span {
+              display: inline-block;
+              position: relative;
+            }
+          }
+          i{
+            padding-right:10px;
+          }
+        }
+        &:hover{
+          h3.widget-title{
+            &:after{
+              width:100%;
+              @include transition($tztheme-transition-ease-in-out);
+            }
+          }
+        }
+      }
+      &.style2{
+        h3{
+          border:none;
+          padding:15px 20px;
+          i{
+            font-size:0.9em;
+            padding-right:10px;
+          }
+        }
+      }
+      &.widget_search, &.widget_product_search{
+        padding:0;
       }
     }
+  }
+  .widget{
+    margin-bottom:$tztheme-widget-margin-bottom;
   }
 }

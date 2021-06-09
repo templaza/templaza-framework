@@ -67,9 +67,21 @@ if(!class_exists('Templaza_Custom_Redux_Typography')){
 
             do_action('templaza-framework/override/redux-field/typography/hooks', $this);
         }
-        public function custom_before_render_field($field, $value){
+        public function custom_before_render_field(&$field, &$value){
             if(isset($field['allow_responsive']) && $field['allow_responsive']) {
                 $this -> value  = $value;
+
+                if($value){
+                    if(isset($value['font-size'])) {
+                        $value['font-size'] = '';
+                    }
+                    if(isset($value['line-height'])) {
+                        $value['line-height'] = '';
+                    }
+                    if(isset($value['letter-spacing'])) {
+                        $value['letter-spacing'] = '';
+                    }
+                }
             }
         }
 
@@ -88,6 +100,8 @@ if(!class_exists('Templaza_Custom_Redux_Typography')){
 
         public function custom_render_field($_render, $field){
             if(isset($field['allow_responsive']) && $field['allow_responsive']) {
+//                var_dump($this -> value);
+//                die();
                 $this -> _init_field($field);
 
                 $file   = TEMPLAZA_FRAMEWORK_FIELD_PATH.'/typography/tmpl/typography.php';
@@ -165,7 +179,8 @@ if(!class_exists('Templaza_Custom_Redux_Typography')){
             $this->value = wp_parse_args( $this -> value, $defaults );
 
             if ( empty( $this -> field['units'] )
-                || (!empty($this -> field['units']) && !is_array($this -> field['units']) && ! in_array( $this -> field['units'], $this -> units, true )) ) {
+                || (!empty($this -> field['units']) && !is_array($this -> field['units'])
+                    && ! in_array( $this -> field['units'], $this -> units, true )) ) {
                 $this -> field['units'] = 'px';
             }
 

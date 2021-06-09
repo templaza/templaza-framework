@@ -17,10 +17,14 @@
         if(typeof setting.params.layout_type !== typeof undefined){
             switch (setting.params.layout_type) {
                 default:
-
+                    if(setting.elements.length){
+                        $.each(setting.elements, function(index, value){
+                            if(typeof value.params.tz_no_gutters !== "undefined") {
+                                delete value.params.tz_no_gutters;
+                            }
+                        });
+                    }
                     break;
-                case 'no-container':
-                case 'custom-container':
                 case "container-with-no-gutters":
                 case "container-fluid-with-no-gutters":
                     if(setting.elements.length){

@@ -25,7 +25,6 @@
     }
     .testimonial_content{
       border-top:1px solid #eee;
-      font-size:18px;
       margin-top: 20px;
       padding-top:20px;
     }
@@ -40,12 +39,44 @@
       background:#ccc;
       cursor: pointer;
       display:inline-block;
-      @include transition($transition-all);
+      @include transition($tztheme-transition-all);
       @include border-radius(50%);
       margin: 0  10px;
       &:hover, &.active{
-        background:$global-color;
-        @include transition($transition-all);
+        background:$tztheme-global-color;
+        @include transition($tztheme-transition-all);
+      }
+    }
+  }
+  .testimonial-star{
+    &:before{
+      font-family: "Font Awesome 5 Free";
+      color:#ffb802;
+      font-weight:700;
+    }
+    &.star-5{
+      &:before{
+        content: '\f005 \f005 \f005 \f005 \f005 ';
+      }
+    }
+    &.star-4{
+      &:before{
+        content: '\f005 \f005 \f005 \f005 ';
+      }
+    }
+    &.star-3{
+      &:before{
+        content: '\f005 \f005 \f005 ';
+      }
+    }
+    &.star-2{
+      &:before{
+        content: '\f005 \f005 ';
+      }
+    }
+    &.star-1{
+      &:before{
+        content: '\f005 ';
       }
     }
   }

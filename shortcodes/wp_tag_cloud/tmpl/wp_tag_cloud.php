@@ -8,7 +8,12 @@ use TemPlazaFramework\Templates;
 $options    = Functions::get_theme_options();
 
 $type = 'WP_Widget_Tag_Cloud';
-$args = array();
+$args = array(
+    'before_widget' => '<div class="widget widget-area %s">',
+    'after_widget'  => '</div>',
+    'before_title'  => '<h3 class="widgettitle">',
+    'after_title'   => '</h3>',
+);
 
 global $wp_widget_factory;
 // to avoid unwanted warnings let's check before using widget

@@ -1,0 +1,80 @@
+.templaza-thumbnail-effect{
+  overflow: hidden;
+}
+.templaza-zoomin{
+  overflow: hidden;
+  img{
+    @include transition(transform .5s, visibility .5s ease-in);
+  }
+  &:hover{
+    img{
+      @include transform(scale(1.3));
+    }
+  }
+}
+
+/* Point-zoom Container */
+.templaza-pointzoom{
+  img {
+    transform-origin: 65% 75%;
+    @include transition(transform 1s, filter .5s ease-out);
+  }
+  &:hover{
+    img {
+      @include transform(scale(2));
+    }
+  }
+}
+/* Zoom-n-rotate Container */
+.templaza-zoomrorate{
+  img {
+    @include transition(transform 0.6s ease-in-out);
+  }
+  &:hover{
+    img {
+      @include transform(scale(1.3) rotate(10deg));
+    }
+  }
+}
+/* Zoom in slow-motion Container */
+.templaza-zoomslow-motion{
+  img {
+    transform-origin: 50% 65%;
+    filter: brightness(120%);
+    @include transition(transform 3s, filter 1.2s ease-in-out);
+  }
+  &:hover{
+    img {
+      filter: brightness(100%);
+      @include transform(scale(1.5));
+    }
+  }
+}
+/* Brighten and Zoom-in Container */
+.templaza-brighten-zoomin{
+  img {
+    transform-origin: center center;
+    filter: brightness(70%);
+    @include transition(transform 1s, filter 1.5s ease-in-out);
+  }
+  &:hover{
+    img {
+      @include transform(scale(1.2));
+      filter: brightness(100%);
+    }
+  }
+}
+/* Horizontal Zoom-pan Container */
+.templaza-blur-zoom{
+  img {
+    transition: transform 1s, filter 1s ease;
+    filter: blur(0.5px);
+    transform: scale(1.1);
+  }
+  &:hover{
+    img {
+      filter: blur(0);
+      transform: scale(1);
+    }
+  }
+}

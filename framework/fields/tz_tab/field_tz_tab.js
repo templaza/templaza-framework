@@ -29,7 +29,8 @@
                 if(el.find("[data-fl-tz_layout-tab]").length) {
                     el.find("[data-fl-tz_layout-tab]").tabs({
                         "activate": function (event, ui) {
-                            var fields = ui.newPanel.find(".redux-field-container");
+                            var tab = $(this),
+                                fields = ui.newPanel.find(".redux-field-container");
                             if (fields.length) {
                                 fields.each(function () {
                                     var field = $(this),
@@ -37,7 +38,27 @@
                                         tz_redux = redux.field_objects;
 
                                     if (typeof tz_redux[field_type] !== typeof undefined) {
-                                        tz_redux[field_type].init(field[0]);
+                                        var tz_redux_field = tz_redux[field_type];
+
+                                        // Before init field in setting edit
+                                        // Trigger of field (setting_edit_before_init_field)
+                                        if(field.length){
+                                            if(typeof tz_redux_field.templaza_methods !== typeof undefined
+                                                && typeof tz_redux_field.templaza_methods.setting_edit_before_init_field !== typeof undefined){
+                                                tz_redux_field.templaza_methods.setting_edit_before_init_field(field, tab);
+                                            }
+                                        }
+
+                                        tz_redux_field.init(field);
+
+                                        // After init field in setting edit
+                                        // Trigger of field (setting_edit_after_init_field)
+                                        if(field.length){
+                                            if(typeof tz_redux_field.templaza_methods !== typeof undefined
+                                                && typeof tz_redux_field.templaza_methods.setting_edit_after_init_field !== typeof undefined){
+                                                tz_redux_field.templaza_methods.setting_edit_after_init_field(field, tab);
+                                            }
+                                        }
                                     }
                                 });
                             }

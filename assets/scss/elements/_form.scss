@@ -13,18 +13,17 @@ form, form.wpcf7-form{
   margin-top: 20px;
   input[type="text"],
   input[type="email"]{
-    height:50px;
-    line-height: 50px;
+    height:$tztheme-input-height-large;
+    line-height: $tztheme-input-lineheight-large;
     padding:10px 15px;
     background:#fff;
-    border:2px solid #dedede;
+    border:1px solid #dedede;
     width:100%;
-    @include border-radius(3px);
     margin-bottom: 25px;
-    @include transition($transition-all);
+    @include transition($tztheme-transition-all);
     &:focus{
-      border-color:$global-color;
-      @include transition($transition-all);
+      border-color:$tztheme-global-color;
+      @include transition($tztheme-transition-all);
     }
   }
   textarea{
@@ -36,7 +35,7 @@ form, form.wpcf7-form{
   }
   label{
     font-size:18px;
-    color:$heading-color;
+    color:$tztheme-heading-color;
     margin: 0;
     display:block;
     span{
@@ -49,5 +48,8 @@ form, form.wpcf7-form{
   }
   input.wpcf7-submit{
   margin-top: 0;
+  }
+  input[type="submit"]{
+    cursor: pointer;
   }
 }

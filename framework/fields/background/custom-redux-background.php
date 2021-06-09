@@ -60,15 +60,19 @@ if(!class_exists('Templaza_Custom_Redux_Background')){
 
         public function custom_enqueue_field($filter_path, $field){
             if(isset($field['color_rgba']) && $field['color_rgba']) {
-                $dep_array = array('redux-spectrum-js', 'redux-field-background-js');
-                wp_enqueue_script('custom-redux-background-js', Functions::get_my_frame_url()
-                    . "/fields/background/custom-redux-background.js", $dep_array, time(), true);
-
-                wp_enqueue_style('custom-redux-background-css', Functions::get_my_frame_url()
-                    . '/fields/background/custom-redux-background.css',
-                    array(), time(), 'all');
+                add_action('admin_enqueue_scripts', array($this, 'custom_enqueues'));
             }
             return $filter_path;
+        }
+
+        public function custom_enqueues(){
+            $dep_array = array('redux-spectrum-js', 'redux-field-background-js');
+            wp_enqueue_script('custom-redux-background-js', Functions::get_my_frame_url()
+                . "/fields/background/custom-redux-background.js", $dep_array, time(), true);
+
+            wp_enqueue_style('custom-redux-background-css', Functions::get_my_frame_url()
+                . '/fields/background/custom-redux-background.css',
+                array(), time(), 'all');
         }
 
         public function custom_render_field($_render, $field){

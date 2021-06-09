@@ -1,0 +1,20 @@
+.redux-container-spinner .spinner-wrpr .spinner-input{
+  border-color: #ced4da !important;
+  background-color: lighten($tz-secondary-color, 42%) !important;
+}
+.redux-container-spinner .ui-widget .ui-spinner-button{
+  text-shadow: none;
+  background: #fff !important;
+  .ui-icon
+  //,
+  //.redux-container-switch .cb-enable.selected,
+  //.redux-field-container .ui-buttonset .ui-state-active
+  {
+    background-image: none !important;
+    background-color: transparent !important;
+    border-color: $tz-border-color !important;
+    //box-shadow: none !important;
+    @include box-shadow(none !important);
+    color: $tz-global-text-color;
+  }
+}

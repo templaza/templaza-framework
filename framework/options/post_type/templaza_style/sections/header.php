@@ -4,12 +4,6 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 
 use TemPlazaFramework\Functions;
 
-//$this -> sections[] = array(
-//    'title'  => __( 'Header', $this -> text_domain ),
-//    'id'     => 'headers',
-////    'desc'   => __( 'Here you can set your preferences for the template header(Logo, Menu and Menu Elements).', $this -> text_domain ),
-//    'icon'   => 'el el-tasks',
-//);
 Templaza_API::set_section('templaza_style',
     array(
         'title'  => __( 'Header', $this -> text_domain ),
@@ -25,18 +19,6 @@ Templaza_API::set_section('templaza_style',
                 'subtitle' => __( 'Enable or disable the Header Element.', $this -> text_domain ),
                 'default'  => true,
             ),
-    //        array(
-    //            'id'       => 'header-layout',
-    //            'type'     => 'button_set',
-    //            'title'    => __('Header Layout', $this -> text_domain),
-    //            'subtitle' => __('Select the header layout.', $this -> text_domain),
-    //            'options'  => array(
-    //                'wide' => __('Wide', $this -> text_domain),
-    //                'boxed'=> __('Boxed', $this -> text_domain),
-    //            ),
-    //            'default'  => 'wide',
-    //            'required' => array( 'enable-header', '=', '1' ),
-    //        ),
             array(
                 'id'    => 'header-mode',
                 'type'  => 'image_select',
@@ -151,6 +133,18 @@ Templaza_API::set_section('templaza_style',
                     array('enable-header', '=', '1'),
                     array('header-mode', '=', 'sidebar')
                 ),
+            ),
+            array(
+                'id'       => 'header-odd-menu-items',
+                'type'     => 'button_set',
+                'title'    => __('Odd number menu item position', $this -> text_domain),
+                'subtitle' => __('Select where you want to place the extra menu item in case of Odd number of menu items.', $this -> text_domain),
+                'options'  => array(
+                    'left'  => esc_html__('Left', $this -> text_domain),
+                    'right' => esc_html__('Right', $this -> text_domain),
+                ),
+                'default'  => 'left',
+                'required' => array('header-stacked-menu-mode', '=', 'seperated'),
             ),
             array(
                 'id'       => 'header-block-1-type',
@@ -590,16 +584,15 @@ Templaza_API::set_section('templaza_style',
                 'title'    => __( 'Animation', $this -> text_domain ),
                 //Must provide key => value pairs for select options
                 'options'  => array(
-                    'none'  => __('None', $this -> text_domain),
-                    'fade'  => __('Fade', $this -> text_domain),
-                    'slide' => __('Slide', $this -> text_domain),
+                    'fade'  => __('On', $this -> text_domain),
+                    'none'  => __('Off', $this -> text_domain),
+//                    'slide' => __('Slide', $this -> text_domain),
                 ),
                 'default'  => 'fade',
             ),
             array(
                 'id'       => 'dropdown-animation-effect',
                 'type'     => 'select',
-                'required' => array( 'header-mode', '!=', 'sidebar'),
                 'title'    => __( 'Effect', $this -> text_domain ),
                 //Must provide key => value pairs for select options
                 'options'  => array(
@@ -611,6 +604,10 @@ Templaza_API::set_section('templaza_style',
                     'rotate-y'   => __('Rotate Y', $this -> text_domain),
                 ),
                 'default'  => 'fade-down',
+                'required' => array(
+                    array('header-mode', '!=', 'sidebar'),
+                    array('dropdown-animation-type', '!=', 'none')
+                ),
             ),
     //        array(
     //            'id'       => 'dropdown-animation-speed-1',
@@ -698,17 +695,32 @@ Templaza_API::set_section('templaza_style',
             ),
             array(
                 'id'       => 'dropdown-trigger',
-                'type'     => 'switch',
+                'type'     => 'button_set',
                 'required' => array(
                     array('enable-header', '=', '1' ),
                     array('header-mode', '!=', 'sidebar' ),
                 ),
                 'title'    => __( 'Dropdown Trigger', $this -> text_domain ),
                 'subtitle' => __( 'Choose the action for the menu items to view the megamenu', $this -> text_domain ),
-                'default'  => true,
-                'on'       => __('Hover', $this -> text_domain),
-                'off'      => __('Click', $this -> text_domain),
+                'options' => array(
+                    'hover' => __('Hover', $this -> text_domain),
+                    'click' => __('Click', $this -> text_domain),
+                ),
+                'default'  => 'hover',
             ),
+//            array(
+//                'id'       => 'dropdown-trigger',
+//                'type'     => 'switch',
+//                'required' => array(
+//                    array('enable-header', '=', '1' ),
+//                    array('header-mode', '!=', 'sidebar' ),
+//                ),
+//                'title'    => __( 'Dropdown Trigger', $this -> text_domain ),
+//                'subtitle' => __( 'Choose the action for the menu items to view the megamenu', $this -> text_domain ),
+//                'default'  => true,
+//                'on'       => __('Hover', $this -> text_domain),
+//                'off'      => __('Click', $this -> text_domain),
+//            ),
             array(
                 'id'     => 'section-end',
                 'type'   => 'section',

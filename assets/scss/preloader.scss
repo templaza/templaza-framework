@@ -1,0 +1,32 @@
+@import "spinkit/variables";
+@import "spinkit/animation";
+
+// Preloader
+$tztheme-preloader-bg-color:                  var(--tztheme-preloader-bgcolor, 'transparent') !default;
+$tztheme-preloader-image:                     var(--tztheme-preloader-image, '') !default;
+$tztheme-preloader-bg-size:                   var(--tztheme-preloader-bg-size, auto) !default;
+$tztheme-preloader-bg-repeat:                 var(--tztheme-preloader-bg-repeat, repeat) !default;
+$tztheme-preloader-bg-position:               var(--tztheme-preloader-bg-position, '0% 0%') !default;
+$tztheme-preloader-bg-attachment:             var(--tztheme-preloader-bg-attachment, scroll) !default;
+
+#templaza-preloader{
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  z-index:99999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: $tztheme-preloader-bg-color;
+  .preloader-image{
+    width: 100%;
+    height: 100%;
+    background-image: $tztheme-preloader-image;
+    background-repeat: $tztheme-preloader-bg-repeat;
+    background-size: $tztheme-preloader-bg-size;
+    background-position: $tztheme-preloader-bg-position;
+    background-attachment: $tztheme-preloader-bg-attachment;
+  }
+}

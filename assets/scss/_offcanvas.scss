@@ -18,6 +18,9 @@ $offcanvas-btn: 50px !default;
 }
 
 .burger-menu-button {
+	text-align: right;
+	line-height: 0;
+	margin: 0;
 	.button {
 		padding: 0;
 		cursor: pointer;
@@ -186,6 +189,7 @@ $offcanvas-btn: 50px !default;
 		left: 0;
 		width: 100%;
 		z-index: 9;
+		height:$offcanvas-btn;
 	}
 	.templaza-offcanvas-inner {
 		position: relative;
@@ -218,7 +222,7 @@ $offcanvas-btn: 50px !default;
 		opacity: 1;
 	}
 
-	#wpadminbar + .templaza-container &{
+	.admin-bar .templaza-container &{
 		top: 32px;
 	}
 }
