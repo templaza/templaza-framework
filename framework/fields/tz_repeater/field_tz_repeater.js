@@ -121,24 +121,45 @@
                 // Field onchange trigger
                 var field_on_change = function(field){
                     field.off("change").on("change", function(){
-                        var input = $(this).find("input, textarea, select"),
-                            parent = input.closest(".field-tz_repeater-accordion-group");
-
-                        var value = get_value(),
+                        /* 06-10-2021 */
+                        var _field_value = field.serializeForm(),
+                            value = get_value(),
                             index = parent.index(),
-                            input_id = input.attr("id");
-                        if(input.closest(".redux-field-container").attr("data-type") === "select"){
-                            input_id    = input_id.replace(/-select$/gi, "");
+                            field_id = field.attr("data-id");
+
+                        if(Object.keys(_field_value).length){
+                            _field_value    = _field_value[Object.keys(_field_value)[0]];
+                            _field_value    = _field_value[Object.keys(_field_value)[0]];
                         }
 
                         if(value && typeof value[index] !== typeof undefined){
-                            value[index][input_id] = input.val();
+                            value[index][field_id] = _field_value;
                             set_values_to_field(value);
                         }else{
                             var setting = {};
-                            setting[input_id] = input.val();
+                            setting[field_id] = _field_value;
                             insert_value(setting);
                         }
+                        /* End 06-10-2021 */
+
+                        // var input = $(this).find("input, textarea, select"),
+                        //     parent = input.closest(".field-tz_repeater-accordion-group");
+                        //
+                        // var value = get_value(),
+                        //     index = parent.index(),
+                        //     input_id = input.attr("id");
+                        // if(input.closest(".redux-field-container").attr("data-type") === "select"){
+                        //     input_id    = input_id.replace(/-select$/gi, "");
+                        // }
+                        //
+                        // if(value && typeof value[index] !== typeof undefined){
+                        //     value[index][input_id] = input.val();
+                        //     set_values_to_field(value);
+                        // }else{
+                        //     var setting = {};
+                        //     setting[input_id] = input.val();
+                        //     insert_value(setting);
+                        // }
                     });
                 };
 
@@ -173,36 +194,24 @@
                         var field_list = wp.template("tzfrm-field-tz_repeater-template__field-"+el.attr("data-id")),
                             field_list_obj  = $(field_list({})),
                             fields = field_list_obj.find(".redux-field-container");
-                            // fields = field_list_obj.find(".redux-field-container").find("[name]");
+
                         if(fields.length){
                             fields.each(function () {
                                 var field = $(this),
                                     f_name  = field.attr("data-id");
-                                if(typeof value[f_name] !== typeof undefined){
-                                    field.find("[name]").val(value[f_name]);
+                                if(typeof value[f_name] !== "undefined"){
+                                    if(typeof value[f_name] === "object"){
+                                        $.each(value[f_name], function(_sub_name, _sub_value){
+                                            var _sub_field  = field.find("[name$='["+f_name+"]["+_sub_name+"]'");
+                                            if(_sub_field.length){
+                                                _sub_field.val(_sub_value);
+                                            }
+                                        });
+                                    }else {
+                                        field.find("[name]").val(value[f_name]);
+                                    }
                                 }
                                 field_on_change(field);
-
-                                // field.off("change").on("change", function(){
-                                //     var input = $(this).find("input, textarea, select"),
-                                //         parent = input.closest(".field-tz_repeater-accordion-group");
-                                //
-                                //     var value = get_value(),
-                                //         index = parent.index(),
-                                //         input_id = input.attr("id");
-                                //     if(input.closest(".redux-field-container").attr("data-type") === "select"){
-                                //         input_id    = input_id.replace(/-select$/gi, "");
-                                //     }
-                                //
-                                //     if(value && typeof value[index] !== typeof undefined){
-                                //         value[index][input_id] = input.val();
-                                //         set_values_to_field(value);
-                                //     }else{
-                                //         var setting = {};
-                                //         setting[input_id] = input.val();
-                                //         insert_value(setting);
-                                //     }
-                                // });
                             });
                             content.append(field_list_obj);
                         }
@@ -251,29 +260,6 @@
                             }
 
                             field_on_change(field);
-
-                            // field.off("change").on("change", function(){
-                            //     var input = $(this).find("input, textarea, select"),
-                            //         main_input = el.find(el.attr("data-id")),
-                            //         settings = main_input.val(),
-                            //         parent = input.closest(".field-tz_repeater-accordion-group");
-                            //
-                            //     var value = get_value(),
-                            //         index = parent.index(),
-                            //         input_id = input.attr("id");
-                            //     if(input.closest(".redux-field-container").attr("data-type") === "select"){
-                            //         input_id    = input_id.replace(/-select$/gi, "");
-                            //     }
-                            //
-                            //     if(value && typeof value[index] !== typeof undefined){
-                            //         value[index][input_id] = input.val();
-                            //         set_values_to_field(value);
-                            //     }else{
-                            //         var setting = {};
-                            //         setting[input_id] = input.val();
-                            //         insert_value(setting);
-                            //     }
-                            // });
                         });
                     }
                     if(typeof content.data("ui-accordion") !== typeof undefined){
