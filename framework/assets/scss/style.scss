@@ -141,6 +141,28 @@ $grid-gutter-width:           2.5rem !default;
     display: none;
   }
 
+  h1.wp-heading-inline {
+    font-size: 2em;
+  }
+
+  ul.subsubsub {
+    margin: 0;
+    padding: 0;
+    a:not([class]) {
+      color: $tz-wordpress-default-color;
+      text-decoration: none;
+    }
+  }
+  .search-box, .wp-header-end {
+    margin: 0;
+  }
+  .posts {
+    a {
+      color: $tz-wordpress-default-color;
+      text-decoration: none;
+    }
+  }
+
   @import "notices.scss";
   @import "button.scss";
   @import "form.scss";

@@ -5876,6 +5876,19 @@
       color: #ffb900; }
   .templaza-framework__body .redux-container .ui-buttonset .ui-icon {
     display: none; }
+  .templaza-framework__body h1.wp-heading-inline {
+    font-size: 2em; }
+  .templaza-framework__body ul.subsubsub {
+    margin: 0;
+    padding: 0; }
+    .templaza-framework__body ul.subsubsub a:not([class]) {
+      color: #2271b1;
+      text-decoration: none; }
+  .templaza-framework__body .search-box, .templaza-framework__body .wp-header-end {
+    margin: 0; }
+  .templaza-framework__body .posts a {
+    color: #2271b1;
+    text-decoration: none; }
   .templaza-framework__body.tzfrm-postype .notice, .templaza-framework__body.tzfrm-postype div.error, .templaza-framework__body.tzfrm-postype div.updated {
     border-color: #eeeeee;
     -webkit-box-shadow: none;
