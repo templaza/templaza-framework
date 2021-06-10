@@ -5,6 +5,7 @@ $grid-gutter-width:           2.5rem !default;
   *::after {
     box-sizing: border-box;
   }
+  @import "../../../assets/scss/vendor/bootstrap_grid/mixins";
   @import "../../../assets/scss/vendor/bootstrap_grid/bootstrap-grid";
   @import "../../../assets/scss/vendor/bootstrap_grid/bootstrap-utilities";
 

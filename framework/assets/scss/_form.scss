@@ -31,12 +31,17 @@
       @include box-shadow(none);
     }
   }
-  #titlediv #title{
-    font-size: 1.5em;
-    padding: 20px 15px;
-    border-color: transparent;
-    @include border-radius(0);
-    @include box-shadow(0 3px 7px 0 rgba(183, 192, 206, 0.2));
+  #titlediv {
+    #title-prompt-text {
+      padding: 18px 15px;
+    }
+    #title{
+      font-size: 1.5em;
+      padding: 25px 15px 27px;
+      border-color: transparent;
+      @include border-radius(5px);
+      @include box-shadow(0 3px 7px 0 rgba(183, 192, 206, 0.2));
+    }
   }
   .postbox{
     border: none;

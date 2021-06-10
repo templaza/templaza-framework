@@ -1,24 +1,35 @@
 
-$tz-global-color: #727cf5;
-$tz-global-text-color: #686868;
-$tz-body-color: #f0f0f1;
+$tz-global-color: #727cf5 !default;
+$tz-global-text-color: #686868 !default;
+$tz-body-color: #f0f0f1 !default;
+$tz-heading-color: #333333 !default;
+$tz-menu-color: $tz-heading-color !default;
+$tz-muted-color: #666666 !default;
+$tz-primary-background-color: #727cf5 !default;
+$tz-primary-color: #ffffff !default;
+$tz-button-background-color: transparent !default;
+$tz-button-border-color: #e5e5e5 !default;
+$tz-button-color: #222 !default;
 
-$tzline: #000;
-$tzbackground: #fff;
-$tzhover: $tz-global-color;
-$tzdelete:#ff3366;
-$tzspin: #007bff;
+$tzline: #000 !default;
+$tzbackground: transparent !default;
+$tz-background-container: #ffffff !default;
+$tzhover: $tz-global-color !default;
+$tzdelete:#ff3366 !default;
+$tzspin: #007bff !default;
 
-$tz-danger-color: #f0506e;
-$tz-success-color: #32d296;
-$tz-secondary-color: #7987a1;
-$tz-body-background: #f9fafb;
-$tz-border-color: #ced4da;
-$tz-border-color-focus: #80bdff;
-$tz-white-border-color: #e8ebf1;
-$tz-process-background-color: #e9ecef;
+$tz-danger-color: #f0506e !default;
+$tz-success-color: #32d296 !default;
+$tz-secondary-color: #7987a1 !default;
+$tz-body-background: #f9fafb !default;
+$tz-border-color: #eeeeee !default;
+$tz-border-color-focus: #80bdff !default;
+$tz-white-border-color: #e8ebf1 !default;
+$tz-process-background-color: #e9ecef !default;
 
-$btn-secondory: #7987a1;
+$tz-background-menu-hover: #e0e0e0 !default;
+
+$btn-secondory: #7987a1 !default;
 
 $all: all 0.3s ease-in-out;
 $circle: all 0.4s ease-in-out;

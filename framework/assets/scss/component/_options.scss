@@ -9,8 +9,10 @@
    ========================================================================== */
   .redux-sidebar{
     background:$tzbackground;
-    @include box-shadow($shadow_all);
     width:280px;
+    ul.redux-group-menu {
+      padding: 0 !important;
+    }
     .redux-group-tab-link-a{
       span.group_title{
         padding-left:25px;
@@ -28,11 +30,12 @@
       background:$tzbackground;
       li{
         a{
-          color:#000 !important;
-          padding: 10px 15px 10px 25px;
+          color: $tz-menu-color !important;
+          padding: 10px 15px 10px 15px;
+          border-radius: 5px;
+          margin: 5px 0;
           &:hover{
-            background: none !important;
-            color:$tzhover !important;
+            background: $tz-background-menu-hover !important;
           }
           .extraIconSubsections{
             >i{
@@ -40,8 +43,15 @@
             }
           }
         }
+        &.activeChild.hasSubSections {
+          a {
+            background: $tz-background-menu-hover !important;
+            color: $tz-menu-color !important;
+          }
+        }
         .subsection{
           background: $tzbackground;
+          padding-left: 20px;
           .redux-group-tab-link-li{
             &.active{
               a{
@@ -65,9 +75,9 @@
         &.active{
           a{
             width: auto;
-            color:$tzhover !important;
-            font-weight: 400 !important;
-            background:$tzbackground !important;
+            background: $tz-background-menu-hover !important;
+            text-shadow: none !important;
+            color:$tz-menu-color !important;
           }
         }
         &.active,
@@ -87,15 +97,11 @@
         &.activeChild.hasSubSections,
         &.active.hasSubSections{
           > a{
-            background: $tzbackground !important;
-            text-shadow: none !important;
-            color:$tzhover !important;
-            &:hover{
-              background:$tzbackground;
-              color:$tzhover;
+            &:after {
+              display: none;
             }
             i{
-              color:$tzhover;
+              color:$tz-menu-color;
             }
           }
           ul{
@@ -103,41 +109,22 @@
               a{
                 background: $tzbackground !important;
                 text-shadow: none !important;
-                padding: 5px 5px 5px 45px;
+                padding: 10px 15px 10px 15px;
                 font-size:12px;
                 @include transition($all);
-                &:before{
-                  content: '';
-                  width: 4px;
-                  height: 4px;
-                  border-radius: 50%;
-                  background: transparent;
-                  border: 1px solid #a9b4ca;
-                  position: absolute;
-                  left: 27px;
-                  top: 12px;
-                  @include transition($circle);
-                }
                 &:hover{
-                  color:$tzhover !important;
-                  padding-left: 48px;
+                  color: $tz-menu-color !important;
+                  background-color: $tz-background-menu-hover !important;
                   text-shadow: none !important;
-                  &:before{
-                    background:$tzhover;
-                    border: 1px solid $tzhover;
-                    @include transition($circle);
-                  }
                 }
               }
               &.active{
                 a{
-                  color:$tzhover !important;
-                  padding-left: 48px;
+                  color: $tz-menu-color !important;
+                  background-color: $tz-background-menu-hover !important;
                   text-shadow: none !important;
-                  &:before{
-                    background:$tzhover;
-                    border: 1px solid $tzhover;
-                    @include transition($circle);
+                  &:after {
+                    display: none;
                   }
                 }
               }
@@ -151,21 +138,21 @@
   /* Header
    ========================================================================== */
   #redux-header {
-    background:$tzbackground;
-    margin-bottom: 25px;
-    @include box-shadow($shadow_all);
-    border:none;
+    background: $tzbackground !important;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    border: none;
+    padding: 0;
     .rAds{
       display:none !important;
     }
     .display_header {
-      margin: 0 10px;
+      margin: 0;
       h2 {
-        text-transform: uppercase;
-        color:$tzhover;
+        color:$tz-heading-color;
       }
       span{
-        color:$tzhover;
+        color:$tz-muted-color !important;
       }
     }
   }
@@ -185,10 +172,27 @@
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+    .form-table tr {
+      border-color: $tz-border-color;
+    }
+    ul.ui-tabs-nav {
+      padding: 0;
+    }
+    .redux-typography-container {
+      .select_wrapper {
+        margin-bottom: 15px;
+      }
+      .input_wrapper {
+        width: 48%;
+        max-width: 48%;
+        margin: 0 10px 15px 0;
+      }
+    }
   }
   .redux-group-tab{
-    background:$tzbackground;
-    padding:5px 25px 30px 25px;
+    background-color: $tz-background-container;
+    padding:30px 25px;
+    border-radius: 5px;
     @include box-shadow($shadow_all);
   }
   .redux_spinner{
@@ -262,10 +266,13 @@
     @include box-shadow($shadow_all);
     margin: 0 0 25px;
     #info_bar{
-      background:$tzbackground;
+      background-color:$tz-background-container;
       border:none;
-      height:32px;
+      border-radius: 5px;
       padding:25px;
+      display: flex;
+      height: auto;
+      justify-content: flex-end;
       .expand_options{
         margin-left: 0;
       }
@@ -275,15 +282,21 @@
   /* Bar
    ========================================================================== */
   #redux-footer-sticky{
-    margin:0;
+    margin: 10px 0 0 0;
     @include box-shadow($shadow_all);
     #redux-footer{
-      background: $tzbackground !important;
+      background: $tz-background-container !important;
       border:none;
       padding:25px;
+      border-radius: 5px;
       #redux-share a{
         color:$tzhover;
       }
     }
   }
+}
+.select2-results__options {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }

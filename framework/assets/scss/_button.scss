@@ -1,22 +1,22 @@
 .redux-container,
 .tzfrm-ui-dialog,
 &.tzfrm-postype{
-  .button{
+  .button, .button-secondary{
     margin:0;
     line-height: 1;
     text-shadow: none;
     padding:.5rem 1rem;
-    background: #fff;
-    color: $tz-global-color;
-    border-color: $tz-global-color;
+    background: $tz-button-background-color;
+    color: $tz-button-color;
+    border-color: $tz-button-border-color;
     //-webkit-box-shadow: none;
     //-moz-box-shadow: none;
     //box-shadow: none;
     @include box-shadow(none);
     @include transition($butt);
     &:hover{
-      color: $tzbackground;
-      background: $tz-global-color;
+      color: $tz-button-color;
+      border-color: darken($tz-button-border-color,10%);
     }
     &:focus{
       outline: none;
@@ -26,13 +26,14 @@
     }
   }
   .button-primary{
-    color: $tzbackground;
-    background: $tz-global-color;
-    border-color: $tz-global-color;
+    color: $tz-primary-color;
+    background: $tz-primary-background-color;
+    border-color: $tz-primary-background-color;
     @include transition($butt);
     &:hover{
-      background: lighten($tz-global-color, 8%);
-      border-color: lighten($tz-global-color, 8%);
+      color: $tz-primary-color;
+      background: lighten($tz-primary-background-color, 8%);
+      border-color: lighten($tz-primary-background-color, 8%);
     }
   }
   .wrap .page-title-action{
