@@ -77,17 +77,26 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
         }
 
-
         public function hooks()
         {
             parent::hooks();
 
+            // Remove all admin notices
+            add_action('in_admin_header', array($this, 'remove_admin_notices'), 1000);
+
             add_action('templaza-framework/post_type/registered', array($this, 'post_type_registered'));
         }
+
+        public function remove_admin_notices(){
+            if(is_admin() && $this ->my_post_type_exists()) {
+                remove_all_actions('admin_notices');
+                remove_all_actions('all_admin_notices');
+            }
+        }
+
         public function post_type_registered(){
 
             add_action( 'templaza-framework/framework/hooks', array( $this, 'register_sidebar' ) );
-//            add_action( 'widgets_init', array( $this, 'register_sidebar' ) );
 
             $this -> init_main_options();
 
