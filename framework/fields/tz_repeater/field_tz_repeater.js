@@ -121,8 +121,8 @@
                 // Field onchange trigger
                 var field_on_change = function(field){
                     field.off("change").on("change", function(){
-                        /* 06-10-2021 */
                         var _field_value = field.serializeForm(),
+                            parent = field.closest(".field-tz_repeater-accordion-group"),
                             value = get_value(),
                             index = parent.index(),
                             field_id = field.attr("data-id");
@@ -140,26 +140,6 @@
                             setting[field_id] = _field_value;
                             insert_value(setting);
                         }
-                        /* End 06-10-2021 */
-
-                        // var input = $(this).find("input, textarea, select"),
-                        //     parent = input.closest(".field-tz_repeater-accordion-group");
-                        //
-                        // var value = get_value(),
-                        //     index = parent.index(),
-                        //     input_id = input.attr("id");
-                        // if(input.closest(".redux-field-container").attr("data-type") === "select"){
-                        //     input_id    = input_id.replace(/-select$/gi, "");
-                        // }
-                        //
-                        // if(value && typeof value[index] !== typeof undefined){
-                        //     value[index][input_id] = input.val();
-                        //     set_values_to_field(value);
-                        // }else{
-                        //     var setting = {};
-                        //     setting[input_id] = input.val();
-                        //     insert_value(setting);
-                        // }
                     });
                 };
 
