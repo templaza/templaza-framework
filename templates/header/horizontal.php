@@ -32,7 +32,7 @@ $dropdown_animation_effect  = $dropdown_animation_type == 'none'?'':$dropdown_an
 $dropdown_trigger           = isset($options['dropdown-trigger'])?$options['dropdown-trigger']:'hover';
 
 $header_menu                = isset($options['header-menu'])?$options['header-menu']:'header';
-$header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
+$header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'';
 $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options['header-block-1-sidebar']:'';
 $header_menu_level          = isset($options['header-menu-level'])?(int) $options['header-menu-level']:0;
 

@@ -121,7 +121,7 @@ class Templates{
         return $css_name.'.css';
     }
 
-    public static function get_style($name = '', $prefix = 'style', $sass_path = '', $css_path = ''){
+    public static function get_style($name = '', $prefix = 'style', $clean_cache = false, $sass_path = '', $css_path = ''){
         $css_path   = $css_path?$css_path:TEMPLAZA_FRAMEWORK_THEME_CSS_PATH;
         $sass_path  = $sass_path?$sass_path:TEMPLAZA_FRAMEWORK_SCSS_PATH;
 
@@ -136,7 +136,9 @@ class Templates{
         $css_file   = $css_path.'/'.$css_name;
 
         if(!file_exists($css_file)){
-            self::clear_css_cache($css_path, $prefix);
+            if($clean_cache) {
+                self::clear_css_cache($css_path, $prefix);
+            }
             self::compileSass($sass_path, $css_path, $sass_name, $css_name);
         }
 
@@ -181,15 +183,17 @@ class Templates{
         }
     }
 
-    public static function build_inline_style($version, $css = '', $css_file = true)
+    public static function build_inline_style($version, $css = '', $css_file = true, $clean_cache = false)
     {
         $prefix = 'framework-';
         if ($css_file) {
             $theme_css_dir  = TEMPLAZA_FRAMEWORK_THEME_CSS_PATH;
             $file_name      = $prefix.$version.'.css';
             if(!file_exists($theme_css_dir.'/'.$file_name)){
-                // Clear cache
-                self::clear_css_cache($theme_css_dir, 'framework');
+                if($clean_cache) {
+                    // Clear cache
+                    self::clear_css_cache($theme_css_dir, 'framework');
+                }
                 $styles = preg_grep('~^' . $prefix . '.*\.(css)$~', scandir($theme_css_dir));
                 foreach ($styles as $style) {
                     $space_time    =   time() - filemtime($theme_css_dir . '/' .$style);

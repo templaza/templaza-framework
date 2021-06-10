@@ -440,7 +440,7 @@ if (!empty($sticky_off_canvas_button_color)) {
 // Dropdown Coloring
 $dropdown_styles = [];
 if (!empty($dropdown_main_background_color)) {
-   $dropdown_styles[] = '.sub-menu{ background: ' . $dropdown_main_background_color . ' !important;}';
+   $dropdown_styles[] = '.templaza-nav .sub-menu{ background: ' . $dropdown_main_background_color . ' !important;}';
 }
 if (!empty($dropdown_main_background_color)) {
    $dropdown_styles[] = '.has-megamenu.open .arrow{ border-bottom-color: ' . $dropdown_main_background_color . ' !important;}';

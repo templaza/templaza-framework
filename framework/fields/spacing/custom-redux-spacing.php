@@ -8,6 +8,8 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
     class Templaza_Custom_Redux_Spacing{
 
         protected $redux_field_type = 'spacing';
+        protected $units;
+        protected $select2_config;
 
         public function __construct( $args = array(), $parent = null) {
             $this -> args   = $args;

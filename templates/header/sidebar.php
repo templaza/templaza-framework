@@ -23,7 +23,7 @@ $navClass                   = ['nav', 'templaza-nav', 'd-none', 'd-lg-flex'];
 $navWrapperClass            = ['align-self-center', 'px-2', 'd-none', 'd-lg-block'];
 
 $header_menu                = isset($options['header-menu'])?$options['header-menu']:'header';
-$header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
+$header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'';
 $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options['header-block-1-sidebar']:'';
 $header_menu_level          = isset($options['header-menu-level'])?(int) $options['header-menu-level']:0;
 
