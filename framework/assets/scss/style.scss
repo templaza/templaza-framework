@@ -149,7 +149,7 @@ $grid-gutter-width:           2.5rem !default;
     margin: 0;
     padding: 0;
     a:not([class]) {
-      color: $tz-wordpress-default-color;
+      color: inherit;
       text-decoration: none;
     }
   }
@@ -157,10 +157,50 @@ $grid-gutter-width:           2.5rem !default;
     margin: 0;
   }
   .posts {
-    a {
-      color: $tz-wordpress-default-color;
-      text-decoration: none;
+    background-color: $tz-background-container;
+    -webkit-box-shadow: 0 8px 10px 0 rgba(183, 192, 206,  0.2);
+    -moz-box-shadow: 0 8px 10px 0 rgba(183, 192, 206, 0.2);
+    -ms-box-shadow: 0 8px 10px 0 rgba(183, 192, 206, 0.2);
+    box-shadow: 0 8px 10px 0 rgba(183, 192, 206,  0.2);
+    border-radius: 5px;
+    border: none;
+    thead, tfoot {
+      td, th {
+        border-color: $tz-border-color;
+        a {
+          vertical-align: bottom;
+          font-size: 12px;
+          font-weight: normal;
+          color: $tz-muted-color !important;
+          text-transform: uppercase;
+        }
+      }
     }
+    tbody {
+      tr {
+        background-color: $tz-background-container;
+      }
+      tr + tr {
+        border-top: 1px solid $tz-border-color;
+      }
+    }
+    a {
+      text-decoration: none;
+      &:not(.button):not(.submitdelete) {
+        color: $tz-template-title-color;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .button {
+    background: $tz-button-background-color;
+    color: $tz-button-color;
+    border-color: $tz-toolbar-border-color;
+  }
+  input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea {
+    border-color: $tz-toolbar-border-color;
   }
 
   @import "notices.scss";
