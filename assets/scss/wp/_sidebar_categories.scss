@@ -42,7 +42,6 @@
             @include transition($tztheme-transition-all);
           }
           >a{
-            padding-left: 25px;
             @include transition($tztheme-transition-all);
           }
         }

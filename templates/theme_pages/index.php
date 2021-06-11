@@ -21,7 +21,7 @@ if(isset($_GET['view'])){
 }else{
     $blog_layout        = $options[$prefix.'-layout'];
 }
-$blog_grid_col      = isset($options[$prefix.'-grid-column']) && $options[$prefix.'-grid-column']?$options[$prefix.'-grid-column']:2;
+$blog_grid_col      = $options[$prefix.'-grid-column'];
 $blog_thumbnail_size= $options[$prefix.'-thumbnail-size'];
 $blog_thumbnail_effect = $options[$prefix.'-thumbnail-effect'];
 $show_tag           = isset($options[$prefix.'-tag'])?(bool) $options[$prefix.'-tag']:true;
@@ -285,8 +285,9 @@ if ($blog_layout == 'grid') {
                         endif;
                         if ($show_readmore) {
                             ?>
-                            <a href="<?php the_permalink(); ?>" class="templaza-btn more-link">
-                                <?php echo esc_html__('Read more', 'templaza'); ?></a>
+                            <a class="uk-button uk-margin-remove uk-button-text uk-icon-link  uk-icon" data-uk-icon="arrow-right" href="<?php the_permalink(); ?>">
+                                <?php echo esc_html_e('Read more','martha');?>
+                            </a>
                         <?php }
                         ?>
                         <?php if ($show_share):
@@ -296,7 +297,7 @@ if ($blog_layout == 'grid') {
                 </div>
             </div>
             <?php
-            if( $blog_layout == 'grid' && $d%$blog_grid_col==0){
+            if($d%$blog_grid_col==0 && $blog_layout == 'grid'){
                 ?><div class="w-100"></div><?php
             }
             $d++;

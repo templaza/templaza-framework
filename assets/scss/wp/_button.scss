@@ -23,6 +23,7 @@
 .wp-block-search .wp-block-search__button{
   @include button-default;
   border:none;
+  margin-top: 15px;
 }
 .templaza-btn{
   @include button-default;
