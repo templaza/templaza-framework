@@ -8,6 +8,10 @@
   }
 }
 .redux-container-tz_repeater{
+  .field-tz_repeater-accordion{
+    max-height: 400px;
+    overflow-y: auto;
+  }
   .redux-container &{
     .field-tz_repeater-accordion-group{
       margin-bottom: .75rem;
