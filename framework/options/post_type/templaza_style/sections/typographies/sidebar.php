@@ -20,27 +20,44 @@ Templaza_API::set_section('templaza_style',
                 'id'       => 'widget_box_border',
                 'type'     => 'border',
                 'title'    => __('Widget Border', $this -> text_domain),
-                'default'  => ''
+                /* styles option added by TemPlaza*/
+                'styles'   => array('' => esc_html__('Style', $this -> text_domain)),
+                'placeholder'   => array(
+                    'style' => esc_html__('Style', $this -> text_domain),
+                ),
+                'select2'  => array('allowClear' => true),
             ),
             array(
-                'id'       => 'widget_box_padding',
-                'type'     => 'spacing',
-                'title'    => __('Widget Padding', $this -> text_domain),
-                'default'  => ''
+                'id'        => 'widget_box_padding',
+                'type'      => 'spacing',
+                'title'     => __('Widget Padding', $this -> text_domain),
+                'units'     => array(false,'px'),
+                'select2'   => array('allowClear' => true),
+                'default'   => array(
+                    'units' => ''
+                )
             ),
             array(
-                'id'       => 'widget_box_margin',
-                'type'     => 'spacing',
-                'mode'     => 'margin',
-                'title'    => __('Widget Margin', $this -> text_domain),
-                'default'  => ''
+                'id'        => 'widget_box_margin',
+                'type'      => 'spacing',
+                'mode'      => 'margin',
+                'title'     => __('Widget Margin', $this -> text_domain),
+                'units'     => array(false,'px'),
+                'select2'   => array('allowClear' => true),
+                'default'   => array(
+                    'units' => ''
+                )
             ),
             array(
                 'id'       => 'widget_box_border_radius',
                 'type'     => 'spacing',
                 'mode'     => 'border-radius',
                 'title'    => __('Widget Border radius', $this -> text_domain),
-                'default'  => ''
+                'units'     => array(false,'px'),
+                'select2'   => array('allowClear' => true),
+                'default'   => array(
+                    'units' => ''
+                )
             ),
             array(
                 'id'       => 'widget_box_shadow',
@@ -51,20 +68,22 @@ Templaza_API::set_section('templaza_style',
             ),
             array(
                 'id'       => 'widget_box_heading_style',
-                'type'     => 'image_select',
+                'type'     => 'tz_select_image',
                 'title'    => __('Heading Style', 'redux-framework-demo'),
                 'subtitle' => __('Choose Heading Style.', 'redux-framework-demo'),
                 'options'  => array(
                     'style1' => array(
-                        'alt'   => 'Style 1',
+                        'alt'   => esc_html__('Style 1', $this -> text_domain),
                         'img'   =>  Functions::get_my_frame_url().'/options/patterns/widget-title-style1.jpg'
                     ),
                     'style2' => array(
-                        'alt'   => 'Style 1',
+                        'alt'   => esc_html__('Style 2', $this -> text_domain),
                         'img'   => Functions::get_my_frame_url().'/options/patterns/widget-title-style2.jpg'
                     ),
                 ),
-                'default'  => 'style1',
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
             ),
             array(
                 'id'       => 'widget_box_heading2_margin',
@@ -89,7 +108,24 @@ Templaza_API::set_section('templaza_style',
                 'letter-spacing' => true,
                 'text-transform' => true,
                 'title'    => __('Widget Heading', $this -> text_domain),
-                'default'  => ''
+                'units'                   => array(
+                    'font-size'         => array(''),
+                    'line-height'       => array(''),
+                    'letter-spacing'    => array(''),
+                ),
+                'default'                 => array(
+                    'color'          => '',
+                    'font-weight'    => '',
+                    'letter-spacing' => '',
+                    'text-transform' => '',
+                    'font-family'    => '',
+                    'font-backup'    => '',
+                    'units'          => array(
+                        'font-size'     => '',
+                        'line-height'   => '',
+                        'letter-spacing'   => '',
+                    )
+                ),
             ),
             array(
                 'id'       => 'widget_box_content',
@@ -100,7 +136,24 @@ Templaza_API::set_section('templaza_style',
                 'letter-spacing' => true,
                 'text-transform' => true,
                 'title'    => __('Widget Content', $this -> text_domain),
-                'default'  => ''
+                'units'                   => array(
+                    'font-size'         => array(''),
+                    'line-height'       => array(''),
+                    'letter-spacing'    => array(''),
+                ),
+                'default'                 => array(
+                    'color'          => '',
+                    'font-weight'    => '',
+                    'letter-spacing' => '',
+                    'text-transform' => '',
+                    'font-family'    => '',
+                    'font-backup'    => '',
+                    'units'          => array(
+                        'font-size'     => '',
+                        'line-height'   => '',
+                        'letter-spacing'   => '',
+                    )
+                ),
             ),
         )
     )

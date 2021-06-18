@@ -285,9 +285,8 @@ if ($blog_layout == 'grid') {
                         endif;
                         if ($show_readmore) {
                             ?>
-                            <a class="uk-button uk-margin-remove uk-button-text uk-icon-link  uk-icon" data-uk-icon="arrow-right" href="<?php the_permalink(); ?>">
-                                <?php echo esc_html_e('Read more','martha');?>
-                            </a>
+                            <a href="<?php the_permalink(); ?>" class="templaza-btn more-link">
+                                <?php echo esc_html__('Read more', 'templaza'); ?></a>
                         <?php }
                         ?>
                         <?php if ($show_share):

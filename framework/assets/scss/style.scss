@@ -5,12 +5,51 @@ $grid-gutter-width:           2.5rem !default;
   *::after {
     box-sizing: border-box;
   }
-  @import "../../../assets/scss/vendor/bootstrap_grid/mixins";
-  @import "../../../assets/scss/vendor/bootstrap_grid/bootstrap-grid";
-  @import "../../../assets/scss/vendor/bootstrap_grid/bootstrap-utilities";
+  //@import "../../../assets/scss/vendor/bootstrap_grid/mixins.scss";
+  //@import "../../../assets/scss/vendor/bootstrap_grid/bootstrap-grid.scss";
+  //@import "../../../assets/scss/vendor/bootstrap_grid/bootstrap-utilities.scss";
 
-  @import "variables";
-  @import "mixins";
+  @import "variables_override.scss";
+  @import "bootstrap_custom.scss";
+
+  &:not(.nav-menus-php){
+    @import "../../../assets/scss/vendor/bootstrap_grid/reboot.scss";
+
+    .search-box, .wp-header-end {
+      margin: 0;
+    }
+    .widefat tfoot td, .widefat tfoot th{
+      border-top-width: 1px;
+      border-top-style: solid;
+    }
+    .widefat thead td, .widefat thead th {
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+    }
+    .updates-table tbody td.check-column, .widefat tbody th.check-column,
+    .widefat tfoot td.check-column, .widefat thead td.check-column {
+      padding: 11px 0 0 3px;
+    }
+    .updates-table td input, .widefat tfoot td input, .widefat th input, .widefat thead td input{
+      margin: 0 0 0 8px;
+    }
+    .widefat tfoot td.check-column, .widefat thead td.check-column {
+      padding-top: 4px;
+      vertical-align: middle;
+    }
+    .tablenav .actions select {
+      margin-right: 6px;
+    }
+    .search-box input[name="s"], .tablenav .search-plugins input[name="s"], .tagsdiv .newtag{
+      margin: 0 4px 0 0;
+    }
+    .ac_match, .subsubsub a.current {
+      color: #000;
+    }
+  }
+
+  @import "variables.scss";
+  @import "mixins.scss";
 
   $enable-shadows:              true !default;
 
@@ -42,6 +81,7 @@ $grid-gutter-width:           2.5rem !default;
         color: #fff;
       }
     }
+
   }
   //background: $tz-body-background;
   .w-100 {
@@ -194,14 +234,14 @@ $grid-gutter-width:           2.5rem !default;
       }
     }
   }
-  .button {
-    background: $tz-button-background-color;
-    color: $tz-button-color;
-    border-color: $tz-toolbar-border-color;
-  }
-  input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea {
-    border-color: $tz-toolbar-border-color;
-  }
+  //.button {
+  //  background: $tz-button-background-color;
+  //  color: $tz-button-color;
+  //  border-color: $tz-toolbar-border-color;
+  //}
+  //input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea {
+  //  border-color: $tz-toolbar-border-color;
+  //}
 
   @import "notices.scss";
   @import "button.scss";

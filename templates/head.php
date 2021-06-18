@@ -20,7 +20,7 @@ wp_enqueue_script( 'templaza-js__main', Functions::get_my_url().'/assets/js/main
 // Let's add the Smooth Scroll is enabled.
 $enable_smooth_scroll         = isset($options['enable-smooth-scroll'])?(bool) $options['enable-smooth-scroll']:true;
 if($enable_smooth_scroll) {
-    $smooth_scroll_speed = isset($options['smooth-scroll-speed'])?$options['smooth-scroll-speed']:'';
+    $smooth_scroll_speed = isset($options['smooth-scroll-speed'])?$options['smooth-scroll-speed']:'300';
     wp_enqueue_script( 'templaza-js__smooth-scroll', Functions::get_my_url().'/assets/js/vendor/smooth-scroll.polyfills.min.js', array( 'jquery' ) );
     $smoothashell = '
 			var scroll = new SmoothScroll(\'a[href*="#"]\', {

@@ -16,17 +16,19 @@ Templaza_API::set_section('templaza_style',
                 'title'    => __( 'Style', $this -> text_domain ),
                 'subtitle' => __( 'Choose the style how you want to show social profile on your site.', $this -> text_domain ),
                 'options'  => array(
-                    'inherit' => esc_html__('Inherit', $this -> text_domain),
+                    'inherit' => esc_html__('Default', $this -> text_domain),
                     'brand'   => esc_html__('Brand', $this -> text_domain),
                 ),
-                'default'  => 'inherit',
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
             ),
             array(
                 'id'       => 'social',
                 'type'     => 'tz_social',
                 'title'    => __( 'Branding', $this -> text_domain ),
                 'subtitle' => __( 'Enable or disable the footer copyright bar.', $this -> text_domain ),
-                'default'  => false,
+                'default'  => '',
             ),
         )
     )

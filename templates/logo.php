@@ -13,7 +13,7 @@ $blog_title = get_bloginfo();
 $tag_line   = get_bloginfo('description');
 
 // Getting params from template
-$logo_type                  = isset($options['logo-type'])?(bool)$options['logo-type']:true; // Logo Type
+$logo_type                  = isset($options['logo-type'])?$options['logo-type']:'image'; // Logo Type
 $header_mode                = isset($options['header-mode'])?$options['header-mode']:'horizontal';
 $header_stacked_menu_mode   = isset($options['header-stacked-menu-mode'])?$options['header-stacked-menu-mode']:'center';
 

@@ -21,10 +21,16 @@ Templaza_API::set_section('templaza_style',
         'fields'     => array(
             array(
                 'id'       => 'enable-footer',
-                'type'     => 'switch',
+                'type'     => 'select',
                 'title'    => __( 'Branding', $this -> text_domain ),
                 'subtitle' => __( 'Enable or disable the footer copyright bar.', $this -> text_domain ),
-                'default'  => false,
+                'options'       => array(
+                    'on'         => esc_html__('On', $this -> text_domain),
+                    'off'         => esc_html__('Off', $this -> text_domain),
+                ),
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
             ),
             array(
                 'id'       => 'footer-copyright',
@@ -34,7 +40,7 @@ Templaza_API::set_section('templaza_style',
                 'desc'     => __('HTML is allowed in here.', $this -> text_domain),
                 'validate' => 'html', //see http://codex.wordpress.org/Function_Reference/wp_kses_post
                 'default'  => '© {sitename} {year}. Design by <a href="https://www.templaza.com/" title="TemPlaza">TemPlaza</a>',
-                'required' => array( 'enable-footer', '=', true ),
+                'required' => array( 'enable-footer', '!=', 'off' ),
             ),
         )
     )
@@ -49,10 +55,16 @@ Templaza_API::set_section('templaza_style',
         'fields'     => array(
             array(
                 'id'       => 'miscellaneous-development-mode',
-                'type'     => 'switch',
+                'type'     => 'select',
                 'title'    => __( 'Development Mode', $this -> text_domain ),
                 'subtitle' => __( 'Enable development mode to take your site offline and show a static coming soon page.', $this -> text_domain ),
-                'default'  => true,
+                'options'       => array(
+                    'on'        => esc_html__('On', $this -> text_domain),
+                    'off'       => esc_html__('Off', $this -> text_domain),
+                ),
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
             ),
             array(
                 'id'          => 'miscellaneous-logo',
@@ -60,7 +72,7 @@ Templaza_API::set_section('templaza_style',
                 'title'       => __( 'Logo', $this -> text_domain ),
                 'subtitle'    => __( 'Select a logo for coming soon page.', $this -> text_domain ),
                 'required'    => array(
-                    array('miscellaneous-development-mode', '=', '1'),
+                    array('miscellaneous-development-mode', '!=', 'off'),
                 ),
             ),
             array(
@@ -71,7 +83,7 @@ Templaza_API::set_section('templaza_style',
                 'desc'        => __('HTML is allowed in here.', $this -> text_domain),
                 'validate'    => 'html', //see http://codex.wordpress.org/Function_Reference/wp_kses_post
                 'required'    => array(
-                    array('miscellaneous-development-mode', '=', '1'),
+                    array('miscellaneous-development-mode', '!=', 'off'),
                 ),
             ),
             array(
@@ -80,16 +92,22 @@ Templaza_API::set_section('templaza_style',
                 'title'       => __( 'Countdown Date', $this -> text_domain ),
                 'subtitle'    => __( 'Set a date for countdown.', $this -> text_domain ),
                 'required'    => array(
-                    array('miscellaneous-development-mode', '=', '1'),
+                    array('miscellaneous-development-mode', '!=', 'off'),
                 ),
             ),
             array(
                 'id'          => 'miscellaneous-coming-soon-social',
-                'type'        => 'switch',
+                'type'        => 'select',
                 'title'       => __( 'Social Icons', $this -> text_domain ),
-                'default'     => true,
+                'options'       => array(
+                    '1'         => esc_html__('On', $this -> text_domain),
+                    '0'         => esc_html__('Off', $this -> text_domain),
+                ),
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
                 'required'    => array(
-                    array('miscellaneous-development-mode', '=', '1'),
+                    array('miscellaneous-development-mode', '!=', 'off'),
                 ),
             ),
             array(
@@ -102,8 +120,11 @@ Templaza_API::set_section('templaza_style',
                     'image' => __('Image', $this -> text_domain),
                     'video' => __('Video', $this -> text_domain),
                 ),
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
                 'required'    => array(
-                    array('miscellaneous-development-mode', '=', '1'),
+                    array('miscellaneous-development-mode', '!=', 'off'),
                 ),
             ),
         )
@@ -137,34 +158,36 @@ Templaza_API::set_section('templaza_style',
             ),
             array(
                 'id'          => '404-background-setting',
-                'type'        => 'button_set',
+                'type'        => 'select',
                 'title'       => __( 'Background Type', $this -> text_domain ),
                 'options'     => array(
-                    '0'     => __('None', $this -> text_domain),
-                    'color' => __('Color', $this -> text_domain),
-                    'image' => __('Image', $this -> text_domain),
-                    'video' => __('Video', $this -> text_domain),
+                    'none'    => __('None', $this -> text_domain),
+                    'color'   => __('Color', $this -> text_domain),
+                    'image'   => __('Image', $this -> text_domain),
+                    'video'   => __('Video', $this -> text_domain),
                 ),
-                'default'     => 0,
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
             ),
             array(
                 'id'          => '404-background-color',
                 'type'        => 'color_rgba',
                 'title'       => __( 'Background Color', $this -> text_domain ),
-                'required'  => array('404-background-setting', '=', 'color'),
+                'required'  => array('404-background-setting', '=', array('color','')),
             ),
             array(
                 'id'          => '404-background',
                 'type'        => 'background',
                 'title'       => __( 'Background', $this -> text_domain ),
-                'required'  => array('404-background-setting', '=', 'image'),
+                'required'  => array('404-background-setting', '=', array('','image')),
                 'background-color' => false,
             ),
             array(
                 'id'          => '404-background-video',
                 'type'        => 'media',
                 'title'       => __( 'Background Video', $this -> text_domain ),
-                'required'  => array('404-background-setting', '=', 'video'),
+                'required'  => array('404-background-setting', '=', array('','video')),
             ),
         )
     )

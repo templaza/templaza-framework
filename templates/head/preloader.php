@@ -7,7 +7,7 @@ use TemPlazaFramework\Templates;
 
 $options        = Functions::get_theme_options();
 
-$enable_preloader   = isset($options['preloader'])?(bool) $options['preloader']:true;
+$enable_preloader   = isset($options['preloader'])?filter_var($options['preloader'], FILTER_VALIDATE_BOOLEAN):true;
 
 if (!$enable_preloader) {
     return;

@@ -117,12 +117,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
 
 
-//                add_filter('redux/options/'.$opt_name.'/options', function($options){
-//
-//                    var_dump($options); die();
-//                    return $options;
-//                });
-
                 add_action('edit_form_after_title', array($this, 'generate_template_options'));
                 add_action( 'save_post_'.$this -> get_post_type(), array( $this, 'save_main_options' ), 10, 2 );
 //                add_action( 'save_post', array( $this, 'save_main_options' ), 10, 2 );
@@ -148,7 +142,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             }
             add_action('admin_footer', function(){
                 $t  = \Redux::instance($this -> setting_args[$this -> get_post_type()]['opt_name']);
-                if($t) {
+                if($t && method_exists($t, '_enqueue')) {
                     $t->_enqueue();
                 }
                 if(!$this ->my_post_type_exists()) {
@@ -182,19 +176,24 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
         }
 
         protected function _init_arguments() {
-            $theme = wp_get_theme(); // For use with some settings. Not necessary.
-            $this -> setting_args['settings']   = $this -> framework -> get_arguments();
-            $args               = $this -> setting_args['settings'];
+            $theme                      = wp_get_theme(); // For use with some settings. Not necessary.
+            $global_args                = $this -> framework -> get_arguments();
+            $global_args['post_type']   = $this -> get_post_type();
+            $global_args['hide_expand']  = false;
 
+            \Redux::set_args($global_args['opt_name'], $global_args);
+
+            $this -> setting_args['settings']   = $global_args;
+
+            $args                   = $this -> setting_args['settings'];
             $args['opt_name']      .= '-' . $this->get_post_type();
-
             $args['dev_mode']       = false;
             $args['database']       = '';
             $args['ajax_save']      = false;
             $args['hide_save']      = true;
             $args['menu_type']      = 'hidden';
             $args['hide_reset']     = true;
-            $args['post_type']     = $this -> get_post_type();
+//            $args['post_type']     = $this -> get_post_type();
 //            $args['open_expanded']  = true;
 
 //            $args['shortcode_section']    = true;
@@ -215,7 +214,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                             WP_Filesystem();
 
                             $options = $wp_filesystem->get_contents($file);
-//                            $options = stripslashes($options);
 
                             $options = json_decode($options, true);
                         }
@@ -240,25 +238,40 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
             $this -> _init_arguments();
 
+            $_pagenow   = isset($_GET['page']) && $_GET['page']?$_GET['page']:'';
+
+            // If page url param is settings don't load fields below
+            if($_pagenow == 'tzfrm_options'){
+                return;
+            }
+
             if($sections = \Templaza_API::construct_sections($this -> get_post_type())) {
 
                 if(count($sections)) {
                     $args       = $this -> setting_args[$this -> get_post_type()];
                     $opt_name   = $args['opt_name'];
 
-                    \Templaza_API::load_my_fields($opt_name);
-
                     \Redux::set_args($opt_name, $args);
                     \Redux::set_sections($opt_name, $sections);
                     $path = TEMPLAZA_FRAMEWORK_CORE_PATH . '/extensions/';
                     \Redux::set_extensions($opt_name, $path);
-
                     \Redux::init($opt_name);
-
-//                    \Redux::set_option()
+                    $default_options    = \Redux::$options_defaults;
+//                    var_dump(\Redux::$options_defaults);
+//                    die();
+//                    var_dump($default_options);
+//                    die();
 
                     if(($redux  = \Redux::instance($opt_name))
                         && $this -> get_current_screen_post_type() == $this -> get_post_type()) {
+                        $redux -> transients    = count($redux -> transients)?$redux -> transients:array('changed_values' => '');
+
+//                        var_dump(get_option($opt_name)); die();
+                        \Templaza_API::load_my_fields($opt_name);
+//                        $redux -> options_defaults  = $redux -> options_defaults?$redux -> options_defaults:$default_options;
+//                        var_dump($redux -> _default_values()); die();
+//                        var_dump($redux -> options_defaults); die();
+
 
 //                        // Set options
 //                        $post_id    = isset($_REQUEST['post'])?$_REQUEST['post']:0;
@@ -266,7 +279,19 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 //                            $redux -> options   = Functions::get_theme_options_by_post_type_ID($post_id);
 //                        }
 
-//                        $redux->_register_settings();
+                        $redux->_register_settings();
+
+
+//                        // Global settings
+//                        $gb_opt_name    = isset($this -> setting_args['settings']['opt_name'])?$this -> setting_args['settings']['opt_name']:'';
+//                        $gb_options     = !empty($gb_opt_name)?get_option($gb_opt_name, array()):array();
+//                        $tpl_options    = !empty($opt_name)?get_option($opt_name, array()):array();
+//
+//                        $tpl_options    = count($tpl_options)?$tpl_options:$gb_options;
+//                        $redux -> options   = $tpl_options;
+////                        \Redux::set_option($opt_name, $tpl_options);
+
+
 
                         $enqueue    = new Enqueue($redux);
                         $enqueue -> init();
@@ -480,7 +505,30 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             $post_type  = $this -> get_post_type();
             $opt_name   = $this -> setting_args[$post_type]['opt_name'];
 
+//            // Global settings
+//            $gb_opt_name    = isset($this -> setting_args['settings']['opt_name'])?$this -> setting_args['settings']['opt_name']:'';
+//            $gb_options     = !empty($gb_opt_name)?get_option($gb_opt_name, array()):array();
+//            $tpl_options    = !empty($opt_name)?get_option($opt_name, array()):array();
+//
+//            $tpl_options    = count($tpl_options)?$tpl_options:$gb_options;
+//
+////            $tpl_options    = wp_parse_args()
+//
+////            $x = array('a' => '', 'b' => 'B', 'c'=> 'C');
+////            $y = array('a' => 'A', 'b' => '', 'd'=> 'D');
+////            echo('<pre>');
+//////            var_dump(wp_parse_args($y, $x));
+//////            var_dump(wp_parse_args($gb_options, $tpl_options));
+////            var_dump($tpl_options);
+////            var_dump($gb_options);
+////            echo('</pre>');
+//////            var_dump(get_option($opt_name, array()));
+//////            var_dump(get_option($this -> setting_args['settings']['opt_name'], array()));
+////            die();
+
+
             if($redux  = \Redux::instance($opt_name)) {
+//                var_dump($redux ->required); die();
                 $redux->_register_settings();
                 $redux->generate_panel();
             }

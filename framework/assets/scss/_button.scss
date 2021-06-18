@@ -42,13 +42,44 @@
     border-color: $tz-global-color;
     @include transition($butt);
     &:hover{
-      color: $tzbackground;
+      color: #fff;
       background: $tz-global-color;
     }
   }
   button{
     &:focus{
       outline: none;
+    }
+  }
+}
+&:not(.nav-menus-php){
+  .wrap .page-title-action{
+    background: $tzbackground;
+    color: $tz-global-color;
+    border-color: $tz-global-color;
+    @include transition($butt);
+    &:hover{
+      color: #fff;
+      background: $tz-global-color;
+    }
+  }
+  .button {
+    color: $tz-button-color;
+    border-color: $tz-button-border-color;
+    &:hover{
+      color: $tz-button-color;
+      border-color: darken($tz-button-border-color,10%);
+    }
+  }
+  .button-primary{
+    color: $tz-primary-color;
+    background: $tz-primary-background-color;
+    border-color: $tz-primary-background-color;
+    @include transition($butt);
+    &:hover{
+      color: $tz-primary-color;
+      background: lighten($tz-primary-background-color, 8%);
+      border-color: lighten($tz-primary-background-color, 8%);
     }
   }
 }

@@ -38,27 +38,6 @@ use TemPlazaFramework\Functions;
                     $args['opt_name']   = $opt_name;
                     foreach($this -> field['tabs'] as $k => &$tab) {
 
-//                        Redux::set_args($opt_name, $args);
-//                        Redux::set_section($opt_name, $tab);
-//                        Redux::init($opt_name);
-////                        var_dump(Redux::instance($opt_name));
-//
-//                        $redux  = Redux::instance($opt_name);
-//                        $redux->_register_settings();
-//                        $redux -> _enqueue();
-////                        foreach ($redux -> sections as $k => $section) {
-//
-//                        $tab['class'] = isset($tab['class']) ? ' ' . $tab['class'] : '';
-////                            echo '<div id="metabox_' . $k . '_section_group' . '" class="redux-group-tab' . esc_attr($tab['class']) . '" data-rel="metabox_' . $k . '">';
-//
-//                            do_action("redux/page/{$redux->args['opt_name']}/section/before", $tab);
-//                            do_settings_sections( $redux->args['opt_name'] . $k . '_section_group' );
-//                            do_action("redux/page/{$redux->args['opt_name']}/section/after", $tab);
-//
-////                            echo '</div>';
-////                        }
-
-
                         foreach ($tab['fields'] as &$f) {
                             if($f['type'] == 'background'){
                                 $has_media  = true;
@@ -138,23 +117,6 @@ use TemPlazaFramework\Functions;
                 $tab_contents   = '';
 
                 if(isset($this -> field['tabs']) && count($this -> field['tabs'])){
-//                    $enqueue    = null;
-//                    if(class_exists('reduxCoreEnqueue')) {
-//                        $enqueue = new reduxCoreEnqueue ( $this -> parent );
-//                        $enqueue = new Redux_Enqueue($this -> parent);
-//                    }
-//                    $args   = $this -> parent -> args;
-//                    $args['opt_name']   .= '__'.$this -> field['id'];
-//                    $opt_name   = $args['opt_name'];
-//
-//                    $args['show_import_export'] = false;
-//                    Redux::set_args($opt_name, $args);
-//                    Redux::set_sections($opt_name, $this -> field['tabs']);
-//                    Redux::init($opt_name);
-//                    $redux  = Redux::instance($opt_name);
-//                    $redux -> _register_settings();
-//                    $redux -> _enqueue();
-
 
                     $args   = $this -> parent -> args;
 //                    $args['opt_name']   .= '__'.$this -> field['id'];
@@ -164,68 +126,25 @@ use TemPlazaFramework\Functions;
                     $args['show_import_export'] = false;
                     Redux::set_args($opt_name, $args);
 
-                    \Templaza_API::load_my_fields($opt_name);
-//                    Redux::set_sections($opt_name, $this -> field['tabs']);
-//                    Redux::init($opt_name);
-
                     foreach($this -> field['tabs'] as $k => $tab){
                         $tab_titles     .= '<li><a href="#tz_tab-'.$tab['id'].'">'.$tab['title'].'</a></li>';
 
                         $tab['title']   = '';
 
-//                        if($k == 1) {
-//                            var_dump($tab['fields']);
-//                        }
                         Redux::set_section($opt_name, $tab);
 
                     }
+                    \Templaza_API::load_my_fields($opt_name);
                     Redux::init($opt_name);
 
                     $redux  = Redux::instance($opt_name);
 
-//                    var_dump($opt_name);
-//                    var_dump($redux -> sections[2]);
-
                     foreach($redux -> sections as $k => $tab){
                         $tab_contents   .= '<div id="tz_tab-'.$tab['id'].'">';
-//                        $tab_titles     .= '<li><a href="#tz_tab-'.$tab['id'].'">'.$tab['title'].'</a></li>';
-//                        $tab_contents   .= '<div id="tz_tab-'.$tab['id'].'">';
-
-
-//                        if(isset($tab['fields']) && count($tab['fields'])){
-//                            $args   = $this -> parent -> args;
-//                            $args['opt_name']   .= '__'.$tab['id'];
-//                            $opt_name   = $args['opt_name'];
-//
-//                            $args['show_import_export'] = false;
-
-
-//                            $args   = $this -> parent -> args;
-//                            $args['opt_name']   .= '__'.$tab['id'];
-//                            $opt_name   = $args['opt_name'];
-////                            $args['opt_name']   = '';
-//
-//                            $args['show_import_export'] = false;
-//                            Redux::set_args($opt_name, $args);
-//
-//                            $_tab   = $tab;
-//                            $_tab['title']  = '';
-//
-//
-//                            Redux::set_section($opt_name, $_tab);
-//                            Redux::init($opt_name);
-
-//                            $redux  = Redux::instance($opt_name);
-//                            $redux -> _register_settings();
-//                            $redux -> _enqueue();
-
-//                            var_dump($k);
 
                         if(isset($tab['fields']) && count($tab['fields'])){
                             foreach ($tab['fields'] as $field) {
                                 add_filter("redux/options/{$opt_name}/field/{$field['id']}", function($_field)use($field){
-//                                    var_dump($_field['id']);
-//                                    var_dump($_field['name']);
                                     $_field['name'] = $_field['id'];
                                     return $_field;
                                 });
@@ -259,83 +178,6 @@ use TemPlazaFramework\Functions;
 //                        $tab_contents .= '</div>';
                         $tab_contents .= '</div>';
                         $tab_contents .= '</div>';
-
-
-
-//                            $enqueue = new Redux_Enqueue($redux);
-//                            $tab_contents   .= '<table class="form-table">';
-//                            foreach($tab['fields'] as $field){
-//                                if($enqueue){
-//                                    $enqueue -> enqueue_field($redux, $field);
-////                                    $enqueue -> enqueue_field($this -> parent, $field);
-//                                }
-//                                $f_org_id   = $field['id'];
-//                                $field['class'] = '';
-//
-//
-////                                $redux -> field_default_values($field);
-////                                $redux -> check_dependencies($field);
-////                                $this -> parent -> field_default_values($field);
-////                                $this -> parent -> check_dependencies($field);
-//                                $redux -> field_default_values($field);
-//                                $redux -> check_dependencies($field);
-//                                $f_value    = '';
-//
-//                                if(isset($this -> field['shortcode']) && $this -> field['shortcode']) {
-//                                    $field['shortcode'] = $this -> field['shortcode'];
-//                                    $field['name'] = $field['id'];
-//                                    if(isset($field['default'])) {
-//                                        $f_value = $field['default'];
-//                                    }
-//                                }else{
-//                                    $field['id']    = $this -> field['id'].'-'.$field['id'];
-//                                    $field['name']  = $this -> parent -> args['opt_name'].'['.$field['id'].']';
-//                                    $f_value = isset ( $this ->parent->options[$f_org_id] ) ? $this ->parent->options[$f_org_id] : $this -> parent -> get_default_value($field['id']);
-//                                }
-//
-//                                ob_start();
-//                                $redux -> _field_input($field, $f_value);
-//                                $field_html = ob_get_contents();
-//                                ob_end_clean();
-//                                if(preg_match('/<script\b[^>]*>(.*?)<\/script>/is', $field_html)){
-//                                    $field_html = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $field_html);
-//                                }
-//
-//                                $tab_contents   .= '<tr>';
-//                                $tab_contents   .= '<th>'.$this -> parent -> get_header_html($field).'</th>';
-//                                $tab_contents   .= '<td>'.$field_html.'<td>';
-//                                $tab_contents   .= '</tr>';
-//                            }
-//                            $tab_contents   .= '</table>';
-
-//                            foreach ($redux -> sections as $k => $section) {
-////
-////                                $section['class'] = isset($section['class']) ? ' ' . $section['class'] : '';
-////                                echo '<div id="metabox_' . $k . '_section_group' . '" class="redux-group-tab' . esc_attr($section['class']) . '" data-rel="metabox_' . $k . '">';
-////
-////                                do_action("redux/page/{$redux->args['opt_name']}/section/before", $section);
-//                                ob_start();
-//                                do_settings_sections( $redux->args['opt_name'] . $k . '_section_group' );
-//                                $field_html   = ob_get_contents();
-//                                ob_end_clean();
-//
-//                                if(preg_match('/<script\b[^>]*>(.*?)<\/script>/is', $field_html)){
-//                                    $field_html = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $field_html);
-//                                }
-//
-////                            var_dump($_tab['fields']);
-////                            var_dump($field_html); exit();
-//
-//                                $tab_contents   .= $field_html;
-////                                do_action("redux/page/{$redux->args['opt_name']}/section/after", $section);
-//
-////
-////                                echo '</div>';
-//                            }
-
-
-//                        }
-
                         $tab_contents   .= '</div>';
                     }
                 }

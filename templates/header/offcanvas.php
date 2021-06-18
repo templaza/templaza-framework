@@ -8,8 +8,8 @@ use TemPlazaFramework\Menu;
 
 $options                    = Functions::get_theme_options();
 
-$header                     = isset($options['enable-header'])?(bool) $options['enable-header']:true;
-$enable_offcanvas           = isset($options['enable-offcanvas'])?(bool) $options['enable-offcanvas']:false;
+$header                     = isset($options['enable-header'])?filter_var($options['enable-header'], FILTER_VALIDATE_BOOLEAN):true;
+$enable_offcanvas           = isset($options['enable-offcanvas'])?filter_var($options['enable-offcanvas'], FILTER_VALIDATE_BOOLEAN):false;
 $offcanvas_sidebar          = isset($options['offcanvas-sidebar'])?$options['offcanvas-sidebar']:'';
 $offcanvas_menu_location    = isset($options['offcanvas-menu-location'])?$options['offcanvas-menu-location']:'header';
 $offcanvas_menu_level       = isset($options['offcanvas-menu-level'])?(int) $options['offcanvas-menu-level']:0;

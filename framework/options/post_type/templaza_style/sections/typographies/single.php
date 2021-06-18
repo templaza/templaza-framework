@@ -18,6 +18,12 @@ Templaza_API::set_section('templaza_style',
                 'id'       => 'blog_single_border',
                 'type'     => 'border',
                 'title'    => __('Blog single border', $this -> text_domain),
+                /* styles option added by TemPlaza*/
+                'styles'   => array('' => esc_html__('Style', $this -> text_domain)),
+                'placeholder'   => array(
+                    'style' => esc_html__('Style', $this -> text_domain),
+                ),
+                'select2'  => array('allowClear' => true),
                 'default'  => ''
             ),
 
@@ -25,21 +31,33 @@ Templaza_API::set_section('templaza_style',
                 'id'       => 'blog_single_padding',
                 'type'     => 'spacing',
                 'title'    => __('Blog single padding', $this -> text_domain),
-                'default'  => ''
+                'units'     => array(false,'px'),
+                'select2'   => array('allowClear' => true),
+                'default'   => array(
+                    'units' => ''
+                )
             ),
             array(
                 'id'       => 'blog_single_margin',
                 'type'     => 'spacing',
                 'mode'     => 'margin',
                 'title'    => __('Blog single margin', $this -> text_domain),
-                'default'  => ''
+                'units'     => array(false,'px'),
+                'select2'   => array('allowClear' => true),
+                'default'   => array(
+                    'units' => ''
+                )
             ),
             array(
                 'id'       => 'blog_single_border_radius',
                 'type'     => 'spacing',
                 'mode'     => 'border-radius',
                 'title'    => __('Blog single Border radius', $this -> text_domain),
-                'default'  => ''
+                'units'     => array(false,'px'),
+                'select2'   => array('allowClear' => true),
+                'default'   => array(
+                    'units' => ''
+                )
             ),
             array(
                 'id'       => 'blog_single_shadow',
@@ -63,7 +81,24 @@ Templaza_API::set_section('templaza_style',
                 'text-transform' => true,
                 'letter-spacing' => true,
                 'title'    => __('Blog single blockquote', $this -> text_domain),
-                'default'  => ''
+                'units'                   => array(
+                    'font-size'         => array(''),
+                    'line-height'       => array(''),
+                    'letter-spacing'    => array(''),
+                ),
+                'default'                 => array(
+                    'color'          => '',
+                    'font-weight'    => '',
+                    'letter-spacing' => '',
+                    'text-transform' => '',
+                    'font-family'    => '',
+                    'font-backup'    => '',
+                    'units'          => array(
+                        'font-size'     => '',
+                        'line-height'   => '',
+                        'letter-spacing'   => '',
+                    )
+                ),
             ),
             array(
                 'id'       => 'blog_single_h1',
@@ -74,7 +109,24 @@ Templaza_API::set_section('templaza_style',
                 'text-transform' => true,
                 'letter-spacing' => true,
                 'title'    => __('Blog single heading H1', $this -> text_domain),
-                'default'  => ''
+                'units'                   => array(
+                    'font-size'         => array(''),
+                    'line-height'       => array(''),
+                    'letter-spacing'    => array(''),
+                ),
+                'default'                 => array(
+                    'color'          => '',
+                    'font-weight'    => '',
+                    'letter-spacing' => '',
+                    'text-transform' => '',
+                    'font-family'    => '',
+                    'font-backup'    => '',
+                    'units'          => array(
+                        'font-size'     => '',
+                        'line-height'   => '',
+                        'letter-spacing'   => '',
+                    )
+                ),
             ),
             array(
                 'id'       => 'blog_single_heading_box',
@@ -97,7 +149,24 @@ Templaza_API::set_section('templaza_style',
                 'text-transform' => true,
                 'letter-spacing' => true,
                 'title'    => __('Blog single heading H2', $this -> text_domain),
-                'default'  => ''
+                'units'                   => array(
+                    'font-size'         => array(''),
+                    'line-height'       => array(''),
+                    'letter-spacing'    => array(''),
+                ),
+                'default'                 => array(
+                    'color'          => '',
+                    'font-weight'    => '',
+                    'letter-spacing' => '',
+                    'text-transform' => '',
+                    'font-family'    => '',
+                    'font-backup'    => '',
+                    'units'          => array(
+                        'font-size'     => '',
+                        'line-height'   => '',
+                        'letter-spacing'   => '',
+                    )
+                ),
             ),
             array(
                 'id'       => 'blog_single_h3',
@@ -108,7 +177,24 @@ Templaza_API::set_section('templaza_style',
                 'text-transform' => true,
                 'letter-spacing' => true,
                 'title'    => __('Blog single heading H3', $this -> text_domain),
-                'default'  => ''
+                'units'                   => array(
+                    'font-size'         => array(''),
+                    'line-height'       => array(''),
+                    'letter-spacing'    => array(''),
+                ),
+                'default'                 => array(
+                    'color'          => '',
+                    'font-weight'    => '',
+                    'letter-spacing' => '',
+                    'text-transform' => '',
+                    'font-family'    => '',
+                    'font-backup'    => '',
+                    'units'          => array(
+                        'font-size'     => '',
+                        'line-height'   => '',
+                        'letter-spacing'   => '',
+                    )
+                ),
             ),
             array(
                 'id'       => 'blog_single_h4',
@@ -119,7 +205,24 @@ Templaza_API::set_section('templaza_style',
                 'text-transform' => true,
                 'letter-spacing' => true,
                 'title'    => __('Blog single heading H4', $this -> text_domain),
-                'default'  => ''
+                'units'                   => array(
+                    'font-size'         => array(''),
+                    'line-height'       => array(''),
+                    'letter-spacing'    => array(''),
+                ),
+                'default'                 => array(
+                    'color'          => '',
+                    'font-weight'    => '',
+                    'letter-spacing' => '',
+                    'text-transform' => '',
+                    'font-family'    => '',
+                    'font-backup'    => '',
+                    'units'          => array(
+                        'font-size'     => '',
+                        'line-height'   => '',
+                        'letter-spacing'   => '',
+                    )
+                ),
             ),
             array(
                 'id'       => 'blog_single_h5',
@@ -130,7 +233,24 @@ Templaza_API::set_section('templaza_style',
                 'text-transform' => true,
                 'letter-spacing' => true,
                 'title'    => __('Blog single heading H5', $this -> text_domain),
-                'default'  => ''
+                'units'                   => array(
+                    'font-size'         => array(''),
+                    'line-height'       => array(''),
+                    'letter-spacing'    => array(''),
+                ),
+                'default'                 => array(
+                    'color'          => '',
+                    'font-weight'    => '',
+                    'letter-spacing' => '',
+                    'text-transform' => '',
+                    'font-family'    => '',
+                    'font-backup'    => '',
+                    'units'          => array(
+                        'font-size'     => '',
+                        'line-height'   => '',
+                        'letter-spacing'   => '',
+                    )
+                ),
             ),
             array(
                 'id'       => 'blog_single_h6',
@@ -141,7 +261,24 @@ Templaza_API::set_section('templaza_style',
                 'text-transform' => true,
                 'letter-spacing' => true,
                 'title'    => __('Blog single heading H6', $this -> text_domain),
-                'default'  => ''
+                'units'                   => array(
+                    'font-size'         => array(''),
+                    'line-height'       => array(''),
+                    'letter-spacing'    => array(''),
+                ),
+                'default'                 => array(
+                    'color'          => '',
+                    'font-weight'    => '',
+                    'letter-spacing' => '',
+                    'text-transform' => '',
+                    'font-family'    => '',
+                    'font-backup'    => '',
+                    'units'          => array(
+                        'font-size'     => '',
+                        'line-height'   => '',
+                        'letter-spacing'   => '',
+                    )
+                ),
             ),
             array(
                 'id'       => 'blog_single_content',
@@ -152,7 +289,24 @@ Templaza_API::set_section('templaza_style',
                 'text-transform' => true,
                 'letter-spacing' => true,
                 'title'    => __('Blog single content', $this -> text_domain),
-                'default'  => ''
+                'units'                   => array(
+                    'font-size'         => array(''),
+                    'line-height'       => array(''),
+                    'letter-spacing'    => array(''),
+                ),
+                'default'                 => array(
+                    'color'          => '',
+                    'font-weight'    => '',
+                    'letter-spacing' => '',
+                    'text-transform' => '',
+                    'font-family'    => '',
+                    'font-backup'    => '',
+                    'units'          => array(
+                        'font-size'     => '',
+                        'line-height'   => '',
+                        'letter-spacing'   => '',
+                    )
+                ),
             ),
         )
     )

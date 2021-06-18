@@ -14,7 +14,7 @@ use TemPlazaFramework\Templates;
 
 $options            = Functions::get_theme_options();
 $mode               = isset($options['header-mode'])?$options['header-mode']:'horizontal';
-$header             = isset($options['enable-header'])?(bool) $options['enable-header']:true;
+$header             = isset($options['enable-header'])?filter_var($options['enable-header'], FILTER_VALIDATE_BOOLEAN):true;
 $header_layout      = isset($options['header-layout'])?$options['header-layout']:'wide';
 $template_layout    = isset($options['layout-theme'])?$options['layout-theme']:'wide';
 $dropdown_trigger   = isset($options['dropdown-trigger'])?$options['dropdown-trigger']:'hover';

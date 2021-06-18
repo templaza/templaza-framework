@@ -36,6 +36,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Row')){
                     array(
                         'id' => 'tabs',
                         'type'  => 'tz_tab',
+                        'title' => '',
                         'tabs' => array(
                             // General settings
                             array(

@@ -113,5 +113,11 @@
     background-color: $tz-process-background-color;
   }
 }
-
+.redux-field-container{
+  .redux-preview-image{
+    padding: 0;
+    background: #fff;
+    border: 3px solid $tz-border-color;
+  }
+}
 

@@ -16,24 +16,24 @@ $prefix             = $post_type.'-single';
 if($post_type == 'post'){
     $prefix = 'blog-single';
 }
-$show_thumbnail         = isset($options[$prefix.'-thumbnail'])?(bool) $options[$prefix.'-thumbnail']:true;
-$show_tag               = isset($options[$prefix.'-tag'])?(bool) $options[$prefix.'-tag']:true;
-$show_date              = isset($options[$prefix.'-date'])?(bool) $options[$prefix.'-date']:true;
-$show_share             = isset($options[$prefix.'-share'])?(bool) $options[$prefix.'-share']:true;
-$show_title             = isset($options[$prefix.'-title'])?(bool) $options[$prefix.'-title']:true;
-$show_author            = isset($options[$prefix.'-author'])?(bool) $options[$prefix.'-author']:true;
-$show_related           = isset($options[$prefix.'-related'])?(bool) $options[$prefix.'-related']:true;
-$show_comment           = isset($options[$prefix.'-comment'])?(bool) $options[$prefix.'-comment']:true;
-$show_category          = isset($options[$prefix.'-category'])?(bool) $options[$prefix.'-category']:true;
-$show_description       = isset($options[$prefix.'-description'])?(bool) $options[$prefix.'-description']:true;
-$show_comment_count     = isset($options[$prefix.'-comment-count'])?(bool) $options[$prefix.'-comment-count']:true;
-$show_post_view         = isset($options[$prefix.'-post-view'])?(bool) $options[$prefix.'-post-view']:true;
-$blog_slider_autoplay   = isset($options['blog-slider-autoplay'])?(bool) $options['blog-slider-autoplay']:true;
+$show_thumbnail         = isset($options[$prefix.'-thumbnail'])?filter_var($options[$prefix.'-thumbnail'], FILTER_VALIDATE_BOOLEAN):true;
+$show_tag               = isset($options[$prefix.'-tag'])?filter_var($options[$prefix.'-tag'], FILTER_VALIDATE_BOOLEAN):true;
+$show_date              = isset($options[$prefix.'-date'])?filter_var($options[$prefix.'-date'], FILTER_VALIDATE_BOOLEAN):true;
+$show_share             = isset($options[$prefix.'-share'])?filter_var($options[$prefix.'-share'], FILTER_VALIDATE_BOOLEAN):true;
+$show_title             = isset($options[$prefix.'-title'])?filter_var($options[$prefix.'-title'], FILTER_VALIDATE_BOOLEAN):true;
+$show_author            = isset($options[$prefix.'-author'])?filter_var($options[$prefix.'-author'], FILTER_VALIDATE_BOOLEAN):true;
+$show_related           = isset($options[$prefix.'-related'])?filter_var($options[$prefix.'-related'], FILTER_VALIDATE_BOOLEAN):true;
+$show_comment           = isset($options[$prefix.'-comment'])?filter_var($options[$prefix.'-comment'], FILTER_VALIDATE_BOOLEAN):true;
+$show_category          = isset($options[$prefix.'-category'])?filter_var($options[$prefix.'-category'], FILTER_VALIDATE_BOOLEAN):true;
+$show_description       = isset($options[$prefix.'-description'])?filter_var($options[$prefix.'-description'], FILTER_VALIDATE_BOOLEAN):true;
+$show_comment_count     = isset($options[$prefix.'-comment-count'])?filter_var($options[$prefix.'-comment-count'], FILTER_VALIDATE_BOOLEAN):true;
+$show_post_view         = isset($options[$prefix.'-post-view'])?filter_var($options[$prefix.'-post-view'], FILTER_VALIDATE_BOOLEAN):true;
+$blog_slider_autoplay   = isset($options['blog-slider-autoplay'])?filter_var($options['blog-slider-autoplay'], FILTER_VALIDATE_BOOLEAN):true;
 $blog_thumbnail_size    = $options[$prefix.'-thumbnail-size'];
 $blog_thumbnail_effect  = $options[$prefix.'-thumbnail-effect'];
 
 $blog_slider_animation  = $options['blog-slider-animation'];
-$blog_slider_nav        = isset($options['blog-slider-nav'])?(bool) $options['blog-slider-nav']:true;
+$blog_slider_nav        = isset($options['blog-slider-nav'])?filter_var($options['blog-slider-nav'], FILTER_VALIDATE_BOOLEAN):true;
 
 $blog_slider_autoplay   = $blog_slider_autoplay?'true':'false';
 $blog_slider_nav        = $blog_slider_nav?'true':'false';

@@ -39,14 +39,10 @@ class TemPlazaFrameWork{
     public function hooks(){
 
         add_action('after_setup_theme', array($this, 'default_menu_locations'), 99999);
-//        add_action('after_setup_theme', array($this, 'init'), 99999);
         add_action('init', array($this, 'init'), 99999);
 
-//        add_action('init', array($this, 'frontend_init'), 5);
         add_action('init', array($this, 'frontend_init'), 99999);
 
-//        add_action('plugins_loaded', array($this, 'init'));
-//        add_action('wp_loaded', array($this, 'init'));
         add_action('template_include', array($this, 'template_include'), 999999);
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 99999);
 
@@ -129,31 +125,12 @@ class TemPlazaFrameWork{
             return;
         }
 
-//        if(is_admin()){
         if(!class_exists('TemPlazaFrameWork\Core\Framework')) {
             require_once TEMPLAZA_FRAMEWORK_CORE_PATH . '/framework.php';
         }
         $core   = new Framework();
-//            $core -> init();
 
         do_action( 'templaza-framework/plugin/admin_init', $this, $core );
-//        }
-
-//        else{
-//
-//            if(!defined('TEMPLAZA_FRAMEWORK_THEME_DIR_NAME')) {
-//                define('TEMPLAZA_FRAMEWORK_THEME_DIR_NAME', basename(get_template_directory()));
-//            }
-//
-//            if(!is_dir(TEMPLAZA_FRAMEWORK_THEME_PATH)){
-//                return;
-//            }
-//
-//            $this -> theme_options  = Functions::get_theme_options();
-//            $this -> load_template();
-//        }
-//
-//        do_action( 'templaza-framework/plugin/init', $this);
     }
 
     public function frontend_init(){
@@ -166,8 +143,6 @@ class TemPlazaFrameWork{
             $this -> theme_options  = Functions::get_theme_options();
 
             $this -> load_template();
-
-//            do_action( 'templaza-framework/plugin/init', $this);
         }
     }
 

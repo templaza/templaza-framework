@@ -22,6 +22,13 @@ if(!class_exists('Templaza_Custom_Redux_Select')){
         }
 //
         protected function hooks(){
+
+            add_filter("redux/{$this->args['opt_name']}/field/class/select", function($filter_path, $field){
+                $_filter_path   = TEMPLAZA_FRAMEWORK_FIELD_PATH.'/select/override-redux-select.php';
+                $filter_path    = file_exists($_filter_path)?$_filter_path:$filter_path;
+                return $filter_path;
+            }, 10, 2);
+
             add_filter("redux/{$this -> args['opt_name']}/field/class/{$this -> redux_field_type}",
                 array($this, 'custom_enqueue_field'), 10, 2);
 

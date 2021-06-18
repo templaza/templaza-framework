@@ -17,7 +17,7 @@ if(!empty($content)){
 
     if(has_shortcode($content, 'templaza_header')){
         $options        = Functions::get_theme_options();
-        $header         = isset($options['enable-header'])?(bool) $options['enable-header']:true;
+        $header         = isset($options['enable-header'])?filter_var($options['enable-header'],FILTER_VALIDATE_BOOLEAN):true;
 
         if($header){
             $header_absolute = isset($options['header-absolute'])?(bool) $options['header-absolute']:false;

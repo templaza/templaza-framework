@@ -11,10 +11,10 @@ $options                    = Functions::get_theme_options();
 
 $header_menu                = isset($options['header-menu'])?$options['header-menu']:'header';
 $header_menu_level          = isset($options['header-menu-level'])?(int) $options['header-menu-level']:0;
-$enable_offcanvas           = isset($options['enable-offcanvas'])?(bool) $options['enable-offcanvas']:false;
+$enable_offcanvas           = isset($options['enable-offcanvas'])?filter_var($options['enable-offcanvas'], FILTER_VALIDATE_BOOLEAN):false;
 $offcanvas_animation        = isset($options['offcanvas-animation'])?$options['offcanvas-animation']:'st-effect-1';
 //$offcanvas_direction        = isset($options['offcanvas-direction'])?(bool) $options['offcanvas-direction']:true;
-$offcanvas_direction        = isset($options['offcanvas-direction']) && (bool) $options['offcanvas-direction']?'offcanvasDirLeft':'offcanvasDirRight';
+$offcanvas_direction        = isset($options['offcanvas-direction'])?$options['offcanvas-direction']:'offcanvasDirLeft';
 $offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$options['offcanvas-togglevisibility']:'d-block';
 
 $class                      = ['templaza-header', 'templaza-header-sticky'];

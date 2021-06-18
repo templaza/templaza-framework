@@ -18,6 +18,7 @@ Templaza_API::set_section('templaza_style',
             array(
                 'id'       => 'layout',
                 'type'     => 'tz_layout',
+                'title'    => 'Layout',
                 'class'    => 'field-tz_layout-content',
     //            'elements' => array(
     //                array(

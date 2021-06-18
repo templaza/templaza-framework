@@ -20,16 +20,13 @@ class Framework{
 
     public function __construct()
     {
-//        if(is_admin()) {
+        if(is_admin()) {
             $this->init();
-//        }
+        }
     }
 
     public function init(){
-
-//        if (!class_exists('ReduxFramework')) {
-//            return;
-//        }
+        
         if (!class_exists('Redux')) {
             return;
         }
@@ -132,13 +129,14 @@ class Framework{
         if($sections = \Templaza_API::construct_sections('settings')) {
             $opt_name   = $args['opt_name'];
             if(count($sections)) {
-                \Templaza_API::load_my_fields($opt_name);
-
                 \Redux::set_args($opt_name, $args);
+
                 \Redux::set_sections($opt_name, $sections);
                 $path = TEMPLAZA_FRAMEWORK_CORE_PATH . '/extensions/';
                 \Redux::set_extensions($opt_name, $path);
+                \Templaza_API::load_my_fields($opt_name);
                 \Redux::init($opt_name);
+
             }
         }
 
@@ -247,7 +245,7 @@ class Framework{
 
     public function enqueue(){
         wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'__js', Functions::get_my_frame_url().'/assets/js/core.js',
-            array(), false, true);
+            array('redux-js'), time(), true);
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css-core',
             Functions::get_my_frame_url().'/assets/vendors/core/core.css');
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css-fontawesome',

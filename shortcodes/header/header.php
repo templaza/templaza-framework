@@ -22,7 +22,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Header')){
         public function after_shortcode($shortcode){
 
             $options        = Functions::get_theme_options();
-            $header         = isset($options['enable-header'])?(bool) $options['enable-header']:true;
+            $header         = isset($options['enable-header'])?filter_var($options['enable-header'], FILTER_VALIDATE_BOOLEAN):true;
 
             if(!$header){
                 return '';

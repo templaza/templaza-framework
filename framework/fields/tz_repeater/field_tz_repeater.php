@@ -5,8 +5,12 @@ defined( 'TEMPLAZA_FRAMEWORK' ) or exit;
 
 use TemPlazaFramework\Functions;
 
+//if(!Redux_Functions::class_exists_ex( array('Redux_Spacing') )){
+//    require_once Redux_Core::$dir .'inc/fields/spacing/class-redux-spacing.php';
+//}
+
 if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
-    class ReduxFramework_TZ_Repeater
+    class ReduxFramework_TZ_Repeater extends Redux_Field
     {
         protected $elements;
         protected $opt_name;
@@ -15,7 +19,8 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
         protected $templates = array();
         protected $ignore_fields = array();
 
-        function __construct( $field = array(), $value = '', $parent ) {
+        public function __construct( $field = array(), $value = '', $parent ) {
+            parent::__construct(array(), null, $parent);
             $this -> text_domain    = Functions::get_my_text_domain();
             $this->parent           = $parent;
             $this->field            = $field;
@@ -39,9 +44,8 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
             $sections                           = array(
                 'title' => '',
                 array(
-
-//                        'id' => 'megamenu-settings-section',
-//                        'title' => esc_html__('Settings', $this -> text_domain),
+                    'id'    => uniqid(),
+                    'title' => '',
                     'fields' => $fields
                 )
             );
@@ -61,11 +65,9 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
             $redux_args['show_import_export']   = false;
             $redux_args['class']   = 'fully-expanded field-tz_repeater__container';
 
-
-            \Templaza_API::load_my_fields($opt_name);
-
             \Redux::set_args($opt_name, $redux_args);
             \Redux::set_sections($opt_name, $sections);
+            \Templaza_API::load_my_fields($opt_name);
             \Redux::init($opt_name);
 
 

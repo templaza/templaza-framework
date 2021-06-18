@@ -13,16 +13,16 @@ $mode                       = isset($options['header-horizontal-menu-mode'])?$op
 $block_1_type               = isset($options['header-block-1-type'])?$options['header-block-1-type']:'blank';
 $block_1_custom             = isset($options['header-block-1-custom'])?$options['header-block-1-custom']:'';
 
-$enable_offcanvas           = isset($options['enable-offcanvas'])?(bool) $options['enable-offcanvas']:false;
+$enable_offcanvas           = isset($options['enable-offcanvas'])?filter_var($options['enable-offcanvas'],FILTER_VALIDATE_BOOLEAN):false;
 $offcanvas_animation        = isset($options['offcanvas-animation'])?$options['offcanvas-animation']:'st-effect-1';
-$offcanvas_direction        = isset($options['offcanvas-direction']) && (bool) $options['offcanvas-direction']?'offcanvasDirLeft':'offcanvasDirRight';
+$offcanvas_direction        = isset($options['offcanvas-direction'])?$options['offcanvas-direction']:'offcanvasDirLeft';
 $offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$options['offcanvas-togglevisibility']:'d-block';
 
 //$class                      = ['templaza-header', 'templaza-horizontal-header', 'templaza-horizontal-' . $mode . '-header'];
 $navClass                   = ['nav', 'navbar-nav', 'templaza-nav', 'd-none', 'd-lg-flex'];
 $navWrapperClass            = ['align-self-center', 'px-2', 'd-none', 'd-lg-block'];
 
-$dropdown_arrow             = isset($options['dropdown-arrow'])?(bool) $options['dropdown-arrow']:true;
+$dropdown_arrow             = isset($options['dropdown-arrow'])?filter_var($options['dropdown-arrow'], FILTER_VALIDATE_BOOLEAN):true;
 //$dropdown_animation_ease    = isset($options['dropdown-animation-ease'])?$options['dropdown-animation-ease']:'linear';
 $dropdown_animation_type    = isset($options['dropdown-animation-type'])?$options['dropdown-animation-type']:'fade';
 $dropdown_animation_effect  = isset($options['dropdown-animation-effect'])?$options['dropdown-animation-effect']:'fade-down';

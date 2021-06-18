@@ -15,12 +15,12 @@ $block_1_custom = isset($options['header-block-1-custom'])?$options['header-bloc
 $block_2_type   = isset($options['header-block-2-type'])?$options['header-block-2-type']:'blank';
 $block_2_custom = isset($options['header-block-2-custom'])?$options['header-block-2-custom']:'';
 
-$enable_offcanvas           = isset($options['enable-offcanvas'])?(bool) $options['enable-offcanvas']:false;
+$enable_offcanvas           = isset($options['enable-offcanvas'])?filter_var($options['enable-offcanvas'], FILTER_VALIDATE_BOOLEAN):false;
 $offcanvas_animation        = isset($options['offcanvas-animation'])?$options['offcanvas-animation']:'st-effect-1';
-$offcanvas_direction        = isset($options['offcanvas-direction'])?(bool) $options['offcanvas-direction']:true;
+$offcanvas_direction        = isset($options['offcanvas-direction'])?$options['offcanvas-direction']:'offcanvasDirLeft';
 $offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$options['offcanvas-togglevisibility']:'d-block';
 
-$dropdown_arrow             = isset($options['dropdown-arrow'])?(bool) $options['dropdown-arrow']:true;
+$dropdown_arrow             = isset($options['dropdown-arrow'])?filter_var($options['dropdown-arrow'], FILTER_VALIDATE_BOOLEAN):true;
 //$dropdown_animation_speed   = isset($options['dropdown-animation-speed'])?(bool) $options['dropdown-animation-speed']:300;
 //$dropdown_animation_ease    = isset($options['dropdown-animation-ease'])?(bool) $options['dropdown-animation-ease']:'linear';
 $dropdown_animation_type    = isset($options['dropdown-animation-type'])?(bool) $options['dropdown-animation-type']:'fade';
@@ -42,10 +42,10 @@ $block_2_sidebar            = isset($options['header-block-2-sidebar'])?$options
 $header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'';
 
 $navClass[] = $dropdown_animation_effect;
-$dropdown_style = '.templaza-nav.'.$dropdown_animation_effect.' .sub-menu {
-    transition-duration: '.$dropdown_animation_speed_1.'ms, '.$dropdown_animation_speed_2.'ms;
-}';
-Templates::add_inline_style($dropdown_style);
+//$dropdown_style = '.templaza-nav.'.$dropdown_animation_effect.' .sub-menu {
+//    transition-duration: '.$dropdown_animation_speed_1.'ms, '.$dropdown_animation_speed_2.'ms;
+//}';
+//Templates::add_inline_style($dropdown_style);
 
 // Get data attributes - them added from header shortcode
 $data_attribs = $menu_datas = Functions::get_attributes('header');

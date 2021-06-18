@@ -4,14 +4,21 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
 
 use TemPlazaFramework\Functions;
 
+//$field_class = Redux_Functions::class_exists_ex( $field_classes );
+if(!Redux_Functions::class_exists_ex( array('Redux_Spacing') )){
+    require_once Redux_Core::$dir .'inc/fields/spacing/class-redux-spacing.php';
+}
+
+
 if(!class_exists('Templaza_Custom_Redux_Spacing')){
-    class Templaza_Custom_Redux_Spacing{
+    class Templaza_Custom_Redux_Spacing  extends Redux_Spacing{
 
         protected $redux_field_type = 'spacing';
         protected $units;
-        protected $select2_config;
+//        protected $select2_config;
 
         public function __construct( $args = array(), $parent = null) {
+            parent::__construct(array(), null, $parent);
             $this -> args   = $args;
             $this -> parent = $parent;
             $this -> text_domain    = Functions::get_my_text_domain();
@@ -22,7 +29,7 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
 
             $this -> hooks();
         }
-//
+
         protected function hooks(){
             add_filter("redux/{$this -> args['opt_name']}/field/class/{$this -> redux_field_type}",
                 array($this, 'custom_enqueue_field'), 10, 2);
@@ -30,29 +37,13 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
             add_action("redux/field/{$this ->args['opt_name']}/spacing/render/before", array($this, 'custom_before_render_field'), 10, 2);
             add_filter("redux/field/{$this -> args['opt_name']}/spacing/render/after", array($this, 'custom_render_field'), 10, 2);
 
-//            add_filter("redux/{$this -> args['opt_name']}/field/class/typography", array($this, 'custom_enqueue_field'), 10, 2);
-
             do_action('templaza-framework/override/redux-field/'.$this -> redux_field_type.'/hooks', $this);
         }
 
         public function custom_before_render_field(&$field, &$value){
             if((isset($field['allow_responsive']) && $field['allow_responsive']) ||
                 (isset($field['mode']) && !in_array($field['mode'], array('absolute', 'margin', 'padding')))) {
-//            if(isset($field['allow_responsive']) && $field['allow_responsive']) {
                 $this -> value  = $value;
-
-//                if($value){
-//                    if(isset($value['font-size'])) {
-//                        $value['font-size'] = '';
-//                    }
-//                    if(isset($value['line-height'])) {
-//                        $value['line-height'] = '';
-//                    }
-//                    if(isset($value['letter-spacing'])) {
-//                        $value['letter-spacing'] = '';
-//                    }
-//                }
-//            }
             }
         }
 
@@ -69,9 +60,6 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
                     $_render    = ob_get_contents();
                     ob_end_clean();
                 }
-//                if(!empty($_render)){
-//                    $_render    = '<div data-responsive="'.(isset($field['allow_responsive'])?(int) $field['allow_responsive']:0).'">'.$_render.'</div>';
-//                }
             }
 
             return $_render;
@@ -80,7 +68,6 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
         public function custom_enqueue_field($filter_path, $field){
             if(wp_script_is('redux-field-'.$this -> redux_field_type.'-js') &&
                 !wp_script_is('custom-redux-'.$this -> redux_field_type.'-js')) {
-//            if(!wp_script_is('custom-redux-'.$this -> redux_field_type.'-js')) {
                 $dep_array = array('redux-field-'.$this -> redux_field_type.'-js');
                 wp_enqueue_script('custom-redux-'.$this -> redux_field_type.'-js', Functions::get_my_frame_url()
                     . "/fields/{$this -> redux_field_type}/custom-redux-{$this -> redux_field_type}.js", $dep_array, time(), true);
@@ -130,15 +117,11 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
             $this->value = wp_parse_args( $this -> value, $defaults );
 
             if ( empty( $this -> field['units'] )
-                || (!empty($this -> field['units']) && !is_array($this -> field['units'])
+                || ($this -> units && !empty($this -> field['units']) && !is_array($this -> field['units'])
                     && ! in_array( $this -> field['units'], $this -> units, true )) ) {
                 $this -> field['units'] = 'px';
             }
 
-//            if ( empty( $this -> field['fonts'] ) ) {
-//                $this -> user_fonts     = false;
-//                $this -> field['fonts'] = $this -> std_fonts;
-//            }
         }
     }
 }

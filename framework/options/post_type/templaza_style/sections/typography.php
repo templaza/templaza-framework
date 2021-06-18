@@ -24,21 +24,23 @@ Templaza_API::set_section('templaza_style',
         'fields'     => array(
             array(
                 'id'       => 'typography-body',
-                'type'     => 'button_set',
+                'type'     => 'select',
                 'title'    => __( 'Typography Properties', $this -> text_domain ),
                 'subtitle' => __( 'Choose typography properties for this section. If <code>Default</code> selected then properties will inherit from CSS code.', $this -> text_domain ),
                 'options'  => array(
                     'default'     => __('Default', $this -> text_domain),
                     'custom'      => __('Custom', $this -> text_domain),
                 ),
-                'default'  => 'default',
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
             ),
             array(
                 'id'                      => 'typography-body-option',
                 'type'                    => 'typography',
                 'title'                   => __( 'Body Font', $this -> text_domain ),
                 'subtitle'                => __( 'Specify the body font properties.', $this -> text_domain ),
-                'required'                => array('typography-body', '=', 'custom'),
+                'required'                => array('typography-body', '!=', 'default'),
                 'color'                   => false,
                 'text-align'              => false,
                 'preview'                 => true, // Disable the previewer
@@ -50,17 +52,24 @@ Templaza_API::set_section('templaza_style',
                 'allow_empty_line_height' => true,
                 'google'                  => true,
                 'units'                   => array(
-                    'font-size'   => 'px',
-                    'line-height' => 'em',
+                    'font-size'   => array(''),
+                    'line-height' => array(''),
+                    'letter-spacing' => array(''),
                 ),
-                'default'        => array(
-                    'color'          => '#000',
-                    'font-weight'    => '400',
-                    'letter-spacing' => '0',
-                    'text-transform' => 'none',
-                    'font-family'    => 'Nunito',
-                    'font-backup'    => 'Arial, Helvetica, sans-serif',
+                'default'                 => array(
+                    'color'          => '',
+                    'font-weight'    => '',
+                    'letter-spacing' => '',
+                    'text-transform' => '',
+                    'font-family'    => '',
+                    'font-backup'    => '',
+                    'units'          => array(
+                        'font-size'     => '',
+                        'line-height'   => '',
+                        'letter-spacing'   => '',
+                    )
                 ),
+                'select2'       => array( 'allowClear' => true ),
             ),
         )
     )

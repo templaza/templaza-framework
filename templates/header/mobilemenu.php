@@ -8,7 +8,7 @@ use TemPlazaFramework\Templates;
 
 $options        = Functions::get_theme_options();
 
-$header             = isset($options['enable-header'])?(bool) $options['enable-header']:true;
+$header             = isset($options['enable-header'])?filter_var($options['enable-header'], FILTER_VALIDATE_BOOLEAN):true;
 $header_mobile_menu = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'';
 
 if ($header && !empty($header_mobile_menu)) {

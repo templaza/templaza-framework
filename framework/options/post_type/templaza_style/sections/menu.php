@@ -30,6 +30,7 @@ Templaza_API::set_section('templaza_style',
                 'all'    => false,
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                 'title'  => esc_html__('Padding', $this -> text_domain),
+                'select2'   => array('allowClear' => true),
             ),
             array(
                 'id'     => 'main-menu-margin',
@@ -38,6 +39,7 @@ Templaza_API::set_section('templaza_style',
                 'all'    => false,
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                 'title'  => esc_html__('Margin', $this -> text_domain),
+                'select2'   => array('allowClear' => true),
             ),
         ),
     )
@@ -57,6 +59,7 @@ Templaza_API::set_section('templaza_style',
                 'all'    => false,
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                 'title'  => esc_html__('Padding', $this -> text_domain),
+                'select2'   => array('allowClear' => true),
             ),
             array(
                 'id'     => 'sticky-menu-margin',
@@ -65,6 +68,7 @@ Templaza_API::set_section('templaza_style',
                 'all'    => false,
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                 'title'  => esc_html__('Margin', $this -> text_domain),
+                'select2'   => array('allowClear' => true),
             ),
         ),
     )
