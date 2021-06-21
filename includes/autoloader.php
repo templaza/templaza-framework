@@ -3,6 +3,7 @@
 defined('ABSPATH') or exit();
 
 require_once __DIR__.'/defines.php';
+require_once __DIR__.'/array_helper.php';
 require_once __DIR__.'/functions.php';
 require_once __DIR__.'/css.php';
 require_once __DIR__.'/post_typefunctions.php';
