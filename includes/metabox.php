@@ -119,10 +119,10 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                 $redux_args['open_expanded']        = true;
                 $redux_args['show_import_export']   = false;
 
-                \Templaza_API::load_my_fields($metabox['id']);
-
                 Redux::set_args($metabox['id'], $redux_args);
                 Redux::set_sections($metabox['id'], $sections);
+
+                \Templaza_API::load_my_fields($metabox['id']);
                 Redux::init($metabox['id']);
 
                 add_filter("redux/{$setting_args['opt_name']}/repeater", function($repeater_data) use($redux_args){

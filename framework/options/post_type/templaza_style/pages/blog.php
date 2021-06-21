@@ -82,7 +82,7 @@ Templaza_API::set_section('templaza_style',
                 'placeholder'   => esc_html__('Inherit', $this -> text_domain),
                 'select2'       => array( 'allowClear' => true ),
                 'default'       => '',
-                'required' => array('blog-page-thumbnail', '=' , true)
+                'required' => array('blog-page-thumbnail', '!=' , 'off')
             ),
             array(
                 'id'       => 'blog-page-thumbnail-effect',
@@ -93,7 +93,7 @@ Templaza_API::set_section('templaza_style',
                 'placeholder'   => esc_html__('Inherit', $this -> text_domain),
                 'select2'       => array( 'allowClear' => true ),
                 'default'       => '',
-                'required' => array('blog-page-thumbnail', '=' , true)
+                'required' => array('blog-page-thumbnail', '!=' , 'off')
             ),
             array(
                 'id'       => 'blog-page-date',
@@ -323,7 +323,7 @@ Templaza_API::set_section('templaza_style',
                 'placeholder'   => esc_html__('Inherit', $this -> text_domain),
                 'select2'       => array( 'allowClear' => true ),
                 'default'       => '',
-                'required' => array('blog-single-thumbnail', '=' , true)
+                'required' => array('blog-single-thumbnail', '!=' , 'off')
             ),
             array(
                 'id'       => 'blog-single-thumbnail-effect',
@@ -334,7 +334,7 @@ Templaza_API::set_section('templaza_style',
                 'placeholder'   => esc_html__('Inherit', $this -> text_domain),
                 'select2'       => array( 'allowClear' => true ),
                 'default'       => '',
-                'required' => array('blog-page-thumbnail', '=' , true)
+                'required' => array('blog-page-thumbnail', '!=' , 'off')
             ),
             array(
                 'id'       => 'blog-single-date',
