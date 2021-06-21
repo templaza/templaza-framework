@@ -75,7 +75,46 @@ if(!class_exists('TemPlazaFramework\Functions')){
             return 'tzfrm_'.basename(get_template_directory()).'_opt';
         }
 
+        public static function get_global_settings(){
+            $opt_name   = self::get_theme_option_name();
+
+            $store_id   = __METHOD__;
+            $store_id  .= ':'.$opt_name;
+            $store_id   = md5($store_id);
+
+            if(isset(self::$cache[$store_id])){
+                return self::$cache[$store_id];
+            }
+            $options = get_option($opt_name, array());
+            if(count($options)){
+                self::$cache[$store_id] = $options;
+            }
+            return $options;
+        }
+
         public static function get_theme_options($post_type = ''){
+//            if(is_admin()){
+//                return;
+//            }
+            $global_options     = self::get_global_settings();
+            $template_options   = self::_get_theme_options($post_type);
+//            var_dump($global_options['header-mode']);
+//            var_dump($global_options['header-horizontal-menu-mode']);
+//            var_dump($template_options['header-mode']);
+//            var_dump($template_options['header-horizontal-menu-mode']);
+//            $test   = new \ReflectionException();
+//            $test ->getFile()
+//            var_dump($test); die();
+//            var_dump(__FILE__);
+//            die(__FILE__);
+
+            $theme_options      = self::merge_array($template_options, $global_options);
+//            $theme_options      = self::merge_array($global_options, $template_options);
+//            $theme_options      = $template_options;
+
+            return $theme_options;
+        }
+        protected static function _get_theme_options($post_type = ''){
             $the_ID = \get_the_ID();
 
             if(is_single() || is_archive()){
@@ -113,8 +152,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
 
             $style_id   = get_post_meta($id, 'templaza-style', true);
 
-//            $style_slug   = get_post_meta($id, 'templaza-style', true);
-
             // Is slug
             if($style_id && !is_numeric($style_id)) {
                 // Get style id by style slug
@@ -127,8 +164,15 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 $style_id = $posts[0]->ID;
             }
 
+            // When not found style id return to global options (old version to home options)
             if(!$id || empty($style_id)){
-                // Get home post id
+
+                // Return by global options
+                return self::get_global_settings();
+
+                /* Get home post id
+                * Replace by global options
+                 */
                 $args = array(
                     'post_type'      => 'templaza_style',
                     'meta_query' => array(
@@ -141,7 +185,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 );
                 $posts = \get_posts($args);
                 if($posts && count($posts)){
-//                    $id   = $posts[0] -> ID;
                     $style_id   = $posts[0] -> ID;
                 }
             }
@@ -393,7 +436,9 @@ if(!class_exists('TemPlazaFramework\Functions')){
 
                 // Reset shortcode tree when level is zero
                 if($level == 0){
-                    self::$shortcode  .= $shortcode['shortcode']['open'][$level];
+                    if(isset($shortcode['shortcode']['open'][$level])) {
+                        self::$shortcode .= $shortcode['shortcode']['open'][$level];
+                    }
                     $shortcode['shortcode']   = array();
                 }
 
@@ -476,23 +521,28 @@ if(!class_exists('TemPlazaFramework\Functions')){
         }
 
         public static function get_templaza_style_by_slug(){
-        $args     = array(
-            'post_type'      => 'templaza_style',
-            'posts_per_page' => -1,
-            'orderby'        => 'title',
-            'order'          => 'ASC',
-            'meta_key'       => '_templaza_style_theme',
-            'meta_value'     => basename(get_template_directory()),
-        );
+            $args     = array(
+                'post_type'      => 'templaza_style',
+                'posts_per_page' => -1,
+                'orderby'        => 'title',
+                'order'          => 'ASC',
+                'meta_key'       => '_templaza_style_theme',
+                'meta_value'     => basename(get_template_directory()),
+            );
 
-        $tz_posts = \get_posts($args);
-        if($tz_posts && count($tz_posts)){
             $data    = array();
-            foreach($tz_posts as $_tz_post){
-                $data[$_tz_post -> post_name] = $_tz_post -> post_title;
+            $tz_posts = \get_posts($args);
+            if($tz_posts && count($tz_posts)){
+    //            $data    = array();
+                foreach($tz_posts as $_tz_post){
+                    $data[$_tz_post -> post_name] = $_tz_post -> post_title;
+                }
             }
+            return $data;
         }
-        return $data;
-    }
+
+        public static function merge_array($source, $destination, $recursive = false){
+            return Array_Helper::merge($source, $destination, $recursive);
+        }
     }
 }

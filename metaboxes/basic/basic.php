@@ -53,22 +53,6 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
                                 'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
                                 'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
                             ),
-//                            array(
-//                                'id'       => 'templaza-style',
-//                                'type'     => 'select',
-//                                'data'     => 'posts',
-//                                'width'    => '100%',
-//                                'title'    => esc_html__('Templaza Style', $this -> text_domain),
-//                                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
-//                                'args'     => array(
-//                                    'post_type'      => 'templaza_style',
-//                                    'posts_per_page' => -1,
-//                                    'orderby'        => 'title',
-//                                    'order'          => 'ASC',
-//                                    'meta_key'       => '_templaza_style_theme',
-//                                    'meta_value'     => basename(get_template_directory()),
-//                                ),
-//                            ),
                         ),
                     ),
                 ),
@@ -114,10 +98,10 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
                 if(method_exists($this,'post_type_table_head')) {
                     add_filter('manage_'.$post_type.'_posts_columns', array($this, 'post_type_table_head'));
                 }
-                // Add content column to post type list
-                if(method_exists($this,'post_type_table_content')) {
-                    add_action( 'manage_'.$post_type.'_posts_custom_column', array($this, 'post_type_table_content'), 10, 2 );
-                }
+//                // Add content column to post type list
+//                if(method_exists($this,'post_type_table_content')) {
+//                    add_action( 'manage_'.$post_type.'_posts_custom_column', array($this, 'post_type_table_content'), 10, 2 );
+//                }
                 // Ordering column
                 if(method_exists($this,'post_type_table_sorting')) {
                     add_filter( 'manage_edit-'.$post_type.'_sortable_columns', array($this, 'post_type_table_sorting' ) );
@@ -161,7 +145,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
             $columns = array(
                 "cb"                 => "<input type=\"checkbox\" />",
                 "title"              => esc_html__("Title", $this -> text_domain),
-                "home"             => esc_html__("Default",$this -> text_domain),
+//                "home"             => esc_html__("Default",$this -> text_domain),
                 "date"               => esc_html__("Date",$this -> text_domain)
             );
             return $columns;
