@@ -121,8 +121,8 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 add_action( 'save_post_'.$this -> get_post_type(), array( $this, 'save_main_options' ), 10, 2 );
 //                add_action( 'save_post', array( $this, 'save_main_options' ), 10, 2 );
 
-                // Check post allow or deny when trash
-                add_filter('pre_trash_post', array($this, 'pre_trash_post'), 10, 2);
+//                // Check post allow or deny when trash
+//                add_filter('pre_trash_post', array($this, 'pre_trash_post'), 10, 2);
 
                 // Create duplicate action
                 add_filter('post_row_actions', array($this, 'duplicate_post_link'), 10, 2);
@@ -257,10 +257,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                     \Redux::set_extensions($opt_name, $path);
                     \Redux::init($opt_name);
                     $default_options    = \Redux::$options_defaults;
-//                    var_dump(\Redux::$options_defaults);
-//                    die();
-//                    var_dump($default_options);
-//                    die();
 
                     if(($redux  = \Redux::instance($opt_name))
                         && $this -> get_current_screen_post_type() == $this -> get_post_type()) {
@@ -505,30 +501,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             $post_type  = $this -> get_post_type();
             $opt_name   = $this -> setting_args[$post_type]['opt_name'];
 
-//            // Global settings
-//            $gb_opt_name    = isset($this -> setting_args['settings']['opt_name'])?$this -> setting_args['settings']['opt_name']:'';
-//            $gb_options     = !empty($gb_opt_name)?get_option($gb_opt_name, array()):array();
-//            $tpl_options    = !empty($opt_name)?get_option($opt_name, array()):array();
-//
-//            $tpl_options    = count($tpl_options)?$tpl_options:$gb_options;
-//
-////            $tpl_options    = wp_parse_args()
-//
-////            $x = array('a' => '', 'b' => 'B', 'c'=> 'C');
-////            $y = array('a' => 'A', 'b' => '', 'd'=> 'D');
-////            echo('<pre>');
-//////            var_dump(wp_parse_args($y, $x));
-//////            var_dump(wp_parse_args($gb_options, $tpl_options));
-////            var_dump($tpl_options);
-////            var_dump($gb_options);
-////            echo('</pre>');
-//////            var_dump(get_option($opt_name, array()));
-//////            var_dump(get_option($this -> setting_args['settings']['opt_name'], array()));
-////            die();
-
-
             if($redux  = \Redux::instance($opt_name)) {
-//                var_dump($redux ->required); die();
                 $redux->_register_settings();
                 $redux->generate_panel();
             }
