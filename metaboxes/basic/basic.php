@@ -8,27 +8,27 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
     class TemplazaFramework_MetaBox_Basic extends TemplazaFramework_MetaBox{
 
         public function register(){
-            $metaboxes[] = array(
-                'id'            => 'basic',
-                'title'         => __( 'Basic Options', $this -> text_domain ),
-                'post_types'    => array('templaza_style' ),
-                'position'      => 'side', // normal, advanced, side
-                'priority'      => 'core', // high, core, default, low - Priorities of placement
-                'store_each'    => true, // Store value of each fields to each post meta
-                'sections'      => array(
-                    array(
-                        'fields' => array(
-                            array(
-                                'id'       => 'home',
-                                'type'     => 'switch',
-                                'default'  => false,
-                                'title'    => esc_html__('Default', $this -> text_domain),
-                                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
-                            ),
-                        ),
-                    ),
-                ),
-            );
+//            $metaboxes[] = array(
+//                'id'            => 'basic',
+//                'title'         => __( 'Basic Options', $this -> text_domain ),
+//                'post_types'    => array('templaza_style' ),
+//                'position'      => 'side', // normal, advanced, side
+//                'priority'      => 'core', // high, core, default, low - Priorities of placement
+//                'store_each'    => true, // Store value of each fields to each post meta
+//                'sections'      => array(
+//                    array(
+//                        'fields' => array(
+//                            array(
+//                                'id'       => 'home',
+//                                'type'     => 'switch',
+//                                'default'  => false,
+//                                'title'    => esc_html__('Default', $this -> text_domain),
+//                                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+//                            ),
+//                        ),
+//                    ),
+//                ),
+//            );
 
             // Get all post types without templaza_style
 //            $tzfrm_post_types  = Post_TypeFunctions::getPostTypes();

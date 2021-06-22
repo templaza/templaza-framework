@@ -122,7 +122,9 @@
     }
 
     a:hover,
-    .uk-link:hover {
+    .uk-link:hover,
+    .uk-link-toggle:hover .uk-link,
+    .uk-link-toggle:focus .uk-link {
         color: $inverse-base-link-hover-color;
         @if(mixin-exists(hook-inverse-base-link-hover)) {@include hook-inverse-base-link-hover();}
     }
@@ -423,6 +425,16 @@
 @mixin hook-card-secondary-title(){}
 @mixin hook-card-secondary-hover(){}
 @mixin hook-card-misc(){}
+@mixin hook-inverse-card-badge(){}
+@mixin hook-inverse-component-card(){
+
+    &.uk-card-badge {
+        background-color: $inverse-card-badge-background;
+        color: $inverse-card-badge-color;
+        @if(mixin-exists(hook-inverse-card-badge)) {@include hook-inverse-card-badge();}
+    }
+
+}
 @mixin hook-close(){}
 @mixin hook-close-hover(){}
 @mixin hook-close-misc(){}
@@ -701,11 +713,22 @@
     .uk-form-icon:hover { color: $inverse-form-icon-hover-color; }
 
 }
+@mixin hook-grid-divider-horizontal(){}
+@mixin hook-grid-divider-vertical(){}
 @mixin hook-grid-misc(){}
+@mixin hook-inverse-grid-divider-horizontal(){}
+@mixin hook-inverse-grid-divider-vertical(){}
 @mixin hook-inverse-component-grid(){
 
-    .uk-grid-divider > :not(.uk-first-column)::before { border-left-color: $inverse-grid-divider-border; }
-    .uk-grid-divider.uk-grid-stack > .uk-grid-margin::before { border-top-color: $inverse-grid-divider-border; }
+    .uk-grid-divider > :not(.uk-first-column)::before {
+        border-left-color: $inverse-grid-divider-border;
+        @if(mixin-exists(hook-inverse-grid-divider-horizontal)) {@include hook-inverse-grid-divider-horizontal();}
+    }
+
+    .uk-grid-divider.uk-grid-stack > .uk-grid-margin::before {
+        border-top-color: $inverse-grid-divider-border;
+        @if(mixin-exists(hook-inverse-grid-divider-vertical)) {@include hook-inverse-grid-divider-vertical();}
+    }
 
 }
 @mixin hook-heading-small(){}
@@ -1090,6 +1113,15 @@
 
     .uk-nav-primary .uk-nav-sub li.uk-active > a { color: $inverse-nav-primary-sublist-item-active-color; }
 
+    //
+    // Dividers
+    //
+
+    .uk-nav.uk-nav-divider > :not(.uk-nav-divider) + :not(.uk-nav-header, .uk-nav-divider) {
+        border-top-color: $inverse-nav-dividers-border;
+        @if(mixin-exists(hook-nav-dividers)) {@include hook-nav-dividers();}
+    }
+
 }
 @mixin hook-inverse-component-navbar(){
 
@@ -1435,6 +1467,7 @@
 @mixin hook-nav-primary-item-active(){}
 @mixin hook-nav-primary-header(){}
 @mixin hook-nav-primary-divider(){}
+@mixin hook-nav-dividers(){}
 @mixin hook-nav-misc(){}
 @mixin hook-inverse-nav-parent-icon(){}
 @mixin hook-inverse-nav-default-item(){}
