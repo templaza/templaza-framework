@@ -9,7 +9,8 @@ ul{
   }
 }
 .templaza-archive-item{
-  .templaza-post-meta{
+  .templaza-post-meta,
+  .templaza-blog-share{
     line-height: 1.6em;
     span{
       color:$tztheme-postmeta;
@@ -19,6 +20,24 @@ ul{
       }
       &:not(:last-child){
         padding-right:15px;
+      }
+    }
+  }
+  .templaza-blog-share{
+    a{
+      color:$tztheme-postmeta;
+      i{
+        padding-right:5px;
+        font-size:0.9em;
+      }
+      &:not(:last-child){
+        padding-right:15px;
+      }
+      &:hover{
+        color:$tztheme-global-color;
+        span{
+          color:$tztheme-global-color;
+        }
       }
     }
   }
@@ -35,27 +54,27 @@ ul{
       width:100%;
     }
   }
-  .tns-outer{
-    position:relative;
-    .tns-controls{
+  .templaza-blog-item-link{
+    background:$tztheme-format-link-background;
+  }
+  .templaza-archive-gallery{
+    .uk-slideshow-items{
+      li{
+        margin:0;
+      }
+    }
+    .uk-slidenav{
+      @include button-slider-default;
+      height:$tztheme-height-button-slider;
+      width:$tztheme-height-button-slider;
+      text-align: center;
       margin:0;
-      button{
-        @include button-slider-default;
-        height:$tztheme-height-button-slider;
-        width:$tztheme-height-button-slider;
-        text-align: center;
-        position:absolute;
-        top:50%;
-        margin-top: -($tztheme-height-button-slider/2);
-        margin-left: 0;
-        margin-right: 0;
-        left:0;
-        @include border-radius(0 5px 5px 0);
-        &[data-controls="next"]{
-          right:0;
-          left:auto;
-          @include border-radius(5px 0 0 5px);
-        }
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      @include border-radius(0 5px 5px 0);
+      &.uk-slidenav-next{
+        @include border-radius(5px 0 0 5px);
       }
     }
   }

@@ -13,7 +13,6 @@ use TemPlazaFramework\Templates;
 
 $error = new WP_Error();
 
-
 $options    = Functions::get_theme_options();
 
 $errorContent   = isset($options['404-content'])?$options['404-content']:'';
@@ -77,37 +76,30 @@ if($background_setting_404){
     }
 }
 ?>
-    <div class="templaza-error-page">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center align-self-center">
-                    <?php
-                    if (!empty($errorContent) && $error ->has_errors()) {
-                        $errorContent   = str_replace('{errorcode}', $error -> get_error_code(), $errorContent);
-                        $errorContent   = str_replace('{errormessage}', htmlspecialchars($error ->get_error_message(), ENT_QUOTES, 'UTF-8'), $errorContent);
-                        echo $errorContent;
-//                        echo str_replace('{errormessage}', htmlspecialchars($error ->get_error_message(), ENT_QUOTES, 'UTF-8'), str_replace('{errorcode}', $error -> get_error_code(), $errorContent));
+    <div class="templaza-error-page uk-container uk-container-small uk-text-center">
+        <div class="col-12 text-center align-self-center">
+            <?php
+            if (!empty($errorContent) && $error ->has_errors()) {
+                $errorContent   = str_replace('{errorcode}', $error -> get_error_code(), $errorContent);
+                $errorContent   = str_replace('{errormessage}', htmlspecialchars($error ->get_error_message(), ENT_QUOTES, 'UTF-8'), $errorContent);
+                echo  wp_kses_post($errorContent);
 
-
-                    } elseif($error -> has_errors()) {
-                        ?>
-                        <div class="py-5">
-                            <h2 class="display-1"><?php echo $error -> get_error_code(); ?></h2>
-                            <h5 class="display-4"><?php echo htmlspecialchars($error -> get_error_message(), ENT_QUOTES, 'UTF-8'); ?></h5>
-                        </div>
-                        <?php
-                    }else{
-                    ?>
-                        <h1 class="title-404"><?php echo __('404 ERROR!', $this -> text_domain); ?></h1>
-                        <div id="errorboxheader"><?php echo __('Look like something went wrong!'
-                                .' The page you were looking for is not here.'
-                                .' Go Home or try a search.', $this -> text_domain);?></div>
-                    <?php
-                    }
-                    ?>
-                    <a class="btn btn-backtohome" href="<?php echo get_home_url(); ?>" role="button"><?php echo $errorButton; ?></a>
-
+            } elseif($error -> has_errors()) {
+                ?>
+                <div class="py-5">
+                    <h2 class="display-1"><?php echo $error -> get_error_code(); ?></h2>
+                    <h5 class="display-4"><?php echo htmlspecialchars($error -> get_error_message(), ENT_QUOTES, 'UTF-8'); ?></h5>
                 </div>
-            </div>
+                <?php
+            }else{
+            ?>
+                <h1 class="title-404"><?php echo __('404 ERROR!', $this -> text_domain); ?></h1>
+                <p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try a search?', 'martha' ); ?></p>
+                <?php get_search_form(); ?>
+            <?php
+            }
+            ?>
+            <a class="btn btn-backtohome" href="<?php echo get_home_url(); ?>" role="button"><?php echo $errorButton; ?></a>
+
         </div>
     </div>

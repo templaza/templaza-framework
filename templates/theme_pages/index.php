@@ -21,17 +21,12 @@ if(isset($_GET['view'])){
 }else{
     $blog_layout        = $options[$prefix.'-layout'];
 }
-$blog_grid_col      = isset($options[$prefix.'-grid-column']) && $options[$prefix.'-grid-column']?$options[$prefix.'-grid-column']:2;
+$blog_grid_col      = $options[$prefix.'-grid-column'];
 $blog_thumbnail_size= $options[$prefix.'-thumbnail-size'];
 $blog_thumbnail_effect = $options[$prefix.'-thumbnail-effect'];
-$show_tag           = isset($options[$prefix.'-tag'])?filter_var($options[$prefix.'-tag'], FILTER_VALIDATE_BOOLEAN):true;
-$show_comment_count = isset($options[$prefix.'-comment-count'])?filter_var($options[$prefix.'-comment-count'], FILTER_VALIDATE_BOOLEAN):true;
-$show_date          = isset($options[$prefix.'-date'])?filter_var($options[$prefix.'-date'], FILTER_VALIDATE_BOOLEAN):true;
+$blog_leading      = isset($options[$prefix.'-leading'])?filter_var($options[$prefix.'-leading'], FILTER_VALIDATE_BOOLEAN):true;
 $show_thumbnail     = isset($options[$prefix.'-thumbnail'])?filter_var($options[$prefix.'-thumbnail'], FILTER_VALIDATE_BOOLEAN):true;
 $show_title         = isset($options[$prefix.'-title'])?filter_var($options[$prefix.'-title'], FILTER_VALIDATE_BOOLEAN):true;
-$show_author        = isset($options[$prefix.'-author'])?filter_var($options[$prefix.'-author'], FILTER_VALIDATE_BOOLEAN):true;
-$show_post_view     = isset($options[$prefix.'-post-view'])?filter_var($options[$prefix.'-post-view'], FILTER_VALIDATE_BOOLEAN):true;
-$show_category      = isset($options[$prefix.'-category'])?filter_var($options[$prefix.'-category'], FILTER_VALIDATE_BOOLEAN):true;
 $show_description   = isset($options[$prefix.'-description'])?filter_var($options[$prefix.'-description'], FILTER_VALIDATE_BOOLEAN):true;
 $show_readmore      = isset($options[$prefix.'-readmore'])?filter_var($options[$prefix.'-readmore'], FILTER_VALIDATE_BOOLEAN):true;
 $show_share         = isset($options[$prefix.'-share'])?filter_var($options[$prefix.'-share'], FILTER_VALIDATE_BOOLEAN):true;
@@ -39,278 +34,113 @@ $show_thumbnail_audio = isset($options[$prefix.'-thumb-audio'])?filter_var($opti
 $show_thumbnail_video = isset($options[$prefix.'-thumb-video'])?filter_var($options[$prefix.'-thumb-video'], FILTER_VALIDATE_BOOLEAN):true;
 $show_thumbnail_link = isset($options[$prefix.'-thumb-link'])?filter_var($options[$prefix.'-thumb-link'], FILTER_VALIDATE_BOOLEAN):true;
 $show_thumbnail_quote = isset($options[$prefix.'-thumb-quote'])?filter_var($options[$prefix.'-thumb-quote'], FILTER_VALIDATE_BOOLEAN):true;
+$show_pagination = isset($options[$prefix.'-pagination'])?filter_var($options[$prefix.'-pagination'], FILTER_VALIDATE_BOOLEAN):true;
 $blog_cl = '';
-$blog_slider_autoplay = isset($options['blog-slider-autoplay'])?filter_var($options['blog-slider-autoplay'], FILTER_VALIDATE_BOOLEAN):true;
-$blog_slider_animation = $options['blog-slider-animation'];
-$blog_slider_nav = isset($options['blog-slider-nav'])?filter_var($options['blog-slider-nav'], FILTER_VALIDATE_BOOLEAN):true;
-if($blog_slider_autoplay==true){
-    $blog_slider_autoplay='true';
-}else{
-    $blog_slider_autoplay = 'false';
-}
-if($blog_slider_nav==true){
-    $blog_slider_nav='true';
-}else{
-    $blog_slider_nav = 'false';
-}
 if ($blog_layout == 'grid') {
-    $bl_layout_cl = 'templaza-blog-grid row';
-    $blog_cl = 'col';
+    $bl_layout_cl = 'templaza-blog-grid uk-child-width-1-'.$blog_grid_col.'@m';
+    $blog_cl = '';
 }else{
     $bl_layout_cl = 'templaza-blog-list';
     $blog_cl = '';
 }
-
 ?>
 <div id="templaza-archive-<?php echo $id;?>" class="templaza-blog templaza-archive templaza-archive-<?php echo get_post_type().$custom_class; ?>">
-    <div class="templaza-blog-body <?php echo esc_attr($bl_layout_cl);?>">
+    <div class="templaza-blog-body <?php echo esc_attr($bl_layout_cl);?>" data-uk-grid>
         <?php
-        $d = 1;
+        $d=1;
         if (have_posts()) : while (have_posts()) : the_post();
             if(is_sticky(get_the_ID())){
-                $stky_cl = 'templaza-sticky';
+                $sticky_cl = 'templaza-sticky';
             }else{
-                $stky_cl = '';
+                $sticky_cl = '';
             }
-            $templaza_comment_count = wp_count_comments(get_the_ID());
-            $templaza_class_icon = '';
-            if (has_post_format('gallery')) {
-                $templaza_class_icon = 'fas fa-images';
-            } elseif (has_post_format('video')) {
-                $templaza_class_icon = 'fas fa-play';
-            } elseif (has_post_format('audio')) {
-                $templaza_class_icon = 'fab fa-soundcloud';
-            } elseif (has_post_format('link')) {
-                $templaza_class_icon = 'fas fa-link';
-            } elseif (has_post_format('quote')) {
-                $templaza_class_icon = 'fas fa-quote-left';
-            } else {
-                $templaza_class_icon = 'fas fa-image';
+            if($blog_leading && $d==1 && $blog_layout=='grid'){
+                $lead = 'uk-width-1-1';
+                $wrap_lead_content = 'uk-container-small uk-container templaza-item-lead';
+            }else{
+                $lead = $wrap_lead_content = ' ';
             }
             ?>
-            <div id='post-<?php the_ID(); ?>' class="<?php echo esc_attr($blog_cl. ' '.$stky_cl); ?> templaza-blog-item ">
+            <div id='post-<?php the_ID(); ?>' class="<?php echo esc_attr($blog_cl. ' '.$sticky_cl.' '.$lead); ?> templaza-blog-item ">
                 <div class="templaza-blog-item-wrap">
                     <?php
                     if(is_sticky(get_the_ID()) && has_post_thumbnail()){
                         ?>
                         <span class="templaza-sticky-post" title="<?php echo esc_html__('Sticky Post','templaza-framework');?>"><i class="fas fa-thumbtack"></i></span>
-                    <?php
+                        <?php
                     }
-                    if (has_post_format('gallery')) :?>
-                        <?php if ($show_thumbnail): ?>
-                            <?php $templaza_gallery = get_post_meta(get_the_ID(), '_format_gallery_images', true);
-                            $tinyid = uniqid('tiny_');
-                            if ($templaza_gallery) : ?>
-                                <div id ="<?php echo esc_attr($tinyid);?>" class="templaza-blog-slider templaza-archive-gallery">
-                                        <?php foreach ($templaza_gallery as $templaza_image) : ?>
-                                            <?php $templaza_image_src = wp_get_attachment_image_src($templaza_image,$blog_thumbnail_size );?>
-                                            <?php $templaza_caption = get_post_field('post_excerpt', $templaza_image); ?>
-                                        <div class="blog-gallery-img-item">
-                                            <div class="templaza-thumbnail-effect templaza-<?php echo esc_attr($blog_thumbnail_effect);?>">
-                                                <a href="<?php the_permalink() ?>">
-                                                    <img src="<?php echo esc_url($templaza_image_src[0]); ?>"
-                                                         <?php if ($templaza_caption) : ?>title="<?php echo esc_attr($templaza_caption); ?>"<?php endif; ?> />
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <?php endforeach; ?>
-                                </div>
-                            <?php
-                                echo templaza_blog_get_tinyslider($tinyid);
-                            else: ?>
-                                <div class="templaza-blog-item-img templaza-thumbnail-effect templaza-<?php echo esc_attr($blog_thumbnail_effect);?>">
-                                    <a href="<?php the_permalink() ?>">
-                                        <?php the_post_thumbnail($blog_thumbnail_size); ?>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    <?php  endif; ?>
-                    <?php if(has_post_thumbnail() && empty(has_post_format('gallery')) && empty(has_post_format('audio'))
-                        && empty(has_post_format('video')) && empty(has_post_format('quote'))&& empty(has_post_format('link'))){
-                        if ($show_thumbnail): ?>
-                            <div class="templaza-blog-item-img templaza-thumbnail-effect templaza-<?php echo esc_attr($blog_thumbnail_effect);?>">
-                                <a href="<?php the_permalink() ?>">
-                                    <?php the_post_thumbnail($blog_thumbnail_size); ?>
-                                </a>
-                            </div>
-                        <?php endif;
+                    if ($show_thumbnail){
+                        if (has_post_format('gallery')) {
+                            do_action('templaza_gallery_post');
+                        }
+                        if(has_post_thumbnail() && empty(has_post_format('gallery')) && empty(has_post_format('audio'))
+                            && empty(has_post_format('video')) && empty(has_post_format('quote'))&& empty(has_post_format('link'))){
+                            do_action('templaza_image_post');
+                        }
+                        if (has_post_format('video')) {
+                            if ($show_thumbnail_video){
+                                do_action('templaza_image_post');
+                            }else{
+                                do_action('templaza_video_post');
+                            }
+                        }
+                        if (has_post_format('audio')){
+                            if ($show_thumbnail_audio){
+                                do_action('templaza_image_post');
+                            }else{
+                                do_action('templaza_audio_post');
+                            }
+                        }
+                        if (has_post_format('link')){
+                            if ($show_thumbnail_link){
+                                do_action('templaza_image_post');
+                            }
+                        }
+                        if (has_post_format('quote')){
+                            if ($show_thumbnail_quote){
+                                do_action('templaza_image_post');
+                            }
+                        }
                     }
                     ?>
-                    <?php if (has_post_format('video')) : ?>
-                        <?php if ($show_thumbnail_video): ?>
-                            <div class="templaza-blog-item-img templaza-thumbnail-effect templaza-<?php echo esc_attr($blog_thumbnail_effect);?>">
-                                <a href="<?php the_permalink() ?>">
-                                    <?php the_post_thumbnail($blog_thumbnail_size); ?>
-                                </a>
-                            </div>
-                        <?php endif; ?>
-                        <?php if ($show_thumbnail): ?>
-                            <?php $templaza_video = get_post_meta(get_the_ID(), '_format_video_embed', true); ?>
-                            <?php
-                            if ($templaza_video != ''):
-                                ?>
-                                <div class="templaza-blog-item-video">
-                                    <?php if (wp_oembed_get($templaza_video)) : ?>
-                                        <?php echo wp_oembed_get($templaza_video); ?>
-                                    <?php else : ?>
-                                        <?php echo wp_oembed_get($templaza_video); ?>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                    <?php if (has_post_format('audio')) : ?>
-                        <?php if ($show_thumbnail_audio): ?>
-                            <div class="templaza-blog-item-img templaza-thumbnail-effect templaza-<?php echo esc_attr($blog_thumbnail_effect);?>">
-                                <a href="<?php the_permalink() ?>">
-                                    <?php the_post_thumbnail($blog_thumbnail_size); ?>
-                                </a>
-                            </div>
-                        <?php else: ?>
-                            <?php if ($show_thumbnail): ?>
-                                <?php $templaza_audio = get_post_meta(get_the_ID(), '_format_audio_embed', true); ?>
-                                <?php if ($templaza_audio != ''): ?>
-                                    <div class="templaza-blog-item-audio">
-                                        <?php if (wp_oembed_get($templaza_audio)) : ?>
-                                            <?php echo wp_oembed_get($templaza_audio); ?>
-                                        <?php else : ?>
-                                            <?php echo balanceTags($templaza_audio); ?>
-                                        <?php endif; ?>
-                                    </div>
-                                <?php endif; ?>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                    <?php if (has_post_format('link')) : ?>
-                        <?php if ($show_thumbnail_link): ?>
-                            <div class="templaza-blog-item-img templaza-thumbnail-effect templaza-<?php echo esc_attr($blog_thumbnail_effect);?>">
-                                <a href="<?php the_permalink() ?>">
-                                    <?php the_post_thumbnail($blog_thumbnail_size); ?>
-                                </a>
-                            </div>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                    <?php if (has_post_format('quote')) : ?>
-                        <?php if ($show_thumbnail_quote): ?>
-                            <div class="templaza-blog-item-img templaza-thumbnail-effect templaza-<?php echo esc_attr($blog_thumbnail_effect);?>">
-                                <a href="<?php the_permalink() ?>">
-                                    <?php the_post_thumbnail($blog_thumbnail_size); ?>
-                                </a>
-                            </div>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                    <div class="templaza-blog-item-content templaza-archive-item">
-                        <?php if ($show_title): ?>
-                            <h3 class="templaza-blog-item-title title">
-                                <a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
-                                <?php
-                                if(is_sticky(get_the_ID()) && has_post_thumbnail()==false){
-                                    ?>
-                                    <span class="templaza-sticky-post" title="<?php echo esc_html__('Sticky Post','templaza-framework');?>"><i class="fas fa-thumbtack"></i></span>
-                                <?php
-                                }
-                                ?>
-                            </h3>
-                        <?php endif; ?>
-                        <div class="templaza-blog-item-Info templaza-post-meta uk-article-meta">
-                            <?php if ($show_date){ ?>
-                                <span><i class="fa fa-calendar"></i><?php echo esc_attr(get_the_date()); ?></span>
-                            <?php } ?>
-                            <?php if($show_author){ ?>
-                                <span class="author">
-                                <i class="fas fa-user"></i>
-                                <?php echo get_the_author_posts_link();?>
-                                </span>
-                            <?php } ?>
-                            <?php if ($show_comment_count){ ?>
-                                <span><i class="fas fa-comment"></i><?php echo esc_html__('Comments','templaza-framework'); ?> <?php echo esc_html($templaza_comment_count->total_comments)?></span>
-                            <?php } ?>
-                            <?php if($show_post_view):?>
-                                <span class="views"><i class="fas fa-eye"></i>
-                                    <?php do_action('templaza_get_postviews',get_the_ID()); ?></span>
-                            <?php endif; ?>
-                            <?php if($show_category){ ?>
-                                <span class="category">
-                                <i class="fas fa-folder"></i> <?php the_category(', '); ?>
-                                </span>
-                            <?php } ?>
-                            <?php if($show_tag && has_tag()){ ?>
-                                <span class="tag">
-                                <i class="fas fa-tags"></i> <?php the_tags(); ?>
-                                </span>
-                            <?php } ?>
-                            <?php
-                            edit_post_link();
-                            ?>
-                        </div>
+                    <div class="templaza-blog-item-content templaza-archive-item <?php echo esc_attr($wrap_lead_content);?>">
+                        <?php
+                        if ($show_title){
+                            do_action('templaza_title_post');
+                        }
+                        do_action('templaza_meta_post');
 
-                        <?php if (has_post_format('link')) : ?>
-                            <?php if ($show_description): ?>
-                                <div class="templaza-blog-item-link uk-margin-top uk-margin-bottom">
-                                    <?php $templaza_link = get_post_meta(get_the_ID(), '_format_link_url', true); ?>
-                                    <a target="_blank" title="<?php the_title(); ?>"
-                                       href="<?php echo esc_url($templaza_link); ?>">
-                                        <?php echo esc_html($templaza_link); ?>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-                        <?php elseif (has_post_format('quote')):
-                            $templaza_quote_name = get_post_meta(get_the_ID(), '_format_quote_source_name', true);
-                            $templaza_quote_url = get_post_meta(get_the_ID(), '_format_quote_source_url', true);
-                            $templaza_quote_content = get_post_meta(get_the_ID(), '_format_quote_source_content', true);
-                            ?>
-                            <?php if ($show_description): ?>
-                            <div class="templaza-blog-item-quote uk-margin-top uk-margin-bottom">
-                                <?php
-                                echo esc_html($templaza_quote_content);
-                                ?>
-                            </div>
-                        <?php endif; ?>
-                        <?php endif; ?>
-                        <?php
-                        if ($show_description):
-                            ?>
-                        <div class="templaza-blog-desc uk-margin-top uk-margin-medium-bottom">
-                        <?php
-                            if (!has_excerpt()) {
-                                the_content( __( 'Continue reading', 'templaza-framework' ) );
-                            } else {
-                                the_excerpt();
-                            }
-                            ?>
-                            <div class="clr"></div>
-                        </div>
-                        <?php
-                        endif;
+                        if (has_post_format('link')){
+                            do_action('templaza_link_post');
+                        }
+                        if (has_post_format('quote')){
+                            do_action('templaza_quote_post');
+                        }
+                        if ($show_description){
+                            do_action('templaza_excerpt_post');
+                        }
+                        if ($show_share) {
+                            do_action('templaza_share_post');
+                        }
                         if ($show_readmore) {
-                            ?>
-                            <a href="<?php the_permalink(); ?>" class="templaza-btn more-link">
-                                <?php echo esc_html__('Read more', 'templaza'); ?></a>
-                        <?php }
+                            do_action('templaza_readmore_post');
+                        }
                         ?>
-                        <?php if ($show_share):
-                            do_action('templaza_share_social');
-                        endif; ?>
                     </div>
                 </div>
             </div>
             <?php
-            if( $blog_layout == 'grid' && $d%$blog_grid_col==0){
-                ?><div class="w-100"></div><?php
-            }
             $d++;
         endwhile; // end while ( have_posts )
+
         endif; // end if ( have_posts )
         ?>
+    </div>
+    <?php if($show_pagination){?>
         <div class="templaza-blog-pagenavi">
             <?php
-            if (function_exists('wp_pagenavi')):
-                wp_pagenavi();
-            else:
-                templaza_pagination();
-            endif;
+            do_action('templaza_pagination');
             ?>
         </div>
-    </div>
+    <?php } ?>
 </div>

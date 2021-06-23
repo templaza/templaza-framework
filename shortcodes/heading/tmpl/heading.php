@@ -34,6 +34,8 @@ if ( is_category() ) {
     $title = __('Not Found','templaza-framework');
 } elseif ( is_search() ) {
     $title = __('Search Results','templaza-framework');
+}elseif ( is_single() ) {
+    $title = single_post_title( '', false );
 }
 
 $heading    = $enable_custom_heading?$custom_heading:($title);

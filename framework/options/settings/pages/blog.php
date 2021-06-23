@@ -46,6 +46,14 @@ Templaza_API::set_section('settings',
                 'required' => array('blog-page-layout', '=' , 'grid')
             ),
             array(
+                'id'       => 'blog-page-leading',
+                'type'     => 'switch',
+                'title'    => __( 'Leading item', $this -> text_domain ),
+                'subtitle' => __( 'Show/hide Leading item.', $this -> text_domain ),
+                'default'  => true,
+                'required' => array('blog-page-layout', '=' , 'grid')
+            ),
+            array(
                 'id'       => 'blog-page-title',
                 'type'     => 'switch',
                 'title'    => __( 'Show Title', $this -> text_domain ),
@@ -265,6 +273,13 @@ Templaza_API::set_section('settings',
                 'default'  => true,
             ),
             array(
+                'id'       => 'blog-single-next-preview',
+                'type'     => 'switch',
+                'title'    => __( 'Show Next, Preview', $this -> text_domain ),
+                'subtitle' => __( 'Show/hide next, preview post.', $this -> text_domain ),
+                'default'  => true,
+            ),
+            array(
                 'id'       => 'blog-single-comment',
                 'type'     => 'switch',
                 'title'    => __( 'Show Comment', $this -> text_domain ),
@@ -275,7 +290,7 @@ Templaza_API::set_section('settings',
     )
 );
 
-// -> START Blog Single Section
+// -> START Blog Single Slider
 Templaza_API::set_section('settings',
     array(
         'title'      => __( 'Blog Slider Options', $this -> text_domain ),
@@ -290,16 +305,6 @@ Templaza_API::set_section('settings',
                 'default'  => true,
             ),
             array(
-                'id'       => 'blog-slider-animation',
-                'type'     => 'select',
-                'title'    => __('Animation', $this -> text_domain),
-                'options'  => array(
-                    'fade' => 'Fade',
-                    'slide'   => 'Slide',
-                ),
-                'default'  => 'fade',
-            ),
-            array(
                 'id'       => 'blog-slider-nav',
                 'type'     => 'switch',
                 'title'    => __( 'Show Nav(next/preview)', $this -> text_domain ),
@@ -307,25 +312,56 @@ Templaza_API::set_section('settings',
                 'default'  => true,
             ),
             array(
-                'id'       => 'blog-slider-slideshowspeed',
-                'type'     => 'spinner',
-                'title'    => __('Animation duration', $this -> text_domain),
-                'subtitle' => __( 'Set the speed of the slideshow cycling, in milliseconds.', $this -> text_domain ),
-                'default'  => '7000',
-                'min'      => '1000',
-                'step'     => '200',
-                'max'      => '100000',
+                'id'       => 'blog-slider-animation',
+                'type'     => 'select',
+                'title'    => __('Animation', $this -> text_domain),
+                'options'  => array(
+                    'fade' => esc_html__('Fade', $this -> text_domain),
+                    'slide'   => esc_html__('Slide', $this -> text_domain),
+                    'scale'   => esc_html__('Scale', $this -> text_domain),
+                    'pull'   => esc_html__('Pull', $this -> text_domain),
+                    'push'   => esc_html__('Push', $this -> text_domain),
+                ),
+                'default'  => 'fade',
             ),
             array(
-                'id'       => 'blog-slider-animationduration',
-                'type'     => 'spinner',
-                'title'    => __('Animation duration', $this -> text_domain),
-                'subtitle' => __( 'Set the speed of animations, in milliseconds.', $this -> text_domain ),
-                'default'  => '600',
-                'min'      => '100',
-                'step'     => '100',
-                'max'      => '100000',
+                'id'       => 'blog-slider-kenburns',
+                'type'     => 'switch',
+                'title'    => __( 'Show Ken Burns effect)', $this -> text_domain ),
+                'subtitle' => __( 'Show/hide Ken Burns effect.', $this -> text_domain ),
+                'default'  => true,
             ),
+
+        )
+    )
+);
+// -> START Blog Single Related
+Templaza_API::set_section('settings',
+    array(
+        'title'      => __( 'Blog Related Options', $this -> text_domain ),
+        'id'         => 'blog-related',
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'blog-related-column',
+                'type'     => 'spinner',
+                'title'    => __('Related columns', $this -> text_domain),
+                'subtitle' => __('Number items per row',$this -> text_domain),
+                'default'  => '3',
+                'min'      => '1',
+                'step'     => '1',
+                'max'      => '20',
+            ),
+            array(
+                'id'       => 'blog-related-limit',
+                'type'     => 'spinner',
+                'title'    => __('Related Limit', $this -> text_domain),
+                'subtitle' => __('Limit related post ',$this -> text_domain),
+                'default'  => '3',
+                'min'      => '1',
+                'step'     => '1',
+                'max'      => '21',
+            )
         )
     )
 );

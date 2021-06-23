@@ -1,7 +1,6 @@
-.wp-block-quote, blockquote{
+.wp-block-quote{
   padding:20px;
   background:$tztheme-quote-bg;
-  @include border-radius($tztheme-quote-radius);
   cite{
     font-size:0.8em;
   }
@@ -25,6 +24,40 @@ body{
     background:#eee;
   }
   blockquote{
+    color:$tztheme-quote-color;
+    background:$tztheme-quote-bg;
+    padding:$tztheme-quote-padding;
+    font-size: 1.5em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    text-transform: none;
+    position: relative;
+    border-left: none;
+    &:before{
+      content: "";
+      font-family: "Font Awesome 5 Free";
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      line-height: 1;
+      font-weight: 900;
+      color: $tztheme-quote-icon-color;
+      position: absolute;
+      top: 15px;
+      left: 1px;
+      font-size: 2.4rem;
+    }
+    &.wp-block-quote.is-style-large{
+      background:$tztheme-quote-bg;
+      padding: $tztheme-quote-padding;
+    }
+    &.has-very-dark-gray-color{
+      &:before{
+        color:#313131;
+      }
+    }
     code{
       display: inline;
       padding:7px 10px;
@@ -41,5 +74,19 @@ body{
 .wp-block-pullquote{
   blockquote{
     background:none;
+  }
+}
+.templaza-quote{
+  blockquote{
+    color:inherit;
+    font-size:inherit;
+    margin:0;
+    padding:0;
+    &:before{
+      color:#e4e6ec;
+      position:relative;
+      margin-bottom: 30px;
+      display:block;
+    }
   }
 }

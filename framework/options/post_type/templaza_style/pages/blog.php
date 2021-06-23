@@ -48,6 +48,20 @@ Templaza_API::set_section('templaza_style',
                 'required' => array('blog-page-layout', '=' , 'grid')
             ),
             array(
+                'id'       => 'blog-page-leading',
+                'type'     => 'select',
+                'title'    => __( 'Leading item', $this -> text_domain ),
+                'subtitle' => __( 'Show/hide leading item.', $this -> text_domain ),
+                'options'       => array(
+                    'on'        => esc_html__('On', $this -> text_domain),
+                    'off'       => esc_html__('Off', $this -> text_domain),
+                ),
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
+                'required' => array('blog-page-layout', '=' , 'grid')
+            ),
+            array(
                 'id'       => 'blog-page-title',
                 'type'     => 'select',
                 'title'    => __( 'Show Title', $this -> text_domain ),
@@ -454,6 +468,19 @@ Templaza_API::set_section('templaza_style',
                 'default'       => '',
             ),
             array(
+                'id'       => 'blog-single-next-preview',
+                'type'     => 'select',
+                'title'    => __( 'Show Next, Preview', $this -> text_domain ),
+                'subtitle' => __( 'Show/hide next, preview post.', $this -> text_domain ),
+                'options'       => array(
+                    'on'         => esc_html__('On', $this -> text_domain),
+                    'off'         => esc_html__('Off', $this -> text_domain),
+                ),
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
+            ),
+            array(
                 'id'       => 'blog-single-comment',
                 'type'     => 'select',
                 'title'    => __( 'Show Comment', $this -> text_domain ),
@@ -508,35 +535,60 @@ Templaza_API::set_section('templaza_style',
                 'type'     => 'select',
                 'title'    => __('Animation', $this -> text_domain),
                 'options'  => array(
-                    'fade' => esc_html__('Fade', $this -> text_domain),
+                    'fade'    => esc_html__('Fade', $this -> text_domain),
                     'slide'   => esc_html__('Slide', $this -> text_domain),
+                    'scale'   => esc_html__('Scale', $this -> text_domain),
+                    'pull'    => esc_html__('Pull', $this -> text_domain),
+                    'push'    => esc_html__('Push', $this -> text_domain),
                 ),
                 'placeholder'   => esc_html__('Inherit', $this -> text_domain),
                 'select2'       => array( 'allowClear' => true ),
                 'default'       => '',
             ),
             array(
-                'id'       => 'blog-slider-slideshowspeed',
+                'id'       => 'blog-slider-kenburns',
+                'type'     => 'select',
+                'title'    => __( ' Ken Burns effect', $this -> text_domain ),
+                'subtitle' => __( ' Ken Burns effect.', $this -> text_domain ),
+                'options'       => array(
+                    'on'         => esc_html__('On', $this -> text_domain),
+                    'off'         => esc_html__('Off', $this -> text_domain),
+                ),
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
+            ),
+
+        )
+    )
+);
+// -> START Blog Single Related
+Templaza_API::set_section('templaza_style',
+    array(
+        'title'      => __( 'Blog Related Options', $this -> text_domain ),
+        'id'         => 'blog-related',
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'blog-related-column',
                 'type'     => 'spinner',
-                'title'    => __('Animation speed', $this -> text_domain),
-                'subtitle' => __( 'Set the speed of the slideshow cycling, in milliseconds.', $this -> text_domain ),
-                'default'  => '7000',
-                'min'      => '1000',
-                'step'     => '200',
-                'max'      => '100000',
-                'required' => array('blog-slider-animation', '!=', ''),
+                'title'    => __('Related columns', $this -> text_domain),
+                'subtitle' => __('Number items per row',$this -> text_domain),
+                'default'  => '3',
+                'min'      => '1',
+                'step'     => '1',
+                'max'      => '20',
             ),
             array(
-                'id'       => 'blog-slider-animationduration',
+                'id'       => 'blog-related-limit',
                 'type'     => 'spinner',
-                'title'    => __('Animation duration', $this -> text_domain),
-                'subtitle' => __( 'Set the speed of animations, in milliseconds.', $this -> text_domain ),
-                'default'  => '600',
-                'min'      => '100',
-                'step'     => '100',
-                'max'      => '100000',
-                'required' => array('blog-slider-animation', '!=', ''),
-            ),
+                'title'    => __('Related Limit', $this -> text_domain),
+                'subtitle' => __('Limit related post ',$this -> text_domain),
+                'default'  => '3',
+                'min'      => '1',
+                'step'     => '1',
+                'max'      => '21',
+            )
         )
     )
 );
