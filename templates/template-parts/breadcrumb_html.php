@@ -2,8 +2,8 @@
 defined('ABSPATH') or exit();
 $templaza_breadcrums_id      = 'breadcrumb';
 $templaza_breadcrums_class   = 'templaza-breadcrumb';
-$templaza_blog_title         = esc_html__('Blog','templaza-elements');
-$templaza_home_title         = esc_html__('Home','templaza-elements');
+$templaza_blog_title         = esc_html__('Blog',$this -> text_domain);
+$templaza_home_title         = esc_html__('Home',$this -> text_domain);
 
 /* If you have any custom post types with custom taxonomies, put the taxonomy name below (e.g. produtemplaza_cat) */
 $templaza_custom_taxonomy    = 'product_cat';
@@ -18,7 +18,7 @@ if ( !is_front_page() ) {
     echo '<ul id="' . esc_attr($templaza_breadcrums_id) . '" class="' . esc_attr($templaza_breadcrums_class) . '">';
 
     /* Home page */
-    echo '<li class="item-home-txt"><span>'.esc_html__('You are here: ','templaza-elements').'</span></li>';
+    echo '<li class="item-home-txt"><span>'.esc_html__('You are here: ',$this -> text_domain).'</span></li>';
     echo '<li class="item-home"><a href="' . get_home_url() . '" title="' . esc_attr($templaza_home_title) . '">' . esc_html($templaza_home_title) . '</a></li>';
 
     if ( is_archive() && !is_tax() && !is_category() && !is_tag() && !is_author() ) {
@@ -200,28 +200,28 @@ if ( !is_front_page() ) {
         /* Day archive */
 
         /* Year link */
-        echo '<li class="item-year item-year-' . get_the_time('Y') . '"><a href="' . get_year_link( get_the_time('Y') ) . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . esc_html__(' Archives','templaza-elements') . '</a></li>';
+        echo '<li class="item-year item-year-' . get_the_time('Y') . '"><a href="' . get_year_link( get_the_time('Y') ) . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . esc_html__(' Archives',$this -> text_domain) . '</a></li>';
 
         /* Month link */
-        echo '<li class="item-month item-month-' . get_the_time('m') . '"><a href="' . get_month_link( get_the_time('Y'), get_the_time('m') ) . '" title="' . get_the_time('M') . '">' . get_the_time('M') . esc_html__(' Archives','templaza-elements') . '</a></li>';
+        echo '<li class="item-month item-month-' . get_the_time('m') . '"><a href="' . get_month_link( get_the_time('Y'), get_the_time('m') ) . '" title="' . get_the_time('M') . '">' . get_the_time('M') . esc_html__(' Archives',$this -> text_domain) . '</a></li>';
 
         /* Day display */
-        echo '<li class="item-current item-' . get_the_time('j') . '"><span class="bread-current bread-' . get_the_time('j') . '"> ' . get_the_time('jS') . ' ' . get_the_time('M') . esc_html__(' Archives','templaza-elements') . '</span></li>';
+        echo '<li class="item-current item-' . get_the_time('j') . '"><span class="bread-current bread-' . get_the_time('j') . '"> ' . get_the_time('jS') . ' ' . get_the_time('M') . esc_html__(' Archives',$this -> text_domain) . '</span></li>';
 
     } elseif ( is_month() ) {
 
         /* Month Archive */
 
         /* Year link */
-        echo '<li class="item-year item-year-' . get_the_time('Y') . '"><a href="' . get_year_link( get_the_time('Y') ) . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . esc_html__(' Archives','templaza-elements') . '</a></li>';
+        echo '<li class="item-year item-year-' . get_the_time('Y') . '"><a href="' . get_year_link( get_the_time('Y') ) . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . esc_html__(' Archives',$this -> text_domain) . '</a></li>';
 
         /* Month display */
-        echo '<li class="item-month item-month-' . get_the_time('m') . '"><span class="bread-month bread-month-' . get_the_time('m') . '" title="' . get_the_time('M') . '">' . get_the_time('M') . esc_html__(' Archives','templaza-elements') . '</span></li>';
+        echo '<li class="item-month item-month-' . get_the_time('m') . '"><span class="bread-month bread-month-' . get_the_time('m') . '" title="' . get_the_time('M') . '">' . get_the_time('M') . esc_html__(' Archives',$this -> text_domain) . '</span></li>';
 
     } elseif ( is_year() ) {
 
         /* Display year archive */
-        echo '<li class="item-current item-current-' . get_the_time('Y') . '"><span class="bread-current bread-current-' . get_the_time('Y') . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . esc_html__(' Archives','templaza-elements') . '</span></li>';
+        echo '<li class="item-current item-current-' . get_the_time('Y') . '"><span class="bread-current bread-current-' . get_the_time('Y') . '" title="' . get_the_time('Y') . '">' . get_the_time('Y') . esc_html__(' Archives',$this -> text_domain) . '</span></li>';
 
     } elseif ( is_author() ) {
 
@@ -232,22 +232,22 @@ if ( !is_front_page() ) {
         $templaza_userdata = get_userdata( $author );
 
         /* Display author name */
-        echo '<li class="item-current item-current-' . esc_attr($templaza_userdata->user_nicename) . '"><span class="bread-current bread-current-' . $templaza_userdata->user_nicename . '" title="' . $templaza_userdata->display_name . '">' . esc_html__('Author: ','templaza-elements') . $templaza_userdata->display_name . '</span></li>';
+        echo '<li class="item-current item-current-' . esc_attr($templaza_userdata->user_nicename) . '"><span class="bread-current bread-current-' . $templaza_userdata->user_nicename . '" title="' . $templaza_userdata->display_name . '">' . esc_html__('Author: ',$this -> text_domain) . $templaza_userdata->display_name . '</span></li>';
 
     } elseif ( get_query_var('paged') ) {
 
         /* Paginated archives */
-        echo '<li class="item-current item-current-' . get_query_var('paged') . '"><span class="bread-current bread-current-' . get_query_var('paged') . '" title="Page ' . get_query_var('paged') . '">'.esc_html__('Page','templaza-elements') . ' ' . get_query_var('paged') . '</span></li>';
+        echo '<li class="item-current item-current-' . get_query_var('paged') . '"><span class="bread-current bread-current-' . get_query_var('paged') . '" title="Page ' . get_query_var('paged') . '">'.esc_html__('Page',$this -> text_domain) . ' ' . get_query_var('paged') . '</span></li>';
 
     } elseif ( is_search() ) {
 
         /* Search results page */
-        echo '<li class="item-current item-current-' . get_search_query() . '"><span class="bread-current bread-current-' . get_search_query() . '" title="' . esc_html__('Search results for: ','templaza-elements') . get_search_query() . '">' . esc_html__('Search results for: ','templaza-elements') . get_search_query() . '</span></li>';
+        echo '<li class="item-current item-current-' . get_search_query() . '"><span class="bread-current bread-current-' . get_search_query() . '" title="' . esc_html__('Search results for: ',$this -> text_domain) . get_search_query() . '">' . esc_html__('Search results for: ',$this -> text_domain) . get_search_query() . '</span></li>';
 
     } elseif ( is_404() ) {
 
         /* 404 page */
-        echo '<li>' . esc_html__('Error 404','templaza-elements') . '</li>';
+        echo '<li>' . esc_html__('Error 404',$this -> text_domain) . '</li>';
     }
 
     echo '</ul>';

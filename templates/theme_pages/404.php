@@ -94,7 +94,7 @@ if($background_setting_404){
             }else{
             ?>
                 <h1 class="title-404"><?php echo __('404 ERROR!', $this -> text_domain); ?></h1>
-                <p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try a search?', 'martha' ); ?></p>
+                <p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try a search?', $this -> text_domain ); ?></p>
                 <?php get_search_form(); ?>
             <?php
             }
