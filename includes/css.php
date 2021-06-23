@@ -334,4 +334,20 @@ class CSS{
         }
         return '';
     }
+
+    public static function make_color_rgba_redux($color_options = array()){
+        $store_id   = __METHOD__;
+        $store_id  .= ':'.serialize($color_options);
+        $store_id   = md5($store_id);
+
+        if(isset(static::$cache[$store_id])){
+            return static::$cache[$store_id];
+        }
+
+        if(empty($color_options)){
+            return '';
+        }
+
+        return self::make_color_rgba($color_options['color'], $color_options['alpha'], $color_options['rgba']);
+    }
 }
