@@ -83,6 +83,21 @@ $grid-gutter-width:           2.5rem !default;
     }
 
   }
+
+  .redux-container-tz_layout .fl_control,
+  .redux-container-tz_layout__dialog .fl_control,{
+    color: #71748d;
+    &:hover {
+      color: $tz-global-color;
+    }
+  }
+  .redux-container-tz_layout .fl_add-element-not-empty-button,
+  .redux-container-tz_layout__dialog .fl_add-element-not-empty-button{
+    color: #71748d;
+    &:hover {
+      color: #fff;
+    }
+  }
   //background: $tz-body-background;
   .w-100 {
     width: 100% !important;
