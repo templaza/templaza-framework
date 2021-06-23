@@ -24,8 +24,14 @@ $backtotop_icon_size        = isset($options['backtotop-icon-size'])?(int) $opti
 $backtotop_icon_color       = isset($options['backtotop-icon-color'])?$options['backtotop-icon-color']: '#000';
 $backtotop_icon_color       = CSS::make_color_rgba_redux($backtotop_icon_bgcolor);
 $backtotop_icon_color       = !empty($backtotop_icon_color)?$backtotop_icon_color: '#000';
+//if(is_array($backtotop_icon_color) && isset($backtotop_icon_color['rgba'])) {
+//    $backtotop_icon_color    = $backtotop_icon_color['rgba'];
+//}
 $backtotop_icon_bgcolor     = isset($options['backtotop-icon-bgcolor'])?$options['backtotop-icon-bgcolor']: '';
 $backtotop_icon_bgcolor = CSS::make_color_rgba_redux($backtotop_icon_bgcolor);
+//if(is_array($backtotop_icon_bgcolor) && isset($backtotop_icon_bgcolor['rgba'])) {
+//    $backtotop_icon_bgcolor    = $backtotop_icon_bgcolor['rgba'];
+//}
 
 $backtotop_icon_style       = isset($options['backtotop-icon-shape'])?$options['backtotop-icon-shape']: 'circle';
 $backtotop_on_mobile        = isset($options['backtotop-on-mobile'])?(bool) $options['backtotop-on-mobile']: true;
@@ -54,6 +60,13 @@ if (!$backtotop_on_mobile) {
    $class[] = 'hideonxs';
 }
 
-$html .= '<a id="templaza-backtotop" class="' . implode(' ', $class) . '" href="javascript:void(0)" style="' . $astyle . '"><i class="' . $backtotop_icon . '" style="' . $style . '"></i></a>';
+if(!empty($astyle)){
+    Templates::add_inline_style('#templaza-backtotop{'.$astyle.'}');
+}
+if(!empty($style)){
+    Templates::add_inline_style('#templaza-backtotop > i{'.$style.'}');
+}
+
+$html .= '<a id="templaza-backtotop" class="' . implode(' ', $class) . '" href="javascript:void(0)"><i class="' . $backtotop_icon . '" ></i></a>';
 echo $html;
 ?>
