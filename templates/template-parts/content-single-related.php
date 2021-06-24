@@ -19,7 +19,7 @@ if ($post_cats) {
     if($templaza_query->have_posts()){?>
 
         <div class="templaza-related-posts">
-            <h3 class="box-title"><?php echo esc_html_e('Related Posts',$this -> text_domain);?></h3>
+            <h3 class="box-title"><?php echo esc_html_e('Related Posts','templaza-framework');?></h3>
             <div class="content-related uk-child-width-1-<?php echo esc_attr($related_col);?>@m uk-child-width-1-2@s" data-uk-grid>
                 <?php
                 while( $templaza_query->have_posts() ) {

@@ -93,8 +93,8 @@ if($background_setting_404){
                 <?php
             }else{
             ?>
-                <h1 class="title-404"><?php echo __('404 ERROR!', $this -> text_domain); ?></h1>
-                <p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try a search?', $this -> text_domain ); ?></p>
+                <h1 class="title-404"><?php echo __('404 ERROR!', 'templaza-framework'); ?></h1>
+                <p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try a search?', 'templaza-framework' ); ?></p>
                 <?php get_search_form(); ?>
             <?php
             }
