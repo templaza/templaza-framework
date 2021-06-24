@@ -16,6 +16,9 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
             add_filter('wp_kses_allowed_html', array($this, 'templaza_wpkses_post_tags'), 10, 2);
             add_filter('upload_mimes', array($this, 'templaza_mime_types'));
             add_filter('edit_post_link', array($this, 'templaza_edit_post_link'),10,3);
+
+            add_shortcode('icon', array($this, 'templaza_shortcode_icon'),10,2);
+
             add_action('templaza_get_postviews',array($this,'templaza_getPostViews'));
             add_action('templaza_set_postviews',array($this,'templaza_setPostViews'));
             add_action('templaza_get_commentcount_post',array($this,'templaza_getCommentCountPost'));
@@ -106,6 +109,10 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
             }
 
             return $tags;
+        }
+
+        public function templaza_shortcode_icon($attr, $content ) {
+            return '<i style="color:'.$attr['color'].'" class="'. $content . '"></i>';
         }
 
         public function templaza_mime_types( $mimes ){
