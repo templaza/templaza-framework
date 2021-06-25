@@ -39,15 +39,11 @@ if(!class_exists('TemPlazaFramework\Array_Helper')){
             }elseif(!$destination && !$source){
                 return false;
             }
+
             $new_data   = $destination;
-//            var_dump($new_data['header-mode']);
-//            var_dump($new_data['header-horizontal-menu-mode']);
 
             self::bindData($new_data, $source, $recursive, false);
 
-//            var_dump($new_data['header-mode']);
-//            var_dump($new_data['header-horizontal-menu-mode']);
-//            die(__FILE__);
             if(count($new_data)){
                 self::$cache[$storeId]  = $new_data;
                 return $new_data;
@@ -61,11 +57,7 @@ if(!class_exists('TemPlazaFramework\Array_Helper')){
 //            $this->initialized = true;
 
             // Ensure the input data is an array.
-            $data = \is_object($data) ? get_object_vars($data) : (array) $data;
-
-//            var_dump($data['layout']);
-//            var_dump($parent['layout']);
-//            die();
+            $data = \is_object($data) ? get_object_vars($data) : $data;
 
             foreach ($data as $k => $v)
             {
@@ -74,7 +66,27 @@ if(!class_exists('TemPlazaFramework\Array_Helper')){
                     continue;
                 }
 
-                if ($recursive && ((\is_array($v) && self::isAssociative($v)) || \is_object($v)))
+//                if ($recursive && ((\is_array($v) && self::isAssociative($v)) || \is_object($v)))
+//                if ($recursive && (\is_array($v) || \is_object($v)))
+//                {
+//                    if (is_object($parent) && !isset($parent->$k))
+//                    {
+//                        $parent->$k = new \stdClass;
+//                    }elseif(is_array($parent) && !isset($parent[$k])){
+//                        $parent[$k] = array();
+//                    }
+//
+//                    if(is_array($parent)){
+//                        self::bindData($parent[$k], $v);
+//                    }else {
+//                        self::bindData($parent->$k, $v);
+//                    }
+//
+//                    continue;
+//                }
+
+
+                if ($recursive && \is_array($v))
                 {
                     if (is_object($parent) && !isset($parent->$k))
                     {
@@ -83,12 +95,9 @@ if(!class_exists('TemPlazaFramework\Array_Helper')){
                         $parent[$k] = array();
                     }
 
-                    if(is_array($parent)){
-                        self::bindData($parent[$k], $v);
-                    }else {
-                        self::bindData($parent->$k, $v);
+                    if(count($data[$k])) {
+                        self::bindData($data[$k], $v);
                     }
-
                     continue;
                 }
 

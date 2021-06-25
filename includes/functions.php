@@ -93,26 +93,32 @@ if(!class_exists('TemPlazaFramework\Functions')){
         }
 
         public static function get_theme_options($post_type = ''){
+
+            $store_id   = __METHOD__;
+            $store_id  .= ':'.$post_type;
 //            if(is_admin()){
 //                return;
 //            }
             $global_options     = self::get_global_settings();
             $template_options   = self::_get_theme_options($post_type);
-//            var_dump($global_options['header-mode']);
-//            var_dump($global_options['header-horizontal-menu-mode']);
-//            var_dump($template_options['header-mode']);
-//            var_dump($template_options['header-horizontal-menu-mode']);
-//            $test   = new \ReflectionException();
-//            $test ->getFile()
-//            var_dump($test); die();
-//            var_dump(__FILE__);
-//            die(__FILE__);
+
+            $store_id  .= serialize($global_options);
+            $store_id  .= serialize($template_options);
+            $store_id   = md5($store_id);
+
+            if(isset(self::$cache[$store_id])){
+                return self::$cache[$store_id];
+            }
 
             $theme_options      = self::merge_array($template_options, $global_options);
 //            $theme_options      = self::merge_array($global_options, $template_options);
-//            $theme_options      = $template_options;
 
-            return $theme_options;
+            if($theme_options && count($theme_options)){
+                self::$cache[$store_id] = $theme_options;
+                return $theme_options;
+            }
+
+            return array();
         }
         protected static function _get_theme_options($post_type = ''){
             $the_ID = \get_the_ID();
@@ -164,30 +170,32 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 $style_id = $posts[0]->ID;
             }
 
-            // When not found style id return to global options (old version to home options)
-            if(!$id || empty($style_id)){
 
-                // Return by global options
-                return self::get_global_settings();
 
-                /* Get home post id
-                * Replace by global options
-                 */
-                $args = array(
-                    'post_type'      => 'templaza_style',
-                    'meta_query' => array(
-                        array(
-                            'key' => 'home',
-                            'value' => '1',
-                            'compare' => '=',
-                        )
-                    )
-                );
-                $posts = \get_posts($args);
-                if($posts && count($posts)){
-                    $style_id   = $posts[0] -> ID;
-                }
-            }
+//            // When not found style id return to global options (old version to home options)
+//            if(!$id || empty($style_id)){
+////            if(!$id && empty($style_id)){
+////            if(empty($style_id)){
+//
+//                /* Get home post id
+//                * Replace by global options
+//                 */
+//                $args = array(
+//                    'post_type'      => 'templaza_style',
+//                    'meta_query' => array(
+//                        array(
+//                            'key' => 'home',
+//                            'value' => '1',
+//                            'compare' => '=',
+//                        )
+//                    )
+//                );
+//                $posts = \get_posts($args);
+//                if($posts && count($posts)){
+//                    $style_id   = $posts[0] -> ID;
+//                }
+//            }
+
 
             $options    = self::get_theme_option_by_id($style_id);
 
@@ -203,7 +211,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
             $store_id  .= ':'.$style_id;
             $store_id   = md5($store_id);
 
-            if(isset(self::$cache[$store_id])){
+            if($style_id && isset(self::$cache[$store_id])){
                 return self::$cache[$store_id];
             }
 
@@ -219,24 +227,24 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 $style_id = $posts[0]->ID;
             }
 
-            // Get default style options if not style id
-            if(!$style_id){
-                // Get home post id
-                $args = array(
-                    'post_type'      => 'templaza_style',
-                    'meta_query' => array(
-                        array(
-                            'key' => 'home',
-                            'value' => '1',
-                            'compare' => '=',
-                        )
-                    )
-                );
-                $posts = \get_posts($args);
-                if($posts && count($posts)){
-                    $style_id   = $posts[0] -> ID;
-                }
-            }
+//            // Get default style options if not style id
+//            if(!$style_id){
+//                // Get home post id
+//                $args = array(
+//                    'post_type'      => 'templaza_style',
+//                    'meta_query' => array(
+//                        array(
+//                            'key' => 'home',
+//                            'value' => '1',
+//                            'compare' => '=',
+//                        )
+//                    )
+//                );
+//                $posts = \get_posts($args);
+//                if($posts && count($posts)){
+//                    $style_id   = $posts[0] -> ID;
+//                }
+//            }
 
             // Get options by style id
             if($style_id){
@@ -258,7 +266,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 }
             }
 
-            return array();
+            return self::get_global_settings();
         }
 
         public static function list_files( $folder = '',  $filter = '.', $levels = 100, $exclusions = array() ) {
@@ -541,7 +549,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
             return $data;
         }
 
-        public static function merge_array($source, $destination, $recursive = false){
+        public static function merge_array($source, $destination, $recursive = true){
             return Array_Helper::merge($source, $destination, $recursive);
         }
     }
