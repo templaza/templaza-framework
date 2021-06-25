@@ -74,6 +74,20 @@ Templaza_API::set_section('templaza_style',
                 'subtitle' => __( 'Enter your phone number.', $this -> text_domain ),
                 'required' => array( 'enable-contact', '!=', 'off' ),
             ),
+            array(
+                'id'          => 'contact-login-icon',
+                'type'        => 'select',
+                'title'       => __( 'Login icon', $this -> text_domain ),
+                'data'        => 'fontawesome',
+                'required'    => array( 'enable-contact', '=', true ),
+            ),
+            array(
+                'id'       => 'contact-login',
+                'type'     => 'text',
+                'title'    => __( 'Login label', $this -> text_domain ),
+                'subtitle' => __( 'Enter your login label.', $this -> text_domain ),
+                'required' => array( 'enable-contact', '=', true ),
+            ),
         )
     )
 );

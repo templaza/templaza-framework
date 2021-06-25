@@ -293,3 +293,20 @@ Templaza_API::set_section('templaza_style',
         ),
     )
 );
+// -> START Contact Color
+Templaza_API::set_section('settings',
+    array(
+        'title'      => __( 'Contact icon', $this -> text_domain ),
+        'id'         => 'colors-contact-icon',
+        'desc'       => __( 'Select colors for contact icon', $this -> text_domain ),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'contact-icon-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Contact icon color', $this -> text_domain ),
+                'subtitle' => __( 'Set the color of contact icon', $this -> text_domain ),
+            ),
+        ),
+    )
+);
