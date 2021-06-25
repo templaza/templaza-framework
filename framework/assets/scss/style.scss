@@ -98,6 +98,11 @@ $grid-gutter-width:           2.5rem !default;
       color: #fff;
     }
   }
+  .redux-field-container{
+    .iris-picker{
+      box-sizing: content-box;
+    }
+  }
   //background: $tz-body-background;
   .w-100 {
     width: 100% !important;
