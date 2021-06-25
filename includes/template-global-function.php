@@ -1,6 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
+if ( ! function_exists( 'templaza_comment' ) ) :
 function templaza_comment( $templaza_comment, $templaza_args, $templaza_depth ) {
     switch ( $templaza_comment->comment_type ) :
         case 'pingback' :
@@ -55,3 +55,4 @@ function templaza_comment( $templaza_comment, $templaza_args, $templaza_depth ) 
             break;
     endswitch;
 }
+endif;
