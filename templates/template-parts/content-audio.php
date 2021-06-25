@@ -5,8 +5,8 @@ if ($templaza_audio != ''):
     ?>
     <div class="templaza-blog-item-audio">
         <?php
-        if (wp_oembed_get($templaza_audio)) :
-            echo wp_kses_post(wp_oembed_get($templaza_audio));
+        if ($templaza_audio) :
+            echo wp_kses_post($templaza_audio);
         endif;
         ?>
     </div>

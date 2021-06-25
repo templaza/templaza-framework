@@ -12,4 +12,5 @@ require_once __DIR__.'/templates.php';
 require_once __DIR__.'/fonts.php';
 require_once __DIR__.'/shortcode.php';
 require_once __DIR__.'/template-function.php';
+require_once __DIR__.'/template-global-function.php';
 require_once TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/helper/fieldhelper.php';

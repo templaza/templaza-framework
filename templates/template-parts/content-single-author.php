@@ -21,7 +21,7 @@ defined('ABSPATH') or exit();
             <?php the_author_meta('description'); ?>
         </p>
         <div class="templaza-block-author-social">
-            <?php do_action('templaza-author-social');?>
+            <?php do_action('templaza_author_social');?>
         </div>
     </div>
 </div>

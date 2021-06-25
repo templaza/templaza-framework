@@ -41,6 +41,8 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
             add_action('templaza_single_next_post',array($this,'templaza_single_get_next_post'));
             add_action('templaza_single_author_post',array($this,'templaza_single_get_author_post'));
             add_action('templaza_single_related_post',array($this,'templaza_single_get_related_post'));
+            add_action('templaza_author_social',array($this,'templaza_author_social'));
+
         }
         public function templaza_modify_contact_methods($profile_fields)
         {
@@ -109,6 +111,19 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
             }
 
             return $tags;
+        }
+
+        function templaza_author_social () {
+            $author_social = array('facebook','twitter','instagram','dribbble','linkedin','pinterest','youtube','vimeo','flickr','tumblr','whatsapp');
+            foreach($author_social as $item){
+                if(get_the_author_meta($item)){
+                    ?>
+                    <a href="<?php echo esc_url(get_the_author_meta($item));?>" target="_blank">
+                        <i class="fab fa-<?php echo $item;?>"></i>
+                    </a>
+                    <?php
+                }
+            }
         }
 
         public function templaza_shortcode_icon($attr, $content ) {
