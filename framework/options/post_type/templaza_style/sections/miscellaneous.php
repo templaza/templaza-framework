@@ -12,6 +12,71 @@ Templaza_API::set_section('templaza_style',
     )
 );
 
+// -> START Contact
+Templaza_API::set_section('templaza_style',
+    array(
+        'title'   => __('Contact', $this -> text_domain),
+        'id'      => 'miscellaneous-contact',
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'enable-contact',
+                'type'     => 'select',
+                'title'    => __( 'Contact info', $this -> text_domain ),
+                'subtitle' => __( 'Enable or disable Contact info.', $this -> text_domain ),
+                'options'       => array(
+                    'on'         => esc_html__('On', $this -> text_domain),
+                    'off'         => esc_html__('Off', $this -> text_domain),
+                ),
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
+            ),
+            array(
+                'id'          => 'contact-location-icon',
+                'type'        => 'select',
+                'title'       => __( 'Location icon', $this -> text_domain ),
+                'data'        => 'fontawesome',
+                'required'    => array( 'enable-contact', '=', true ),
+            ),
+            array(
+                'id'       => 'contact-location',
+                'type'     => 'text',
+                'title'    => __( 'Location', $this -> text_domain ),
+                'subtitle' => __( 'Enter your location address.', $this -> text_domain ),
+                'required' => array( 'enable-contact', '!=', 'off' ),
+            ),
+            array(
+                'id'          => 'contact-email-icon',
+                'type'        => 'select',
+                'title'       => __( 'Email icon', $this -> text_domain ),
+                'data'        => 'fontawesome',
+                'required'    => array( 'enable-contact', '=', true ),
+            ),
+            array(
+                'id'       => 'contact-email',
+                'type'     => 'text',
+                'title'    => __( 'Email address', $this -> text_domain ),
+                'subtitle' => __( 'Enter your Email address.', $this -> text_domain ),
+                'required' => array( 'enable-contact', '!=', 'off' ),
+            ),
+            array(
+                'id'          => 'contact-phone-icon',
+                'type'        => 'select',
+                'title'       => __( 'Phone icon', $this -> text_domain ),
+                'data'        => 'fontawesome',
+                'required'    => array( 'enable-contact', '=', true ),
+            ),
+            array(
+                'id'       => 'contact-phone',
+                'type'     => 'text',
+                'title'    => __( 'Phone number', $this -> text_domain ),
+                'subtitle' => __( 'Enter your phone number.', $this -> text_domain ),
+                'required' => array( 'enable-contact', '!=', 'off' ),
+            ),
+        )
+    )
+);
 // -> START Copyright
 Templaza_API::set_section('templaza_style',
     array(

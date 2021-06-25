@@ -1,12 +1,4 @@
 <?php
-/**
- * The template for displaying the 404 template in the Twenty Twenty theme.
- *
- * @package WordPress
- * @subpackage Twenty_Twenty
- * @since Twenty Twenty 1.0
- */
-
 use TemPlazaFramework\CSS;
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
@@ -17,7 +9,6 @@ $options    = Functions::get_theme_options();
 
 $errorContent   = isset($options['404-content'])?$options['404-content']:'';
 $errorButton    = isset($options['404-call-to-action'])?$options['404-call-to-action']:'';
-
 // Background Image
 $background_setting_404    = isset($options['404-background-setting'])?$options['404-background-setting']:0;
 

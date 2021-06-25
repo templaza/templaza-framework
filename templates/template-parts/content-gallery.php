@@ -24,7 +24,7 @@ if($blog_slider_animation != ''){
     $blog_slider_options .='animation: '.$blog_slider_animation. '';
 }
 if ($templaza_gallery) : ?>
-    <div class="templaza-archive-gallery uk-position-relative uk-visible-toggle uk-light" tabindex="-1" data-uk-slideshow="<?php echo esc_attr($blog_slider_options);?>>">
+    <div class="templaza-archive-gallery uk-position-relative uk-visible-toggle uk-light" tabindex="-1" data-uk-slideshow="<?php echo esc_attr($blog_slider_options);?>">
         <ul class="uk-slideshow-items">
             <?php foreach ($templaza_gallery as $templaza_image) : ?>
                 <?php $templaza_image_src = wp_get_attachment_image_src($templaza_image,$blog_thumbnail_size );?>
@@ -34,13 +34,13 @@ if ($templaza_gallery) : ?>
                     if($blog_slider_kenburns){?>
                         <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-bottom-left">
                             <img src="<?php echo esc_url($templaza_image_src[0]); ?>"
-                                <?php if ($templaza_caption) : ?> alt="<?php echo esc_attr($templaza_caption); ?>"<?php endif; ?> data-uk-cover />
+                                <?php if ($templaza_caption) : ?> alt="<?php echo esc_attr($templaza_caption); ?>"<?php endif; ?> data-uk-cover >
                         </div>
                         <?php
                     }else{
                         ?>
                         <img src="<?php echo esc_url($templaza_image_src[0]); ?>"
-                            <?php if ($templaza_caption) : ?> alt="<?php echo esc_attr($templaza_caption); ?>"<?php endif; ?> data-uk-cover />
+                            <?php if ($templaza_caption) : ?> alt="<?php echo esc_attr($templaza_caption); ?>"<?php endif; ?> data-uk-cover >
                         <?php
                     }
                     ?>
