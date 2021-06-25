@@ -294,7 +294,7 @@ Templaza_API::set_section('templaza_style',
     )
 );
 // -> START Contact Color
-Templaza_API::set_section('settings',
+Templaza_API::set_section('templaza_style',
     array(
         'title'      => __( 'Contact icon', $this -> text_domain ),
         'id'         => 'colors-contact-icon',

@@ -299,7 +299,7 @@ if (!empty($mobile_active_background_color)) {
 //Miscellaneous -> Contact Us
 $miscellaneous          = [];
 if (!empty($contact_icon_color)) {
-	$miscellaneous[]    = '.templaza-contact-info i[class*="fa-"]{color:' . $contact_icon_color . ' !important;}';
+	$miscellaneous[]    = '.templaza-contact-info .contact-icon{color:' . $contact_icon_color . ' !important;}';
 }
 //if (!empty($social_icon_color)) {
 //	$miscellaneous[]    = '.templaza-social-icons > li a{color:'.$social_icon_color.' !important;}';
