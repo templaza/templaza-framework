@@ -17,7 +17,7 @@ if(has_post_thumbnail()){
 ?>
 <div class="templaza-blog-item-img templaza-thumbnail-effect templaza-<?php echo esc_attr($blog_thumbnail_effect);?>">
     <a href="<?php the_permalink() ?>">
-        <?php the_post_thumbnail($blog_thumbnail_size); ?>
+        <?php the_post_thumbnail($blog_thumbnail_size,array( 'alt' => '' )); ?>
     </a>
 </div>
 <?php

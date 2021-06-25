@@ -34,13 +34,13 @@ if ($templaza_gallery) : ?>
                     if($blog_slider_kenburns){?>
                         <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-bottom-left">
                             <img src="<?php echo esc_url($templaza_image_src[0]); ?>"
-                                <?php if ($templaza_caption) : ?> alt="<?php echo esc_attr($templaza_caption); ?>"<?php endif; ?> data-uk-cover >
+                                <?php if ($templaza_caption) { ?> alt="<?php echo esc_attr($templaza_caption); ?>"<?php }else{ ?> alt="" <?php } ?> data-uk-cover >
                         </div>
                         <?php
                     }else{
                         ?>
                         <img src="<?php echo esc_url($templaza_image_src[0]); ?>"
-                            <?php if ($templaza_caption) : ?> alt="<?php echo esc_attr($templaza_caption); ?>"<?php endif; ?> data-uk-cover >
+                            <?php if ($templaza_caption) { ?> alt="<?php echo esc_attr($templaza_caption); ?>"<?php }else{ ?> alt="" <?php } ?> data-uk-cover >
                         <?php
                     }
                     ?>
