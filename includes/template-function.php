@@ -47,17 +47,17 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
         public function templaza_modify_contact_methods($profile_fields)
         {
             $profile_fields['job'] = 'Job';
-            $profile_fields['facebook'] = __('Facebook URL',$this -> text_domain);
-            $profile_fields['twitter'] = __('Twitter URL',$this -> text_domain);
-            $profile_fields['instagram'] = __('Instagram URL',$this -> text_domain);
-            $profile_fields['dribbble'] = __('Dribbble URL',$this -> text_domain);
-            $profile_fields['linkedin'] = __('Linkedin URL',$this -> text_domain);
-            $profile_fields['pinterest'] = __('Pinterest URL',$this -> text_domain);
-            $profile_fields['youtube'] = __('Youtube URL',$this -> text_domain);
-            $profile_fields['vimeo'] = __('Vimeo URL',$this -> text_domain);
-            $profile_fields['flickr'] = __('Flickr URL',$this -> text_domain);
-            $profile_fields['tumblr'] = __('Tumblr URL',$this -> text_domain);
-            $profile_fields['whatsapp'] = __('WhatsApp URL',$this -> text_domain);
+            $profile_fields['facebook'] = __('Facebook URL','templaza-framework');
+            $profile_fields['twitter'] = __('Twitter URL','templaza-framework');
+            $profile_fields['instagram'] = __('Instagram URL','templaza-framework');
+            $profile_fields['dribbble'] = __('Dribbble URL','templaza-framework');
+            $profile_fields['linkedin'] = __('Linkedin URL','templaza-framework');
+            $profile_fields['pinterest'] = __('Pinterest URL','templaza-framework');
+            $profile_fields['youtube'] = __('Youtube URL','templaza-framework');
+            $profile_fields['vimeo'] = __('Vimeo URL','templaza-framework');
+            $profile_fields['flickr'] = __('Flickr URL','templaza-framework');
+            $profile_fields['tumblr'] = __('Tumblr URL','templaza-framework');
+            $profile_fields['whatsapp'] = __('WhatsApp URL','templaza-framework');
             return $profile_fields;
         }
 
@@ -68,9 +68,9 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
             if ($count == '') { // If such views are not
                 delete_post_meta($postID, $count_key);
                 add_post_meta($postID, $count_key, '0');
-                echo esc_html__('View: 0',$this -> text_domain); // return value of 0
+                echo esc_html__('View: 0','templaza-framework'); // return value of 0
             }else{
-                echo esc_html__('Views:',$this -> text_domain).' '.$count;
+                echo esc_html__('Views:','templaza-framework').' '.$count;
             }
         }
 
@@ -93,9 +93,9 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
             $templaza_comment_count = wp_count_comments(get_the_ID());
             $templaza_cm_total = $templaza_comment_count->total_comments;
             if ($templaza_cm_total == ''|| $templaza_cm_total==0) {
-                echo esc_html__('Comment: 0',$this -> text_domain);
+                echo esc_html__('Comment: 0','templaza-framework');
             }else{
-                echo esc_html__('Comments:',$this -> text_domain).' '.$templaza_cm_total;
+                echo esc_html__('Comments:','templaza-framework').' '.$templaza_cm_total;
             }
         }
 
@@ -158,7 +158,7 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
             $text = sprintf(
                 wp_kses(
                 /* translators: %s: Post title. Only visible to screen readers. */
-                    __( 'Edit <span class="screen-reader-text">%s</span>', $this -> text_domain ),
+                    __( 'Edit <span class="screen-reader-text">%s</span>', 'templaza-framework' ),
                     array(
                         'span' => array(
                             'class' => array(),
