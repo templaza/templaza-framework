@@ -13,7 +13,7 @@ class Templates{
 
     protected static $cache = array();
 
-    public static function locate_my_template($template_names, $load = false, $require_once = true){
+    public static function locate_my_template($template_names, $load = false, $require_once = true, $args = array()){
         $located    = '';
         $base       = TEMPLAZA_FRAMEWORK.'/templates';
 
@@ -38,31 +38,31 @@ class Templates{
         }
 
         if($load && $located != '') {
-            load_template($located, $require_once);
+            load_template($located, $require_once, $args);
         }
 
         return $located;
     }
 
-    public static function load_my_layout($partial, $load = true, $require_once = true){
+    public static function load_my_layout($partial, $load = true, $require_once = true, $args = array()){
         $partial    = str_replace('.', '/', $partial);
-        $located    = self::locate_my_template((array) $partial, $load, $require_once);
+        $located    = self::locate_my_template((array) $partial, $load, $require_once, $args);
 
         return $located;
     }
 
-    public static function load_my_header($name = null, $require_once = true){
+    public static function load_my_header($name = null, $require_once = true, $args = array()){
         if('' != $name){
-            self::load_my_layout($name, true, $require_once);
+            self::load_my_layout($name, true, $require_once, $args);
         }else {
-            self::load_my_layout('header', true, $require_once);
+            self::load_my_layout('header', true, $require_once, $args);
         }
     }
-    public static function load_my_footer($name = 'footer'){
+    public static function load_my_footer($name = 'footer', $args = array()){
         if('' != $name){
-            self::load_my_layout($name, true);
+            self::load_my_layout($name, true, $args);
         }else {
-            self::load_my_layout('footer', true);
+            self::load_my_layout('footer', true, $args);
         }
     }
 

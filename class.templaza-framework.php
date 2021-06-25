@@ -199,6 +199,10 @@ class TemPlazaFrameWork{
             $theme_file = preg_replace('/\.php$/i', '', $theme_file);
         }
 
+        if(is_404() && $theme_file != '404'){
+            $theme_file = '404';
+        }
+
         add_filter('templaza-framework_theme_file', function($file) use($theme_file){
             if(!is_file($theme_file)){
                 // Check file exists in sub folder

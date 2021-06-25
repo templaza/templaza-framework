@@ -243,6 +243,10 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
             Templates::load_my_layout('template-parts.content-single-related',true,false);
         }
 
+        public static function templaza_comment( $templaza_comment, $templaza_args, $templaza_depth ) {
+            $args   = get_defined_vars();
+            Templates::load_my_layout('template-parts.content-single-comment-list', true, false, $args);
+        }
 
     }
 
