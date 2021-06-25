@@ -22,7 +22,7 @@ $html = '';
 $backtotop_icon             = isset($options['backtotop-icon'])?$options['backtotop-icon']:'fas fa-arrow-up';
 $backtotop_icon_size        = isset($options['backtotop-icon-size'])?(int) $options['backtotop-icon-size']:20;
 $backtotop_icon_color       = isset($options['backtotop-icon-color'])?$options['backtotop-icon-color']: '#000';
-$backtotop_icon_color       = CSS::make_color_rgba_redux($backtotop_icon_bgcolor);
+$backtotop_icon_color       = CSS::make_color_rgba_redux($backtotop_icon_color);
 $backtotop_icon_color       = !empty($backtotop_icon_color)?$backtotop_icon_color: '#000';
 //if(is_array($backtotop_icon_color) && isset($backtotop_icon_color['rgba'])) {
 //    $backtotop_icon_color    = $backtotop_icon_color['rgba'];

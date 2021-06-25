@@ -30,7 +30,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
         ?>
         <span class="contact-location">
             <?php if($contact_location_icon){ ?>
-            <i class="<?php echo esc_attr($contact_location_icon);?>"></i>
+            <i class="contact-icon <?php echo esc_attr($contact_location_icon);?>"></i>
         <?php } echo esc_attr($contact_location);?>
         </span>
         <?php
@@ -39,7 +39,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
         ?>
         <span class="contact-email">
         <?php if($contact_email_icon){ ?>
-            <i class="<?php echo esc_attr($contact_email_icon);?>"></i>
+            <i class="contact-icon <?php echo esc_attr($contact_email_icon);?>"></i>
             <?php } ?>
         <a href="mailto:<?php echo esc_attr($contact_email);?>"><?php echo esc_attr($contact_email);?></a>
         </span>
@@ -49,7 +49,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
         ?>
         <span class="contact-phone">
         <?php if($contact_phone_icon){ ?>
-            <i class="<?php echo esc_attr($contact_phone_icon);?>"></i>
+            <i class="contact-icon <?php echo esc_attr($contact_phone_icon);?>"></i>
         <?php } ?>
         <a href="tel:<?php echo esc_attr($contact_phone);?>"><?php echo esc_attr($contact_phone);?></a>
         </span>
@@ -59,7 +59,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
         ?>
         <span class="contact-login">
         <?php if($contact_login_icon){ ?>
-            <i class="<?php echo esc_attr($contact_login_icon);?>"></i>
+            <i class="contact-icon <?php echo esc_attr($contact_login_icon);?>"></i>
         <?php } ?>
         <a href="<?php echo esc_url(admin_url());?>"><?php echo esc_attr($contact_login);?></a>
         </span>
