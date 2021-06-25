@@ -6,7 +6,7 @@ defined('ABSPATH') or exit();
     <?php
     if(is_sticky(get_the_ID()) && has_post_thumbnail()==false){
         ?>
-        <span class="templaza-sticky-post" title="<?php echo esc_html__('Sticky Post','templaza-framework');?>"><i class="fas fa-thumbtack"></i></span>
+        <span class="templaza-sticky-post-no-thumbnail"> <?php echo esc_html__('Sticky Post','templaza-framework');?></span>
         <?php
     }
     ?>
