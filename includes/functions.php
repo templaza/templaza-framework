@@ -96,9 +96,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
 
             $store_id   = __METHOD__;
             $store_id  .= ':'.$post_type;
-//            if(is_admin()){
-//                return;
-//            }
             $global_options     = self::get_global_settings();
             $template_options   = self::_get_theme_options($post_type);
 
@@ -211,10 +208,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
             $store_id  .= ':'.$style_id;
             $store_id   = md5($store_id);
 
-            if($style_id && isset(self::$cache[$store_id])){
-                return self::$cache[$store_id];
-            }
-
             // Is slug
             if($style_id && !is_numeric($style_id)) {
                 // Get style id by style slug
@@ -225,6 +218,10 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 );
                 $posts = \get_posts($style_args);
                 $style_id = $posts[0]->ID;
+            }
+
+            if($style_id && isset(self::$cache[$store_id])){
+                return self::$cache[$store_id];
             }
 
 //            // Get default style options if not style id

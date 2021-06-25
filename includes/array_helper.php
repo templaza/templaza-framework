@@ -86,7 +86,7 @@ if(!class_exists('TemPlazaFramework\Array_Helper')){
 //                }
 
 
-                if ($recursive && \is_array($v))
+                if ($recursive && ((\is_array($v) && self::isAssociative($v)) || \is_object($v)))
                 {
                     if (is_object($parent) && !isset($parent->$k))
                     {
@@ -95,9 +95,12 @@ if(!class_exists('TemPlazaFramework\Array_Helper')){
                         $parent[$k] = array();
                     }
 
-                    if(count($data[$k])) {
-                        self::bindData($data[$k], $v);
+                    if(is_array($parent)){
+                        self::bindData($parent[$k], $v,$recursive, $allowNull);
+                    }else {
+                        self::bindData($parent->$k, $v,$recursive, $allowNull);
                     }
+
                     continue;
                 }
 
