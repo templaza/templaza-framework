@@ -6,7 +6,7 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
-add_filter( 'templaza-framework/field/select/font-icons', function(){
+add_filter( 'templaza-framework/field/select/font-icons/fontawesome', function(){
     return array(
         0 => 'fab fa-500px',
         1 => 'fab fa-accessible-icon',

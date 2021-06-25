@@ -116,6 +116,7 @@ class Fields{
 //                        }else{
                             require_once $iconPath;
                             $icons  = apply_filters('templaza-framework/field/select/font-icons', $data);
+                            $icons  = apply_filters('templaza-framework/field/select/font-icons/'.$field['data'], $icons);
 //                        }
                         if($icons && count($icons)) {
                             $icons = array_combine($icons, $icons);

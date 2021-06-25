@@ -6,7 +6,7 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
-add_filter( 'templaza-framework/field/select/font-icons', function(){
+add_filter( 'templaza-framework/field/select/font-icons/fontawesome-arrows', function(){
     return array(
         'fas fa-arrow-up',
         'fas fa-arrow-circle-up',
