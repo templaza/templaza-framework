@@ -65,7 +65,7 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
         {
             $count_key = 'post_views_count';
             $count = get_post_meta($postID, $count_key, true);
-            if ($count == '') { // If such views are not
+            if ($count == '' || empty($count)) { // If such views are not
                 delete_post_meta($postID, $count_key);
                 add_post_meta($postID, $count_key, '0');
                 echo esc_html__('View: 0','templaza-framework'); // return value of 0

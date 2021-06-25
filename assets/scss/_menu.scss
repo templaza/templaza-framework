@@ -503,13 +503,13 @@ ul{
                left: 100%;
                top: 0;
                margin: 0;
-               padding: 10px 20px;
+               padding: 0;
                list-style: none;
                background-color: #fff;
                box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.1);
                li{
-                  padding:12px 0;
-                  border-top:1px solid $tztheme-menu-border-color;
+                  padding:0;
+                  border-top:none;
                   a{
                      i{
                         font-size:0.9em;
