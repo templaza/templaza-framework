@@ -17,19 +17,22 @@ if(!empty($social_profiles)){
 echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
    <?php
    foreach ($social_profiles as $social_profile) {
-      switch (isset($social_profile -> id) && $social_profile->id) {
-         case 'whatsapp':
-            $social_profile_link = 'https://wa.me/' . $social_profile->link;
-            break;
-         case 'telegram':
-            $social_profile_link = 'https://t.me/' . $social_profile->link;
-            break;
-         case 'skype':
-            $social_profile_link = 'skype:' . $social_profile->link . '?chat';
-            break;
-         default:
-            $social_profile_link = $social_profile->link;
-            break;
+       $social_profile_link = $social_profile->link;
+       if(isset($social_profile -> id)){
+          switch ($social_profile->id) {
+             case 'whatsapp':
+                $social_profile_link = 'https://wa.me/' . $social_profile->link;
+                break;
+             case 'telegram':
+                $social_profile_link = 'https://t.me/' . $social_profile->link;
+                break;
+             case 'skype':
+                $social_profile_link = 'skype:' . $social_profile->link . '?chat';
+                break;
+             default:
+                $social_profile_link = $social_profile->link;
+                break;
+          }
       }
       echo '<li><a style="color:' . ($style == 'inherit' ? 'inherit;' : $social_profile->color .' !important;')
           . '" href="' . $social_profile_link . '" target="_blank" rel="noopener"><i class="'
