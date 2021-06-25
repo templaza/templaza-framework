@@ -36,3 +36,11 @@
     }
   }
 }
+.redux-field-container{
+  &.redux-field{
+    textarea{
+      height:auto;
+      width:100%;
+    }
+  }
+}
