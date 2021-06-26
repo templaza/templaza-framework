@@ -48,7 +48,42 @@ class TemPlazaFrameWork{
 
         add_filter('register_sidebar_defaults', array($this, 'modify_sidebar'), 9999);
 
+        add_action('after_switch_theme', array($this, 'set_default_settings'), 999);
+
         do_action( 'templaza-framework/plugin/hooks', $this );
+    }
+
+    public function set_default_settings(){
+        if(!current_theme_supports('templaza-framework', true, false)){
+            return;
+        }
+
+        $def_path       = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/settings/default.json';
+
+        if(!file_exists($def_path)) {
+            $def_path = TEMPLAZA_FRAMEWORK_OPTION_PATH . '/settings/default.json';
+        }
+
+        if(!file_exists($def_path)){
+            return;
+        }
+
+        $def_settings   = file_get_contents($def_path);
+
+        if(empty($def_settings)){
+            return;
+        }
+
+        $setting_name   = Functions::get_theme_option_name();
+        $settings       = get_option($setting_name, array());
+
+        if(!empty($settings)){
+            return;
+        }
+
+        $def_settings   = is_string($def_settings)?json_decode($def_settings, true):$def_settings;
+
+        update_option($setting_name, $def_settings);
     }
 
     public function modify_sidebar($defaults){
