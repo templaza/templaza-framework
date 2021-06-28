@@ -11,6 +11,7 @@
   &.is-style-outline{
     .wp-block-button__link{
       border-color:$tztheme-button_background;
+      color:$tztheme-button_text_color;
       &:hover{
         border-color:$tztheme-button_background_hover;
       }
