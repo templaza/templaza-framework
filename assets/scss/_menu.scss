@@ -247,6 +247,14 @@ ul{
    }
 }
 .templaza-header{
+   ul{
+      margin: 0;
+      li{
+         a{
+            padding:0 1em;
+         }
+      }
+   }
    .navbar-nav{
       flex-direction: row;
      margin:0;

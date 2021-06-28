@@ -47,7 +47,7 @@ if($blog_slider_animation != ''){
 }
 ?>
 <div class="templaza-blog">
-    <div id="templaza-single-<?php echo $id; ?>" class="templaza-single templaza-single-<?php
+    <div id="templaza-single-<?php echo esc_attr($id); ?>" class="templaza-single templaza-single-<?php
     echo esc_attr($post_type.' '.$custom_class); ?> templaza-blog-body">
         <?php
         if ( have_posts() ) : while (have_posts()) : the_post() ;
@@ -105,7 +105,7 @@ if($blog_slider_animation != ''){
                                 ?>
                             </div>
                             <?php
-                            if($show_tag && has_tag()){
+                            if($show_tag && has_tag() && get_the_tag_list()){
                                 do_action('templaza_single_tag_post');
                             }
                             if($show_share){
@@ -114,6 +114,7 @@ if($blog_slider_animation != ''){
                                     <?php do_action('templaza_share_post'); ?>
                                 </div>
                             <?php }
+                            $post_nav = posts_nav_link();
                             if($show_post_next_preview){
                                 do_action('templaza_single_next_post');
                             }
