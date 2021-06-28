@@ -22,8 +22,8 @@ if ( is_category() ) {
     $title = single_tag_title( '', false );
 } elseif ( is_author() ) {
     $title = '<span class="vcard">' . get_the_author() . '</span>';
-} elseif ( is_post_type_archive() ) {
-    $title = post_type_archive_title( '', false );
+} elseif ( is_archive() ) {
+    $title = get_the_archive_title( );
 } elseif ( is_tax() ) {
     $title = single_term_title( '', false );
 } elseif ( is_home() ) {
@@ -35,7 +35,7 @@ if ( is_category() ) {
 } elseif ( is_search() ) {
     $title = __('Search Results','templaza-framework');
 }elseif ( is_single() ) {
-    $title = single_post_title( '', false );
+    $title = __('Single Post','templaza-framework');
 }
 
 $heading    = $enable_custom_heading?$custom_heading:($title);
