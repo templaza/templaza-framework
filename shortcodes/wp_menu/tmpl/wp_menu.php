@@ -32,7 +32,7 @@ if ($nav_menu){
         $args['menu_class']         = $menu_class;
         $args['container_class']    = 'widget-content';
         if($style == 'ui_accordion'){
-            $args['items_wrap'] = '<ul id="%1$s" class="%2$s uk-nav-parent-icon" uk-nav>%3$s</ul>';
+            $args['items_wrap'] = '<ul id="%1$s" class="%2$s uk-nav-parent-icon" data-uk-nav>%3$s</ul>';
         }
         return $args;
     });
