@@ -6,6 +6,16 @@ ul{
 .page-links{
   clear:both;
 }
+.templaza-page, .templaza-single{
+  .type-page, .templaza-single-content{
+    &:after{
+      content: "";
+      display: table;
+      table-layout: fixed;
+      clear:both;
+    }
+  }
+}
 .templaza-archive{
   .templaza-archive-item{
     margin-bottom: $tztheme-blog-margin-bottom;
