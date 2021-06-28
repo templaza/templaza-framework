@@ -22,7 +22,7 @@ if(!class_exists('TemPlazaFramework\Array_Helper')){
          *
          * @since   1.0
          */
-        public static function merge($source, $destination, $recursive = false)
+        public static function merge($source, $destination, $recursive = false,  $allowNull = false)
         {
             $storeId    = __METHOD__;
             $storeId   .= ':'.serialize($source);
@@ -42,7 +42,7 @@ if(!class_exists('TemPlazaFramework\Array_Helper')){
 
             $new_data   = $destination;
 
-            self::bindData($new_data, $source, $recursive, false);
+            self::bindData($new_data, $source, $recursive, $allowNull);
 
             if(count($new_data)){
                 self::$cache[$storeId]  = $new_data;

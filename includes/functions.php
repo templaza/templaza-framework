@@ -546,8 +546,8 @@ if(!class_exists('TemPlazaFramework\Functions')){
             return $data;
         }
 
-        public static function merge_array($source, $destination, $recursive = true){
-            return Array_Helper::merge($source, $destination, $recursive);
+        public static function merge_array($source, $destination, $recursive = true,  $allowNull = false){
+            return Array_Helper::merge($source, $destination, $recursive, $allowNull);
         }
     }
 }

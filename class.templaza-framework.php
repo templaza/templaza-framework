@@ -74,16 +74,24 @@ class TemPlazaFrameWork{
             return;
         }
 
+        $def_settings   = is_string($def_settings)?json_decode($def_settings, true):$def_settings;
+
         $setting_name   = Functions::get_theme_option_name();
         $settings       = get_option($setting_name, array());
 
-        if(!empty($settings)){
-            return;
-        }
+        $new_settings   = Functions::merge_array($settings, $def_settings, true, true);
 
-        $def_settings   = is_string($def_settings)?json_decode($def_settings, true):$def_settings;
+//        $source     = array('enable-header' => '1', 'enable-test' => '', 'abc' => '');
+//        $def_s      = array('enable-header' => '', 'enable-test' => '1', 'layout' => 'layout_shortcode');
+//        var_dump( Functions::merge_array($source, $def_s, true, true)); die();
 
-        update_option($setting_name, $def_settings);
+        update_option($setting_name, $new_settings);
+
+//        if(!empty($settings)){
+//            return;
+//        }
+//
+//        update_option($setting_name, $def_settings);
     }
 
     public function modify_sidebar($defaults){
