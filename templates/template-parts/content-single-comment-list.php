@@ -3,11 +3,11 @@ defined('ABSPATH') or exit();
 
 use TemPlazaFramework\Functions;
 
-wp_parse_args($args, array(
+extract(wp_parse_args($args, array(
     'templaza_comment' => '',
     'templaza_args' => '',
     'templaza_depth' => ''
-));
+)));
 
 switch ( $templaza_comment->comment_type ){
     case 'pingback' :
