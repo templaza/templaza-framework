@@ -66,4 +66,12 @@ body{
   em{
     color:$tztheme-global-color;
   }
+  [hidden], .uk-hidden{
+    display:none !important;
+  }
+  .templaza-header-sticky .templaza-logo .templaza-logo-sticky{
+    &[hidden]{
+      display:none !important;
+    }
+  }
 }

@@ -107,6 +107,8 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
                     'width'           => true,
                     'frameborder'     => true,
                     'allowfullscreen' => true,
+                    'data-uk-responsive' => true,
+                    'data-uk-video' => true,
                 );
             }
 
