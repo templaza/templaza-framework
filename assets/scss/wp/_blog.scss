@@ -3,7 +3,7 @@
   clear:both;
 }
 .templaza-page, .templaza-single{
-  .type-page, .templaza-single-content{
+  .type-page, .templaza-single-content, .templaza-single-tags{
     &:after{
       content: "";
       display: table;
