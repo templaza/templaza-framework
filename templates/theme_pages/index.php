@@ -40,11 +40,11 @@ if ($blog_layout == 'grid') {
     $bl_layout_cl = 'templaza-blog-grid uk-child-width-1-'.$blog_grid_col.'@m';
     $blog_cl = '';
 }else{
-    $bl_layout_cl = 'templaza-blog-list';
+    $bl_layout_cl = 'templaza-blog-list uk-child-width-1-1';
     $blog_cl = '';
 }
 ?>
-<div id="templaza-archive-<?php echo $id;?>" class="templaza-blog templaza-archive templaza-archive-<?php echo get_post_type().$custom_class; ?>">
+<div id="templaza-archive-<?php echo esc_attr($id);?>" class="templaza-blog templaza-archive templaza-archive-<?php echo get_post_type().$custom_class; ?>">
     <div class="templaza-blog-body <?php echo esc_attr($bl_layout_cl);?>" data-uk-grid>
         <?php
         $d=1;
