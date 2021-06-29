@@ -56,4 +56,11 @@ div.templaza-sidebar {
   .widget{
     margin-bottom:$tztheme-widget-margin-bottom;
   }
+  ul{
+    padding:0;
+    li{
+      margin:1em 0;
+      list-style:none;
+    }
+  }
 }
