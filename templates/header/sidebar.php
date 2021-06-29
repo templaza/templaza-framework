@@ -23,7 +23,7 @@ $navClass                   = ['nav', 'templaza-nav', 'd-none', 'd-lg-flex'];
 $navWrapperClass            = ['align-self-center', 'px-2', 'd-none', 'd-lg-block'];
 
 $header_menu                = isset($options['header-menu'])?$options['header-menu']:'header';
-$header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'';
+$header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
 $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options['header-block-1-sidebar']:'';
 $header_menu_level          = isset($options['header-menu-level'])?(int) $options['header-menu-level']:0;
 
@@ -40,7 +40,7 @@ $header_menu_level          = isset($options['header-menu-level'])?(int) $option
             </div>
 	    <?php } ?>
         <div class="templaza-sidebar-logo">
-			<?php if (!empty($header_mobile_menu)) { ?>
+<!--			--><?php //if (!empty($header_mobile_menu)) { ?>
                 <div class="justify-content-start templaza-sidebar-mobile-menu">
                     <div class="header-mobilemenu-trigger burger-menu-button align-self-center"
                          data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
@@ -48,7 +48,7 @@ $header_menu_level          = isset($options['header-menu-level'])?(int) $option
                         </button>
                     </div>
                 </div>
-			<?php } ?>
+<!--			--><?php //} ?>
 			<?php Templates::load_my_layout('logo'); ?>
         </div>
         <div class="templaza-sidebar-menu">

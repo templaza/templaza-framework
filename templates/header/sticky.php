@@ -66,13 +66,13 @@ $attribs    = ' '.$attribs;
 <?php /* header starts*/ ?>
 <div id="templaza-sticky-header" class="<?php echo implode(' ', $class); ?> d-none"<?php echo $attribs;?>>
     <div class="container d-flex flex-row justify-content-between">
-        <?php if (!empty($header_mobile_menu)) { ?>
+<!--        --><?php //if (!empty($header_mobile_menu)) { ?>
             <div class="d-flex d-lg-none justify-content-start">
                 <div class="header-mobilemenu-trigger d-lg-none burger-menu-button align-self-center" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
                     <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
                 </div>
             </div>
-        <?php } ?>
+<!--        --><?php //} ?>
         <div class="header-left-section d-flex justify-content-between">
             <?php
             Templates::load_my_layout('logo', true, false); ?>

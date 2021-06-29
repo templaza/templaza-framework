@@ -2,7 +2,6 @@
    $.fn.templazaMobileMenu = function () {
       this.each(function () {
          var _this = $(this);
-         console.log(_this);
          _this.find('li').addClass('menu-item');
          _this.find('li').each(function () {
             $(this).children('ul').addClass('dropdown-menus');

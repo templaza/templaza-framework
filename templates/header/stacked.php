@@ -39,7 +39,7 @@ $header_menu                = isset($options['header-menu'])?$options['header-me
 $header_menu_level          = isset($options['header-menu-level'])?(int) $options['header-menu-level']:0;
 $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options['header-block-1-sidebar']:'';
 $block_2_sidebar            = isset($options['header-block-2-sidebar'])?$options['header-block-2-sidebar']:'';
-$header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'';
+$header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
 
 $navClass[] = $dropdown_animation_effect;
 //$dropdown_style = '.templaza-nav.'.$dropdown_animation_effect.' .sub-menu {
@@ -61,13 +61,13 @@ $data_attribs   = ' '.$data_attribs;
      if ($mode == 'center') {
         echo '<div class="w-100 d-flex justify-content-center">';
         ?>
-        <?php if (!empty($header_mobile_menu)) { ?>
+<!--        --><?php //if (!empty($header_mobile_menu)) { ?>
            <div class="d-flex d-lg-none justify-content-start">
               <div class="header-mobilemenu-trigger d-lg-none burger-menu-button align-self-center" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
                  <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
               </div>
            </div>
-        <?php } ?>
+<!--        --><?php //} ?>
         <?php
         echo '<div class="d-flex w-100 justify-content-center">';
         Templates::load_my_layout('logo');
@@ -137,14 +137,14 @@ $data_attribs   = ' '.$data_attribs;
         // header nav starts
         ?>
         <div class="header-stacked-inner w-100 d-flex justify-content-center"<?php echo $data_attribs;?>>
-           <?php if (!empty($header_mobile_menu)) { ?>
+<!--           --><?php //if (!empty($header_mobile_menu)) { ?>
               <div class="d-flex d-lg-none justify-content-start">
                  <div class="header-mobilemenu-trigger d-lg-none burger-menu-button align-self-center" data-offcanvas="#astroid-mobilemenu" data-effect="mobilemenu-slide">
                     <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
                  </div>
               </div>
               <?php
-           }
+//           }
            echo '<div class="d-flex w-100 justify-content-center">';
            echo '<div class="d-lg-none">';
            Templates::load_my_layout('logo');

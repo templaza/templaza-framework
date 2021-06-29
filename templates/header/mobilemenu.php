@@ -9,9 +9,9 @@ use TemPlazaFramework\Templates;
 $options        = Functions::get_theme_options();
 
 $header             = isset($options['enable-header'])?filter_var($options['enable-header'], FILTER_VALIDATE_BOOLEAN):true;
-$header_mobile_menu = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'';
+$header_mobile_menu = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
 
-if ($header && !empty($header_mobile_menu)) {
+if ($header) {
 
     $dir = 'left';
     $header_mode = isset($options['header-mode']) ? $options['header-mode'] : 'horizontal';

@@ -32,7 +32,7 @@ $dropdown_animation_effect  = $dropdown_animation_type == 'none'?'':$dropdown_an
 $dropdown_trigger           = isset($options['dropdown-trigger'])?$options['dropdown-trigger']:'hover';
 
 $header_menu                = isset($options['header-menu'])?$options['header-menu']:'header';
-$header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'';
+$header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
 $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options['header-block-1-sidebar']:'';
 $header_menu_level          = isset($options['header-menu-level'])?(int) $options['header-menu-level']:0;
 
@@ -42,13 +42,13 @@ $navClass[] = $dropdown_animation_effect;
 $menu_datas = Functions::get_attributes('header');
 ?>
 <div class="d-flex flex-row justify-content-between">
-    <?php if (!empty($header_mobile_menu)) { ?>
+<!--    --><?php //if (!empty($header_mobile_menu)) { ?>
         <div class="d-flex d-lg-none justify-content-start">
             <div class="header-mobilemenu-trigger d-lg-none burger-menu-button align-self-center" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
                 <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
             </div>
         </div>
-    <?php } ?>
+<!--    --><?php //} ?>
     <div class="header-left-section d-flex justify-content-between">
         <?php Templates::load_my_layout('logo'); ?>
         <?php

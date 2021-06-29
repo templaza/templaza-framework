@@ -14,7 +14,7 @@
     };
     var initMobileMenu = function () {
         $('.templaza-mobile-menu').templazaMobileMenu();
-        $('#templaza-offcanvas').find('ul.menu').templazaMobileMenu();
+        // $('#templaza-offcanvas').find('ul.menu').templazaMobileMenu();
         $('.templaza-mobile-menu').removeClass('d-none');
         $('.templaza-sidebar-menu .nav-item-caret').click(function () {
             $(this).parent('li').siblings('li').children('ul').slideUp();
