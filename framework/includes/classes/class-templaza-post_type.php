@@ -30,6 +30,12 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
                 $this -> init();
             }
 
+            if($this ->my_post_type_exists()){
+                if(method_exists($this,'parse_query')) {
+                    add_filter('parse_query', array($this, 'parse_query'));
+                }
+            }
+
 //            if(method_exists($this, 'hooks')){
 //                $this -> hooks();
 //            }
@@ -53,15 +59,12 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
         }
 
         public function hooks(){
-            $post_type  = $this->get_post_type();
-
-//            add_filter('admin_body_class', array($this, 'admin_body_class'));
-
-            if($this ->my_post_type_exists()){
-                if(method_exists($this,'parse_query')) {
-                    add_filter('parse_query', array($this, 'parse_query'));
-                }
-            }
+//            $post_type  = $this->get_post_type();
+//            if($this ->my_post_type_exists()){
+//                if(method_exists($this,'parse_query')) {
+//                    add_filter('parse_query', array($this, 'parse_query'));
+//                }
+//            }
             if(method_exists($this, 'enqueue')){
                 add_action('admin_enqueue_scripts', array($this, 'enqueue'));
             }
@@ -121,7 +124,7 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
 
         public function my_post_type_exists(){
             $post_type  = $this -> get_post_type();
-            if(post_type_exists($this -> get_post_type()) && $this -> get_current_screen_post_type() == $post_type) {
+            if(post_type_exists($post_type) && $this -> get_current_screen_post_type() == $post_type) {
                 return true;
             }
             return false;

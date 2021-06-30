@@ -483,7 +483,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
          * Modify query of post type (added filter by theme name for list page).
          */
         public function parse_query($query ){
-            if(isset($query -> query_vars['post_type'])) {
+            if(isset($query -> query_vars['post_type']) && $query -> query_vars['post_type'] == $this -> get_post_type()) {
                 $query->set('meta_query', array(
                     array(
                         'key' => '_' . $query->query_vars['post_type'] . '_theme',
