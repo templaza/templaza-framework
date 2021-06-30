@@ -92,3 +92,17 @@ body{
     }
   }
 }
+.templaza-testimonial{
+  ul{
+    li{
+      margin:0;
+    }
+  }
+  .quote-icon{
+    color:#e4e6ec;
+    @include transform(rotateX(-180deg) rotateY(-180deg));
+  }
+  .templaza_quote_content{
+    padding-bottom:10px;
+  }
+}

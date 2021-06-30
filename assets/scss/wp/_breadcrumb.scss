@@ -18,10 +18,6 @@ div.templaza-breadcrumb {
     position:relative;
     color:#fff;
     justify-content: space-between;
-    h1{
-      color:#fff;
-      font-size:48px;
-    }
     .breadcrumb{
       background:none;
       .bread_space{
@@ -33,5 +29,7 @@ div.templaza-breadcrumb {
       }
     }
   }
-
+}
+ul.templaza-breadcrumb{
+  padding-left:0;
 }
