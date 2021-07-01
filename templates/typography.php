@@ -73,9 +73,9 @@ $typographies = array(
         'id'        => 'typography-menu-option',
         'enable'    => (isset($options['typography-menu']) && $options['typography-menu'] =='custom'?true:false),
         'class'     => array(
-            'desktop' => '.templaza-nav>li>a,.templaza-sidebar-menu>li>a',
-            'tablet'  => '.templaza-nav>li>a,.templaza-sidebar-menu>li>a',
-            'mobile'  => '.templaza-nav>li>a,.templaza-sidebar-menu>li>a'
+            'desktop' => '.templaza-nav, .templaza-nav>li>a,.templaza-sidebar-menu>li>a',
+            'tablet'  => '.templaza-nav, .templaza-nav>li>a,.templaza-sidebar-menu>li>a',
+            'mobile'  => '.templaza-nav, .templaza-nav>li>a,.templaza-sidebar-menu>li>a'
         )
     ),
     array(
