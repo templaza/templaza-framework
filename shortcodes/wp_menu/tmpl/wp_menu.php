@@ -24,6 +24,13 @@ if ($nav_menu){
 //    WP_Nav_Menu_Widget::
     $type = 'WP_Nav_Menu_Widget';
     $args = array();
+//    add_filter('wp_nav_menu_items', function ($items, $args){
+//        var_dump();
+//        var_dump($items);
+//        var_dump($args);
+//        die();
+//
+//    }, 10, 2);
     add_filter('widget_nav_menu_args', function ($args) use ($enable_submenu, $style) {
         if(!$enable_submenu){
             $args['depth']  = 1;
@@ -41,6 +48,12 @@ if ($nav_menu){
             if($style == 'ui_accordion'){
                 if(in_array('menu-item-has-children', $classes)){
                     $classes[]  = 'uk-parent';
+                }
+                if(in_array('current-menu-parent', $classes)){
+                    $classes[]  = 'uk-open';
+                }
+                if(in_array('current-menu-item', $classes)){
+                    $classes[]  = 'uk-active';
                 }
             }
             return $classes;
