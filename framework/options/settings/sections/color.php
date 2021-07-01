@@ -310,3 +310,38 @@ Templaza_API::set_section('settings',
         ),
     )
 );
+// -> START Button Color
+Templaza_API::set_section('settings',
+    array(
+        'title'      => __( 'Button', $this -> text_domain ),
+        'id'         => 'colors-button',
+        'desc'       => __( 'Select colors for Button', $this -> text_domain ),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'button-background-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Button background color', $this -> text_domain ),
+                'subtitle' => __( 'Set background color button', $this -> text_domain ),
+            ),
+            array(
+                'id'       => 'button-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Button color', $this -> text_domain ),
+                'subtitle' => __( 'Set color button', $this -> text_domain ),
+            ),
+            array(
+                'id'       => 'button-background-color-hover',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Button hover background color', $this -> text_domain ),
+                'subtitle' => __( 'Set background color button hover', $this -> text_domain ),
+            ),
+            array(
+                'id'       => 'button-color-hover',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Button color hover', $this -> text_domain ),
+                'subtitle' => __( 'Set color button hover', $this -> text_domain ),
+            ),
+        ),
+    )
+);
