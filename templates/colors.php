@@ -152,6 +152,27 @@ $contact_icon_color     = CSS::make_color_rgba_redux($contact_icon_color);
 //$hikacart_icon_color = $template->params->get('hikacart_icon_color', '');
 //$login_icon_color = $template->params->get('login_icon_color', '');
 //$menu_icon_color = $template->params->get('dropdownmenu_icon_color', '');
+
+$button_css             = '';
+$button_color           = isset($options['button-color'])?$options['button-color']:'';
+$button_color_hover     = isset($options['button-color-hover'])?$options['button-color-hover']:'';
+$button_bg_color        = isset($options['button-background-color'])?$options['button-background-color']:'';
+$button_bg_color_hover  = isset($options['button-background-color-hover'])?$options['button-background-color-hover']:'';
+
+$button_color           = CSS::make_color_rgba_redux($button_color);
+$button_bg_color        = CSS::make_color_rgba_redux($button_bg_color);
+$button_color_hover     = CSS::make_color_rgba_redux($button_color_hover);
+$button_bg_color_hover  = CSS::make_color_rgba_redux($button_bg_color_hover);
+
+$button_css             = !empty($button_color)?'color:'.$button_color.';':'';
+$button_css            .= !empty($button_bg_color)?'background-color:'.$button_bg_color.';':'';
+$button_css             = !empty($button_css)?'form input[type="submit"], form button{'.$button_css.'}':'';
+Templates::add_inline_style($button_css);
+$button_css             = '';
+$button_css            .= !empty($button_color_hover)?'color:'.$button_color_hover.';':'';
+$button_css            .= !empty($button_bg_color_hover)?'background-color:'.$button_bg_color_hover.';':'';
+$button_css             = !empty($button_css)?'form input[type="submit"]:hover, form button:hover{'.$button_css.'}':'';
+Templates::add_inline_style($button_css);
 ?>
 
 <?php
