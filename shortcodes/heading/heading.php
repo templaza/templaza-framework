@@ -77,6 +77,13 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                         'default'  => false,
                     ),
                     array(
+                        'id'       => 'enable_heading_single',
+                        'type'     => 'switch',
+                        'title'    => esc_html__('Show heading in single post', $this -> text_domain),
+                        'subtitle' => esc_html__('The heading will be show in single post', $this -> text_domain),
+                        'default'  => false,
+                    ),
+                    array(
                         'id'       => 'heading_custom_class',
                         'type'     => 'text',
                         'title'    => esc_html__('Heading Custom Class', $this -> text_domain),

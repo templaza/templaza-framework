@@ -12,6 +12,7 @@ extract(shortcode_atts(array(
     'heading_custom_class'     => '',
     'enable_custom_heading'    => false,
     'enable_heading_inner_tag' => false,
+    'enable_heading_single'    => false,
 ), $atts));
 
 $options            = Functions::get_theme_options();
@@ -50,7 +51,9 @@ if ( is_category() ) {
 $heading    = $enable_custom_heading?$custom_heading:($title);
 
 //$inner_tag  = $enable_heading_inner_tag?'span':
-
+if (is_single() && $enable_heading_single == false){
+    return;
+}
 if(!empty($heading)){
     $heading    = $enable_heading_inner_tag?'<span>'.$heading.'</span>':$heading;
 ?>

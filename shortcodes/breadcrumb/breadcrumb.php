@@ -22,18 +22,14 @@ if(!class_exists('TemplazaFramework_ShortCode_Breadcrumb')){
 //                                        'color_rgba' => true,
                         'title'      => __('Background'),
                     ),
-//                    array(
-//                        'id'    => 'customclass',
-//                        'type'  => 'text',
-//                        'title' => esc_html__('Custom Class', $this -> text_domain),
-//                        'desc' => esc_html__('Custom Class can be used for writing custom CSS or JS.', $this -> text_domain),
-//                    ),
-//                    array(
-//                        'id'    => 'customid',
-//                        'type'  => 'text',
-//                        'title' => esc_html__('Custom ID', $this -> text_domain),
-//                        'desc' => esc_html__('Custom ID can be used for overriding the auto-generated id.', $this -> text_domain),
-//                    ),
+                    array(
+                        'id'       => 'enable_breadcrumb_single',
+                        'type'     => 'switch',
+                        'title'    => esc_html__('Show Breadcrumb in single post', $this -> text_domain),
+                        'subtitle' => esc_html__('The Breadcrumb will be show in single post', $this -> text_domain),
+                        'default'  => false,
+                    ),
+
                 )
             );
         }
