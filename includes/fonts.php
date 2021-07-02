@@ -205,7 +205,7 @@ class Fonts{
         }
 
         // Create font option has devices
-        $end_key    = array_key_last($font_option);
+        $end_key    = @end(array_keys($font_option));
         foreach($font_option as $key => $option){
             if($key == 'font-family' || $key == 'font-backup'
                 || $key == 'font-options' || $key == 'google' || $key == 'subsets'){

@@ -11,7 +11,7 @@ $enable_footer         = isset($options['enable-footer'])?filter_var($options['e
 if ($enable_footer) {
     $footer_copyright         = isset($options['footer-copyright'])?$options['footer-copyright']:'';
     // values to find & replace
-    $year       = get_the_date('Y');
+    $year       = date('Y');
     $site_title = get_bloginfo('name');
     $find       = array('{year}', '{sitetitle}');
     $replace    = array($year, $site_title);

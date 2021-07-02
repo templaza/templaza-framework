@@ -47,32 +47,50 @@ $class = ['templaza-logo', 'templaza-logo-' . $logo_type, 'd-flex align-items-ce
    $mr = ($header_mode == 'stacked' && ($header_stacked_menu_mode == 'seperated' || $header_stacked_menu_mode == 'center')) ? '' : ' mr-0 mr-lg-4';
    ?>
    <a class="<?php echo implode(' ', $class); ?><?php echo $mr; ?>" href="<?php echo get_home_url(); ?>">
-      <?php if (!empty($default_logo) && !empty($default_logo['url'])) {
-          $logo_filetype    = wp_check_filetype($default_logo['url']);
-          $log_svg          = '';
-          if($logo_filetype['ext'] && strtolower($logo_filetype['ext']) == 'svg'){
+      <?php
+      $logo_url = Functions::get_theme_default_logo_url('logo');
+      if(!empty($default_logo) && isset($default_logo['url']) && !empty($default_logo['url'])
+          && !Functions::is_external_url($default_logo['url'])){
+          $logo_url = $default_logo['url'];
+      }
+      if(!empty($logo_url)){
+          $log_svg              = '';
+          if(Functions::file_ext_exists($logo_url, 'svg')){
               $log_svg  = ' data-uk-svg';
           }
           ?>
-         <img src="<?php echo $default_logo['url']; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-default"<?php echo $log_svg; ?>/>
+         <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-default"<?php
+         echo $log_svg; ?>/>
       <?php } ?>
-      <?php if (!empty($mobile_logo) && !empty($mobile_logo['url'])) {
-          $logo_filetype    = wp_check_filetype($mobile_logo['url']);
-          $log_svg          = '';
-          if($logo_filetype['ext'] && strtolower($logo_filetype['ext']) == 'svg'){
+      <?php
+      $logo_url = Functions::get_theme_default_logo_url('logo_mobile');
+      if(!empty($mobile_logo) && isset($mobile_logo['url']) && !empty($mobile_logo['url'])
+          && !Functions::is_external_url($mobile_logo['url'])){
+          $logo_url = $mobile_logo['url'];
+      }
+      if(!empty($logo_url)){
+          $log_svg              = '';
+          if(Functions::file_ext_exists($logo_url, 'svg')){
               $log_svg  = ' data-uk-svg';
           }
           ?>
-         <img src="<?php echo $mobile_logo['url']; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-mobile"<?php echo $log_svg; ?>/>
+         <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-mobile"<?php
+         echo $log_svg; ?>/>
       <?php } ?>
-      <?php if (!empty($sticky_header_logo) && !empty($sticky_header_logo['url'])) {
-          $logo_filetype    = wp_check_filetype($sticky_header_logo['url']);
-          $log_svg          = '';
-          if($logo_filetype['ext'] && strtolower($logo_filetype['ext']) == 'svg'){
+      <?php
+      $logo_url = Functions::get_theme_default_logo_url('logo_sticky');
+      if(!empty($sticky_header_logo) && isset($sticky_header_logo['url']) && !empty($sticky_header_logo['url'])
+          && !Functions::is_external_url($sticky_header_logo['url'])){
+          $logo_url = $sticky_header_logo['url'];
+      }
+      if(!empty($logo_url)){
+          $log_svg              = '';
+          if(Functions::file_ext_exists($logo_url, 'svg')){
               $log_svg  = ' data-uk-svg';
           }
           ?>
-         <img src="<?php echo $sticky_header_logo['url']; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-sticky"<?php echo $log_svg; ?>/>
+         <img src="<?php echo $sticky_header_logo['url']; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-sticky"<?php
+         echo $log_svg; ?>/>
       <?php } ?>
    </a>
    <!-- image logo ends -->

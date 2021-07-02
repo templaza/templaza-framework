@@ -499,7 +499,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
             }
         }
 
-        public static function get_attribute_value($key='attribute', $attrib_key){
+        public static function get_attribute_value($key='attribute', $attrib_key = ''){
             $attributes = self::get_attributes($key);
 
             if(isset($attributes[$attrib_key])){
@@ -548,6 +548,80 @@ if(!class_exists('TemPlazaFramework\Functions')){
 
         public static function merge_array($source, $destination, $recursive = true,  $allowNull = false){
             return Array_Helper::merge($source, $destination, $recursive, $allowNull);
+        }
+
+        public static function get_framework_logo_url(){
+            $logo_url   = self::get_my_url();
+            $log_path   = TEMPLAZA_FRAMEWORK_PATH.'/assets/images/logo.svg';
+            if(file_exists($log_path)){
+                return $logo_url.'/assets/images/logo.svg';
+            }
+            return '';
+        }
+
+        /**
+         * Get theme's default logo when option has not set in config
+         * Note: your logo file should have in your theme base folder. Ex: your-theme/assets/images
+         * @param string $file_name
+         * @param array $files_ext
+         * @param string $base_folder
+         * @return string
+         * */
+        public static function get_theme_default_logo_url($file_name, $files_ext = array('.svg', '.png'), $base_folder = 'assets/images'){
+
+            if(empty($file_name) || empty($files_ext) || empty($base_folder)){
+                return '';
+            }
+
+            $logo_url = $logo_path = '/'.$base_folder.'/'.$file_name;
+            $logo_url     = get_stylesheet_directory_uri().$logo_url;
+            $logo_path    = get_stylesheet_directory().$logo_path;
+            foreach($files_ext as $ext){
+                if(file_exists($logo_path.$ext)){
+                    return $logo_url.$ext;
+                }
+            }
+            return '';
+        }
+
+        /**
+         * Check url is external
+         * @param string $url
+         * @return bool true|false
+         * */
+        public static function is_external_url($url){
+            if(!$url){
+                return false;
+            }
+
+            $url_host       = parse_url($url, PHP_URL_HOST);
+            $internal_host  = parse_url(get_site_url(), PHP_URL_HOST);
+
+            if($url_host != $internal_host){
+                return true;
+            }
+            return false;
+        }
+
+        /**
+         * Check extension of a file
+         * @param string $file
+         * @param string $ext_check The extension of file to check
+         * @return bool true|false|null
+         * */
+        public static function file_ext_exists($file, $ext_check){
+            if(!$file || !$ext_check){
+                return null;
+            }
+
+            $file_type  = wp_check_filetype($file);
+            if(!$file_type['ext']){
+                return null;
+            }
+            if(is_array($ext_check) && in_array($file_type['ext'], $ext_check)){
+                return true;
+            }
+            return (is_string($ext_check) && $file_type['ext'] == $ext_check);
         }
     }
 }
