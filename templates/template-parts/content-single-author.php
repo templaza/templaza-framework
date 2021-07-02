@@ -1,5 +1,6 @@
 <?php
 defined('ABSPATH') or exit();
+if(get_the_author_meta('description')){
 ?>
 <div class="templaza-single-author uk-margin-large-bottom">
     <div class="templaza-block-author uk-flex-middle uk-margin-bottom" data-uk-grid>
@@ -25,3 +26,5 @@ defined('ABSPATH') or exit();
         </div>
     </div>
 </div>
+<?php
+}
