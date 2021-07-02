@@ -35,8 +35,14 @@ if($enable_smooth_scroll) {
 // Add Favicon
 add_action('wp_head', function() use($options){
     $favicon    = isset($options['favicon'])?$options['favicon']:array();
-    if(count($favicon) && !empty($favicon['url'])) {
-        echo '<link rel="shortcut icon" href="' .$favicon['url']. '" />';
+    $favicon_url = Functions::get_theme_default_logo_url('favicon', '.ico');
+    if(!empty($favicon) && isset($favicon['url']) && !empty($favicon['url'])
+        && !Functions::is_external_url($favicon['url'])){
+        $favicon_url = $favicon['url'];
+    }
+
+    if(!empty($favicon_url)) {
+        echo '<link rel="shortcut icon" href="' .$favicon_url. '" />';
     }
 }, 3);
 
