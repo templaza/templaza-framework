@@ -25,7 +25,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
          *
          * @since ReduxFramework 1.0.0
          */
-        function __construct( $field = array(), $value = '', $parent ) {
+        function __construct( $field = array(), $value = '', $parent = null) {
             $this -> text_domain    = Functions::get_my_text_domain();
             $this->parent = $parent;
             $this->field  = $field;

@@ -23,7 +23,7 @@ use TemPlazaFramework\Functions;
              * @access        public
              * @return        void
              */
-            public function __construct( $field = array(), $value = '', $parent ) {
+            public function __construct( $field = array(), $value = '', $parent = null ) {
                 $this->parent = $parent;
                 $this->field  = $field;
                 $this->value  = $value;

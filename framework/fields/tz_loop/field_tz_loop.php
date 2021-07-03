@@ -16,7 +16,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Loop' ) ) {
         protected $templates = array();
         protected $ignore_fields = array();
 
-        function __construct( $field = array(), $value = '', $parent ) {
+        function __construct( $field = array(), $value = '', $parent = null ) {
             $this -> text_domain    = Functions::get_my_text_domain();
             $this->parent           = $parent;
             $this->field            = $field;

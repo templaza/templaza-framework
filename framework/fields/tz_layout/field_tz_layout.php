@@ -13,7 +13,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
         protected $elements;
         protected $templates = array();
 
-        function __construct( $field = array(), $value = '', $parent ) {
+        function __construct( $field = array(), $value = '', $parent = null ) {
 
             $this -> text_domain    = Functions::get_my_text_domain();
 
