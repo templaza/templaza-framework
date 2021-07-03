@@ -37,6 +37,8 @@ if(!empty($content)){
         $tz_class   .= ' '.$section_type;
     }
 
+    $tz_class   .= (!empty($layout_type))?' templaza-section-'.$layout_type:'';
+
     $_gutter        = '';
     $_layout_type   = 'container';
     switch ($layout_type){
