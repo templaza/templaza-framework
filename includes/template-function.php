@@ -42,6 +42,7 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
             add_action('templaza_single_author_post',array($this,'templaza_single_get_author_post'));
             add_action('templaza_single_related_post',array($this,'templaza_single_get_related_post'));
             add_action('templaza_author_social',array($this,'templaza_author_social'));
+            add_action('templaza_search_no_result',array($this,'templaza_search_no_result'));
 
         }
         public function templaza_modify_contact_methods($profile_fields)
@@ -248,6 +249,10 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
         public static function templaza_comment( $templaza_comment, $templaza_args, $templaza_depth ) {
             $args   = get_defined_vars();
             Templates::load_my_layout('template-parts.content-single-comment-list', true, false, $args);
+        }
+
+        public static function templaza_search_no_result( ) {
+            Templates::load_my_layout('template-parts.content-search-no-result', true, false);
         }
 
     }

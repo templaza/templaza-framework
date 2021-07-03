@@ -13,7 +13,7 @@ $options            = Functions::get_theme_options();
 $post_type          = get_post_type(get_the_ID());
 $prefix             = $post_type.'-page';
 
-if($post_type == 'post'){
+if($post_type == 'post' || is_search()){
     $prefix = 'blog-page';
 }
 if(isset($_GET['view'])){
@@ -48,6 +48,10 @@ if ($blog_layout == 'grid') {
     <div class="templaza-blog-body <?php echo esc_attr($bl_layout_cl);?>" data-uk-grid>
         <?php
         $d=1;
+        global $wp_query;
+        if($wp_query->found_posts==0 && is_search()){
+            do_action('templaza_search_no_result');
+        }
         if (have_posts()) : while (have_posts()) : the_post();
             if(is_sticky(get_the_ID())){
                 $sticky_cl = 'templaza-sticky';
