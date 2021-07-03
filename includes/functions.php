@@ -563,7 +563,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
          * Get theme's default logo when option has not set in config
          * Note: your logo file should have in your theme base folder. Ex: your-theme/assets/images
          * @param string $file_name
-         * @param array $files_ext
+         * @param array|string $files_ext
          * @param string $base_folder
          * @return string
          * */
@@ -576,10 +576,15 @@ if(!class_exists('TemPlazaFramework\Functions')){
             $logo_url = $logo_path = '/'.$base_folder.'/'.$file_name;
             $logo_url     = get_stylesheet_directory_uri().$logo_url;
             $logo_path    = get_stylesheet_directory().$logo_path;
-            foreach($files_ext as $ext){
-                if(file_exists($logo_path.$ext)){
-                    return $logo_url.$ext;
+
+            if(is_array($files_ext)){
+                foreach($files_ext as $ext){
+                    if(file_exists($logo_path.$ext)){
+                        return $logo_url.$ext;
+                    }
                 }
+            }elseif(is_string($files_ext) && $logo_path.$files_ext){
+                return $logo_url.$files_ext;
             }
             return '';
         }
