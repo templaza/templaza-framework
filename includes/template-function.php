@@ -16,6 +16,7 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
             add_filter('wp_kses_allowed_html', array($this, 'templaza_wpkses_post_tags'), 10, 2);
             add_filter('upload_mimes', array($this, 'templaza_mime_types'));
             add_filter('edit_post_link', array($this, 'templaza_edit_post_link'),10,3);
+            add_filter('the_content_more_link', array($this, 'templaza_modify_read_more_link'));
 
             add_shortcode('icon', array($this, 'templaza_shortcode_icon'),10,2);
 
@@ -60,6 +61,9 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
             $profile_fields['tumblr'] = __('Tumblr URL','templaza-framework');
             $profile_fields['whatsapp'] = __('WhatsApp URL','templaza-framework');
             return $profile_fields;
+        }
+        public function templaza_modify_read_more_link() {
+            return '';
         }
 
         public function templaza_getPostViews($postID)
