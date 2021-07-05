@@ -120,7 +120,12 @@
     }
   }
 }
-
+.templaza-block-author-name {
+  margin-bottom: 10px;
+  a {
+    color: inherit;
+  }
+}
 p{
   &.has-large-font-size,
   &[style^="font"]{
