@@ -17,6 +17,18 @@
     margin-bottom: $tztheme-blog-margin-bottom;
   }
 }
+.templaza-post-meta {
+  dd {
+    display: inline;
+    i{
+      padding-right:5px;
+      font-size:0.9em;
+    }
+    &:not(:last-child){
+      padding-right:15px;
+    }
+  }
+}
 .templaza-post-meta,
 .templaza-blog-share{
   line-height: 1.6em;
