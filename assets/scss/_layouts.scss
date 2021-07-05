@@ -1,6 +1,16 @@
 /*
 * Body Wrapper
 */
+.container {
+	@media (min-width: 640px) {
+		padding-left: var(--bs-gutter-x, 30px);
+		padding-right: var(--bs-gutter-x, 30px);
+	}
+	@media (min-width: 960px) {
+		padding-left: var(--bs-gutter-x, 40px);
+		padding-right: var(--bs-gutter-x, 40px);
+	}
+}
 .templaza-content {
 	left: 0;
 	-webkit-transition: transform 0.5s;
