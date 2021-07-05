@@ -1,7 +1,7 @@
 <?php
 defined('ABSPATH') or exit();
 $templaza_breadcrums_id      = 'breadcrumb';
-$templaza_breadcrums_class   = 'templaza-breadcrumb';
+$templaza_breadcrums_class   = 'templaza-breadcrumb uk-breadcrumb';
 $templaza_blog_title         = esc_html__('Blog','templaza-framework');
 $templaza_home_title         = esc_html__('Home','templaza-framework');
 
