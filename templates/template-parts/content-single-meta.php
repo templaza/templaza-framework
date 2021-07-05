@@ -45,6 +45,12 @@ $show_post_view         = isset($options[$prefix.'-post-view'])?filter_var($opti
             <?php the_category(', '); ?>
         </dd>
     <?php } ?>
+    <?php if(is_sticky() && is_single()){ ?>
+        <dd class="sticky">
+            <i class="fas fa-thumbtack"></i>
+            <?php echo esc_html__('Sticky','templaza-framework');?>
+        </dd>
+    <?php } ?>
     <?php
     edit_post_link();
     ?>
