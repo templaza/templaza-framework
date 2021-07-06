@@ -396,15 +396,6 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
 //            parent::hooks();
 
             if(is_admin()){
-//                add_action('wp_nav_menu_item_custom_fields', function($item_id, $item){
-//                    echo '<input type="hidden" data-tz-menu-slug value="'.$item -> post_name.'" />';
-////                        var_dump($item_id);
-////                    if(isset($_POST['action']) && $_POST['action'] == 'add-menu-item') {
-////                        var_dump(sanitize_title($item->post_title));
-////                        var_dump($item);
-////                        die();
-////                    }
-//                }, 10, 2);
                 if($pagenow == 'nav-menus.php') {
                     add_filter( 'hidden_meta_boxes', array($this, 'remove_hidden_meta_boxes'), 10, 2 );
                     add_action('admin_init', array($this, 'add_meta_boxes'), 10, 2);

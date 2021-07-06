@@ -124,6 +124,11 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
          */
         function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)
         {
+
+            // My bug
+//                if($item -> )
+//            var_dump($item); die(__METHOD__);
+
             $this -> item_tmp   = $item;
 
             $indent = ($depth) ? str_repeat("\t", $depth) : '';
@@ -292,15 +297,22 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
             $item_output .= $_args['after'];
 
             if($item -> type == $this -> my_menu_type){
-                    $item_shortcode = $item->templaza_megamenu_html;
-                    if(preg_match_all( '/(.*?)' . get_shortcode_regex(array($this -> menu_shorcode_tag)) . '/sm',
-                        $item_shortcode, $matches2, PREG_SET_ORDER )) {
-                        $matches2   = array_shift($matches2);
-                        $output .= $matches2[1];
 
-                    }else{
-                        $output .= $item_shortcode;
-                    }
+                if(isset($item -> templaza_allow_el) && $item -> templaza_allow_el) {
+                    $direction = isset($settings['submenu_direction']) ? $settings['submenu_direction'] : 'left';
+                    $output .= '<li data-position="' . $direction . '" class="' . $class . '" >';
+                }
+
+                $item_shortcode = $item->templaza_megamenu_html;
+
+                if(preg_match_all( '/(.*?)' . get_shortcode_regex(array($this -> menu_shorcode_tag)) . '/sm',
+                    $item_shortcode, $matches2, PREG_SET_ORDER )) {
+                    $matches2   = array_shift($matches2);
+                    $output .= $matches2[1];
+
+                }else{
+                    $output .= $item_shortcode;
+                }
                 $item_output    = '';
             }
             else {
@@ -339,6 +351,10 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                     if(preg_match( '/'.$this -> menu_shorcode_tag.'\](.*)/im', $item_shortcode, $match )){
                         $output .= $match[1];
                     }
+                }
+
+                if(isset($item -> templaza_allow_el) && $item -> templaza_allow_el) {
+                    $output .= "</li>"; // remove new line to remove the 4px gap between menu items
                 }
             }
             else {

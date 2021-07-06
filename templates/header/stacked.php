@@ -92,11 +92,11 @@ $data_attribs   = ' '.$data_attribs;
             <div class="<?php echo implode(' ', $navWrapperClass)?>">
                <?php
                Menu::get_nav_menu(array(
-                   'theme_location'  => $header_menu,
-                   'menu_class'      => implode(' ', $navClass),
-                   'container_class' => implode(' ', $navWrapperClass),
-                   'menu_id'         => '',
-                   'depth'           => $header_menu_level, // Level
+                   'theme_location'              => $header_menu,
+                   'menu_class'                  => implode(' ', $navClass),
+                   'container_class'             => implode(' ', $navWrapperClass),
+                   'menu_id'                     => '',
+                   'depth'                       => $header_menu_level, // Level
                    'templaza_megamenu_html_data' => $menu_datas
                ));
                ?>
@@ -157,6 +157,7 @@ $data_attribs   = ' '.$data_attribs;
                     'container_class' => implode(' ', $navWrapperClass),
                     'menu_id'         => '',
                     'depth'           => $header_menu_level, // Level
+                    'templaza_is_header'          => true,
                     'templaza_megamenu_html_data' => $menu_datas
                 ));
                 ?>
@@ -259,6 +260,7 @@ $data_attribs   = ' '.$data_attribs;
                     'container_class' => implode(' ', $navWrapperClass),
                     'menu_id'         => '',
                     'depth'           => $header_menu_level, // Level
+                    'templaza_is_header'          => true,
                     'templaza_megamenu_html_data' => $menu_datas
                 ));
                 // header nav ends

@@ -36,12 +36,16 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
             $this -> framework      = $framework;
             $this -> text_domain    = Functions::get_my_text_domain();
 
-            $this -> framework -> repeater_data    = array();
+            if($this -> framework) {
+                $this->framework->repeater_data = array();
+            }
 
-            $this -> metaboxes  = $this -> register();
-            $this -> metaboxes  = apply_filters("templaza-framework/metabox/register", $this -> metaboxes, $post_type);
+            if(is_admin()) {
+                $this->metaboxes = $this->register();
+                $this->metaboxes = apply_filters("templaza-framework/metabox/register", $this->metaboxes, $post_type);
 
-            do_action('templaza-framework/metabox/'.$this -> get_meta_box_name().'/constructor');
+                do_action('templaza-framework/metabox/'.$this -> get_meta_box_name().'/constructor');
+            }
 
             $this -> hooks();
         }

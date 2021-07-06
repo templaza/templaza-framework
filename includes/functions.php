@@ -389,6 +389,8 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     foreach($params as $key => $param){
                         if(!is_array($param)) {
                             $attribs .= ' ' . $key . '="' . $param . '"';
+                        }else{
+                            $attribs    .= ' '.$key.'=\''.json_encode($param).'\'';
                         }
                     }
                 }
@@ -439,6 +441,9 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     }
                 }
 
+                $shortcode['shortcode']['open'][$level] = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/after_shortcode',
+                    $shortcode['shortcode']['open'][$level], $level, $params, $item);
+
                 // Reset shortcode tree when level is zero
                 if($level == 0){
                     if(isset($shortcode['shortcode']['open'][$level])) {
@@ -451,8 +456,8 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     $shortcode['shortcode']['open'][$level] = '';
                 }
 
-                $shortcode['shortcode']['open'][$level] = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/after_shortcode',
-                    $shortcode['shortcode']['open'][$level], $level, $params, $item);
+//                $shortcode['shortcode']['open'][$level] = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/after_shortcode',
+//                    $shortcode['shortcode']['open'][$level], $level, $params, $item);
 
                 // Store prev shortcode
                 $shortcode['item']    = $item;
