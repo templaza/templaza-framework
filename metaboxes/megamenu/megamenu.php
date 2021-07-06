@@ -982,8 +982,7 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
             $megamenu   = json_decode($megamenu, true);
             $megamenu_settings   = json_decode($megamenu_settings, true);
 
-//            var_dump($megamenu); die();
-            if(count($megamenu)){
+            if(!empty($megamenu_settings) && is_array($megamenu_settings) && count($megamenu)){
 
                 // Hook to change menu id to menu slug of megamenu menu item element
                 add_filter('templaza-framework/metabox/'.$this -> get_meta_box_name()
@@ -997,7 +996,7 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                 }
             }
 
-            if(count($megamenu_settings)){
+            if(!empty($megamenu_settings) && is_array($megamenu_settings) && count($megamenu_settings)){
                 foreach ($megamenu_settings as $_menu_id => $setting){
                     update_post_meta($_menu_id, '_templaza_megamenu_settings', $setting);
                 }
