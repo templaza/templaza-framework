@@ -11,9 +11,9 @@ if(!class_exists('TemplazaFramework_ShortCode_WC_Products')){
             return array(
                 'id'          => 'wc_products',
                 'icon'        => 'fas fa-box-open',
-                'title'       => __('Woocommerce Products', $this -> text_domain),
+                'title'       => __('Woo Products', $this -> text_domain),
                 'param_title' => esc_html__('Woocommerce Products Settings', $this -> text_domain),
-                'desc'        => __('Load Woocommerce Products.', $this -> text_domain),
+                'desc'        => __('Load Woo Products.', $this -> text_domain),
                 'admin_label' => true,
                 'params'      => array(
                     array(

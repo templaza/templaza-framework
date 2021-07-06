@@ -1,6 +1,11 @@
-.templaza-social{
+ul.templaza-social{
   li{
     display:inline;
+    a {
+      i {
+        padding: 0;
+      }
+    }
     &:hover{
       color:$tztheme-global-color;
     }
