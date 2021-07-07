@@ -12,8 +12,8 @@ $custom_class   = isset($atts['custom_container_class'])?' '.$atts['custom_conta
 $options            = Functions::get_theme_options();
 $post_type          = get_post_type(get_the_ID());
 $prefix             = $post_type.'-page';
-
-if($post_type == 'post'){
+global $wp_query;
+if($post_type == 'post' || $wp_query->found_posts ==0){
     $prefix = 'blog-page';
 }
 if(isset($_GET['view'])){
@@ -48,6 +48,9 @@ if ($blog_layout == 'grid') {
     <div class="templaza-blog-body <?php echo esc_attr($bl_layout_cl);?>" data-uk-grid>
         <?php
         $d=1;
+        if($wp_query->found_posts==0){
+            do_action('templaza_archive_no_result');
+        }
         if (have_posts()) : while (have_posts()) : the_post();
             if(is_sticky(get_the_ID())){
                 $sticky_cl = 'templaza-sticky';

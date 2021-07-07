@@ -41,7 +41,7 @@ if ( !is_front_page() ) {
         $templaza_post_type = get_post_type();
 
         /* If it is a custom post type display name and link */
-        if($templaza_post_type != 'post') {
+        if($templaza_post_type != 'post' && $templaza_post_type !=null) {
 
             /* Blog page */
             if( get_option( 'page_for_posts' ) != '0' && $templaza_post_type == 'post' ){
