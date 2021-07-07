@@ -133,8 +133,11 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
             }
         }
 
-        public function templaza_shortcode_icon($attr, $content ) {
-            return '<i style="color:'.$attr['color'].'" class="'. $content . '"></i>';
+        public function templaza_shortcode_icon($atts, $content='' ) {
+            extract( shortcode_atts( array(
+                'color'    => '',
+            ), $atts ) );
+            return '<i style="color:'.$color.'" class="'. $content . '"></i>';
         }
 
         public function templaza_mime_types( $mimes ){
