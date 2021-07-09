@@ -2,6 +2,8 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
+use TemPlazaFramework\Media;
+
 // -> START Miscellaneous
 Templaza_API::set_section('settings',
     array(
@@ -125,6 +127,7 @@ Templaza_API::set_section('settings',
                 'type'     => 'switch',
                 'title'    => __( 'Development Mode', $this -> text_domain ),
                 'subtitle' => __( 'Enable development mode to take your site offline and show a static coming soon page.', $this -> text_domain ),
+                'library_filter'    => Media::get_image_formats_by_mime_type(),
                 'default'  => true,
             ),
             array(
@@ -149,22 +152,22 @@ Templaza_API::set_section('settings',
             ),
             array(
                 'id'          => 'miscellaneous-coming-soon-countdown-date',
-                'type'        => 'text',
+                'type'        => 'date',
                 'title'       => __( 'Countdown Date', $this -> text_domain ),
                 'subtitle'    => __( 'Set a date for countdown.', $this -> text_domain ),
                 'required'    => array(
                     array('miscellaneous-development-mode', '=', '1'),
                 ),
             ),
-            array(
-                'id'          => 'miscellaneous-coming-soon-social',
-                'type'        => 'switch',
-                'title'       => __( 'Social Icons', $this -> text_domain ),
-                'default'     => true,
-                'required'    => array(
-                    array('miscellaneous-development-mode', '=', '1'),
-                ),
-            ),
+//            array(
+//                'id'          => 'miscellaneous-coming-soon-social',
+//                'type'        => 'switch',
+//                'title'       => __( 'Social Icons', $this -> text_domain ),
+//                'default'     => true,
+//                'required'    => array(
+//                    array('miscellaneous-development-mode', '=', '1'),
+//                ),
+//            ),
             array(
                 'id'          => 'miscellaneous-background-setting',
                 'type'        => 'select',
@@ -175,8 +178,35 @@ Templaza_API::set_section('settings',
                     'image' => __('Image', $this -> text_domain),
                     'video' => __('Video', $this -> text_domain),
                 ),
+                'default'   => '0',
                 'required'    => array(
                     array('miscellaneous-development-mode', '=', '1'),
+                ),
+            ),
+            array(
+                'id'          => 'miscellaneous-background-color',
+                'type'        => 'color_rgba',
+                'title'       => __( 'Background Color', $this -> text_domain ),
+                'required'    => array(
+                    array('miscellaneous-background-setting', '=', 'color'),
+                ),
+            ),
+            array(
+                'id'                => 'miscellaneous-background-image',
+                'type'              => 'background',
+                'title'             => __( 'Background Image', $this -> text_domain ),
+                'library_filter'    => Media::get_image_formats_by_mime_type(),
+                'required'          => array(
+                    array('miscellaneous-background-setting', '=', 'image'),
+                ),
+            ),
+            array(
+                'id'                => 'miscellaneous-background-video',
+                'type'              => 'media',
+                'title'             => __( 'Background Video', $this -> text_domain ),
+                'library_filter'    => Media::get_video_formats_by_mime_type(),
+                'required'          => array(
+                    array('miscellaneous-background-setting', '=', 'video'),
                 ),
             ),
         )
@@ -227,15 +257,17 @@ Templaza_API::set_section('settings',
                 'required'  => array('404-background-setting', '=', 'color'),
             ),
             array(
-                'id'          => '404-background',
-                'type'        => 'background',
-                'title'       => __( 'Background', $this -> text_domain ),
-                'required'  => array('404-background-setting', '=', 'image'),
+                'id'               => '404-background',
+                'type'             => 'background',
+                'title'            => __( 'Background', $this -> text_domain ),
+                'library_filter'   => Media::get_image_formats_by_mime_type(),
+                'required'         => array('404-background-setting', '=', 'image'),
                 'background-color' => false,
             ),
             array(
                 'id'          => '404-background-video',
                 'type'        => 'media',
+                'library_filter'    => Media::get_video_formats_by_mime_type(),
                 'title'       => __( 'Background Video', $this -> text_domain ),
                 'required'  => array('404-background-setting', '=', 'video'),
             ),

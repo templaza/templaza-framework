@@ -50,8 +50,23 @@ class TemPlazaFrameWork{
 
         add_action('after_switch_theme', array($this, 'set_default_settings'), 999);
 
+//        add_action('template_redirect', array($this,'coming_soon_redirect'));
+
         do_action( 'templaza-framework/plugin/hooks', $this );
     }
+
+//    //redirect non-users to the coming soon page
+//    public function coming_soon_redirect()
+//    {
+//        global $pagenow;
+//
+//        if(!is_user_logged_in() && !is_page("login") && !is_page("coming-soon") && $pagenow != "wp-login.php")
+//        {
+//            var_dump('gdfjgk'); die();
+////            wp_redirect(home_url("coming-soon"));
+//            exit;
+//        }
+//    }
 
     public function set_default_settings(){
         if(!current_theme_supports('templaza-framework', true, false)){
@@ -242,6 +257,15 @@ class TemPlazaFrameWork{
             $theme_file = preg_replace('/\.php$/i', '', $theme_file);
         }
 
+        // Is coming soon page
+        $options    = Functions::get_theme_options();
+
+        $coming_soon_dev_mode   = isset($options['miscellaneous-development-mode'])?filter_var($options['miscellaneous-development-mode'], FILTER_VALIDATE_BOOLEAN):false;
+        if($coming_soon_dev_mode){
+            $theme_file = 'comingsoon';
+        }
+
+        // Is 404 page
         if(is_404() && $theme_file != '404'){
             $theme_file = '404';
         }

@@ -5,6 +5,7 @@ namespace TemPlazaFramework\Core;
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Admin_Functions;
 use TemPlazaFramework\Core\Fields;
+use TemPlazaFramework\Media;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -20,10 +21,29 @@ class Framework{
 
     public function __construct()
     {
-        if(is_admin()) {
-            $this->init();
+        if(!$this -> text_domain) {
+            $this->text_domain = Functions::get_my_text_domain();
         }
+        // Just for demo purposes. Not needed per say.
+        if(!$this -> theme) {
+            $this->theme = wp_get_theme();
+        }
+        if(file_exists(dirname(__FILE__).'/includes/autoloader.php')) {
+            require_once dirname(__FILE__).'/includes/autoloader.php';
+        }
+
+//        if(is_admin()) {
+//            $this -> admin_init();
+//        }
+
+//        $this -> init_metaboxes();
+//        if(is_admin()) {
+            $this->init();
+//        }
+///
+        $this -> hooks();
     }
+
 
     public function init(){
         
@@ -31,68 +51,44 @@ class Framework{
             return;
         }
 
-        if(!$this -> text_domain) {
-            $this->text_domain = Functions::get_my_text_domain();
-        }
-
-        // Just for demo purposes. Not needed per say.
-        if(!$this -> theme) {
-            $this->theme = wp_get_theme();
-        }
-
-        if(file_exists(dirname(__FILE__).'/includes/autoloader.php')) {
-            require_once dirname(__FILE__).'/includes/autoloader.php';
-        }
-
-//        $this -> hooks();
-
+//        if(!$this -> text_domain) {
+//            $this->text_domain = Functions::get_my_text_domain();
+//        }
+//
+//        // Just for demo purposes. Not needed per say.
+//        if(!$this -> theme) {
+//            $this->theme = wp_get_theme();
+//        }
+//
+//        if(file_exists(dirname(__FILE__).'/includes/autoloader.php')) {
+//            require_once dirname(__FILE__).'/includes/autoloader.php';
+//        }
+//
+//
         // Register arguments
         $this -> register_arguments();
         $this -> init_post_types();
+//        $this -> init_metaboxes();
         $this -> init_global_settings();
 
-        $this -> hooks();
+//        $this -> hooks();
 
     }
     
     public function hooks(){
 
-//        add_action('setup_theme', array($this, 'initSettings'));
-//        add_action('after_setup_theme', array($this, 'init_post_types'));
-//        add_action('init', array($this, 'enqueue'));
-
-        add_filter('admin_body_class', function($body_class){
-            global $typenow, $pagenow;
-
-            $_body_class    = ' templaza-framework__body';
-
-            if($pagenow == 'nav-menus.php'){
-                $body_class .= $_body_class;
-            }
-            elseif($typenow && count($this -> post_types) && array_key_exists($typenow, $this -> post_types)){
-                if($pagenow == 'post-new.php' || $pagenow == 'post.php') {
-                    $_body_class .= ' tzfrm-postype';
-                }
-                $body_class .= $_body_class;
-            }
-            return $body_class;
-        });
+        add_filter('admin_body_class', array($this, 'admin_body_class'));
 
         add_action('admin_init', array($this, 'enqueue'));
 //        add_action('admin_init', array($this, 'megamenu'));
 
-        // Filter to remove redux adv
-        add_filter("redux/{$this -> args['opt_name']}/localize", array($this, 'redux_localize'));
+        if(is_admin()) {
+            // Filter to remove redux adv
+            add_filter("redux/{$this -> args['opt_name']}/localize", array($this, 'redux_localize'));
+        }
 
         do_action('templaza-framework/framework/hooks');
     }
-
-//    public function megamenu(){
-//        global $pagenow;
-//        if($pagenow == 'nav-menus.php') {
-//            var_dump($pagenow);
-//        }
-//    }
 
     public function init_post_types(){
         $path   = TEMPLAZA_FRAMEWORK_CORE_PATH.'/post-types';
@@ -139,7 +135,23 @@ class Framework{
 
             }
         }
+    }
 
+    public function admin_body_class($body_class){
+        global $typenow, $pagenow;
+
+        $_body_class    = ' templaza-framework__body';
+
+        if($pagenow == 'nav-menus.php'){
+            $body_class .= $_body_class;
+        }
+        elseif($typenow && count($this -> post_types) && array_key_exists($typenow, $this -> post_types)){
+            if($pagenow == 'post-new.php' || $pagenow == 'post.php') {
+                $_body_class .= ' tzfrm-postype';
+            }
+            $body_class .= $_body_class;
+        }
+        return $body_class;
     }
 
     public function redux_localize($localize){
@@ -201,6 +213,7 @@ class Framework{
             'transient_time'      => 60 * MINUTE_IN_SECONDS,
             'output'              => true,                    // Global shut-off for dynamic CSS output by the framework. Will also disable google fonts output
             'output_tag'          => true,                    // Allows dynamic CSS to be generated for customizer and google fonts, but stops the dynamic CSS from going to the head
+            'output_location'     => array( ' ' ),  // Output dynamic CSS.
 
             // FUTURE -> Not in use yet, but reserved or partially implemented. Use at your own risk.
             'database'            => '', // possible: options, theme_mods, theme_mods_expanded, transient. Not fully functional, warning!

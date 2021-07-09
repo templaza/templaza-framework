@@ -76,9 +76,11 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             parent::hooks();
 
             // Remove all admin notices
-            add_action('in_admin_header', array($this, 'remove_admin_notices'), 1000);
+            if(\is_user_logged_in()) {
+                add_action('in_admin_header', array($this, 'remove_admin_notices'), 1000);
 
-            add_action('templaza-framework/post_type/registered', array($this, 'post_type_registered'));
+                add_action('templaza-framework/post_type/registered', array($this, 'post_type_registered'));
+            }
         }
 
         public function remove_admin_notices(){
@@ -221,6 +223,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
         }
 
         public function init_main_options(){
+
             $core_file     = TEMPLAZA_FRAMEWORK_OPTION_PATH.'/config.php';
             if(file_exists($core_file)){
                 require_once $core_file;

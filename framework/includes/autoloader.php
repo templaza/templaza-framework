@@ -3,6 +3,7 @@
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
 //require_once .'../../includes/autoloader.php';
+require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/media.php';
 require_once 'admin_functions.php';
 require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/classes/class-templaza_api.php';
 require_once 'classes/class-templaza-enqueue.php';

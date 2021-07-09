@@ -2,6 +2,8 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
+use TemPlazaFramework\Media;
+
 // -> START Miscellaneous
 Templaza_API::set_section('templaza_style',
     array(
@@ -174,21 +176,21 @@ Templaza_API::set_section('templaza_style',
                     array('miscellaneous-development-mode', '!=', 'off'),
                 ),
             ),
-            array(
-                'id'          => 'miscellaneous-coming-soon-social',
-                'type'        => 'select',
-                'title'       => __( 'Social Icons', $this -> text_domain ),
-                'options'       => array(
-                    '1'         => esc_html__('On', $this -> text_domain),
-                    '0'         => esc_html__('Off', $this -> text_domain),
-                ),
-                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
-                'select2'       => array( 'allowClear' => true ),
-                'default'       => '',
-                'required'    => array(
-                    array('miscellaneous-development-mode', '!=', 'off'),
-                ),
-            ),
+//            array(
+//                'id'          => 'miscellaneous-coming-soon-social',
+//                'type'        => 'select',
+//                'title'       => __( 'Social Icons', $this -> text_domain ),
+//                'options'       => array(
+//                    '1'         => esc_html__('On', $this -> text_domain),
+//                    '0'         => esc_html__('Off', $this -> text_domain),
+//                ),
+//                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+//                'select2'       => array( 'allowClear' => true ),
+//                'default'       => '',
+//                'required'    => array(
+//                    array('miscellaneous-development-mode', '!=', 'off'),
+//                ),
+//            ),
             array(
                 'id'          => 'miscellaneous-background-setting',
                 'type'        => 'select',
@@ -204,6 +206,31 @@ Templaza_API::set_section('templaza_style',
                 'default'       => '',
                 'required'    => array(
                     array('miscellaneous-development-mode', '!=', 'off'),
+                ),
+            ),array(
+                'id'          => 'miscellaneous-background-color',
+                'type'        => 'color_rgba',
+                'title'       => __( 'Background Color', $this -> text_domain ),
+                'required'    => array(
+                    array('miscellaneous-background-setting', '=', 'color'),
+                ),
+            ),
+            array(
+                'id'                => 'miscellaneous-background-image',
+                'type'              => 'background',
+                'title'             => __( 'Background Image', $this -> text_domain ),
+                'library_filter'    => Media::get_image_formats_by_mime_type(),
+                'required'          => array(
+                    array('miscellaneous-background-setting', '=', 'image'),
+                ),
+            ),
+            array(
+                'id'                => 'miscellaneous-background-video',
+                'type'              => 'media',
+                'title'             => __( 'Background Video', $this -> text_domain ),
+                'library_filter'    => Media::get_video_formats_by_mime_type(),
+                'required'          => array(
+                    array('miscellaneous-background-setting', '=', 'video'),
                 ),
             ),
         )
