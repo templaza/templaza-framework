@@ -90,10 +90,10 @@ if (!empty($main_menu_margin_css)) {
 $sticky_menu_styles = [];
 
 if (!empty($sticky_menu_padding_css)) {
-    $sticky_menu_styles[] = '#templaza-sticky-header .templaza-nav .menu-item > a{' . $sticky_menu_padding_css . '}';
+    $sticky_menu_styles[] = '#templaza-sticky-header .templaza-nav > .menu-item > a{' . $sticky_menu_padding_css . '}';
 }
 if (!empty($sticky_menu_margin_css)) {
-    $sticky_menu_styles[] = '#templaza-sticky-header .templaza-nav .menu-item > a{' . $sticky_menu_margin_css . '}';
+    $sticky_menu_styles[] = '#templaza-sticky-header .templaza-nav > .menu-item > a{' . $sticky_menu_margin_css . '}';
 }
 
 Templates::add_inline_style(implode('', $menu_styles));
