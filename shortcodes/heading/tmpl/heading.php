@@ -36,7 +36,7 @@ if ( is_category() ) {
 } elseif ( is_search() ) {
     $title = __('Search Results','templaza-framework');
 }elseif ( is_single() ) {
-    $title = __('Single Post','templaza-framework');
+    $title = single_post_title( '', false );
 }elseif ( is_year() ) {
     $title  = get_the_date( _x( 'Y', 'yearly archives date format' ) );
     $prefix = _x( 'Year:', 'date archive title prefix' );
