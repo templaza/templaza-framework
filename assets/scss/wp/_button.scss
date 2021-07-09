@@ -30,3 +30,9 @@
 .templaza-btn{
   @include button-default;
 }
+.uk-button-rounded {
+  border-radius: 5px;
+}
+.uk-button-round {
+  border-radius: 500px;
+}

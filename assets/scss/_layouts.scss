@@ -11,6 +11,12 @@
 		padding-right: var(--bs-gutter-x, 40px);
 	}
 }
+.elementor-section.elementor-section-boxed > .elementor-container {
+	@media (min-width: 1400px) {
+		max-width: 1480px;
+	}
+
+}
 .templaza-content {
 	left: 0;
 	-webkit-transition: transform 0.5s;

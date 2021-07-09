@@ -350,10 +350,10 @@ h6, .uk-h6,
 .uk-heading-xlarge,
 .uk-heading-2xlarge {
     margin: 0 0 $base-margin-vertical 0;
-    font-family: $base-heading-font-family;
-    font-weight: $base-heading-font-weight;
-    color: $base-heading-color;
-    text-transform: $base-heading-text-transform;
+    //font-family: $base-heading-font-family;
+    //font-weight: $base-heading-font-weight;
+    //color: $base-heading-color;
+    //text-transform: $base-heading-text-transform;
     @if(mixin-exists(hook-base-heading)) {@include hook-base-heading();}
 }
 
