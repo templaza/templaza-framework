@@ -6,10 +6,10 @@ $enable-shadows:            true !default;
 $grid-gutter-width:         40px !default;
 $include-column-box-sizing: true !default;
 $container-max-widths: (
-        sm: 540px,
-        md: 720px,
-        lg: 960px,
-        xl: 1140px,
+        sm: 768px,
+        md: 992px,
+        lg: 1200px,
+        xl: 1400px,
         xxl: 1480px
 ) !default;
 
