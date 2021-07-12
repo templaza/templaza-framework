@@ -80,7 +80,7 @@ class Framework{
         add_filter('admin_body_class', array($this, 'admin_body_class'));
 
         add_action('admin_init', array($this, 'enqueue'));
-//        add_action('admin_init', array($this, 'megamenu'));
+        add_action('admin_init', array($this, 'update_checker'));
 
         if(is_admin()) {
             // Filter to remove redux adv
@@ -152,6 +152,22 @@ class Framework{
             $body_class .= $_body_class;
         }
         return $body_class;
+    }
+
+    public function update_checker(){
+        require_once TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/plugin-updates/plugin-update-checker.php';
+        $TemplazaFrameworkUpdateChecker = \Puc_v4_Factory::buildUpdateChecker(
+            'https://github.com/templaza/templaza-framework/',
+            TEMPLAZA_FRAMEWORK_PATH.'/'.TEMPLAZA_FRAMEWORK_NAME.'.php', //Full path to the main plugin file or functions.php.
+            'templaza-framework'
+        );
+
+        //Set the branch that contains the stable release.
+        $TemplazaFrameworkUpdateChecker->setBranch('master');
+
+        //Optional: If you're using a private repository, specify the access token like this:
+        $TemplazaFrameworkUpdateChecker->setAuthentication('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');
+        $TemplazaFrameworkUpdateChecker ->clearCachedTranslationUpdates();
     }
 
     public function redux_localize($localize){
