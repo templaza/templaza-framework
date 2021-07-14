@@ -164,7 +164,10 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     'numberposts' => 1
                 );
                 $posts = \get_posts($style_args);
-                $style_id = $posts[0]->ID;
+                if(!empty($posts)){
+                    $style_id = $posts[0]->ID;
+                }
+
             }
 
 
@@ -217,7 +220,10 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     'numberposts' => 1
                 );
                 $posts = \get_posts($style_args);
-                $style_id = $posts[0]->ID;
+                if(!empty($posts)){
+                    $style_id = $posts[0]->ID;
+                }
+
             }
 
             if($style_id && isset(self::$cache[$store_id])){

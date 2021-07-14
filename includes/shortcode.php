@@ -396,9 +396,13 @@ class TemplazaFramework_ShortCode{
             if(isset($link_color['active']) && !empty($link_color['active'])){
                 $css_link   .= $custom_css_name.' a:active{color:'.$link_color['active'].' !important;}';
             }
-
             if(!empty($css_link)){
-                $params['tz_css']   .= $css_link;
+                if(isset($params['tz_css'])){
+                    $params['tz_css']   .= $css_link;
+                }else{
+                    $params['tz_css']   = $css_link;
+                }
+
             }
         }
 
