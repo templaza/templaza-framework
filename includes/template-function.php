@@ -70,15 +70,8 @@ if(!class_exists('TemPlazaFramework\Template_Function')){
 
         public function templaza_getPostViews($postID)
         {
-            $count_key = 'post_views_count';
-            $count = get_post_meta($postID, $count_key, true);
-            if ($count == '' || empty($count)) { // If such views are not
-                delete_post_meta($postID, $count_key);
-                add_post_meta($postID, $count_key, '0');
-                echo esc_html__('View: 0','templaza-framework'); // return value of 0
-            }else{
-                echo esc_html__('Views:','templaza-framework').' '.$count;
-            }
+            $args   = get_defined_vars();
+            Templates::load_my_layout('template-parts.content-views',true,false,$args);
         }
 
         function templaza_setPostViews($postID)
