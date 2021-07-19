@@ -320,8 +320,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
         }
 
 
-        public function prepare_params($params, $element){
-            $params = parent::prepare_params($params, $element);
+        public function prepare_params($params, $element,$parent_el){
+            $params = parent::prepare_params($params, $element,$parent_el);
 
             if(isset($element['size'])){
                 if(isset($params['tz_class'])) {

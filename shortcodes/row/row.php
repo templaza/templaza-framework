@@ -159,16 +159,20 @@ if(!class_exists('TemplazaFramework_ShortCode_Row')){
 
         }
 
-        public function prepare_params($params, $element){
-            $params = parent::prepare_params($params, $element);
+        public function prepare_params($params, $element,$parent_el){
+            $params = parent::prepare_params($params, $element,$parent_el);
 
 
             if(!isset($params['tz_class'])){
                 $params['tz_class'] = '';
             }
 
-            if(isset($params['tz_no_gutters']) && $params['tz_no_gutters']){
-                $params['tz_class'] .= ' no-gutters gx-0';
+            if($parent_el && isset($parent_el['params'])){
+                $_parent_params = $parent_el['params'];
+                if(isset($_parent_params['layout_type']) && in_array($_parent_params['layout_type'],
+                        array( 'no-container', 'container-with-no-gutters', 'container-fluid-with-no-gutters'))) {
+                    $params['tz_class'] .= ' gx-0';
+                }
             }
 
             if(isset($params['hideonxxl']) && (bool) $params['hideonxxl']){

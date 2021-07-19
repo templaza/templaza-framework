@@ -333,13 +333,14 @@ if(!class_exists('TemPlazaFramework\Functions')){
             return self::$shortcode;
         }
 
-        protected static function __generate_option_to_shortcode($layout, &$level = 0, &$shortcode = array()){
+        protected static function __generate_option_to_shortcode($layout, &$level = 0, &$shortcode = array(), $parent_el = false){
             if(!$layout){
                 return;
             }
 
             foreach($layout as $i => $item){
-                $item   = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/before_register', $item);
+
+                $item   = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/before_register', $item, $parent_el);
 
                 $shortcode_file = TEMPLAZA_FRAMEWORK_SHORTCODES_PATH.'/'.$item['type'].'/'.$item['type'].'.php';
                 if(file_exists($shortcode_file)){
@@ -352,8 +353,8 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     self::$cache['shortcode'][$shortcode_storeId] = new $shortcode_class();
                 }
 
-                $item = apply_filters('templaza-framework/layout/generate/shortcode/prepare', $item);
-                $item = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/prepare', $item);
+                $item = apply_filters('templaza-framework/layout/generate/shortcode/prepare', $item, $parent_el);
+                $item = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/prepare', $item, $parent_el);
 
                 $shortcode_name = 'templaza_'.$item['type'];
                 $subitems       = is_array($item) && isset($item['elements']) && !empty($item['elements']);
@@ -378,15 +379,18 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     $level++;
                 }
 
+
                 // Call back function if shortcode has child shortcode
                 if($subitems){
-                    self::__generate_option_to_shortcode($item['elements'],$level, $shortcode);
+//                    $parent_el  = $item;
+                    self::__generate_option_to_shortcode($item['elements'],$level, $shortcode, $item);
                 }
 
                 $attribs    = "";
                 $params     = isset($item['params'])?$item['params']: array();
 
-                $params = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/params/prepare', $params, $item);
+                $params = apply_filters('templaza-framework/layout/generate/shortcode/'
+                    .$item['type'].'/params/prepare', $params, $item, $parent_el);
 
                 if(count($params)){
                     $params = array_filter($params, function($v, $k){
@@ -448,7 +452,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 }
 
                 $shortcode['shortcode']['open'][$level] = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/after_shortcode',
-                    $shortcode['shortcode']['open'][$level], $level, $params, $item);
+                    $shortcode['shortcode']['open'][$level], $level, $params, $item, $parent_el);
 
                 // Reset shortcode tree when level is zero
                 if($level == 0){

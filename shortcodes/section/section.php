@@ -206,8 +206,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
         }
 
 
-        public function prepare_params($params, $element){
-            $params = parent::prepare_params($params, $element);
+        public function prepare_params($params, $element,$parent_el){
+            $params = parent::prepare_params($params, $element,$parent_el);
 
             if(!isset($params['tz_class'])){
                 $params['tz_class'] = '';

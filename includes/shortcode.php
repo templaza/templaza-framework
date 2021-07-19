@@ -60,7 +60,7 @@ class TemplazaFramework_ShortCode{
             }
         }else{
             add_filter('templaza-framework/layout/generate/shortcode/'.$this -> get_shortcode_name().'/params/prepare',
-                array($this, 'prepare_params'), 10, 2);
+                array($this, 'prepare_params'), 10, 3);
 
             add_shortcode('templaza_'.$this -> get_shortcode_name(), array($this, 'shortcode'));
         }
@@ -343,7 +343,7 @@ class TemplazaFramework_ShortCode{
         }
     }
 
-    public function prepare_params($params, $element){
+    public function prepare_params($params, $element, $parent_el){
         $id = '';
         if(isset($element['id'])){
             $id = $element['id'];
