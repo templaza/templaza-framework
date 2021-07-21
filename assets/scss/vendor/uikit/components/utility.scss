@@ -246,9 +246,9 @@ $dragover-box-shadow:                            0 0 20px rgba(100,100,100,0.3) 
 /* Border
  ========================================================================== */
 
-.uk-border-circle { border-radius: 50%; }
-.uk-border-pill { border-radius: 500px; }
-.uk-border-rounded { border-radius: $border-rounded-border-radius; }
+.uk-border-circle { border-radius: 50% !important; }
+.uk-border-pill { border-radius: 500px !important; }
+.uk-border-rounded { border-radius: $border-rounded-border-radius !important; }
 
 /*
  * Fix `overflow: hidden` to be ignored with border-radius and CSS transforms in Webkit
@@ -260,10 +260,10 @@ $dragover-box-shadow:                            0 0 20px rgba(100,100,100,0.3) 
 /* Box-shadow
  ========================================================================== */
 
-.uk-box-shadow-small { box-shadow: $global-small-box-shadow; }
-.uk-box-shadow-medium { box-shadow: $global-medium-box-shadow; }
-.uk-box-shadow-large { box-shadow: $global-large-box-shadow; }
-.uk-box-shadow-xlarge { box-shadow: $global-xlarge-box-shadow; }
+.uk-box-shadow-small { box-shadow: $global-small-box-shadow !important; }
+.uk-box-shadow-medium { box-shadow: $global-medium-box-shadow !important; }
+.uk-box-shadow-large { box-shadow: $global-large-box-shadow !important; }
+.uk-box-shadow-xlarge { box-shadow: $global-xlarge-box-shadow !important; }
 
 /*
  * Hover
@@ -271,10 +271,10 @@ $dragover-box-shadow:                            0 0 20px rgba(100,100,100,0.3) 
 
 [class*='uk-box-shadow-hover'] { transition: box-shadow $box-shadow-duration ease-in-out; }
 
-.uk-box-shadow-hover-small:hover { box-shadow: $global-small-box-shadow; }
-.uk-box-shadow-hover-medium:hover { box-shadow: $global-medium-box-shadow; }
-.uk-box-shadow-hover-large:hover { box-shadow: $global-large-box-shadow; }
-.uk-box-shadow-hover-xlarge:hover { box-shadow: $global-xlarge-box-shadow; }
+.uk-box-shadow-hover-small:hover { box-shadow: $global-small-box-shadow !important; }
+.uk-box-shadow-hover-medium:hover { box-shadow: $global-medium-box-shadow !important; }
+.uk-box-shadow-hover-large:hover { box-shadow: $global-large-box-shadow !important; }
+.uk-box-shadow-hover-xlarge:hover { box-shadow: $global-xlarge-box-shadow !important; }
 
 
 /* Box-shadow bottom
