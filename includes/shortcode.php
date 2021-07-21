@@ -378,6 +378,13 @@ class TemplazaFramework_ShortCode{
         if(isset($params['text_align']) && !empty($params['text_align'])){
             $params['tz_class'] .= ' '.$params['text_align'];
         }
+		if(isset($params['background_overlay']) && !empty($params['background_overlay'])){
+            $overlay_color = CSS::make_color_rgba_redux($params['background_overlay']);
+            $params['tz_class'] .=' tz_background_overlay ';
+            $css_overlay   = '';
+            $css_overlay   .= '.'.$custom_css_name.'::before {background-color:'.$overlay_color.' ;}';
+            $params['tz_css']   .= $css_overlay;
+        }
 
         if(isset($params['link_color']) && !empty($params['link_color'])){
 //            $custom_css_name    = '.tz_custom_'.$element['id'];

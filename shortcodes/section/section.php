@@ -89,6 +89,11 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'type'       => 'background',
                                         'title'      => esc_html__('Background', $this -> text_domain),
                                     ),
+									array(
+                                        'id'       => 'background_overlay',
+                                        'type'     => 'color_rgba',
+                                        'title'    => esc_html__('Background Overlay', $this -> text_domain),
+                                    ),
                                     array(
                                         'id'         => 'border',
                                         'type'       => 'border',
