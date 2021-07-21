@@ -27,9 +27,9 @@ if(!empty($image)){
 				$svg    =    $ext == 'svg' ? 'uk-svg' : '';
 				echo '<div id="'.$tz_id.'" class="'.$tz_class.'">';
 				if ($svg) {
-					echo '<img uk-img="data-src:'.$image->url.'" uk-svg>';
+					echo '<img data-uk-img="data-src:'.$image->url.'" src="'.$image->url.'" alt="Logo" data-uk-svg>';
 				} else {
-					echo '<img data-src="'.$image->url.'" uk-img>';
+					echo '<img data-src="'.$image->url.'" src="'.$image->url.'" alt="Logo" data-uk-img>';
 				}
 				echo '</div>';
 			}
