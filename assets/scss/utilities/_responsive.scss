@@ -31,4 +31,7 @@
 	.row {
 		--#{$variable-prefix}gutter-x: #{$tztheme-grid-gutter-width-xl};
 	}
+	.g-0, .gx-0 {
+		--#{$variable-prefix}gutter-x: 0;
+	}
 }
