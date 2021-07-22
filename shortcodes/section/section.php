@@ -53,6 +53,13 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         ),
                                         'default' => 'default'
                                     ),
+									array(
+                                        'id'       => 'hideon_single',
+                                        'type'     => 'switch',
+                                        'title'    => esc_html__('Hide on Single Post', $this -> text_domain),
+                                        'subtitle' => esc_html__('Enable to hide this section on Single Post', $this -> text_domain),
+                                        'default'  => false,
+                                    ),
                                     array(
                                         'id'       => 'title',
                                         'type'     => 'text',

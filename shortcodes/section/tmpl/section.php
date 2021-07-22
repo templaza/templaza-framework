@@ -6,11 +6,14 @@ use TemPlazaFramework\Functions;
 extract(shortcode_atts(array(
     'tz_id'                  => '',
     'tz_class'               => '',
+	'hideon_single'          => '',
     'section_type'           => 'default',
     'layout_type'            => 'container',
     'custom_container_class' => '',
 ), $atts));
-
+if(is_single()==true && $hideon_single ==1) {
+    return;
+}else{
 if(!empty($content)){
 
     $_tz_class  = '';
@@ -59,4 +62,4 @@ if(!empty($content)){
     <?php echo $content; ?>
     <?php if($layout_type != 'no-container'){ ?></div><?php } ?>
 </section>
-<?php } ?>
+<?php } }?>
