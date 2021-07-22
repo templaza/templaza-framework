@@ -382,8 +382,12 @@ class TemplazaFramework_ShortCode{
             $overlay_color = CSS::make_color_rgba_redux($params['background_overlay']);
             $params['tz_class'] .=' tz_background_overlay ';
             $css_overlay   = '';
-            $css_overlay   .= '.'.$custom_css_name.'::before {background-color:'.$overlay_color.' ;}';
-            $params['tz_css']   .= $css_overlay;
+            $css_overlay   .= '.'.$custom_css_name.'::before {background-color:'.$overlay_color.' ;}';            
+			if(isset($params['tz_css'])){
+                $params['tz_css']   .= $css_overlay;
+            }else{
+                $params['tz_css']   = $css_overlay;
+            }
         }
 
         if(isset($params['link_color']) && !empty($params['link_color'])){
