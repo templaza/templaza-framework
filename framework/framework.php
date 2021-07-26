@@ -163,48 +163,6 @@ class Framework{
         }
     }
 
-    protected function add_submenus(){
-
-        Menu_Admin::add_submenu_section(TEMPLAZA_FRAMEWORK, array(
-            'label'             => esc_html__('Dashboard', $this->text_domain),
-            'description'       => '',
-            'add_admin_menu'    => true,
-            'callback'          => array($this, 'render')
-        ), null);
-        Menu_Admin::add_submenu_section('importer', array(
-            'label'             => esc_html__('Demo Importer', $this->text_domain),
-            'description'       => '',
-            'add_admin_menu'    => true,
-            'callback'          => array($this, 'render')
-        ));
-        $sections  = Menu_Admin::get_menu_sections();
-        if( empty( $sections ) ){
-            return;
-        }
-        $position   = 0;
-        foreach ( $sections as $section_id => $section ) {
-            if( ! empty( $section['add_admin_menu'] ) && $section['add_admin_menu'] ){
-                add_submenu_page(
-                    TEMPLAZA_FRAMEWORK,
-                    $section['label'],
-                    $section['label'],
-                    'manage_options',
-                    $section['slug'],
-                    $section['callback'],
-                    $position
-                );
-
-                $position++;
-            }
-        }
-
-//        var_dump($submenu); die();
-//        remove_submenu_page(
-//            TEMPLAZA_FRAMEWORK,
-//            TEMPLAZA_FRAMEWORK
-//        );
-    }
-
     public function render(){
 
         Template_Admin::load_my_layout('render', true, true, array('framework' => $this));
@@ -249,7 +207,7 @@ class Framework{
                 }
                 if(class_exists($class_name)){
                     $post_type_obj  = new $class_name($this);
-                    $this -> post_types[$file_name] = new $class_name($this);
+                    $this -> post_types[$file_name] = $post_type_obj;
                 }
             }
         }
