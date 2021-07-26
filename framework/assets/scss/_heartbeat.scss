@@ -1,0 +1,15 @@
+#setting-error-plzinst_heartbeat_domain_notice{
+  margin: 0 -13px;
+  .notice-error{
+    border-left-color: $badge-bg-danger-color;
+  }
+  .button-primary{
+    color: #fff;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 0 $badge-bg-danger-color;
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 0 $badge-bg-danger-color;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 0 $badge-bg-danger-color;
+    text-shadow: 0 -1px 1px $badge-bg-danger-color, 1px 0 1px $badge-bg-danger-color, 0 1px 1px $badge-bg-danger-color, -1px 0 1px $badge-bg-danger-color;
+    border-color: $badge-bg-danger-color;
+    background-color: lighten($badge-bg-danger-color, 1%);
+  }
+}

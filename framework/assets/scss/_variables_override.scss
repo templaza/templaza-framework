@@ -1,3 +1,20 @@
 // Override bootstrap
 $hr-margin-y: 0;
 $link-decoration: none;
+//$green: #5cb85c;
+
+//$primary:       #727cf5 !default;
+//$danger:        #f0506e !default;
+//$alert-background:       $danger !default;
+
+// scss-docs-start theme-colors-map
+$theme-colors: (
+        "primary":    #727cf5,
+        "secondary":  $secondary,
+        "success":    #5cb85c,
+        "info":       $info,
+        "warning":    $warning,
+        "danger":     #f0506e,
+        "light":      $light,
+        "dark":       $dark
+) !default;

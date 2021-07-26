@@ -48,7 +48,16 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
             if(!post_type_exists($post_type)){
                 // Register post type to wordpress
                 if(method_exists($this, 'register')) {
-                    \register_post_type($this->get_post_type(), $this->register());
+                    $post_type_args = $this -> register();
+
+                    add_filter(TEMPLAZA_FRAMEWORK.'_admin_nav_tabs', function($nav_tabs) use($post_type_args) {
+                        $nav_tabs[] = array(
+                            'label' => $post_type_args['labels']['all_items'],
+                            'url'   => 'edit.php?post_type='.$this->get_post_type(),
+                        );
+                        return $nav_tabs;
+                    });
+                    \register_post_type($this->get_post_type(), $post_type_args);
 
                     if($this -> my_post_type_exists()){
                         do_action('templaza-framework/post_type/'.$post_type.'/registered', $post_type, $this);
@@ -69,23 +78,6 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
                 add_action('admin_enqueue_scripts', array($this, 'enqueue'));
             }
         }
-
-
-//        public function post_type_registered($post_type, $framework){
-//            add_filter('admin_body_class', array($this, 'admin_body_class'));
-//        }
-
-//        public function admin_body_class($body_class){
-//            global $typenow;
-//
-//            if($typenow == $this -> get_post_type()){
-//                $body_class .= ' templaza-framework__body ';
-//            }
-//            return $body_class;
-//        }
-
-        // Register arguments for post type
-//        public function register(){return array();}
 
         // Get post type name by class name
         public function get_post_type(){

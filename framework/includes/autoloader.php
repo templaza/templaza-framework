@@ -3,9 +3,18 @@
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
 //require_once .'../../includes/autoloader.php';
+
 require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/media.php';
 require_once 'admin_functions.php';
 require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/classes/class-templaza_api.php';
+require_once 'menu_admin.php';
+
+
+require_once TEMPLAZA_FRAMEWORK_CORE_INCLUDES_PATH . '/admin/admin_autoloader.php';
+
+
+require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/templates.php';
+require_once 'template_admin.php';
 require_once 'classes/class-templaza-enqueue.php';
 require_once 'classes/class-templaza-post_type.php';
 //require_once TEMPLAZA_FRAMEWORK_CORE_PATH.'/includes/classes/class-templaza-post_type.php';

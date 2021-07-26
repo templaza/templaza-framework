@@ -14,6 +14,7 @@ $grid-gutter-width:           2.5rem !default;
 
   &:not(.nav-menus-php){
     @import "../../../assets/scss/vendor/bootstrap_grid/reboot.scss";
+    @import "bootstrap/bootstrap_addition.scss";
 
     .search-box, .wp-header-end {
       margin: 0;
@@ -272,6 +273,8 @@ $grid-gutter-width:           2.5rem !default;
   @import "ui_dialog";
   @import "_ui_tooltip";
   @import "_media_lightbox";
+  @import "heartbeat.scss";
+  @import "main.scss";
 }
 @import "ui_tab";
 @import "shortcode/widget";

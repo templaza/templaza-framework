@@ -1,0 +1,177 @@
+.templaza-framework__wrap{
+  margin-top: 25px;
+  //*{
+  //  box-sizing: border-box;
+  //}
+  .close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+  }
+  button.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  .tzinst-demo-import.no-license{
+    opacity: .3;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .tzfrm-ui-dialog-installation{
+    max-width: 800px;
+    left: 50% !important;
+    transform: translateX(-50%);
+    > *{
+      left: 0;
+      position: inherit;
+    }
+  }
+  .tzinst-plugin__install .title:before {
+    content: "";
+    z-index: 0;
+    left: 0;
+    right: 5px;
+    bottom: 5px;
+    position: absolute;
+    border-bottom: 1px dotted #d2d2d2;
+  }
+  .ui-dialog-buttonset{
+    > *{
+      margin-left: 7px;
+    }
+  }
+  .welcome-image{
+    max-height: 400px;
+  }
+  .templaza-framework__header {
+    margin-bottom: 2.7em;
+  }
+  .mh-px-300 {
+    max-height: 300px;
+  }
+  .mr-2, .mx-2 {
+    margin-right: .5rem!important;
+  }
+  .box{
+    @include box-shadow(0 3px 7px 0 rgba(183, 192, 206, 0.2));
+  }
+  .btn-facebook{
+    color: white;
+    background: $btn-fb-bg-color;
+    &:hover, &:focus{
+      background: lighten($btn-fb-bg-color, 10%);
+    }
+  }
+  .btn-twitter{
+    color: white;
+    background: $btn-tweet-bg-color;
+    &:hover, &:focus{
+      background: lighten($btn-tweet-bg-color, 10%);
+    }
+  }
+  .btn-google{
+    color: white;
+    background: $btn-google-bg-color;
+    &:hover, &:focus{
+      background: lighten($btn-google-bg-color, 10%);
+    }
+  }
+  #tzinst-dashboard-widgets-wrap{
+    .btn{
+      margin-right: 8px;
+    }
+    ul{
+      padding-left: 0;
+    }
+    .steps{
+      .setup-step{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1em;
+        padding: 1.4em;
+        border-radius: 5px;
+        color: inherit;
+        border: 1px solid $tz-white-border-color;
+      }
+      .setup-step-heading{
+        font-size: 1.5em;
+        font-weight: 600;
+      }
+    }
+  }
+  .wx-46{
+    width: 46px;
+  }
+  .hx-46{
+    height: 46px;
+  }
+  .flex-1 {
+    flex: 1;
+  }
+  .rounded-circle {
+    border-radius: 50%!important;
+  }
+  .step-num{
+    margin-right: 1rem;
+  }
+  .btn-warning{
+    color: #fff;
+  }
+
+  .js-tzinst-import{
+    &.importing .spinner-border{
+      display: inherit;
+    }
+    .spinner-border{
+      display: none;
+    }
+    .spinner-border-sm {
+      width: 0.75rem;
+      height: 0.75rem;
+      margin-right: 3px;
+      border-width: .18em;
+    }
+  }
+}
+.templaza-framework__navbar{
+  background: #fff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  //@include box-shadow(0 3px 7px 0 rgba(183, 192, 206, 0.2));
+  -webkit-box-shadow: 0 3px 7px 0 rgba(183, 192, 206, 0.2);
+  -moz-box-shadow: 0 3px 7px 0 rgba(183, 192, 206, 0.2);
+  box-shadow: 0 3px 7px 0 rgba(183, 192, 206, 0.2);
+  .nav-item{
+    display: inline-block;
+    padding: 15px 20px;
+    font-size: 1.2em;
+    &:first-child{
+      padding-left: 0;
+    }
+    a{
+      color: $tz-heading-color;
+      text-decoration: none;
+    }
+    &.active{
+      a{
+        color: $tz-global-color;
+      }
+    }
+  }
+}
+.templaza-framework__header{
+  margin-bottom: 2.7em;
+}
