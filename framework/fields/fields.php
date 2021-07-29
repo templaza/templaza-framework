@@ -8,6 +8,8 @@ class Fields{
     public $args;
     public $section;
 
+    protected $cache    = array();
+
     public function __construct($args = null, $section = null)
     {
         $this -> args       = $args;
@@ -24,7 +26,7 @@ class Fields{
         $fieldPath  = trailingslashit($fieldPath);
 
         if(is_dir($fieldPath)){
-            $files  = list_files($fieldPath, 1);
+            $files  = \list_files($fieldPath, 1);
             if($files && count($files)){
                 foreach($files as $f){
                     if(!is_dir($f)){
@@ -64,7 +66,18 @@ class Fields{
                         require_once $custom_file;
                         $custom_class   = 'Templaza_Custom_Redux_'.ucfirst($field_type);
                         if(class_exists($custom_class)){
-                            new $custom_class($this -> args, $this);
+                            $reduxFramework = \Redux::instance($this -> args['opt_name']);
+
+                            if(!$reduxFramework instanceof \ReduxFramework) {
+                                $reduxFramework = new \ReduxFramework();
+                                $reduxFramework -> args = $this -> args;
+                            }
+
+                            $field_class = new $custom_class(array(), null, $reduxFramework);
+
+                            if(method_exists($field_class, '__tz_init')){
+                                $field_class -> __tz_init($this -> args, $this);
+                            }
                         }
 
 //                        do_action('templaza-framework/field/'.$fName.'/init');
@@ -75,6 +88,35 @@ class Fields{
 
 //        do_action('templaza-framework-field-init');
     }
+//
+//
+//    /**
+//     * Get list fields of framework
+//    */
+//    public function get_files(){
+//
+//        $store_id   = md5(__METHOD__);
+//
+//        if(isset($this -> cache[$store_id])){
+//            return $this -> cache[$store_id];
+//        }
+//
+//        $fieldPath  = TEMPLAZA_FRAMEWORK_FIELD_PATH;
+//        $fieldPath  = trailingslashit($fieldPath);
+//
+//        if(is_dir($fieldPath)){
+//            $files  = \list_files($fieldPath, 1);
+//            if($files && count($files)){
+//                $this -> cache[$store_id]   = $files;
+//                return $files;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public function register_custom_file(){
+//
+//    }
 
     public function hooks(){
 

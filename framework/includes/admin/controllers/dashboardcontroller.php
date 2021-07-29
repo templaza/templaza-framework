@@ -47,7 +47,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
                 'admin_ajax_url'        => admin_url('admin-ajax.php'),
                 'admin_url'             => admin_url('admin.php'),
                 'strings'               =>  array(
-                    'theme_active_title'    => sprintf(__('%s &ndash; Theme Activation', $this -> text_domain),$config['productname'] ),
+                    'theme_active_title'    => sprintf(__('%s &ndash; Theme Activation', $this -> text_domain),(isset($config['productname']) && !empty($config['productname']))?$config['productname']:'' ),
                     'delete_question'       => __('Are you sure you want to delete template activation?', $this -> text_domain),
                     'browser_warning'       => __('Your browser is blocking popups, activation process cannot continue!', $this -> text_domain),
                     'loading'               => __('Please wait&hellip;', $this -> text_domain),

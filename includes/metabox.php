@@ -75,16 +75,7 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                 foreach($metaboxes as $k => $metabox){
                     $metabox    = apply_filters('templaza-framework/metabox/change', $metabox);
                     $metabox    = apply_filters("templaza-framework/metabox/{$metabox['id']}/change", $metabox);
-//                    $metabox    = apply_filters('templaza-framework-metabox', $metabox);
-//                    $metabox    = apply_filters('templaza-framework-metabox__'.$metabox['id'], $metabox);
-
                     $metabox_args['metabox']   = $metabox;
-
-//                    if(isset($metabox['sections']) && !empty($metabox['sections'])){
-//                        $metabox_args['sections']   = $metabox['sections'];
-//                    }
-//                    $metabox_args['__block_editor_compatible_meta_box']   = false;
-//                    $metabox_args['__back_compat_meta_box']   = true;
 
                     if($metabox == end($metaboxes)){
                         $metabox_args['last']   = true;
@@ -109,6 +100,7 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
             if(!empty($_metabox) && isset($_metabox['sections']) && !empty($_metabox['sections'])) {
                 $sections   = array();
                 $sections   = apply_filters("templaza-framework/metabox/{$_metabox['id']}/sections/before", $sections, $_metabox);
+
                 $sections = array_merge((array) $sections, (array) $_metabox['sections']);
                 $sections   = apply_filters("templaza-framework/metabox/{$_metabox['id']}/sections/after", $sections, $_metabox);
 
@@ -126,8 +118,8 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                 Redux::set_args($metabox['id'], $redux_args);
                 Redux::set_sections($metabox['id'], $sections);
 
-                \Templaza_API::load_my_fields($metabox['id']);
                 Redux::init($metabox['id']);
+                \Templaza_API::load_my_fields($metabox['id']);
 
                 add_filter("redux/{$setting_args['opt_name']}/repeater", function($repeater_data) use($redux_args){
                     $repeater_data['opt_names'][]   = $redux_args['opt_name'];
@@ -152,7 +144,6 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                 foreach ($redux -> sections as $k => $section) {
 
                     $section['class'] = isset($section['class']) ? ' ' . $section['class'] : '';
-//                    echo '<div id="metabox_' . $k . '_section_group' . '" class="redux-group-tab' . esc_attr($section['class']) . '" data-rel="metabox_' . $k . '">';
                     echo '<div id="metabox_'.$metabox['id'].'_' . $k . '_section_group' . '" class="redux-group-tab' . esc_attr($section['class']) . '" data-rel="metabox_'.$metabox['id'].'_' . $k . '">';
 
                     do_action("redux/page/{$redux->args['opt_name']}/section/before", $section);

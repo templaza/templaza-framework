@@ -134,8 +134,8 @@ use TemPlazaFramework\Functions;
                         Redux::set_section($opt_name, $tab);
 
                     }
-                    \Templaza_API::load_my_fields($opt_name);
                     Redux::init($opt_name);
+                    \Templaza_API::load_my_fields($opt_name);
 
                     $redux  = Redux::instance($opt_name);
 

@@ -93,7 +93,7 @@ if ( ! class_exists( 'Templaza_API', false ) ) {
 //        }
 //
 
-        public static function construct_sections( $opt_name ) {
+        public static function construct_sections(string $opt_name ): array {
             $sections   = parent::construct_sections($opt_name);
 
             unset(\Redux::$sections[$opt_name]);
@@ -307,6 +307,21 @@ if ( ! class_exists( 'Templaza_API', false ) ) {
             }
             $fields = new Fields(\Redux::construct_args($opt_name));
         }
+//        /**
+//         * Sets all fields in path.
+//         *
+//         * @param string $opt_name Panel opt_name.
+//         * @param string $path     Path to extension folder.
+//         * @param bool   $force    Make extension reload.
+//         */
+//        public static function load_my_fields($opt_name = '')
+//        {
+//            // Load custom fields
+//            if(!class_exists('Fields')){
+//                require_once TEMPLAZA_FRAMEWORK_FIELD_PATH.'/fields.php';
+//            }
+//            $fields = new Fields(\Redux::construct_args($opt_name));
+//        }
 
         public static function load() {
             remove_action( 'after_setup_theme', array( 'Redux', 'create_redux' ) );

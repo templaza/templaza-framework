@@ -75,6 +75,7 @@
                 var set_values_to_field = function(global_value){
                     var field_main = get_field_main();
                     if(field_main.length ){
+                        global_value    = Object.assign({}, global_value);
                         global_value    = JSON.stringify(global_value);
                         field_main.val(global_value).text(global_value);
                     }
@@ -136,6 +137,8 @@
                 // Field onchange trigger
                 var field_on_change = function(field){
                     field.off("change").on("change", function(){
+
+                        var _field_value    = $(this).serializeForm();
                         var input = $(this).find("input, textarea, select"),
                             parent = input.closest(".field-tz_loop-accordion-group"),
                             group_field = parent.attr("data-group-field");
@@ -143,27 +146,42 @@
                         var value = get_value(),
                             index = parent.index(),
                             input_id = input.attr("id");
+
+                        if(Object.keys(_field_value).length){
+                            _field_value    = _field_value[Object.keys(_field_value)[0]];
+                            _field_value    = _field_value[Object.keys(_field_value)[0]];
+                        }
+
+                        console.log(value);
+                        console.log(typeof value);
+                        // console.log(group_field);
+                        // console.log(input_id);
+                        // console.log(_field_value);
                         if(input.closest(".redux-field-container").attr("data-type") === "select"){
                             input_id    = input_id.replace(/-select$/gi, "");
                         }
 
                         if(group_field !== undefined){
                             if(value && value[group_field] !== undefined){
-                                value[group_field][input_id]    = input.val();
+                                // value[group_field][input_id]    = input.val();
+                                value[group_field][input_id]    = _field_value;
                                 set_values_to_field(value);
                             }else{
                                 var setting = {};
                                 setting[group_field]    = {};
-                                setting[group_field][input_id] = input.val();
+                                // setting[group_field][input_id] = input.val();
+                                setting[group_field][input_id] = _field_value;
                                 insert_value(setting, "json");
                             }
                         }else{
                             if(value && typeof value[index] !== typeof undefined){
-                                value[index][input_id] = input.val();
+                                // value[index][input_id] = input.val();
+                                value[index][input_id] = _field_value;
                                 set_values_to_field(value);
                             }else{
                                 var setting = {};
-                                setting[input_id] = input.val();
+                                // setting[input_id] = input.val();
+                                setting[input_id] = _field_value;
                                 insert_value(setting);
                             }
                         }

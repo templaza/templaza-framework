@@ -8,11 +8,12 @@ if(!class_exists('Templaza_Custom_Redux_Checkbox')){
     class Templaza_Custom_Redux_Checkbox{
 
         protected $redux_field_type = 'checkbox';
+        protected $tz_fields_object;
 
-        public function __construct( $args = array(), $parent = null) {
-            $this -> args   = $args;
-            $this -> parent = $parent;
-            $this -> text_domain    = Functions::get_my_text_domain();
+        public function __tz_init($args = array(),  $field_object = null){
+            $this -> args               = $args;
+            $this -> tz_fields_object   = $field_object;
+            $this -> text_domain        = Functions::get_my_text_domain();
 
             if(isset($args['opt_name']) && $args['opt_name']){
                 $this -> redux_framework    = \Redux::instance($args['opt_name']);

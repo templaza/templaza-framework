@@ -144,6 +144,18 @@
       border-width: .18em;
     }
   }
+  .modal-footer{
+    .processing-box:not(.d-none) +.action {
+      margin-top: 1rem;
+    }
+  }
+  .processing-box{
+    .progress{
+      top: 0;
+      right: 0;
+      left: 0;
+    }
+  }
 }
 .templaza-framework__navbar{
   background: #fff;

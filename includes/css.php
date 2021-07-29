@@ -350,4 +350,22 @@ class CSS{
 
         return self::make_color_rgba($color_options['color'], $color_options['alpha'], $color_options['rgba']);
     }
+
+    public static function background_redux($background_options = array()){
+        $store_id   = __METHOD__;
+        $store_id  .= ':'.serialize($background_options);
+        $store_id   = md5($store_id);
+
+        if(isset(static::$cache[$store_id])){
+            return static::$cache[$store_id];
+        }
+
+        if(empty($background_options)){
+            return '';
+        }
+
+        return self::background($background_options['background-color'], $background_options['background-image'],
+            $background_options['background-repeat'], $background_options['background-attachment'],
+            $background_options['background-position'], $background_options['background-size']);
+    }
 }

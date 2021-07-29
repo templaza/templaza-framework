@@ -314,7 +314,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 $demo_title     = isset($_POST['demo_title']) && $_POST['demo_title']?$_POST['demo_title']:'';
                 $demo_key       = isset($_POST['demo_key']) && $_POST['demo_key']?$_POST['demo_key']:'';
                 $produce        = $_POST['pack'];
-                $pack_main      = $_POST['pack_main'];
+                $pack_main      = isset($_POST['pack_main'])?$_POST['pack_main']:'';
                 $security       = $_POST['security'];
                 $action_import  = isset($_POST['action_import'])?$_POST['action_import']:null;
 
@@ -539,15 +539,15 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
         protected function import_content($folder_path, $filename = '',  $file_filter = '.xml'){
             if ( ! class_exists( 'WXR_Importer' ) ) {
-                include wp_normalize_path( TEMPLAZA_FRAMEWORK_INSTALLATION_LIBRARY . '/importer/class-logger.php' );
-                include wp_normalize_path( TEMPLAZA_FRAMEWORK_INSTALLATION_LIBRARY . '/importer/class-logger-html.php' );
+                include wp_normalize_path( TEMPLAZA_FRAMEWORK_LIBRARY_PATH . '/importer/class-logger.php' );
+                include wp_normalize_path( TEMPLAZA_FRAMEWORK_LIBRARY_PATH . '/importer/class-logger-html.php' );
 
-                $wp_import = wp_normalize_path( TEMPLAZA_FRAMEWORK_INSTALLATION_LIBRARY . '/importer/class-wxr-importer.php' );
+                $wp_import = wp_normalize_path( TEMPLAZA_FRAMEWORK_LIBRARY_PATH . '/importer/class-wxr-importer.php' );
                 include $wp_import;
             }
 
             if ( ! class_exists( 'Plzinst_WXR_Importer' ) ) {
-                $class_wp_importer = TEMPLAZA_FRAMEWORK_INSTALLATION_LIBRARY.'/importer/class-plazart-wxr-importer.php';
+                $class_wp_importer = TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/importer/class-plazart-wxr-importer.php';
                 if ( file_exists( $class_wp_importer ) )
                     require_once $class_wp_importer;
             }
@@ -671,7 +671,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
         protected function import_widgets($folder_path, $filename = '',  $file_filter = '.wie|.json') {
             /* needed option tree file for operatiob */
-            include_once( TEMPLAZA_FRAMEWORK_INSTALLATION_LIBRARY . '/importer/class-widget-importer.php' );
+            include_once( TEMPLAZA_FRAMEWORK_LIBRARY_PATH . '/importer/class-widget-importer.php' );
 
             if(!class_exists('Plzinst_Widget_Importer')){
                 $this -> info -> set_message(esc_html__('Class Plzinst_Widget_Importer not exists.'), false);

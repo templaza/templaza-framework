@@ -52,8 +52,8 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
 
                 \Redux::set_args($opt_name, $redux_args);
                 \Redux::set_sections($opt_name, $sections);
-                \Templaza_API::load_my_fields($opt_name);
                 \Redux::init($opt_name);
+                \Templaza_API::load_my_fields($opt_name);
 
                 add_filter("redux/{$opt_name}/repeater", function($repeater_data) use($redux_args){
                     $repeater_data['opt_names'][]   = $redux_args['opt_name'];
@@ -1258,8 +1258,8 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
 
                     Redux::set_args($metabox['id'], $redux_args);
                     Redux::set_sections($metabox['id'], $sections);
-                    \Templaza_API::load_my_fields($metabox['id']);
                     Redux::init($metabox['id']);
+                    \Templaza_API::load_my_fields($metabox['id']);
 
                     add_filter("redux/{$setting_args['opt_name']}/repeater", function($repeater_data) use($redux_args){
                         $repeater_data['opt_names'][]   = $redux_args['opt_name'];

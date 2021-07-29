@@ -4,11 +4,6 @@ namespace TemPlazaFramework\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
-//require_once TEMPLAZA_FRAMEWORK_INSTALLATION_LIBRARY.'/files.php';
-//require_once TEMPLAZA_FRAMEWORK_INSTALLATION_ADMIN_PATH.'/installation_adminfunctions.php';
-//require_once TEMPLAZA_FRAMEWORK_INSTALLATION_LIBRARY.'/helperlicense.php';
-//require_once TEMPLAZA_FRAMEWORK_INSTALLATION_LIBRARY.'/class-tgm-plugin-activation.php';
-
 use \TemPlazaFramework\Functions;
 use \TemPlazaFramework\Admin\Admin_Page_Function;
 use TemPlazaFramework\Controller\BaseController;

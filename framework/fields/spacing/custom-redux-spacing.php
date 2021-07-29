@@ -14,21 +14,35 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
     class Templaza_Custom_Redux_Spacing  extends Redux_Spacing{
 
         protected $redux_field_type = 'spacing';
+        protected $args = array();
         protected $units;
+        protected $redux_framework;
+        protected $tz_fields_object;
 //        protected $select2_config;
 
-        public function __construct( $args = array(), $parent = null) {
-            parent::__construct(array(), null, $parent);
-            $this -> args   = $args;
-            $this -> parent = $parent;
-            $this -> text_domain    = Functions::get_my_text_domain();
-
+        public function __tz_init($args = array(),  $field_object = null){
+            $this -> args               = $args;
+            $this -> tz_fields_object   = $field_object;
+            $this -> text_domain        = Functions::get_my_text_domain();
             if(isset($args['opt_name']) && $args['opt_name']){
                 $this -> redux_framework    = \Redux::instance($args['opt_name']);
             }
 
             $this -> hooks();
         }
+
+//        public function __construct( $args = array(),  $parent = null) {
+//            parent::__construct(array(), null, $parent);
+//            $this -> args   = $args;
+//            $this -> parent = $parent;
+//            $this -> text_domain    = Functions::get_my_text_domain();
+//
+//            if(isset($args['opt_name']) && $args['opt_name']){
+//                $this -> redux_framework    = \Redux::instance($args['opt_name']);
+//            }
+//
+//            $this -> hooks();
+//        }
 
         protected function hooks(){
             add_filter("redux/{$this -> args['opt_name']}/field/class/{$this -> redux_field_type}",

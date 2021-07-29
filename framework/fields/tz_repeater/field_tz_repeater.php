@@ -67,8 +67,8 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
 
             \Redux::set_args($opt_name, $redux_args);
             \Redux::set_sections($opt_name, $sections);
-            \Templaza_API::load_my_fields($opt_name);
             \Redux::init($opt_name);
+            \Templaza_API::load_my_fields($opt_name);
 
 
             add_filter("redux/{$opt_name}/repeater", function($repeater_data) use($redux_args){
