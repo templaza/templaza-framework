@@ -11,6 +11,9 @@
 @import "wp/block_quote";
 .wp-block{
   padding:15px;
+  .wp-block{
+    padding:0;
+  }
   ul{
     padding-left:0;
     li{
@@ -49,6 +52,18 @@
           @include transition($tztheme-transition-ease-in-out);
         }
       }
+    }
+  }
+  .wp-block-search__inside-wrapper{
+    input{
+      margin-top:15px;
+      height: $tztheme-input-height;
+    }
+    .wp-block-search__button{
+      height: $tztheme-input-height;
+      line-height: $tztheme-input-height;
+      padding-top:0 !important;
+      padding-bottom:0 !important;
     }
   }
 }
