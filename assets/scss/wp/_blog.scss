@@ -3,12 +3,18 @@
   clear:both;
 }
 .templaza-page, .templaza-single{
-  .type-page, .templaza-single-content, .templaza-single-tags{
+  .type-page, .templaza-single-content{
     &:after{
       content: "";
       display: table;
       table-layout: fixed;
       clear:both;
+    }
+  }
+  .templaza-single-tags {
+    > a:before {
+      content: '# ';
+      display: inline;
     }
   }
 }
