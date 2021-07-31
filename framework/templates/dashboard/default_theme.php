@@ -18,38 +18,49 @@ $theme  = wp_get_theme();
         </div>
         <div>
             <div class="setup-container">
+                <?php
+                $step_count = 2;
+                if(isset($this -> theme_config_registered) && !empty($this -> theme_config_registered)){
+                    $step_count += 2;
+                }
+                ?>
                 <h2 class="h3"><?php echo __('Setup your website', $this -> text_domain); ?></h2>
-                <p><?php echo __('Set up your website with 3 easy steps.', $this -> text_domain); ?></p>
-<!--                <p>--><?php //echo $theme -> get('Description'); ?><!--</p>-->
+                <p><?php echo sprintf(__('Set up your website with %d easy steps.', $this -> text_domain), $step_count); ?></p>
                 <ul class="steps">
+                    <?php if(isset($this -> theme_config_registered) && !empty($this -> theme_config_registered)){ ?>
+                        <li>
+                            <a href="#tzinst-license" class="setup-step">
+                                <div class="setup-step-info">
+                                    <h5 class="setup-step-heading"><?php echo __('Theme Activation', $this -> text_domain); ?></h5>
+                                    <p class="uk-margin-remove"><?php echo __('Enter your purchase code manually. Follow steps to activate the theme', $this -> text_domain);?></p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="setup-step" href="<?php echo admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK.'-importer'); ?>">
+                                <div class="setup-step-info">
+                                    <h5 class="setup-step-heading"><?php echo __('Data Importation', $this -> text_domain); ?></h5>
+                                    <p class="uk-margin-remove"><?php echo __('One-click import one of our demo content.', $this -> text_domain);?></p>
+                                </div>
+                            </a>
+                        </li>
+                    <?php } ?>
                     <li>
-                        <a href="#tzinst-license" class="setup-step">
+                        <a class="setup-step" href="<?php echo admin_url('admin.php?page='.Functions::get_theme_option_name().'_options'); ?>">
                             <div class="setup-step-info">
-                                <h5 class="setup-step-heading"><?php echo __('Theme Activation', $this -> text_domain); ?></h5>
-                                <p class="uk-margin-remove"><?php echo __('Enter your purchase code manually. Follow steps to activate the theme', $this -> text_domain);?></p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="setup-step" href="<?php echo admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK.'-importer'); ?>">
-                            <div class="setup-step-info">
-                                <h5 class="setup-step-heading"><?php echo __('Data Importation', $this -> text_domain); ?></h5>
-                                <p class="uk-margin-remove"><?php echo __('One-click import one of our demo content.', $this -> text_domain);?></p>
+                                <h5 class="setup-step-heading"><?php echo __('Document Link', $this -> text_domain); ?></h5>
+                                <p class="uk-margin-remove"><?php echo __('Documentation, help files, and video tutorials for beginners and professionals', $this -> text_domain);?></p>
                             </div>
                         </a>
                     </li>
                     <li>
                         <a class="setup-step" href="<?php echo admin_url('admin.php?page='.Functions::get_theme_option_name().'_options'); ?>">
                             <div class="setup-step-info">
-                                <h5 class="setup-step-heading"><?php echo __('Config Your Website', $this -> text_domain); ?></h5>
-                                <p class="uk-margin-remove"><?php echo __('Gives you full control over the design of both the main menu and the sticky menu', $this -> text_domain);?></p>
+                                <h5 class="setup-step-heading"><?php echo __('Support Link', $this -> text_domain); ?></h5>
+                                <p class="uk-margin-remove"><?php echo __('Join our community', $this -> text_domain);?></p>
                             </div>
                         </a>
                     </li>
-<!--                    <li>-->
-<!--                        <h3 class="h5">--><?php //echo __('Create Custom Config', $this -> text_domain); ?><!--</h3>-->
-<!--                        <p>--><?php //echo __('', $this -> text_domain);?><!--</p>-->
-<!--                    </li>-->
                 </ul>
             </div>
         </div>
