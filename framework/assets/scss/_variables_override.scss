@@ -10,11 +10,11 @@ $link-decoration: none;
 // scss-docs-start theme-colors-map
 $theme-colors: (
         "primary":    #727cf5,
-        "secondary":  $secondary,
+        "secondary":  #555555,
         "success":    #5cb85c,
-        "info":       $info,
-        "warning":    $warning,
+        "info":       #0DCAF0,
+        "warning":    #FFC107,
         "danger":     #f0506e,
-        "light":      $light,
-        "dark":       $dark
+        "light":      #fff,
+        "dark":       #222
 ) !default;

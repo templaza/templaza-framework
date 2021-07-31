@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) || exit;
 
     <div class="row">
         <div class="col-md-12 mb-4">
-            <div class="p-3 bg-white box-shadow h-100 rounded-3"><?php echo $this -> load_template('theme');?></div>
+            <div class="uk-card uk-card-default uk-card-body rounded-3"><?php echo $this -> load_template('theme');?></div>
         </div>
         <div id="tzinst-license" class="col-md-8 mb-4">
             <div class="p-4 bg-white box-shadow h-100 rounded-3"><?php echo $this -> load_template('license');?></div>

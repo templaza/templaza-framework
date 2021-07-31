@@ -1,5 +1,7 @@
 .templaza-framework__wrap{
   margin-top: 25px;
+  margin-right: 20px;
+  max-width: 1200px;
   //*{
   //  box-sizing: border-box;
   //}
@@ -51,11 +53,9 @@
       margin-left: 7px;
     }
   }
-  .welcome-image{
-    max-height: 400px;
-  }
   .templaza-framework__header {
     margin-bottom: 2.7em;
+    background-color: white;
   }
   .mh-px-300 {
     max-height: 300px;
@@ -157,33 +157,10 @@
     }
   }
 }
-.templaza-framework__navbar{
-  background: #fff;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  //@include box-shadow(0 3px 7px 0 rgba(183, 192, 206, 0.2));
-  -webkit-box-shadow: 0 3px 7px 0 rgba(183, 192, 206, 0.2);
-  -moz-box-shadow: 0 3px 7px 0 rgba(183, 192, 206, 0.2);
-  box-shadow: 0 3px 7px 0 rgba(183, 192, 206, 0.2);
-  .nav-item{
-    display: inline-block;
-    padding: 15px 20px;
-    font-size: 1.2em;
-    &:first-child{
-      padding-left: 0;
-    }
-    a{
-      color: $tz-heading-color;
-      text-decoration: none;
-    }
-    &.active{
-      a{
-        color: $tz-global-color;
-      }
-    }
-  }
-}
 .templaza-framework__header{
   margin-bottom: 2.7em;
+  .uk-navbar-nav > li > a {
+    min-height: 30px;
+    font-weight: bold;
+  }
 }

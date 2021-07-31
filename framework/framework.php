@@ -387,6 +387,10 @@ class Framework{
     public function enqueue(){
         wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'__js', Functions::get_my_frame_url().'/assets/js/core.js',
             array('redux-js'), time(), true);
+	    wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_js', Functions::get_my_url().'/assets/js/vendor/uikit.min.js', array(), time(), true);
+	    wp_enqueue_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_js');
+	    wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_icon_js', Functions::get_my_url().'/assets/js/vendor/uikit-icons.min.js', array(), time(), true);
+	    wp_enqueue_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_icon_js');
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css-core',
             Functions::get_my_frame_url().'/assets/vendors/core/core.css');
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css-fontawesome',
@@ -395,5 +399,4 @@ class Framework{
             Functions::get_my_frame_url().'/assets/css/style.css',
             array(TEMPLAZA_FRAMEWORK_NAME.'__css-fontawesome'));
     }
-
 }

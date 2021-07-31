@@ -29,7 +29,7 @@ use TemPlazaFramework\Template_Admin;
 
         $this -> the_header();
         $this -> the_notices();
-        $this -> the_nav();
+//        $this -> the_nav();
         $this -> the_content();
         $this -> the_footer();
         ?>

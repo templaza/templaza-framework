@@ -12,8 +12,12 @@ $grid-gutter-width:           2.5rem !default;
   @import "variables_override.scss";
   @import "bootstrap_custom.scss";
 
+  @import "../../../assets/scss/vendor/uikit/variables-theme.scss";
+  @import "../../../assets/scss/vendor/uikit/mixins-theme.scss";
+  @import "../../../assets/scss/vendor/uikit/uikit-theme.scss";
+
   &:not(.nav-menus-php){
-    @import "../../../assets/scss/vendor/bootstrap_grid/reboot.scss";
+    //@import "../../../assets/scss/vendor/bootstrap_grid/reboot.scss";
     @import "bootstrap/bootstrap_addition.scss";
 
     .search-box, .wp-header-end {
@@ -242,7 +246,9 @@ $grid-gutter-width:           2.5rem !default;
         background-color: $tz-background-container;
       }
       tr + tr {
-        border-top: 1px solid $tz-border-color;
+        td,th {
+          border-top: 1px solid $tz-border-color;
+        }
       }
     }
     a {
