@@ -95,6 +95,9 @@
       padding-left: 0;
     }
     .steps{
+      a {
+        text-decoration: none;
+      }
       .setup-step{
         display: flex;
         align-items: center;
@@ -108,6 +111,7 @@
       .setup-step-heading{
         font-size: 1.5em;
         font-weight: 600;
+        color: #333;
       }
     }
   }

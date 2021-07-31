@@ -12382,6 +12382,8 @@
       margin-right: 8px; }
     .templaza-framework__body .templaza-framework__wrap #tzinst-dashboard-widgets-wrap ul {
       padding-left: 0; }
+    .templaza-framework__body .templaza-framework__wrap #tzinst-dashboard-widgets-wrap .steps a {
+      text-decoration: none; }
     .templaza-framework__body .templaza-framework__wrap #tzinst-dashboard-widgets-wrap .steps .setup-step {
       display: flex;
       align-items: center;
@@ -12393,7 +12395,8 @@
       border: 1px solid #e8ebf1; }
     .templaza-framework__body .templaza-framework__wrap #tzinst-dashboard-widgets-wrap .steps .setup-step-heading {
       font-size: 1.5em;
-      font-weight: 600; }
+      font-weight: 600;
+      color: #333; }
     .templaza-framework__body .templaza-framework__wrap .wx-46 {
       width: 46px; }
     .templaza-framework__body .templaza-framework__wrap .hx-46 {

@@ -29,37 +29,44 @@ $theme  = wp_get_theme();
                 <ul class="steps">
                     <?php if(isset($this -> theme_config_registered) && !empty($this -> theme_config_registered)){ ?>
                         <li>
-                            <a href="#tzinst-license" class="setup-step">
+                            <a href="#tzinst-license" class="setup-step p-4">
                                 <div class="setup-step-info">
-                                    <h5 class="setup-step-heading"><?php echo __('Theme Activation', $this -> text_domain); ?></h5>
+                                    <h5 class="setup-step-heading uk-margin-small"><?php echo __('Theme Activation', $this -> text_domain); ?></h5>
                                     <p class="uk-margin-remove"><?php echo __('Enter your purchase code manually. Follow steps to activate the theme', $this -> text_domain);?></p>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a class="setup-step" href="<?php echo admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK.'-importer'); ?>">
+                            <a class="setup-step p-4" href="<?php echo admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK.'-importer'); ?>">
                                 <div class="setup-step-info">
-                                    <h5 class="setup-step-heading"><?php echo __('Data Importation', $this -> text_domain); ?></h5>
+                                    <h5 class="setup-step-heading uk-margin-small"><?php echo __('Data Importation', $this -> text_domain); ?></h5>
                                     <p class="uk-margin-remove"><?php echo __('One-click import one of our demo content.', $this -> text_domain);?></p>
                                 </div>
                             </a>
                         </li>
                     <?php } ?>
                     <li>
-                        <a class="setup-step" href="<?php echo admin_url('admin.php?page='.Functions::get_theme_option_name().'_options'); ?>">
+                        <a class="setup-step p-4" href="<?php echo admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK.'_support'); ?>">
                             <div class="setup-step-info">
-                                <h5 class="setup-step-heading"><?php echo __('Document Link', $this -> text_domain); ?></h5>
+                                <h5 class="setup-step-heading uk-margin-small"><?php echo __('Get Support', $this -> text_domain); ?></h5>
                                 <p class="uk-margin-remove"><?php echo __('Documentation, help files, and video tutorials for beginners and professionals', $this -> text_domain);?></p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a class="setup-step" href="<?php echo admin_url('admin.php?page='.Functions::get_theme_option_name().'_options'); ?>">
+                        <div class="setup-step p-4">
                             <div class="setup-step-info">
-                                <h5 class="setup-step-heading"><?php echo __('Support Link', $this -> text_domain); ?></h5>
-                                <p class="uk-margin-remove"><?php echo __('Join our community', $this -> text_domain);?></p>
+                                <h5 class="setup-step-heading uk-margin-small"><?php echo __('Useful Links', $this -> text_domain); ?></h5>
+                                <dl class="uk-description-list uk-margin-remove-bottom">
+                                    <dt><?php echo __('Author:', $this -> text_domain); ?></dt>
+                                    <dd><a class="uk-link-text" href="https://www.templaza.com/"><?php echo __('TemPlaza.com', $this -> text_domain); ?></a></dd>
+                                    <dt><?php echo __('Forum Support:', $this -> text_domain); ?></dt>
+                                    <dd><a class="uk-link-text" href="https://www.templaza.com/forums.html"><?php echo __('Ask a question.', $this -> text_domain); ?></a></dd>
+                                    <dt><?php echo __('Online Document:', $this -> text_domain); ?></dt>
+                                    <dd><a class="uk-link-text" href="https://document.templaza.com/<?php echo $theme -> get('Name'); ?>"><?php echo sprintf(__('Check %s Documentation.'), $theme -> get('Name')); ?></a></dd>
+                                </dl>
                             </div>
-                        </a>
+                        </div>
                     </li>
                 </ul>
             </div>
