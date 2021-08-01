@@ -4,26 +4,23 @@ defined( 'ABSPATH' ) || exit;
 
 ?>
 <div id="tzinst-dashboard-widgets-wrap">
-
-    <div class="row">
-        <div class="col-md-12 mb-4">
+    <div class="uk-grid-match" data-uk-grid>
+        <div class="uk-width-1-1">
             <div class="uk-card uk-card-default uk-card-body rounded-3"><?php echo $this -> load_template('theme');?></div>
         </div>
         <?php if(isset($this -> theme_config_registered) && !empty($this -> theme_config_registered)){ ?>
-            <div id="tzinst-license" class="col-md-8 mb-4">
-                <div class="p-4 bg-white box-shadow h-100 rounded-3"><?php echo $this -> load_template('license');?></div>
+            <div id="tzinst-license" class="uk-width-1-1">
+                <div class="uk-card uk-card-default uk-card-body rounded-3"><?php echo $this -> load_template('license');?></div>
             </div>
         <?php } ?>
-        <div class="col-md-4 mb-4">
-            <div class="p-4 bg-white box-shadow h-100 rounded-3"><?php echo $this -> load_template('support');?></div>
+        <div class="uk-width-1-3@m uk-width-1-1">
+            <div class="uk-card uk-card-default uk-card-body rounded-3"><?php echo $this -> load_template('support');?></div>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="p-4 bg-white box-shadow h-100 rounded-3"><?php echo $this -> load_template('social');?></div>
+        <div class="uk-width-1-3@m uk-width-1-1">
+            <div class="uk-card uk-card-default uk-card-body rounded-3"><?php echo $this -> load_template('documentation');?></div>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="p-4 bg-white box-shadow h-100 rounded-3"><?php echo $this -> load_template('feed');?></div>
+        <div class="uk-width-1-3@m uk-width-1-1">
+            <div class="uk-card uk-card-default uk-card-body rounded-3"><?php echo $this -> load_template('custom');?></div>
         </div>
     </div>
-
-
 </div>

@@ -7,7 +7,7 @@ if(isset($nav_tabs) && $nav_tabs){
 ?>
         <div class="uk-width-expand@s">
             <nav class="uk-navbar-container uk-navbar-transparent" data-uk-navbar>
-                <div class="uk-margin-auto-left@s uk-margin-remove-right@s uk-margin-auto">
+                <div class="uk-margin-auto-left@m uk-margin-remove-right@m uk-margin-auto">
                     <ul class="uk-navbar-nav uk-margin-remove">
 				        <?php foreach( $nav_tabs as $tab_id => $tab_info ) {
 					        $feature_tab_class  = $this -> get_current_page() === $tab_id ? 'nav-item uk-active' : 'nav-item';

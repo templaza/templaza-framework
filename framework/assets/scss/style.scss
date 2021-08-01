@@ -1,4 +1,7 @@
 $grid-gutter-width:           2.5rem !default;
+@import "../../../assets/scss/vendor/uikit/variables-theme.scss";
+@import "../../../assets/scss/vendor/uikit/mixins-theme.scss";
+
 .templaza-framework__body {
   *,
   *::before,
@@ -11,11 +14,7 @@ $grid-gutter-width:           2.5rem !default;
 
   @import "variables_override.scss";
   @import "bootstrap_custom.scss";
-
-  @import "../../../assets/scss/vendor/uikit/variables-theme.scss";
-  @import "../../../assets/scss/vendor/uikit/mixins-theme.scss";
   @import "../../../assets/scss/vendor/uikit/uikit-theme.scss";
-
   &:not(.nav-menus-php){
     //@import "../../../assets/scss/vendor/bootstrap_grid/reboot.scss";
     @import "bootstrap/bootstrap_addition.scss";

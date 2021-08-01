@@ -27,7 +27,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 'new_item'           => __( 'New template', $this -> text_domain ),
                 'edit_item'          => __( 'Edit template', $this -> text_domain),
                 'view_item'          => __( 'View template', $this -> text_domain ),
-                'all_items'          => __( 'All templates', $this -> text_domain ),
+                'all_items'          => __( 'Templates', $this -> text_domain ),
                 'search_items'       => __( 'Search templates', $this -> text_domain ),
                 'parent_item_colon'  => __( 'Parent templates:', $this -> text_domain ),
                 'not_found'          => __( 'No templates found.', $this -> text_domain ),

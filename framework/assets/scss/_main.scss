@@ -1,6 +1,9 @@
 .templaza-framework__wrap{
   margin-top: 25px;
   margin-right: 20px;
+  @media (max-width: 782px) {
+    margin-right: 10px;
+  }
   max-width: 1200px;
   //*{
   //  box-sizing: border-box;
@@ -166,5 +169,9 @@
   .uk-navbar-nav > li > a {
     min-height: 30px;
     font-weight: bold;
+    @media (max-width: 640px) {
+      font-size: 0.8rem;
+      text-transform: capitalize;
+    }
   }
 }

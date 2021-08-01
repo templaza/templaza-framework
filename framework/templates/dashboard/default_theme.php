@@ -24,8 +24,8 @@ $theme  = wp_get_theme();
                     $step_count += 2;
                 }
                 ?>
-                <h2 class="h3"><?php echo __('Setup your website', $this -> text_domain); ?></h2>
-                <p><?php echo sprintf(__('Set up your website with %d easy steps.', $this -> text_domain), $step_count); ?></p>
+                <h2 class="uk-h3 uk-margin-small-bottom"><?php echo __('Setup your website', $this -> text_domain); ?></h2>
+                <p class="uk-margin-remove-top"><?php echo __('Set up your website with our useful resources', $this -> text_domain); ?></p>
                 <ul class="steps">
                     <?php if(isset($this -> theme_config_registered) && !empty($this -> theme_config_registered)){ ?>
                         <li>

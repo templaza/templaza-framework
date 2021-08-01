@@ -349,14 +349,12 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                     'callback' => array($this, 'render')
                 ));
             }
-
 	        Menu_Admin::add_submenu_section('support', array(
 		        'label' => esc_html__('Support', $this->text_domain),
 		        'description' => '',
 		        'add_admin_menu' => true,
 		        'callback' => array($this, 'render')
 	        ));
-
             $this -> add_submenus();
         }
 
