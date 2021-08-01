@@ -623,44 +623,47 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
         }
 
         public function add_widgets_to_menu($items, $args ){
+
+            /* Checking */
             $args   = (array) $args;
-//            if(!$args['theme_location']){
-//                return;
-//            }
-//
-            $meta_options = get_option( 'templaza_megamenu_settings' );
-            $current_theme_location = $args['theme_location'];
 
-            $settings  = isset($meta_options['tz_megamenu_meta'])?json_decode($meta_options['tz_megamenu_meta'], true):array();
-
-//            if ( isset ( $settings[ $current_theme_location ]['enabled'] ) && $settings[ $current_theme_location ]['enabled'] == true ) {
+            // If not header
+            if(!isset($args['templaza_megamenu_html_data']) || (isset($args['templaza_megamenu_html_data'])
+                    && !$args['templaza_megamenu_html_data'])){
+                return $items;
+            }
 
             $rolling_dummy_id = 999999999;
             $items_to_move  = array();
 
-            $items = apply_filters( "templaza-framework/metabox/megamenu/nav_menu_objects_before", $items, $args );
+            $items      = apply_filters( "templaza-framework/metabox/megamenu/nav_menu_objects_before", $items, $args );
 
-//                if ( isset ( $settings[ $current_theme_location ]['enabled'] ) && $settings[ $current_theme_location ]['enabled'] == true ) {
+            $items      = array_values($items);
+            $new_items  = $items;
+            $next_order = $items[0] -> menu_order;
 
-            foreach($items as $item) {
+            foreach($items as $i => $item) {
+                $new_items[$i] -> menu_order    = $next_order;
                 if(isset($item -> templaza_megamenu_saved_layout) && $item -> templaza_megamenu_saved_layout){
-                    $next_order = $this->menu_order_of_next_sibling($item->ID, $item->menu_item_parent, $items) - 999;
-
                     $saved_layout   = $item -> templaza_megamenu_saved_layout;
-                    $this -> tree_element($saved_layout, $item, $items, $rolling_dummy_id, $next_order, $items_to_move);
-
+                    $this -> tree_element($saved_layout, $item, $new_items, $rolling_dummy_id,
+                        $next_order, $items_to_move);
                 }
+                else{
+                    $next_order++;
+                }
+
             }
+
+            $items  = $new_items;
 
             if ( count( $items_to_move ) ) {
                 foreach ( $items_to_move as $id => $new_parent ) {
                     $items_to_find[] = $id;
                 }
 
-                foreach ( $items as $item ) {
+                foreach ( $items as $index => $item ) {
                     if ( in_array( $item->ID, $items_to_find, true ) ) {
-//                        $item->menu_item_parent = $items_to_move[ $item->post_name ]['new_parent'];
-//                        $item->menu_order       = $items_to_move[ $item->post_name ]['new_order'];
                         $item->menu_item_parent = $items_to_move[ $item->ID ]['new_parent'];
                         $item->menu_order       = $items_to_move[ $item->ID ]['new_order'];
                         $item -> templaza_moved  = true;
@@ -668,36 +671,19 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                 }
             }
 
-            $items = apply_filters( "templaza-framework/metabox/megamenu/nav_menu_objects_after", $items, $args );
-//            }
-
-            return $items;
-        }
-
-
-        /**
-         * If descriptions are enabled, create a new 'mega_description' property.
-         * This is for backwards compatibility for users who have used filters
-         * to display descriptions
-         *
-         * @param array $items
-         * @param array $args
-         * @return array
-         */
-        public function set_descriptions_if_enabled( $items, $args ) {
-
-//            $settings = get_option( 'templaza_megamenu_settings' );
-
-//            $descriptions = isset( $settings['descriptions'] ) ? $settings['descriptions'] : 'disabled';
-
-//            if ($descriptions == 'enabled') {
-            foreach ( $items as $item ) {
-                if (  property_exists( $item, 'description' ) && strlen( $item->description )  ) {
-                    $item->templaza_megamenu_description = $item->description;
-                    $item->classes[] = 'has-description';
+            $count  = count($items);
+            for ($i = 0; $i < $count - 1; $i++)
+            {
+                for ($j = $i + 1; $j < $count; $j++){
+                    if ($items[$i] -> menu_order >= $items[$j] -> menu_order){
+                        $tmp          = $items[$i];
+                        $items[$i]    = $items[$j];
+                        $items[$j]    = $tmp;
+                    }
                 }
             }
-//            }
+
+            $items = apply_filters( "templaza-framework/metabox/megamenu/nav_menu_objects_after", $items, $args );
 
             return $items;
         }
@@ -744,19 +730,19 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                     'templaza_megamenu_layout'  => $shortcode_layout,
                     'db_id' => $rolling_dummy_id,
                 );
+
+                if($element['type'] != 'megamenu_menu_item') {
+                    $items[] = (object)$layout_item;
+                }
+
                 if($element['type'] == 'megamenu_menu_item'){
                     $layout_item['title']   = $element['admin_label'];
-                    $next_order++;
-//                    $items_to_move[$element['menu_slug']] = array(
-//                        'new_parent' => $menu_item_parent,
-//                        'new_order'  => $next_order,
-//                    );
                     $items_to_move[$element['menu_id']] = array(
                         'new_parent' => $menu_item_parent,
                         'new_order'  => $next_order,
                     );
+
                 }
-                $items[] = (object)$layout_item;
 
                 if(!isset($shortcode_tmp['__tree'])){
                     $shortcode_tmp['__tree']   = array();
@@ -769,7 +755,6 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
 
                 $count++;
                 if($subitems){
-//                    $depth++;
                     $level++;
                     $this -> tree_element($element['elements'], $item, $items, $rolling_dummy_id,
                         $next_order, $items_to_move, $count, $depth, $level,$shortcode_tmp);
@@ -784,6 +769,35 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                 }
             }
         }
+
+
+        /**
+         * If descriptions are enabled, create a new 'mega_description' property.
+         * This is for backwards compatibility for users who have used filters
+         * to display descriptions
+         *
+         * @param array $items
+         * @param array $args
+         * @return array
+         */
+        public function set_descriptions_if_enabled( $items, $args ) {
+
+//            $settings = get_option( 'templaza_megamenu_settings' );
+
+//            $descriptions = isset( $settings['descriptions'] ) ? $settings['descriptions'] : 'disabled';
+
+//            if ($descriptions == 'enabled') {
+            foreach ( $items as $item ) {
+                if (  property_exists( $item, 'description' ) && strlen( $item->description )  ) {
+                    $item->templaza_megamenu_description = $item->description;
+                    $item->classes[] = 'has-description';
+                }
+            }
+//            }
+
+            return $items;
+        }
+
         private function menu_order_of_next_sibling( $item_id, $menu_item_parent, $items ) {
 
             $get_order_of_next_item = false;

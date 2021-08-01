@@ -175,6 +175,11 @@
                      }
                      _content.css('right', _right);
                      _content.css('left', 'inherit');
+                  }else{
+                     if ($(this).data('position') == 'center'){
+                        var _left = ($(this).outerWidth() - _content.outerWidth()) /2;
+                        _content.css('left', _left);
+                     }
                   }
 
                // }

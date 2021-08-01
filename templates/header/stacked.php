@@ -25,7 +25,7 @@ $dropdown_arrow             = isset($options['dropdown-arrow'])?filter_var($opti
 //$dropdown_animation_ease    = isset($options['dropdown-animation-ease'])?(bool) $options['dropdown-animation-ease']:'linear';
 $dropdown_animation_type    = isset($options['dropdown-animation-type'])?(bool) $options['dropdown-animation-type']:'fade';
 $dropdown_animation_effect  = isset($options['dropdown-animation-effect'])?$options['dropdown-animation-effect']:'fade-down';
-$dropdown_animation_effect  = $dropdown_animation_type == 'none'?'':$dropdown_animation_effect;
+$dropdown_animation_effect  = $dropdown_animation_type === 'none'?'':$dropdown_animation_effect;
 //$dropdown_animation_speed_1 = isset($options['dropdown-animation-speed-1'])?$options['dropdown-animation-speed-1']:300;
 //$dropdown_animation_speed_2 = isset($options['dropdown-animation-speed-2'])?$options['dropdown-animation-speed-2']:300;
 $dropdown_trigger           = isset($options['dropdown-trigger'])?$options['dropdown-trigger']:'hover';

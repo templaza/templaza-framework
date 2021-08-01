@@ -15,7 +15,7 @@ class Menu{
         $mode    = isset($options['header-mode'])?$options['header-mode']:'horizontal';
         $header_stacked_menu_mode   = isset($options['header-stacked-menu-mode'])?$options['header-stacked-menu-mode']:'center';
         if($mode == 'stacked' && $header_stacked_menu_mode == 'seperated'){
-            add_filter( 'wp_nav_menu_objects', array( 'TemPlazaFramework\Menu', 'add_logo_to_menu' ), 10, 2 );
+            add_filter( 'wp_nav_menu_objects', array( 'TemPlazaFramework\Menu', 'add_logo_to_menu' ), 1000000, 2 );
         }
 
         return wp_nav_menu($args);
