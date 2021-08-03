@@ -31,7 +31,6 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
         {
             $this -> text_domain        = Functions::get_my_text_domain();
             $this -> page_slug          = TEMPLAZA_FRAMEWORK;
-//            $this -> page_slug          = TEMPLAZA_FRAMEWORK;
             $this -> theme_name         = get_template();
             $theme_imports  = apply_filters('templaza-framework-importer', array());
 
@@ -41,31 +40,27 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                 $this -> theme_config_registered   = $theme_imports;
             }
 
-//            if($this -> theme_demo_datas && count($this -> theme_demo_datas)){
+            $page = $this -> _get_page();
 
-                $page = $this -> _get_page();
-//                var_dump($page); die();
+            if(strpos($page, TEMPLAZA_FRAMEWORK) !== false) {
+                if(!session_id()) {
+                    session_start();
+                }
+                remove_all_actions( 'admin_notices' );
+                $action = $this -> _get_action();
 
-                if(strpos($page, TEMPLAZA_FRAMEWORK) !== false) {
-                    if(!session_id()) {
-                        session_start();
-                    }
-                    remove_all_actions( 'admin_notices' );
-                    $action = $this -> _get_action();
+                $this -> controller = BaseController::getInstance('',
+                    array(
+                        'basePath'                  => TEMPLAZA_FRAMEWORK_CORE_INCLUDES_PATH.'/admin',
+                        'theme_name'                => $this -> theme_name,
+                        'theme_config_registered'   => $this -> theme_config_registered
+                    )
+                );
+                $this -> controller -> set('theme_demo_datas', $this -> theme_demo_datas);
 
-                    $this -> controller = BaseController::getInstance('',
-                        array(
-                            'basePath'                  => TEMPLAZA_FRAMEWORK_CORE_INCLUDES_PATH.'/admin',
-                            'theme_name'                => $this -> theme_name,
-                            'theme_config_registered'   => $this -> theme_config_registered
-                        )
-                    );
-                    $this -> controller -> set('theme_demo_datas', $this -> theme_demo_datas);
-
-                    if($action){
-                        $this -> controller -> execute($action);
-                    }
-//                }
+                if($action){
+                    $this -> controller -> execute($action);
+                }
                 add_action('after_switch_theme', array($this, 'plugin_redirect'));
             }
         }
@@ -103,7 +98,6 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
         }
 
         public function admin_init(){
-//            add_action('admin_enqueue_scripts', array($this, 'installation_enqueue_scripts'));
 
             if(HelperLicense::is_authorised($this -> theme_name)) {
                 add_action('admin_enqueue_scripts', array($this, 'global_admin_enqueue_scripts'));
@@ -118,7 +112,6 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
             $react      = '<a href="admin.php?page=tzinst-dashboard" class="button-primary">'
                 .__('Reactivate license', $this -> text_domain).'</a>';
 
-
             wp_enqueue_script('tzinst-admin-js__hearbeat',
                 Functions::get_my_frame_url().'/assets/js/heartbeat.js',
                 array(), Functions::get_my_version());
@@ -132,11 +125,6 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                     'reactivate' => $react,
                 )
             ));
-
-//            /* Add style */
-//            wp_enqueue_style('tzinst-admin-css__hearbeat',
-//                Functions::get_my_frame_url().'/assets/css/heartbeat.css',
-//                array(), Functions::get_my_version());
         }
 
         public function heartbeat_notice(){
@@ -244,54 +232,14 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                         $result['message']   = $authMsg;
                     }
                 }
-
-//                status_header($response['response']['code']);
             }
 
             wp_send_json($result);
             exit();
 
-//            $ch = curl_init();
-//            curl_setopt($ch, CURLOPT_URL,$url);
-//
-//            $headers = [
-////                'Content-type' => 'application/json',
-//                'Content-type' => 'application/x-www-form-urlencoded',
-//            ];
-//
-//
-//            curl_setopt($ch, CURLOPT_POST, 1);
-//            curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-//
-//            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-//            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-//            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-//            curl_setopt($ch, CURLOPT_POSTREDIR, 3);
-//
-//            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-//            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
-//
-//            $apiData   =  curl_exec ($ch);
-//            if (curl_errno($ch)) {
-//                var_dump(curl_error($ch));
-//            }
-//
-//            curl_close ($ch);
         }
 
         public function enqueue_admin_scripts(){
-
-
-//            var_dump(HelperLicense::get_secret_key($this -> theme_name));
-//
-//            die(__METHOD__);
-
-//            /* Add bootstrap */
-//            wp_enqueue_script('tzinst-admin-js__bootstrap',
-//                self::get_plugin_url().'/vendor/bootstrap4.3.1/js/bootstrap.min.js',
-//                array(), self::get_plugin_version());
-
             wp_enqueue_script('templaza-framework-installation',
                 Functions::get_my_frame_url().'/assets/js/installation.js',
                 array(), Functions::get_my_version());
@@ -307,33 +255,10 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                     'plugin_install_failed' => __( 'Plugin install failed. Please try again.', $this -> text_domain),
                 )
             ));
-
-//            wp_enqueue_style('tzinst__admin-bootstrap',
-//                self::get_plugin_url().'/vendor/bootstrap4.3.1/css/bootstrap.min.css',
-//                array(), self::get_plugin_version());
-//
-//            /* Add style */
-//            wp_enqueue_style('tzinst__admin-style',
-//                self::get_plugin_url().'/admin/assets/css/style.css',
-//                array(), self::get_plugin_version());
             do_action('tzinst_enqueue_admin_scripts');
         }
 
         public function register_admin_menu(){
-//            $this -> pageHooks[$this -> page_slug] = add_menu_page(
-//                __('Plazart Installation', $this -> text_domain),
-//                __('Plazart Installation', $this -> text_domain),
-//                'manage_options',
-//                $this -> page_slug,
-//                array($this, 'render'),
-//                'dashicons-download'
-//            );
-
-
-//            add_filter(  TEMPLAZA_FRAMEWORK_NAME.'_admin_sections', array( $this, 'add_section_dashboard' ), 60);
-//            add_filter(  TEMPLAZA_FRAMEWORK_NAME.'_admin_sections', array( $this, 'add_section_importer' ), 60);
-
-
             Menu_Admin::add_submenu_section(TEMPLAZA_FRAMEWORK, array(
                 'label'             => esc_html__('Dashboard', $this->text_domain),
                 'description'       => '',
@@ -349,49 +274,14 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                     'callback' => array($this, 'render')
                 ));
             }
-	        Menu_Admin::add_submenu_section('support', array(
-		        'label' => esc_html__('Support', $this->text_domain),
-		        'description' => '',
-		        'add_admin_menu' => true,
-		        'callback' => array($this, 'render')
-	        ));
+            Menu_Admin::add_submenu_section('support', array(
+                'label' => esc_html__('Support', $this->text_domain),
+                'description' => '',
+                'add_admin_menu' => true,
+                'callback' => array($this, 'render')
+            ));
             $this -> add_submenus();
         }
-
-//        public function add_section_dashboard( $sections){
-//            if( !empty( $sections['dashboard'] ) ){
-//                $sections['dashboard']['callback']       = array($this, 'render');
-//                $sections['dashboard']['add_admin_menu'] = true;
-//            }else {
-//                $sections['dashboard'] = array(
-//                    'label' => esc_html__('Dashboard', $this->text_domain),
-//                    'description' => '',
-//                    'url' => 'admin.php?page='.$this ->page_slug.'-dashboard',
-//                    'add_admin_menu' => true,
-//                    'callback' => array($this, 'render')
-//                );
-//            }
-//
-//            return $sections;
-//        }
-//        public function add_section_importer( $sections){
-//            if($this -> theme_demo_datas && count($this -> theme_demo_datas)){
-//                if( !empty( $sections['importer'] ) ){
-//                    $sections['importer']['callback']       = array($this, 'render');
-//                    $sections['importer']['add_admin_menu'] = true;
-//                }else {
-//                    $sections['importer'] = array(
-//                        'label' => esc_html__('Demo Importer', $this->text_domain),
-//                        'description' => '',
-//                        'url' => 'admin.php?page='.$this ->page_slug.'-importer',
-//                        'add_admin_menu' => true,
-//                        'callback' => array($this, 'render')
-//                    );
-//                }
-//            }
-//
-//            return $sections;
-//        }
 
         public function get_sections(){
             if( empty( $this->sections ) ){
@@ -426,14 +316,14 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                         $section_slug   = $this -> page_slug;
                     }
                     $this -> pageHooks[$section_slug] = add_submenu_page(
-                            $this->page_slug,
-                            $section['label'],
-                            $section['label'],
-                            'manage_options'
-                            , $section_slug,
-                            $section['callback'],
-                            $position
-                        );
+                        $this->page_slug,
+                        $section['label'],
+                        $section['label'],
+                        'manage_options'
+                        , $section_slug,
+                        $section['callback'],
+                        $position
+                    );
                     $position++;
 
                 }
@@ -502,8 +392,6 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
         }
 
         protected function the_footer(){
-
-//            $file   = self::get_template_directory().'/footer.php';
             $file   = self::get_template_directory().'/footer.php';
 
             if(file_exists($file)){

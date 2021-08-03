@@ -42,7 +42,6 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
             $this -> title_field    = 'admin_label';
 
             $sections                           = array(
-                'title' => '',
                 array(
                     'id'    => uniqid(),
                     'title' => '',

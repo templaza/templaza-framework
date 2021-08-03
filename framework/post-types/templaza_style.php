@@ -81,6 +81,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 add_action('in_admin_header', array($this, 'remove_admin_notices'), 1000);
 
                 add_action('templaza-framework/post_type/registered', array($this, 'post_type_registered'));
+
             }
         }
 
@@ -94,6 +95,8 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
         public function post_type_registered(){
 
             add_action( 'templaza-framework/framework/hooks', array( $this, 'register_sidebar' ) );
+
+            $this -> _init_arguments();
 
             $this -> init_main_options();
 
@@ -112,14 +115,8 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                     return TEMPLAZA_FRAMEWORK_CORE_TEMPLATE.'/redux-panel/footer.tpl.php';
                 });
 
-
-
                 add_action('edit_form_after_title', array($this, 'generate_template_options'));
                 add_action( 'save_post_'.$this -> get_post_type(), array( $this, 'save_main_options' ), 10, 2 );
-//                add_action( 'save_post', array( $this, 'save_main_options' ), 10, 2 );
-
-//                // Check post allow or deny when trash
-//                add_filter('pre_trash_post', array($this, 'pre_trash_post'), 10, 2);
 
                 // Create duplicate action
                 add_filter('post_row_actions', array($this, 'duplicate_post_link'), 10, 2);
@@ -132,9 +129,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
                 // Remove templates post attributes
                 add_filter("theme_{$post_type}_templates", array($this, 'remove_templates'));
-
-
-//                add_action( 'wp_ajax_mm_edit_widget', array( $this, 'ajax_show_widget_form' ) );
 
             }
             add_action('admin_footer', function(){
@@ -190,10 +184,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             $args['hide_save']      = true;
             $args['menu_type']      = 'hidden';
             $args['hide_reset']     = true;
-//            $args['post_type']     = $this -> get_post_type();
-//            $args['open_expanded']  = true;
 
-//            $args['shortcode_section']    = true;
             $args['display_name']   = __('Template Settings', $this->text_domain);
 
             // Get option values from file and load to fields
@@ -224,17 +215,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
         }
 
         public function init_main_options(){
-
-            $core_file     = TEMPLAZA_FRAMEWORK_OPTION_PATH.'/config.php';
-            if(file_exists($core_file)){
-                require_once $core_file;
-            }
-            $core_file     = TEMPLAZA_FRAMEWORK_THEME_PATH_OPTION.'/config.php';
-            if(file_exists($core_file)){
-                require_once $core_file;
-            }
-
-            $this -> _init_arguments();
 
             $_pagenow   = isset($_GET['page']) && $_GET['page']?$_GET['page']:'';
 
@@ -356,7 +336,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
         public function post_type_duplicate(){
             $post_type      = $this -> get_post_type();
             $nonce_name     = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
-//            $nonce_action   = $post_type.'_duplicate';
             $nonce_action   = isset( $_GET['action'] ) ? $_GET['action'] : '';;
 
             // Check if nonce is valid.
@@ -390,11 +369,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                     'menu_order'     => $post->menu_order
                 );
                 $clone_post_id = wp_insert_post( $args );
-
-//                $post_name  = wp_unique_post_slug($post -> post_name, $clone_post_id,
-//                    $args['post_status'], $args['post_type'], $args['post_parent']);
-////                var_dump($post_name); die();
-//                wp_update_post(array('ID' => $clone_post_id, 'post_name' => $post_name));
 
                 $taxonomies = get_object_taxonomies($post->post_type);
                 if (!empty($taxonomies) && is_array($taxonomies)){
@@ -494,7 +468,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             // Store main config to json file
             $setting_args = $this -> setting_args[$this -> get_post_type()];
             $main_param_name = $setting_args['opt_name'];
-//            $main_param_name = $this -> framework -> args['opt_name'];
 
             if(isset($_POST[$main_param_name])) {
                 global $wp_filesystem;

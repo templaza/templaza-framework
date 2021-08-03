@@ -42,63 +42,32 @@ class Framework{
             require_once dirname(__FILE__) . '/includes/autoloader.php';
         }
 
-//        if(is_admin()) {
-//            $this -> admin_init();
-//        }
-
 
         if(is_admin()) {
-//            var_dump(TEMPLAZA_FRAMEWORK_INSTALLATION_ADMIN_PATH . '/installation_admin.php');
-//            var_dump(file_exists(TEMPLAZA_FRAMEWORK_INSTALLATION_ADMIN_PATH . '/installation_admin.php'));
-//            die();
-//            use TemPlazaFramework\Installation\Installation_Admin;
-//            require_once TEMPLAZA_FRAMEWORK_INSTALLATION_ADMIN_PATH . '/admin_page.php';
-//            require_once TEMPLAZA_FRAMEWORK_CORE_INCLUDES_PATH . '/admin/admin_autoloader.php';
-//            var_dump(class_exists('TemPlazaFramework\Admin\Admin_Page')); die(__FILE__);
             $admin = new Admin_Page();
             $admin->init();
         }
 
-//        $this -> init_metaboxes();
-//        if(is_admin()) {
-            $this->init();
-//        }
-///
+        $this->init();
+
         $this -> hooks();
     }
 
 
     public function init(){
-        
+
         if (!class_exists('Redux')) {
             return;
         }
 
-//        if(!$this -> text_domain) {
-//            $this->text_domain = Functions::get_my_text_domain();
-//        }
-//
-//        // Just for demo purposes. Not needed per say.
-//        if(!$this -> theme) {
-//            $this->theme = wp_get_theme();
-//        }
-//
-//        if(file_exists(dirname(__FILE__).'/includes/autoloader.php')) {
-//            require_once dirname(__FILE__).'/includes/autoloader.php';
-//        }
-//
-//
         // Register arguments
         $this -> register_arguments();
         $this -> init_post_types();
-//        $this -> init_metaboxes();
         $this -> init_global_settings();
-
-
-//        $this -> hooks();
+//        $this -> init_post_types();
 
     }
-    
+
     public function hooks(){
 
         add_filter('admin_body_class', array($this, 'admin_body_class'));
@@ -116,14 +85,15 @@ class Framework{
                     'manage_options',
                     TEMPLAZA_FRAMEWORK,
                     '',
-                    /*array($this, 'render'),*/
                     'dashicons-art'
                 );
 
-//                $this -> add_submenus();
-            }, 9);
+                remove_submenu_page(
+                    TEMPLAZA_FRAMEWORK,
+                    TEMPLAZA_FRAMEWORK
+                );
 
-//            add_action( 'admin_notices', array($this,'admin_nav_tabs' ));
+            }, 9);
 
             add_action('in_admin_header', array($this, 'remove_admin_notices'), 1000);
             add_filter(TEMPLAZA_FRAMEWORK.'_admin_nav_tabs', array($this, 'admin_nav_tabs'), 1000);
@@ -142,11 +112,6 @@ class Framework{
         );
 
         return $nav_tabs;
-
-//        if ( ! is_admin() ) {
-//            return;
-//        }
-//        Template_Admin::load_my_layout('header');
     }
     public function remove_admin_notices(){
         global $pagenow;
@@ -156,34 +121,8 @@ class Framework{
                 && (in_array($_GET['page'], $slugs) || $_GET['page'] == $this -> args['opt_name'].'_options'))) {
                 remove_all_actions('admin_notices');
                 remove_all_actions('all_admin_notices');
-//                add_action('admin_notices', function(){
-//                    echo 'Admin Notice';
-//                });
             }
         }
-    }
-
-    public function render(){
-
-        Template_Admin::load_my_layout('render', true, true, array('framework' => $this));
-
-//        $render = Template_Admin::load_my_layout('render', false);
-//        var_dump($render);
-////        var_dump(get_template_directory());
-////        var_dump(TEMPLAZA_FRAMEWORK_PLUGIN_DIR_PATH);
-//        die(__FILE__);
-
-//        $file   = self::get_template_directory().'/render.php';
-//
-//        if(file_exists($file)){
-//            require_once $file;
-//        }
-//        if(isset($_GET['page']) && $_GET['page'] == 'templaza-framework_options'){
-//            $redux  = \Redux::instance($this -> args['opt_name']);
-//            $redux ->_register_settings();
-//            $redux ->_enqueue();
-//            $redux -> generate_panel();
-//        }
     }
 
     public function init_post_types(){
@@ -290,6 +229,16 @@ class Framework{
 
     public function register_arguments() {
         $theme = wp_get_theme(); // For use with some settings. Not necessary.
+
+        $core_file     = TEMPLAZA_FRAMEWORK_OPTION_PATH.'/config.php';
+        if(file_exists($core_file)){
+            require_once $core_file;
+        }
+        $core_file     = TEMPLAZA_FRAMEWORK_THEME_PATH_OPTION.'/config.php';
+        if(file_exists($core_file)){
+            require_once $core_file;
+        }
+
         $this->args = array(
             // TYPICAL -> Change these values as you need/desire
             'opt_name'            => Functions::get_theme_option_name(),            // This is where your data is stored in the database and also becomes your global variable name.
@@ -387,10 +336,10 @@ class Framework{
     public function enqueue(){
         wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'__js', Functions::get_my_frame_url().'/assets/js/core.js',
             array('redux-js'), time(), true);
-	    wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_js', Functions::get_my_url().'/assets/js/vendor/uikit.min.js', array(), time(), true);
-	    wp_enqueue_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_js');
-	    wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_icon_js', Functions::get_my_url().'/assets/js/vendor/uikit-icons.min.js', array(), time(), true);
-	    wp_enqueue_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_icon_js');
+        wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_js', Functions::get_my_url().'/assets/js/vendor/uikit.min.js', array(), time(), true);
+        wp_enqueue_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_js');
+        wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_icon_js', Functions::get_my_url().'/assets/js/vendor/uikit-icons.min.js', array(), time(), true);
+        wp_enqueue_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_icon_js');
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css-core',
             Functions::get_my_frame_url().'/assets/vendors/core/core.css');
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css-fontawesome',
