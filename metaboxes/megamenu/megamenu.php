@@ -399,12 +399,12 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                 if($pagenow == 'nav-menus.php') {
                     add_filter( 'hidden_meta_boxes', array($this, 'remove_hidden_meta_boxes'), 10, 2 );
                     add_action('admin_init', array($this, 'add_meta_boxes'), 10, 2);
+                    add_action('admin_footer', array($this, 'megamenu_enqueue'));
+                    add_action('admin_footer', array($this, 'template'));
                 }
                 add_action('wp_ajax_templaza_megamenu_save_settings', array($this, 'save_settings'));
                 add_action( 'pre_update_option_nav_menu_options', array( $this, 'update_nav_menu' ), 10, 3 );
 
-                add_action('admin_footer', array($this, 'megamenu_enqueue'));
-                add_action('admin_footer', array($this, 'template'));
 
                 add_filter( 'redux/'.$this -> opt_name .'/panel/template/header.tpl.php' , function($path){
                     return TEMPLAZA_FRAMEWORK_METABOXES_PATH.'/'.$this -> get_meta_box_name().'/tmpl/redux-panel/header.tpl.php';
@@ -955,7 +955,7 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
         }
 
         public function change_to_menu_id($element){
-            if($element['type'] == 'megamenu_menu_item' && isset($element['menu_slug'])){
+            if($element && $element['type'] == 'megamenu_menu_item' && isset($element['menu_slug'])){
                 $menu   = get_posts(array(
                     'name'      => $element['menu_slug'],
                     'post_type' => 'nav_menu_item',

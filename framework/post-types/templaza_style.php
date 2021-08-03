@@ -7,6 +7,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 use TemPlazaFramework\Admin_Functions;
 use TemPlazaFramework\Core\Fields;
 use TemPlazaFramework\Functions;
+use TemPlazaFramework\Menu_Admin;
 use TemPlazaFramework\Post_Type;
 use TemPlazaFramework\Enqueue;
 
@@ -93,12 +94,18 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
         }
 
         public function post_type_registered(){
+            global $pagenow;
 
             add_action( 'templaza-framework/framework/hooks', array( $this, 'register_sidebar' ) );
 
             $this -> _init_arguments();
 
-            $this -> init_main_options();
+            $slugs      = Menu_Admin::get_submenu_slugs();
+            $post_type  = $this -> get_post_type();
+            if(($this -> get_current_screen_post_type() == 'templaza_style') || ($pagenow == 'nav-menus.php' || ($pagenow == 'admin.php' && isset($_GET['page'])
+                        && (in_array($_GET['page'], $slugs) || $_GET['page'] == $this -> setting_args[$post_type]['opt_name'])))){
+                $this -> init_main_options();
+            }
 
             if($this -> my_post_type_exists()) {
 
