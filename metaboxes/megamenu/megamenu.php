@@ -475,6 +475,8 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
 
             if ( isset ( $settings[ $current_theme_location ]['enabled'] ) && $settings[ $current_theme_location ]['enabled'] == true ) {
 
+                $args['templaza_megamenu_enable']   = $settings[ $current_theme_location ]['enabled'];
+
                 if ( ! isset( $locations[ $current_theme_location ] ) ) {
                     return $args;
                 }

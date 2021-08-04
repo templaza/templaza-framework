@@ -42,92 +42,70 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
         {
             /* Coding */
             // Create submenu main html tag
-            if($this -> has_original_lvl) {
-                if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
-                    $t = '';
-                    $n = '';
-                } else {
-                    $t = "\t";
-                    $n = "\n";
-                }
-                $indent = str_repeat( $t, $depth );
 
-                // Default class.
-                $classes = array( 'nav-submenu link-list' );
+            $args   = (array) $args;
+            if(isset($args['templaza_megamenu_enable']) && $args['templaza_megamenu_enable']) {
+                if($this -> has_original_lvl) {
+                    if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+                        $t = '';
+                        $n = '';
+                    } else {
+                        $t = "\t";
+                        $n = "\n";
+                    }
+                    $indent = str_repeat( $t, $depth );
 
-                /**
-                 * Filters the CSS class(es) applied to a menu list element.
-                 *
-                 * @since 4.8.0
-                 *
-                 * @param string[] $classes Array of the CSS classes that are applied to the menu `<ul>` element.
-                 * @param stdClass $args    An object of `wp_nav_menu()` arguments.
-                 * @param int      $depth   Depth of menu item. Used for padding.
-                 */
-                $class_names = implode( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
-                $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+                    // Default class.
 
-                $output .= "{$n}{$indent}<ul$class_names>{$n}";
 
-            }else {
-                if($this -> has_layout) {
-                    if ($this->item_tmp && isset($this->item_tmp->templaza_megamenu_saved_layout)
-                        && !empty($this->item_tmp->templaza_megamenu_saved_layout)) {
+                    $classes = array('nav-submenu link-list');
+                    //                $classes = array( 'sub-menu nav-submenu link-list' );
 
-                        $item   = $this -> item_tmp;
+                    /**
+                     * Filters the CSS class(es) applied to a menu list element.
+                     *
+                     * @since 4.8.0
+                     *
+                     * @param string[] $classes Array of the CSS classes that are applied to the menu `<ul>` element.
+                     * @param stdClass $args    An object of `wp_nav_menu()` arguments.
+                     * @param int      $depth   Depth of menu item. Used for padding.
+                     */
+                    $class_names = implode( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
+                    $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
-//                        // Default class.
-//                        $classes = array('sub-menu megamenu-sub-menu');
-//
-//
-//                        $classes = apply_filters('nav_menu_submenu_css_class', $classes, $args, $depth);
-//                        $class_names = join(' ', apply_filters('templaza-framework/walker/megamenu/submenu_class',
-//                            $classes, $args, $depth));
-//
-//                        $settings   = array();
-//                        if (property_exists($item, 'templaza_megamenu_settings')) {
-//                            $settings = $item->templaza_megamenu_settings;
-//                        }
-//                        $direction  = isset($settings['submenu_direction'])?$settings['submenu_direction']:'full';
-//                        $width      = isset($settings['width']) && ($direction != 'full' && $direction != 'edge')?$settings['width']:'';
-//
-////                    if($depth == 0){
-//                        if ($direction == 'full') {
-//                            $width = '100vw';
-//                        }
-//                        if ($direction == 'edge') {
-//                            $width = '100vw';
-//                        }
-////                    }
-//
-//                        $style      = '';
-//                        if($width){
-//                            $style  .= 'width:'.$width.';';
-//                        }
-//
-//                        $output .= '<div class="' . $class_names . '"' . (!empty($style) ? ' style="' . $style . '"' : '') . '><div class="container">';
+                    $output .= "{$n}{$indent}<ul$class_names>{$n}";
 
-                        $this -> start_my_lvl($output, $item, $depth, $args);
+                }else {
+                    if($this -> has_layout) {
+                        if ($this->item_tmp && isset($this->item_tmp->templaza_megamenu_saved_layout)
+                            && !empty($this->item_tmp->templaza_megamenu_saved_layout)) {
 
-                        $this -> my_trees[$depth]   = $item;
+                            $item   = $this -> item_tmp;
 
-                        if(isset($this -> elements) && !empty($this -> elements)) {
-                            $db_ids = wp_list_pluck($this->elements, 'db_id');
-                            $children = wp_list_pluck($this->elements, 'menu_item_parent');
+                            $this -> start_my_lvl($output, $item, $depth, $args);
 
-                            $parent_index = array_search($item->db_id, array_reverse($children, true));
-                            if ($parent_index !== false && isset($this->elements[$parent_index])) {
-                                $this->item_mega_lvl = $this->elements[$parent_index];
+                            $this -> my_trees[$depth]   = $item;
+
+                            if(isset($this -> elements) && !empty($this -> elements)) {
+                                $db_ids = wp_list_pluck($this->elements, 'db_id');
+                                $children = wp_list_pluck($this->elements, 'menu_item_parent');
+
+                                $parent_index = array_search($item->db_id, array_reverse($children, true));
+                                if ($parent_index !== false && isset($this->elements[$parent_index])) {
+                                    $this->item_mega_lvl = $this->elements[$parent_index];
+                                }
                             }
+
+                            //                        $this->has_mega_lvl = true;
                         }
 
-//                        $this->has_mega_lvl = true;
                     }
-
+                    else{
+                        parent::start_lvl($output, $depth, $args);
+                    }
                 }
-                else{
-                    parent::start_lvl($output, $depth, $args);
-                }
+            }else{
+                parent::start_lvl($output, $depth, $args);
             }
             /* End coding */
 
@@ -147,54 +125,17 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
         function end_lvl(&$output, $depth = 0, $args = array())
         {
             /* Coding */
-            if($this -> has_original_lvl){
-                parent::end_lvl($output, $depth, $args);
-            }else {
-                if($this -> has_layout) {
-//                    if ($this->item_tmp->type == $this->my_menu_type) {
-//                        if (preg_match('/\[' . $this->menu_shorcode_tag . '.*?\][\n|\s]*?(.*?)$/ism',
-//                            $this->item_tmp->templaza_megamenu_html, $match)) {
-//    //                        var_dump('end_lvl_item_db_id_first: '.$this -> item_tmp -> db_id);
-//    //                        var_dump($match);
-//    //                        if($this -> item_tmp -> db_id == 1000000000){
-//    //                            var_dump($match); die();
-//    //                        }
-//                            $output .= $match[1];
-//                            $output .= $this->item_tmp -> title;
-//                        }
-//                    }
-                    // Create submenu main html tag
-//                    if ((isset($this->has_mega_lvl) && $this->has_mega_lvl) ||
-//                        (isset($this->item_tmp) && isset($this->item_tmp->templaza_megamenu_saved_layout))
-//                        && !empty($this->item_tmp->templaza_megamenu_saved_layout)) {
-//                    var_dump('end_lvl: '.$this -> has_mega_lvl);
-
-//                    var_dump('end_lvl_item_db_id: '.$this -> item_tmp -> db_id.'__'.$this -> item_tmp -> title);
-
-//                    var_dump('end_lvl_has_children: '.$this -> has_children);
-
-                    ///////////
-
-//                    $this -> end_my_lvl($output, )
-
-//                    if ($this -> has_mega_lvl && $depth > 0) {
-//                        $output .= '</div></div>';
-//                        $output .= 'has_mega_lvl: '.$this -> has_mega_lvl;
-//                        $this->has_mega_lvl = false;
-//                    }
-
-
-//                    if ($this -> has_mega_lvl || (/*!$this -> has_mega_lvl && */isset($this -> item_mega_lvl)
-//                            && $this -> item_mega_lvl -> db_id == $this -> item_tmp -> db_id)) {
-//                        $output .= '</div></div>';
-//                        $output .= 'has_mega_lvl: '.$this -> has_mega_lvl;
-//                        $output .= 'item_mega_lvl: '.$this -> item_mega_lvl -> db_id;
-//                        $this->has_mega_lvl = false;
-//                    }
-
-                }else{
+            $args   = (array) $args;
+            if(isset($args['templaza_megamenu_enable']) && $args['templaza_megamenu_enable']) {
+                if($this -> has_original_lvl){
                     parent::end_lvl($output, $depth, $args);
+                }else {
+                    if(!$this -> has_layout){
+                        parent::end_lvl($output, $depth, $args);
+                    }
                 }
+            }else{
+                parent::end_lvl($output, $depth, $args);
             }
 
             /* End coding */
@@ -209,7 +150,6 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
 
                 // Default class.
                 $classes = array('sub-menu megamenu-sub-menu');
-
 
                 $classes = apply_filters('nav_menu_submenu_css_class', $classes, $args, $depth);
                 $class_names = join(' ', apply_filters('templaza-framework/walker/megamenu/submenu_class',
@@ -246,7 +186,7 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                 && $this -> my_trees[$depth] -> db_id == $item -> db_id){
 //            if($this -> has_mega_lvl) {
 //                if(!isset($item -> templaza_allow_el) || (isset($item -> templaza_allow_el) && !$item -> templaza_allow_el)) {
-                    $output .= '</div></div>';
+                $output .= '</div></div>';
 //                }
             }
         }
@@ -269,7 +209,6 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
 
             /* Coding */
             $_args  = (array) $args;
-
             $this -> has_layout = false;
             if(isset($_args['templaza_megamenu_html_data']) && !empty($_args['templaza_megamenu_html_data'])) {
                 $this->has_layout = true;
@@ -386,21 +325,23 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                         }
 
 //                        if ($this->item_tmp->type == $this->my_menu_type) {
-                            if (preg_match('/(.*?)[\n|\s]*?\[' . $this->menu_shorcode_tag . '.*?\]/im',
-                                $item->templaza_megamenu_html, $match)) {
-                                $output .= $match[1];
-                            }
+                        if (preg_match('/(.*?)[\n|\s]*?\[' . $this->menu_shorcode_tag . '.*?\]/im',
+                            $item->templaza_megamenu_html, $match)) {
+                            $output .= $match[1];
+                        }
 //                        }
                     }
 
                 } else {
-                    if ($depth > 0 && $item->type != $this->my_menu_type) {
-                        $this->has_original_lvl = true;
-                        $this->start_lvl($output, $depth, $args);
-                        $this->has_original_lvl = false;
+                    if(isset($_args['templaza_megamenu_enable']) && $_args['templaza_megamenu_enable']) {
+                        if ($depth > 0 && $item->type != $this->my_menu_type) {
+                            $this->has_original_lvl = true;
+                            $this->start_lvl($output, $depth, $args);
+                            $this->has_original_lvl = false;
+                        }
                     }
 //                    if(isset($item -> templaza_allow_el) && $item -> templaza_allow_el) {
-                        $output .= '<li data-position="' . $direction . '" class="' . $class . '" >';
+                    $output .= '<li data-position="' . $direction . '" class="' . $class . '" >';
 //                    }
                 }
 
@@ -592,34 +533,38 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
             /* Coding */
             $_args  = (array) $args;
 
-            if($this->has_layout) {
-                $this->item_tmp = $item;
-                if($item -> type != $this -> my_menu_type){
+            if(isset($_args['templaza_megamenu_enable']) && $_args['templaza_megamenu_enable']) {
+                if($this->has_layout) {
+                    $this->item_tmp = $item;
+                    if($item -> type != $this -> my_menu_type){
 
-                    // Close tag of submenu
-//                    if(isset($this -> my_trees[$depth]) && isset($this -> my_trees[$depth])
-//                        && $this -> my_trees[$depth] -> db_id == $item -> db_id){
-//                        $output .= '</div></div>';
-                    $this -> end_my_lvl($output, $item, $depth, $args);
-//                    }
+                        // Close tag of submenu
+                        //                    if(isset($this -> my_trees[$depth]) && isset($this -> my_trees[$depth])
+                        //                        && $this -> my_trees[$depth] -> db_id == $item -> db_id){
+                        //                        $output .= '</div></div>';
+                        $this -> end_my_lvl($output, $item, $depth, $args);
+                        //                    }
 
-                    parent::end_el($output, $item, $depth, $args);
-
-                    if($depth > 0 && $item -> type != $this -> my_menu_type){
-                        $this -> has_original_lvl    = true;
-                        $this -> end_lvl($output, $depth, $args);
-                        $this -> has_original_lvl    = false;
-
-                    }
-                }else{
-                    if(isset($item -> templaza_allow_el) && $item -> templaza_allow_el) {
                         parent::end_el($output, $item, $depth, $args);
+
+                        if($depth > 0 && $item -> type != $this -> my_menu_type){
+                            $this -> has_original_lvl    = true;
+                            $this -> end_lvl($output, $depth, $args);
+                            $this -> has_original_lvl    = false;
+
+                        }
                     }else{
-                        if (preg_match('/\[' . $this->menu_shorcode_tag . '.*?\][\n|\s]*?(.*?)$/ism',
-                            $item->templaza_megamenu_html, $match)) {
-                            $output .= $match[1];
+                        if(isset($item -> templaza_allow_el) && $item -> templaza_allow_el) {
+                            parent::end_el($output, $item, $depth, $args);
+                        }else{
+                            if (preg_match('/\[' . $this->menu_shorcode_tag . '.*?\][\n|\s]*?(.*?)$/ism',
+                                $item->templaza_megamenu_html, $match)) {
+                                $output .= $match[1];
+                            }
                         }
                     }
+                }else{
+                    parent::end_el($output, $item, $depth, $args);
                 }
             }else{
                 parent::end_el($output, $item, $depth, $args);
