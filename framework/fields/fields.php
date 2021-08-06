@@ -51,20 +51,20 @@ class Fields{
                     }
 
                     // Require override exists file
-                    $override_file   =  $f."override-redux-{$fName}.php";
+                    $override_file   =  $f."override-redux-{$field_type}.php";
                     if(file_exists($override_file)) {
-                        add_filter("redux/{$this->args['opt_name']}/field/class/{$fName}", function ($filter_path, $field) use ($fName) {
-                            $_filter_path = TEMPLAZA_FRAMEWORK_FIELD_PATH . "/{$fName}/override-redux-{$fName}.php";
+                        add_filter("redux/{$this->args['opt_name']}/field/class/{$fName}", function ($filter_path, $field) use ($fName, $field_type) {
+                            $_filter_path = TEMPLAZA_FRAMEWORK_FIELD_PATH . "/{$fName}/override-redux-{$field_type}.php";
                             $filter_path = file_exists($_filter_path) ? $_filter_path : $filter_path;
                             return $filter_path;
                         }, 10, 2);
                     }
 
                     // Register my custom field override redux's fields
-                    $custom_file    = $f.'custom-redux-'.$field_type.'.php';
+                    $custom_file    = $f.'custom-redux-'.$fName.'.php';
                     if(file_exists($custom_file)){
                         require_once $custom_file;
-                        $custom_class   = 'Templaza_Custom_Redux_'.ucfirst($field_type);
+                        $custom_class   = 'Templaza_Custom_Redux_'.ucfirst($fName);
                         if(class_exists($custom_class)){
                             $reduxFramework = \Redux::instance($this -> args['opt_name']);
 

@@ -77,12 +77,88 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
         {
             parent::hooks();
 
+
+
             // Remove all admin notices
             if(\is_user_logged_in()) {
+                $global_args    = $this -> framework -> get_arguments();
+                $opt_name       = $global_args['opt_name'].'-templaza_style';
+                add_action('wp_ajax_redux_download_options-'.$opt_name, array($this, 'download_options'));
+                add_action('wp_ajax_nopriv_redux_download_options-'.$opt_name, array($this, 'download_options'));
+
                 add_action('in_admin_header', array($this, 'remove_admin_notices'), 1000);
 
                 add_action('templaza-framework/post_type/registered', array($this, 'post_type_registered'));
 
+            }
+        }
+
+        public function download_options() {
+            $global_args    = $this -> framework -> get_arguments();
+            $opt_name       = $global_args['opt_name'].'-templaza_style';
+            if ( ! isset( $_GET['secret'] ) || md5( md5( \Redux_Functions_Ex::hash_key() ) . '-'
+                    . $opt_name ) !== $_GET['secret'] ) { // phpcs:ignore WordPress.Security.NonceVerification
+                wp_die( __('Invalid Secret for options use', $this -> text_domain) );
+                exit;
+            }
+
+            $options    = array();
+
+            if(isset($_GET['post_id']) && !empty($_GET['post_id'])){
+                $style_id   = $_GET['post_id'];
+                if($style_id){
+                    $file_id    = get_post_meta($style_id, '_templaza_style', true);
+                    $theme_name = get_post_meta($style_id, '_templaza_style_theme', true);
+                    if($file_id){
+                        require_once ( ABSPATH . '/wp-admin/includes/file.php' );
+                        global $wp_filesystem;
+                        WP_Filesystem();
+                        $file   = dirname(get_template_directory()) .'/'.$theme_name.'/'
+                            .TEMPLAZA_FRAMEWORK_NAME. '/theme_options/' . $file_id . '.json';
+                        if(file_exists($file)){
+                            $options    = $wp_filesystem -> get_contents($file);
+                            $options    = json_decode($options, true);
+                        }
+
+                    }
+                }
+            }
+
+            $backup_options                 = $options;
+            $backup_options['redux-backup'] = 1;
+
+            if ( isset( $backup_options['REDUX_imported'] ) ) {
+                unset( $backup_options['REDUX_imported'] );
+            }
+
+            // No need to escape this, as it's been properly escaped previously and through json_encode.
+            $content = wp_json_encode( $backup_options );
+
+            if ( isset( $_GET['action'] ) && 'redux_download_options-' . $opt_name === $_GET['action'] ) { // phpcs:ignore WordPress.Security.NonceVerification
+                header( 'Content-Description: File Transfer' );
+                header( 'Content-type: application/txt' );
+                header( 'Content-Disposition: attachment; filename="redux_options_"' . $opt_name . '_backup_' . gmdate( 'd-m-Y' ) . '.json' );
+                header( 'Content-Transfer-Encoding: binary' );
+                header( 'Expires: 0' );
+                header( 'Cache-Control: must-revalidate' );
+                header( 'Pragma: public' );
+
+                echo( $content ); // phpcs:ignore WordPress.Security.EscapeOutput
+
+                exit;
+            } else {
+                header( 'Expires: Mon, 26 Jul 1997 05:00:00 GMT' );
+                header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . 'GMT' );
+                header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' );
+                header( 'Cache-Control: no-store, no-cache, must-revalidate' );
+                header( 'Cache-Control: post-check=0, pre-check=0', false );
+                header( 'Pragma: no-cache' );
+
+                // Can't include the type. Thanks old Firefox and IE. BAH.
+                // header('Content-type: application/json');.
+                echo( $content ); // phpcs:ignore WordPress.Security.EscapeOutput
+
+                exit;
             }
         }
 
@@ -103,7 +179,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             $slugs      = Menu_Admin::get_submenu_slugs();
             $post_type  = $this -> get_post_type();
             if(($this -> get_current_screen_post_type() == 'templaza_style') || ($pagenow == 'nav-menus.php' || ($pagenow == 'admin.php' && isset($_GET['page'])
-                        && (in_array($_GET['page'], $slugs) || $_GET['page'] == $this -> setting_args[$post_type]['opt_name'])))){
+                    && (in_array($_GET['page'], $slugs) || $_GET['page'] == $this -> setting_args[$post_type]['opt_name'])))){
                 $this -> init_main_options();
             }
 
@@ -121,6 +197,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 add_filter( 'redux/'.$opt_name .'/panel/template/footer.tpl.php' , function($path){
                     return TEMPLAZA_FRAMEWORK_CORE_TEMPLATE.'/redux-panel/footer.tpl.php';
                 });
+
 
                 add_action('edit_form_after_title', array($this, 'generate_template_options'));
                 add_action( 'save_post_'.$this -> get_post_type(), array( $this, 'save_main_options' ), 10, 2 );
@@ -482,9 +559,11 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
                 $data   = wp_unslash($_POST[$main_param_name]);
 
-                if(count($data)){
+
+                if(count($data) && !empty($post -> post_name )){
                     $folder     = TEMPLAZA_FRAMEWORK_THEME_PATH . '/theme_options';
                     $file_by_id = $folder . '/' . $post_id . '.json';
+
                     $file       = $folder . '/' . $post -> post_name . '.json';
 
                     if(!$wp_filesystem -> is_dir(TEMPLAZA_FRAMEWORK_THEME_PATH)){
@@ -499,7 +578,17 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                         rename($file_by_id, $file);
                     }
 
+                    // Check import
+                    if ( isset( $data['import_link'] ) && '' !== $data['import_link'] && ! ! wp_http_validate_url( $data['import_link'] ) ) {
+                        $import           = wp_remote_retrieve_body( wp_remote_get( $data['import_link'] ) );
+                        $data = json_decode( $import, true );
+                    }
+                    if ( isset( $data['import_code'] ) && '' !== $data['import_code'] ) {
+                        $data = json_decode( $data['import_code'], true );
+                    }
+
                     // Create config file
+//                    $wp_filesystem->put_contents($file, json_encode($data));
                     $wp_filesystem->put_contents($file, json_encode($data));
 
                     update_post_meta( $post_id, '_'.$this -> get_post_type(), $post -> post_name );
