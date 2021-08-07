@@ -76,6 +76,23 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 			$do_close = false;
 
 			$id = $this->parent->args['opt_name'] . '-' . $this->field['id'];
+
+            $cpost_type = isset($_GET['post_type'])?$_GET['post_type']:'';
+            $cpost      = (isset($_GET['post']) && !empty($_GET['post']))?get_post($_GET['post']):'';
+            $post_name  = (!empty($cpost) && isset($cpost -> post_name) && !empty($cpost -> post_name))? $cpost -> post_name:'';
+
+            if(!isset($_GET['post']) || ((isset($_GET['post']) && !empty($_GET['post']) || $cpost_type) && empty($post_name))){
+                ?>
+                <p class="uk-text-danger">
+                    <span>
+                        <?php // phpcs:ignore WordPress.NamingConventions.ValidHookName ?>
+                        <?php
+                        echo esc_html( apply_filters( 'redux-import-warning', esc_html__( 'WARNING! Please save add title and publish first!', 'redux-framework' ) ) ); ?>
+                    </span>
+                </p>
+                <?php
+                return;
+            }
 			?>
 			<h4><?php esc_html_e( 'Import Options', 'redux-framework' ); ?></h4>
 			<p>
@@ -131,10 +148,11 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
                     data-secret="<?php echo esc_attr( $secret ); ?>"
                     <?php
                     echo (isset($_GET['post']) && !empty($_GET['post']))?' data-post-id="'.$_GET['post'].'"':''?>
-					value="<?php esc_html_e( 'Import', 'redux-framework' ); ?>">&nbsp;&nbsp;
+					value="<?php esc_html_e( 'Import', 'redux-framework' ); ?>">
 				<span>
 					<?php // phpcs:ignore WordPress.NamingConventions.ValidHookName ?>
-					<?php echo esc_html( apply_filters( 'redux-import-warning', esc_html__( 'WARNING! This will overwrite all existing option values, please proceed with caution!', 'redux-framework' ) ) ); ?>
+					<?php
+                    echo esc_html( apply_filters( 'redux-import-warning', esc_html__( 'WARNING! This will overwrite all existing option values, please proceed with caution!', 'redux-framework' ) ) ); ?>
 				</span>
 			</p>
 			<div class="hr">
