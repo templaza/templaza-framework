@@ -89,7 +89,7 @@ $class = ['templaza-logo', 'templaza-logo-' . $logo_type, 'd-flex align-items-ce
               $log_svg  = ' data-uk-svg';
           }
           ?>
-         <img src="<?php echo $sticky_header_logo['url']; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-sticky"<?php
+         <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-sticky"<?php
          echo $log_svg; ?>/>
       <?php } ?>
    </a>
