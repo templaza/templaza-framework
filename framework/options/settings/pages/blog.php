@@ -169,6 +169,45 @@ Templaza_API::set_section('settings',
                 'title'    => __( 'Show Pagination', $this -> text_domain ),
                 'subtitle' => __( 'Show/hide pagination.', $this -> text_domain ),
             ),
+	        array(
+		        'id'       => 'blog_item_bg',
+		        'type'     => 'background',
+		        'title'    => __( 'Blog item background', $this -> text_domain ),
+		        'subtitle' => __( 'background for blog item.', $this -> text_domain ),
+	        ),
+	        array(
+		        'id'       => 'blog_item_border',
+		        'type'     => 'border',
+		        'title'    => __('Blog item border', $this -> text_domain),
+		        'default'  => ''
+	        ),
+	        array(
+		        'id'       => 'blog_item_padding',
+		        'type'     => 'spacing',
+		        'title'    => __('Blog item padding', $this -> text_domain),
+		        'default'  => ''
+	        ),
+	        array(
+		        'id'       => 'blog_item_margin',
+		        'type'     => 'spacing',
+		        'mode'     => 'margin',
+		        'title'    => __('Blog item margin', $this -> text_domain),
+		        'default'  => ''
+	        ),
+	        array(
+		        'id'       => 'blog_item_border_radius',
+		        'type'     => 'spacing',
+		        'mode'     => 'border-radius',
+		        'title'    => __('Blog item Border radius', $this -> text_domain),
+		        'default'  => '',
+	        ),
+	        array(
+		        'id'       => 'blog_item_shadow',
+		        'type'     => 'text',
+		        'title'    => __('Blog item box shadow', $this -> text_domain),
+		        'default'  => '',
+		        'desc'     => __( 'Example: 10px 10px 5px 0px rgba(0,0,0,0.75). You can generator <a href="https://cssgenerator.org/box-shadow-css-generator.html">Here</a> ', $this -> text_domain ),
+	        ),
         )
     )
 );
@@ -286,6 +325,52 @@ Templaza_API::set_section('settings',
                 'subtitle' => __( 'Show/hide comment.', $this -> text_domain ),
                 'default'  => true,
             ),
+	        array(
+		        'id'       => 'blog_single_bg',
+		        'type'     => 'background',
+		        'title'    => __( 'Blog single background', $this -> text_domain ),
+		        'subtitle' => __( 'background for Blog single.', $this -> text_domain ),
+	        ),
+	        array(
+		        'id'       => 'blog_single_border',
+		        'type'     => 'border',
+		        'title'    => __('Blog single border', $this -> text_domain),
+		        'default'  => ''
+	        ),
+
+	        array(
+		        'id'       => 'blog_single_padding',
+		        'type'     => 'spacing',
+		        'title'    => __('Blog single padding', $this -> text_domain),
+		        'default'  => ''
+	        ),
+	        array(
+		        'id'       => 'blog_single_margin',
+		        'type'     => 'spacing',
+		        'mode'     => 'margin',
+		        'title'    => __('Blog single margin', $this -> text_domain),
+		        'default'  => ''
+	        ),
+	        array(
+		        'id'       => 'blog_single_border_radius',
+		        'type'     => 'spacing',
+		        'mode'     => 'border-radius',
+		        'title'    => __('Blog single Border radius', $this -> text_domain),
+		        'default'  => ''
+	        ),
+	        array(
+		        'id'       => 'blog_single_shadow',
+		        'type'     => 'text',
+		        'title'    => __('Blog single box shadow', $this -> text_domain),
+		        'default'  => '',
+		        'desc'     => __( 'Example: 10px 10px 5px 0px rgba(0,0,0,0.75). You can generator <a href="https://cssgenerator.org/box-shadow-css-generator.html">Here</a> ', $this -> text_domain ),
+	        ),
+	        array(
+		        'id'       => 'blog_single_quote_bg',
+		        'type'     => 'background',
+		        'title'    => __( 'blockquote background', $this -> text_domain ),
+		        'subtitle' => __( 'background for blockquote.', $this -> text_domain ),
+	        ),
         )
     )
 );

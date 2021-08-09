@@ -9,52 +9,6 @@ Templaza_API::set_section('settings',
         'subsection' => true,
         'fields'     => array(
             array(
-                'id'       => 'blog_single_bg',
-                'type'     => 'background',
-                'title'    => __( 'Blog single background', $this -> text_domain ),
-                'subtitle' => __( 'background for Blog single.', $this -> text_domain ),
-            ),
-            array(
-                'id'       => 'blog_single_border',
-                'type'     => 'border',
-                'title'    => __('Blog single border', $this -> text_domain),
-                'default'  => ''
-            ),
-
-            array(
-                'id'       => 'blog_single_padding',
-                'type'     => 'spacing',
-                'title'    => __('Blog single padding', $this -> text_domain),
-                'default'  => ''
-            ),
-            array(
-                'id'       => 'blog_single_margin',
-                'type'     => 'spacing',
-                'mode'     => 'margin',
-                'title'    => __('Blog single margin', $this -> text_domain),
-                'default'  => ''
-            ),
-            array(
-                'id'       => 'blog_single_border_radius',
-                'type'     => 'spacing',
-                'mode'     => 'border-radius',
-                'title'    => __('Blog single Border radius', $this -> text_domain),
-                'default'  => ''
-            ),
-            array(
-                'id'       => 'blog_single_shadow',
-                'type'     => 'text',
-                'title'    => __('Blog single box shadow', $this -> text_domain),
-                'default'  => '',
-                'desc'     => __( 'Example: 10px 10px 5px 0px rgba(0,0,0,0.75). You can generator <a href="https://cssgenerator.org/box-shadow-css-generator.html">Here</a> ', $this -> text_domain ),
-            ),
-            array(
-                'id'       => 'blog_single_quote_bg',
-                'type'     => 'background',
-                'title'    => __( 'blockquote background', $this -> text_domain ),
-                'subtitle' => __( 'background for blockquote.', $this -> text_domain ),
-            ),
-            array(
                 'id'       => 'blog_single_quote',
                 'type' => 'typography',
                 'allow_responsive'        => true,
