@@ -12,6 +12,13 @@
   }
 }
 body{
+  p,li{
+    code{
+      display:inline-block;
+      padding:0.3em 1em;
+      margin:0;
+    }
+  }
   code{
     white-space: pre-line;
     background:$tztheme-quote-bg;
