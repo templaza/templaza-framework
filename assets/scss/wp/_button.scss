@@ -11,7 +11,7 @@
       color:$tztheme-button_background;
       &:hover{
         border-color:$tztheme-button_background_hover;
-        color:$tztheme-button_text_color_hover;
+        color:$tztheme-button_background_hover;
       }
     }
   }
