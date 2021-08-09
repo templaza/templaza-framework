@@ -43,9 +43,9 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
             $page = $this -> _get_page();
 
             if(strpos($page, TEMPLAZA_FRAMEWORK) !== false) {
-                if(!session_id()) {
-                    session_start();
-                }
+                //if(!session_id()) {
+                //    session_start();
+                //}
                 remove_all_actions( 'admin_notices' );
                 $action = $this -> _get_action();
 

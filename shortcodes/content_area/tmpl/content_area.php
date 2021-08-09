@@ -38,6 +38,7 @@ if(file_exists($path)){
 
     $theme_page_html    = trim($theme_page_html);
     if(!empty($theme_page_html)){
+        $theme_page_html    = str_replace( ']]&gt;', ']]>', $theme_page_html );
 ?>
     <div<?php echo !empty($tz_id)?' id="'.esc_attr($tz_id).'"':''; ?> class="<?php
     echo esc_attr($tz_class); ?>">

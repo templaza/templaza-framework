@@ -183,7 +183,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 *
 		 * @return array|void
 		 */
-		public function localize( $field, $value = '' ) {
+		public function localize( array $field, string $value = '' ) {
 			$params = array();
 
 			if ( true === $this->user_fonts && ! empty( $this->field['fonts'] ) ) {
