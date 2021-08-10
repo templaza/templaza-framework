@@ -1,17 +1,13 @@
 table{
   border-spacing: 0;
-  border:$tztheme-input-border;
+  border-collapse: collapse;
   thead{
     tr{
       background:$tztheme-table-heading-bg;
       th{
-        border-right:$tztheme-input-border;
-        border-bottom:$tztheme-input-border;
+        border:$tztheme-input-border;
         color:$tztheme-heading-color;
         padding:5px 15px;
-        &:last-child{
-          border-right:none;
-        }
       }
       &:last-child{
         th{
@@ -20,20 +16,20 @@ table{
       }
     }
   }
-
   td,th{
-    border-right:$tztheme-input-border;
-    border-bottom:$tztheme-input-border;
+    border:$tztheme-input-border;
     padding:5px 15px;
-    &:last-child{
-      border-right:none;
+  }
+  &.is-style-stripes{
+    th,td{
+      border-width:0;
     }
   }
-  tr{
-    &:last-child{
-      td,th{
-        border-bottom:none;
-      }
+}
+.wp-block-table{
+  &.is-style-stripes{
+    th,td{
+      border-width:0;
     }
   }
 }

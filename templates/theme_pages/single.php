@@ -11,11 +11,8 @@ $custom_class   = isset($atts['custom-container-class'])?' '.$atts['custom-conta
 
 $options            = Functions::get_theme_options();
 $post_type          = get_post_type(get_the_ID());
-$prefix             = $post_type.'-single';
+$prefix             = 'blog-single';
 
-if($post_type == 'post'){
-    $prefix = 'blog-single';
-}
 $show_thumbnail         = isset($options[$prefix.'-thumbnail'])?filter_var($options[$prefix.'-thumbnail'], FILTER_VALIDATE_BOOLEAN):true;
 $show_tag               = isset($options[$prefix.'-tag'])?filter_var($options[$prefix.'-tag'], FILTER_VALIDATE_BOOLEAN):true;
 $show_date              = isset($options[$prefix.'-date'])?filter_var($options[$prefix.'-date'], FILTER_VALIDATE_BOOLEAN):true;
