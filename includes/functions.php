@@ -451,6 +451,9 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     }
                 }
 
+                if(!isset($shortcode['shortcode']['open'][$level])){
+                    $shortcode['shortcode']['open'][$level] = '';
+                }
                 $shortcode['shortcode']['open'][$level] = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/after_shortcode',
                     $shortcode['shortcode']['open'][$level], $level, $params, $item, $parent_el);
 
