@@ -117,9 +117,9 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                 array(), Functions::get_my_version());
             wp_register_script( 'tzinst-admin-js__hearbeat', '' );
             wp_localize_script('tzinst-admin-js__hearbeat', 'tzinst_heartbeat_ajax', array(
-                'page' => TEMPLAZA_FRAMEWORK.'-dashboard',
-                'heartbeat_action' => TEMPLAZA_FRAMEWORK.'-heartbeat',
-                'heartbeat_nonce' => esc_attr( wp_create_nonce(TEMPLAZA_FRAMEWORK.'-heartbeat')),
+                'page' => 'tzinst-dashboard',
+                'heartbeat_action' => 'tzinst-heartbeat',
+                'heartbeat_nonce' => esc_attr( wp_create_nonce('tzinst-heartbeat')),
                 'admin_ajax_url' => admin_url('admin-ajax.php'),
                 'l10nStrings' => array(
                     'reactivate' => $react,
@@ -182,7 +182,7 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
 
         public function heartbeat(){
 
-            check_admin_referer( TEMPLAZA_FRAMEWORK.'-heartbeat','_nonce' );
+            check_admin_referer( 'tzinst-heartbeat','_nonce' );
 
             $result     = array(
                 'auth_check'    => false,

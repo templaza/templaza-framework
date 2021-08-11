@@ -18,7 +18,7 @@ if($items && count($items)){
             $this -> item           = $item;
             $this -> product_code   = $theme_name;
             ?>
-        <div class="col-md-3 mb-4">
+        <div class="col-md-4 mb-4">
             <div class="card rounded-3 p-0 mt-0 border-0 h-100 box">
                 <img class="card-img-top mw-100 rounded-top" src="<?php echo $item['thumb']; ?>" alt="<?php echo $item['title']; ?>"/>
                 <div class="card-body d-flex flex-column p-4">
