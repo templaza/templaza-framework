@@ -157,9 +157,9 @@ class TemPlazaFrameWork{
         Templates::load_my_layout('head');
 
         // Include preloader css
-        $theme_css_uri = Functions::get_my_theme_css_uri();
-        $preloader_css           = Templates::get_style('preloader', 'preloader');
-        $widget_css           = Templates::get_style('widget', 'widget');
+        $theme_css_uri  = Functions::get_my_theme_css_uri();
+        $preloader_css  = Templates::get_style('preloader', 'preloader');
+        $widget_css     = Templates::get_style('widget', 'widget');
 
         wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-preloader', $theme_css_uri.'/'.$preloader_css);
         wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-widget', $theme_css_uri.'/'.$widget_css);

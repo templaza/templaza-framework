@@ -38,8 +38,7 @@ if(is_array($preloader_bgcolor) && isset($preloader_bgcolor['rgba'])) {
 
 $preloader_image        = isset($options['preloader-image'])?$options['preloader-image']:'';
 
-wp_add_inline_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-preloader',
-    '#templaza-preloader {--tztheme-preloader-size: '.$preloader_size.';'
+Templates::add_inline_style('#templaza-preloader {--tztheme-preloader-size: '.$preloader_size.';'
     .'--tztheme-preloader-color: '.$preloader_color.';'
     .($preloader_bgcolor?'--tztheme-preloader-bgcolor: '.$preloader_bgcolor.';':'')
     .($preloader_image && !empty($preloader_image['background-image'])?'--tztheme-preloader-image: url('.$preloader_image['background-image'].');':'')
