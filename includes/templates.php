@@ -183,6 +183,25 @@ class Templates{
         }
     }
 
+    public static function get_inline_styles(){
+        $inline_styles  = self::$_styles;
+        if(is_array($inline_styles)){
+            $styles = [];
+            foreach (['desktop', 'tablet', 'mobile'] as $device) {
+                if ($device == 'mobile') {
+                    $styles[] = '@media (max-width: 767.98px) {' . implode('', self::$_styles[$device]) . '}';
+                } elseif ($device == 'tablet') {
+                    $styles[] = '@media (max-width: 991.98px) {' . implode('', self::$_styles[$device]) . '}';
+                } else {
+                    $styles[] = implode('', self::$_styles[$device]);
+                }
+            }
+            $styles = implode('', $styles);
+            $inline_styles  = $styles;
+        }
+        return $inline_styles;
+    }
+
     public static function build_inline_style($version, $css = '', $css_file = true, $clean_cache = false)
     {
         $prefix = 'framework-';

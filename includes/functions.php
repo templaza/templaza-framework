@@ -592,8 +592,8 @@ if(!class_exists('TemPlazaFramework\Functions')){
             }
 
             $logo_url = $logo_path = '/'.$base_folder.'/'.$file_name;
-            $logo_url     = get_stylesheet_directory_uri().$logo_url;
-            $logo_path    = get_stylesheet_directory().$logo_path;
+            $logo_url     = get_template_directory_uri().$logo_url;
+            $logo_path    = get_template_directory().$logo_path;
 
             if(is_array($files_ext)){
                 foreach($files_ext as $ext){
@@ -646,5 +646,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
             }
             return (is_string($ext_check) && $file_type['ext'] == $ext_check);
         }
+
     }
 }

@@ -148,10 +148,14 @@ class TemPlazaFrameWork{
         return $defaults;
     }
 
+
     public function enqueue_scripts(){
         if(!current_theme_supports('templaza-framework')){
             return;
         }
+
+        Templates::load_my_layout('head');
+
         // Include preloader css
         $theme_css_uri = Functions::get_my_theme_css_uri();
         $preloader_css           = Templates::get_style('preloader', 'preloader');
@@ -160,7 +164,19 @@ class TemPlazaFrameWork{
         wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-preloader', $theme_css_uri.'/'.$preloader_css);
         wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-widget', $theme_css_uri.'/'.$widget_css);
 
-        Templates::load_my_layout('head');
+        if($google_link = Fonts::make_google_web_font_link()){
+            wp_enqueue_style('templaza-google-font', $google_link);
+        }
+        $theme_css_uri = Functions::get_my_theme_css_uri();
+        if($custom_compiled_css = Templates::get_style_name(TEMPLAZA_FRAMEWORK_THEME_PATH, true)){
+            wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-custom', $theme_css_uri.'/'.$custom_compiled_css);
+        }
+        $compiled_css           = Templates::get_style_name(TEMPLAZA_FRAMEWORK_THEME_PATH);
+        wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm', $theme_css_uri.'/'.$compiled_css);
+
+        $inline_css = Templates::get_inline_styles();
+
+        wp_add_inline_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm', $inline_css);
 
         do_action('templaza-framework/plugin/enqueue_scripts', $this);
     }
@@ -171,13 +187,12 @@ class TemPlazaFrameWork{
         $theme_css_uri = Functions::get_my_theme_css_uri();
         $editor_css           = Templates::get_style('editor-blocks', 'editor-blocks');
         wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-editor-blocks', $theme_css_uri.'/'.$editor_css);
-        Templates::load_my_layout('head');
+
         do_action('templaza-framework/plugin/tz_block_editor_styles', $this);
     }
 
     public function default_menu_locations(){
 
-//        if(!$_wp_registered_nav_menus) {
         // Register menu locations
         $locations = array(
             'header' => __('Header Menu', $this->text_domain),
@@ -185,7 +200,6 @@ class TemPlazaFrameWork{
             'footer' => __('Footer Menu', $this->text_domain),
         );
         register_nav_menus($locations);
-//        }
     }
 
     public function init(){
@@ -212,7 +226,8 @@ class TemPlazaFrameWork{
 
             $this -> theme_options  = Functions::get_theme_options();
 
-            $this -> load_template();
+//            $this -> load_template();
+            add_action('templaza-framework_theme_body', array($this, 'theme_body_main'));
         }
     }
 
@@ -233,18 +248,6 @@ class TemPlazaFrameWork{
     public function load_my_footer(){
         Templates::load_my_footer();
         Templates::load_my_layout('typography');
-        if($google_link = Fonts::make_google_web_font_link()){
-            wp_enqueue_style('templaza-google-font', $google_link);
-        }
-
-        $theme_css_uri = Functions::get_my_theme_css_uri();
-        if($custom_compiled_css = Templates::get_style_name(TEMPLAZA_FRAMEWORK_THEME_PATH, true)){
-            wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-custom', $theme_css_uri.'/'.$custom_compiled_css);
-        }
-        $compiled_css           = Templates::get_style_name(TEMPLAZA_FRAMEWORK_THEME_PATH);
-        wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm', $theme_css_uri.'/'.$compiled_css);
-
-        Templates::load_css_file();
     }
 
     public function template_include($template){
@@ -311,18 +314,51 @@ class TemPlazaFrameWork{
         return $template;
     }
 
-    protected function load_template(){
+    protected $template_init = array();
 
-        add_action('wp_body_open', function(){
-            $this -> load_my_header();
-        });
+    protected function init_template(){
+        ob_start();
+        $this -> load_my_header();
+        $this -> template_init['header']    = ob_get_contents();
+        ob_end_clean();
+        ob_start();
+        $this -> load_my_footer();
+        $this -> template_init['footer']    = ob_get_contents();
+        ob_end_clean();
 
-        add_action('templaza-framework_theme_body', array($this, 'load_my_body'));
-
-//        add_action('wp_body_open', array($this, 'load_my_header'));
-        add_action('wp_footer', array($this, 'load_my_footer'));
-//        add_action('templaza-framework__header', array($this, 'load_my_header'));
-//        add_action('templaza-framework__footer', array($this, 'load_my_footer'));
     }
+
+    public function display_header(){
+        if(isset($this -> template_init['header'])){
+            echo $this -> template_init['header'];
+        }
+    }
+
+    public function display_footer(){
+        if(isset($this -> template_init['footer'])){
+            echo $this -> template_init['footer'];
+        }
+    }
+
+    public function theme_body_main($theme_file_name){
+        $this -> init_template();
+        if($theme_file_name) {
+            add_filter('templaza-framework/shortcode/content_area/theme_file', function($file_name)use($theme_file_name){
+                $file_name  = !empty($theme_file_name)?$theme_file_name:$file_name;
+                return $file_name;
+            });
+        }
+
+        add_action('wp_body_open', array($this, 'display_header'));
+        add_action('wp_footer', array($this, 'display_footer'));
+
+        Templates::load_my_layout('body');
+    }
+
+//    protected function load_template(){
+////        add_action('wp_body_open', array($this, 'load_my_header'));
+////        add_action('templaza-framework_theme_body', array($this, 'load_my_body'));
+////        add_action('wp_footer', array($this, 'load_my_footer'));
+//    }
 
 }
