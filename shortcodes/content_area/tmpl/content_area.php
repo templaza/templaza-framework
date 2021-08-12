@@ -32,7 +32,7 @@ if(file_exists($path)){
 
     ob_start();
 
-    require_once $path;
+    require $path;
     $theme_page_html    = ob_get_contents();
     ob_end_clean();
 
