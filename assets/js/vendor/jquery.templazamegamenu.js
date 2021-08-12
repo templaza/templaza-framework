@@ -53,8 +53,6 @@
             _submenus.children('li').each(function () {
                if ($(this).children(settings.submenuClass).length) {
                   if (!$(this).children(settings.submenuClass).hasClass('d-block')) {
-                     console.log($(this));
-
                      $(this).unbind('mouseenter mouseleave').hover(function () {
                         var _submenu = $(this).children(settings.submenuClass);
                         _submenu.removeClass('right');
@@ -72,14 +70,10 @@
                }
             });
 
-            // console.log(_megamenu);
             // if (settings.dropdownArrows) {
             //    _megamenu.append('<span class="arrow" />');
             // }
 
-            // console.log(settings.megamenuClass);
-            // console.log(_megamenu);
-            // console.log($(this).children(".megamenu-item-link.item-level-1"));
             _megamenu.each(function () {
                var _content = $(this).find(">" + settings.contentClass);
 
@@ -104,11 +98,6 @@
                //    // _content.find('.jddrop-content').css('width', _width);
                // }
 
-               // console.log(get_menu_item_level($(this).find(">.megamenu-item-link")));
-
-               // console.log($(this).data("position"));
-               // console.log(!$(this).find(">.megamenu-item-link.item-level-1").length &&
-               //     ($(this).data("position") == "right" || $(this).data("position") == "left"));
                if(!$(this).find(">.megamenu-item-link.item-level-1").length &&
                    ($(this).data("position") == "right" || $(this).data("position") == "left")){
                   return true;
@@ -128,8 +117,6 @@
                var _top = _container.outerHeight() - $(this).outerHeight();
                var _arrow = $(this).children('.arrow');
 
-               // console.log($(this));
-               // console.log($(this).children(".megamenu-item-link"));
                // if($(this).children(".megamenu-item-link.item-level-1").length){
                    _content.css('left', '0px');
 
@@ -265,7 +252,6 @@
                   }
                   break;
                default:
-                  // _content.stop(true, true).slideUp(_animations);
                   // if (settings.dropdownArrows) {
                   //    setTimeout(function () {
                   //       _arrow.hide();
@@ -284,7 +270,6 @@
             _megamenu.unbind('mouseenter mouseleave').hover(function () {
                openMe($(this));
             }, function () {
-               console.log(this);
                closeMe($(this));
             });
          } else {
