@@ -53,16 +53,12 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
         public function hooks(){
 
             add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 2 );
-//            add_action( 'admin_init', array( $this, 'add_meta_boxes' ), 10, 2 );
             add_action( 'save_post', array( $this, 'save_meta_box' ), 10, 2 );
 
             if(method_exists($this, 'enqueue')){
 
                 add_action('admin_enqueue_scripts', array($this, 'enqueue'));
-//                $this -> enqueue();
             }
-
-//            add_filter( 'page_attributes_meta_box', array($this, 'test'), 10, 2 );
 
             add_action('admin_footer', array($this, 'template'));
         }
@@ -104,6 +100,7 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                 $sections = array_merge((array) $sections, (array) $_metabox['sections']);
                 $sections   = apply_filters("templaza-framework/metabox/{$_metabox['id']}/sections/after", $sections, $_metabox);
 
+
                 $setting_args                       = $this -> post_type -> setting_args;
                 $setting_args                       = $setting_args[$this -> post_type -> get_post_type()];
                 $redux_args                         = $setting_args;
@@ -114,6 +111,18 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                 $redux_args['ajax_save']            = false;
                 $redux_args['open_expanded']        = true;
                 $redux_args['show_import_export']   = false;
+
+                // Add id for section if it not exists;
+                if(count($sections)){
+                    foreach($sections as &$section){
+                        if(!isset($section['id'])){
+                            $section['id']  = uniqid();
+                        }
+                        if(!isset($section['title'])){
+                            $section['title']  = '';
+                        }
+                    }
+                }
 
                 Redux::set_args($metabox['id'], $redux_args);
                 Redux::set_sections($metabox['id'], $sections);
@@ -129,7 +138,6 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
 
                 // Set options
                 $redux -> options   = $this -> get_my_data($_metabox, $post);
-
 
                 $redux->_register_settings();
 
@@ -147,7 +155,7 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                     echo '<div id="metabox_'.$metabox['id'].'_' . $k . '_section_group' . '" class="redux-group-tab' . esc_attr($section['class']) . '" data-rel="metabox_'.$metabox['id'].'_' . $k . '">';
 
                     do_action("redux/page/{$redux->args['opt_name']}/section/before", $section);
-                     do_settings_sections( $redux->args['opt_name'] . $k . '_section_group' );
+                    do_settings_sections( $redux->args['opt_name'] . $k . '_section_group' );
                     do_action("redux/page/{$redux->args['opt_name']}/section/after", $section);
 
                     echo '</div>';

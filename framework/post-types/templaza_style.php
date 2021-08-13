@@ -10,6 +10,7 @@ use TemPlazaFramework\Functions;
 use TemPlazaFramework\Menu_Admin;
 use TemPlazaFramework\Post_Type;
 use TemPlazaFramework\Enqueue;
+use TemPlazaFramework\Post_TypeFunctions;
 
 if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
     class Templaza_Style extends Post_Type{
@@ -213,9 +214,13 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
             $this -> _init_arguments();
 
-            $slugs      = Menu_Admin::get_submenu_slugs();
-            $post_type  = $this -> get_post_type();
-            if(($this -> get_current_screen_post_type() == 'templaza_style') || ($pagenow == 'nav-menus.php' || ($pagenow == 'admin.php' && isset($_GET['page'])
+            $slugs              = Menu_Admin::get_submenu_slugs();
+            $post_type          = $this -> get_post_type();
+            $current_post_type  = $this -> get_current_screen_post_type();
+            $tzfrm_post_types   = Post_TypeFunctions::getPostTypes();
+
+            if(($current_post_type == 'templaza_style') || in_array($current_post_type, $tzfrm_post_types)
+                || ($pagenow == 'nav-menus.php' || ($pagenow == 'admin.php' && isset($_GET['page'])
                         && (in_array($_GET['page'], $slugs) || $_GET['page'] == $this -> setting_args[$post_type]['opt_name'])))){
                 $this -> init_main_options();
             }
