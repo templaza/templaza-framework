@@ -13,19 +13,13 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
      */
     class TemplazaFramework_Mega_Menu_Walker extends Walker_Nav_Menu
     {
-        private $item_tmp;
-        private $prev_item;
-        private $prev_depth = -1;
-        private $current_el;
-        private $item_has_child;
-        private $depth_tmp;
-        private $has_layout = false;
-        private $my_trees = array();
-        private $has_mega_lvl = false;
-        private $has_original_lvl = false;
+        private $is_header_menu     = false;
+        private $is_megamenu        = false;
 
-        private $my_menu_type = '__templaza_mega_item';
-        private $menu_shorcode_tag = 'templaza___megamenu_item';
+        private $depth_mega = array();
+
+        private $my_menu_type       = '__templaza_mega_item';
+        private $menu_shorcode_tag  = 'templaza___megamenu_item';
 
         /**
          * Starts the list before the elements are added.
@@ -40,74 +34,15 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
          */
         function start_lvl(&$output, $depth = 0, $args = array())
         {
-            /* Coding */
-            // Create submenu main html tag
-
-            $args   = (array) $args;
-            if(isset($args['templaza_megamenu_enable']) && $args['templaza_megamenu_enable']) {
-                if($this -> has_original_lvl) {
-                    if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
-                        $t = '';
-                        $n = '';
-                    } else {
-                        $t = "\t";
-                        $n = "\n";
-                    }
-                    $indent = str_repeat( $t, $depth );
-
-                    // Default class.
-
-
-                    $classes = array('nav-submenu link-list');
-                    //                $classes = array( 'sub-menu nav-submenu link-list' );
-
-                    /**
-                     * Filters the CSS class(es) applied to a menu list element.
-                     *
-                     * @since 4.8.0
-                     *
-                     * @param string[] $classes Array of the CSS classes that are applied to the menu `<ul>` element.
-                     * @param stdClass $args    An object of `wp_nav_menu()` arguments.
-                     * @param int      $depth   Depth of menu item. Used for padding.
-                     */
-                    $class_names = implode( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
-                    $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
-
-                    $output .= "{$n}{$indent}<ul$class_names>{$n}";
-
-                }else {
-                    if($this -> has_layout) {
-                        if ($this->item_tmp && isset($this->item_tmp->templaza_megamenu_saved_layout)
-                            && !empty($this->item_tmp->templaza_megamenu_saved_layout)) {
-
-                            $item   = $this -> item_tmp;
-
-                            $this -> start_my_lvl($output, $item, $depth, $args);
-
-                            $this -> my_trees[$depth]   = $item;
-
-                            if(isset($this -> elements) && !empty($this -> elements)) {
-                                $db_ids = wp_list_pluck($this->elements, 'db_id');
-                                $children = wp_list_pluck($this->elements, 'menu_item_parent');
-
-                                $parent_index = array_search($item->db_id, array_reverse($children, true));
-                                if ($parent_index !== false && isset($this->elements[$parent_index])) {
-                                    $this->item_mega_lvl = $this->elements[$parent_index];
-                                }
-                            }
-
-                            //                        $this->has_mega_lvl = true;
-                        }
-
-                    }
-                    else{
-                        parent::start_lvl($output, $depth, $args);
-                    }
+            if($this -> is_header_menu){
+                if(isset($this -> depth_mega[$depth]) && !empty($this -> depth_mega[$depth])){
+                    $this -> start_my_lvl($output, $this -> depth_mega[$depth], $depth, $args);
+                }else{
+                    parent::start_lvl($output, $depth, $args);
                 }
             }else{
                 parent::start_lvl($output, $depth, $args);
             }
-            /* End coding */
 
         }
 
@@ -124,24 +59,13 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
          */
         function end_lvl(&$output, $depth = 0, $args = array())
         {
-            /* Coding */
-            $args   = (array) $args;
-            if(isset($args['templaza_megamenu_enable']) && $args['templaza_megamenu_enable']) {
-                if($this -> has_original_lvl){
+            if($this -> is_header_menu){
+                if(!isset($this -> depth_mega[$depth]) || (isset($this -> depth_mega[$depth]) && empty($this -> depth_mega[$depth]))){
                     parent::end_lvl($output, $depth, $args);
-                }else {
-                    if(!$this -> has_layout){
-                        parent::end_lvl($output, $depth, $args);
-                    }
                 }
-            }else{
+            }else {
                 parent::end_lvl($output, $depth, $args);
             }
-
-            /* End coding */
-
-
-
         }
 
         protected function start_my_lvl(&$output, $item, $depth, $args){
@@ -162,14 +86,12 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                 $direction = isset($settings['submenu_direction']) ? $settings['submenu_direction'] : 'full';
                 $width = isset($settings['width']) && ($direction != 'full' && $direction != 'edge') ? $settings['width'] : '';
 
-//                    if($depth == 0){
                 if ($direction == 'full') {
                     $width = '100vw';
                 }
                 if ($direction == 'edge') {
                     $width = '100vw';
                 }
-//                    }
 
                 $style = '';
                 if ($width) {
@@ -177,18 +99,11 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                 }
 
                 $output .= '<div class="' . $class_names . '"' . (!empty($style) ? ' style="' . $style . '"' : '') . '><div class="container">';
-                $this -> has_mega_lvl   = true;
             }
         }
 
         protected function end_my_lvl(&$output, $item, $depth, $args){
-            if(isset($this -> my_trees[$depth]) && isset($this -> my_trees[$depth])
-                && $this -> my_trees[$depth] -> db_id == $item -> db_id){
-//            if($this -> has_mega_lvl) {
-//                if(!isset($item -> templaza_allow_el) || (isset($item -> templaza_allow_el) && !$item -> templaza_allow_el)) {
-                $output .= '</div></div>';
-//                }
-            }
+            $output .= '</div></div>';
         }
 
         /**
@@ -206,13 +121,18 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
          */
         function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)
         {
-
-            /* Coding */
-            $_args  = (array) $args;
-            $this -> has_layout = false;
-            if(isset($_args['templaza_megamenu_html_data']) && !empty($_args['templaza_megamenu_html_data'])) {
-                $this->has_layout = true;
+            $this -> is_megamenu    = false;
+            if(isset($item -> templaza_megamenu_layout) && !empty($item -> templaza_megamenu_layout)) {
+                $this -> is_megamenu = true;
             }
+
+
+            $this -> depth_mega[$depth] = false;
+            if($this -> is_megamenu && $this -> has_children){
+                $this -> depth_mega[$depth] = $item;
+            }
+
+
             $settings   = array();
             if (property_exists($item, 'templaza_megamenu_settings')) {
                 $settings = $item->templaza_megamenu_settings;
@@ -225,15 +145,15 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
             $has_mega_class = 'has-megamenu';
             $_args  = (array) $args;
 
-            if($this -> has_layout) {
-                $megamenu_data  = isset($_args['templaza-megamenu-html-data'])?$_args['templaza-megamenu-html-data']:array();
+            if($this -> is_megamenu) {
+                $megamenu_data  = isset($_args['templaza_megamenu_html_data'])?$_args['templaza_megamenu_html_data']:array();
                 if(isset($megamenu_data['data-megamenu-class'])) {
                     $has_mega_class = preg_replace('/^\./', '', $megamenu_data['data-megamenu-class']);
                 }
             }
 
             if(is_array($classes)){
-                if($this -> has_layout) {
+                if($this -> is_megamenu) {
                     $classes[]  = $has_mega_class;
                     $id         = "megamenu-item-{$item->ID}";
                 }else{
@@ -291,7 +211,7 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
 
             $atts['class']  .= ' item-level-'.($depth + 1);
 
-            if($this -> has_layout || in_array('menu-item-has-children', $classes)) {
+            if($this -> is_megamenu || in_array('menu-item-has-children', $classes)) {
                 $atts['class']  .= ' has-children';
             }
 
@@ -304,15 +224,13 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                 }
             }
 
-//            $attributes = $this -> get_link_attribute($item, $depth, $args);
-
             $item_output    = '';
             if ($item->type != $this->my_menu_type) {
                 $item_output = $this->get_link_tag($item, $attributes, $args);
             }
 
-
-            if($this->has_layout) {
+            /* New coding */
+            if($this -> is_header_menu){
 
                 if ($item->type == $this->my_menu_type) {
 
@@ -324,39 +242,84 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                             $output .= $item->templaza_megamenu_html;
                         }
 
-//                        if ($this->item_tmp->type == $this->my_menu_type) {
                         if (preg_match('/(.*?)[\n|\s]*?\[' . $this->menu_shorcode_tag . '.*?\]/im',
                             $item->templaza_megamenu_html, $match)) {
                             $output .= $match[1];
                         }
-//                        }
                     }
-
-                } else {
-                    if(isset($_args['templaza_megamenu_enable']) && $_args['templaza_megamenu_enable']) {
-                        if ($depth > 0 && $item->type != $this->my_menu_type) {
-                            $this->has_original_lvl = true;
-                            $this->start_lvl($output, $depth, $args);
-                            $this->has_original_lvl = false;
+                }else{
+                    $has_lvl = $this->has_my_menu_type($item);
+                    if($has_lvl){
+                        if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+                            $t = '';
+                            $n = '';
+                        } else {
+                            $t = "\t";
+                            $n = "\n";
                         }
+                        $indent = str_repeat( $t, $depth );
+
+                        // Default class.
+                        $classes = array('nav-submenu link-list');
+
+                        /**
+                         * Filters the CSS class(es) applied to a menu list element.
+                         *
+                         * @since 4.8.0
+                         *
+                         * @param string[] $classes Array of the CSS classes that are applied to the menu `<ul>` element.
+                         * @param stdClass $args    An object of `wp_nav_menu()` arguments.
+                         * @param int      $depth   Depth of menu item. Used for padding.
+                         */
+                        $class_names = implode( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
+                        $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+
+                        $output .= "{$n}{$indent}<ul$class_names>{$n}";
                     }
-//                    if(isset($item -> templaza_allow_el) && $item -> templaza_allow_el) {
                     $output .= '<li data-position="' . $direction . '" class="' . $class . '" >';
-//                    }
                 }
-
-//                $this -> start_my_lvl($output, $item, $depth, $args);
-
-                $this->prev_depth = $depth;
-                $this->item_tmp = $item;
-            }
-            else{
+            }else{
                 $output .= '<li class="' . $class . '" >';
-//                parent::start_el($output, $item, $depth, $args, $id);
             }
+
             $output .= apply_filters('templaza-framework/walker/megamenu/megamenu_walker_nav_menu_start_el',
                 $item_output, $item, $depth, $args);
-            /* End coding */
+        }
+
+        protected function has_my_menu_type($item, $position = 'prev'){
+            $has_lvl        = false;
+            $items          = $this -> elements;
+            $db_ids         = wp_list_pluck($items, 'db_id');
+            $parent_id      = $item -> menu_item_parent;
+
+            $pos_item       = '';
+
+            $parent_index   = array_search($parent_id, $db_ids);
+            $item_index     = array_search($item -> db_id, $db_ids);
+            $pos_index      = -1;
+
+            if($position == 'prev'){
+                $pos_index  = $item_index - 1;
+            }elseif($position == 'next'){
+                $pos_index  = $item_index + 1;
+            }
+
+            if(isset($items[$pos_index])){
+                $pos_item   = $items[$pos_index];
+            }
+
+            if(isset($items[$parent_index]) && $items[$parent_index] -> type == $this -> my_menu_type) {
+                if($position == 'prev' && !empty($pos_item) && $pos_item -> type == $this -> my_menu_type){
+                    $has_lvl    = true;
+                }
+                if($position == 'next' && (empty($pos_item) || (!empty($pos_item) && ($pos_item -> type == $this -> my_menu_type
+                        || ($pos_item -> type != $this -> my_menu_type
+                            && $pos_item -> menu_item_parent != $item -> menu_item_parent))))){
+                    $has_lvl    = true;
+                }
+            }
+
+            return $has_lvl;
         }
 
         protected function get_link_tag($item, $attributes, $args = array()){
@@ -409,7 +372,7 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
             $options    = \TemPlazaFramework\Functions::get_theme_options();
             $show_arrow = isset($options['dropdown-arrow'])?(bool) $options['dropdown-arrow']:true;
 
-            if ($this -> has_layout && $this -> has_children) {
+            if ($this -> is_megamenu && $this -> has_children) {
                 if($show_arrow) {
                     $arrow_icon = isset($settings['dropdown-arrow-icon'])?$settings['dropdown-arrow-icon']:'megamenu-indicator';
                     if($icon_position == 'right') {
@@ -433,7 +396,7 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
             $has_mega_class = 'has-megamenu';
             $_args  = (array) $args;
 
-            if($this -> has_layout) {
+            if($this -> is_megamenu) {
                 $megamenu_data  = isset($_args['templaza-megamenu-html-data'])?$_args['templaza-megamenu-html-data']:array();
                 if(isset($megamenu_data['data-megamenu-class'])) {
                     $has_mega_class = preg_replace('/^\./', '', $megamenu_data['data-megamenu-class']);
@@ -441,7 +404,7 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
             }
 
             if(is_array($classes)){
-                if($this -> has_layout) {
+                if($this -> is_megamenu) {
                     $classes[]  = $has_mega_class;
                     $id         = "megamenu-item-{$item->ID}";
                 }else{
@@ -499,7 +462,7 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
 
             $atts['class']  .= ' item-level-'.($depth + 1);
 
-            if($this -> has_layout || in_array('menu-item-has-children', $classes)) {
+            if($this -> is_megamenu || in_array('menu-item-has-children', $classes)) {
                 $atts['class']  .= ' has-children';
             }
 
@@ -529,54 +492,37 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
          */
         public function end_el(&$output, $item, $depth = 0, $args = array())
         {
-
-            /* Coding */
-            $_args  = (array) $args;
-
-            if(isset($_args['templaza_megamenu_enable']) && $_args['templaza_megamenu_enable']) {
-                if($this->has_layout) {
-                    $this->item_tmp = $item;
-                    if($item -> type != $this -> my_menu_type){
-
-                        // Close tag of submenu
-                        //                    if(isset($this -> my_trees[$depth]) && isset($this -> my_trees[$depth])
-                        //                        && $this -> my_trees[$depth] -> db_id == $item -> db_id){
-                        //                        $output .= '</div></div>';
-                        $this -> end_my_lvl($output, $item, $depth, $args);
-                        //                    }
-
+            if($this -> is_header_menu){
+                if ($item->type == $this->my_menu_type) {
+                    if(isset($item -> templaza_allow_el) && $item -> templaza_allow_el) {
                         parent::end_el($output, $item, $depth, $args);
-
-                        if($depth > 0 && $item -> type != $this -> my_menu_type){
-                            $this -> has_original_lvl    = true;
-                            $this -> end_lvl($output, $depth, $args);
-                            $this -> has_original_lvl    = false;
-
-                        }
                     }else{
-                        if(isset($item -> templaza_allow_el) && $item -> templaza_allow_el) {
-                            parent::end_el($output, $item, $depth, $args);
-                        }else{
-                            if (preg_match('/\[' . $this->menu_shorcode_tag . '.*?\][\n|\s]*?(.*?)$/ism',
-                                $item->templaza_megamenu_html, $match)) {
-                                $output .= $match[1];
-                            }
+                        if (preg_match('/\[' . $this->menu_shorcode_tag . '.*?\][\n|\s]*?(.*?)$/ism',
+                            $item->templaza_megamenu_html, $match)) {
+                            $output .= $match[1];
                         }
                     }
                 }else{
+                    if(isset($this -> depth_mega[$depth]) && !empty($this -> depth_mega[$depth])
+                        && $item -> db_id == $this -> depth_mega[$depth] -> db_id){
+                        $this -> end_my_lvl($output, $item, $depth, $args);
+                    }
                     parent::end_el($output, $item, $depth, $args);
+
+                    $has_lvl = $this->has_my_menu_type($item, 'next');
+                    if($has_lvl){
+                        $output .= '</ul>';
+                    }
                 }
-            }else{
+            }else {
                 parent::end_el($output, $item, $depth, $args);
             }
-
-            /* End coding */
-
-
         }
 
         public function walk( $elements, $max_depth, ...$args ) {
-            $this ->elements    = $elements;
+            $_args  = (array) $args[0];
+            $this -> is_header_menu    = (isset($_args['templaza_megamenu_html_data']) && !empty($_args['templaza_megamenu_html_data']))?true:false;
+            $this -> elements            = $elements;
             $output = parent::walk($elements, $max_depth, ...$args);
 
             return $output;

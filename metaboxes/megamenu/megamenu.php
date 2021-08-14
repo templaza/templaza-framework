@@ -687,6 +687,7 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
 
             $items = apply_filters( "templaza-framework/metabox/megamenu/nav_menu_objects_after", $items, $args );
 
+//            var_dump(wp_list_pluck($items, 'title')); die();
             return $items;
         }
 
@@ -998,7 +999,7 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
             $megamenu   = json_decode($megamenu, true);
             $megamenu_settings   = json_decode($megamenu_settings, true);
 
-            if(!empty($megamenu_settings) && is_array($megamenu_settings) && count($megamenu)){
+            if(!empty($megamenu) && is_array($megamenu) && count($megamenu)){
 
                 // Hook to change menu id to menu slug of megamenu menu item element
                 add_filter('templaza-framework/metabox/'.$this -> get_meta_box_name()
