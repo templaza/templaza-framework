@@ -114,7 +114,7 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                     'id'    => 'enabled',
                     'type'  => 'switch',
                     'title' => esc_html__('Enable', $this -> text_domain),
-                    'default' => 1,
+                    'default' => 0,
                 ),
 //                array(
 //                    'id'        => 'event',
@@ -192,6 +192,7 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                                 'id'           => 'tz_megamenu_meta',
                                 'type'         => 'tz_loop',
                                 'title'        => 'Main Options',
+//                                'title'        => '',
                                 'group_fields' => $tagged_menu_locations,
                                 'fields'       => $mloopFields,
                             ),
@@ -1217,17 +1218,8 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                     $tagged_menu_locations = $this->get_tagged_theme_locations_for_menu_id($menu_id);
 
                     // Get mega menu settings
-                    $options    = get_option( 'templaza_megamenu_settings' , array());
-                    $meta_options = count($options)?$options['tz_megamenu_meta']:array();
-                    if(is_string($meta_options)){
-                        $meta_options   = json_decode($meta_options, true);
-                        foreach($meta_options as $mlocal => $mval){
-                            if(!isset($tagged_menu_locations[$mlocal])){
-                                unset($meta_options[$mlocal]);
-                            }
-                        }
-                        $options['tz_megamenu_meta']    = json_encode($meta_options);
-                    }
+                    $options        = get_option( 'templaza_megamenu_settings' , array());
+                    $meta_options   = count($options)?$options['tz_megamenu_meta']:array();
 
                     // Set theme location assigned to tz_mega_menu field
                     if(count($sections)) {
@@ -1261,6 +1253,32 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                         }
                     }
 
+                    if(is_string($meta_options)){
+                        $meta_options   = json_decode($meta_options, true);
+                        foreach($meta_options as $mlocal => $mval){
+                            if(!isset($tagged_menu_locations[$mlocal])){
+                                unset($meta_options[$mlocal]);
+                            }
+                        }
+
+                        if(count($tagged_menu_locations)){
+                            foreach($tagged_menu_locations as $mlocation => $mlocationName){
+                                if(!isset($meta_options[$mlocation])){
+                                    if(isset($mdefault[$mlocation])) {
+                                        $meta_options[$mlocation]  = $mdefault[$mlocation];
+                                    }else{
+                                        $meta_options[$mlocation]  = array();
+                                    }
+                                }
+                            }
+                        }
+
+                        if(!empty($meta_options) && count($meta_options)) {
+                            $options['tz_megamenu_meta'] = json_encode($meta_options);
+                        }
+                    }
+
+
                     $setting_args                       = $this -> post_type -> setting_args;
                     $setting_args                       = $setting_args[$this -> post_type -> get_post_type()];
                     $redux_args                         = $setting_args;
@@ -1285,7 +1303,12 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                     $redux  = \Redux::instance($metabox['id']);
 
                     // Set options
-                    $redux -> options   = $options;
+//                    var_dump(!empty($options));
+//                    var_dump(!empty(array_values($options)));
+//                    die();
+//                    if(count($options)) {
+                        $redux -> options   = $options;
+//                    }
 
                     $redux->_register_settings();
 

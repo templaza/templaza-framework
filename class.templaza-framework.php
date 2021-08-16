@@ -54,8 +54,6 @@ class TemPlazaFrameWork{
 
         add_action('after_switch_theme', array($this, 'set_default_settings'), 999);
 
-//        add_action('template_redirect', array($this,'coming_soon_redirect'));
-
         do_action( 'templaza-framework/plugin/hooks', $this );
     }
 
@@ -88,12 +86,6 @@ class TemPlazaFrameWork{
         $new_settings   = Functions::merge_array($settings, $def_settings, true, true);
 
         update_option($setting_name, $new_settings);
-
-//        if(!empty($settings)){
-//            return;
-//        }
-//
-//        update_option($setting_name, $def_settings);
     }
 
     public function modify_sidebar($defaults){

@@ -227,7 +227,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
             if($this -> my_post_type_exists()) {
 
-                $post_type  = $this -> get_post_type();
                 $opt_name   = $this ->setting_args?$this -> setting_args[$post_type]['opt_name']:'';
 
                 add_filter( 'redux/'.$opt_name .'/panel/template/header.tpl.php' , function($path){
@@ -321,13 +320,21 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                     $pID = get_post_meta($post_id, '_' . $this -> get_post_type(), true);
 
                     if ($pID) {
-                        $file = TEMPLAZA_FRAMEWORK_THEME_PATH . '/theme_options/' . $pID . '.json';
-                        if (file_exists($file)) {
-                            require_once(ABSPATH . '/wp-admin/includes/file.php');
-                            global $wp_filesystem;
-                            WP_Filesystem();
+                        // Option file path from uploads folder
+                        $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$pID.'.json';
 
-                            $options = $wp_filesystem->get_contents($file);
+                        // Option file path from theme if uploads folder not exists config file
+                        $file   = !file_exists($file)?TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION .'/'
+                            . $pID . '.json':$file;
+
+//                        $file = TEMPLAZA_FRAMEWORK_THEME_PATH . '/theme_options/' . $pID . '.json';
+                        if (file_exists($file)) {
+//                            require_once(ABSPATH . '/wp-admin/includes/file.php');
+//                            global $wp_filesystem;
+//                            WP_Filesystem();
+//                            $options = $wp_filesystem->get_contents($file);
+
+                            $options = file_get_contents($file);
 
                             $options = json_decode($options, true);
                         }
@@ -602,17 +609,21 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 $data   = wp_unslash($_POST[$main_param_name]);
 
                 if(count($data) && !empty($post -> post_name )){
-                    $folder     = TEMPLAZA_FRAMEWORK_THEME_PATH . '/theme_options';
+//                    $folder     = TEMPLAZA_FRAMEWORK_THEME_PATH . '/theme_options';
+                    $folder     = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION;
+
+                    if(!is_dir($folder)){
+                        mkdir($folder, FS_CHMOD_DIR, true);
+                    }
+
                     $file_by_id = $folder . '/' . $post_id . '.json';
 
                     $file       = $folder . '/' . $post -> post_name . '.json';
 
-                    if(!$wp_filesystem -> is_dir(TEMPLAZA_FRAMEWORK_THEME_PATH)){
-                        $wp_filesystem -> mkdir(TEMPLAZA_FRAMEWORK_THEME_PATH);
-                    }
-                    if(!$wp_filesystem -> is_dir($folder)){
-                        $wp_filesystem -> mkdir($folder);
-                    }
+
+//                    if(!$wp_filesystem -> is_dir($folder)){
+//                        $wp_filesystem -> mkdir($folder);
+//                    }
 
                     // Rename option file by post id to post name (slug)
                     if(file_exists($file_by_id)){
@@ -630,7 +641,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
                     // Create config file
 //                    $wp_filesystem->put_contents($file, json_encode($data));
-                    $wp_filesystem->put_contents($file, json_encode($data));
+                    file_put_contents($file, json_encode($data));
 
                     update_post_meta( $post_id, '_'.$this -> get_post_type(), $post -> post_name );
 

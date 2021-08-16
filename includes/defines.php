@@ -65,6 +65,11 @@ if(!defined('TEMPLAZA_FRAMEWORK_TEMPLATE_PATH')){
 if(!defined('TEMPLAZA_FRAMEWORK_THEME_PATH')){
     define('TEMPLAZA_FRAMEWORK_THEME_PATH', get_template_directory().'/templaza-framework');
 }
+if(!defined('TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION')){
+    $theme      = wp_get_theme();
+    define('TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION', WP_CONTENT_DIR.'/uploads/templaza/theme/'
+        .$theme -> get_template().'/options');
+}
 if(!defined('TEMPLAZA_FRAMEWORK_THEME_CSS_PATH')){
     define('TEMPLAZA_FRAMEWORK_THEME_CSS_PATH', TEMPLAZA_FRAMEWORK_THEME_PATH.'/css');
 }

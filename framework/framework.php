@@ -74,6 +74,7 @@ class Framework{
 
         add_action('admin_init', array($this, 'enqueue'));
 
+
         if(is_admin()) {
             add_action('admin_init', array($this, 'update_checker'));
             add_action('admin_menu', function(){
@@ -100,9 +101,33 @@ class Framework{
 
             // Filter to remove redux adv
             add_filter("redux/{$this -> args['opt_name']}/localize", array($this, 'redux_localize'));
+
+
+            $glb_args   = $this -> get_arguments();
+            add_action('redux/options/'.$glb_args['opt_name'].'/saved', array($this, 'save_settings_to_file'));
         }
 
         do_action('templaza-framework/framework/hooks');
+    }
+
+    public function save_settings_to_file($options){
+        $glb_args   = $this -> get_arguments();
+        $opt_name   = $glb_args['opt_name'];
+
+        $action = isset($_REQUEST['action'])?$_REQUEST['action']:'';
+        if($action == $opt_name.'_ajax_save') {
+            require_once(ABSPATH . '/wp-admin/includes/file.php');
+            global $wp_filesystem;
+            WP_Filesystem();
+
+            $folder = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION . '/settings';
+            if(!is_dir($folder)){
+                mkdir($folder, FS_CHMOD_DIR, true);
+            }
+
+            $file = $folder . '/setting.json';
+            $wp_filesystem->put_contents($file, json_encode($options));
+        }
     }
 
     public function admin_nav_tabs($nav_tabs){

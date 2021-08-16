@@ -85,7 +85,21 @@ if(!class_exists('TemPlazaFramework\Functions')){
             if(isset(self::$cache[$store_id])){
                 return self::$cache[$store_id];
             }
-            $options = get_option($opt_name, array());
+//            $options = get_option($opt_name, array());
+
+            $options        = array();
+            $setting_file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/settings/setting.json';
+
+            // Get default config from file in theme
+            if(!count($options)){
+                $setting_file   = file_exists($setting_file)?$setting_file:TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/settings/default.json';
+                if(file_exists($setting_file)){
+                    $def_options    = file_get_contents($setting_file);
+                    $def_options    = (is_string($def_options) && !empty($def_options))?json_decode($def_options, true):$def_options;
+                    $options        = count($def_options)?$def_options:$options;
+                }
+            }
+
             if(count($options)){
                 self::$cache[$store_id] = $options;
             }
@@ -257,8 +271,16 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     require_once ( ABSPATH . '/wp-admin/includes/file.php' );
                     global $wp_filesystem;
                     WP_Filesystem();
-                    $file   = dirname(get_template_directory()) .'/'.$theme_name.'/'
-                        .TEMPLAZA_FRAMEWORK_NAME. '/theme_options/' . $file_id . '.json';
+
+                    // Option file path from uploads folder
+                    $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$file_id.'.json';
+
+                    // Option file path from theme if uploads folder not exists config file
+                    $file   = !file_exists($file)?TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION .'/'
+                        . $file_id . '.json':$file;
+
+//                    var_dump($file); die();
+
                     if(file_exists($file)){
                         $options    = $wp_filesystem -> get_contents($file);
                         $options    = json_decode($options, true);
