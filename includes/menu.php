@@ -9,6 +9,11 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 class Menu{
 
     public static function get_nav_menu($args = array()){
+
+        if(isset($args['theme_location']) && !empty($args['theme_location']) && !has_nav_menu($args['theme_location'])){
+            return '';
+        }
+
         $options    = Functions::get_theme_options();
 
 //        $header  = isset($options['enable-header'])?(bool) $options['enable-header']:true;
