@@ -546,14 +546,14 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 include $wp_import;
             }
 
-            if ( ! class_exists( 'Plzinst_WXR_Importer' ) ) {
-                $class_wp_importer = TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/importer/class-plazart-wxr-importer.php';
+            if ( ! class_exists( 'TemplazaFramework_WXR_Importer' ) ) {
+                $class_wp_importer = TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/importer/class-templaza-wxr-importer.php';
                 if ( file_exists( $class_wp_importer ) )
                     require_once $class_wp_importer;
             }
 
-            if(!class_exists('Plzinst_WXR_Importer')){
-                $this -> info -> set_message(esc_html__('The class Plzinst_WXR_Importer not found.', $this -> text_domain), true);
+            if(!class_exists('TemplazaFramework_WXR_Importer')){
+                $this -> info -> set_message(esc_html__('The class TemplazaFramework_WXR_Importer not found.', $this -> text_domain), true);
                 echo $this -> info -> output(true);
                 die();
             }
@@ -561,7 +561,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             $_file   = $this -> get_substeps($folder_path, $filename, $file_filter);
 
             $logger = new \WP_Importer_Logger_HTML();
-            $importer = new \Plzinst_WXR_Importer(
+            $importer = new \TemplazaFramework_WXR_Importer(
                 array(
                     'fetch_attachments' => true,
                     'prefill_existing_posts' => false,
