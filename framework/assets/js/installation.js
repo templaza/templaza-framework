@@ -10,8 +10,6 @@
             if(typeof tzinst_license_ajax !== "undefined")try {
                 templatejson = tzinst_license_ajax.license_active;
             }catch (window) {}
-
-            console.log(templatejson);
             
             if (null != templatejson) {
                 var doc = $("<html>"),
@@ -94,7 +92,7 @@
             }
             // }
 
-            // $("#plazart-installation [data-install-demo-data__modal]").on("show.bs.modal", function(){
+            // $("#plazart-installation [data-install-demo-data__modal]").on("show.bs.uk-modal", function(){
             //    $(this).find(".js-processing-box .progress-bar").css("width", "0%")
             //        .end().find("[data-import-message-box]").html("");
             // });
@@ -178,7 +176,7 @@
 
             $.get( ajaxurl, data, function( response ) {
                 var $div   =  $("<div></div>");
-                var message_box = $this.closest(".modal").find("[data-import-message-box]");
+                var message_box = $this.closest(".uk-modal").find("[data-import-message-box]");
 
                 $div.append(response);
                 var result  = {},
@@ -243,10 +241,10 @@
                 if(__tzinst_plugin_count(action) && !$error) {
                     $(".js-tzinst-plugin__"+ action +"-all").trigger("click");
                 }else if(!__tzinst_plugin_count(action)){
-                    $(".js-tzinst-plugin__"+ action +"-all").addClass("d-none");
+                    $(".js-tzinst-plugin__"+ action +"-all").addClass("uk-hidden");
                 }
             }, "html" ).fail(function(jqXHR, textStatus, errorThrown){
-                var message_box = $this.closest(".modal").find("[data-import-message-box]");
+                var message_box = $this.closest(".uk-modal").find("[data-import-message-box]");
                 message_box.html("<div class=\"alert alert-danger rounded-0\">"+
                     errorThrown + ": " +jqXHR.responseText
                     +"</div>");
@@ -284,19 +282,19 @@
                 $(".tzinst-plugin__install input[data-checkbox-plugin-all]").prop("checked", false);
             }
             if(__tzinst_plugin_count("install")){
-                $(".js-tzinst-plugin__install-all").removeClass("d-none");
+                $(".js-tzinst-plugin__install-all").removeClass("uk-hidden");
             }else{
-                $(".js-tzinst-plugin__install-all").addClass("d-none");
+                $(".js-tzinst-plugin__install-all").addClass("uk-hidden");
             }
             if(__tzinst_plugin_count("update")) {
-                $(".js-tzinst-plugin__update-all").removeClass("d-none");
+                $(".js-tzinst-plugin__update-all").removeClass("uk-hidden");
             }else{
-                $(".js-tzinst-plugin__update-all").addClass("d-none");
+                $(".js-tzinst-plugin__update-all").addClass("uk-hidden");
             }
             if(__tzinst_plugin_count("activate")) {
-                $(".js-tzinst-plugin__activate-all").removeClass("d-none");
+                $(".js-tzinst-plugin__activate-all").removeClass("uk-hidden");
             }else{
-                $(".js-tzinst-plugin__activate-all").addClass("d-none");
+                $(".js-tzinst-plugin__activate-all").addClass("uk-hidden");
             }
         });
 
@@ -375,12 +373,12 @@
             e.preventDefault();
 
             var $this   = $(this),
-                modal   = $this.closest(".modal"),
+                modal   = $this.closest("[data-install-demo-data__modal]"),
                 form    = modal.find("form[data-demo-id]"),
                 inputEl = $this.closest(".item").find("input[type=checkbox]"),
                 totalItem = form.find(".js-tzinst-demoitem:not(.is-finished) input[data-pack-type]:checked").length,
                 totalItemCheck = form.find(".js-tzinst-demoitem input[data-pack-type]:checked").length,
-                progress_bar = $this.closest(".modal-footer").find(".js-processing-box .progress-bar");
+                progress_bar = $this.closest(".uk-modal-footer").find(".js-processing-box .js-progress-bar");
 
             if($this.hasClass("importing")){
                 return;
@@ -391,13 +389,13 @@
             }
             inputEl.prop("checked", true);
 
-            modal.off("click.dismiss.bs.modal", "[data-dismiss=\"modal\"]");
-            modal.off();
+            modal.find(".uk-modal-close").prop("disabled",true);
 
             $this.addClass("disabled importing")
-                .closest(".modal-footer")
-                .find(".processing-box")
-                .removeClass("d-none");
+                .find("> .js-tzinst-importing-icon").removeClass("uk-hidden")
+                .closest(".uk-modal-footer")
+                .find(".js-processing-box")
+                .removeClass("uk-hidden");
 
             form.find("input[data-pack-type]")
                 .prop("disabled", true);
@@ -407,19 +405,24 @@
             }
             progress_bar.parent().css("padding-right", 0);
 
-            modal.find("[data-tzinst-stop-importing]").removeClass("d-none");
+            modal.find("[data-tzinst-stop-importing]").removeClass("uk-hidden");
 
             tzinst_import_ajax({}, $this, form, totalItem, totalItemCheck, totalItem);
         });
 
         $("[data-tzinst-stop-importing]").on("click", function(e){
             e.preventDefault();
-            var ajaxRequest = $(".js-tzinst-import").data("ajaxRequest");
+            var __stop_btn  = $(this),
+                __parent    = __stop_btn.parent(),
+                __import_btn = __parent.find(".js-tzinst-import"),
+                ajaxRequest = __import_btn.data("ajaxRequest");
             if(typeof ajaxRequest === "undefined"){
                 return;
             }
             ajaxRequest.abort();
-            $(this).addClass("d-none");
+            __stop_btn.addClass("uk-hidden");
+            __import_btn.find(".js-tzinst-importing-icon").addClass("uk-hidden");
+            __parent.find(".uk-modal-close").prop("disabled", false);
 
         });
 
@@ -433,9 +436,9 @@
 
                 if (input.length) {
                     var postdata    = data,
-                        modal   = button.closest(".modal"),
-                        message_box = button.closest(".modal").find("[data-import-message-box]"),
-                        progress_bar = button.closest(".modal-footer").find(".js-processing-box .progress-bar");
+                        modal   = button.closest(".uk-modal"),
+                        message_box = button.closest(".uk-modal").find("[data-import-message-box]"),
+                        progress_bar = button.closest(".uk-modal-footer").find(".js-processing-box .progress-bar");
 
                     if(!Object.keys(postdata).length){
                         postdata    = {
@@ -468,12 +471,11 @@
                     postdata["demo_item_last"]  = count;
 
                     if(!item.hasClass("importing") && !item.hasClass("is-finished")) {
-                        modal.find(".modal-body").scrollTop(modal.find(".modal-body").scrollTop() + item.position().top);
+                        modal.find(".uk-modal-body").scrollTop(modal.find(".uk-modal-body").scrollTop() + item.position().top);
                     }
-
                     item.addClass("importing");
 
-                    var ajaxRequest = $.post(ajaxurl, postdata, function (response) {
+                    button.data("ajaxRequest", $.post(ajaxurl, postdata, function (response) {
 
                         if (response.success) {
                             var currentWidth = parseFloat(progress_bar[0].style.width),
@@ -530,31 +532,28 @@
                                     form.find(".js-tzinst-demoitem input[data-pack-type]:checked")
                                         .prop("disabled");
 
-                                    modal.on("click.dismiss.bs.modal", "[data-dismiss=\"modal\"]", function(){
-                                        modal.modal("hide");
-                                    });
+                                    modal.find(".uk-modal-close").prop("disabled", false);
 
                                     form.find(".js-tzinst-demoitem input[data-pack-type]:not(:checked)")
                                         .removeProp("disabled");
 
-                                    button.removeClass("importing disabled");
+                                    button.removeClass("importing disabled")
+                                        .find("> .js-tzinst-importing-icon").addClass("uk-hidden");
 
-                                    modal.find("[data-tzinst-stop-importing]").addClass("d-none");
+                                    modal.find("[data-tzinst-stop-importing]").addClass("uk-hidden");
 
                                     message_box.html("<div class=\"alert alert-success rounded-0\">"+
                                         response.message
                                         +"</div>");
-                                    modal.find(".modal-body").scrollTop(message_box.position().top);
+                                    modal.find(".uk-modal-body").scrollTop(message_box.position().top);
                                 }
                             }
                         } else {
                             message_box.html("<div class=\"alert alert-danger rounded-0\">"+
                                 response.message
                                 +"</div>");
-                            modal.find(".modal-body").scrollTop(message_box.position().top);
-                            modal.on("click.dismiss.bs.modal", "[data-dismiss=\"modal\"]", function(){
-                                modal.modal("hide");
-                            });
+                            modal.find(".uk-modal-body").scrollTop(message_box.position().top);
+                            modal.find(".uk-modal-close").prop("disabled", false);
 
                             /* Minus the value of progress bar */
                             if(item.data("tzinst_import_ajax_current_step") !== undefined){
@@ -572,11 +571,9 @@
                         message_box.html("<div class=\"alert alert-danger rounded-0\">"+
                             errorThrown + ": " +jqXHR.responseText
                             +"</div>");
-                        modal.find(".modal-body").scrollTop(message_box.position().top);
+                        modal.find(".uk-modal-body").scrollTop(message_box.position().top);
 
-                        modal.on("click.dismiss.bs.modal", "[data-dismiss=\"modal\"]", function(){
-                            modal.modal("hide");
-                        });
+                        modal.find(".uk-modal-close").prop("disabled", false);
                         item.removeClass("importing");
 
                         /* Minus the value of progress bar */
@@ -588,9 +585,11 @@
                         form.find(".js-tzinst-demoitem input[data-pack-type]:not(:checked), .js-tzinst-demoitem input[data-pack-type]:not(.is-finished)")
                             .removeProp("disabled");
                         button.removeClass("importing disabled");
-                    });
+                    })
+                );
 
-                    button.data("ajaxRequest", ajaxRequest);
+                    // button.data("ajaxRequest", ajaxRequest);
+                    // button.data("ajaxRequest", "ajaxRequest");
                 }
             }
         }
