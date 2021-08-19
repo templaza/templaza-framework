@@ -45,7 +45,6 @@ class TemPlazaFrameWork{
         add_action('init', array($this, 'init'), 99999);
 
         add_action('init', array($this, 'frontend_init'), 99999);
-        add_action( 'enqueue_block_editor_assets', array($this,'tz_block_editor_styles'),99999 );
 
         add_action('template_include', array($this, 'template_include'), 999999);
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 99999);
@@ -158,16 +157,6 @@ class TemPlazaFrameWork{
         wp_add_inline_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm', $inline_css);
 
         do_action('templaza-framework/plugin/enqueue_scripts', $this);
-    }
-    public function tz_block_editor_styles(){
-        if(!current_theme_supports('templaza-framework')){
-            return;
-        }
-        $theme_css_uri = Functions::get_my_theme_css_uri();
-        $editor_css           = Templates::get_style('editor-blocks', 'editor-blocks');
-        wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-editor-blocks', $theme_css_uri.'/'.$editor_css);
-
-        do_action('templaza-framework/plugin/tz_block_editor_styles', $this);
     }
 
     public function default_menu_locations(){
