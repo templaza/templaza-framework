@@ -58,6 +58,9 @@ class Menu{
                     $count++;
                 }
             }
+            $rolling_dummy_id = 999999999;
+            $max_id = (int) max(wp_list_pluck($items, 'db_id'));
+            $rolling_dummy_id = $max_id < $rolling_dummy_id?$rolling_dummy_id+1:$max_id+1;
             $layout_item = array(
                 'menu_item_parent' => 0,
                 'type' => '__templaza_mega_item',
@@ -66,6 +69,7 @@ class Menu{
                 'menu_order' => $split+1,
                 'depth' => 0,
                 'ID' => "{$item->ID}-{$i}-{$count}",
+                'db_id' => $rolling_dummy_id,
                 'templaza_megamenu_html'  => $logo_html,
                 'templaza_megamenu_layout'  => '',
             );
