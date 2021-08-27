@@ -34,14 +34,43 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
          */
         function start_lvl(&$output, $depth = 0, $args = array())
         {
-            if($this -> is_header_menu){
-                if(isset($this -> depth_mega[$depth]) && !empty($this -> depth_mega[$depth])){
+            if($this -> is_header_menu && isset($this -> depth_mega[$depth]) && !empty($this -> depth_mega[$depth])){
                     $this -> start_my_lvl($output, $this -> depth_mega[$depth], $depth, $args);
-                }else{
-                    parent::start_lvl($output, $depth, $args);
-                }
             }else{
-                parent::start_lvl($output, $depth, $args);
+//                parent::start_lvl($output, $depth, $args);
+                if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+                    $t = '';
+                    $n = '';
+                } else {
+                    $t = "\t";
+                    $n = "\n";
+                }
+                $indent = str_repeat( $t, $depth );
+
+                // Default class.
+                $classes = array( 'sub-menu' );
+
+                /**
+                 * Filters the CSS class(es) applied to a menu list element.
+                 *
+                 * @since 4.8.0
+                 *
+                 * @param string[] $classes Array of the CSS classes that are applied to the menu `<ul>` element.
+                 * @param stdClass $args    An object of `wp_nav_menu()` arguments.
+                 * @param int      $depth   Depth of menu item. Used for padding.
+                 */
+                $class_names = implode( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
+//                $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+
+                $attributes = array(
+                    'class' => esc_attr( $class_names )
+                );
+
+                $attributes = apply_filters( 'templaza-framework/walker/megamenu/wp_nav_menu_submenu_attribute', $attributes, $args, $depth );
+
+                $attributes = $this -> generate_attribute($attributes);
+
+                $output .= "{$n}{$indent}<ul$attributes>{$n}";
             }
 
         }
@@ -98,8 +127,40 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                     $style .= 'width:' . $width . ';';
                 }
 
-                $output .= '<div class="' . $class_names . '"' . (!empty($style) ? ' style="' . $style . '"' : '') . '><div class="container">';
+//                $output .= '<div class="' . $class_names . '"' . (!empty($style) ? ' style="' . $style . '"' : '') . '><div class="container">';
+
+                $attributes = array(
+                    'class' => $class_names,
+                    'style' => $style
+                );
+                $attributes_container   = array(
+                    'class' => 'container'
+                );
+
+                $attributes             = apply_filters( 'templaza-framework/walker/megamenu/submenu_attribute', $attributes, $args, $depth );
+                $attributes_container   = apply_filters( 'templaza-framework/walker/megamenu/submenu_attribute_container', $attributes_container, $args, $depth );
+
+                $attributes             = $this -> generate_attribute($attributes);
+                $attributes_container   = $this -> generate_attribute($attributes_container);
+
+                $output .= '<div'.$attributes.'><div'.$attributes_container.'>';
             }
+        }
+
+        private function generate_attribute($attributes){
+            if(is_array($attributes) && count($attributes)){
+                foreach($attributes as $key => &$attrib){
+                    if(is_array($attrib)) {
+                        $attrib = $key.'="'.implode($attrib).'"';
+                    }else{
+                        $attrib = $key . '="' . $attrib . '"';
+                    }
+                }
+            }
+
+            $attributes = implode(' ', $attributes);
+
+            return !empty($attributes)?' '.$attributes:'';
         }
 
         protected function end_my_lvl(&$output, $item, $depth, $args){
@@ -215,18 +276,18 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                 $atts['class']  .= ' has-children';
             }
 
-            $attributes = '';
-
-            foreach ($atts as $attr => $value) {
-                if (strlen($value)) {
-                    $value = ('href' === $attr) ? esc_url($value) : esc_attr($value);
-                    $attributes .= ' ' . $attr . '="' . $value . '"';
-                }
-            }
+//            $attributes = '';
+//
+//            foreach ($atts as $attr => $value) {
+//                if (strlen($value)) {
+//                    $value = ('href' === $attr) ? esc_url($value) : esc_attr($value);
+//                    $attributes .= ' ' . $attr . '="' . $value . '"';
+//                }
+//            }
 
             $item_output    = '';
             if ($item->type != $this->my_menu_type) {
-                $item_output = $this->get_link_tag($item, $attributes, $args);
+                $item_output = $this->get_link_tag($item, $atts, $args);
             }
 
             /* New coding */
@@ -324,8 +385,18 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
 
         protected function get_link_tag($item, $attributes, $args = array()){
 
-            $args   = (array) $args;
+            $args       = (array) $args;
             $settings   = array();
+
+            $_attributes = '';
+
+            foreach ($attributes as $attr => $value) {
+                if (strlen($value)) {
+                    $value = ('href' === $attr) ? esc_url($value) : esc_attr($value);
+                    $_attributes .= ' ' . $attr . '="' . $value . '"';
+                }
+            }
+
             if (property_exists($item, 'templaza_megamenu_settings')) {
                 $settings = $item->templaza_megamenu_settings;
             }
@@ -346,7 +417,11 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
             }
 
             $item_output = $args['before'];
-            $item_output .= '<a' . $attributes . '>';
+            $item_output .= '<a' . $_attributes . '>';
+
+            $before_title   = '';
+            $item_output .= apply_filters('templaza-framework/walker/megamenu/before_megamenu_the_title',
+                $before_title, $item, $attributes, $args);
 
             if(!empty($icon)){
                 $item_output    .= $icon;
@@ -358,14 +433,14 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                 $item_output .= '<span class="megamenu-description-group">';
                 $item_output .= '<span class="megamenu-title">';
                 $item_output .= $args['link_before']. apply_filters('templaza-framework/walker/megamenu/megamenu_the_title',
-                        $item->title, $item->ID) . $args['link_after'];
+                        $item -> title, $item, $attributes, $args) . $args['link_after'];
                 $item_output .= '</span><span class="megamenu-description">'
                     . $item->description . '</span>';
                 $item_output .= '</span>';
             } else {
                 $item_output .= $args['link_before'].'<span class="megamenu-title">';
                 $item_output .= apply_filters('templaza-framework/walker/megamenu/megamenu_the_title',
-                    $item->title, $item->ID);
+                    $item -> title, $item, $attributes, $args);
                 $item_output .= '</span>' . $args['link_after'];
             }
 
@@ -382,6 +457,10 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                     }
                 }
             }
+
+            $after_title    = '';
+            $item_output .= apply_filters('templaza-framework/walker/megamenu/after_megamenu_the_title',
+                $after_title, $item, $attributes, $args);
 
             $item_output .= '</a>';
             $item_output .= $args['after'];
