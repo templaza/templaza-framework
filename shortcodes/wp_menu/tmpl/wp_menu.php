@@ -21,59 +21,19 @@ if ($nav_menu){
 
     $options    = Functions::get_theme_options();
 
-//    WP_Nav_Menu_Widget::
     $type = 'WP_Nav_Menu_Widget';
     $args = array();
-//    add_filter('wp_nav_menu_items', function ($items, $args){
-//        var_dump();
-//        var_dump($items);
-//        var_dump($args);
-//        die();
-//
-//    }, 10, 2);
-    add_filter('widget_nav_menu_args', function ($args) use ($enable_submenu, $style) {
-        if(!$enable_submenu){
-            $args['depth']  = 1;
-        }
-        $menu_class                 = $style?'menu tz-menu-'.$style:'menu tz-menu-horizontal';
-        $args['menu_class']         = $menu_class;
-        $args['container_class']    = 'widget-content';
-        if($style == 'ui_accordion'){
-            $args['items_wrap'] = '<ul id="%1$s" class="%2$s uk-nav-parent-icon" data-uk-nav>%3$s</ul>';
-        }
-        return $args;
-    });
-
-        add_filter( 'nav_menu_css_class', function ( $classes )use($style){
-            if($style == 'ui_accordion'){
-                if(in_array('menu-item-has-children', $classes)){
-                    $classes[]  = 'uk-parent';
-                }
-                if(in_array('current-menu-parent', $classes)){
-                    $classes[]  = 'uk-open';
-                }
-                if(in_array('current-menu-item', $classes)){
-                    $classes[]  = 'uk-active';
-                }
-            }
-            return $classes;
-        }, 10 );
-        add_filter( 'nav_menu_submenu_css_class', function ( $classes )use($style){
-            if($style == 'ui_accordion'){
-                $classes[]  = 'uk-nav-sub';
-            }
-            return $classes;
-        }, 10 );
-        add_filter( 'templaza-framework/walker/megamenu/megamenu_nav_menu_item_id', function ( $id )use($style){
-            if($style == 'ui_accordion'){
-                $id = '';
-            }
-            return $id;
-        }, 10 );
-
 
     $args['before_title']   = '<'.$widget_heading.' class="widgettitle'.($widget_heading_style?' uk-'.$widget_heading_style:'').'">';
     $args['after_title']    = '</'.$widget_heading.'>';
+
+    if($style == 'ui_accordion') {
+        $args['templaza_wp_menu_shortcode_submenu_attributes'] = array(
+            'data-uk-nav' => 'toggle: > a > .nav-item-caret'
+        );
+        $args['items_wrap']    = '<ul id="%1$s" class="%2$s" data-uk-nav="toggle: > a > .nav-item-caret">%3$s</ul>';
+        $args['templaza_wp_menu_shortcode_after_title'] = '<i class="uk-float-right nav-item-caret"></i>';
+    }
 
     global $wp_widget_factory;
     // to avoid unwanted warnings let's check before using widget

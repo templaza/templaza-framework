@@ -12,7 +12,7 @@ $template_layout= isset($options['layout-theme'])?$options['layout-theme']:'wide
 
 $content_classes = [];
 
-if ($header && !empty($header_mode) && $header_mode == 'sidebar') {
+if ($header && !empty($mode) && $mode == 'sidebar') {
     $sidebar_dir        = isset($options['header-sidebar-menu-mode'])?$options['header-sidebar-menu-mode']:'left';
     $content_classes[]  = 'has-sidebar';
     $content_classes[]  = 'sidebar-dir-' . $sidebar_dir;

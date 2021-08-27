@@ -31,7 +31,7 @@ $dropdown_animation_effect  = $dropdown_animation_type === 'none'?'':$dropdown_a
 $dropdown_trigger           = isset($options['dropdown-trigger'])?$options['dropdown-trigger']:'hover';
 
 $navClass = ['nav', 'navbar-nav', 'templaza-nav', 'justify-content-center', 'd-flex', 'align-items-center'];
-$navClassLeft = ['nav', 'navbar-nav', 'templaza-nav', 'justify-content-left', 'd-flex', 'align-items-left'];
+$navClassLeft = ['nav', 'navbar-nav', 'templaza-nav', 'justify-content-left', 'd-flex', 'align-items-left', 'uk-padding-remove-left'];
 $navClassDivided = ['nav', 'navbar-nav', 'templaza-nav'];
 $navWrapperClass = ['templaza-nav-wraper', 'align-self-center', 'px-2', 'd-none', 'd-lg-block', 'w-100'];
 
@@ -42,6 +42,7 @@ $block_2_sidebar            = isset($options['header-block-2-sidebar'])?$options
 $header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
 
 $navClass[] = $dropdown_animation_effect;
+$navClassLeft[] = $dropdown_animation_effect;
 //$dropdown_style = '.templaza-nav.'.$dropdown_animation_effect.' .sub-menu {
 //    transition-duration: '.$dropdown_animation_speed_1.'ms, '.$dropdown_animation_speed_2.'ms;
 //}';
