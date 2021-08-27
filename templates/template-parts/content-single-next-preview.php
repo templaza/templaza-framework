@@ -16,7 +16,7 @@ if ( $next_post || $prev_post ) {
             if ( $prev_post ) {
                 ?>
                 <a class="previous-post" href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>">
-                    <p class="uk-margin-remove-vertical">
+                    <p class="uk-flex uk-flex-middle uk-margin-remove-vertical">
                         <span class="uk-margin-small-right uk-visible@s" data-uk-icon="arrow-left"></span>
                         <span class="title"><?php echo esc_html_e('Preview Post','templaza-framework'); ?></span>
                     </p>
@@ -31,7 +31,7 @@ if ( $next_post || $prev_post ) {
             if ( $next_post ) {
                 ?>
                 <a class="next-post" href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>">
-                    <p class="uk-margin-remove-vertical">
+                    <p class="uk-flex uk-flex-middle uk-flex-right uk-margin-remove-vertical">
                         <span class="title"><?php echo esc_html_e('Next Post','templaza-framework'); ?></span>
                         <span class="uk-margin-small-left uk-visible@s" data-uk-icon="arrow-right"></span>
                     </p>
