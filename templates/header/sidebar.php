@@ -19,8 +19,8 @@ $offcanvas_direction        = isset($options['offcanvas-direction'])?(bool) $opt
 $offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$options['offcanvas-togglevisibility']:'d-block';
 $sidebar_logo               = isset($options['sidebar-logo'])?$options['sidebar-logo']:false;
 $class                      = ['templaza-header', 'templaza-sidebar-header', 'sidebar-dir-' . $mode, 'h-100', 'has-sidebar'];
-$navClass                   = ['nav', 'templaza-nav', 'd-none', 'd-lg-flex'];
-$navWrapperClass            = ['align-self-center', 'px-2', 'd-none', 'd-lg-block'];
+$navClass                   = ['nav', 'templaza-nav', 'uk-nav-sub', 'uk-padding-remove-left'];
+//$navWrapperClass            = ['align-self-center', 'px-2', 'd-none', 'd-lg-block'];
 
 $header_menu                = isset($options['header-menu'])?$options['header-menu']:'header';
 $header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
@@ -56,10 +56,12 @@ $header_menu_level          = isset($options['header-menu-level'])?(int) $option
             Menu::get_nav_menu(array(
                 'theme_location'  => $header_menu,
                 'menu_class'      => implode(' ', $navClass),
-                'container_class' => implode(' ', $navWrapperClass),
+//                'container_class' => implode(' ', $navWrapperClass),
                 'menu_id'         => '',
                 'depth'           => $header_menu_level, // Level
-            )); ?>
+            ));
+            remove_filter('nav_menu_submenu_css_class', 'test');
+            ?>
         </div>
 		<?php if ($block_1_type != 'blank'): ?>
             <div class="templaza-sidebar-block">

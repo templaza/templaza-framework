@@ -23,18 +23,18 @@
         padding-right: 0;
       }
     }
-    .templaza-sidebar-content {
-      padding: 0;
-      > div.templaza-sidebar-menu, div.templaza-sidebar-block {
-        padding: 10px 20px;
-      }
-    }
-    &.has-sidebar {
-      .templaza-sidebar-logo {
-        padding-left: 20px;
-        padding-right: 20px;
-      }
-    }
+    //.templaza-sidebar-content {
+    //  padding: 0;
+    //  > div.templaza-sidebar-menu, div.templaza-sidebar-block {
+    //    padding: 10px 20px;
+    //  }
+    //}
+    //&.has-sidebar {
+    //  .templaza-sidebar-logo {
+    //    padding-left: 20px;
+    //    padding-right: 20px;
+    //  }
+    //}
   }
   @media(min-width: 1200px) and (max-width: 1600px) {
     .templaza-sidebar-collapsed-logo {
@@ -67,11 +67,24 @@
     -moz-transition: .1s linear all;
     -ms-transition: .1s linear all;
     -o-transition: .1s linear all;
-    @media(max-width: 1600px) {
-      width: $tztheme-sidebar-header-mini-width;
-    }
+    //@media(max-width: 1600px) {
+    //  width: $tztheme-sidebar-header-mini-width;
+    //}
   }
-  @media (max-width: 1600px) {
+  //@media (max-width: 1600px) {
+  //  &.has-sidebar {
+  //    display: block;
+  //    width: 100%;
+  //    position: relative;
+  //    padding: 15px 0;
+  //    .templaza-sidebar-logo {
+  //      display: flex;
+  //      padding: 0 15px;
+  //      align-items: center;
+  //    }
+  //  }
+  //}
+  @media (max-width: 1024px) {
     &.has-sidebar {
       display: block;
       width: 100%;
@@ -82,13 +95,19 @@
         padding: 0 15px;
         align-items: center;
       }
+      .templaza-sidebar-menu{
+        display: none;
+      }
+      .templaza-sidebar-mobile-menu{
+        display: block;
+      }
     }
   }
   @media(max-width: 1600px) {
     .templaza-sidebar-content {
-      > div.templaza-sidebar-menu {
-        display: none;
-      }
+      //> div.templaza-sidebar-menu {
+      //  display: none;
+      //}
       > div.templaza-sidebar-block {
         display: none;
       }
@@ -118,19 +137,37 @@
       }
     }
   }
-  @media(min-width: 1200px) and (max-width: 1600px) {
-    &.has-sidebar {
-      padding: 0;
-      position: fixed;
-      width: $tztheme-header-sidebar-mini-width;
-      .templaza-sidebar-collapsable{
-        display: block;
-      }
-    }
-    &.has-sidebar:not(.expanded) .templaza-sidebar-logo {
-      display: none;
-    }
-  }
+  //@media(min-width: 1200px) and (max-width: 1600px) {
+  //  &.has-sidebar {
+  //    padding: 0;
+  //    position: fixed;
+  //    width: $tztheme-header-sidebar-mini-width;
+  //    .templaza-sidebar-collapsable{
+  //      display: block;
+  //    }
+  //  }
+  //  &.has-sidebar:not(.expanded) .templaza-sidebar-logo {
+  //    display: none;
+  //  }
+  //}
+  //@media(max-width: 1024px) {
+  //  &.has-sidebar {
+  //    .templaza-sidebar-menu {
+  //      display: none;
+  //    }
+  //  //  padding: 0;
+  //  //  position: fixed;
+  //  //  width: $tztheme-header-sidebar-mini-width;
+  //  //  .templaza-sidebar-collapsable{
+  //  //    display: block;
+  //  //  }
+  //  }
+  //  &.has-sidebar:not(.expanded) .templaza-sidebar-logo {
+  //    display: flex;
+  //    padding: 0 15px;
+  //    align-items: center;
+  //  }
+  //}
 }
 @media (min-width:1201px) {
   body.header-sidebar-left{

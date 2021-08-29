@@ -23,6 +23,12 @@ if(!class_exists('TemplazaFramework_ShortCode_Header')){
 
             add_filter('templaza-framework/layout/generate/shortcode/'.$this -> get_shortcode_name().'/after_generate_shortcode',
                 array($this, 'after_generate_shortcode'));
+
+        }
+
+        public function before_do_shortcode($atts){
+            $this -> header_shortcode_atts = $atts;
+
             add_filter('templaza-framework/walker/megamenu/wp_nav_menu_submenu_attribute',
                 array($this, 'wp_nav_menu_submenu_attribute'));
 
@@ -30,10 +36,6 @@ if(!class_exists('TemplazaFramework_ShortCode_Header')){
             add_filter('wp_nav_menu_args', array($this, 'wp_nav_menu_args'));
             add_filter('nav_menu_css_class', array($this, 'nav_menu_css_class'));
             add_filter('nav_menu_submenu_css_class', array($this, 'nav_menu_submenu_css_class'));
-        }
-
-        public function before_do_shortcode($atts){
-            $this -> header_shortcode_atts = $atts;
         }
 
         public function after_do_shortcode($atts){

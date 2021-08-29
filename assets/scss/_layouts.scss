@@ -36,11 +36,14 @@
 		&.sidebar-dir-left {
 			padding-left: $tztheme-header-sidebar-width;
 
-			@media(max-width: 1600px) {
-				padding-left: $tztheme-header-sidebar-mini-width;
-			}
-
-			@media(max-width: 1200px) {
+			//@media(max-width: 1600px) {
+			//	padding-left: $tztheme-header-sidebar-mini-width;
+			//}
+			//
+			//@media(max-width: 1200px) {
+			//	padding-left: 0;
+			//}
+			@media(max-width: 1024px) {
 				padding-left: 0;
 			}
 		}
@@ -48,11 +51,14 @@
 		&.sidebar-dir-right {
 			padding-right: $tztheme-header-sidebar-width;
 
-			@media(max-width: 1600px) {
-				padding-right: $tztheme-header-sidebar-mini-width;
-			}
-
-			@media(max-width: 1200px) {
+			//@media(max-width: 1600px) {
+			//	padding-right: $tztheme-header-sidebar-mini-width;
+			//}
+			//
+			//@media(max-width: 1200px) {
+			//	padding-right: 0;
+			//}
+			@media(max-width: 1024px) {
 				padding-right: 0;
 			}
 		}
