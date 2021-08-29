@@ -20,13 +20,13 @@ if(!class_exists('TemplazaFramework_ShortCode_WP_Menu')){
             add_action('templaza-framework/shortcode/'.$this -> get_shortcode_name().'/before_do_shortcode', array($this, 'before_do_shortcode'));
             add_action('templaza-framework/shortcode/'.$this -> get_shortcode_name().'/after_do_shortcode', array($this, 'after_do_shortcode'));
 
-            add_filter('nav_menu_css_class', array($this, 'nav_menu_css_class'));
-            add_filter('nav_menu_submenu_css_class', array($this, 'nav_menu_submenu_css_class'));
-            add_filter( 'templaza-framework/walker/megamenu/after_megamenu_the_title', array($this, 'after_megamenu_the_title'), 10, 4);
-            add_filter('templaza-framework/walker/megamenu/wp_nav_menu_submenu_attribute', array($this, 'wp_nav_menu_submenu_attribute'), 10, 2);
-            add_filter( 'templaza-framework/walker/megamenu/megamenu_nav_menu_item_id', array($this, 'wp_menu_shortcode_megamenu_nav_menu_item_id'));
-
-            add_filter('widget_nav_menu_args', array($this, 'widget_nav_menu_args'), 10, 4);
+//            add_filter('nav_menu_css_class', array($this, 'nav_menu_css_class'));
+//            add_filter('nav_menu_submenu_css_class', array($this, 'nav_menu_submenu_css_class'));
+//            add_filter( 'templaza-framework/walker/megamenu/after_megamenu_the_title', array($this, 'after_megamenu_the_title'), 10, 4);
+//            add_filter('templaza-framework/walker/megamenu/wp_nav_menu_submenu_attribute', array($this, 'wp_nav_menu_submenu_attribute'), 10, 2);
+//            add_filter( 'templaza-framework/walker/megamenu/megamenu_nav_menu_item_id', array($this, 'wp_menu_shortcode_megamenu_nav_menu_item_id'));
+//
+//            add_filter('widget_nav_menu_args', array($this, 'widget_nav_menu_args'), 10, 4);
         }
 
         public function register(){
@@ -115,6 +115,14 @@ if(!class_exists('TemplazaFramework_ShortCode_WP_Menu')){
 
         public function before_do_shortcode($atts){
             $this -> wp_menu_shortcode_atts = $atts;
+
+            add_filter('nav_menu_css_class', array($this, 'nav_menu_css_class'));
+            add_filter('nav_menu_submenu_css_class', array($this, 'nav_menu_submenu_css_class'));
+            add_filter( 'templaza-framework/walker/megamenu/after_megamenu_the_title', array($this, 'after_megamenu_the_title'), 10, 4);
+            add_filter('templaza-framework/walker/megamenu/wp_nav_menu_submenu_attribute', array($this, 'wp_nav_menu_submenu_attribute'), 10, 2);
+            add_filter( 'templaza-framework/walker/megamenu/megamenu_nav_menu_item_id', array($this, 'wp_menu_shortcode_megamenu_nav_menu_item_id'));
+
+            add_filter('widget_nav_menu_args', array($this, 'widget_nav_menu_args'), 10, 4);
         }
 
         public function after_do_shortcode($atts){

@@ -75,8 +75,8 @@ class Menu{
             );
             $layout_item    = (object) $layout_item;
 
-            $first_items    = array_slice($items, 0, $split-1);
-            $second_items    = array_slice($items, $split-1, count($items));
+            $first_items    = array_slice($items, 0, $split);
+            $second_items    = array_slice($items, $split, count($items));
 
             if(count($second_items)){
                 foreach ($second_items as &$second_item){
