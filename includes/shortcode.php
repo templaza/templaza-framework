@@ -467,6 +467,8 @@ class TemplazaFramework_ShortCode{
     }
 
     public function shortcode($atts, $content = ''){
+        do_action('templaza-framework/shortcode/before_do_shortcode', $atts,  $content);
+        do_action('templaza-framework/shortcode/'.$this -> get_shortcode_name().'/before_do_shortcode', $atts, $content);
 
         if(isset($atts['tz_css'])) {
             Templates::add_inline_style( $atts['tz_css']);
@@ -484,6 +486,10 @@ class TemplazaFramework_ShortCode{
         }
         $html   = ob_get_contents();
         ob_end_clean();
+
+        do_action('templaza-framework/shortcode/after_do_shortcode', $atts, $content, $html);
+        do_action('templaza-framework/shortcode/'.$this -> get_shortcode_name().'/after_do_shortcode', $atts, $content, $html);
+
         return $html;
     }
 
