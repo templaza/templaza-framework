@@ -18,7 +18,7 @@ if ( $next_post || $prev_post ) {
                 <a class="previous-post" href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>">
                     <p class="uk-flex uk-flex-middle uk-margin-remove-vertical">
                         <span class="uk-margin-small-right uk-visible@s" data-uk-icon="arrow-left"></span>
-                        <span class="title"><?php echo esc_html_e('Preview Post','templaza-framework'); ?></span>
+                        <span class="title"><?php echo esc_html_e('Previous Post','templaza-framework'); ?></span>
                     </p>
                     <h5 class="uk-margin-remove-vertical"><?php echo esc_html($prev_post->post_title); ?></h5>
                 </a>
