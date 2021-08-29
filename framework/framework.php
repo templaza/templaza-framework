@@ -194,6 +194,27 @@ class Framework{
                 \Templaza_API::load_my_fields($opt_name);
                 \Redux::init($opt_name);
 
+                $this -> load_settings($opt_name);
+            }
+        }
+    }	
+
+    public function load_settings($opt_name = ''){
+        $args       = $this -> get_arguments();
+        $opt_name   = !empty($opt_name)?$opt_name:(isset($args['opt_name']) && !empty($args['opt_name'])?$args['opt_name']:'');
+
+        if($redux = \Redux::instance($opt_name)){
+            // Load default options
+            $opt_file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/settings/setting.json';
+            if(!file_exists($opt_file)){
+                $opt_file   = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/settings/default.json';
+            }
+            if(file_exists($opt_file)){
+                $options    = file_get_contents($opt_file);
+
+                $options    = (!empty($options) && is_string($options))?json_decode($options, true):$options;
+                $redux -> options   = $options;
+
             }
         }
     }
