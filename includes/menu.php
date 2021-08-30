@@ -70,6 +70,7 @@ class Menu{
                 'depth' => 0,
                 'ID' => "{$item->ID}-{$i}-{$count}",
                 'db_id' => $rolling_dummy_id,
+                'templaza_allow_el'  => true,
                 'templaza_megamenu_html'  => $logo_html,
                 'templaza_megamenu_layout'  => '',
             );
