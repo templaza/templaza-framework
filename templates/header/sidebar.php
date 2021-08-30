@@ -28,58 +28,54 @@ $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options
 $header_menu_level          = isset($options['header-menu-level'])?(int) $options['header-menu-level']:0;
 
 ?>
-<!-- header starts -->
-<header id="templaza-header" class="<?php echo implode(' ', $class); ?>">
-    <div class="templaza-sidebar-content h-100">
-        <div class="templaza-sidebar-collapsable">
-            <i class="fa"></i>
+<div class="templaza-sidebar-content h-100">
+    <div class="templaza-sidebar-collapsable">
+        <i class="fa"></i>
+    </div>
+    <?php if (!empty($sidebar_logo) && $sidebar_logo['url']) { ?>
+        <div class="templaza-sidebar-collapsed-logo">
+            <img src="<?php echo $sidebar_logo['url']; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-sidebar" />
         </div>
-	    <?php if (!empty($sidebar_logo) && $sidebar_logo['url']) { ?>
-            <div class="templaza-sidebar-collapsed-logo">
-                <img src="<?php echo $sidebar_logo['url']; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-sidebar" />
-            </div>
-	    <?php } ?>
-        <div class="templaza-sidebar-logo">
-<!--			--><?php //if (!empty($header_mobile_menu)) { ?>
-                <div class="justify-content-start templaza-sidebar-mobile-menu">
-                    <div class="header-mobilemenu-trigger burger-menu-button align-self-center"
-                         data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
-                        <button class="button" type="button"><span class="box"><span class="inner"></span></span>
-                        </button>
-                    </div>
+    <?php } ?>
+    <div class="templaza-sidebar-logo">
+			<?php //if (!empty($header_mobile_menu)) { ?>
+            <div class="justify-content-start templaza-sidebar-mobile-menu">
+                <div class="header-mobilemenu-trigger burger-menu-button align-self-center"
+                     data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
+                    <button class="button" type="button"><span class="box"><span class="inner"></span></span>
+                    </button>
                 </div>
-<!--			--><?php //} ?>
-			<?php Templates::load_my_layout('logo'); ?>
-        </div>
-        <div class="templaza-sidebar-menu">
-			<?php
-            Menu::get_nav_menu(array(
-                'theme_location'  => $header_menu,
-                'menu_class'      => implode(' ', $navClass),
+            </div>
+        <?php //} ?>
+        <?php Templates::load_my_layout('logo'); ?>
+    </div>
+    <div class="templaza-sidebar-menu">
+        <?php
+        Menu::get_nav_menu(array(
+            'theme_location'  => $header_menu,
+            'menu_class'      => implode(' ', $navClass),
 //                'container_class' => implode(' ', $navWrapperClass),
-                'menu_id'         => '',
-                'depth'           => $header_menu_level, // Level
-            ));
-            remove_filter('nav_menu_submenu_css_class', 'test');
+            'menu_id'         => '',
+            'depth'           => $header_menu_level, // Level
+        ));
+        remove_filter('nav_menu_submenu_css_class', 'test');
+        ?>
+    </div>
+    <?php if ($block_1_type != 'blank'): ?>
+        <div class="templaza-sidebar-block">
+            <?php
+            if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
+                echo '<div class="header-block-item block-sidebar">';
+                dynamic_sidebar($block_1_sidebar);
+                echo '</div>';
+            }
+            if ($block_1_type == 'custom')
+            {
+                echo '<div class="header-block-item">';
+                echo $block_1_custom;
+                echo '</div>';
+            }
             ?>
         </div>
-		<?php if ($block_1_type != 'blank'): ?>
-            <div class="templaza-sidebar-block">
-				<?php
-                if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-                    echo '<div class="header-block-item block-sidebar">';
-                    dynamic_sidebar($block_1_sidebar);
-                    echo '</div>';
-                }
-				if ($block_1_type == 'custom')
-				{
-					echo '<div class="header-block-item">';
-					echo $block_1_custom;
-					echo '</div>';
-				}
-				?>
-            </div>
-		<?php endif; ?>
-    </div>
-</header>
-<!-- header ends -->
+    <?php endif; ?>
+</div>
