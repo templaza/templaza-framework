@@ -272,7 +272,8 @@ class TemPlazaFrameWork{
         }
         /* End my coding */
 
-        add_filter('templaza-framework_theme_file', function($file) use($theme_file){
+//        add_filter('templaza-framework_theme_file', function($file) use($theme_file){
+        add_filter('templaza-framework/shortcode/content_area/theme_file', function($file) use($theme_file){
             if(!is_file($theme_file)){
                 // Check file exists in sub folder
                 $path       = Templates::load_my_layout('theme_pages.'.$theme_file.'.'.get_post_type(), false);
@@ -337,7 +338,8 @@ class TemPlazaFrameWork{
 
     protected function load_template(){
         add_action('wp_body_open', array($this, 'display_header'));
-        add_action('templaza-framework_theme_body', array($this, 'theme_body_main'));
+        /*add_action('templaza-framework_theme_body', array($this, 'theme_body_main'));*/
+        add_action('templaza-framework_theme_body', array($this, 'display_body'));
         add_action('wp_footer', array($this, 'display_footer'));
     }
 
