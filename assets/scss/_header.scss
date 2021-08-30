@@ -10,9 +10,9 @@
     }
   }
   .templaza-sidebar-content {
-    padding: 40px 25px;
-    @media (min-width: 1200px) {
-      padding: 50px 40px;
+    padding: 50px 40px;
+    @media (max-width: 1024px) {
+      padding: 0;
     }
   }
   .templaza-sidebar-collapsed-logo {
@@ -95,7 +95,6 @@
       padding: 15px 0;
       .templaza-sidebar-logo {
         display: flex;
-        padding: 0 15px;
         align-items: center;
       }
       .templaza-sidebar-menu{
@@ -106,11 +105,8 @@
       }
     }
   }
-  @media(max-width: 1600px) {
+  @media(max-width: 1024px) {
     .templaza-sidebar-content {
-      //> div.templaza-sidebar-menu {
-      //  display: none;
-      //}
       > div.templaza-sidebar-block {
         display: none;
       }
@@ -140,37 +136,6 @@
       }
     }
   }
-  //@media(min-width: 1200px) and (max-width: 1600px) {
-  //  &.has-sidebar {
-  //    padding: 0;
-  //    position: fixed;
-  //    width: $tztheme-header-sidebar-mini-width;
-  //    .templaza-sidebar-collapsable{
-  //      display: block;
-  //    }
-  //  }
-  //  &.has-sidebar:not(.expanded) .templaza-sidebar-logo {
-  //    display: none;
-  //  }
-  //}
-  //@media(max-width: 1024px) {
-  //  &.has-sidebar {
-  //    .templaza-sidebar-menu {
-  //      display: none;
-  //    }
-  //  //  padding: 0;
-  //  //  position: fixed;
-  //  //  width: $tztheme-header-sidebar-mini-width;
-  //  //  .templaza-sidebar-collapsable{
-  //  //    display: block;
-  //  //  }
-  //  }
-  //  &.has-sidebar:not(.expanded) .templaza-sidebar-logo {
-  //    display: flex;
-  //    padding: 0 15px;
-  //    align-items: center;
-  //  }
-  //}
 }
 @media (min-width:1201px) {
   body.header-sidebar-left{
