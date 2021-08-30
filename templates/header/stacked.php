@@ -185,10 +185,8 @@ $data_attribs   = ' '.$data_attribs;
         // header nav ends
         // header block starts
          if ($block_2_type == 'sidebar' && is_active_sidebar($block_2_sidebar)){
-             echo '<div class="w-100 header-block-item d-none d-lg-flex justify-content-center py-3">';
-             echo '<ul id="sidebar">';
+             echo '<div class="block-sidebar w-100 header-block-item d-none d-lg-flex justify-content-center py-3">';
              dynamic_sidebar($block_2_sidebar);
-             echo '</ul>';
              echo '</div>';
          }
         if ($block_2_type == 'custom') {
@@ -219,10 +217,8 @@ $data_attribs   = ' '.$data_attribs;
 
         // header block starts
          if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-             echo '<div class="d-none d-lg-flex w-100 header-block-item justify-content-end py-3 align-items-center">';
-             echo '<ul id="sidebar">';
+             echo '<div class="block-sidebar d-none d-lg-flex w-100 header-block-item justify-content-end py-3 align-items-center">';
              dynamic_sidebar($block_1_sidebar);
-             echo '</ul>';
              echo '</div>';
          }
         if ($block_1_type == 'custom') {
@@ -272,10 +268,8 @@ $data_attribs   = ' '.$data_attribs;
         // header nav ends
         // header block starts
          if ($block_2_type == 'sidebar' && is_active_sidebar($block_2_sidebar)){
-             echo '<div class="d-flex header-block-item justify-content-end py-3 align-items-center">';
-             echo '<ul id="sidebar">';
+             echo '<div class="block-sidebar d-flex header-block-item justify-content-end py-3 align-items-center">';
              dynamic_sidebar($block_2_sidebar);
-             echo '</ul>';
              echo '</div>';
          }
         if ($block_2_type == 'custom') {

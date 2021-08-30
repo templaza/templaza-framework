@@ -67,10 +67,8 @@ $header_menu_level          = isset($options['header-menu-level'])?(int) $option
             <div class="templaza-sidebar-block">
 				<?php
                 if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-                    echo '<div class="header-block-item">';
-                    echo '<ul id="sidebar">';
+                    echo '<div class="header-block-item block-sidebar">';
                     dynamic_sidebar($block_1_sidebar);
-                    echo '</ul>';
                     echo '</div>';
                 }
 				if ($block_1_type == 'custom')

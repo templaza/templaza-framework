@@ -10,7 +10,10 @@
     }
   }
   .templaza-sidebar-content {
-    padding: 15px 25px;
+    padding: 40px 25px;
+    @media (min-width: 1200px) {
+      padding: 50px 40px;
+    }
   }
   .templaza-sidebar-collapsed-logo {
     margin: 15px 12px;
