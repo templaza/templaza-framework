@@ -1,5 +1,5 @@
 /* Header Section */
-#templaza-header{
+.templaza-header{
   &.has-sidebar{
     z-index: 1050;
     .templaza-logo {
@@ -7,6 +7,21 @@
     }
     .templaza-sidebar-block {
       padding: 10px 0;
+    }
+    ul.sub-menu > li {
+      > a {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        &:before {
+          content: "|--";
+          margin-right: 10px;
+        }
+        > span {
+          flex: 1;
+          min-width: 1px;
+        }
+      }
     }
   }
   .templaza-sidebar-content {
@@ -26,18 +41,6 @@
         padding-right: 0;
       }
     }
-    //.templaza-sidebar-content {
-    //  padding: 0;
-    //  > div.templaza-sidebar-menu, div.templaza-sidebar-block {
-    //    padding: 10px 20px;
-    //  }
-    //}
-    //&.has-sidebar {
-    //  .templaza-sidebar-logo {
-    //    padding-left: 20px;
-    //    padding-right: 20px;
-    //  }
-    //}
   }
   @media(min-width: 1200px) and (max-width: 1600px) {
     .templaza-sidebar-collapsed-logo {

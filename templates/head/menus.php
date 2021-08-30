@@ -80,10 +80,10 @@ if(is_array($sticky_menu_margin) && count($sticky_menu_margin)) {
 $menu_styles    = [];
 
 if (!empty($main_menu_padding_css)) {
-    $menu_styles[]  = '.templaza-nav > .menu-item > a{'.$main_menu_padding_css.'}';
+    $menu_styles[]  = '.templaza-nav > .menu-item > a, .templaza-nav .sub-menu > .menu-item > a {'.$main_menu_padding_css.'}';
 }
 if (!empty($main_menu_margin_css)) {
-    $menu_styles[]  = '.templaza-nav > .menu-item > a{'.$main_menu_margin_css.'}';
+    $menu_styles[]  = '.templaza-nav > .menu-item > a, .templaza-nav .sub-menu > .menu-item > a {'.$main_menu_margin_css.'}';
 }
 
 // Style for sticky menu
