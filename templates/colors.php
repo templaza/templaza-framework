@@ -243,7 +243,7 @@ if (!empty($off_canvas_button_color)) {
    $main_menu_styles[] = '.burger-menu-button .inner, .burger-menu-button .inner::before, .burger-menu-button .inner::after { background-color: ' . $off_canvas_button_color . ' !important;}';
 }
 if (!empty($sidebar_separate_color)) {
-	$main_menu_styles[] = '.templaza-sidebar-menu li, .templaza-sidebar-menu li > ul { border-color: ' . $sidebar_separate_color . ' !important;}';
+	$main_menu_styles[] = '.templaza-sidebar-menu li { border-color: ' . $sidebar_separate_color . ' !important;}';
 }
 ?>
 

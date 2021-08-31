@@ -230,10 +230,9 @@ ul{
          }
       }
       > ul {
-         border-top: 1px solid #eee;
          li{
             &:last-child{
-               border-bottom: 0;
+               border-bottom: none;
             }
          }
       }

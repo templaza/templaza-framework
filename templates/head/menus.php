@@ -42,6 +42,41 @@ if(is_array($main_menu_margin) && count($main_menu_margin)) {
     }
 }
 
+// Style for drop-down menu
+$dropdown_menu_padding_css  = '';
+$dropdown_menu_padding  = isset($options['dropdown-menu-padding'])?$options['dropdown-menu-padding']:'';
+if(is_array($dropdown_menu_padding) && count($dropdown_menu_padding)) {
+	if(isset($dropdown_menu_padding['padding-top']) && strlen($dropdown_menu_padding['padding-top'])){
+		$dropdown_menu_padding_css    .= 'padding-top: '.$dropdown_menu_padding['padding-top'].' !important;';
+	}
+	if(isset($dropdown_menu_padding['padding-right']) && strlen($dropdown_menu_padding['padding-right'])){
+		$dropdown_menu_padding_css    .= 'padding-right: '.$dropdown_menu_padding['padding-right'].' !important;';
+	}
+	if(isset($dropdown_menu_padding['padding-bottom']) && strlen($dropdown_menu_padding['padding-bottom'])){
+		$dropdown_menu_padding_css    .= 'padding-bottom: '.$dropdown_menu_padding['padding-bottom'].' !important;';
+	}
+	if(isset($dropdown_menu_padding['padding-left']) && strlen($dropdown_menu_padding['padding-left'])){
+		$dropdown_menu_padding_css    .= 'padding-left: '.$dropdown_menu_padding['padding-left'].' !important;';
+	}
+}
+
+$dropdown_menu_margin_css   = '';
+$dropdown_menu_margin  = isset($options['dropdown-menu-margin'])?$options['dropdown-menu-margin']:'';
+if(is_array($dropdown_menu_margin) && count($dropdown_menu_margin)) {
+	if(isset($dropdown_menu_margin['margin-top']) && strlen($dropdown_menu_margin['margin-top'])){
+		$dropdown_menu_margin_css    .= 'margin-top: '.$dropdown_menu_margin['margin-top'].' !important;';
+	}
+	if(isset($dropdown_menu_margin['margin-right']) && strlen($dropdown_menu_margin['margin-right'])){
+		$dropdown_menu_margin_css    .= 'margin-right: '.$dropdown_menu_margin['margin-right'].' !important;';
+	}
+	if(isset($dropdown_menu_margin['margin-bottom']) && strlen($dropdown_menu_margin['margin-bottom'])){
+		$dropdown_menu_margin_css    .= 'margin-bottom: '.$dropdown_menu_margin['margin-bottom'].' !important;';
+	}
+	if(isset($dropdown_menu_margin['margin-left']) && strlen($dropdown_menu_margin['margin-left'])){
+		$dropdown_menu_margin_css    .= 'margin-left: '.$dropdown_menu_margin['margin-left'].' !important;';
+	}
+}
+
 // Sticky menu
 $sticky_menu_padding_css  = '';
 $sticky_menu_padding  = isset($options['sticky-menu-padding'])?$options['sticky-menu-padding']:'';
@@ -79,11 +114,20 @@ if(is_array($sticky_menu_margin) && count($sticky_menu_margin)) {
 
 $menu_styles    = [];
 
+// Style for main menu
 if (!empty($main_menu_padding_css)) {
-    $menu_styles[]  = '.templaza-nav > .menu-item > a, .templaza-nav .sub-menu > .menu-item > a {'.$main_menu_padding_css.'}';
+    $menu_styles[]  = '.templaza-nav > .menu-item > a {'.$main_menu_padding_css.'}';
 }
 if (!empty($main_menu_margin_css)) {
-    $menu_styles[]  = '.templaza-nav > .menu-item > a, .templaza-nav .sub-menu > .menu-item > a {'.$main_menu_margin_css.'}';
+    $menu_styles[]  = '.templaza-nav > .menu-item > a {'.$main_menu_margin_css.'}';
+}
+
+// Style for main drop-down menu
+if (!empty($dropdown_menu_padding_css)) {
+	$menu_styles[]  = '.templaza-nav .sub-menu > .menu-item > a {'.$dropdown_menu_padding_css.'}';
+}
+if (!empty($dropdown_menu_margin_css)) {
+	$menu_styles[]  = '.templaza-nav .sub-menu > .menu-item > a {'.$dropdown_menu_margin_css.'}';
 }
 
 // Style for sticky menu

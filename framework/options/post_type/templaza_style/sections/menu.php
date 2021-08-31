@@ -46,6 +46,33 @@ Templaza_API::set_section('templaza_style',
 );
 
 Templaza_API::set_section('templaza_style',
+	array(
+		'title'      => __( 'Drop-down Menu', $this -> text_domain ),
+		'id'         => 'menus-dropdown-menu',
+		'desc'       => __( 'These settings control design for drop down menu', $this -> text_domain ),
+		'subsection' => true,
+		'fields'     => array(
+			array(
+				'id'     => 'dropdown-menu-padding',
+				'type'   => 'spacing',
+				'mode'   => 'padding',
+				'all'    => false,
+				'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+				'title'  => esc_html__('Padding', $this -> text_domain),
+			),
+			array(
+				'id'     => 'dropdown-menu-margin',
+				'type'   => 'spacing',
+				'mode'   => 'margin',
+				'all'    => false,
+				'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+				'title'  => esc_html__('Margin', $this -> text_domain),
+			),
+		),
+	)
+);
+
+Templaza_API::set_section('templaza_style',
     array(
         'title'      => __( 'Sticky Menu', $this -> text_domain ),
         'id'         => 'menus-sticky-menu',

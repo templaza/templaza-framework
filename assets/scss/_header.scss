@@ -8,18 +8,22 @@
     .templaza-sidebar-block {
       padding: 10px 0;
     }
-    ul.sub-menu > li {
-      > a {
-        display: flex;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        &:before {
-          content: "|--";
-          margin-right: 10px;
-        }
-        > span {
-          flex: 1;
-          min-width: 1px;
+    ul.sub-menu {
+      border-left: 1px dashed #ccc;
+      margin-left: 10px;
+      > li {
+        position: relative;
+        > a {
+          &:before {
+            content: "";
+            margin-right: 10px;
+            border-top: 1px dashed #ccc;
+            width: 7px;
+            height: 1px;
+            position: absolute;
+            top: 50%;
+            left: -13px;
+          }
         }
       }
     }
