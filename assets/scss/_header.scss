@@ -12,8 +12,8 @@
       border-left: 1px dashed #ccc;
       margin-left: 10px;
       > li {
-        position: relative;
         > a {
+          position: relative;
           &:before {
             content: "";
             margin-right: 10px;
