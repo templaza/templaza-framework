@@ -4,6 +4,9 @@ namespace TemPlazaFramework\Admin\Controller;
 
 defined( 'TEMPLAZA_FRAMEWORK' ) || exit;
 
+use Elementor\Core\App\Modules\ImportExport\Import;
+use Elementor\Core\Kits\Manager;
+use Elementor\Plugin;
 use TemPlazaFramework\Admin\Application;
 use TemPlazaFramework\Controller\BaseController;
 use TemPlazaFramework\Helpers\Files;
@@ -443,6 +446,9 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                 case 'redux-framework':
                                     $this -> import_redux_framework($folder_path, $file_name);
                                     break;
+                                case 'elementor':
+                                    $this -> import_elementor($folder_path, $file_name);
+                                    break;
                             }
 
                             // Import error
@@ -812,10 +818,11 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
         protected function import_redux_framework($folder_path, $filename = '',  $file_filter = '.txt|.json'){
 
             $values = array();
+            $theme  = wp_get_theme();
             if($file = $this->get_substeps($folder_path, $filename, $file_filter)){
                 list($_filename, $fileExt) = explode('.', $file);
             }
-            $settings = get_option( 'aventura_options-transients', array());
+            $settings = get_option( $theme -> get_template().'_options-transients', array());
 
             $options    = file_get_contents($folder_path.'/'.$file);
 
@@ -829,10 +836,54 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             }
 
             /* update the redux option array */
-            update_option('aventura_options', $values);
+            update_option($theme -> get_template().'_options', $values);
+
+            return true;
+        }
 
 
+        protected function import_elementor($folder_path, $filename = '',  $file_filter = '.json|.xml'){
 
+            if(!class_exists('Elementor\Core\App\Modules\ImportExport\Import')){
+                $this -> info -> set_message(esc_html__('Class Import not found. Please install the elementor plugin to continue import it.',
+                    $this -> text_domain), true);
+                echo $this -> info -> output();
+                die();
+            }
+
+//            $file   = $this -> get_substeps($folder_path, $filename, $file_filter);
+
+            if(class_exists('Elementor\Core\App\Modules\ImportExport\Import')){
+
+                $importer   = new Import(array(
+                    'stage' => 2,
+                    'include'   => ['settings'],
+                    "overrideConditions" => [],
+                    'directory' => $folder_path.'/',
+                ));
+
+                // Import
+                $el_result = $importer -> run();
+
+//                if($el_result == null){
+//
+//                    return true;
+//                }
+
+
+                /*
+                 * Create default kit
+                 * Recreate default kit (only when default kit does not exist).
+                 * */
+                $kit = Plugin::$instance->kits_manager->get_active_kit();
+                if ( !$kit->get_id() ) {
+                    $created_default_kit = Plugin::$instance->kits_manager->create_default();
+
+                    if ($created_default_kit) {
+                        update_option(Manager::OPTION_ACTIVE, $created_default_kit);
+                    }
+                }
+            }
             return true;
         }
 

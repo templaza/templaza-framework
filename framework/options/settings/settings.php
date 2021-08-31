@@ -12,22 +12,21 @@ Templaza_API::set_section('settings', array(
     'icon'      => 'el-icon-home',
     'fields'    => array(
         array(
+            'id'       => 'dev-mode',
+            'type'     => 'switch',
+            'title'    => __('Developer mode', $this -> text_domain),
+            'default'   => '0',
+        ),
+        array(
             'id'       => '404-page-style',
             'type'     => 'select',
-//            'data'     => 'posts',
             'title'    => __('404 Page Style', $this -> text_domain),
             'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
-//            'args'     => $tzfrm_field_args,
             'data'     => 'callback',
             'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
         )
     ),
 ));
-//Templaza_API::set_subsection('settings', 'settings', array(
-//    'id'    => '404-pages-subsections',
-//    'title' => __('404 Page'),
-//
-//));
 
 $tzfrm_post_types  = Post_TypeFunctions::getPostTypes();
 if(count($tzfrm_post_types)){
@@ -41,20 +40,16 @@ if(count($tzfrm_post_types)){
                 array(
                     'id'    => $tzfrm_post_type.'-archive-style',
                     'type'  => 'select',
-//                    'data' => 'posts',
                     'title' => sprintf(__('%s Archive Style', $this -> text_domain), $tzfrm_post_type_obj -> label),
                     'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
-//                    'args'  => $tzfrm_field_args,
                     'data'     => 'callback',
                     'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
                 ),
                 array(
                     'id'    => $tzfrm_post_type.'-single-style',
                     'type'  => 'select',
-//                    'data' => 'posts',
                     'title' => sprintf(__('%s Single Style', $this -> text_domain), $tzfrm_post_type_obj -> label),
                     'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
-//                    'args'  => $tzfrm_field_args,
                     'data'     => 'callback',
                     'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
                 )

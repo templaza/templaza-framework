@@ -361,9 +361,7 @@ class TemplazaFramework_ShortCode{
         $custom_css_name    = 'tz_custom_'.$element['id'];
         $params['tz_class'].= ' '.$custom_css_name;
         if(!empty($css)) {
-//            $custom_css_name    = 'tz_custom_'.$element['id'];
             $params['tz_css']   = '.'.$custom_css_name.'{'.$css.'}';
-//            $params['tz_class'].= ' '.$custom_css_name;
         }
         if(isset($params['tz_customclass']) && !empty($params['tz_customclass'])){
             if(isset($params['tz_class'])){
@@ -380,18 +378,19 @@ class TemplazaFramework_ShortCode{
         }
 		if(isset($params['background_overlay']) && !empty($params['background_overlay'])){
             $overlay_color = CSS::make_color_rgba_redux($params['background_overlay']);
-            $params['tz_class'] .=' tz_background_overlay ';
-            $css_overlay   = '';
-            $css_overlay   .= '.'.$custom_css_name.'::before {background-color:'.$overlay_color.' ;}';            
-			if(isset($params['tz_css'])){
-                $params['tz_css']   .= $css_overlay;
-            }else{
-                $params['tz_css']   = $css_overlay;
+            if(!empty($overlay_color)){
+                $params['tz_class'] .=' tz_background_overlay ';
+                $css_overlay   = '';
+                $css_overlay   .= '.'.$custom_css_name.'::before {background-color:'.$overlay_color.' ;}';
+                if(isset($params['tz_css'])){
+                    $params['tz_css']   .= $css_overlay;
+                }else{
+                    $params['tz_css']   = $css_overlay;
+                }
             }
         }
 
         if(isset($params['link_color']) && !empty($params['link_color'])){
-//            $custom_css_name    = '.tz_custom_'.$element['id'];
             $custom_css_name    = '.'.$custom_css_name;
 
 

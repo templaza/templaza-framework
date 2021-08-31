@@ -51,40 +51,7 @@ class TemPlazaFrameWork{
 
         add_filter('register_sidebar_defaults', array($this, 'modify_sidebar'), 9999);
 
-        add_action('after_switch_theme', array($this, 'set_default_settings'), 999);
-
         do_action( 'templaza-framework/plugin/hooks', $this );
-    }
-
-    public function set_default_settings(){
-        if(!current_theme_supports('templaza-framework', true, false)){
-            return;
-        }
-
-        $def_path       = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/settings/default.json';
-
-        if(!file_exists($def_path)) {
-            $def_path = TEMPLAZA_FRAMEWORK_OPTION_PATH . '/settings/default.json';
-        }
-
-        if(!file_exists($def_path)){
-            return;
-        }
-
-        $def_settings   = file_get_contents($def_path);
-
-        if(empty($def_settings)){
-            return;
-        }
-
-        $def_settings   = is_string($def_settings)?json_decode($def_settings, true):$def_settings;
-
-        $setting_name   = Functions::get_theme_option_name();
-        $settings       = get_option($setting_name, array());
-
-        $new_settings   = Functions::merge_array($settings, $def_settings, true, true);
-
-        update_option($setting_name, $new_settings);
     }
 
     public function modify_sidebar($defaults){
@@ -135,6 +102,7 @@ class TemPlazaFrameWork{
         Templates::load_my_layout('head');
 
         // Include preloader css
+        $theme          = wp_get_theme();
         $theme_css_uri  = Functions::get_my_theme_css_uri();
         $preloader_css  = Templates::get_style('preloader', 'preloader');
         $widget_css     = Templates::get_style('widget', 'widget');
@@ -145,12 +113,27 @@ class TemPlazaFrameWork{
         if($google_link = Fonts::make_google_web_font_link()){
             wp_enqueue_style('templaza-google-font', $google_link);
         }
-        $theme_css_uri = Functions::get_my_theme_css_uri();
-        if($custom_compiled_css = Templates::get_style_name(TEMPLAZA_FRAMEWORK_THEME_PATH, true)){
-            wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-custom', $theme_css_uri.'/'.$custom_compiled_css);
+
+        $options    = Functions::get_global_settings();
+        $dev_mode   = isset($options['dev-mode'])?filter_var($options['dev-mode'], FILTER_VALIDATE_BOOLEAN):false;
+
+        if(!$dev_mode){
+            $css_path   = \get_template_directory().'/assets/css';
+            if(!file_exists($css_path.'/templaza-style.css')) {
+                Templates::compileSass(TEMPLAZA_FRAMEWORK_SCSS_PATH, $css_path, 'style.scss', 'templaza-style.css');
+            }
+            if(file_exists($css_path.'/templaza-style.css')){
+                wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME . '__tzfrm',
+                    get_template_directory_uri().'/assets/css/templaza-style.css', array(), $theme -> get('Version') );
+            }
+        }else {
+            if ($custom_compiled_css = Templates::get_style_name(TEMPLAZA_FRAMEWORK_THEME_PATH, true)) {
+                wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME . '__tzfrm-custom', $theme_css_uri . '/' . $custom_compiled_css);
+            }
+            $compiled_css = Templates::get_style_name(TEMPLAZA_FRAMEWORK_THEME_PATH);
+            wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME . '__tzfrm',
+                $theme_css_uri . '/' . $compiled_css, array(), $theme -> get('Version'));
         }
-        $compiled_css           = Templates::get_style_name(TEMPLAZA_FRAMEWORK_THEME_PATH);
-        wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm', $theme_css_uri.'/'.$compiled_css);
 
 
         $inline_css = Templates::get_inline_styles();
