@@ -163,6 +163,9 @@ header {
     }
     .templaza-sidebar-logo {
       margin: 15px 0 30px;
+      @media (max-width: 1024px) {
+        margin: 15px 0;
+      }
     }
     .templaza-logo {
       margin: 0 auto !important;
