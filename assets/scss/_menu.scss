@@ -138,15 +138,13 @@
    }
    .menu-item.uk-parent {
       > .megamenu-item-link > .nav-item-caret {
+         font-family: monospace;
          &:after{
             display: flex;
             align-items: center;
             justify-content: center;
-            content: "+";
+            content: "[+]";
             font-style: normal;
-            width: 1rem;
-            height: 1rem;
-            font-size: 1.5em;
             float: right;
             background-repeat: no-repeat;
             background-position: 50% 50%;
@@ -154,7 +152,7 @@
          }
       }
       &.uk-open{
-         > .megamenu-item-link > .nav-item-caret::after { content: "-"; }
+         > .megamenu-item-link > .nav-item-caret::after { content: "[-]"; }
       }
    }
 }
