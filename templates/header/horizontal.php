@@ -68,7 +68,7 @@ $menu_datas = Functions::get_attributes('header');
     </div>
     <?php
     if ($mode == 'center') {
-        echo '<div class="header-center-section d-none d-lg-block justify-content-center">';
+        echo '<div class="header-center-section d-none d-lg-flex justify-content-center">';
         // header nav starts
           Menu::get_nav_menu(array(
               'theme_location'  => $header_menu,
