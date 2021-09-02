@@ -126,14 +126,6 @@ class Framework{
 
             $file = $folder . '/setting.json';
             $wp_filesystem->put_contents($file, json_encode($options));
-
-            // Compile style.scss to templaza-style.css
-            $dev_mode   = isset($options['dev-mode'])?filter_var($options['dev-mode'], FILTER_VALIDATE_BOOLEAN):false;
-
-            if(!$dev_mode) {
-                $css_path = \get_template_directory() . '/assets/css';
-                Templates::compileSass(TEMPLAZA_FRAMEWORK_SCSS_PATH, $css_path, 'style.scss', 'templaza-style.css');
-            }
         }
     }
 

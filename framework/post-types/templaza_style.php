@@ -78,8 +78,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
         {
             parent::hooks();
 
-
-
             // Remove all admin notices
             if(\is_user_logged_in()) {
                 $global_args    = $this -> framework -> get_arguments();
@@ -92,7 +90,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 add_action('in_admin_header', array($this, 'remove_admin_notices'), 1000);
 
                 add_action('templaza-framework/post_type/registered', array($this, 'post_type_registered'));
-
             }
         }
 
@@ -104,8 +101,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                     require_once ( ABSPATH . '/wp-admin/includes/file.php' );
                     global $wp_filesystem;
                     WP_Filesystem();
-                    $file   = dirname(get_template_directory()) .'/'.$theme_name.'/'
-                        .TEMPLAZA_FRAMEWORK_NAME. '/theme_options/' . $file_id . '.json';
+                    $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$file_id.'.json';
                     if(file_exists($file)){
                         $options    = $wp_filesystem -> get_contents($file);
                         $options    = json_decode($options, true);
@@ -242,6 +238,9 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
                 add_action('edit_form_after_title', array($this, 'generate_template_options'));
                 add_action( 'save_post_'.$this -> get_post_type(), array( $this, 'save_main_options' ), 10, 2 );
+
+                add_action( 'pre_post_update', array( $this, 'pre_post_update' ), 10, 2 );
+//                add_filter( 'wp_insert_post_data', array( $this, 'wp_insert_post_data' ), 10, 2 );
 
                 // Create duplicate action
                 add_filter('post_row_actions', array($this, 'duplicate_post_link'), 10, 2);
@@ -453,8 +452,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             require_once ( ABSPATH . '/wp-admin/includes/file.php' );
             global $wp_filesystem;
             WP_Filesystem();
-            $file    = dirname(get_template_directory()).'/'.$theme_name.'/'.TEMPLAZA_FRAMEWORK_NAME
-                .'/theme_options/'.$file_name.'.json';
+            $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$file_name.'.json';
 
             if(file_exists($file)){
                 $wp_filesystem -> delete($file);
@@ -495,13 +493,15 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                     'post_name'      => $post->post_name,
                     'post_parent'    => $post->post_parent,
                     'post_password'  => $post->post_password,
-                    'post_status'    => 'draft',
-                    'post_title'     => $post->post_title,
+//                    'post_status'    => 'draft',
+                    'post_status'    => 'publish',
+                    'post_title'     => Admin_Functions::unique_post_title($post->post_title, $post -> ID, $post -> post_status, $post -> post_type, $post ->post_parent),
                     'post_type'      => $post->post_type,
                     'to_ping'        => $post->to_ping,
                     'menu_order'     => $post->menu_order
                 );
-                $clone_post_id = wp_insert_post( $args );
+                $clone_post_id      = wp_insert_post( $args );
+                $clone_post_name    = '';
 
                 $taxonomies = get_object_taxonomies($post->post_type);
                 if (!empty($taxonomies) && is_array($taxonomies)){
@@ -514,8 +514,8 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 $post_meta_data = $wpdb->get_results("SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=$post_id");
                 if (count($post_meta_data)!=0) {
 
-                    $theme_name         = '';
-                    $file_option_name   = '';
+                    $theme_name     = '';
+                    $source_name    = '';
 
                     $clone_query = "INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value) ";
                     foreach ($post_meta_data as $meta_data) {
@@ -526,25 +526,31 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                             $theme_name = $meta_value;
                         }
                         if($meta_key == '_'.$post_type){
-                            $file_option_name   = $meta_value;
-                            $meta_value         = $clone_post_id;
+                            $source_name    = $meta_value;
+                            $meta_value     = $clone_post_id;
                         }
 
                         $clone_query_select[]= "SELECT $clone_post_id, '$meta_key', '$meta_value'";
 
                     }
                     $clone_query.= implode(" UNION ALL ", $clone_query_select);
+
                     $wpdb->query($clone_query);
+
+                    $clone_post = get_post($clone_post_id);
+                    $clone_post_name    = $clone_post -> post_name;
+
+                    $clone_post_name    = !empty($clone_post_name)?$clone_post_name:$clone_post_id;
 
                     // Duplicate options file
                     require_once ( ABSPATH . '/wp-admin/includes/file.php' );
                     global $wp_filesystem;
                     WP_Filesystem();
-                    $theme_base_path    = dirname(get_template_directory()).'/'.$theme_name.'/'.TEMPLAZA_FRAMEWORK_NAME
-                        .'/theme_options';
-                    $source_file   = $theme_base_path.'/'.$file_option_name.'.json';
+
+                    $theme_base_path    = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION;
+                    $source_file   = $theme_base_path.'/'.$source_name.'.json';
                     if(file_exists($source_file)){
-                        $new_file   = $theme_base_path.'/'.$clone_post_id.'.json';
+                        $new_file   = $theme_base_path.'/'.$clone_post_name.'.json';
                         $wp_filesystem -> copy($source_file, $new_file, true);
                     }
 
@@ -596,6 +602,20 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             }
         }
 
+        public function pre_post_update($post_id, $data){
+            // Remove old file if slug changed when update
+            if($post_id && ($pre_post = get_post($post_id))){
+                if(isset($pre_post -> post_name) && !empty($pre_post -> post_name)
+                    && isset($data['post_name']) && !empty($data['post_name'])
+                    && $pre_post -> post_name !== $data['post_name']){
+                    $old_file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$pre_post -> post_name.'.json';
+                    if(file_exists($old_file)){
+                        unlink($old_file);
+                    }
+                }
+            }
+        }
+
         public function save_main_options($post_id, $post){
 
             // Store main config to json file
@@ -609,7 +629,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 $data   = wp_unslash($_POST[$main_param_name]);
 
                 if(count($data) && !empty($post -> post_name )){
-//                    $folder     = TEMPLAZA_FRAMEWORK_THEME_PATH . '/theme_options';
                     $folder     = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION;
 
                     if(!is_dir($folder)){
@@ -619,11 +638,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                     $file_by_id = $folder . '/' . $post_id . '.json';
 
                     $file       = $folder . '/' . $post -> post_name . '.json';
-
-
-//                    if(!$wp_filesystem -> is_dir($folder)){
-//                        $wp_filesystem -> mkdir($folder);
-//                    }
 
                     // Rename option file by post id to post name (slug)
                     if(file_exists($file_by_id)){
@@ -640,7 +654,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                     }
 
                     // Create config file
-//                    $wp_filesystem->put_contents($file, json_encode($data));
                     file_put_contents($file, json_encode($data));
 
                     update_post_meta( $post_id, '_'.$this -> get_post_type(), $post -> post_name );

@@ -117,24 +117,28 @@ class TemPlazaFrameWork{
         $options    = Functions::get_global_settings();
         $dev_mode   = isset($options['dev-mode'])?filter_var($options['dev-mode'], FILTER_VALIDATE_BOOLEAN):false;
 
-        if(!$dev_mode){
-            $css_path   = \get_template_directory().'/assets/css';
-            if(!file_exists($css_path.'/templaza-style.css')) {
-                Templates::compileSass(TEMPLAZA_FRAMEWORK_SCSS_PATH, $css_path, 'style.scss', 'templaza-style.css');
+        $css_path       = \get_template_directory().'/assets/css';
+        $transient      = get_option(TEMPLAZA_FRAMEWORK_NAME.'-transients', array());
+        if($dev_mode){
+            $cur_style_name = Templates::get_sass_name_hash();
+            if(!isset($transient['style_name']) || (isset($transient['style_name']) && !empty($transient['style_name'])
+                && $cur_style_name != $transient['style_name'])){
+                $transient['style_name']    = $cur_style_name;
+                Templates::compileSass(TEMPLAZA_FRAMEWORK_SCSS_PATH, $css_path, 'style.scss', 'style.css');
+                update_option(TEMPLAZA_FRAMEWORK_NAME.'-transients', $transient);
             }
-            if(file_exists($css_path.'/templaza-style.css')){
-                wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME . '__tzfrm',
-                    get_template_directory_uri().'/assets/css/templaza-style.css', array(), $theme -> get('Version') );
-            }
-        }else {
-            if ($custom_compiled_css = Templates::get_style_name(TEMPLAZA_FRAMEWORK_THEME_PATH, true)) {
-                wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME . '__tzfrm-custom', $theme_css_uri . '/' . $custom_compiled_css);
-            }
-            $compiled_css = Templates::get_style_name(TEMPLAZA_FRAMEWORK_THEME_PATH);
-            wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME . '__tzfrm',
-                $theme_css_uri . '/' . $compiled_css, array(), $theme -> get('Version'));
         }
 
+        if(!file_exists($css_path.'/style.css')) {
+            $transient['style_name']    = $cur_style_name;
+            Templates::compileSass(TEMPLAZA_FRAMEWORK_SCSS_PATH, $css_path, 'style.scss', 'style.css');
+            update_option(TEMPLAZA_FRAMEWORK_NAME.'-transients', $transient);
+        }
+
+        if(file_exists($css_path.'/style.css')){
+            wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME . '__tzfrm',
+                get_template_directory_uri().'/assets/css/style.css', array(), $theme -> get('Version') );
+        }
 
         $inline_css = Templates::get_inline_styles();
 
