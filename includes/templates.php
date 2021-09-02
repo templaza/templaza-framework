@@ -370,7 +370,7 @@ class Templates{
         $css_name   = '';
 
         $core_path  = !empty($core_path)?$core_path:TEMPLAZA_FRAMEWORK_SCSS_PATH;
-        $theme_path = !empty($theme_path)?$theme_path:TEMPLAZA_FRAMEWORK_THEME_PATH.'/scss';
+        $theme_path = !empty($theme_path)?$theme_path:TEMPLAZA_FRAMEWORK_THEME_SCSS_PATH;
 
         // Get framework scss core files
         if(is_dir($core_path)){
