@@ -4,6 +4,7 @@ namespace TemPlazaFramework;
 
 use Pelago\Emogrifier\CssInliner;
 use ScssPhp\ScssPhp\Compiler;
+use ScssPhp\ScssPhp\OutputStyle;
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
@@ -145,18 +146,23 @@ class Templates{
         return $css_name;
     }
 
-    public static function compileSass($sass_path, $css_path, $sass, $css, $variables = array())
+    public static function compileSass($sass_path, $css_path, $sass, $css, $compress = true, $variables = array())
     {
         try {
             global $wp_filesystem;
-            require_once TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/phpclass/scssphp/scss.inc.php';
+            require_once TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/phpclass/scssphp-1.6.0/scss.inc.php';
             $scss = new Compiler();
             $scss->setImportPaths($sass_path);
-            $scss->setFormatter('\ScssPhp\ScssPhp\Formatter\Compressed');
+            if($compress){
+                $scss -> setOutputStyle(OutputStyle::COMPRESSED);
+            }else{
+                $scss -> setOutputStyle(OutputStyle::EXPANDED);
+            }
             if (!empty($variables)) {
                 $scss->setVariables($variables);
             }
-            $content = $scss->compile('@import "' . $sass . '";');
+
+            $content = $scss -> compileString('@import "' . $sass . '";') -> getCss();
 
             if(!is_dir($css_path)) {
                 $wp_filesystem -> mkdir($css_path, 775, true);

@@ -128,21 +128,28 @@ class TemPlazaFrameWork{
             if(!isset($transient['sass_code']) || (isset($transient['sass_code']) && !empty($transient['sass_code'])
                 && $cur_sass_name != $transient['sass_code'])){
                 $transient['sass_code']    = $cur_sass_name;
-                Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.css');
+                Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.css', false);
+                Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.min.css', true);
                 update_option($trans_name, $transient);
             }
         }
 
-        if(!file_exists($css_path.'/style.css')) {
+        if(!file_exists($css_path.'/style.min.css')) {
             $cur_sass_name = Templates::get_sass_name_hash();
             $transient['sass_code']    = $cur_sass_name;
-            Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.css');
+            Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.css', false);
+            Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.min.css', true);
             update_option($trans_name, $transient);
         }
 
-        if(file_exists($css_path.'/style.css')){
+        $style_file = 'style.css';
+        if(file_exists($css_path.'/style.min.css')){
+            $style_file = 'style.min.css';
+        }
+
+        if(file_exists($css_path.'/'.$style_file)) {
             wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME . '__tzfrm',
-                get_template_directory_uri().'/assets/css/style.css', array(), $theme -> get('Version') );
+                get_template_directory_uri() . '/assets/css/'.$style_file, array(), $theme->get('Version'));
         }
 
         $inline_css = Templates::get_inline_styles();
