@@ -511,6 +511,11 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                     }
                 }
 
+                $clone_post = get_post($clone_post_id);
+                $clone_post_name    = $clone_post -> post_name;
+
+                $clone_post_name    = !empty($clone_post_name)?$clone_post_name:$clone_post_id;
+
                 $post_meta_data = $wpdb->get_results("SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=$post_id");
                 if (count($post_meta_data)!=0) {
 
@@ -527,7 +532,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                         }
                         if($meta_key == '_'.$post_type){
                             $source_name    = $meta_value;
-                            $meta_value     = $clone_post_id;
+                            $meta_value     = $clone_post_name;
                         }
 
                         $clone_query_select[]= "SELECT $clone_post_id, '$meta_key', '$meta_value'";
@@ -536,11 +541,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                     $clone_query.= implode(" UNION ALL ", $clone_query_select);
 
                     $wpdb->query($clone_query);
-
-                    $clone_post = get_post($clone_post_id);
-                    $clone_post_name    = $clone_post -> post_name;
-
-                    $clone_post_name    = !empty($clone_post_name)?$clone_post_name:$clone_post_id;
 
                     // Duplicate options file
                     require_once ( ABSPATH . '/wp-admin/includes/file.php' );

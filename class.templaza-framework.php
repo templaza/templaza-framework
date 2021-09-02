@@ -120,14 +120,16 @@ class TemPlazaFrameWork{
         $css_path   = \get_template_directory().'/assets/css';
         $scss_path  = TEMPLAZA_FRAMEWORK_THEME_SCSS_PATH;
         $scss_path  = is_dir($scss_path)?$scss_path:TEMPLAZA_FRAMEWORK_SCSS_PATH;
-        $transient  = get_option(TEMPLAZA_FRAMEWORK_NAME.'-transients', array());
+        $trans_name = 'templaza-'.$theme -> get_template().'-transients';
+        $transient  = get_option($trans_name, array());
+
         if($dev_mode){
             $cur_sass_name = Templates::get_sass_name_hash();
             if(!isset($transient['sass_code']) || (isset($transient['sass_code']) && !empty($transient['sass_code'])
                 && $cur_sass_name != $transient['sass_code'])){
                 $transient['sass_code']    = $cur_sass_name;
                 Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.css');
-                update_option(TEMPLAZA_FRAMEWORK_NAME.'-transients', $transient);
+                update_option($trans_name, $transient);
             }
         }
 
@@ -135,7 +137,7 @@ class TemPlazaFrameWork{
             $cur_sass_name = Templates::get_sass_name_hash();
             $transient['sass_code']    = $cur_sass_name;
             Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.css');
-            update_option(TEMPLAZA_FRAMEWORK_NAME.'-transients', $transient);
+            update_option($trans_name, $transient);
         }
 
         if(file_exists($css_path.'/style.css')){
