@@ -365,27 +365,31 @@ class Templates{
         return true;
     }
 
-    public static function get_sass_name_hash($core_path = '', $them_path = ''){
+    public static function get_sass_name_hash($core_path = '', $theme_path = ''){
 
         $css_name   = '';
 
         $core_path  = !empty($core_path)?$core_path:TEMPLAZA_FRAMEWORK_SCSS_PATH;
-        $theme_path = !empty($theme_path)?$theme_path:TEMPLAZA_FRAMEWORK_THEME_PATH;
+        $theme_path = !empty($theme_path)?$theme_path:TEMPLAZA_FRAMEWORK_THEME_PATH.'/scss';
 
         // Get framework scss core files
-        $frm_files  = Functions::list_files($core_path, '.scss');
-        if(count($frm_files)){
-            foreach($frm_files as $frm_file){
-                $css_name .= md5_file($frm_file);
-                $css_name .= md5(filesize($frm_file));
+        if(is_dir($core_path)){
+            $frm_files  = Functions::list_files($core_path, '.scss');
+            if(!empty($frm_files) && count($frm_files)){
+                foreach($frm_files as $frm_file){
+                    $css_name .= md5_file($frm_file);
+                    $css_name .= md5(filesize($frm_file));
+                }
             }
         }
 
-        $file_list   = Functions::list_files($theme_path, '.scss');
-        if(count($file_list)){
-            foreach($file_list as $file){
-                $css_name .= md5_file($file);
-                $css_name .= md5(filesize($file));
+        if(is_dir($theme_path)){
+            $file_list   = Functions::list_files($theme_path, '.scss');
+            if(!empty($file_list) && count($file_list)){
+                foreach($file_list as $file){
+                    $css_name .= md5_file($file);
+                    $css_name .= md5(filesize($file));
+                }
             }
         }
         return !empty($css_name)?md5($css_name):'';
