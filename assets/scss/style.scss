@@ -1,13 +1,16 @@
 @import "variables_override";
 
-// Import bootstrap
+/*	2.1 Bootstrap Style
+/* -------------------------------------------------------------------------- */
 @import "bootstrap_custom";
 
-// Import UIkit.
+/*	2.2 UIKit Style
+/* -------------------------------------------------------------------------- */
 @import "uikit";
 
+/*	2.3 TemPlaza Framework Styles
+/* -------------------------------------------------------------------------- */
 @import "variables";
-
 @import "typography";
 @import "utilities";
 @import "layouts";
