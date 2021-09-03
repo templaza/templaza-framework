@@ -150,13 +150,19 @@ class Templates{
     {
         try {
             global $wp_filesystem;
-            require_once TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/phpclass/scssphp-1.6.0/scss.inc.php';
+
+            require_once TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/phpclass/scssphp/scss.inc.php';
+
+            // Require my scss formatter
+            require_once TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/helper/scssphp/formatter/ExpandedNewline.php';
+
             $scss = new Compiler();
             $scss->setImportPaths($sass_path);
             if($compress){
                 $scss -> setOutputStyle(OutputStyle::COMPRESSED);
             }else{
-                $scss -> setOutputStyle(OutputStyle::EXPANDED);
+//                $scss -> setOutputStyle(OutputStyle::EXPANDED);
+                $scss -> setFormatter('TemPlazaFramework\\ScssPhp\\Formatter\\ExpandedNewline');
             }
             if (!empty($variables)) {
                 $scss->setVariables($variables);

@@ -134,11 +134,15 @@ class TemPlazaFrameWork{
             }
         }
 
-        if(!file_exists($css_path.'/style.min.css')) {
+        if(!file_exists($css_path.'/style.min.css') || !file_exists($css_path.'/style.css')) {
             $cur_sass_name = Templates::get_sass_name_hash();
             $transient['sass_code']    = $cur_sass_name;
-            Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.css', false);
-            Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.min.css', true);
+            if(!file_exists($css_path.'/style.css')) {
+                Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.css', false);
+            }
+            if(!file_exists($css_path.'/style.min.css')) {
+                Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.min.css', true);
+            }
             update_option($trans_name, $transient);
         }
 
