@@ -132,24 +132,6 @@ $attribs    = ' '.$attribs;
                         </button>
                     </div>
                 <?php } ?>
-<!--                --><?php //if ($block_1_type != 'blank'): ?>
-<!--                    <div class="header-right-block d-none d-lg-block align-self-center px-2">-->
-<!--                        --><?php
-//                        if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-//                            echo '<div class="header-block-item">';
-//                            echo '<ul id="sidebar">';
-//                            dynamic_sidebar($block_1_sidebar);
-//                            echo '</ul>';
-//                            echo '</div>';
-//                        }
-//                        if ($block_1_type == 'custom') {
-//                            echo '<div class="header-block-item">';
-//                            echo $block_1_custom;
-//                            echo '</div>';
-//                        }
-//                        ?>
-<!--                    </div>-->
-<!--                --><?php //endif; ?>
             </div>
         <?php endif; ?>
     </div>
