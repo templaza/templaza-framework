@@ -251,11 +251,19 @@ Templaza_API::set_section('settings',
                 'required' => array('blog-page-thumbnail', '=' , true)
             ),
             array(
+                'id'       => 'blog-single-meta',
+                'type'     => 'switch',
+                'title'    => __( 'Show block meta post', $this -> text_domain ),
+                'subtitle' => __( 'Show/hide meta post.', $this -> text_domain ),
+                'default'  => true,
+            ),
+            array(
                 'id'       => 'blog-single-date',
                 'type'     => 'switch',
                 'title'    => __( 'Show Date', $this -> text_domain ),
                 'subtitle' => __( 'Show/hide date.', $this -> text_domain ),
                 'default'  => true,
+                'required' => array('blog-single-meta', '=' , true)
             ),
             array(
                 'id'       => 'blog-single-author',
@@ -263,18 +271,21 @@ Templaza_API::set_section('settings',
                 'title'    => __( 'Show Author', $this -> text_domain ),
                 'subtitle' => __( 'Show/hide title.', $this -> text_domain ),
                 'default'  => true,
+                'required' => array('blog-single-meta', '=' , true)
             ),
             array(
                 'id'       => 'blog-single-comment-count',
                 'type'     => 'switch',
                 'title'    => __( 'Show Comment count', $this -> text_domain ),
                 'subtitle' => __( 'Show/hide comment count.', $this -> text_domain ),
+                'required' => array('blog-single-meta', '=' , true)
             ),
             array(
                 'id'       => 'blog-single-post-view',
                 'type'     => 'switch',
                 'title'    => __( 'Show Post view', $this -> text_domain ),
                 'subtitle' => __( 'Show/hide Post view.', $this -> text_domain ),
+                'required' => array('blog-single-meta', '=' , true)
             ),
             array(
                 'id'       => 'blog-single-category',
@@ -282,6 +293,7 @@ Templaza_API::set_section('settings',
                 'title'    => __( 'Show Category', $this -> text_domain ),
                 'subtitle' => __( 'Show/hide category.', $this -> text_domain ),
                 'default'  => true,
+                'required' => array('blog-single-meta', '=' , true)
             ),
             array(
                 'id'       => 'blog-single-tag',

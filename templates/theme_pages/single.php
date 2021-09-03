@@ -15,6 +15,7 @@ $prefix             = 'blog-single';
 
 $show_thumbnail         = isset($options[$prefix.'-thumbnail'])?filter_var($options[$prefix.'-thumbnail'], FILTER_VALIDATE_BOOLEAN):true;
 $show_tag               = isset($options[$prefix.'-tag'])?filter_var($options[$prefix.'-tag'], FILTER_VALIDATE_BOOLEAN):true;
+$show_meta              = isset($options[$prefix.'-meta'])?filter_var($options[$prefix.'-meta'], FILTER_VALIDATE_BOOLEAN):true;
 $show_date              = isset($options[$prefix.'-date'])?filter_var($options[$prefix.'-date'], FILTER_VALIDATE_BOOLEAN):true;
 $show_share             = isset($options[$prefix.'-share'])?filter_var($options[$prefix.'-share'], FILTER_VALIDATE_BOOLEAN):true;
 $show_title             = isset($options[$prefix.'-title'])?filter_var($options[$prefix.'-title'], FILTER_VALIDATE_BOOLEAN):true;
@@ -58,7 +59,9 @@ if($blog_slider_animation != ''){
                         }?>
                         <div class="uk-text-center">
                             <?php
+                            if($show_meta){
                             do_action('templaza_single_meta_post');
+                            }
                             ?>
                         </div>
                         <?php
