@@ -95,6 +95,9 @@ class Templates{
         $frm_files  = Functions::list_files(TEMPLAZA_FRAMEWORK_SCSS_PATH, '.scss');
         if(count($frm_files)){
             foreach($frm_files as $frm_file){
+                if(!is_file($frm_file)){
+                    continue;
+                }
                 $css_name .= md5_file($frm_file);
                 $css_name .= md5(filesize($frm_file));
             }
@@ -103,6 +106,9 @@ class Templates{
         $file_list   = Functions::list_files($scss_file_path, '.scss');
         if(count($file_list)){
             foreach($file_list as $file){
+                if(!is_file($file)){
+                    continue;
+                }
                 $css_name .= md5_file($file);
                 $css_name .= md5(filesize($file));
             }
@@ -389,6 +395,9 @@ class Templates{
             $frm_files  = Functions::list_files($core_path, '.scss');
             if(!empty($frm_files) && count($frm_files)){
                 foreach($frm_files as $frm_file){
+                    if(!is_file($frm_file)){
+                        continue;
+                    }
                     $css_name .= md5_file($frm_file);
                     $css_name .= md5(filesize($frm_file));
                 }
@@ -399,6 +408,9 @@ class Templates{
             $file_list   = Functions::list_files($theme_path, '.scss');
             if(!empty($file_list) && count($file_list)){
                 foreach($file_list as $file){
+                    if(!is_file($file)){
+                        continue;
+                    }
                     $css_name .= md5_file($file);
                     $css_name .= md5(filesize($file));
                 }
