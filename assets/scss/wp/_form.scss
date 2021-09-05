@@ -41,20 +41,16 @@ form{
 select{
   @include input-default;
 }
-.templaza-content_area{
-  .searchform{
-    input[type="text"]{
-      width:60%;
-      font-size:0.9em;
-    }
-    i{
-      display:none;
-    }
-    input.submit{
-      font-size:0.9em;
-      padding: 0 25px;
-      @include border-radius(0);
-    }
-
+.searchform{
+  input[type="text"]{
+    font-size:0.9em;
+  }
+  i{
+    display:none;
+  }
+  input.submit{
+    font-size:0.9em;
+    padding: 0 25px;
+    @include border-radius(0);
   }
 }
