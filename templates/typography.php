@@ -120,18 +120,18 @@ $typographies = array(
         'id'        => 'blog_item_heading',
         'enable'    => true,
         'class'     => array(
-            'desktop'    => 'div.templaza-archive .templaza-archive-item .title a',
-            'tablet'     => 'div.templaza-archive .templaza-archive-item .title a',
-            'mobile'     => 'div.templaza-archive .templaza-archive-item .title a',
+            'desktop'    => 'div.templaza-archive .templaza-archive-item .title',
+            'tablet'     => 'div.templaza-archive .templaza-archive-item .title',
+            'mobile'     => 'div.templaza-archive .templaza-archive-item .title',
         )
     ),
     array(
         'id'        => 'blog_item_content',
         'enable'    => true,
         'class'     => array(
-            'desktop'    => 'div.templaza-archive .templaza-archive-item .excerpt',
-            'tablet'     => 'div.templaza-archive .templaza-archive-item .excerpt',
-            'mobile'     => 'div.templaza-archive .templaza-archive-item .excerpt',
+            'desktop'    => 'div.templaza-archive .templaza-archive-item .templaza-blog-desc',
+            'tablet'     => 'div.templaza-archive .templaza-archive-item .templaza-blog-desc',
+            'mobile'     => 'div.templaza-archive .templaza-archive-item .templaza-blog-desc',
         )
     ),
     // Widget sidebar typography
@@ -244,7 +244,8 @@ $typographies = array(
             'mobile'     => 'div.templaza-single .templaza-single-content h6'
                 .',div.templaza-single .templaza-single-content .h6',
         )
-    ),array(
+    ),
+	array(
         'id'        => 'blog_single_quote',
         'enable'    => true,
         'class'     => array(
