@@ -419,6 +419,8 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
                         try {
 
+                            set_time_limit( 0 );
+
                             $folder_path    = $upgrade_folder . '/' . $produce . '_' . $pack_type;
                             unzip_file($filePath, $folder_path);
 
@@ -857,19 +859,13 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
                 $importer   = new Import(array(
                     'stage' => 2,
-                    'include'   => ['settings'],
+                    'include'   => ['templates', 'content','settings'],
                     "overrideConditions" => [],
                     'directory' => $folder_path.'/',
                 ));
 
                 // Import
                 $el_result = $importer -> run();
-
-//                if($el_result == null){
-//
-//                    return true;
-//                }
-
 
                 /*
                  * Create default kit
