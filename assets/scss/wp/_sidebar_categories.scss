@@ -35,6 +35,10 @@
           padding-right:10px;
           position:absolute;
           left:0;
+          top: 0.785rem;
+        }
+        a{
+          padding-left:20px;
         }
         &:hover{
           &:before{
@@ -44,9 +48,6 @@
           >a{
             @include transition($tztheme-transition-all);
           }
-        }
-        a{
-          padding-left:20px;
         }
         .children{
           margin: 0.7em 0 0 0;
