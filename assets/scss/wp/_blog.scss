@@ -93,8 +93,8 @@
       width:100%;
     }
   }
-  .templaza-blog-item-link{
-    background:$tztheme-format-link-background;
+  .templaza-blog-item-link > .templaza-post-link{
+    border: 2px dashed $tz-basic-border-color;
   }
   .templaza-archive-gallery{
     .uk-slideshow-items{
