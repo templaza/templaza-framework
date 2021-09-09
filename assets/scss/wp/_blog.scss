@@ -34,7 +34,18 @@
       font-size:0.9em;
     }
     &:not(:last-child){
-      padding-right:15px;
+      &:after {
+        content: " - ";
+        margin: 0 6px;
+      }
+    }
+    &.tag {
+      a {
+        &:before {
+          content: "#";
+          margin-right: 1px;
+        }
+      }
     }
   }
 }
