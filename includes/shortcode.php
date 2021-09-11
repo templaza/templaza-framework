@@ -507,53 +507,6 @@ class TemplazaFramework_ShortCode{
         return $css;
     }
 
-//    public function custom_css(&$params, &$element, $selector = '', $device = 'desktop'){
-//        $css = '';
-//
-//        if(isset($params['text_color']) && !empty($params['text_color'])){
-//            $css    .= 'color: '.$params['text_color'].' !important;';
-//            unset($params['text_color']);
-//        }
-//
-//        if(isset($params['background'])){
-//            $background = $params['background'];
-//            $css    .= CSS::background($background['background-color'], $background['background-image'],
-//                $background['background-repeat'], $background['background-attachment'],
-//                $background['background-position'], $background['background-size'], '', '', true);
-//
-//            unset($params['background']);
-//        }
-//
-//        if(isset($params['border']) && !empty($params['border'])){
-//            $border = $params['border'];
-//            $css    .= CSS::border($border['border-top'],$border['border-right'],
-//                $border['border-bottom'],$border['border-left'], $border['border-style'],
-//                $border['border-color'], true);
-//
-//            unset($params['border']);
-//
-//        }
-//
-//        if(isset($params['margin']) && !empty($params['margin'])){
-//            $margin = $params['margin'];
-//            $css    .= CSS::margin($margin['margin-top'],$margin['margin-right'],
-//                $margin['margin-bottom'],$margin['margin-left'], true);
-//
-//            unset($params['margin']);
-//        }
-//
-//        if(isset($params['padding']) && !empty($params['padding'])){
-//            $padding = $params['padding'];
-//            $css    .= Templates::make_spacing_redux($padding, true);
-////            $css    .= CSS::padding($padding['padding-top'],$padding['padding-right'],
-////                $padding['padding-bottom'],$padding['padding-left'], true);
-//
-//            unset($params['padding']);
-//        }
-//
-//        return $css;
-//    }
-
     public function shortcode($atts, $content = ''){
         do_action('templaza-framework/shortcode/before_do_shortcode', $atts,  $content);
         do_action('templaza-framework/shortcode/'.$this -> get_shortcode_name().'/before_do_shortcode', $atts, $content);

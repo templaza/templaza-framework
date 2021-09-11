@@ -148,7 +148,7 @@ $data_attribs   = ' '.$data_attribs;
 //           }
            echo '<div class="d-flex w-100 justify-content-center">';
            echo '<div class="d-lg-none">';
-           Templates::load_my_layout('logo');
+           Templates::load_my_layout('logo', true, false);
            echo '</div>';
            ?>
                 <?php
