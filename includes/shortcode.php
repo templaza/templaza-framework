@@ -206,6 +206,7 @@ class TemplazaFramework_ShortCode{
                         'type'   => 'spacing',
                         'mode'   => 'margin',
                         'all'    => false,
+                        'allow_responsive'    => true,
                         'units'  => array( 'em', 'rem', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                         'title'  => esc_html__('Margin', $this -> text_domain),
                         'default' => array(
@@ -217,6 +218,7 @@ class TemplazaFramework_ShortCode{
                         'type'   => 'spacing',
                         'mode'   => 'padding',
                         'all'    => false,
+                        'allow_responsive'    => true,
                         'units'  => array( 'em', 'rem', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                         'title'  => esc_html__('Padding', $this -> text_domain),
                         'default' => array(
@@ -356,13 +358,30 @@ class TemplazaFramework_ShortCode{
         $params['tz_class'] = isset($params['tz_class'])?$params['tz_class']:'templaza-'.$element['type'];
         $params['tz_id']    = 'templaza-'.$element['type'].'-'.$id;
 
-        $css    = $this -> custom_css($params, $element);
-
         $custom_css_name    = 'tz_custom_'.$element['id'];
         $params['tz_class'].= ' '.$custom_css_name;
-        if(!empty($css)) {
-            $params['tz_css']   = '.'.$custom_css_name.'{'.$css.'}';
+
+        $css    = $this -> custom_css($params, $element);
+
+        if(!empty($css)){
+            if(is_array($css)){
+                if(count($css)){
+                    foreach ($css as $device => $style){
+                        if(!empty($style)) {
+                            $style  = '.'.$custom_css_name.'{'.$style.'}';
+                            Templates::add_inline_style($style, $device);
+                        }
+                    }
+                }
+            }else{
+                Templates::add_inline_style($css);
+            }
         }
+
+//        if(!empty($css)) {
+//            $params['tz_css']   = '.'.$custom_css_name.'{'.$css.'}';
+//        }
+
         if(isset($params['tz_customclass']) && !empty($params['tz_customclass'])){
             if(isset($params['tz_class'])){
                 $params['tz_class'].= ' '.$params['tz_customclass'];
@@ -382,11 +401,14 @@ class TemplazaFramework_ShortCode{
                 $params['tz_class'] .=' tz_background_overlay ';
                 $css_overlay   = '';
                 $css_overlay   .= '.'.$custom_css_name.'::before {background-color:'.$overlay_color.' ;}';
-                if(isset($params['tz_css'])){
-                    $params['tz_css']   .= $css_overlay;
-                }else{
-                    $params['tz_css']   = $css_overlay;
+                if(!empty($css_overlay)){
+                    Templates::add_inline_style($css_overlay);
                 }
+//                if(isset($params['tz_css'])){
+//                    $params['tz_css']   .= $css_overlay;
+//                }else{
+//                    $params['tz_css']   = $css_overlay;
+//                }
             }
         }
 
@@ -407,29 +429,32 @@ class TemplazaFramework_ShortCode{
                 $css_link   .= $custom_css_name.' a:active{color:'.$link_color['active'].' !important;}';
             }
             if(!empty($css_link)){
-                if(isset($params['tz_css'])){
-                    $params['tz_css']   .= $css_link;
-                }else{
-                    $params['tz_css']   = $css_link;
-                }
-
+                Templates::add_inline_style($css_link);
             }
+//            if(!empty($css_link)){
+//                if(isset($params['tz_css'])){
+//                    $params['tz_css']   .= $css_link;
+//                }else{
+//                    $params['tz_css']   = $css_link;
+//                }
+//
+//            }
         }
 
         return $params;
     }
 
     public function custom_css(&$params, &$element){
-        $css = '';
+        $css = array('desktop' => '', 'tablet' => '', 'mobile' => '');
 
         if(isset($params['text_color']) && !empty($params['text_color'])){
-            $css    .= 'color: '.$params['text_color'].' !important;';
+            $css['desktop'] .= 'color: '.$params['text_color'].' !important;';
             unset($params['text_color']);
         }
 
         if(isset($params['background'])){
             $background = $params['background'];
-            $css    .= CSS::background($background['background-color'], $background['background-image'],
+            $css['desktop']    .= CSS::background($background['background-color'], $background['background-image'],
                 $background['background-repeat'], $background['background-attachment'],
                 $background['background-position'], $background['background-size'], '', '', true);
 
@@ -438,7 +463,7 @@ class TemplazaFramework_ShortCode{
 
         if(isset($params['border']) && !empty($params['border'])){
             $border = $params['border'];
-            $css    .= CSS::border($border['border-top'],$border['border-right'],
+            $css['desktop']    .= CSS::border($border['border-top'],$border['border-right'],
                 $border['border-bottom'],$border['border-left'], $border['border-style'],
                 $border['border-color'], true);
 
@@ -447,23 +472,87 @@ class TemplazaFramework_ShortCode{
         }
 
         if(isset($params['margin']) && !empty($params['margin'])){
-            $margin = $params['margin'];
-            $css    .= CSS::margin($margin['margin-top'],$margin['margin-right'],
-                $margin['margin-bottom'],$margin['margin-left'], true);
+
+            $margin    = CSS::make_spacing_redux('margin', $params['margin'], true);
+
+            if(!empty($margin)){
+                if(is_array($margin)){
+                    foreach($margin as $device => $pcss){
+                        $css[$device] .= $pcss;
+                    }
+                }else{
+                    $css['desktop'] .= $margin;
+                }
+            }
 
             unset($params['margin']);
         }
 
         if(isset($params['padding']) && !empty($params['padding'])){
-            $padding = $params['padding'];
-            $css    .= CSS::padding($padding['padding-top'],$padding['padding-right'],
-                $padding['padding-bottom'],$padding['padding-left'], true);
+            $padding    = CSS::make_spacing_redux('padding', $params['padding'], true);
+
+            if(!empty($padding)){
+                if(is_array($padding)){
+                    foreach($padding as $device => $pcss){
+                        $css[$device] .= $pcss;
+                    }
+                }else{
+                    $css['desktop'] .= $padding;
+                }
+            }
 
             unset($params['padding']);
         }
 
         return $css;
     }
+
+//    public function custom_css(&$params, &$element, $selector = '', $device = 'desktop'){
+//        $css = '';
+//
+//        if(isset($params['text_color']) && !empty($params['text_color'])){
+//            $css    .= 'color: '.$params['text_color'].' !important;';
+//            unset($params['text_color']);
+//        }
+//
+//        if(isset($params['background'])){
+//            $background = $params['background'];
+//            $css    .= CSS::background($background['background-color'], $background['background-image'],
+//                $background['background-repeat'], $background['background-attachment'],
+//                $background['background-position'], $background['background-size'], '', '', true);
+//
+//            unset($params['background']);
+//        }
+//
+//        if(isset($params['border']) && !empty($params['border'])){
+//            $border = $params['border'];
+//            $css    .= CSS::border($border['border-top'],$border['border-right'],
+//                $border['border-bottom'],$border['border-left'], $border['border-style'],
+//                $border['border-color'], true);
+//
+//            unset($params['border']);
+//
+//        }
+//
+//        if(isset($params['margin']) && !empty($params['margin'])){
+//            $margin = $params['margin'];
+//            $css    .= CSS::margin($margin['margin-top'],$margin['margin-right'],
+//                $margin['margin-bottom'],$margin['margin-left'], true);
+//
+//            unset($params['margin']);
+//        }
+//
+//        if(isset($params['padding']) && !empty($params['padding'])){
+//            $padding = $params['padding'];
+//            $css    .= Templates::make_spacing_redux($padding, true);
+////            $css    .= CSS::padding($padding['padding-top'],$padding['padding-right'],
+////                $padding['padding-bottom'],$padding['padding-left'], true);
+//
+//            unset($params['padding']);
+//        }
+//
+//        return $css;
+//    }
 
     public function shortcode($atts, $content = ''){
         do_action('templaza-framework/shortcode/before_do_shortcode', $atts,  $content);

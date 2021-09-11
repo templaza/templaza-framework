@@ -2,7 +2,6 @@
 
 namespace TemPlazaFramework;
 
-use Pelago\Emogrifier\CssInliner;
 use ScssPhp\ScssPhp\Compiler;
 use ScssPhp\ScssPhp\OutputStyle;
 
@@ -11,6 +10,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 class Templates{
 
     public static $_styles = ['desktop' => [], 'tablet' => [], 'mobile' => []];
+    public static $_devices= ['desktop' => '', 'tablet' => '', 'mobile' => ''];
 
     protected static $cache = array();
 
@@ -201,6 +201,27 @@ class Templates{
         }
     }
 
+    /**
+    *
+     */
+    public static function add_inline_styles($styles = array(), $css_file = true, $handle = false){
+        if(!count($styles)){
+            return;
+        }
+        if(count($styles)){
+            foreach($styles as $device => $style){
+                if ($css_file) {
+                    self::$_styles[$device][] = $style;
+                }
+                else {
+                    if($handle){
+                        wp_add_inline_style($handle, $style);
+                    }
+                }
+            }
+        }
+    }
+
     public static function get_inline_styles(){
         $inline_styles  = self::$_styles;
         if(is_array($inline_styles)){
@@ -315,7 +336,8 @@ class Templates{
             return static::$cache[$store_id];
         }
 
-        $css    = '';
+        $css    = self::$_devices;
+
         if(is_array($option_names)){
             $important  = $important?' !important':'';
 
@@ -325,30 +347,42 @@ class Templates{
 
                     // Background
                     if(array_key_exists('background-color', $option)) {
-                        $css    .= CSS::background($option['background-color'], $option['background-image'],
+                        $css['desktop']    .= CSS::background($option['background-color'], $option['background-image'],
                             $option['background-repeat'], $option['background-attachment'],
                             $option['background-position'],$option['background-size']);
                     }
                     // Border
                     if(array_key_exists('border-top', $option)){
-                        $css    .= CSS::border($option['border-top'], $option['border-right'],
+                        $css['desktop']    .= CSS::border($option['border-top'], $option['border-right'],
                             $option['border-bottom'], $option['border-left'],
                             $option['border-style'], $option['border-color'], $important);
                     }
                     // Border radius
                     if(array_key_exists('border-radius-top-left', $option)){
-                        $css    .= CSS::border_radius($option['border-radius-top-left'], $option['border-radius-top-right'],
-                            $option['border-radius-bottom-left'], $option['border-radius-bottom-right'], $important);
+                        $border_radius = CSS::make_spacing_redux('border-radius', $option, $important);
+                        if(!empty($border_radius) && count($border_radius)){
+                            foreach ($border_radius as $device => $mstyle){
+                                $css[$device]   .= $mstyle;
+                            }
+                        }
                     }
                     // Margin
                     if(array_key_exists('margin-top', $option)){
-                        $css    .= CSS::margin($option['margin-top'], $option['margin-right'],
-                            $option['margin-bottom'], $option['margin-left'], $important);
+                        $margin = CSS::make_spacing_redux('margin', $option, $important);
+                        if(!empty($margin) && count($margin)){
+                            foreach ($margin as $device => $mstyle){
+                                $css[$device]   .= $mstyle;
+                            }
+                        }
                     }
                     // Padding
                     if(array_key_exists('padding-top', $option)){
-                        $css    .= CSS::padding($option['padding-top'], $option['padding-right'],
-                            $option['padding-bottom'], $option['padding-left'], $important);
+                        $padding = CSS::make_spacing_redux('padding', $option, $important);
+                        if(!empty($padding) && count($padding)){
+                            foreach ($padding as $device => $pstyle){
+                                $css[$device]   .= $pstyle;
+                            }
+                        }
                     }
                 }
             }

@@ -25,6 +25,7 @@ Templaza_API::set_section('settings',
             array(
                 'id'       => 'widget_box_padding',
                 'type'     => 'spacing',
+                'allow_responsive'    => true,
                 'title'    => __('Widget Padding', $this -> text_domain),
                 'default'  => ''
             ),
@@ -32,6 +33,7 @@ Templaza_API::set_section('settings',
                 'id'       => 'widget_box_margin',
                 'type'     => 'spacing',
                 'mode'     => 'margin',
+                'allow_responsive'    => true,
                 'title'    => __('Widget Margin', $this -> text_domain),
                 'default'  => ''
             ),
@@ -39,6 +41,7 @@ Templaza_API::set_section('settings',
                 'id'       => 'widget_box_border_radius',
                 'type'     => 'spacing',
                 'mode'     => 'border-radius',
+                'allow_responsive'    => true,
                 'title'    => __('Widget Border radius', $this -> text_domain),
                 'default'  => ''
             ),

@@ -2,6 +2,7 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
+use TemPlazaFramework\CSS;
 use TemPlazaFramework\Functions;
 
 if(!class_exists('TemplazaFramework_ShortCode_Column')){
@@ -394,27 +395,11 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
             $css    = parent::custom_css($params, $element);
 
             if(isset($params['text_color']) && !empty($params['text_color'])){
-                $css    .= 'color: '.$params['text_color'].';';
+                $css['desktop'] .= 'color: '.$params['text_color'].';';
             }
 
             if(isset($params['border']) && !empty($params['border'])){
-                $border = $params['border'];
-                $border_color   = isset($border['border-color']) && $border['border-color']?' '.$border['border-color']:'';
-                if(isset($border['border-style']) && !empty($border['border-style'])){
-                    if(isset($border['border-top']) && strlen($border['border-top'])){
-                        $css    .= 'border-top: '.$border['border-top'].' '.$border['border-style'].$border_color;
-                    }
-                    if(isset($border['border-right']) && strlen($border['border-right'])){
-                        $css    .= 'border-right: '.$border['border-right'].' '.$border['border-style'].$border_color;
-                    }
-                    if(isset($border['border-bottom']) && strlen($border['border-bottom'])){
-                        $css    .= 'border-bottom: '.$border['border-bottom'].' '.$border['border-style'].$border_color;
-                    }
-                    if(isset($border['border-left']) && strlen($border['border-left'])){
-                        $css    .= 'border-left: '.$border['border-left'].' '.$border['border-style'].$border_color;
-                    }
-                }
-
+                $css['desktop'] .= CSS::border_redux($params['border']);
             }
 
             return $css;

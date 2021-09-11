@@ -544,47 +544,34 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 die();
             }
         }
-
         protected function import_content($folder_path, $filename = '',  $file_filter = '.xml'){
-            if ( ! class_exists( 'WXR_Importer' ) ) {
-                include wp_normalize_path( TEMPLAZA_FRAMEWORK_LIBRARY_PATH . '/importer/class-logger.php' );
-                include wp_normalize_path( TEMPLAZA_FRAMEWORK_LIBRARY_PATH . '/importer/class-logger-html.php' );
 
-                $wp_import = wp_normalize_path( TEMPLAZA_FRAMEWORK_LIBRARY_PATH . '/importer/class-wxr-importer.php' );
-                include $wp_import;
-            }
+            require_once TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/importer/class-templaza-importer.php';
 
-            if ( ! class_exists( 'TemplazaFramework_WXR_Importer' ) ) {
-                $class_wp_importer = TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/importer/class-templaza-wxr-importer.php';
+
+            if ( ! class_exists( 'TemplazaFramework_Importer' ) ) {
+                $class_wp_importer = TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/importer/class-templaza-importer.php';
                 if ( file_exists( $class_wp_importer ) )
                     require_once $class_wp_importer;
             }
 
-            if(!class_exists('TemplazaFramework_WXR_Importer')){
+            if(!class_exists('TemplazaFramework_Importer')){
                 $this -> info -> set_message(esc_html__('The class TemplazaFramework_WXR_Importer not found.', $this -> text_domain), true);
                 echo $this -> info -> output(true);
                 die();
             }
-
             $_file   = $this -> get_substeps($folder_path, $filename, $file_filter);
 
-            $logger = new \WP_Importer_Logger_HTML();
-            $importer = new \TemplazaFramework_WXR_Importer(
-                array(
-                    'fetch_attachments' => true,
-                    'prefill_existing_posts' => false,
-                    'aggressive_url_search' => true,
-                )
-            );
-
-            $importer->set_logger($logger);
+            $importer   = new \TemplazaFramework_Importer();
 
             ob_start();
             $importer->import($folder_path.'/'.$_file);
+            $result = ob_get_contents();
             ob_end_clean();
 
             return true;
         }
+
         protected function import_revslider($folder_path, $filename = '',  $file_filter = '.zip'){
 
             if(!class_exists('RevSliderSliderImport') && !class_exists('RevSlider')){

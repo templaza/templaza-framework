@@ -120,18 +120,18 @@ $typographies = array(
         'id'        => 'blog_item_heading',
         'enable'    => true,
         'class'     => array(
-            'desktop'    => 'div.templaza-archive .templaza-archive-item .title',
-            'tablet'     => 'div.templaza-archive .templaza-archive-item .title',
-            'mobile'     => 'div.templaza-archive .templaza-archive-item .title',
+            'desktop'    => 'div.templaza-archive .templaza-archive-item .title a',
+            'tablet'     => 'div.templaza-archive .templaza-archive-item .title a',
+            'mobile'     => 'div.templaza-archive .templaza-archive-item .title a',
         )
     ),
     array(
         'id'        => 'blog_item_content',
         'enable'    => true,
         'class'     => array(
-            'desktop'    => 'div.templaza-archive .templaza-archive-item .templaza-blog-desc',
-            'tablet'     => 'div.templaza-archive .templaza-archive-item .templaza-blog-desc',
-            'mobile'     => 'div.templaza-archive .templaza-archive-item .templaza-blog-desc',
+            'desktop'    => 'div.templaza-archive .templaza-archive-item .excerpt',
+            'tablet'     => 'div.templaza-archive .templaza-archive-item .excerpt',
+            'mobile'     => 'div.templaza-archive .templaza-archive-item .excerpt',
         )
     ),
     // Widget sidebar typography
@@ -244,8 +244,7 @@ $typographies = array(
             'mobile'     => 'div.templaza-single .templaza-single-content h6'
                 .',div.templaza-single .templaza-single-content .h6',
         )
-    ),
-	array(
+    ),array(
         'id'        => 'blog_single_quote',
         'enable'    => true,
         'class'     => array(
@@ -358,43 +357,39 @@ if(count($designs)) {
     foreach($designs as $design){
         $enable = isset($design['enable']) ? (bool)$design['enable'] : false;
         if ($enable) {
-            $wd_css = '';
-//            if (is_array($design['class'])) {
-//                $devices = $design['class'];
-//            } else {
-//                $devices['desktop'] = $design['class'];
-//                $devices['tablet']  = $design['class'];
-//                $devices['mobile']  = $design['class'];
-//            }
+            $wd_css_responsive  = array(
+                'desktop' => '',
+                'tablet' => '',
+                'mobile' => '',
+            );
 
-//            if(isset($design['id']) && !empty($design['id'])) {
-//
-//                $typoParams = isset($options[$design['id']]) ? $options[$design['id']] : array();
-////                $wd_css     .= Templates::make_css_design_style($typoParams)
-////                $_styles    = Fonts::make_css_style($typoParams, $devices);
-////                $styles     = count($styles)?($styles + $_styles):$_styles;
-//                $wd_css = Templates::make_css_design_style($design['options'], $options);
-//
-//            }elseif(isset($design['options']) && count($design['options'])){
-                if($index = array_search('widget_box_shadow', $design['options'])){
-                    $box_shadow = isset($options['widget_box_shadow'])?$options['widget_box_shadow']:'';
-                    $wd_css .= CSS::box_shadow($box_shadow);
-                    unset($design['options'][$index]);
-                }elseif($index = array_search('blog_item_shadow', $design['options'])){
-                    $box_shadow = isset($options['blog_item_shadow'])?$options['blog_item_shadow']:'';
-                    $wd_css .= CSS::box_shadow($box_shadow);
-                    unset($design['options'][$index]);
-                }elseif($index = array_search('blog_single_shadow', $design['options'])){
-                    $box_shadow = isset($options['blog_single_shadow'])?$options['blog_single_shadow']:'';
-                    $wd_css .= CSS::box_shadow($box_shadow);
-                    unset($design['options'][$index]);
-                }
-                $wd_css .= Templates::make_css_design_style($design['options'], $options);
+            if($index = array_search('widget_box_shadow', $design['options'])){
+                $box_shadow = isset($options['widget_box_shadow'])?$options['widget_box_shadow']:'';
+                $wd_css_responsive['desktop'] .= CSS::box_shadow($box_shadow);
+                unset($design['options'][$index]);
+            }elseif($index = array_search('blog_item_shadow', $design['options'])){
+                $box_shadow = isset($options['blog_item_shadow'])?$options['blog_item_shadow']:'';
+                $wd_css_responsive['desktop'] .= CSS::box_shadow($box_shadow);
+                unset($design['options'][$index]);
+            }elseif($index = array_search('blog_single_shadow', $design['options'])){
+                $box_shadow = isset($options['blog_single_shadow'])?$options['blog_single_shadow']:'';
+                $wd_css_responsive['desktop'] .= CSS::box_shadow($box_shadow);
+                unset($design['options'][$index]);
+            }
+            $wd_css    = Templates::make_css_design_style($design['options'], $options);
 
-                if(!empty($wd_css)){
+            if(!empty($wd_css)){
+                if(is_array($wd_css)){
+                    foreach ($wd_css as $device => $wd_style){
+                        if(!empty($wd_style)) {
+                            $wd_style = $design['class'] . '{' . $wd_style . '}';
+                            Templates::add_inline_style($wd_style, $device);
+                        }
+                    }
+                }else{
                     Templates::add_inline_style($design['class'].'{'.$wd_css.'}');
                 }
-//            }
+            }
         }
     }
 }

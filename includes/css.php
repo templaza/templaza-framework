@@ -2,7 +2,7 @@
 
 namespace TemPlazaFramework;
 
-use ScssPhp\ScssPhp\Compiler;
+use TemPlazaFramework\Templates;
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
@@ -258,6 +258,31 @@ class CSS{
         return $css;
     }
 
+    public static function border_redux($border = array(), $important = false){
+        $store_id   = __METHOD__;
+        $store_id  .= ':'.serialize($border);
+        $store_id  .= ':'.$important;
+        $store_id   = md5($store_id);
+
+        if(isset(static::$cache[$store_id])){
+            return static::$cache[$store_id];
+        }
+
+        $top_name       = 'border-top';
+        $right_name     = 'border-right';
+        $bottom_name    = 'border-bottom';
+        $left_name      = 'border-left';
+
+        $top    = isset($border[$top_name])?$border[$top_name]:'';
+        $right  = isset($border[$right_name])?$border[$right_name]:'';
+        $bottom = isset($border[$bottom_name])?$border[$bottom_name]:'';
+        $left   = isset($border[$left_name])?$border[$left_name]:'';
+        $color  = isset($border['border-color'])?$border['border-color']:'';
+        $style  = isset($border['border-style'])?$border['border-style']:'';
+
+        return self::border($top, $right, $bottom, $left, $style, $color, $important);
+    }
+
     public static function border_radius($top_left = '',$top_right = '',$bottom_left = '',$bottom_right = '', $important = false){
         $store_id   = __METHOD__;
         $store_id  .= ':'.$top_left;
@@ -367,5 +392,145 @@ class CSS{
         return self::background($background_options['background-color'], $background_options['background-image'],
             $background_options['background-repeat'], $background_options['background-attachment'],
             $background_options['background-position'], $background_options['background-size']);
+    }
+
+    /**
+     * @param array $spacing_option Padding, margin, border.. options
+     * @param string $important The css will be add "!important"
+     * @param string $mode Accepts: padding or margin.
+     */
+    public static function spacing_redux($mode = 'padding', $spacing_option = array(), $important = false){
+        $store_id   = __METHOD__;
+        $store_id  .= ':'.serialize($spacing_option);
+        $store_id  .= ':'.$important;
+        $store_id   = md5($store_id);
+
+        if(isset(static::$cache[$store_id])){
+            return static::$cache[$store_id];
+        }
+
+        if(!count($spacing_option)){
+            return '';
+        }
+
+        $top_name       = $mode.'-top';
+        $right_name     = $mode.'-right';
+        $bottom_name    = $mode.'-bottom';
+        $left_name      = $mode.'-left';
+        if($mode == 'border-radius'){
+            $top_name        = $mode.'-top-left';
+            $right_name      = $mode.'-top-right';
+            $bottom_name     = $mode.'-bottom-right';
+            $left_name       = $mode.'-bottom-left';
+        }
+
+        $top    = isset($spacing_option[$top_name])?$spacing_option[$top_name]:'';
+        $right  = isset($spacing_option[$right_name])?$spacing_option[$right_name]:'';
+        $bottom = isset($spacing_option[$bottom_name])?$spacing_option[$bottom_name]:'';
+        $left   = isset($spacing_option[$left_name])?$spacing_option[$left_name]:'';
+
+        $important  = $important?' !important':'';
+
+        if(!empty($top) && !empty($right) && !empty($bottom) && !empty($left)){
+            if($top == $bottom && $top == $left && $top == $right){
+                $css    = $mode.':'.$top.$important.';';
+            }elseif($top == $bottom && $left == $right){
+                $css    = $mode.':'.$top.' '.$left . $important . ';';
+            }elseif($left == $right && $top != $bottom) {
+                $css    = $mode.':'.$top.' '.$left.' '.$bottom.$important.';';
+            }else{
+                $css    = $mode.':'.$top.' '.$right.' '
+                    . $bottom.' '.$left.$important.';';
+            }
+        }else {
+            $css    = !empty($top)?$top_name.':'.$top.$important.';':'';
+            $css   .= !empty($right)?$right_name.':'.$right.$important.';':'';
+            $css   .= !empty($bottom)?$bottom_name.':' . $bottom.$important.';':'';
+            $css   .= !empty($left)?$left_name.':'.$left.$important.';':'';
+        }
+
+        if(empty($css)){
+            return '';
+        }
+
+        static::$cache[$store_id]   = $css;
+        return $css;
+    }
+
+    /**
+     * @param string $selector The id css name or class css name,...
+     * @param array $spacing_option Padding, margin, border.. options
+     * @param string $important The css will be add "!important"
+     * @param string $mode Accepts: absolute padding or margin.
+     */
+    public static function make_spacing_redux($mode = 'padding', $spacing_option = array(), $important = false, $selector = ''){
+        $store_id   = __METHOD__;
+        $store_id  .= ':'.serialize($spacing_option);
+        $store_id  .= ':'.$important;
+        $store_id   = md5($store_id);
+
+        if(isset(static::$cache[$store_id])){
+            return static::$cache[$store_id];
+        }
+
+        $spacing_option = array_filter($spacing_option);
+
+        if(!count($spacing_option)){
+            return '';
+        }
+
+        $devices    = Templates::$_devices;
+        $css        = array();
+
+        $is_responsive  = false;
+        $values         = array_values($spacing_option);
+//        $keys           = array_keys($values[0]);
+
+        if(array_key_exists('desktop', $values[0]) || array_key_exists('tablet', $values[0])
+            || array_key_exists('mobile', $values[0])){
+            $is_responsive  = true;
+        }
+
+        if($is_responsive){
+            foreach($devices as $device => $dval){
+                $padding_device = array();
+                $padding_device[$device]    = array();
+                foreach($spacing_option as $name => $value){
+                    if(isset($value[$device])) {
+                        $padding_device[$device][$name] = $value[$device];
+                    }
+                }
+
+                $_css   = self::spacing_redux($mode, $padding_device[$device], $important);
+
+                if(!empty($_css)){
+                    if(!isset($css[$device])){
+                        $css[$device]   = '';
+                    }
+                    if(!empty($selector)){
+                        if ($device == 'mobile') {
+                            $css[$device] = !empty($_css)?'@media (max-width: 767.98px) {'.$selector.'{'. $_css . '}}':'';
+                        } elseif ($device == 'tablet') {
+                            $css[$device] = !empty($_css)?'@media (max-width: 991.98px) {'.$selector.'{'. $_css . '}}':'';
+                        } else {
+                            $css[$device] = !empty($_css)?$selector.'{'.$_css.'}':'';
+                        }
+                    }else{
+                        $css[$device] = $_css;
+                    }
+                }
+            }
+
+        }else{
+            $css    = self::spacing_redux($mode, $spacing_option, $important);
+            $css    = !empty($css) && !empty($selector)?$selector.'{'.$css.'}':(!empty($css)?$css:'');
+        }
+
+        if(!empty($css)){
+            self::$cache[$store_id] = $css;
+            return $css;
+        }
+
+        return '';
     }
 }
