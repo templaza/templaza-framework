@@ -7,7 +7,7 @@ div.templaza-single-post {
     }
   }
   h3{
-    &.block_title, &.comment-reply-title{
+    &.block_title {
       color:$tztheme-heading-color;
       font-weight:700;
       font-size:24px;
