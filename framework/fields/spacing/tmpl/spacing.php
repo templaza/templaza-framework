@@ -23,13 +23,11 @@ $devices    = array(
 );
 $allow_responsive   = isset($this -> field['allow_responsive'])?filter_var($this -> field['allow_responsive'], FILTER_VALIDATE_BOOLEAN):false;
 
-//var_dump($allow_responsive);
-//var_dump($this -> field['allow_responsive']);
-//var_dump(__FILE__);
-////die(__FILE__);
+if($allow_responsive){
 ?>
 <div data-responsive="<?php echo (isset($this -> field['allow_responsive'])?(int) $this -> field['allow_responsive']:0);
 ?>" data-field-device="desktop">
+<?php }?>
     <?php
     $unit_arr = Redux_Helpers::$array_units;
 
@@ -101,12 +99,21 @@ $allow_responsive   = isset($this -> field['allow_responsive'])?filter_var($this
             'bottom' => isset($this->value[$this->field['mode'] . '-' . $position['bottom']]) ? $this->value[$this->field['mode'] . '-' . $position['bottom']]:array(),
             'left' => isset($this->value[$this->field['mode'] . '-' . $position['left']]) ? $this->value[$this->field['mode'] . '-' . $position['left']]:array(),
         );
-        $value = array(
-            'top' => isset($this->value[$this->field['mode'] . '-' . $position['top']]['desktop']) ? filter_var($this->value[$this->field['mode'] . '-' . $position['top']]['desktop'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['top'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-            'right' => isset($this->value[$this->field['mode'] . '-' . $position['right']]['desktop']) ? filter_var($this->value[$this->field['mode'] . '-' . $position['right']]['desktop'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['right'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-            'bottom' => isset($this->value[$this->field['mode'] . '-' . $position['bottom']]['desktop']) ? filter_var($this->value[$this->field['mode'] . '-' . $position['bottom']]['desktop'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['bottom'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-            'left' => isset($this->value[$this->field['mode'] . '-' . $position['left']]['desktop']) ? filter_var($this->value[$this->field['mode'] . '-' . $position['left']]['desktop'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-        );
+        if(isset($this->value[$this->field['mode'] . '-' . $position['top']]['desktop'])) {
+            $value = array(
+                'top' => isset($this->value[$this->field['mode'] . '-' . $position['top']]['desktop']) ? filter_var($this->value[$this->field['mode'] . '-' . $position['top']]['desktop'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['top'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+                'right' => isset($this->value[$this->field['mode'] . '-' . $position['right']]['desktop']) ? filter_var($this->value[$this->field['mode'] . '-' . $position['right']]['desktop'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['right'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+                'bottom' => isset($this->value[$this->field['mode'] . '-' . $position['bottom']]['desktop']) ? filter_var($this->value[$this->field['mode'] . '-' . $position['bottom']]['desktop'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['bottom'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+                'left' => isset($this->value[$this->field['mode'] . '-' . $position['left']]['desktop']) ? filter_var($this->value[$this->field['mode'] . '-' . $position['left']]['desktop'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+            );
+        }else{
+            $value = array(
+                'top' => isset($this->value[$this->field['mode'] . '-' . $position['top']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['top']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['top'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+                'right' => isset($this->value[$this->field['mode'] . '-' . $position['right']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['right']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['right'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+                'bottom' => isset($this->value[$this->field['mode'] . '-' . $position['bottom']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['bottom']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['bottom'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+                'left' => isset($this->value[$this->field['mode'] . '-' . $position['left']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['left']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+            );
+        }
     }else {
         $value = array(
             'top' => isset($this->value[$this->field['mode'] . '-' . $position['top']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['top']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['top'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
@@ -173,19 +180,22 @@ $allow_responsive   = isset($this -> field['allow_responsive'])?filter_var($this
         <div class="uk-clearfix">
             <span class="spacing-lock locked">
                 <i class="dashicons dashicons-lock"></i>
-<!--                <i class="dashicons dashicons-unlock"></i>-->
             </span>
             <ul class="uk-iconnav uk-float-right" data-uk-switcher>
                 <?php
-                $units  = $value_responsive['units'];
                 foreach($devices as $device => $item) {
-                    $unit_value = is_array($unit_responsive) && isset($unit_responsive[$device])?$unit_responsive[$device]:'';
+                    $unit_value = is_array($unit_responsive) && isset($unit_responsive[$device])?$unit_responsive[$device]:$unit_responsive;
                     $input_unit_html    .= '<input 
                             type="hidden" 
                             name="' . esc_attr($this->field['name'] . $this->field['name_suffix']) . '[units]['.$device.']" 
                             class="field-units js-device-'.$device.'" value="' . esc_attr($unit_value) . '">'."\n";
                     if ( true === $this->field['top'] ) {
-                        $top_val    = isset($value_responsive['top'][$device])?filter_var($value_responsive['top'][$device], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION):'';
+                        $top_val    = '';
+                        if(isset($value_responsive['top'][$device])){
+                            $top_val    = filter_var($value_responsive['top'][$device], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                        }elseif($device == 'desktop'){
+                            $top_val    = filter_var($value_responsive['top'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                        }
 
                         $input_spacing_html .= '<input 
                                     type="hidden" 
@@ -196,7 +206,13 @@ $allow_responsive   = isset($this -> field['allow_responsive'])?filter_var($this
                                   >'."\n";
                     }
                     if ( true === $this->field['right'] ) {
-                        $right_val    = isset($value_responsive['right'][$device])?filter_var($value_responsive['right'][$device], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION):'';
+                        $right_val    = '';
+                        if(isset($value_responsive['right'][$device])){
+                            $right_val    = filter_var($value_responsive['right'][$device], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                        }elseif($device == 'desktop'){
+                            $right_val    = filter_var($value_responsive['right'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                        }
+
                         $input_spacing_html .= '<input 
                                     type="hidden" 
                                     class="redux-spacing-value js-device-'.$device.'"
@@ -206,7 +222,13 @@ $allow_responsive   = isset($this -> field['allow_responsive'])?filter_var($this
                                   >';
                     }
                     if ( true === $this->field['bottom'] ) {
-                        $bottom_val    = isset($value_responsive['bottom'][$device])?filter_var($value_responsive['bottom'][$device], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION):'';
+                        $bottom_val    = '';
+                        if(isset($value_responsive['bottom'][$device])){
+                            $bottom_val    = filter_var($value_responsive['bottom'][$device], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                        }elseif($device == 'desktop'){
+                            $bottom_val    = filter_var($value_responsive['bottom'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                        }
+
                         $input_spacing_html .= '<input 
                                     type="hidden" 
                                     class="redux-spacing-value js-device-'.$device.'" 
@@ -216,7 +238,13 @@ $allow_responsive   = isset($this -> field['allow_responsive'])?filter_var($this
                                   >'."\n";
                     }
                     if ( true === $this->field['left'] ) {
-                        $left_val    = isset($value_responsive['left'][$device])?filter_var($value_responsive['left'][$device], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION):'';
+                        $left_val    = '';
+                        if(isset($value_responsive['left'][$device])){
+                            $left_val    = filter_var($value_responsive['left'][$device], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                        }elseif($device == 'desktop'){
+                            $left_val    = filter_var($value_responsive['left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                        }
+                        
                         $input_spacing_html .= '<input 
                                     type="hidden" 
                                     class="redux-spacing-value js-device-'.$device.'"
@@ -404,4 +432,6 @@ $allow_responsive   = isset($this -> field['allow_responsive'])?filter_var($this
         }
         ?>
     </div>
+<?php if($allow_responsive){?>
 </div>
+<?php }?>

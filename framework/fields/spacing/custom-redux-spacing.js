@@ -134,9 +134,6 @@
 		// tzfrm_org_redux_field_spacing(selector);
 	};
 	redux.field_objects.spacing.templaza_methods.setting_edit_after_init_field = function(selector, parent, element){
-		console.log(selector);
-		console.log(element);
-
 		var __uk_item = $(this),
 			__el	= $(selector),
 			__responsive_main = $(selector).find("[data-responsive]"),

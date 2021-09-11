@@ -361,17 +361,25 @@ class Templates{
                     if(array_key_exists('border-radius-top-left', $option)){
                         $border_radius = CSS::make_spacing_redux('border-radius', $option, $important);
                         if(!empty($border_radius) && count($border_radius)){
-                            foreach ($border_radius as $device => $mstyle){
-                                $css[$device]   .= $mstyle;
+                            if(is_array($border_radius) && count($border_radius)){
+                                foreach ($border_radius as $device => $mstyle){
+                                    $css[$device]   .= $mstyle;
+                                }
+                            }else{
+                                $css['desktop'] .= $border_radius;
                             }
                         }
                     }
                     // Margin
                     if(array_key_exists('margin-top', $option)){
                         $margin = CSS::make_spacing_redux('margin', $option, $important);
-                        if(!empty($margin) && count($margin)){
-                            foreach ($margin as $device => $mstyle){
-                                $css[$device]   .= $mstyle;
+                        if(!empty($margin)){
+                            if(is_array($margin) && count($margin)){
+                                foreach ($margin as $device => $mstyle){
+                                    $css[$device]   .= $mstyle;
+                                }
+                            }else{
+                                $css['desktop'] .= $margin;
                             }
                         }
                     }
@@ -379,8 +387,12 @@ class Templates{
                     if(array_key_exists('padding-top', $option)){
                         $padding = CSS::make_spacing_redux('padding', $option, $important);
                         if(!empty($padding) && count($padding)){
-                            foreach ($padding as $device => $pstyle){
-                                $css[$device]   .= $pstyle;
+                            if(is_array($padding) && count($padding)){
+                                foreach ($padding as $device => $pstyle){
+                                    $css[$device]   .= $pstyle;
+                                }
+                            }else{
+                                $css['desktop'] .= $padding;
                             }
                         }
                     }

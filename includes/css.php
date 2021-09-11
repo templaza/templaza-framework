@@ -486,7 +486,8 @@ class CSS{
         if(is_array($spacing_option) && count($spacing_option)){
             $values         = array_values($spacing_option);
 
-            if(is_array($values)  && count($values) && (array_key_exists('desktop', $values[0]) || array_key_exists('tablet', $values[0])
+            if(isset($values[0]) && is_array($values[0]) && count($values[0])
+                && (array_key_exists('desktop', $values[0]) || array_key_exists('tablet', $values[0])
                 || array_key_exists('mobile', $values[0]))){
                 $is_responsive  = true;
             }

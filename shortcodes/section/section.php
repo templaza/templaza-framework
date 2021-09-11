@@ -133,6 +133,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'type'   => 'spacing',
                                         'mode'   => 'margin',
                                         'all'    => false,
+                                        'allow_responsive'  => true,
                                         'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                                         'title'  => esc_html__('Margin', $this -> text_domain),
                                     ),
@@ -141,6 +142,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'type'   => 'spacing',
                                         'mode'   => 'padding',
                                         'all'    => false,
+                                        'allow_responsive'  => true,
                                         'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                                         'title'  => esc_html__('Padding', $this -> text_domain),
                                     ),
