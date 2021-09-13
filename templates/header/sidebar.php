@@ -58,7 +58,6 @@ $header_menu_level          = isset($options['header-menu-level'])?(int) $option
             'menu_id'         => '',
             'depth'           => $header_menu_level, // Level
         ));
-        remove_filter('nav_menu_submenu_css_class', 'test');
         ?>
     </div>
     <?php if ($block_1_type != 'blank'): ?>

@@ -866,6 +866,10 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                         update_option(Manager::OPTION_ACTIVE, $created_default_kit);
                     }
                 }
+
+                /* Import global settings */
+                update_option('elementor_disable_color_schemes', 'yes');
+                update_option('elementor_disable_typography_schemes', 'yes');
             }
             return true;
         }

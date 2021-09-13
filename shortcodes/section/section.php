@@ -136,6 +136,9 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'allow_responsive'  => true,
                                         'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                                         'title'  => esc_html__('Margin', $this -> text_domain),
+                                        'default'   => array(
+                                            'units' => 'px',
+                                        ),
                                     ),
                                     array(
                                         'id'     => 'padding',
@@ -145,6 +148,9 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'allow_responsive'  => true,
                                         'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                                         'title'  => esc_html__('Padding', $this -> text_domain),
+                                        'default'   => array(
+                                            'units' => 'px',
+                                        ),
                                     ),
                                     array(
                                         'id'     => 'tab-spacing-end',

@@ -51,6 +51,13 @@ if($allow_responsive){
         $unit_responsive = $this->value['units'];
     }
 
+//    var_dump('<pre>');
+////    var_dump($unit_responsive);
+//    var_dump($this->field['units']);
+////    var_dump($unit_responsive);
+////    var_dump($unit_arr);
+//    var_dump('</pre>');
+
     // If units field has a value but is not an acceptable value, unset the variable.
     if ( ! Redux_Helpers::array_in_array( $this->field['units'], $unit_check ) ) {
         $this->field['units'] = 'px';
@@ -244,7 +251,7 @@ if($allow_responsive){
                         }elseif($device == 'desktop'){
                             $left_val    = filter_var($value_responsive['left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
                         }
-                        
+
                         $input_spacing_html .= '<input 
                                     type="hidden" 
                                     class="redux-spacing-value js-device-'.$device.'"

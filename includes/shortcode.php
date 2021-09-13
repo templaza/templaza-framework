@@ -473,7 +473,7 @@ class TemplazaFramework_ShortCode{
 
         if(isset($params['margin']) && !empty($params['margin'])){
 
-            $margin    = CSS::make_spacing_redux('margin', $params['margin'], true);
+            $margin    = CSS::make_spacing_redux('margin', $params['margin'], true, 'px');
 
             if(!empty($margin)){
                 if(is_array($margin)){
@@ -489,7 +489,7 @@ class TemplazaFramework_ShortCode{
         }
 
         if(isset($params['padding']) && !empty($params['padding'])){
-            $padding    = CSS::make_spacing_redux('padding', $params['padding'], true);
+            $padding    = CSS::make_spacing_redux('padding', $params['padding'], true, 'px');
 
             if(!empty($padding)){
                 if(is_array($padding)){

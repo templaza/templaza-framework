@@ -84,7 +84,8 @@ $attribs    = ' '.$attribs;
                     'menu_class'      => implode(' ', $navClass),
                     'container_class' => implode(' ', $navWrapperClass),
                     'menu_id'         => '',
-                    'depth'           => $header_menu_level, // Level
+                    'depth'           => $header_menu_level, // Level				
+					'templaza_is_sticky'    => true,
                     'templaza_megamenu_html_data' => $menu_datas
                 ));
                 // header nav ends
@@ -100,7 +101,8 @@ $attribs    = ' '.$attribs;
                 'menu_class'      => implode(' ', $navClass),
                 'container_class' => implode(' ', $navWrapperClass),
                 'menu_id'         => '',
-                'depth'           => $header_menu_level, // Level
+                'depth'           => $header_menu_level, // Level						
+				'templaza_is_sticky'    => true,
                 'templaza_megamenu_html_data' => $menu_datas
             ));
             // header nav ends
@@ -117,7 +119,8 @@ $attribs    = ' '.$attribs;
                         'menu_class'      => implode(' ', $navClass),
                         'container_class' => implode(' ', $navWrapperClass),
                         'menu_id'         => '',
-                        'depth'           => $header_menu_level, // Level
+                        'depth'           => $header_menu_level, // Level						
+						'templaza_is_sticky'    => true,
                         'templaza_megamenu_html_data' => $menu_datas
                     ));
                     // header nav ends

@@ -398,8 +398,9 @@ class CSS{
      * @param array $spacing_option Padding, margin, border.. options
      * @param string $important The css will be add "!important"
      * @param string $mode Accepts: padding or margin.
+     * @param string $default_unit Default unit
      */
-    public static function spacing_redux($mode = 'padding', $spacing_option = array(), $important = false){
+    public static function spacing_redux($mode = 'padding', $spacing_option = array(), $important = false, $default_unit = ''){
         $store_id   = __METHOD__;
         $store_id  .= ':'.serialize($spacing_option);
         $store_id  .= ':'.$important;
@@ -413,6 +414,8 @@ class CSS{
             return '';
         }
 
+        $units  = isset($spacing_option['units']) && !empty($spacing_option['units'])?$spacing_option['units']:$default_unit;
+
         $top_name       = $mode.'-top';
         $right_name     = $mode.'-right';
         $bottom_name    = $mode.'-bottom';
@@ -425,9 +428,16 @@ class CSS{
         }
 
         $top    = isset($spacing_option[$top_name])?$spacing_option[$top_name]:'';
+        $top   .= (is_numeric($top) && !empty($units))?$units:'';
+
         $right  = isset($spacing_option[$right_name])?$spacing_option[$right_name]:'';
+        $right .= (is_numeric($right) && !empty($units))?$units:'';
+
         $bottom = isset($spacing_option[$bottom_name])?$spacing_option[$bottom_name]:'';
+        $bottom.= (is_numeric($bottom) && !empty($units))?$units:'';
+
         $left   = isset($spacing_option[$left_name])?$spacing_option[$left_name]:'';
+        $left  .= (is_numeric($left) && !empty($units))?$units:'';
 
         $important  = $important?' !important':'';
 
@@ -462,8 +472,10 @@ class CSS{
      * @param array $spacing_option Padding, margin, border.. options
      * @param string $important The css will be add "!important"
      * @param string $mode Accepts: absolute padding or margin.
+     * @param string|array $default_unit Default unit
      */
-    public static function make_spacing_redux($mode = 'padding', $spacing_option = array(), $important = false, $selector = ''){
+    public static function make_spacing_redux($mode = 'padding', $spacing_option = array(),
+                                              $important = false, $default_unit = '', $selector = ''){
         $store_id   = __METHOD__;
         $store_id  .= ':'.serialize($spacing_option);
         $store_id  .= ':'.$important;
@@ -503,7 +515,9 @@ class CSS{
                     }
                 }
 
-                $_css   = self::spacing_redux($mode, $padding_device[$device], $important);
+                $_default_unit  = !empty($default_unit) && is_array($default_unit) && isset($default_unit[$device])?$default_unit[$device]:$default_unit;
+
+                $_css   = self::spacing_redux($mode, $padding_device[$device], $important, $_default_unit);
 
                 if(!empty($_css)){
                     if(!isset($css[$device])){
@@ -524,7 +538,7 @@ class CSS{
             }
 
         }else{
-            $css    = self::spacing_redux($mode, $spacing_option, $important);
+            $css    = self::spacing_redux($mode, $spacing_option, $important, $default_unit);
             $css    = !empty($css) && !empty($selector)?$selector.'{'.$css.'}':(!empty($css)?$css:'');
         }
 

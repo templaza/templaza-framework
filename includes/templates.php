@@ -359,7 +359,7 @@ class Templates{
                     }
                     // Border radius
                     if(array_key_exists('border-radius-top-left', $option)){
-                        $border_radius = CSS::make_spacing_redux('border-radius', $option, $important);
+                        $border_radius = CSS::make_spacing_redux('border-radius', $option, $important, 'px');
                         if(!empty($border_radius) && count($border_radius)){
                             if(is_array($border_radius) && count($border_radius)){
                                 foreach ($border_radius as $device => $mstyle){
@@ -372,7 +372,7 @@ class Templates{
                     }
                     // Margin
                     if(array_key_exists('margin-top', $option)){
-                        $margin = CSS::make_spacing_redux('margin', $option, $important);
+                        $margin = CSS::make_spacing_redux('margin', $option, $important, 'px');
                         if(!empty($margin)){
                             if(is_array($margin) && count($margin)){
                                 foreach ($margin as $device => $mstyle){
@@ -385,7 +385,7 @@ class Templates{
                     }
                     // Padding
                     if(array_key_exists('padding-top', $option)){
-                        $padding = CSS::make_spacing_redux('padding', $option, $important);
+                        $padding = CSS::make_spacing_redux('padding', $option, $important, 'px');
                         if(!empty($padding) && count($padding)){
                             if(is_array($padding) && count($padding)){
                                 foreach ($padding as $device => $pstyle){
