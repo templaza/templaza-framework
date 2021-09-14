@@ -39,12 +39,12 @@
         margin: 0 6px;
       }
     }
-    &.tag {
-      a {
-        &:before {
-          content: "#";
-          margin-right: 1px;
-        }
+  }
+  .tag {
+    a {
+      &:before {
+        content: "#";
+        margin-right: 1px;
       }
     }
   }
