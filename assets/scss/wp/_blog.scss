@@ -27,7 +27,7 @@
   }
 }
 .templaza-post-meta {
-  dd {
+  span {
     display: inline;
     i{
       padding-right:5px;
@@ -57,9 +57,6 @@
     i{
       padding-right:5px;
       font-size:0.9em;
-    }
-    &:not(:last-child){
-      padding-right:15px;
     }
   }
 }
