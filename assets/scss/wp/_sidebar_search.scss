@@ -28,66 +28,12 @@
     }
   }
 }
-aside .widget.widget_search-sidebar,
-aside .widget.widget_search,
-aside .widget.widget_product_search,
-aside .widget.widget_product_search-sidebar {
-  padding: 0;
-  h3 {
-    &:before {
-      content: none;
-    }
+.searchform {
+  input[type="text"] {
+    position: relative;
+    width: 100%;
   }
-  form{
-    &.searchform,
-    &.woocommerce-product-search{
-      width: 100%;
-      position: relative;
-      input{
-        &.Tzsearchform,&.search-field {
-          @include input-default;
-        }
-        &.searchsubmit{
-          background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-          border: medium none;
-          font-size: 0;
-          height: $tztheme-input-height;
-          position: absolute;
-          right: 0;
-          top: 15px;
-          width: $tztheme-input-height;
-          z-index: 1;
-        }
-      }
-      button[type="submit"]{
-        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-        border: medium none;
-        font-size: 0;
-        height: $tztheme-input-height;
-        position: absolute;
-        right: 0;
-        top: 15px;
-        width: $tztheme-input-height;
-        z-index: 1;
-        color:inherit;
-        padding:0;
-        &:before{
-          content:"\f002";
-          font-family: "Font Awesome 5 Free";
-          font-size:0.8em;
-          font-weight:700;
-          position:absolute;
-          top:50%;
-          left:50%;
-          margin-left: -7px;
-        }
-      }
-      .i-search {
-        position: absolute;
-        right: 18px;
-        top: 50%;
-        font-size:0.8em;
-      }
-    }
-  }
+}
+.has-button-icon {
+  width: $tztheme-input-height;
 }
