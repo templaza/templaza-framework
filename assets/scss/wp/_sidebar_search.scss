@@ -1,6 +1,5 @@
 div.templaza-sidebar {
   form, form.wpcf7-form, form.woocommerce-product-search {
-    margin: 0;
     position: relative;
     input[type="text"], input[type="email"],input[type="search"]{
       @include input-default;
@@ -29,8 +28,10 @@ div.templaza-sidebar {
     }
   }
 }
+aside .widget.widget_search-sidebar,
 aside .widget.widget_search,
-aside .widget.widget_product_search {
+aside .widget.widget_product_search,
+aside .widget.widget_product_search-sidebar {
   padding: 0;
   h3 {
     &:before {

@@ -11,10 +11,10 @@
       }
     }
   }
-  .widget_categories,
-  .widget_archive,
-  .widget_pages,
-  .widget_nav_menu{
+  .widget_categories, .widget_categories-sidebar,
+  .widget_archive, .widget_archive-sidebar,
+  .widget_pages, .widget_pages-sidebar,
+  .widget_nav_menu, .widget_nav_menu-sidebar{
     select{
       width:100%;
     }
@@ -61,7 +61,7 @@
       }
     }
   }
-  .widget_nav_menu{
+  .widget_nav_menu, .widget_nav_menu-sidebar{
     ul{
       li{
         .sub-menu{

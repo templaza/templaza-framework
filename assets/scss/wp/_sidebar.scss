@@ -1,4 +1,14 @@
 .widget{
+  &.widget_text, &.widget_text-sidebar {
+    img {
+      display: block;
+    }
+    br {
+      margin-bottom: 20px;
+      display: block;
+      content: "";
+    }
+  }
   &.style1{
     h2,h3{
       position:relative;
@@ -72,7 +82,7 @@
       }
     }
   }
-  &.widget_search, &.widget_product_search{
+  &.widget_search, &.widget_search-sidebar, &.widget_product_search, &.widget_product_search-sidebar{
     padding:0;
   }
 }
