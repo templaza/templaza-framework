@@ -28,3 +28,11 @@
     }
   }
 }
+.wp-calendar-table {
+  td a {
+    color: inherit;
+    &:hover {
+      color: inherit;
+    }
+  }
+}
