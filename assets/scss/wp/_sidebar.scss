@@ -1,5 +1,5 @@
 .widget{
-  &.widget_text, &.widget_text-sidebar {
+  &.widget_text {
     img {
       display: block;
     }
@@ -82,7 +82,7 @@
       }
     }
   }
-  &.widget_search, &.widget_search-sidebar, &.widget_product_search, &.widget_product_search-sidebar{
+  &.widget_search, &.widget_product_search {
     padding:0;
   }
 }
