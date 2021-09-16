@@ -31,6 +31,9 @@ Templaza_API::set_section('settings',
                 'allow_responsive'    => true,
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                 'title'  => esc_html__('Padding', $this -> text_domain),
+                'default' => array(
+                    'units' => 'px',
+                ),
             ),
             array(
                 'id'     => 'main-menu-margin',
@@ -40,6 +43,9 @@ Templaza_API::set_section('settings',
                 'allow_responsive'    => true,
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                 'title'  => esc_html__('Margin', $this -> text_domain),
+                'default' => array(
+                    'units' => 'px',
+                ),
             ),
         ),
     )
