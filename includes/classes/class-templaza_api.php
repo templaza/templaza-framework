@@ -291,6 +291,74 @@ if ( ! class_exists( 'Templaza_API', false ) ) {
             }
         }
 
+        /**
+         * Add an argument for a field.
+         *
+         * @param string $opt_name Panel opt_name.
+         * @param string|int $section_id Section ID this field belongs to.
+         * @param string $field_id Field ID.
+         * @param string $name Argument name this field belongs to.
+         * @param string| $value Argument value this field belongs to.
+         */
+        public static function add_field_single_argument($opt_name = '', $section_id = '', $field_id = '',
+                                                         $name = '', $value = ''){
+            if ( '' === $opt_name || '' === $section_id  || '' === $field_id || '' === $name ) {
+                return;
+            }
+
+            self::check_opt_name( $opt_name );
+
+            if(!isset(self::$fields[$opt_name][$field_id])){
+                return;
+            }
+
+            $field  = self::$fields[$opt_name][$field_id];
+
+            if(isset($field[$name]) && is_array($field[$name])){
+                $field[$name]   = array_merge($field[$name], (array) $value);
+            }else {
+                $field[$name] = $value;
+            }
+
+            self::$fields[$opt_name][$field_id] = $field;
+        }
+
+
+        /**
+         * Add arguments for a field.
+         *
+         * @param string $opt_name Panel opt_name.
+         * @param string|int $section_id Section ID this field belongs to.
+         * @param string $field_id Field ID.
+         * @param array $field_args Arguments this field belongs to.
+         */
+        public static function add_field_argument($opt_name = '', $section_id = '', $field_id = '', $field_args = array()){
+            if (!is_array($field_args) || empty($field_args) || '' === $opt_name
+                || '' === $section_id  || '' === $field_id ) {
+                return;
+            }
+
+            foreach ($field_args as $name => $value){
+                self::add_field_single_argument($opt_name, $section_id, $field_id, $name, $value);
+            }
+        }
+
+        /**
+         * Add multiple arguments for multiple fields.
+         *
+         * @param string $opt_name Panel opt_name.
+         * @param string|int $section_id Section ID this field belongs to.
+         * @param array $field_args Multiple field arguments.
+         */
+        public static function add_field_arguments($opt_name = '', $section_id = '', $field_args = array()){
+            if ( !is_array($field_args) || empty( $field_args ) || '' === $opt_name || '' === $section_id  ) {
+                return;
+            }
+
+            foreach($field_args as $field_id => $fargs){
+                self::add_field_argument($opt_name, $section_id, $field_id, $fargs);
+            }
+        }
 
         /**
          * Sets all fields in path.
@@ -307,21 +375,6 @@ if ( ! class_exists( 'Templaza_API', false ) ) {
             }
             $fields = new Fields(\Redux::construct_args($opt_name));
         }
-//        /**
-//         * Sets all fields in path.
-//         *
-//         * @param string $opt_name Panel opt_name.
-//         * @param string $path     Path to extension folder.
-//         * @param bool   $force    Make extension reload.
-//         */
-//        public static function load_my_fields($opt_name = '')
-//        {
-//            // Load custom fields
-//            if(!class_exists('Fields')){
-//                require_once TEMPLAZA_FRAMEWORK_FIELD_PATH.'/fields.php';
-//            }
-//            $fields = new Fields(\Redux::construct_args($opt_name));
-//        }
 
         public static function load() {
             remove_action( 'after_setup_theme', array( 'Redux', 'create_redux' ) );
