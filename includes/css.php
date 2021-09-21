@@ -199,6 +199,8 @@ class CSS{
         $store_id  .= ':'.$right;
         $store_id  .= ':'.$bottom;
         $store_id  .= ':'.$left;
+        $store_id  .= ':'.$style;
+        $store_id  .= ':'.$color;
         $store_id  .= ':'.$important;
         $store_id   = md5($store_id);
 

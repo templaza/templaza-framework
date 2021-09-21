@@ -22,10 +22,10 @@ if ($nav_menu){
     $options    = Functions::get_theme_options();
 
     $type = 'WP_Nav_Menu_Widget';
-    $args = array();
-
-    $args['before_title']   = '<'.$widget_heading.' class="widgettitle'.($widget_heading_style?' uk-'.$widget_heading_style:'').'">';
-    $args['after_title']    = '</'.$widget_heading.'>';
+    $args = array(
+        'before_title' => '<'.$widget_heading.' class="widgettitle'.($widget_heading_style?' uk-'.$widget_heading_style:'').'">',
+        'after_title'  => '</'.$widget_heading.'>'
+    );
 
     if($style == 'ui_accordion') {
         $args['templaza_wp_menu_shortcode_submenu_attributes'] = array(
@@ -39,8 +39,8 @@ if ($nav_menu){
     // to avoid unwanted warnings let's check before using widget
     if ( is_object( $wp_widget_factory ) && isset( $wp_widget_factory->widgets, $wp_widget_factory->widgets[ $type ] ) ) {
 ?>
-<div<?php echo $tz_id?' id="'.$tz_id.'"':''; ?> class="<?php
-    echo $tz_class?trim($tz_class):''; ?>">
+<div<?php echo !empty($tz_id)?' id="'.esc_attr($tz_id).'"':''; ?> class="<?php
+    echo !empty($tz_class)?esc_attr($tz_class):''; ?>">
     <aside id="widget-area-<?php echo $id; ?>" class="widget-area">
     <?php
         the_widget( $type, $atts, $args );

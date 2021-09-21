@@ -5,12 +5,22 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 
+extract(shortcode_atts(array(
+    'id'                    => uniqid(),
+    'tz_id'                 => '',
+    'tz_css'                => '',
+    'tz_class'              => '',
+    'widget_heading'        => 'h3',
+    'widget_heading_style'  => '',
+), $atts));
+
 $options    = Functions::get_theme_options();
 
 $type = 'WP_Widget_Categories';
+
 $args = array(
-    'before_title'  => '<h3 class="widgettitle">',
-    'after_title'   => '</h3>',
+    'before_title' => '<'.$widget_heading.' class="widgettitle'.($widget_heading_style?' uk-'.$widget_heading_style:'').'">',
+    'after_title'  => '</'.$widget_heading.'>'
 );
 
 global $wp_widget_factory;
@@ -18,8 +28,8 @@ global $wp_widget_factory;
 if ( is_object( $wp_widget_factory ) && isset( $wp_widget_factory->widgets, $wp_widget_factory->widgets[ $type ] ) ) {
 ?>
 
-<div<?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="<?php
-    echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
+<div<?php echo !empty($tz_id)?' id="'.esc_attr($tz_id).'"':''; ?> class="<?php
+    echo !empty($tz_class)?esc_attr($tz_class):''; ?>">
     <?php
         the_widget( $type, $atts, $args );
         ?>
