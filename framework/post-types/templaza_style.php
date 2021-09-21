@@ -308,6 +308,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             $args['hide_save']      = true;
             $args['menu_type']      = 'hidden';
             $args['hide_reset']     = true;
+            $args['show_presets']   = true;
 
             $args['display_name']   = __('Template Settings', $this->text_domain);
 

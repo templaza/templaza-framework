@@ -381,6 +381,9 @@ if(count($designs)) {
             if(!empty($wd_css)){
                 if(is_array($wd_css)){
                     foreach ($wd_css as $device => $wd_style){
+                        if(isset($wd_css_responsive[$device]) && !empty($wd_css_responsive[$device])){
+                            $wd_style   .= $wd_css_responsive[$device];
+                        }
                         if(!empty($wd_style)) {
                             $wd_style = $design['class'] . '{' . $wd_style . '}';
                             Templates::add_inline_style($wd_style, $device);
