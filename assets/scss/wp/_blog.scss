@@ -144,12 +144,6 @@
     color: inherit;
   }
 }
-p{
-  &.has-large-font-size,
-  &[style^="font"]{
-    line-height: 1.2em;
-  }
-}
 .templaza-sticky-post{
   background-color: $tztheme-global-color;
   position: absolute;
