@@ -213,6 +213,7 @@ class CSS{
         }
 
         $important  = $important?' !important':'';
+        $css        = '';
 
         if(!empty($top) && !empty($right) && !empty($bottom) && !empty($left)){
             if($top == $right && $top == $bottom && $top == $left){

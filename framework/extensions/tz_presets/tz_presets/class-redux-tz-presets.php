@@ -10,9 +10,13 @@ if ( ! class_exists( 'Redux_TZ_Presets' ) ) {
     {
         private $preset_path;
 
+        private $text_domain = 'templaza-framework';
+
         public function __construct($field = array(), $value = null, $parent = null)
         {
             parent::__construct($field, $value, $parent);
+
+            $this -> text_domain    = Functions::get_my_text_domain();
 
             $this -> preset_path    = isset($field['preset_path'])?$field['preset_path']:TEMPLAZA_FRAMEWORK_THEME_PATH.'/presets';
         }
