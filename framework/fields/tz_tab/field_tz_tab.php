@@ -30,14 +30,14 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
             $this->value  = $value;
 
             $this -> init_tab_field($field);
-
         }
 
         public function init_tab_field($field){
 
             if(isset($field['tabs'])){
                 $has_media                          = true;
-                $opt_name                           = uniqid($field['id'].'__').'__opt_name';
+                $args   = $this -> parent -> args;
+                $opt_name                           = uniqid($field['id']).'__opt_name';
                 $redux_args['opt_name']             = $opt_name;
                 $redux_args['menu_type']            = 'hidden';
                 $redux_args['dev_mode']             = false;
@@ -68,13 +68,13 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
 
                 $enqueue    = new Enqueue($redux);
                 $enqueue -> init();
-                ob_start();
+//                ob_start();
+//
+//                $redux->generate_panel();
+//
+//                ob_end_clean();
 
-                $redux->generate_panel();
-
-                ob_end_clean();
-
-                $this -> redux          = $redux;
+//                $this -> redux          = $redux;
 
                 if($has_media){
                     if ( function_exists( 'wp_enqueue_media' ) ) {

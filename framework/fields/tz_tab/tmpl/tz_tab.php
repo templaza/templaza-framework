@@ -4,7 +4,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
 
 use TemPlazaFramework\Enqueue;
 
-if(isset($this -> redux) && ($redux = $this -> redux)){
+if(isset($this->field) &&  !empty($this->field)){
 
     // No errors please
     $defaults    = array(
