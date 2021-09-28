@@ -27,12 +27,14 @@ if(!empty($image)){
 				$svg    =    $ext == 'svg' ? 'uk-svg' : '';
 				echo '<div id="'.$tz_id.'" class="'.$tz_class.'">';
 				if ($svg) {
-					echo '<img data-uk-img="data-src:'.$image->url.'" src="'.$image->url.'" alt="Logo" data-uk-svg>';
+					echo '<img data-uk-img="data-src:'.esc_url($image->url).'" src="'.esc_url($image->url).'" alt="'.esc_attr('Logo').'" data-uk-svg>';
 				} else {
-					echo '<img data-src="'.$image->url.'" src="'.$image->url.'" alt="Logo" data-uk-img>';
+					echo '<img data-src="'.esc_url($image->url).'" src="'.esc_url($image->url).'" alt="'.esc_attr('Logo').'" data-uk-img>';
 				}
 				echo '</div>';
 			}
 		}
+	} elseif (file_exists(get_template_directory().'/assets/images/logo.svg')) {
+		echo '<img data-uk-img="data-src:'.esc_url(get_template_directory_uri().'/assets/images/logo.svg').'" src="'.esc_url(get_template_directory_uri().'/assets/images/logo.svg').'" alt="'.esc_attr('Logo').'" data-uk-svg>';
 	}
 }
