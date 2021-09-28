@@ -114,7 +114,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
                                     array(
                                         'id'      => 'xs_column_size',
                                         'type'    => 'select',
-                                        'title'   => esc_html__('Column size'),
+                                        'title'   => esc_html__('Column size', $this -> text_domain),
                                         'options' => array(
                                             'inherit' => esc_html__('Inherit', $this -> text_domain),
                                             '1'       => esc_html__('col-xs-1', $this -> text_domain),
@@ -168,7 +168,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
                                     array(
                                         'id'      => 'sm_visibility',
                                         'type'    => 'switch',
-                                        'title'   => esc_html__('Visibility'),
+                                        'title'   => esc_html__('Visibility', $this -> text_domain),
                                         'default' => true,
                                     ),
                                     // Medium subsection

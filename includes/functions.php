@@ -669,5 +669,92 @@ if(!class_exists('TemPlazaFramework\Functions')){
             return (is_string($ext_check) && $file_type['ext'] == $ext_check);
         }
 
+        public static function get_padding($padding) {
+	        $css    =   array('desktop' => '', 'tablet' => '', 'mobile' => '');
+	        if ($padding['padding-top']) {
+		        $css['desktop'] .= !empty($padding['padding-top']['desktop']) ? 'padding-top: '.$padding['padding-top']['desktop'].';' : '';
+		        $css['tablet'] .= !empty($padding['padding-top']['tablet']) ? 'padding-top: '.$padding['padding-top']['tablet'].';' : '';
+		        $css['mobile'] .= !empty($padding['padding-top']['mobile']) ? 'padding-top: '.$padding['padding-top']['mobile'].';' : '';
+	        }
+	        if ($padding['padding-right']) {
+		        $css['desktop'] .= !empty($padding['padding-right']['desktop']) ? 'padding-right: '.$padding['padding-right']['desktop'].';' : '';
+		        $css['tablet'] .= !empty($padding['padding-right']['tablet']) ? 'padding-right: '.$padding['padding-right']['tablet'].';' : '';
+		        $css['mobile'] .= !empty($padding['padding-right']['mobile']) ? 'padding-right: '.$padding['padding-right']['mobile'].';' : '';
+	        }
+	        if ($padding['padding-bottom']) {
+		        $css['desktop'] .= !empty($padding['padding-bottom']['desktop']) ? 'padding-bottom: '.$padding['padding-bottom']['desktop'].';' : '';
+		        $css['tablet'] .= !empty($padding['padding-bottom']['tablet']) ? 'padding-bottom: '.$padding['padding-bottom']['tablet'].';' : '';
+		        $css['mobile'] .= !empty($padding['padding-bottom']['mobile']) ? 'padding-bottom: '.$padding['padding-bottom']['mobile'].';' : '';
+	        }
+	        if ($padding['padding-left']) {
+		        $css['desktop'] .= !empty($padding['padding-left']['desktop']) ? 'padding-left: '.$padding['padding-left']['desktop'].';' : '';
+		        $css['tablet'] .= !empty($padding['padding-left']['tablet']) ? 'padding-left: '.$padding['padding-left']['tablet'].';' : '';
+		        $css['mobile'] .= !empty($padding['padding-left']['mobile']) ? 'padding-left: '.$padding['padding-left']['mobile'].';' : '';
+	        }
+	        return $css;
+        }
+
+	    public static function get_margin($margin) {
+		    $css    =   array('desktop' => '', 'tablet' => '', 'mobile' => '');
+		    if ($margin['margin-top']) {
+			    $css['desktop'] .= !empty($margin['margin-top']['desktop']) ? 'margin-top: '.$margin['margin-top']['desktop'].';' : '';
+			    $css['tablet'] .= !empty($margin['margin-top']['tablet']) ? 'margin-top: '.$margin['margin-top']['tablet'].';' : '';
+			    $css['mobile'] .= !empty($margin['margin-top']['mobile']) ? 'margin-top: '.$margin['margin-top']['mobile'].';' : '';
+		    }
+		    if ($margin['margin-right']) {
+			    $css['desktop'] .= !empty($margin['margin-right']['desktop']) ? 'margin-right: '.$margin['margin-right']['desktop'].';' : '';
+			    $css['tablet'] .= !empty($margin['margin-right']['tablet']) ? 'margin-right: '.$margin['margin-right']['tablet'].';' : '';
+			    $css['mobile'] .= !empty($margin['margin-right']['mobile']) ? 'margin-right: '.$margin['margin-right']['mobile'].';' : '';
+		    }
+		    if ($margin['margin-bottom']) {
+			    $css['desktop'] .= !empty($margin['margin-bottom']['desktop']) ? 'margin-bottom: '.$margin['margin-bottom']['desktop'].';' : '';
+			    $css['tablet'] .= !empty($margin['margin-bottom']['tablet']) ? 'margin-bottom: '.$margin['margin-bottom']['tablet'].';' : '';
+			    $css['mobile'] .= !empty($margin['margin-bottom']['mobile']) ? 'margin-bottom: '.$margin['margin-bottom']['mobile'].';' : '';
+		    }
+		    if ($margin['margin-left']) {
+			    $css['desktop'] .= !empty($margin['margin-left']['desktop']) ? 'margin-left: '.$margin['margin-left']['desktop'].';' : '';
+			    $css['tablet'] .= !empty($margin['margin-left']['tablet']) ? 'margin-left: '.$margin['margin-left']['tablet'].';' : '';
+			    $css['mobile'] .= !empty($margin['margin-left']['mobile']) ? 'margin-left: '.$margin['margin-left']['mobile'].';' : '';
+		    }
+		    return $css;
+	    }
+
+	    public static function get_background($background) {
+		    $css = '';
+		    if (!empty($background['background-color'])) {
+			    $css     .=  'background-color: '.$background['background-color'].';';
+		    }
+		    if (!empty($background['background-repeat'])) {
+			    $css     .=  'background-repeat: '.$background['background-repeat'].';';
+		    }
+		    if (!empty($background['background-size'])) {
+			    $css     .=  'background-size: '.$background['background-size'].';';
+		    }
+		    if (!empty($background['background-attachment'])) {
+			    $css     .=  'background-attachment: '.$background['background-attachment'].';';
+		    }
+		    if (!empty($background['background-position'])) {
+			    $css     .=  'background-position: '.$background['background-position'].';';
+		    }
+		    if (!empty($background['background-image'])) {
+			    $css     .=  'background-image: url("'.$background['background-image'].'");';
+		    }
+		    return $css;
+	    }
+
+	    public static function get_border($border) {
+		    $css     =      'border-top: '.(!empty($border['border-top']) ? $border['border-top'] : '0' ).';';
+		    $css     .=     'border-right: '.(!empty($border['border-right']) ? $border['border-right'] : '0' ).';';
+		    $css     .=     'border-bottom: '.(!empty($border['border-bottom']) ? $border['border-bottom'] : '0' ).';';
+		    $css     .=     'border-left: '.(!empty($border['border-left']) ? $border['border-left'] : '0' ).';';
+
+		    if (!empty($border['border-style'])) {
+			    $css     .=  'border-style: '.$border['border-style'].';';
+		    }
+		    if (!empty($border['border-color'])) {
+			    $css     .=  'border-color: '.$border['border-color'].';';
+		    }
+		    return $css;
+	    }
     }
 }
