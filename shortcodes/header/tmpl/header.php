@@ -35,19 +35,13 @@ switch ($mode) {
 
 $class  = implode(' ', $class);
 
-//if(isset($atts['tz_class'])){
-//    $class  .= ' '.trim($atts['tz_class']);
-//}
-//if(isset($atts['tz_class'])){
-//    $main_class = ' '.trim($atts['tz_class']);
-//}
-
 // Add data attributes to use some places.
 $attribs = array(
     'data-megamenu'               => '',
     'data-header-offset'          => 'true',
     'data-megamenu-class'         => '.has-megamenu',
     'data-megamenu-trigger'       => $dropdown_trigger,
+    'data-megamenu-submenu-class' => '.sub-menu',
     'data-megamenu-content-class' => '.megamenu-sub-menu',
 );
 Functions::add_attributes('header', $attribs);

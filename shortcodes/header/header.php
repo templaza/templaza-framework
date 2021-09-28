@@ -84,9 +84,6 @@ if(!class_exists('TemplazaFramework_ShortCode_Header')){
 
 
         public function nav_menu_css_class($classes){
-//            $atts           = $this -> wp_menu_shortcode_atts;
-//            $style          = isset($atts['style'])?$atts['style']:'';
-
             $options            = Functions::get_theme_options();
             $mode               = isset($options['header-mode'])?$options['header-mode']:'horizontal';
 
@@ -133,28 +130,9 @@ if(!class_exists('TemplazaFramework_ShortCode_Header')){
                 'param_title' => __('Header settings'),
                 'desc'        => __('Load a header.'),
                 'admin_label' => true,
-                'params'      => array(
-//                    array(
-//                        'id'    => 'customclass',
-//                        'type'  => 'text',
-//                        'title' => esc_html__('Custom Class', $this -> text_domain),
-//                        'desc' => esc_html__('Custom Class can be used for writing custom CSS or JS.', $this -> text_domain),
-//                    ),
-//                    array(
-//                        'id'    => 'customid',
-//                        'type'  => 'text',
-//                        'title' => esc_html__('Custom ID', $this -> text_domain),
-//                        'desc' => esc_html__('Custom ID can be used for overriding the auto-generated id.', $this -> text_domain),
-//                    ),
-                )
+                'params'      => array()
             );
         }
-//        public function prepare_params($params, $element){
-//            $params = parent::prepare_params($params, $element);
-//
-//
-//            return $params;
-//        }
     }
 
 }

@@ -3,11 +3,8 @@
 // Exit if accessed directly
 defined( 'TEMPLAZA_FRAMEWORK' ) or exit;
 
+use TemPlazaFramework\Enqueue;
 use TemPlazaFramework\Functions;
-
-//if(!Redux_Functions::class_exists_ex( array('Redux_Spacing') )){
-//    require_once Redux_Core::$dir .'inc/fields/spacing/class-redux-spacing.php';
-//}
 
 if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
     class ReduxFramework_TZ_Repeater extends Redux_Field
@@ -30,6 +27,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
 
             $fields = $field['fields'];
             $opt_name                           = $this -> opt_name;
+
             $this -> hooks();
 
             $core_field = array(
@@ -78,7 +76,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
 
             $redux-> _register_settings();
 
-            $enqueue    = new \TemPlazaFramework\Enqueue($redux);
+            $enqueue    = new Enqueue($redux);
             $enqueue -> init();
             ob_start();
 
@@ -98,15 +96,16 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
         }
 
         public function render(){
-            $content_id = $this -> field['id'].'__content';
-            ?>
-            <textarea class="hide" name="<?php echo $this -> field['name'];?>" id="<?php echo $this -> field['id'];
-            ?>"><?php echo $this -> value; ?></textarea>
-            <div class="field-tz_repeater-accordion" id="<?php echo $content_id; ?>"></div>
 
-            <a href="#" class="add-more button button-primary" data-content="#<?php echo $content_id; ?>"><i class="far fa-plus-square"></i> <?php echo __('Add More', $this -> text_domain); ?></a>
+            $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_FIELDS.'/tz_repeater/tmpl/tz_repeater.php';
 
-        <?php
+            if(!file_exists($file)){
+                $file   = TEMPLAZA_FRAMEWORK_FIELD_PATH.'/tz_repeater/tmpl/tz_repeater.php';
+            }
+
+            if(file_exists($file)){
+                require $file;
+            }
         }
 
         public function template(){

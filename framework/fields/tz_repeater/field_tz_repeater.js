@@ -27,6 +27,15 @@
                     return;
                 }
 
+                // Remove form settings of layout in dialog
+                if(el.closest(".tzfrm-ui-dialog").length){
+                    el.closest(".tzfrm-ui-dialog").on("templaza-framework/setting/save/before", function(event, $setting,  $element, $selector, $settings){
+                        if(typeof $setting.params[el.attr("data-id")+"__opt_name"] !== "undefined"){
+                            delete $setting.params[el.attr("data-id")+"__opt_name"];
+                        }
+                    });
+                }
+
                 var insert_value = function (value, pos = "last") {
                     var global_value  = get_value();
                     if(!global_value){
@@ -54,12 +63,14 @@
                         return false;
                     }
                     value   = JSON.parse(value);
+                    value   = !Array.isArray(value)?Object.values(value):value;
                     return value;
                 };
 
                 var set_values_to_field = function(global_value){
                     var field_main = get_field_main();
                     if(field_main.length ){
+                        global_value    = Object.assign({}, global_value);
                         global_value    = JSON.stringify(global_value);
                         field_main.val(global_value).text(global_value);
                     }

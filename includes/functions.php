@@ -420,7 +420,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     }, ARRAY_FILTER_USE_BOTH);
                     foreach($params as $key => $param){
                         if(!is_array($param)) {
-                            $attribs .= ' ' . $key . '="' . $param . '"';
+                            $attribs .= ' ' . $key . '=\'' . $param . '\'';
                         }else{
                             $attribs    .= ' '.$key.'=\''.json_encode($param).'\'';
                         }

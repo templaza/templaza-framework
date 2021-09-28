@@ -120,7 +120,7 @@ Templaza_API::set_section('templaza_style',
                 'subtitle' => __( 'Enter the text that displays in the copyright bar. You can use <code>{year}</code> for current year and <code>{sitetitle}</code> for site name.', $this -> text_domain ),
                 'desc'     => __('HTML is allowed in here.', $this -> text_domain),
                 'validate' => 'html', //see http://codex.wordpress.org/Function_Reference/wp_kses_post
-                'default'  => '© {sitename} {year}. Design by <a href="https://www.templaza.com/" title="TemPlaza">TemPlaza</a>',
+                'default'  => '© {sitetitle} {year}. Design by <a href="https://www.templaza.com/" title="TemPlaza">TemPlaza</a>',
                 'required' => array( 'enable-footer', '!=', 'off' ),
             ),
         )
