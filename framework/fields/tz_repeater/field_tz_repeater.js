@@ -64,6 +64,7 @@
                     }
                     value   = JSON.parse(value);
                     value   = !Array.isArray(value)?Object.values(value):value;
+                    console.log(value);
                     return value;
                 };
 
@@ -179,7 +180,8 @@
                 if(field_val.length && typeof field_val === "string"){
                     field_val   = JSON.parse(field_val);
                 }
-                if(field_val.length){
+
+                if((Array.isArray(field_val) && field_val.length) || (!Array.isArray(field_val) && Object.keys(field_val).length)){
                     var content = el.find(".field-tz_repeater-accordion");
                     $.each(field_val, function(index, value){
                         var field_list = wp.template("tzfrm-field-tz_repeater-template__field-"+el.attr("data-id")),
