@@ -34,7 +34,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 $app -> enqueue_message(sprintf(__(
                     'Theme %s not Activated! To install any of the demo content sites below you must <a href="%s">Activate theme</a>',
                     $this -> text_domain), wp_get_theme()->get('Name'),
-                    admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK.'-dashboard') ), 'warning');
+                    admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK) ), 'warning');
             }
 
             $this -> imported_key   = '_'.TEMPLAZA_FRAMEWORK.'_'.$this -> theme_name.'__demo_imported';

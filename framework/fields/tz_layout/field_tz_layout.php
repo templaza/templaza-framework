@@ -131,6 +131,15 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
                     time(),
                     'all'
                 );
+                wp_localize_script(
+                    'templaza-field-tz_layout-js',
+                    'templaza_field_tz_layout', array('i18n' => array(
+                        'copied'        => __('Copied!'),
+                        'pasted'        => __('Pasted!'),
+                        'copy_failed'   => __('Copy failed!'),
+                        'paste_failed'  => __('Not Pasted! Please copy again.'),
+                    ))
+                );
             }
 
         }

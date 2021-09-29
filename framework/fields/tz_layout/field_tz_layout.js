@@ -28,9 +28,15 @@
         $(selector).each(
             function () {
                 var el = $(this),
-                    el_inner = el.find(".js-field-tz_layout"),
-                    allow_copy = el_inner.data("copy");
+                    el_inner = el.find(".js-field-tz_layout");
                 var parent = el;
+                var field_tz_layout = templaza_field_tz_layout || {};
+                var __i18n = templaza_field_tz_layout.i18n || {
+                    "copied": "Copied!",
+                    "pasted": "Pasted!",
+                    "copy_failed": "Copy failed!",
+                    "paste_failed": "Not Pasted! Please copy again."
+                };
                 if (!el.hasClass('redux-field-container')) {
                     parent = el.parents('.redux-field-container:first');
                 }
@@ -70,6 +76,7 @@
                     el.find(".js-copy-layout").on("click", function(e){
                         e.preventDefault();
                         var __settings  = $field.val().trim();
+
                         if(__settings.length) {
                             var __copied    = templaza.copyClipboard("layout", __settings);
 
@@ -77,12 +84,12 @@
 
                             if(__copied){
                                 UIkit.notification({
-                                    "message": "Copied!",
+                                    "message": __i18n.copied,
                                     "pos": "bottom-right"
                                 });
                             }else{
                                 UIkit.notification({
-                                    "message": "Copy failed!",
+                                    "message": __i18n.copy_failed,
                                     "pos": "bottom-right"
                                 });
                             }
@@ -108,13 +115,13 @@
                             paste_button();
 
                             UIkit.notification({
-                                "message": "Pasted!",
+                                "message": __i18n.pasted,
                                 "pos": "bottom-right"
                             });
                             return true;
                         }catch(e){
                             UIkit.notification({
-                                "message": "Not Pasted! Please copy again.",
+                                "message": __i18n.paste_failed,
                                 "pos": "bottom-right"
                             });
 

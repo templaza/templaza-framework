@@ -90,15 +90,11 @@
                     _activate_license();
                 });
             }
-            // }
 
-            // $("#plazart-installation [data-install-demo-data__modal]").on("show.bs.uk-modal", function(){
-            //    $(this).find(".js-processing-box .progress-bar").css("width", "0%")
-            //        .end().find("[data-import-message-box]").html("");
-            // });
             $("[data-tzinst-delete-license]").on("click", function (t) {
                 var $this = $(this);
-                if (confirm(tzinst_license_ajax.strings.delete_question)) {
+
+                var __delete_license = function(){
                     var request = {};
                     // request[token] = 1;
                     request['action'] = 'ajax_deactivate_license';
@@ -113,20 +109,21 @@
                         },
                         success: function (response) {
                             if(response.success && response.redirect){
-                                // $this.find('> span:first-child').removeClass(tzinst_license_ajax.tzinst_license_ajax);
-                                window.location.href    = response.redirect;
+                                window.location    = response.redirect;
                             }
-                            // window.location.href    = tzinst_license_ajax.admin_url+"?page="+request['page'];
-                            // window.location.re
-                            // $this.find('i').removeClass('fa-spin');
-                            // if (response.status == 'success') {
-                            //     window.location.reload();
-                            // } else {
-                            //     $this.appendText(JSON.stringify(response));
-                            // }
                         }
                     });
                     return 1;
+                };
+
+                if(typeof UIkit !== "undefined" && typeof UIkit.modal !== "undefined"){
+                    UIkit.modal.confirm(tzinst_license_ajax.strings.delete_question).then(function () {
+                        return __delete_license();
+                    }, function () {
+                        return false;
+                    });
+                }else if (confirm(tzinst_license_ajax.strings.delete_question)) {
+                    return __delete_license();
                 }
             });
         }

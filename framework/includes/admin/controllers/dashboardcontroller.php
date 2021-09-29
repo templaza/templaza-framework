@@ -106,12 +106,12 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
 
         public function ajax_deactivate_license(){
             if(get_option(HelperLicense::get_option_name($this -> theme_name))){
-                delete_option('_tzinst_envato_license__'.$this -> theme_name);
+                delete_option(HelperLicense::get_option_name($this -> theme_name));
             }
             $app    = new Application();
             $app -> enqueue_message(__('The license deleted!', $this -> text_domain), 'success');
             echo json_encode(array('success' => true, 'redirect' => admin_url('admin.php?page='
-            .TEMPLAZA_FRAMEWORK.($this -> get_name() != 'dashboard')?'_'.$this -> get_name():'')));
+            .TEMPLAZA_FRAMEWORK.(($this -> get_name() != 'dashboard')?'_'.$this -> get_name():''))));
             wp_die();
         }
     }
