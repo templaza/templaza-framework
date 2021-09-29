@@ -18,6 +18,9 @@ $grid-gutter-width:           2.5rem !default;
   &:not(.nav-menus-php){
     //@import "../../../assets/scss/vendor/bootstrap_grid/reboot.scss";
     @import "bootstrap/bootstrap_addition.scss";
+    .progress-bar-animated.bg-success {
+      background-image:none;
+    }
 
     .search-box, .wp-header-end {
       margin: 0;
