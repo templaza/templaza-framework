@@ -37,7 +37,7 @@ $theme  = wp_get_theme();
                             </a>
                         </li>
                         <li>
-                            <a class="setup-step p-4" href="<?php echo admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK.'-importer'); ?>">
+                            <a class="setup-step p-4" href="<?php echo admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK.'_importer'); ?>">
                                 <div class="setup-step-info">
                                     <h5 class="setup-step-heading uk-margin-small"><?php echo __('Data Importation', $this -> text_domain); ?></h5>
                                     <p class="uk-margin-remove"><?php echo __('One-click import one of our demo content.', $this -> text_domain);?></p>
