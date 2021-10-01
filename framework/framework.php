@@ -212,8 +212,11 @@ class Framework{
                 $options    = file_get_contents($opt_file);
 
                 $options    = (!empty($options) && is_string($options))?json_decode($options, true):$options;
-                $redux -> options   = $options;
 
+                if(!empty($options)) {
+//                    update_option($opt_name, $options);
+                    $redux -> set_options($options);
+                }
             }
         }
     }

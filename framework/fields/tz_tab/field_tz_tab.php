@@ -64,7 +64,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
                 });
                 $redux  = \Redux::instance($opt_name );
 
-                $redux-> _register_settings();
+//                $redux-> _register_settings();
 
                 $enqueue    = new Enqueue($redux);
                 $enqueue -> init();
