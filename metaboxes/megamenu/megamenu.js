@@ -99,8 +99,10 @@
                     // Delete child menu moved
                     delete_menu_item_child_setting(menu_item_setting, _menu_item_childs);
 
+                    // console.log("_menu_item_childs");
+                    // console.log(_menu_item_childs);
 
-                    if(!_menu_item_childs.length){
+                    // if(!_menu_item_childs.length){
 
                         var _column_setting_new = create_element_setting("column"),
                             _row_setting_new    = create_element_setting("row");
@@ -131,7 +133,7 @@
                             menu_item_setting.push(_row_setting_new);
 
                         }
-                    }
+                    // }
 
                     setting_obj.find("#megamenu_layout").val("");
 

@@ -1099,11 +1099,11 @@
                 var parent  = element.parent();
 
                 if(element.data("fl-element_type") === "row"){
-                    if(parent.find("> [data-fl-element_type=row]").length === 1){
+                    if(parent.find("> [data-fl-element_type=row]").length === 1 || element.find("[data-fl-element_type=megamenu_menu_item]").length){
                         access  = false;
                     }
                 }else if(element.data("fl-element_type") === "column"){
-                    if(parent.find("[data-fl-element_type=column]").length === 1){
+                    if(parent.find("[data-fl-element_type=column]").length === 1 || element.find("[data-fl-element_type=megamenu_menu_item]").length){
                         access  = false;
                     }
                 }
