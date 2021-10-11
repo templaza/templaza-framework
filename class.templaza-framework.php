@@ -56,17 +56,24 @@ class TemPlazaFrameWork{
     }
 
     public function load_gutenberg_blocks(){
-        $file_path  = TEMPLAZA_FRAMEWORK_PATH.'/gutenberg-blocks';
+        $theme_path  = TEMPLAZA_FRAMEWORK_THEME_PATH_GUTENBERG_BLOCK;
 
-        if(!is_dir($file_path)){
+        $core_path  = TEMPLAZA_FRAMEWORK_PATH.'/gutenberg-blocks';
+
+
+        if(!is_dir($core_path) || !is_dir($theme_path)){
             return;
         }
 
-        $folders    = glob($file_path.'/*', GLOB_ONLYDIR);
+        $folders        = glob($core_path.'/*', GLOB_ONLYDIR);
+        $theme_folders  = glob($theme_path.'/*', GLOB_ONLYDIR);
 
-        if(empty($folders) || (!empty($folders) && !count($folders))){
+        if((empty($folders) || (!empty($folders) && !count($folders))) ||
+            (empty($theme_folders) || (!empty($theme_folders) && !count($theme_folders)))){
             return;
         }
+
+        $folders    = array_merge($folders, $theme_folders);
 
         if(!empty($folders) && count($folders)){
             foreach ($folders as $folder){
