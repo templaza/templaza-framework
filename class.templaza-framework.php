@@ -4,7 +4,6 @@ namespace TemPlazaFramework;
 
 defined( 'ABSPATH' ) || exit;
 
-use Cassandra\Value;
 use TemPlazaFramework\Core\Framework;
 use TemPlazaFramework\Functions;
 use ScssPhp\ScssPhp\Formatter\Compressed;
@@ -12,14 +11,14 @@ use TemPlazaFramework\Templates;
 
 class TemPlazaFrameWork{
 
-    protected $theme_options;
-    protected static $instance;
     public $text_domain;
 
-
+    protected $theme_options;
+    protected $theme_support;
+    protected static $instance;
     protected $template_init = array();
 
-    protected $theme_support;
+    private $gutenberg_blocks   = array();
 
     public static function instance(){
 
@@ -34,6 +33,8 @@ class TemPlazaFrameWork{
         $instance -> text_domain    = Functions::get_my_text_domain();
 
         $instance -> hooks();
+
+        $instance -> load_gutenberg_blocks();
 
         static::$instance   = $instance;
         return $instance;
@@ -52,6 +53,43 @@ class TemPlazaFrameWork{
         add_filter('register_sidebar_defaults', array($this, 'modify_sidebar'), 9999);
 
         do_action( 'templaza-framework/plugin/hooks', $this );
+    }
+
+    public function load_gutenberg_blocks(){
+        $file_path  = TEMPLAZA_FRAMEWORK_PATH.'/gutenberg-blocks';
+
+        if(!is_dir($file_path)){
+            return;
+        }
+
+        $folders    = glob($file_path.'/*', GLOB_ONLYDIR);
+
+        if(empty($folders) || (!empty($folders) && !count($folders))){
+            return;
+        }
+
+        if(!empty($folders) && count($folders)){
+            foreach ($folders as $folder){
+                $block  = basename($folder);
+
+                $block_path = $folder.'/'.$block.'.php';
+
+                if(!file_exists($block_path)){
+                    continue;
+                }
+
+                if(file_exists($block_path)){
+                    require $block_path;
+                }
+
+                $block  = str_replace('-', '_', $block);
+                $class  = 'TemplazaFramework_Gutenberg_'.ucfirst($block);
+
+                if(class_exists($class) && !isset($this -> gutenberg_blocks[$class])){
+                    $this -> gutenberg_blocks[$class]   = new $class();
+                }
+            }
+        }
     }
 
     public function modify_sidebar($defaults){
