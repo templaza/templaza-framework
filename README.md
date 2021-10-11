@@ -1,8 +1,8 @@
-# TemPlaza - Framework
- TemPlaza Framework - Wordpress Plugin
+# TemPlaza - Framework - Extensions
+Extensions sample for templaza framework plugin.
 
 Changelogs:
 
-Version 1.0.2 - September 29, 2021
-    
-    Update import feature
+11/10/2021
+	
+	- Added sample, sample-json blocks for gutenberg.

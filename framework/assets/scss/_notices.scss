@@ -1,9 +1,0 @@
-&.tzfrm-postype{
-  .notice, div.error, div.updated{
-    border-color: $tz-border-color;
-    @include box-shadow(none);
-  }
-  .notice-success, div.updated{
-      border-left-color: $tz-success-color;
-  }
-}
