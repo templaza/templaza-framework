@@ -301,27 +301,7 @@ class TemPlazaFrameWork{
             $theme_file = '404';
         }
 
-
-        /* My coding */
-        if(!is_file($theme_file)){
-            // Check file exists in sub folder
-            $path       = Templates::load_my_layout('theme_pages.'.$theme_file.'.'.get_post_type(), false);
-
-            if(!$path){
-                $path   = Templates::load_my_layout('theme_pages.'.$theme_file, false);
-            }
-        }else{
-            $path   = $theme_file;
-        }
-        if(file_exists($path)) {
-            ob_start();
-            require $path;
-            ob_end_clean();
-        }
-        /* End my coding */
-
-//        add_filter('templaza-framework_theme_file', function($file) use($theme_file){
-        add_filter('templaza-framework/shortcode/content_area/theme_file', function($file) use($theme_file){
+        add_filter('templaza-framework/shortcode/content_area/theme_html', function($html) use ( $theme_file){
             if(!is_file($theme_file)){
                 // Check file exists in sub folder
                 $path       = Templates::load_my_layout('theme_pages.'.$theme_file.'.'.get_post_type(), false);
@@ -329,15 +309,16 @@ class TemPlazaFrameWork{
                 if(!$path){
                     $path   = Templates::load_my_layout('theme_pages.'.$theme_file, false);
                 }
-
-                if(!file_exists($path)){
-                    return $file;
-                }
+            }else{
+                $path   = $theme_file;
             }
 
-            $file = !empty($theme_file) ? $theme_file : $file;
+            ob_start();
+            require $path;
+            $html    = ob_get_contents();
+            ob_end_clean();
 
-            return $file;
+            return $html;
         });
 
         if (file_exists($main_file)) {

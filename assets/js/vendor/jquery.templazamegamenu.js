@@ -75,8 +75,13 @@
             // }
 
             _megamenu.each(function () {
+               // var _content = $(this).find(settings.contentClass);
                var _content = $(this).find(">" + settings.contentClass);
 
+               // console.log(_container);
+               // console.log(_content);
+               // console.log($(this));
+               // console.log(settings.contentClass);
                // var _width = _content.data('width');
                // if (typeof _width != 'undefined' && _width != '') {
                //    if (_width == 'container') {
@@ -103,6 +108,10 @@
                   return true;
                }
 
+               // console.log($(this));
+               // console.log(_container);
+               // console.log(_content);
+               // console.log(settings.contentClass);
 
                if($(this).data('position') == 'edge') {
                   var _leftoverflow = 0;
@@ -147,6 +156,10 @@
                //    _content.css('left', -(_left));
                //    _content.css('right', 'inherit');
 
+               // console.log("offsetleft: " + offsetleft);
+               // console.log("_content_w: " + _content.outerWidth());
+               // console.log("container_rightoverflow: " + _rightoverflow);
+               // console.log("container_leftoverflow: " + _leftoverflow);
 
                   if ((offsetleft + _content.outerWidth()) > _rightoverflow) {
                      var _left = _content.outerWidth() - (_rightoverflow - offsetleft);
@@ -163,10 +176,24 @@
                      _content.css('right', _right);
                      _content.css('left', 'inherit');
                   }else{
-                     if ($(this).data('position') == 'center'){
+                     if ($(this).data('position') == 'right') {
+                        _content.css('left', 'inherit');
+                        _content.css('right', 0);
+                     }else{
                         var _left = ($(this).outerWidth() - _content.outerWidth()) /2;
                         _content.css('left', _left);
+                        _content.css('right', 'inherit');
                      }
+
+                     //    var _left = ($(this).outerWidth() - _content.outerWidth()) /2;
+                     // console.log("_left: "+_left);
+                     // console.log("_right: "+_right);
+
+                     // var _right = (offsetleft - _leftoverflow);
+                     // if ($(this).data('position') == 'center'){
+                     //    var _left = ($(this).outerWidth() - _content.outerWidth()) /2;
+                     //    _content.css('left', _left);
+                     // }
                   }
 
                // }

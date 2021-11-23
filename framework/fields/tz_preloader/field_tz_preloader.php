@@ -119,7 +119,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Preloader' ) ) {
         ?>
         <div class="field-tz-preloader">
             <a href="#<?php echo $this -> field['id'].'__modal';
-            ?>" data-toggle="tz-preloader-modal"><span class="tz-preloader-field-select"></span></a>
+            ?>" data-toggle="tz-preloader-modal" data-uk-toggle><span class="tz-preloader-field-select"></span></a>
             <div class="select-preloader"><?php
                 if(isset($selected) && isset($selected['html'])){
                     echo $selected['html'];
@@ -127,20 +127,29 @@ if ( ! class_exists( 'ReduxFramework_TZ_Preloader' ) ) {
                 ?></div>
         </div>
         <div id="<?php echo $this -> field['id'].'__modal'; ?>" title="<?php
-        echo $dialog_title; ?>" class="field-tz-preloader-dialog-content hide">
-            <div class="tz-field-preloaders-selector">
-                <?php if(isset($this -> field['options']) && count($this -> field['options'])){
-                    foreach ($this -> field['options'] as $key => $option){
-                    ?>
-                <div class="tz-preloader-select" data-value="<?php echo $key; ?>" data-id="<?php
-                    echo $this -> field['id'];?>" data-html="<?php echo htmlspecialchars($option['html']);
-                    ?>">
-                    <div class="tz-preloader-select-inner">
-                        <?php echo isset($option['html'])?$option['html']:$option['title'];?>
-                    </div>
+        echo $dialog_title; ?>" class="field-tz-preloader-dialog-content uk-modal-container" data-uk-modal>
+            <div class="uk-modal-dialog">
+                <button class="uk-modal-close-default" type="button" data-uk-close></button>
+                <div class="uk-modal-header">
+                    <h2 class="uk-h4"><?php echo $dialog_title; ?></h2>
                 </div>
-                <?php }
-                } ?>
+                <div class="uk-modal-body tz-field-preloaders-selector" data-uk-overflow-auto>
+                    <?php if(isset($this -> field['options']) && count($this -> field['options'])){
+                        foreach ($this -> field['options'] as $key => $option){
+                        ?>
+                    <div class="tz-preloader-select" data-value="<?php echo $key; ?>" data-id="<?php
+                        echo $this -> field['id'];?>" data-html="<?php echo htmlspecialchars($option['html']); ?>">
+                        <div class="tz-preloader-select-inner">
+                            <?php echo isset($option['html'])?$option['html']:$option['title'];?>
+                        </div>
+                    </div>
+                    <?php }
+                    } ?>
+                </div>
+                <div class="uk-modal-footer uk-text-right">
+                    <button class="uk-button uk-button-default uk-modal-close" type="button"><?php
+                        echo __('Cancel', $this -> text_domain);?></button>
+                </div>
             </div>
         </div>
         <input type="hidden" name="<?php echo $this->field['name']; ?>" id="<?php echo $this -> field['id'];

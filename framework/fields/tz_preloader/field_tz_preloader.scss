@@ -1,6 +1,6 @@
 @import "../../../assets/scss/spinkit/variables";
-$spinkit-size: 40px;
-$spinkit-spinner-color: #727cf5;
+$tztheme-spinkit-size: 40px;
+$tztheme-spinkit-spinner-color: #727cf5;
 @import "../../../assets/scss/spinkit/animation";
 
 //@include sk-rotating-plane(40px, #210048);
@@ -169,6 +169,8 @@ $spinkit-spinner-color: #727cf5;
     position: relative;
     overflow: hidden;
     display: inline-block;
+    min-width: 40px;
+    min-height: 40px;
   }
   //.field-tz-preloader-dialog{
   //  display: none;

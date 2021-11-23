@@ -74,6 +74,6 @@ if($preloder_setting == "animations"){
 }
 
 ?>
-<div id="templaza-preloader" class="d-flex align-items-center">
+<div id="templaza-preloader" class="uk-flex uk-flex-middle">
 	<?php echo $preloaderHTML; ?>
 </div>

@@ -65,6 +65,7 @@ if(!class_exists('TemplazaFramework_ShortCode_WP_Recent_Posts')){
                         'type'     => 'spinner',
                         'title'    => __( 'Number of posts', $this -> text_domain ),
                         'subtitle' => __( 'Enter number of posts to display.', $this -> text_domain ),
+                        'max'      => 100,
                         'default'  => 5,
                     ),
                     array(

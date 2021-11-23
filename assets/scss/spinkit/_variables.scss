@@ -8,7 +8,7 @@ $tztheme-sk-wave-delayRange:                    0.4s !default;
 
 /* wandering-cubes */
 $tztheme-sk-wandering-cubs-animationDuration:   1.8s !default;
-$tztheme-sk-wandering-cubeDistance:             ($tztheme-spinkit-size / 2) !default;
+$tztheme-sk-wandering-cubeDistance:             calc(#{$tztheme-spinkit-size} * 0.55) !default;
 
 /* chase */
 $tztheme-sk-chase-count:                         6 !default;

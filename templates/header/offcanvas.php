@@ -17,15 +17,15 @@ $offcanvas_animation        = isset($options['offcanvas-animation'])?$options['o
 //$offcanvas_direction        = isset($options['offcanvas-direction'])?(bool) $options['offcanvas-direction']:true;
 $panelwidth                 = isset($options['offcanvas-panelwidth']) &&
                                 !empty($options['offcanvas-panelwidth'])?$options['offcanvas-panelwidth']:'320px';
-$offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$options['offcanvas-togglevisibility']:'d-block';
+$offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$options['offcanvas-togglevisibility']:'uk-display-block';
 
-$navClass                   = ['nav menu list-inline d-block'];
+$navClass                   = ['nav menu list-inline uk-display-block'];
 
 if (!$header || !$enable_offcanvas) {
 	return;
 }
 ?>
-    <div class="templaza-offcanvas d-none d-init" id="templaza-offcanvas">
+    <div class="templaza-offcanvas uk-hidden d-init" id="templaza-offcanvas">
         <div class="burger-menu-button active">
             <button type="button" class="button close-offcanvas offcanvas-close-btn">
          <span class="box">

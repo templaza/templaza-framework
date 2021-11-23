@@ -1,6 +1,6 @@
-@import "../../../assets/scss/vendor/bootstrap_grid/functions";
-@import "../../../assets/scss/vendor/bootstrap_grid/variables";
-@import "../../../assets/scss/vendor/bootstrap_grid/mixins";
+//@import "../../../assets/scss/vendor/bootstrap_grid/functions";
+//@import "../../../assets/scss/vendor/bootstrap_grid/variables";
+//@import "../../../assets/scss/vendor/bootstrap_grid/mixins";
 
 /* Variables */
 $f-color:  #71748d;
@@ -414,20 +414,21 @@ $f-border-color:  #e8ebf1;
     }
 
     .fl-ui-state-highlight {
-      background: lighten($f-border-color, 2%);
+      //background: lighten($f-border-color, 2%);
       position: relative;
 
-      &.fl-column-state-highlight {
-        margin: 0 15px 15px;
-      }
+      //&.fl-column-state-highlight {
+      //  margin: 0 15px 15px;
+      //}
 
-      &.fl-row-state-highlight {
-        margin: 15px 0;
+      &.fl-row-state-highlight,
+      &.fl-section-state-highlight{
+        margin: 15px 0 30px;
       }
 
       &.fl-element-state-highlight {
         margin: 10px 0;
-        padding: 9px 0;
+        //padding: 9px 0;
       }
     }
 
@@ -500,12 +501,15 @@ $f-border-color:  #e8ebf1;
       .fl-grid-item {
         &:hover {
           cursor: pointer;
+          //> .uk-grid{
+          //  background: rgba(114,124,245,0.1);
+          //}
         }
 
-        .row .fl-grid-item-col {
+        .fl-grid-item-col {
           position: relative;
-          padding: 0px 3px;
-          margin-bottom: 30px;
+          padding: 0 3px;
+          //margin-bottom: 30px;
 
           span {
             min-height: 120px;
@@ -570,5 +574,17 @@ $f-border-color:  #e8ebf1;
     //    border: none;
     //  }
     //}
+
+    &.uk-modal{
+      .form-table-section-indented {
+        width: 98%;
+        margin-left: 2% !important;
+      }
+      .redux-container{
+        .redux-group-tab{
+          box-shadow: none;
+        }
+      }
+    }
   }
 //}

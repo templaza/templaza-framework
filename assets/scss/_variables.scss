@@ -13,11 +13,11 @@ $tztheme-logo-max-height:                     90px !default;
 // Header Section
 $tztheme-header-padding-y:                    15px !default;
 $tztheme-header-padding-x:                    0 !default;
-$tztheme-header-section-zindex:               $zindex-dropdown !default;
+$tztheme-header-section-zindex:               1000 !default;
 $tztheme-header-shadow:                       0 .125rem .25rem rgba(0, 0, 0, .075) !default;
 
 // Sticky Header
-$tztheme-sticky-header-zindex:                $zindex-sticky !default;
+$tztheme-sticky-header-zindex:                1020 !default;
 $tztheme-sticky-header-animation-duration:    .7s !default;
 $tztheme-sticky-header-padding-x:             0 !default;
 $tztheme-sticky-header-padding-y:             10px !default;
@@ -26,7 +26,7 @@ $tztheme-sticky-header-shadow:                0 .125rem .25rem rgba(0, 0, 0, .07
 
 // Stacked Header
 $tztheme-stacked-header-bg:                   #fff !default;
-$tztheme-stacked-header-zindex:               $zindex-dropdown !default;
+$tztheme-stacked-header-zindex:               1000 !default;
 
 // Deprecated Variable
 $tztheme-header-sidebar-width:                320px !default;
@@ -36,7 +36,7 @@ $tztheme-header-sidebar-mini-width:           54px !default;
 $tztheme-backtotop-right:                     20px !default;
 $tztheme-backtotop-bottom:                    20px !default;
 $tztheme-backtotop-padding:                   10px !default;
-$tztheme-backtotop-zindex:                    $zindex-sticky !default;
+$tztheme-backtotop-zindex:                    1020 !default;
 $tztheme-backtotop-rounded-radius:            4px !default;
 
 //form
@@ -98,3 +98,21 @@ $tztheme-transition-image-hover:              all 0.5s ease-in-out !default;
 
 $tztheme-heading-font:                        'Barlow Semi Condensed', Arial, Helvetica, sans-serif !default;
 $tztheme-button-font:                         'Barlow Semi Condensed', Arial, Helvetica, sans-serif !default;
+
+
+$tztheme-body-color:                          #212529 !default;
+$tztheme-white:                               #fff !default;
+$tztheme-black:                               #000 !default;
+
+$tztheme-enable-rounded:                      true !default;
+$tztheme-enable-shadows:                      false !default;
+// scss-docs-start grid-breakpoints
+$tztheme-grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1400px
+) !default;
+// scss-docs-end grid-breakpoints

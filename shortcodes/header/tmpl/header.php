@@ -29,7 +29,7 @@ switch ($mode) {
         $class[]    = 'templaza-' . $mode . '-' . $menu_mode . '-header';
         break;
     case 'sidebar':
-        $class  = array_merge($class,['sidebar-dir-' . $menu_mode, 'h-100', 'has-sidebar']);
+        $class  = array_merge($class,['sidebar-dir-' . $menu_mode, 'uk-height-1-1', 'has-sidebar']);
         break;
 }
 
@@ -41,7 +41,8 @@ $attribs = array(
     'data-header-offset'          => 'true',
     'data-megamenu-class'         => '.has-megamenu',
     'data-megamenu-trigger'       => $dropdown_trigger,
-    'data-megamenu-submenu-class' => '.sub-menu',
+//    'data-megamenu-submenu-class' => '.sub-menu',
+    'data-megamenu-submenu-class' => '.nav-submenu',
     'data-megamenu-content-class' => '.megamenu-sub-menu',
 );
 Functions::add_attributes('header', $attribs);

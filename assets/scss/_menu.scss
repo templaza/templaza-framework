@@ -155,6 +155,16 @@
          > .megamenu-item-link > .nav-item-caret::after { content: "[-]"; }
       }
    }
+   //.menu-icon{
+   //   padding-right: .5em;
+   //}
+   .menu-highlight-label{
+      font-size: 0.7em;
+      text-transform: none;
+      padding: .35em .55em;
+      margin-left: .75em;
+      line-height: 1;
+   }
 }
 
 ul{
@@ -276,6 +286,17 @@ ul{
      margin:0;
       &.fade-down, &.fade-up, &.fade-left, &.fade-right, &.rotate-x, &.rotate-y{
          .menu-item{
+            &.has-megamenu{
+               .menu-item{
+                  > .sub-menu{
+                     -webkit-transform: none;
+                     -moz-transform: none;
+                     -ms-transform: none;
+                     -o-transform: none;
+                     transform: none;
+                  }
+               }
+            }
             &:hover{
                >.sub-menu {
                   transform: rotateX(0deg);
@@ -431,6 +452,7 @@ ul{
       .menu-item{
          display:flex;
          position: relative;
+         overflow: hidden;
          &.current-menu-item{
             >a{
                color:$tztheme-global-color;
@@ -442,6 +464,7 @@ ul{
          }
 
          &:hover{
+            overflow: visible;
             >.sub-menu{
                opacity: 1;
                visibility: visible;
@@ -572,6 +595,7 @@ ul{
                   padding: 8px 0;
                }
                .megamenu-arrow{
+                  float: right;
                   margin-right: 12px;
                }
                .megamenu-indicator{
@@ -642,6 +666,37 @@ ul{
             }
          }
 
+      }
+
+      .has-megamenu{
+         //&.menu-item li.menu-item.menu-item-has-children>a{
+         //   font-size: inherit;
+         //}
+
+         .menu-item{
+            > .sub-menu{
+               opacity: 1;
+               position: static;
+               visibility: visible;
+               //-webkit-transform: none;
+               //-moz-transform: none;
+               //-ms-transform: none;
+               //-o-transform: none;
+               //transform: none;
+               -webkit-box-shadow: none;
+               -moz-box-shadow: none;
+               box-shadow: none;
+            }
+         }
+
+         .megamenu-arrow{
+            display: none;
+         }
+         > .megamenu-item-link.item-level-1{
+            .megamenu-arrow{
+               display: inline;
+            }
+         }
       }
    }
    &.templaza-header-sticky.megamenu-trigger-click,

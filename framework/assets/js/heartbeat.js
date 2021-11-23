@@ -37,11 +37,9 @@
                                     }
                                     if ($mHeader.length) {
                                         if (response.message) {
-                                            var $msg = '<div class="alert alert-danger rounded-0 mb-4 heartbeat-error">' +
+                                            var $msg = '<div class="uk-alert-danger uk-margin-bottom uk-box-shadow-small heartbeat-error" data-uk-alert>' +
                                                 response.message +
-                                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                                                '<span aria-hidden="true">&times;</span>' +
-                                                '</button></div>';
+                                                '<a class="uk-alert-close" data-uk-close></a></div>';
                                             var $heartbeat = $main.find(".heartbeat-error");
                                             if ($heartbeat.length) {
                                                 $heartbeat.remove();

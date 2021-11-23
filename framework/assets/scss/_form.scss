@@ -120,4 +120,16 @@
     border: 3px solid $tz-border-color;
   }
 }
-
+input[type=checkbox]{
+  &.uk-checkbox{
+    box-shadow: none;
+    &:checked::before{
+      content: none;
+    }
+  }
+}
+input[type=radio]{
+  &.uk-radio{
+    box-shadow: none;
+  }
+}

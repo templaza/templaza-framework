@@ -158,9 +158,9 @@ class TemplazaFramework_ShortCode{
                     'type'    => 'select',
                     'title'   => __('Text Align', $this -> text_domain),
                     'options' => array(
-                        'text-start'  => esc_html__('Left', $this -> text_domain),
-                        'text-center' => esc_html__('Center', $this -> text_domain),
-                        'text-end'    => esc_html__('Right', $this -> text_domain),
+                        'left'  => esc_html__('Left', $this -> text_domain),
+                        'center' => esc_html__('Center', $this -> text_domain),
+                        'right'    => esc_html__('Right', $this -> text_domain),
                     ),
                 ),
                 array(
@@ -201,6 +201,23 @@ class TemplazaFramework_ShortCode{
                         'indent' => true,
                         'title'  => esc_html__('Spacing', $this -> text_domain),
                     ),
+
+                    array(
+                        'id'        => 'margin_type',
+                        'type'      => 'select',
+                        'title'     =>  esc_html__('Margin', $this -> text_domain),
+                        'options' => array(
+                            'default'   => esc_html__('Keep existing', $this -> text_domain),
+                            'small'     => esc_html__('Small', $this -> text_domain),
+                            'medium'    => esc_html__('Medium', $this -> text_domain),
+                            'large'     => esc_html__('Large', $this -> text_domain),
+                            'xlarge'    => esc_html__('XLarge', $this -> text_domain),
+                            'remove-vertical'      => esc_html__('None', $this -> text_domain),
+                            'custom'    => esc_html__('Custom', $this -> text_domain),
+                        ),
+                        'select2'       => array( 'allowClear' => false ),
+                        'default' => 'custom',
+                    ),
                     array(
                         'id'     => 'margin',
                         'type'   => 'spacing',
@@ -208,10 +225,46 @@ class TemplazaFramework_ShortCode{
                         'all'    => false,
                         'allow_responsive'    => true,
                         'units'  => array( 'em', 'rem', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
-                        'title'  => esc_html__('Margin', $this -> text_domain),
+                        'title'  => esc_html__('Custom Margin', $this -> text_domain),
                         'default' => array(
                             'units' => 'px'
                         ),
+                        'required'  => array('margin_type', '=', 'custom'),
+                    ),
+                    array(
+                        'id'       => 'margin_remove_top',
+                        'type'     => 'switch',
+                        'title'    => esc_html__('Remove top margin', $this -> text_domain),
+                        'required' => array(
+                            array('margin_type', '!=', 'custom'),
+                            array('margin_type', '!=', 'remove-vertical'),
+                        ),
+//                        'required' => array('margin_type', '=', array('default','small','medium','large','xlarge')),
+                    ),
+                    array(
+                        'id'       => 'margin_remove_bottom',
+                        'type'     => 'switch',
+                        'title'    => esc_html__('Remove bottom margin', $this -> text_domain),
+                        'required' => array(
+                            array('margin_type', '!=', 'custom'),
+                            array('margin_type', '!=', 'remove-vertical'),
+                        ),
+//                        'required' => array('margin_type', '=', array('default','small','medium','large','xlarge')),
+                    ),
+                    array(
+                        'id'        => 'padding_type',
+                        'type'      => 'select',
+                        'title'     =>  esc_html__('Padding', $this -> text_domain),
+                        'subtitle'  =>  esc_html__('Set the vertical padding.', $this -> text_domain),
+                        'options' => array(
+                            'default'   => esc_html__('Default', $this -> text_domain),
+                            'small'     => esc_html__('Small', $this -> text_domain),
+                            'large'     => esc_html__('Large', $this -> text_domain),
+                            'none'      => esc_html__('None', $this -> text_domain),
+                            'custom'    => esc_html__('Custom', $this -> text_domain),
+                        ),
+                        'select2'       => array( 'allowClear' => false ),
+                        'default' => 'custom',
                     ),
                     array(
                         'id'     => 'padding',
@@ -220,10 +273,31 @@ class TemplazaFramework_ShortCode{
                         'all'    => false,
                         'allow_responsive'    => true,
                         'units'  => array( 'em', 'rem', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
-                        'title'  => esc_html__('Padding', $this -> text_domain),
+                        'title'  => esc_html__('Custom Padding', $this -> text_domain),
                         'default' => array(
                             'units' => 'px'
                         ),
+                        'required'  => array('padding_type', '=', 'custom'),
+                    ),
+                    array(
+                        'id'       => 'padding_remove_top',
+                        'type'     => 'switch',
+                        'title'    => esc_html__('Remove top padding', $this -> text_domain),
+                        'required' => array(
+                            array('padding_type', '!=', 'none'),
+                            array('padding_type', '!=', 'custom'),
+                        ),
+//                        'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
+                    ),
+                    array(
+                        'id'       => 'padding_remove_bottom',
+                        'type'     => 'switch',
+                        'title'    => esc_html__('Remove bottom padding', $this -> text_domain),
+                        'required' => array(
+                            array('padding_type', '!=', 'none'),
+                            array('padding_type', '!=', 'custom'),
+                        ),
+//                        'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
                     ),
                     array(
                         'id'     => 'tab-spacing-end',
@@ -361,6 +435,59 @@ class TemplazaFramework_ShortCode{
         $custom_css_name    = 'tz_custom_'.$element['id'];
         $params['tz_class'].= ' '.$custom_css_name;
 
+        $margin_type   = isset($params['margin_type'])?$params['margin_type']:'custom';
+
+        switch ($margin_type){
+            case 'xsmall':
+            case 'small':
+            case 'large':
+            case 'xlarge':
+                $params['tz_class']   .= ' uk-margin-'.$margin_type;
+                break;
+            case 'none':
+            case 'remove-vertical':
+                $params['tz_class']   .= ' uk-margin-remove-vertical';
+                break;
+        }
+        if($margin_type != 'none' && $margin_type != 'remove-vertical' && $margin_type != 'custom'){
+            $margin_remove_top    = isset($params['margin_remove_top'])?filter_var($params['margin_remove_top'], FILTER_VALIDATE_BOOLEAN):false;
+            $margin_remove_bottom = isset($params['margin_remove_bottom'])?filter_var($params['margin_remove_bottom'], FILTER_VALIDATE_BOOLEAN):false;
+            if($margin_remove_top){
+                $params['tz_class'] .= ' uk-margin-remove-top';
+            }
+            if($margin_remove_bottom){
+                $params['tz_class'] .= ' uk-margin-remove-bottom';
+            }
+        }
+
+        $padding_type   = isset($params['padding_type'])?$params['padding_type']:'custom';
+//        if(isset($params['padding_type'])){
+//            $padding_type    = $params['padding_type'];
+
+        switch ($padding_type){
+            case 'xsmall':
+            case 'small':
+            case 'large':
+            case 'xlarge':
+                $params['tz_class']   .= ' uk-section-'.$padding_type;
+                break;
+            case 'none':
+            case 'remove-vertical':
+                $params['tz_class']   .= ' uk-padding-remove';
+                break;
+        }
+        if($padding_type != 'none' && $padding_type != 'remove-vertical' && $padding_type != 'custom'){
+            $padding_remove_top    = isset($params['padding_remove_top'])?filter_var($params['padding_remove_top'], FILTER_VALIDATE_BOOLEAN):false;
+            $padding_remove_bottom = isset($params['padding_remove_bottom'])?filter_var($params['padding_remove_bottom'], FILTER_VALIDATE_BOOLEAN):false;
+            if($padding_remove_top){
+                $params['tz_class'] .= ' uk-padding-remove-top';
+            }
+            if($padding_remove_bottom){
+                $params['tz_class'] .= ' uk-padding-remove-bottom';
+            }
+        }
+//        }
+
         $css    = $this -> custom_css($params, $element);
 
         if(!empty($css)){
@@ -393,7 +520,7 @@ class TemplazaFramework_ShortCode{
         }
 
         if(isset($params['text_align']) && !empty($params['text_align'])){
-            $params['tz_class'] .= ' '.$params['text_align'];
+            $params['tz_class'] .= ' uk-text-'.$params['text_align'];
         }
 		if(isset($params['background_overlay']) && !empty($params['background_overlay'])){
             $overlay_color = CSS::make_color_rgba_redux($params['background_overlay']);
@@ -471,7 +598,8 @@ class TemplazaFramework_ShortCode{
 
         }
 
-        if(isset($params['margin']) && !empty($params['margin'])){
+        $margin_type    = isset($params['margin_type'])?$params['margin_type']:'custom';
+        if($margin_type == 'custom' && isset($params['margin']) && !empty($params['margin'])){
 
             $margin    = CSS::make_spacing_redux('margin', $params['margin'], true, 'px');
 
@@ -488,7 +616,8 @@ class TemplazaFramework_ShortCode{
             unset($params['margin']);
         }
 
-        if(isset($params['padding']) && !empty($params['padding'])){
+        $padding_type    = isset($params['padding_type'])?$params['padding_type']:'custom';
+        if($padding_type == 'custom' && isset($params['padding']) && !empty($params['padding'])){
             $padding    = CSS::make_spacing_redux('padding', $params['padding'], true, 'px');
 
             if(!empty($padding)){

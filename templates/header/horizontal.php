@@ -16,11 +16,11 @@ $block_1_custom             = isset($options['header-block-1-custom'])?$options[
 $enable_offcanvas           = isset($options['enable-offcanvas'])?filter_var($options['enable-offcanvas'],FILTER_VALIDATE_BOOLEAN):false;
 $offcanvas_animation        = isset($options['offcanvas-animation'])?$options['offcanvas-animation']:'st-effect-1';
 $offcanvas_direction        = isset($options['offcanvas-direction'])?$options['offcanvas-direction']:'offcanvasDirLeft';
-$offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$options['offcanvas-togglevisibility']:'d-block';
+$offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$options['offcanvas-togglevisibility']:'uk-display-block';
 
 //$class                      = ['templaza-header', 'templaza-horizontal-header', 'templaza-horizontal-' . $mode . '-header'];
-$navClass                   = ['nav', 'navbar-nav', 'templaza-nav', 'd-none', 'd-lg-flex'];
-$navWrapperClass            = ['align-self-center', 'px-2', 'd-none', 'd-lg-block'];
+$navClass                   = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-visible@m'];
+$navWrapperClass            = [ 'uk-margin-small-left', 'uk-margin-small-right', 'uk-visible@m'];
 
 $dropdown_arrow             = isset($options['dropdown-arrow'])?filter_var($options['dropdown-arrow'], FILTER_VALIDATE_BOOLEAN):true;
 //$dropdown_animation_ease    = isset($options['dropdown-animation-ease'])?$options['dropdown-animation-ease']:'linear';
@@ -41,13 +41,13 @@ $navClass[] = $dropdown_animation_effect;
 // Get data attributes - them added from header shortcode
 $menu_datas = Functions::get_attributes('header');
 ?>
-<div class="d-flex flex-row justify-content-between">
-        <div class="d-flex d-lg-none justify-content-start">
-            <div class="header-mobilemenu-trigger d-lg-none burger-menu-button align-self-center" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
-                <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
-            </div>
+<div class="uk-flex uk-flex-row uk-flex-between">
+    <div class="uk-flex uk-hidden@m uk-flex-left uk-flex-middle">
+        <div class="header-mobilemenu-trigger burger-menu-button" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
+            <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
         </div>
-    <div class="header-left-section d-flex justify-content-between">
+    </div>
+    <div class="header-left-section uk-flex uk-flex-between uk-flex-middle">
         <?php Templates::load_my_layout('logo'); ?>
         <?php
         if ($mode == 'left') {
@@ -66,7 +66,7 @@ $menu_datas = Functions::get_attributes('header');
     </div>
     <?php
     if ($mode == 'center') {
-        echo '<div class="header-center-section d-none d-lg-flex justify-content-center">';
+        echo '<div class="header-center-section uk-flex uk-flex-center uk-flex-middle uk-visible@m">';
         // header nav starts
           Menu::get_nav_menu(array(
               'theme_location'  => $header_menu,
@@ -82,7 +82,7 @@ $menu_datas = Functions::get_attributes('header');
     }
     ?>
     <?php if ($block_1_type != 'blank' || $mode == 'right' || $enable_offcanvas): ?>
-        <div class="header-right-section d-flex justify-content-end">
+        <div class="header-right-section uk-flex uk-flex-right uk-flex-middle">
             <?php
             if ($mode == 'right') {
                 // header nav starts
@@ -99,7 +99,7 @@ $menu_datas = Functions::get_attributes('header');
             }
             ?>
             <?php if ($enable_offcanvas) { ?>
-                <div class="header-offcanvas-trigger burger-menu-button align-self-center <?php echo $offcanvas_togglevisibility; ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>" >
+                <div class="header-offcanvas-trigger burger-menu-button <?php echo $offcanvas_togglevisibility; ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>" >
                     <button type="button" class="button">
                  <span class="box">
                     <span class="inner"></span>
@@ -108,7 +108,7 @@ $menu_datas = Functions::get_attributes('header');
                 </div>
             <?php } ?>
             <?php if ($block_1_type != 'blank'): ?>
-                <div class="header-right-block d-none d-lg-block align-self-center px-2">
+                <div class="header-right-block uk-visible@m uk-margin-small-left uk-margin-small-right">
                     <?php
                     if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
                         echo '<div class="header-block-item">';

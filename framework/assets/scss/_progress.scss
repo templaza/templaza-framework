@@ -1,0 +1,33 @@
+//.ui-progress-tripped{
+//  background-image: linear-gradient(
+//                  45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent);
+//  background-size: 15px 15px
+//;
+//}
+
+$progress-bar-animation-timing:     1s linear infinite !default;
+
+.ui-progress-stripped {
+  @include ui-gradient-striped();
+  background-size: $progress-height $progress-height;
+}
+.ui-progress-animated {
+  animation: $progress-bar-animation-timing progress-bar-stripes;
+
+  //@if $enable-reduced-motion {
+  //  @media (prefers-reduced-motion: reduce) {
+  //    animation: none;
+  //  }
+  //}
+}
+.uk-progress{
+  &.ui-progress-success{
+    &::-webkit-progress-value,
+    &::-moz-progress-bar,
+    &::-ms-fill{
+      background-color: $tz-progress-bg-success-color ;
+    }
+    //background-color: $tz-progress-bg-success-color;
+    //@include ui-gradient-striped($tz-progress-bg-success-color);
+  }
+}

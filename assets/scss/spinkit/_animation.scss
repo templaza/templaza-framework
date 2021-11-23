@@ -97,8 +97,12 @@
 
   .sk-cube {
     background-color: $tztheme-spinkit-spinner-color;
-    width: calc(#{$tztheme-spinkit-size} / 4);
-    height: calc(#{$tztheme-spinkit-size} / 4);
+    width: 20%;
+    height: 20%;
+    //width: ($tztheme-spinkit-size / 4);
+    //height: ($tztheme-spinkit-size / 4);
+    //width: calc(#{$tztheme-spinkit-size} / 4);
+    //height: calc(#{$tztheme-spinkit-size} / 4);
     position: absolute;
     top: 0;
     left: 0;

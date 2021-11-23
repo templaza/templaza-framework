@@ -67,8 +67,7 @@ if($background_setting_404){
     }
 }
 ?>
-    <div class="templaza-error-page uk-container uk-container-small uk-text-center">
-        <div class="col-12 text-center align-self-center">
+    <div class="templaza-error-page uk-container uk-container-small uk-text-center uk-flex-middle">
             <?php
             if (!empty($errorContent) && $error ->has_errors()) {
                 $errorContent   = str_replace('{errorcode}', $error -> get_error_code(), $errorContent);
@@ -91,6 +90,4 @@ if($background_setting_404){
             }
             ?>
             <a class="btn btn-backtohome" href="<?php echo get_home_url(); ?>" role="button"><?php echo $errorButton; ?></a>
-
-        </div>
     </div>

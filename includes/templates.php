@@ -227,12 +227,14 @@ class Templates{
         if(is_array($inline_styles)){
             $styles = [];
             foreach (['desktop', 'tablet', 'mobile'] as $device) {
+//                $style_device   = self::$_styles[$device];
+                $style_device   = array_unique(self::$_styles[$device]);
                 if ($device == 'mobile') {
-                    $styles[] = '@media (max-width: 767.98px) {' . implode('', self::$_styles[$device]) . '}';
+                    $styles[] = '@media (max-width: 767.98px) {' . implode('',$style_device) . '}';
                 } elseif ($device == 'tablet') {
-                    $styles[] = '@media (max-width: 991.98px) {' . implode('', self::$_styles[$device]) . '}';
+                    $styles[] = '@media (max-width: 991.98px) {' . implode('', $style_device) . '}';
                 } else {
-                    $styles[] = implode('', self::$_styles[$device]);
+                    $styles[] = implode('', $style_device);
                 }
             }
             $styles = implode('', $styles);

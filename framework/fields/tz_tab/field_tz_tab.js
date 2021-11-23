@@ -14,6 +14,8 @@
             function () {
                 var el = $(this);
                 var parent = el;
+                // console.log("field_tz_tab");
+                // console.log(el);
                 if (!el.hasClass('redux-field-container')) {
                     parent = el.parents('.redux-field-container:first');
                 }
@@ -27,6 +29,72 @@
                 }
 
                 if(el.find("[data-fl-tz_layout-tab]").length) {
+                    // console.log(el.find("[data-opt-name]:eq(0)"));
+                    // console.log(el.find("[data-opt-name]:eq(0)").attr("data-opt-name").replace( /\-/g, '_'));
+                    var tz_required = function(obj_selector) {
+                        if(obj_selector.find("[data-opt-name]").length) {
+                            $.each(obj_selector.find("[data-opt-name]"), function(){
+                                var _opt_name = $(this).attr("data-opt-name");
+
+                                $.each(
+                                    window['redux_' + _opt_name.replace( /\-/g, '_')].folds,
+                                    function (i, v) {
+                                        var div;
+                                        var rawTable;
+
+                                        var fieldset = obj_selector.find('#' + _opt_name + '-' + i);
+
+                                        fieldset.parents('tr:first, li:first').addClass('fold');
+
+                                        if ('hide' === v ) {
+                                            fieldset.parents( 'tr:first, li:first' ).addClass( 'hide' );
+                                            if(typeof window['redux_' + _opt_name.replace( /\-/g, '_')].required_child !== "undefined"
+                                                && !$.redux.check_parents_dependencies(i)) {
+                                                fieldset.parents('tr:first, li:first').addClass('hide');
+                                            }
+
+                                            if (fieldset.hasClass('redux-container-section')) {
+                                                div = $('#section-' + i);
+
+                                                if (div.hasClass('redux-section-indent-start')) {
+                                                    $('#section-table-' + i).hide().addClass('hide');
+                                                    div.hide().addClass('hide');
+                                                }
+                                            }
+
+                                            if (fieldset.hasClass('redux-container-info')) {
+                                                $('#info-' + i).hide().addClass('hide');
+                                            }
+
+                                            if (fieldset.hasClass('redux-container-divide')) {
+                                                $('#divide-' + i).hide().addClass('hide');
+                                            }
+
+                                            if (fieldset.hasClass('redux-container-raw')) {
+                                                rawTable = fieldset.parents().find('table#' + redux.opt_names[x] + '-' + i);
+                                                rawTable.hide().addClass('hide');
+                                            }
+                                        }
+                                    }
+                                );
+                            });
+                        }
+                    };
+
+
+                    // if(el.find("[data-opt-name]").length) {
+                    //     $.each(el.find("[data-opt-name]"), function () {
+                    //
+                    //         var _opt_name = $(this).attr("data-opt-name");
+                    //
+                    //         if(redux.opt_names.indexOf(_opt_name) === -1) {
+                    //             redux.opt_names.push(_opt_name);
+                    //         }
+                    //         // redux.opt_names.push(_opt_name.replace( /\-/g, '_'));
+                    //     });
+                    //     // $.redux.required();
+                    // }
+
                     el.find("[data-fl-tz_layout-tab]").tabs({
                         "activate": function (event, ui) {
                             var tab = $(this),
@@ -51,6 +119,9 @@
 
                                         tz_redux_field.init(field);
 
+                                        // redux_change(field.find(" input,  textarea, select"));
+                                        // $.redux.check_dependencies(field.find(" input,  textarea, select"));
+
                                         // After init field in setting edit
                                         // Trigger of field (setting_edit_after_init_field)
                                         if(field.length){
@@ -61,9 +132,18 @@
                                         }
                                     }
                                 });
+
+                                // console.log(ui.newPanel.find(".redux-container"));
+                                // tz_required(ui.newPanel);
+                                // $.redux.required();
+                                // $.redux.checkRequired(ui.newPanel.find(".redux-container"));
+                                // $.redux.check_parents_dependencies(ui.newPanel.find(".redux-container"));
                             }
                         },
                     });
+
+                    // $.redux.required();
+                    // redux.optName   = __redux_tmp;
                 }
 
             });

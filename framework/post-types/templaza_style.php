@@ -266,6 +266,15 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                         $(window).load(function(){
                             $.redux.initFields();
                         });
+                        $(document).ready(function() {
+                            setTimeout(function(){
+                                if(typeof window._wpLoadBlockEditor !== "undefined"){
+                                    window._wpLoadBlockEditor.then( function() {                            
+                                        $.redux.initFields();
+                                    });
+                                }
+                            },100);
+                        });
                     })(jQuery);');
                 }
             }, 99);
@@ -305,6 +314,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             $args['dev_mode']       = false;
             $args['database']       = '';
             $args['ajax_save']      = false;
+            $args['save_defaults']  = false;
             $args['hide_save']      = true;
             $args['menu_type']      = 'hidden';
             $args['hide_reset']     = true;

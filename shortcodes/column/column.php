@@ -104,207 +104,83 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
                                 'id'     => 'responsive-settings',
                                 'title'  => esc_html__('Responsive Settings', $this -> text_domain),
                                 'fields' => array(
+
                                     array(
-                                        'id'     => 'tab-extra-small',
-                                        'type'   => 'section',
-                                        'indent' => true,
-                                        'title'  => esc_html__('Extra small', $this -> text_domain),
-                                        'subtitle'   => esc_html__('<576px', $this -> text_domain),
-                                    ),
-                                    array(
-                                        'id'      => 'xs_column_size',
+                                        'id'      => 'xs_size',
                                         'type'    => 'select',
-                                        'title'   => esc_html__('Column size', $this -> text_domain),
-                                        'options' => array(
-                                            'inherit' => esc_html__('Inherit', $this -> text_domain),
-                                            '1'       => esc_html__('col-xs-1', $this -> text_domain),
-                                            '2'       => esc_html__('col-xs-2', $this -> text_domain),
-                                            '3'       => esc_html__('col-xs-3', $this -> text_domain),
-                                            '4'       => esc_html__('col-xs-4', $this -> text_domain),
-                                            '5'       => esc_html__('col-xs-5', $this -> text_domain),
-                                            '6'       => esc_html__('col-xs-6', $this -> text_domain),
-                                            '7'       => esc_html__('col-xs-7', $this -> text_domain),
-                                            '8'       => esc_html__('col-xs-8', $this -> text_domain),
-                                            '9'       => esc_html__('col-xs-9', $this -> text_domain),
-                                            '10'      => esc_html__('col-xs-10', $this -> text_domain),
-                                            '11'      => esc_html__('col-xs-11', $this -> text_domain),
-                                            '12'      => esc_html__('col-xs-12', $this -> text_domain),
-                                        )
-                                    ),
-                                    array(
-                                        'id'      => 'xs_visibility',
-                                        'type'    => 'switch',
-                                        'title'   => esc_html__('Visibility'),
-                                        'default' => true,
-                                    ),
-                                    // Small subsection
-                                    array(
-                                        'id'     => 'tab-small',
-                                        'type'   => 'section',
-                                        'indent' => true,
-                                        'title'  => esc_html__('Small', $this -> text_domain),
-                                        'subtitle'   => esc_html__('>=576px', $this -> text_domain),
+                                        'title'   => esc_html__('Phone Portrait', $this -> text_domain),
+                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', $this -> text_domain),
+                                        'options' => $this -> column_width_options(),
+                                        'default' => '1-1'
                                     ),
                                     array(
                                         'id'      => 'sm_size',
                                         'type'    => 'select',
-                                        'title'   => esc_html__('Column size'),
-                                        'options' => array(
-                                            'inherit' => esc_html__('Inherit', $this -> text_domain),
-                                            '1'       => esc_html__('col-sm-1', $this -> text_domain),
-                                            '2'       => esc_html__('col-sm-2', $this -> text_domain),
-                                            '3'       => esc_html__('col-sm-3', $this -> text_domain),
-                                            '4'       => esc_html__('col-sm-4', $this -> text_domain),
-                                            '5'       => esc_html__('col-sm-5', $this -> text_domain),
-                                            '6'       => esc_html__('col-sm-6', $this -> text_domain),
-                                            '7'       => esc_html__('col-sm-7', $this -> text_domain),
-                                            '8'       => esc_html__('col-sm-8', $this -> text_domain),
-                                            '9'       => esc_html__('col-sm-9', $this -> text_domain),
-                                            '10'      => esc_html__('col-sm-10', $this -> text_domain),
-                                            '11'      => esc_html__('col-sm-11', $this -> text_domain),
-                                            '12'      => esc_html__('col-sm-12', $this -> text_domain),
-                                        )
-                                    ),
-                                    array(
-                                        'id'      => 'sm_visibility',
-                                        'type'    => 'switch',
-                                        'title'   => esc_html__('Visibility', $this -> text_domain),
-                                        'default' => true,
-                                    ),
-                                    // Medium subsection
-                                    array(
-                                        'id'     => 'tab-medium',
-                                        'type'   => 'section',
-                                        'indent' => true,
-                                        'title'  => esc_html__('Medium', $this -> text_domain),
-                                        'subtitle'   => esc_html__('>=768px', $this -> text_domain),
+                                        'title'   => esc_html__('Phone Landscape', $this -> text_domain),
+                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', $this -> text_domain),
+                                        'options' => $this -> column_width_options()
                                     ),
                                     array(
                                         'id'      => 'md_size',
                                         'type'    => 'select',
-                                        'title'   => esc_html__('Column size'),
-                                        'options' => array(
-                                            'inherit' => esc_html__('Inherit', $this -> text_domain),
-                                            '1'       => esc_html__('col-md-1', $this -> text_domain),
-                                            '2'       => esc_html__('col-md-2', $this -> text_domain),
-                                            '3'       => esc_html__('col-md-3', $this -> text_domain),
-                                            '4'       => esc_html__('col-md-4', $this -> text_domain),
-                                            '5'       => esc_html__('col-md-5', $this -> text_domain),
-                                            '6'       => esc_html__('col-md-6', $this -> text_domain),
-                                            '7'       => esc_html__('col-md-7', $this -> text_domain),
-                                            '8'       => esc_html__('col-md-8', $this -> text_domain),
-                                            '9'       => esc_html__('col-md-9', $this -> text_domain),
-                                            '10'      => esc_html__('col-md-10', $this -> text_domain),
-                                            '11'      => esc_html__('col-md-11', $this -> text_domain),
-                                            '12'      => esc_html__('col-md-12', $this -> text_domain),
-                                        )
-                                    ),
-                                    array(
-                                        'id'      => 'md_visibility',
-                                        'type'    => 'switch',
-                                        'title'   => esc_html__('Visibility'),
-                                        'default' => true,
-                                    ),
-                                    // Large subsection
-                                    array(
-                                        'id'     => 'tab-large',
-                                        'type'   => 'section',
-                                        'indent' => true,
-                                        'title'  => esc_html__('Large', $this -> text_domain),
-                                        'subtitle'   => esc_html__('>=992px', $this -> text_domain),
+                                        'title'   => esc_html__('Tablet Landscape', $this -> text_domain),
+                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', $this -> text_domain),
+                                        'options' => $this -> column_width_options()
                                     ),
                                     array(
                                         'id'      => 'lg_size',
                                         'type'    => 'select',
-                                        'title'   => esc_html__('Column size'),
-                                        'options' => array(
-                                            'inherit' => esc_html__('Inherit', $this -> text_domain),
-                                            '1'       => esc_html__('col-lg-1', $this -> text_domain),
-                                            '2'       => esc_html__('col-lg-2', $this -> text_domain),
-                                            '3'       => esc_html__('col-lg-3', $this -> text_domain),
-                                            '4'       => esc_html__('col-lg-4', $this -> text_domain),
-                                            '5'       => esc_html__('col-lg-5', $this -> text_domain),
-                                            '6'       => esc_html__('col-lg-6', $this -> text_domain),
-                                            '7'       => esc_html__('col-lg-7', $this -> text_domain),
-                                            '8'       => esc_html__('col-lg-8', $this -> text_domain),
-                                            '9'       => esc_html__('col-lg-9', $this -> text_domain),
-                                            '10'      => esc_html__('col-lg-10', $this -> text_domain),
-                                            '11'      => esc_html__('col-lg-11', $this -> text_domain),
-                                            '12'      => esc_html__('col-lg-12', $this -> text_domain),
-                                        )
-                                    ),
-                                    array(
-                                        'id'      => 'lg_visibility',
-                                        'type'    => 'switch',
-                                        'title'   => esc_html__('Visibility'),
-                                        'default' => true,
-                                    ),
-                                    // Extra large subsection
-                                    array(
-                                        'id'     => 'tab-extra-large',
-                                        'type'   => 'section',
-                                        'indent' => true,
-                                        'title'  => esc_html__('Extra Large', $this -> text_domain),
-                                        'subtitle'   => esc_html__('≥1200px', $this -> text_domain),
+                                        'title'   => esc_html__('Desktop (Default Device)', $this -> text_domain),
+                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', $this -> text_domain),
+                                        'options' => $this -> column_width_options()
                                     ),
                                     array(
                                         'id'      => 'xl_size',
                                         'type'    => 'select',
-                                        'title'   => esc_html__('Column size'),
-                                        'options' => array(
-                                            'inherit' => esc_html__('Inherit', $this -> text_domain),
-                                            '1'       => esc_html__('col-xl-1', $this -> text_domain),
-                                            '2'       => esc_html__('col-xl-2', $this -> text_domain),
-                                            '3'       => esc_html__('col-xl-3', $this -> text_domain),
-                                            '4'       => esc_html__('col-xl-4', $this -> text_domain),
-                                            '5'       => esc_html__('col-xl-5', $this -> text_domain),
-                                            '6'       => esc_html__('col-xl-6', $this -> text_domain),
-                                            '7'       => esc_html__('col-xl-7', $this -> text_domain),
-                                            '8'       => esc_html__('col-xl-8', $this -> text_domain),
-                                            '9'       => esc_html__('col-xl-9', $this -> text_domain),
-                                            '10'      => esc_html__('col-xl-10', $this -> text_domain),
-                                            '11'      => esc_html__('col-xl-11', $this -> text_domain),
-                                            '12'      => esc_html__('col-xl-12', $this -> text_domain),
-                                        )
+                                        'title'   => esc_html__('Large Screen', $this -> text_domain),
+                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', $this -> text_domain),
+                                        'options' => $this -> column_width_options()
+                                    ),
+                                    array(
+                                        'id'     => 'tab-visibility-options',
+                                        'type'   => 'section',
+                                        'indent' => true,
+                                        'title'  => esc_html__('Visibility Options', $this -> text_domain),
+//                                        'subtitle'   => esc_html__('<576px', $this -> text_domain),
+                                    ),
+//                                    array(
+//                                        'id'      => 'xs_visibility',
+//                                        'type'    => 'switch',
+//                                        'title'   => esc_html__('Visible On Phone Portrait'),
+//                                        'subtitle'=> esc_html__('Disable to hide this section on phone portrait device'),
+//                                        'default' => true,
+//                                    ),
+                                    array(
+                                        'id'      => 'sm_visibility',
+                                        'type'    => 'switch',
+                                        'title'   => esc_html__('Visible On Phone Landscape', $this -> text_domain),
+                                        'subtitle'=> esc_html__('Disable to hide this section on phone landscape device'),
+                                        'default' => true,
+                                    ),
+                                    array(
+                                        'id'      => 'md_visibility',
+                                        'type'    => 'switch',
+                                        'title'   => esc_html__('Visible On Tablet Landscape'),
+                                        'subtitle'=> esc_html__('Disable to hide this section on tablet landscape device'),
+                                        'default' => true,
+                                    ),
+                                    array(
+                                        'id'      => 'lg_visibility',
+                                        'type'    => 'switch',
+                                        'title'   => esc_html__('Visible On Desktop'),
+                                        'subtitle'=> esc_html__('Disable to hide this section on desktop device'),
+                                        'default' => true,
                                     ),
                                     array(
                                         'id'      => 'xl_visibility',
                                         'type'    => 'switch',
-                                        'title'   => esc_html__('Visibility'),
-                                        'default' => true,
-                                    ),
-                                    // Extra extra large subsection
-                                    array(
-                                        'id'     => 'tab-extra-extra-large',
-                                        'type'   => 'section',
-                                        'indent' => true,
-                                        'title'  => esc_html__('Extra Extra Large', $this -> text_domain),
-                                        'subtitle'   => esc_html__('≥1400px', $this -> text_domain),
-                                    ),
-                                    array(
-                                        'id'      => 'xxl_size',
-                                        'type'    => 'select',
-                                        'title'   => esc_html__('Column size'),
-                                        'options' => array(
-                                            'inherit' => esc_html__('Inherit', $this -> text_domain),
-                                            '1'       => esc_html__('col-xxl-1', $this -> text_domain),
-                                            '2'       => esc_html__('col-xxl-2', $this -> text_domain),
-                                            '3'       => esc_html__('col-xxl-3', $this -> text_domain),
-                                            '4'       => esc_html__('col-xxl-4', $this -> text_domain),
-                                            '5'       => esc_html__('col-xxl-5', $this -> text_domain),
-                                            '6'       => esc_html__('col-xxl-6', $this -> text_domain),
-                                            '7'       => esc_html__('col-xxl-7', $this -> text_domain),
-                                            '8'       => esc_html__('col-xxl-8', $this -> text_domain),
-                                            '9'       => esc_html__('col-xxl-9', $this -> text_domain),
-                                            '10'      => esc_html__('col-xxl-10', $this -> text_domain),
-                                            '11'      => esc_html__('col-xxl-11', $this -> text_domain),
-                                            '12'      => esc_html__('col-xxl-12', $this -> text_domain),
-                                        )
-                                    ),
-                                    array(
-                                        'id'      => 'xxl_visibility',
-                                        'type'    => 'switch',
-                                        'title'   => esc_html__('Visibility'),
+                                        'title'   => esc_html__('Visible On Large Screen'),
+                                        'subtitle'=> esc_html__('Disable to hide this section on large screen device'),
                                         'default' => true,
                                     ),
                                     array(
@@ -320,39 +196,119 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
             );
         }
 
+        protected function column_width_options(){
+            return array(
+                esc_html__('Fraction width', $this -> text_domain) => array(
+                    '1-1'      => esc_html__('1/1', $this -> text_domain), // 12
+                    '1-2'       => esc_html__('1/2', $this -> text_domain), // 6
+                    '1-3'       => esc_html__('1/3', $this -> text_domain),  // 4
+                    '2-3'       => esc_html__('2/3', $this -> text_domain), // 8
+                    '1-4'       => esc_html__('1/4', $this -> text_domain), // 3
+                    '3-4'       => esc_html__('3/4', $this -> text_domain), // 9
+                    '1-5'      => esc_html__('1/5', $this -> text_domain), // 2
+                    '2-5'       => esc_html__('2/5', $this -> text_domain), // 5
+                    '3-5'       => esc_html__('3/5', $this -> text_domain), // 7
+                    '4-5'       => esc_html__('4/5', $this -> text_domain), // 10
+                    '1-6'      => esc_html__('1/6', $this -> text_domain), // 1
+                    '5-6'       => esc_html__('5/6', $this -> text_domain), // 11
+                ),
+                                                esc_html__('Fixed width', $this -> text_domain) => array(
+                    'expand'  => esc_html__('Expand', $this -> text_domain),
+                    'auto'    => esc_html__('Auto', $this -> text_domain),
+                    'small'   => esc_html__('Small', $this -> text_domain),
+                    'medium'  => esc_html__('Medium', $this -> text_domain),
+                    'large'   => esc_html__('Large', $this -> text_domain),
+                    'xlarge'  => esc_html__('XLarge', $this -> text_domain),
+                    '2xlarge' => esc_html__('2XLarge', $this -> text_domain),
+                )
+            );
+        }
+
+        protected function convert_column_to_UIkit($column){
+            $col_real   = $column;
+            $modulo = 12 % $column;
+            switch($column){
+//                case 1:
+//                    $col_real   = '1-12';
+//                    break;
+                case 2:
+                case 3:
+                case 4:
+                case 6:
+                case 8:
+                case 9:
+                case 10:
+                    if($modulo == 0){
+                        $col_real   = '1-'.(12 / $column);
+                    }else{
+                        $col_real   = ($column/$modulo).'-'.(12/$modulo);
+                    }
+                    break;
+                case 5:
+                    $col_real   = '1-5';
+                    break;
+                case 7:
+                    $col_real   = '4-5';
+                    break;
+//                case 11:
+//                    $col_real   = '11-12';
+//                    break;
+                case 12:
+                    $col_real   = '1-1';
+                    break;
+            }
+            return $col_real;
+        }
 
         public function prepare_params($params, $element,$parent_el){
             $params = parent::prepare_params($params, $element,$parent_el);
 
-            if(isset($element['size'])){
+            $size       = (isset($element['size']) && !empty($element['size']))?$element['size']:'';
+            $xs_size    = (isset($params['xs_size']) && !empty($params['xs_size']))?$params['xs_size']:'1-1';
+            $sm_size    = (isset($params['sm_size']) && !empty($params['sm_size']))?$params['sm_size']:'';
+            $md_size    = (isset($params['md_size']) && !empty($params['md_size']))?$params['md_size']:'';
+//            $lg_size    = (isset($params['lg_size']) && !empty($params['lg_size']))?$params['lg_size']:'';
+            $xl_size    = (isset($params['xl_size']) && !empty($params['xl_size']))?$params['xl_size']:'';
+
+            if(!empty($size)){
                 if(isset($params['tz_class'])) {
-                    $params['tz_class'].= ' col-lg-'.$element['size'];
+                    $size    = (strpos($size, '-') === false)?$this -> convert_column_to_UIkit($size):$size;
+                    $params['tz_class'] .= ' uk-width-'.$size.'@l';
                 }else{
-                    $params['tz_class'] = ' col-lg-'.$element['size'];
+                    $params['tz_class'] = ' uk-width-'.$size.'@l';
                 }
                 $params['tz_class'] = trim($params['tz_class']);
             }
 
-            if(isset($params['xs_size']) && !empty($params['xs_colum_size'])){
-                $params['tz_class'] .= ' col-xs-'.$params['xs_colum_size'];
+//            if(isset($params['xs_size']) && !empty($params['xs_colum_size'])){
+//                $params['tz_class'] .= ' col-xs-'.$params['xs_colum_size'];
+//            }
+            if(!empty($xs_size)){
+                $xs_size    = (strpos($xs_size, '-') === false)?$this -> convert_column_to_UIkit($xs_size):$xs_size;
+                $params['tz_class'] .= ' uk-width-'.$xs_size;
             }
-            if(isset($params['sm_size']) && !empty($params['sm_size'])){
-                $params['tz_class'] .= ' col-sm-'.$params['sm_size'];
+            if(!empty($sm_size)){
+                $sm_size    = (strpos($sm_size, '-') === false)?$this -> convert_column_to_UIkit($sm_size):$sm_size;
+                $params['tz_class'] .= ' uk-width-'.$sm_size.'@s';
             }
-            if(isset($params['md_size']) && !empty($params['md_size'])){
-                $params['tz_class'] .= ' col-md-'.$params['md_size'];
+            if(!empty($md_size)){
+                $md_size    = (strpos($md_size, '-') === false)?$this -> convert_column_to_UIkit($md_size):$md_size;
+                $params['tz_class'] .= ' uk-width-'.$md_size.'@m';
             }
-            if(isset($params['xl_size']) && !empty($params['xl_size'])){
-                $params['tz_class'] .= ' col-xl-'.$params['xl_size'];
-            }
-            if(isset($params['xxl_size']) && !empty($params['xxl_size'])){
-                $params['tz_class'] .= ' col-xxl-'.$params['xxl_size'];
+//            if(!empty($lg_size)){
+//                $lg_size    = (strpos($lg_size, '-') === false)?$this -> convert_column_to_UIkit($lg_size):$lg_size;
+//                $params['tz_class'] .= ' uk-width-'.$lg_size.'@l';
+////                $params['tz_class'] .= ' col-xl-'.$params['xl_size'];
+//            }
+            if(!empty($xl_size)){
+                $xl_size    = (strpos($xl_size, '-') === false)?$this -> convert_column_to_UIkit($xl_size):$xl_size;
+                $params['tz_class'] .= ' uk-width-'.$xl_size.'@xl';
             }
 
 
-            if(isset($params['xxl_visibility']) && $params['xxl_visibility'] == ''){
-                $params['xxl_visibility']   = 1;
-            }
+//            if(isset($params['xxl_visibility']) && $params['xxl_visibility'] == ''){
+//                $params['xxl_visibility']   = 1;
+//            }
             if(isset($params['xl_visibility']) && $params['xl_visibility'] == ''){
                 $params['xl_visibility']   = 1;
             }
@@ -369,24 +325,28 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
                 $params['xs_visibility']   = 1;
             }
 
-            if(isset($params['xxl_visibility']) && (!(bool) $params['xxl_visibility'])){
-                $params['tz_class'] .= ' hideonxxl';
-            }
+//            if(isset($params['xxl_visibility']) && (!(bool) $params['xxl_visibility'])){
+//                $params['tz_class'] .= ' hideonxxl';
+//            }
             if(isset($params['xl_visibility']) && (!(bool) $params['xl_visibility'])){
+//                $params['tz_class'] .= ' uk-visible@xl';
                 $params['tz_class'] .= ' hideonxl';
             }
             if(isset($params['lg_visibility']) && (!(bool) $params['lg_visibility'])){
+//                $params['tz_class'] .= ' uk-visible@l';
                 $params['tz_class'] .= ' hideonlg';
             }
             if(isset($params['md_visibility']) && (!(bool) $params['md_visibility'])){
+//                $params['tz_class'] .= ' uk-visible@m';
                 $params['tz_class'] .= ' hideonmd';
             }
             if(isset($params['sm_visibility']) && (!(bool) $params['sm_visibility'])){
+//                $params['tz_class'] .= ' uk-hidden@s';
                 $params['tz_class'] .= ' hideonsm';
             }
-            if(isset($params['xs_visibility']) && (!(bool) $params['xs_visibility'])){
-                $params['tz_class'] .= ' hideonxs';
-            }
+//            if(isset($params['xs_visibility']) && (!(bool) $params['xs_visibility'])){
+//                $params['tz_class'] .= ' hideonxs';
+//            }
 
             return $params;
         }

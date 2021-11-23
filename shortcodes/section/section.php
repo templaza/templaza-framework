@@ -51,6 +51,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                             'default'         => esc_html__('Default', $this -> text_domain),
                                             'templaza-footer' => esc_html__('Footer', $this -> text_domain),
                                         ),
+                                        'select2'       => array( 'allowClear' => false ),
                                         'default' => 'default'
                                     ),
 									array(
@@ -60,29 +61,85 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'subtitle' => esc_html__('Enable to hide this section on Single Post', $this -> text_domain),
                                         'default'  => false,
                                     ),
+//                                    array(
+//                                        'id'       => 'title',
+//                                        'type'     => 'text',
+//                                        'title'    => esc_html__('Section Title', $this -> text_domain),
+//                                    ),
+
                                     array(
-                                        'id'       => 'title',
-                                        'type'     => 'text',
-                                        'title'    => esc_html__('Section Title', $this -> text_domain),
+                                        'id'      => 'container_width',
+                                        'type'    => 'select',
+                                        'title'   => esc_html__('Max width', $this -> text_domain),
+                                        'options' => array(
+                                            'default'   => esc_html__('Default', $this -> text_domain),
+                                            'xsmall'    => esc_html__('XSmall', $this -> text_domain),
+                                            'small'     => esc_html__('Small', $this -> text_domain),
+                                            'large'     => esc_html__('Large', $this -> text_domain),
+                                            'xlarge'    => esc_html__('XLarge', $this -> text_domain),
+                                            'expand'    => esc_html__('Expand', $this -> text_domain),
+                                            'none'      => esc_html__('None', $this -> text_domain),
+                                            'custom'    => esc_html__('Custom (Add Custom class to use customized container)', $this -> text_domain),
+                                        ),
+                                        'select2'       => array( 'allowClear' => false ),
+                                        'default' => 'default',
                                     ),
                                     array(
-                                        'id'      => 'layout_type',
-                                        'type'    => 'select',
-                                        'title'   => esc_html__('Section Layout', $this -> text_domain),
-                                        'options' => array(
-                                            'container'                       => esc_html__('Container', $this -> text_domain),
-                                            'container-fluid'                 => esc_html__('Container Fluid', $this -> text_domain),
-                                            'container-with-no-gutters'       => esc_html__('Container with No gutters', $this -> text_domain),
-                                            'container-fluid-with-no-gutters' => esc_html__('Container Fluid with No gutters', $this -> text_domain),
-                                            'no-container'                    => esc_html__('Without Container', $this -> text_domain),
-                                            'custom-container'                => esc_html__('Custom (Add Custom class to use customized container)', $this -> text_domain),
-                                        ),
-                                        'default' => 'container',
+                                        'id'       => 'padding_remove_horizontal',
+                                        'type'     => 'switch',
+                                        'title'    => esc_html__('Remove horizontal padding', $this -> text_domain),
+                                        'subtitle' => __('Set the maximum content width.', $this -> text_domain),
+                                        'required' => array('container_width', '=', array('default', 'xsmall', 'small', 'large', 'xlarge')),
                                     ),
                                     array(
                                         'id'    => 'custom_container_class',
                                         'type'  => 'text',
-                                        'title' => esc_html__('Layout Custom Class', $this -> text_domain),
+                                        'title' => esc_html__('Container Custom Class', $this -> text_domain),
+                                        'required' => array('container_width', '!=', 'none'), /* required: container_width != 'none' */
+//                                        'required' => array('container_width', '=', array('default', 'xsmall', 'small',
+//                                            'large', 'xlarge','expand', 'custom')), /* required: container_width != 'none' */
+                                    ),
+                                    array(
+                                        'id'       => 'container_width_expand',
+                                        'type'     => 'select',
+                                        'title'    => esc_html__('Expand One Side', $this -> text_domain),
+                                        'subtitle' => __('Expand the width of one side to the left or right while the other side keeps within the constraints of the max width.', $this -> text_domain),
+                                        'options'  => array(
+                                            ''  => esc_html__("Don't expand", $this ->text_domain),
+                                            'left'  => esc_html__("To left", $this ->text_domain),
+                                            'right'  => esc_html__("To right", $this ->text_domain),
+                                        ),
+                                        'select2'       => array( 'allowClear' => false ),
+                                    ),
+                                    array(
+                                        'id'       => 'height',
+                                        'type'     => 'select',
+                                        'title'    => esc_html__('Height', $this -> text_domain),
+                                        'subtitle' => __('Expand the width of one side to the left or right while the other side keeps within the constraints of the max width.', $this -> text_domain),
+                                        'options'  => array(
+                                            ''        => esc_html__("None", $this ->text_domain),
+                                            'full'    => esc_html__("Viewport", $this ->text_domain),
+                                            'percent' => esc_html__("Viewport (Minus 20%)", $this ->text_domain),
+                                            'section' => esc_html__("Viewport (Minus the following section)", $this ->text_domain),
+                                            'expand'  => esc_html__("Expand", $this ->text_domain),
+                                        ),
+                                        'select2'       => array( 'allowClear' => false ),
+                                    ),
+                                    array(
+                                        'id'       => 'vertical_align',
+                                        'type'     => 'select',
+                                        'title'    => esc_html__('Vertical Alignment', $this -> text_domain),
+                                        'subtitle' => __('Align the section content vertically, if the section height is larger than the content itself.', $this -> text_domain),
+                                        'options'  => array(
+                                            ''        => esc_html__("Top", $this ->text_domain),
+                                            'middle'    => esc_html__("Middle", $this ->text_domain),
+                                            'bottom' => esc_html__("Bottom", $this ->text_domain),
+                                        ),
+                                        'select2'       => array( 'allowClear' => false ),
+//                                        'required' => array('height', '!=', 'expand')
+//                                        'required' => array(array('height', 'is_empty_or', ''), array('height', '=', 'expand'))
+//                                        'required' => array(array('height', 'is_empty_or', ''), array('height', '!=', 'expand'))
+                                        'required' => array('height', '=', array('full','percent','section'))
                                     ),
                                 ),
                             ),
@@ -141,16 +198,48 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         ),
                                     ),
                                     array(
+                                        'id'        => 'padding_type',
+                                        'type'      => 'select',
+                                        'title'     =>  esc_html__('Padding', $this -> text_domain),
+                                        'subtitle'  =>  esc_html__('Set the vertical padding.', $this -> text_domain),
+                                        'options' => array(
+                                            'default'   => esc_html__('Default', $this -> text_domain),
+                                            'xsmall'    => esc_html__('XSmall', $this -> text_domain),
+                                            'small'     => esc_html__('Small', $this -> text_domain),
+                                            'large'     => esc_html__('Large', $this -> text_domain),
+                                            'xlarge'    => esc_html__('XLarge', $this -> text_domain),
+                                            'none'      => esc_html__('None', $this -> text_domain),
+                                            'custom'    => esc_html__('Custom', $this -> text_domain),
+                                        ),
+                                        'select2'       => array( 'allowClear' => false ),
+                                        'default' => 'custom',
+                                    ),
+                                    array(
+                                        'id'       => 'padding_remove_top',
+                                        'type'     => 'switch',
+                                        'title'    => esc_html__('Remove top padding', $this -> text_domain),
+                                        'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
+//                                        'required' => array('padding_type', '!=', array('none','custom')),
+                                    ),
+                                    array(
+                                        'id'       => 'padding_remove_bottom',
+                                        'type'     => 'switch',
+                                        'title'    => esc_html__('Remove bottom padding', $this -> text_domain),
+                                        'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
+//                                        'required' => array('padding_type', '!=', array('none','custom')),
+                                    ),
+                                    array(
                                         'id'     => 'padding',
                                         'type'   => 'spacing',
                                         'mode'   => 'padding',
                                         'all'    => false,
                                         'allow_responsive'  => true,
                                         'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
-                                        'title'  => esc_html__('Padding', $this -> text_domain),
+                                        'title'  => esc_html__('Custom padding', $this -> text_domain),
                                         'default'   => array(
                                             'units' => 'px',
                                         ),
+                                        'required'  => array('padding_type', '=', 'custom'),
                                     ),
                                     array(
                                         'id'     => 'tab-spacing-end',
@@ -227,11 +316,59 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
 
 
         public function prepare_params($params, $element,$parent_el){
+
+            // Remove padding option if the padding_type is not custom
+            if(isset($params['padding']) && isset($params['padding_type']) && $params['padding_type'] != 'custom'){
+                unset($params['padding']);
+            }
+
             $params = parent::prepare_params($params, $element,$parent_el);
 
             if(!isset($params['tz_class'])){
                 $params['tz_class'] = '';
             }
+
+            if(isset($params['section_type']) && $params['section_type'] !== 'default'){
+                $params['tz_class']   .= ' '.$params['section_type'];
+            }
+
+            if((strpos($params['tz_class'], 'uk-section') == false) &&
+                (!isset($params['padding_type']) || (isset($params['padding_type']) && $params['padding_type'] != 'custom'))){
+                $params['tz_class'] .= ' uk-section';
+            }
+            if(isset($params['padding_type'])){
+                $padding_type    = $params['padding_type'];
+
+                switch ($padding_type){
+                    case 'xsmall':
+                    case 'small':
+                    case 'large':
+                    case 'xlarge':
+                        $params['tz_class']   .= ' uk-section-'.$padding_type;
+                        break;
+                    case 'none':
+                        $params['tz_class']   .= ' uk-padding-remove-vertical';
+                        break;
+                }
+                if($padding_type != 'none' && $padding_type != 'custom'){
+                    $padding_remove_top    = isset($params['padding_remove_top'])?filter_var($params['padding_remove_top'], FILTER_VALIDATE_BOOLEAN):false;
+                    $padding_remove_bottom = isset($params['padding_remove_bottom'])?filter_var($params['padding_remove_bottom'], FILTER_VALIDATE_BOOLEAN):false;
+                    if($padding_remove_top){
+                        $params['tz_class'] .= ' uk-padding-remove-top';
+                    }
+                    if($padding_remove_bottom){
+                        $params['tz_class'] .= ' uk-padding-remove-bottom';
+                    }
+                }
+            }
+
+            if(isset($params['height']) && isset($params['vertical_align'])){
+                $height = $params['height'];
+                if($height != '' && $height != 'expand' && !empty($vertical_align)){
+                    $params['tz_class']   .= ' uk-flex uk-flex-'.$vertical_align;
+                }
+            }
+
 
             if(isset($params['hideonxxl']) && (bool) $params['hideonxxl']){
                 $params['tz_class'] .= ' hideonxxl';

@@ -47,7 +47,6 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                 //            $redux_args['open_expanded']        = true;
                 $redux_args['shortcode_section']    = false;
                 $redux_args['show_import_export']   = false;
-//                $redux_args['showimportexport']   = false;
 
 
                 \Redux::set_args($opt_name, $redux_args);
@@ -70,9 +69,9 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                 $redux -> options   = array();
 //                $redux ->_default_values();
 //                $redux ->check_dependencies();
-                //            if(method_exists($redux, '_register_settings')) {
+//                if(method_exists($redux, '_register_settings')) {
                 $redux->_register_settings();
-                //            }
+//                }
 
                 // Generate redux html to field call hook or filter
                 ob_start();
@@ -116,186 +115,94 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                     'title' => esc_html__('Enable', $this -> text_domain),
                     'default' => 0,
                 ),
-//                array(
-//                    'id'        => 'event',
-//                    'type'      => 'select',
-//                    'title'     => esc_html__('Event', $this -> text_domain),
-//                    'options'   => array(
-//                        'hover'  => esc_html__('Hover Intent', $this -> text_domain),
-//                        'hover_' => esc_html__('Hover', $this -> text_domain),
-//                        'click'  => esc_html__('Click', $this -> text_domain),
-//                    ),
-//                    'default' => 'hover'
-//                ),
-//                array(
-//                    'id'        => 'effect',
-//                    'type'      => 'select',
-//                    'title'     => esc_html__('Effect', $this -> text_domain),
-//                    'options'   => array(
-//                        'disabled' => esc_html__('None', $this -> text_domain),
-//                        'fade'     => esc_html__('Fade', $this -> text_domain),
-//                        'fade_up'  => esc_html__('Fade Up', $this -> text_domain),
-//                        'slide'    => esc_html__('Slide', $this -> text_domain),
-//                        'slide_up' => esc_html__('Slide Up', $this -> text_domain),
-//                    ),
-//                    'default' => 'fade_up'
-//                ),
-//                array(
-//                    'id'        => 'effect_speed',
-//                    'type'      => 'select',
-//                    'title'     => esc_html__('Effect Speed', $this -> text_domain),
-//                    'options'   => array(
-//                        '200' => esc_html__('Fast', $this -> text_domain),
-//                        '400'     => esc_html__('Med', $this -> text_domain),
-//                        '600'  => esc_html__('Slow', $this -> text_domain),
-//                    ),
-//                    'default' => '200'
-//                ),
-//                array(
-//                    'id'        => 'effect_mobile',
-//                    'type'      => 'select',
-//                    'title'     => esc_html__('Effect (Mobile)', $this -> text_domain),
-//                    'options'   => array(
-//                        'disabled' => esc_html__('None', $this -> text_domain),
-//                        'slide'     => esc_html__('Slide Down', $this -> text_domain),
-//                        'slide_left'  => esc_html__('Slide Left (Off Canvas)', $this -> text_domain),
-//                        'slide_right'    => esc_html__('Slide Right (Off Canvas)', $this -> text_domain),
-//                    ),
-//                    'default'   => 'disabled'
-//                ),
-//                array(
-//                    'id'        => 'effect_speed_mobile',
-//                    'type'      => 'select',
-//                    'title'     => esc_html__('Effect Speed (Mobile)', $this -> text_domain),
-//                    'options'   => array(
-//                        '200' => esc_html__('Fast', $this -> text_domain),
-//                        '400'     => esc_html__('Med', $this -> text_domain),
-//                        '600'  => esc_html__('Slow', $this -> text_domain),
-//                    ),
-//                    'default'   => '200'
-//                ),
             );
 
-            $metaboxes[] = array(
-                'id'            => 'tz_megamenu-main',
-                'title'         => __( 'TZ Mengamenu Options', $this -> text_domain ),
-                'post_types'    => 'nav-menus',
-                'position'      => 'side', // normal, advanced, side
-                'priority'      => 'high', // high, core, default, low - Priorities of placement
-                'store_each'    => true, // Store value of each fields to each post meta
-                'sections'      => array(
-                    array(
-                        'id'    => uniqid(),
-                        'title' => '',
-                        'fields' => array(
-                            array(
-                                'id'           => 'tz_megamenu_meta',
-                                'type'         => 'tz_loop',
-                                'title'        => 'Main Options',
-//                                'title'        => '',
-                                'group_fields' => $tagged_menu_locations,
-                                'fields'       => $mloopFields,
-                            ),
-                        ),
-                    ),
-                ),
-            );
+            $metaboxes  = array();
+
+//            $metaboxes[] = array(
+//                'id'            => 'tz_megamenu-main',
+//                'title'         => __( 'TZ Mengamenu Options', $this -> text_domain ),
+//                'post_types'    => 'nav-menus',
+//                'position'      => 'side', // normal, advanced, side
+//                'priority'      => 'high', // high, core, default, low - Priorities of placement
+//                'store_each'    => true, // Store value of each fields to each post meta
+//                'sections'      => array(
+//                    array(
+//                        'id'    => uniqid(),
+//                        'title' => '',
+//                        'fields' => array(
+//                            array(
+//                                'id'           => 'tz_megamenu_meta',
+//                                'type'         => 'tz_loop',
+//                                'title'        => 'Main Options',
+////                                'title'        => '',
+//                                'group_fields' => $tagged_menu_locations,
+//                                'fields'       => $mloopFields,
+//                            ),
+//                        ),
+//                    ),
+//                ),
+//            );
 
             $this -> layout_fields  = array(
                 array(
                     'id'     => 'megamenu-layout-section',
                     'icon'   => 'dashicons dashicons-welcome-widgets-menus',
-                    'title'  => esc_html__('Mega Menu', $this -> text_domain),
+//                    'title'  => esc_html__('Mega Menu', $this -> text_domain),
                     'fields' => array(
                         array(
-                            'id'       => 'megamenu_layout',
-                            'type'     => 'tz_layout',
-                            'class'    => 'field-tz_layout-content',
+                            'id'       => 'icon',
+                            'type'     => 'select',
+                            'title'    => __( 'Icon Select', $this -> text_domain ),
+                            'subtitle' => __( 'Select an icon for your menu item.', $this -> text_domain ),
+                            'data'     => 'fontawesome',
+//                            'default'  => 'fas fa-arrow-up',
+//                            'required' => array('backtotop','=','1'),
                         ),
-
-                    ),
-                ),
-                array(
-                    'id'     => 'megamenu-settings-section',
-                    'title'  => esc_html__('Settings', $this -> text_domain),
-                    'fields' => array(
                         array(
-                            'id'    => 'hide_text',
+                            'id'       => 'hide_text',
+                            'type'     => 'switch',
+                            'title'    => __( 'Icon/Thumbnail Only', $this -> text_domain ),
+                            'subtitle' => __( 'Select an icon for your menu item.', $this -> text_domain ),
+                        ),
+                        array(
+                            'id'       => 'highlight_text',
+                            'type'     => 'text',
+                            'title'    => __( 'Menu Highlight Label', $this -> text_domain ),
+                            'subtitle' => __( 'Set the highlight label for menu item.', $this -> text_domain ),
+                            'required' => array('hide_text', '!=', true),
+                        ),
+                        array(
+                            'id'          => 'highlight_text_bg_color',
+                            'type'        => 'color',
+                            'title'       => __( 'Menu Highlight Label Background Color', $this -> text_domain ),
+                            'subtitle'    => __( 'Set the highlight label background color.', $this -> text_domain ),
+                            'transparent' => false,
+                            'required'    => array('hide_text', '!=', true),
+                        ),
+                        array(
+                            'id'          => 'highlight_text_color',
+                            'type'        => 'color',
+                            'title'       => __( 'Menu Highlight Label Text Color', $this -> text_domain ),
+                            'subtitle'    => __( 'Set the highlight label text color.', $this -> text_domain ),
+                            'transparent' => false,
+                            'required'    => array('hide_text', '!=', true),
+                        ),
+                        array(
+                            'id'          => 'background',
+                            'type'        => 'background',
+                            'title'       => __( 'Mega Menu / Flyout Menu Background Image', $this -> text_domain ),
+                            'subtitle'    => __( 'Select an image for the mega menu or flyout menu background.\nMega Menu: In case of mega menu, if left empty, the Main Menu Dropdown Background Color will be used. Each mega menu column can have its own background image, or you can have one image that spreads across the entire mega menu width.
+Flyout Menu: When used in the flyout menu, the image will be shown full screen when hovering the corresponding menu item.', $this -> text_domain ),
+                            'transparent' => false,
+                            'background-color'  => false,
+//                            'required'    => array('hide_text', 'not', '1'),
+                        ),
+                        array(
+                            'id'    => 'megamenu_enable',
                             'type'  => 'switch',
-                            'title' => esc_html__('Hide Text', $this -> text_domain)
+                            'title' => esc_html__('Enable', $this -> text_domain)
                         ),
-//                        array(
-//                            'id'    => 'hide_arrow',
-//                            'type'  => 'switch',
-//                            'title' => esc_html__('Hide Arrow', $this -> text_domain)
-//                        ),
-                        array(
-                            'id'    => 'disable_link',
-                            'type'  => 'switch',
-                            'title' => esc_html__('Disable Link', $this -> text_domain)
-                        ),
-                        array(
-                            'id'    => 'hide_on_mobile',
-                            'type'  => 'switch',
-                            'title' => esc_html__('Hide Item on Mobile', $this -> text_domain)
-                        ),
-                        array(
-                            'id'    => 'hide_on_desktop',
-                            'type'  => 'switch',
-                            'title' => esc_html__('Hide Item on Desktop', $this -> text_domain)
-                        ),
-                        array(
-                            'id'    => 'item_align',
-                            'type'  => 'select',
-                            'title' => esc_html__('Menu Item Align', $this -> text_domain),
-                            'options' => array(
-                                'float-left' => esc_html__('Left', $this -> text_domain),
-                                'left'       => esc_html__('Default', $this -> text_domain),
-                                'right'      => esc_html__('Right', $this -> text_domain),
-                            ),
-                            'default' => 'left'
-                        ),
-//                        array(
-//                            'id'    => 'submenu-section-start',
-//                            'title' => esc_html__('Sub Menu Settings', $this -> text_domain),
-//                            'type'  => 'section',
-//                            'indent' => true,
-//                            'subtitle' => __('With the "section" field you can create indent option sections.', 'redux-framework-demo'),
-//                        ),
-//                        array(
-//                            'id'    => 'width',
-//                            'type'  => 'text',
-//                            'title' => esc_html__('Sub Menu Width', $this -> text_domain),
-//                            'default' => '980px',
-//                        ),
-//                        array(
-//                            'id'    => 'align',
-//                            'type'  => 'select',
-//                            'title' => esc_html__('Sub Menu Align', $this -> text_domain),
-//                            'options' => array(
-//                                'bottom-left'  => esc_html__('Left edge of Parent', $this -> text_domain),
-//                                'bottom-right'   => esc_html__('Right edge of Parent', $this -> text_domain),
-//                            ),
-//                            'default' => 'bottom-left'
-//                        ),
-//                        array(
-//                            'id'    => 'hide_sub_menu_on_mobile',
-//                            'type'  => 'switch',
-//                            'title' => esc_html__('Hide Sub Menu on Mobile', $this -> text_domain),
-//                        ),
-//                        array(
-//                            'id'    => 'submenu-section-end',
-//                            'type'  => 'section',
-//                            'indent' => false,
-//                        ),
-                    ),
-                ),
-                array(
-                    'id'         =>'megamenu-submenu-setting-section',
-                    'title'      => __('Sub Menu Settings', $this -> text_domain),
-                    'desc'       => __('Configure Submenu settings.', $this -> text_domain),
-                    'subsection' => true,
-                    'fields'     => array(
                         array(
                             'id'      => 'submenu_direction',
                             'type'    => 'select',
@@ -307,85 +214,170 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                                 'full'   => esc_html__('Container', $this -> text_domain),
                                 'edge'   => esc_html__('Full', $this -> text_domain),
                             ),
-                            'default' => 'left'
+                            'default' => 'left',
+                            'required'  => array('megamenu_enable', '=', true),
                         ),
                         array(
-                            'id'    => 'width',
-                            'type'  => 'text',
-                            'title' => __('Sub Menu Width', $this -> text_domain),
-                            'placeholder' => '980px',
+                            'id'        => 'width',
+                            'type'      => 'text',
+                            'title'     => __('Sub Menu Width', $this -> text_domain),
+                            'subtitle'  => __('Controls the max width of the mega menu. In pixels.', $this -> text_domain),
+//                            'placeholder' => '980px',
                             'required' => array(
                                 array('submenu_direction', '!=', 'full'),
                                 array('submenu_direction', '!=', 'edge')
-                            )
-                        ),
-//                        array(
-//                            'id'    => 'align',
-//                            'type'  => 'select',
-//                            'title' => __('Sub Menu Align', $this -> text_domain),
-//                            'options' => array(
-//                                'bottom-left'  => esc_html__('Left edge of Parent', $this -> text_domain),
-//                                'bottom-right'   => esc_html__('Right edge of Parent', $this -> text_domain),
-//                            ),
-//                            'default' => 'bottom-left'
-//                        ),
-                        array(
-                            'id'    => 'hide_sub_menu_on_mobile',
-                            'type'  => 'switch',
-                            'title' => __('Hide Sub Menu on Mobile', $this -> text_domain),
-                        ),
-                    ),
-                ),
-                array(
-                    'id'         => 'megamenu-icon-section',
-//                    'icon'       => 'dashicons dashicons-format-image',
-                    'title'      => esc_html__('Icon', $this -> text_domain),
-                    'subsection' => true,
-                    'fields'     => array(
-                        array(
-                            'id'    => 'icon_position',
-                            'type'  => 'select',
-                            'title' => esc_html__('Icon Position', $this -> text_domain),
-                            'options' => array(
-                                'left'   => esc_html__('Left', $this -> text_domain),
-                                'top'    => esc_html__('Top', $this -> text_domain),
-                                'right'  => esc_html__('Right', $this -> text_domain),
-                                'bottom' => esc_html__('Bottom', $this -> text_domain),
                             ),
-                            'default' => 'left'
                         ),
                         array(
-                            'id'       => 'icon',
-                            'type'     => 'select',
-                            'title'    => __( 'Menu Item Icon', $this -> text_domain ),
-//                            'subtitle' => __( 'Select a Back to Top Icon from the list', $this -> text_domain ),
-                            'data'     => 'fontawesome',
-//                            'default'  => 'fas fa-arrow-up',
-//                            'required' => array('backtotop','=','1'),
-                        ),
-                        array(
-                            'id'         => 'dropdown-arrow-icon',
-                            'type'       => 'select',
-                            'title'      => __('Dropdown Arrow Icon', $this -> text_domain),
-                            'data'       => 'fontawesome',
-//                            'data'       => 'icons',
-//                            'data-icons' => array(
-//                                'fas fa-arrow-down',
-//                                'fas fa-arrow-circle-down',
-//                                'fas fa-arrow-alt-circle-down',
-//                                'fas fa-sort-down',
-//                                'fas fa-chevron-down',
-//                                'fas chevron-circle-down',
-//                                'fas fa-caret-square-down',
-//                                'far fa-caret-square-down',
-//                                'fas fa-caret-down',
-//                                'fas fa-angle-down',
-//                                'fas fa-angle-double-down',
-//                            ),
+                            'id'            => 'megamenu_layout',
+                            'type'          => 'tz_layout',
+                            'allow_copy'    => false,
+                            'one_row'       => true,
+                            'class'         => 'field-tz_layout-content',
+                            'default'       => false,
+                            'required'      => array('megamenu_enable', '=', true),
                         ),
 
                     ),
                 ),
+//                array(
+//                    'id'     => 'megamenu-settings-section',
+//                    'title'  => esc_html__('Settings', $this -> text_domain),
+//                    'fields' => array(
+//                        array(
+//                            'id'    => 'hide_text',
+//                            'type'  => 'switch',
+//                            'title' => esc_html__('Hide Text', $this -> text_domain)
+//                        ),
+////                        array(
+////                            'id'    => 'hide_arrow',
+////                            'type'  => 'switch',
+////                            'title' => esc_html__('Hide Arrow', $this -> text_domain)
+////                        ),
+//                        array(
+//                            'id'    => 'disable_link',
+//                            'type'  => 'switch',
+//                            'title' => esc_html__('Disable Link', $this -> text_domain)
+//                        ),
+//                        array(
+//                            'id'    => 'hide_on_mobile',
+//                            'type'  => 'switch',
+//                            'title' => esc_html__('Hide Item on Mobile', $this -> text_domain)
+//                        ),
+//                        array(
+//                            'id'    => 'hide_on_desktop',
+//                            'type'  => 'switch',
+//                            'title' => esc_html__('Hide Item on Desktop', $this -> text_domain)
+//                        ),
+//                        array(
+//                            'id'    => 'item_align',
+//                            'type'  => 'select',
+//                            'title' => esc_html__('Menu Item Align', $this -> text_domain),
+//                            'options' => array(
+//                                'float-left' => esc_html__('Left', $this -> text_domain),
+//                                'left'       => esc_html__('Default', $this -> text_domain),
+//                                'right'      => esc_html__('Right', $this -> text_domain),
+//                            ),
+//                            'default' => 'left'
+//                        ),
+//                    ),
+//                ),
+//                array(
+//                    'id'         =>'megamenu-submenu-setting-section',
+//                    'title'      => __('Sub Menu Settings', $this -> text_domain),
+//                    'desc'       => __('Configure Submenu settings.', $this -> text_domain),
+//                    'subsection' => true,
+//                    'fields'     => array(
+//                        array(
+//                            'id'      => 'submenu_direction',
+//                            'type'    => 'select',
+//                            'title'   => __('Sub Menu Alignment', $this -> text_domain),
+//                            'options' => array(
+//                                'left'   => esc_html__('Left', $this -> text_domain),
+//                                'right'  => esc_html__('Right', $this -> text_domain),
+//                                'center' => esc_html__('Center', $this -> text_domain),
+//                                'full'   => esc_html__('Container', $this -> text_domain),
+//                                'edge'   => esc_html__('Full', $this -> text_domain),
+//                            ),
+//                            'default' => 'left'
+//                        ),
+//                        array(
+//                            'id'    => 'width',
+//                            'type'  => 'text',
+//                            'title' => __('Sub Menu Width', $this -> text_domain),
+//                            'placeholder' => '980px',
+//                            'required' => array(
+//                                array('submenu_direction', '!=', 'full'),
+//                                array('submenu_direction', '!=', 'edge')
+//                            )
+//                        ),
+////                        array(
+////                            'id'    => 'align',
+////                            'type'  => 'select',
+////                            'title' => __('Sub Menu Align', $this -> text_domain),
+////                            'options' => array(
+////                                'bottom-left'  => esc_html__('Left edge of Parent', $this -> text_domain),
+////                                'bottom-right'   => esc_html__('Right edge of Parent', $this -> text_domain),
+////                            ),
+////                            'default' => 'bottom-left'
+////                        ),
+//                        array(
+//                            'id'    => 'hide_sub_menu_on_mobile',
+//                            'type'  => 'switch',
+//                            'title' => __('Hide Sub Menu on Mobile', $this -> text_domain),
+//                        ),
+//                    ),
+//                ),
+//                array(
+//                    'id'         => 'megamenu-icon-section',
+////                    'icon'       => 'dashicons dashicons-format-image',
+//                    'title'      => esc_html__('Icon', $this -> text_domain),
+//                    'subsection' => true,
+//                    'fields'     => array(
+//                        array(
+//                            'id'    => 'icon_position',
+//                            'type'  => 'select',
+//                            'title' => esc_html__('Icon Position', $this -> text_domain),
+//                            'options' => array(
+//                                'left'   => esc_html__('Left', $this -> text_domain),
+//                                'top'    => esc_html__('Top', $this -> text_domain),
+//                                'right'  => esc_html__('Right', $this -> text_domain),
+//                                'bottom' => esc_html__('Bottom', $this -> text_domain),
+//                            ),
+//                            'default' => 'left'
+//                        ),
+//                        array(
+//                            'id'       => 'icon',
+//                            'type'     => 'select',
+//                            'title'    => __( 'Menu Item Icon', $this -> text_domain ),
+////                            'subtitle' => __( 'Select a Back to Top Icon from the list', $this -> text_domain ),
+//                            'data'     => 'fontawesome',
+////                            'default'  => 'fas fa-arrow-up',
+////                            'required' => array('backtotop','=','1'),
+//                        ),
+//                        array(
+//                            'id'         => 'dropdown-arrow-icon',
+//                            'type'       => 'select',
+//                            'title'      => __('Dropdown Arrow Icon', $this -> text_domain),
+//                            'data'       => 'fontawesome',
+////                            'data'       => 'icons',
+////                            'data-icons' => array(
+////                                'fas fa-arrow-down',
+////                                'fas fa-arrow-circle-down',
+////                                'fas fa-arrow-alt-circle-down',
+////                                'fas fa-sort-down',
+////                                'fas fa-chevron-down',
+////                                'fas chevron-circle-down',
+////                                'fas fa-caret-square-down',
+////                                'far fa-caret-square-down',
+////                                'fas fa-caret-down',
+////                                'fas fa-angle-down',
+////                                'fas fa-angle-double-down',
+////                            ),
+//                        ),
+//
+//                    ),
+//                ),
             );
 
             return $metaboxes;
@@ -399,12 +391,18 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
             if(is_admin()){
                 if($pagenow == 'nav-menus.php') {
                     add_filter( 'hidden_meta_boxes', array($this, 'remove_hidden_meta_boxes'), 10, 2 );
+                    add_filter( 'templaza-framework/field/tz_layout/elements', array($this, 'prepare_layout_elements'), 10, 2 );
+
                     add_action('admin_init', array($this, 'add_meta_boxes'), 10, 2);
                     add_action('admin_footer', array($this, 'megamenu_enqueue'));
                     add_action('admin_footer', array($this, 'template'));
+
                 }
                 add_action('wp_ajax_templaza_megamenu_save_settings', array($this, 'save_settings'));
                 add_action( 'pre_update_option_nav_menu_options', array( $this, 'update_nav_menu' ), 10, 3 );
+
+
+                add_action('wp_nav_menu_item_custom_fields', array($this, 'megamenu_button'));
 
 
                 add_filter( 'redux/'.$this -> opt_name .'/panel/template/header.tpl.php' , function($path){
@@ -417,6 +415,9 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                 add_filter( 'redux/'.$this -> opt_name .'/panel/template/header-stickybar.tpl.php' , function($path){
                     return TEMPLAZA_FRAMEWORK_METABOXES_PATH.'/'.$this -> get_meta_box_name().'/tmpl/redux-panel/header-stickybar.tpl.php';
                 });
+                add_filter( 'redux/'.$this -> opt_name .'/panel/template/menu-container.tpl.php' , function($path){
+                    return TEMPLAZA_FRAMEWORK_METABOXES_PATH.'/'.$this -> get_meta_box_name().'/tmpl/redux-panel/menu-container.tpl.php';
+                });
             }else {
                 add_filter('wp_nav_menu_args', array($this, 'modify_nav_menu_args'), 99999);
                 add_filter('wp_nav_menu_objects', array($this, 'setup_menu_items'), 99999, 2);
@@ -425,6 +426,26 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
             }
 
             do_action('templaza-framework/metabox/'.$this -> get_meta_box_name().'/hooks');
+        }
+
+        public function megamenu_button() {
+            echo '<p><button type="button" class="button button-primary tz_mm_launch"><i class="fas fa-box-open"></i> '.
+                __('Menu Options', $this -> text_domain).'</button></p>';
+        }
+
+        public function prepare_layout_elements($elements){
+
+            // Remove content area element
+            $find   = trailingslashit(TEMPLAZA_FRAMEWORK_SHORTCODES_PATH.'/content_area');
+
+            if(in_array($find, $elements)){
+                $index  = array_search($find, $elements);
+                if($index != false){
+                    unset($elements[$index]);
+                }
+            }
+
+            return $elements;
         }
 
         public function remove_hidden_meta_boxes($hidden, $screen ){
@@ -445,169 +466,135 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
             do_action('templaza-framework/metabox/'.$this -> get_meta_box_name()
                 .'/megamenu_instance_counter_' . $args['theme_location']);
 
-            $num_times_called = did_action('templaza-framework/metabox/'.$this -> get_meta_box_name()
-                .'/megamenu_instance_counter_' . $args['theme_location']);
-
-            $meta_options = get_option( 'templaza_megamenu_settings' );
-            $current_theme_location = $args['theme_location'];
-
-            $settings  = isset($meta_options['tz_megamenu_meta'])?json_decode($meta_options['tz_megamenu_meta'], true):array();
-
-            $active_instance = isset( $settings['instances'][$current_theme_location] ) ? $settings['instances'][$current_theme_location] : 0;
-
-            if ( $active_instance != '0' && strlen( $active_instance ) ) {
-
-                if ( strpos( $active_instance, "," ) || is_numeric( $active_instance ) ) {
-
-                    $active_instances = explode( ",", $active_instance );
-
-                    if ( ! in_array( $num_times_called, $active_instances )) {
-                        return $args;
-                    }
-
-                } else if ( isset( $args['container_id'] ) && $active_instance != $args['container_id'] ) {
-
-                    return $args;
-
-                }
-            }
-
-            $locations = get_nav_menu_locations();
-
-            if ( isset ( $settings[ $current_theme_location ]['enabled'] ) && $settings[ $current_theme_location ]['enabled'] == true ) {
-
-                $args['templaza_megamenu_enable']   = $settings[ $current_theme_location ]['enabled'];
-
-                if ( ! isset( $locations[ $current_theme_location ] ) ) {
-                    return $args;
-                }
-
-                $menu_id = $locations[ $current_theme_location ];
-
-                if ( ! $menu_id ) {
-                    return $args;
-                }
-
-                $menu_settings = $settings[ $current_theme_location ];
-
-                $effect = isset( $menu_settings['effect'] ) ? $menu_settings['effect'] : 'disabled';
-
-                // convert Pro JS based effect to CSS3 effect
-                if ( $effect == 'fadeUp' ) {
-                    $effect = 'fade_up';
-                }
-
-                // as set on the main settings page
-                $vertical_behaviour = isset( $settings['mobile_behaviour'] ) ? $settings['mobile_behaviour'] : 'standard';
-
-                if ( isset( $menu_settings['mobile_behaviour'] ) ) {
-                    $vertical_behaviour = $menu_settings['mobile_behaviour'];
-                }
-
-                // as set on the main settings page
-                $second_click = isset( $settings['second_click'] ) ? $settings['second_click'] : 'go';
-
-                if ( isset( $menu_settings['second_click'] ) ) {
-                    $second_click = $menu_settings['second_click'];
-                }
-
-                $unbind = isset( $settings['unbind'] ) ? $settings['unbind'] : 'enabled';
-
-                if ( isset( $menu_settings['unbind'] ) ) {
-                    $unbind = $menu_settings['unbind'];
-                }
-
-                $event = 'hover_intent';
-
-                if ( isset( $menu_settings['event'] ) ) {
-                    if ( $menu_settings['event'] == 'hover' ) {
-                        $event = 'hover_intent';
-                    } elseif ( $menu_settings['event'] == 'hover_' ) {
-                        $event = 'hover';
-                    } else {
-                        $event = $menu_settings['event'];
-                    }
-                }
-
-                $mobile_force_width = 'false';
-
-
-                $effect_mobile = 'disabled';
-
-                if ( isset( $menu_settings['effect_mobile'] ) ) {
-                    $effect_mobile = $menu_settings['effect_mobile'];
-                }
-
-                $effect_speed_mobile = 200;
-
-                if ( isset( $menu_settings['effect_speed_mobile'] ) ) {
-                    $effect_speed_mobile = $menu_settings['effect_speed_mobile'];
-                }
-
-                if ( $effect_mobile == 'disabled' ) {
-                    $effect_speed_mobile = 0;
-                }
-//                var_dump($menu_settings);
-//                die();
-
-                $hover_intent_params = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
-                    .'/megamenu_javascript_localisation', // backwards compatiblity
-                    array(
-                        "timeout" => 300,
-                        "interval" => 100
-                    )
-                );
-
-                $wrap_attributes = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
-                    .'/megamenu_wrap_attributes', array(
-                    "id" => '%1$s',
-                    "class" => '%2$s wsmenu-list',
-//                    "data-megamenu" => "megamenu",
-//                    "data-megamenu-class" => ".has-megamenu",
-//                    "data-megamenu-content-class" => ".mega-sub-menu",
-//                    "class" => '%2$s mega-no-js',
-//                    "data-event" => $event,
-//                    "data-effect" => $effect,
-//                    "data-effect-speed" => isset( $menu_settings['effect_speed'] ) ? $menu_settings['effect_speed'] : '200',
-//                    "data-effect-mobile" => $effect_mobile,
-//                    "data-effect-speed-mobile" => $effect_speed_mobile,
-//                    "data-panel-width" => preg_match('/^\d/', $menu_theme['panel_width']) !== 1 ? $menu_theme['panel_width'] : '',
-//                    "data-panel-inner-width" => substr( trim( $menu_theme['panel_inner_width'] ), -1 ) !== '%' ? $menu_theme['panel_inner_width'] : '',
-//                    "data-mobile-force-width" => $mobile_force_width,
-//                    "data-second-click" => $second_click,
-//                    "data-document-click" => 'collapse',
-//                    "data-vertical-behaviour" => $vertical_behaviour,
-//                    "data-breakpoint" => absint( $menu_theme['responsive_breakpoint'] ),
-//                    "data-unbind" => $unbind === "disabled" ? "false" : "true",
-//                    "data-hover-intent-timeout" => absint($hover_intent_params['timeout']),
-//                    "data-hover-intent-interval" => absint($hover_intent_params['interval'])
-                ), $menu_id, $menu_settings, $settings, $current_theme_location );
-
-                $attributes = "";
-
-                foreach( $wrap_attributes as $attribute => $value ) {
-                    if ( strlen( $value ) ) {
-                        $attributes .= " " . $attribute . '="' . esc_attr( $value ) . '"';
-                    }
-                }
-
-                $sanitized_location = str_replace( apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
-                    .'/megamenu_location_replacements', array("-", " ") ), "-", $current_theme_location );
-
-
-//                $walker_file    = TEMPLAZA_FRAMEWORK_METABOXES_PATH.'/'.$this -> get_meta_box_name().'/classes/walker.class.php';
+//            $num_times_called = did_action('templaza-framework/metabox/'.$this -> get_meta_box_name()
+//                .'/megamenu_instance_counter_' . $args['theme_location']);
 //
-//                if(file_exists($walker_file)) {
-//                    require_once $walker_file;
+//            $meta_options = get_option( 'templaza_megamenu_settings' );
+//            $current_theme_location = $args['theme_location'];
+//
+//            $settings  = isset($meta_options['tz_megamenu_meta'])?json_decode($meta_options['tz_megamenu_meta'], true):array();
+//
+//            $active_instance = isset( $settings['instances'][$current_theme_location] ) ? $settings['instances'][$current_theme_location] : 0;
+//
+//            if ( $active_instance != '0' && strlen( $active_instance ) ) {
+//
+//                if ( strpos( $active_instance, "," ) || is_numeric( $active_instance ) ) {
+//
+//                    $active_instances = explode( ",", $active_instance );
+//
+//                    if ( ! in_array( $num_times_called, $active_instances )) {
+//                        return $args;
+//                    }
+//
+//                } else if ( isset( $args['container_id'] ) && $active_instance != $args['container_id'] ) {
+//
+//                    return $args;
+//
+//                }
+//            }
+//
+//            $locations = get_nav_menu_locations();
+//
+//            if ( isset ( $settings[ $current_theme_location ]['enabled'] ) && $settings[ $current_theme_location ]['enabled'] == true ) {
+//
+//                $args['templaza_megamenu_enable']   = $settings[ $current_theme_location ]['enabled'];
+//
+//                if ( ! isset( $locations[ $current_theme_location ] ) ) {
+//                    return $args;
 //                }
 //
-//                $defaults = array(
-//                    'walker' => new TemplazaFramework_Mega_Menu_Walker()
+//                $menu_id = $locations[ $current_theme_location ];
+//
+//                if ( ! $menu_id ) {
+//                    return $args;
+//                }
+//
+//                $menu_settings = $settings[ $current_theme_location ];
+//
+//                $effect = isset( $menu_settings['effect'] ) ? $menu_settings['effect'] : 'disabled';
+//
+//                // convert Pro JS based effect to CSS3 effect
+//                if ( $effect == 'fadeUp' ) {
+//                    $effect = 'fade_up';
+//                }
+//
+//                // as set on the main settings page
+//                $vertical_behaviour = isset( $settings['mobile_behaviour'] ) ? $settings['mobile_behaviour'] : 'standard';
+//
+//                if ( isset( $menu_settings['mobile_behaviour'] ) ) {
+//                    $vertical_behaviour = $menu_settings['mobile_behaviour'];
+//                }
+//
+//                // as set on the main settings page
+//                $second_click = isset( $settings['second_click'] ) ? $settings['second_click'] : 'go';
+//
+//                if ( isset( $menu_settings['second_click'] ) ) {
+//                    $second_click = $menu_settings['second_click'];
+//                }
+//
+//                $unbind = isset( $settings['unbind'] ) ? $settings['unbind'] : 'enabled';
+//
+//                if ( isset( $menu_settings['unbind'] ) ) {
+//                    $unbind = $menu_settings['unbind'];
+//                }
+//
+//                $event = 'hover_intent';
+//
+//                if ( isset( $menu_settings['event'] ) ) {
+//                    if ( $menu_settings['event'] == 'hover' ) {
+//                        $event = 'hover_intent';
+//                    } elseif ( $menu_settings['event'] == 'hover_' ) {
+//                        $event = 'hover';
+//                    } else {
+//                        $event = $menu_settings['event'];
+//                    }
+//                }
+//
+//                $mobile_force_width = 'false';
+//
+//
+//                $effect_mobile = 'disabled';
+//
+//                if ( isset( $menu_settings['effect_mobile'] ) ) {
+//                    $effect_mobile = $menu_settings['effect_mobile'];
+//                }
+//
+//                $effect_speed_mobile = 200;
+//
+//                if ( isset( $menu_settings['effect_speed_mobile'] ) ) {
+//                    $effect_speed_mobile = $menu_settings['effect_speed_mobile'];
+//                }
+//
+//                if ( $effect_mobile == 'disabled' ) {
+//                    $effect_speed_mobile = 0;
+//                }
+//
+//                $hover_intent_params = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
+//                    .'/megamenu_javascript_localisation', // backwards compatiblity
+//                    array(
+//                        "timeout" => 300,
+//                        "interval" => 100
+//                    )
 //                );
 //
-//                $args = array_merge( $args, apply_filters( 'templaza-framework/metabox/'.$this -> get_meta_box_name()
-//                    .'/megamenu_nav_menu_args', $defaults, $menu_id, $current_theme_location ) );
-            }
+//                $wrap_attributes = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
+//                    .'/megamenu_wrap_attributes', array(
+//                    "id" => '%1$s',
+//                    "class" => '%2$s wsmenu-list',
+//                ), $menu_id, $menu_settings, $settings, $current_theme_location );
+//
+//                $attributes = "";
+//
+//                foreach( $wrap_attributes as $attribute => $value ) {
+//                    if ( strlen( $value ) ) {
+//                        $attributes .= " " . $attribute . '="' . esc_attr( $value ) . '"';
+//                    }
+//                }
+//
+//                $sanitized_location = str_replace( apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
+//                    .'/megamenu_location_replacements', array("-", " ") ), "-", $current_theme_location );
+//
+//            }
 
             $walker_file    = TEMPLAZA_FRAMEWORK_METABOXES_PATH.'/'.$this -> get_meta_box_name().'/classes/walker.class.php';
 
@@ -620,7 +607,7 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
             );
 
             $args = array_merge( $args, apply_filters( 'templaza-framework/metabox/'.$this -> get_meta_box_name()
-                .'/megamenu_nav_menu_args', $defaults, $current_theme_location ) );
+                .'/megamenu_nav_menu_args', $defaults, $args['theme_location'] ) );
 
             return $args;
         }
@@ -940,9 +927,11 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                     $saved_settings = array_filter( (array) get_post_meta( $item->ID, '_templaza_megamenu_settings', true ) );
                     $item->templaza_megamenu_settings = $saved_settings;
 
-//                    if (!isset($settings[$current_theme_location]) ||
-//                        (isset ( $settings[ $current_theme_location ]['enabled'] ) && ((bool) $settings[ $current_theme_location ]['enabled']) == true) ) {
-                    if (isset ( $settings[ $current_theme_location ]['enabled'] ) && ((bool) $settings[ $current_theme_location ]['enabled']) == true ) {
+//                    var_dump($item); die();
+                    $megamenu_enable    = isset($saved_settings['megamenu_enable'])?filter_var($saved_settings['megamenu_enable'], FILTER_VALIDATE_BOOLEAN):false;
+
+//                    if (isset ( $settings[ $current_theme_location ]['enabled'] ) && ((bool) $settings[ $current_theme_location ]['enabled']) == true ) {
+                    if ($megamenu_enable) {
                         $saved_layout = array_filter((array)get_post_meta($item->ID, '_templaza_megamenu_layout', true));
 
                         $this -> tree_element_main($saved_layout);

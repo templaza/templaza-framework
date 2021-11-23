@@ -16,6 +16,9 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
      */
     class ReduxFramework_TZ_Tab {
         protected $instances = array();
+
+        protected $cache    = array();
+
         /**
          * Field Constructor.
          * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
@@ -34,57 +37,80 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
 
         public function init_tab_field($field){
 
-            if(isset($field['tabs'])){
-                $has_media                          = true;
-                $args   = $this -> parent -> args;
-                $opt_name                           = uniqid($field['id']).'__opt_name';
-                $redux_args['opt_name']             = $opt_name;
-                $redux_args['menu_type']            = 'hidden';
-                $redux_args['dev_mode']             = false;
-                $redux_args['ajax_save']            = false;
-                $redux_args['open_expanded']        = false;
+            $store_id   = __METHOD__;
+            $store_id  .= ':'.serialize($field);
+            $store_id   = md5($store_id);
 
-                $redux_args['dev_mode']             = false;
-                $redux_args['database']             = '';
-                $redux_args['ajax_save']            = false;
-                $redux_args['hide_save']            = true;
-                $redux_args['menu_type']            = 'hidden';
-                $redux_args['hide_reset']           = true;
-                $redux_args['show_import_export']   = false;
+            if(!isset($this -> cache[$store_id])){
+                if(isset($field['tabs'])){
+                    $has_media                          = true;
+                    $args   = $this -> parent -> args;
+                    $opt_name                           = uniqid($field['id']).'__opt_name';
+                    $redux_args['opt_name']             = $opt_name;
+                    $redux_args['menu_type']            = 'hidden';
+                    $redux_args['dev_mode']             = false;
+                    $redux_args['ajax_save']            = false;
+                    $redux_args['open_expanded']        = false;
 
-                \Redux::set_args($opt_name, $redux_args);
-                \Redux::set_sections($opt_name, $field['tabs']);
-                \Redux::init($opt_name);
-                \Templaza_API::load_my_fields($opt_name);
+                    $redux_args['dev_mode']             = false;
+                    $redux_args['database']             = '';
+                    $redux_args['ajax_save']            = false;
+                    $redux_args['save_defaults']        = false;
+                    $redux_args['hide_save']            = true;
+                    $redux_args['menu_type']            = 'hidden';
+                    $redux_args['hide_reset']           = true;
+                    $redux_args['show_import_export']   = false;
+
+                    \Redux::set_args($opt_name, $redux_args);
+                    \Redux::set_sections($opt_name, $field['tabs']);
+
+                    // Rename of field's name
+                    foreach($field['tabs'] as $k => $tab){
+                        if(isset($tab['fields']) && count($tab['fields'])){
+                            foreach ($tab['fields'] as $field) {
+                                add_filter("redux/options/{$opt_name}/field/{$field['id']}", function($_field)use($field){
+                                    $_field['name'] = $_field['id'];
+                                    return $_field;
+                                });
+                            }
+                        }
+                    }
+
+                    \Redux::init($opt_name);
+                    \Templaza_API::load_my_fields($opt_name);
 
 
-                add_filter("redux/{$opt_name}/repeater", function($repeater_data) use($redux_args){
-                    $repeater_data['opt_names'][]   = $redux_args['opt_name'];
-                    return $repeater_data;
-                });
-                $redux  = \Redux::instance($opt_name );
+                    add_filter("redux/{$opt_name}/repeater", function($repeater_data) use($redux_args){
+                        $repeater_data['opt_names'][]   = $redux_args['opt_name'];
+                        return $repeater_data;
+                    });
+                    $redux  = \Redux::instance($opt_name );
 
-//                $redux-> _register_settings();
+//                    if(!$this -> value) {
+//                        $redux -> options   =  $redux -> _default_values();
+//                    }
 
-                $enqueue    = new Enqueue($redux);
-                $enqueue -> init();
-//                ob_start();
-//
-//                $redux->generate_panel();
-//
-//                ob_end_clean();
 
-//                $this -> redux          = $redux;
+//                    $redux-> _register_settings();
 
-                if($has_media){
-                    if ( function_exists( 'wp_enqueue_media' ) ) {
-                        wp_enqueue_media();
-                    } else {
-                        if ( ! wp_script_is( 'media-upload' ) ) {
-                            wp_enqueue_script( 'media-upload' );
+
+//                    $enqueue    = new Enqueue($redux);
+//                    $enqueue -> init();
+
+//                    $this -> redux_args          = $redux_args;
+                    $this -> redux          = $redux;
+
+                    if($has_media){
+                        if ( function_exists( 'wp_enqueue_media' ) ) {
+                            wp_enqueue_media();
+                        } else {
+                            if ( ! wp_script_is( 'media-upload' ) ) {
+                                wp_enqueue_script( 'media-upload' );
+                            }
                         }
                     }
                 }
+                $this -> cache[$store_id]   = $redux;
             }
         }
 

@@ -9,7 +9,15 @@ extract(shortcode_atts(array(
 	'hideon_single'          => '',
     'section_type'           => 'default',
     'layout_type'            => 'container',
+    'height'                 => '',
+    'vertical_align'         => '',
+    'container_width'        => '',
+    'padding_type'        => '',
+    'padding_remove_top'     => '',
+    'padding_remove_bottom'  => '',
     'custom_container_class' => '',
+    'container_width_expand' => '',
+    'padding_remove_horizontal' => '',
 ), $atts));
 if(is_single()==true && $hideon_single ==1) {
     return;
@@ -17,6 +25,8 @@ if(is_single()==true && $hideon_single ==1) {
 if(!empty($content)){
 
     $_tz_class  = '';
+
+    $padding_remove_horizontal    = isset($padding_remove_horizontal)?filter_var($padding_remove_horizontal, FILTER_VALIDATE_BOOLEAN):false;
 
     if(has_shortcode($content, 'templaza_header')){
         $options        = Functions::get_theme_options();
@@ -36,30 +46,47 @@ if(!empty($content)){
         $tz_class   = $_tz_class;
     }
 
-    if(isset($section_type) && $section_type !== 'default'){
-        $tz_class   .= ' '.$section_type;
+    $_gutter            = '';
+    $container_class    = 'uk-container';
+
+    if($container_width == '' || $container_width == 'none'){
+        $container_class    = '';
+    }elseif($container_width != 'default'){
+        $container_class    .= ' uk-container-'.$container_width;
+    }elseif($container_width == 'custom'){
+        $container_width    = 'custom-container';
     }
 
-    $tz_class   .= (!empty($layout_type))?' templaza-section-'.$layout_type:'';
+    if($container_width != '' && $container_width != 'none' && $container_width != 'expand') {
+        $container_class .= $padding_remove_horizontal ? ' uk-padding-remove-horizontal' : '';
+    }
+    $container_class    .= !empty($container_width_expand)?' uk-container-expand-'.$container_width_expand:'';
 
-    $_gutter        = '';
-    $_layout_type   = 'container';
-    switch ($layout_type){
-        case 'container':
-        case 'container-fluid':
-            $_layout_type   = $layout_type;
+    $_section_attributes   = '';
+    switch($height) {
+        case 'full':
+            $_section_attributes = ' data-uk-height-viewport="offset-top: true;"';
             break;
-        case 'container-fluid-with-no-gutters':
-            $_layout_type   = 'container-fluid';
+        case 'percent':
+            $_section_attributes = ' data-uk-height-viewport="offset-top: true; offset-bottom: 20;"';
+            break;
+        case 'section':
+            $_section_attributes = ' data-uk-height-viewport="offset-top: true; offset-bottom: true;"';
+            break;
+        case 'expand':
+            $_section_attributes = ' data-uk-height-viewport="expand: true;"';
             break;
     }
+
 ?>
-<section<?php echo isset($tz_id)?' id="'.$tz_id.'"':''; ?> class="<?php echo isset($tz_class)?esc_attr($tz_class):''; ?>">
-    <?php if($layout_type != 'no-container'){ ?>
-    <div class="<?php echo $_layout_type;?><?php
+<section<?php echo isset($tz_id)?' id="'.$tz_id.'"':''; ?> class="<?php echo isset($tz_class)?esc_attr($tz_class):''; ?>"<?php
+echo $_section_attributes;?>>
+    <?php if(!empty($container_class)){ ?>
+    <div class="<?php echo $container_class;?><?php
     echo isset($custom_container_class)?' '.$custom_container_class:'';?>">
     <?php }?>
     <?php echo $content; ?>
-    <?php if($layout_type != 'no-container'){ ?></div><?php } ?>
+    <?php if(!empty($container_class)){ ?>
+    </div><?php } ?>
 </section>
 <?php } }?>

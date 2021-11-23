@@ -34,9 +34,12 @@
                 var __i18n = templaza_field_tz_layout.i18n || {
                     "copied": "Copied!",
                     "pasted": "Pasted!",
+                    "delete_question": "Are you sure?",
                     "copy_failed": "Copy failed!",
-                    "paste_failed": "Not Pasted! Please copy again."
+                    "paste_failed": "Not Pasted! Please copy again.",
+                    "custom_column": "Please enter custom grid size (eg. 1-2;1-4;1-4 or auto;1-3;expand)"
                 };
+                redux.field_objects.tz_layout.i18n    = __i18n;
                 if (!el.hasClass('redux-field-container')) {
                     parent = el.parents('.redux-field-container:first');
                 }
@@ -47,6 +50,12 @@
                     parent.removeClass('redux-field-init');
                 } else {
                     return;
+                }
+
+                el.data("allow_event", false);
+
+                if(el.closest("td").length){
+                    el.closest("td").attr("colspan", el.closest(".field-tz_layout-content").children().length);
                 }
 
                 var $settings,
@@ -184,6 +193,16 @@
                         $m_tree_html[$m_level + 1]  = "" ;
                     }
 
+                    // Prepare default setting from shortcode element
+                    if(typeof templaza.shortcode !== typeof undefined){
+                        var element_type = item.type,
+                            shortcode = templaza.shortcode;
+                        if(typeof shortcode[element_type] !== typeof undefined &&
+                            typeof shortcode[element_type]["init"] === "function"){
+                            shortcode[element_type]["init"]($m_item_tmp_data, $m_params);
+                        }
+                    }
+
                     var $m_item_html = $m_item_tmp($m_item_tmp_data);
 
                     var $m_item_html_prepare = selector.triggerHandler("templaza-framework/field/tz_layout/shortcode/" +
@@ -199,15 +218,15 @@
 
                     $m_level --;
 
-                    // Prepare default setting from shortcode element
-                    if(typeof templaza.shortcode !== typeof undefined){
-                        var element_type = item.type,
-                            shortcode = templaza.shortcode;
-                        if(typeof shortcode[element_type] !== typeof undefined &&
-                            typeof shortcode[element_type]["init"] === "function"){
-                            shortcode[element_type]["init"]($m_item_tmp_data, $m_params);
-                        }
-                    }
+                    // // Prepare default setting from shortcode element
+                    // if(typeof templaza.shortcode !== typeof undefined){
+                    //     var element_type = item.type,
+                    //         shortcode = templaza.shortcode;
+                    //     if(typeof shortcode[element_type] !== typeof undefined &&
+                    //         typeof shortcode[element_type]["init"] === "function"){
+                    //         shortcode[element_type]["init"]($m_item_tmp_data, $m_params);
+                    //     }
+                    // }
                 });
             };
             tree_element(settings);
@@ -338,6 +357,10 @@
                var field  = $(this),
                     f_name = field.attr("name"),
                     f_value;
+
+                var __opt_name   = field.closest("[data-opt-name]").attr("data-opt-name");
+                var __reg    = new RegExp("^"+__opt_name+"\\[(.*?)\\]", "gi");
+                f_name   = f_name.replace(__reg, "$1");
 
                if(f_name === "admin_label" && typeof $value[f_name] !== typeof undefined){
                    field.val($value[f_name]);
@@ -539,7 +562,7 @@
     };
     redux.field_objects.tz_layout.get_column_empty = function(){
         var column = wp.template('field-tz_layout-template-column');
-        return  column({"size": 12});
+        return  column({"size": "1-1"});
     };
     redux.field_objects.tz_layout.get_section_empty = function(){
         if(!$("#tmpl-field-tz_layout-template-section").length){
@@ -579,13 +602,16 @@
                 items: '> [data-fl-element_type=column]',
                 start: function( event, ui ) {
                     sort_selector.tooltip("destroy");
-                    var padding = ui.item.outerWidth() - ui.item.width(),
-                        width   = Math.floor(ui.item.closest(".fl_row_container").width() / 100 * parseFloat(ui.item.css("flex").replace("0 0 ", "")));
-                    ui.placeholder.width(width-padding);
-                    ui.placeholder.height(ui.item.outerHeight());
+                    // var padding = ui.item.outerWidth() - ui.item.width(),
+                    //     width   = Math.floor(ui.item.closest(".fl_row_container").width() / 100 * parseFloat(ui.item.css("flex").replace("0 0 ", "")));
+
+                    ui.placeholder.html('<div class="uk-background-muted uk-width uk-height-1-1"></div>');
+                    ui.placeholder.addClass(ui.item.attr("class"));
+                    // ui.placeholder.width(width-padding);
+                    // ui.placeholder.height(ui.item.outerHeight());
+                    ui.placeholder.height(ui.helper.height());
 
                     $(this).data("fl-ui-old-index", ui.item.index());
-                    // console.log(ui.item);
                     $(this).data("fl-ui-parent-old", ui.item.parents("[data-fl-element_type]").first());
                 },
                 stop: function( event, ui ) {
@@ -626,6 +652,9 @@
                         sort_selector.tooltip("destroy");
                     }
 
+                    ui.placeholder.html('<div class="uk-background-muted uk-width uk-height-1-1"></div>');
+                    ui.placeholder.height(ui.helper.outerHeight());
+
                     $(this).data("fl-ui-old-index", ui.item.index());
                     $(this).data("fl-ui-parent-old", ui.item.parents("[data-fl-element_type]").first());
                 },
@@ -645,10 +674,19 @@
                             des_parent   = ui.item.closest(".fl_column-container.fl_container_for_children");
                         if(!src_parent.children().length){
                             src_parent.addClass("fl_empty-container");
+                            var __src_column    = src_parent.closest(".fl_column");
+
+                            if(__src_column.length){
+                                __src_column.addClass("fl_empty-column");
+                            }
                             init_event();
                         }
+
                         if(des_parent.length && des_parent.hasClass("fl_empty-container")){
                             des_parent.removeClass("fl_empty-container").off("click");
+                            if(des_parent.closest(".fl_column").length) {
+                                des_parent.closest(".fl_column").removeClass("fl_empty-column");
+                            }
                         }
                     }
                 },
@@ -684,7 +722,10 @@
                 connectWith: ".fl_column-container:not(.fl_container_for_children)",
                 start: function( event, ui ) {
                     sort_selector.tooltip("destroy");
-                    ui.placeholder.height(ui.item.outerHeight());
+                    ui.placeholder.html('<div class="uk-background-muted uk-width uk-height-1-1"></div>');
+                    var __col_margin    = ui.item.find(".fl_column").outerHeight(true) - ui.item.find(".fl_column").height();
+                    // ui.placeholder.css("margin-bottom", "+=" + __col_margin);
+                    ui.placeholder.height(ui.item.outerHeight() - __col_margin);
 
                     $(this).data("fl-ui-old-index", ui.item.index());
                     $(this).data("fl-ui-parent-old", ui.item.parents("[data-fl-element_type]").first());
@@ -724,13 +765,16 @@
             // Section sortable
             sort_selector.sortable({
                 handle: "> .fl_controls [data-fl-control=move]",
-                placeholder: "fl-ui-state-highlight",
+                placeholder: "fl-section-state-highlight fl-ui-state-highlight",
                 forcePlaceholderSize: true,
                 items: '[data-fl-element_type=section]',
                 start: function( event, ui ) {
                     sort_selector.tooltip("destroy");
+                    ui.placeholder.html('<div class="uk-background-muted uk-width uk-height-1-1"></div>');
                     // if(ui.item.hasClass("fl_content_element")) {
-                    ui.placeholder.height(ui.item.outerHeight());
+                    var __col_margin    = ui.item.find(".fl_column").outerHeight(true) - ui.item.find(".fl_column").height();
+                    // ui.placeholder.css("margin-bottom", "+=" + __col_margin);
+                    ui.placeholder.height(ui.item.outerHeight() - __col_margin);
                     // }
 
                     $(this).data("fl-ui-old-index", ui.item.index());
@@ -783,6 +827,140 @@
                 ]
             }, options);
             return dialog_selector.dialog(dialog_settings).removeClass("hide");
+        };
+
+        var tz_parent_modal_exists = function(el_selector){
+            if(typeof el_selector.closest(".uk-modal") !== "undefined" && el_selector.closest(".uk-modal").length){
+                return el_selector.closest(".uk-modal");
+            }
+            return false;
+        };
+
+        var tz_ui_modal  = function(dialog_selector, options){
+            var __modal_title   = dialog_selector.data("modal-title");
+            options = $.extend({},{
+                "title": (typeof __modal_title !== "undefined")?__modal_title:"",
+                // "container": selector,
+                "stack": true,
+                "current_target": undefined,
+                "parent_modal_hide": false,
+                "modal_class": "",
+                "dialog_class": "",
+                "buttons":[
+                    {
+                        text: "Close",
+                        class: "uk-button uk-button-default",
+                        click: function() {
+                            // console.log($( this ).closest(".uk-modal"));
+                            UIkit.modal($( this ).closest(".uk-modal")).hide();
+                            // $( this ).closest(".uk-modal").dialog( "close" );
+                        },
+                    },
+                ]
+            }, options);
+
+            __modal_title   = options.title;
+            var __modal_html   = $('<div id="'+ Date.now() +'" class="uk-modal redux-container-tz_layout '+
+                options.modal_class +'"><div class="uk-modal-dialog uk-width-4-5 '+
+                options.dialog_class+'">\n' +
+                '        <button class="uk-modal-close-default" type="button" data-uk-close></button>\n' +
+                '        <div class="uk-modal-body" data-uk-overflow-auto></div>\n' +
+                '    </div></div>');
+
+            if(typeof __modal_title !== "undefined" && __modal_title.length){
+                $('<div class="uk-modal-header">\n' +
+                    '            <h2 class="uk-h4">'+ __modal_title +'</h2>\n' +
+                    '        </div>').insertBefore(__modal_html.find(".uk-modal-body"));
+            }
+            if(options.buttons.length){
+                var __modal_footer  = $('<div class="uk-modal-footer uk-text-right"></div>\n');
+                $.each(options.buttons, function(index,button){
+                    var __button    = $('<button type="button" class="'+ button.class +'">'+ button.text +'</button>');
+                    __button.on("click", function () {
+                        button.click.call(this);
+                    });
+                    __modal_footer.append(__button);
+                });
+                __modal_footer.appendTo(__modal_html.find(".uk-modal-dialog"));
+            }
+            __modal_html.find(".uk-modal-body").append(dialog_selector);
+            var __uimodal = UIkit.modal(__modal_html, options);
+
+            if(typeof options.current_target !== "undefined") {
+                UIkit.util.on(__modal_html, "beforeshow", function () {
+                    // Hide parent modal if it exists
+                    var __parent_modal = tz_parent_modal_exists(options.current_target);
+
+                    if (__parent_modal) {
+
+                        var __main_field = options.current_target.closest("[data-type=tz_layout]");
+
+                        if(__main_field.data("allow_event")){
+                            var __parent_allow_event = true;
+
+                            if(__parent_modal && typeof __parent_modal.data("allow_event") !== "undefined"){
+                                __parent_allow_event  = __parent_modal.data("allow_event");
+                            }
+                            if(__parent_allow_event) {
+                                __parent_modal.data("modal_shown", false);
+                                UIkit.modal(__parent_modal).hide();
+                            }
+                        }
+                    }
+                });
+            }
+
+            var __org_opt_names = typeof redux.opt_names != "undefined"?redux.opt_names:[];
+
+            UIkit.util.on(__modal_html, "shown", function(){
+
+                if(__modal_html.find("[data-opt-name]").length) {
+                    redux.opt_names = [];
+                    $.each(__modal_html.find("[data-opt-name]"), function () {
+                        var _opt_name = $(this).attr("data-opt-name");
+                        if(redux.opt_names.indexOf(_opt_name) === -1) {
+                            redux.opt_names.push(_opt_name);
+                        }
+                    });
+                }
+            });
+
+            UIkit.util.on(__modal_html, "hidden", function(){
+                redux.opt_names = __org_opt_names;
+
+                if(typeof options.current_target !== "undefined") {
+                    // Show parent modal if it exists
+                    var __parent_modal = tz_parent_modal_exists(options.current_target);
+                    if (__parent_modal) {
+
+
+                        var __main_field = options.current_target.closest("[data-type=tz_layout]");
+
+                        if(__main_field.data("allow_event")){
+                            var __parent_allow_event = true;
+
+                            if(__parent_modal && typeof __parent_modal.data("allow_event") !== "undefined"){
+                                __parent_allow_event  = __parent_modal.data("allow_event");
+                            }
+                            if(__parent_allow_event) {
+                                __parent_modal.data("modal_shown", true);
+                                UIkit.modal(__parent_modal).show();
+                            }
+                        }
+                    }
+                }
+            });
+
+            var __methods   = ["beforeshow", "show", "shown", "beforehide", "hide", "hidden"];
+            $.each(__methods, function (index, method) {
+                if(typeof options[method] !== "undefined") {
+                    UIkit.util.on(__modal_html, method, function () {
+                        options[method].call(__modal_html);
+                    });
+                }
+            });
+
+            return __uimodal;
         };
 
 
@@ -845,8 +1023,8 @@
                         element_dest.append(tmp_el).removeClass("fl_empty-container").off("click");
                     }
                     element_dest.closest("[data-fl-element_type=column]").removeClass("fl_empty-column")
-                        .find(">.fl_controls-column.bottom-controls").first()
-                        .addClass("d-block");
+                        .find(">.fl_controls-column.bottom-controls").first();
+                        // .addClass("d-block");
 
                     var dest_setting = redux.field_objects.tz_layout.get_setting(dest_element, selector, settings);
                     // Add setting
@@ -857,7 +1035,13 @@
                     element_selector.trigger("templaza-framework/field/tz_layout/action/add/shortcode/after",
                         [src_setting, element_dest, dest_setting]);
 
-                    element_selector.dialog("close");
+                    if(element_selector.is(':ui-dialog')) {
+                        element_selector.dialog("close");
+                    }
+
+                    if(typeof UIkit.modal !== "undefined" && item.closest(".uk-modal").length){
+                        UIkit.modal(item.closest(".uk-modal")).hide();
+                    }
 
                     sortable(selector);
                     init_event();
@@ -918,14 +1102,24 @@
                     var list_elements = wp.template("field-tz_layout-list__items");
                     var list_element_obj = $(list_elements());
 
-                    tzdialog(list_element_obj, {
-                        open: function( event, ui ) {
+                    tz_ui_modal(list_element_obj,{
+                        "current_target": control,
+                        "beforeshow":function(){
                             element_click_event($(this), control);
                         },
-                        "close": function (ev, ui) {
+                        "hidden":function(){
                             $(this).remove();
                         }
-                    }).removeClass("hide").dialog('open');
+                    }).show();
+
+                    // tzdialog(list_element_obj, {
+                    //     open: function( event, ui ) {
+                    //         element_click_event($(this), control);
+                    //     },
+                    //     "close": function (ev, ui) {
+                    //         $(this).remove();
+                    //     }
+                    // }).removeClass("hide").dialog('open');
 
                 }
 
@@ -950,19 +1144,23 @@
                     list_element_obj.find("[data-element=row_inner]").parent().removeClass("hide");
                 }
 
-                tzdialog(list_element_obj, {
-                    open: function( event, ui ) {
-                        element_click_event($(this), element_empty);
-                    },
-                    "close": function (ev, ui) {
-                        // button_cache   = null;
+                tz_ui_modal(list_element_obj, {
+                    "current_target": element_empty,
+                   "beforeshow":function(){
+                       element_click_event($(this), element_empty);
+                   },
+                    "hidden": function () {
                         $(this).remove();
                     }
-                }).removeClass("hide").dialog('open');
+                }).show();
 
-                // tzdialog($("[data-fl_tz_layout-elements]"),{
+                // tzdialog(list_element_obj, {
+                //     open: function( event, ui ) {
+                //         element_click_event($(this), element_empty);
+                //     },
                 //     "close": function (ev, ui) {
-                //         button_cache   = undefined;
+                //         // button_cache   = null;
+                //         $(this).remove();
                 //     }
                 // }).removeClass("hide").dialog('open');
             });
@@ -1108,16 +1306,26 @@
                     }
                 }
                 if(access) {
-                    var result  = confirm("Are you sure?");
-                    if(result){
 
+                    var __confirm_opt   = {
+                        "stack": true,
+                    };
+
+                    var __m_uikit_modal = control.closest(".uk-modal");
+
+                    if(typeof __m_uikit_modal !== "undefined") {
+                        __m_uikit_modal.data("modal_shown", false);
+                    }
+
+                    var result  = UIkit.modal.confirm(redux.field_objects.tz_layout.i18n.delete_question,
+                        __confirm_opt ).then(function() {
                         var element_index = element.index(),
                             parent_element = element.parents("[data-fl-element_type]").first(),
                             parent_setting  = redux.field_objects.tz_layout.get_setting(parent_element, selector, settings),
-                        element_setting = (typeof parent_setting !== typeof undefined && parent_setting.elements[element_index])?parent_setting.elements[element_index]:{};
+                            element_setting = (typeof parent_setting !== typeof undefined && parent_setting.elements[element_index])?parent_setting.elements[element_index]:{};
 
                         selector.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/setting/before",
-                                [element, element_setting, parent_setting]);
+                            [element, element_setting, parent_setting]);
                         control.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/setting/before", [element, element_setting, parent_setting]);
 
                         if(typeof parent_setting !== typeof undefined){
@@ -1145,7 +1353,56 @@
 
                         sortable(selector);
                         init_event();
-                    }
+
+                        // if(typeof __m_uikit_modal !== "undefined"){
+                        //     UIkit.modal(__m_uikit_modal).show();
+                        //     __m_uikit_modal.data("modal_shown", true);
+                        // }
+                    },function(){
+                        // if(typeof __m_uikit_modal !== "undefined"){
+                        //     UIkit.modal(__m_uikit_modal).show();
+                        //     __m_uikit_modal.data("modal_shown", true);
+                        // }
+
+                    });
+                    // var result  = confirm("Are you sure?");
+                    // if(result){
+                    //
+                    //     var element_index = element.index(),
+                    //         parent_element = element.parents("[data-fl-element_type]").first(),
+                    //         parent_setting  = redux.field_objects.tz_layout.get_setting(parent_element, selector, settings),
+                    //     element_setting = (typeof parent_setting !== typeof undefined && parent_setting.elements[element_index])?parent_setting.elements[element_index]:{};
+                    //
+                    //     selector.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/setting/before",
+                    //             [element, element_setting, parent_setting]);
+                    //     control.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/setting/before", [element, element_setting, parent_setting]);
+                    //
+                    //     if(typeof parent_setting !== typeof undefined){
+                    //         parent_setting.elements.splice(element_index, 1);
+                    //     }else{
+                    //         settings.splice(element_index, 1);
+                    //     }
+                    //
+                    //     redux.field_objects.tz_layout.set_setting_to_field(settings, selector);
+                    //
+                    //     selector.trigger("templaza-framework/field/tz_layout/action/delete/shortcode", [element, element_setting, parent_setting]);
+                    //     control.trigger("templaza-framework/field/tz_layout/action/delete/shortcode", [element, element_setting, parent_setting]);
+                    //
+                    //     element.remove();
+                    //
+                    //     if(parent.hasClass("fl_column-container fl_container_for_children") && !parent.find("[data-fl-element_type]").length){
+                    //         var column = wp.template("field-tz_layout-template-column");
+                    //         parent.closest("[data-fl-element_type]").after(column({
+                    //             size: parent.closest("[data-fl-element_type]").attr("data-column-width")
+                    //         })).remove();
+                    //     }
+                    //
+                    //     selector.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/after");
+                    //     control.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/after");
+                    //
+                    //     sortable(selector);
+                    //     init_event();
+                    // }
                 }
             });
 
@@ -1155,20 +1412,38 @@
                 // It's better to do this by PHP but there is no filter in tr tag , so is not possible
                 // we going to move each attributes we may need for folding to tr tag.
                 $.each(
-                    redux.opt_names,
+                    /*redux.opt_names,*/
+                    obj_selector.find("[data-opt-name]"),
                     function( x ) {
+                        var _opt_name = $(this).attr("data-opt-name");
+                        // console.log(x);
+                        // console.log(_opt_name);
                         $.each(
-                            window['redux_' + redux.opt_names[x].replace( /\-/g, '_' )].folds,
+                            window['redux_' + _opt_name.replace( /\-/g, '_' )].folds,
+                            // window['redux_' + redux.opt_names[x].replace( /\-/g, '_' )].folds,
                             function( i, v ) {
                                 var div;
                                 var rawTable;
 
-                                var fieldset = obj_selector.find( '#' + redux.opt_names[x] + '-' + i );
+                                var fieldset = obj_selector.find( '#' + _opt_name + '-' + i );
+                                // var fieldset = obj_selector.find( '#' + redux.opt_names[x] + '-' + i );
 
                                 fieldset.parents( 'tr:first, li:first' ).addClass( 'fold' );
 
+                                // console.log($.redux.check_parents_dependencies(i));
+                                // //
+                                // // console.log(obj_selector.find("form[data-opt-name]"));
+                                // console.log(i);
+                                // console.log(v);
+                                // console.log(_opt_name);
+
                                 if ( 'hide' === v ) {
                                     fieldset.parents( 'tr:first, li:first' ).addClass( 'hide' );
+
+                                    if(typeof window['redux_' + _opt_name.replace( /\-/g, '_' )].required_child !== "undefined"
+                                        && !$.redux.check_parents_dependencies(i)) {
+                                        fieldset.parents('tr:first, li:first').addClass('hide');
+                                    }
 
                                     if ( fieldset.hasClass( 'redux-container-section' ) ) {
                                         div = $( '#section-' + i );
@@ -1218,25 +1493,27 @@
 
                     redux.field_objects.tz_layout.load_setting(setting_obj, element, selector, settings);
 
-                    tz_required( setting_obj );
+                    // tz_required( setting_obj );
+
                     selector.tooltip("destroy");
 
                     var obj_id  = redux.field_objects.tz_layout.generateID();
                     setting_obj.attr("id", "modal-" + obj_id);
 
-                    tzdialog(setting_obj, {
+                    tz_ui_modal(setting_obj, {
+                        "current_target": control,
                         "title": setting_obj.data("fl-setting-title"),
                         "buttons": [
                             {
                                 text: "Save changes",
-                                class: "button button-primary js-field-tz_layout-save-el-setting",
+                                class: "uk-button uk-button-primary js-field-tz_layout-save-el-setting",
                                 click: function () {
-                                    $(this).trigger("templaza-framework/setting/save/init", element, selector, settings);
+                                    $(this).closest(".uk-modal").trigger("templaza-framework/setting/save/init", element, selector, settings);
 
                                     // Save change
                                     var setting = redux.field_objects.tz_layout.get_setting(element, selector, settings);
 
-                                    redux.field_objects.tz_layout.modify_setting(setting, $(this), element, selector, settings);
+                                    redux.field_objects.tz_layout.modify_setting(setting, $(this).closest(".uk-modal"), element, selector, settings);
 
                                     if (typeof setting.admin_label !== typeof undefined && element.hasClass("fl_content_element")) {
                                         if (element.find(".fl_element-title > .admin-label").length) {
@@ -1250,7 +1527,7 @@
                                         var shortcode = templaza.shortcode;
                                         if (typeof shortcode[element_type] !== typeof undefined &&
                                             typeof shortcode[element_type]["save_setting"] !== typeof undefined) {
-                                            shortcode[element_type]["save_setting"](setting, element, $(this));
+                                            shortcode[element_type]["save_setting"](setting, element, $(this).closest(".uk-modal"));
                                         }
                                     }
 
@@ -1260,28 +1537,35 @@
 
                                     $(this).trigger("templaza-framework/setting/save/after",[setting, element, selector, settings]);
 
-                                    $(this).dialog("close").dialog("destroy");
+                                    // redux.optName.args.opt_name = control.closest("form.redux-form-wrapper").attr("data-opt-name");
+                                    UIkit.modal($( this ).closest(".uk-modal")).hide();
                                 },
                             },
                             {
                                 text: "Close",
-                                class: "button button-secondary ms-2",
+                                class: "uk-button uk-button-default uk-margin-small-left",
                                 click: function () {
                                     $(this).trigger("templaza-framework/setting/close", [settings, selector]);
-                                    $(this).dialog("close").dialog("destroy");
+
+                                    // redux.optName.args.opt_name = control.closest("form.redux-form-wrapper").attr("data-opt-name");
+                                    UIkit.modal($( this ).closest(".uk-modal")).hide();
                                 },
                             },
                         ],
-                        "close": function (ev, ui) {
-                            // $(this).remove();
+                        "hidden": function () {
+                            $(this).remove();
+
                             redux.field_objects.tz_layout.init_tooltip(selector);
                         },
-                        "create": function(event, ui){
+                        "beforeshow": function(){
                             if(!$(this).closest(".templaza-framework-options").length){
-                                $(this).wrapInner("<div class=\"redux-container templaza-framework-options\"><div class='redux-main'></div></div>");
+                                $(this).find(".uk-modal-body").children().wrapInner("<div class=\"redux-container templaza-framework-options\"><div class='redux-main uk-margin-remove-left'></div></div>");
                             }
                         },
-                        "open": function (event, ui) {
+                        "shown": function () {
+
+                            // $.redux.required();
+
                             var shortcode = templaza.shortcode;
                             var _dialog = $(this);
                             fields  = _dialog.find(".redux-field-container");
@@ -1295,6 +1579,10 @@
                             }
 
                             if (fields.length) {
+
+                                // tz_required( _dialog );
+                                // $.redux.checkRequired(_dialog.find(".redux-container"));
+
                                 main_wrap.data("opt-name", undefined);
                                 main_wrap.removeData("data-opt-name");
                                 fields.each(function () {
@@ -1302,17 +1590,15 @@
                                         field_type = field.data("type"),
                                         tz_redux = redux.field_objects;
 
-                                    if (typeof tz_redux[field_type] !== typeof undefined) {
-                                        // if(field_type === "select"){
-                                        //     field.find("select").data("dropdown-parent", _dialog.closest(".tzfrm-ui-dialog"));
-                                        // }
+
+                                    if (typeof tz_redux[field_type] !== "undefined") {
 
                                         var tz_redux_field = tz_redux[field_type];
 
                                         // Before init field in setting edit
                                         // Trigger of shortcode (setting_edit_before_init_field)
-                                        if(typeof shortcode !== typeof undefined){
-                                            if(typeof shortcode[element_type] !== typeof undefined &&
+                                        if(typeof shortcode !== "undefined"){
+                                            if(typeof shortcode[element_type] !== "undefined" &&
                                                 typeof shortcode[element_type]["setting_edit_before_init_field"] === "function"){
                                                 shortcode[element_type]["setting_edit_before_init_field"](field, _dialog, element, selector, settings);
                                             }
@@ -1328,7 +1614,10 @@
                                             }
                                         }
 
+
                                         tz_redux_field.init(field);
+                                        // $.redux.check_dependencies(field.find(" input,  textarea, select"));
+                                        redux_change(field.find(" input,  textarea, select"));
 
                                         // After init field in setting edit
                                         // Trigger of field (setting_edit_after_init_field)
@@ -1352,9 +1641,16 @@
                                     main_wrap.removeData("data-opt-name");
 
                                 });
+
+                                $.redux.checkRequired(_dialog.find(".redux-container"));
+
+
+                                // $.redux.required();
+                                // tz_required( _dialog );
+
                             }
                         },
-                    }).dialog('open');
+                    }).show();
                 }
             });
 
@@ -1366,101 +1662,180 @@
                     grid_setting    = wp.template("field-tz_layout-settings__grid"),
                     grid_setting_obj    = $(grid_setting());
 
+                var __m_uikit_modal = control.closest(".uk-modal");
+
                 grid_setting_obj.find(".fl-grid-item").off("click").on("click", function (e) {
                     e.preventDefault();
                     var $grid_item = $(this),
                         $cells   = $grid_item.data("cells"),
                         columns = row.find("> .fl_element-wrapper > .fl_container_for_children > [data-fl-element_type=column]");
 
+                    var __grid_item_modal   = typeof $grid_item.closest(".uk-modal") !== "undefined"?$grid_item.closest(".uk-modal"):false;
+
                     if($cells !== "custom") {
-                        $cells = $cells.toString().replace(/\s+/g, "").split("+");
+                        // control.data("modal_shown",true);
+                        __grid_item_modal.data("modal_shown",true);
+                        $cells = $cells.toString().replace(/\s+/g, "").split(/\+|,|;/);
                     }else{
-                        var $custom  = prompt("Please enter custom grid size (eg. 2+3+6+1)");
-                        if($custom.length){
-                           $cells   = $custom.replace(/\s+/g, "").split("+");
+                        if(typeof __m_uikit_modal !== "undefined") {
+                            __m_uikit_modal.data("allow_event", false);
+                        }
+
+                        __grid_item_modal.data("modal_shown",false);
+
+                        /* Use UIkit modal dialog */
+                        UIkit.modal.prompt(redux.field_objects.tz_layout.i18n.custom_column, "",{
+                            "container": true,
+                            "stack": true,
+                        }).then(function ($custom) {
+                            // Set allow event to show or hide parent modal
+                            if(typeof __m_uikit_modal !== "undefined") {
+                                __m_uikit_modal.data("allow_event", true);
+                            }
+                            if($custom === null || !$custom.length){
+                                if(__grid_item_modal){
+                                    UIkit.modal(__grid_item_modal).show();
+                                }
+                                return true;
+                            }
+
+                            if(__grid_item_modal){
+                                __grid_item_modal.data("modal_shown",true);
+                                UIkit.modal(__grid_item_modal).hide();
+                            }
+
+                            if($custom.length) {
+                                $cells = $custom.replace(/\s+/g, "").split(/\+|,|;/);
+                                set_cells($cells);
+                                sortable(selector);
+                                init_event();
+
+                                return true;
+
+                            }
+
+                        });
+
+                        // /* Use jquery ui dialog */
+                        // var $custom  = prompt("Please enter custom grid size (eg. 1-2;1-4;1-4)");
+                        // if($custom && $custom.length){
+                        //    $cells   = $custom.replace(/\s+/g, "").split(/\+|,|;/);
+                        // }
+                    }
+
+                    function set_cells($cells) {
+                        if(typeof $cells !== "string" && $cells.length){
+                            var $not    = '';
+                            var row_setting = redux.field_objects.tz_layout.get_setting(row, selector, settings);
+                            var col_htmls = [];
+                            var col_settings = [];
+
+                            $.each($cells, function(index, value){
+                                var $new_col = wp.template('field-tz_layout-template-column'),
+                                    $col_data = {size: value};
+                                if(columns.length){
+                                    var new_col_setting;
+
+                                    var $col =  columns.eq(index);
+                                    if($not){
+                                        $not    += ",";
+                                    }
+                                    $not   += ":eq(" + index +")";
+
+                                    if($col.length){
+                                        var $col_child = $col.find(">.fl_element-wrapper>.fl_column-container.fl_container_for_children");
+                                        if(!$col_child.hasClass("fl_empty-container")){
+                                            $col_data["element"]    = $col_child.html();
+                                        }
+                                    }
+
+                                    var $new_col_obj    = $($new_col($col_data));
+                                    var $new_col_form   = $(wp.template("field-tz_layout-settings-column")());
+
+                                    if($col.length){
+                                        new_col_setting = redux.field_objects.tz_layout.get_setting($col, selector, settings);
+                                        new_col_setting.size    = $new_col_obj.data("column-width");
+                                    }else{
+                                        new_col_setting = redux.field_objects.tz_layout.get_form_settings($new_col_form, $new_col_obj);
+                                    }
+
+                                    if( index === ($cells.length - 1) && columns.length && columns.length > $cells.length){
+
+                                        var $child_settings = [];
+                                        // // Insert all children settings
+                                        $.each(columns.not($not), function(){
+                                            var col = $(this),
+                                                col_opt = redux.field_objects.tz_layout.get_setting(col, selector, settings);
+
+                                            $child_settings = $child_settings.concat(col_opt.elements);
+                                        });
+
+                                        new_col_setting.elements    = new_col_setting.elements.concat($child_settings);
+
+                                        var __not_empty_child   = columns.not($not)
+                                            .find(">.fl_element-wrapper>.fl_column-container.fl_container_for_children")
+                                            .children();
+                                        if(__not_empty_child.length) {
+                                            $new_col_obj.find(".fl_container_for_children").first()
+                                                .append(__not_empty_child).removeClass("fl_empty-container");
+                                        }
+                                    }
+
+                                    new_col_setting.id   = redux.field_objects.tz_layout.generateID();
+
+                                    col_settings.push(new_col_setting);
+                                    col_htmls.push($new_col_obj[0]);
+                                }
+                            });
+
+                            row_setting.elements    = col_settings;
+
+                            redux.field_objects.tz_layout.set_setting_to_field(settings, selector);
+
+                            row.find(".fl_row_container.fl_container_for_children").first().html(col_htmls);
                         }
                     }
 
-                    if(typeof $cells !== "string" && $cells.length){
-                        var $not    = '';
-                        var row_setting = redux.field_objects.tz_layout.get_setting(row, selector, settings);
-                        var col_htmls = [];
-                        var col_settings = [];
-
-                        $.each($cells, function(index, value){
-                            var $new_col = wp.template('field-tz_layout-template-column'),
-                                $col_data = {size: value};
-                            if(columns.length){
-                                var new_col_setting;
-
-                                var $col =  columns.eq(index);
-                                if($not){
-                                    $not    += ",";
-                                }
-                                $not   += ":eq(" + index +")";
-
-                                if($col.length){
-                                    var $col_child = $col.find(">.fl_element-wrapper>.fl_column-container.fl_container_for_children");
-                                    if(!$col_child.hasClass("fl_empty-container")){
-                                        $col_data["element"]    = $col_child.html();
-                                    }
-                                }
-
-                                var $new_col_obj    = $($new_col($col_data));
-                                var $new_col_form   = $(wp.template("field-tz_layout-settings-column")());
-
-                                if($col.length){
-                                    new_col_setting = redux.field_objects.tz_layout.get_setting($col, selector, settings);
-                                    new_col_setting.size    = $new_col_obj.data("column-width");
-                                }else{
-                                    new_col_setting = redux.field_objects.tz_layout.get_form_settings($new_col_form, $new_col_obj);
-                                }
-
-                                if( index === ($cells.length - 1) && columns.length && columns.length > $cells.length){
-
-                                    var $child_settings = [];
-                                    // // Insert all children settings
-                                    $.each(columns.not($not), function(){
-                                        var col = $(this),
-                                            col_opt = redux.field_objects.tz_layout.get_setting(col, selector, settings);
-
-                                        $child_settings = $child_settings.concat(col_opt.elements);
-                                    });
-
-                                    new_col_setting.elements    = new_col_setting.elements.concat($child_settings);
-
-                                    $new_col_obj.find(".fl_container_for_children").first().append(columns.not($not)
-                                            .find(">.fl_element-wrapper>.fl_column-container.fl_container_for_children")
-                                            .children()).removeClass("fl_empty-container");
-                                }
-
-                                new_col_setting.id   = redux.field_objects.tz_layout.generateID();
-
-                                col_settings.push(new_col_setting);
-                                col_htmls.push($new_col_obj[0]);
-                            }
-                        });
-
-                        row_setting.elements    = col_settings;
-
-                        redux.field_objects.tz_layout.set_setting_to_field(settings, selector);
-
-                        row.find(".fl_row_container.fl_container_for_children").first().html(col_htmls);
-                    }
+                    set_cells($cells);
 
                     sortable(selector);
                     init_event();
 
-                    grid_setting_obj.dialog("destroy");
+                    if (grid_setting_obj.is(':ui-dialog')) {
+                        grid_setting_obj.dialog("destroy");
+                    }
+
+                    // if(typeof __uimodal !== "undefined"){
+                    //     __uimodal.hide();
+                    // }
+                    if(__grid_item_modal){
+                        UIkit.modal(__grid_item_modal).hide();
+                    }
                 });
 
-                tzdialog(grid_setting_obj,{
+                tz_ui_modal(grid_setting_obj,{
                     "title": grid_setting_obj.data("fl-setting-title"),
-                    "close": function (ev, ui) {
-                        $(this).remove();
+                    "dialog_class": "",
+                    "current_target": control,
+                    "beforeshow": function(){
+                        $(this).find(".uk-modal-body").attr("data-uk-overflow-auto","");
                     },
-                }).dialog('open');
+                    "hidden": function(){
+                        // if(typeof control.data("modal_shown") === "undefined" || control.data("modal_shown")) {
+                        if(typeof $(this).data("modal_shown") === "undefined" || $(this).data("modal_shown")) {
+                            $(this).remove();
+                        }
+                    }
+                }).show();
+
+                // tzdialog(grid_setting_obj,{
+                //     "title": grid_setting_obj.data("fl-setting-title"),
+                //     "close": function (ev, ui) {
+                //         $(this).remove();
+                //     },
+                // }).dialog('open');
             });
+            // console.log("init event");
         };
 
         sortable(selector);

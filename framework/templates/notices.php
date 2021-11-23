@@ -17,6 +17,7 @@ if($queues && count($queues)) {
             default:
                 $notice_type    = $notice['type'];
                 break;
+            case 'message':
             case 'primary':
                 $notice_type    = 'primary';
                 break;
@@ -28,11 +29,9 @@ if($queues && count($queues)) {
                 break;
         }
         ?>
-        <div class="alert alert-<?php echo $notice_type; ?> rounded-0 mb-4">
-            <?php echo $notice['message']; ?>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="uk-alert-<?php echo $notice_type; ?> uk-box-shadow-small uk-margin-bottom" data-uk-alert>
+            <a class="uk-alert-close" data-uk-close></a>
+            <p><?php echo $notice['message']; ?></p>
         </div>
     <?php }
 }

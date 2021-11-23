@@ -86,45 +86,43 @@ $comingsoon_date    = $date->format('c');
 Templates::add_inline_style('.comingsoon-wrap{'.$css.'}');
 ?>
 <div class="comingsoon-wrap" <?php echo implode(' ', $video); ?>>
-    <div class="container">
-        <div class="text-center">
-            <div id="comingsoon">
-                <div class="comingsoon-page-logo">
-                    <?php if ($hascs_logo) { ?>
-                        <img class="comingsoon-logo m-auto" alt="logo" src="<?php echo $comingsoon_logo; ?>" />
-                    <?php } ?>
-                </div>
-
-                <?php if (!empty($coming_soon_content)) { ?>
-                    <div class="comingsoon-content">
-                        <?php echo $coming_soon_content; ?>
-                    </div>
-                <?php } ?>
-
-                <?php if ($comingsoon_date) { ?>
-                    <div class="uk-grid-small uk-child-width-auto uk-flex-center" data-uk-grid data-uk-countdown="date: <?php echo esc_attr($comingsoon_date); ?>">
-                        <div>
-                            <div class="uk-countdown-number uk-countdown-days"></div>
-                            <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo __('Days',Functions::get_my_text_domain()); ?></div>
-                        </div>
-                        <div class="uk-countdown-separator">:</div>
-                        <div>
-                            <div class="uk-countdown-number uk-countdown-hours"></div>
-                            <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo __('Hours',Functions::get_my_text_domain()); ?></div>
-                        </div>
-                        <div class="uk-countdown-separator">:</div>
-                        <div>
-                            <div class="uk-countdown-number uk-countdown-minutes"></div>
-                            <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo __('Minutes',Functions::get_my_text_domain()); ?></div>
-                        </div>
-                        <div class="uk-countdown-separator">:</div>
-                        <div>
-                            <div class="uk-countdown-number uk-countdown-seconds"></div>
-                            <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo __('Seconds',Functions::get_my_text_domain()); ?></div>
-                        </div>
-                    </div>
+    <div class="uk-text-center">
+        <div id="comingsoon">
+            <div class="comingsoon-page-logo">
+                <?php if ($hascs_logo) { ?>
+                    <img class="comingsoon-logo m-auto" alt="logo" src="<?php echo $comingsoon_logo; ?>" />
                 <?php } ?>
             </div>
+
+            <?php if (!empty($coming_soon_content)) { ?>
+                <div class="comingsoon-content">
+                    <?php echo $coming_soon_content; ?>
+                </div>
+            <?php } ?>
+
+            <?php if ($comingsoon_date) { ?>
+                <div class="uk-grid-small uk-child-width-auto uk-flex-center" data-uk-grid data-uk-countdown="date: <?php echo esc_attr($comingsoon_date); ?>">
+                    <div>
+                        <div class="uk-countdown-number uk-countdown-days"></div>
+                        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo __('Days',Functions::get_my_text_domain()); ?></div>
+                    </div>
+                    <div class="uk-countdown-separator">:</div>
+                    <div>
+                        <div class="uk-countdown-number uk-countdown-hours"></div>
+                        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo __('Hours',Functions::get_my_text_domain()); ?></div>
+                    </div>
+                    <div class="uk-countdown-separator">:</div>
+                    <div>
+                        <div class="uk-countdown-number uk-countdown-minutes"></div>
+                        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo __('Minutes',Functions::get_my_text_domain()); ?></div>
+                    </div>
+                    <div class="uk-countdown-separator">:</div>
+                    <div>
+                        <div class="uk-countdown-number uk-countdown-seconds"></div>
+                        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo __('Seconds',Functions::get_my_text_domain()); ?></div>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
     </div>
 </div>

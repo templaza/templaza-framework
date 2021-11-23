@@ -27,11 +27,11 @@
 		display: none !important;
 	}
 }
-@media (max-width: 1200px) {
-	.row {
-		--#{$variable-prefix}gutter-x: #{$tztheme-grid-gutter-width-xl};
-	}
-	.g-0, .gx-0 {
-		--#{$variable-prefix}gutter-x: 0;
-	}
-}
+//@media (max-width: 1200px) {
+//	.row {
+//		--#{$variable-prefix}gutter-x: #{$tztheme-grid-gutter-width-xl};
+//	}
+//	.g-0, .gx-0 {
+//		--#{$variable-prefix}gutter-x: 0;
+//	}
+//}

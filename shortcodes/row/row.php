@@ -43,53 +43,109 @@ if(!class_exists('TemplazaFramework_ShortCode_Row')){
                                 'id' => 'settings',
                                 'title'  => esc_html__('General Settings', $this -> text_domain),
                                 'fields' => array(
-//                                    array(
-//                                        'id'       => 'full-height',
-//                                        'type'     => 'switch',
-//                                        'title'    => __('Full height row', $this -> text_domain),
-//                                        'subtitle' => __('If set on, row will be set to full height.', $this -> text_domain),
-//                                        'default'  => false,
-//                                    ),
-//                                    array(
-//                                        'id'       => 'columns-placement',
-//                                        'type'     => 'select',
-//                                        'title'    => __('Columns position', $this -> text_domain),
-//                                        'subtitle' => __('Select columns position within row.', $this -> text_domain),
-//                                        'options'  => array(
-//                                            'top'     => esc_html__('Top', $this -> text_domain),
-//                                            'middle'  => esc_html__('Middle', $this -> text_domain),
-//                                            'bottom'  => esc_html__('Bottom', $this -> text_domain),
-//                                            'stretch' => esc_html__('Stretch', $this -> text_domain),
-//                                        ),
-//                                        'default'  => 'top',
-//                                        'required' => array('full-height', '=', false),
-//                                    ),
-//                                    array(
-//                                        'id'       => 'equal-height',
-//                                        'type'     => 'switch',
-//                                        'title'    => __('Equal height', $this -> text_domain),
-//                                        'subtitle' => __('If set on, columns will be set to equal height.', $this -> text_domain),
-//                                        'default'  => true,
-//                                    ),
-//                                    array(
-//                                        'id'       => 'rtl-reverse',
-//                                        'type'     => 'switch',
-//                                        'title'    => __('Reverse columns in RTL', $this -> text_domain),
-//                                        'subtitle' => __('If set on, columns will be reversed in RTL.', $this -> text_domain),
-//                                        'default'  => false,
-//                                    ),
-//                                    array(
-//                                        'id'       => 'content-placement',
-//                                        'type'     => 'select',
-//                                        'title'    => __('Content position', $this -> text_domain),
-//                                        'subtitle' => __('Select content position within columns.', $this -> text_domain),
-//                                        'options'  => array(
-//                                            'top'     => esc_html__('Top', $this -> text_domain),
-//                                            'middle'  => esc_html__('Middle', $this -> text_domain),
-//                                            'bottom'  => esc_html__('Bottom', $this -> text_domain),
-//                                        ),
-//                                        'default'  => '',
-//                                    ),
+                                    array(
+                                        'id'        => 'column_gap',
+                                        'type'      => 'select',
+                                        'title'     =>  esc_html__('Column Gap', $this -> text_domain),
+                                        'subtitle'  => esc_html__('Set the size of the gap between the grid columns.', $this -> text_domain),
+                                        'options'   => array(
+                                            'default'   => esc_html__('Default', $this -> text_domain),
+                                            'small'     => esc_html__('Small', $this -> text_domain),
+                                            'medium'    => esc_html__('Medium', $this -> text_domain),
+                                            'large'     => esc_html__('Large', $this -> text_domain),
+                                            'collapse'  => esc_html__('None', $this -> text_domain),
+                                        ),
+                                        'select2'       => array( 'allowClear' => false ),
+                                        'default'       => 'default',
+                                    ),
+                                    array(
+                                        'id'        => 'row_gap',
+                                        'type'      => 'select',
+                                        'title'     =>  esc_html__('Row Gap', $this -> text_domain),
+                                        'subtitle'  => esc_html__('Set the size of the gap between the grid rows.', $this -> text_domain),
+                                        'options'   => array(
+                                            'default'   => esc_html__('Default', $this -> text_domain),
+                                            'small'     => esc_html__('Small', $this -> text_domain),
+                                            'medium'    => esc_html__('Medium', $this -> text_domain),
+                                            'large'     => esc_html__('Large', $this -> text_domain),
+                                            'collapse'  => esc_html__('None', $this -> text_domain),
+                                        ),
+                                        'select2'       => array( 'allowClear' => false ),
+                                        'default'       => 'default',
+                                    ),
+                                    array(
+                                        'id'        => 'divider',
+                                        'type'      => 'switch',
+                                        'title'     =>  esc_html__('Divider', $this -> text_domain),
+                                        'subtitle'  => esc_html__('Show a divider between grid columns.', $this -> text_domain),
+                                        'required'  => array(
+                                            array('column_gap', '=', array('default','small','medium','large')), /* column_gap is not equal 'collapse' */
+                                            array('row_gap', '=', array('default','small','medium','large')), /* row_gap is not equal 'collapse' */
+                                        ),
+                                    ),
+                                    array(
+                                        'id'        => 'width',
+                                        'type'      => 'select',
+                                        'title'     =>  esc_html__('Max Width', $this -> text_domain),
+                                        'options' => array(
+                                            'default'   => esc_html__('Default', $this -> text_domain),
+                                            'xsmall'    => esc_html__('XSmall', $this -> text_domain),
+                                            'small'     => esc_html__('Small', $this -> text_domain),
+                                            'large'     => esc_html__('Large', $this -> text_domain),
+                                            'xlarge'    => esc_html__('XLarge', $this -> text_domain),
+                                            'expand'    => esc_html__('Expand', $this -> text_domain),
+                                            'none'      => esc_html__('None', $this -> text_domain),
+                                        ),
+                                        'select2'       => array( 'allowClear' => false ),
+                                        'default'       => 'none',
+                                    ),
+                                    array(
+                                        'id'       => 'padding_remove_horizontal',
+                                        'type'     => 'switch',
+                                        'title'    => esc_html__('Remove horizontal padding', $this -> text_domain),
+                                        'subtitle' => __('Set the maximum content width. Note: The section may already have a maximum width, which you cannot exceed.', $this -> text_domain),
+                                        'required' => array('width', '=', array('default', 'xsmall', 'small', 'large', 'xlarge')),
+                                    ),
+                                    array(
+                                        'id'       => 'width_expand',
+                                        'type'     => 'select',
+                                        'title'    => esc_html__('Expand One Side', $this -> text_domain),
+                                        'subtitle' => __('Expand the width of one side to the left or right while the other side keeps within the constraints of the max width.', $this -> text_domain),
+                                        'options'  => array(
+                                            'no_expand' => esc_html__("Don't expand", $this ->text_domain),
+                                            'left'      => esc_html__("To left", $this ->text_domain),
+                                            'right'     => esc_html__("To right", $this ->text_domain),
+                                        ),
+                                        'default'       => 'no_expand',
+                                        'select2'       => array( 'allowClear' => false ),
+                                        'required' => array('width', '=', array('default', 'xsmall', 'small', 'large', 'xlarge')),
+                                    ),
+                                    array(
+                                        'id'       => 'height',
+                                        'type'     => 'select',
+                                        'title'    => esc_html__('Height', $this -> text_domain),
+                                        'subtitle' => __('Enabling viewport height on a row that directly follows the header will subtract the header height from it.', $this -> text_domain),
+                                        'options'  => array(
+                                            'none'    => esc_html__("None", $this ->text_domain),
+                                            'full'    => esc_html__("Viewport", $this ->text_domain),
+                                            'percent' => esc_html__("Viewport (Minus 20%)", $this ->text_domain),
+                                        ),
+                                        'default'       => 'none',
+                                        'select2'       => array( 'allowClear' => false ),
+                                    ),
+                                    array(
+                                        'id'       => 'match_height',
+                                        'type'     => 'switch',
+                                        'title'    => esc_html__('Match Height', $this -> text_domain),
+                                        'subtitle' => __('Match the height of all panel elements which are styled as a card.', $this -> text_domain),
+                                    ),
+                                    array(
+                                        'id'       => 'match_height_selector',
+                                        'type'     => 'text',
+                                        'title'    => esc_html__('Match Height Selector', $this -> text_domain),
+                                        'default'  => '>.templaza-column>*',
+                                        'required' => array('match_height', '=', '1'),
+                                    ),
                                 ),
                             ),
                             // Responsive settings
@@ -162,16 +218,80 @@ if(!class_exists('TemplazaFramework_ShortCode_Row')){
         public function prepare_params($params, $element,$parent_el){
             $params = parent::prepare_params($params, $element,$parent_el);
 
-
             if(!isset($params['tz_class'])){
                 $params['tz_class'] = '';
+            }
+
+            $width          = (isset($params['width']) && !empty($params['width']))?$params['width']:'none';
+            $row_gap        = (isset($params['row_gap']) && !empty($params['row_gap']))?$params['row_gap']:'default';
+            $column_gap     = (isset($params['column_gap']) && !empty($params['column_gap']))?$params['column_gap']:'default';
+            $width_expand   = (isset($params['width_expand']) && !empty($params['width_expand']))?$params['width_expand']:'no_expand';
+
+            $pad_rm_h   = isset($params['padding_remove_horizontal'])?filter_var($params['padding_remove_horizontal'], FILTER_VALIDATE_BOOLEAN):false;
+            $grid_gap   = '';
+
+//            if($column_gap == $row_gap && $column_gap != 'default'){
+//                $grid_gap .= ' uk-grid-'.$column_gap;
+//            }else{
+//                if($column_gap != 'default'){
+//                    $grid_gap .= ' uk-grid-column-'.$params['column_gap'];
+//                }
+//                if($row_gap != 'default'){
+//                    $grid_gap .= ' uk-grid-row-'.$params['row_gap'];
+//                }
+//            }
+
+            $_tz_outer_class    = '';
+
+            if(!empty($width) && $width != 'none'){
+                $_tz_outer_class       = $params['tz_class'];
+                $_tz_outer_class       .= ' uk-container';
+                $_tz_outer_class       .= ($width != 'default')?' uk-container-'.$width:'';
+                $params['tz_class']     = '';
+
+                if(in_array($row_gap, array('small','medium','large'))){
+                    $_tz_outer_class .= ' uk-grid-margin-' . $params['row_gap'];
+                }elseif($row_gap == 'default'){
+                    $_tz_outer_class .= ' uk-grid-margin';
+                }
+
+                $_tz_outer_class    .= (!empty($width_expand) && $width_expand != 'no_expand')?' uk-container-expand-'.$width_expand:'';
+
+            }
+
+            if($width != 'expand' && $width != 'none' && $pad_rm_h){
+                $_tz_outer_class    .= ' uk-padding-remove-horizontal';
+            }
+
+
+            $params['_tz_outer_class']  = $_tz_outer_class;
+
+            if($column_gap == $row_gap && $column_gap != 'default'){
+                $params['tz_class'] .= ' uk-grid-'.$column_gap;
+            }else{
+                if($column_gap != 'default'){
+                    $params['tz_class'] .= ' uk-grid-column-'.$params['column_gap'];
+                }
+                if($row_gap != 'default'){
+                    $params['tz_class'] .= ' uk-grid-row-'.$params['row_gap'];
+                }
+            }
+
+            if(isset($params['divider']) &&
+                (isset($params['column_gap']) && !empty($params['column_gap']) && $params['column_gap'] != 'collapse') &&
+                (isset($params['row_gap']) && !empty($params['row_gap']) && $params['row_gap'] != 'collapse')){
+                $divider    = isset($params['divider'])?filter_var($params['divider'], FILTER_VALIDATE_BOOLEAN):false;
+                if($divider) {
+                    $params['tz_class'] .= ' uk-grid-divider';
+                }
             }
 
             if($parent_el && isset($parent_el['params'])){
                 $_parent_params = $parent_el['params'];
                 if(isset($_parent_params['layout_type']) && in_array($_parent_params['layout_type'],
                         array( 'no-container', 'container-with-no-gutters', 'container-fluid-with-no-gutters'))) {
-                    $params['tz_class'] .= ' gx-0';
+                    $params['tz_class'] .= ' uk-grid-collapse';
+//                    $params['tz_class'] .= ' gx-0';
                 }
             }
 

@@ -103,18 +103,19 @@ class Framework{
 
 
             $glb_args   = $this -> get_arguments();
-            add_action('redux/options/'.$glb_args['opt_name'].'/saved', array($this, 'save_settings_to_file'));
+            add_action('update_option_'.$glb_args['opt_name'], array($this, 'save_settings_to_file'),10,2);
+//            add_action('redux/options/'.$glb_args['opt_name'].'/saved', array($this, 'save_settings_to_file'));
         }
 
         do_action('templaza-framework/framework/hooks');
     }
 
-    public function save_settings_to_file($options){
+    public function save_settings_to_file($old_value, $options){
         $glb_args   = $this -> get_arguments();
         $opt_name   = $glb_args['opt_name'];
 
-        $action = isset($_REQUEST['action'])?$_REQUEST['action']:'';
-        if($action == $opt_name.'_ajax_save') {
+//        $action = isset($_REQUEST['action'])?$_REQUEST['action']:'';
+//        if($action == $opt_name.'_ajax_save') {
             require_once(ABSPATH . '/wp-admin/includes/file.php');
             global $wp_filesystem;
             WP_Filesystem();
@@ -126,7 +127,8 @@ class Framework{
 
             $file = $folder . '/setting.json';
             $wp_filesystem->put_contents($file, json_encode($options));
-        }
+            file_put_contents($file, json_encode($options), FS_CHMOD_FILE);
+//        }
     }
 
     public function admin_nav_tabs($nav_tabs){
@@ -214,8 +216,11 @@ class Framework{
                 $options    = (!empty($options) && is_string($options))?json_decode($options, true):$options;
 
                 if(!empty($options)) {
-//                    update_option($opt_name, $options);
-                    $redux -> set_options($options);
+                    if(method_exists($redux, 'set_options')) {
+                        $redux->set_options($options);
+                    }else{
+                        update_option($opt_name, $options);
+                    }
                 }
             }
         }

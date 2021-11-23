@@ -3,7 +3,7 @@
 defined('TEMPLAZA_FRAMEWORK') or exit;
 
 $allow_copy = isset($this -> field['allow_copy'])?filter_var($this -> field['allow_copy'], FILTER_VALIDATE_BOOLEAN):false;
-$allow_copy = $allow_copy?'true':'false';
+//$allow_copy = $allow_copy?'true':'false';
 
 if($allow_copy){
 ?>
@@ -24,6 +24,11 @@ if($allow_copy){
     if(isset($this -> parent -> args['shortcode_section']) && !$this -> parent -> args['shortcode_section']){
         $text   = 'Add Row';
     }
+
+    $field   = isset($this -> field)?$this -> field:array();
+    $one_row        = (isset($field['one_row']) && $field['one_row'])?filter_var($field['one_row'], FILTER_VALIDATE_BOOLEAN):false;
+    if(!$one_row){
     ?>
     <a href="#" class="fl_add-element-not-empty-button"><i class="far fa-plus-square"></i> <?php echo __($text, $this -> text_domain); ?></a>
+    <?php } ?>
 </div>

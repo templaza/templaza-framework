@@ -47,6 +47,8 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
                 $folders    = array_merge($folders, $theme_files);
             }
 
+            $folders    = apply_filters('templaza-framework/field/tz_layout/elements', $folders, $this);
+
             foreach($folders as $folder){
                 $file_name  = basename($folder);
 
@@ -111,6 +113,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
         }
 
         public function enqueue(){
+//            wp_enqueue_editor();
             do_action('templaza-framework/field/tz_layout/enqueue', $this);
 
             if (!wp_style_is('templaza-field-tz_layout-css')) {
@@ -134,10 +137,12 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
                 wp_localize_script(
                     'templaza-field-tz_layout-js',
                     'templaza_field_tz_layout', array('i18n' => array(
-                        'copied'        => __('Copied!'),
-                        'pasted'        => __('Pasted!'),
-                        'copy_failed'   => __('Copy failed!'),
-                        'paste_failed'  => __('Not Pasted! Please copy again.'),
+                        'copied'            => __('Copied!'),
+                        'delete_question'   => __('Are you sure?'),
+                        'pasted'            => __('Pasted!'),
+                        'copy_failed'       => __('Copy failed!'),
+                        'paste_failed'      => __('Not Pasted! Please copy again.'),
+                        'custom_column'     => __('Please enter custom grid size (eg. 1-2;1-4;1-4 or auto;1-3;expand).'),
                     ))
                 );
             }

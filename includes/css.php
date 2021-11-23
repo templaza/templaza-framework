@@ -45,7 +45,7 @@ class CSS{
             if(!empty($image)){
                 $css .= 'background-image:url('.$image.')'.$important.';';
                 if(!empty($repeat)){
-                    $css .= 'background-repeat: '.$repeat.';';
+                    $css .= 'background-repeat: '.$repeat.$important.';';
                 }
             }
             if(!empty($color)){
@@ -379,9 +379,10 @@ class CSS{
         return self::make_color_rgba($color_options['color'], $color_options['alpha'], $color_options['rgba']);
     }
 
-    public static function background_redux($background_options = array()){
+    public static function background_redux($background_options = array(), $important = false){
         $store_id   = __METHOD__;
         $store_id  .= ':'.serialize($background_options);
+        $store_id  .= ':'.$important;
         $store_id   = md5($store_id);
 
         if(isset(static::$cache[$store_id])){
@@ -392,9 +393,17 @@ class CSS{
             return '';
         }
 
-        return self::background($background_options['background-color'], $background_options['background-image'],
-            $background_options['background-repeat'], $background_options['background-attachment'],
-            $background_options['background-position'], $background_options['background-size']);
+        $color      = isset($background_options['background-color'])?$background_options['background-color']:'';
+        $image      = isset($background_options['background-image'])?$background_options['background-image']:'';
+        $clip       = isset($background_options['background-clip'])?$background_options['background-clip']:'';
+        $repeat     = isset($background_options['background-repeat'])?$background_options['background-repeat']:'';
+        $attachment = isset($background_options['background-attachment'])?$background_options['background-attachment']:'';
+        $position   = isset($background_options['background-position'])?$background_options['background-position']:'';
+        $size       = isset($background_options['background-size'])?$background_options['background-size']:'';
+        $origin     = isset($background_options['background-origin'])?$background_options['background-origin']:'';
+
+        return self::background($color, $image, $repeat, $attachment,
+            $position, $size, $origin, $clip, $important);
     }
 
     /**
