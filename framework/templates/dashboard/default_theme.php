@@ -63,7 +63,7 @@ $theme  = wp_get_theme();
                                     <dt><?php echo __('Forum Support:', $this -> text_domain); ?></dt>
                                     <dd><a class="uk-link-text" href="https://www.templaza.com/forums.html"><?php echo __('Ask a question.', $this -> text_domain); ?></a></dd>
                                     <dt><?php echo __('Online Document:', $this -> text_domain); ?></dt>
-                                    <dd><a class="uk-link-text" href="https://document.templaza.com/<?php echo $theme -> get('Name'); ?>"><?php echo sprintf(__('Check %s Documentation.'), $theme -> get('Name')); ?></a></dd>
+                                    <dd><a class="uk-link-text" href="https://document.templaza.com/<?php echo $theme -> get('TextDomain'); ?>"><?php echo sprintf(__('Check %s Documentation.'), $theme -> get('Name')); ?></a></dd>
                                 </dl>
                             </div>
                         </div>
