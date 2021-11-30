@@ -624,7 +624,7 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                     if(isset($item -> templaza_allow_el) && $item -> templaza_allow_el) {
                         parent::end_el($output, $item, $depth, $args);
                     }else{
-                        if (preg_match('/\[' . $this->menu_shorcode_tag . '.*?\][\n|\s]*?(.*?)$/ism',
+                        if (preg_match('/\[' . $this->menu_shorcode_tag . '.*?\][\n|\s|\r]*?(.*>?)$/ism',
                             $item->templaza_megamenu_html, $match)) {
                             $output .= $match[1];
                         }
