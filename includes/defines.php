@@ -27,14 +27,8 @@ if(!defined('TEMPLAZA_FRAMEWORK_CORE_TEMPLATE')){
     define('TEMPLAZA_FRAMEWORK_CORE_TEMPLATE', TEMPLAZA_FRAMEWORK_CORE_PATH.'/templates');
 }
 if(!defined('TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN')){
-    define('TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN', 'https://joomla.templaza.com/templazaplus');
+    define('TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN', 'https://www.templaza.com');
 }
-//if(!defined('TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN')){
-//    define('TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN', 'https://joomla.templaza.com/tzportfolio.com/joomla');
-//}
-//if(!defined('TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN')){
-//    define('TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN', 'https://www.templaza.com');
-//}
 if(!defined('TEMPLAZA_FRAMEWORK_CORE_SCSS_PATH')){
     define('TEMPLAZA_FRAMEWORK_CORE_SCSS_PATH', TEMPLAZA_FRAMEWORK_CORE_PATH.'/assets/scss');
 }
