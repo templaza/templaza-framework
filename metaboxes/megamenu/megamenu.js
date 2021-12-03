@@ -608,33 +608,38 @@
                 var _column_setting_new = create_element_setting("column"),
                     _row_setting_new    = create_element_setting("row");
 
-                // Read, create and update setting
-                $.each(_menu_item_childs, function(){
+                if(_menu_item_childs.length){
+                    // Read, create and update setting
+                    $.each(_menu_item_childs, function(){
 
-                    var _menu_item_child    = $(this),
-                        __menu_item_child_id = _menu_item_child.find(".menu-item-data-db-id").val(),
-                        _menu_item_child_slug = _menu_item_child.find("input[data-tz-menu-slug]").val(),
-                        _menu_item_child_id = typeof _menu_item_child_slug !== "undefined"?_menu_item_child_slug:__menu_item_child_id;
+                        var _menu_item_child    = $(this),
+                            __menu_item_child_id = _menu_item_child.find(".menu-item-data-db-id").val(),
+                            _menu_item_child_slug = _menu_item_child.find("input[data-tz-menu-slug]").val(),
+                            _menu_item_child_id = typeof _menu_item_child_slug !== "undefined"?_menu_item_child_slug:__menu_item_child_id;
 
-                    var _has_menu_child_item = menu_child_item_in_setting_exists(menu_item_setting, _menu_item_child_id);
-                    // var _has_menu_child_item = menu_child_item_in_setting_exists(menu_item_setting, _menu_item_child_slug);
+                        var _has_menu_child_item = menu_child_item_in_setting_exists(menu_item_setting, _menu_item_child_id);
+                        // var _has_menu_child_item = menu_child_item_in_setting_exists(menu_item_setting, _menu_item_child_slug);
 
-                    if(!_has_menu_child_item){
-                        var _menu_child_item_setting = create_megamenu_item_setting(_menu_item_child);
+                        if(!_has_menu_child_item){
+                            var _menu_child_item_setting = create_megamenu_item_setting(_menu_item_child);
 
-                        if(!_has_menu_child_item && _menu_child_item_setting) {
-                            _column_setting_new.elements.push(_menu_child_item_setting);
+                            if(!_has_menu_child_item && _menu_child_item_setting) {
+                                _column_setting_new.elements.push(_menu_child_item_setting);
+                            }
                         }
+
+                    });
+
+                    if(_column_setting_new.elements.length){
+                        _row_setting_new.elements.push(_column_setting_new);
+                        menu_item_setting.push(_row_setting_new);
+
                     }
-
-                });
-
-                if(_column_setting_new.elements.length){
+                }else{
+                    // Create row and column when this menu doesn't have childs
                     _row_setting_new.elements.push(_column_setting_new);
                     menu_item_setting.push(_row_setting_new);
-
                 }
-                // }
 
                 setting_obj.find("#megamenu_layout").val("");
 
