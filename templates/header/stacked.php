@@ -57,10 +57,10 @@ $data_attribs    = join(' ', array_map(function($v, $k){
 $data_attribs   = ' '.$data_attribs;
 ?>
 <div class="uk-flex">
-  <div class="header-stacked-section uk-flex uk-width uk-flex-column uk-flex-between">
+  <div class="header-stacked-section uk-flex uk-width uk-flex-column uk-flex-between ">
      <?php
      if ($mode == 'center') {
-        echo '<div class="uk-flex uk-width uk-flex-center">';
+        echo '<div class="uk-flex uk-width uk-flex-center templaza-logo-center-wrap">';
         ?>
 <!--        --><?php //if (!empty($header_mobile_menu)) { ?>
            <div class="uk-flex uk-flex-right uk-flex-middle uk-hidden@m">
@@ -70,7 +70,7 @@ $data_attribs   = ' '.$data_attribs;
            </div>
 <!--        --><?php //} ?>
         <?php
-        echo '<div class="uk-flex uk-width uk-flex-center">';
+        echo '<div class="uk-flex uk-width uk-flex-center templaza-logo-center-wrap">';
         Templates::load_my_layout('logo');
         echo '</div>';
         if ($enable_offcanvas) {
@@ -89,7 +89,7 @@ $data_attribs   = ' '.$data_attribs;
         echo '</div>';
         // header nav starts -->
         ?>
-        <div class="uk-flex uk-width uk-flex-center uk-flex-middle uk-visible@m pt-3"<?php echo $data_attribs;?>>
+        <div class="uk-flex uk-width uk-flex-center uk-flex-middle templaza-center-menu-wrap uk-visible@m pt-3"<?php echo $data_attribs;?>>
             <div class="<?php echo implode(' ', $navWrapperClass)?>">
                <?php
                Menu::get_nav_menu(array(
@@ -197,7 +197,7 @@ $data_attribs   = ' '.$data_attribs;
         // header block ends
      }
      if ($mode == 'divided') {
-        echo '<div class="uk-flex uk-width uk-flex-center">';
+        echo '<div class="uk-flex uk-width uk-flex-center templaza-divi-logo-wrap">';
         ?>
         <?php if (!empty($header_mobile_menu)) { ?>
            <div class="uk-flex uk-flex-left uk-flex-middle uk-hidden@m">
@@ -245,7 +245,7 @@ $data_attribs   = ' '.$data_attribs;
         }
         echo '</div>';
         // header nav starts -->
-        echo '<div class="uk-flex uk-width uk-visible@m">';
+        echo '<div class="uk-flex uk-width uk-visible@m templaza-divi-menu-wrap">';
         ?>
         <div class="uk-flex uk-flex-left uk-flex-1 uk-flex-middle pt-3"<?php echo $data_attribs;?>>
             <div class="<?php echo implode(' ', $navWrapperClass)?>">

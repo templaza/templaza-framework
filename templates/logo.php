@@ -59,7 +59,7 @@ $class = ['templaza-logo', 'templaza-logo-' . $logo_type, 'uk-flex uk-flex-middl
               $log_svg  = ' data-uk-svg';
           }
           ?>
-         <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-default"<?php
+         <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-default uk-preserve"<?php
          echo $log_svg; ?>/>
       <?php } ?>
       <?php
@@ -74,7 +74,7 @@ $class = ['templaza-logo', 'templaza-logo-' . $logo_type, 'uk-flex uk-flex-middl
               $log_svg  = ' data-uk-svg';
           }
           ?>
-         <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-mobile"<?php
+         <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-mobile uk-preserve"<?php
          echo $log_svg; ?>/>
       <?php } ?>
       <?php
@@ -89,7 +89,7 @@ $class = ['templaza-logo', 'templaza-logo-' . $logo_type, 'uk-flex uk-flex-middl
               $log_svg  = ' data-uk-svg';
           }
           ?>
-         <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-sticky"<?php
+         <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-sticky uk-preserve"<?php
          echo $log_svg; ?>/>
       <?php } ?>
    </a>
