@@ -964,7 +964,8 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
         }
 
         public function change_to_menu_slug($element){
-            if($element['type'] == 'megamenu_menu_item' && isset($element['menu_id'])){
+            if($element && isset($element['type']) &&
+                $element['type'] == 'megamenu_menu_item' && isset($element['menu_id'])){
                 $menu   = get_post($element['menu_id']);
                 if($menu && $menu -> ID == $element['menu_id']) {
                     $element['menu_slug'] = $menu -> post_name;

@@ -52,5 +52,47 @@ if( class_exists( 'WP_Import') ) {
                 }
             }
         }
+        /**
+         * Attempt to create a new menu item from import data
+         *
+         * Fails for draft, orphaned menu items and those without an associated nav_menu
+         * or an invalid nav_menu term. If the post type or term object which the menu item
+         * represents doesn't exist then the menu item will not be imported (waits until the
+         * end of the import to retry again before discarding).
+         *
+         * @param array $item Menu item details from WXR file
+         */
+        function process_menu_item( $item ) {
+            parent::process_menu_item($item);
+
+            if(!isset($item['post_id']) || empty($item['post_id'])) {
+                return;
+            }
+            $post_id = intval($item['post_id']);
+
+            if(!isset($this -> processed_menu_items[$post_id]) || empty($this -> processed_menu_items[$post_id])){
+                return;
+            }
+
+            $id = $this->processed_menu_items[intval($item['post_id'])];
+
+            foreach ( $item['postmeta'] as $meta ) {
+                ${$meta['key']} = $meta['value'];
+            }
+
+            // Update post meta for menu
+            if(isset($_templaza_megamenu_layout) && !empty($_templaza_megamenu_layout)){
+                if(is_string($_templaza_megamenu_layout)) {
+                    $_templaza_megamenu_layout = unserialize($_templaza_megamenu_layout);
+                }
+                update_post_meta($id, '_templaza_megamenu_layout', $_templaza_megamenu_layout);
+            }
+            if(isset($_templaza_megamenu_settings) && !empty($_templaza_megamenu_settings)){
+                if(is_string($_templaza_megamenu_settings)) {
+                    $_templaza_megamenu_settings = unserialize($_templaza_megamenu_settings);
+                }
+                update_post_meta($id, '_templaza_megamenu_settings', $_templaza_megamenu_settings);
+            }
+        }
     }
 }

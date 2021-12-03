@@ -34,7 +34,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 $app -> enqueue_message(sprintf(__(
                     'Theme %s not Activated! To install any of the demo content sites below you must <a href="%s">Activate theme</a>',
                     $this -> text_domain), wp_get_theme()->get('Name'),
-                    admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK) ), 'warning');
+                    admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK) ), 'message');
             }
 
             $this -> imported_key   = '_'.TEMPLAZA_FRAMEWORK.'_'.$this -> theme_name.'__demo_imported';
@@ -562,6 +562,15 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             }
             $_file   = $this -> get_substeps($folder_path, $filename, $file_filter);
 
+            // Replace demo url to client url
+            add_action('import_post_meta', function($post_id, $key, $value){
+                $config = $this -> get_theme_demo_datas();
+                if(isset($config['source_url']) && preg_match('#'.$config['source_url'].'#is', $value)){
+                    $value  = preg_replace('#'.$config['source_url'].'#is', get_home_url(), $value);
+                    update_post_meta($post_id, $key, $value);
+                }
+            },10,3);
+
             $importer   = new \TemplazaFramework_Importer();
 
             ob_start();
@@ -831,7 +840,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
         }
 
 
-        protected function import_elementor($folder_path, $filename = '',  $file_filter = '.json|.xml'){
+        protected function import_elementor($folder_path, $filename = '',  $file_filter = '.json|.zip'){
 
             if(!class_exists('Elementor\Core\App\Modules\ImportExport\Import')){
                 $this -> info -> set_message(esc_html__('Class Import not found. Please install the elementor plugin to continue import it.',
@@ -840,38 +849,80 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 die();
             }
 
-//            $file   = $this -> get_substeps($folder_path, $filename, $file_filter);
+            $result = true;
 
-            if(class_exists('Elementor\Core\App\Modules\ImportExport\Import')){
+            // Has zip file in package
+            $has_zip    = Files::get_files_of_folder($folder_path, '.zip');
 
-                $importer   = new Import(array(
-                    'stage' => 2,
-                    'include'   => ['templates', 'content','settings'],
-                    "overrideConditions" => [],
-                    'directory' => $folder_path.'/',
-                ));
-
-                // Import
-                $el_result = $importer -> run();
-
-                /*
-                 * Create default kit
-                 * Recreate default kit (only when default kit does not exist).
-                 * */
-                $kit = Plugin::$instance->kits_manager->get_active_kit();
-                if ( !$kit->get_id() ) {
-                    $created_default_kit = Plugin::$instance->kits_manager->create_default();
-
-                    if ($created_default_kit) {
-                        update_option(Manager::OPTION_ACTIVE, $created_default_kit);
-                    }
+            if($has_zip){
+                if($file = $this->get_substeps($folder_path, $filename, $file_filter)){
+                    $exp    = explode('.', $file);
+                    $_filename  = $exp[0];
+                    $fileExt  = end($exp);
+                }else{
+                    $_filename      = basename($folder_path);
+                    $folder_path    = preg_replace('#/'.$_filename.'$#', '', $folder_path);
+                    $fileExt        = 'zip';
+                    $file           =   $_filename.'.'.$fileExt;
                 }
 
-                /* Import global settings */
-                update_option('elementor_disable_color_schemes', 'yes');
-                update_option('elementor_disable_typography_schemes', 'yes');
+                if($fileExt == 'zip'){
+                    $filePath   = $folder_path.'/'.$file;
+                    $sub_folder_path    = $folder_path.'/'.$_filename;
+                    unzip_file($filePath, $sub_folder_path);
+
+                    // Import elementor kit
+                    $result = $this -> _import_elementor_kit($sub_folder_path);
+                }elseif($fileExt == 'json'){
+
+                    // Import elementor settings
+                    $filePath   = $folder_path.'/'.$file;
+                    $settings   = file_get_contents($filePath);
+                    $settings   = is_string($settings)?json_decode($settings, true):$settings;
+
+                    if(!empty($settings) && count($settings)){
+                        foreach ($settings as $name => $value){
+                            update_option($name, $value);
+                        }
+                    }
+                }
+            }else{
+                // Import elementor kit
+                $result = $this -> _import_elementor_kit($folder_path);
             }
-            return true;
+
+            return $result;
+        }
+
+        protected function _import_elementor_kit($folder_path){
+            if(!class_exists('Elementor\Core\App\Modules\ImportExport\Import')){
+                return false;
+            }
+
+            $importer   = new Import(array(
+                'stage' => 2,
+                'include'   => ['templates', 'content','settings'],
+                "overrideConditions" => [],
+                'directory' => $folder_path.'/',
+            ));
+
+            // Import
+            $el_result = $importer -> run();
+
+            /*
+             * Create default kit
+             * Recreate default kit (only when default kit does not exist).
+             * */
+            $kit = Plugin::$instance->kits_manager->get_active_kit();
+            if ( !$kit->get_id() ) {
+                $created_default_kit = Plugin::$instance->kits_manager->create_default();
+
+                if ($created_default_kit) {
+                    update_option(Manager::OPTION_ACTIVE, $created_default_kit);
+                }
+            }
+
+            return $el_result;
         }
 
         protected function get_substeps($folder_path, $filename = '', $file_filter = '.'){

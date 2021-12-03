@@ -195,11 +195,11 @@
                                 .addClass("text-primary activate").html(templazaInstallationSettings.l10nStrings.activate);
                         }
                         if(result.message){
-                            message_box.html("<div class=\"alert alert-danger rounded-0\">"+
+                            message_box.html("<div class=\"alert alert-danger rounded-0 uk-alert-danger\" data-uk-alert>"+
                                 result.message
                                 +"</div>");
                         }else{
-                            message_box.html("<div class=\"alert alert-danger rounded-0\">"+
+                            message_box.html("<div class=\"alert alert-danger rounded-0 uk-alert-danger\" data-uk-alert>"+
                                 $div.find(".wrap").find("> p:last-child").remove().end().html()
                                 +"</div>");
                         }
@@ -212,7 +212,7 @@
                                 .addClass("text-success activated").html(templazaInstallationSettings.l10nStrings.activated);
                         }
                         if(result.message && !__tzinst_plugin_count(action)){
-                            message_box.html("<div class=\"alert alert-success rounded-0\">"+
+                            message_box.html("<div class=\"alert alert-success rounded-0 uk-alert-success\" data-uk-alert>"+
                                 result.message
                                 +"</div>");
                         }
@@ -242,7 +242,7 @@
                 }
             }, "html" ).fail(function(jqXHR, textStatus, errorThrown){
                 var message_box = $this.closest(".uk-modal").find("[data-import-message-box]");
-                message_box.html("<div class=\"alert alert-danger rounded-0\">"+
+                message_box.html("<div class=\"alert alert-danger rounded-0 uk-alert-danger\" data-uk-alert>"+
                     errorThrown + ": " +jqXHR.responseText
                     +"</div>");
             });
@@ -539,14 +539,14 @@
 
                                     modal.find("[data-tzinst-stop-importing]").addClass("uk-hidden");
 
-                                    message_box.html("<div class=\"alert alert-success rounded-0\">"+
+                                    message_box.html("<div class=\"alert alert-success rounded-0 uk-alert-success\" data-uk-alert>"+
                                         response.message
                                         +"</div>");
                                     modal.find(".uk-modal-body").scrollTop(message_box.position().top);
                                 }
                             }
                         } else {
-                            message_box.html("<div class=\"alert alert-danger rounded-0\">"+
+                            message_box.html("<div class=\"alert alert-danger rounded-0 uk-alert-danger\" data-uk-alert>"+
                                 response.message
                                 +"</div>");
                             modal.find(".uk-modal-body").scrollTop(message_box.position().top);
@@ -565,7 +565,7 @@
                         }
                     }, 'json').fail(function(jqXHR, textStatus, errorThrown){
 
-                        message_box.html("<div class=\"alert alert-danger rounded-0\">"+
+                        message_box.html("<div class=\"alert alert-danger rounded-0 uk-alert-danger\" data-uk-alert>"+
                             errorThrown + ": " +jqXHR.responseText
                             +"</div>");
                         modal.find(".uk-modal-body").scrollTop(message_box.position().top);
