@@ -5,6 +5,7 @@ defined( 'TEMPLAZA_FRAMEWORK' ) or exit;
 
 use TemPlazaFramework\Enqueue;
 use TemPlazaFramework\Functions;
+use TemPlazaFramework\Core\Fields;
 
 if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
     class ReduxFramework_TZ_Repeater extends Redux_Field
@@ -38,6 +39,9 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
             );
              array_unshift($fields, $core_field);
             $this -> title_field    = 'admin_label';
+
+            // Init Fields
+            Fields::load_fields($fields, $parent);
 
             $sections                           = array(
                 array(

@@ -9,6 +9,7 @@ class Fields{
     public $section;
 
     protected $cache    = array();
+    protected static $loaded   = array();
 
     public function __construct($args = null, $section = null)
     {
@@ -88,35 +89,61 @@ class Fields{
 
 //        do_action('templaza-framework-field-init');
     }
+
+    public static function load_field($field, $value = '', $parent = null)
+    {
+        // Load custom core fields
+        if(!$field){
+            return;
+        }
+
+        $field_type = $field['type'];
+
+        if(isset(static::$loaded[$field_type])){
+            return;
+        }
+
+        $field_path = TEMPLAZA_FRAMEWORK_FIELD_PATH;
+        $field_path  .= '/'.$field_type.'/field_'.$field_type.'.php';
+        $field_classes = array( 'Redux_' . $field_type, 'ReduxFramework_' . $field_type );
+
+        $field_class = \Redux_Functions::class_exists_ex( $field_classes );
+        if(!class_exists($field_class) && file_exists($field_path)){
+            require_once $field_path;
+        }
+        $field_class = \Redux_Functions::class_exists_ex( $field_classes );
+
+        if(!class_exists($field_class)){
+            return;
+        }
+
+        static::$loaded[$field_type]    = new $field_class($field, '', $parent);
+
+    }
+
+    public static function load_fields($fields, $parent = null)
+    {
+//        $store_id   = __METHOD__;
+//        $store_id  .= ':'.serialize($fields);
+//        $store_id   = md5($store_id);
 //
-//
-//    /**
-//     * Get list fields of framework
-//    */
-//    public function get_files(){
-//
-//        $store_id   = md5(__METHOD__);
-//
-//        if(isset($this -> cache[$store_id])){
-//            return $this -> cache[$store_id];
+//        if(!static::$instance) {
+//            $f = static::$instance = new self();
 //        }
 //
-//        $fieldPath  = TEMPLAZA_FRAMEWORK_FIELD_PATH;
-//        $fieldPath  = trailingslashit($fieldPath);
-//
-//        if(is_dir($fieldPath)){
-//            $files  = \list_files($fieldPath, 1);
-//            if($files && count($files)){
-//                $this -> cache[$store_id]   = $files;
-//                return $files;
-//            }
+//        if(isset($f -> cache[$store_id])){
+//            $f -> cache[$store_id];
 //        }
-//        return false;
-//    }
-//
-//    public function register_custom_file(){
-//
-//    }
+
+        if(!$fields || !count($fields)){
+            return;
+        }
+
+        foreach ($fields as $field){
+            static::load_field($field, '', $parent);
+        }
+//        $f -> cache[$store_id]  = true;
+    }
 
     public function hooks(){
 

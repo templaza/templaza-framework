@@ -58,7 +58,7 @@ class TemplazaFramework_ShortCode{
                 }
             }
 
-            $this -> _init_admin_template_settings();
+//            $this -> _init_admin_template_settings();
 
             add_filter('templaza-framework/field/tz_layout/element/template', array($this, '__admin_template'));
         }else{

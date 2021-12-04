@@ -27,7 +27,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
             if(is_admin()) {
                 $this->load_element();
 
-                $this -> _init_template();
+//                $this -> _init_template();
             }
 
             $this -> hooks();

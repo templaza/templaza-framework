@@ -3,8 +3,8 @@
 // Exit if accessed directly
 defined( 'TEMPLAZA_FRAMEWORK' ) or exit;
 
-use TemPlazaFramework\Enqueue;
 use TemPlazaFramework\Functions;
+use TemPlazaFramework\Core\Fields;
 
 // Don't duplicate me!
 if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
@@ -68,6 +68,8 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
                     foreach($field['tabs'] as $k => $tab){
                         if(isset($tab['fields']) && count($tab['fields'])){
                             foreach ($tab['fields'] as $field) {
+                                Fields::load_field($field, '', $this -> parent);
+
                                 add_filter("redux/options/{$opt_name}/field/{$field['id']}", function($_field)use($field){
                                     $_field['name'] = $_field['id'];
                                     return $_field;
