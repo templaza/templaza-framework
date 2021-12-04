@@ -26,8 +26,15 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
 
             if(is_admin()) {
                 $this->load_element();
+
+                $this -> _init_template();
             }
 
+            $this -> hooks();
+        }
+
+        public function hooks(){
+            add_action('admin_footer', array($this, 'template'));
         }
 
         protected function load_element(){
@@ -95,9 +102,21 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
         }
 
         public function template(){
+            if(!isset($this -> templates) || empty($this -> templates)) {
+                $this -> _init_template();
+            }
+
+            if(isset($this -> templates) && count($this -> templates)) {
+                $this -> templates  = array_unique($this -> templates);
+                echo implode("\n", $this->templates);
+            }
+        }
+
+        protected function _init_template(){
+            // Load tpl file in construct to fields can run hooks
             ob_start();
             ?>
-        <?php
+            <?php
             require_once __DIR__.'/template/element.tpl.php';
             require_once __DIR__.'/template/list_items.tpl.php';
             require_once __DIR__.'/template/setting_grid.tpl.php';
@@ -105,11 +124,6 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
             $this -> templates['element'] = ob_get_contents();
             ob_end_clean();
             $this -> templates  = apply_filters('templaza-framework/field/tz_layout/element/template', $this -> templates);
-
-            if(isset($this -> templates) && count($this -> templates)) {
-                $this -> templates  = array_unique($this -> templates);
-                echo implode("\n", $this->templates);
-            }
         }
 
         public function enqueue(){

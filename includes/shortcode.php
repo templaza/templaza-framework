@@ -14,6 +14,7 @@ class TemplazaFramework_ShortCode{
 
     protected $element;
     protected $text_domain;
+    protected $admin_template_settings;
 
     public function __construct($field_parent = array(), $value = '', $parent = ''){
         $this->parent = $parent;
@@ -23,8 +24,6 @@ class TemplazaFramework_ShortCode{
         $this -> text_domain    = Functions::get_my_text_domain();
 
         if(is_admin()) {
-
-            add_filter('templaza-framework/field/tz_layout/element/template', array($this, '__admin_template'));
 
             $this->element = $this->register();
 
@@ -58,6 +57,10 @@ class TemplazaFramework_ShortCode{
 
                 }
             }
+
+            $this -> _init_admin_template_settings();
+
+            add_filter('templaza-framework/field/tz_layout/element/template', array($this, '__admin_template'));
         }else{
             add_filter('templaza-framework/layout/generate/shortcode/'.$this -> get_shortcode_name().'/params/prepare',
                 array($this, 'prepare_params'), 10, 3);
@@ -369,53 +372,74 @@ class TemplazaFramework_ShortCode{
             if($params){
                 ?>
                 <script type="text/html" id="tmpl-field-tz_layout-settings-<?php echo $el['id']; ?>">
-                    <div class="fl_ui-panel-tab-content-container" data-fl-setting-title="<?php
-                    echo isset($el['param_title'])?$el['param_title']:'';?>">
-                        <table class="form-table">
-                            <?php
-                            if(class_exists('reduxCoreEnqueue')) {
+                    <?php if(!isset($this -> admin_template_settings[$this -> get_shortcode_name()])
+                        || empty($this -> admin_template_settings[$this -> get_shortcode_name()])){
+                        $this ->_init_admin_template_settings();
+                    }
+                    if(isset($this -> admin_template_settings[$this -> get_shortcode_name()])
+                        && !empty($this -> admin_template_settings[$this -> get_shortcode_name()])){
+                        echo $this -> admin_template_settings[$this -> get_shortcode_name()];
+                    } ?>
+                </script>
+            <?php }
+        }
+    }
+
+    protected function _init_admin_template_settings(){
+        if($el = $this -> get_element()){
+            $params = isset($el['params'])?$el['params']:null;
+            if($params){
+                ob_start();
+                ?>
+                <div class="fl_ui-panel-tab-content-container" data-fl-setting-title="<?php
+                echo isset($el['param_title'])?$el['param_title']:'';?>">
+                    <table class="form-table">
+                        <?php
+                        if(class_exists('reduxCoreEnqueue')) {
 //                            $enqueue = new reduxCoreEnqueue ( $this -> parent );
-                                $enqueue    = new Redux_Enqueue($this -> parent);
+                            $enqueue    = new Redux_Enqueue($this -> parent);
+                        }
+                        foreach($params as &$param){
+                            $param['shortcode'] = true;
+                            if($enqueue){
+                                $enqueue -> enqueue_field($this -> parent, $param);
                             }
-                            foreach($params as &$param){
-                                $param['shortcode'] = true;
-                                if($enqueue){
-                                    $enqueue -> enqueue_field($this -> parent, $param);
-                                }
 
 //                            apply_filters('templaza-framework/element/param/before', $param, $this);
 
-                                $this -> parent -> field_default_values($param);
-                                $this -> parent -> check_dependencies($param);
+                            $this -> parent -> field_default_values($param);
+                            $this -> parent -> check_dependencies($param);
 
-                                TemPlazaFramework\Helpers\FieldHelper::check_required_dependencies($param, $this -> field_parent, $this -> parent);
+                            TemPlazaFramework\Helpers\FieldHelper::check_required_dependencies($param, $this -> field_parent, $this -> parent);
 
-                                do_action('templaza-framework/element/param/before', $param, $this);
-                                $param  = apply_filters('templaza-framework/element/param/before', $param, $this);
+                            do_action('templaza-framework/element/param/before', $param, $this);
+                            $param  = apply_filters('templaza-framework/element/param/before', $param, $this);
 
-                                $param['name']  = $param['id'];
-                                $param['class'] = '';
-                                $param['id']    = $this -> field_parent['id'].'-'.$param['id'];
+                            $param['name']  = $param['id'];
+                            $param['class'] = '';
+                            $param['id']    = $this -> field_parent['id'].'-'.$param['id'];
 
-                                ob_start();
-                                $this -> parent -> _field_input($param);
-                                $param_html = ob_get_contents();
-                                ob_end_clean();
-                                if(preg_match('/<script\b[^>]*>(.*?)<\/script>/is', $param_html)){
-                                    $param_html = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $param_html);
-                                }
-                                ?>
-                                <tr>
-                                    <?php if($title = $this -> parent -> get_header_html($param)){ ?>
-                                        <th><?php echo $title; ?></th>
-                                    <?php } ?>
-                                    <td><?php echo $param_html; ?></td>
-                                </tr>
-                            <?php } ?>
-                        </table>
-                    </div>
-                </script>
-            <?php }
+                            ob_start();
+                            $this -> parent -> _field_input($param);
+                            $param_html = ob_get_contents();
+                            ob_end_clean();
+                            if(preg_match('/<script\b[^>]*>(.*?)<\/script>/is', $param_html)){
+                                $param_html = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $param_html);
+                            }
+                            ?>
+                            <tr>
+                                <?php if($title = $this -> parent -> get_header_html($param)){ ?>
+                                    <th><?php echo $title; ?></th>
+                                <?php } ?>
+                                <td><?php echo $param_html; ?></td>
+                            </tr>
+                        <?php } ?>
+                    </table>
+                </div>
+                <?php
+                $this -> admin_template_settings[$this -> get_shortcode_name()] = ob_get_contents();
+                ob_end_clean();
+            }
         }
     }
 
