@@ -491,7 +491,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                             $locations[$location['location']]   = $menu -> term_id;
                                         }
                                     }
-                                    if(count($locations)){
+                                    if(is_array($locations) && count($locations)){
                                         set_theme_mod( 'nav_menu_locations', $locations );
                                     }
                                 }
@@ -869,7 +869,10 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 if($fileExt == 'zip'){
                     $filePath   = $folder_path.'/'.$file;
                     $sub_folder_path    = $folder_path.'/'.$_filename;
-                    unzip_file($filePath, $sub_folder_path);
+                    $unziped    = unzip_file($filePath, $sub_folder_path);
+                    if($unziped){
+                        unlink($filePath);
+                    }
 
                     // Import elementor kit
                     $result = $this -> _import_elementor_kit($sub_folder_path);
@@ -899,15 +902,12 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 return false;
             }
 
-            $importer   = new Import(array(
+            $importer_opt   = array(
                 'stage' => 2,
                 'include'   => ['templates', 'content','settings'],
                 "overrideConditions" => [],
                 'directory' => $folder_path.'/',
-            ));
-
-            // Import
-            $el_result = $importer -> run();
+            );
 
             /*
              * Create default kit
@@ -921,6 +921,27 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                     update_option(Manager::OPTION_ACTIVE, $created_default_kit);
                 }
             }
+
+            $importer_opt['post_id']    = $kit -> get_id();
+
+
+            $importer   = new Import($importer_opt);
+
+            // Import
+            $el_result = $importer -> run();
+
+//            /*
+//             * Create default kit
+//             * Recreate default kit (only when default kit does not exist).
+//             * */
+//            $kit = Plugin::$instance->kits_manager->get_active_kit();
+//            if ( !$kit->get_id() ) {
+//                $created_default_kit = Plugin::$instance->kits_manager->create_default();
+//
+//                if ($created_default_kit) {
+//                    update_option(Manager::OPTION_ACTIVE, $created_default_kit);
+//                }
+//            }
 
             return $el_result;
         }
