@@ -9,8 +9,19 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 
 class Templates{
 
-    public static $_styles = ['desktop' => [], 'tablet' => [], 'mobile' => []];
-    public static $_devices= ['desktop' => '', 'tablet' => '', 'mobile' => ''];
+    public static $_styles = ['xlarge' => [],'desktop' => [], 'tablet' => [], 'mobile' => []];
+    public static $_devices= [
+        'mobile' => '@media (max-width: 640px)',
+        'tablet' => '@media (min-width: 640px)',
+        'laptop' => '@media (min-width: 960px)',
+        'desktop' => '',
+        'xlarge' => '@media (min-width: 1600px)',
+    ];
+//    public static $_devices= [
+//        'desktop' => '',
+//        'tablet' => '@media (max-width: 991.98px)',
+//        'mobile' => '@media (max-width: 767.98px)'
+//    ];
 
     protected static $cache = array();
 
@@ -225,17 +236,23 @@ class Templates{
     public static function get_inline_styles(){
         $inline_styles  = self::$_styles;
         if(is_array($inline_styles)){
-            $styles = [];
-            foreach (['desktop', 'tablet', 'mobile'] as $device) {
-//                $style_device   = self::$_styles[$device];
+            $styles     = [];
+//            $_devices   = array_keys(static::$_devices);
+            foreach (static::$_devices as $device => $media_css) {
                 $style_device   = array_unique(self::$_styles[$device]);
-                if ($device == 'mobile') {
-                    $styles[] = '@media (max-width: 767.98px) {' . implode('',$style_device) . '}';
-                } elseif ($device == 'tablet') {
-                    $styles[] = '@media (max-width: 991.98px) {' . implode('', $style_device) . '}';
-                } else {
+                if($device == 'desktop'){
                     $styles[] = implode('', $style_device);
+                }else{
+                    $styles[] = $media_css.'{' . implode('', $style_device) . '}';
                 }
+
+//                if ($device == 'mobile') {
+//                    $styles[] = '@media (max-width: 767.98px) {' . implode('',$style_device) . '}';
+//                } elseif ($device == 'tablet') {
+//                    $styles[] = '@media (max-width: 991.98px) {' . implode('', $style_device) . '}';
+//                } else {
+//                    $styles[] = implode('', $style_device);
+//                }
             }
             $styles = implode('', $styles);
             $inline_styles  = $styles;
@@ -273,15 +290,20 @@ class Templates{
     public static function load_css_file($css_file = true)
     {
         if ($css_file) {
-            $styles = [];
-            foreach (['desktop', 'tablet', 'mobile'] as $device) {
-                if ($device == 'mobile') {
-                    $styles[] = '@media (max-width: 767.98px) {' . implode('', self::$_styles[$device]) . '}';
-                } elseif ($device == 'tablet') {
-                    $styles[] = '@media (max-width: 991.98px) {' . implode('', self::$_styles[$device]) . '}';
-                } else {
+            $styles     = [];
+            foreach (static::$_devices as $device => $media_css) {
+                if($device == 'desktop'){
                     $styles[] = implode('', self::$_styles[$device]);
+                }else{
+                    $styles[] = $media_css.'{' . implode('', self::$_styles[$device]) . '}';
                 }
+//                if ($device == 'mobile') {
+//                    $styles[] = '@media (max-width: 767.98px) {' . implode('', self::$_styles[$device]) . '}';
+//                } elseif ($device == 'tablet') {
+//                    $styles[] = '@media (max-width: 991.98px) {' . implode('', self::$_styles[$device]) . '}';
+//                } else {
+//                    $styles[] = implode('', self::$_styles[$device]);
+//                }
             }
             $styles = implode('', $styles);
             $version = md5($styles);
@@ -338,7 +360,10 @@ class Templates{
             return static::$cache[$store_id];
         }
 
-        $css    = self::$_devices;
+        $css    = array_keys(self::$_devices);
+
+        // Set all value's items of $css array to ''
+        $css    = array_fill_keys($css, '');
 
         if(is_array($option_names)){
             $important  = $important?' !important':'';

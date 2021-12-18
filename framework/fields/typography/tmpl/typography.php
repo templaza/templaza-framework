@@ -338,20 +338,21 @@ if(!empty($unit) && is_array($unit)){
     }
 
     /* Font Size */
-    $devices    = array(
-        'desktop' => array(
-            'title'=> esc_html__('Desktop', $this -> text_domain),
-            'icon' => 'dashicons dashicons-desktop',
-        ),
-        'tablet'  => array(
-            'title'=> esc_html__('Tablet', $this -> text_domain),
-            'icon' => 'dashicons dashicons-tablet',
-        ),
-        'mobile'  => array(
-            'title'=> esc_html__('Mobile', $this -> text_domain),
-            'icon' => 'dashicons dashicons-smartphone',
-        ),
-    );
+//    $devices    = array(
+//        'desktop' => array(
+//            'title'=> esc_html__('Desktop', $this -> text_domain),
+//            'icon' => 'dashicons dashicons-desktop',
+//        ),
+//        'tablet'  => array(
+//            'title'=> esc_html__('Tablet', $this -> text_domain),
+//            'icon' => 'dashicons dashicons-tablet',
+//        ),
+//        'mobile'  => array(
+//            'title'=> esc_html__('Mobile', $this -> text_domain),
+//            'icon' => 'dashicons dashicons-smartphone',
+//        ),
+//    );
+    $devices    = $this -> get_devices();
     $units      = array(
         'px',
         'pt',
@@ -365,9 +366,14 @@ if(!empty($unit) && is_array($unit)){
         $font_size_units    = array_merge($this -> field['units']['font-size'], $font_size_units);
     }
     if ( true === $this -> field['font-size'] ) {
-        echo '<div class="input_wrapper font-size redux-container-typography tabs">';
+        echo '<div class="input_wrapper font-size redux-container-typography">';
+        echo '<div data-uk-grid>';
+        echo '  <div class="uk-width-auto uk-margin-small-right">';
+        echo '    <label>' . esc_html__( 'Font Size', $this -> text_domain ) . '</label>';
+        echo '  </div>';
 
-        $nav_tab    = '<li><label>' . esc_html__( 'Font Size', $this -> text_domain ) . '</label></li>';
+        $nav_tab    = '';
+//        $nav_tab    = '<li><label>' . esc_html__( 'Font Size', $this -> text_domain ) . '</label></li>';
         $tab_pane   = '';
         foreach($devices as $device => $item) {
             $uniquid    = uniqid();
@@ -389,8 +395,17 @@ if(!empty($unit) && is_array($unit)){
                 }
             }
 
+//            $nav_tab    .= '<li><a href="#tabs-'.$this -> field['id'].'-'.$uniquid.'" title="' . $item['title']
+//                . '"><span class="'.$item['icon'].'"></span></a></li>';
             $nav_tab    .= '<li><a href="#tabs-'.$this -> field['id'].'-'.$uniquid.'" title="' . $item['title']
-                . '"><span class="'.$item['icon'].'"></span></a></li>';
+                . '" data-uk-tooltip="'.$item['title'].'">';
+            if(isset($item['uk-icon']) && !empty($item['uk-icon'])){
+                $nav_tab    .= '<span data-uk-icon="icon: '.$item['uk-icon'].'"></span>';
+            }else{
+                $nav_tab    .= '<span class="'.$item['icon'].'"></span>';
+            }
+            $nav_tab    .= '</a></li>';
+
             $tab_pane   .= '<div id="tabs-'.$this -> field['id'].'-'.$uniquid
                 .'" class="tz-redux-typography-size" data-device="'.$device.'" data-name="size" data-hidden-name="font-size">';
             $tab_pane   .= '<input
@@ -420,11 +435,12 @@ if(!empty($unit) && is_array($unit)){
 
             $tab_pane  .= '</div>';
         }
-            echo '<ul class="clearfix">';
+            echo '  <ul class="clearfix uk-iconnav uk-width-expand" data-uk-switcher="active: 1;">';
             echo $nav_tab;
-            echo '</ul>';
-            echo '<div class="tab-content">';
+            echo '  </ul>';
+            echo '  <div class="uk-switcher uk-width-1-1 uk-margin-remove">';
             echo $tab_pane;
+            echo '  </div>';
             echo '</div>';
         echo '</div>';
     }
@@ -437,9 +453,15 @@ if(!empty($unit) && is_array($unit)){
     }
     if ( true === $this -> field['line-height'] ) {
 
-        echo '<div class="input_wrapper line-height redux-container-typography tabs">';
+        echo '<div class="input_wrapper line-height redux-container-typography">';
 
-        $nav_tab    = '<li><label>' . esc_html__( 'Line Height', $this -> text_domain ) . '</label></li>';
+        echo '<div data-uk-grid>';
+        echo '<div class="uk-width-auto uk-margin-small-right">';
+        echo '<label>' . esc_html__( 'Line Height', $this -> text_domain ) . '</label>';
+        echo '</div>';
+
+        $nav_tab    = '';
+
         $tab_pane   = '';
         foreach($devices as $device =>  $item) {
             $uniquid    = uniqid();
@@ -462,7 +484,15 @@ if(!empty($unit) && is_array($unit)){
             }
 
             $nav_tab    .= '<li><a href="#tabs-'.$this -> field['id'].'-'.$uniquid.'" title="' . $item['title']
-                . '"><span class="'.$item['icon'].'"></span></a></li>';
+                . '" data-uk-tooltip="'.$item['title'].'">';
+
+            if(isset($item['uk-icon']) && !empty($item['uk-icon'])){
+                $nav_tab    .= '<span data-uk-icon="icon: '.$item['uk-icon'].'"></span>';
+            }else{
+                $nav_tab    .= '<span class="'.$item['icon'].'"></span>';
+            }
+            $nav_tab    .= '</a></li>';
+
             $tab_pane   .= '<div id="tabs-'.$this -> field['id'].'-'.$uniquid
                 .'" class="" data-device="'.$device.'" data-name="height" data-hidden-name="line-height">';
             $tab_pane   .= '<input
@@ -492,11 +522,12 @@ if(!empty($unit) && is_array($unit)){
                 . '" data-id="' . esc_attr( $this -> field['id'] ) . '" data-device="'.$device.'"/>';
             $tab_pane  .= '</div>';
         }
-        echo '<ul class="clearfix">';
+        echo '  <ul class="clearfix uk-iconnav uk-width-expand" data-uk-switcher="active: 1;">';
         echo $nav_tab;
-        echo '</ul>';
-        echo '<div class="tab-content">';
+        echo '  </ul>';
+        echo '  <div class="uk-switcher uk-width-1-1 uk-margin-remove">';
         echo $tab_pane;
+        echo '  </div>';
         echo '</div>';
         echo '</div>';
 
@@ -510,9 +541,14 @@ if(!empty($unit) && is_array($unit)){
         $word_units  = array_merge($this -> field['units']['word-spacing'], $word_units);
     }
     if ( true === $this -> field['word-spacing'] ) {
-        echo '<div class="input_wrapper line-height redux-container-typography tabs">';
+        echo '<div class="input_wrapper line-height redux-container-typography">';
 
-        $nav_tab    = '<li><label>' . esc_html__( 'Word Spacing', $this -> text_domain ) . '</label></li>';
+        echo '<div data-uk-grid>';
+        echo '<div class="uk-width-auto uk-margin-small-right">';
+        echo '<label>' . esc_html__( 'Word Spacing', $this -> text_domain ) . '</label>';
+        echo '</div>';
+
+        $nav_tab    = '';
         $tab_pane   = '';
         foreach($devices as $device => $item) {
             $uniquid    = uniqid();
@@ -534,8 +570,19 @@ if(!empty($unit) && is_array($unit)){
                 }
             }
 
+//            $nav_tab    .= '<li><a href="#tabs-'.$this -> field['id'].'-'.$uniquid.'" title="' . $item['title']
+//                . '"><span class="'.$item['icon'].'"></span></a></li>';
+
             $nav_tab    .= '<li><a href="#tabs-'.$this -> field['id'].'-'.$uniquid.'" title="' . $item['title']
-                . '"><span class="'.$item['icon'].'"></span></a></li>';
+                . '" data-uk-tooltip="'.$item['title'].'">';
+
+            if(isset($item['uk-icon']) && !empty($item['uk-icon'])){
+                $nav_tab    .= '<span data-uk-icon="icon: '.$item['uk-icon'].'"></span>';
+            }else{
+                $nav_tab    .= '<span class="'.$item['icon'].'"></span>';
+            }
+            $nav_tab    .= '</a></li>';
+
             $tab_pane   .= '<div id="tabs-'.$this -> field['id'].'-'.$uniquid
                 .'" class="" data-device="'.$device.'" data-name="letter" data-hidden-name="letter-spacing">';
             $tab_pane   .= '<input
@@ -565,11 +612,12 @@ if(!empty($unit) && is_array($unit)){
                 . '" data-id="' . esc_attr( $this -> field['id'] ) . '" data-device="'.$device.'"/>';
             $tab_pane  .= '</div>';
         }
-        echo '<ul class="clearfix">';
+        echo '  <ul class="clearfix uk-iconnav uk-width-expand" data-uk-switcher="active: 1;">';
         echo $nav_tab;
-        echo '</ul>';
-        echo '<div class="tab-content">';
+        echo '  </ul>';
+        echo '  <div class="uk-switcher uk-width-1-1 uk-margin-remove">';
         echo $tab_pane;
+        echo '  </div>';
         echo '</div>';
         echo '</div>';
     }
@@ -582,9 +630,14 @@ if(!empty($unit) && is_array($unit)){
             $letter_units  = array_merge($this -> field['units']['letter-spacing'], $letter_units);
         }
 
-        echo '<div class="input_wrapper line-height redux-container-typography tabs">';
+        echo '<div class="input_wrapper letter-spacing redux-container-typography">';
 
-        $nav_tab    = '<li><label>' . esc_html__( 'Letter Spacing', $this -> text_domain ) . '</label></li>';
+        echo '<div data-uk-grid>';
+        echo '<div class="uk-width-auto uk-margin-small-right">';
+        echo '<label>' . esc_html__( 'Letter Spacing', $this -> text_domain ) . '</label>';
+        echo '</div>';
+
+        $nav_tab    = '';
         $tab_pane   = '';
         foreach($devices as $device => $item) {
             $uniquid    = uniqid();
@@ -607,7 +660,15 @@ if(!empty($unit) && is_array($unit)){
             }
 
             $nav_tab    .= '<li><a href="#tabs-'.$this -> field['id'].'-'.$uniquid.'" title="' . $item['title']
-                . '"><span class="'.$item['icon'].'"></span></a></li>';
+                . '" data-uk-tooltip="'.$item['title'].'">';
+
+            if(isset($item['uk-icon']) && !empty($item['uk-icon'])){
+                $nav_tab    .= '<span data-uk-icon="icon: '.$item['uk-icon'].'"></span>';
+            }else{
+                $nav_tab    .= '<span class="'.$item['icon'].'"></span>';
+            }
+            $nav_tab    .= '</a></li>';
+
             $tab_pane   .= '<div id="tabs-'.$this -> field['id'].'-'.$uniquid
                 .'" class="" data-device="'.$device.'" data-name="word" data-hidden-name="word-spacing">';
             $tab_pane   .= '<input
@@ -637,11 +698,12 @@ if(!empty($unit) && is_array($unit)){
                 . '" data-id="' . esc_attr( $this -> field['id'] ) . '" data-device="'.$device.'"/>';
             $tab_pane  .= '</div>';
         }
-        echo '<ul class="clearfix">';
+        echo '  <ul class="clearfix uk-iconnav uk-width-expand" data-uk-switcher="active: 1;">';
         echo $nav_tab;
-        echo '</ul>';
-        echo '<div class="tab-content">';
+        echo '  </ul>';
+        echo '  <div class="uk-switcher uk-width-1-1 uk-margin-remove">';
         echo $tab_pane;
+        echo '  </div>';
         echo '</div>';
         echo '</div>';
 

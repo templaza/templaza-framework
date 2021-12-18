@@ -510,39 +510,60 @@ class CSS{
         if(is_array($spacing_option) && count($spacing_option)){
             $values         = array_values($spacing_option);
 
-            if(isset($values[0]) && is_array($values[0]) && count($values[0])
-                && (array_key_exists('desktop', $values[0]) || array_key_exists('tablet', $values[0])
-                || array_key_exists('mobile', $values[0]))){
-                $is_responsive  = true;
+            if(isset($values[0]) && is_array($values[0]) && count($values[0])){
+
+                $_devices       = array_keys($devices);
+                $keys           = array_keys($values[0]);
+                $keys_exists    = array_intersect($_devices,$keys);
+
+                if(!empty($keys_exists)) {
+                    $is_responsive = true;
+                }
             }
         }
 
         if($is_responsive){
             foreach($devices as $device => $dval){
-                $padding_device = array();
-                $padding_device[$device]    = array();
+                $spacing_device = array();
+                $spacing_device[$device]    = array();
                 foreach($spacing_option as $name => $value){
+//                    if($name == 'units'){
+//                        var_dump($value); die(__METHOD__);
+//                    }
                     if(isset($value[$device])) {
-                        $padding_device[$device][$name] = $value[$device];
+                        $spacing_device[$device][$name] = $value[$device];
                     }
                 }
 
+//                var_dump($device);
+//                var_dump($dval);
+//                var_dump($spacing_device);
+//                var_dump(__METHOD__);
+//                var_dump($spacing_option);
+//                var_dump($spacing_option);
+//                var_dump($css);
+//                die(__METHOD__);
                 $_default_unit  = !empty($default_unit) && is_array($default_unit) && isset($default_unit[$device])?$default_unit[$device]:$default_unit;
 
-                $_css   = self::spacing_redux($mode, $padding_device[$device], $important, $_default_unit);
+                $_css   = self::spacing_redux($mode, $spacing_device[$device], $important, $_default_unit);
 
                 if(!empty($_css)){
                     if(!isset($css[$device])){
                         $css[$device]   = '';
                     }
                     if(!empty($selector)){
-                        if ($device == 'mobile') {
-                            $css[$device] = !empty($_css)?'@media (max-width: 767.98px) {'.$selector.'{'. $_css . '}}':'';
-                        } elseif ($device == 'tablet') {
-                            $css[$device] = !empty($_css)?'@media (max-width: 991.98px) {'.$selector.'{'. $_css . '}}':'';
-                        } else {
+                        if($device == 'desktop'){
                             $css[$device] = !empty($_css)?$selector.'{'.$_css.'}':'';
+                        }else{
+                            $css[$device] = !empty($_css)?$dval.'{'.$selector.'{'. $_css . '}}':'';
                         }
+//                        if ($device == 'mobile') {
+//                            $css[$device] = !empty($_css)?'@media (max-width: 767.98px) {'.$selector.'{'. $_css . '}}':'';
+//                        } elseif ($device == 'tablet') {
+//                            $css[$device] = !empty($_css)?'@media (max-width: 991.98px) {'.$selector.'{'. $_css . '}}':'';
+//                        } else {
+//                            $css[$device] = !empty($_css)?$selector.'{'.$_css.'}':'';
+//                        }
                     }else{
                         $css[$device] = $_css;
                     }

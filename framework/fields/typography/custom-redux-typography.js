@@ -70,6 +70,22 @@
 
 				// el.each(function () {
 					var _el = $(this);
+
+					_el.find("[data-uk-switcher] a").on("click", function(){
+						var __el_switcher	= $(this);
+						UIkit.util.on(__el_switcher.closest("[data-uk-switcher]").next(".uk-switcher"), "show", function(e,a){
+							var __parent = $(e.target.closest(".uk-switcher")),
+								__prev = __parent.prev("[data-uk-switcher]"),
+								__switchers = _el.find("[data-uk-switcher]").not(__prev);
+
+							if(__switchers.length){
+								$.each(__switchers, function(){
+									UIkit.switcher($(this)).show(a.index());
+								});
+							}
+						});
+					});
+
 					$(this).find(".tabs").tabs({
 						create: function (event, ui) {
 

@@ -31,19 +31,6 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
             $this -> hooks();
         }
 
-//        public function __construct( $args = array(),  $parent = null) {
-//            parent::__construct(array(), null, $parent);
-//            $this -> args   = $args;
-//            $this -> parent = $parent;
-//            $this -> text_domain    = Functions::get_my_text_domain();
-//
-//            if(isset($args['opt_name']) && $args['opt_name']){
-//                $this -> redux_framework    = \Redux::instance($args['opt_name']);
-//            }
-//
-//            $this -> hooks();
-//        }
-
         protected function hooks(){
             add_filter("redux/{$this -> args['opt_name']}/field/class/{$this -> redux_field_type}",
                 array($this, 'custom_enqueue_field'), 10, 2);
@@ -135,7 +122,38 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
                     && ! in_array( $this -> field['units'], $this -> units, true )) ) {
                 $this -> field['units'] = 'px';
             }
+        }
 
+        protected function devices(){
+
+            $devices    = array(
+                'xlarge' => array(
+                    'title'=> esc_html__('Large Screen', $this -> text_domain),
+//                    'icon' => 'dashicons dashicons-desktop',
+                    'uk-icon' => 'tv',
+                ),
+                'desktop' => array(
+                    'title'=> esc_html__('Desktop', $this -> text_domain),
+                    'icon' => 'dashicons dashicons-desktop',
+                    'uk-icon' => 'desktop',
+                ),
+                'laptop' => array(
+                    'title'=> esc_html__('Laptop', $this -> text_domain),
+                    'icon' => 'dashicons dashicons-laptop',
+                    'uk-icon' => 'laptop',
+                ),
+                'tablet'  => array(
+                    'title'=> esc_html__('Tablet', $this -> text_domain),
+                    'icon' => 'dashicons dashicons-tablet',
+                    'uk-icon' => 'tablet',
+                ),
+                'mobile'  => array(
+                    'title'=> esc_html__('Mobile', $this -> text_domain),
+                    'icon' => 'dashicons dashicons-smartphone',
+                    'uk-icon' => 'phone',
+                ),
+            );
+            return $devices;
         }
     }
 }

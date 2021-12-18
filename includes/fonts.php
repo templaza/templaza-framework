@@ -148,11 +148,19 @@ class Fonts{
 
     public static function make_css_style($font_option, $devices = array('desktop' => '', 'tablet' => '', 'mobile' => '')){
 
+//        $_org_devices   = Templates::get_devices(true);
+
+
         $open_devices   = array_filter($devices);
-        $def_devices    = array('desktop' => '');
-        $devices        = array_merge($def_devices, $devices);
-        $devices        = array_keys($devices);
-        $devices        = array_fill_keys($devices, '');
+        $def_devices    = Templates::get_devices(true);
+        $devices        = $def_devices;
+
+        $diff_devices   = array_diff_key($def_devices, $open_devices);
+        if(count($diff_devices)) {
+            $diff_devices = array_fill_keys(array_keys($diff_devices), $open_devices['desktop']);
+        }
+
+        $open_devices   = array_merge($def_devices, $open_devices, $diff_devices);
 
         if(!count($font_option)){
             return $devices;

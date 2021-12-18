@@ -7,20 +7,23 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit;
 
-$devices    = array(
-    'desktop' => array(
-        'title'=> esc_html__('Desktop', $this -> text_domain),
-        'icon' => 'dashicons dashicons-desktop',
-    ),
-    'tablet'  => array(
-        'title'=> esc_html__('Tablet', $this -> text_domain),
-        'icon' => 'dashicons dashicons-tablet',
-    ),
-    'mobile'  => array(
-        'title'=> esc_html__('Mobile', $this -> text_domain),
-        'icon' => 'dashicons dashicons-smartphone',
-    ),
-);
+//$devices    = array(
+//    'desktop' => array(
+//        'title'=> esc_html__('Desktop', $this -> text_domain),
+//        'icon' => 'dashicons dashicons-desktop',
+//    ),
+//    'tablet'  => array(
+//        'title'=> esc_html__('Tablet', $this -> text_domain),
+//        'icon' => 'dashicons dashicons-tablet',
+//    ),
+//    'mobile'  => array(
+//        'title'=> esc_html__('Mobile', $this -> text_domain),
+//        'icon' => 'dashicons dashicons-smartphone',
+//        'uk-icon' => 'dashicons dashicons-smartphone',
+//    ),
+//);
+
+$devices    = $this -> devices();
 $allow_responsive   = isset($this -> field['allow_responsive'])?filter_var($this -> field['allow_responsive'], FILTER_VALIDATE_BOOLEAN):false;
 
 if($allow_responsive){
@@ -188,10 +191,21 @@ if($allow_responsive){
             <span class="spacing-lock locked">
                 <i class="dashicons dashicons-lock"></i>
             </span>
-            <ul class="uk-iconnav uk-float-right" data-uk-switcher>
+            <ul class="uk-iconnav uk-float-right" data-uk-switcher="active: 1">
                 <?php
                 foreach($devices as $device => $item) {
-                    $unit_value = is_array($unit_responsive) && isset($unit_responsive[$device])?$unit_responsive[$device]:$unit_responsive;
+
+                    $unit_value = '';
+                    if(is_array($unit_responsive) && isset($unit_responsive[$device])){
+                        if($unit_responsive[$device] == 'Array'){
+                            $unit_value = '';
+                        }else {
+                            $unit_value = $unit_responsive[$device];
+                        }
+                    }elseif(is_string($unit_responsive)){
+                        $unit_value = $unit_responsive;
+                    }
+
                     $input_unit_html    .= '<input 
                             type="hidden" 
                             name="' . esc_attr($this->field['name'] . $this->field['name_suffix']) . '[units]['.$device.']" 
@@ -262,7 +276,13 @@ if($allow_responsive){
                     }
                     ?>
                     <li><a href="#" data-uk-tooltip="<?php echo $item['title']; ?>" data-field-device="<?php
-                        echo $device; ?>"><i class="<?php echo $item['icon']; ?>"></i></a></li>
+                        echo $device; ?>">
+                            <?php if(isset($item['uk-icon']) && !empty($item['uk-icon'])){?>
+                                <span data-uk-icon="icon: <?php echo $item['uk-icon'];?>"></span>
+                            <?php }else{?>
+                            <i class="<?php echo $item['icon']; ?>"></i>
+                            <?php } ?>
+                        </a></li>
                 <?php } ?>
             </ul>
         </div>

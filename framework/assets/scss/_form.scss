@@ -8,6 +8,19 @@
 @import "fields/slider";
 @import "fields/multi_text";
 @import "fields/image_select";
+.redux-field-container{
+  .uk-iconnav{
+    >*>a{
+      color: lighten($tz-muted-color, 20%);
+      &:hover, &:focus{
+        color: darken(#999, 20%);
+      }
+    }
+    >.uk-active>a{
+      color: darken(#999, 20%);
+    }
+  }
+}
 &.tzfrm-postype{
   input[type=color],
   input[type=date],

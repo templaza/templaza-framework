@@ -944,6 +944,38 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		public function output_variables() {
 			// No code needed, just defining the method is enough.
 		}
+
+        protected function get_devices(){
+
+            $devices    = array(
+                'xlarge' => array(
+                    'title'=> esc_html__('Large Screen', $this -> text_domain),
+//                    'icon' => 'dashicons dashicons-desktop',
+                    'uk-icon' => 'tv',
+                ),
+                'desktop' => array(
+                    'title'=> esc_html__('Desktop', $this -> text_domain),
+                    'icon' => 'dashicons dashicons-desktop',
+                    'uk-icon' => 'desktop',
+                ),
+                'laptop' => array(
+                    'title'=> esc_html__('Laptop', $this -> text_domain),
+                    'icon' => 'dashicons dashicons-laptop',
+                    'uk-icon' => 'laptop',
+                ),
+                'tablet'  => array(
+                    'title'=> esc_html__('Tablet', $this -> text_domain),
+                    'icon' => 'dashicons dashicons-tablet',
+                    'uk-icon' => 'tablet',
+                ),
+                'mobile'  => array(
+                    'title'=> esc_html__('Mobile', $this -> text_domain),
+                    'icon' => 'dashicons dashicons-smartphone',
+                    'uk-icon' => 'phone',
+                ),
+            );
+            return $devices;
+        }
 	}
 }
 if ( ! class_exists( 'ReduxFramework_Typography' ) ) {
