@@ -272,7 +272,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
 
             if(!empty($size)){
                 if(isset($params['tz_class'])) {
-                    $size    = (strpos($size, '-') === false)?$this -> convert_column_to_UIkit($size):$size;
+                    $size    = (strpos($size, '-') === false && is_numeric($size))?$this -> convert_column_to_UIkit($size):$size;
                     $params['tz_class'] .= ' uk-width-'.$size.'@l';
                 }else{
                     $params['tz_class'] = ' uk-width-'.$size.'@l';
@@ -284,15 +284,15 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
 //                $params['tz_class'] .= ' col-xs-'.$params['xs_colum_size'];
 //            }
             if(!empty($xs_size)){
-                $xs_size    = (strpos($xs_size, '-') === false)?$this -> convert_column_to_UIkit($xs_size):$xs_size;
+                $xs_size    = (strpos($xs_size, '-') === false && is_numeric($size))?$this -> convert_column_to_UIkit($xs_size):$xs_size;
                 $params['tz_class'] .= ' uk-width-'.$xs_size;
             }
             if(!empty($sm_size)){
-                $sm_size    = (strpos($sm_size, '-') === false)?$this -> convert_column_to_UIkit($sm_size):$sm_size;
+                $sm_size    = (strpos($sm_size, '-') === false && is_numeric($size))?$this -> convert_column_to_UIkit($sm_size):$sm_size;
                 $params['tz_class'] .= ' uk-width-'.$sm_size.'@s';
             }
             if(!empty($md_size)){
-                $md_size    = (strpos($md_size, '-') === false)?$this -> convert_column_to_UIkit($md_size):$md_size;
+                $md_size    = (strpos($md_size, '-') === false && is_numeric($size))?$this -> convert_column_to_UIkit($md_size):$md_size;
                 $params['tz_class'] .= ' uk-width-'.$md_size.'@m';
             }
 //            if(!empty($lg_size)){
@@ -301,7 +301,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
 ////                $params['tz_class'] .= ' col-xl-'.$params['xl_size'];
 //            }
             if(!empty($xl_size)){
-                $xl_size    = (strpos($xl_size, '-') === false)?$this -> convert_column_to_UIkit($xl_size):$xl_size;
+                $xl_size    = (strpos($xl_size, '-') === false && is_numeric($size))?$this -> convert_column_to_UIkit($xl_size):$xl_size;
                 $params['tz_class'] .= ' uk-width-'.$xl_size.'@xl';
             }
 
