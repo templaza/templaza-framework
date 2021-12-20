@@ -11,11 +11,11 @@ class Templates{
 
     public static $_styles = ['xlarge' => [],'desktop' => [], 'tablet' => [], 'mobile' => []];
     public static $_devices= [
-        'mobile' => '@media (max-width: 640px)',
         'tablet' => '@media (min-width: 640px)',
         'laptop' => '@media (min-width: 960px)',
         'desktop' => '',
         'xlarge' => '@media (min-width: 1600px)',
+        'mobile' => '@media (max-width: 640px)',
     ];
 //    public static $_devices= [
 //        'desktop' => '',
@@ -490,5 +490,15 @@ class Templates{
             }
         }
         return !empty($css_name)?md5($css_name):'';
+    }
+
+    public static function get_devices($reset = false){
+        $devices    = static::$_devices;
+
+        if($reset){
+            $devices    = array_fill_keys(array_keys($devices), '');
+        }
+
+        return $devices;
     }
 }
