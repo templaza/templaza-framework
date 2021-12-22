@@ -630,6 +630,9 @@ class TemplazaFramework_ShortCode{
             if(!empty($margin)){
                 if(is_array($margin)){
                     foreach($margin as $device => $pcss){
+                        if(!isset($css[$device])){
+                            $css[$device]   = '';
+                        }
                         $css[$device] .= $pcss;
                     }
                 }else{
@@ -647,6 +650,9 @@ class TemplazaFramework_ShortCode{
             if(!empty($padding)){
                 if(is_array($padding)){
                     foreach($padding as $device => $pcss){
+                        if(!isset($css[$device])){
+                            $css[$device]   = '';
+                        }
                         $css[$device] .= $pcss;
                     }
                 }else{
