@@ -11,8 +11,8 @@ class Templates{
 
     public static $_styles = ['xlarge' => [],'desktop' => [], 'tablet' => [], 'mobile' => []];
     public static $_devices= [
-        'xlarge' => '@media (min-width: 1600px)',
         'desktop' => '',
+        'xlarge' => '@media (min-width: 1600px)',
         'laptop' => '@media (min-width: 960px) and (max-width: 1200px)',
         'tablet' => '@media (min-width: 640px) and (max-width: 960px)',
         'mobile' => '@media (max-width: 640px)',
