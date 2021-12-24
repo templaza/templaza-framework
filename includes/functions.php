@@ -133,8 +133,16 @@ if(!class_exists('TemPlazaFramework\Functions')){
         }
         protected static function _get_theme_options($post_type = ''){
             $the_ID = \get_the_ID();
+            global $wp;
 
             if(is_single() || is_archive()){
+                if(is_archive() && \get_page_by_path($wp -> request)){
+                    // Get page
+                    $page   = \get_page_by_path($wp -> request);
+                    if($page -> ID){
+                        return static::get_theme_options_by_post_type_ID($page -> ID);
+                    }
+                }
                 $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
                 if(!empty($post_type)){
                     $key    = null;
@@ -183,8 +191,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 }
 
             }
-
-
 
 //            // When not found style id return to global options (old version to home options)
 //            if(!$id || empty($style_id)){
