@@ -35,10 +35,6 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
                     add_filter('parse_query', array($this, 'parse_query'));
                 }
             }
-
-//            if(method_exists($this, 'hooks')){
-//                $this -> hooks();
-//            }
         }
 
         public function register_post_type(){
@@ -68,12 +64,18 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
         }
 
         public function hooks(){
-//            $post_type  = $this->get_post_type();
-//            if($this ->my_post_type_exists()){
-//                if(method_exists($this,'parse_query')) {
-//                    add_filter('parse_query', array($this, 'parse_query'));
-//                }
-//            }
+            // Manage post type header column list hook
+            if(method_exists($this, 'manage_edit_columns')){
+                remove_filter('manage_'.$this ->get_post_type().'_posts_columns', array($this, 'manage_edit_columns'));
+                add_filter('manage_'.$this ->get_post_type().'_posts_columns', array($this, 'manage_edit_columns'),9);
+            }
+
+            // Manage post type content column list hook
+            if(method_exists($this, 'manage_custom_column')) {
+                remove_action('manage_' . $this->get_post_type() . '_posts_custom_column', array($this, 'manage_custom_column'));
+                add_action('manage_' . $this->get_post_type() . '_posts_custom_column', array($this, 'manage_custom_column'), 9, 2);
+            }
+
             if(method_exists($this, 'enqueue')){
                 add_action('admin_enqueue_scripts', array($this, 'enqueue'));
             }

@@ -25,21 +25,39 @@
             selector = $(document).find(".redux-group-tab:visible").find('.redux-container-tz_layout:visible');
         }
 
+        var field_tz_layout = templaza_field_tz_layout || {};
+        redux.field_objects.tz_layout.i18n = field_tz_layout.i18n || {
+            "name": "Name",
+            "close": "Close",
+            "search": "Search",
+            "pasted": "Pasted!",
+            "copied": "Copied!",
+            "actions": "Actions",
+            "created": "Created",
+            "created_date": "Created date",
+            "copy_failed": "Copy failed!",
+            "section_added": "Section added!",
+            "delete_question": "Are you sure?",
+            "paste_failed": "Not Pasted! Please copy again.",
+            "custom_column": "Please enter custom grid size (eg. 1-2;1-4;1-4 or auto;1-3;expand)"
+        };
+
         $(selector).each(
             function () {
                 var el = $(this),
                     el_inner = el.find(".js-field-tz_layout");
                 var parent = el;
                 var field_tz_layout = templaza_field_tz_layout || {};
-                var __i18n = templaza_field_tz_layout.i18n || {
-                    "copied": "Copied!",
-                    "pasted": "Pasted!",
-                    "delete_question": "Are you sure?",
-                    "copy_failed": "Copy failed!",
-                    "paste_failed": "Not Pasted! Please copy again.",
-                    "custom_column": "Please enter custom grid size (eg. 1-2;1-4;1-4 or auto;1-3;expand)"
-                };
-                redux.field_objects.tz_layout.i18n    = __i18n;
+                // var __i18n = templaza_field_tz_layout.i18n || {
+                //     "copied": "Copied!",
+                //     "pasted": "Pasted!",
+                //     "delete_question": "Are you sure?",
+                //     "copy_failed": "Copy failed!",
+                //     "paste_failed": "Not Pasted! Please copy again.",
+                //     "custom_column": "Please enter custom grid size (eg. 1-2;1-4;1-4 or auto;1-3;expand)"
+                // };
+                // redux.field_objects.tz_layout.i18n    = __i18n;
+                var __i18n = redux.field_objects.tz_layout.i18n;
                 if (!el.hasClass('redux-field-container')) {
                     parent = el.parents('.redux-field-container:first');
                 }
@@ -154,9 +172,87 @@
                 };
 
                 init_layout();
+                selector.on("init_layout", init_layout);
             });
     };
 
+    /**
+     * Generate settings to html
+     * */
+    redux.field_objects.tz_layout.generate_setting_to_html = function(settings, selector){
+        if(settings){
+            var $html = "";
+
+            var $m_tree_html = [];
+            var $m_level = -1;
+
+            var tree_element = function(tree){
+                $.each(tree, function(index, item){
+
+                    var $m_item_tmp,
+                        $m_item_tmp_data = $.extend(true, {}, item),
+                        $m_params = $m_item_tmp_data.params;
+
+                    delete $m_item_tmp_data.params;
+                    delete $m_item_tmp_data.elements;
+
+                    $m_level++;
+
+                    if(typeof item.elements !== typeof undefined && item.elements.length){
+                        tree_element(item.elements);
+                    }
+
+
+                    // Get element html template
+                    if($("#tmpl-field-tz_layout-template-" + item.type).length) {
+                        $m_item_tmp = wp.template("field-tz_layout-template-" + item.type);
+                    }else{
+                        $m_item_tmp = wp.template("field-tz_layout-template__element");
+                    }
+
+                    if(typeof $m_tree_html[$m_level + 1] !== "undefined"){
+                        $m_item_tmp_data.element  = $m_tree_html[$m_level + 1];
+                        $m_tree_html[$m_level + 1]  = "" ;
+                    }
+
+                    // Prepare default setting from shortcode element
+                    if(typeof templaza.shortcode !== typeof undefined){
+                        var element_type = item.type,
+                            shortcode = templaza.shortcode;
+                        if(typeof shortcode[element_type] !== typeof undefined &&
+                            typeof shortcode[element_type]["init"] === "function"){
+                            shortcode[element_type]["init"]($m_item_tmp_data, $m_params);
+                        }
+                    }
+
+                    var $m_item_html = $m_item_tmp($m_item_tmp_data);
+
+                    if(typeof selector !== "undefined") {
+                        var $m_item_html_prepare = selector.triggerHandler("templaza-framework/field/tz_layout/shortcode/" +
+                            item.type + "/prepare/html", [$m_item_html, $m_item_tmp_data, $m_params]);
+                        if(typeof $m_item_html_prepare !== "undefined"){
+                            $m_item_html  = $m_item_html_prepare;
+                        }
+                    }
+                    if(typeof $m_tree_html[$m_level] === typeof undefined) {
+                        $m_tree_html[$m_level] = $m_item_html;
+                    }else{
+                        $m_tree_html[$m_level] += $m_item_html;
+                    }
+
+                    $m_level --;
+                });
+            };
+            tree_element(settings);
+
+            if($m_tree_html.length) {
+                $html   = $m_tree_html.shift();
+            }
+
+            return $html;
+        }
+        return '';
+    };
     redux.field_objects.tz_layout.init_elements = function(selector, settings){
         if(settings){
             var $html = "";
@@ -217,16 +313,6 @@
                     }
 
                     $m_level --;
-
-                    // // Prepare default setting from shortcode element
-                    // if(typeof templaza.shortcode !== typeof undefined){
-                    //     var element_type = item.type,
-                    //         shortcode = templaza.shortcode;
-                    //     if(typeof shortcode[element_type] !== typeof undefined &&
-                    //         typeof shortcode[element_type]["init"] === "function"){
-                    //         shortcode[element_type]["init"]($m_item_tmp_data, $m_params);
-                    //     }
-                    // }
                 });
             };
             tree_element(settings);
@@ -1171,40 +1257,226 @@
                     section_empty = redux.field_objects.tz_layout.get_section_empty(),
                     section_new,
                     element = control.closest("[data-fl-element_type=section]");
+                var __i18n = redux.field_objects.tz_layout.i18n;
+
+                // if(section_empty){
+                //     section_new = $(section_empty);
+                // }else{
+                //     section_new = $(redux.field_objects.tz_layout.get_row_empty());
+                // }
+
+                var __insert_blank_section = function(section_new) {
+                    var pos = "last",
+                        src_setting = redux.field_objects.tz_layout.generate_setting_element(section_new, selector, settings);
+
+                    if (element.length) {
+                        pos = element.parent().find("[data-fl-element_type=section]").index(element) + 1;
+                        element.after(section_new);
+                    } else {
+                        if (!selector.find(".field-tz_layout-content > .fl_column-container.fl_column-section-container").length) {
+                            var selector_child = $("<div>");
+                            selector_child.attr("class", "fl_column-container fl_column-section-container");
+
+                            if (!section_empty) {
+                                selector_child.append(section_new).appendTo(selector.find(".field-tz_layout-content"));
+                            } else {
+                                selector_child.append(section_empty).appendTo(selector.find(".field-tz_layout-content"));
+                            }
+                        } else {
+                            selector.find(".field-tz_layout-content > .fl_column-container.fl_column-section-container").append(section_new);
+                        }
+                    }
+
+                    redux.field_objects.tz_layout.insert_setting(src_setting, null, settings, selector, pos);
+                };
+
+                var __insert_section_library = function(){
+                    var __modal_html   = $('<div id="'+ Date.now() +'" class="uk-modal redux-container-tz_layout '+
+                        '"><div class="uk-modal-dialog uk-width-4-5">\n' +
+                        '        <button class="uk-modal-close-default" type="button" data-uk-close></button>\n' +
+                        '        <div class="uk-modal-header">\n' +
+                        '        <h2 class="uk-h4">Section Library</h2>\n' +
+                        '        </div>\n' +
+                        '        <div class="uk-modal-body uk-background-muted uk-position-relative" data-uk-overflow-auto>\n' +
+                        '           <div class="uk-margin uk-clearfix">\n' +
+                        '               <div class="uk-inline uk-float-right">\n' +
+                        '                   <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: search"></span>\n' +
+                        '                   <input class="uk-input uk-form-width-medium" id="form-s-search" type="search" placeholder="'+__i18n.search+'"/>\n' +
+                        '               </div>\n' +
+                        '           </div>\n' +
+                        '           <div class="fl-library-items">\n' +
+                        '           </div>\n' +
+                        '        </div>\n' +
+                        '        <div class="uk-modal-footer uk-text-right">\n' +
+                        '            <button class="uk-button uk-button-default uk-modal-close" type="button">'+__i18n.close+'</button>\n' +
+                        '        </div>\n' +
+                        '    </div></div>');
+                    var __loading = $('<div class="uk-position-cover uk-background-muted uk-flex uk-flex-center uk-flex-middle"><div data-uk-spinner></div></div>');
+
+                    // __modal_html.find(".uk-modal-body").html(__loading);
+                    __modal_html.find(".uk-modal-body").append(__loading);
+
+                    var __table = $('        <table class="uk-table uk-table-divider">\n' +
+                        '    <thead>\n' +
+                        '        <tr>\n' +
+                        '            <th class="uk-table-expand">'+__i18n.name+'</th>\n' +
+                        '            <th>'+__i18n.created+'</th>\n' +
+                        '            <th>'+__i18n.created_date+'</th>\n' +
+                        '            <th class="uk-width-1-5">'+__i18n.actions+'</th>\n' +
+                        '        </tr>\n' +
+                        '    </thead>\n' +
+                        '    <tbody class="uk-card uk-card-default">\n' +
+                        '    </tbody>\n' +
+                        '</table>');
+
+                    var __ui_modal = UIkit.modal(__modal_html);
+                    UIkit.util.on(__modal_html, "beforeshow", function () {
+                        $.post(ajaxurl,{
+                            // "action": "templaza-framework/field/tz_layout/action/templa",
+                            "action": "templaza-framework/post_type/templaza_library/get_data",
+                            "post_type": "templaza_library",
+                            "editor_post_id": "",
+                        }, function(response){
+                            if(typeof response !== "undefined"){
+                                if(typeof response.success !== "undefined" && response.success){
+                                    var __items = response.data;
+                                    if(__items.length){
+
+                                        // Search
+                                        __modal_html.find("#form-s-search").on("keyup", function (e) {
+
+                                            var __elsearch     = $(this),
+                                                __find_text   = __elsearch.val();
+
+                                            __table.find("tbody").html("");
+                                            if(__find_text.length) {
+                                                var __patt = new RegExp(__find_text, 'ig');
+
+                                                $.grep(__items, function (source_data, index) {
+                                                    var __finded = __patt.exec(source_data.title);
+
+                                                    if (__finded) {
+                                                        // Display source html found
+                                                        __insert_item(source_data);
+                                                    }
+                                                });
+                                            }else{
+                                                $.grep(__items, function (source_data, index) {
+                                                    // Display source html found
+                                                    __insert_item(source_data);
+                                                });
+                                            }
+                                        });
+                                        var __insert_item = function(item, i){
+
+                                            var __tr    = '<tr>\n' +
+                                                '   <td><strong>'+ item.title +'</strong></td>\n' +
+                                                '   <td>'+item.author+'</td>\n' +
+                                                '   <td>'+item.human_date+'</td>\n' +
+                                                '   <td>' +
+                                                '       <button class="uk-button uk-button-primary uk-button-small fl-lib-insert" type="button"><span data-uk-icon="icon: download; ratio: 0.8"></span> Insert</button>';
+
+                                            if(typeof item.lib_id !== "undefined" && item.lib_id) {
+                                                __tr += '       <button class="uk-button uk-button-danger uk-button-small fl-lib-delete" type="button"><span data-uk-icon="trash"></span> Delete</button>';
+                                            }
+
+                                            __tr    += '   </td>\n' +
+                                                '</tr>\n';
+                                            __tr    = $(__tr);
+
+                                            if(typeof i !== "undefined" && i === 0){
+                                                __table.find("tbody").html("");
+                                                __tr.css("border-top", "none");
+                                            }
+
+                                            // Insert section trigger
+                                            __tr.find(".fl-lib-insert").on("click", item, function(event){
+                                                if(typeof event.data !== "undefined"){
+                                                    var __item = event.data;
+
+                                                    if(typeof __item.lib_id !== "undefined" && __item.lib_id){
+                                                        var __pos   = "last";
+
+                                                        var __new_html  = redux.field_objects.tz_layout.generate_setting_to_html([__item.lib_data], selector);
+                                                        // Insert html
+                                                        if(__new_html.length){
+                                                            if(element.length) {
+                                                                element.after(__new_html);
+                                                                __pos = element.parent().find("[data-fl-element_type=section]").index(element) + 1;
+                                                            }else{
+                                                                selector.find(".field-tz_layout-content").append(__new_html);
+                                                            }
+                                                        }
+
+                                                        // Insert settings
+                                                        redux.field_objects.tz_layout.insert_setting(__item.lib_data, null, settings, selector, __pos);
+                                                    }else {
+                                                        __insert_blank_section($(redux.field_objects.tz_layout.get_section_empty()));
+                                                    }
+
+                                                    selector.trigger("templaza-framework/field/tz_layout/shortcode/section/add/after");
+
+                                                    sortable(selector);
+                                                    init_event();
+
+                                                    if(__ui_modal){
+                                                        // Disable lightbox
+                                                        __ui_modal.hide();
+                                                        UIkit.notification(__i18n.section_added, {status: "success", pos: "bottom-right", timeout: 700});
+                                                    }
+                                                }
+                                            });
+
+                                            // Delete section trigger
+                                            __tr.find(".fl-lib-delete").on("click", item, function(event){
+
+                                                if(typeof event.data === "undefined") {
+                                                    return;
+                                                }
+                                                var __tr_cur = $(this).closest("tr"),
+                                                    __item = event.data;
+
+                                                UIkit.modal.confirm(__i18n.delete_question,{
+                                                    "stack": true,
+                                                }).then(function () {
+                                                    $.post(ajaxurl, {
+                                                        "action": "templaza-framework/post_type/templaza_library/remove_data",
+                                                        "post_type": "templaza_library",
+                                                        "lib_id": __item.lib_id,
+                                                    }, function (response) {
+                                                        if(response.success){
+                                                            __tr_cur.remove();
+                                                            UIkit.notification(response.data, {status: "success", pos: "bottom-right", timeout: 700});
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                            __table.find("tbody").append(__tr);
+                                        };
+                                        $.each(__items, function (i, item) {
+                                            __insert_item(item, i);
+                                        });
+
+                                        __loading.hide();
+                                        __modal_html.find(".uk-modal-body .fl-library-items").html(__table);
+                                    }
+                                }
+                            }
+                        });
+                    });
+                    __ui_modal.show();
+                };
 
                 if(section_empty){
-                    section_new = $(section_empty);
+                    __insert_section_library();
                 }else{
-                    section_new = $(redux.field_objects.tz_layout.get_row_empty());
+                    __insert_blank_section($(redux.field_objects.tz_layout.get_row_empty()));
+
+                    selector.trigger("templaza-framework/field/tz_layout/shortcode/section/add/after");
+
+                    sortable(selector);
+                    init_event();
                 }
-
-                var pos = "last",
-                    src_setting = redux.field_objects.tz_layout.generate_setting_element(section_new, selector, settings);
-
-                if(element.length) {
-                    pos = element.parent().find("[data-fl-element_type=section]").index(element) + 1;
-                    element.after(section_new);
-                }else{
-                    if(!selector.find(".field-tz_layout-content > .fl_column-container.fl_column-section-container").length) {
-                        var selector_child = $("<div>");
-                        selector_child.attr("class", "fl_column-container fl_column-section-container");
-
-                        if(!section_empty) {
-                            selector_child.append(section_new).appendTo(selector.find(".field-tz_layout-content"));
-                        }else{
-                            selector_child.append(section_empty).appendTo(selector.find(".field-tz_layout-content"));
-                        }
-                    }else {
-                        selector.find(".field-tz_layout-content > .fl_column-container.fl_column-section-container").append(section_new);
-                    }
-                }
-
-                redux.field_objects.tz_layout.insert_setting(src_setting, null, settings, selector, pos);
-
-                selector.trigger("templaza-framework/field/tz_layout/shortcode/section/add/after");
-
-                sortable(selector);
-                init_event();
             });
             // Add row
             selector.find("[data-fl-control=add-row]").off("click").on("click", function(event){
@@ -1288,6 +1560,45 @@
                 sortable(selector);
                 init_event();
             });
+
+            // Save Section
+            UIkit.util.on("[data-fl-control=save]", "click", function (e) {
+                e.preventDefault();
+                e.target.blur();
+                var __control = $(this);
+                var __loading = $('<div id="tz_loading_page" class="uk-position-fixed uk-position-cover uk-position-z-index uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle">\n' +
+                    '    <div data-uk-spinner="ratio: 2"></div>\n' +
+                    '</div>');
+                var __modal = UIkit.modal.prompt("Enter name of this section:", "").then(function (name) {
+                    if(name && name.length){
+                        var __element = __control.closest("[data-fl-element_type]");
+                        // Get my section
+                        var __sec_settings = redux.field_objects.tz_layout.get_setting(__element, selector, settings);
+
+                        __loading.appendTo("body");
+                        $.ajax({
+                            url: ajaxurl,
+                            method: 'POST',
+                            data: {
+                                // page: "tzfrm_alita_opt_options",
+                                // page: adminpage,
+                                post_type: "templaza_library",
+                                title: name,
+                                action: "templaza-framework/field/tz_layout/action/save_section",
+                                section: JSON.stringify(__sec_settings),
+                            }
+                        }).done(function(response){
+                            var __notice_status   = "danger";
+                            if(response.success){
+                                __notice_status   = "success";
+                            }
+                            __loading.remove();
+                            UIkit.notification(response.message, {status: __notice_status, pos: "bottom-right"});
+                        });
+                    }
+                });
+            });
+
             // Delete element
             selector.find("[data-fl-control=delete]").off("click").on("click", function(event){
                 event.preventDefault();

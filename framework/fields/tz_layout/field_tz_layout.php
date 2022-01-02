@@ -34,7 +34,8 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
         }
 
         public function hooks(){
-            add_action('admin_footer', array($this, 'template'));
+//            add_action('admin_footer', array($this, 'template'));
+//            add_action('wp_ajax_nopriv_');
         }
 
         protected function load_element(){
@@ -151,12 +152,19 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
                 wp_localize_script(
                     'templaza-field-tz_layout-js',
                     'templaza_field_tz_layout', array('i18n' => array(
-                        'copied'            => __('Copied!'),
-                        'delete_question'   => __('Are you sure?'),
-                        'pasted'            => __('Pasted!'),
-                        'copy_failed'       => __('Copy failed!'),
-                        'paste_failed'      => __('Not Pasted! Please copy again.'),
-                        'custom_column'     => __('Please enter custom grid size (eg. 1-2;1-4;1-4 or auto;1-3;expand).'),
+                        'close'             => __('Close', $this -> text_domain),
+                        'name'              => __('Name', $this -> text_domain),
+                        'copied'            => __('Copied!', $this -> text_domain),
+                        'pasted'            => __('Pasted!', $this -> text_domain),
+                        'search'            => __('Search', $this -> text_domain),
+                        'created'           => __('Created', $this -> text_domain),
+                        'actions'           => __('Actions', $this -> text_domain),
+                        'copy_failed'       => __('Copy failed!', $this -> text_domain),
+                        'created_date'      => __('Created date', $this -> text_domain),
+                        'section_added'     => __('Section added!', $this -> text_domain),
+                        'delete_question'   => __('Are you sure?', $this -> text_domain),
+                        'paste_failed'      => __('Not Pasted! Please copy again.', $this -> text_domain),
+                        'custom_column'     => __('Please enter custom grid size (eg. 1-2;1-4;1-4 or auto;1-3;expand).', $this -> text_domain),
                     ))
                 );
             }

@@ -15,6 +15,8 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
             <div class="fl_controls-row-right">
                 <a href="#" class="fl_control fl_column-delete" data-fl-control="delete" title="<?php
                 echo __('Remove Section', $this -> text_domain);?>"><i class="far fa-trash-alt"></i></a>
+                <a href="#" class="fl_control fl_column-save" data-fl-control="save" title="<?php
+                echo __('Save Section', $this -> text_domain);?>"><i class="far fa-save"></i></a>
                 <a href="#" class="fl_control fl_column-clone" data-fl-control="clone" title="<?php
                 echo __('Duplicate Section', $this -> text_domain);?>"><i class="far fa-copy"></i></a>
                 <a href="#" class="fl_control fl_column-edit" data-fl-control="edit" title="<?php
