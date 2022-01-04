@@ -376,6 +376,10 @@ class CSS{
             return '';
         }
 
+        if(is_string($color_options)){
+            return $color_options;
+        }
+
         return self::make_color_rgba($color_options['color'], $color_options['alpha'], $color_options['rgba']);
     }
 
