@@ -264,7 +264,7 @@ class Framework{
         $TemplazaFrameworkUpdateChecker->setBranch('master');
 
         //Optional: If you're using a private repository, specify the access token like this:
-        $TemplazaFrameworkUpdateChecker->setAuthentication('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');
+//        $TemplazaFrameworkUpdateChecker->setAuthentication('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');
         $TemplazaFrameworkUpdateChecker ->clearCachedTranslationUpdates();
     }
 
