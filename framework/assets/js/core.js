@@ -84,5 +84,9 @@
         $("#post").submit(function(){
             window.onbeforeunload = null;
         });
+
+        $( "#poststuff .redux-group-menu .redux-group-tab-link-li" ).on("click", function( event, ui ) {
+            UIkit.update( document.body, 'update');
+        });
     });
 })(jQuery, window);

@@ -262,20 +262,15 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 }
                 if(!$this ->my_post_type_exists()) {
                     wp_add_inline_script('redux-js', '
-                    (function($){ 
-                        $(window).load(function(){
-                            $.redux.initFields();
-                        });
-                        $(document).ready(function() {
-                            setTimeout(function(){
-                                if(typeof window._wpLoadBlockEditor !== "undefined"){
-                                    window._wpLoadBlockEditor.then( function() {                            
-                                        $.redux.initFields();
-                                    });
-                                }
-                            },100);
-                        });
-                    })(jQuery);');
+                    jQuery(document).ready(function($){
+                        let templaza_frameworkBlockLoadedInterval = setInterval(function() {
+                            if (!$(".postbox .redux-field-container").is(":hidden")) {
+                                //Actual functions goes here
+                                $.redux.initFields();
+                                clearInterval( templaza_frameworkBlockLoadedInterval );
+                            }
+                        }, 500);
+                    });');
                 }
             }, 99);
         }
