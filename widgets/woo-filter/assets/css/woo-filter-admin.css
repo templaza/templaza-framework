@@ -1,0 +1,152 @@
+.templaza-products-filters {
+	position: relative;
+}
+
+.templaza-products-filters .no-filter {
+	text-align: center;
+}
+
+.templaza-products-filter-add-new {
+	font-weight: 700;
+}
+
+.templaza-products-filter-fields * {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.templaza-products-filter-fields {
+	overflow: hidden;
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-bottom: 20px;
+}
+
+.templaza-products-filter-fields .name,
+.templaza-products-filter-fields .source,
+.templaza-products-filter-fields .display,
+.templaza-products-filter-fields .actions {
+	float: left;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.templaza-products-filter-fields .name,
+.templaza-products-filter-fields .source,
+.templaza-products-filter-fields .display {
+	width: 32%;
+}
+
+.templaza-products-filter-fields .actions {
+	width: 4%;
+	padding-top: 26px;
+	text-align: right;
+}
+
+.templaza-products-filter-fields .remove-filter {
+	color: #b4b9be;
+}
+
+.templaza-products-filter-fields .remove-filter:hover {
+	color: #c00;
+}
+
+.templaza-products-filter-fields input,
+.templaza-products-filter-fields select {
+	margin: 5px 0;
+}
+
+.templaza-products-filter-form__sub-nav .button-link.active {
+	color: #444;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.templaza-products-filter-form__section {
+	display: none;
+}
+
+.templaza-products-filter-form__section.active {
+	display: block;
+}
+
+.templaza-products-filter-form__filter {
+	margin-bottom: 10px;
+}
+
+.templaza-products-filter-form__filter-top {
+	overflow: hidden;
+	border: 1px solid #ccd0d4;
+}
+
+.templaza-products-filter-form__filter-top:hover {
+	border-color: #999;
+}
+
+.templaza-products-filter-form__filter-actions {
+	float: right;
+	padding: 10px;
+}
+
+.templaza-products-filter-form__filter-actions .button-link-delete {
+	text-decoration: none;
+}
+
+.templaza-products-filter-form__filter-toggle {
+	float: left;
+	padding: 10px;
+	margin: 0;
+	border: 0;
+	background: none;
+	cursor: pointer;
+}
+
+.templaza-products-filter-form__filter-toggle-indicator {
+	color: #999;
+	float: left;
+}
+
+.templaza-products-filter-form__filter-toggle-indicator:before {
+	content: "\f140";
+	font: normal 20px/1 dashicons;
+	speak: none;
+	display: block;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-decoration: none;
+}
+
+.templaza-products-filter-form__filter-title {
+	padding: 12px 10px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.templaza-products-filter-form__filter-options {
+	display: none;
+	padding: 5px 15px;
+	border: 1px solid #ccd0d4;
+	border-top: 0;
+}
+
+.templaza-products-filter-form__section-actions {
+	text-align: center;
+}
+
+.templaza-products-filter-form__section-actions button {
+	font-weight: 700;
+}
+
+.templaza-products-filter-form__filter.open .templaza-products-filter-form__filter-top {
+	background: #fafafa;
+	border-color: #ccd0d4;
+}
+
+.templaza-products-filter-form__filter.open .templaza-products-filter-form__filter-toggle-indicator:before {
+	content: "\f142";
+}
+
+.templaza-products-filter-form__message {
+	text-align: center;
+}

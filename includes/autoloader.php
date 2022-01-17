@@ -13,4 +13,5 @@ require_once __DIR__.'/templates.php';
 require_once __DIR__.'/fonts.php';
 require_once __DIR__.'/shortcode.php';
 require_once __DIR__.'/gutenberg.php';
+require_once __DIR__.'/widget.php';
 require_once TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/helper/fieldhelper.php';

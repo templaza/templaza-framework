@@ -64,7 +64,6 @@ class Framework{
         $this -> register_arguments();
         $this -> init_post_types();
         $this -> init_global_settings();
-
     }
 
     public function hooks(){

@@ -13,6 +13,7 @@ class TemPlazaFrameWork{
 
     public $text_domain;
 
+    private $widgets;
     protected $theme_options;
     protected $theme_support;
     protected static $instance;
@@ -52,6 +53,9 @@ class TemPlazaFrameWork{
 
         add_filter('register_sidebar_defaults', array($this, 'modify_sidebar'), 9999);
 
+        // Register widgets
+        add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+
         do_action( 'templaza-framework/plugin/hooks', $this );
     }
 
@@ -73,7 +77,9 @@ class TemPlazaFrameWork{
             return;
         }
 
-        $folders    = array_merge($folders, $theme_folders);
+        if(count($theme_folders)) {
+            $folders = array_merge($folders, $theme_folders);
+        }
 
         if(!empty($folders) && count($folders)){
             foreach ($folders as $folder){
@@ -97,6 +103,95 @@ class TemPlazaFrameWork{
                 }
             }
         }
+    }
+
+    public function register_widgets(){
+
+        $theme_path  = TEMPLAZA_FRAMEWORK_THEME_PATH.'/widgets';
+
+        $core_path  = TEMPLAZA_FRAMEWORK_PATH.'/widgets';
+
+
+        if(!is_dir($core_path) && !is_dir($theme_path)){
+            return;
+        }
+
+        $folders        = glob($core_path.'/*', GLOB_ONLYDIR);
+        $theme_folders  = glob($theme_path.'/*', GLOB_ONLYDIR);
+
+        if((empty($folders) || (!empty($folders) && !count($folders))) &&
+            (empty($theme_folders) || (!empty($theme_folders) && !count($theme_folders)))){
+            return;
+        }
+
+        if(!empty($theme_folders) && count($theme_folders)) {
+            $folders = array_merge($folders, $theme_folders);
+        }
+
+        if(!empty($folders) && count($folders)){
+            foreach ($folders as $folder){
+                $file_name  = basename($folder);
+                $wd_name     = $file_name;
+
+                $path = $folder.'/'.$wd_name.'.php';
+
+                if(!file_exists($path)){
+                    continue;
+                }
+
+                if(file_exists($path)){
+                    require $path;
+                }
+
+                $wd_name = str_replace(array('_', '-'), ' ',$wd_name);
+                $wd_name = !empty($wd_name)?ucwords($wd_name):$wd_name;
+                $wd_name = !empty($wd_name)?str_replace(' ', '_', $wd_name):$wd_name;
+                $class  = 'TemplazaFramework_Widget_'.$wd_name;
+
+                if(class_exists($class) && !isset($this -> widgets[$class])){
+                    $widget_obj = new $class();
+                    register_widget( $widget_obj );
+                    $this -> widgets[$file_name] = $widget_obj;
+                }
+            }
+        }
+
+
+//        $path   = TEMPLAZA_FRAMEWORK_PATH.'/widgets';
+//        if(!$path || ($path && !is_dir($path))){
+//            return false;
+//        }
+//
+//        require_once ( ABSPATH . '/wp-admin/includes/file.php' );
+//
+//        $files  = list_files($path, 1);
+//        if(!count($files)){
+//            return;
+//        }
+//        foreach ($files as $file){
+//            $info = pathinfo($file);
+//            $file_name  = $info['filename'];
+//
+//            $clname = str_replace(array('_', '-'), ' ',$file_name);
+//            $clname = !empty($clname)?ucwords($clname):$clname;
+//            $clname = !empty($clname)?str_replace(' ', '_', $clname):$clname;
+//
+//            $class_name = 'TemplazaFramework_Widget_'.ucfirst($clname);
+//
+//            var_dump($clname);
+//            var_dump($file);
+//            var_dump(class_exists($class_name));
+//            var_dump($class_name);
+//            die(__METHOD__);
+//            if(file_exists($file) && !class_exists($class_name)){
+//                require_once $file;
+//            }
+//            if(class_exists($class_name)){
+//                $widget_obj  = new $class_name();
+//                register_widget( $widget_obj );
+//                $this -> widgets[$file_name] = $widget_obj;
+//            }
+//        }
     }
 
     public function modify_sidebar($defaults){
