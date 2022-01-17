@@ -1853,7 +1853,8 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter')) {
                 wp_enqueue_style( 'select2' );
             }
 
-            wp_enqueue_script( 'templaza-products-filter', PLUGIN_PATH . '/admin/widgets/woo-filter/assets/js/woo-filter.js', array(
+            wp_enqueue_script( 'templaza-products-filter', Functions::get_my_url()
+                . '/widgets/woo-filter/assets/js/woo-filter.js', array(
                 'jquery',
                 'wp-util',
                 'select2',
