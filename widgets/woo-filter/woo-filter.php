@@ -2,6 +2,8 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
+use TemPlazaFramework\Functions;
+
 if(!class_exists('TemplazaFramework_Widget_Woo_Filter')) {
     class TemplazaFramework_Widget_Woo_Filter extends TemplazaFramework_Widget{
 
@@ -1821,8 +1823,10 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter')) {
                 return;
             }
 
-            wp_enqueue_style( 'templaza-products-filter-admin', PLUGIN_PATH . '/admin/widgets/woo-filter/assets/css/woo-filter-admin.css', array(), '20210311' );
-            wp_enqueue_script( 'templaza-products-filter-admin', PLUGIN_PATH . '/admin/widgets/woo-filter/assets/js/woo-filter-admin.js', array( 'wp-util' ), '20210311', true );
+            wp_enqueue_style( 'templaza-products-filter-admin', Functions::get_my_url()
+                . '/widgets/woo-filter/assets/css/woo-filter-admin.css', array(), '20210311' );
+            wp_enqueue_script( 'templaza-products-filter-admin', Functions::get_my_url()
+                . '/widgets/woo-filter/assets/js/woo-filter-admin.js', array( 'wp-util' ), '20210311', true );
 
             wp_localize_script(
                 'templaza-products-filter-admin', 'templaza_products_filter_params', array(
