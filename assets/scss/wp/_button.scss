@@ -1,38 +1,11 @@
-.wp-block-button{
-  margin:1em 0;
-  &.is-style-squared{
-    a{
-      @include border-radius(0);
-    }
+.templaza-btn-outline{
+  @include button-default;
+  background:none !important;
+  border:1px solid $tztheme-heading-color !important;
+  @include border-radius(0);
+  &:hover{
+    background: none !important;
+    color:$tztheme-heading-color !important;
+    border-color:$tztheme-button_background_hover !important;
   }
-  &.is-style-outline{
-    .wp-block-button__link{
-      border-color:$tztheme-button_background;
-      color:$tztheme-button_background;
-      &:hover{
-        border-color:$tztheme-button_background_hover;
-        color:$tztheme-button_background_hover;
-      }
-    }
-  }
-}
-.wp-block-button__link{
-  @include button-default;
-}
-.wp-block-file .wp-block-file__button{
-  @include button-default;
-}
-.wp-block-search .wp-block-search__button{
-  @include button-default;
-  border:none;
-  margin-top: 15px;
-}
-.templaza-btn{
-  @include button-default;
-}
-.uk-button-rounded {
-  border-radius: 5px;
-}
-.uk-button-round {
-  border-radius: 500px;
 }

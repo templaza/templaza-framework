@@ -1,0 +1,147 @@
+/*--------------------------------------------------------------
+# Quick view
+--------------------------------------------------------------*/
+.quick-view-modal .button-close {
+  top: 32px;
+  right: 32px;
+  transform: none;
+  z-index: 9;
+  cursor: pointer;
+}
+
+.quick-view-modal .button-close i {
+  font-size: 24px;
+}
+
+.quick-view-modal .modal-content {
+  width:1170px;
+  max-height: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  padding: 0;
+}
+
+.quick-view-modal .templaza-posts__loading {
+  bottom: 0;
+}
+
+.quick-view-modal.loading .button-close,
+.quick-view-modal.loading .product {
+  opacity: 0;
+}
+
+.quick-view-modal.loading .templaza-posts__loading {
+  display: block;
+  background-color: transparent;
+}
+
+.quick-view-modal.loading .templaza-posts__loading .templaza-loading {
+  transform: translate(-50%, -50%);
+  top: 50%;
+}
+
+.quick-view-modal .woocommerce .product {
+  background-color: #fff;
+}
+
+.quick-view-modal .woocommerce .product .woocommerce-product-gallery {
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.quick-view-modal .woocommerce .product .woocommerce-product-gallery .woocommerce-product-gallery__image img {
+  cursor: default;
+}
+
+.quick-view-modal .woocommerce .product .entry-thumbnail {
+  width: 42%;
+  position: relative;
+  overflow: hidden;
+}
+
+.quick-view-modal .woocommerce .product .entry-thumbnail:hover .rz-swiper-button {
+  opacity: 1;
+}
+
+.quick-view-modal .woocommerce .product .entry-summary {
+  padding: 40px 70px 20px 55px;
+  width: 58%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+.quick-view-modal .woocommerce .product .entry-summary .woocommerce-product-rating {
+  margin-bottom: 20px;
+}
+
+.quick-view-modal .woocommerce .product .rz-buy-now-button + .rz-wishlist-button {
+  border: none;
+}
+
+.quick-view-modal .woocommerce .product .rz-buy-now-button + .rz-wishlist-button .templaza-svg-icon {
+  font-size: 20px;
+}
+
+.quick-view-modal .templaza-product-deal {
+  margin: 30px 0 20px;
+}
+
+.quick-view-modal .product-more-infor {
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  padding: 14px 20px;
+  text-align: center;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $tztheme-button_background;
+  color: $tztheme-button_text_color;
+  z-index: 1;
+}
+
+.quick-view-modal .product-more-infor i {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.quick-view-modal .rz-swiper-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  cursor: pointer;
+  outline: none;
+  width: 42px;
+  height: 42px;
+  line-height: 42px;
+  background-color: #ffffff;
+  text-align: center;
+  color: var(--rz-color-dark);
+  opacity: 0;
+  z-index: 1;
+  transition: .3s;
+  font-size: 20px;
+}
+
+.quick-view-modal .rz-swiper-button svg {
+  /*rtl:raw:
+          transform: rotate(-180deg);
+      */
+}
+
+.quick-view-modal .rz-quickview-button-prev {
+  left: 0;
+}
+
+.quick-view-modal .rz-quickview-button-next {
+  right: 0;
+}

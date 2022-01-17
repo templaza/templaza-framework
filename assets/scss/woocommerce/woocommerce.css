@@ -1,0 +1,18 @@
+@keyframes TemplazaFadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 80px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.TemplazaFadeInUp {
+  animation-name: TemplazaFadeInUp;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.65, 0.8, 0.44, 0.99);
+}
+
+/*# sourceMappingURL=woocommerce.css.map */
