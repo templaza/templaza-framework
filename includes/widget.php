@@ -21,7 +21,7 @@ class TemplazaFramework_Widget extends WP_Widget {
 
         if(!empty($wdargs) && count($wdargs) && isset($wdargs['title'])){
 
-            $id_base        = isset($wdargs['id'])?$wdargs['id']:strtolower(__CLASS__);
+            $id_base        = isset($wdargs['id'])?$wdargs['id']:strtolower(get_class($this));
             $title          = isset($wdargs['title'])?$wdargs['title']:$wdargs[1];
             $widget_options = isset($wdargs['widget_options'])?$wdargs['widget_options']:(isset($wdargs[2])?$wdargs[2]:array());
             $control_options= isset($wdargs['control_options'])?$wdargs['control_options']:(isset($wdargs[3])?$wdargs[3]:array());
