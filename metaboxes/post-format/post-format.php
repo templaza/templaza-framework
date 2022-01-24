@@ -14,7 +14,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Post_Format')){
                 'id'            => 'templaza-post-format',
                 'title'         => __( 'Post Format Data', $this -> text_domain ),
                 'post_types'    => array('post'),
-                'position'      => 'normal', // normal, advanced, side
+                'position'      => 'side', // normal, advanced, side
                 'priority'      => 'default', // high, core, default, low - Priorities of placement
                 'store_each'    => true, // Store value of each fields to each post meta
 //                'sections'      => array(
