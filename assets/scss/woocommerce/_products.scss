@@ -5,7 +5,6 @@ ul.products {
   li.product {
     list-style: none;
     position: relative;
-    margin-bottom: 25px;
     .product-thumbnail {
       position: relative;
       .woocommerce-loop-product__link {
@@ -129,7 +128,7 @@ ul.products {
         width: 16px;
         height: 16px;
         display: inline-block;
-        border-radius: 50%;
+        border-radius: 50% !important;
         border: 2px solid;
         border-top-color: transparent;
         -webkit-animation: templaza-spin infinite 1s linear;
@@ -172,8 +171,9 @@ ul.products {
       }
     }
     .woocommerce-loop-product__title {
-      font-size: 16px;
+      font-size: $tztheme-catalog-title-size;
       margin: 0 0 10px;
+      font-weight:$tztheme-catalog-title-weight;
       a {
         color: inherit;
       }
@@ -189,8 +189,7 @@ ul.products {
     }
     .price {
       color: $tztheme-postmeta;
-      font-size: 18px;
-      font-weight: 500;
+      font-size: $tztheme-catalog-price-size;
       display: block;
       del {
         font-size: 14px;

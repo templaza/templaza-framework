@@ -258,7 +258,7 @@ body.admin-bar .notifyjs-corner {
 
 .rz-popup-add-to-cart .rz-product-popup-atc__recommendation .recommendation-heading {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
@@ -275,6 +275,13 @@ body.admin-bar .notifyjs-corner {
           */
 }
 
+.rz-popup-add-to-cart .rz-product-popup-atc__recommendation .rz-swiper-buttons {
+  display:flex;
+}
+.rz-popup-add-to-cart .rz-product-popup-atc__recommendation .rz-swiper-buttons span{
+  width:20px;
+  text-align: center;
+}
 .rz-popup-add-to-cart .rz-product-popup-atc__recommendation .rz-swiper-buttons:focus {
   outline: none;
 }
