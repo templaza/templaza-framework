@@ -11,6 +11,7 @@ use TemPlazaFramework\Menu_Admin;
 use TemPlazaFramework\Template_Admin;
 use TemPlazaFramework\Templates;
 use \TemPlazaFramework\Admin\Admin_Page;
+use TemPlazaFramework\Post_Formats_Ui;
 
 defined( 'ABSPATH' ) || exit;
 

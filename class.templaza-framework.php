@@ -155,43 +155,6 @@ class TemPlazaFrameWork{
                 }
             }
         }
-
-
-//        $path   = TEMPLAZA_FRAMEWORK_PATH.'/widgets';
-//        if(!$path || ($path && !is_dir($path))){
-//            return false;
-//        }
-//
-//        require_once ( ABSPATH . '/wp-admin/includes/file.php' );
-//
-//        $files  = list_files($path, 1);
-//        if(!count($files)){
-//            return;
-//        }
-//        foreach ($files as $file){
-//            $info = pathinfo($file);
-//            $file_name  = $info['filename'];
-//
-//            $clname = str_replace(array('_', '-'), ' ',$file_name);
-//            $clname = !empty($clname)?ucwords($clname):$clname;
-//            $clname = !empty($clname)?str_replace(' ', '_', $clname):$clname;
-//
-//            $class_name = 'TemplazaFramework_Widget_'.ucfirst($clname);
-//
-//            var_dump($clname);
-//            var_dump($file);
-//            var_dump(class_exists($class_name));
-//            var_dump($class_name);
-//            die(__METHOD__);
-//            if(file_exists($file) && !class_exists($class_name)){
-//                require_once $file;
-//            }
-//            if(class_exists($class_name)){
-//                $widget_obj  = new $class_name();
-//                register_widget( $widget_obj );
-//                $this -> widgets[$file_name] = $widget_obj;
-//            }
-//        }
     }
 
     public function modify_sidebar($defaults){

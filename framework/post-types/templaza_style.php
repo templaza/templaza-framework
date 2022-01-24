@@ -686,7 +686,11 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                         require_once $file;
                     }
 
-                    $class_name = 'TemplazaFramework_MetaBox_'.ucfirst($file_name);
+                    $mtname = str_replace(array('_', '-'), ' ',$file_name);
+                    $mtname = !empty($mtname)?ucwords($mtname):$mtname;
+                    $mtname = !empty($mtname)?str_replace(' ', '_', $mtname):$mtname;
+
+                    $class_name = 'TemplazaFramework_MetaBox_'.$mtname;
                     if(class_exists($class_name)){
                         new $class_name($this, $this -> framework);
                     }
