@@ -53,8 +53,8 @@ if(!class_exists('TemplazaFramework_MetaBox_Portfolio')){
                 if(method_exists($this,'post_type_table_head')) {
                     add_filter('manage_'.$post_type.'_posts_columns', array($this, 'post_type_table_head'));
                 }
-                // Duplicate post action
-                add_action("templaza-framework/post-type/{$post_type}/duplicate", array($this, 'post_duplicate'), 11, 2);
+//                // Duplicate post action
+//                add_action("templaza-framework/post-type/{$post_type}/duplicate", array($this, 'post_duplicate'), 11, 2);
 //                // Set home for post type
 //                add_action( 'admin_action_'.$post_type.'_set_default', array($this, 'post_type_set_default') );
             }

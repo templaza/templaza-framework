@@ -51,7 +51,7 @@
 }
 .vp-pfui-elm-block .vp-pfui-elm-container {
 	background: #f0f0f0;
-	padding: 10px;
+	padding: 7px;
 }
 .vp-pfui-elm-block .vp-pfui-elm-container p.none {
 	text-align: center;
@@ -195,7 +195,7 @@
 	background: #eeeeee;
 }
 .vp-pfui-gallery-picker .gallery span {
-	padding: 5px;
+	padding: 3px;
 	border: solid 1px #EFEFEF;
 }
 .vp-pfui-gallery-picker .gallery > span:hover {
@@ -204,19 +204,19 @@
 	-webkit-box-shadow: 1px 1px 5px #999;
 	box-shadow: 1px 1px 5px #999;
 }
-#templaza-gutenberg-format #vp-post-formats-ui-tabs{
+#tzfrm_metabox-templaza-post-format #vp-post-formats-ui-tabs{
 
 }
-#templaza-gutenberg-format #vp-post-formats-ui-tabs ul li a{
+#tzfrm_metabox-templaza-post-format #vp-post-formats-ui-tabs ul li a{
 	border:1px solid #ccc;
 	margin-bottom:5px;
 	border-radius:3px;
 }
-#templaza-gutenberg-format .vp-pfui-gallery-picker .gallery span{
+#tzfrm_metabox-templaza-post-format .vp-pfui-gallery-picker .gallery span{
 	width:55px;
 	height:55px;
 }
-#templaza-gutenberg-format .vp-pfui-gallery-picker .gallery span.close{
+#tzfrm_metabox-templaza-post-format .vp-pfui-gallery-picker .gallery span.close{
 	width:8px;
 	height:8px;
 }

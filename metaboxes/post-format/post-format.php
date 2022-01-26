@@ -84,6 +84,8 @@ if(!class_exists('TemplazaFramework_MetaBox_Post_Format')){
 
 
             add_action('admin_init', array($this, 'admin_init'));
+
+            add_filter( 'admin_body_class', array( $this,'custom_admin_body_class' ) );
 //            add_action('add_meta_boxes', array($this, 'vp_pfui_add_meta_boxes'));
             add_action('wp_ajax_vp_pfui_gallery_preview', array($this, 'vp_pfui_gallery_preview'));
 
@@ -106,6 +108,11 @@ if(!class_exists('TemplazaFramework_MetaBox_Post_Format')){
 
         }
 
+        public function custom_admin_body_class( $classes ) {
+			$classes .= ' templaza-gutenberg-vp-pfui';
+
+			return $classes;
+		}
 
         public function render($post, $metabox){
             $this -> vp_pfui_post_admin_setup();
