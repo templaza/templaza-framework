@@ -11,8 +11,8 @@ if(!class_exists('TemplazaFramework_MetaBox_Portfolio')){
             // Get all post types without templaza_style
             $metaboxes[] = array(
                 'id'            => 'portfolio-options',
-                'title'         => __( 'Portfolio Options', $this -> text_domain ),
-                'post_types'    => array('portfolio','post'),
+                'title'         => esc_html__( 'Portfolio Options', $this -> text_domain ),
+                'post_types'    => array('portfolio'),
                 'position'      => 'normal', // normal, advanced, side
                 'priority'      => 'default', // high, core, default, low - Priorities of placement
                 'store_each'    => true, // Store value of each fields to each post meta
