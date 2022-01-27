@@ -43,6 +43,8 @@ jQuery( function ( $ ) {
 					break;
 			}
 		});
+
+		$("#post-format-selector-0").trigger("change");
 	})
 
 } );
