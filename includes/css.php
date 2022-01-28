@@ -431,6 +431,7 @@ class CSS{
         }
 
         $units  = isset($spacing_option['units']) && !empty($spacing_option['units'])?$spacing_option['units']:$default_unit;
+        $units  = is_array($units)?array_pop($test):$units;
 
         $top_name       = $mode.'-top';
         $right_name     = $mode.'-right';
