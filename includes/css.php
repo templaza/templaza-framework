@@ -443,7 +443,6 @@ class CSS{
             $bottom_name     = $mode.'-bottom-right';
             $left_name       = $mode.'-bottom-left';
         }
-
         $top    = isset($spacing_option[$top_name])?$spacing_option[$top_name]:'';
         $top   .= (is_numeric($top) && !empty($units))?$units:'';
 
