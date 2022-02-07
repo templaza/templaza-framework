@@ -514,11 +514,12 @@ class CSS{
         $is_responsive  = false;
         if(is_array($spacing_option) && count($spacing_option)){
             $values         = array_values($spacing_option);
+            $last_index     = (is_array($values) && count($values))?(count($values) - 1):0;
 
-            if(isset($values[0]) && is_array($values[0]) && count($values[0])){
+            if(isset($values[$last_index]) && is_array($values[$last_index]) && count($values[$last_index])){
 
                 $_devices       = array_keys($devices);
-                $keys           = array_keys($values[0]);
+                $keys           = array_keys($values[$last_index]);
                 $keys_exists    = array_intersect($_devices,$keys);
 
                 if(!empty($keys_exists)) {
