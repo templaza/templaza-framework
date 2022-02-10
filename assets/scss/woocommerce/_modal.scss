@@ -109,3 +109,46 @@
   top: 32px;
   height: calc( 100% - 32px);
 }
+
+.tz-account-modal{
+  .modal-content {
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    .form-row {
+      padding: 0;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+  .woocommerce-error .error-message {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .templaza-button {
+    width: 100%;
+    line-height: 50px;
+    cursor: pointer;
+    padding:0;
+    &.templaza-loading:before {
+      left: 50%;
+      top: -10px;
+    }
+    &.create-account {
+      margin-top: 20px;
+    }
+  }
+  form.register button.templaza-button {
+    margin: 20px 0 0 0;
+  }
+  div.nsl-container.nsl-container-block .nsl-container-buttons {
+    width: 100%;
+  }
+}

@@ -18,9 +18,8 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Account')) {
         {
 
             $this->defaults = array(
-                'title'          => '',
-                'button-text'       => '',
-                'button-url'        => '',
+                'account-text'       => '',
+                'account-icon'       => 'far fa-user',
             );
             parent::__construct();
         }
@@ -43,11 +42,33 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Account')) {
                 echo $args['before_title'] . $instance['title'] . $args['after_title'];
 
             $instance = wp_parse_args( $instance, $this->defaults );
+            if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
+                $templaza_options = array();
+            }else{
+                $templaza_options = Functions::get_theme_options();
+            }
+            $modals = isset($templaza_options['templaza-shop-account-login'])?$templaza_options['templaza-shop-account-login']:'modal';
+
             ?>
-            <div class="ui-button uk-text-center">
-                <a class="uk-button uk-button-default uk-button-square"
-                   href="<?php echo esc_url($instance['button-url']);?>" title="<?php echo esc_attr($instance['button-text']);?>"><?php echo esc_attr($instance['button-text']);?>
+            <div class="header-account">
+                <a class="account-icon" href="<?php echo esc_url( wc_get_account_endpoint_url( 'dashboard' ) ) ?>"
+                   data-toggle="<?php echo esc_attr($modals);?>"
+                   data-target="account-modal">
+                    <i class="<?php echo esc_attr($instance['account-icon']);?>"></i>
                 </a>
+                <?php if ( is_user_logged_in() ) : ?>
+                    <div class="account-links">
+                        <ul>
+                            <?php foreach ( wc_get_account_menu_items() as $endpoint => $label ) : ?>
+                                <li class="account-link--<?php echo esc_attr( $endpoint ); ?>">
+                                    <a href="<?php echo esc_url( wc_get_account_endpoint_url( $endpoint ) ); ?>" class="underline-hover">
+                                        <?php echo esc_html( $label ); ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
             </div>
             <?php
             echo $args['after_widget'];
@@ -55,34 +76,25 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Account')) {
         /* function form */
         public function form($instance) {
             $instance = wp_parse_args( $instance, array(
-                'title'         => 'Title',
-                'button-text'    => '',
-                'button-url'       => '',
+                'account-text'      => '',
+                'account-icon'      => '',
             ) );
 
             ?>
             <p>
-                <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">
-                    <?php esc_html_e('Title','templaza-elements'); ?>
+                <label for="<?php echo esc_attr($this->get_field_id('account-text')); ?>">
+                    <?php esc_html_e('Account text','templaza-elements'); ?>
                 </label>
                 <br>
-                <input type="text" name="<?php echo esc_attr($this->get_field_name('title')); ?>" id="<?php echo esc_attr($this->get_field_id('title')); ?>" class="widefat" value="<?php echo esc_html($instance['title']); ?>" >
+                <input type="text" name="<?php echo esc_attr($this->get_field_name('account-text')); ?>" id="<?php echo esc_attr($this->get_field_id('account-text')); ?>" class="widefat" value="<?php echo esc_html($instance['account-text']); ?>" >
             </p>
 
             <p>
-                <label for="<?php echo esc_attr($this->get_field_name('button-text')); ?>">
-                    <?php esc_html_e('Button Text','templaza-elements'); ?>
+                <label for="<?php echo esc_attr($this->get_field_name('account-icon')); ?>">
+                    <?php esc_html_e('Account icon','templaza-elements'); ?>
                 </label>
                 <br>
-                <input type="text" name="<?php echo esc_attr($this->get_field_name('button-text')); ?>" class="widefat" id="<?php echo esc_attr($this->get_field_name('button-text')); ?>" value="<?php echo esc_html($instance['button-text']); ?>" >
-            </p>
-
-            <p>
-                <label for="<?php echo esc_attr($this->get_field_name('button-url')); ?>">
-                    <?php esc_html_e('Button Url','templaza-elements'); ?>
-                </label>
-                <br>
-                <input type="text" name="<?php echo esc_attr($this->get_field_name('button-url')); ?>" id="<?php echo esc_attr($this->get_field_name('button-url')); ?>" class="widefat" value="<?php echo esc_html($instance['button-url']); ?>" >
+                <input type="text" name="<?php echo esc_attr($this->get_field_name('account-icon')); ?>" class="widefat" id="<?php echo esc_attr($this->get_field_name('account-icon')); ?>" value="<?php echo esc_html($instance['account-icon']); ?>" >
             </p>
 
             <?php
@@ -91,9 +103,8 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Account')) {
         /* function update */
         public function update($new_instance,$old_instance){
             $instance = $old_instance ;
-            $instance['title']          =   $new_instance['title'];
-            $instance['button-text']     =   $new_instance['button-text'];
-            $instance['button-url']        =   $new_instance['button-url'];
+            $instance['account-text']       =   $new_instance['account-text'];
+            $instance['account-icon']       =   $new_instance['account-icon'];
 
             return $instance;
         }

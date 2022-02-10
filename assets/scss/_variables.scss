@@ -85,6 +85,9 @@ $tztheme-box-shadow-sidebar:                  0 0 3px 0 rgba(0, 0, 0, 0.1) !defa
 
 $tztheme-border-color:                        #dedede !default;
 $tztheme-menu-border-color:                   #ededed !default;
+$tztheme-submenu-bg-color:                    #ffffff !default;
+$tztheme-submenu-color:                       $tztheme-content-color !default;
+
 // Elements
 $tztheme-element-title-size:                  inherit !default;
 $tztheme-element-title-weight:                700 !default;
@@ -144,6 +147,12 @@ $tztheme-shop-detail-tab-transform: uppercase !default;
 $tztheme-shop-detail-related-size: 30px !default;
 $tztheme-shop-detail-related-transform: uppercase !default;
 
+$tztheme-bg-info:#d8eafc !default;
+$tztheme-color-info:#1e87f0 !default;
+$tztheme-bg-warning:#fff6ee !default;
+$tztheme-color-warning:#faa05a !default;
+$tztheme-bg-error:#fef4f6 !default;
+$tztheme-color-error:#f0506e !default;
 // Advanced Product
 
 $tztheme-ap-archive-title-size: 20px !default;
