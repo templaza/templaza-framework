@@ -27,7 +27,7 @@ extract(shortcode_atts(array(
 if(!empty($nav_items)){
 	$navs      =   json_decode($nav_items, true);
 	if (count($navs)) {
-		echo '<ul id="'.esc_attr($tz_id).'" class="uk-nav '.esc_attr($tz_class.(!empty($nav_alignment) ? ' uk-text-'.$nav_alignment : '')).'">';
+		echo '<ul id="'.esc_attr($tz_id).'" class="uk-nav '.esc_attr($tz_class.(!empty($nav_alignment) ? ' uk-text-'.$nav_alignment.'@m' : '')).'">';
 	}
 	for ($i = 0; $i < count($navs); $i++ ) {
 		$nav = $navs[$i];
