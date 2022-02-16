@@ -383,9 +383,10 @@ class Templates{
                     // Border
                     $border_top     = '';
                     $border_right   = '';
-                    $border_bottom   = '';
-                    $border_left   = '';
+                    $border_bottom  = '';
+                    $border_left    = '';
                     $border_style   = '';
+                    $border_color   = '';
                     if(array_key_exists('border-top', $option)){
                         $border_top = $option['border-top'];
                     }
