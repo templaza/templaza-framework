@@ -385,6 +385,7 @@ class Templates{
                     $border_right   = '';
                     $border_bottom   = '';
                     $border_left   = '';
+                    $border_style   = '';
                     if(array_key_exists('border-top', $option)){
                         $border_top = $option['border-top'];
                     }
@@ -397,9 +398,16 @@ class Templates{
                     if(array_key_exists('border-left', $option)){
                         $border_left = $option['border-left'];
                     }
+                    if(array_key_exists('border-style', $option)){
+                        $border_style = $option['border-style'];
+                    }
+                    if(array_key_exists('border-color', $option)){
+                        $border_color = $option['border-color'];
+                    }
+
                     $css['desktop']    .= CSS::border($border_top, $border_right,
                         $border_bottom, $border_left,
-                        $option['border-style'], $option['border-color'], $important);
+                        $border_style, $border_color, $important);
 
                     // Border radius
                     if(array_key_exists('border-radius-top-left', $option)){
