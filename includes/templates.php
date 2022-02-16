@@ -381,7 +381,10 @@ class Templates{
                             $option['background-position'],$option['background-size']);
                     }
                     // Border
-                    if(array_key_exists('border-top', $option)){
+                    if(array_key_exists('border-top', $option)
+                        || array_key_exists('border-right', $option)
+                        || array_key_exists('border-bottom', $option)
+                        || array_key_exists('border-left', $option)){
                         $css['desktop']    .= CSS::border($option['border-top'], $option['border-right'],
                             $option['border-bottom'], $option['border-left'],
                             $option['border-style'], $option['border-color'], $important);
