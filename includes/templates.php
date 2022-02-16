@@ -381,14 +381,26 @@ class Templates{
                             $option['background-position'],$option['background-size']);
                     }
                     // Border
-                    if(array_key_exists('border-top', $option)
-                        || array_key_exists('border-right', $option)
-                        || array_key_exists('border-bottom', $option)
-                        || array_key_exists('border-left', $option)){
-                        $css['desktop']    .= CSS::border($option['border-top'], $option['border-right'],
-                            $option['border-bottom'], $option['border-left'],
-                            $option['border-style'], $option['border-color'], $important);
+                    $border_top     = '';
+                    $border_right   = '';
+                    $border_bottom   = '';
+                    $border_left   = '';
+                    if(array_key_exists('border-top', $option)){
+                        $border_top = $option['border-top'];
                     }
+                    if(array_key_exists('border-right', $option)){
+                        $border_right = $option['border-right'];
+                    }
+                    if(array_key_exists('border-bottom', $option)){
+                        $border_bottom = $option['border-bottom'];
+                    }
+                    if(array_key_exists('border-left', $option)){
+                        $border_left = $option['border-left'];
+                    }
+                    $css['desktop']    .= CSS::border($border_top, $border_right,
+                        $border_bottom, $border_left,
+                        $option['border-style'], $option['border-color'], $important);
+
                     // Border radius
                     if(array_key_exists('border-radius-top-left', $option)){
                         $border_radius = CSS::make_spacing_redux('border-radius', $option, $important, 'px');
@@ -403,7 +415,10 @@ class Templates{
                         }
                     }
                     // Margin
-                    if(array_key_exists('margin-top', $option)){
+                    if(array_key_exists('margin-top', $option)
+                        || array_key_exists('margin-right', $option)
+                        || array_key_exists('margin-bottom', $option)
+                        || array_key_exists('margin-left', $option)){
                         $margin = CSS::make_spacing_redux('margin', $option, $important, 'px');
                         if(!empty($margin)){
                             if(is_array($margin) && count($margin)){
@@ -416,7 +431,10 @@ class Templates{
                         }
                     }
                     // Padding
-                    if(array_key_exists('padding-top', $option)){
+                    if(array_key_exists('padding-top', $option)
+                        || array_key_exists('padding-right', $option)
+                        || array_key_exists('padding-bottom', $option)
+                        || array_key_exists('padding-left', $option)){
                         $padding = CSS::make_spacing_redux('padding', $option, $important, 'px');
                         if(!empty($padding) && count($padding)){
                             if(is_array($padding) && count($padding)){
