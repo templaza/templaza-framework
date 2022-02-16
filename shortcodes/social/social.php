@@ -16,6 +16,18 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
                 'param_title' => __('Social settings'),
                 'admin_label' => true,
                 'params'      => array(
+                    array(
+                        'id'     => 'social-item-margin',
+                        'type'   => 'spacing',
+                        'mode'   => 'margin',
+                        'all'    => false,
+                        'allow_responsive'    => true,
+                        'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                        'title'  => esc_html__('Social Item Margin', $this -> text_domain),
+                        'default' => array(
+                            'units' => 'px',
+                        ),
+                    ),
                 )
             );
         }
