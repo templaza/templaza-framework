@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-var_dump($attributes);
+//var_dump($attributes);
 
 //$submit_text        = '';
 $submit_icon        = '';

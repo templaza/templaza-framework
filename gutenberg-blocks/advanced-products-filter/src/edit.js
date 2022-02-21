@@ -28,6 +28,8 @@ import { useState } from '@wordpress/element';
 // import { /*Spinner,*/ IconButton/*, TextControl, Panel, PanelBody, PanelRow*/  } from '@wordpress/components';
 import { SelectControl,Panel,PanelBody,FormToggle,TextControl,BoxControl,ComboboxControl} from '@wordpress/components';
 // import { more } from '@wordpress/icons';
+// import React from 'react';
+// import {Select} from 'react-select';
 
 // import { useSelect } from '@wordpress/data';
 // import MyButtonBlockAppender from './button-appender';
@@ -124,7 +126,16 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 						{/*<BoxControl values={ attributes.title_margin }*/}
 						{/*			onChange={ ( nextValues ) => console.log(nextValues) }/>*/}
 						{/*}*/}
-						<SelectControl
+
+						{/*<Select*/}
+						{/*	// Selected value.*/}
+                        {/*    isMulti='true'*/}
+						{/*	value={ attributes.ap_custom_fields }*/}
+						{/*	label={ __( 'Select Custom Fields' ) }*/}
+						{/*	onChange={( val ) => { setAttributes( { ap_custom_fields: val }) }}*/}
+						{/*	options={ typeof tz_gt_advanced_products_filter !== "undefined"?tz_gt_advanced_products_filter.custom_fields_options:'' } />*/}
+
+                        <SelectControl
 							// Selected value.
 							multiple
 							value={ attributes.ap_custom_fields }

@@ -85,6 +85,9 @@ if(!class_exists('TemplazaFramework_Gutenberg_Advanced_Products_Filter')) {
                     'tz_gt_advanced_products_filter', array('custom_fields_options' => $field_options)
                 );
             }
+
+//            wp_enqueue_style('templaza-framework-select2', Functions::get_my_url().'/assets/vendors/select2/js/select2.min.css');
+//            wp_enqueue_script('templaza-framework-select2', Functions::get_my_url().'/assets/vendors/select2/js/select2.min.js');
         }
 
         public function get_folder_name()
