@@ -1,0 +1,56 @@
+{
+	"apiVersion": 2,
+	"name": "templaza-framework/advanced-products-filter",
+	"version": "0.1.0",
+	"title": "TemPlaza - Advanced Products Filter",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"title":{
+			"type": "string",
+			"default": "Inventory Search"
+		},
+		"form_title":{
+			"type": "string",
+			"default": "Inventory Search"
+		},
+		"title_tag":{
+			"type": "string",
+			"default": "h3"
+		},
+		"title_display":{
+			"type": "string",
+			"default": "uk-display-block"
+		},
+		"title_padding":{
+			"type": "array",
+			"default": ""
+		},
+		"title_margin":{
+			"type": "array",
+			"default": ""
+		},
+		"enable_keyword":{
+			"type": "boolean"
+		},
+		"submit_text":{
+			"type": "string",
+			"default": "Search"
+		},
+		"submit_icon":{
+			"type": "string",
+			"default": ""
+		},
+		"ap_custom_fields":{
+			"type": "array"
+		}
+	},
+	"textdomain": "templaza-framework",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}
