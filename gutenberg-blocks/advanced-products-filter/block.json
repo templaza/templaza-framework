@@ -5,7 +5,7 @@
 	"title": "TemPlaza - Advanced Products Filter",
 	"category": "widgets",
 	"icon": "smiley",
-	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"description": "Generate to form from shortcode of advanced products plugin.",
 	"supports": {
 		"html": false
 	},

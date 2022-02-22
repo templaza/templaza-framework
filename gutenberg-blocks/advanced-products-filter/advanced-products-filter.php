@@ -58,6 +58,10 @@ if(!class_exists('TemplazaFramework_Gutenberg_Advanced_Products_Filter')) {
                         'label' => $field->post_title,
                         'value' => $key
                     );
+//                    $field_options[] = array(
+//                        'label' => $field->post_title,
+//                        'value' => $key
+//                    );
                 }
             }
 //            get_custom_field_option_by_id
