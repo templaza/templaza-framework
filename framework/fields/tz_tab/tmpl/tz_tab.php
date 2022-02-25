@@ -29,16 +29,13 @@ if(isset($this->field) &&  !empty($this->field)){
 //        $redux      = Redux::instance($opt_name);
         if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
             $redux->_register_settings();
+
+            $enqueue    = new Enqueue($redux);
+            $enqueue -> init();
         }else{
             $redux -> options_class -> register();
+            $redux -> enqueue_class -> init();
         }
-
-        $enqueue    = new Enqueue($redux);
-        $enqueue -> init();
-
-
-
-
 
 //        $args   = $this -> parent -> args;
 //        $args['opt_name']   .= uniqid('__'.$this -> field['id'].'-');

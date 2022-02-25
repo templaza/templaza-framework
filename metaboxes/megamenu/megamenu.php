@@ -79,7 +79,11 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
 
                 // Generate redux html to field call hook or filter
                 ob_start();
-                $redux->generate_panel();
+                if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                    $redux->generate_panel();
+                }else{
+                    $redux -> render_class -> generate_panel();
+                }
                 ob_end_clean();
 
                 $this -> redux  = $redux;
@@ -1306,12 +1310,13 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 
                     if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
                         $redux->_register_settings();
+
+                        $enqueue    = new Enqueue($redux);
+                        $enqueue -> init();
                     }else{
                         $redux -> options_class -> register();
+                        $redux -> enqueue_class -> init();
                     }
-
-                    $enqueue    = new Enqueue($redux);
-                    $enqueue -> init();
 
                     ?>
                     <?php

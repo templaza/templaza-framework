@@ -257,8 +257,12 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             }
             add_action('admin_footer', function(){
                 $t  = \Redux::instance($this -> setting_args[$this -> get_post_type()]['opt_name']);
-                if($t && method_exists($t, '_enqueue')) {
-                    $t->_enqueue();
+                if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                    if($t && method_exists($t, '_enqueue')) {
+                        $t->_enqueue();
+                    }
+                }else{
+                    $t -> enqueue_class -> init();
                 }
                 if(!$this ->my_post_type_exists()) {
                     wp_add_inline_script('redux-js', '
@@ -389,15 +393,20 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
                         if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
                             $redux->_register_settings();
+
+                            $enqueue    = new Enqueue($redux);
+                            $enqueue -> init();
                         }else{
                             $redux -> options_class -> register();
+                            $redux -> enqueue_class -> init();
                         }
 
-                        $enqueue    = new Enqueue($redux);
-                        $enqueue -> init();
-
                         ob_start();
-                        $redux->generate_panel();
+                        if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                            $redux->generate_panel();
+                        }else{
+                            $redux -> render_class -> generate_panel();
+                        }
                         $content = ob_get_contents();
                         ob_end_clean();
                     }
@@ -609,10 +618,11 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             if($redux  = \Redux::instance($opt_name)) {
                 if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
                     $redux->_register_settings();
+                    $redux->generate_panel();
                 }else{
                     $redux -> options_class -> register();
+                    $redux -> render_class->generate_panel();
                 }
-                $redux->generate_panel();
             }
         }
 
