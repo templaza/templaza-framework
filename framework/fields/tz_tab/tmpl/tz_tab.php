@@ -27,7 +27,11 @@ if(isset($this->field) &&  !empty($this->field)){
         $opt_name   = $args['opt_name'];
 
 //        $redux      = Redux::instance($opt_name);
-        $redux -> _register_settings();
+        if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+            $redux->_register_settings();
+        }else{
+            $redux -> options_class -> register();
+        }
 
         $enqueue    = new Enqueue($redux);
         $enqueue -> init();

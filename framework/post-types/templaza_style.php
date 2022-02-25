@@ -387,7 +387,11 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                             $redux->options['layout'] = $gb_options['layout'];
                         }
 
-                        $redux->_register_settings();
+                        if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                            $redux->_register_settings();
+                        }else{
+                            $redux -> options_class -> register();
+                        }
 
                         $enqueue    = new Enqueue($redux);
                         $enqueue -> init();
@@ -603,7 +607,11 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             $opt_name   = $this -> setting_args[$post_type]['opt_name'];
 
             if($redux  = \Redux::instance($opt_name)) {
-                $redux->_register_settings();
+                if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                    $redux->_register_settings();
+                }else{
+                    $redux -> options_class -> register();
+                }
                 $redux->generate_panel();
             }
         }
