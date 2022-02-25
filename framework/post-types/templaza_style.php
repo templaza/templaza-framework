@@ -262,7 +262,9 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                         $t->_enqueue();
                     }
                 }else{
-                    $t -> enqueue_class -> init();
+                    if($t && isset($t->enqueue_class) && $t->enqueue_class) {
+                        $t->enqueue_class->init();
+                    }
                 }
                 if(!$this ->my_post_type_exists()) {
                     wp_add_inline_script('redux-js', '

@@ -387,6 +387,7 @@ class TemplazaFramework_ShortCode{
 
     protected function _init_admin_template_settings(){
         if($el = $this -> get_element()){
+            $parent = $this -> parent;
             $params = isset($el['params'])?$el['params']:null;
             if($params){
                 ob_start();
@@ -407,8 +408,13 @@ class TemplazaFramework_ShortCode{
 
 //                            apply_filters('templaza-framework/element/param/before', $param, $this);
 
-                            $this -> parent -> field_default_values($param);
-                            $this -> parent -> check_dependencies($param);
+                            if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                                $this->parent->field_default_values($param);
+                                $this->parent->check_dependencies($param);
+                            }else {
+                                $parent -> options_defaults_class -> field_default_values($parent->args['opt_name'], $param);
+                                $parent -> required_class -> check_dependencies($param);
+                            }
 
                             TemPlazaFramework\Helpers\FieldHelper::check_required_dependencies($param, $this -> field_parent, $this -> parent);
 
@@ -420,7 +426,11 @@ class TemplazaFramework_ShortCode{
                             $param['id']    = $this -> field_parent['id'].'-'.$param['id'];
 
                             ob_start();
-                            $this -> parent -> _field_input($param);
+                            if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                                $this->parent->_field_input($param);
+                            }else{
+                                $parent -> render_class -> field_input($param, null);
+                            }
                             $param_html = ob_get_contents();
                             ob_end_clean();
                             if(preg_match('/<script\b[^>]*>(.*?)<\/script>/is', $param_html)){
@@ -428,7 +438,14 @@ class TemplazaFramework_ShortCode{
                             }
                             ?>
                             <tr>
-                                <?php if($title = $this -> parent -> get_header_html($param)){ ?>
+                                <?php
+                                $title  = false;
+                                if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')){
+                                    $title = $this -> parent -> get_header_html($param);
+                                }else{
+                                    $title  = $parent -> render_class -> get_header_html($param);
+                                }
+                                if($title){ ?>
                                     <th><?php echo $title; ?></th>
                                 <?php } ?>
                                 <td><?php echo $param_html; ?></td>
