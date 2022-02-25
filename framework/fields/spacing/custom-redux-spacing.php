@@ -16,6 +16,7 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
         protected $redux_field_type = 'spacing';
         protected $args = array();
         protected $units;
+        protected $value_tmp;
         protected $redux_framework;
         protected $tz_fields_object;
 //        protected $select2_config;
@@ -44,7 +45,11 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
         public function custom_before_render_field(&$field, &$value){
             if((isset($field['allow_responsive']) && $field['allow_responsive']) ||
                 (isset($field['mode']) && !in_array($field['mode'], array('absolute', 'margin', 'padding')))) {
-                $this -> value  = $value;
+                if(is_array($value)) {
+                    $this->value_tmp = $value;
+                    $value['units'] = 'px';
+                }
+                $this -> value      = $value;
             }
         }
 
@@ -53,6 +58,9 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
                 (isset($field['mode']) && !in_array($field['mode'], array('absolute', 'margin', 'padding')))) {
 
                 $this -> _init_field($field);
+                if(isset($this -> value_tmp) && !empty($this -> value_tmp)) {
+                    $this->value = $this->value_tmp;
+                }
 
                 $file   = TEMPLAZA_FRAMEWORK_FIELD_PATH.'/spacing/tmpl/spacing.php';
                 if(file_exists($file)){
