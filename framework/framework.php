@@ -216,11 +216,11 @@ class Framework{
                 $options    = (!empty($options) && is_string($options))?json_decode($options, true):$options;
 
                 if(!empty($options)) {
-                    if(method_exists($redux, 'set_options')) {
-                        $redux->set_options($options);
-                    }else{
+//                    if(method_exists($redux, 'set_options')) {
+//                        $redux->set_options($options);
+//                    }else{
                         update_option($opt_name, $options);
-                    }
+//                    }
                 }
             }
         }
