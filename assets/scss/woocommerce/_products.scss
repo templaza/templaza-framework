@@ -166,7 +166,7 @@ ul.products {
       transition: transform .35s ease;
       padding-top: 20px;
       background-color: #fff;
-      .rz-loop_atc_button {
+      .tz-loop_atc_button {
         display: none;
       }
     }
@@ -701,7 +701,7 @@ ul.products.product-loop-layout-6 {
       transition-property: box-shadow;
       &:hover {
         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.06);
-        .rz-loop_atc_button {
+        .tz-loop_atc_button {
           background-color: $tztheme-button_background;
           color: $tztheme-button_text_color_hover;
         }
@@ -714,7 +714,7 @@ ul.products.product-loop-layout-6 {
       padding-left: 30px;
       padding-right: 30px;
     }
-    .rz-loop_atc_button {
+    .tz-loop_atc_button {
       padding: 10px 24px;
       min-width: 140px;
       border: 1px solid $tztheme-button_background;
@@ -734,7 +734,7 @@ ul.products.product-loop-layout-6 {
         display: none;
       }
     }
-    .rz-loop_atc_button.loading {
+    .tz-loop_atc_button.loading {
       &:before {
         position: absolute;
         top: 50%;
@@ -883,7 +883,7 @@ ul.products.product-loop-layout-8 {
     .product-close-variations-form {
       display: none;
     }
-    .rz-loop_atc_button {
+    .tz-loop_atc_button {
       float: left;
       text-transform: uppercase;
       font-weight: 500;
@@ -911,7 +911,7 @@ ul.products.product-loop-layout-8 {
         display: none;
       }
     }
-    .rz-loop_atc_button.loading {
+    .tz-loop_atc_button.loading {
       padding-left: 25px;
       position: relative;
       &:before {
@@ -1052,7 +1052,7 @@ ul.products.product-loop-layout-9 {
     .product-summary {
       position: relative;
       z-index: 1;
-      .rz-loop_atc_button {
+      .tz-loop_atc_button {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1091,7 +1091,7 @@ ul.products.product-loop-layout-9 {
           margin-left: 10px;
         }
       }
-      .rz-loop_atc_button.loading {
+      .tz-loop_atc_button.loading {
         &:before {
           margin-top: 0;
           vertical-align: middle;
@@ -1158,7 +1158,7 @@ ul.products.product-loop-layout-9.has-variations-form {
           }
         }
       }
-      .rz-loop_atc_button {
+      .tz-loop_atc_button {
         display: none;
       }
     }
@@ -1198,7 +1198,7 @@ ul.products.product-loop-layout-9.has-variations-form {
         z-index: 999;
         bottom: 40px;
       }
-      .rz-loop_atc_button {
+      .tz-loop_atc_button {
         display: flex;
       }
       .product-quick-shop-button {
