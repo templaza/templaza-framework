@@ -79,9 +79,16 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
 
                         $redux  = \Redux::instance($opt_name);
                     }
-                    $redux -> _register_settings();
-                    $enqueue    = new \Redux_Enqueue($redux);
-                    $enqueue -> init();
+
+                    if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                        $redux->_register_settings();
+
+                        $enqueue    = new Enqueue($redux);
+                        $enqueue -> init();
+                    }else{
+                        $redux -> options_class -> register();
+                        $redux -> enqueue_class -> init();
+                    }
                 }
 
                 foreach($metaboxes as $k => $metabox){
@@ -155,10 +162,15 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                 // Set options
                 $redux -> options   = $this -> get_my_data($_metabox, $post);
 
-                $redux->_register_settings();
+                if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                    $redux->_register_settings();
 
-                $enqueue    = new Enqueue($redux);
-                $enqueue -> init();
+                    $enqueue    = new Enqueue($redux);
+                    $enqueue -> init();
+                }else{
+                    $redux -> options_class -> register();
+                    $redux -> enqueue_class -> init();
+                }
 
                 ?>
                 <?php

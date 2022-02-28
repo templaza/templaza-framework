@@ -120,10 +120,13 @@ if ( !class_exists ( 'ReduxFramework_TZ_Element' ) ) {
                     $f['class'] = '';
                     $f['id']    = $this->field[ 'id' ].'-'.$f['id'];
 
-
-
-                    $this -> parent -> field_default_values($f);
-                    $this -> parent -> check_dependencies($f);
+                    if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                        $this->parent->field_default_values($f);
+                        $this->parent->check_dependencies($f);
+                    }else{
+                        $parent -> options_defaults_class -> field_default_values($parent -> args['opt_name'], $f);
+                        $parent -> required_class -> check_dependencies($f);
+                    }
 
                     Helper::check_required_dependencies($f, $this -> field, $this -> parent);
 

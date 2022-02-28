@@ -78,13 +78,21 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
             });
             $redux  = \Redux::instance($opt_name );
 
-            $redux-> _register_settings();
+            if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                $redux->_register_settings();
 
-            $enqueue    = new Enqueue($redux);
-            $enqueue -> init();
+                $enqueue    = new Enqueue($redux);
+                $enqueue -> init();
+            }else{
+                $redux -> options_class -> register();
+                $redux -> enqueue_class -> init();
+            }
             ob_start();
-
-            $redux->generate_panel();
+            if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                $redux->generate_panel();
+            }else{
+                $redux -> render_class -> generate_panel();
+            }
 
             ob_end_clean();
 

@@ -3,6 +3,10 @@
 
 Changelogs:
 
+Version 1.0.5 - February 28, 2022
+    
+    Fix issue with redux v4.3.11.
+
 Version 1.0.4 - January 15, 2021
     
     Update post type portfolio.

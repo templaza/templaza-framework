@@ -26,34 +26,15 @@ if(isset($this->field) &&  !empty($this->field)){
         $args       = $redux -> args;
         $opt_name   = $args['opt_name'];
 
-//        $redux      = Redux::instance($opt_name);
-        $redux -> _register_settings();
+        if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+            $redux->_register_settings();
 
-        $enqueue    = new Enqueue($redux);
-        $enqueue -> init();
-
-
-
-
-
-//        $args   = $this -> parent -> args;
-//        $args['opt_name']   .= uniqid('__'.$this -> field['id'].'-');
-//        $opt_name   = $args['opt_name'];
-//        $args['show_import_export'] = false;
-//        Redux::set_args($opt_name, $args);
-//
-//        foreach($this -> field['tabs'] as $k => $tab){
-//            $tab_titles     .= '<li><a href="#tz_tab-'.$tab['id'].'">'.$tab['title'].'</a></li>';
-//
-//            $tab['title']   = '';
-//
-//            Redux::set_section($opt_name, $tab);
-//
-//        }
-//        Redux::init($opt_name);
-//        \Templaza_API::load_my_fields($opt_name);
-//
-//        $redux  = Redux::instance($opt_name);
+            $enqueue    = new Enqueue($redux);
+            $enqueue -> init();
+        }else{
+            $redux -> options_class -> register();
+            $redux -> enqueue_class -> init();
+        }
 
         foreach($redux -> sections as $k => $tab){
 
