@@ -252,10 +252,10 @@
   .templaza-sticky-add-to-cart__content-button {
     @include button-default;
     @include border-radius(0);
-    height:$tztheme-input-height;
     color:$tztheme-button_text_color;
     display:flex;
     align-items: center;
+    line-height: 1.5em;
     padding-left:30px;
     padding-right:30px;
     text-transform: $tztheme-button_transform;
