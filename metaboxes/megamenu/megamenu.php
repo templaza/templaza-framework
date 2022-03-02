@@ -863,9 +863,9 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                 return;
             }
 
-            $megamenu   = str_replace('\\', '', $megamenu);
+            $megamenu   = wp_unslash($megamenu);
+//            $megamenu   = str_replace('\\', '', $megamenu);
             $megamenu_settings   = str_replace('\\', '', $megamenu_settings);
-
             $megamenu   = json_decode($megamenu, true);
             $megamenu_settings   = json_decode($megamenu_settings, true);
 
@@ -879,12 +879,6 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 
                 foreach ($megamenu as $menu_id => &$layout){
                     $this -> tree_element_main($layout);
-////                    if(empty($layout['elements'])) {
-//                        var_dump($menu_id);
-//                        var_dump($layout['type']);
-////                        var_dump($layout);
-//                        die(__FILE__);
-////                    }
                     update_post_meta($menu_id, '_templaza_megamenu_layout', $layout);
                 }
             }
@@ -933,7 +927,6 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                         $subitems   = false;
                     }
                 }
-
 
 //                if($continue){
 //                    continue;
@@ -1008,7 +1001,6 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
             // The menu id of the current menu being edited.
             $nav_menu_selected_id = isset( $_REQUEST['menu'] ) ? (int) $_REQUEST['menu'] : 0;
 
-
             // Get recently edited nav menu.
             $recently_edited = absint( get_user_option( 'nav_menu_recently_edited' ) );
             if ( empty( $recently_edited ) && is_nav_menu( $nav_menu_selected_id ) ) {
@@ -1047,12 +1039,12 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                     }, 10);
                     foreach ($menu_items as $menu_item){
                         if($mega_layout = get_post_meta($menu_item -> ID, '_templaza_megamenu_layout', true)) {
-                            $mlayout    = get_post_meta($menu_item->ID, '_templaza_megamenu_layout', true);
+//                            $mlayout    = get_post_meta($menu_item->ID, '_templaza_megamenu_layout', true);
 
                             // Change menu slug to menu id of megamenu menu item element
-                            $this -> tree_element_main($mlayout);
+                            $this -> tree_element_main($mega_layout);
 
-                            $data[$menu_item->ID] = $mlayout;
+                            $data[$menu_item->ID] = $mega_layout;
                         }
 
                         if($mega_settings = get_post_meta($menu_item -> ID, '_templaza_megamenu_settings', true)) {
