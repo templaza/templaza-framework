@@ -474,136 +474,6 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
             do_action('templaza-framework/metabox/'.$this -> get_meta_box_name()
                 .'/megamenu_instance_counter_' . $args['theme_location']);
 
-//            $num_times_called = did_action('templaza-framework/metabox/'.$this -> get_meta_box_name()
-//                .'/megamenu_instance_counter_' . $args['theme_location']);
-//
-//            $meta_options = get_option( 'templaza_megamenu_settings' );
-//            $current_theme_location = $args['theme_location'];
-//
-//            $settings  = isset($meta_options['tz_megamenu_meta'])?json_decode($meta_options['tz_megamenu_meta'], true):array();
-//
-//            $active_instance = isset( $settings['instances'][$current_theme_location] ) ? $settings['instances'][$current_theme_location] : 0;
-//
-//            if ( $active_instance != '0' && strlen( $active_instance ) ) {
-//
-//                if ( strpos( $active_instance, "," ) || is_numeric( $active_instance ) ) {
-//
-//                    $active_instances = explode( ",", $active_instance );
-//
-//                    if ( ! in_array( $num_times_called, $active_instances )) {
-//                        return $args;
-//                    }
-//
-//                } else if ( isset( $args['container_id'] ) && $active_instance != $args['container_id'] ) {
-//
-//                    return $args;
-//
-//                }
-//            }
-//
-//            $locations = get_nav_menu_locations();
-//
-//            if ( isset ( $settings[ $current_theme_location ]['enabled'] ) && $settings[ $current_theme_location ]['enabled'] == true ) {
-//
-//                $args['templaza_megamenu_enable']   = $settings[ $current_theme_location ]['enabled'];
-//
-//                if ( ! isset( $locations[ $current_theme_location ] ) ) {
-//                    return $args;
-//                }
-//
-//                $menu_id = $locations[ $current_theme_location ];
-//
-//                if ( ! $menu_id ) {
-//                    return $args;
-//                }
-//
-//                $menu_settings = $settings[ $current_theme_location ];
-//
-//                $effect = isset( $menu_settings['effect'] ) ? $menu_settings['effect'] : 'disabled';
-//
-//                // convert Pro JS based effect to CSS3 effect
-//                if ( $effect == 'fadeUp' ) {
-//                    $effect = 'fade_up';
-//                }
-//
-//                // as set on the main settings page
-//                $vertical_behaviour = isset( $settings['mobile_behaviour'] ) ? $settings['mobile_behaviour'] : 'standard';
-//
-//                if ( isset( $menu_settings['mobile_behaviour'] ) ) {
-//                    $vertical_behaviour = $menu_settings['mobile_behaviour'];
-//                }
-//
-//                // as set on the main settings page
-//                $second_click = isset( $settings['second_click'] ) ? $settings['second_click'] : 'go';
-//
-//                if ( isset( $menu_settings['second_click'] ) ) {
-//                    $second_click = $menu_settings['second_click'];
-//                }
-//
-//                $unbind = isset( $settings['unbind'] ) ? $settings['unbind'] : 'enabled';
-//
-//                if ( isset( $menu_settings['unbind'] ) ) {
-//                    $unbind = $menu_settings['unbind'];
-//                }
-//
-//                $event = 'hover_intent';
-//
-//                if ( isset( $menu_settings['event'] ) ) {
-//                    if ( $menu_settings['event'] == 'hover' ) {
-//                        $event = 'hover_intent';
-//                    } elseif ( $menu_settings['event'] == 'hover_' ) {
-//                        $event = 'hover';
-//                    } else {
-//                        $event = $menu_settings['event'];
-//                    }
-//                }
-//
-//                $mobile_force_width = 'false';
-//
-//
-//                $effect_mobile = 'disabled';
-//
-//                if ( isset( $menu_settings['effect_mobile'] ) ) {
-//                    $effect_mobile = $menu_settings['effect_mobile'];
-//                }
-//
-//                $effect_speed_mobile = 200;
-//
-//                if ( isset( $menu_settings['effect_speed_mobile'] ) ) {
-//                    $effect_speed_mobile = $menu_settings['effect_speed_mobile'];
-//                }
-//
-//                if ( $effect_mobile == 'disabled' ) {
-//                    $effect_speed_mobile = 0;
-//                }
-//
-//                $hover_intent_params = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
-//                    .'/megamenu_javascript_localisation', // backwards compatiblity
-//                    array(
-//                        "timeout" => 300,
-//                        "interval" => 100
-//                    )
-//                );
-//
-//                $wrap_attributes = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
-//                    .'/megamenu_wrap_attributes', array(
-//                    "id" => '%1$s',
-//                    "class" => '%2$s wsmenu-list',
-//                ), $menu_id, $menu_settings, $settings, $current_theme_location );
-//
-//                $attributes = "";
-//
-//                foreach( $wrap_attributes as $attribute => $value ) {
-//                    if ( strlen( $value ) ) {
-//                        $attributes .= " " . $attribute . '="' . esc_attr( $value ) . '"';
-//                    }
-//                }
-//
-//                $sanitized_location = str_replace( apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
-//                    .'/megamenu_location_replacements', array("-", " ") ), "-", $current_theme_location );
-//
-//            }
-
             $walker_file    = TEMPLAZA_FRAMEWORK_METABOXES_PATH.'/'.$this -> get_meta_box_name().'/classes/walker.class.php';
 
             if(file_exists($walker_file)) {
@@ -942,6 +812,7 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                     if ($megamenu_enable) {
                         $saved_layout = array_filter((array)get_post_meta($item->ID, '_templaza_megamenu_layout', true));
 
+
                         $this -> tree_element_main($saved_layout);
 
                         $shortcode = Functions::generate_option_to_shortcode($saved_layout);
@@ -1008,6 +879,12 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 
                 foreach ($megamenu as $menu_id => &$layout){
                     $this -> tree_element_main($layout);
+////                    if(empty($layout['elements'])) {
+//                        var_dump($menu_id);
+//                        var_dump($layout['type']);
+////                        var_dump($layout);
+//                        die(__FILE__);
+////                    }
                     update_post_meta($menu_id, '_templaza_megamenu_layout', $layout);
                 }
             }
@@ -1026,7 +903,7 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
             }
             do_action('templaza-framework/metabox/'.$this -> get_meta_box_name()
                 .'/element/before', $elements);
-            foreach ($elements as &$element){
+            foreach ($elements as $i => &$element){
 
 //                $continue   = false;
 //                if($element['type'] != 'megamenu_menu_item'){
@@ -1037,6 +914,26 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 //                $continue   = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
 //                    .'/element/each/continue', $continue, $element, $elements);
                 $subitems   = is_array($element) && isset($element['elements']) && !empty($element['elements']);
+
+                // Remove row with columns don't have sub elements
+                if($element['type'] == 'row' && $subitems){
+                    $columns    = $element['elements'];
+                    foreach($columns as $j => $column){
+                        $col_subitems   = is_array($column) && isset($column['elements']) && !empty($column['elements']);
+                        if(!$col_subitems){
+                            // Remove column $j
+                            unset($element['elements'][$j]);
+                        }
+                    }
+                    $subitems   = is_array($element) && isset($element['elements']) && !empty($element['elements']);
+                    $row_subitems   = is_array($element) && isset($element['elements']) && !empty($element['elements']);
+                    if(!$row_subitems){
+                        // Remove row $i
+                        unset($elements[$i]);
+                        $subitems   = false;
+                    }
+                }
+
 
 //                if($continue){
 //                    continue;
@@ -1054,6 +951,10 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 
                 $element = apply_filters('templaza-framework/metabox/'.$this -> get_meta_box_name()
                     .'/element/each', $element, $elements);
+//                var_dump($element['type']);
+//                var_dump(empty($subitems));
+//                var_dump($level);
+//                die(930);
 
                 if($subitems){
                     do_action('templaza-framework/metabox/'.$this -> get_meta_box_name()

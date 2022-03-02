@@ -216,11 +216,20 @@ class Framework{
                 $options    = (!empty($options) && is_string($options))?json_decode($options, true):$options;
 
                 if(!empty($options)) {
-//                    if(method_exists($redux, 'set_options')) {
-//                        $redux->set_options($options);
-//                    }else{
-                        update_option($opt_name, $options);
-//                    }
+                    if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                        if(method_exists($redux, 'set_options')) {
+                            $redux->set_options($options);
+                        }else{
+                            update_option($opt_name, $options);
+                        }
+                    }else{
+                        if(isset($redux->options_class) && !empty($redux->options_class)
+                            && method_exists($redux->options_class, 'set')) {
+                            $redux->options_class->set($options);
+                        }else{
+                            update_option($opt_name, $options);
+                        }
+                    }
                 }
             }
         }
