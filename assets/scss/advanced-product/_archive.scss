@@ -24,17 +24,8 @@
     }
     .ap-specification{
       .ap-spec-item{
-        padding:3px 10px;
-        color:$tztheme-heading-color;
+        padding:2px 10px;
         font-size: 0.875em;
-        @include transition($tztheme-transition-all);
-        &:hover{
-          background: $tztheme-button_background;
-          @include transition($tztheme-transition-all);
-          a{
-            color:$tztheme-heading-color;
-          }
-        }
       }
     }
   }

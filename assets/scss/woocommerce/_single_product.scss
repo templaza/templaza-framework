@@ -8,7 +8,7 @@
 .single-product div.product .woocommerce-product-gallery {
   position: relative;
   float: left;
-  width: 48.7%;
+  width: 45%;
 }
 
 .single-product div.product .woocommerce-product-gallery .woocommerce-product-gallery__trigger {
@@ -194,7 +194,7 @@
 }
 
 .single-product div.product .rz-wishlist-button .tz-loop-button {
-  padding: 0 25px;
+  padding: 0 20px;
   i{
     margin:0;
     padding:0;
@@ -256,11 +256,12 @@
 }
 
 .single-product div.product .product_meta {
-  margin: 20px 0;
+  margin: 30px 0 0;
 }
 
 .single-product div.product .product_meta > span {
   display: block;
+  margin-bottom: 10px;
 }
 
 .single-product div.product .product_meta > span a:not(:hover) {
@@ -289,7 +290,7 @@
   padding-right: 20px;
   position: relative;
   margin-right: 18px;
-  min-width: 230px;
+  min-width: 200px;
 }
 
 .single-product div.product .product-button-wrapper .single_add_to_cart_button.loading {
@@ -297,7 +298,7 @@
 }
 
 .single-product div.product .product-button-wrapper .single_add_to_cart_button.loading:after {
-  height: 19px;
+  height: 16px;
   display: inline-block;
   border-radius: 50%;
   border: 2px solid;
@@ -310,20 +311,21 @@
 }
 
 .single-product div.product .product-button-wrapper .single_add_to_cart_button:after {
-  margin-left: 15px;
+  margin-left: 10px;
   display: inline-block;
   line-height: 1;
-  vertical-align: middle;
-  width: 19px;
+  width: 16px;
   content: "\f07a";
-  font-size: 1rem;
   font-weight: 900;
+  font-size: 0.9em;
   font-family: "Font Awesome 5 Free";
 }
 
 .single-product div.product .woocommerce-product-details__short-description {
   margin-top: 10px;
   margin-bottom: 15px;
+  border-top: 1px solid $tztheme-border-color;
+  padding-top:30px;
 }
 
 .single-product div.product .woocommerce-product-details__short-description p {
@@ -382,8 +384,7 @@
 }
 
 .single-product div.product .quantity .qty {
-  width: 83px;
-  font-size: 18px;
+  width: 60px;
   padding-left: 20px;
   padding-right: 20px;
   height: calc(#{$tztheme-input-height} - 2px);
@@ -391,7 +392,7 @@
 }
 
 .single-product div.product .quantity .qty-dropdown .current {
-  width: 83px;
+  width: 60px;
   height: $tztheme-input-height;
   line-height: $tztheme-input-height;
   font-size: 18px;
@@ -643,8 +644,8 @@
 }
 
 .single-product div.product .entry-summary {
-  width: 51.3%;
-  padding-left: 100px;
+  width: 55%;
+  padding-left: 80px;
   float: right;
 }
 
@@ -690,7 +691,7 @@
 
 .single-product div.product .entry-summary .price ins {
   background-color: transparent;
-  color: $tztheme-content-color;
+  color: $tztheme-global-color;
 }
 
 .single-product div.product .entry-summary .woocommerce-review-link {
@@ -700,6 +701,7 @@
 .single-product div.product .entry-summary .yith-wcwl-add-to-wishlist {
   margin: 0;
   line-height: $tztheme-input-height;
+  text-align: center;
 }
 
 .single-product div.product .summary-top-box {
@@ -1112,7 +1114,7 @@
 }
 
 .single-product div.product.product-type-variable form.cart .variations td.label {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: $tztheme-heading-color;
 }
 
@@ -1173,7 +1175,10 @@
 }
 
 .single-product div.product.product-type-variable form.variations_form .variations td.value {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+.single_variation_wrap{
+  margin-top: 10px;
 }
 
 .single-product div.product.product-type-variable form.variations_form .product-button-wrapper .single_add_to_cart_button.disabled {
@@ -1314,7 +1319,9 @@
 
 .wcboost-variation-swatches.wcboost-variation-swatches--button .wcboost-variation-swatches__item, .wcboost-variation-swatches.wcboost-variation-swatches--label .wcboost-variation-swatches__item {
   box-shadow: none;
-  border: 1px solid #ddd;
+  border: 1px solid $tztheme-border-color;
+  font-size: 0.875rem;
+  line-height:28px;
 }
 
 .wcboost-variation-swatches.wcboost-variation-swatches--button .wcboost-variation-swatches__item.selected, .wcboost-variation-swatches.wcboost-variation-swatches--button .wcboost-variation-swatches__item:hover, .wcboost-variation-swatches.wcboost-variation-swatches--label .wcboost-variation-swatches__item.selected, .wcboost-variation-swatches.wcboost-variation-swatches--label .wcboost-variation-swatches__item:hover {
@@ -1357,6 +1364,7 @@
   font-size:$tztheme-shop-detail-tab-size;
   text-transform: $tztheme-shop-detail-tab-transform;
   color:$tztheme-heading-color;
+  font-family: $tztheme-heading-font;
 }
 
 .woocommerce-tabs > ul.tabs > li > a:after {

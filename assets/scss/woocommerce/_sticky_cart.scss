@@ -64,14 +64,13 @@
     .single_add_to_cart_button {
       margin-left: 25px;
       &:after {
-        margin-left: 15px;
+        margin-left: 10px;
         display: inline-block;
         line-height: 1;
-        vertical-align: middle;
-        width: 19px;
+        width: 16px;
         content: "\f07a";
-        font-size: 1rem;
         font-weight: 900;
+        font-size:0.9em;
         font-family: "Font Awesome 5 Free";
       }
     }
@@ -286,6 +285,7 @@
 }
 .templaza-sticky-add-to-cart__content-title {
   font-weight: 600;
+  color:$tztheme-heading-color;
 }
 .templaza-sticky-add-to-cart__content-product-info {
   margin-right: 40px;

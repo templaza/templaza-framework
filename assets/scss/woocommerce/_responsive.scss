@@ -13,6 +13,12 @@
     padding-left: 30px;
     padding-right: 30px;
   }
+  .single-product div.product .woocommerce-tabs{
+    margin-top: 60px;
+  }
+  .single-product div.product section.products{
+    margin-top: 70px;
+  }
   .single-product div.product .entry-summary {
     padding-left: 45px;
   }
@@ -1352,7 +1358,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 639.99px) {
   .quick-view-modal .woocommerce .deal-expire-date,
   .quick-view-modal .woocommerce .deal-sold {
     display: block;
@@ -1368,6 +1374,24 @@
   }
   body .notifyjs-corner {
     z-index: 999999;
+  }
+  .single-product div.product section.products > h2{
+    margin-bottom: 60px;
+  }
+  .woocommerce-tabs > ul.tabs > li > a{
+    font-size: 16px;
+  }
+  .woocommerce-tabs > ul.tabs > li > a{
+    font-size:14px;
+  }
+  .single-product div.product .woocommerce-tabs .panel{
+    margin-top: 35px;
+  }
+  .single-product div.product .woocommerce-tabs{
+    margin-top: 40px;
+  }
+  .single-product div.product section.products{
+    margin-top: 60px;
   }
 }
 
