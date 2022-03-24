@@ -5,7 +5,7 @@
   @include border-radius(0);
   &:hover{
     background: none !important;
-    color:$tztheme-heading-color !important;
+    color:$tztheme-button_background_hover !important;
     border-color:$tztheme-button_background_hover !important;
   }
 }
