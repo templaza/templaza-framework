@@ -302,6 +302,10 @@ class TemPlazaFrameWork{
             $this -> theme_options  = Functions::get_theme_options();
 
             $this -> load_template();
+
+            if(file_exists(TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/helpers/woocommerce/woocommerce-load.php')) {
+                require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/woocommerce-load.php';
+            }
         }
     }
 
