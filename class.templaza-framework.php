@@ -37,6 +37,10 @@ class TemPlazaFrameWork{
 
         $instance -> load_gutenberg_blocks();
 
+        if(!is_admin() && file_exists(TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/helpers/woocommerce/woocommerce-load.php')) {
+            require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/woocommerce-load.php';
+        }
+
         static::$instance   = $instance;
         return $instance;
     }
@@ -263,7 +267,7 @@ class TemPlazaFrameWork{
 
         wp_add_inline_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm', $inline_css);
 
-//        $this -> woo_enqueue_scripts();
+        $this -> woo_enqueue_scripts();
 
         do_action('templaza-framework/plugin/enqueue_scripts', $this);
     }
