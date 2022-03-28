@@ -263,7 +263,7 @@ class TemPlazaFrameWork{
 
         wp_add_inline_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm', $inline_css);
 
-//        $this -> woo_enqueue_scripts();
+        $this -> woo_enqueue_scripts();
 
         do_action('templaza-framework/plugin/enqueue_scripts', $this);
     }
@@ -279,8 +279,8 @@ class TemPlazaFrameWork{
         wp_enqueue_script( 'templaza-woo-catalog' );
 
         $admin_url = admin_url('admin-ajax.php');
-        $agruco_ajax_url = array('url' => $admin_url);
-        wp_localize_script('agruco-scripts', 'agruco_ajax_url', $agruco_ajax_url);
+        $templaza_ajax_url = array('url' => $admin_url);
+        wp_localize_script('templaza-scripts', 'templaza_ajax_url', $templaza_ajax_url);
 
         wp_enqueue_script( 'templaza-woo-scripts', Functions::get_my_url() . '/assets/js/woo/woo-scripts.js', array(
             'jquery',
@@ -350,9 +350,9 @@ class TemPlazaFrameWork{
 
             $this -> load_template();
 
-//            if(file_exists(TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/helpers/woocommerce/woocommerce-load.php')) {
-//                require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/woocommerce-load.php';
-//            }
+            if(file_exists(TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/helpers/woocommerce/woocommerce-load.php')) {
+                require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/woocommerce-load.php';
+            }
         }
     }
 

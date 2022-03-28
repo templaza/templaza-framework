@@ -196,7 +196,7 @@ class Templaza_Woo_Catalog {
 			wp_enqueue_script('sticky-kit');
 		}
 
-		wp_enqueue_script( 'templaza-product-catalog', Functions::get_my_url() . '/assets/js/woocommerce/woo-catalog.js', array(
+		wp_enqueue_script( 'templaza-product-catalog', Functions::get_my_url() . '/assets/js/woo/woo-catalog.js', array(
 			'agruco',
 		), '20211209', true );
 

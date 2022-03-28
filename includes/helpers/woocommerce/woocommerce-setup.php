@@ -74,7 +74,6 @@ class Templaza_Woo_Setup {
 				'max_columns'     => 7,
 			),
 		) );
-
 		if ( $product_image_zoom ) {
 			add_theme_support( 'wc-product-gallery-zoom' );
 		}

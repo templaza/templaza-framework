@@ -164,7 +164,6 @@ class Templaza_Single_Product {
 
         $tabs_position        = isset($templaza_options['templaza-shop-single-content-tabs'])?$templaza_options['templaza-shop-single-content-tabs']:'default';
         // Product Layout
-
 		switch ( $this->single_get_product_layout() ) {
 			case 'layout-3':
 				// Change Gallery
