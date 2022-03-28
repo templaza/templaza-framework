@@ -37,10 +37,6 @@ class TemPlazaFrameWork{
 
         $instance -> load_gutenberg_blocks();
 
-        if(!is_admin() && file_exists(TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/helpers/woocommerce/woocommerce-load.php')) {
-            require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/woocommerce-load.php';
-        }
-
         static::$instance   = $instance;
         return $instance;
     }
