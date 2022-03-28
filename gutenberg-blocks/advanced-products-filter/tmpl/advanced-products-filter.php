@@ -37,9 +37,9 @@ $shortcode .= ' enable_keyword="'.($enable_keyword?1:0).'"]';
 ?>
 <div class="templaza-framework-gutenberg-adv-product-filters">
     <?php
-    if($title){
-        echo '<'.esc_html($title_tag).' class="inventory-title-search '.esc_html($title_display).'"> '.esc_html($title).'</'.esc_html($title_tag).'>';
-    }
+//    if($title){
+//        echo '<'.esc_html($title_tag).' class="inventory-title-search '.esc_html($title_display).'"> '.esc_html($title).'</'.esc_html($title_tag).'>';
+//    }
     ?>
     <?php echo do_shortcode($shortcode); ?>
 </div>

@@ -263,7 +263,54 @@ class TemPlazaFrameWork{
 
         wp_add_inline_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm', $inline_css);
 
+//        $this -> woo_enqueue_scripts();
+
         do_action('templaza-framework/plugin/enqueue_scripts', $this);
+    }
+
+    protected function woo_enqueue_scripts(){
+
+        wp_register_script( 'templaza-woo-notify', Functions::get_my_url(). '/assets/js/woo/notify.min.js', array(), '1.0.0', true );
+        wp_register_script( 'templaza-woo-swiper', Functions::get_my_url() . '/assets/js/woo/swiper.min.js', array( 'jquery' ), '5.3.8', true );
+
+        wp_register_script( 'templaza-woo-viewport', Functions::get_my_url() . '/assets/js/woo/isInViewport.min.js', array('jquery'),false,true );
+        wp_enqueue_script( 'templaza-woo-viewport' );
+        wp_register_script( 'templaza-woo-catalog', Functions::get_my_url() . '/assets/js/woo/woo-catalog.js', array('jquery'),false,true );
+        wp_enqueue_script( 'templaza-woo-catalog' );
+
+        $admin_url = admin_url('admin-ajax.php');
+        $agruco_ajax_url = array('url' => $admin_url);
+        wp_localize_script('agruco-scripts', 'agruco_ajax_url', $agruco_ajax_url);
+
+        wp_enqueue_script( 'templaza-woo-scripts', Functions::get_my_url() . '/assets/js/woo/woo-scripts.js', array(
+            'jquery',
+            'templaza-woo-viewport',
+            'templaza-woo-swiper',
+            'templaza-woo-notify',
+            'imagesloaded',
+        ), false, true );
+
+        $templaza_data = array(
+            'direction'            => is_rtl() ? 'true' : 'false',
+            'ajax_url'             => class_exists( 'WC_AJAX' ) ? \WC_AJAX::get_endpoint( '%%endpoint%%' ) : '',
+            'nonce'                => wp_create_nonce( '_templaza_nonce' ),
+            'search_content_type'  => get_option( 'header_search_type' ),
+            'header_search_number' => get_option( 'header_search_number' ),
+            'header_ajax_search'   => intval( get_option( 'header_search_ajax' ) ),
+            'sticky_header'        => intval( get_option( 'header_sticky' ) ),
+            'mobile_landscape'     => get_option( 'mobile_landscape_product_columns' ),
+            'mobile_portrait'      => get_option( 'mobile_portrait_product_columns' ),
+            'popup'                => get_option( 'newsletter_popup_enable' ),
+            'popup_frequency'      => get_option( 'newsletter_popup_frequency' ),
+            'popup_visible'        => get_option( 'newsletter_popup_visible' ),
+            'popup_visible_delay'  => get_option( 'newsletter_popup_visible_delay' ),
+        );
+
+        $templaza_data = apply_filters( 'templaza_wp_script_data', $templaza_data );
+
+        wp_localize_script(
+            'templaza-woo-scripts', 'templazaData', $templaza_data
+        );
     }
 
     public function default_menu_locations(){
@@ -303,9 +350,9 @@ class TemPlazaFrameWork{
 
             $this -> load_template();
 
-            if(file_exists(TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/helpers/woocommerce/woocommerce-load.php')) {
-                require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/woocommerce-load.php';
-            }
+//            if(file_exists(TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/helpers/woocommerce/woocommerce-load.php')) {
+//                require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/woocommerce-load.php';
+//            }
         }
     }
 

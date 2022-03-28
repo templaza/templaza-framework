@@ -205,7 +205,7 @@ class Templaza_Single_Product {
 	 * @return void
 	 */
 	public function scripts() {
-		wp_enqueue_script( 'templaza-single-product', get_template_directory_uri() . '/assets/js/woo/single-product.js', array(
+		wp_enqueue_script( 'templaza-single-product', Functions::get_my_url() . '/assets/js/woo/single-product.js', array(
 			'templaza-woo-scripts',
 		), false, true );
 	}
