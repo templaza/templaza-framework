@@ -3,6 +3,7 @@
  * Register taxonomy
  */
 
+use TemPlazaFramework\Functions;
 
 /**
  * Class Templaza_Product_Brands
@@ -145,7 +146,7 @@ class Templaza_Product_Brands {
 		$screen = get_current_screen();
 		if ( $hook == 'edit-tags.php' && $screen->taxonomy == 'product_brand' || $hook == 'term.php' && $screen->taxonomy == 'product_brand' ) {
 			wp_enqueue_media();
-			wp_enqueue_script( 'templaza_product_brand_js', get_template_directory_uri() . "/assets/js/woo/product-brand-admin.js", array( 'jquery' ), false );
+			wp_enqueue_script( 'templaza_product_brand_js', Functions::get_my_url() . "/assets/js/woo/product-brand-admin.js", array( 'jquery' ), false );
 		}
 	}
 

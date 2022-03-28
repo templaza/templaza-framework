@@ -190,13 +190,13 @@ class Templaza_Woo_Catalog {
 	 * @return void
 	 */
 	public function scripts() {
-		wp_register_script( 'sticky-kit', get_template_directory_uri() . '/assets/js/woo/sticky-kit.min.js', array( 'jquery' ), '1.1.3', true );
+		wp_register_script( 'sticky-kit', Functions::get_my_url() . '/assets/js/woo/sticky-kit.min.js', array( 'jquery' ), '1.1.3', true );
 
 		if( get_option('catalog_sticky_sidebar') ) {
 			wp_enqueue_script('sticky-kit');
 		}
 
-		wp_enqueue_script( 'templaza-product-catalog', get_template_directory_uri() . '/assets/js/woocommerce/woo-catalog.js', array(
+		wp_enqueue_script( 'templaza-product-catalog', Functions::get_my_url() . '/assets/js/woocommerce/woo-catalog.js', array(
 			'agruco',
 		), '20211209', true );
 
