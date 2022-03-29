@@ -49,7 +49,8 @@ if(!class_exists('TemplazaFramework_Gutenberg_Advanced_Products_Filter')) {
             $custom_fields = \Advanced_Product\Helper\AP_Custom_Field_Helper::get_custom_fields();
             if(!empty($custom_fields) && count($custom_fields)){
                 foreach ($custom_fields as $field){
-                    $f_attr             = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);
+                    $f_attr             = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID, array(
+                        'exclude_core_field' => false));
                     $key    = $field -> ID;
                     if(!empty($f_attr)) {
                         $key = isset($f_attr['_name']) ? $f_attr['_name'] : (isset($f_attr['name'])?$f_attr['name']:$key);
@@ -58,40 +59,14 @@ if(!class_exists('TemplazaFramework_Gutenberg_Advanced_Products_Filter')) {
                         'label' => $field->post_title,
                         'value' => $key
                     );
-//                    $field_options[] = array(
-//                        'label' => $field->post_title,
-//                        'value' => $key
-//                    );
                 }
             }
-//            get_custom_field_option_by_id
-//            var_dump($field_options);
-//            die(__FILE__);
-
-//            $args   = array(
-//                'post_type'     => 'ap_custom_field',
-//                'numberposts'   => -1
-//            );
-//            $ap_options = array();
-//            $ap_custom_fields = get_posts($args);
-//            if(!empty($ap_custom_fields) && count($ap_custom_fields)){
-//                foreach ($ap_custom_fields as $item) {
-//
-//                    $ap_options[] = array(
-//                        'label' => $item -> post_title,
-//                        'value' => $item -> ID
-//                    );
-//                }
-//            }
 
             if(!empty($field_options) && count($field_options)){
                 wp_localize_script('templaza-framework-advanced-products-filter-editor-script',
                     'tz_gt_advanced_products_filter', array('custom_fields_options' => $field_options)
                 );
             }
-
-//            wp_enqueue_style('templaza-framework-select2', Functions::get_my_url().'/assets/vendors/select2/js/select2.min.css');
-//            wp_enqueue_script('templaza-framework-select2', Functions::get_my_url().'/assets/vendors/select2/js/select2.min.js');
         }
 
         public function get_folder_name()
