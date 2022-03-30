@@ -1,3 +1,10 @@
+.templaza-sidebar{
+  .advanced-product-search-form{
+    label.search-label{
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+}
 .advanced-product-search-form{
   .ap-search-item{
     margin-bottom: 45px;
@@ -10,7 +17,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
     padding: 0 0 15px;
     font-size: 18px;
@@ -54,6 +60,13 @@
           }
         }
       }
+    }
+    select{
+      background-color:transparent;
+      border-color:$tztheme-border-color;
+    }
+    input[type="number"]{
+      width:100%;
     }
   }
 }
