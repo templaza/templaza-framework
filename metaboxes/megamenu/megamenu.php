@@ -855,7 +855,8 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
         }
 
         public function update_nav_menu($value, $old_value, $option){
-            $megamenu   = isset($_POST['_templaza_megamenu_layout'])?sanitize_text_field($_POST['_templaza_megamenu_layout']):false;
+//            $megamenu   = isset($_POST['_templaza_megamenu_layout'])?sanitize_text_field($_POST['_templaza_megamenu_layout']):false;
+            $megamenu   = isset($_POST['_templaza_megamenu_layout'])?$_POST['_templaza_megamenu_layout']:false;
 
             $megamenu_settings = isset($_POST['_templaza_megamenu_settings'])?sanitize_text_field($_POST['_templaza_megamenu_settings']):false;
 
