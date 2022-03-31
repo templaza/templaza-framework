@@ -1786,7 +1786,7 @@
 		}
 
 		templaza_woo.$body.on('added_to_wishlist', function (e, $el_wrap) {
-			var content = $el_wrap.data('product-title');
+			var content = $el_wrap.attr('data-product-title');
 			getaddedToWishlistNotice(content);
 		});
 

@@ -76,7 +76,7 @@ class Templaza_Woo_Sticky_ATC {
 	public function sticky_single_add_to_cart() {
 		global $product;
 
-		if ( ! $this->has_sticky_atc() ) {
+		if ( ! $this->has_sticky_atc() or ! is_singular('product')) {
 			return;
 		}
         if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){

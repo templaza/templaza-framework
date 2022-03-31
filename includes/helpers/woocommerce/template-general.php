@@ -160,7 +160,7 @@ class Templaza_Woo_General {
 	public function woocommerce_wrapper_before() {
 		?>
         <div id="primary" class="content-area" >
-        <main id="main" class="site-main">
+        <div id="main" class="site-main">
 		<?php
 	}
 
@@ -174,7 +174,7 @@ class Templaza_Woo_General {
 	 */
 	public function woocommerce_wrapper_after() {
 		?>
-        </main><!-- #main -->
+        </div><!-- #main -->
         </div><!-- #primary -->
 		<?php
 	}
