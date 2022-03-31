@@ -65,7 +65,7 @@ if(!empty($heading)){
     <<?php echo $heading_tag; ?><?php echo !empty($heading_custom_class)?' class="'
         .esc_attr__($heading_custom_class).'"':'';?>><?php echo $heading; ?></<?php echo $heading_tag; ?>>
     <?php
-    if($enable_heading_single_meta == true){
+    if(is_single() && $enable_heading_single_meta == true){
         do_action('templaza_single_meta_post');
     }
     ?>
