@@ -63,7 +63,7 @@
     }
     select{
       background-color:transparent;
-      border-color:$tztheme-border-color;
+      border:1px solid rgba(0, 0, 0, 0.1) !important;
     }
     input[type="number"]{
       width:100%;

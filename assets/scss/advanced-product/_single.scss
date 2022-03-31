@@ -60,7 +60,7 @@
       font-weight:bold;
       color:$tztheme-heading-color;
       .currency{
-        background:$tztheme-global-color;
+        background:#334B36;
         @include border-radius(50%);
         width:40px;
         height:40px;
@@ -70,6 +70,15 @@
       padding:35px 30px;
       background:$tztheme-ap-single-price-bg;
       margin-bottom: 30px;
+    }
+    .field-value{
+      color:$tztheme-heading-color;
+      font-weight:600;
+    }
+    .widget-title{
+      font-weight:$tztheme-ap-single-side-title-weight;
+      font-size:$tztheme-ap-single-side-title;
+      margin-bottom: 35px !important;
     }
   }
   .elementor-tabs{
