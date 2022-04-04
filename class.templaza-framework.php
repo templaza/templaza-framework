@@ -37,6 +37,8 @@ class TemPlazaFrameWork{
 
         $instance -> load_gutenberg_blocks();
 
+        require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-product-brand.php';
+
         static::$instance   = $instance;
         return $instance;
     }
@@ -337,6 +339,7 @@ class TemPlazaFrameWork{
         $core   = new Framework();
 
         do_action( 'templaza-framework/plugin/admin_init', $this, $core );
+
     }
 
     public function frontend_init(){
