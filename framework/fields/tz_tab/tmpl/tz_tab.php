@@ -34,7 +34,10 @@ if(isset($this->field) &&  !empty($this->field)){
             $enqueue -> init();
         }else{
             $redux -> options_class -> register();
-            $redux -> enqueue_class -> init();
+            $my_enqueue = new Enqueue($redux);
+            $my_enqueue ->init();
+//            $redux -> enqueue_class -> init();
+
         }
 
 //        $args   = $this -> parent -> args;

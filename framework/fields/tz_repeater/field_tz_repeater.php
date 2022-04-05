@@ -84,7 +84,9 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
                 $enqueue -> init();
             }else{
                 $redux -> options_class -> register();
-                $redux -> enqueue_class -> init();
+//                $redux -> enqueue_class -> init();
+                $my_enqueue = new Enqueue($redux);
+                $my_enqueue ->init();
             }
 
             ob_start();
