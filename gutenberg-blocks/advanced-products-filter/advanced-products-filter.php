@@ -46,7 +46,10 @@ if(!class_exists('TemplazaFramework_Gutenberg_Advanced_Products_Filter')) {
 
         function gutenberg_enqueue() {
             $field_options  = array();
-            $custom_fields = \Advanced_Product\Helper\AP_Custom_Field_Helper::get_custom_fields();
+            if(!class_exists('Advanced_Product\Helper\AP_Custom_Field_Helper')){
+                return $field_options;
+            }
+            $custom_fields = AP_Custom_Field_Helper::get_custom_fields();
             if(!empty($custom_fields) && count($custom_fields)){
                 foreach ($custom_fields as $field){
                     $f_attr             = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID, array(
@@ -63,9 +66,9 @@ if(!class_exists('TemplazaFramework_Gutenberg_Advanced_Products_Filter')) {
             }
 
             if(!empty($field_options) && count($field_options)){
-                wp_localize_script('templaza-framework-advanced-products-filter-editor-script',
-                    'tz_gt_advanced_products_filter', array('custom_fields_options' => $field_options)
-                );
+//                wp_localize_script('templaza-framework-advanced-products-filter-editor-script',
+//                    'tz_gt_advanced_products_filter', array('custom_fields_options' => $field_options)
+//                );
             }
         }
 
