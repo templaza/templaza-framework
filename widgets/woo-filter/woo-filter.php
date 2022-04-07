@@ -4,7 +4,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 
 use TemPlazaFramework\Functions;
 
-if(!class_exists('TemplazaFramework_Widget_Woo_Filter')) {
+if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'woocommerce/woocommerce.php' )) {
     class TemplazaFramework_Widget_Woo_Filter extends TemplazaFramework_Widget{
 
         /**

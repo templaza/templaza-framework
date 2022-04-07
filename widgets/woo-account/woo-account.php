@@ -4,7 +4,7 @@
  * Widgets display Woocommerce Account
  */
 use TemPlazaFramework\Functions;
-if(!class_exists('TemplazaFramework_Widget_Woo_Account')) {
+if(!class_exists('TemplazaFramework_Widget_Woo_Account') && is_plugin_active( 'woocommerce/woocommerce.php' )) {
     class TemplazaFramework_Widget_Woo_Account extends TemplazaFramework_Widget
     {
         /**
