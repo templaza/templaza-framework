@@ -903,10 +903,11 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             }
 
             $importer_opt   = array(
-                'stage' => 2,
-                'include'   => ['templates', 'content','settings'],
-                "overrideConditions" => [],
-                'directory' => $folder_path.'/',
+                'stage'                 => 2,
+                'include'               => ['templates', 'content','settings'],
+                'overrideConditions'    => [],
+                'session'               => $folder_path.'/',
+                'directory'             => $folder_path.'/',
             );
 
             /*
