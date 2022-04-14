@@ -2,12 +2,16 @@
   .advanced-product-search-form{
     label.search-label{
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      margin: 0 0 35px;
+    }
+    .ap-search-item{
+      margin-bottom: 45px;
     }
   }
 }
 .advanced-product-search-form{
   .ap-search-item{
-    margin-bottom: 45px;
+    margin-bottom: 30px;
   }
   label.search-label{
     font-family: $tztheme-heading-font;
@@ -20,7 +24,7 @@
     cursor: pointer;
     padding: 0 0 15px;
     font-size: 18px;
-    margin: 0 0 35px;
+    margin: 0;
     line-height: 1;
   }
   .uk-form-controls{

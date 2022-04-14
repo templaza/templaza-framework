@@ -707,14 +707,14 @@
 .single-product div.product .summary-top-box {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 0;
   align-items: center;
 }
 
 .single-product div.product .summary-price-box {
   display: flex;
   align-items: center;
-  margin: 20px 0;
+  margin: 0 0 20px 0;
 }
 
 .single-product div.product .summary-price-box .price {

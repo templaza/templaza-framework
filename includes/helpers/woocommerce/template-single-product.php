@@ -88,6 +88,8 @@ class Templaza_Single_Product {
 		add_action( 'woocommerce_single_product_summary', array( $this, 'open_summary_top_wrapper' ), 2 );
 		add_action( 'woocommerce_single_product_summary', array( $this, 'single_product_taxonomy' ), 2 );
 
+        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+
 		// Re-order the stars rating.
 		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
 		add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 3 );
