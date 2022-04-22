@@ -54,7 +54,40 @@ if( class_exists( 'WP_Import') ) {
                     $this -> {$name}    = $option;
                 }
             }
+
+            // Constructor hook to load this class to use in others
+            do_action('templaza-framework/import/constructor', $this);
         }
+
+        /**
+         * Get value of this class variables
+         * @param string $name An optional of variable name
+         * @return void|bool
+         * */
+        public function get($name){
+            if(isset($this -> {$name})){
+                return $this -> {$name};
+            }
+            return false;
+        }
+
+        function process_posts() {
+            do_action('templaza-framework/import/before_import_posts', $this);
+            parent::process_posts();
+            do_action('templaza-framework/import/after_import_posts', $this);
+        }
+
+        function process_terms() {
+            do_action('templaza-framework/import/before_import_terms', $this);
+            parent::process_terms();
+            do_action('templaza-framework/import/after_import_terms', $this);
+        }
+        protected function process_termmeta($term, $term_id) {
+            do_action('templaza-framework/import/before_import_termmeta', $this);
+            parent::process_termmeta($term, $term_id);
+            do_action('templaza-framework/import/after_import_termmeta', $this);
+        }
+
         /**
          * Attempt to create a new menu item from import data
          *
@@ -83,7 +116,8 @@ if( class_exists( 'WP_Import') ) {
                 ${$meta['key']} = $meta['value'];
             }
 
-            if(isset($_menu_item_menu_item_parent) && $_menu_item_menu_item_parent) {
+            if(isset($_menu_item_menu_item_parent) && $_menu_item_menu_item_parent
+                && isset($this->processed_menu_items[$_menu_item_menu_item_parent])) {
                 $__parent_id    = $this->processed_menu_items[$_menu_item_menu_item_parent];
 
                 $__parent_layout    = get_post_meta($__parent_id, '_templaza_megamenu_layout', true);

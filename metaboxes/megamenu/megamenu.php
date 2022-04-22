@@ -553,7 +553,6 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 
             $items = apply_filters( "templaza-framework/metabox/megamenu/nav_menu_objects_after", $items, $args );
 
-//            var_dump(wp_list_pluck($items, 'title')); die();
             return $items;
         }
 
@@ -592,7 +591,6 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                     'parent_submenu_type' => '',
                     'menu_order' => $next_order,
                     'depth' => $depth,
-//                    'depth' => 0,
                     'ID' => "{$item->ID}-{$count}",
                     'templaza_shortcode_type' => $element['type'],
                     'templaza_megamenu_html'  => $shortcode,
@@ -650,19 +648,12 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
          * @return array
          */
         public function set_descriptions_if_enabled( $items, $args ) {
-
-//            $settings = get_option( 'templaza_megamenu_settings' );
-
-//            $descriptions = isset( $settings['descriptions'] ) ? $settings['descriptions'] : 'disabled';
-
-//            if ($descriptions == 'enabled') {
             foreach ( $items as $item ) {
                 if (  property_exists( $item, 'description' ) && strlen( $item->description )  ) {
                     $item->templaza_megamenu_description = $item->description;
                     $item->classes[] = 'has-description';
                 }
             }
-//            }
 
             return $items;
         }
@@ -677,9 +668,6 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                     continue;
                 }
 
-//                if ( 'widget' === $item->type ) {
-//                    continue;
-//                }
                 if ( '__templaza_mega_item' === $item->type ) {
                     continue;
                 }
@@ -790,10 +778,6 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                 $current_theme_location = $_args['theme_location'];
 
                 $settings  = isset($meta_options['tz_megamenu_meta'])?json_decode($meta_options['tz_megamenu_meta'], true):array();
-//                if (!isset($settings[$current_theme_location]) ||
-//                    (isset ( $settings[ $current_theme_location ]['enabled'] ) && (bool) $settings[ $current_theme_location ]['enabled'] == false) ) {
-//                    return $items;
-//                }
 
                 // Hook to change menu id to menu slug of megamenu menu item element
                 add_filter('templaza-framework/metabox/'.$this -> get_meta_box_name()
@@ -805,10 +789,8 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                     $saved_settings = array_filter( (array) get_post_meta( $item->ID, '_templaza_megamenu_settings', true ) );
                     $item->templaza_megamenu_settings = $saved_settings;
 
-//                    var_dump($item); die();
                     $megamenu_enable    = isset($saved_settings['megamenu_enable'])?filter_var($saved_settings['megamenu_enable'], FILTER_VALIDATE_BOOLEAN):false;
 
-//                    if (isset ( $settings[ $current_theme_location ]['enabled'] ) && ((bool) $settings[ $current_theme_location ]['enabled']) == true ) {
                     if ($megamenu_enable) {
                         $saved_layout = array_filter((array)get_post_meta($item->ID, '_templaza_megamenu_layout', true));
 
@@ -855,7 +837,6 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
         }
 
         public function update_nav_menu($value, $old_value, $option){
-//            $megamenu   = isset($_POST['_templaza_megamenu_layout'])?sanitize_text_field($_POST['_templaza_megamenu_layout']):false;
             $megamenu   = isset($_POST['_templaza_megamenu_layout'])?$_POST['_templaza_megamenu_layout']:false;
 
             $megamenu_settings = isset($_POST['_templaza_megamenu_settings'])?sanitize_text_field($_POST['_templaza_megamenu_settings']):false;
@@ -864,11 +845,10 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                 return;
             }
 
-            $megamenu   = wp_unslash($megamenu);
-//            $megamenu   = str_replace('\\', '', $megamenu);
-            $megamenu_settings   = str_replace('\\', '', $megamenu_settings);
-            $megamenu   = json_decode($megamenu, true);
-            $megamenu_settings   = json_decode($megamenu_settings, true);
+            $megamenu           = wp_unslash($megamenu);
+            $megamenu_settings  = wp_unslash( $megamenu_settings);
+            $megamenu           = json_decode($megamenu, true);
+            $megamenu_settings  = json_decode($megamenu_settings, true);
 
             if(!empty($megamenu) && is_array($megamenu) && count($megamenu)){
 

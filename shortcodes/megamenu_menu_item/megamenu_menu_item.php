@@ -50,16 +50,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Megamenu_Menu_Item')){
             if(isset($element['menu_slug'])){
                 $params['menu_slug']  = $element['menu_slug'];
             }
-//            var_dump($params);
-//            var_dump($element);
-//            var_dump('432432'); die(__METHOD__);
             return $params;
         }
-//        public function prepare_element(&$element, $default_params = true){
-//            parent::prepare_element($element, $default_params);
-//
-//            var_dump($element);
-//        }
 
         public function enqueue() {
             if (!wp_script_is('templaza-shortcode-'.$this -> get_shortcode_name().'-js')) {
