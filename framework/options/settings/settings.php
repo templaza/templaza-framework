@@ -69,3 +69,4 @@ require_once 'sections/layout.php';
 require_once 'sections/social.php';
 require_once 'sections/miscellaneous.php';
 require_once 'sections/custom.php';
+require_once 'sections/woocommerce/product.php';

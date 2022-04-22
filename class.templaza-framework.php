@@ -37,7 +37,9 @@ class TemPlazaFrameWork{
 
         $instance -> load_gutenberg_blocks();
 
-        require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-product-brand.php';
+        if(class_exists( 'woocommerce' )) {
+            require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-product-brand.php';
+        }
 
         static::$instance   = $instance;
         return $instance;
@@ -265,7 +267,9 @@ class TemPlazaFrameWork{
 
         wp_add_inline_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm', $inline_css);
 
-        $this -> woo_enqueue_scripts();
+        if(class_exists( 'woocommerce' )){
+            $this -> woo_enqueue_scripts();
+        }
 
         do_action('templaza-framework/plugin/enqueue_scripts', $this);
     }
@@ -353,7 +357,7 @@ class TemPlazaFrameWork{
 
             $this -> load_template();
 
-            if(file_exists(TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/helpers/woocommerce/woocommerce-load.php')) {
+            if(file_exists(TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/helpers/woocommerce/woocommerce-load.php') && class_exists( 'woocommerce' )) {
                 require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/woocommerce-load.php';
             }
         }

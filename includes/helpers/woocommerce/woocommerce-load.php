@@ -1,6 +1,4 @@
 <?php
-//require_once 'register-product-brand.php';
-require_once 'woocommerce-style.php';
 require_once 'woocommerce-setup.php';
 require_once 'woocommerce-helper.php';
 require_once 'template-general.php';
