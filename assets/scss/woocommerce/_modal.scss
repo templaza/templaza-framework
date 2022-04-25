@@ -1,6 +1,23 @@
 /*--------------------------------------------------------------
 # Modals
 --------------------------------------------------------------*/
+.templaza-scrollbar {
+  overflow-y: auto;
+  scrollbar-color: #1f1f1f #e2e2e278;
+  scrollbar-width: thin;
+}
+
+.templaza-scrollbar::-webkit-scrollbar {
+  width: 2px;
+}
+
+.templaza-scrollbar::-webkit-scrollbar-track {
+  background-color: #e2e2e2;
+}
+
+.templaza-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #1f1f1f;
+}
 .templaza-modal {
   position: fixed;
   top: 0;
