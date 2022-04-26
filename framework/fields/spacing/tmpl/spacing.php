@@ -118,10 +118,10 @@ if($allow_responsive){
             );
         }else{
             $value = array(
-                'top' => isset($this->value[$this->field['mode'] . '-' . $position['top']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['top']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['top'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-                'right' => isset($this->value[$this->field['mode'] . '-' . $position['right']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['right']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['right'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-                'bottom' => isset($this->value[$this->field['mode'] . '-' . $position['bottom']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['bottom']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['bottom'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-                'left' => isset($this->value[$this->field['mode'] . '-' . $position['left']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['left']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+                'top' => isset($this->value[$this->field['mode'] . '-' . $position['top']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['top']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : (isset($this -> value['top'])?filter_var($this->value['top'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION):''),
+                'right' => isset($this->value[$this->field['mode'] . '-' . $position['right']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['right']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : (isset($this -> value['right'])?filter_var($this->value['right'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION):''),
+                'bottom' => isset($this->value[$this->field['mode'] . '-' . $position['bottom']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['bottom']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : (isset($this -> value['bottom'])?filter_var($this->value['bottom'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION):''),
+                'left' => isset($this->value[$this->field['mode'] . '-' . $position['left']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['left']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : (isset($this -> value['left'])?filter_var($this->value['left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION):''),
             );
         }
     }else {
@@ -450,8 +450,14 @@ if($allow_responsive){
             if ( ! is_array( $this->field['units'] ) ) {
                 echo '<option value="' . esc_attr( $this->field['units'] ) . '" selected="selected">' . esc_attr( $this->field['units'] ) . '</option>';
             } else {
+                $val_units  = $this->value['units'];
                 foreach ( $test_units as $a_unit ) {
-                    echo '<option value="' . esc_attr( $a_unit ) . '" ' . selected( $this->value['units'], $a_unit, false ) . '>' . esc_html( $a_unit ) . '</option>';
+                    if(isset($val_units['desktop'])) {
+                        echo '<option value="' . esc_attr($a_unit) . '" ' . selected($val_units['desktop'], $a_unit, false) . '>' . esc_html($a_unit) . '</option>';
+                    }else{
+                        echo '<option value="' . esc_attr($a_unit) . '" ' . selected($val_units, $a_unit, false) . '>' . esc_html($a_unit) . '</option>';
+
+                    }
                 }
             }
 

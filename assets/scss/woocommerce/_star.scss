@@ -1,0 +1,85 @@
+/**
+ * Star rating
+ */
+.star-rating {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  .rating-stars {
+    display: block;
+    line-height: 1;
+    i {
+      margin-right: 1px;
+    }
+  }
+  .max-rating {
+    i {
+      color: $tztheme-rating;
+    }
+  }
+  .user-rating {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    i {
+      color: $tztheme-rating-visible;
+    }
+  }
+}
+p.stars {
+  line-height: 1;
+  display: block;
+  margin: 0 0 15px;
+  >span {
+    display: flex;
+    height: 15px;
+  }
+  a {
+    position: relative;
+    height: 15px;
+    width: 15px;
+    text-indent: -999em;
+    font-size: 0;
+    color: $tztheme-rating;
+    display: inline-block;
+    text-decoration: none;
+    margin-right: 1px;
+    font-weight: 400;
+    transition: none;
+    &:hover {
+      ~ {
+        a {
+          color: $tztheme-rating;
+        }
+      }
+    }
+    span {
+      text-indent: 0;
+      display: block;
+      font-size: 15px;
+    }
+  }
+  &:hover {
+    a {
+      color: $tztheme-rating-visible;
+    }
+  }
+}
+p.stars.selected {
+  a.active {
+    color: $tztheme-rating-visible;
+    ~ {
+      a {
+        color: $tztheme-rating;
+      }
+    }
+  }
+  a {
+    &:not(.active) {
+      color: $tztheme-rating-visible;
+    }
+  }
+}

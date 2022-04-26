@@ -257,8 +257,14 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             }
             add_action('admin_footer', function(){
                 $t  = \Redux::instance($this -> setting_args[$this -> get_post_type()]['opt_name']);
-                if($t && method_exists($t, '_enqueue')) {
-                    $t->_enqueue();
+                if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                    if($t && method_exists($t, '_enqueue')) {
+                        $t->_enqueue();
+                    }
+                }else{
+                    if($t && isset($t->enqueue_class) && $t->enqueue_class) {
+                        $t->enqueue_class->init();
+                    }
                 }
                 if(!$this ->my_post_type_exists()) {
                     wp_add_inline_script('redux-js', '
@@ -700,7 +706,11 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                         require_once $file;
                     }
 
-                    $class_name = 'TemplazaFramework_MetaBox_'.ucfirst($file_name);
+                    $mtname = str_replace(array('_', '-'), ' ',$file_name);
+                    $mtname = !empty($mtname)?ucwords($mtname):$mtname;
+                    $mtname = !empty($mtname)?str_replace(' ', '_', $mtname):$mtname;
+
+                    $class_name = 'TemplazaFramework_MetaBox_'.$mtname;
                     if(class_exists($class_name)){
                         new $class_name($this, $this -> framework);
                     }

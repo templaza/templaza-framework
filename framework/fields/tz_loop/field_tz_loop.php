@@ -65,12 +65,13 @@ if ( ! class_exists( 'ReduxFramework_TZ_Loop' ) ) {
 
             if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
                 $redux->_register_settings();
-
                 $enqueue    = new Enqueue($redux);
                 $enqueue -> init();
             }else{
                 $redux -> options_class -> register();
-                $redux -> enqueue_class -> init();
+//                $redux -> enqueue_class -> init();
+                $my_enqueue = new Enqueue($redux);
+                $my_enqueue ->init();
             }
 
             ob_start();
@@ -79,6 +80,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Loop' ) ) {
             }else{
                 $redux -> render_class -> generate_panel();
             }
+
             ob_end_clean();
 
             $this -> redux          = $redux;

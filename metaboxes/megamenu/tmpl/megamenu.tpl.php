@@ -20,7 +20,6 @@ if($redux){
         <div class="fl_column-container">
             <?php
             ob_start();
-
             if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
                 $redux->generate_panel();
             }else{

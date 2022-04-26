@@ -1,0 +1,171 @@
+/*--------------------------------------------------------------
+# Modals
+--------------------------------------------------------------*/
+.templaza-scrollbar {
+  overflow-y: auto;
+  scrollbar-color: #1f1f1f #e2e2e278;
+  scrollbar-width: thin;
+}
+
+.templaza-scrollbar::-webkit-scrollbar {
+  width: 2px;
+}
+
+.templaza-scrollbar::-webkit-scrollbar-track {
+  background-color: #e2e2e2;
+}
+
+.templaza-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #1f1f1f;
+}
+.templaza-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1600;
+  display: none;
+  --templaza-modal-spacing: 30px;
+}
+
+.templaza-modal .panel-content {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 470px;
+  max-width: 100%;
+  margin: 0;
+  background-color: $tz-basic-body-background;
+  transform: translateX(100%);
+  transition: transform .5s;
+  display: flex;
+  flex-direction: column;
+}
+
+.templaza-modal .modal-header {
+  padding: 25px 45px 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: $tz-basic-body-background;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: center;
+}
+
+.templaza-modal .modal-header .modal-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1;
+}
+
+.templaza-modal .modal-content {
+  position: relative;
+  padding: $tztheme-modal-spacing;
+  background-color: $tz-basic-body-background;
+}
+
+.templaza-modal.open {
+  visibility: visible;
+}
+
+.templaza-modal.open .modal-header {
+  opacity: 1;
+  display: block;
+}
+
+.templaza-modal.open .modal-content {
+  opacity: 1;
+}
+
+.templaza-modal.open .panel-content {
+  transform: none;
+}
+
+.templaza-modal.side-left .panel-content {
+  left: 0;
+  right: auto;
+  transform: translateX(-100%);
+}
+
+.templaza-modal.side-left.open .panel-content {
+  transform: none;
+}
+
+.templaza-modal .off-modal-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-color: $tztheme-heading-color;
+  opacity: 0.5;
+}
+
+.templaza-modal .button-close {
+  display: flex;
+  line-height: 1;
+  position: absolute;
+  right: $tztheme-modal-spacing;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #a6a6a6;
+  margin-left: 20px;
+}
+
+.templaza-modal .button-close:hover {
+  color: #767676;
+}
+
+.admin-bar .templaza-modal {
+  top: 32px;
+  height: calc( 100% - 32px);
+}
+
+.tz-account-modal{
+  .modal-content {
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    .form-row {
+      padding: 0;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+  .woocommerce-error .error-message {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .templaza-button {
+    width: 100%;
+    line-height: 50px;
+    cursor: pointer;
+    padding:0;
+    &.templaza-loading:before {
+      left: 50%;
+      top: -10px;
+    }
+    &.create-account {
+      margin-top: 20px;
+    }
+  }
+  form.register button.templaza-button {
+    margin: 20px 0 0 0;
+  }
+  div.nsl-container.nsl-container-block .nsl-container-buttons {
+    width: 100%;
+  }
+}

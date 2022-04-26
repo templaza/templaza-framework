@@ -1,83 +1,153 @@
 <?php
 
-defined('TEMPLAZA_FRAMEWORK') or exit;
+// Exit if accessed directly
+defined( 'TEMPLAZA_FRAMEWORK' ) or exit;
 
-use TemPlazaFramework\Enqueue;
+use TemPlazaFramework\Functions;
+use TemPlazaFramework\Core\Fields;
 
-if(isset($this->field) &&  !empty($this->field)){
+// Don't duplicate me!
+if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
 
-    // No errors please
-    $defaults    = array(
-        'indent'   => '',
-        'style'    => '',
-        'class'    => '',
-        'title'    => '',
-        'subtitle' => '',
-    );
-    $this->field = wp_parse_args( $this->field, $defaults );
+    /**
+     * Main ReduxFramework_heading class
+     *
+     * @since       1.0.0
+     */
+    class ReduxFramework_TZ_Tab {
+        protected $instances = array();
 
-    $tab_titles     = '';
-    $tab_contents   = '';
+        protected $cache    = array();
 
-    if(isset($this -> field['tabs']) && count($this -> field['tabs'])){
+        /**
+         * Field Constructor.
+         * Required - must call the parent constructor, then assign field and value to vars, and obviously call the render field function
+         *
+         * @since         1.0.0
+         * @access        public
+         * @return        void
+         */
+        public function __construct( $field = array(), $value = '', $parent = null ) {
+            $this->parent = $parent;
+            $this->field  = $field;
+            $this->value  = $value;
 
-        $redux      = $this -> redux;
-//        $args       = $this -> redux_args;
-        $args       = $redux -> args;
-        $opt_name   = $args['opt_name'];
-
-        if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
-            $redux->_register_settings();
-
-            $enqueue    = new Enqueue($redux);
-            $enqueue -> init();
-        }else{
-            $redux -> options_class -> register();
-            $redux -> enqueue_class -> init();
+            $this -> init_tab_field($field);
         }
 
-        foreach($redux -> sections as $k => $tab){
+        public function init_tab_field($field){
 
-            $tab_titles     .= '<li><a href="#tz_tab-'.$tab['id'].'">'.$tab['title'].'</a></li>';
+            $store_id   = __METHOD__;
+            $store_id  .= ':'.serialize($field);
+            $store_id   = md5($store_id);
 
-            $tab_contents   .= '<div id="tz_tab-'.$tab['id'].'">';
+            if(!isset($this -> cache[$store_id])){
+                if(isset($field['tabs'])){
+                    $has_media                          = true;
+                    $args   = $this -> parent -> args;
+                    $opt_name                           = uniqid($field['id']).'__opt_name';
+                    $redux_args['opt_name']             = $opt_name;
+                    $redux_args['menu_type']            = 'hidden';
+                    $redux_args['dev_mode']             = false;
+                    $redux_args['ajax_save']            = false;
+                    $redux_args['open_expanded']        = false;
 
-            if(isset($tab['fields']) && count($tab['fields'])){
-                foreach ($tab['fields'] as $field) {
-                    add_filter("redux/options/{$opt_name}/field/{$field['id']}", function($_field)use($field){
-                        $_field['name'] = $_field['id'];
-                        return $_field;
+                    $redux_args['dev_mode']             = false;
+                    $redux_args['database']             = '';
+                    $redux_args['ajax_save']            = false;
+                    $redux_args['save_defaults']        = false;
+                    $redux_args['hide_save']            = true;
+                    $redux_args['menu_type']            = 'hidden';
+                    $redux_args['hide_reset']           = true;
+                    $redux_args['show_import_export']   = false;
+
+                    \Redux::set_args($opt_name, $redux_args);
+                    \Redux::set_sections($opt_name, $field['tabs']);
+
+                    // Rename of field's name
+                    foreach($field['tabs'] as $k => $tab){
+                        if(isset($tab['fields']) && count($tab['fields'])){
+                            foreach ($tab['fields'] as $field) {
+                                Fields::load_field($field, '', $this -> parent);
+
+                                add_filter("redux/options/{$opt_name}/field/{$field['id']}", function($_field)use($field){
+                                    $_field['name'] = $_field['id'];
+                                    return $_field;
+                                });
+                            }
+                        }
+                    }
+
+                    \Redux::init($opt_name);
+                    \Templaza_API::load_my_fields($opt_name);
+
+
+                    add_filter("redux/{$opt_name}/repeater", function($repeater_data) use($redux_args){
+                        $repeater_data['opt_names'][]   = $redux_args['opt_name'];
+                        return $repeater_data;
                     });
+                    $redux  = \Redux::instance($opt_name );
+
+//                    if(!$this -> value) {
+//                        $redux -> options   =  $redux -> _default_values();
+//                    }
+
+
+//                    $redux-> _register_settings();
+
+
+//                    $enqueue    = new Enqueue($redux);
+//                    $enqueue -> init();
+
+//                    $this -> redux_args          = $redux_args;
+                    $this -> redux          = $redux;
+
+                    if($has_media){
+                        if ( function_exists( 'wp_enqueue_media' ) ) {
+                            wp_enqueue_media();
+                        } else {
+                            if ( ! wp_script_is( 'media-upload' ) ) {
+                                wp_enqueue_script( 'media-upload' );
+                            }
+                        }
+                    }
                 }
+                $this -> cache[$store_id]   = $redux;
+            }
+        }
+
+
+        /**
+         * Field Render Function.
+         * Takes the vars and outputs the HTML for the field in the settings
+         *
+         * @since         1.0.0
+         * @access        public
+         * @return        void
+         */
+        public function render() {
+
+            $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_FIELDS.'/tz_tab/tmpl/tz_tab.php';
+
+            if(!file_exists($file)){
+                $file   = TEMPLAZA_FRAMEWORK_FIELD_PATH.'/tz_tab/tmpl/tz_tab.php';
             }
 
+            if(file_exists($file)){
+                require $file;
+            }
+        }
 
-//            add_filter("redux/{$this -> parent -> args['opt_name']}/repeater", function($repeater_data) use($opt_name){
-//                $repeater_data['opt_names'][]   = $opt_name;
-//                return $repeater_data;
-//            });
-//
-//            $redux -> _register_settings();
-//            $enqueue    = new Enqueue($redux);
-//            $enqueue -> init();
-
-            $tab['class'] = isset($tab['class']) ? ' ' . $tab['class'] : '';
-            $tab_contents .= '<div id="'.$this -> field['type'].'_' . $k . '_section_group' . '" class="uk-display-block uk-padding-remove-horizontal redux-group-tab' . esc_attr($tab['class']) . '" data-rel="'.$this -> field['type'].'_' . $k . '">';
-            $tab_contents .= '<div class="redux-container"  data-opt-name="'.$opt_name.'">';
-
-            ob_start();
-            do_settings_sections( $redux->args['opt_name'] . $k . '_section_group' );
-            $tab_contents   .= ob_get_contents();
-            ob_end_clean();
-
-            $tab_contents .= '</div>';
-            $tab_contents .= '</div>';
-            $tab_contents   .= '</div>';
+        public function enqueue() {
+            if (!wp_script_is('templaza-field-tz_tab-js')) {
+                wp_enqueue_script(
+                    'templaza-field-tz_tab-js',
+                    Functions::get_my_frame_url() . '/fields/tz_tab/field_tz_tab.js',
+                    array( 'jquery', 'jquery-ui-tabs','redux-js'),
+                    time(),
+                    true
+                );
+            }
         }
     }
-
-    echo '<div id="tz_tab-'.$this -> field['id'].'-tab" class="tzfrm-ui-tab" data-fl-tz_layout-tab>
-                    <ul>'.$tab_titles.'</ul>
-                    '.$tab_contents.'
-                </div>';
 }

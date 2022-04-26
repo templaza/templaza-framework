@@ -56,49 +56,6 @@ if ( !class_exists ( 'ReduxFramework_TZ_Element' ) ) {
 
             $this -> text_domain    = Functions::get_my_text_domain();
 
-//            // Set field array defaults.  No errors please
-//            $defaults = array(
-//                'fields' => array(
-//                    array(
-//                        'id' => 'width',
-//                        'type' => 'slider',
-//                        'title' => 'Width',
-//                        'description' => __('Min: 1, Max: 12, Default value: 1', $this->text_domain),
-//                        'min' => 1,
-//                        'max' => 12,
-//                        'step' => 1,
-//                        'default' => 1,
-//                    ),
-////                    array(
-////                        'id'    => 'type',
-////                        'type'  => 'button_set',
-////                        'title' => __('Type', $this -> text_domain),
-////                        'options' => array(
-////                            'sidebar' => __('Sidebar', $this -> text_domain),
-////                        ),
-////                        'default' => 'sidebar',
-////                    ),
-//                    array(
-//                        'id' => 'sidebar',
-//                        'type' => 'select',
-//                        'title' => __('Sidebar', $this->text_domain),
-//                        'data' => 'sidebars',
-////                        'required' => array($this -> field['id'].'-type', '=', 'sidebar'),
-//                    ),
-//                    array(
-//                        'id' => 'custom_class',
-//                        'type' => 'text',
-//                        'title' => __('Custom Class', $this->text_domain),
-//                    ),
-//                ),
-//            );
-
-//            if(isset($this -> field['fields']) && !empty($this -> field['fields'])) {
-//                $this -> field['fields']   = array_merge($defaults['fields'], $this -> field['fields']);
-//            }
-//            $this->field = wp_parse_args($this->field, $defaults);
-            var_dump($this->field);
-
             if(isset($this -> field['fields']) && count($this -> field['fields'])){
                 $fields = $this -> field['fields'];
 

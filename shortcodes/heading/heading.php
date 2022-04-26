@@ -84,6 +84,13 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                         'default'  => false,
                     ),
                     array(
+                        'id'       => 'enable_heading_single_meta',
+                        'type'     => 'switch',
+                        'title'    => esc_html__('Show meta in single post', $this -> text_domain),
+                        'default'  => false,
+                        'required' => array('enable_heading_single', '=', true),
+                    ),
+                    array(
                         'id'       => 'heading_custom_class',
                         'type'     => 'text',
                         'title'    => esc_html__('Heading Custom Class', $this -> text_domain),

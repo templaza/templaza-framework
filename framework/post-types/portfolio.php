@@ -30,17 +30,17 @@ if(!class_exists('TemPlazaFramework\Post_Type\Portfolio')){
         public function register()
         {
             $labels = array(
-                'name'               => esc_html_x('Portfolio', 'Portfolio General Name', 'templaza-elements'),
-                'singular_name'      => esc_html_x('Portfolio Item', 'Portfolio Singular Name', 'templaza-elements'),
-                'add_new'            => esc_html_x('Add New', 'Add New Portfolio Name', 'templaza-elements'),
-                'add_new_item'       => esc_html__('Add New Portfolio', 'templaza-elements'),
-                'all_items'          => esc_html__( 'All Portfolios', 'templaza-elements'),
-                'edit_item'          => esc_html__('Edit Portfolio', 'templaza-elements'),
-                'new_item'           => esc_html__('New Portfolio', 'templaza-elements'),
-                'view_item'          => esc_html__('View Portfolio', 'templaza-elements'),
-                'search_items'       => esc_html__('Search Portfolio', 'templaza-elements'),
-                'not_found'          => esc_html__('Nothing found', 'templaza-elements'),
-                'not_found_in_trash' => esc_html__('Nothing found in Trash', 'templaza-elements'),
+                'name'               => esc_html_x('Portfolio', 'Portfolio General Name', $this -> text_domain),
+                'singular_name'      => esc_html_x('Portfolio Item', 'Portfolio Singular Name', $this -> text_domain),
+                'add_new'            => esc_html_x('Add New', 'Add New Portfolio Name', $this -> text_domain),
+                'add_new_item'       => esc_html__('Add New Portfolio', $this -> text_domain),
+                'all_items'          => esc_html__( 'All Portfolios', $this -> text_domain),
+                'edit_item'          => esc_html__('Edit Portfolio', $this -> text_domain),
+                'new_item'           => esc_html__('New Portfolio', $this -> text_domain),
+                'view_item'          => esc_html__('View Portfolio', $this -> text_domain),
+                'search_items'       => esc_html__('Search Portfolio', $this -> text_domain),
+                'not_found'          => esc_html__('Nothing found', $this -> text_domain),
+                'not_found_in_trash' => esc_html__('Nothing found in Trash', $this -> text_domain),
                 'parent_item_colon'  => ''
             );
             $args = array(
@@ -65,7 +65,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Portfolio')){
             $tz_theme_support = $tz_theme_support?(array)$tz_theme_support:array();
             $tz_theme_support = count($tz_theme_support)?$tz_theme_support[0]:$tz_theme_support;
 
-            if(!in_array($this -> get_post_type(), $tz_theme_support)){
+            if(!post_type_exists($this -> get_post_type()) && !in_array($this -> get_post_type(), $tz_theme_support)){
                 return;
             }
 
@@ -76,27 +76,27 @@ if(!class_exists('TemPlazaFramework\Post_Type\Portfolio')){
 
         public function register_taxonomy(){
             register_taxonomy(
-                "portfolio-category", array( "portfolio" ), array(
+                "portfolio-category", array( $this -> get_post_type() ), array(
                 "hierarchical"   => true,
                 "show_in_rest"   => true,
                 'show_admin_column'          => true,
-                "label"          => esc_html__("Portfolio Categories",'templaza-elements'),
-                "singular_label" => esc_html__("Portfolio Categories",'templaza-elements'),
+                "label"          => esc_html__("Portfolio Categories",$this -> text_domain),
+                "singular_label" => esc_html__("Portfolio Categories",$this -> text_domain),
                 "rewrite"        => true ));
-            register_taxonomy_for_object_type('portfolio-category', 'portfolio');
+            register_taxonomy_for_object_type('portfolio-category', $this -> get_post_type());
 
             // function tags
             register_taxonomy(
-                "portfolio_tag",array("portfolio"), array(
+                "portfolio_tag",array($this -> get_post_type()), array(
                     "hierarchical"   => '',
                     "show_in_rest"   => true,
                     'show_admin_column'          => true,
-                    "label"          => esc_html__("Portfolio Tags",'templaza-elements'),
-                    "singular_label" => esc_html__("Portfolio Tags",'templaza-elements'),
+                    "label"          => esc_html__("Portfolio Tags",$this -> text_domain),
+                    "singular_label" => esc_html__("Portfolio Tags",$this -> text_domain),
                     "rewrite"        => ''
                 )
             );
-            register_taxonomy_for_object_type('portfolio_tag','portfolio');
+            register_taxonomy_for_object_type('portfolio_tag', $this -> get_post_type());
         }
     }
 }

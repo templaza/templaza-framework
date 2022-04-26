@@ -8,6 +8,11 @@ use TemPlazaFramework\Templates;
 $options        = Functions::get_theme_options();
 
 $social_profiles    = isset($options['social'])?$options['social']:'';
+if(isset($atts['text_align'])){
+    if($atts['text_align'] == 'center'){
+        $atts['tz_class'] .= ' uk-flex-center';
+    }
+}
 if(!empty($social_profiles)){
     $social_profiles    = json_decode($social_profiles);
     $style              = isset($options['social-style']) ? $options['social-style'] : 'inherit';

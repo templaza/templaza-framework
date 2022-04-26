@@ -13,6 +13,7 @@ class TemPlazaFrameWork{
 
     public $text_domain;
 
+    private $widgets;
     protected $theme_options;
     protected $theme_support;
     protected static $instance;
@@ -36,6 +37,10 @@ class TemPlazaFrameWork{
 
         $instance -> load_gutenberg_blocks();
 
+        if(class_exists( 'woocommerce' )) {
+            require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-product-brand.php';
+        }
+
         static::$instance   = $instance;
         return $instance;
     }
@@ -51,6 +56,9 @@ class TemPlazaFrameWork{
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 99999);
 
         add_filter('register_sidebar_defaults', array($this, 'modify_sidebar'), 9999);
+
+        // Register widgets
+        add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
         do_action( 'templaza-framework/plugin/hooks', $this );
     }
@@ -73,7 +81,9 @@ class TemPlazaFrameWork{
             return;
         }
 
-        $folders    = array_merge($folders, $theme_folders);
+        if(count($theme_folders)) {
+            $folders = array_merge($folders, $theme_folders);
+        }
 
         if(!empty($folders) && count($folders)){
             foreach ($folders as $folder){
@@ -94,6 +104,58 @@ class TemPlazaFrameWork{
 
                 if(class_exists($class) && !isset($this -> gutenberg_blocks[$class])){
                     $this -> gutenberg_blocks[$class]   = new $class();
+                }
+            }
+        }
+    }
+
+    public function register_widgets(){
+
+        $theme_path  = TEMPLAZA_FRAMEWORK_THEME_PATH.'/widgets';
+
+        $core_path  = TEMPLAZA_FRAMEWORK_PATH.'/widgets';
+
+
+        if(!is_dir($core_path) && !is_dir($theme_path)){
+            return;
+        }
+
+        $folders        = glob($core_path.'/*', GLOB_ONLYDIR);
+        $theme_folders  = glob($theme_path.'/*', GLOB_ONLYDIR);
+
+        if((empty($folders) || (!empty($folders) && !count($folders))) &&
+            (empty($theme_folders) || (!empty($theme_folders) && !count($theme_folders)))){
+            return;
+        }
+
+        if(!empty($theme_folders) && count($theme_folders)) {
+            $folders = array_merge($folders, $theme_folders);
+        }
+
+        if(!empty($folders) && count($folders)){
+            foreach ($folders as $folder){
+                $file_name  = basename($folder);
+                $wd_name     = $file_name;
+
+                $path = $folder.'/'.$wd_name.'.php';
+
+                if(!file_exists($path)){
+                    continue;
+                }
+
+                if(file_exists($path)){
+                    require $path;
+                }
+
+                $wd_name = str_replace(array('_', '-'), ' ',$wd_name);
+                $wd_name = !empty($wd_name)?ucwords($wd_name):$wd_name;
+                $wd_name = !empty($wd_name)?str_replace(' ', '_', $wd_name):$wd_name;
+                $class  = 'TemplazaFramework_Widget_'.$wd_name;
+
+                if(class_exists($class) && !isset($this -> widgets[$class])){
+                    $widget_obj = new $class();
+                    register_widget( $widget_obj );
+                    $this -> widgets[$file_name] = $widget_obj;
                 }
             }
         }
@@ -205,7 +267,56 @@ class TemPlazaFrameWork{
 
         wp_add_inline_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm', $inline_css);
 
+        if(class_exists( 'woocommerce' )){
+            $this -> woo_enqueue_scripts();
+        }
+
         do_action('templaza-framework/plugin/enqueue_scripts', $this);
+    }
+
+    protected function woo_enqueue_scripts(){
+
+        wp_register_script( 'templaza-woo-notify', Functions::get_my_url(). '/assets/js/woo/notify.min.js', array(), '1.0.0', true );
+        wp_register_script( 'templaza-woo-swiper', Functions::get_my_url() . '/assets/js/woo/swiper.min.js', array( 'jquery' ), '5.3.8', true );
+
+        wp_register_script( 'templaza-woo-viewport', Functions::get_my_url() . '/assets/js/woo/isInViewport.min.js', array('jquery'),false,true );
+        wp_enqueue_script( 'templaza-woo-viewport' );
+        wp_register_script( 'templaza-woo-catalog', Functions::get_my_url() . '/assets/js/woo/woo-catalog.js', array('jquery'),false,true );
+        wp_enqueue_script( 'templaza-woo-catalog' );
+
+        $admin_url = admin_url('admin-ajax.php');
+        $templaza_ajax_url = array('url' => $admin_url);
+        wp_localize_script('templaza-scripts', 'templaza_ajax_url', $templaza_ajax_url);
+
+        wp_enqueue_script( 'templaza-woo-scripts', Functions::get_my_url() . '/assets/js/woo/woo-scripts.js', array(
+            'jquery',
+            'templaza-woo-viewport',
+            'templaza-woo-swiper',
+            'templaza-woo-notify',
+            'imagesloaded',
+        ), false, true );
+
+        $templaza_data = array(
+            'direction'            => is_rtl() ? 'true' : 'false',
+            'ajax_url'             => class_exists( 'WC_AJAX' ) ? \WC_AJAX::get_endpoint( '%%endpoint%%' ) : '',
+            'nonce'                => wp_create_nonce( '_templaza_nonce' ),
+            'search_content_type'  => get_option( 'header_search_type' ),
+            'header_search_number' => get_option( 'header_search_number' ),
+            'header_ajax_search'   => intval( get_option( 'header_search_ajax' ) ),
+            'sticky_header'        => intval( get_option( 'header_sticky' ) ),
+            'mobile_landscape'     => get_option( 'mobile_landscape_product_columns' ),
+            'mobile_portrait'      => get_option( 'mobile_portrait_product_columns' ),
+            'popup'                => get_option( 'newsletter_popup_enable' ),
+            'popup_frequency'      => get_option( 'newsletter_popup_frequency' ),
+            'popup_visible'        => get_option( 'newsletter_popup_visible' ),
+            'popup_visible_delay'  => get_option( 'newsletter_popup_visible_delay' ),
+        );
+
+        $templaza_data = apply_filters( 'templaza_wp_script_data', $templaza_data );
+
+        wp_localize_script(
+            'templaza-woo-scripts', 'templazaData', $templaza_data
+        );
     }
 
     public function default_menu_locations(){
@@ -232,6 +343,7 @@ class TemPlazaFrameWork{
         $core   = new Framework();
 
         do_action( 'templaza-framework/plugin/admin_init', $this, $core );
+
     }
 
     public function frontend_init(){
@@ -244,6 +356,10 @@ class TemPlazaFrameWork{
             $this -> theme_options  = Functions::get_theme_options();
 
             $this -> load_template();
+
+            if(file_exists(TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/helpers/woocommerce/woocommerce-load.php') && class_exists( 'woocommerce' )) {
+                require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/woocommerce-load.php';
+            }
         }
     }
 

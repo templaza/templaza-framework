@@ -1,0 +1,76 @@
+.templaza-sidebar{
+  .advanced-product-search-form{
+    label.search-label{
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      margin: 0 0 35px;
+    }
+    .ap-search-item{
+      margin-bottom: 45px;
+    }
+  }
+}
+.advanced-product-search-form{
+  .ap-search-item{
+    margin-bottom: 30px;
+  }
+  label.search-label{
+    font-family: $tztheme-heading-font;
+    font-weight: 700;
+    text-transform: uppercase;
+    color:$tztheme-heading-color;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 0 0 15px;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+  }
+  .uk-form-controls{
+    ul{
+      margin: 0;
+      li{
+        margin: 0;
+        text-transform: capitalize;
+        color: #666666;
+        padding: 6px 0;
+        &:first-child{
+          padding-top: 0;
+        }
+        input[type="checkbox"]{
+          display: inline-block;
+          height: 18px;
+          width: 18px;
+          padding:0;
+          margin-right: 10px;
+          overflow: hidden;
+          margin-top: -4px;
+          vertical-align: middle;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          background-color: transparent;
+          background-repeat: no-repeat;
+          background-position: 50% 50%;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          transition: .2s ease-in-out;
+          transition-property: background-color,border;
+          cursor: pointer;
+          &:checked{
+            background:$tztheme-button_background;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2214%22%20height%3D%2211%22%20viewBox%3D%220%200%2014%2011%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%232a2a2a%22%20points%3D%2212%201%205%207.5%202%205%201%205.5%205%2010%2013%201.5%22%20%2F%3E%0A%3C%2Fsvg%3E%0A");
+          }
+        }
+      }
+    }
+    select{
+      background-color:transparent;
+      border:1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+    input[type="number"]{
+      width:100%;
+    }
+  }
+}

@@ -13,6 +13,7 @@ extract(shortcode_atts(array(
     'enable_custom_heading'    => false,
     'enable_heading_inner_tag' => false,
     'enable_heading_single'    => false,
+    'enable_heading_single_meta'    => false,
 ), $atts));
 
 $options            = Functions::get_theme_options();
@@ -47,6 +48,9 @@ if ( is_category() ) {
     $title  = get_the_date( _x( 'F j, Y', 'daily archives date format' ) );
     $prefix = _x( 'Day:', 'date archive title prefix' );
 }
+if(is_single()){
+    $tz_class .=' heading-single';
+}
 
 $heading    = $enable_custom_heading?$custom_heading:($title);
 
@@ -60,6 +64,11 @@ if(!empty($heading)){
 <div<?php echo !empty($tz_id)?' id="'.esc_attr__($tz_id).'"':''; ?> class="<?php echo esc_attr__($tz_class); ?>">
     <<?php echo $heading_tag; ?><?php echo !empty($heading_custom_class)?' class="'
         .esc_attr__($heading_custom_class).'"':'';?>><?php echo $heading; ?></<?php echo $heading_tag; ?>>
+    <?php
+    if(is_single() && $enable_heading_single_meta == true){
+        do_action('templaza_single_meta_post');
+    }
+    ?>
 </div>
 <?php
 }

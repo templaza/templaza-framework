@@ -33,6 +33,10 @@ class TemplazaFramework_GutenbergBlock{
         return strtolower($name);
     }
 
+    public function get_folder_name(){
+        return $this -> get_name();
+    }
+
     public function get_default_arguments(){
         $def_args   = array(
             'render_callback' => array($this, 'render')
@@ -57,9 +61,9 @@ class TemplazaFramework_GutenbergBlock{
     }
 
     public function render($attributes, $content){
-        $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_GUTENBERG_BLOCK.'/'.$this -> get_name().'/tmpl/'.$this -> get_name().'.php';
+        $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_GUTENBERG_BLOCK.'/'.$this -> get_folder_name().'/tmpl/'.$this -> get_folder_name().'.php';
         if(!file_exists($file)){
-            $file   = TEMPLAZA_FRAMEWORK_GUTENBERG_BLOCK_PATH.'/'.$this -> get_name().'/tmpl/'.$this -> get_name().'.php';
+            $file   = TEMPLAZA_FRAMEWORK_GUTENBERG_BLOCK_PATH.'/'.$this -> get_folder_name().'/tmpl/'.$this -> get_folder_name().'.php';
         }
 
         if(file_exists($file)){

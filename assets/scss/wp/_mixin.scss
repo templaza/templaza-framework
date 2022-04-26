@@ -20,6 +20,9 @@
     color:$tztheme-button_text_color_hover;
     @include transition($tztheme-transition-all);
   }
+  i{
+    padding-right: 15px;
+  }
 }
 @mixin button-slider-default {
   background:$tztheme-button_background;

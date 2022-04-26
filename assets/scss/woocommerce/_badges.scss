@@ -1,0 +1,69 @@
+
+.woocommerce-badges {
+  position: absolute;
+  left: 0;
+  top: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  display: inline-block;
+  text-align: center;
+}
+
+.woocommerce-badges > span {
+  display: block;
+  padding: 5px 11px;
+  line-height: 1;
+  background-color: $tztheme-heading-color;
+  color: $tztheme-white;
+}
+
+.woocommerce-badges > span:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.woocommerce-badges .sold-out {
+  background-color: #a0a0a0;
+  color: #fff;
+}
+
+.woocommerce-badges .featured {
+  background-color: #ff6f61;
+  color: #fff;
+}
+
+.woocommerce-badges .new {
+  background-color: $tztheme-global-color;
+  color: $tztheme-heading-color;
+}
+
+ul:not(.product-loop-layout-2) .woocommerce-badges--layout-2 {
+  left: initial;
+  right: 20px;
+}
+
+.woocommerce-badges--layout-2 {
+  text-transform: lowercase;
+  left: 20px;
+}
+
+.woocommerce-badges--layout-2 > span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  line-height: 1.2;
+  font-size: 16px;
+}
+
+.woocommerce-badges--layout-2 .onsale .text {
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.woocommerce-badges--layout-2 .onsale .percent {
+  font-size: 16px;
+}

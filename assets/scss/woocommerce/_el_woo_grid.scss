@@ -1,0 +1,20 @@
+div .tz-woo-grid .product .product-info{
+  .product-title{
+    font-size: $tztheme-catalog-title-size;
+    font-weight:$tztheme-catalog-title-weight;
+  }
+  .tz-product-price{
+    .price{
+      font-size:$tztheme-catalog-price-size;
+      del {
+        font-size: 14px;
+        color: #a6a6a6;
+      }
+      ins,bdi {
+        background-color: transparent;
+        color: $tztheme-global-color;
+        padding-left: 5px;
+      }
+    }
+  }
+}

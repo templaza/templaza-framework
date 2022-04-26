@@ -1,0 +1,146 @@
+.templaza-ap-single{
+  .ap-heading{
+    font-size:$tztheme-ap-single-title-size;
+    font-weight:$tztheme-ap-single-title-weight;
+    margin-bottom: 10px;
+  }
+  .ap-compare{
+    display:flex;
+  }
+  .ap-media{
+    margin-top: 0;
+  }
+  .ap-slideshow{
+    .uk-slidenav{
+      width:55px;
+      height:55px;
+      background:#222;
+      color:#fff;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      &:hover{
+        background:$tztheme-global-color;
+      }
+    }
+    .uk-slider{
+      padding-top: 5px;
+      .uk-slidenav{
+        @include border-radius(0);
+        width:30px;
+        height:30px;
+      }
+    }
+    ul{
+      li{
+        margin:0;
+      }
+    }
+  }
+  .ap-single-price-box{
+    background:$tztheme-ap-single-price-bg;
+    padding:40px 30px 30px;
+    .price{
+      font-size:$tztheme-ap-single-price-size;
+      color:$tztheme-heading-color;
+      font-weight:$tztheme-ap-single-price-weight;
+    }
+    .call-to-buy{
+      border-top:1px solid $tztheme-border-color;
+      margin-top:30px;
+      padding-top:20px;
+      .label{
+        text-transform: uppercase;
+        color:$tztheme-heading-color;
+        font-weight: bold;
+      }
+    }
+  }
+  .ap-single-side-box{
+    &:not(:first-child){
+      margin-top:20px;
+    }
+    .highlight{
+      padding:20px 30px;
+      background:$tztheme-global-color;
+      font-weight:bold;
+      color:$tztheme-heading-color;
+      .currency{
+        background:#334B36;
+        @include border-radius(50%);
+        width:40px;
+        height:40px;
+      }
+    }
+    &.ap-specs{
+      padding:35px 30px;
+      background:$tztheme-ap-single-price-bg;
+      margin-bottom: 30px;
+    }
+    .field-value{
+      color:$tztheme-heading-color;
+      font-weight:600;
+    }
+    .widget-title{
+      font-weight:$tztheme-ap-single-side-title-weight;
+      font-size:$tztheme-ap-single-side-title;
+      margin-bottom: 35px !important;
+    }
+  }
+  .elementor-tabs{
+    iframe,.wpforms-container{
+      width:50%;
+      float:left;
+    }
+    iframe{
+      padding-right:20px;
+      padding-top: 12px;
+    }
+    .wpforms-container{
+      padding-left:20px;
+      form{
+        input{
+          &[type="text"],
+          &[type="email"]
+          {
+            height:$tz-basic-input-height !important;
+          }
+        }
+        button{
+          height:$tz-basic-input-height !important;
+        }
+      }
+    }
+  }
+}
+.ap-modal{
+  button.uk-close{
+    color:$tz-basic-body-color !important;
+  }
+  .wpforms-container{
+    margin-bottom: 10px;
+    form{
+      label{
+        font-family: $tz-basic-heading-font !important;
+        font-size:1em !important;
+        font-weight:600;
+        color:$tz-basic-heading-color !important;
+      }
+      input{
+        &[type="text"],
+        &[type="email"]
+        {
+          height:$tz-basic-input-height !important;
+          font-size:0.9em !important;
+        }
+      }
+      button{
+        height:$tz-basic-input-height !important;
+      }
+      textarea{
+        height:120px;
+        font-size:0.9em !important;
+      }
+    }
+  }
+}

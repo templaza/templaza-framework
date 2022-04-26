@@ -416,7 +416,6 @@ class TemplazaFramework_ShortCode{
                                 $parent -> required_class -> check_dependencies($param);
                             }
 
-
                             TemPlazaFramework\Helpers\FieldHelper::check_required_dependencies($param, $this -> field_parent, $this -> parent);
 
                             do_action('templaza-framework/element/param/before', $param, $this);
@@ -440,6 +439,7 @@ class TemplazaFramework_ShortCode{
                             ?>
                             <tr>
                                 <?php
+                                $title  = false;
                                 if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')){
                                     $title = $this -> parent -> get_header_html($param);
                                 }else{

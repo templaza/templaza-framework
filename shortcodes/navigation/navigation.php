@@ -16,6 +16,15 @@ if(!class_exists('TemplazaFramework_ShortCode_Navigation')){
 				'desc'        => esc_html__('Insert an Navigation', $this -> text_domain),
 				'admin_label' => true,
 				'params'      => array(
+                    array(
+                        'id'        => 'nav_wrap_style',
+                        'type'      => 'select',
+                        'title'     => esc_html__('Menu Style', $this -> text_domain),
+                        'options'   => array(
+                            'default'       => esc_html__('Default', $this -> text_domain),
+                            'inline'        => esc_html__('Inline', $this -> text_domain),
+                        )
+                    ),
 					array(
 						'id' => 'nav-items-start',
 						'type' => 'section',

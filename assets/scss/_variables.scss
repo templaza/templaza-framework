@@ -68,6 +68,7 @@ $tztheme-button_text_color:                   #ffffff !default;
 $tztheme-button_text_color_hover:             #fff !default;
 $tztheme-button_padding:                      12px 25px !default;
 $tztheme-button_radius:                       5px !default;
+$tztheme-button_transform:                    uppercase !default;
 
 $tztheme-height-button-slider:                50px !default;
 $tztheme-width-button-slider:                 50px !default;
@@ -84,6 +85,9 @@ $tztheme-box-shadow-sidebar:                  0 0 3px 0 rgba(0, 0, 0, 0.1) !defa
 
 $tztheme-border-color:                        #dedede !default;
 $tztheme-menu-border-color:                   #ededed !default;
+$tztheme-submenu-bg-color:                    #ffffff !default;
+$tztheme-submenu-color:                       $tztheme-content-color !default;
+
 // Elements
 $tztheme-element-title-size:                  inherit !default;
 $tztheme-element-title-weight:                700 !default;
@@ -116,3 +120,48 @@ $tztheme-grid-breakpoints: (
         xxl: 1400px
 ) !default;
 // scss-docs-end grid-breakpoints
+
+// Woocommerce
+
+$tztheme-rating: #CDCDCD !default;
+$tztheme-rating-visible: #f1d069 !default;
+$tztheme-loop-icon-font-size:0.8rem !default;
+$tztheme-color-gray: #cdcdcd !default;
+$tztheme-bg-color-gray: #f5f5f5 !default;
+$tztheme_modal_spacing: 30px !default;
+$tztheme-catalog-price-size: 18px !default;
+$tztheme-catalog-title-size: 20px !default;
+$tztheme-catalog-title-weight: 600 !default;
+$tztheme-catalog-price-weight: 700 !default;
+
+$tztheme-shop-detail-title-size: 36px !default;
+$tztheme-shop-detail-title-weight: 600 !default;
+$tztheme-shop-detail-price-size: 30px !default;
+$tztheme-shop-detail-variation-price-size: 26px !default;
+$tztheme-shop-detail-price-weight: 700 !default;
+$tztheme-shop-detail-variation-size: 18px !default;
+$tztheme-shop-detail-variation-weight: 600 !default;
+$tztheme-shop-detail-meta-weight: 700 !default;
+$tztheme-shop-detail-tab-size: 18px !default;
+$tztheme-shop-detail-tab-transform: uppercase !default;
+$tztheme-shop-detail-related-size: 30px !default;
+$tztheme-shop-detail-related-transform: uppercase !default;
+$tztheme-shop-detail-title-recent-weight: 700 !default;
+
+$tztheme-bg-info:#d8eafc !default;
+$tztheme-color-info:#1e87f0 !default;
+$tztheme-bg-warning:#fff6ee !default;
+$tztheme-color-warning:#faa05a !default;
+$tztheme-bg-error:#fef4f6 !default;
+$tztheme-color-error:#f0506e !default;
+// Advanced Product
+
+$tztheme-ap-archive-title-size: 16px !default;
+$tztheme-ap-archive-title-weight: 600 !default;
+$tztheme-ap-single-title-size: 36px !default;
+$tztheme-ap-single-title-weight: 600 !default;
+$tztheme-ap-single-price-bg: #F6F4EC !default;
+$tztheme-ap-single-price-size: 36px !default;
+$tztheme-ap-single-price-weight: 700 !default;
+$tztheme-ap-single-side-title: 18px !default;
+$tztheme-ap-single-side-title-weight: 700 !default;

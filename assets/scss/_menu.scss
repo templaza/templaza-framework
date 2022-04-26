@@ -475,10 +475,10 @@ ul{
             top: 100%;
             z-index: 1000;
             margin: 0;
-            box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.1);
+            box-shadow: $tztheme-box-shadow-default;
             padding: 10px 0;
             min-width: 190px;
-            background-color: #fff;
+            background-color: $tztheme-submenu-bg-color;
             border: none;
             opacity: 0;
             visibility: hidden;
@@ -553,7 +553,7 @@ ul{
                padding: 0;
                list-style: none;
                background-color: #fff;
-               box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.1);
+               box-shadow: $tztheme-box-shadow-default;
                li{
                   padding:0;
                   border-top:none;
@@ -649,7 +649,7 @@ ul{
             border-left: 4px solid rgba(0, 0, 0, 0);
             border-right: 4px solid rgba(0, 0, 0, 0);
             border-top: 4px solid;
-            top:50%;
+            top:40%;
          }
 
          .megamenu-description-group{
