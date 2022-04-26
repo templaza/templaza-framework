@@ -13,7 +13,7 @@ Version 1.0.6 - April 26, 2022
     Add post-format metabox.
     Update hooks action for importer.
     Update advanced-products-filter gutenberg block.
-
+    
 Version 1.0.5 - February 28, 2022
 
     Fix issue with redux v4.3.11
