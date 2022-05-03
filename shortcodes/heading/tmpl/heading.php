@@ -3,13 +3,16 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
-
+use TemPlazaFramework\Fonts;
+use TemPlazaFramework\CSS;
 extract(shortcode_atts(array(
     'tz_id'                    => '',
     'tz_class'                 => '',
     'heading_tag'              => 'h1',
     'custom_heading'           => '',
     'heading_custom_class'     => '',
+    'enable_heading_custom_font'     => false,
+    'typography-heading-element'     => '',
     'enable_custom_heading'    => false,
     'enable_heading_inner_tag' => false,
     'enable_heading_single'    => false,
@@ -71,5 +74,46 @@ if(!empty($heading)){
     ?>
 </div>
 <?php
+}
+
+$typographies = array(
+    array(
+        'id'        => 'typography-heading-element',
+        'enable'    => (isset($enable_heading_custom_font) && $enable_heading_custom_font =='1'?true:false),
+        'class'     => array(
+            'desktop' => '.templaza-heading h1, .templaza-heading h2, .templaza-heading h3, .templaza-heading h4, .templaza-heading h5, .templaza-heading h6',
+            'tablet' => '.templaza-heading h1, .templaza-heading h2, .templaza-heading h3, .templaza-heading h4, .templaza-heading h5, .templaza-heading h6',
+            'mobile' => '.templaza-heading h1, .templaza-heading h2, .templaza-heading h3, .templaza-heading h4, .templaza-heading h5, .templaza-heading h6',
+        )
+    )
+);
+// Get typographies
+$typographies   = apply_filters('templaza-framework/typography/list', $typographies);
+
+// Generate typography styles.
+if(count($typographies)) {
+    foreach ($typographies as $typo) {
+
+        $enable = isset($typo['enable']) ? (bool)$typo['enable'] : false;
+        if ($enable) {
+            $typoParams = isset($options[$typo['id']]) ? $options[$typo['id']] : array();
+            if (is_array($typo['class'])) {
+                $devices = $typo['class'];
+            } else {
+                $devices['desktop'] = $typo['class'];
+                $devices['tablet'] = $typo['class'];
+                $devices['mobile'] = $typo['class'];
+            }
+
+            $_styles = Fonts::make_css_style($typoParams, $devices);
+            var_dump($_styles);
+
+            if (count($_styles)) {
+                foreach ($_styles as $device => $style) {
+                    Templates::add_inline_style($style, $device);
+                }
+            }
+        }
+    }
 }
 ?>
