@@ -1404,7 +1404,7 @@
                                                                 element.after(__new_html);
                                                                 __pos = element.parent().find("[data-fl-element_type=section]").index(element) + 1;
                                                             }else{
-                                                                selector.find(".field-tz_layout-content").append(__new_html);
+                                                                selector.find(".field-tz_layout-content > .fl_column-section-container").append(__new_html);
                                                             }
                                                         }
 
