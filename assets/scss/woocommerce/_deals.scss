@@ -1,0 +1,171 @@
+.woocommerce .deal {
+	margin: 50px 0 40px;
+}
+
+.templaza-countdown {
+	display: flex;
+}
+
+.templaza-countdown .timer {
+	padding: 0 23px;
+	position: relative;
+	text-align: center;
+}
+
+.templaza-countdown .timer:first-child {
+	padding-left: 0 !important;
+}
+
+.templaza-countdown .timer:last-child {
+	padding-right: 0 !important;
+}
+
+.templaza-countdown .timer .text {
+	display: block;
+	text-transform: uppercase;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.templaza-countdown .timer .divider {
+	position: absolute;
+	top: 15px;
+	right: -8px;
+	font-size: 37px;
+	line-height: 1;
+	font-weight: 600;
+}
+
+.templaza-countdown .digits {
+	font-size: 44px;
+	font-weight: 600;
+	display: block;
+	color: $tztheme-global-color;
+}
+
+.templaza-products-deal ul.products li.product .product-thumbnail .templaza-product-deal .templaza-countdown {
+	padding: 3px 10px;
+	min-width: 103px;
+}
+
+.templaza-products-deal ul.products li.product .product-thumbnail .templaza-product-deal .templaza-countdown .timer {
+	padding: 0 5px;
+	color: $tztheme-global-color;
+}
+
+.templaza-products-deal ul.products li.product .product-thumbnail .templaza-product-deal .templaza-countdown .timer .divider {
+	font-size: 11px;
+	top: 2px;
+	right: -1px;
+}
+
+.templaza-products-deal ul.products li.product .product-thumbnail .templaza-product-deal .templaza-countdown .digits {
+	font-weight: 500;
+	font-size: 11px;
+	line-height: 16px;
+	letter-spacing: 0.02em;
+}
+
+.woocommerce .deal-expire-text,
+.woocommerce .deal-sold-text {
+	margin-bottom: 0.5em;
+	width: 35%;
+	font-weight: 700;
+	text-transform: capitalize;
+}
+
+.woocommerce .deal-progress .deal-progress-bar,
+.woocommerce .deal-progress .progress-value {
+	height: 15px;
+}
+
+.woocommerce .deal-progress .deal-progress-bar {
+	position: relative;
+	background: #e4e4e4;
+	margin-bottom: 3px;
+}
+
+.woocommerce .deal-progress .progress-value {
+	background-color: $tztheme-global-color;
+}
+
+.woocommerce .deal-expire-date {
+	margin-bottom: 20px;
+}
+
+.woocommerce .deal-expire-date,
+.woocommerce .deal-sold{
+	display: flex;
+}
+
+.woocommerce .deal-expire-countdown,
+.woocommerce .deal-progress{
+	overflow: hidden;
+	width: 65%;
+}
+
+.woocommerce .deal-expire-countdown .timer,
+.woocommerce .deal-expire-countdown .divider {
+	text-align: center;
+	display: block;
+	float: left;
+}
+
+.woocommerce .deal-expire-countdown .timer {
+	width: 20%;
+}
+
+.woocommerce .deal-expire-countdown .divider {
+	font-size: 1.8em;
+	width: 6.3333%;
+	padding-top: 0.3em;
+}
+
+.woocommerce .deal-expire-countdown .timer span {
+	display: block;
+}
+
+.woocommerce .deal-expire-countdown .timer .digits {
+	font-size: 25px;
+	margin: 0 0 3px 0;
+	padding: 12px 8px;
+	min-width: 56px;
+	min-height: 56px;
+	border: 1px solid #ddd;
+	font-weight: 600;
+	line-height: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: $tztheme-global-color;
+}
+
+.woocommerce .deal-expire-countdown .timer .text,
+.woocommerce .deal-progress .deal-text {
+	font-size: 14px;
+}
+
+.woocommerce .deal-expire-countdown.templaza-countdown {
+	justify-content: space-between;
+	overflow: inherit;
+}
+
+.woocommerce .deal-expire-countdown.templaza-countdown .timer {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+}
+
+.woocommerce .deal-expire-countdown.templaza-countdown .divider {
+    font-size: 18px;
+    width: auto;
+	padding-top: 20px;
+	top: 0;
+    right: -13px;
+}
+
+.woocommerce .deal-expire-countdown.templaza-countdown .timer .text{
+	font-size: 13px;
+	font-weight: 400;
+	text-transform: capitalize;
+}
