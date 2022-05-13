@@ -144,8 +144,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
             $title      = isset($_REQUEST['title'])?sanitize_text_field($_REQUEST['title']):'';
             $alias      = !empty($title)?sanitize_title($title):'';
             $lib_type   = isset($_REQUEST['lib_type'])?sanitize_title($_REQUEST['lib_type']):'section';
-            $section    = isset($_REQUEST['section'])?sanitize_text_field($_REQUEST['section']):'';
-//            $section    = wp_unslash($section);
+            $section    = isset($_REQUEST['section'])?$_REQUEST['section']:'';
 
             if(empty($title) || empty($section)){
                 wp_send_json_error();
@@ -184,10 +183,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
 
             // Update postmeta library data
             $result = update_post_meta($postId, '_templaza_library_data', $section);
-
-//            if(!$result){
-//                wp_send_json_error(__('Update post meta error'));
-//            }
 
             wp_send_json(array('success' => true, 'message' => __('Section Saved', $this -> text_domain)));
         }
