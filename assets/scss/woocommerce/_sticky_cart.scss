@@ -25,21 +25,24 @@
         display: none;
       }
     }
+    button{
+      height:$tztheme-shop-sticky-input-height;
+    }
     .qty {
       width: 83px;
-      font-size: 18px;
+      font-size: 16px;
       padding-left: 20px;
       padding-right: 20px;
       color: var(--rz-text-color);
-      height: calc(#{$tztheme-input-height} - 2px);
-      line-height: calc(#{$tztheme-input-height} - 2px);
+      height: calc(#{$tztheme-shop-sticky-input-height} - 2px);
+      line-height: calc(#{$tztheme-shop-sticky-input-height} - 2px);
     }
     .quantity {
       .qty-dropdown {
         .current {
           width: 83px;
-          height: $tztheme-input-height;
-          line-height: $tztheme-input-height;
+          height: $tztheme-shop-sticky-input-height;
+          line-height: $tztheme-shop-sticky-input-height;
           font-size: 18px;
           padding: 0 20px;
         }
@@ -323,6 +326,16 @@
 .templaza-sticky-add-to-cart__content-button {
   margin-left: auto;
   position: relative;
+  @include button-default;
+  @include border-radius(0);
+  text-transform: $tztheme-button_transform;
+  line-height: 1.5em;
+  padding-left:30px;
+  padding-right:30px;
+  color:$tztheme-button_text_color;
+  &:hover{
+    color:$tztheme-button_text_color_hover;
+  }
   &:after {
     margin-left: 16px;
     display: inline-block;

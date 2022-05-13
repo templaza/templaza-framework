@@ -41,7 +41,6 @@ class Templaza_Woo_Setup {
 	 * @return void
 	 */
 	public function __construct() {
-//		add_action( 'after_setup_theme', array( $this, 'woocommerce_setup' ) );
 		add_filter( 'woocommerce_get_image_size_gallery_thumbnail', array(
 			$this,
 			'get_gallery_thumbnail_size'

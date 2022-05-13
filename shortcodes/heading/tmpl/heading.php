@@ -106,7 +106,6 @@ if(count($typographies)) {
             }
 
             $_styles = Fonts::make_css_style($typoParams, $devices);
-            var_dump($_styles);
 
             if (count($_styles)) {
                 foreach ($_styles as $device => $style) {

@@ -230,9 +230,13 @@
   margin: $tztheme-modal-spacing 0 0 0;
 }
 
-.widget_shopping_cart_content .woocommerce-mini-cart__buttons .templaza-button {
+.widget_shopping_cart_content .woocommerce-mini-cart__buttons .templaza-btn {
   height: 54px;
   line-height: 54px;
+  padding:0;
+  &.templaza-btn-outline{
+    color:$tztheme-button_background;
+  }
 }
 
 .widget_shopping_cart_content .woocommerce-mini-cart__buttons .checkout {

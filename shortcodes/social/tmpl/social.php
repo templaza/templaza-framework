@@ -12,6 +12,9 @@ if(isset($atts['text_align'])){
     if($atts['text_align'] == 'center'){
         $atts['tz_class'] .= ' uk-flex-center';
     }
+    if($atts['text_align'] == 'right'){
+        $atts['tz_class'] .= ' uk-flex-right';
+    }
 }
 if(!empty($social_profiles)){
     $social_profiles    = json_decode($social_profiles);

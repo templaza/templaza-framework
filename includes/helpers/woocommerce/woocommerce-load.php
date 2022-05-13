@@ -13,4 +13,7 @@ require_once 'template-recently-viewed.php';
 require_once 'template-badges.php';
 require_once 'template-cart.php';
 require_once 'template-checkout.php';
+require_once 'template-deal.php';
+require_once 'template-variation.php';
+require_once 'template-attribute.php';
 require_once 'template-login-ajax.php';

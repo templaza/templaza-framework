@@ -139,9 +139,9 @@ $typographies = array(
         'id'        => 'widget_box_heading',
         'enable'    => true,
         'class'     => array(
-            'desktop'    => '.templaza-sidebar .widget-area >.widget .widget-title',
-            'tablet'     => '.templaza-sidebar .widget-area >.widget .widget-title',
-            'mobile'     => '.templaza-sidebar .widget-area >.widget .widget-title',
+            'desktop'    => '.templaza-sidebar .widget-area >.widget .widget-title, .templaza_woo_filter-name',
+            'tablet'     => '.templaza-sidebar .widget-area >.widget .widget-title, .templaza_woo_filter-name',
+            'mobile'     => '.templaza-sidebar .widget-area >.widget .widget-title, .templaza_woo_filter-name',
         ),
     ),
     array(

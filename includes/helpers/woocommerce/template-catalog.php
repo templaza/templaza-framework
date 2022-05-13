@@ -350,7 +350,7 @@ class Templaza_Woo_Catalog {
 
 
 		if ( ! empty( $output ) ) {
-			echo sprintf( '<div id="catalog-header-banners" class="rz-hide_on__mobile catalog-header-banners swiper-container"><ul class="list-images swiper-wrapper">%s</ul></div>', $output );
+			echo sprintf( '<div id="catalog-header-banners" class="templaza-hide_on__mobile catalog-header-banners swiper-container"><ul class="list-images swiper-wrapper">%s</ul></div>', $output );
 		}
 
 	}
@@ -404,7 +404,7 @@ class Templaza_Woo_Catalog {
 	 * @return void
 	 */
 	public function product_result_toolbar() {
-		templaza_posts_found();
+        TemPlaza_Woo\Templaza_Woo_Helper::templaza_posts_found();
 	}
 
 	/**
@@ -416,7 +416,7 @@ class Templaza_Woo_Catalog {
 	 */
 	public function products_filtered() {
 		?>
-        <div id="rz-products-filter__activated" class="products-filter__activated"></div>
+        <div id="templaza-products-filter__activated" class="products-filter__activated"></div>
 		<?php
 	}
 
@@ -446,7 +446,7 @@ class Templaza_Woo_Catalog {
 
 		} else {
 
-			templaza_posts_found();
+            TemPlaza_Woo\Templaza_Woo_Helper::templaza_posts_found();
 
 			if ( get_next_posts_link() ) {
 
@@ -538,8 +538,8 @@ class Templaza_Woo_Catalog {
 			$cat_content .= $count_html;
 
 			$output[] = sprintf(
-				'<li class="rz-catalog-categories__item swiper-slide %s">' .
-				'<a href="%s" class="rz-catalog-categories__title">' .
+				'<li class="templaza-catalog-categories__item swiper-slide %s">' .
+				'<a href="%s" class="templaza-catalog-categories__title">' .
 				'%s' .
 				'</a>' .
 				'</li>',
@@ -558,7 +558,7 @@ class Templaza_Woo_Catalog {
 
 			$class = intval( get_option( 'top_categories_ajax_filter' ) ) ? 'ajax-filter' : '';
 			printf(
-				'<div id="rz-catalog-top-categories" class="rz-catalog-categories templaza-swiper-carousel-elementor navigation-arrows navigation-tablet-dots navigation-mobile-dots %s" data-columns="%s"><div class="swiper-container"><ul class="catalog-categories__wrapper swiper-wrapper">%s</ul></div></div>',
+				'<div id="templaza-catalog-top-categories" class="templaza-catalog-categories templaza-swiper-carousel-elementor navigation-arrows navigation-tablet-dots navigation-mobile-dots %s" data-columns="%s"><div class="swiper-container"><ul class="catalog-categories__wrapper swiper-wrapper">%s</ul></div></div>',
 				esc_attr( $class ),
 				esc_attr( $columns ),
 				implode( ' ', $output )
@@ -624,7 +624,7 @@ class Templaza_Woo_Catalog {
                 <div class="modal-header">
                     <h3 class="modal-title"><?php esc_html_e( 'Filter By', 'agruco' ) ?></h3>
                     <a href="#"
-                           class="close-account-panel button-close"><i class="far fa-times"></i></a>
+                           class="close-account-panel button-close"><i class="fas fa-times"></i></a>
                 </div>
                 <div class="modal-content templaza-scrollbar catalog-sidebar <?php echo esc_attr( $classes ); ?>">
 					<?php if ( is_active_sidebar( $sidebar ) ) {
