@@ -11,15 +11,10 @@ $errorContent   = isset($options['404-content'])?$options['404-content']:'';
 $errorButton    = isset($options['404-call-to-action'])?$options['404-call-to-action']:'';
 // Background Image
 $background_setting_404    = isset($options['404-background-setting'])?$options['404-background-setting']:0;
-
-
-//$errorContent =  $template->params->get('error_404_content', '');
-//$errorButton = $template->params->get('error_call_to_action', '');
-
-// Background Image
-//$background_setting_404 = $template->params->get('background_setting_404');
+$background_overlay    = isset($options['404-background-overlay'])?$options['404-background-overlay']:'';
 
 $styles = '';
+$style_overlay = '';
 $video  = [];
 if($background_setting_404){
     if($background_setting_404 =="color"){
@@ -48,11 +43,7 @@ if($background_setting_404){
 
         if (count($background_video_404) && !empty($background_video_404['url'])) {
             $attributes['data-templaza-video-bg'] = $background_video_404['url'];
-//            $videobgjs = 'vendor/jquery.jdvideobg.js';
-//            if(!isset($template->_js[$videobgjs])){
-//                $template->addScript($videobgjs);
             wp_enqueue_script('tzfrm_templazavideobg', Functions::get_my_url().'/assets/js/vendor/jquery.templazavideobg.js');
-//            }
         }
 
         $return = [];
@@ -61,9 +52,19 @@ if($background_setting_404){
         }
         $video =  $return;
     }
+    if (!empty($background_overlay)) {
+        $bg_overlay   = CSS::make_color_rgba($background_overlay['color'], $background_overlay['alpha'],
+            $background_overlay['rgba']);
+        if(!empty($bg_overlay)) {
+            $style_overlay = 'background-color:' . $bg_overlay;
+        }
+    }
 
     if(!empty($styles)){
         Templates::add_inline_style('.templaza-error-page{'.$styles.'}');
+    }
+    if(!empty($style_overlay)){
+        Templates::add_inline_style('.templaza-error-page::before{'.$style_overlay.'}');
     }
 }
 ?>

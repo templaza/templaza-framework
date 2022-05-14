@@ -253,6 +253,24 @@ $typographies = array(
             'mobile'     => 'div.templaza-single .templaza-single-box blockquote',
         )
     ),
+    array(
+        'id'        => 'typography-404-heading',
+        'enable'    => true,
+        'class'     => array(
+            'desktop'    => '.templaza-error-page .page-404 h1',
+            'tablet'     => '.templaza-error-page .page-404 h1',
+            'mobile'     => '.templaza-error-page .page-404 h1',
+        )
+    ),
+    array(
+        'id'        => 'typography-404-content',
+        'enable'    => true,
+        'class'     => array(
+            'desktop'    => '.templaza-error-page .page-404',
+            'tablet'     => '.templaza-error-page .page-404',
+            'mobile'     => '.templaza-error-page .page-404',
+        )
+    ),
 );
 
 // Get typographies
@@ -275,9 +293,14 @@ if(count($typographies)) {
 
             if($typo['id'] == 'blog_item_heading'){
                 if(isset($typoParams['text-align']) && !empty($typoParams['text-align'])){
-//                    Templates::add_inline_style('div.templaza-archive .templaza-archive-item .title{text-align:'.$typoParams['text-align'].'}');
                     $devices['desktop'] = 'div.templaza-archive .templaza-archive-item .title{text-align:'.$typoParams['text-align'].'}';
                     unset($typoParams['text-align']);
+                }
+            }
+            if($typo['id'] == 'typography-404-content'){
+                if(isset($typoParams['color']) && !empty($typoParams['color'])){
+                    $devices['desktop'] = '.templaza-error-page h1 span{color:'.$typoParams['color'].'}';
+                    unset($typoParams['color']);
                 }
             }
 
