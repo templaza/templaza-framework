@@ -805,8 +805,8 @@ class Templaza_Product_Loop {
 				}
 				if ( $image_ids ) {
 					echo '</div>';
-					echo '<span class="rz-product-loop-swiper-prev rz-swiper-button"><i class="fas fa-chevron-left"></i></span>';
-					echo '<span class="rz-product-loop-swiper-next rz-swiper-button"><i class="fas fa-chevron-right"></i></span>';
+					echo '<span class="templaza-product-loop-swiper-prev templaza-swiper-button"><i class="fas fa-chevron-left"></i></span>';
+					echo '<span class="templaza-product-loop-swiper-next templaza-swiper-button"><i class="fas fa-chevron-right"></i></span>';
 				}
 				do_action( 'templaza_product_loop_thumbnail' );
 				echo '</div>';

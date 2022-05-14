@@ -1,0 +1,63 @@
+.templaza-variation-images-container {
+	border: 1px solid #eee;
+	padding: 10px;
+}
+
+.templaza-variation-images-container > h4 {
+	font-size: 16px;
+	margin: 0px 0 0;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+	color: #111;
+}
+
+.templaza-variation-images-container ul.variation-images-list li {
+	width: 80px;
+	float: left;
+	cursor: move;
+	border: 1px solid #d5d5d5;
+	margin: 9px 9px 0 0;
+	background: #f7f7f7;
+	border-radius: 2px;
+	position: relative;
+	box-sizing: border-box;
+}
+
+.templaza-variation-images-container ul.variation-images-list:after {
+	clear: both;
+	display: block;
+	content: "";
+}
+
+.templaza-variation-images-container ul.variation-images-list li img {
+	width: 100%;
+    height: auto;
+    display: block;
+}
+
+.templaza-variation-images-container ul.variation-images-list li a.delete {
+	position: absolute;
+    top: 0;
+    right: 0;
+	z-index: 10;
+	text-decoration: none;
+	cursor: pointer;
+	opacity: 0;
+	transition: 0.35s;
+}
+
+
+.templaza-variation-images-container ul.variation-images-list li:hover a.delete {
+	opacity: 1;
+}
+
+.templaza-variation-images-container ul.variation-images-list li:hover a.delete::before {
+    font-family: Dashicons;
+    line-height: 1;
+    margin: 0;
+    content: "\f153";
+    color: #999;
+  	font-size: 18px;
+	background: #fff;
+	border-radius: 50%;
+}

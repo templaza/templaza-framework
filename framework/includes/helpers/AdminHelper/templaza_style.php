@@ -23,7 +23,7 @@ if(!class_exists('TemPlazaFramework\AdminHelper\Templaza_Style')){
                 'order'          => 'ASC',
                 'meta_query'     => array(
                     array(
-                        'key'   => '_templaza_header__theme',
+                        'key'   => '_templaza_style_theme',
                         'value' => get_template()
                     )
                 )

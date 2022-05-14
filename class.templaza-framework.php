@@ -37,8 +37,13 @@ class TemPlazaFrameWork{
 
         $instance -> load_gutenberg_blocks();
 
-        if(class_exists( 'woocommerce' )) {
+        if(is_plugin_active( 'woocommerce/woocommerce.php' )) {
             require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-product-brand.php';
+            require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-deal.php';
+            require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-variation.php';
+            if ( get_option( 'templaza_variation_images' ) == 'yes' ) {
+                require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/variation-options.php';
+            }
         }
 
         static::$instance   = $instance;

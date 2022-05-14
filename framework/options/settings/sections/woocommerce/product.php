@@ -131,6 +131,12 @@ Templaza_API::set_section('settings',
                 'max'      => '500',
             ),
             array(
+                'id'       => 'templaza-shop-background-color',
+                'type'     => 'color_rgba',
+                'title'    => esc_html__( 'Item Background Color', $this -> text_domain ),
+                'subtitle' => esc_html__( 'Select the background color for Shop item.', $this -> text_domain ),
+            ),
+            array(
                 'id'     => 'templaza-shop-padding',
                 'type'   => 'spacing',
                 'mode'   => 'padding',
@@ -138,7 +144,6 @@ Templaza_API::set_section('settings',
                 'allow_responsive'    => true,
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                 'title'  => esc_html__('Item Summary Padding', 'agruco'),
-                'select2'   => array('allowClear' => true),
             ),
             array(
                 'id'     => 'templaza-shop-margin',
@@ -148,7 +153,6 @@ Templaza_API::set_section('settings',
                 'allow_responsive'    => true,
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                 'title'  => esc_html__('Item Summary Margin', 'agruco'),
-                'select2'   => array('allowClear' => true),
             ),
 
             array(
@@ -422,6 +426,44 @@ Templaza_API::set_subsection('settings', 'shop-page',
                     'layout-5' => esc_html__( 'Layout 5', 'agruco' ),
                 ),
                 'default'  => 'layout-1',
+            ),
+            array(
+                'id'       => 'templaza-shop-single-box-background-color',
+                'type'     => 'color_rgba',
+                'title'    => esc_html__( 'Background Color', $this -> text_domain ),
+                'subtitle' => esc_html__( 'Select the background color for boxed layout.', $this -> text_domain ),
+            ),
+            array(
+                'id'     => 'templaza-shop-single-box-padding',
+                'type'   => 'spacing',
+                'mode'   => 'padding',
+                'all'    => false,
+                'allow_responsive'    => true,
+                'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                'title'  => esc_html__('Single Box Padding', $this -> text_domain),
+                'default' => array(
+                    'units' => 'px',
+                ),
+            ),
+            array(
+                'id'     => 'templaza-shop-single-box-margin',
+                'type'   => 'spacing',
+                'mode'   => 'margin',
+                'all'    => false,
+                'allow_responsive'    => true,
+                'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                'title'  => esc_html__('Single Box Margin', $this -> text_domain),
+            ),
+            array(
+                'id'     => 'templaza-shop-single-content-max-width',
+                'type'   => 'dimensions',
+                'height' => false,
+                'units'    => array('em','px','%'),
+                'title'  => esc_html__('Description max width', $this -> text_domain),
+                'default' => array(
+                    'width' => '',
+                    'units' => '%',
+                ),
             ),
             array(
                 'id'       => 'templaza-shop-single-cart-ajax',

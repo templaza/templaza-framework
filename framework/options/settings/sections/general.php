@@ -258,3 +258,21 @@ Templaza_API::set_section('settings',
         )
     )
 );
+
+// -> START Header
+Templaza_API::set_section('settings',
+    array(
+        'id'         => 'headers',
+        'title'     => esc_html__('Header',$this -> text_domain),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'enable-header',
+                'type'     => 'switch',
+                'title'    => __( 'Enable Header', $this -> text_domain ),
+                'subtitle' => __( 'Enable or disable the Header Element.', $this -> text_domain ),
+                'default'  => true,
+            ),
+        )
+    )
+);

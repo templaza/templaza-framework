@@ -356,7 +356,7 @@ class Templaza_Woo_General {
 
 		$css_class = get_option( 'product_wishlist_button' ) == 'title' ? 'show-wishlist-title' : '';
 
-		echo '<div class="rz-wishlist-button templaza-button templaza-btn-outline ' . esc_attr( $css_class ) . '">';
+		echo '<div class="templaza-wishlist-button templaza-button templaza-btn-outline ' . esc_attr( $css_class ) . '">';
 		echo do_shortcode( '[yith_wcwl_add_to_wishlist]' );
 		echo '</div>';
 	}

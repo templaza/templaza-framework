@@ -4,12 +4,12 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 
 use TemPlazaFramework\Post_TypeFunctions;
 
-if(!class_exists('TemplazaFramework_MetaBox_Default_Layout')){
-    class TemplazaFramework_MetaBox_Default_Layout extends TemplazaFramework_MetaBox{
+if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
+    class TemplazaFramework_MetaBox_Layout_Assignment extends TemplazaFramework_MetaBox{
 
         public function register(){
             $metaboxes[] = array(
-                'id'            => 'default-layout',
+                'id'            => 'layout-assignment',
                 'title'         => __( 'Default Layout', $this -> text_domain ),
                 'post_types'    => array('templaza_header', 'templaza_footer'),
                 'position'      => 'side', // normal, advanced, side
@@ -31,7 +31,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Default_Layout')){
             $metaboxes[] = array(
                 'id'            => 'header-layout-assign',
                 'title'         => __( 'Template Assignment', $this -> text_domain ),
-                'post_types'    => 'templaza_header',
+                'post_types'    => array('templaza_header'),
                 'position'      => 'side', // normal, advanced, side
                 'priority'      => 'default', // high, core, default, low - Priorities of placement
                 'store_each'    => true, // Store value of each fields to each post meta
@@ -120,29 +120,12 @@ if(!class_exists('TemplazaFramework_MetaBox_Default_Layout')){
                 if(method_exists($this,'post_type_templaza_style_table_head')) {
                     add_filter('manage_templaza_style_posts_columns', array($this, 'post_type_templaza_style_table_head'));
                 }
-//                // Add header column to templaza style post type list
-//                if(method_exists($this,'post_type_templaza_style_table_content')) {
-//                    add_filter('manage_templaza_style_posts_custom_column', array($this,
-//                        'post_type_templaza_style_table_content'), 10, 2);
-//                }
 
-//                // Add header column to post type list
-////                if(method_exists($this,'post_type_table_head')) {
+                // Add header column to post type list
                 add_filter('manage_posts_columns', array($this, 'post_type_table_head'), 10, 2);
                 add_filter('manage_posts_custom_column', array($this,'post_type_table_content'), 10, 2);
-////                }
 
                 if(in_array($post_type, $post_types)){
-//                    // Add header column to post type list
-//                    if(method_exists($this,'post_type_table_head')) {
-//                        add_filter('manage_'.$post_type.'_posts_columns', array($this, 'post_type_table_head'));
-//                    }
-//
-//                    // Add header column to post type list
-//                    if(method_exists($this,'post_type_table_content')) {
-//                        add_filter('manage_'.$post_type.'_posts_custom_column', array($this,
-//                            'post_type_table_content'), 10, 2);
-//                    }
 
                     // Ordering column
                     if(method_exists($this,'post_type_table_sorting')) {
@@ -173,25 +156,6 @@ if(!class_exists('TemplazaFramework_MetaBox_Default_Layout')){
         public function post_duplicate($new_post_id, $post_id){
             update_post_meta($new_post_id, '__home', 0);
         }
-
-//        /*
-//         * Add columns for header custom post type in list page
-//         * @param array $columns
-//         * */
-//        public function post_type_table_head($columns){
-//
-//            $pos            = array_search('title', array_keys($columns)) + 1;
-//            $new_columns    = array(
-//                '__home' => esc_html__('Default', $this -> text_domain),
-//                '__h_template_assign' => esc_html__('Template Assigned', $this -> text_domain)
-//            );
-//
-//            return array_merge(
-//                array_slice($columns, 0, $pos),
-//                $new_columns,
-//                array_slice($columns, $pos)
-//            );
-//        }
 
         /*
          * Add columns for header custom post type in list page
@@ -258,16 +222,13 @@ if(!class_exists('TemplazaFramework_MetaBox_Default_Layout')){
                     $assigned   = array_filter($assigned);
 
                     if(!empty($assigned)) {
-//                        $assigned = array_map('strval', $assigned);
                         $args = array(
                             'post_type' => 'templaza_style',
                             'posts_per_page' => -1,
                             'post_name__in' => $assigned
                         );
                         $temp_assigned  = get_posts($args);
-//                        $query  = new WP_Query($args);
-//                        var_dump($query -> request);
-//                        var_dump($temp_assigned);
+
                         if(!empty($temp_assigned) && !is_wp_error($temp_assigned)){
                             $content    = '';
                             foreach ($temp_assigned as $i => $temp){
@@ -466,10 +427,6 @@ if(!class_exists('TemplazaFramework_MetaBox_Default_Layout')){
                         )
                     );
 
-//                    $query  = new WP_Query($args);
-//                    var_dump($query -> request);
-//                    die(__FILE__);
-
                     $post_exists   = get_posts($args);
 
                     if(!is_wp_error($post_exists) && empty($post_exists)){
@@ -625,9 +582,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Default_Layout')){
                 $query .= ' FROM ' . $wpdb->postmeta.' AS pm';
                 $query .= ' INNER JOIN '.$wpdb -> posts.' AS p ON p.ID = pm.post_id AND p.post_type="'.$post_type.'"';
                 $query .= ' WHERE (pm.meta_key="' . $name . '"';
-//                $query .= ' AND pm.post_id <> ' . $post_id;
                 $query .= ' AND pm.meta_value IN("' . implode('","',$value ). '"))';
-//                $query .= ' AND (pm.meta_key="_' . $post_type . '__theme" AND pm.meta_value ="'.get_template().'")';
 
                 $sub_query = '   SELECT pm2.post_id';
                 $sub_query .= '   FROM (SELECT * FROM '.$wpdb ->postmeta.') AS pm2';
@@ -665,9 +620,6 @@ if(!class_exists('TemplazaFramework_MetaBox_Default_Layout')){
             $sub_query .= '   WHERE (pm2.meta_key="_' . $post_type . '__theme" AND pm2.meta_value ="'.get_template().'")';
             $sub_query .= '   AND pm2.post_id <> '.$post_id;
             $query .= ' AND pm.post_id IN('.$sub_query.')';
-//            var_dump($query);
-////            var_dump($sub_query);
-//            die(__FILE__);
 
             $wpdb ->query($query);
         }

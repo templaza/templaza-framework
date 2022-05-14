@@ -48,7 +48,8 @@ class Templaza_Woo_Checkout {
 		add_action( 'woocommerce_before_checkout_form', array( __CLASS__, 'checkout_login_form' ), 10 );
 		add_action( 'woocommerce_before_checkout_form', array( __CLASS__, 'checkout_coupon_form' ), 10 );
 		add_action( 'woocommerce_before_checkout_form', array( __CLASS__, 'after_login_form' ), 10 );
-
+        add_action( 'woocommerce_checkout_before_order_review_heading', array( __CLASS__, 'before_order_review' ) );
+        add_action( 'woocommerce_checkout_after_order_review', array( __CLASS__, 'after_order_review' ) );
 	}
 
 	/**
@@ -105,6 +106,27 @@ class Templaza_Woo_Checkout {
 		echo '<div class="checkout-coupon checkout-form-col col-flex col-flex-md-6 col-flex-xs-12">';
 		woocommerce_checkout_coupon_form();
 		echo '</div>';
+	}
+
+	/**
+	 * Checkout before_order_review
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	public static function before_order_review() {
+        echo '<div class="tz-shop-order-wrap">';
+	}
+	/**
+	 * Checkout after_order_review
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	public static function after_order_review() {
+        echo '</div>';
 	}
 }
 Templaza_Woo_Checkout::get_instance();

@@ -27,8 +27,7 @@ if(!class_exists('TemPlazaFramework\AdminHelper\Templaza_Header')){
                         'value' => get_template()
                     )
                 )
-//                'meta_key'       => '_templaza_style_theme',
-//                'meta_value'     => basename(get_template_directory()),
+
             );
 
             $data    = array();

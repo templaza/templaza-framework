@@ -4,7 +4,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 
 // Post type is templaza_style
 require_once 'sections/general.php';
-require_once 'sections/header.php';
+//require_once 'sections/header.php';
 require_once 'sections/menu.php';
 require_once 'sections/typography.php';
 require_once 'sections/color.php';

@@ -165,9 +165,13 @@ ul.products {
     .product-summary {
       transition: transform .35s ease;
       padding-top: 20px;
+      padding-bottom: 20px;
       background-color: #fff;
       .tz-loop_atc_button {
         display: none;
+      }
+      .product-loop__buttons{
+        background-color: #fff;
       }
     }
     .woocommerce-loop-product__title {
@@ -210,7 +214,6 @@ ul.products {
       }
     }
     .product-inner {
-      padding-bottom: 20px;
       position: relative;
       &:hover {
         .product-thumbnail {
@@ -637,7 +640,6 @@ ul.products.product-loop-layout-4 {
     }
     .product-inner {
       overflow: hidden;
-      padding-bottom: 25px;
       &:hover {
         .product-summary {
           transform: translateY(-40px);
@@ -654,6 +656,7 @@ ul.products.product-loop-layout-4 {
     }
     .product-loop__buttons {
       padding-top: 15px;
+      padding-bottom: 20px;
       position: absolute;
       left: 0;
       right: 0;
@@ -684,7 +687,6 @@ ul.products.product-loop-layout-4 {
 ul.products.product-loop-layout-5 {
   li.product {
     .product-inner {
-      padding-bottom: 25px;
       transition: all .2s ease-in-out;
       transition-property: box-shadow;
       &:hover {
@@ -696,14 +698,13 @@ ul.products.product-loop-layout-5 {
 ul.products.product-loop-layout-6 {
   li.product {
     .product-inner {
-      padding-bottom: 25px;
       transition: all .2s ease-in-out;
       transition-property: box-shadow;
       &:hover {
         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.06);
         .tz-loop_atc_button {
           background-color: $tztheme-button_background;
-          color: $tztheme-button_text_color_hover;
+          color: $tztheme-button_text_color;
         }
       }
     }
@@ -751,7 +752,6 @@ ul.products.product-loop-layout-6 {
 }
 ul.products.product-loop-layout-7 {
   li.product {
-    margin-bottom: 30px;
     .product-inner {
       overflow: hidden;
       padding-bottom: 0;
@@ -773,11 +773,12 @@ ul.products.product-loop-layout-7 {
       flex-direction: column;
       opacity: 0;
       transition: opacity .2s ease-in-out;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, 0.85);
       padding-left: 30px;
       padding-right: 30px;
     }
     .product-loop__buttons {
+      background:none;
       padding-top: 25px;
       display: flex;
       align-items: center;
@@ -824,7 +825,6 @@ ul.products.product-loop-layout-8 {
     }
     .product-inner {
       position: relative;
-      padding-bottom: 25px;
       overflow: hidden;
       &:not(:hover) {
         .product-summary {
@@ -843,6 +843,7 @@ ul.products.product-loop-layout-8 {
     .product-loop__buttons {
       text-align: right;
       padding-top: 20px;
+      padding-bottom: 20px;
       position: absolute;
       top: 100%;
       width: 100%;
