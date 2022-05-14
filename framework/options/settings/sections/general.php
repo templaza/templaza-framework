@@ -12,17 +12,6 @@ Templaza_API::set_section('settings',
         'desc'      => esc_html__('General theme options',$this -> text_domain),
         'icon'      => 'el-icon-cog',
         'fields'    => array(
-//            array(
-//                'id'               => 'editor-text',
-//                'type'             => 'editor',
-//                'title'            => __('Editor Text', 'redux-framework-demo'),
-//                'subtitle'         => __('Subtitle text would go here.', 'redux-framework-demo'),
-//                'default'          => 'Powered by Redux.',
-//                'args'   => array(
-//                    'teeny'            => true,
-//                    'textarea_rows'    => 10
-//                )
-//            ),
         ),
     )
 );

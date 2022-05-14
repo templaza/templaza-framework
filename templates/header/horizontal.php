@@ -7,7 +7,8 @@ use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 use TemPlazaFramework\Menu;
 
-$options                    = Functions::get_theme_options();
+$gb_options                 = Functions::get_theme_options();
+$options                    = Functions::get_header_options();
 
 $mode                       = isset($options['header-horizontal-menu-mode'])?$options['header-horizontal-menu-mode']:'left';
 $block_1_type               = isset($options['header-block-1-type'])?$options['header-block-1-type']:'blank';
@@ -18,17 +19,13 @@ $offcanvas_animation        = isset($options['offcanvas-animation'])?$options['o
 $offcanvas_direction        = isset($options['offcanvas-direction'])?$options['offcanvas-direction']:'offcanvasDirLeft';
 $offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$options['offcanvas-togglevisibility']:'uk-display-block';
 
-//$class                      = ['templaza-header', 'templaza-horizontal-header', 'templaza-horizontal-' . $mode . '-header'];
 $navClass                   = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-visible@m'];
 $navWrapperClass            = [ 'uk-margin-small-left', 'uk-margin-small-right', 'uk-visible@m'];
 
 $dropdown_arrow             = isset($options['dropdown-arrow'])?filter_var($options['dropdown-arrow'], FILTER_VALIDATE_BOOLEAN):true;
-//$dropdown_animation_ease    = isset($options['dropdown-animation-ease'])?$options['dropdown-animation-ease']:'linear';
 $dropdown_animation_type    = isset($options['dropdown-animation-type'])?$options['dropdown-animation-type']:'fade';
 $dropdown_animation_effect  = isset($options['dropdown-animation-effect'])?$options['dropdown-animation-effect']:'fade-down';
 $dropdown_animation_effect  = $dropdown_animation_type === 'none'?'':$dropdown_animation_effect;
-//$dropdown_animation_speed_1 = isset($options['dropdown-animation-speed-1'])?$options['dropdown-animation-speed-1']:300;
-//$dropdown_animation_speed_2 = isset($options['dropdown-animation-speed-2'])?$options['dropdown-animation-speed-2']:300;
 $dropdown_trigger           = isset($options['dropdown-trigger'])?$options['dropdown-trigger']:'hover';
 
 $header_menu                = isset($options['header-menu'])?$options['header-menu']:'header';

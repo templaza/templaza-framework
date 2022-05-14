@@ -80,14 +80,15 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
 
             if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
                 $redux->_register_settings();
-                $enqueue    = new Enqueue($redux);
-                $enqueue -> init();
+//                $enqueue    = new Enqueue($redux);
+//                $enqueue -> init();
             }else{
                 $redux -> options_class -> register();
-//                $redux -> enqueue_class -> init();
-                $my_enqueue = new Enqueue($redux);
-                $my_enqueue ->init();
+//                $my_enqueue = new Enqueue($redux);
+//                $my_enqueue ->init();
             }
+            $my_enqueue = new Enqueue($redux);
+            $my_enqueue ->framework_init();
 
             ob_start();
             if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {

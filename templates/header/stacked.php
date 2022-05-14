@@ -7,7 +7,8 @@ use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 use TemPlazaFramework\Menu;
 
-$options        = Functions::get_theme_options();
+$gb_options                 = Functions::get_theme_options();
+$options                    = Functions::get_header_options();
 
 $mode           = isset($options['header-stacked-menu-mode'])?$options['header-stacked-menu-mode']:'center';
 $block_1_type   = isset($options['header-block-1-type'])?$options['header-block-1-type']:'blank';

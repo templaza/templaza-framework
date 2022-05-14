@@ -12,6 +12,7 @@ use TemPlazaFramework\Template_Admin;
 use TemPlazaFramework\Templates;
 use \TemPlazaFramework\Admin\Admin_Page;
 use TemPlazaFramework\Post_Formats_Ui;
+use TemPlazaFramework\Enqueue;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -104,7 +105,6 @@ class Framework{
 
             $glb_args   = $this -> get_arguments();
             add_action('update_option_'.$glb_args['opt_name'], array($this, 'save_settings_to_file'),10,2);
-//            add_action('redux/options/'.$glb_args['opt_name'].'/saved', array($this, 'save_settings_to_file'));
         }
 
         do_action('templaza-framework/framework/hooks');

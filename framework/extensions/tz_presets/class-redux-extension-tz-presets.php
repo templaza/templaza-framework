@@ -63,25 +63,11 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
             $this->is_field = Redux_Helpers::is_field_in_use( $parent, 'tz_presets' );
 
             if ( ! $this->is_field && is_admin() && isset($this->parent->args['show_presets']) && $this->parent->args['show_presets'] ) {
+//                if(isset($parent -> args['preset_post_type']) && !empty($parent -> args['preset_post_type'])){
+//                    $this -> preset_path    .= '/'.$parent -> args['preset_post_type'];
+//                }
                 $this->add_section();
             }
-
-
-//			$this->add_field( 'import_export' );
-
-//			add_action( 'wp_ajax_redux_download_options-' . $this->parent->args['opt_name'], array( $this, 'download_options' ) );
-//			add_action( 'wp_ajax_nopriv_redux_download_options-' . $this->parent->args['opt_name'], array( $this, 'download_options' ) );
-//
-//			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-//			do_action( 'redux/options/' . $this->parent->args['opt_name'] . '/import', array( $this, 'remove_cookie' ) );
-//
-//			$this->is_field = Redux_Helpers::is_field_in_use( $parent, 'import_export' );
-//
-//			if ( ! $this->is_field && $this->parent->args['show_import_export'] ) {
-//				$this->add_section();
-//			}
-//
-//			add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 		}
 
 		private function hooks(){
@@ -95,10 +81,16 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 
         private function get_preset_path(){
 
+            global $pagenow;
             $preset_path = $this->preset_path;
 
             $page       = isset($_REQUEST['page']) && !empty($_REQUEST['page'])?$_REQUEST['page']:false;
+            $post_id  = isset($_REQUEST['post']) && !empty($_REQUEST['post'])?$_REQUEST['post']:0;
             $post_type  = isset($_REQUEST['post_type']) && !empty($_REQUEST['post_type'])?$_REQUEST['post_type']:false;
+
+            if($pagenow == 'post.php' && empty($post_type) && $post_id){
+                $post_type  = get_post_type($post_id);
+            }
 
             if(isset($post_type) && !empty($post_type)){
                 if($post_type != 'templaza_style'){
@@ -193,34 +185,6 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
             $preset     = isset($_REQUEST['preset']) && !empty($_REQUEST['preset'])?$_REQUEST['preset']:'';
             $desc       = isset($_REQUEST['description']) && !empty($_REQUEST['description'])?$_REQUEST['description']:'';
 
-//            $source_file_name   = '';
-//
-//            if(isset($post_type) && !empty($post_type)){
-//                if($post_type == 'templaza_style'){
-//                    if($post_id){
-//                        $source_file_name   = get_post_meta($post_id, '_templaza_style', true).'.json';
-//                    }
-//                }else {
-//                    $preset_path .= '/' . $post_type;
-//                }
-//            }elseif($page){
-//                if($page == Functions::get_theme_option_name().'_options'){
-//                    $preset_path    .= '/settings';
-//                    $source_file_name   = 'setting.json';
-//                }else{
-//                    $page_name      = preg_replace('/^'.TEMPLAZA_FRAMEWORK.'/', '', $page);
-//                    $preset_path    .= '/'.$page_name;
-//                    $source_file_name   = $page_name.'.json';
-//                }
-//            }
-//
-//            if(!file_exists($source_file.'/'.$source_file_name)){
-//                wp_send_json_error(array('message' => __('Config file not found.', $this -> text_domain)));
-//                wp_die();
-//            }
-//
-//            $preset = file_get_contents($source_file);
-
 		    $title_slug  = sanitize_title($title);
 		    $file_name  = $title_slug;
             $file_path  = $preset_path.'/'.$file_name;
@@ -264,6 +228,7 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 						'id'         => 'presets',
 						'type'       => 'tz_presets',
 						'full_width' => true,
+                        'preset_path' => $this -> get_preset_path()
 					),
 				),
 			);

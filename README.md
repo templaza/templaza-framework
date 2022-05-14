@@ -3,6 +3,13 @@
 
 Changelogs:
 
+Version 1.0.8 - May 14, 2022
+    
+    Fix issue multiple redux localize script added.
+    Fix issue load advanced-products-filter gutenberg block.
+    Change action buttons's tooltip of section, row, element to use UIkit tooltip.
+    Update header and footer layout builder
+
 Version 1.0.7 - May 09, 2022
     
     Fix issue save section with text block.

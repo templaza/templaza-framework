@@ -48,15 +48,7 @@
                     el_inner = el.find(".js-field-tz_layout");
                 var parent = el;
                 var field_tz_layout = templaza_field_tz_layout || {};
-                // var __i18n = templaza_field_tz_layout.i18n || {
-                //     "copied": "Copied!",
-                //     "pasted": "Pasted!",
-                //     "delete_question": "Are you sure?",
-                //     "copy_failed": "Copy failed!",
-                //     "paste_failed": "Not Pasted! Please copy again.",
-                //     "custom_column": "Please enter custom grid size (eg. 1-2;1-4;1-4 or auto;1-3;expand)"
-                // };
-                // redux.field_objects.tz_layout.i18n    = __i18n;
+
                 var __i18n = redux.field_objects.tz_layout.i18n;
                 if (!el.hasClass('redux-field-container')) {
                     parent = el.parents('.redux-field-container:first');
@@ -164,7 +156,6 @@
 
                     redux.field_objects.tz_layout.init_tooltip(el);
 
-                    // redux.field_objects.tz_layout.init_source(el);
                     redux.field_objects.tz_layout.init_control(el, $settings);
 
 
@@ -362,20 +353,12 @@
                     var $setting;
                     var form_setting_tmp = wp.template("field-tz_layout-settings-" + sub_element.data("fl-element_type"));
 
-                    // /* 29/04/2021 */
-                    // var _form_setting_obj   = $(form_setting_tmp());
-                    // /* End 29/04/2021 */
-
                     if(selector.find("[data-fl-element_type]").index(element) > -1){
                         $setting   = redux.field_objects.tz_layout.get_setting(sub_element, selector, settings);
                     }else{
                         $setting   = redux.field_objects.tz_layout.get_form_settings($(form_setting_tmp()), sub_element);
                     }
                     $setting["id"]  = redux.field_objects.tz_layout.generateID();
-
-                    // /* 29/04/2021 */
-                    // $setting["parent"]  = _form_setting_obj.attr("data-fl-parent");
-                    // /* End 29/04/2021 */
 
                     if(typeof sub_element.data("icon") !== typeof undefined) {
                         $setting["icon"] = sub_element.data("icon");
@@ -389,12 +372,7 @@
                         $setting["elements"]    =  $tree_setting[$level - 1];
                         $tree_setting[$level - 1]   = [];
                     }
-                    // else{
-                    // //     $level  = 0;
-                    //     if(typeof $setting.elements !== typeof undefined){
-                    //         delete $setting.elements;
-                    //     }
-                    // }
+
                     if(typeof $tree_setting[$level] === typeof undefined) {
                         $tree_setting[$level]   = [];
                     }
@@ -424,7 +402,6 @@
             }
             return $setting;
         }
-        // return false;
     };
 
 
@@ -483,6 +460,12 @@
                        }
                    }
                }
+
+                selector.trigger("templaza-framework/field/tz_layout/load_setting/field_value",
+                    [f_name, $setting, field, element, form, settings, selector]);
+                selector.trigger("templaza-framework/field/tz_layout/load_setting/"+field
+                    .closest(".redux-field-container").attr("data-type")+"/field_value",
+                    [f_name, $setting, field, element, form, settings, selector]);
             });
 
             // Prepare default setting from shortcode element
@@ -682,19 +665,14 @@
         var sortable_column  = function(sort_selector){
             // Column sortable
             sort_selector.find("[data-fl-element_type=row] .fl_row_container").sortable({
-                // handle: "[data-fl-control=move]",
                 placeholder: "fl-ui-state-highlight fl-column-state-highlight",
                 forcePlaceholderSize: true,
                 items: '> [data-fl-element_type=column]',
                 start: function( event, ui ) {
                     sort_selector.tooltip("destroy");
-                    // var padding = ui.item.outerWidth() - ui.item.width(),
-                    //     width   = Math.floor(ui.item.closest(".fl_row_container").width() / 100 * parseFloat(ui.item.css("flex").replace("0 0 ", "")));
 
                     ui.placeholder.html('<div class="uk-background-muted uk-width uk-height-1-1"></div>');
                     ui.placeholder.addClass(ui.item.attr("class"));
-                    // ui.placeholder.width(width-padding);
-                    // ui.placeholder.height(ui.item.outerHeight());
                     ui.placeholder.height(ui.helper.height());
 
                     $(this).data("fl-ui-old-index", ui.item.index());
@@ -747,11 +725,6 @@
                 stop: function( event, ui ) {
                     redux.field_objects.tz_layout.init_tooltip(sort_selector);
 
-                    // Allow 2 level of row
-                    // if(ui.item.data("fl-element_type") === "row_inner") {
-                    //     $(this).sortable('cancel');
-                    // }
-
                     if(ui.item.data("fl-element_type") === "row_inner" && ui.item.parents("[data-fl-element_type=row_inner]").length) {
                         $(this).sortable('cancel');
                     }
@@ -803,14 +776,12 @@
                 placeholder: "fl-row-state-highlight fl-ui-state-highlight",
                 forcePlaceholderSize: true,
                 containment: "parent",
-                // cancel: '[data-fl-element_type=row].fl_row_inner',
                 items: '[data-fl-element_type=row]',
                 connectWith: ".fl_column-container:not(.fl_container_for_children)",
                 start: function( event, ui ) {
                     sort_selector.tooltip("destroy");
                     ui.placeholder.html('<div class="uk-background-muted uk-width uk-height-1-1"></div>');
                     var __col_margin    = ui.item.find(".fl_column").outerHeight(true) - ui.item.find(".fl_column").height();
-                    // ui.placeholder.css("margin-bottom", "+=" + __col_margin);
                     ui.placeholder.height(ui.item.outerHeight() - __col_margin);
 
                     $(this).data("fl-ui-old-index", ui.item.index());
@@ -857,21 +828,14 @@
                 start: function( event, ui ) {
                     sort_selector.tooltip("destroy");
                     ui.placeholder.html('<div class="uk-background-muted uk-width uk-height-1-1"></div>');
-                    // if(ui.item.hasClass("fl_content_element")) {
+
                     var __col_margin    = ui.item.find(".fl_column").outerHeight(true) - ui.item.find(".fl_column").height();
-                    // ui.placeholder.css("margin-bottom", "+=" + __col_margin);
                     ui.placeholder.height(ui.item.outerHeight() - __col_margin);
-                    // }
 
                     $(this).data("fl-ui-old-index", ui.item.index());
                 },
                 stop: function( event, ui ) {
                     redux.field_objects.tz_layout.init_tooltip(sort_selector);
-
-                    // // Allow 2 level of row
-                    // if(ui.item.data("fl-element_type") === "row" && ui.item.parents("[data-fl-element_type=row].fl_row_inner").length) {
-                    //     $(this).sortable('cancel');
-                    // }
                 },
                 update: function( event, ui ) {
 
@@ -898,9 +862,7 @@
                 'autoOpen': false,
                 'closeOnEscape': true,
                 'draggable': false,
-                // "appendTo": selector,
                 "appendTo": selector.closest(".tzfrm-ui-dialog").length?$("body"):selector,
-                // "appendTo": dialog_selector.parent(),
                 "title":  dialog_selector.data("modal-title"),
                 'buttons'       : [
                     {
@@ -1198,15 +1160,6 @@
                         }
                     }).show();
 
-                    // tzdialog(list_element_obj, {
-                    //     open: function( event, ui ) {
-                    //         element_click_event($(this), control);
-                    //     },
-                    //     "close": function (ev, ui) {
-                    //         $(this).remove();
-                    //     }
-                    // }).removeClass("hide").dialog('open');
-
                 }
 
                 sortable(selector);
@@ -1218,12 +1171,6 @@
                 var list_elements = wp.template("field-tz_layout-list__items");
                 var list_element_obj = $(list_elements());
 
-                // button_cache   = $(this);
-                // if(element_empty.closest("[data-fl-element_type=row_inner").length){
-                //     $("[data-fl_tz_layout-elements]").find("[data-element=row_inner]").parent().addClass("hide");
-                // }else{
-                //     $("[data-fl_tz_layout-elements]").find("[data-element=row_inner]").parent().removeClass("hide");
-                // }
                 if(element_empty.closest("[data-fl-element_type=row_inner").length){
                     list_element_obj.find("[data-element=row_inner]").parent().addClass("hide");
                 }else{
@@ -1240,15 +1187,6 @@
                     }
                 }).show();
 
-                // tzdialog(list_element_obj, {
-                //     open: function( event, ui ) {
-                //         element_click_event($(this), element_empty);
-                //     },
-                //     "close": function (ev, ui) {
-                //         // button_cache   = null;
-                //         $(this).remove();
-                //     }
-                // }).removeClass("hide").dialog('open');
             });
             // Add section
             selector.find("[data-fl-control=add-section], .fl_add-element-not-empty-button").off("click").on("click", function(event){
@@ -1258,12 +1196,6 @@
                     section_new,
                     element = control.closest("[data-fl-element_type=section]");
                 var __i18n = redux.field_objects.tz_layout.i18n;
-
-                // if(section_empty){
-                //     section_new = $(section_empty);
-                // }else{
-                //     section_new = $(redux.field_objects.tz_layout.get_row_empty());
-                // }
 
                 var __insert_blank_section = function(section_new) {
                     var pos = "last",
@@ -1313,7 +1245,6 @@
                         '    </div></div>');
                     var __loading = $('<div class="uk-position-cover uk-background-muted uk-flex uk-flex-center uk-flex-middle"><div data-uk-spinner></div></div>');
 
-                    // __modal_html.find(".uk-modal-body").html(__loading);
                     __modal_html.find(".uk-modal-body").append(__loading);
 
                     var __table = $('        <table class="uk-table uk-table-divider">\n' +
@@ -1404,7 +1335,14 @@
                                                                 element.after(__new_html);
                                                                 __pos = element.parent().find("[data-fl-element_type=section]").index(element) + 1;
                                                             }else{
-                                                                selector.find(".field-tz_layout-content > .fl_column-section-container").append(__new_html);
+                                                                if (!selector.find(".field-tz_layout-content > .fl_column-container.fl_column-section-container").length) {
+                                                                    var selector_child = $("<div>");
+                                                                    selector_child.attr("class", "fl_column-container fl_column-section-container");
+
+                                                                    selector_child.append(__new_html).appendTo(selector.find(".field-tz_layout-content"));
+                                                                } else {
+                                                                    selector.find(".field-tz_layout-content  > .fl_column-section-container").append(__new_html);
+                                                                }
                                                             }
                                                         }
 
@@ -1523,7 +1461,6 @@
                     [control, element, selector, settings]);
 
                 var pos = element.index() + 1;
-                // var pos = element.parent().find("[data-fl-element_type]").index(element) + 1;
                 var dest_setting = null;
                 var el_setting = redux.field_objects.tz_layout.get_setting(element, selector, settings);
                 var src_setting = $.extend(true, {id: redux.field_objects.tz_layout.generateID()}, el_setting);
@@ -1545,10 +1482,6 @@
                 selector.trigger("templaza-framework/field/tz_layout/action/clone/shortcode/html/before",
                     [element, clone, src_setting, dest_setting, selector, settings]);
 
-                // var clone   = element.clone();
-
-                // clone   = selector.triggerHandler("templaza-framework/field/tz_layout/action/clone/shortcode/html/prepare",
-                //     [clone, element, src_setting, dest_setting, control]);
                 clone.insertAfter(element);
 
                 selector.trigger("templaza-framework/field/tz_layout/action/clone/shortcode/html/after",
@@ -1580,8 +1513,6 @@
                             url: ajaxurl,
                             method: 'POST',
                             data: {
-                                // page: "tzfrm_alita_opt_options",
-                                // page: adminpage,
                                 post_type: "templaza_library",
                                 title: name,
                                 action: "templaza-framework/field/tz_layout/action/save_section",
@@ -1665,55 +1596,8 @@
                         sortable(selector);
                         init_event();
 
-                        // if(typeof __m_uikit_modal !== "undefined"){
-                        //     UIkit.modal(__m_uikit_modal).show();
-                        //     __m_uikit_modal.data("modal_shown", true);
-                        // }
                     },function(){
-                        // if(typeof __m_uikit_modal !== "undefined"){
-                        //     UIkit.modal(__m_uikit_modal).show();
-                        //     __m_uikit_modal.data("modal_shown", true);
-                        // }
-
                     });
-                    // var result  = confirm("Are you sure?");
-                    // if(result){
-                    //
-                    //     var element_index = element.index(),
-                    //         parent_element = element.parents("[data-fl-element_type]").first(),
-                    //         parent_setting  = redux.field_objects.tz_layout.get_setting(parent_element, selector, settings),
-                    //     element_setting = (typeof parent_setting !== typeof undefined && parent_setting.elements[element_index])?parent_setting.elements[element_index]:{};
-                    //
-                    //     selector.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/setting/before",
-                    //             [element, element_setting, parent_setting]);
-                    //     control.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/setting/before", [element, element_setting, parent_setting]);
-                    //
-                    //     if(typeof parent_setting !== typeof undefined){
-                    //         parent_setting.elements.splice(element_index, 1);
-                    //     }else{
-                    //         settings.splice(element_index, 1);
-                    //     }
-                    //
-                    //     redux.field_objects.tz_layout.set_setting_to_field(settings, selector);
-                    //
-                    //     selector.trigger("templaza-framework/field/tz_layout/action/delete/shortcode", [element, element_setting, parent_setting]);
-                    //     control.trigger("templaza-framework/field/tz_layout/action/delete/shortcode", [element, element_setting, parent_setting]);
-                    //
-                    //     element.remove();
-                    //
-                    //     if(parent.hasClass("fl_column-container fl_container_for_children") && !parent.find("[data-fl-element_type]").length){
-                    //         var column = wp.template("field-tz_layout-template-column");
-                    //         parent.closest("[data-fl-element_type]").after(column({
-                    //             size: parent.closest("[data-fl-element_type]").attr("data-column-width")
-                    //         })).remove();
-                    //     }
-                    //
-                    //     selector.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/after");
-                    //     control.trigger("templaza-framework/field/tz_layout/action/delete/shortcode/after");
-                    //
-                    //     sortable(selector);
-                    //     init_event();
-                    // }
                 }
             });
 
@@ -1731,7 +1615,6 @@
                         // console.log(_opt_name);
                         $.each(
                             window['redux_' + _opt_name.replace( /\-/g, '_' )].folds,
-                            // window['redux_' + redux.opt_names[x].replace( /\-/g, '_' )].folds,
                             function( i, v ) {
                                 var div;
                                 var rawTable;
@@ -1740,13 +1623,6 @@
                                 // var fieldset = obj_selector.find( '#' + redux.opt_names[x] + '-' + i );
 
                                 fieldset.parents( 'tr:first, li:first' ).addClass( 'fold' );
-
-                                // console.log($.redux.check_parents_dependencies(i));
-                                // //
-                                // // console.log(obj_selector.find("form[data-opt-name]"));
-                                // console.log(i);
-                                // console.log(v);
-                                // console.log(_opt_name);
 
                                 if ( 'hide' === v ) {
                                     fieldset.parents( 'tr:first, li:first' ).addClass( 'hide' );
@@ -1848,7 +1724,6 @@
 
                                     $(this).trigger("templaza-framework/setting/save/after",[setting, element, selector, settings]);
 
-                                    // redux.optName.args.opt_name = control.closest("form.redux-form-wrapper").attr("data-opt-name");
                                     UIkit.modal($( this ).closest(".uk-modal")).hide();
                                 },
                             },
@@ -1858,15 +1733,16 @@
                                 click: function () {
                                     $(this).trigger("templaza-framework/setting/close", [settings, selector]);
 
-                                    // redux.optName.args.opt_name = control.closest("form.redux-form-wrapper").attr("data-opt-name");
                                     UIkit.modal($( this ).closest(".uk-modal")).hide();
                                 },
                             },
                         ],
                         "hidden": function () {
-                            $(this).remove();
+                            // if(!$(this).is(':visible')) {
+                                $(this).remove();
 
-                            redux.field_objects.tz_layout.init_tooltip(selector);
+                                redux.field_objects.tz_layout.init_tooltip(selector);
+                            // }
                         },
                         "beforeshow": function(){
                             if(!$(this).closest(".templaza-framework-options").length){
@@ -1890,9 +1766,6 @@
                             }
 
                             if (fields.length) {
-
-                                // tz_required( _dialog );
-                                // $.redux.checkRequired(_dialog.find(".redux-container"));
 
                                 main_wrap.data("opt-name", undefined);
                                 main_wrap.removeData("data-opt-name");
@@ -1927,7 +1800,6 @@
 
 
                                         tz_redux_field.init(field);
-                                        // $.redux.check_dependencies(field.find(" input,  textarea, select"));
                                         redux_change(field.find(" input,  textarea, select"));
 
                                         // After init field in setting edit
@@ -1954,10 +1826,6 @@
                                 });
 
                                 $.redux.checkRequired(_dialog.find(".redux-container"));
-
-
-                                // $.redux.required();
-                                // tz_required( _dialog );
 
                             }
                         },
@@ -2026,12 +1894,6 @@
                             }
 
                         });
-
-                        // /* Use jquery ui dialog */
-                        // var $custom  = prompt("Please enter custom grid size (eg. 1-2;1-4;1-4)");
-                        // if($custom && $custom.length){
-                        //    $cells   = $custom.replace(/\s+/g, "").split(/\+|,|;/);
-                        // }
                     }
 
                     function set_cells($cells) {
@@ -2116,9 +1978,6 @@
                         grid_setting_obj.dialog("destroy");
                     }
 
-                    // if(typeof __uimodal !== "undefined"){
-                    //     __uimodal.hide();
-                    // }
                     if(__grid_item_modal){
                         UIkit.modal(__grid_item_modal).hide();
                     }
@@ -2139,14 +1998,7 @@
                     }
                 }).show();
 
-                // tzdialog(grid_setting_obj,{
-                //     "title": grid_setting_obj.data("fl-setting-title"),
-                //     "close": function (ev, ui) {
-                //         $(this).remove();
-                //     },
-                // }).dialog('open');
             });
-            // console.log("init event");
         };
 
         sortable(selector);

@@ -189,6 +189,11 @@
       }
     }
   }
+  &.fully-expanded{
+    .redux-main{
+      margin-left: 0;
+    }
+  }
   .redux-group-tab{
     background-color: $tz-background-container;
     padding:30px 25px;

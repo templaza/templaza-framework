@@ -63,15 +63,6 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
         public function get_data(){
             global $wpdb;
 
-//            $sql    = "SELECT p.*, pm.meta_value FROM $wpdb->posts AS p"
-//                ." LEFT JOIN $wpdb->postmeta AS pm ON pm.post_id = p.ID AND pm.meta_key='_templaza_library_data'"
-//                ." AND pm.meta_key='_templaza_library_type' AND pm.meta_value='section'"
-//                ." WHERE p.post_type='{$this -> get_post_type()}'";
-//
-//            var_dump($sql); die(__METHOD__);
-//            $posts = $wpdb->get_results( $sql );
-//            wp_reset_postdata();
-
             $posts  = get_posts(array(
                 'numberposts'      => -1,
                 'post_type' => 'templaza_library'
@@ -183,6 +174,10 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
 
             // Update postmeta library data
             $result = update_post_meta($postId, '_templaza_library_data', $section);
+
+//            if(!$result){
+//                wp_send_json_error(__('Update post meta error'));
+//            }
 
             wp_send_json(array('success' => true, 'message' => __('Section Saved', $this -> text_domain)));
         }

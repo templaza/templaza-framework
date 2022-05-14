@@ -39,7 +39,7 @@
                 return __ajax_data;
             };
 
-            el.on("click", ".js-save-preset", function(){
+            el.off("click", ".js-save-preset").on("click", ".js-save-preset", function(){
                 var __btn    = $(this),
                     __title = el.find(".js-preset-title").val(),
                     __description = el.find(".js-preset-description").val(),

@@ -53,7 +53,7 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
         public function hooks(){
 
             add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 10, 2 );
-            add_action( 'save_post', array( $this, 'save_meta_box' ), 10, 2 );
+            add_action( 'save_post', array( $this, 'save_meta_box' ), 20, 2 );
 
             if(method_exists($this, 'enqueue')){
 
@@ -76,17 +76,19 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                     if(!property_exists($redux, 'core_instance')){
                         \Redux::set_args($opt_name, $args);
                         \Redux::init($opt_name);
-
                         $redux  = \Redux::instance($opt_name);
                     }
                     if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
                         $redux->_register_settings();
-                        $enqueue    = new \Redux_Enqueue($redux);
-                        $enqueue -> init();
+//                        $enqueue    = new \Redux_Enqueue($redux);
+//                        $enqueue -> init();
                     }else{
                         $redux -> options_class -> register();
-                        $redux -> enqueue_class -> init();
+//                        $redux -> enqueue_class -> init();
                     }
+
+                    $enqueue    = new Enqueue($redux);
+                    $enqueue -> framework_init();
                 }
 
                 foreach($metaboxes as $k => $metabox){
@@ -155,6 +157,7 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                     $repeater_data['opt_names'][]   = $redux_args['opt_name'];
                     return $repeater_data;
                 });
+
                 $redux  = \Redux::instance($metabox['id']);
 
                 // Set options
@@ -162,13 +165,14 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
 
                 if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
                     $redux->_register_settings();
-
-                    $enqueue    = new Enqueue($redux);
-                    $enqueue -> init();
+//                    $enqueue    = new Enqueue($redux);
+//                    $enqueue -> init();
                 }else{
                     $redux -> options_class -> register();
-                    $redux -> enqueue_class -> init();
+//                    $redux -> enqueue_class -> init();
                 }
+                $enqueue    = new Enqueue($redux);
+                $enqueue -> framework_init();
 
                 ?>
                 <?php
@@ -278,6 +282,10 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                         if(isset($section['fields']) && $section['fields'] && count($section['fields'])){
                             foreach($section['fields'] as $field){
                                 $pdata  = get_post_meta($post -> ID, $field['id'], true);
+                                if(method_exists($this, 'prepare_field_value')){
+                                    $pdata = $this -> prepare_field_value($pdata, $field['id'], $post);
+                                }
+                                $pdata = apply_filters("templaza-framework/metabox/{$metabox['id']}/prepare_field_value", $pdata, $field['id'], $post);
                                 if(!empty($pdata)) {
                                     $data[$field['id']] = $pdata;
                                 }
@@ -335,9 +343,38 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                         $options    = $_POST[$mt_key];
                         if(isset($metabox['store_each']) && $metabox['store_each']){
                             foreach ($options as $key => $option){
+                                if(method_exists($this, 'prepare_field_value_update')){
+                                    $option = $this -> prepare_field_value_update($option, $key, $post_id, $post);
+                                }
+                                $option = apply_filters("templaza-framework/metabox/{$metabox['id']}/prepare_field_value_update", $option, $key, $post_id, $post);
+
+                                $result = false;
+                                if(method_exists($this, 'before_update_field_value')){
+                                    $result = $this -> before_update_field_value($result, $option, $key, $post_id, $post);
+                                }
+                                $result = apply_filters("templaza-framework/metabox/{$metabox['id']}/before_update_field_value", $result, $option, $key, $post_id, $post);
+
+                                if($result){
+                                    continue;
+                                }
                                 update_post_meta($post_id, $key, $option);
                             }
                         }else {
+                            if(method_exists($this, 'prepare_field_value_update')){
+                                $options = $this -> prepare_field_value_update($options, $mt_key, $post_id, $post);
+                            }
+                            $options = apply_filters("templaza-framework/metabox/{$metabox['id']}/prepare_field_value_update", $options, $mt_key, $post_id, $post);
+
+                            $result = false;
+                            if(method_exists($this, 'before_update_field_value')){
+                                $result = $this -> before_update_field_value($result, $options, $mt_key, $post_id, $post);
+                            }
+                            $result = apply_filters("templaza-framework/metabox/{$metabox['id']}/before_update_field_value", $result, $options, $mt_key, $post_id, $post);
+
+                            if($result){
+                                continue;
+                            }
+
                             update_post_meta($post_id, $mt_key, $options);
                         }
                     }

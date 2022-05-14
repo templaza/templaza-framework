@@ -4,11 +4,11 @@
 
         <!-- Column Top control -->
         <div class="fl_controls fl_controls-column">
-            <a href="#" class="fl_control fl_column-add" data-fl-control="add" title="<?php
+            <a href="#" class="fl_control fl_column-add" data-fl-control="add" data-uk-tooltip="<?php
             echo __('Add Element', $this -> text_domain); ?>"><i class="fas fa-plus"></i></a>
-            <a href="#" class="fl_control fl_column-edit" data-fl-control="edit" title="<?php
+            <a href="#" class="fl_control fl_column-edit" data-fl-control="edit" data-uk-tooltip="<?php
             echo __('Edit Column', $this -> text_domain);?>"><i class="far fa-edit"></i></a>
-            <a href="#" class="fl_control fl_column-delete" data-fl-control="delete" title="<?php
+            <a href="#" class="fl_control fl_column-delete" data-fl-control="delete" data-uk-tooltip="<?php
             echo __('Delete Column', $this -> text_domain);?>"><i class="far fa-trash-alt"></i></a>
         </div><!-- End Column Top control -->
 

@@ -16,6 +16,9 @@ if ( ! class_exists( 'Templaza_API', false ) ) {
          */
         public static $org_sections = array();
 
+        protected static $fields_loaded = array();
+        protected static $cache = array();
+
         public static function construct_sections(string $opt_name ): array {
             $sections   = parent::construct_sections($opt_name);
 
@@ -289,7 +292,11 @@ if ( ! class_exists( 'Templaza_API', false ) ) {
             if(!class_exists('Fields')){
                 require_once TEMPLAZA_FRAMEWORK_FIELD_PATH.'/fields.php';
             }
-            $fields = new Fields(\Redux::construct_args($opt_name));
+
+            if(!isset(static::$fields_loaded[$opt_name])) {
+                $fields = new Fields(\Redux::construct_args($opt_name));
+                static::$fields_loaded[$opt_name]   = true;
+            }
         }
 
         public static function load() {

@@ -7,12 +7,14 @@ use TemPlazaFramework\Functions;
 
 $redux  = $this -> redux;
 if($redux){
-    if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
-        $enqueue = new Enqueue($redux);
-        $enqueue->init();
-    }else{
-        $redux -> enqueue_class -> init();
-    }
+    $enqueue = new Enqueue($redux);
+    $enqueue->init();
+//    if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+//        $enqueue = new Enqueue($redux);
+//        $enqueue->init();
+//    }else{
+//        $redux -> enqueue_class -> init();
+//    }
 ?>
 
 <script type="text/html" id="tmpl-templaza-metabox-megamenu-template">

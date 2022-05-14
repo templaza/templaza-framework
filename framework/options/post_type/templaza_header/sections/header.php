@@ -4,35 +4,19 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 
 use TemPlazaFramework\Functions;
 
-Templaza_API::set_section('settings',
+Templaza_API::set_section('templaza_header',
     array(
         'title'  => __( 'Header', $this -> text_domain ),
         'id'     => 'headers',
         'desc'   => __( 'Here you can set your preferences for the template header(Logo, Menu and Menu Elements).', $this -> text_domain ),
         'icon'   => 'el el-tasks',
+        //    'subsection' => true,
         'fields' => array(
-            array(
-                'id'       => 'enable-header',
-                'type'     => 'switch',
-                'title'    => __( 'Enable Header', $this -> text_domain ),
-                'subtitle' => __( 'Enable or disable the Header Element.', $this -> text_domain ),
-                'default'  => true,
-            ),
-            array(
-                'id'       => 'header-layout',
-                'type'     => 'select',
-                'data'     => 'callback',
-                'title'    => esc_html__('Header Layout', $this -> text_domain),
-                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
-                'args'     => array('TemPlazaFramework\AdminHelper\Templaza_Header', 'get_items_by_slug'),
-                'required' => array( 'enable-header', '=', '1' ),
-            ),
             array(
                 'id'    => 'header-mode',
                 'type'  => 'image_select',
                 'title'    => __('Header Mode', $this -> text_domain),
                 'subtitle' => __( 'Select your header mode for the appearance of your site.', $this -> text_domain ),
-                'required' => array( 'enable-header', '=', '1' ),
                 'default'  => 'horizontal',
                 'options'  => array(
                     'horizontal' => array(
@@ -82,7 +66,6 @@ Templaza_API::set_section('settings',
                 ),
                 'default'  => 'left',
                 'required' => array(
-                    array('enable-header', '=', '1'),
                     array('header-mode', '=', 'horizontal')
                 ),
             ),
@@ -113,7 +96,6 @@ Templaza_API::set_section('settings',
                     ),
                 ),
                 'required' => array(
-                    array('enable-header', '=', '1'),
                     array('header-mode', '=', 'stacked')
                 ),
             ),
@@ -138,7 +120,6 @@ Templaza_API::set_section('settings',
                     ),
                 ),
                 'required' => array(
-                    array('enable-header', '=', '1'),
                     array('header-mode', '=', 'sidebar')
                 ),
             ),
@@ -167,7 +148,6 @@ Templaza_API::set_section('settings',
                 ),
                 'select2'       => array( 'allowClear' => false ),
                 'default'  => 'blank',
-                'required' => array( array('enable-header', '=', '1')),
             ),
             array(
                 'id'       => 'header-block-1-sidebar',
@@ -184,7 +164,6 @@ Templaza_API::set_section('settings',
                 'title'    => __( 'Block 1 Custom HTML', $this -> text_domain ),
                 'subtitle' => __( 'Enter your Custom HTML code for Header Block 1.', $this -> text_domain ),
                 'required' => array(
-                    array('enable-header', '=', '1'),
                     array('header-block-1-type', '=', 'custom')
                 ),
             ),
@@ -224,7 +203,6 @@ Templaza_API::set_section('settings',
                     'custom' => __('Custom HTML', $this -> text_domain),
                 ),
                 'required' => array(
-                    array('enable-header', '=', '1'),
                     array('header-block-2-type', '=', 'custom'),
                 ),
             ),
@@ -235,21 +213,7 @@ Templaza_API::set_section('settings',
                 'title'    => __( 'Site Menu', $this -> text_domain ),
                 'subtitle' => __( 'Select Site Menu.', $this -> text_domain ),
                 'default'  => 'header',
-                'required' => array(
-                    array('enable-header', '=', '1'),
-                ),
             ),
-    //        array(
-    //            'id'       => 'header-menu-item',
-    //            'type'     => 'select',
-    //            'data'     => 'menus',
-    //            'title'    => __( 'Site Menus', $this -> text_domain ),
-    //            'subtitle' => __( 'Select Site Menu.', $this -> text_domain ),
-    //            'default'  => 'header',
-    //            'required' => array(
-    //                array('enable-header', '=', '1'),
-    //            ),
-    //        ),
             array(
                 'id'       => 'header-menu-level',
                 'type'     => 'spinner',
@@ -259,9 +223,6 @@ Templaza_API::set_section('settings',
                 'step'     => 1,
                 'max'      => 10,
                 'default'  => 0,
-                'required' => array(
-                    array('enable-header', '=', '1'),
-                ),
             ),
             array(
                 'id'       => 'header-mobile-menu',
@@ -270,9 +231,6 @@ Templaza_API::set_section('settings',
                 'title'    => __( 'Mobile Menu', $this -> text_domain ),
                 'subtitle' => __( 'Select Mobile Menu.', $this -> text_domain ),
                 'default'  => 'header',
-                'required' => array(
-                    array('enable-header', '=', '1'),
-                ),
             ),
             array(
                 'id'       => 'header-mobile-menu-level',
@@ -283,9 +241,6 @@ Templaza_API::set_section('settings',
                 'step'     => 1,
                 'max'      => 10,
                 'default'  => 0,
-                'required' => array(
-                    array('enable-header', '=', '1'),
-                ),
             ),
             array(
                 'id'       => 'header-absolute',
@@ -302,7 +257,6 @@ Templaza_API::set_section('settings',
             array(
                 'id'       => 'section-logo',
                 'type'     => 'section',
-                'required' => array('enable-header', '=','1'),
                 'title'      => __( 'Logo', $this -> text_domain ),
                 'subtitle'       => __( 'You can select a logo for desktop view, mobile view and sticky header.', $this -> text_domain ),
                 'indent'   => true, // Indent all options below until the next 'section' option is set.
@@ -310,7 +264,6 @@ Templaza_API::set_section('settings',
             array(
                 'id'       => 'logo-type',
                 'type'     => 'button_set',
-                'required' => array( 'enable-header', '=', '1' ),
                 'title'    => __( 'Logo Type', $this -> text_domain ),
                 'subtitle' => __( 'Select logo type.', $this -> text_domain ),
                 'options'  => array(
@@ -328,7 +281,7 @@ Templaza_API::set_section('settings',
                 'compiler' => 'true',
                 'desc'     => __( 'Basic media uploader with disabled URL input field.', $this -> text_domain ),
                 'subtitle' => __( 'Select an image for your logo.', $this -> text_domain ),
-                'required' => array( array('enable-header', '=', '1'),
+                'required' => array(
                     array('logo-type', '=', 'image') ),
             ),
             array(
@@ -339,7 +292,7 @@ Templaza_API::set_section('settings',
                 'compiler' => 'true',
                 'desc'     => __( 'Basic media uploader with disabled URL input field.', $this -> text_domain ),
                 'subtitle' => __( 'Select an image for your mobile logo.', $this -> text_domain ),
-                'required' => array( array('enable-header', '=', '1'),
+                'required' => array(
                     array('logo-type', '=', 'image') ),
             ),
             array(
@@ -350,7 +303,7 @@ Templaza_API::set_section('settings',
                 'compiler' => 'true',
                 'desc'     => __( 'This logo will appear when sidebar is collapsed.', $this -> text_domain ),
                 'subtitle' => __( 'Select an image for your sidebar logo.', $this -> text_domain ),
-                'required' => array( array('enable-header', '=', '1'),
+                'required' => array(
                     array('header-mode', '=', 'sidebar') ),
             ),
             array(
@@ -358,7 +311,7 @@ Templaza_API::set_section('settings',
                 'type'  => 'text',
                 'title'    => __('Logo Text', $this -> text_domain),
                 'subtitle' => __( 'Enter Logo Text.', $this -> text_domain ),
-                'required' => array( array('enable-header', '=', '1'),
+                'required' => array(
                     array('logo-type', '=', 'text') ),
             ),
             array(
@@ -366,7 +319,7 @@ Templaza_API::set_section('settings',
                 'type'  => 'text',
                 'title'    => __('Tag Line', $this -> text_domain),
                 'subtitle' => __( 'Enter Tag Line.', $this -> text_domain ),
-                'required' => array( array('enable-header', '=', '1'),
+                'required' => array(
                     array('logo-type', '=', 'text') ),
             ),
 
@@ -375,7 +328,6 @@ Templaza_API::set_section('settings',
                 'id'       => 'section-sticky-header',
                 'type'     => 'section',
                 'required' => array(
-                    array('enable-header', '=','1'),
                     array('header-mode', '!=','sidebar'),
                 ),
                 'title'    => __( 'Sticky', $this -> text_domain ),
@@ -395,10 +347,10 @@ Templaza_API::set_section('settings',
             array(
                 'id'    => 'sticky-menu-mode',
                 'type'  => 'image_select',
-    //            'tiles'    => true,
+                //            'tiles'    => true,
                 'title'    => __('Sticky Menu Mode', $this -> text_domain),
                 'subtitle' => __( 'Select your horizontal menu mode. Select between left, right or center menu.', $this -> text_domain ),
-                'required' => array( array('enable-header', '=', '1'),
+                'required' => array(
                     array('enable-sticky', '=', '1') ),
                 'options'  => array(
                     'left' => array(
@@ -430,7 +382,7 @@ Templaza_API::set_section('settings',
                 'compiler' => 'true',
                 'desc'     => __( 'Basic media uploader with disabled URL input field.', $this -> text_domain ),
                 'subtitle' => __( 'Select an image for your sticky header logo.', $this -> text_domain ),
-                'required' => array( array('enable-header', '=', '1'),
+                'required' => array(
                     array('enable-sticky', '=', '1') ),
             ),
             array(
@@ -445,7 +397,7 @@ Templaza_API::set_section('settings',
                 ),
                 'select2'       => array( 'allowClear' => false ),
                 'default'  => 'sticky',
-                'required' => array( array('enable-header', '=', '1'),
+                'required' => array(
                     array('enable-sticky', '=', '1') ),
             ),
             array(
@@ -461,7 +413,7 @@ Templaza_API::set_section('settings',
                 ),
                 'select2'       => array( 'allowClear' => false ),
                 'default'  => 'static',
-                'required' => array( array('enable-header', '=', '1'),
+                'required' => array(
                     array('enable-sticky', '=', '1') ),
             ),
             array(
@@ -477,7 +429,7 @@ Templaza_API::set_section('settings',
                 ),
                 'select2'  => array( 'allowClear' => false ),
                 'default'  => 'static',
-                'required' => array( array('enable-header', '=', '1'),
+                'required' => array(
                     array('enable-sticky', '=', '1') ),
             ),
 
@@ -488,7 +440,6 @@ Templaza_API::set_section('settings',
                 'title'      => __( 'Off-Canvas menu', $this -> text_domain ),
                 'subtitle'       => __( 'Customize Off-Canvas style for your site. You must publish content to the Off-Canvas module position or you\'ll see a blank off-canvas menu.', $this -> text_domain ),
                 'required' => array(
-                    array('enable-header', '=','1'),
                     array('header-mode', '!=','sidebar'),
                 ),
                 'indent'   => true, // Indent all options below until the next 'section' option is set.
@@ -496,20 +447,10 @@ Templaza_API::set_section('settings',
             array(
                 'id'       => 'enable-offcanvas',
                 'type'     => 'switch',
-                'required' => array( 'enable-header', '=', '1' ),
                 'title'    => __( 'Off-Canvas menu', $this -> text_domain ),
                 'subtitle' => __( 'Enable or disable to show or hide Off-Canvas menu.', $this -> text_domain ),
                 'default'  => false,
             ),
-    //        array(
-    //            'id'       => 'offcanvas-menu',
-    //            'type'     => 'select',
-    //            'data'     => 'menu_locations',
-    //            'required' => array( 'enable-offcanvas', '=', '1' ),
-    //            'title'    => __( 'Off-Canvas menu location', $this -> text_domain ),
-    //            'subtitle' => __( 'Enable or disable to show or hide Off-Canvas menu.', $this -> text_domain ),
-    //            'default'  => 'header',
-    //        ),
             array(
                 'id'       => 'offcanvas-sidebar',
                 'type'     => 'select',
@@ -578,7 +519,6 @@ Templaza_API::set_section('settings',
                 'select2'       => array( 'allowClear' => false ),
                 'default'       => 'offcanvasDirLeft',
                 'required' => array(
-                    array('enable-header', '=', '1' ),
                     array('enable-offcanvas', '=', '1' )
                 ),
             ),
@@ -591,16 +531,12 @@ Templaza_API::set_section('settings',
                 'type'     => 'section',
                 'indent'   => true, // Indent all options below until the next 'section' option is set.
                 'required' => array(
-                    array('enable-header', '=','1'),
                     array('header-mode', '!=','sidebar'),
                 ),
             ),
             array(
                 'id'       => 'dropdown-animation-type',
                 'type'     => 'button_set',
-                'required' => array(
-                    array( 'enable-header', '=', '1' ),
-                ),
                 'title'    => __( 'Animation', $this -> text_domain ),
                 //Must provide key => value pairs for select options
                 'options'  => array(
@@ -630,84 +566,10 @@ Templaza_API::set_section('settings',
                     array('dropdown-animation-type', '!=', 'none')
                 ),
             ),
-    //        array(
-    //            'id'       => 'dropdown-animation-speed-1',
-    //            'type'     => 'slider',
-    //            'required' => array(
-    //                array( 'header-mode', '!=', 'sidebar' ),
-    //            ),
-    //            'title'    => __( 'Animation Speed 1', $this -> text_domain ),
-    //            'desc'     => __( 'Animation speed by: ms', $this -> text_domain ),
-    //            'default'       => 300,
-    //            'min'           => 100,
-    //            'step'          => 1,
-    //            'max'           => 4000,
-    //            'display_value' => 'text'
-    //        ),
-    //        array(
-    //            'id'       => 'dropdown-animation-speed-2',
-    //            'type'     => 'slider',
-    //            'required' => array(
-    //                array('header-mode', '!=', 'sidebar'),
-    //            ),
-    //            'title'    => __( 'Animation Speed 2', $this -> text_domain ),
-    //            'desc'     => __( 'Animation speed by: ms', $this -> text_domain),
-    //            'default'       => 300,
-    //            'min'           => 100,
-    //            'step'          => 1,
-    //            'max'           => 4000,
-    //            'display_value' => 'text'
-    //        ),
-    //        array(
-    //            'id'       => 'dropdown-animation-ease',
-    //            'type'     => 'select',
-    //            'required' => array(
-    //                array( 'enable-header', '=', '1' ),
-    //                array( 'header-mode', '!=', 'sidebar' ),
-    //            ),
-    //            'title'    => __( 'Easing', $this -> text_domain ),
-    //            //Must provide key => value pairs for select options
-    //            'options'  => array(
-    //                'linear'            => __('linear', $this -> text_domain),
-    //                'swing'             => __('swing', $this -> text_domain),
-    //                'easeInQuad'        => __('easeInQuad', $this -> text_domain),
-    //                'easeOutQuad'       => __('easeOutQuad', $this -> text_domain),
-    //                'easeInOutQuad'     => __('easeInOutQuad', $this -> text_domain),
-    //                'easeInCubic'       => __('easeInCubic', $this -> text_domain),
-    //                'easeOutCubic'      => __('easeOutCubic', $this -> text_domain),
-    //                'easeInOutCubic'    => __('easeInOutCubic', $this -> text_domain),
-    //                'easeInQuart'       => __('easeInQuart', $this -> text_domain),
-    //                'easeOutQuart'      => __('easeOutQuart', $this -> text_domain),
-    //                'easeInOutQuart'    => __('easeInOutQuart', $this -> text_domain),
-    //                'easeInQuint'       => __('easeInQuint', $this -> text_domain),
-    //                'easeOutQuint'      => __('easeOutQuint', $this -> text_domain),
-    //                'easeInOutQuint'    => __('easeInOutQuint', $this -> text_domain),
-    //                'easeInSine'        => __('easeInSine', $this -> text_domain),
-    //                'easeOutSine'       => __('easeOutSine', $this -> text_domain),
-    //                'easeInOutSine'     => __('easeInOutSine', $this -> text_domain),
-    //                'easeInExpo'        => __('easeInExpo', $this -> text_domain),
-    //                'easeOutExpo'       => __('easeOutExpo', $this -> text_domain),
-    //                'easeInOutExpo'     => __('easeInOutExpo', $this -> text_domain),
-    //                'easeInCirc'        => __('easeInCirc', $this -> text_domain),
-    //                'easeOutCirc'       => __('easeOutCirc', $this -> text_domain),
-    //                'easeInOutCirc'     => __('easeInOutCirc', $this -> text_domain),
-    //                'easeInElastic'     => __('easeInElastic', $this -> text_domain),
-    //                'easeOutElastic'    => __('easeOutElastic', $this -> text_domain),
-    //                'easeInOutElastic' => __('easeInOutElastic', $this -> text_domain),
-    //                'easeInBack'        => __('easeInBack', $this -> text_domain),
-    //                'easeOutBack'       => __('easeOutBack', $this -> text_domain),
-    //                'easeInOutBack'     => __('easeInOutBack', $this -> text_domain),
-    //                'easeInBounce'      => __('easeInBounce', $this -> text_domain),
-    //                'easeOutBounce'     => __('easeOutBounce', $this -> text_domain),
-    //                'easeInOutBounce'   => __('easeInOutBounce', $this -> text_domain),
-    //            ),
-    //            'default'  => 'linear',
-    //        ),
             array(
                 'id'       => 'dropdown-arrow',
                 'type'     => 'switch',
                 'required' => array(
-                    array('enable-header', '=', '1' ),
                     array('header-mode', '!=', 'sidebar' ),
                 ),
                 'title'    => __( 'Dropdown Arrow', $this -> text_domain ),
@@ -718,7 +580,6 @@ Templaza_API::set_section('settings',
                 'id'       => 'dropdown-trigger',
                 'type'     => 'button_set',
                 'required' => array(
-                    array('enable-header', '=', '1' ),
                     array('header-mode', '!=', 'sidebar' ),
                 ),
                 'title'    => __( 'Dropdown Trigger', $this -> text_domain ),
@@ -729,19 +590,6 @@ Templaza_API::set_section('settings',
                 ),
                 'default'  => 'hover',
             ),
-//            array(
-//                'id'       => 'dropdown-trigger',
-//                'type'     => 'switch',
-//                'required' => array(
-//                    array('enable-header', '=', '1' ),
-//                    array('header-mode', '!=', 'sidebar' ),
-//                ),
-//                'title'    => __( 'Dropdown Trigger', $this -> text_domain ),
-//                'subtitle' => __( 'Choose the action for the menu items to view the megamenu', $this -> text_domain ),
-//                'default'  => true,
-//                'on'       => __('Hover', $this -> text_domain),
-//                'off'      => __('Click', $this -> text_domain),
-//            ),
             array(
                 'id'     => 'section-end',
                 'type'   => 'section',

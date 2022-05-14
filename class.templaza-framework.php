@@ -448,19 +448,56 @@ class TemPlazaFrameWork{
     }
 
     protected function init_template(){
-        ob_start();
-        $this -> load_my_header();
-        $this -> template_init['header']    = ob_get_contents();
-        ob_end_clean();
-        ob_start();
-        Templates::load_my_layout('body', true, false);
-        $this -> template_init['body']    = ob_get_contents();
-        ob_end_clean();
-        ob_start();
-        $this -> load_my_footer();
-        $this -> template_init['footer']    = ob_get_contents();
-        ob_end_clean();
 
+        if(!is_admin()){
+            $header_options = Functions::get_header_options();
+            $footer_options = Functions::get_footer_options();
+
+            $this -> template_init['body']  = '';
+
+            // Generate header layout if it exists
+            if(!empty($header_options) && isset($header_options['h_layout'])) {
+                $hlayout_shortcode = Functions::generate_option_to_shortcode($header_options['h_layout']);
+
+                if (!empty($hlayout_shortcode)) {
+                    do {
+                        $hlayout_shortcode = trim(do_shortcode($hlayout_shortcode));
+                    } while (preg_match_all('/' . get_shortcode_regex() . '/', $hlayout_shortcode, $matches, PREG_SET_ORDER));
+                }
+
+                $this->template_init['body'] = (!empty($hlayout_shortcode)) ? $hlayout_shortcode : '';
+            }
+
+            ob_start();
+            $this -> load_my_header();
+            $this -> template_init['header']    = ob_get_contents();
+            ob_end_clean();
+
+            // Generate body layout
+            ob_start();
+            Templates::load_my_layout('body', true, false);
+            $this -> template_init['body']    .= ob_get_contents();
+            ob_end_clean();
+
+            // Generate footer layout if it exists
+            if(!empty($footer_options) && isset($footer_options['f_layout'])) {
+                $flayout_shortcode = Functions::generate_option_to_shortcode($footer_options['f_layout']);
+
+                if (!empty($flayout_shortcode)) {
+                    do {
+                        $flayout_shortcode = trim(do_shortcode($flayout_shortcode));
+                    } while (preg_match_all('/' . get_shortcode_regex() . '/', $flayout_shortcode, $matches, PREG_SET_ORDER));
+                }
+
+                $this->template_init['body'] .= (!empty($flayout_shortcode)) ? $flayout_shortcode : '';
+            }
+
+            ob_start();
+            $this -> load_my_footer();
+            $this -> template_init['footer']    = ob_get_contents();
+            ob_end_clean();
+
+        }
     }
 
     public function display_header(){

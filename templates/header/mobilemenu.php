@@ -6,9 +6,10 @@ use TemPlazaFramework\Menu;
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 
-$options        = Functions::get_theme_options();
+$gb_options                 = Functions::get_theme_options();
+$options                    = Functions::get_header_options();
 
-$header             = isset($options['enable-header'])?filter_var($options['enable-header'], FILTER_VALIDATE_BOOLEAN):true;
+$header             = isset($gb_options['enable-header'])?filter_var($gb_options['enable-header'], FILTER_VALIDATE_BOOLEAN):true;
 $header_mobile_menu = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
 
 if ($header) {

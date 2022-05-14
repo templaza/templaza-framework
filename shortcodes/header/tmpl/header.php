@@ -12,10 +12,11 @@ use TemPlazaFramework\Templates;
 ?>
 <?php
 
-$options            = Functions::get_theme_options();
+$gb_options                 = Functions::get_theme_options();
+$options                    = Functions::get_header_options();
+
 $mode               = isset($options['header-mode'])?$options['header-mode']:'horizontal';
-$header             = isset($options['enable-header'])?filter_var($options['enable-header'], FILTER_VALIDATE_BOOLEAN):true;
-$header_layout      = isset($options['header-layout'])?$options['header-layout']:'wide';
+$header             = isset($gb_options['enable-header'])?filter_var($gb_options['enable-header'], FILTER_VALIDATE_BOOLEAN):true;
 $template_layout    = isset($options['layout-theme'])?$options['layout-theme']:'wide';
 $dropdown_trigger   = isset($options['dropdown-trigger'])?$options['dropdown-trigger']:'hover';
 
@@ -41,7 +42,6 @@ $attribs = array(
     'data-header-offset'          => 'true',
     'data-megamenu-class'         => '.has-megamenu',
     'data-megamenu-trigger'       => $dropdown_trigger,
-//    'data-megamenu-submenu-class' => '.sub-menu',
     'data-megamenu-submenu-class' => '.nav-submenu',
     'data-megamenu-content-class' => '.megamenu-sub-menu',
 );

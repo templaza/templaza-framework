@@ -110,6 +110,18 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                         ),
                     ),
                     array(
+                        'id'     => 'margin-test',
+                        'type'   => 'spacing',
+                        'mode'   => 'margin',
+                        'all'    => false,
+                        'allow_responsive'    => true,
+                        'units'  => array( 'em', 'rem', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                        'title'  => esc_html__('Custom Margin', $this -> text_domain),
+                        'default' => array(
+                            'units' => 'px'
+                        ),
+                    ),
+                    array(
                         'id'       => 'enable_heading_single',
                         'type'     => 'switch',
                         'title'    => esc_html__('Show heading in single post', $this -> text_domain),
