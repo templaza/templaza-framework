@@ -92,12 +92,21 @@
                         __ajax_data["secret"] = __secret;
                     }
 
-                    $.post(ajaxurl, __ajax_data, function (data) {
-                        // if (data && data.success) {
-                        //     window.location.href = window.location.href;
-                        // }
-                        //
-                        window.location = window.location.href;
+                    $.post(ajaxurl, __ajax_data, function (response) {
+                        if (response && response.success) {
+                            UIkit.notification({
+                                "pos":      "bottom-right",
+                                "status":   "success",
+                                "message":  '<div class="uk-text-break">' + response.data.message + '</div>'
+                            });
+                            window.location = window.location.href;
+                        }else{
+                            UIkit.notification({
+                                "pos":      "bottom-right",
+                                "status":   "danger",
+                                "message":  '<div class="uk-text-break">' + response.data.message + '</div>'
+                            });
+                        }
                     });
                 }, function () {
                     return;
@@ -118,13 +127,21 @@
                         __ajax_data["secret"] = __secret;
                     }
 
-                    $.post(ajaxurl, __ajax_data, function (data) {
-                        if (data && data.success) {
+                    $.post(ajaxurl, __ajax_data, function (response) {
+                        if (response && response.success) {
+                            UIkit.notification({
+                                "pos":      "bottom-right",
+                                "status":   "success",
+                                "message":  '<div class="uk-text-break">' + response.data.message + '</div>'
+                            });
                             window.location = window.location.href;
-                            // window.location.href = window.location.href;
+                        }else{
+                            UIkit.notification({
+                                "pos":      "bottom-right",
+                                "status":   "danger",
+                                "message":  '<div class="uk-text-break">' + response.data.message + '</div>'
+                            });
                         }
-                        //
-                        // window.location.href = window.location.href;
                     });
                 }, function () {
                     return;

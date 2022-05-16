@@ -129,10 +129,12 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
                 $page       = isset($_REQUEST['page']) && !empty($_REQUEST['page'])?$_REQUEST['page']:false;
                 $post_id    = isset($_REQUEST['post_id']) && !empty($_REQUEST['post_id'])?$_REQUEST['post_id']:false;
                 $post_type  = isset($_REQUEST['post_type']) && !empty($_REQUEST['post_type'])?$_REQUEST['post_type']:false;
-
-                if($post_type && $post_type == 'templaza_style'){
+                if($post_type){
+                    if($post_type != 'templaza_style'){
+                        $dest_file  .= '/'.$post_type;
+                    }
                     if($post_id){
-                        $slug   = get_post_meta($post_id, '_templaza_style', true);
+                        $slug = get_post_meta($post_id, '_'.$post_type, true);
 
                         $dest_file  .= '/'.$slug.'.json';
                     }
@@ -140,12 +142,15 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
                     $dest_file  .= '/settings/setting.json';
                 }
 
-                if(file_exists($dest_file)){
-                    file_put_contents($dest_file, json_encode($preset['preset']));
-
-                    wp_send_json_success(array('message' => __('Preset loaded', $this -> text_domain)));
+                if(!file_exists($dest_file)){
+                    wp_send_json_error(array('message' => __(sprintf('Preset not loaded: File %s not found', $dest_file), $this -> text_domain)));
                     wp_die();
                 }
+
+                file_put_contents($dest_file, json_encode($preset['preset']));
+
+                wp_send_json_success(array('message' => __('Preset loaded', $this -> text_domain)));
+                wp_die();
             }
 
             wp_send_json_error(array('message' => __('Preset not loaded', $this -> text_domain)));
@@ -161,7 +166,7 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
             $file   = $preset_path.'/'.$name.'.json';
 
             if(!file_exists($file)){
-                wp_send_json_error(array('message' => __('Preset file not found', $this -> text_domain)));
+                wp_send_json_error(array('message' => __(sprintf('Preset file %s not found', $file), $this -> text_domain)));
                 wp_die();
             }
 
