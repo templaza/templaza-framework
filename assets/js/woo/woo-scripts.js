@@ -1559,7 +1559,7 @@
 			product_title = typeof(product_title) === 'undefined' ? '' : product_title;
 			if (product_title === '') {
 				if ($thisbutton.closest('form.cart').not('.grouped_form').length) {
-					product_title = $thisbutton.closest('form.cart').find('.rz_product_id').data('title');
+					product_title = $thisbutton.closest('form.cart').find('.templaza_product_id').data('title');
 				}
 			}
 
@@ -1640,7 +1640,7 @@
 
 			if ($product_id === 0 && $thisbutton.closest('form.cart').length) {
 				var $cartForm = $thisbutton.closest('form.cart');
-				$product_id = $cartForm.find('.rz_product_id').val();
+				$product_id = $cartForm.find('.templaza_product_id').val();
 
 				$product_item_id = $product_id;
 

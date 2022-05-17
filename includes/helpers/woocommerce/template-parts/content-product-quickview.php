@@ -13,7 +13,7 @@ if ( get_option( 'product_add_to_cart_ajax' ) ) {
 	$classes[] = 'product-add-to-cart-ajax';
 }
 
-if ( get_option( 'rz_buy_now' ) == 'yes' ) {
+if ( get_option( 'templaza_buy_now' ) == 'yes' ) {
 	$classes[] = 'has-buy-now';
 }
 
