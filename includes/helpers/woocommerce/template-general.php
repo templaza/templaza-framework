@@ -370,7 +370,7 @@ class Templaza_Woo_General {
 	 */
 	public function product_id_hidden() {
 		global $product;
-		echo '<input class="rz_product_id" type="hidden" data-title="' . esc_attr( $product->get_title() ) . '" value="' . esc_attr( $product->get_id() ) . '">';
+		echo '<input class="templaza_product_id" type="hidden" data-title="' . esc_attr( $product->get_title() ) . '" value="' . esc_attr( $product->get_id() ) . '">';
 	}
 
 	/**

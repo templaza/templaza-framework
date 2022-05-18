@@ -294,8 +294,8 @@ class Templaza_Woo_Catalog {
 		if ( function_exists( 'is_product_category' ) && is_product_category() ) {
 			$queried_object = get_queried_object();
 			$term_id        = $queried_object->term_id;
-			$banners_ids    = get_term_meta( $term_id, 'rz_cat_banners_id', true );
-			$banners_links  = get_term_meta( $term_id, 'rz_cat_banners_link', true );
+			$banners_ids    = get_term_meta( $term_id, 'templaza_cat_banners_id', true );
+			$banners_links  = get_term_meta( $term_id, 'templaza_cat_banners_link', true );
 
 			if ( $banners_ids ) {
 				$thumbnail_ids = explode( ',', $banners_ids );
