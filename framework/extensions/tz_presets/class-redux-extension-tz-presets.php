@@ -230,10 +230,10 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 				'customizer' => false,
 				'fields'     => array(
 					array(
-						'id'         => 'presets',
-						'type'       => 'tz_presets',
-						'full_width' => true,
-                        'preset_path' => $this -> get_preset_path()
+						'id'            => 'presets',
+						'type'          => 'tz_presets',
+						'full_width'    => true,
+                        'preset_path'   => $this -> get_preset_path(),
 					),
 				),
 			);

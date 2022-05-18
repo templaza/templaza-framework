@@ -15,7 +15,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
             <div class="fl_controls-row-right">
                 <a href="#" class="fl_control fl_column-delete" data-fl-control="delete" data-uk-tooltip="<?php
                 echo __('Remove Section', $this -> text_domain);?>"><i class="far fa-trash-alt"></i></a>
-                <a href="#" class="fl_control fl_column-save" data-fl-control="save" data-uk-tooltip="<?php
+                <a href="javascript:" class="fl_control fl_column-save" data-fl-control="save" data-uk-tooltip="<?php
                 echo __('Save Section', $this -> text_domain);?>"><i class="far fa-save"></i></a>
                 <a href="#" class="fl_control fl_column-clone" data-fl-control="clone" data-uk-tooltip="<?php
                 echo __('Duplicate Section', $this -> text_domain);?>"><i class="far fa-copy"></i></a>
@@ -46,7 +46,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 
                     <!-- Column controls bottom -->
                     <div class="fl_controls fl_controls-column bottom-controls">
-                        <a href="#" class="fl_control fl_column-add" data-fl-control="add-row" title="<?php
+                        <a href="#" class="fl_control fl_column-add" data-fl-control="add-row" data-uk-tooltip="<?php
                         echo __('Add Row', $this -> text_domain);?>"><i class="far fa-plus-square"></i> <?php echo __('Add Row', $this -> text_domain); ?></a>
                     </div><!-- End Column controls bottom -->
                 </div><!-- End column -->

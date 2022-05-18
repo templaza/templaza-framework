@@ -65,6 +65,10 @@ class TemPlazaFrameWork{
         // Register widgets
         add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
+        register_activation_hook( TEMPLAZA_FRAMEWORK_PATH.'/templaza-framework.php', array($this, 'create_post_default') );
+        add_action( 'upgrader_process_complete', array($this, 'create_post_default') );
+        add_action( 'after_setup_theme', array($this, 'create_post_default') );
+
         do_action( 'templaza-framework/plugin/hooks', $this );
     }
 
@@ -520,6 +524,67 @@ class TemPlazaFrameWork{
     public function display_footer(){
         if(isset($this -> template_init['footer'])){
             echo $this -> template_init['footer'];
+        }
+    }
+
+    /**
+     * Create post default
+     * */
+    public function create_post_default(){
+        $post_types = array('templaza_header', 'templaza_footer');
+
+        foreach ($post_types as $ptype) {
+            // Check data exists
+            $args = array(
+                'post_type'     => $ptype,
+                'post_status'   => 'publish',
+                'meta_query'    => array(
+                    array(
+                        'key'   => '__home',
+                        'value' => 1
+                    )
+                )
+            );
+
+            $pexists    = \get_posts($args);
+            if(is_wp_error($pexists) || !empty($pexists)){
+                continue;
+            }
+
+            // Create post default
+            $author = (int) get_current_user_id();
+
+            $now    = date('Y-m-d H:i:s');
+            $postdata = array(
+                'post_author'   => $author,
+                'post_date'     => $now,
+                'post_date_gmt' => $now,
+                'post_title'    => esc_html__('Default', $this -> text_domain),
+                'post_status'   => 'publish',
+                'post_name'     => 'default',
+                'post_type'     => $ptype,
+            );
+
+            $post_id = wp_insert_post( $postdata, true );
+
+            if($post_id){
+                // Assign post type to current theme
+                update_post_meta($post_id, '_' . $ptype, $postdata['post_name']);
+                update_post_meta($post_id, '_' . $ptype . '__theme', get_template());
+                update_post_meta($post_id, '__home', 1);
+
+                // Copy json file
+                $source_file    = TEMPLAZA_FRAMEWORK_CORE_PATH.'/data-import/'.$ptype.'.json';
+                $dest_file      = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$ptype;
+                if(!is_dir($dest_file)){
+                    require_once(ABSPATH . '/wp-admin/includes/file.php');
+                    mkdir($dest_file, FS_CHMOD_DIR, true);
+                }
+                $dest_file     .= '/'.$postdata['post_name'].'.json';
+                if(file_exists($source_file) && !file_exists($dest_file)){
+                    copy($source_file, $dest_file);
+                }
+            }
         }
     }
 

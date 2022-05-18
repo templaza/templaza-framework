@@ -3,6 +3,7 @@
 // Exit if accessed directly
 defined( 'TEMPLAZA_FRAMEWORK' ) or exit;
 
+use TemPlazaFramework\Enqueue;
 use TemPlazaFramework\Functions;
 
 if ( ! class_exists( 'Redux_TZ_Presets' ) ) {
@@ -75,9 +76,13 @@ if ( ! class_exists( 'Redux_TZ_Presets' ) ) {
             }
         }
 
-        public function render()
-        {
-            $file   = __DIR__.'/tmpl/tz_presets.php';
+        public function render(){
+
+            $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_FIELDS.'/tz_presets/tmpl/tz_presets.php';
+
+            if(!file_exists($file)){
+                $file   = __DIR__.'/tmpl/tz_presets.php';
+            }
 
             if(file_exists($file)){
                 require $file;
