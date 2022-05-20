@@ -115,6 +115,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
             if(is_user_logged_in() && is_admin()){
                 add_filter('pre_trash_post', array($this, 'pre_trash_post'), 10, 2);
                 add_filter('pre_delete_post', array($this, 'pre_delete_post'), 10, 3);
+                add_filter('post_row_actions', array($this, 'post_row_actions'), 10, 2);
 
                 $post_types = array('templaza_header', 'templaza_footer');
                 $post_type  = $this -> post_type ->  get_current_screen_post_type();
@@ -636,6 +637,26 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
             }
 
             return $delete;
+        }
+
+        /**
+         * Deny trash action with field is protected
+         * @param string[] $actions An array of row action links. Defaults are
+         *                          'Edit', 'Quick Edit', 'Restore', 'Trash',
+         *                          'Delete Permanently', 'Preview', and 'View'.
+         * @param WP_Post  $post    The post object.
+         * @return bool|null
+         * */
+        public function post_row_actions($actions, $post){
+            if ( isset($actions['trash']) && !empty($post)
+                && in_array($post -> post_type, array('templaza_header', 'templaza_footer'))) {
+                $is_home    = (bool) get_post_meta($post -> ID, '__home', true);
+                if($is_home){
+                    unset($actions['trash']);
+                }
+            }
+
+            return $actions;
         }
 
         /*
