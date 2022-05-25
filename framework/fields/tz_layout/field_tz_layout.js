@@ -935,23 +935,25 @@
             var __uimodal = UIkit.modal(__modal_html, options);
 
             if(typeof options.current_target !== "undefined") {
-                UIkit.util.on(__modal_html, "beforeshow", function () {
-                    // Hide parent modal if it exists
-                    var __parent_modal = tz_parent_modal_exists(options.current_target);
+                UIkit.util.on(__modal_html, "beforeshow", function (event) {
+                    if($(event.target).hasClass("uk-modal")) {
+                        // Hide parent modal if it exists
+                        var __parent_modal = tz_parent_modal_exists(options.current_target);
 
-                    if (__parent_modal) {
+                        if (__parent_modal) {
 
-                        var __main_field = options.current_target.closest("[data-type=tz_layout]");
+                            var __main_field = options.current_target.closest("[data-type=tz_layout]");
 
-                        if(__main_field.data("allow_event")){
-                            var __parent_allow_event = true;
+                            if(__main_field.data("allow_event")){
+                                var __parent_allow_event = true;
 
-                            if(__parent_modal && typeof __parent_modal.data("allow_event") !== "undefined"){
-                                __parent_allow_event  = __parent_modal.data("allow_event");
-                            }
-                            if(__parent_allow_event) {
-                                __parent_modal.data("modal_shown", false);
-                                UIkit.modal(__parent_modal).hide();
+                                if(__parent_modal && typeof __parent_modal.data("allow_event") !== "undefined"){
+                                    __parent_allow_event  = __parent_modal.data("allow_event");
+                                }
+                                if(__parent_allow_event) {
+                                    __parent_modal.data("modal_shown", false);
+                                    UIkit.modal(__parent_modal).hide();
+                                }
                             }
                         }
                     }
@@ -960,39 +962,41 @@
 
             var __org_opt_names = typeof redux.opt_names != "undefined"?redux.opt_names:[];
 
-            UIkit.util.on(__modal_html, "shown", function(){
-
-                if(__modal_html.find("[data-opt-name]").length) {
-                    redux.opt_names = [];
-                    $.each(__modal_html.find("[data-opt-name]"), function () {
-                        var _opt_name = $(this).attr("data-opt-name");
-                        if(redux.opt_names.indexOf(_opt_name) === -1) {
-                            redux.opt_names.push(_opt_name);
-                        }
-                    });
+            UIkit.util.on(__modal_html, "shown", function(event){
+                if($(event.target).hasClass("uk-modal")) {
+                    if(__modal_html.find("[data-opt-name]").length) {
+                        redux.opt_names = [];
+                        $.each(__modal_html.find("[data-opt-name]"), function () {
+                            var _opt_name = $(this).attr("data-opt-name");
+                            if(redux.opt_names.indexOf(_opt_name) === -1) {
+                                redux.opt_names.push(_opt_name);
+                            }
+                        });
+                    }
                 }
             });
 
-            UIkit.util.on(__modal_html, "hidden", function(){
+            UIkit.util.on(__modal_html, "hidden", function(event){
                 redux.opt_names = __org_opt_names;
+                if($(event.target).hasClass("uk-modal")) {
+                    if(typeof options.current_target !== "undefined") {
+                        // Show parent modal if it exists
+                        var __parent_modal = tz_parent_modal_exists(options.current_target);
+                        if (__parent_modal) {
 
-                if(typeof options.current_target !== "undefined") {
-                    // Show parent modal if it exists
-                    var __parent_modal = tz_parent_modal_exists(options.current_target);
-                    if (__parent_modal) {
 
+                            var __main_field = options.current_target.closest("[data-type=tz_layout]");
 
-                        var __main_field = options.current_target.closest("[data-type=tz_layout]");
+                            if(__main_field.data("allow_event")){
+                                var __parent_allow_event = true;
 
-                        if(__main_field.data("allow_event")){
-                            var __parent_allow_event = true;
-
-                            if(__parent_modal && typeof __parent_modal.data("allow_event") !== "undefined"){
-                                __parent_allow_event  = __parent_modal.data("allow_event");
-                            }
-                            if(__parent_allow_event) {
-                                __parent_modal.data("modal_shown", true);
-                                UIkit.modal(__parent_modal).show();
+                                if(__parent_modal && typeof __parent_modal.data("allow_event") !== "undefined"){
+                                    __parent_allow_event  = __parent_modal.data("allow_event");
+                                }
+                                if(__parent_allow_event) {
+                                    __parent_modal.data("modal_shown", true);
+                                    UIkit.modal(__parent_modal).show();
+                                }
                             }
                         }
                     }
@@ -1002,8 +1006,10 @@
             var __methods   = ["beforeshow", "show", "shown", "beforehide", "hide", "hidden"];
             $.each(__methods, function (index, method) {
                 if(typeof options[method] !== "undefined") {
-                    UIkit.util.on(__modal_html, method, function () {
-                        options[method].call(__modal_html);
+                    UIkit.util.on(__modal_html, method, function (event) {
+                        if($(event.target).hasClass("uk-modal")) {
+                            options[method].call(__modal_html);
+                        }
                     });
                 }
             });
@@ -1680,9 +1686,7 @@
 
                     redux.field_objects.tz_layout.load_setting(setting_obj, element, selector, settings);
 
-                    // tz_required( setting_obj );
-
-                    selector.tooltip("destroy");
+                    // selector.tooltip("destroy");
 
                     var obj_id  = redux.field_objects.tz_layout.generateID();
                     setting_obj.attr("id", "modal-" + obj_id);
@@ -1738,11 +1742,12 @@
                             },
                         ],
                         "hidden": function () {
-                            // if(!$(this).is(':visible')) {
+                            // console.log(event);
+                            // // if(!$(this).is(':visible')) {
                                 $(this).remove();
-
-                                redux.field_objects.tz_layout.init_tooltip(selector);
-                            // }
+                            //
+                            //     // redux.field_objects.tz_layout.init_tooltip(selector);
+                            // // }
                         },
                         "beforeshow": function(){
                             if(!$(this).closest(".templaza-framework-options").length){

@@ -407,7 +407,7 @@ if(!empty($unit) && is_array($unit)){
             $nav_tab    .= '</a></li>';
 
             $tab_pane   .= '<div id="tabs-'.$this -> field['id'].'-'.$uniquid
-                .'" class="tz-redux-typography-size" data-device="'.$device.'" data-name="size" data-hidden-name="font-size">';
+                .'" class="tz-redux-typography-size tz-redux-typography-device" data-device="'.$device.'" data-name="size" data-hidden-name="font-size">';
             $tab_pane   .= '<input
                                 type="text"
                                 class="span2 redux-typography mini typography-input ' . esc_attr($this -> field['class']) . '"
@@ -494,7 +494,7 @@ if(!empty($unit) && is_array($unit)){
             $nav_tab    .= '</a></li>';
 
             $tab_pane   .= '<div id="tabs-'.$this -> field['id'].'-'.$uniquid
-                .'" class="" data-device="'.$device.'" data-name="height" data-hidden-name="line-height">';
+                .'" class="tz-redux-typography-device" data-device="'.$device.'" data-name="height" data-hidden-name="line-height">';
             $tab_pane   .= '<input
                             type="text"
                             class="span2 redux-typography mini typography-input ' . esc_attr( $this -> field['class'] ) . '"
@@ -584,7 +584,7 @@ if(!empty($unit) && is_array($unit)){
             $nav_tab    .= '</a></li>';
 
             $tab_pane   .= '<div id="tabs-'.$this -> field['id'].'-'.$uniquid
-                .'" class="" data-device="'.$device.'" data-name="letter" data-hidden-name="letter-spacing">';
+                .'" class="tz-redux-typography-device" data-device="'.$device.'" data-name="letter" data-hidden-name="letter-spacing">';
             $tab_pane   .= '<input
                             type="text"
                             class="span2 redux-typography mini typography-input ' . esc_attr( $this -> field['class'] ) . '"
@@ -670,7 +670,7 @@ if(!empty($unit) && is_array($unit)){
             $nav_tab    .= '</a></li>';
 
             $tab_pane   .= '<div id="tabs-'.$this -> field['id'].'-'.$uniquid
-                .'" class="" data-device="'.$device.'" data-name="word" data-hidden-name="word-spacing">';
+                .'" class="tz-redux-typography-device" data-device="'.$device.'" data-name="word" data-hidden-name="word-spacing">';
             $tab_pane   .= '<input
                             type="text"
                             class="span2 redux-typography mini typography-input ' . esc_attr( $this -> field['class'] ) . '"

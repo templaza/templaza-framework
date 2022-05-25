@@ -14,6 +14,29 @@
 	'use strict';
 
 	var org_redux_field_typography = redux.field_objects.typography.init;
+
+	$(document).on("templaza-framework/field/tz_layout/load_setting/typography/field_value",
+		".redux-container-tz_layout", function(e, f_name, setting, field, element, form){
+			if(field.closest(".redux-field-container").attr("data-type") === "typography"){
+				var _f_name	= field.closest(".redux-field-container").attr("data-id");
+				var _f_value = typeof setting[_f_name] !== "undefined" ? setting[_f_name] : setting[_f_name];
+
+				if(f_name.match(/\[font-family\]$/) !== null){
+					field.closest(".redux-typography-container").find(".redux-typography-family").data("value",_f_value["font-family"]);
+				}else if(field.closest("[data-device]").length){
+					var __unit	= field.val().match(/\D+$/g,'');
+					field.closest(".tz-redux-typography-device[data-device]").find(".redux-typography").val(field.val().replace(/\D+$/g,''));
+					if(__unit !== null){
+						field.closest(".tz-redux-typography-device[data-device]").find(".redux-typography-unit").val(__unit);
+					}
+				}
+				/*else{
+					field.parent().find(".redux-typography").data("value", field.val());
+				}*/
+
+			}
+		});
+
 	redux.field_objects.typography.init	= function(selector) {
 
 		org_redux_field_typography(selector);
@@ -139,10 +162,13 @@
 
 							var that = $('#' + mainID);
 							that.attr("data-units", unit).data('units', unit);
+
+							redux.field_objects.typography.select(main);
+
+							parent.find("input[data-device="+device+"]").val($( this ).val() + unit);
 						}
 
-						redux.field_objects.typography.select(main);
-						// redux.field_objects.typography.select($(this).parents('.redux-container-typography:first'));
+						// redux.field_objects.typography.select(main);
 
 						parent.find(".typography-input").removeClass(input_class)
 							.end().find("input[type=hidden][data-device=" + device + "]").removeClass(input_hidden_class);
@@ -190,6 +216,8 @@
 
 							redux.field_objects.typography.select(main);
 							// redux.field_objects.typography.select($(this).parents('.redux-container-typography:first'));
+
+							parent.find("input[data-device="+device+"]").val(parent.find(".typography-input").val() + unit);
 
 							parent.find(".typography-input").removeClass(input_class)
 								.end().find("input[type=hidden][data-device=" + device + "]").removeClass(input_hidden_class);
