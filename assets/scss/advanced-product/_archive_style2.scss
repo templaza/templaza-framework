@@ -1,0 +1,79 @@
+.ap-item.ap-item-style2{
+  .ap-inner{
+    .ap-meta-top{
+      font-size:12px;
+      color:$tztheme-global-color;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    .ap-title{
+      margin-bottom: 0;
+      text-align: center;
+      margin-top: 0;
+
+    }
+    .ap-readmore-box{
+      display:flex;
+      .templaza-btn{
+        background:none;
+        border: 1px solid $tztheme-border-color;
+        font-size:14px;
+        color:#333;
+        height:auto;
+        line-height: 1em;
+        padding:10px 20px;
+        &:hover{
+          border-color:#777;
+        }
+      }
+    }
+    .ap-price-box{
+      color:#333;
+      line-height: 1;
+      font-weight:bold;
+      font-size:20px;
+      .meta{
+        color:$tztheme-postmeta;
+      }
+    }
+    .ap-info-inner{
+      padding:20px;
+      &.ap-info-bottom{
+        border-top:1px solid $tztheme-border-color;
+        padding:20px;
+      }
+    }
+    .ap-specification{
+      &.ap-specification-style2{
+        .ap-spec-item{
+          position: relative;
+          padding: 3px 15px;
+          &:first-child{
+            background:transparent;
+            color:inherit;
+          }
+          &:before{
+            height: 4px;
+            width:4px;
+            background:$tztheme-global-color;
+            content:"";
+            position:absolute;
+            top:50%;
+            left:0;
+            margin-top: -2px;
+            @include border-radius(50%);
+          }
+          .ap-spec-value{
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+  &:hover{
+    .ap-inner{
+      @include transition($tztheme-transition-all);
+    }
+  }
+}

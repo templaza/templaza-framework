@@ -139,9 +139,9 @@ $typographies = array(
         'id'        => 'widget_box_heading',
         'enable'    => true,
         'class'     => array(
-            'desktop'    => '.templaza-sidebar .widget-area >.widget .widget-title, .templaza_woo_filter-name',
-            'tablet'     => '.templaza-sidebar .widget-area >.widget .widget-title, .templaza_woo_filter-name',
-            'mobile'     => '.templaza-sidebar .widget-area >.widget .widget-title, .templaza_woo_filter-name',
+            'desktop'    => '.templaza-sidebar .widget-area >.widget .widget-title, .templaza_woo_filter-name,.templaza-sidebar .advanced-product-search-form label.search-label',
+            'tablet'     => '.templaza-sidebar .widget-area >.widget .widget-title, .templaza_woo_filter-name, .templaza-sidebar .advanced-product-search-form label.search-label',
+            'mobile'     => '.templaza-sidebar .widget-area >.widget .widget-title, .templaza_woo_filter-name, .templaza-sidebar .advanced-product-search-form label.search-label',
         ),
     ),
     array(
@@ -244,13 +244,32 @@ $typographies = array(
             'mobile'     => 'div.templaza-single .templaza-single-content h6'
                 .',div.templaza-single .templaza-single-content .h6',
         )
-    ),array(
+    ),
+    array(
         'id'        => 'blog_single_quote',
         'enable'    => true,
         'class'     => array(
             'desktop'    => 'div.templaza-single .templaza-single-box blockquote',
             'tablet'     => 'div.templaza-single .templaza-single-box blockquote',
             'mobile'     => 'div.templaza-single .templaza-single-box blockquote',
+        )
+    ),
+    array(
+        'id'        => 'typography-ap-group-title',
+        'enable'    => true,
+        'class'     => array(
+            'desktop'    => '.ap-single-side-box .ap-group-title',
+            'tablet'     => '.ap-single-side-box .ap-group-title',
+            'mobile'     => '.ap-single-side-box .ap-group-title',
+        )
+    ),
+    array(
+        'id'        => 'typography-ap-field-label',
+        'enable'    => true,
+        'class'     => array(
+            'desktop'    => '.ap-custom-fields .ap-field-label',
+            'tablet'     => '.ap-custom-fields .ap-field-label',
+            'mobile'     => '.ap-custom-fields .ap-field-label',
         )
     ),
     array(
@@ -419,5 +438,3 @@ if(count($designs)) {
         }
     }
 }
-
-

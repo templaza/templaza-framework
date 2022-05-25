@@ -1,6 +1,5 @@
 .ap-item{
   .ap-inner{
-    border:1px solid #e8e8e8;
     @include transition($tztheme-transition-all);
     @include box-shadow($tztheme-box-shadow-default);
     .ap-title{
@@ -31,7 +30,6 @@
   }
   &:hover{
     .ap-inner{
-      border-color:#6d8c53;
       @include transition($tztheme-transition-all);
     }
   }

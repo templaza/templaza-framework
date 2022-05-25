@@ -6,6 +6,9 @@
     }
     .ap-search-item{
       margin-bottom: 45px;
+      &:last-child{
+        margin-bottom: 0;
+      }
     }
   }
 }
@@ -67,7 +70,6 @@
     }
     select{
       background-color:transparent;
-      border:1px solid rgba(0, 0, 0, 0.1) !important;
     }
     input[type="number"]{
       width:100%;
