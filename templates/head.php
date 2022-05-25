@@ -49,4 +49,5 @@ add_action('wp_head', function() use($options){
 Templates::load_my_layout('head.menus');
 Templates::load_my_layout('head.custom');
 Templates::load_my_layout('head.preloader');
-Templates::load_my_layout('woocommerce.style');
+Templates::load_my_layout('post-type-style.advanced-product-style');
+Templates::load_my_layout('post-type-style.woocommerce-style');

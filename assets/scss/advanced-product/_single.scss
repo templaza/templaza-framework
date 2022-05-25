@@ -130,12 +130,12 @@
         &[type="text"],
         &[type="email"]
         {
-          height:$tz-basic-input-height !important;
+          height:50px !important;
           font-size:0.9em !important;
         }
       }
       button{
-        height:$tz-basic-input-height !important;
+        height:50px !important;
       }
       textarea{
         height:120px;
@@ -143,4 +143,7 @@
       }
     }
   }
+}
+.ap-related-product{
+
 }
