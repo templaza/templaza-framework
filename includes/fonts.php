@@ -146,6 +146,7 @@ class Fonts{
         return apply_filters('templaza-framework/typography/google-font/list', $fonts);
     }
 
+    /* */
     public static function make_css_style($font_option, $devices = array('desktop' => '', 'tablet' => '', 'mobile' => '')){
 
 //        $_org_devices   = Templates::get_devices(true);
@@ -162,7 +163,11 @@ class Fonts{
 
         $open_devices   = array_merge($def_devices, $open_devices, $diff_devices);
 
-        if(!count($font_option)){
+        if(!empty($font_option) && is_string($font_option)){
+            $font_option    = json_decode($font_option, true);
+        }
+
+        if(empty($font_option) || !is_array($font_option) || !count($font_option)){
             return $devices;
         }
 
@@ -224,28 +229,11 @@ class Fonts{
                     if(!empty($value)){
                         $devices[$device]   .= $key.':'.$value.';';
                     }
-
-//                    if(count($open_devices) && isset($open_devices[$device]) && $end_key == $key){
-//                        $open_device    = trim($open_devices[$device]);
-//                        if(!preg_match('/\{$/is', $open_device)){
-//                            $open_device    .= '{';
-//                        }
-//                        $devices[$device] = $open_device.$devices[$device].'}';
-//                    }
                 }
             }else{
                 if(!empty($option)) {
                     $devices['desktop'] .= $key . ':' . $option . ';';
                 }
-
-//                if(count($open_devices) && isset($open_devices['desktop']) && $end_key == $key){
-//                    $open_device    = trim($open_devices['desktop']);
-//                    if(!preg_match('/\{$/is', $open_device)){
-//                        $open_device    .= '{';
-//                    }
-//
-//                    $devices['desktop'] = $open_device.$devices['desktop'].'}';
-//                }
             }
 
             if(count($open_devices) && $end_key == $key){

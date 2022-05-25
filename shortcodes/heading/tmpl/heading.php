@@ -6,20 +6,19 @@ use TemPlazaFramework\Templates;
 use TemPlazaFramework\Fonts;
 use TemPlazaFramework\CSS;
 extract(shortcode_atts(array(
-    'tz_id'                    => '',
-    'tz_class'                 => '',
-    'heading_tag'              => 'h1',
-    'custom_heading'           => '',
-    'heading_custom_class'     => '',
+    'tz_id'                         => '',
+    'tz_class'                      => '',
+    'heading_tag'                   => 'h1',
+    'custom_heading'                => '',
+    'heading_custom_class'          => '',
     'enable_heading_custom_font'     => false,
-    'typography-heading-element'     => '',
-    'enable_custom_heading'    => false,
-    'enable_heading_inner_tag' => false,
-    'enable_heading_single'    => false,
+    'typography_heading_element'    => '',
+    'enable_custom_heading'         => false,
+    'enable_heading_inner_tag'      => false,
+    'enable_heading_single'         => false,
     'enable_heading_single_meta'    => false,
 ), $atts));
 
-$options            = Functions::get_theme_options();
 $title = '';
 if ( is_category() ) {
     $title = single_cat_title( '', false );
@@ -74,45 +73,50 @@ if(!empty($heading)){
     ?>
 </div>
 <?php
-}
-
-$typographies = array(
-    array(
-        'id'        => 'typography-heading-element',
-        'enable'    => (isset($enable_heading_custom_font) && $enable_heading_custom_font =='1'?true:false),
-        'class'     => array(
-            'desktop' => '.templaza-heading h1, .templaza-heading h2, .templaza-heading h3, .templaza-heading h4, .templaza-heading h5, .templaza-heading h6',
-            'tablet' => '.templaza-heading h1, .templaza-heading h2, .templaza-heading h3, .templaza-heading h4, .templaza-heading h5, .templaza-heading h6',
-            'mobile' => '.templaza-heading h1, .templaza-heading h2, .templaza-heading h3, .templaza-heading h4, .templaza-heading h5, .templaza-heading h6',
+    $typographies = array(
+        array(
+            'id'        => 'typography-heading-element',
+            'enable'    => (isset($enable_heading_custom_font) && $enable_heading_custom_font =='1'?true:false),
+            'class'     => array(
+                'desktop' => '#'.$tz_id.' h1, #'.$tz_id.' h2,'
+                    .'#'.$tz_id.' h3,#'.$tz_id.' h4,#'.$tz_id.' h5,'
+                    .'#'.$tz_id.' h6',
+                'tablet' => '#'.$tz_id.' h1, #'.$tz_id.' h2,'
+                    .'#'.$tz_id.' h3,#'.$tz_id.' h4,#'.$tz_id.' h5,'
+                    .'#'.$tz_id.' h6',
+                'mobile' => '#'.$tz_id.' h1, #'.$tz_id.' h2,'
+                    .'#'.$tz_id.' h3,#'.$tz_id.' h4,#'.$tz_id.' h5,'
+                    .'#'.$tz_id.' h6',
+            )
         )
-    )
-);
-// Get typographies
-$typographies   = apply_filters('templaza-framework/typography/list', $typographies);
+    );
 
-// Generate typography styles.
-if(count($typographies)) {
-    foreach ($typographies as $typo) {
+    // Get typographies
+    $typographies   = apply_filters('templaza-framework/typography/list', $typographies);
 
-        $enable = isset($typo['enable']) ? (bool)$typo['enable'] : false;
-        if ($enable) {
-            $typoParams = isset($options[$typo['id']]) ? $options[$typo['id']] : array();
-            if (is_array($typo['class'])) {
-                $devices = $typo['class'];
-            } else {
-                $devices['desktop'] = $typo['class'];
-                $devices['tablet'] = $typo['class'];
-                $devices['mobile'] = $typo['class'];
-            }
+    // Generate typography styles.
+    if(count($typographies)) {
+        foreach ($typographies as $typo) {
+            $enable = isset($typo['enable']) ? (bool)$typo['enable'] : false;
+            if ($enable) {
+                if (is_array($typo['class'])) {
+                    $devices = $typo['class'];
+                } else {
+                    $devices['desktop'] = $typo['class'];
+                    $devices['tablet'] = $typo['class'];
+                    $devices['mobile'] = $typo['class'];
+                }
 
-            $_styles = Fonts::make_css_style($typoParams, $devices);
+                $_styles = Fonts::make_css_style($typography_heading_element, $devices);
 
-            if (count($_styles)) {
-                foreach ($_styles as $device => $style) {
-                    Templates::add_inline_style($style, $device);
+                if (count($_styles)) {
+                    foreach ($_styles as $device => $style) {
+                        Templates::add_inline_style($style, $device);
+                    }
                 }
             }
         }
     }
 }
+
 ?>

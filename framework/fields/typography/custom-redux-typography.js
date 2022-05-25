@@ -21,18 +21,18 @@
 				var _f_name	= field.closest(".redux-field-container").attr("data-id");
 				var _f_value = typeof setting[_f_name] !== "undefined" ? setting[_f_name] : setting[_f_name];
 
-				if(f_name.match(/\[font-family\]$/) !== null){
-					field.closest(".redux-typography-container").find(".redux-typography-family").data("value",_f_value["font-family"]);
-				}else if(field.closest("[data-device]").length){
-					var __unit	= field.val().match(/\D+$/g,'');
-					field.closest(".tz-redux-typography-device[data-device]").find(".redux-typography").val(field.val().replace(/\D+$/g,''));
-					if(__unit !== null){
+				if (f_name.match(/\[font-family\]$/) !== null && typeof _f_value !== "undefined"
+					&& typeof _f_value["font-family"] !== "undefined") {
+					field.closest(".redux-typography-container").find(".redux-typography-family").data("value", _f_value["font-family"]);
+				} else if (field.closest("[data-device]").length) {
+					var __unit = field.val().match(/\D+$/g, '');
+					field.closest(".tz-redux-typography-device[data-device]").find(".redux-typography").val(field.val().replace(/\D+$/g, ''));
+					if (__unit !== null) {
 						field.closest(".tz-redux-typography-device[data-device]").find(".redux-typography-unit").val(__unit);
 					}
+				}else if(field.closest(".select_wrapper").length && f_name.match(/\[font-style\]$/) === null){
+					field.closest(".select_wrapper").find(".redux-typography").data("value", field.val());
 				}
-				/*else{
-					field.parent().find(".redux-typography").data("value", field.val());
-				}*/
 
 			}
 		});
