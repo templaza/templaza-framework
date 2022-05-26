@@ -223,7 +223,7 @@ ul.products {
           }
         }
         .product-thumbnails--slider {
-          .rz-swiper-button {
+          .templaza-swiper-button {
             opacity: 1;
           }
         }
@@ -243,7 +243,7 @@ ul.products {
       .swiper-lazy.swiper-lazy-loaded {
         opacity: 1;
       }
-      .rz-swiper-button {
+      .templaza-swiper-button {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -259,10 +259,10 @@ ul.products {
         align-items: center;
         justify-content: center;
       }
-      .rz-product-loop-swiper-next {
+      .templaza-product-loop-swiper-next {
         right: 0;
       }
-      .rz-product-loop-swiper-prev {
+      .templaza-product-loop-swiper-prev {
         left: 0;
       }
       .woocommerce-badges {
@@ -368,7 +368,7 @@ ul.products {
           box-shadow: none;
         }
         .wcboost-variation-swatches__item.selected {
-          border-color: var(--rz-color-dark);
+          border-color: var(--templaza-color-dark);
         }
       }
       .tawcvs-swatches {
@@ -443,7 +443,7 @@ ul.products {
           width: 200%;
           height: 1px;
           top: 50%;
-          background-color: var(--rz-background-color-primary);
+          background-color: var(--templaza-background-color-primary);
           transform: rotate(45deg);
         }
         &::after {
@@ -453,7 +453,7 @@ ul.products {
           width: 200%;
           height: 1px;
           top: 50%;
-          background-color: var(--rz-background-color-primary);
+          background-color: var(--templaza-background-color-primary);
           transform: rotate(45deg);
           transform: rotate(-45deg);
         }
@@ -678,7 +678,7 @@ ul.products.product-loop-layout-4 {
       }
     }
     .product-thumbnails--slider {
-      .rz-swiper-button {
+      .templaza-swiper-button {
         margin-top: -20px;
       }
     }
@@ -709,7 +709,7 @@ ul.products.product-loop-layout-6 {
       }
     }
     .price {
-      color: var(--rz-color-dark);
+      color: var(--templaza-color-dark);
     }
     .product-summary {
       padding-left: 30px;
@@ -927,7 +927,7 @@ ul.products.product-loop-layout-8 {
       padding-left: 10px;
     }
     .product-thumbnails--slider {
-      .rz-swiper-button {
+      .templaza-swiper-button {
         margin-top: -20px;
       }
     }
@@ -972,7 +972,7 @@ ul.products.product-loop-layout-8 {
   }
   li.product-type-variable {
     .product-thumbnails--slider {
-      .rz-swiper-button {
+      .templaza-swiper-button {
         margin-top: -40px;
       }
     }

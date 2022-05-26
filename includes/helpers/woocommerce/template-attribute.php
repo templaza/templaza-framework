@@ -95,7 +95,11 @@ class Templaza_Woo_Attribute {
             $templaza_options = Functions::get_theme_options();
         }
         $attributes = isset($templaza_options['templaza-shop-loop-attributes'])?$templaza_options['templaza-shop-loop-attributes']:'';
-        $loop_hover = isset($templaza_options['templaza-shop-loop-hover'])?$templaza_options['templaza-shop-loop-hover']:'';
+        if(isset($_GET['product_hover'])) {
+            $loop_hover = $_GET['product_hover'];
+        }else{
+            $loop_hover = isset($templaza_options['templaza-shop-loop-hover'])?$templaza_options['templaza-shop-loop-hover']:'';
+        }
 
 		if ( is_null( self::$product_attr_types ) ) {
 			self::$product_attr_types = (array) $attributes;

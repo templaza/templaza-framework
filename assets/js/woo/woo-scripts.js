@@ -1228,8 +1228,8 @@
 			setTimeout(function () {
 				$selector.each(function () {
 					options.navigation = {
-						nextEl: $(this).find('.rz-product-loop-swiper-next'),
-						prevEl: $(this).find('.rz-product-loop-swiper-prev'),
+						nextEl: $(this).find('.templaza-product-loop-swiper-next'),
+						prevEl: $(this).find('.templaza-product-loop-swiper-prev'),
 					}
 					new Swiper($(this), options);
 				});
@@ -1321,8 +1321,8 @@
 					$gallery.addClass('swiper-container');
 					$gallery.find('.woocommerce-product-gallery__wrapper').addClass('swiper-wrapper');
 					$gallery.find('.woocommerce-product-gallery__image').addClass('swiper-slide');
-					$gallery.after('<span class="templaza-svg-icon rz-quickview-button-prev rz-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></span>');
-					$gallery.after('<span class="templaza-svg-icon rz-quickview-button-next rz-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>');
+					$gallery.after('<span class="templaza-svg-icon templaza-quickview-button-prev templaza-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></span>');
+					$gallery.after('<span class="templaza-svg-icon templaza-quickview-button-next templaza-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>');
 
 					var options = {
 						loop: false,
@@ -1330,8 +1330,8 @@
 						speed: 800,
 						watchOverflow: true,
 						navigation: {
-							nextEl: '.rz-quickview-button-next',
-							prevEl: '.rz-quickview-button-prev',
+							nextEl: '.templaza-quickview-button-next',
+							prevEl: '.templaza-quickview-button-prev',
 						},
 						on: {
 							init: function () {
@@ -1619,9 +1619,9 @@
 			return;
 		}
 
-		var $modal = $('#rz-popup-add-to-cart'),
+		var $modal = $('#templaza-popup-add-to-cart'),
 			$product = $modal.find('.product-modal-content'),
-			$recomended = $product.find('.rz-product-popup-atc__recommendation');
+			$recomended = $product.find('.templaza-product-popup-atc__recommendation');
 
 		if ($modal.length < 1) {
 			return
@@ -1738,8 +1738,8 @@
 				spaceBetween: 20,
 				watchOverflow: true,
 				navigation: {
-					nextEl: $selector.find('.rz-swiper-button-next'),
-					prevEl: $selector.find('.rz-swiper-button-prev'),
+					nextEl: $selector.find('.templaza-swiper-button-next'),
+					prevEl: $selector.find('.templaza-swiper-button-prev'),
 				},
 				pagination: {
 					el: $selector.find('.swiper-pagination'),
@@ -2055,7 +2055,7 @@
 
 	// Scroll Section
 	templaza_woo.scrollSection = function () {
-		var baseURI = $('#rz-base-url').data('url');
+		var baseURI = $('#templaza-base-url').data('url');
 		$('#primary-menu').on('click', 'a', function (e) {
 			e.preventDefault();
 			var currentHref = $(this).attr('href'),
@@ -2134,7 +2134,7 @@
 	 templaza_woo.stickyAddToCart = function() {
 		var $sticky = $( '#templaza-sticky-add-to-cart' );
 
-		$sticky = ! $sticky.length ? $( '#rz-navigation-bar' ) : $sticky;
+		$sticky = ! $sticky.length ? $( '#templaza-navigation-bar' ) : $sticky;
 
 		if ( ! $sticky.length ) {
 			return;

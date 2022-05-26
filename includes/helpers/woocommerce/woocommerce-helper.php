@@ -106,7 +106,11 @@ class Templaza_Woo_Helper {
             }else{
                 $templaza_options = Functions::get_theme_options();
             }
-            $layout       = isset($templaza_options['templaza-shop-loop-layout'])?$templaza_options['templaza-shop-loop-layout']:'layout-1';
+            if(isset($_GET['product_loop'])){
+                $layout = $_GET['product_loop'];
+            }else{
+                $layout       = isset($templaza_options['templaza-shop-loop-layout'])?$templaza_options['templaza-shop-loop-layout']:'layout-1';
+            }
             if ( self::templaza_get_catalog_layout() == 'masonry' && self::templaza_is_catalog() ) {
                 $layout = 'layout-7';
             }

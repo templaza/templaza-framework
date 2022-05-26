@@ -62,7 +62,7 @@
   overflow: hidden;
 }
 
-.quick-view-modal .woocommerce .product .entry-thumbnail:hover .rz-swiper-button {
+.quick-view-modal .woocommerce .product .entry-thumbnail:hover .templaza-swiper-button {
   opacity: 1;
 }
 
@@ -79,11 +79,11 @@
   margin-bottom: 20px;
 }
 
-.quick-view-modal .woocommerce .product .rz-buy-now-button + .templaza-wishlist-button {
+.quick-view-modal .woocommerce .product .templaza-buy-now-button + .templaza-wishlist-button {
   border: none;
 }
 
-.quick-view-modal .woocommerce .product .rz-buy-now-button + .templaza-wishlist-button .templaza-svg-icon {
+.quick-view-modal .woocommerce .product .templaza-buy-now-button + .templaza-wishlist-button .templaza-svg-icon {
   font-size: 20px;
 }
 
@@ -113,7 +113,7 @@
   font-size: 20px;
 }
 
-.quick-view-modal .rz-swiper-button {
+.quick-view-modal .templaza-swiper-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -125,23 +125,23 @@
   line-height: 42px;
   background-color: #ffffff;
   text-align: center;
-  color: var(--rz-color-dark);
+  color: var(--templaza-color-dark);
   opacity: 0;
   z-index: 1;
   transition: .3s;
   font-size: 20px;
 }
 
-.quick-view-modal .rz-swiper-button svg {
+.quick-view-modal .templaza-swiper-button svg {
   /*rtl:raw:
           transform: rotate(-180deg);
       */
 }
 
-.quick-view-modal .rz-quickview-button-prev {
+.quick-view-modal .templaza-quickview-button-prev {
   left: 0;
 }
 
-.quick-view-modal .rz-quickview-button-next {
+.quick-view-modal .templaza-quickview-button-next {
   right: 0;
 }

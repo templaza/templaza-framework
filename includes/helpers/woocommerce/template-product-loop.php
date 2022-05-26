@@ -761,8 +761,11 @@ class Templaza_Product_Loop {
         }else{
             $templaza_options = Functions::get_theme_options();
         }
-        $loop_hover = isset($templaza_options['templaza-shop-loop-hover'])?$templaza_options['templaza-shop-loop-hover']:'';
-
+        if(isset($_GET['product_hover'])) {
+            $loop_hover = $_GET['product_hover'];
+        }else{
+            $loop_hover = isset($templaza_options['templaza-shop-loop-hover'])?$templaza_options['templaza-shop-loop-hover']:'';
+        }
 		$loop_layout = TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout();
 
 		$product_hover = $loop_layout == 'layout-7' ? 'classic' : $loop_hover;
@@ -1140,7 +1143,12 @@ class Templaza_Product_Loop {
         }
         $loop_variation     = isset($templaza_options['templaza-shop-loop-variation'])?filter_var($templaza_options['templaza-shop-loop-variation'], FILTER_VALIDATE_BOOLEAN):true;
         $loop_variation_ajax     = isset($templaza_options['templaza-shop-loop-variation-ajax'])?filter_var($templaza_options['templaza-shop-loop-variation-ajax'], FILTER_VALIDATE_BOOLEAN):true;
-        $loop_hover       = isset($templaza_options['templaza-shop-loop-hover'])?$templaza_options['templaza-shop-loop-hover']:'classic';
+        if(isset($_GET['product_hover'])) {
+            $loop_hover = $_GET['product_hover'];
+        }else{
+            $loop_hover = isset($templaza_options['templaza-shop-loop-hover'])?$templaza_options['templaza-shop-loop-hover']:'';
+        }
+
         if ( in_array( TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout(), array( 'layout-8', 'layout-9' ) ) ) {
 			$data['product_loop_layout'] = TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout();
 			if ( $loop_variation ) {

@@ -54,8 +54,8 @@ Templaza_API::set_section('settings',
             array(
                 'id'       => 'ap_product-layout',
                 'type'     => 'select',
-                'title'    => esc_html__('Shop Layout', 'baressco'),
-                'subtitle' => esc_html__('Default style list or grid for Shop page.', 'baressco'),
+                'title'    => esc_html__('Inventory Layout', 'baressco'),
+                'subtitle' => esc_html__('Default style list or grid for Inventory page.', 'baressco'),
                 'options'  => array(
                     'grid' => esc_html__('Grid', 'baressco'),
                     'masonry' => esc_html__('Masonry', 'baressco'),
@@ -166,6 +166,27 @@ Templaza_API::set_section('settings',
                 'min'      => '1',
                 'step'     => '1',
                 'max'      => '500',
+            ),
+
+        )
+    )
+);
+Templaza_API::set_section('settings',
+    array(
+        'title'      => esc_html__( 'Advanced Product Loop', 'baressco' ),
+        'id'         => 'ap_product-loop',
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'ap_product-loop-layout',
+                'type'     => 'select',
+                'title'    => esc_html__('Inventory Layout', 'baressco'),
+                'subtitle' => esc_html__('Default style list or grid for Inventory page.', 'baressco'),
+                'options'  => array(
+                    'style1' => esc_html__('Style1', 'baressco'),
+                    'style2' => esc_html__('Style2', 'baressco'),
+                ),
+                'default'  => 'style1',
             ),
             array(
                 'id'       => 'ap_product-thumbnail-size',

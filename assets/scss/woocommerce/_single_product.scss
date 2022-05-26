@@ -132,7 +132,7 @@
   height: 100%;
 }
 
-.single-product div.product .woocommerce-product-gallery__thumbs-carousel .rz-swiper-button {
+.single-product div.product .woocommerce-product-gallery__thumbs-carousel .templaza-swiper-button {
   cursor: pointer;
   outline: none;
   background-color: $tztheme-white;
@@ -145,7 +145,7 @@
   justify-content: center;
 }
 
-.single-product div.product .woocommerce-product-gallery__thumbs-carousel .rz-swiper-button.swiper-button-lock {
+.single-product div.product .woocommerce-product-gallery__thumbs-carousel .templaza-swiper-button.swiper-button-lock {
   display: none;
 }
 
@@ -160,7 +160,7 @@
   margin: 0;
 }
 
-.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-vertical .rz-swiper-button {
+.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-vertical .templaza-swiper-button {
   position: absolute;
   transform: none;
   width: 100%;
@@ -170,20 +170,20 @@
   right: 0;
 }
 
-.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-vertical .rz-thumbs-button-prev {
+.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-vertical .templaza-thumbs-button-prev {
   top: 0;
 }
 
-.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-vertical .rz-thumbs-button-prev svg {
+.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-vertical .templaza-thumbs-button-prev svg {
   transform: rotate(90deg);
 }
 
-.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-vertical .rz-thumbs-button-next {
+.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-vertical .templaza-thumbs-button-next {
   bottom: 0;
   top: auto;
 }
 
-.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-vertical .rz-thumbs-button-next svg {
+.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-vertical .templaza-thumbs-button-next svg {
   transform: rotate(90deg);
 }
 
@@ -191,7 +191,7 @@
   position: relative;
 }
 
-.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-horizontal .rz-swiper-button {
+.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-horizontal .templaza-swiper-button {
   line-height: 48px;
   position: absolute;
   top: 50%;
@@ -200,11 +200,11 @@
   height: 50px;
 }
 
-.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-horizontal .rz-thumbs-button-prev {
+.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-horizontal .templaza-thumbs-button-prev {
   left: 0;
 }
 
-.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-horizontal .rz-thumbs-button-next {
+.single-product div.product .woocommerce-product-gallery__thumbs-carousel.swiper-container-horizontal .templaza-thumbs-button-next {
   right: 0;
 }
 
@@ -212,7 +212,7 @@
   cursor: not-allowed;
 }
 
-.single-product div.product .woocommerce-product-gallery__thumbs-carousel:hover .rz-swiper-button {
+.single-product div.product .woocommerce-product-gallery__thumbs-carousel:hover .templaza-swiper-button {
   opacity: 1;
 }
 
@@ -750,7 +750,7 @@
   margin-right: 16px;
 }
 
-.single-product div.product .summary-price-box .rz-stock {
+.single-product div.product .summary-price-box .templaza-stock {
   color: $tztheme-heading-color;
 }
 
@@ -841,7 +841,7 @@
   max-width: 50%;
 }
 
-.single-product div.product.layout-v4 .rz-swiper-button {
+.single-product div.product.layout-v4 .templaza-swiper-button {
   position: absolute;
   z-index: 1;
   display: block;
@@ -861,11 +861,11 @@
   cursor: not-allowed;
 }
 
-.single-product div.product.layout-v4 .rz-swiper-button-next {
+.single-product div.product.layout-v4 .templaza-swiper-button-next {
   right: 0;
 }
 
-.single-product div.product.layout-v4 .rz-swiper-button-prev {
+.single-product div.product.layout-v4 .templaza-swiper-button-prev {
   left: 0;
 }
 
@@ -1033,13 +1033,13 @@
   color: $tztheme-white;
 }
 
-.single-product div.product.has-buy-now .rz-buy-now-button {
+.single-product div.product.has-buy-now .templaza-buy-now-button {
   min-width: 145px;
   margin-right: 18px;
   padding: 0 20px;
 }
 
-.single-product div.product.has-buy-now .rz-buy-now-button.disabled {
+.single-product div.product.has-buy-now .templaza-buy-now-button.disabled {
   opacity: .5;
   cursor: not-allowed;
 }

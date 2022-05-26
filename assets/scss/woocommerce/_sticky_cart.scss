@@ -21,7 +21,7 @@
     margin-left: auto;
     .product-button-wrapper {
       display: flex;
-      .rz-buy-now-button {
+      .templaza-buy-now-button {
         display: none;
       }
     }
@@ -33,7 +33,7 @@
       font-size: 16px;
       padding-left: 20px;
       padding-right: 20px;
-      color: var(--rz-text-color);
+      color: var(--templaza-text-color);
       height: calc(#{$tztheme-shop-sticky-input-height} - 2px);
       line-height: calc(#{$tztheme-shop-sticky-input-height} - 2px);
     }
@@ -205,7 +205,7 @@
     .price {
       font-size: 14px;
       font-weight: 500;
-      color: var(--rz-text-color-gray);
+      color: var(--templaza-text-color-gray);
       display: block;
       del {
         margin-right: 10px;
@@ -215,14 +215,14 @@
       }
       ins {
         background-color: transparent;
-        color: var(--rz-color-primary);
+        color: var(--templaza-color-primary);
       }
     }
   }
   .price {
     font-size: 14px;
     font-weight: 500;
-    color: var(--rz-text-color-gray);
+    color: var(--templaza-text-color-gray);
     display: block;
     del {
       margin-right: 10px;
@@ -232,7 +232,7 @@
     }
     ins {
       background-color: transparent;
-      color: var(--rz-color-primary);
+      color: var(--templaza-color-primary);
     }
   }
 }
@@ -296,7 +296,7 @@
 .templaza-sticky-add-to-cart__content-price {
   font-size: 14px;
   font-weight: 500;
-  color: var(--rz-text-color-gray);
+  color: var(--templaza-text-color-gray);
   display: block;
   del {
     margin-right: 10px;
@@ -306,7 +306,7 @@
   }
   ins {
     background-color: transparent;
-    color: var(--rz-color-primary);
+    color: var(--templaza-color-primary);
   }
 }
 .templaza-sticky-add-to-cart__content-button.loading {
@@ -364,7 +364,7 @@
 .templaza-sticky-atc_top.open {
   transform: translate3d(0, 0, 0);
 }
-.rz-header_sticky-act-active {
+.templaza-header_sticky-act-active {
   opacity: 0;
 }
 .templaza-sticky-atc_bottom {
