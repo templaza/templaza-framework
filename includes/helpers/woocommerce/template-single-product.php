@@ -654,7 +654,11 @@ class Templaza_Single_Product {
         }else{
             $templaza_options = Functions::get_theme_options();
         }
-        $product_layout        = isset($templaza_options['templaza-shop-single-layout'])?$templaza_options['templaza-shop-single-layout']:'layout-1';
+        if(isset($_GET['single_layout'])){
+            $product_layout = $_GET['single_layout'];
+        }else{
+            $product_layout        = isset($templaza_options['templaza-shop-single-layout'])?$templaza_options['templaza-shop-single-layout']:'layout-1';
+        }
 
 		return apply_filters( 'templaza_single_get_product_layout', $product_layout );
 	}
