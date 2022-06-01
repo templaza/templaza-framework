@@ -192,12 +192,10 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                 $this -> is_megamenu = true;
             }
 
-
             $this -> depth_mega[$depth] = false;
             if($this -> is_megamenu && $this -> has_children){
                 $this -> depth_mega[$depth] = $item;
             }
-
 
             $settings   = array();
             if (property_exists($item, 'templaza_megamenu_settings')) {
@@ -649,9 +647,6 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
         public function walk( $elements, $max_depth, ...$args ) {
             $_args  = (array) $args[0];
             $this -> is_header_menu    = (isset($_args['templaza_megamenu_html_data']) && !empty($_args['templaza_megamenu_html_data']))?true:false;
-            if(isset($_args['is_mobilemenu']) && $_args['is_mobilemenu']){
-                $this -> is_header_menu = false;
-            }
             $this -> elements            = $elements;
             $output = parent::walk($elements, $max_depth, ...$args);
 
