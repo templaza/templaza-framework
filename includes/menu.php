@@ -14,7 +14,8 @@ class Menu{
             return '';
         }
 
-        $options    = Functions::get_theme_options();
+//        $options    = Functions::get_theme_options();
+        $options    = Functions::get_header_options();
 
 //        $header  = isset($options['enable-header'])?(bool) $options['enable-header']:true;
         $mode    = isset($options['header-mode'])?$options['header-mode']:'horizontal';
@@ -47,7 +48,8 @@ class Menu{
                 $count  = 0;
                 $split  = 0;
                 if($root_count % 2 != 0){
-                    $options    = Functions::get_theme_options();
+//                    $options    = Functions::get_theme_options();
+                    $options    = Functions::get_header_options();
                     $odd_position   = isset($options['header-odd-menu-items'])?$options['header-odd-menu-items']:'left';
                     if($odd_position == 'right'){
                         $count--;

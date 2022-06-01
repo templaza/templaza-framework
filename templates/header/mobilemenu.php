@@ -43,6 +43,7 @@ if ($header) {
 //            'container_class' => implode(' ', $navWrapperClass),
             'menu_id'         => '',
             'depth'           => $header_mobile_menu_level, // Level
+            'is_mobilemenu'   => true,
             'templaza_megamenu_html_data' => $menu_datas
         )); ?>
     </div>
