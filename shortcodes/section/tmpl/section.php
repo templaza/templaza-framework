@@ -29,8 +29,9 @@ if(!empty($content)){
     $padding_remove_horizontal    = isset($padding_remove_horizontal)?filter_var($padding_remove_horizontal, FILTER_VALIDATE_BOOLEAN):false;
 
     if(has_shortcode($content, 'templaza_header')){
-        $options        = Functions::get_theme_options();
-        $header         = isset($options['enable-header'])?filter_var($options['enable-header'],FILTER_VALIDATE_BOOLEAN):true;
+        $gboptions      = Functions::get_theme_options();
+        $options        = Functions::get_header_options();
+        $header         = isset($gboptions['enable-header'])?filter_var($gboptions['enable-header'],FILTER_VALIDATE_BOOLEAN):true;
 
         if($header){
             $header_absolute = isset($options['header-absolute'])?(bool) $options['header-absolute']:false;
