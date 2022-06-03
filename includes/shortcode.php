@@ -463,6 +463,7 @@ class TemplazaFramework_ShortCode{
     public function prepare_params($params, $element, $parent_el){
         $id = '';
         if(isset($element['id'])){
+            $element['id']  = (int) round(microtime(true) * 1000000);
             $id = $element['id'];
         }
         if(isset($params['tz_customid']) && !empty($params['tz_customid'])){
