@@ -37,7 +37,7 @@
   width: 470px;
   max-width: 100%;
   margin: 0;
-  background-color: $tz-basic-body-background;
+  background-color: #fff;
   transform: translateX(100%);
   transition: transform .5s;
   display: flex;
@@ -50,7 +50,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: $tz-basic-body-background;
+  background-color: #fff;
   border-bottom: 1px solid #e5e5e5;
   text-align: center;
 }
@@ -65,7 +65,7 @@
 .templaza-modal .modal-content {
   position: relative;
   padding: $tztheme-modal-spacing;
-  background-color: $tz-basic-body-background;
+  background-color: #fff;
 }
 
 .templaza-modal.open {

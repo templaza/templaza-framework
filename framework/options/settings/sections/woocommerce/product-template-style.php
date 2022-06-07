@@ -136,12 +136,10 @@ Templaza_API::set_section('templaza_style',
             ),
             array(
                 'id'       => 'templaza-shop-products_per_page',
-                'type'     => 'spinner',
+                'type'     => 'text',
                 'title'    => esc_html__('Products per page.', 'agruco'),
                 'subtitle' => esc_html__('Products per page.', 'agruco'),
-                'min'      => '1',
-                'step'     => '1',
-                'max'      => '500',
+                'default'  => '',
             ),
             array(
                 'id'       => 'templaza-shop-background-color',
@@ -1071,7 +1069,7 @@ Templaza_API::set_subsection('templaza_style', 'shop-page',
 );
 
 // Cart Setting
-Templaza_API::set_subsection('settings', 'shop-page',
+Templaza_API::set_subsection('templaza_style', 'shop-page',
     array(
         'title'      => esc_html__( 'Cart Page', 'agruco' ),
         'id'         => 'shop-cart',
@@ -1111,7 +1109,7 @@ Templaza_API::set_subsection('settings', 'shop-page',
     )
 );
 // Login Setting
-Templaza_API::set_subsection('settings', 'shop-page',
+Templaza_API::set_subsection('templaza_style', 'shop-page',
     array(
         'title'      => esc_html__( 'Mini cart', 'agruco' ),
         'id'         => 'mini-cart',
@@ -1125,13 +1123,15 @@ Templaza_API::set_subsection('settings', 'shop-page',
                     'modal' => esc_html__('Modal','agruco'),
                     'link' => esc_html__('Link','agruco'),
                 ),
-                'default'  => 'modal',
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
             ),
         )
     )
 );
 // Login Setting
-Templaza_API::set_subsection('settings', 'shop-page',
+Templaza_API::set_subsection('templaza_style', 'shop-page',
     array(
         'title'      => esc_html__( 'Account Login', 'agruco' ),
         'id'         => 'account-login',
@@ -1145,7 +1145,9 @@ Templaza_API::set_subsection('settings', 'shop-page',
                     'modal' => esc_html__('Modal','agruco'),
                     'link' => esc_html__('Link','agruco'),
                 ),
-                'default'  => 'modal',
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
             ),
             array(
                 'id'       => 'templaza-shop-account-text',
@@ -1157,6 +1159,9 @@ Templaza_API::set_subsection('settings', 'shop-page',
                 'type'        => 'select',
                 'title'       => esc_html__( 'Login icon', 'agruco' ),
                 'data'        => 'fontawesome',
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
             ),
 
         )

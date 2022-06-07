@@ -316,12 +316,12 @@ if(count($typographies)) {
                     unset($typoParams['text-align']);
                 }
             }
-            if($typo['id'] == 'typography-404-content'){
-                if(isset($typoParams['color']) && !empty($typoParams['color'])){
-                    $devices['desktop'] = '.templaza-error-page h1 span{color:'.$typoParams['color'].'}';
-                    unset($typoParams['color']);
-                }
-            }
+//            if($typo['id'] == 'typography-404-content'){
+//                if(isset($typoParams['color']) && !empty($typoParams['color'])){
+//                    $devices['desktop'] = '.templaza-error-page h1 span{color:'.$typoParams['color'].'}';
+//                    unset($typoParams['color']);
+//                }
+//            }
 
             $_styles = Fonts::make_css_style($typoParams, $devices);
 

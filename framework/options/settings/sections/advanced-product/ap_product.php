@@ -23,10 +23,11 @@ if(function_exists('wpforms')){
     );
 
     $wpforms = get_posts( $args );
-    if ( $wpforms ) {
+    if ( $wpforms && !is_wp_error($wpforms) ) {
         foreach ( $wpforms as $post ){
             $arr_wpform[$post->ID] = $post->post_title;
         }
+        wp_reset_postdata();
     }
 }
 $arr_wpform['custom'] = esc_html__('Custom','baressco');
@@ -38,7 +39,7 @@ if(is_plugin_active( 'advanced-product/advanced-product.php' )) {
     );
 
     $wpfields = get_posts( $args );
-    if ( $wpfields ) {
+    if ( $wpfields && !is_wp_error($wpfields)) {
         foreach ( $wpfields as $post ){
             $arr_fields[$post->post_excerpt] = $post->post_title;
         }
@@ -171,7 +172,7 @@ Templaza_API::set_section('settings',
         )
     )
 );
-Templaza_API::set_section('settings',
+Templaza_API::set_subsection('settings','ap_product-page',
     array(
         'title'      => esc_html__( 'Advanced Product Loop', 'baressco' ),
         'id'         => 'ap_product-loop',
@@ -211,6 +212,15 @@ Templaza_API::set_section('settings',
                 'title'  => esc_html__('Product Loop Padding', 'baressco'),
             ),
             array(
+                'id'     => 'ap_product-loop-info-padding',
+                'type'   => 'spacing',
+                'mode'   => 'padding',
+                'all'    => false,
+                'allow_responsive'    => true,
+                'units'  => array( 'em', 'px', '%' ),
+                'title'  => esc_html__('Product Info Padding', 'baressco'),
+            ),
+            array(
                 'id'     => 'ap_product-loop-border',
                 'type'     => 'border',
                 'title'    => esc_html__('Product Loop Border', 'baressco'),
@@ -226,7 +236,6 @@ Templaza_API::set_section('settings',
         )
     )
 );
-
 Templaza_API::set_subsection('settings','ap_product-page',
     array(
         'title'      => esc_html__( 'Advanced Product Single', 'baressco' ),

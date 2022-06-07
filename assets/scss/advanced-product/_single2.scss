@@ -40,9 +40,10 @@
     .ap-single-content-tab{
       .ap-tab-title{
         margin-top: 0;
+        margin-left: 0;
         li{
           position:relative;
-          padding-bottom:15px;
+          padding:0 10px 20px 10px;
           margin: 0 20px;
           a{
             font-size:24px;
@@ -50,14 +51,15 @@
             font-family: $tztheme-heading-font;
             text-transform: capitalize;
             color:$tztheme-heading-color;
+            border:none;
           }
           &:before{
             content:"";
             position:absolute;
-            left:20px;
-            bottom:0;
+            left:0;
+            bottom:-1px;
             width:100%;
-            height:2px;
+            height:3px;
             background:$tztheme-global-color;
             opacity:0;
           }
@@ -85,6 +87,18 @@
         font-size:48px;
         margin-bottom: 20px;
       }
+    }
+  }
+}
+@media(max-width: 1199.99px) {
+  .templaza-ap-single.ap-single-style2 .ap-wrap-content{
+    display:block;
+    .ap-single-right,
+    .ap-single-left{
+      width:100%;
+    }
+    .ap-single-right{
+      padding:40px 0 0;
     }
   }
 }

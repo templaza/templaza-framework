@@ -76,8 +76,13 @@ class Templaza_Woo_Notices {
        }else{
             $templaza_options = Functions::get_theme_options();
        }
-       $cart_notify        = isset($templaza_options['templaza-shop-notify'])?$templaza_options['templaza-shop-notify']:'panel';
-        if ( is_404() ) {
+       if(isset($_GET['cart_style'])){
+            $cart_notify = $_GET['cart_style'];
+        }else{
+            $cart_notify        = isset($templaza_options['templaza-shop-notify'])?$templaza_options['templaza-shop-notify']:'panel';
+       }
+
+       if ( is_404() ) {
             return;
         }
 
@@ -287,7 +292,11 @@ class Templaza_Woo_Notices {
         }else{
             $templaza_options = Functions::get_theme_options();
         }
-        $cart_notify = isset($templaza_options['templaza-shop-notify'])?$templaza_options['templaza-shop-notify']:'panel';
+        if(isset($_GET['cart_style'])){
+            $cart_notify = $_GET['cart_style'];
+        }else{
+            $cart_notify        = isset($templaza_options['templaza-shop-notify'])?$templaza_options['templaza-shop-notify']:'panel';
+       }
         $cart_notify_autohide = isset($templaza_options['templaza-shop-notify-autohide'])?$templaza_options['templaza-shop-notify-autohide']:'3';
         if ( $cart_notify == 'simple' ) {
             $data['added_to_cart_notice'] = array(

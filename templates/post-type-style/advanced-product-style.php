@@ -38,6 +38,13 @@ $ap_styles    = array(
     ),
     array(
         'enable'    => true,
+        'class'     => '.ap-inner .ap-info-inner',
+        'options' => array(
+            'ap_product-loop-info-padding',
+        ),
+    ),
+    array(
+        'enable'    => true,
         'class'     => '.ap-item .ap-inner:hover',
         'options' => array(
             'ap_product-loop-border_hover',
@@ -58,7 +65,7 @@ if(count($ap_styles)) {
                 'tablet' => '',
                 'mobile' => '',
             );
-            $ap_css    = Templates::make_css_design_style($design['options'], $options);
+            $ap_css    = Templates::make_css_design_style($design['options'], $options,true);
             if(!empty($ap_css)){
                 if(is_array($ap_css)){
                     foreach ($ap_css as $device => $ad_style){

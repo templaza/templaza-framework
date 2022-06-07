@@ -981,7 +981,7 @@
 			return;
 		}
 
-		if (templazaData.product_loop_layout !== '9') {
+		if (templazaData.product_loop_layout !== 'layout-9') {
 			return;
 		}
 

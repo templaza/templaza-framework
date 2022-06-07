@@ -147,3 +147,16 @@
 .ap-related-product{
 
 }
+.item-video-thumbnail{
+  img{
+    object-fit: cover;
+    height:117px;
+  }
+}
+.ap-tiny-slider{
+  .item-video{
+    iframe{
+      width:100%;
+    }
+  }
+}
