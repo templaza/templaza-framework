@@ -62,6 +62,8 @@ class TemplazaFramework_ShortCode{
 
             add_filter('templaza-framework/field/tz_layout/element/template', array($this, '__admin_template'));
         }else{
+            add_filter('templaza-framework/layout/generate/shortcode/'.$this -> get_shortcode_name().'/prepare',
+                array($this, 'front_end_prepare_element'), 10, 2);
             add_filter('templaza-framework/layout/generate/shortcode/'.$this -> get_shortcode_name().'/params/prepare',
                 array($this, 'prepare_params'), 10, 3);
 
@@ -460,10 +462,17 @@ class TemplazaFramework_ShortCode{
         }
     }
 
+    public function front_end_prepare_element($element, $parent_el){
+        // Recreate id of element
+        if(isset($element['id'])){
+            $element['id']  = (int) round(microtime(true) * 1000000);
+        }
+        return $element;
+    }
+
     public function prepare_params($params, $element, $parent_el){
         $id = '';
         if(isset($element['id'])){
-            $element['id']  = (int) round(microtime(true) * 1000000);
             $id = $element['id'];
         }
         if(isset($params['tz_customid']) && !empty($params['tz_customid'])){
