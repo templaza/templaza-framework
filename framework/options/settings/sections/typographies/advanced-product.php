@@ -50,6 +50,26 @@ Templaza_API::set_section('settings',
                     'line-height' => 'em',
                 ),
             ),
+            array(
+                'id'        => 'typography-ap-field-value',
+                'type'      => 'typography',
+                'title'     => __( 'Custom field value', $this -> text_domain ),
+                'subtitle'  => __( 'Font for custom field value.', $this -> text_domain ),
+                'color'          => true,
+                'text-align'     => false,
+                'preview'        => true, // Disable the previewer
+                'word-spacing'   => false,
+                'letter-spacing' => true,
+                'text-transform' => true,
+                'font-backup'    => true,
+                'google'                  => true,
+                'allow_responsive'        => true,
+                'allow_empty_line_height' => true,
+                'units'                   => array(
+                    'font-size'   => 'px',
+                    'line-height' => 'em',
+                ),
+            ),
         )
     )
 );

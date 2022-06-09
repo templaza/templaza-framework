@@ -281,6 +281,16 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'required' => array('ap_product-office-price', '=' , true),
             ),
             array(
+                'id'       => 'ap_product-single-customfield-style',
+                'type'     => 'select',
+                'title'    => esc_html__('Custom Fields Style', 'baressco'),
+                'options'  => array(
+                    'style1' => esc_html__('Style 1', 'baressco'),
+                    'style2' => esc_html__('Style 2', 'baressco'),
+                ),
+                'default'  => 'style1',
+            ),
+            array(
                 'id'       => 'ap_product-office-price-form-custom',
                 'type'     => 'text',
                 'title'    => esc_html__( 'Custom Form', 'baressco' ),

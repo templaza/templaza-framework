@@ -273,6 +273,15 @@ $typographies = array(
         )
     ),
     array(
+        'id'        => 'typography-ap-field-value',
+        'enable'    => true,
+        'class'     => array(
+            'desktop'    => '.ap-custom-fields .ap-field-value',
+            'tablet'     => '.ap-custom-fields .ap-field-value',
+            'mobile'     => '.ap-custom-fields .ap-field-value',
+        )
+    ),
+    array(
         'id'        => 'typography-404-heading',
         'enable'    => true,
         'class'     => array(
