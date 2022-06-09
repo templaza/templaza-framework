@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use TemPlazaFramework\CSS;
+use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 
 if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
@@ -488,9 +489,7 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                 }
             }
 
-
-
-            $options    = \TemPlazaFramework\Functions::get_theme_options();
+            $options    = Functions::get_header_options();
             $show_arrow = isset($options['dropdown-arrow'])?(bool) $options['dropdown-arrow']:true;
 
             if (/*$this -> is_megamenu &&*/ $this -> has_children) {
