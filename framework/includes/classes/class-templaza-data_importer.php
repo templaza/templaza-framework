@@ -24,7 +24,7 @@ class Data_Importer{
             $is_home    = false;
             if ( isset( $post['postmeta'] ) ) {
                 foreach( $post['postmeta'] as $meta ) {
-                    if ( $meta['key'] == '__home' ) {
+                    if ( $meta['key'] == '__home' && $meta['value'] == 1) {
                         $is_home    = true;
                         break;
                     }
