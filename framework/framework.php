@@ -13,6 +13,7 @@ use TemPlazaFramework\Templates;
 use \TemPlazaFramework\Admin\Admin_Page;
 use TemPlazaFramework\Post_Formats_Ui;
 use TemPlazaFramework\Enqueue;
+use TemPlazaFramework\Import\Data_Importer;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -48,6 +49,12 @@ class Framework{
         if(is_admin()) {
             $admin = new Admin_Page();
             $admin->init();
+
+            // Import my info when import data from templaza framework
+            require_once TEMPLAZA_FRAMEWORK_CORE_INCLUDES_PATH.'/classes/class-templaza-data_importer.php';
+            if(class_exists('TemPlazaFramework\Import\Data_Importer')) {
+                $data_importer = new Data_Importer();
+            }
         }
 
         $this->init();
