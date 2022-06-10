@@ -21,6 +21,20 @@ class Data_Importer{
     public function pre_post_exists($post_exists, $post){
         if(!empty($post) && isset($post['post_type'])
             && in_array($post['post_type'],array('templaza_header', 'templaza_footer'))){
+            $is_home    = false;
+            if ( isset( $post['postmeta'] ) ) {
+                foreach( $post['postmeta'] as $meta ) {
+                    if ( $meta['key'] == '__home' ) {
+                        $is_home    = true;
+                        break;
+                    }
+                }
+            }
+
+            if(!$is_home){
+                return $post_exists;
+            }
+
             $args   = array(
                 'post_type'     => $post['post_type'],
                 'numberposts'   => 1,
