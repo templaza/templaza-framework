@@ -267,6 +267,12 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'default'  => true,
             ),
             array(
+                'id'       => 'ap_product-single-media',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Media', 'baressco' ),
+                'default'  => true,
+            ),
+            array(
                 'id'       => 'ap_product-office-price-label',
                 'type'     => 'text',
                 'title'    => esc_html__( 'Office Price Label', 'baressco' ),

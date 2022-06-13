@@ -102,3 +102,15 @@
     }
   }
 }
+@media(max-width: 639.99px) {
+  .templaza-ap-single.ap-single-style2 {
+    .ap-single-top-fields{
+      flex-direction: column;
+      .ap-custom-fields {
+        .ap-field-value{
+          font-size:16px;
+        }
+      }
+    }
+  }
+}
