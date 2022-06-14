@@ -451,6 +451,9 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                 case 'elementor':
                                     $this -> import_elementor($folder_path, $file_name);
                                     break;
+                                case 'wpforms':
+                                    $this -> import_wpforms($folder_path, $file_name);
+                                    break;
                             }
 
                             // Import error
@@ -931,20 +934,57 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             // Import
             $el_result = $importer -> run();
 
-//            /*
-//             * Create default kit
-//             * Recreate default kit (only when default kit does not exist).
-//             * */
-//            $kit = Plugin::$instance->kits_manager->get_active_kit();
-//            if ( !$kit->get_id() ) {
-//                $created_default_kit = Plugin::$instance->kits_manager->create_default();
-//
-//                if ($created_default_kit) {
-//                    update_option(Manager::OPTION_ACTIVE, $created_default_kit);
-//                }
-//            }
-
             return $el_result;
+        }
+
+
+        /**
+         * Import wpforms data
+         * @param string $folder_path
+         * @param string $filename
+         * @param string $file_filter
+         * */
+        protected function import_wpforms($folder_path, $filename = '',  $file_filter = '.json'){
+
+            $file   = $this -> get_substeps($folder_path, $filename, $file_filter);
+
+            if(!$file){
+                $this -> info -> set_message(esc_html__('File not found.', $this -> text_domain), true);
+                echo $this -> info -> output();
+                die();
+            }
+            $forms    = json_decode( file_get_contents( $file ) , true );
+
+            if(!$file){
+                $this -> info -> set_message(esc_html__('Forms not found.', $this -> text_domain), true);
+                echo $this -> info -> output();
+                die();
+            }
+
+            foreach ( $forms as $form ) {
+                $title  = ! empty( $form['settings']['form_title'] ) ? $form['settings']['form_title'] : '';
+                $desc   = ! empty( $form['settings']['form_desc'] ) ? $form['settings']['form_desc'] : '';
+                $new_id = wp_insert_post(
+                    [
+                        'post_title'   => $title,
+                        'post_status'  => 'publish',
+                        'post_type'    => 'wpforms',
+                        'post_excerpt' => $desc,
+                    ]
+                );
+
+                if ( $new_id ) {
+                    $form['id'] = $new_id;
+
+                    wp_update_post(
+                        [
+                            'ID'           => $new_id,
+                            'post_content' => wpforms_encode( $form ),
+                        ]
+                    );
+                }
+            }
+            return true;
         }
 
         protected function get_substeps($folder_path, $filename = '', $file_filter = '.'){
