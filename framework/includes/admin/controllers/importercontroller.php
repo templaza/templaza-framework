@@ -946,16 +946,19 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
          * */
         protected function import_wpforms($folder_path, $filename = '',  $file_filter = '.json'){
 
-            $file   = $this -> get_substeps($folder_path, $filename, $file_filter);
+            $file       = $this -> get_substeps($folder_path, $filename, $file_filter);
 
-            if(!$file){
+            $file_path  = $folder_path.'/'.$file;
+
+            if(!$file || !file_exists($file_path)){
                 $this -> info -> set_message(esc_html__('File not found.', $this -> text_domain), true);
                 echo $this -> info -> output();
                 die();
             }
-            $forms    = json_decode( file_get_contents( $file ) , true );
 
-            if(!$file){
+            $forms    = json_decode( file_get_contents( $file_path ) , true );
+
+            if(!$forms){
                 $this -> info -> set_message(esc_html__('Forms not found.', $this -> text_domain), true);
                 echo $this -> info -> output();
                 die();
