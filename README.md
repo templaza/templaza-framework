@@ -9,6 +9,7 @@ Version 1.0.8 - June 21, 2022
     Fix issue load advanced-products-filter gutenberg block.
     Change action buttons's tooltip of section, row, element to use UIkit tooltip.
     Update header and footer layout builder
+    Supported import wpforms.
 
 Version 1.0.7 - May 09, 2022
     
