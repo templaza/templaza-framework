@@ -3,7 +3,7 @@
 
 Changelogs:
 
-Version 1.0.8 - May 14, 2022
+Version 1.0.8 - June 21, 2022
     
     Fix issue multiple redux localize script added.
     Fix issue load advanced-products-filter gutenberg block.
