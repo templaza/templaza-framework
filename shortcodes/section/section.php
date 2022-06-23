@@ -141,6 +141,14 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
 //                                        'required' => array(array('height', 'is_empty_or', ''), array('height', '!=', 'expand'))
                                         'required' => array('height', '=', array('full','percent','section'))
                                     ),
+                                    array(
+                                        'id'    => 'custom_zindex',
+                                        'type'  => 'text',
+                                        'title' => esc_html__('Custom Z-Index', $this -> text_domain),
+                                        'attributes'   => array(
+                                            'type'  => 'number'
+                                        )
+                                    ),
                                 ),
                             ),
                             // Design settings
@@ -390,6 +398,15 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
             }
 
             return $params;
+        }
+        public function custom_css(&$params, &$element)
+        {
+            $css = parent::custom_css($params, $element);
+
+            if(isset($params['custom_zindex']) && !empty($params['custom_zindex'])){
+                $css['desktop'] .= 'z-index: '.$params['custom_zindex'].';';
+            }
+            return $css;
         }
 
         public function enqueue() {
