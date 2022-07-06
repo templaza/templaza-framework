@@ -1154,15 +1154,6 @@ Templaza_API::set_subsection('templaza_style', 'shop-page',
                 'type'     => 'text',
                 'title'    => esc_html__( 'Login text', 'agruco' ),
             ),
-            array(
-                'id'          => 'templaza-shop-account-icon',
-                'type'        => 'select',
-                'title'       => esc_html__( 'Login icon', 'agruco' ),
-                'data'        => 'fontawesome',
-                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
-                'select2'       => array( 'allowClear' => true ),
-                'default'       => '',
-            ),
 
         )
     )

@@ -345,3 +345,38 @@ Templaza_API::set_section('settings',
         ),
     )
 );
+// -> START WooCommerce Color
+Templaza_API::set_section('settings',
+    array(
+        'title'      => __( 'WooCommerce Color', $this -> text_domain ),
+        'id'         => 'woo-color',
+        'desc'       => __( 'Config color on WooCommerce page', $this -> text_domain ),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'woo-catalog-icon-bg-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Catalog icon background color', $this -> text_domain ),
+                'subtitle' => __( 'Set background color icon', $this -> text_domain ),
+            ),
+            array(
+                'id'       => 'woo-catalog-icon-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Catalog icon color', $this -> text_domain ),
+                'subtitle' => __( 'Set color icon', $this -> text_domain ),
+            ),
+            array(
+                'id'       => 'woo-catalog-icon-bg-color-hover',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Catalog icon background color hover', $this -> text_domain ),
+                'subtitle' => __( 'Set background color icon hover', $this -> text_domain ),
+            ),
+            array(
+                'id'       => 'woo-catalog-icon-color-hover',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Catalog icon color hover', $this -> text_domain ),
+                'subtitle' => __( 'Set color icon hover', $this -> text_domain ),
+            ),
+        ),
+    )
+);

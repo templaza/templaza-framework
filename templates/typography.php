@@ -255,6 +255,33 @@ $typographies = array(
         )
     ),
     array(
+        'id'        => 'typography-ap-loop-title',
+        'enable'    => true,
+        'class'     => array(
+            'desktop'    => '.ap-item .ap-inner .ap-title',
+            'tablet'     => '.ap-item .ap-inner .ap-title',
+            'mobile'     => '.ap-item .ap-inner .ap-title',
+        )
+    ),
+    array(
+        'id'        => 'typography-ap-loop-field-label',
+        'enable'    => true,
+        'class'     => array(
+            'desktop'    => '.ap-item .ap-inner .ap-field-label',
+            'tablet'     => '.ap-item .ap-inner .ap-field-label',
+            'mobile'     => '.ap-item .ap-inner .ap-field-label',
+        )
+    ),
+    array(
+        'id'        => 'typography-ap-loop-field-value',
+        'enable'    => true,
+        'class'     => array(
+            'desktop'    => '.ap-item .ap-inner .ap-spec-value',
+            'tablet'     => '.ap-item .ap-inner .ap-spec-value',
+            'mobile'     => '.ap-item .ap-inner .ap-spec-value',
+        )
+    ),
+    array(
         'id'        => 'typography-ap-group-title',
         'enable'    => true,
         'class'     => array(
@@ -372,10 +399,23 @@ $designs    = array(
         'options' => array(
             'blog_item_bg',
             'blog_item_border',
-            'blog_item_padding',
             'blog_item_margin',
             'blog_item_border_radius',
             'blog_item_shadow',
+        ),
+    ),
+    array(
+        'enable'    => true,
+        'class'     => 'div.templaza-archive .templaza-blog-item-content',
+        'options' => array(
+            'blog_item_padding',
+        ),
+    ),
+    array(
+        'enable'    => true,
+        'class'     => 'div.templaza-archive .templaza-blog-item-media',
+        'options' => array(
+            'blog_media_padding',
         ),
     ),
     // Single
@@ -396,6 +436,29 @@ $designs    = array(
             'blog_single_margin',
             'blog_single_border_radius',
             'blog_single_shadow',
+        ),
+    ),
+    array(
+        'enable'    => true,
+        'class'     => 'div.templaza-single .templaza-single-box',
+        'options' => array(
+            'blog_single_media_padding',
+        ),
+    ),
+    array(
+        'enable'    => true,
+        'class'     => 'div.templaza-single .templaza-single-content',
+        'options' => array(
+            'blog_single_bg',
+            'blog_single_margin',
+            'blog_single_border_radius',
+        ),
+    ),
+    array(
+        'enable'    => true,
+        'class'     => 'div.templaza-single .templaza-single-description',
+        'options' => array(
+            'blog_single_padding',
         ),
     ),
 

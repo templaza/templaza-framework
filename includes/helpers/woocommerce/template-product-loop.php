@@ -2,7 +2,6 @@
 /**
  * Product Loop template hooks.
  */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -146,7 +145,6 @@ class Templaza_Product_Loop {
 		$classes = array(
 			'products'
 		);
-
         $loop_layout = TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout();
 
 		$class_layout = $loop_layout == 'layout-3' ? 'layout-2' : $loop_layout;
@@ -277,7 +275,7 @@ class Templaza_Product_Loop {
         $loop_desc     = isset($templaza_options['templaza-shop-loop-description'])?filter_var($templaza_options['templaza-shop-loop-description'], FILTER_VALIDATE_BOOLEAN):true;
         $loop_variation     = isset($templaza_options['templaza-shop-loop-variation'])?filter_var($templaza_options['templaza-shop-loop-variation'], FILTER_VALIDATE_BOOLEAN):true;
         $loop_variation_ajax     = isset($templaza_options['templaza-shop-loop-variation-ajax'])?filter_var($templaza_options['templaza-shop-loop-variation-ajax'], FILTER_VALIDATE_BOOLEAN):true;
-		switch ( $loop_layout ) {
+        switch ( $loop_layout ) {
 
 			// Icons & Quick view button
 			case 'layout-2':
@@ -329,7 +327,6 @@ class Templaza_Product_Loop {
 					$this,
 					'product_loop_buttons_open'
 				), 5 );
-
 				if (!empty($featured_icons) && $featured_icons['wishlist']=='1' ) {
 					add_action( 'templaza_product_loop_thumbnail', array(
                         TemPlaza_Woo\Templaza_Woo_Helper::instance(),
@@ -786,6 +783,7 @@ class Templaza_Product_Loop {
 	 * @return void
 	 */
 	public function product_loop_buttons_close() {
+
 		echo '</div>';
 	}
 

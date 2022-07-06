@@ -150,6 +150,18 @@ Templaza_API::set_section('templaza_header',
                 'default'  => 'blank',
             ),
             array(
+                'id'       => 'header-block-1-position',
+                'type'     => 'select',
+                'title'    => __( 'Header Block 1 Position', $this -> text_domain ),
+                'options'  => array(
+                    'right'     => __('Right', $this -> text_domain),
+                    'center'   => __('Center', $this -> text_domain),
+                ),
+                'select2'       => array( 'allowClear' => false ),
+                'default'  => 'center',
+                'required' => array('header-stacked-menu-mode', '=', 'divided'),
+            ),
+            array(
                 'id'       => 'header-block-1-sidebar',
                 'type'     => 'select',
                 'title'    => __( 'Block 1 Sidebar', $this -> text_domain ),
@@ -595,6 +607,158 @@ Templaza_API::set_section('templaza_header',
                 'type'   => 'section',
                 'indent' => false, // Indent all options below until the next 'section' option is set.
             ),
+            array(
+                'id'       => 'stacked-divided-top-padding',
+                'type'     => 'spacing',
+                'allow_responsive'    => true,
+                'title'    => esc_html__('Logo Section Padding', $this -> text_domain),
+                'default'  => ''
+            ),
+            array(
+                'id'       => 'stacked-divided-background',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Divided background', $this -> text_domain ),
+                'default'  => true,
+                'required' => array('header-stacked-menu-mode', '=' , array('divided','center'))
+            ),
+            array(
+                'id'       => 'logo-section-border',
+                'type'     => 'border',
+                'title'    => esc_html__('Logo section Border', $this -> text_domain),
+                'default'  => '',
+                'required' => array('stacked-divided-background', '=' , true)
+            ),
+            array(
+                'id'       => 'input-border',
+                'type'     => 'border',
+                'title'    => esc_html__('Input Border', $this -> text_domain),
+                'default'  => '',
+                'required' => array('stacked-divided-background', '=' , true)
+            ),
+            array(
+                'id'        => 'stacked-divided-inner-width',
+                'type'      => 'select',
+                'title'     =>  esc_html__('Max Width', $this -> text_domain),
+                'options' => array(
+                    'default'   => esc_html__('Default', $this -> text_domain),
+                    'xsmall'    => esc_html__('XSmall', $this -> text_domain),
+                    'small'     => esc_html__('Small', $this -> text_domain),
+                    'large'     => esc_html__('Large', $this -> text_domain),
+                    'xlarge'    => esc_html__('XLarge', $this -> text_domain),
+                    'expand'    => esc_html__('Expand', $this -> text_domain),
+                    'none'      => esc_html__('None', $this -> text_domain),
+                ),
+                'default'       => 'none',
+                'required' => array('stacked-divided-background', '=' , true)
+            ),
+            array(
+                'id'        => 'stacked-icon-position',
+                'type'      => 'select',
+                'title'     =>  esc_html__('Icon Position', $this -> text_domain),
+                'options' => array(
+                    'top'   => esc_html__('Top', $this -> text_domain),
+                    'bottom'    => esc_html__('Bottom', $this -> text_domain),
+                ),
+                'default'       => 'top',
+                'required' => array('header-stacked-menu-mode', '=' , 'divided')
+            ),
+            array(
+                'id'       => 'stacked-divided-search',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show search icon', $this -> text_domain ),
+                'default'  => true,
+            ),
+            array(
+                'id'       => 'stacked-divided-account',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show account icon', $this -> text_domain ),
+                'default'  => true,
+            ),
+            array(
+                'id'       => 'stacked-divided-cart',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show cart icon', $this -> text_domain ),
+                'default'  => true,
+            ),
+            array(
+                'id'        => 'search-icon-type',
+                'type'      => 'select',
+                'title'     =>  esc_html__('Search Icon Type', $this -> text_domain),
+                'options' => array(
+                    'default'   => esc_html__('Default', $this -> text_domain),
+                    'fontawesome'    => esc_html__('fontawesome', $this -> text_domain),
+                    'custom'     => esc_html__('Custom', $this -> text_domain),
+                ),
+                'default'       => 'default',
+            ),
+            array(
+                'id'          => 'search-icon',
+                'type'        => 'select',
+                'title'       => esc_html__( 'Search icon', $this -> text_domain ),
+                'data'        => 'fontawesome',
+                'required'    => array( 'search-icon-type', '=', 'fontawesome' ),
+            ),
+            array(
+                'id'       => 'search-icon-custom',
+                'type'     => 'media',
+                'url'      => true,
+                'title'    => esc_html__( 'Search icon', $this -> text_domain ),
+                'compiler' => 'true',
+                'required' => array( 'search-icon-type', '=', 'custom' ),
+            ),
+            array(
+                'id'        => 'account-icon-type',
+                'type'      => 'select',
+                'title'     =>  esc_html__('Account Icon Type', $this -> text_domain),
+                'options' => array(
+                    'default'   => esc_html__('Default', $this -> text_domain),
+                    'fontawesome'    => esc_html__('fontawesome', $this -> text_domain),
+                    'custom'     => esc_html__('Custom', $this -> text_domain),
+                ),
+                'default'       => 'default',
+            ),
+            array(
+                'id'          => 'account-icon',
+                'type'        => 'select',
+                'title'       => esc_html__( 'Account icon', $this -> text_domain ),
+                'data'        => 'fontawesome',
+                'required'    => array( 'account-icon-type', '=', 'fontawesome' ),
+            ),
+            array(
+                'id'       => 'account-icon-custom',
+                'type'     => 'media',
+                'url'      => true,
+                'title'    => esc_html__( 'Account icon', $this -> text_domain ),
+                'compiler' => 'true',
+                'required' => array( 'account-icon-type', '=', 'custom' ),
+            ),
+            array(
+                'id'        => 'cart-icon-type',
+                'type'      => 'select',
+                'title'     =>  esc_html__('Cart Icon Type', $this -> text_domain),
+                'options' => array(
+                    'default'   => esc_html__('Default', $this -> text_domain),
+                    'fontawesome'    => esc_html__('fontawesome', $this -> text_domain),
+                    'custom'     => esc_html__('Custom', $this -> text_domain),
+                ),
+                'default'       => 'default',
+            ),
+            array(
+                'id'          => 'cart-icon',
+                'type'        => 'select',
+                'title'       => esc_html__( 'Cart icon', $this -> text_domain ),
+                'data'        => 'fontawesome',
+                'required'    => array( 'cart-icon-type', '=', 'fontawesome' ),
+            ),
+            array(
+                'id'       => 'cart-icon-custom',
+                'type'     => 'media',
+                'url'      => true,
+                'title'    => esc_html__( 'Cart icon', $this -> text_domain ),
+                'compiler' => 'true',
+                'required' => array( 'cart-icon-type', '=', 'custom' ),
+            ),
+
         ),
     )
 );

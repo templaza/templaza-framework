@@ -106,6 +106,7 @@ class Templaza_Woo_Helper {
             }else{
                 $templaza_options = Functions::get_theme_options();
             }
+
             if(isset($_GET['product_loop'])){
                 $layout = $_GET['product_loop'];
             }else{
@@ -114,7 +115,6 @@ class Templaza_Woo_Helper {
             if ( self::templaza_get_catalog_layout() == 'masonry' && self::templaza_is_catalog() ) {
                 $layout = 'layout-7';
             }
-
             $layout = apply_filters( 'templaza_get_product_loop_layout', $layout );
             self::$product_loop = $layout;
         }
@@ -265,9 +265,9 @@ class Templaza_Woo_Helper {
 			</a>',
             is_customize_preview() ? '#' : esc_url( get_permalink() ),
             esc_attr( $product->get_id() ),
-            esc_attr__( 'Quick View', 'agruco' ),
+            esc_attr__( 'Quick View', 'templaza-framework' ),
             '<i class="fas fa-eye"></i>',
-            esc_html__( 'Quick View', 'agruco' )
+            esc_html__( 'Quick View', 'templaza-framework' )
         );
     }
 
@@ -400,14 +400,14 @@ class Templaza_Woo_Helper {
 
         if ( $wp_query && isset( $wp_query->found_posts ) ) {
 
-            $post_text = $wp_query->found_posts > 1 ? esc_html__( 'posts', 'agruco' ) : esc_html__( 'post', 'agruco' );
+            $post_text = $wp_query->found_posts > 1 ? esc_html__( 'posts', 'templaza-framework' ) : esc_html__( 'post', 'templaza-framework' );
 
             if ( self::templaza_is_catalog() ) {
-                $post_text = $wp_query->found_posts > 1 ? esc_html__( 'products', 'agruco' ) : esc_html__( 'product', 'agruco' );
+                $post_text = $wp_query->found_posts > 1 ? esc_html__( 'products', 'templaza-framework' ) : esc_html__( 'product', 'templaza-framework' );
             }
 
             echo sprintf( '<div class="templaza-posts__found uk-margin-medium-top"><div class="templaza-posts__found-inner">%s<span class="current-post"> %s </span> %s <span class="found-post"> %s </span> %s <span class="count-bar"></span></div> </div>',
-                esc_html__( 'Showing', 'agruco' ), $wp_query->post_count, esc_html__( 'of', 'agruco' ), $wp_query->found_posts, $post_text );
+                esc_html__( 'Showing', 'templaza-framework' ), $wp_query->post_count, esc_html__( 'of', 'templaza-framework' ), $wp_query->found_posts, $post_text );
 
         }
     }

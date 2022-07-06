@@ -173,6 +173,28 @@ $button_css            .= !empty($button_color_hover)?'color:'.$button_color_hov
 $button_css            .= !empty($button_bg_color_hover)?'background-color:'.$button_bg_color_hover.';':'';
 $button_css             = !empty($button_css)?'form input[type="submit"]:hover, form button:hover{'.$button_css.'}':'';
 Templates::add_inline_style($button_css);
+
+$woo_css             = '';
+$woo_icon_color           = isset($options['woo-catalog-icon-color'])?$options['woo-catalog-icon-color']:'';
+$woo_icon_color_hover     = isset($options['woo-catalog-icon-color-hover'])?$options['woo-catalog-icon-color-hover']:'';
+$woo_icon_bg_color        = isset($options['woo-catalog-icon-bg-color'])?$options['woo-catalog-icon-bg-color']:'';
+$woo_icon_bg_color_hover  = isset($options['woo-catalog-icon-bg-color-hover'])?$options['woo-catalog-icon-bg-color-hover']:'';
+
+$woo_icon_color           = CSS::make_color_rgba_redux($woo_icon_color);
+$woo_icon_bg_color        = CSS::make_color_rgba_redux($woo_icon_bg_color);
+$woo_icon_color_hover     = CSS::make_color_rgba_redux($woo_icon_color_hover);
+$woo_icon_bg_color_hover  = CSS::make_color_rgba_redux($woo_icon_bg_color_hover);
+
+
+$woo_css             = !empty($woo_icon_color)?'color:'.$woo_icon_color.';':'';
+$woo_css            .= !empty($woo_icon_bg_color)?'background-color:'.$woo_icon_bg_color.';':'';
+$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .tz-loop-button{'.$woo_css.'}':'';
+Templates::add_inline_style($woo_css);
+$woo_css             = '';
+$woo_css            .= !empty($woo_icon_color_hover)?'color:'.$woo_icon_color_hover.';':'';
+$woo_css            .= !empty($woo_icon_bg_color_hover)?'background-color:'.$woo_icon_bg_color_hover.';':'';
+$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .tz-loop-button:hover:hover{'.$woo_css.'}':'';
+Templates::add_inline_style($woo_css);
 ?>
 
 <?php

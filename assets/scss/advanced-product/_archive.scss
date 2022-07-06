@@ -2,6 +2,7 @@
   .ap-inner{
     @include transition($tztheme-transition-all);
     @include box-shadow($tztheme-box-shadow-default);
+    overflow: hidden;
     .ap-title{
       font-size:$tztheme-ap-archive-title-size;
       font-weight:$tztheme-ap-archive-title-weight;

@@ -189,6 +189,13 @@ Templaza_API::set_section('settings',
 		        'default'  => ''
 	        ),
 	        array(
+		        'id'       => 'blog_media_padding',
+		        'type'     => 'spacing',
+                'allow_responsive'    => true,
+		        'title'    => __('Blog media padding', $this -> text_domain),
+		        'default'  => ''
+	        ),
+	        array(
 		        'id'       => 'blog_item_margin',
 		        'type'     => 'spacing',
 		        'mode'     => 'margin',
@@ -358,6 +365,14 @@ Templaza_API::set_section('settings',
 		        'type'     => 'spacing',
                 'allow_responsive'    => true,
 		        'title'    => __('Blog single padding', $this -> text_domain),
+		        'default'  => ''
+	        ),
+
+	        array(
+		        'id'       => 'blog_single_media_padding',
+		        'type'     => 'spacing',
+                'allow_responsive'    => true,
+		        'title'    => __('Blog single media padding', $this -> text_domain),
 		        'default'  => ''
 	        ),
 	        array(

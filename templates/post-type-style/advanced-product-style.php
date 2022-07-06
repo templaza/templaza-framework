@@ -34,6 +34,7 @@ $ap_styles    = array(
             'ap_product-loop-padding',
             'ap_product-loop-bg-color',
             'ap_product-loop-border',
+            'ap_product-loop-border-radius',
         ),
     ),
     array(
@@ -65,7 +66,7 @@ if(count($ap_styles)) {
                 'tablet' => '',
                 'mobile' => '',
             );
-            $ap_css    = Templates::make_css_design_style($design['options'], $options,true);
+            $ap_css    = Templates::make_css_design_style($design['options'], $options,false);
             if(!empty($ap_css)){
                 if(is_array($ap_css)){
                     foreach ($ap_css as $device => $ad_style){
