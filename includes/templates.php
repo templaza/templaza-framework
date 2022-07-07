@@ -371,7 +371,7 @@ class Templates{
             $important  = $important?' !important':'';
 
             foreach($option_names as $name){
-                if($options[$name]){
+                if(isset($options[$name]) && $options[$name]){
                     $option = $options[$name];
 
                     // Background
