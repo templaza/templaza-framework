@@ -19,22 +19,44 @@ if(!class_exists('TemPlazaFramework\Post_TypeFunctions')){
          */
         public static function getPostTypes(){
             $store_id   = __METHOD__;
+
+            $post_types = get_post_types( array( 'public' => true ));
+
+            $store_id  .= '::'.serialize($post_types);
             $store_id   = md5($store_id);
 
+//            var_dump($post_types);
+//            var_dump($store_id);
+////            var_dump(serialize($post_types));
+//            if(in_array('services', $post_types)) {
+////                var_dump($post_types);
+//                die(__FILE__);
+//            }
             if(isset(self::$cache[$store_id])){
                 return self::$cache[$store_id];
             }
 
-
             if ( false === self::$post_types ) {
                 self::$post_types = array();
-                $exclude = self::getExcludePostTypes();
-                foreach ( get_post_types( array( 'public' => true ) ) as $post_type ) {
-                    if ( ! in_array( $post_type, $exclude, true ) ) {
-                        self::$post_types[] = $post_type;
-                    }
+            }
+
+            if(is_wp_error($post_types) || empty($post_types)){
+                return self::$post_types;
+            }
+
+            $exclude = self::getExcludePostTypes();
+            foreach ( $post_types as $post_type ) {
+                if(in_array($post_type, self::$post_types)){
+                    continue;
+                }
+                if ( ! in_array( $post_type, $exclude, true ) ) {
+                    self::$post_types[] = $post_type;
                 }
             }
+
+//            if(count(self::$post_types)){
+//                self::$cache[$store_id] = self::$post_types;
+//            }
 
             return self::$post_types;
         }

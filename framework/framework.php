@@ -72,6 +72,7 @@ class Framework{
         // Register arguments
         $this -> register_arguments();
         $this -> init_post_types();
+        $this -> __load_config();
         $this -> init_global_settings();
     }
 
@@ -299,15 +300,6 @@ class Framework{
     public function register_arguments() {
         $theme = wp_get_theme(); // For use with some settings. Not necessary.
 
-        $core_file     = TEMPLAZA_FRAMEWORK_OPTION_PATH.'/config.php';
-        if(file_exists($core_file)){
-            require_once $core_file;
-        }
-        $core_file     = TEMPLAZA_FRAMEWORK_THEME_PATH_OPTION.'/config.php';
-        if(file_exists($core_file)){
-            require_once $core_file;
-        }
-
         $this->args = array(
             // TYPICAL -> Change these values as you need/desire
             'opt_name'            => Functions::get_theme_option_name(),            // This is where your data is stored in the database and also becomes your global variable name.
@@ -416,5 +408,16 @@ class Framework{
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css',
             Functions::get_my_frame_url().'/assets/css/style.css',
             array(TEMPLAZA_FRAMEWORK_NAME.'__css-fontawesome'));
+    }
+
+    protected function __load_config(){
+        $core_file     = TEMPLAZA_FRAMEWORK_OPTION_PATH.'/config.php';
+        if(file_exists($core_file)){
+            require_once $core_file;
+        }
+        $core_file     = TEMPLAZA_FRAMEWORK_THEME_PATH_OPTION.'/config.php';
+        if(file_exists($core_file)){
+            require_once $core_file;
+        }
     }
 }
