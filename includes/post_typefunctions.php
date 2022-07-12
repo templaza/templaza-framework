@@ -25,13 +25,6 @@ if(!class_exists('TemPlazaFramework\Post_TypeFunctions')){
             $store_id  .= '::'.serialize($post_types);
             $store_id   = md5($store_id);
 
-//            var_dump($post_types);
-//            var_dump($store_id);
-////            var_dump(serialize($post_types));
-//            if(in_array('services', $post_types)) {
-////                var_dump($post_types);
-//                die(__FILE__);
-//            }
             if(isset(self::$cache[$store_id])){
                 return self::$cache[$store_id];
             }

@@ -8,6 +8,7 @@ use TemPlazaFramework\Admin_Functions;
 use TemPlazaFramework\Core\Fields;
 use TemPlazaFramework\Media;
 use TemPlazaFramework\Menu_Admin;
+use TemPlazaFramework\Post_TypeFunctions;
 use TemPlazaFramework\Template_Admin;
 use TemPlazaFramework\Templates;
 use \TemPlazaFramework\Admin\Admin_Page;
@@ -71,8 +72,8 @@ class Framework{
 
         // Register arguments
         $this -> register_arguments();
-        $this -> init_post_types();
         $this -> __load_config();
+        $this -> init_post_types();
         $this -> init_global_settings();
     }
 
@@ -190,6 +191,8 @@ class Framework{
 
         // Get arguments
         $args   = $this -> get_arguments();
+
+        $this -> __init_post_type_settings();
 
         // Global settings
         if($sections = \Templaza_API::construct_sections('settings')) {
@@ -418,6 +421,39 @@ class Framework{
         $core_file     = TEMPLAZA_FRAMEWORK_THEME_PATH_OPTION.'/config.php';
         if(file_exists($core_file)){
             require_once $core_file;
+        }
+    }
+
+    protected function __init_post_type_settings(){
+        $tzfrm_post_types  = Post_TypeFunctions::getPostTypes();
+        if(count($tzfrm_post_types)){
+            foreach ($tzfrm_post_types as $tzfrm_post_type){
+                $tzfrm_post_type_obj  = get_post_type_object($tzfrm_post_type);
+                $tzfrm_subsection   = array(
+                    'id'    => $tzfrm_post_type.'-subsections',
+                    'title' => sprintf(__('%s Options', $this -> text_domain),$tzfrm_post_type_obj -> label),
+                    'subsection' => true,
+                    'fields'     => array(
+                        array(
+                            'id'    => $tzfrm_post_type.'-archive-style',
+                            'type'  => 'select',
+                            'title' => sprintf(__('%s Archive Style', $this -> text_domain), $tzfrm_post_type_obj -> label),
+                            'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+                            'data'     => 'callback',
+                            'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
+                        ),
+                        array(
+                            'id'    => $tzfrm_post_type.'-single-style',
+                            'type'  => 'select',
+                            'title' => sprintf(__('%s Single Style', $this -> text_domain), $tzfrm_post_type_obj -> label),
+                            'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+                            'data'     => 'callback',
+                            'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
+                        )
+                    )
+                );
+                \Templaza_API::set_subsection('settings','settings', $tzfrm_subsection);
+            }
         }
     }
 }
