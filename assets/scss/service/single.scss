@@ -1,0 +1,62 @@
+.templaza-single-service{
+  .single-box{
+    background:$tz-basic-single-content_bg;
+    padding:$tz-basic-single-content_padding;
+    @include border-radius($tz-basic-blog-list-radius);
+    &:not(:first-child){
+      margin-top:40px;
+    }
+    &.image{
+      padding:0;
+    }
+    .title{
+      position:relative;
+      a{
+        font-family: $tz-basic-heading-font;
+        font-weight: $tz-basic-heading-h3-weight;
+        font-size:18px;
+        background:$tz-basic-body-background;
+        @include transition($tz-basic-transition);
+        padding:20px 30px;
+        @include border-radius($tz-basic-button-radius);
+        color:$tz-basic-heading-color;
+        &:hover{
+          background: $tz-basic-theme-color;
+          color:$tz-basic-button-color-hover;
+        }
+      }
+      &.uk-active{
+        a{
+          background: $tz-basic-theme-color;
+          color:$tz-basic-button-color-hover;
+        }
+      }
+      i{
+        position:absolute;
+        right:15px;
+        top:50%;
+        margin-top:-9px;
+      }
+    }
+  }
+  .single-content-box{
+    li > figure{
+      margin-top: 0;
+    }
+  }
+}
+@media(max-width: 1199.9px) {
+  body .templaza-single-service .single-box{
+    padding:30px;
+  }
+}
+@media(max-width: 959.9px) {
+  body .templaza-single-service .single-box{
+    padding:20px;
+    .title a{
+      padding:15px 20px;
+      font-weight: 700;
+      font-size:16px;
+    }
+  }
+}

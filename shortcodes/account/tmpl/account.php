@@ -135,6 +135,8 @@ $account_css = '';
 if($submenu_background){
     $submenu_background = json_decode($submenu_background,true);
     $dropdown_bg = CSS::make_color_rgba_redux($submenu_background);
-    $account_css .= '#'.$tz_id.' .tz-navbar-login .uk-navbar-dropdown{background-color:'.$dropdown_bg.'}';
-    Templates::add_inline_style($account_css);
+    if($dropdown_bg !=''){
+        $account_css .= '#'.$tz_id.' .tz-navbar-login .uk-navbar-dropdown{background-color:'.$dropdown_bg.'}';
+        Templates::add_inline_style($account_css);
+    }
 }

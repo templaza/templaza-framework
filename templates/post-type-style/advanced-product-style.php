@@ -26,6 +26,15 @@ $ap_styles    = array(
             'ap_product-box-bg-color',
         ),
     ),
+    array(
+        'enable'    => true,
+        'class'     => '.single .ap-single-side-box',
+        'options' => array(
+            'ap_product-side-box-padding',
+            'ap_product-side-box-margin',
+            'ap_product-box-bg-color',
+        ),
+    ),
     // Archive
     array(
         'enable'    => true,

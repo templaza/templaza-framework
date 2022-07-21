@@ -312,6 +312,12 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'required' => array('ap_product-office-price-form', '=' , 'custom'),
             ),
             array(
+                'id'       => 'ap_product-vendor-contact',
+                'type'     => 'select',
+                'title'    => esc_html__( 'Vendor Contact Form', $this -> text_domain ),
+                'options'  => $arr_wpform,
+            ),
+            array(
                 'id'       => 'ap_product-box-bg-color',
                 'type'     => 'background',
                 'title'    => esc_html__( 'Single Box Background', $this -> text_domain ),
@@ -334,6 +340,24 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'allow_responsive'    => true,
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                 'title'  => esc_html__('Single Box Margin', $this -> text_domain),
+            ),
+            array(
+                'id'     => 'ap_product-side-box-padding',
+                'type'   => 'spacing',
+                'mode'   => 'padding',
+                'all'    => false,
+                'allow_responsive'    => true,
+                'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                'title'  => esc_html__('Single Side Box Padding', $this -> text_domain),
+            ),
+            array(
+                'id'     => 'ap_product-side-box-margin',
+                'type'   => 'spacing',
+                'mode'   => 'margin',
+                'all'    => false,
+                'allow_responsive'    => true,
+                'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                'title'  => esc_html__('Single Side Box Margin', $this -> text_domain),
             ),
             array(
                 'id'     => 'ap_product-media-padding',
