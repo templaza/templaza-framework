@@ -13,3 +13,7 @@ Templaza_API::set_section('__templaza_style', array(
 
 // Post type is templaza_style
 require_once 'templaza_style/templaza_style.php';
+// Post type is templaza_header
+require_once 'templaza_header/templaza_header.php';
+// Post type is templaza_footer
+require_once 'templaza_footer/templaza_footer.php';

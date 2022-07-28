@@ -7,7 +7,8 @@ use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 use TemPlazaFramework\Menu;
 
-$options                    = Functions::get_theme_options();
+$gb_options                 = Functions::get_theme_options();
+$options                    = Functions::get_header_options();
 
 $header_menu                = isset($options['header-menu'])?$options['header-menu']:'header';
 $header_menu_level          = isset($options['header-menu-level'])?(int) $options['header-menu-level']:0;

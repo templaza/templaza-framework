@@ -1,11 +1,18 @@
-.woocommerce-pagination{
+.woocommerce-pagination, .woocommerce-navigation{
   ul.page-numbers{
+    margin-top:60px;
     padding:0;
     display:flex;
     list-style: none;
     justify-content: center;
     a,span{
 
+    }
+  }
+  &.ajax-navigation{
+    a{
+      @include button-default();
+      margin-top:20px;
     }
   }
 }

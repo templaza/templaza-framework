@@ -1,0 +1,116 @@
+.templaza-ap-single{
+  &.ap-single-style2{
+    .ap-single-price-box{
+      padding:0 0 35px;
+      border-bottom:1px solid $tztheme-border-color;
+      margin-bottom: 20px;
+      .ap-meta-top{
+        margin-bottom: 10px;
+      }
+      .price{
+        font-size:30px;
+        color:$tztheme-global-color;
+      }
+    }
+    .ap-single-top-fields{
+      border-bottom:1px solid $tztheme-border-color;
+      margin-bottom: 40px;
+      .ap-custom-fields{
+        .ap-field-label{
+          font-weight:normal;
+          font-size: 0.875rem;
+        }
+        .ap-field-value{
+          color:$tztheme-global-color;
+          font-weight:bold;
+          font-size:20px;
+        }
+      }
+    }
+    .ap-wrap-content{
+      display: flex;
+      .ap-single-left{
+        width:55%;
+      }
+      .ap-single-right{
+        width:45%;
+        padding-left: 40px;
+      }
+    }
+    .ap-single-content-tab{
+      .ap-tab-title{
+        margin-top: 0;
+        margin-left: 0;
+        li{
+          position:relative;
+          padding:0 10px 20px 10px;
+          margin: 0 20px;
+          a{
+            font-size:24px;
+            font-weight:bold;
+            font-family: $tztheme-heading-font;
+            text-transform: capitalize;
+            color:$tztheme-heading-color;
+            border:none;
+          }
+          &:before{
+            content:"";
+            position:absolute;
+            left:0;
+            bottom:-1px;
+            width:100%;
+            height:3px;
+            background:$tztheme-global-color;
+            opacity:0;
+          }
+          &.uk-active,&:hover{
+            a{
+              border:none;
+            }
+            &:before{
+              opacity:1;
+              @include transition($tztheme-transition-all);
+            }
+          }
+        }
+
+      }
+    }
+    .comments-area h3.comment-reply-title{
+      margin-bottom:10px;
+      &:after{
+        display: none;
+      }
+    }
+    .ap-related-product{
+      .box-title{
+        font-size:48px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+@media(max-width: 1199.99px) {
+  .templaza-ap-single.ap-single-style2 .ap-wrap-content{
+    display:block;
+    .ap-single-right,
+    .ap-single-left{
+      width:100%;
+    }
+    .ap-single-right{
+      padding:40px 0 0;
+    }
+  }
+}
+@media(max-width: 639.99px) {
+  .templaza-ap-single.ap-single-style2 {
+    .ap-single-top-fields{
+      flex-direction: column;
+      .ap-custom-fields {
+        .ap-field-value{
+          font-size:16px;
+        }
+      }
+    }
+  }
+}

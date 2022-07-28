@@ -196,6 +196,8 @@ class Templaza_Single_Product {
 			remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 			add_action( 'woocommerce_single_product_summary', array( $this, 'product_data_tabs' ), 100 );
 		}
+
+        add_action( 'woocommerce_single_product_summary', array( $this, 'product_extra_content' ), 200 );
 	}
 
 	/**
@@ -287,7 +289,7 @@ class Templaza_Single_Product {
 	 */
 	public function open_gallery_summary_wrapper() {
 		$container = apply_filters( 'templaza_single_product_container_class', '' );
-		echo '<div class="product-gallery-summary clearfix ' . esc_attr( $container ) . '">';
+		echo '<div class="product-gallery-summary templaza-shop-box clearfix ' . esc_attr( $container ) . '">';
 	}
 
 	/**
@@ -578,7 +580,7 @@ class Templaza_Single_Product {
 		if ( ! empty( $tabs ) ) :
 			?>
 
-            <div class="woocommerce-tabs wc-tabs-wrapper">
+            <div class="woocommerce-tabs templaza-shop-tabs-meta wc-tabs-wrapper">
 				<?php foreach ( $tabs as $key => $tab ) : ?>
                     <div class="templaza-tab-wrapper">
                         <a href="#tab-<?php echo esc_attr( $key ); ?>"
@@ -652,10 +654,29 @@ class Templaza_Single_Product {
         }else{
             $templaza_options = Functions::get_theme_options();
         }
-        $product_layout        = isset($templaza_options['templaza-shop-single-layout'])?$templaza_options['templaza-shop-single-layout']:'layout-1';
+        if(isset($_GET['single_layout'])){
+            $product_layout = $_GET['single_layout'];
+        }else{
+            $product_layout        = isset($templaza_options['templaza-shop-single-layout'])?$templaza_options['templaza-shop-single-layout']:'layout-1';
+        }
 
 		return apply_filters( 'templaza_single_get_product_layout', $product_layout );
 	}
+    /**
+     * Add product extra content
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function product_extra_content() {
+        $extra = get_post_meta(get_the_ID(),'product-single-extra-content',true);
+        if (  $extra ) {
+            echo '<div class="single-product-extra-content">';
+            echo $extra;
+            echo '</div>';
+        }
+    }
 
 }
 Templaza_Single_Product::get_instance();

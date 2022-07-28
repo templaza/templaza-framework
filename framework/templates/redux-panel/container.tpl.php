@@ -8,7 +8,8 @@
      * @version: 3.5.7.8
      */
 
-    $expanded = ( $this->parent->args['open_expanded'] ) ? ' fully-expanded' : '' . ( ! empty( $this->parent->args['class'] ) ? ' ' . esc_attr( $this->parent->args['class'] ) : '' );
+    $expanded = ! empty( $this->parent->args['class'] ) ? ' ' . esc_attr( $this->parent->args['class'] ) : '';
+    $expanded.= ( $this->parent->args['open_expanded'] ) ? ' fully-expanded' : '';
     $nonce    = wp_create_nonce( "redux_ajax_nonce" . $this->parent->args['opt_name'] );
 ?>
 <div class="templaza-framework">

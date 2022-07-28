@@ -132,5 +132,24 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
             wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__css');
             wp_enqueue_script(TEMPLAZA_FRAMEWORK_NAME.'__js');
         }
+
+        /**
+         * Get md5 key to store cache
+         * @param list $args
+         * */
+        protected function __get_store_id($args){
+
+            $_args = func_get_args();
+
+            $_debug     = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1];
+            $_method    = $_debug['class'].'::'.$_debug['function'];
+            if(!in_array($_method, $_args)){
+                $_args[]    = $_method;
+            }
+
+            $store_id   = serialize($_args);
+
+            return md5($store_id);
+        }
     }
 }

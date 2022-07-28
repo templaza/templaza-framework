@@ -1,0 +1,10 @@
+.field-tz_presets-group{
+  .redux-field-container{
+    margin-bottom: 0;
+    input[type="text"]{
+      .templaza-framework__body .redux-container & {
+        width: 100%;
+      }
+    }
+  }
+}

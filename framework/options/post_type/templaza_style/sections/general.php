@@ -287,3 +287,26 @@ Templaza_API::set_section('templaza_style',
         )
     )
 );
+// -> START Header
+Templaza_API::set_section('templaza_style',
+    array(
+        'id'         => 'headers',
+        'title'     => esc_html__('Header',$this -> text_domain),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'enable-header',
+                'type'     => 'select',
+                'title'    => __( 'Enable Header', $this -> text_domain ),
+                'subtitle' => __( 'Enable or disable the Header Element.', $this -> text_domain ),
+                'options'       => array(
+                    'on'         => esc_html__('On', $this -> text_domain),
+                    'off'         => esc_html__('Off', $this -> text_domain),
+                ),
+                'placeholder'   => esc_html__('Inherit', $this -> text_domain),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
+            ),
+        )
+    )
+);

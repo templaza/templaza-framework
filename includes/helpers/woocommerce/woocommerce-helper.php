@@ -106,11 +106,15 @@ class Templaza_Woo_Helper {
             }else{
                 $templaza_options = Functions::get_theme_options();
             }
-            $layout       = isset($templaza_options['templaza-shop-loop-layout'])?$templaza_options['templaza-shop-loop-layout']:'layout-1';
+
+            if(isset($_GET['product_loop'])){
+                $layout = $_GET['product_loop'];
+            }else{
+                $layout       = isset($templaza_options['templaza-shop-loop-layout'])?$templaza_options['templaza-shop-loop-layout']:'layout-1';
+            }
             if ( self::templaza_get_catalog_layout() == 'masonry' && self::templaza_is_catalog() ) {
                 $layout = 'layout-7';
             }
-
             $layout = apply_filters( 'templaza_get_product_loop_layout', $layout );
             self::$product_loop = $layout;
         }
@@ -261,9 +265,9 @@ class Templaza_Woo_Helper {
 			</a>',
             is_customize_preview() ? '#' : esc_url( get_permalink() ),
             esc_attr( $product->get_id() ),
-            esc_attr__( 'Quick View', 'agruco' ),
+            esc_attr__( 'Quick View', 'templaza-framework' ),
             '<i class="fas fa-eye"></i>',
-            esc_html__( 'Quick View', 'agruco' )
+            esc_html__( 'Quick View', 'templaza-framework' )
         );
     }
 
@@ -285,7 +289,7 @@ class Templaza_Woo_Helper {
             return;
         }
 
-        echo '<div class="rz-stock">(' . $availability['availability'] . ')</div>';
+        echo '<div class="templaza-stock">(' . $availability['availability'] . ')</div>';
     }
 
     /**
@@ -396,14 +400,14 @@ class Templaza_Woo_Helper {
 
         if ( $wp_query && isset( $wp_query->found_posts ) ) {
 
-            $post_text = $wp_query->found_posts > 1 ? esc_html__( 'posts', 'agruco' ) : esc_html__( 'post', 'agruco' );
+            $post_text = $wp_query->found_posts > 1 ? esc_html__( 'posts', 'templaza-framework' ) : esc_html__( 'post', 'templaza-framework' );
 
-            if ( templaza_is_catalog() ) {
-                $post_text = $wp_query->found_posts > 1 ? esc_html__( 'products', 'agruco' ) : esc_html__( 'product', 'agruco' );
+            if ( self::templaza_is_catalog() ) {
+                $post_text = $wp_query->found_posts > 1 ? esc_html__( 'products', 'templaza-framework' ) : esc_html__( 'product', 'templaza-framework' );
             }
 
-            echo sprintf( '<div class="templaza-posts__found"><div class="templaza-posts__found-inner">%s<span class="current-post"> %s </span> %s <span class="found-post"> %s </span> %s <span class="count-bar"></span></div> </div>',
-                esc_html__( 'Showing', 'agruco' ), $wp_query->post_count, esc_html__( 'of', 'agruco' ), $wp_query->found_posts, $post_text );
+            echo sprintf( '<div class="templaza-posts__found uk-margin-medium-top"><div class="templaza-posts__found-inner">%s<span class="current-post"> %s </span> %s <span class="found-post"> %s </span> %s <span class="count-bar"></span></div> </div>',
+                esc_html__( 'Showing', 'templaza-framework' ), $wp_query->post_count, esc_html__( 'of', 'templaza-framework' ), $wp_query->found_posts, $post_text );
 
         }
     }
@@ -428,5 +432,48 @@ class Templaza_Woo_Helper {
         } else {
             $GLOBALS['templaza_woo'][ $prop ] = $value;
         }
+    }
+    /**
+     * Functions that used to get coutndown texts
+     *
+     * @since 1.0.0
+     *
+     * @return array
+     */
+    public static function get_countdown_texts() {
+        return apply_filters( 'templaza_get_countdown_texts', array(
+            'days'    => esc_html__( 'Days', 'templaza-framework' ),
+            'hours'   => esc_html__( 'Hours', 'templaza-framework' ),
+            'minutes' => esc_html__( 'Minutes', 'templaza-framework' ),
+            'seconds' => esc_html__( 'Seconds', 'templaza-framework' )
+        ) );
+    }
+    /**
+     * Check is product deals
+     *
+     * @since 1.0.0
+     *
+     * @return bool
+     */
+    public static function is_product_deal( $product ) {
+        $product = is_numeric( $product ) ? wc_get_product( $product ) : $product;
+
+        // It must be a sale product first
+        if ( ! $product->is_on_sale() ) {
+            return false;
+        }
+
+        // Only support product type "simple" and "external"
+        if ( ! $product->is_type( 'simple' ) && ! $product->is_type( 'external' ) ) {
+            return false;
+        }
+
+        $deal_quantity = get_post_meta( $product->get_id(), '_deal_quantity', true );
+
+        if ( $deal_quantity > 0 ) {
+            return true;
+        }
+
+        return false;
     }
 }

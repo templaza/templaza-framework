@@ -12,17 +12,6 @@ Templaza_API::set_section('settings',
         'desc'      => esc_html__('General theme options',$this -> text_domain),
         'icon'      => 'el-icon-cog',
         'fields'    => array(
-//            array(
-//                'id'               => 'editor-text',
-//                'type'             => 'editor',
-//                'title'            => __('Editor Text', 'redux-framework-demo'),
-//                'subtitle'         => __('Subtitle text would go here.', 'redux-framework-demo'),
-//                'default'          => 'Powered by Redux.',
-//                'args'   => array(
-//                    'teeny'            => true,
-//                    'textarea_rows'    => 10
-//                )
-//            ),
         ),
     )
 );
@@ -265,6 +254,24 @@ Templaza_API::set_section('settings',
                 'step'     => 1,
                 'default'  => '300',
                 'required' => array('enable-smooth-scroll', '=', '1'),
+            ),
+        )
+    )
+);
+
+// -> START Header
+Templaza_API::set_section('settings',
+    array(
+        'id'         => 'headers',
+        'title'     => esc_html__('Header',$this -> text_domain),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'enable-header',
+                'type'     => 'switch',
+                'title'    => __( 'Enable Header', $this -> text_domain ),
+                'subtitle' => __( 'Enable or disable the Header Element.', $this -> text_domain ),
+                'default'  => true,
             ),
         )
     )

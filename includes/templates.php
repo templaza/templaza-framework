@@ -13,9 +13,9 @@ class Templates{
     public static $_devices= [
         'desktop' => '',
         'xlarge' => '@media (min-width: 1600px)',
-        'laptop' => '@media (min-width: 960px) and (max-width: 1200px)',
-        'tablet' => '@media (min-width: 640px) and (max-width: 960px)',
-        'mobile' => '@media (max-width: 640px)',
+        'laptop' => '@media (min-width: 960px) and (max-width: 1199.99px)',
+        'tablet' => '@media (min-width: 640px) and (max-width: 959.99px)',
+        'mobile' => '@media (max-width: 639.99px)',
     ];
 //    public static $_devices= [
 //        'tablet' => '@media (min-width: 640px) and (max-width: 960px)',
@@ -371,7 +371,7 @@ class Templates{
             $important  = $important?' !important':'';
 
             foreach($option_names as $name){
-                if($options[$name]){
+                if(isset($options[$name]) && $options[$name]){
                     $option = $options[$name];
 
                     // Background

@@ -39,21 +39,33 @@
                 return __ajax_data;
             };
 
-            el.on("click", ".js-save-preset", function(){
+            el.off("click", ".js-save-preset").on("click", ".js-save-preset", function(){
+
+                var __form_data = el.serializeForm();
+
+                // if(!__form_data && !__form_data.length){
+                //     UIkit.modal.alert("Please insert name of preset!");
+                //     return;
+                // }
+                if(!__form_data && !__form_data.length){
+                    UIkit.modal.alert("Please enter value of preset!");
+                    return;
+                }
+
+                __form_data = __form_data[Object.keys(__form_data).pop()];
+
                 var __btn    = $(this),
-                    __title = el.find(".js-preset-title").val(),
-                    __description = el.find(".js-preset-description").val(),
+                    __title = typeof __form_data["title"] !== "undefined"?__form_data["title"]:"",
                     __secret = __btn.data("secret"),
                     __ajax_data = get_ajax_data();
 
                 if(!__title && !__title.trim().length){
-                    alert("Please insert name of preset!");
-                    el.find(".js-preset-title").focus();
+                    UIkit.modal.alert("Please enter title of preset!");
                     return;
                 }
 
-                __ajax_data["title"] = __title;
-                __ajax_data["description"] = __description;
+                __ajax_data["preset_data"]  = __form_data;
+
                 __ajax_data["action"]   = "templaza_framework_save_presets-"+redux.optName.args.opt_name;
 
                 if(typeof __secret !== "undefined" && __secret){
@@ -66,10 +78,23 @@
 
                 __ajax_data["preset"] =  JSON.stringify(__options[redux.optName.args.opt_name]);
 
-                $.post(ajaxurl,__ajax_data,function (data) {
-                    if(data && data.success){
+                $.post(ajaxurl,__ajax_data,function (response) {
+                    if(response && response.success){
+                        if(typeof response.data.message !== "undefined") {
+                            UIkit.notification({
+                                "message": response.data.message,
+                                "status": "success",
+                                "pos": "bottom-right"
+                            });
+                        }
                         window.location = window.location.href;
                         // window.location.reload();
+                    }else if(typeof response.data.message !== "undefined") {
+                        UIkit.notification({
+                            "message": response.data.message,
+                            "status": "danger",
+                            "pos"  : "bottom-right"
+                        });
                     }
                 });
             });
@@ -92,12 +117,21 @@
                         __ajax_data["secret"] = __secret;
                     }
 
-                    $.post(ajaxurl, __ajax_data, function (data) {
-                        // if (data && data.success) {
-                        //     window.location.href = window.location.href;
-                        // }
-                        //
-                        window.location = window.location.href;
+                    $.post(ajaxurl, __ajax_data, function (response) {
+                        if (response && response.success) {
+                            UIkit.notification({
+                                "pos":      "bottom-right",
+                                "status":   "success",
+                                "message":  '<div class="uk-text-break">' + response.data.message + '</div>'
+                            });
+                            window.location = window.location.href;
+                        }else{
+                            UIkit.notification({
+                                "pos":      "bottom-right",
+                                "status":   "danger",
+                                "message":  '<div class="uk-text-break">' + response.data.message + '</div>'
+                            });
+                        }
                     });
                 }, function () {
                     return;
@@ -118,18 +152,51 @@
                         __ajax_data["secret"] = __secret;
                     }
 
-                    $.post(ajaxurl, __ajax_data, function (data) {
-                        if (data && data.success) {
+                    $.post(ajaxurl, __ajax_data, function (response) {
+                        if (response && response.success) {
+                            UIkit.notification({
+                                "pos":      "bottom-right",
+                                "status":   "success",
+                                "message":  '<div class="uk-text-break">' + response.data.message + '</div>'
+                            });
                             window.location = window.location.href;
-                            // window.location.href = window.location.href;
+                        }else{
+                            UIkit.notification({
+                                "pos":      "bottom-right",
+                                "status":   "danger",
+                                "message":  '<div class="uk-text-break">' + response.data.message + '</div>'
+                            });
                         }
-                        //
-                        // window.location.href = window.location.href;
                     });
                 }, function () {
                     return;
                 });
             });
+
+            // var __mediaUploader;
+            // el.find(".js-upload-image").off("click").on("click", function(e){
+            //     e.preventDefault();
+            //
+            //     // If the uploader object has already been created, reopen the dialog
+            //     if (__mediaUploader) {
+            //         __mediaUploader.open();
+            //         return;
+            //     }
+            //     // Extend the wp.media object
+            //     __mediaUploader = wp.media.frames.file_frame = wp.media({
+            //         title: 'Choose Image',
+            //         button: {
+            //             text: 'Choose Image'
+            //         }, multiple: false });
+            //
+            //     // // When a file is selected, grab the URL and set it as the text field's value
+            //     // __mediaUploader.on('select', function() {
+            //     //     var attachment = __mediaUploader.state().get('selection').first().toJSON();
+            //     //     $('#image-url').val(attachment.url);
+            //     // });
+            //     // Open the uploader dialog
+            //     __mediaUploader.open();
+            // });
         });
     }
 })(jQuery);

@@ -584,3 +584,17 @@ table.order_details .woocommerce-table__product-table .wc-item-meta li strong {
 table.order_details .woocommerce-table__product-table .wc-item-meta li p {
   margin: 0;
 }
+.woocommerce-checkout{
+  .tz-shop-order-wrap{
+    float: left;
+    width: 34%;
+    position: sticky;
+    top: 35px;
+    .woocommerce-checkout-review-order{
+      position: inherit;
+      float: none;
+      width: 100%;
+      top: auto;
+    }
+  }
+}

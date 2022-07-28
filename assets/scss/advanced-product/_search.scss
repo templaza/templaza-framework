@@ -1,11 +1,14 @@
 .templaza-sidebar{
   .advanced-product-search-form{
     label.search-label{
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid $tztheme-border-color;
       margin: 0 0 35px;
     }
     .ap-search-item{
       margin-bottom: 45px;
+      &:last-child{
+        margin-bottom: 0;
+      }
     }
   }
 }
@@ -52,7 +55,7 @@
           background-color: transparent;
           background-repeat: no-repeat;
           background-position: 50% 50%;
-          border: 1px solid rgba(0, 0, 0, 0.1);
+          border: 1px solid $tztheme-border-color;
           transition: .2s ease-in-out;
           transition-property: background-color,border;
           cursor: pointer;
@@ -63,11 +66,22 @@
             background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2214%22%20height%3D%2211%22%20viewBox%3D%220%200%2014%2011%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%232a2a2a%22%20points%3D%2212%201%205%207.5%202%205%201%205.5%205%2010%2013%201.5%22%20%2F%3E%0A%3C%2Fsvg%3E%0A");
           }
         }
+        &:hover{
+          label{
+            cursor: pointer;
+          }
+          cursor: pointer;
+          input[type="checkbox"]{
+            background:$tztheme-button_background;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2214%22%20height%3D%2211%22%20viewBox%3D%220%200%2014%2011%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%232a2a2a%22%20points%3D%2212%201%205%207.5%202%205%201%205.5%205%2010%2013%201.5%22%20%2F%3E%0A%3C%2Fsvg%3E%0A");
+          }
+        }
       }
     }
     select{
       background-color:transparent;
-      border:1px solid rgba(0, 0, 0, 0.1) !important;
     }
     input[type="number"]{
       width:100%;

@@ -51,7 +51,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Header')){
         }
 
         public function wp_nav_menu_args($nav_menu_args){
-            $options            = Functions::get_theme_options();
+//            $options            = Functions::get_theme_options();
+            $options            = Functions::get_header_options();
             $mode               = isset($options['header-mode'])?$options['header-mode']:'horizontal';
 
             if($mode == 'sidebar'){
@@ -62,7 +63,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Header')){
         }
 
         public function wp_nav_menu_submenu_attribute($attributes){
-            $options            = Functions::get_theme_options();
+//            $options            = Functions::get_theme_options();
+            $options            = Functions::get_header_options();
             $mode               = isset($options['header-mode'])?$options['header-mode']:'horizontal';
 
             if($mode == 'sidebar'){
@@ -73,7 +75,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Header')){
         }
 
         public function nav_menu_submenu_css_class($classes){
-            $options            = Functions::get_theme_options();
+//            $options            = Functions::get_theme_options();
+            $options            = Functions::get_header_options();
             $mode               = isset($options['header-mode'])?$options['header-mode']:'horizontal';
 
             if($mode == 'sidebar') {
@@ -84,7 +87,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Header')){
 
 
         public function nav_menu_css_class($classes){
-            $options            = Functions::get_theme_options();
+//            $options            = Functions::get_theme_options();
+            $options            = Functions::get_header_options();
             $mode               = isset($options['header-mode'])?$options['header-mode']:'horizontal';
 
             if($mode == 'sidebar') {
@@ -132,6 +136,17 @@ if(!class_exists('TemplazaFramework_ShortCode_Header')){
                 'admin_label' => true,
                 'params'      => array()
             );
+        }
+
+        public function prepare_params($params, $element, $parent_el){
+            $params = parent::prepare_params($params, $element, $parent_el);
+
+            $header_slug    = Functions::get_header_id();
+            if(!empty($header_slug)) {
+                $params['tz_class'] .= ' templaza-header__' . $header_slug;
+            }
+
+            return $params;
         }
     }
 

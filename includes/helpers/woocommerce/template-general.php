@@ -113,9 +113,11 @@ class Templaza_Woo_General {
         }else{
             $templaza_options = Functions::get_theme_options();
         }
-        $loop_hover       = isset($templaza_options['templaza-shop-loop-hover'])?$templaza_options['templaza-shop-loop-hover']:'classic';
-//		wp_enqueue_style( 'templaza-woocommerce-style', get_template_directory_uri() . '/assets/css/woo/woocommerce.css', false );
-
+        if(isset($_GET['product_hover'])) {
+            $loop_hover = $_GET['product_hover'];
+        }else{
+            $loop_hover = isset($templaza_options['templaza-shop-loop-hover'])?$templaza_options['templaza-shop-loop-hover']:'';
+        }
 		$parse_css = apply_filters( 'templaza_wc_inline_style', false );
 		if( $parse_css ) {
 			wp_add_inline_style( 'templaza-woocommerce-style', $parse_css );
@@ -356,7 +358,7 @@ class Templaza_Woo_General {
 
 		$css_class = get_option( 'product_wishlist_button' ) == 'title' ? 'show-wishlist-title' : '';
 
-		echo '<div class="rz-wishlist-button templaza-button templaza-btn-outline ' . esc_attr( $css_class ) . '">';
+		echo '<div class="templaza-wishlist-button templaza-button templaza-btn-outline ' . esc_attr( $css_class ) . '">';
 		echo do_shortcode( '[yith_wcwl_add_to_wishlist]' );
 		echo '</div>';
 	}
@@ -370,7 +372,7 @@ class Templaza_Woo_General {
 	 */
 	public function product_id_hidden() {
 		global $product;
-		echo '<input class="rz_product_id" type="hidden" data-title="' . esc_attr( $product->get_title() ) . '" value="' . esc_attr( $product->get_id() ) . '">';
+		echo '<input class="templaza_product_id" type="hidden" data-title="' . esc_attr( $product->get_title() ) . '" value="' . esc_attr( $product->get_id() ) . '">';
 	}
 
 	/**

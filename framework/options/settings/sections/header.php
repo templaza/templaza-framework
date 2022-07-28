@@ -10,7 +10,6 @@ Templaza_API::set_section('settings',
         'id'     => 'headers',
         'desc'   => __( 'Here you can set your preferences for the template header(Logo, Menu and Menu Elements).', $this -> text_domain ),
         'icon'   => 'el el-tasks',
-    //    'subsection' => true,
         'fields' => array(
             array(
                 'id'       => 'enable-header',
@@ -18,6 +17,15 @@ Templaza_API::set_section('settings',
                 'title'    => __( 'Enable Header', $this -> text_domain ),
                 'subtitle' => __( 'Enable or disable the Header Element.', $this -> text_domain ),
                 'default'  => true,
+            ),
+            array(
+                'id'       => 'header-layout',
+                'type'     => 'select',
+                'data'     => 'callback',
+                'title'    => esc_html__('Header Layout', $this -> text_domain),
+                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+                'args'     => array('TemPlazaFramework\AdminHelper\Templaza_Header', 'get_items_by_slug'),
+                'required' => array( 'enable-header', '=', '1' ),
             ),
             array(
                 'id'    => 'header-mode',

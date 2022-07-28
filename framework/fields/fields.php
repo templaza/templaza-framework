@@ -57,6 +57,7 @@ class Fields{
                         add_filter("redux/{$this->args['opt_name']}/field/class/{$fName}", function ($filter_path, $field) use ($fName, $field_type) {
                             $_filter_path = TEMPLAZA_FRAMEWORK_FIELD_PATH . "/{$fName}/override-redux-{$field_type}.php";
                             $filter_path = file_exists($_filter_path) ? $_filter_path : $filter_path;
+
                             return $filter_path;
                         }, 10, 2);
                     }
@@ -123,18 +124,6 @@ class Fields{
 
     public static function load_fields($fields, $parent = null)
     {
-//        $store_id   = __METHOD__;
-//        $store_id  .= ':'.serialize($fields);
-//        $store_id   = md5($store_id);
-//
-//        if(!static::$instance) {
-//            $f = static::$instance = new self();
-//        }
-//
-//        if(isset($f -> cache[$store_id])){
-//            $f -> cache[$store_id];
-//        }
-
         if(!$fields || !count($fields)){
             return;
         }
@@ -142,7 +131,6 @@ class Fields{
         foreach ($fields as $field){
             static::load_field($field, '', $parent);
         }
-//        $f -> cache[$store_id]  = true;
     }
 
     public function hooks(){

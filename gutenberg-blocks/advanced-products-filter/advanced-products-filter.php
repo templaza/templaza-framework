@@ -6,6 +6,17 @@ use Advanced_Product\Helper\AP_Custom_Field_Helper;
 
 if(!class_exists('TemplazaFramework_Gutenberg_Advanced_Products_Filter')) {
     class TemplazaFramework_Gutenberg_Advanced_Products_Filter extends TemplazaFramework_GutenbergBlock{
+        public function __construct()
+        {
+            if(!class_exists('Advanced_Product\Helper\AP_Custom_Field_Helper')
+                && is_plugin_active('advanced-product/advanced-product.php')){
+                if(file_exists(plugin_dir_path(TEMPLAZA_FRAMEWORK_PATH).'advanced-product/includes/autoloader.php')) {
+                    require_once(plugin_dir_path(TEMPLAZA_FRAMEWORK_PATH) . 'advanced-product/includes/autoloader.php');
+                }
+            }
+            parent::__construct();
+
+        }
 
         public function hooks()
         {
@@ -70,9 +81,9 @@ if(!class_exists('TemplazaFramework_Gutenberg_Advanced_Products_Filter')) {
             }
 
             if(!empty($field_options) && count($field_options)){
-//                wp_localize_script('templaza-framework-advanced-products-filter-editor-script',
-//                    'tz_gt_advanced_products_filter', array('custom_fields_options' => $field_options)
-//                );
+                wp_localize_script('templaza-framework-advanced-products-filter-editor-script',
+                    'tz_gt_advanced_products_filter', array('custom_fields_options' => $field_options)
+                );
             }
         }
 

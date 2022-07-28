@@ -1,0 +1,23 @@
+.tz-navbar-login{
+  .uk-navbar-nav{
+    > li{
+      padding:0 !important;
+      margin:0 !important;
+      >a{
+        min-height: 0;
+        text-transform: inherit;
+      }
+      .uk-navbar-dropdown{
+        li{
+          display:block;
+          text-align: left;
+          padding-left:0 !important;
+          margin-left:0 !important;
+          &:before{
+            display:none;
+          }
+        }
+      }
+    }
+  }
+}

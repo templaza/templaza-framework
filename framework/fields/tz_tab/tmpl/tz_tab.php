@@ -22,42 +22,21 @@ if(isset($this->field) &&  !empty($this->field)){
     if(isset($this -> field['tabs']) && count($this -> field['tabs'])){
 
         $redux      = $this -> redux;
-//        $args       = $this -> redux_args;
         $args       = $redux -> args;
         $opt_name   = $args['opt_name'];
 
 //        $redux      = Redux::instance($opt_name);
         if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
             $redux->_register_settings();
-
-            $enqueue    = new Enqueue($redux);
-            $enqueue -> init();
+//            $enqueue    = new Enqueue($redux);
+//            $enqueue -> init();
         }else{
             $redux -> options_class -> register();
-            $my_enqueue = new Enqueue($redux);
-            $my_enqueue ->init();
-//            $redux -> enqueue_class -> init();
-
+//            $my_enqueue = new Enqueue($redux);
+//            $my_enqueue ->init();
         }
-
-//        $args   = $this -> parent -> args;
-//        $args['opt_name']   .= uniqid('__'.$this -> field['id'].'-');
-//        $opt_name   = $args['opt_name'];
-//        $args['show_import_export'] = false;
-//        Redux::set_args($opt_name, $args);
-//
-//        foreach($this -> field['tabs'] as $k => $tab){
-//            $tab_titles     .= '<li><a href="#tz_tab-'.$tab['id'].'">'.$tab['title'].'</a></li>';
-//
-//            $tab['title']   = '';
-//
-//            Redux::set_section($opt_name, $tab);
-//
-//        }
-//        Redux::init($opt_name);
-//        \Templaza_API::load_my_fields($opt_name);
-//
-//        $redux  = Redux::instance($opt_name);
+        $my_enqueue = new Enqueue($redux);
+        $my_enqueue ->framework_init();
 
         foreach($redux -> sections as $k => $tab){
 
@@ -73,16 +52,6 @@ if(isset($this->field) &&  !empty($this->field)){
                     });
                 }
             }
-
-
-//            add_filter("redux/{$this -> parent -> args['opt_name']}/repeater", function($repeater_data) use($opt_name){
-//                $repeater_data['opt_names'][]   = $opt_name;
-//                return $repeater_data;
-//            });
-//
-//            $redux -> _register_settings();
-//            $enqueue    = new Enqueue($redux);
-//            $enqueue -> init();
 
             $tab['class'] = isset($tab['class']) ? ' ' . $tab['class'] : '';
             $tab_contents .= '<div id="'.$this -> field['type'].'_' . $k . '_section_group' . '" class="uk-display-block uk-padding-remove-horizontal redux-group-tab' . esc_attr($tab['class']) . '" data-rel="'.$this -> field['type'].'_' . $k . '">';

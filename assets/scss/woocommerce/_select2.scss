@@ -1,7 +1,6 @@
 
 .select2 span.select2-selection--single {
-  border-radius: 0;
-  border: 0;
+  border-radius: $tztheme-button_radius;
   background: transparent;
   height: auto;
   transition: border 0.4s;

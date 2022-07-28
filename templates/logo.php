@@ -6,7 +6,8 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 
-$options        = Functions::get_theme_options();
+$gb_options                 = Functions::get_theme_options();
+$options                    = Functions::get_header_options();
 
 // Logo Alt Text
 $blog_title = get_bloginfo();

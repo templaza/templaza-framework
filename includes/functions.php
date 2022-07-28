@@ -192,31 +192,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
 
             }
 
-//            // When not found style id return to global options (old version to home options)
-//            if(!$id || empty($style_id)){
-////            if(!$id && empty($style_id)){
-////            if(empty($style_id)){
-//
-//                /* Get home post id
-//                * Replace by global options
-//                 */
-//                $args = array(
-//                    'post_type'      => 'templaza_style',
-//                    'meta_query' => array(
-//                        array(
-//                            'key' => 'home',
-//                            'value' => '1',
-//                            'compare' => '=',
-//                        )
-//                    )
-//                );
-//                $posts = \get_posts($args);
-//                if($posts && count($posts)){
-//                    $style_id   = $posts[0] -> ID;
-//                }
-//            }
-
-
             $options    = self::get_theme_option_by_id($style_id);
 
             if(count($options)){
@@ -226,18 +201,22 @@ if(!class_exists('TemPlazaFramework\Functions')){
             return $options;
         }
 
-        public static function get_theme_option_by_id($style_id){
+        public static function get_theme_option_by_id($style_id, $post_type = 'templaza_style'){
+
+            $post_type  = !empty($post_type)?$post_type:'templaza_style';
+
             $store_id   = __METHOD__;
-            $store_id  .= ':'.$style_id;
+            $store_id  .= '::'.$style_id;
+            $store_id  .= '::'.$post_type;
             $store_id   = md5($store_id);
 
             // Is slug
             if($style_id && !is_numeric($style_id)) {
                 // Get style id by style slug
                 $style_args = array(
-                    'name' => $style_id,
-                    'post_type' => 'templaza_style',
-                    'numberposts' => 1
+                    'name'          => $style_id,
+                    'post_type'     => $post_type,
+                    'numberposts'   => 1
                 );
                 $posts = \get_posts($style_args);
                 if(!empty($posts)){
@@ -250,42 +229,23 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 return self::$cache[$store_id];
             }
 
-//            // Get default style options if not style id
-//            if(!$style_id){
-//                // Get home post id
-//                $args = array(
-//                    'post_type'      => 'templaza_style',
-//                    'meta_query' => array(
-//                        array(
-//                            'key' => 'home',
-//                            'value' => '1',
-//                            'compare' => '=',
-//                        )
-//                    )
-//                );
-//                $posts = \get_posts($args);
-//                if($posts && count($posts)){
-//                    $style_id   = $posts[0] -> ID;
-//                }
-//            }
-
             // Get options by style id
             if($style_id){
-                $file_id    = get_post_meta($style_id, '_templaza_style', true);
-                $theme_name = get_post_meta($style_id, '_templaza_style_theme', true);
+                $file_id    = get_post_meta($style_id, '_'.$post_type, true);
+                $theme_name = get_post_meta($style_id, '_'.$post_type.'_theme', true);
                 if($file_id){
                     require_once ( ABSPATH . '/wp-admin/includes/file.php' );
                     global $wp_filesystem;
                     WP_Filesystem();
 
+                    $post_type_folder   = $post_type != 'templaza_style'?'/'.$post_type:'';
+
                     // Option file path from uploads folder
-                    $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$file_id.'.json';
+                    $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.$post_type_folder.'/'.$file_id.'.json';
 
                     // Option file path from theme if uploads folder not exists config file
-                    $file   = !file_exists($file)?TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION .'/'
+                    $file   = !file_exists($file)?TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.$post_type_folder .'/'
                         . $file_id . '.json':$file;
-
-//                    var_dump($file); die();
 
                     if(file_exists($file)){
                         $options    = $wp_filesystem -> get_contents($file);
@@ -762,5 +722,259 @@ if(!class_exists('TemPlazaFramework\Functions')){
 		    }
 		    return $css;
 	    }
+
+	    public static function get_template_id(){
+//            $store_id   = __METHOD__;
+
+            $result_id   = false;
+
+            $the_ID = \get_the_ID();
+            global $wp;
+
+            if(is_single() || is_archive()){
+                if(is_archive() && \get_page_by_path($wp -> request)){
+                    // Get page
+                    $page   = \get_page_by_path($wp -> request);
+                    if($page -> ID){
+
+                        $result_id   = get_post_meta($page -> ID, 'templaza-style', true);
+
+//                        $result_id  = $page -> ID;
+//                        return $page -> ID;
+                    }
+                }
+                $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
+                if(!empty($post_type)){
+                    $key    = null;
+                    if(is_single()){
+                        $key    = $post_type.'-single-style';
+                    }elseif(is_archive()){
+                        $key    = $post_type.'-archive-style';
+                    }
+                    if($key) {
+                        if($style_id = \Redux::get_option(self::get_theme_option_name(), $key)){
+                            $result_id  = $style_id;
+//                            return $style_id;
+                        }
+                    }
+                }
+            }elseif(is_404()){
+                if($style_id = \Redux::get_option(self::get_theme_option_name(), '404-page-style')){
+                    $result_id  = $style_id;
+//                    return $style_id;
+                }
+            }
+
+
+            if(!$result_id){
+
+//                $result_id    = get_post_meta($the_ID, '_templaza_style', true);
+                $result_id   = get_post_meta($the_ID, 'templaza-style', true);
+            }
+            // Is slug
+            if($result_id && is_numeric($result_id)) {
+                // Get style id by style slug
+                $style_args = array(
+                    'name'          => $result_id,
+                    'post_type'     => $post_type,
+                    'numberposts'   => 1
+                );
+                $posts = \get_posts($style_args);
+                if(!empty($posts)){
+                    $result_id = $posts[0]->post_name;
+                }
+
+
+            }
+
+//            // Get home id
+//            if(empty($result_id)){
+//                // Get default
+//            }
+
+
+            return $result_id;
+        }
+
+	    /**
+	     * Get header options
+         * @param string $layout An optional of header
+         * @return array Header options
+	     * */
+	    public static function get_header_options(){
+
+            $store_id   = __METHOD__;
+            $store_id   = md5($store_id);
+
+            if(isset(static::$cache[$store_id])){
+                return static::$cache[$store_id];
+            }
+
+            $options    = static::__get_post_type_options('templaza_header', '__h_template_assign');
+
+            if(!empty($options)) {
+                static::$cache[$store_id]   = $options;
+            }
+
+            return $options;
+        }
+
+	    /**
+	     * Get footer options
+         * @param string $layout An optional of header
+         * @return array Header options
+	     * */
+	    public static function get_footer_options(){
+
+            $store_id   = __METHOD__;
+            $store_id   = md5($store_id);
+
+            if(isset(static::$cache[$store_id])){
+                return static::$cache[$store_id];
+            }
+
+            $options    = static::__get_post_type_options('templaza_footer', '__f_template_assign');
+
+            if(!empty($options)) {
+                static::$cache[$store_id]   = $options;
+            }
+
+            return $options;
+        }
+
+        /**
+         * Get header id
+         * */
+        public static function get_footer_id(){
+            return static::__get_post_type_file_name('templaza_footer', '__f_template_assign');
+        }
+
+        /**
+         * Get header id
+         * */
+        public static function get_header_id(){
+            return static::__get_post_type_file_name('templaza_header', '__h_template_assign');
+        }
+
+        /**
+         * Get post type id
+         * */
+        protected static function __get_post_type_file_name($post_type = '', $meta_key_assigned = ''){
+
+            $template_id  = static::get_template_id();
+
+            $store_id   = __METHOD__;
+            $store_id  .= '::'.$post_type;
+            $store_id  .= '::'.$template_id;
+            $store_id   = md5($store_id);
+
+            if(isset(static::$cache[$store_id])){
+                return static::$cache[$store_id];
+            }
+
+            $json_file_name = '';
+
+            $args   = array(
+                'post_type'     => $post_type,
+                'post_status'   => 'publish',
+                'numberposts'   => 1,
+                'meta_query'    => array(
+                    array(
+                        'key'   => '__home',
+                        'value' => 1
+                    ),
+                    array(
+                        'key'   => '_'.$post_type.'__theme',
+                        'value' => get_template()
+                    )
+                )
+            );
+
+            // Get default header options
+            $_header_opt_default = get_posts($args);
+            if(!empty($_header_opt_default) && !is_wp_error($_header_opt_default)){
+                $json_file_name = $_header_opt_default[0] -> post_name;
+            }
+
+            // Get header options assigned
+            if($template_id){
+                $args['meta_query'] = array(
+                    array(
+                        'key'   => $meta_key_assigned,
+                        'value' => $template_id
+                    ),
+                    array(
+                        'key'   => '_'.$post_type.'__theme',
+                        'value' => get_template()
+                    )
+                );
+
+                // Get header options assigned
+                $_header_opt = get_posts($args);
+                if(!empty($_header_opt) && !is_wp_error($_header_opt)){
+                    $json_file_name = $_header_opt[0] -> post_name;
+                }
+            }
+
+            if(!empty($json_file_name)){
+                static::$cache[$store_id]   = $json_file_name;
+            }
+
+            return $json_file_name;
+        }
+
+	    /**
+	     * Get header options
+         * @param string $post_type An optional of post type
+         * @param string $meta_key_assigned An optional which post type stored with template
+         * @return array Post type options
+	     * */
+	    protected static function __get_post_type_options($post_type = '', $meta_key_assigned = ''){
+
+            $template_id  = static::get_template_id();
+
+            $store_id   = __METHOD__;
+            $store_id  .= '::'.$post_type;
+            $store_id  .= '::'.$template_id;
+            $store_id   = md5($store_id);
+
+            if(isset(static::$cache[$store_id])){
+                return static::$cache[$store_id];
+            }
+
+            $options        = array();
+            $json_file_name = static::__get_post_type_file_name($post_type, $meta_key_assigned);
+
+            // If header does not exists, return empty array
+            if(empty($json_file_name)){
+                return $options;
+            }
+
+            // Get header options from json file
+            $base_path      = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/'.$post_type;
+            $default_path   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$post_type;
+
+            $json_file  = $default_path.'/'.$json_file_name.'.json';
+
+            if(!file_exists($json_file)){
+                $json_file  = $base_path.'/'.$json_file_name.'.json';
+            }
+
+            // If json file does not exists
+            if(!file_exists($json_file)){
+                return $options;
+            }
+
+            $data   = file_get_contents($json_file);
+
+            $data   = (!empty($data) && is_string($data))?json_decode($data, true):$data;
+
+            if(!empty($data)) {
+                $options = $data;
+                static::$cache[$store_id]   = $data;
+            }
+
+            return $options;
+        }
     }
 }

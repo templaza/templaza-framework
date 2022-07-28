@@ -51,7 +51,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
                                     ?>
                                 <div class="uk-cover-container">
                                     <canvas width="" height="<?php echo esc_attr($latest_post_image_cover_height);?>>"></canvas>
-                                    <img src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_ttr(get_the_title($post_item->ID));?>" data-uk-cover>
+                                    <img src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?>" data-uk-cover>
                                 </div>
                             <?php
                                 }else{

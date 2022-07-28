@@ -7,7 +7,8 @@ use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 use TemPlazaFramework\Menu;
 
-$options    = Functions::get_theme_options();
+$gb_options                 = Functions::get_theme_options();
+$options                    = Functions::get_header_options();
 
 $blog_title                 = get_bloginfo();
 $mode                       = isset($options['header-sidebar-menu-mode'])?$options['header-sidebar-menu-mode']:'left';

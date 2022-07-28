@@ -65,21 +65,6 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 		}
 	];
 
-	// const title_tag =[
-	// 	{"label": "h1", "value": "h1"},
-	// 	{"label": "h2", "value": "h2"},
-	// 	{"label": "h3", "value": "h3"},
-	// 	{"label": "h4", "value": "h4"},
-	// 	{"label": "h5", "value": "h5"},
-	// 	{"label": "h6", "value": "h6"},
-	// 	{"label": "div", "value": "div"},
-	// 	{"label": "span", "value": "span"},
-	// 	{"label": "p", "value": "p"}
-	// ];
-	// const myControl	= function () {
-	//
-	// };
-
 	let _custom_fields=[];
 
 	if(typeof attributes.ap_custom_fields !== "undefined" && attributes.ap_custom_fields.length
@@ -132,48 +117,6 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 				<InspectorControls key="setting">
 					<PanelBody>
 						<div id="templaza-framework-adv-products-filter-controls">
-							{/*<TextControl*/}
-							{/*	label={__('Title')}*/}
-							{/*	value={attributes.title}*/}
-							{/*	onChange={(value) => {*/}
-							{/*		setAttributes({title: value})*/}
-							{/*	}}/>*/}
-							{/*<TextControl*/}
-							{/*	label={__('Title')}*/}
-							{/*	value={className}*/}
-							{/*	onChange={ ( value ) => {setClassName( value ); setAttributes({form_title: value})}}/>*/}
-
-							{/*{typeof attributes.title !== "undefined" &&*/}
-							{/*<SelectControl*/}
-							{/*	// Selected value.*/}
-							{/*	value={ attributes.title_tag }*/}
-							{/*	label={ __( 'Title Tag' ) }*/}
-							{/*	onChange={( val ) => { setAttributes( { title_tag: val }) }}*/}
-							{/*	options={title_tag} />*/}
-							{/*}*/}
-							{/*{typeof attributes.title !== "undefined" &&*/}
-							{/*<SelectControl*/}
-							{/*	// Selected value.*/}
-							{/*	value={ attributes.title_display }*/}
-							{/*	label={ __( 'Title Display' ) }*/}
-							{/*	onChange={( val ) => { setAttributes( { title_display: val }) }}*/}
-							{/*	options={ title_display } />*/}
-							{/*}*/}
-							{/*/!*{ top: '50px', left: '10%', right: '10%', bottom: '50px', }*!/*/}
-							{/*{typeof attributes.title !== "undefined" &&*/}
-							{/*<BoxControl values={ {*/}
-							{/*	top: '50px',*/}
-							{/*	left: '10%',*/}
-							{/*	right: '10%',*/}
-							{/*	bottom: '50px',*/}
-							{/*} }*/}
-							{/*			onChange={ ( nextValues ) => console.log(nextValues) }/>*/}
-							{/*}*/}
-							{/*{typeof attributes.title !== "undefined" &&*/}
-							{/*<BoxControl values={ attributes.title_margin }*/}
-							{/*			onChange={ ( nextValues ) => console.log(nextValues) }/>*/}
-							{/*}*/}
-
 							<BaseControl id="ap-custom-field">
 								<SortableSelectInput
 									className='react-sortable-select'
@@ -205,22 +148,6 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 									variant='fixed'
 								/>
 							</BaseControl>
-							{/*<BaseControl id="textarea-2" label="Test React Select" help="Enter some text">*/}
-							{/*	<ReactSelect*/}
-							{/*		// Selected value.*/}
-							{/*		isMulti='true'*/}
-							{/*		value={ attributes.ap_custom_fields }*/}
-							{/*		onChange={( val ) => { console.log(val); setAttributes( { ap_custom_fields: val }) }}*/}
-							{/*		options={ typeof tz_gt_advanced_products_filter !== "undefined"?tz_gt_advanced_products_filter.custom_fields_options:'' } />*/}
-							{/*</BaseControl>*/}
-
-							{/*<SelectControl*/}
-							{/*	// Selected value.*/}
-							{/*	multiple*/}
-							{/*	value={ attributes.ap_custom_fields }*/}
-							{/*	label={ __( 'Select Custom Fields' ) }*/}
-							{/*	onChange={( val ) => { setAttributes( { ap_custom_fields: val }) }}*/}
-							{/*	options={ typeof tz_gt_advanced_products_filter !== "undefined"?tz_gt_advanced_products_filter.custom_fields_options:'' } />*/}
 
 							<ToggleControl
 								label={__('Filter By Keyword')}
@@ -237,7 +164,6 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 				</InspectorControls>
 
 				<div { ...useBlockProps() }>
-					{/*{"<"+attributes.title_tag+">" +attributes.title+"</"+attributes.title_tag+">"}*/}
 					[advanced-product-form include="{
 						typeof attributes.ap_custom_fields === "object"?attributes.ap_custom_fields.join(','):attributes.ap_custom_fields
 				}" enable_keyword="{isChecked?1:0}" submit_text="{attributes.submit_text}"]

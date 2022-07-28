@@ -37,8 +37,13 @@ class TemPlazaFrameWork{
 
         $instance -> load_gutenberg_blocks();
 
-        if(class_exists( 'woocommerce' )) {
+        if(is_plugin_active( 'woocommerce/woocommerce.php' )) {
             require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-product-brand.php';
+            require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-deal.php';
+            require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-variation.php';
+            if ( get_option( 'templaza_variation_images' ) == 'yes' ) {
+                require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/variation-options.php';
+            }
         }
 
         static::$instance   = $instance;
@@ -59,6 +64,10 @@ class TemPlazaFrameWork{
 
         // Register widgets
         add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+
+        register_activation_hook( TEMPLAZA_FRAMEWORK_PATH.'/templaza-framework.php', array($this, 'create_post_default') );
+        add_action( 'upgrader_process_complete', array($this, 'create_post_default') );
+        add_action( 'after_setup_theme', array($this, 'create_post_default') );
 
         do_action( 'templaza-framework/plugin/hooks', $this );
     }
@@ -448,19 +457,56 @@ class TemPlazaFrameWork{
     }
 
     protected function init_template(){
-        ob_start();
-        $this -> load_my_header();
-        $this -> template_init['header']    = ob_get_contents();
-        ob_end_clean();
-        ob_start();
-        Templates::load_my_layout('body', true, false);
-        $this -> template_init['body']    = ob_get_contents();
-        ob_end_clean();
-        ob_start();
-        $this -> load_my_footer();
-        $this -> template_init['footer']    = ob_get_contents();
-        ob_end_clean();
 
+        if(!is_admin()){
+            $header_options = Functions::get_header_options();
+            $footer_options = Functions::get_footer_options();
+
+            $this -> template_init['body']  = '';
+
+            // Generate header layout if it exists
+            if(!empty($header_options) && isset($header_options['h_layout'])) {
+                $hlayout_shortcode = Functions::generate_option_to_shortcode($header_options['h_layout']);
+
+                if (!empty($hlayout_shortcode)) {
+                    do {
+                        $hlayout_shortcode = trim(do_shortcode($hlayout_shortcode));
+                    } while (preg_match_all('/' . get_shortcode_regex() . '/', $hlayout_shortcode, $matches, PREG_SET_ORDER));
+                }
+
+                $this->template_init['body'] = (!empty($hlayout_shortcode)) ? $hlayout_shortcode : '';
+            }
+
+            ob_start();
+            $this -> load_my_header();
+            $this -> template_init['header']    = ob_get_contents();
+            ob_end_clean();
+
+            // Generate body layout
+            ob_start();
+            Templates::load_my_layout('body', true, false);
+            $this -> template_init['body']    .= ob_get_contents();
+            ob_end_clean();
+
+            // Generate footer layout if it exists
+            if(!empty($footer_options) && isset($footer_options['f_layout'])) {
+                $flayout_shortcode = Functions::generate_option_to_shortcode($footer_options['f_layout']);
+
+                if (!empty($flayout_shortcode)) {
+                    do {
+                        $flayout_shortcode = trim(do_shortcode($flayout_shortcode));
+                    } while (preg_match_all('/' . get_shortcode_regex() . '/', $flayout_shortcode, $matches, PREG_SET_ORDER));
+                }
+
+                $this->template_init['body'] .= (!empty($flayout_shortcode)) ? $flayout_shortcode : '';
+            }
+
+            ob_start();
+            $this -> load_my_footer();
+            $this -> template_init['footer']    = ob_get_contents();
+            ob_end_clean();
+
+        }
     }
 
     public function display_header(){
@@ -478,6 +524,67 @@ class TemPlazaFrameWork{
     public function display_footer(){
         if(isset($this -> template_init['footer'])){
             echo $this -> template_init['footer'];
+        }
+    }
+
+    /**
+     * Create post default
+     * */
+    public function create_post_default(){
+        $post_types = array('templaza_header', 'templaza_footer');
+
+        foreach ($post_types as $ptype) {
+            // Check data exists
+            $args = array(
+                'post_type'     => $ptype,
+                'post_status'   => 'publish',
+                'meta_query'    => array(
+                    array(
+                        'key'   => '__home',
+                        'value' => 1
+                    )
+                )
+            );
+
+            $pexists    = \get_posts($args);
+            if(is_wp_error($pexists) || !empty($pexists)){
+                continue;
+            }
+
+            // Create post default
+            $author = (int) get_current_user_id();
+
+            $now    = date('Y-m-d H:i:s');
+            $postdata = array(
+                'post_author'   => $author,
+                'post_date'     => $now,
+                'post_date_gmt' => $now,
+                'post_title'    => esc_html__('Default', $this -> text_domain),
+                'post_status'   => 'publish',
+                'post_name'     => 'default',
+                'post_type'     => $ptype,
+            );
+
+            $post_id = wp_insert_post( $postdata, true );
+
+            if($post_id){
+                // Assign post type to current theme
+                update_post_meta($post_id, '_' . $ptype, $postdata['post_name']);
+                update_post_meta($post_id, '_' . $ptype . '__theme', get_template());
+                update_post_meta($post_id, '__home', 1);
+
+                // Copy json file
+                $source_file    = TEMPLAZA_FRAMEWORK_CORE_PATH.'/data-import/'.$ptype.'.json';
+                $dest_file      = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$ptype;
+                if(!is_dir($dest_file)){
+                    require_once(ABSPATH . '/wp-admin/includes/file.php');
+                    mkdir($dest_file, FS_CHMOD_DIR, true);
+                }
+                $dest_file     .= '/'.$postdata['post_name'].'.json';
+                if(file_exists($source_file) && !file_exists($dest_file)){
+                    copy($source_file, $dest_file);
+                }
+            }
         }
     }
 

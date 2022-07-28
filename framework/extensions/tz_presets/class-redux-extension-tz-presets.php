@@ -33,12 +33,10 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 		 *
 		 * @var bool
 		 */
-		public $is_field = false;
-
-		private $text_domain = 'templaza-framework';
-
-
         private $preset_path;
+        private $preset_opt_name;
+		public $is_field = false;
+		private $text_domain = 'templaza-framework';
 
 		/**
 		 * Class Constructor. Defines the args for the extions class
@@ -52,9 +50,9 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 		public function __construct( $parent ) {
 			parent::__construct( $parent, __FILE__ );
 
-			$this -> text_domain    = Functions::get_my_text_domain();
-
-            $this -> preset_path    = TEMPLAZA_FRAMEWORK_THEME_PATH.'/presets';
+			$this -> text_domain        = Functions::get_my_text_domain();
+            $this -> preset_opt_name    = 'presets__opt_name';
+            $this -> preset_path        = TEMPLAZA_FRAMEWORK_THEME_PATH.'/presets';
 
 			$this -> hooks();
 
@@ -63,25 +61,11 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
             $this->is_field = Redux_Helpers::is_field_in_use( $parent, 'tz_presets' );
 
             if ( ! $this->is_field && is_admin() && isset($this->parent->args['show_presets']) && $this->parent->args['show_presets'] ) {
+//                if(isset($parent -> args['preset_post_type']) && !empty($parent -> args['preset_post_type'])){
+//                    $this -> preset_path    .= '/'.$parent -> args['preset_post_type'];
+//                }
                 $this->add_section();
             }
-
-
-//			$this->add_field( 'import_export' );
-
-//			add_action( 'wp_ajax_redux_download_options-' . $this->parent->args['opt_name'], array( $this, 'download_options' ) );
-//			add_action( 'wp_ajax_nopriv_redux_download_options-' . $this->parent->args['opt_name'], array( $this, 'download_options' ) );
-//
-//			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-//			do_action( 'redux/options/' . $this->parent->args['opt_name'] . '/import', array( $this, 'remove_cookie' ) );
-//
-//			$this->is_field = Redux_Helpers::is_field_in_use( $parent, 'import_export' );
-//
-//			if ( ! $this->is_field && $this->parent->args['show_import_export'] ) {
-//				$this->add_section();
-//			}
-//
-//			add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 		}
 
 		private function hooks(){
@@ -95,10 +79,16 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 
         private function get_preset_path(){
 
+            global $pagenow;
             $preset_path = $this->preset_path;
 
             $page       = isset($_REQUEST['page']) && !empty($_REQUEST['page'])?$_REQUEST['page']:false;
+            $post_id  = isset($_REQUEST['post']) && !empty($_REQUEST['post'])?$_REQUEST['post']:0;
             $post_type  = isset($_REQUEST['post_type']) && !empty($_REQUEST['post_type'])?$_REQUEST['post_type']:false;
+
+            if($pagenow == 'post.php' && empty($post_type) && $post_id){
+                $post_type  = get_post_type($post_id);
+            }
 
             if(isset($post_type) && !empty($post_type)){
                 if($post_type != 'templaza_style'){
@@ -137,10 +127,12 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
                 $page       = isset($_REQUEST['page']) && !empty($_REQUEST['page'])?$_REQUEST['page']:false;
                 $post_id    = isset($_REQUEST['post_id']) && !empty($_REQUEST['post_id'])?$_REQUEST['post_id']:false;
                 $post_type  = isset($_REQUEST['post_type']) && !empty($_REQUEST['post_type'])?$_REQUEST['post_type']:false;
-
-                if($post_type && $post_type == 'templaza_style'){
+                if($post_type){
+                    if($post_type != 'templaza_style'){
+                        $dest_file  .= '/'.$post_type;
+                    }
                     if($post_id){
-                        $slug   = get_post_meta($post_id, '_templaza_style', true);
+                        $slug = get_post_meta($post_id, '_'.$post_type, true);
 
                         $dest_file  .= '/'.$slug.'.json';
                     }
@@ -148,12 +140,15 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
                     $dest_file  .= '/settings/setting.json';
                 }
 
-                if(file_exists($dest_file)){
-                    file_put_contents($dest_file, json_encode($preset['preset']));
-
-                    wp_send_json_success(array('message' => __('Preset loaded', $this -> text_domain)));
+                if(!file_exists($dest_file)){
+                    wp_send_json_error(array('message' => __(sprintf('Preset not loaded: File %s not found', $dest_file), $this -> text_domain)));
                     wp_die();
                 }
+
+                file_put_contents($dest_file, json_encode($preset['preset']));
+
+                wp_send_json_success(array('message' => __('Preset loaded', $this -> text_domain)));
+                wp_die();
             }
 
             wp_send_json_error(array('message' => __('Preset not loaded', $this -> text_domain)));
@@ -165,12 +160,27 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
             $preset_path = $this->get_preset_path();
 
             $name       = isset($_REQUEST['name']) && !empty($_REQUEST['name'])?$_REQUEST['name']:false;
+            $post_type  = isset($_REQUEST['post_type']) && !empty($_REQUEST['post_type'])?$_REQUEST['post_type']:'';
 
             $file   = $preset_path.'/'.$name.'.json';
 
             if(!file_exists($file)){
-                wp_send_json_error(array('message' => __('Preset file not found', $this -> text_domain)));
+                wp_send_json_error(array('message' => __(sprintf('Preset file %s not found', $file), $this -> text_domain)));
                 wp_die();
+            }
+
+            $preset_data    = file_get_contents($file);
+            $preset_data    = !empty($preset_data)?json_decode($preset_data, true):array();
+
+            // Remove image if it exists
+            $image  = isset($preset_data['image'])?$preset_data['image']:'';
+            if(!empty($image)){
+                $image_path = TEMPLAZA_FRAMEWORK_THEME_PATH.'/images/presets'.(!empty($post_type)?'/'.$post_type:'')
+                    .'/'.$image;
+
+                if(file_exists($image_path)){
+                    unlink($image_path);
+                }
             }
 
             unlink($file);
@@ -189,50 +199,29 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 		        mkdir($preset_path, FS_CHMOD_DIR, true);
             }
 
-            $title      = isset($_REQUEST['title']) && !empty($_REQUEST['title'])?$_REQUEST['title']:'';
+		    $preset_data = isset($_REQUEST['preset_data'])?$_REQUEST['preset_data']:array();
+
+		    if(empty($preset_data)){
+                wp_send_json_error(array('message' => esc_html__('Save preset error: Please enter value!')));
+                wp_die();
+            }
+
+            $title      = isset($preset_data['title']) && !empty($preset_data['title'])?$preset_data['title']:'';
+            $image      = isset($preset_data['image']) && !empty($preset_data['image'])?$preset_data['image']:'';
             $preset     = isset($_REQUEST['preset']) && !empty($_REQUEST['preset'])?$_REQUEST['preset']:'';
-            $desc       = isset($_REQUEST['description']) && !empty($_REQUEST['description'])?$_REQUEST['description']:'';
+            $desc       = isset($preset_data['description']) && !empty($preset_data['description'])?$preset_data['description']:'';
 
-//            $source_file_name   = '';
-//
-//            if(isset($post_type) && !empty($post_type)){
-//                if($post_type == 'templaza_style'){
-//                    if($post_id){
-//                        $source_file_name   = get_post_meta($post_id, '_templaza_style', true).'.json';
-//                    }
-//                }else {
-//                    $preset_path .= '/' . $post_type;
-//                }
-//            }elseif($page){
-//                if($page == Functions::get_theme_option_name().'_options'){
-//                    $preset_path    .= '/settings';
-//                    $source_file_name   = 'setting.json';
-//                }else{
-//                    $page_name      = preg_replace('/^'.TEMPLAZA_FRAMEWORK.'/', '', $page);
-//                    $preset_path    .= '/'.$page_name;
-//                    $source_file_name   = $page_name.'.json';
-//                }
-//            }
-//
-//            if(!file_exists($source_file.'/'.$source_file_name)){
-//                wp_send_json_error(array('message' => __('Config file not found.', $this -> text_domain)));
-//                wp_die();
-//            }
-//
-//            $preset = file_get_contents($source_file);
-
-		    $title_slug  = sanitize_title($title);
+		    $title_slug = sanitize_title($title);
 		    $file_name  = $title_slug;
             $file_path  = $preset_path.'/'.$file_name;
             $file_name    = uniqid($title_slug.'-');
 
+
             while(file_exists($file_path.'/'.$file_name.'.json')){
                 $file_name = uniqid($title_slug.'-');
             }
-            $file_name  .= '.json';
 
-
-            $file_path  = $preset_path.'/'.$file_name;
+            $file_path  = $preset_path.'/'.$file_name.'.json';
 
             $preset = is_string($preset)?json_decode(stripslashes($preset)):$preset;
 
@@ -242,10 +231,45 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
                 'preset'        => $preset
             );
 
-            file_put_contents($file_path, json_encode($data), FS_CHMOD_FILE);
+            // Upload image to theme
+            if(isset($image['url']) && !empty($image['url'])){
+                $image_name = basename($image['url']);
 
-            wp_send_json_success(array('message' => __('Preset saved', $this -> text_domain)));
+                $temp       = explode('.', $image_name);
+                $img_ext    = end($temp);
 
+                $post_type  = isset($_REQUEST['post_type']) && !empty($_REQUEST['post_type'])?$_REQUEST['post_type']:false;
+                $dest_path  = TEMPLAZA_FRAMEWORK_THEME_PATH.'/images/presets'.($post_type?'/'.$post_type:'');
+
+                if(!is_dir($dest_path)){
+                    require_once(ABSPATH . '/wp-admin/includes/file.php');
+                    mkdir($dest_path, FS_CHMOD_DIR, true);
+                }
+
+                $img_name   = $file_name.'.'.$img_ext;
+
+                $dest_path  .= '/'.$img_name;
+
+                if(file_exists($dest_path)){
+                    unlink($dest_path);
+                }
+
+                if(!copy($image['url'], $dest_path)){
+                    wp_send_json_error(array('message' => __('Preset saved error: Can not copy image!', $this -> text_domain)));
+                    wp_die();
+                }
+
+                $data['image']  = $img_name;
+            }
+
+            $result = file_put_contents($file_path, json_encode($data), FS_CHMOD_FILE);
+
+            if(!$result){
+                wp_send_json_error(array('message' => __('Preset saved error: Can not save preset data!', $this -> text_domain)));
+                wp_die();
+            }
+
+            wp_send_json_success(array('message' => __('Preset saved successfully!', $this -> text_domain)));
             wp_die();
         }
 
@@ -261,9 +285,32 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 				'customizer' => false,
 				'fields'     => array(
 					array(
-						'id'         => 'presets',
-						'type'       => 'tz_presets',
-						'full_width' => true,
+						'id'            => 'presets',
+						'type'          => 'tz_presets',
+						'full_width'    => true,
+                        'preset_path'   => $this -> get_preset_path(),
+                        'fields'        => array(
+                            array(
+                                'id'            => 'title',
+                                'type'          => 'text',
+                                'full_width'    => true,
+                                'validate'      => 'not_empty',
+                                'title'         => esc_html__('Title', $this -> text_domain),
+                                'placeholder'   => esc_html__('Some text...', $this -> text_domain)
+                            ),
+                            array(
+                                'id'    => 'image',
+                                'type'  => 'media',
+                                'title' => esc_html__('Image', $this -> text_domain),
+                                'full_width'    => true,
+                            ),
+                            array(
+                                'id'    => 'description',
+                                'type'  => 'textarea',
+                                'title' => esc_html__('Description', $this -> text_domain),
+                                'full_width'    => true,
+                            )
+                        )
 					),
 				),
 			);

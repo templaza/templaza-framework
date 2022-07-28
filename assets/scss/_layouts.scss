@@ -93,3 +93,18 @@
 .templaza-column.uk-container {
 	box-sizing: border-box;
 }
+.templaza-error-page{
+	position: relative;
+	&:before{
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+	}
+	.page-404{
+		z-index: 2;
+	}
+}

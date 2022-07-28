@@ -146,5 +146,22 @@ if(!class_exists('TemPlazaFramework\Admin_Functions')){
 
             return $string;
         }
+
+        /**
+         * Check localize object name exists
+         * @param string $handle      Script handle the data will be attached to.
+         * @param string $object_name Name for the JavaScript object. Passed directly, so it should be qualified JS variable.
+         *                            Example: '/[a-zA-Z0-9_]+/'.
+         * @return bool
+         * */
+        public static function is_localize_script($handle, $object_name){
+            $localize_data    = wp_scripts() -> get_data($handle, 'data');
+
+            if(empty($localize_data)){
+                return false;
+            }
+
+            return (bool) preg_match_all('/var '.addslashes($object_name).'/', $localize_data);
+        }
     }
 }

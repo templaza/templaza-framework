@@ -442,16 +442,16 @@
 }
 
 .templaza-sidebar.has-collapse-hide .widget:not(.products-filter-widget) .widget-content,
-.templaza-sidebar.has-collapse-hide .templaza_woo_filter:not(.rz-active) .templaza_woo_filter-control,
+.templaza-sidebar.has-collapse-hide .templaza_woo_filter:not(.templaza-active) .templaza_woo_filter-control,
 .elementor-widget-wp-widget-templaza-products-filter.has-collapse-hide .widget:not(.products-filter-widget) .widget-content,
-.elementor-widget-wp-widget-templaza-products-filter.has-collapse-hide .templaza_woo_filter:not(.rz-active) .templaza_woo_filter-control {
+.elementor-widget-wp-widget-templaza-products-filter.has-collapse-hide .templaza_woo_filter:not(.templaza-active) .templaza_woo_filter-control {
   display: none;
 }
 
-.templaza-sidebar .templaza_woo_filter.rz-active > .templaza_woo_filter-name:after,
-.templaza-sidebar .widget-title.rz-active .templaza-svg-icon,
-.elementor-widget-wp-widget-templaza-products-filter .templaza_woo_filter.rz-active > .templaza_woo_filter-name:after,
-.elementor-widget-wp-widget-templaza-products-filter .widget-title.rz-active .templaza-svg-icon {
+.templaza-sidebar .templaza_woo_filter.templaza-active > .templaza_woo_filter-name:after,
+.templaza-sidebar .widget-title.templaza-active .templaza-svg-icon,
+.elementor-widget-wp-widget-templaza-products-filter .templaza_woo_filter.templaza-active > .templaza_woo_filter-name:after,
+.elementor-widget-wp-widget-templaza-products-filter .widget-title.templaza-active .templaza-svg-icon {
   transform: rotate(180deg);
 }
 
@@ -493,7 +493,7 @@
   text-overflow: ellipsis;
 }
 
-.catalog-toolbar-filters__v2 .widget:not(.products-filter-widget) .widget-title.rz-active .templaza-svg-icon {
+.catalog-toolbar-filters__v2 .widget:not(.products-filter-widget) .widget-title.templaza-active .templaza-svg-icon {
   transform: rotate(180deg) translateY(50%);
 }
 
@@ -616,8 +616,8 @@
   min-width: 120px;
 }
 
-.catalog-toolbar-filters__v2 .templaza_woo_filter-name.rz-active:after,
-.catalog-toolbar-filters__v2 .widget-title.rz-active .templaza-svg-icon {
+.catalog-toolbar-filters__v2 .templaza_woo_filter-name.templaza-active:after,
+.catalog-toolbar-filters__v2 .widget-title.templaza-active .templaza-svg-icon {
   transform: rotate(180deg);
 }
 

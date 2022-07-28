@@ -83,7 +83,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                         'default'  => false,
                     ),
                     array(
-                        'id'                      => 'typography-heading-element',
+                        /* To use this id is a variable. You should create id with "_" character*/
+                        'id'                      => 'typography_heading_element',
                         'type'                    => 'typography',
                         'title'                   => esc_html__( 'Heading Font', $this -> text_domain ),
                         'subtitle'                => esc_html__( 'Specify Heading font properties.', $this -> text_domain ),
@@ -107,6 +108,18 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                             'font-weight'    => '',
                             'letter-spacing' => '',
                             'text-transform' => 'none',
+                        ),
+                    ),
+                    array(
+                        'id'     => 'margin-test',
+                        'type'   => 'spacing',
+                        'mode'   => 'margin',
+                        'all'    => false,
+                        'allow_responsive'    => true,
+                        'units'  => array( 'em', 'rem', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                        'title'  => esc_html__('Custom Margin', $this -> text_domain),
+                        'default' => array(
+                            'units' => 'px'
                         ),
                     ),
                     array(

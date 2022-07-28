@@ -130,17 +130,33 @@
         &[type="text"],
         &[type="email"]
         {
-          height:$tz-basic-input-height !important;
+          height:50px !important;
           font-size:0.9em !important;
         }
       }
       button{
-        height:$tz-basic-input-height !important;
+        height:50px !important;
       }
       textarea{
         height:120px;
         font-size:0.9em !important;
       }
+    }
+  }
+}
+.ap-related-product{
+
+}
+.item-video-thumbnail{
+  img{
+    object-fit: cover;
+    height:117px;
+  }
+}
+.ap-tiny-slider{
+  .item-video{
+    iframe{
+      width:100%;
     }
   }
 }

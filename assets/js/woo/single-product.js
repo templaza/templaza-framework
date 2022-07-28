@@ -40,8 +40,8 @@
                 $thumbnail.wrap('<div class="woocommerce-product-gallery__thumbs-carousel swiper-container" style="opacity:0"></div>');
                 $thumbnail.addClass('swiper-wrapper');
                 $thumbnail.find('li').addClass('swiper-slide');
-                $thumbnail.after('<span class="templaza_woo-svg-icon rz-thumbs-button-prev rz-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></span>');
-                $thumbnail.after('<span class="templaza_woo-svg-icon rz-thumbs-button-next rz-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>');
+                $thumbnail.after('<span class="templaza_woo-svg-icon templaza-thumbs-button-prev templaza-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></span>');
+                $thumbnail.after('<span class="templaza_woo-svg-icon templaza-thumbs-button-next templaza-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>');
 
                 var options = {
                     slidesPerView: columns,
@@ -51,8 +51,8 @@
                     watchOverflow: true,
                     spaceBetween: 15,
                     navigation: {
-                        nextEl: '.rz-thumbs-button-next',
-                        prevEl: '.rz-thumbs-button-prev',
+                        nextEl: '.templaza-thumbs-button-next',
+                        prevEl: '.templaza-thumbs-button-prev',
                     },
                     on: {
                         init: function () {
@@ -159,8 +159,8 @@
             $gallery.addClass('swiper-container');
             $galleryWrap.addClass('swiper-wrapper');
             $galleryWrap.children().addClass('swiper-slide');
-            $galleryWrap.after('<span class="templaza_woo-svg-icon rz-swiper-button-prev rz-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></span>');
-            $galleryWrap.after('<span class="templaza_woo-svg-icon rz-swiper-button-next rz-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>');
+            $galleryWrap.after('<span class="templaza_woo-svg-icon templaza-swiper-button-prev templaza-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></span>');
+            $galleryWrap.after('<span class="templaza_woo-svg-icon templaza-swiper-button-next templaza-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>');
             $galleryWrap.after('<div class="swiper-pagination"></div>');
 
             var options = {
@@ -170,8 +170,8 @@
                 watchOverflow: true,
                 spaceBetween: 10,
                 navigation: {
-                    nextEl: '.rz-swiper-button-next',
-                    prevEl: '.rz-swiper-button-prev',
+                    nextEl: '.templaza-swiper-button-next',
+                    prevEl: '.templaza-swiper-button-prev',
                 },
                 pagination: {
                     el: '.swiper-pagination',
@@ -521,11 +521,11 @@
                 $selector.addClass('open');
 
                 if (templaza_woo.$body.hasClass('header-sticky') && isTop) {
-                    templaza_woo.$body.find('.site-header').addClass('rz-header_sticky-act-active');
+                    templaza_woo.$body.find('.site-header').addClass('templaza-header_sticky-act-active');
                 }
             } else {
                 $selector.removeClass('open');
-                templaza_woo.$body.find('.site-header').removeClass('rz-header_sticky-act-active');
+                templaza_woo.$body.find('.site-header').removeClass('templaza-header_sticky-act-active');
             }
 
             if (!isTop) {

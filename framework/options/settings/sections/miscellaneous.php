@@ -271,6 +271,11 @@ Templaza_API::set_section('settings',
                 'title'       => __( 'Background Video', $this -> text_domain ),
                 'required'  => array('404-background-setting', '=', 'video'),
             ),
+            array(
+                'id'          => '404-background-overlay',
+                'type'        => 'color_rgba',
+                'title'       => __( 'Color Overlay', $this -> text_domain ),
+            ),
         )
     )
 );

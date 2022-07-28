@@ -90,6 +90,9 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 add_action('in_admin_header', array($this, 'remove_admin_notices'), 1000);
 
                 add_action('templaza-framework/post_type/registered', array($this, 'post_type_registered'));
+
+                // Change post count in list page
+                add_action( 'views_edit-'.$this -> get_post_type(), array($this, 'custom_view_count') );
             }
         }
 
@@ -256,16 +259,17 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
             }
             add_action('admin_footer', function(){
-                $t  = \Redux::instance($this -> setting_args[$this -> get_post_type()]['opt_name']);
+                $redux  = \Redux::instance($this -> setting_args[$this -> get_post_type()]['opt_name']);
                 if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
-                    if($t && method_exists($t, '_enqueue')) {
-                        $t->_enqueue();
+                    if($redux && method_exists($redux, '_enqueue')) {
+                        $redux->_enqueue();
                     }
                 }else{
-                    if($t && isset($t->enqueue_class) && $t->enqueue_class) {
-                        $t->enqueue_class->init();
+                    if($redux && isset($redux->enqueue_class) && $redux->enqueue_class) {
+                        $redux->enqueue_class->init();
                     }
                 }
+
                 if(!$this ->my_post_type_exists()) {
                     wp_add_inline_script('redux-js', '
                     jQuery(document).ready(function($){
@@ -338,12 +342,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                         $file   = !file_exists($file)?TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION .'/'
                             . $pID . '.json':$file;
 
-//                        $file = TEMPLAZA_FRAMEWORK_THEME_PATH . '/theme_options/' . $pID . '.json';
                         if (file_exists($file)) {
-//                            require_once(ABSPATH . '/wp-admin/includes/file.php');
-//                            global $wp_filesystem;
-//                            WP_Filesystem();
-//                            $options = $wp_filesystem->get_contents($file);
 
                             $options = file_get_contents($file);
 
@@ -395,13 +394,15 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
                         if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
                             $redux->_register_settings();
-
-                            $enqueue    = new Enqueue($redux);
-                            $enqueue -> init();
+//                            $enqueue    = new Enqueue($redux);
+//                            $enqueue -> init();
                         }else{
                             $redux -> options_class -> register();
-                            $redux -> enqueue_class -> init();
+//                            $redux -> enqueue_class -> init();
                         }
+
+                        $enqueue    = new Enqueue($redux);
+                        $enqueue -> framework_init();
 
                         ob_start();
                         if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
@@ -716,6 +717,51 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                     }
                 }
             }
+        }
+
+        public function custom_view_count($views){
+            $args = array(
+                'post_type'=> $this -> get_post_type(),
+                'posts_per_page'    => -1,
+                'meta_query' => array(
+                    array(
+                        'key'     => '_'.$this -> get_post_type().'_theme',
+                        'value'   => get_template(),
+                    )
+                ),
+            );
+
+            if(isset($views['all'])) {
+                $query = new \WP_Query($args);
+                $total = $query->found_posts;
+                $views['all'] = preg_replace('/\(.+\)/U', '(' . $total . ')', $views['all']);
+            }
+
+            if(isset($views['publish'])) {
+                wp_reset_query();
+                $args['post_status'] = 'publish';
+                $query = new \WP_Query($args);
+                $publish = $query->found_posts;
+                $views['publish'] = preg_replace('/\(.+\)/U', '(' . $publish . ')', $views['publish']);
+            }
+
+            if(isset($views['draft'])) {
+                wp_reset_query();
+                $args['post_status']    = 'draft';
+                $query = new \WP_Query($args);
+                $draft = $query->found_posts;
+                $views['draft'] = preg_replace('/\(.+\)/U', '(' . $draft . ')', $views['draft']);
+            }
+
+            if(isset($views['trash'])) {
+                wp_reset_query();
+                $args['post_status']    = 'trash';
+                $query = new \WP_Query($args);
+                $trash = $query->found_posts;
+                $views['trash'] = preg_replace('/\(.+\)/U', '(' . $trash . ')', $views['trash']);
+            }
+
+            return $views;
         }
     }
 }

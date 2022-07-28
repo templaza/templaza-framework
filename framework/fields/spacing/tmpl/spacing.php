@@ -126,10 +126,10 @@ if($allow_responsive){
         }
     }else {
         $value = array(
-            'top' => isset($this->value[$this->field['mode'] . '-' . $position['top']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['top']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['top'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-            'right' => isset($this->value[$this->field['mode'] . '-' . $position['right']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['right']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['right'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-            'bottom' => isset($this->value[$this->field['mode'] . '-' . $position['bottom']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['bottom']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['bottom'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
-            'left' => isset($this->value[$this->field['mode'] . '-' . $position['left']]) ? filter_var($this->value[$this->field['mode'] . '-' . $position['left']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var($this->value['left'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+            'top' => (isset($position['top']) && isset($this->value[$this->field['mode'] . '-' . $position['top']])) ? filter_var($this->value[$this->field['mode'] . '-' . $position['top']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var((isset($this->value['top'])?$this->value['top']:''), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+            'right' => (isset($position['right']) && isset($this->value[$this->field['mode'] . '-' . $position['right']])) ? filter_var($this->value[$this->field['mode'] . '-' . $position['right']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var((isset($this->value['right'])?$this->value['right']:''), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+            'bottom' => (isset($position['bottom']) && isset($this->value[$this->field['mode'] . '-' . $position['bottom']])) ? filter_var($this->value[$this->field['mode'] . '-' . $position['bottom']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var((isset($this->value['bottom'])?$this->value['bottom']:''), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+            'left' => (isset($position['left']) && isset($this->value[$this->field['mode'] . '-' . $position['left']])) ? filter_var($this->value[$this->field['mode'] . '-' . $position['left']], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) : filter_var((isset($this->value['left'])?$this->value['left']:''), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
         );
     }
 

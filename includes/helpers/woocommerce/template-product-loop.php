@@ -2,7 +2,6 @@
 /**
  * Product Loop template hooks.
  */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -146,8 +145,7 @@ class Templaza_Product_Loop {
 		$classes = array(
 			'products'
 		);
-
-		$loop_layout = TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout();
+        $loop_layout = TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout();
 
 		$class_layout = $loop_layout == 'layout-3' ? 'layout-2' : $loop_layout;
 
@@ -178,15 +176,55 @@ class Templaza_Product_Loop {
                 $classes[] = ' ';
             }
 		}
+        $shop_col_tablet       = isset($templaza_options['templaza-shop-column-tablet'])?$templaza_options['templaza-shop-column-tablet']:2;
+        $shop_col_mobile       = isset($templaza_options['templaza-shop-column-mobile'])?$templaza_options['templaza-shop-column-mobile']:1;
+        $shop_col_gap          = isset($templaza_options['templaza-shop-column-gap'])?$templaza_options['templaza-shop-column-gap']:'';
+        if(is_product()) {
+            $product_columns = $product_columns_large =$product_columns_laptop =4;
+            $product_columns_tablet = 2;
+            $product_columns_mobile = 1;
+            $product_gap = '';
+        }else{
 
+            if (wc_get_loop_prop('columns')) {
+                $product_columns = wc_get_loop_prop('columns');
+            } else {
+                $product_columns = isset($templaza_options['templaza-shop-column']) ? $templaza_options['templaza-shop-column'] : 4;
+            }
+            if (wc_get_loop_prop('large_columns')) {
+                $product_columns_large = wc_get_loop_prop('large_columns');
+            } else {
+                $product_columns_large = isset($templaza_options['templaza-shop-column-large']) ? $templaza_options['templaza-shop-column-large'] : 4;
+            }
+            if (wc_get_loop_prop('laptop_columns')) {
+                $product_columns_laptop = wc_get_loop_prop('laptop_columns');
+            } else {
+                $product_columns_laptop = isset($templaza_options['templaza-shop-column-laptop']) ? $templaza_options['templaza-shop-column-laptop'] : 3;
+            }
+            if (wc_get_loop_prop('tablet_columns')) {
+                $product_columns_tablet = wc_get_loop_prop('tablet_columns');
+            } else {
+                $product_columns_tablet = isset($templaza_options['templaza-shop-column-tablet']) ? $templaza_options['templaza-shop-column-tablet'] : 2;
+            }
+            if (wc_get_loop_prop('mobile_columns')) {
+                $product_columns_mobile = wc_get_loop_prop('mobile_columns');
+            } else {
+                $product_columns_mobile = isset($templaza_options['templaza-shop-column-mobile']) ? $templaza_options['templaza-shop-column-mobile'] : 2;
+            }
+            if (wc_get_loop_prop('column_gap')) {
+                $product_gap = wc_get_loop_prop('column_gap');
+            } else {
+                $product_gap = isset($templaza_options['templaza-shop-column-gap']) ? $templaza_options['templaza-shop-column-gap'] : '';
+            }
+        }
 		$classes[] = TemPlaza_Woo\Templaza_Woo_Helper::templaza_is_catalog() ? '' . $products_layout : '';
-		$classes[] = 'columns-' . wc_get_loop_prop( 'columns' );
-		$classes[] = 'uk-child-width-1-' . wc_get_loop_prop( 'columns' ).'@l';
-		$classes[] = 'uk-child-width-1-' . wc_get_loop_prop( 'large_columns' ).'@xl';
-		$classes[] = 'uk-child-width-1-' . wc_get_loop_prop( 'laptop_columns' ).'@m';
-		$classes[] = 'uk-child-width-1-' . wc_get_loop_prop( 'tablet_columns' ).'@s';
-		$classes[] = 'uk-child-width-1-' . wc_get_loop_prop( 'mobile_columns' ).'';
-		$classes[] = 'uk-grid-' . wc_get_loop_prop( 'column_gap' ).'';
+		$classes[] = 'columns-' . $product_columns;
+		$classes[] = 'uk-child-width-1-' .$product_columns.'@l';
+		$classes[] = 'uk-child-width-1-' .$product_columns_large.'@xl';
+		$classes[] = 'uk-child-width-1-' .$product_columns_laptop.'@m';
+		$classes[] = 'uk-child-width-1-' .$product_columns_tablet.'@s';
+		$classes[] = 'uk-child-width-1-' .$product_columns_mobile.'';
+		$classes[] = 'uk-grid-' . $product_gap.'';
 
 		if ( $mobile_pl_col = intval( get_option( 'mobile_landscape_product_columns' ) ) ) {
 			$classes[] = 'mobile-pl-col-' . $mobile_pl_col;
@@ -231,12 +269,13 @@ class Templaza_Product_Loop {
 
 		$featured_icons = apply_filters( 'templaza_get_product_loop_featured_icons', $featured_icons );
 
-		$loop_layout    = TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout();
+        $loop_layout = TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout();
+
 		$attributes = isset($templaza_options['templaza-shop-loop-attributes'])?$templaza_options['templaza-shop-loop-attributes']:'';
         $loop_desc     = isset($templaza_options['templaza-shop-loop-description'])?filter_var($templaza_options['templaza-shop-loop-description'], FILTER_VALIDATE_BOOLEAN):true;
         $loop_variation     = isset($templaza_options['templaza-shop-loop-variation'])?filter_var($templaza_options['templaza-shop-loop-variation'], FILTER_VALIDATE_BOOLEAN):true;
         $loop_variation_ajax     = isset($templaza_options['templaza-shop-loop-variation-ajax'])?filter_var($templaza_options['templaza-shop-loop-variation-ajax'], FILTER_VALIDATE_BOOLEAN):true;
-		switch ( $loop_layout ) {
+        switch ( $loop_layout ) {
 
 			// Icons & Quick view button
 			case 'layout-2':
@@ -288,7 +327,6 @@ class Templaza_Product_Loop {
 					$this,
 					'product_loop_buttons_open'
 				), 5 );
-
 				if (!empty($featured_icons) && $featured_icons['wishlist']=='1' ) {
 					add_action( 'templaza_product_loop_thumbnail', array(
                         TemPlaza_Woo\Templaza_Woo_Helper::instance(),
@@ -665,13 +703,14 @@ class Templaza_Product_Loop {
 		$get_variations = count( $product->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
 
 		// Load the template.
-        get_template_part( 'helpers/woocommerce/template-parts/add-to-cart-variable',
-			array(
-				'available_variations' => $get_variations ? $product->get_available_variations() : false,
-				'attributes'           => $product->get_variation_attributes(),
-				'selected_attributes'  => $product->get_default_attributes(),
-			)
-		);
+        wc_get_template(
+            'loop/add-to-cart-variable.php',
+            array(
+                'available_variations' => $get_variations ? $product->get_available_variations() : false,
+                'attributes'           => $product->get_variation_attributes(),
+                'selected_attributes'  => $product->get_default_attributes(),
+            )
+        );
 		$output = ob_get_clean();
 
 		$GLOBALS['post'] = $original_post; // WPCS: override ok.
@@ -744,6 +783,7 @@ class Templaza_Product_Loop {
 	 * @return void
 	 */
 	public function product_loop_buttons_close() {
+
 		echo '</div>';
 	}
 
@@ -761,9 +801,13 @@ class Templaza_Product_Loop {
         }else{
             $templaza_options = Functions::get_theme_options();
         }
-        $loop_hover = isset($templaza_options['templaza-shop-loop-hover'])?$templaza_options['templaza-shop-loop-hover']:'';
+        if(isset($_GET['product_hover'])) {
+            $loop_hover = $_GET['product_hover'];
+        }else{
+            $loop_hover = isset($templaza_options['templaza-shop-loop-hover'])?$templaza_options['templaza-shop-loop-hover']:'';
+        }
 
-		$loop_layout = TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout();
+        $loop_layout = TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout();
 
 		$product_hover = $loop_layout == 'layout-7' ? 'classic' : $loop_hover;
 		$product_hover = apply_filters( 'templaza_get_product_loop_hover', $product_hover );
@@ -805,8 +849,8 @@ class Templaza_Product_Loop {
 				}
 				if ( $image_ids ) {
 					echo '</div>';
-					echo '<span class="rz-product-loop-swiper-prev rz-swiper-button"><i class="fas fa-chevron-left"></i></span>';
-					echo '<span class="rz-product-loop-swiper-next rz-swiper-button"><i class="fas fa-chevron-right"></i></span>';
+					echo '<span class="templaza-product-loop-swiper-prev templaza-swiper-button"><i class="fas fa-chevron-left"></i></span>';
+					echo '<span class="templaza-product-loop-swiper-next templaza-swiper-button"><i class="fas fa-chevron-right"></i></span>';
 				}
 				do_action( 'templaza_product_loop_thumbnail' );
 				echo '</div>';
@@ -992,9 +1036,9 @@ class Templaza_Product_Loop {
 		}
 
 		echo sprintf(
-			'<a href="#" class="product-quick-shop-button templaza-button" data-product_id="%s" >%s%s</a>',
+			'<a href="#" class="product-quick-shop-button templaza-btn" data-product_id="%s" >%s%s</a>',
 			esc_attr( $product->get_id() ),
-			'<i class="fas fa-cart"></i>',
+			'<i class="fas fa-shopping-cart"></i>',
 			esc_html__( 'Quick Shop', 'agruco' )
 		);
 	}
@@ -1140,14 +1184,22 @@ class Templaza_Product_Loop {
         }
         $loop_variation     = isset($templaza_options['templaza-shop-loop-variation'])?filter_var($templaza_options['templaza-shop-loop-variation'], FILTER_VALIDATE_BOOLEAN):true;
         $loop_variation_ajax     = isset($templaza_options['templaza-shop-loop-variation-ajax'])?filter_var($templaza_options['templaza-shop-loop-variation-ajax'], FILTER_VALIDATE_BOOLEAN):true;
-        $loop_hover       = isset($templaza_options['templaza-shop-loop-hover'])?$templaza_options['templaza-shop-loop-hover']:'classic';
-        if ( in_array( TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout(), array( 'layout-8', 'layout-9' ) ) ) {
-			$data['product_loop_layout'] = TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout();
+        if(isset($_GET['product_hover'])) {
+            $loop_hover = $_GET['product_hover'];
+        }else{
+            $loop_hover = isset($templaza_options['templaza-shop-loop-hover'])?$templaza_options['templaza-shop-loop-hover']:'';
+        }
+
+        $loop_layout = TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout();
+
+
+        if ( in_array( $loop_layout, array( 'layout-8', 'layout-9' ) ) ) {
+			$data['product_loop_layout'] = $loop_layout;
 			if ( $loop_variation ) {
 				$data['product_loop_variation'] = 1;
 			}
 
-			if (  TemPlaza_Woo\Templaza_Woo_Helper::templaza_get_product_loop_layout() == 'layout-9' && $loop_variation_ajax ) {
+			if (  $loop_layout == 'layout-9' && $loop_variation_ajax ) {
 				$data['product_loop_variation_ajax'] = 1;
 			}
 		}

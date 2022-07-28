@@ -6,9 +6,10 @@ use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 use TemPlazaFramework\Menu;
 
-$options                    = Functions::get_theme_options();
+$gb_options                 = Functions::get_theme_options();
+$options                    = Functions::get_header_options();
 
-$header                     = isset($options['enable-header'])?filter_var($options['enable-header'], FILTER_VALIDATE_BOOLEAN):true;
+$header                     = isset($gb_options['enable-header'])?filter_var($gb_options['enable-header'], FILTER_VALIDATE_BOOLEAN):true;
 $enable_offcanvas           = isset($options['enable-offcanvas'])?filter_var($options['enable-offcanvas'], FILTER_VALIDATE_BOOLEAN):false;
 $offcanvas_sidebar          = isset($options['offcanvas-sidebar'])?$options['offcanvas-sidebar']:'';
 $offcanvas_menu_location    = isset($options['offcanvas-menu-location'])?$options['offcanvas-menu-location']:'header';

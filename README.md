@@ -3,6 +3,17 @@
 
 Changelogs:
 
+Version 1.0.8 - July 28, 2022
+    
+    Fix issue multiple redux localize script added.
+    Fix issue load advanced-products-filter gutenberg block.
+    Fix issue load custom post type options in settings
+    Added element account, add options advanced product
+    Change action buttons's tooltip of section, row, element to use UIkit tooltip.
+    Update header and footer layout builder
+    Update custom z-index option for section
+    Supported import wpforms.
+
 Version 1.0.7 - May 09, 2022
     
     Fix issue save section with text block.

@@ -8,10 +8,13 @@ use TemPlazaFramework\Admin_Functions;
 use TemPlazaFramework\Core\Fields;
 use TemPlazaFramework\Media;
 use TemPlazaFramework\Menu_Admin;
+use TemPlazaFramework\Post_TypeFunctions;
 use TemPlazaFramework\Template_Admin;
 use TemPlazaFramework\Templates;
 use \TemPlazaFramework\Admin\Admin_Page;
 use TemPlazaFramework\Post_Formats_Ui;
+use TemPlazaFramework\Enqueue;
+use TemPlazaFramework\Import\Data_Importer;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -47,6 +50,12 @@ class Framework{
         if(is_admin()) {
             $admin = new Admin_Page();
             $admin->init();
+
+            // Import my info when import data from templaza framework
+            require_once TEMPLAZA_FRAMEWORK_CORE_INCLUDES_PATH.'/classes/class-templaza-data_importer.php';
+            if(class_exists('TemPlazaFramework\Import\Data_Importer')) {
+                $data_importer = new Data_Importer();
+            }
         }
 
         $this->init();
@@ -63,6 +72,7 @@ class Framework{
 
         // Register arguments
         $this -> register_arguments();
+        $this -> __load_config();
         $this -> init_post_types();
         $this -> init_global_settings();
     }
@@ -104,7 +114,6 @@ class Framework{
 
             $glb_args   = $this -> get_arguments();
             add_action('update_option_'.$glb_args['opt_name'], array($this, 'save_settings_to_file'),10,2);
-//            add_action('redux/options/'.$glb_args['opt_name'].'/saved', array($this, 'save_settings_to_file'));
         }
 
         do_action('templaza-framework/framework/hooks');
@@ -182,6 +191,8 @@ class Framework{
 
         // Get arguments
         $args   = $this -> get_arguments();
+
+        $this -> __init_post_type_settings();
 
         // Global settings
         if($sections = \Templaza_API::construct_sections('settings')) {
@@ -292,15 +303,6 @@ class Framework{
     public function register_arguments() {
         $theme = wp_get_theme(); // For use with some settings. Not necessary.
 
-        $core_file     = TEMPLAZA_FRAMEWORK_OPTION_PATH.'/config.php';
-        if(file_exists($core_file)){
-            require_once $core_file;
-        }
-        $core_file     = TEMPLAZA_FRAMEWORK_THEME_PATH_OPTION.'/config.php';
-        if(file_exists($core_file)){
-            require_once $core_file;
-        }
-
         $this->args = array(
             // TYPICAL -> Change these values as you need/desire
             'opt_name'            => Functions::get_theme_option_name(),            // This is where your data is stored in the database and also becomes your global variable name.
@@ -409,5 +411,49 @@ class Framework{
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css',
             Functions::get_my_frame_url().'/assets/css/style.css',
             array(TEMPLAZA_FRAMEWORK_NAME.'__css-fontawesome'));
+    }
+
+    protected function __load_config(){
+        $core_file     = TEMPLAZA_FRAMEWORK_OPTION_PATH.'/config.php';
+        if(file_exists($core_file)){
+            require_once $core_file;
+        }
+        $core_file     = TEMPLAZA_FRAMEWORK_THEME_PATH_OPTION.'/config.php';
+        if(file_exists($core_file)){
+            require_once $core_file;
+        }
+    }
+
+    protected function __init_post_type_settings(){
+        $tzfrm_post_types  = Post_TypeFunctions::getPostTypes();
+        if(count($tzfrm_post_types)){
+            foreach ($tzfrm_post_types as $tzfrm_post_type){
+                $tzfrm_post_type_obj  = get_post_type_object($tzfrm_post_type);
+                $tzfrm_subsection   = array(
+                    'id'    => $tzfrm_post_type.'-subsections',
+                    'title' => sprintf(__('%s Options', $this -> text_domain),$tzfrm_post_type_obj -> label),
+                    'subsection' => true,
+                    'fields'     => array(
+                        array(
+                            'id'    => $tzfrm_post_type.'-archive-style',
+                            'type'  => 'select',
+                            'title' => sprintf(__('%s Archive Style', $this -> text_domain), $tzfrm_post_type_obj -> label),
+                            'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+                            'data'     => 'callback',
+                            'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
+                        ),
+                        array(
+                            'id'    => $tzfrm_post_type.'-single-style',
+                            'type'  => 'select',
+                            'title' => sprintf(__('%s Single Style', $this -> text_domain), $tzfrm_post_type_obj -> label),
+                            'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+                            'data'     => 'callback',
+                            'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
+                        )
+                    )
+                );
+                \Templaza_API::set_subsection('settings','settings', $tzfrm_subsection);
+            }
+        }
     }
 }

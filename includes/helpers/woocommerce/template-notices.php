@@ -76,8 +76,13 @@ class Templaza_Woo_Notices {
        }else{
             $templaza_options = Functions::get_theme_options();
        }
-       $cart_notify        = isset($templaza_options['templaza-shop-notify'])?$templaza_options['templaza-shop-notify']:'panel';
-        if ( is_404() ) {
+       if(isset($_GET['cart_style'])){
+            $cart_notify = $_GET['cart_style'];
+        }else{
+            $cart_notify        = isset($templaza_options['templaza-shop-notify'])?$templaza_options['templaza-shop-notify']:'panel';
+       }
+
+       if ( is_404() ) {
             return;
         }
 
@@ -86,14 +91,14 @@ class Templaza_Woo_Notices {
         }
         ?>
 
-        <div id="rz-popup-add-to-cart" class="rz-popup-add-to-cart templaza-modal woocommerce">
+        <div id="templaza-popup-add-to-cart" class="templaza-popup-add-to-cart templaza-modal woocommerce">
             <div class="off-modal-layer"></div>
             <div class="modal-content container woocommerce">
                 <div class="button-close">
                     <i class="fas fa-close"></i>
                 </div>
                 <div class="product-modal-content">
-                <div class="rz-product-popup-atc__notice">
+                <div class="templaza-product-popup-atc__notice">
                     <?php esc_html_e( 'Successfully added to your cart.', 'agruco' ) ?>
                 </div>
                <div class="widget_shopping_cart_content"></div>
@@ -177,7 +182,7 @@ class Templaza_Woo_Notices {
         }
 
         if('related_products' == $type || 'upsells_products' == $type ) {
-            echo '<div class="rz-product-popup-atc__recommendation"></div>';
+            echo '<div class="templaza-product-popup-atc__recommendation"></div>';
             return;
         }
 
@@ -219,7 +224,7 @@ class Templaza_Woo_Notices {
             return;
         }
 
-        echo '<div class="rz-product-popup-atc__recommendation loaded">';
+        echo '<div class="templaza-product-popup-atc__recommendation loaded">';
         $this->products_recommended_content($query->posts);
         wp_reset_postdata();
         echo '</div>';
@@ -245,9 +250,9 @@ class Templaza_Woo_Notices {
         ?>
         <div class="recommendation-heading">
             <h2 class="product-heading"> <?php echo esc_html( $notify_title );?> </h2>
-            <div class="rz-swiper-buttons">
-                <span class="rz-swiper-button-prev"><i class="fas fa-chevron-left"></i></span>
-                <span class="rz-swiper-button-next"><i class="fas fa-chevron-right"></i></span>
+            <div class="templaza-swiper-buttons">
+                <span class="templaza-swiper-button-prev"><i class="fas fa-chevron-left"></i></span>
+                <span class="templaza-swiper-button-next"><i class="fas fa-chevron-right"></i></span>
             </div>
         </div>
         <div class="swiper-container recommendation-products-carousel">
@@ -287,7 +292,11 @@ class Templaza_Woo_Notices {
         }else{
             $templaza_options = Functions::get_theme_options();
         }
-        $cart_notify = isset($templaza_options['templaza-shop-notify'])?$templaza_options['templaza-shop-notify']:'panel';
+        if(isset($_GET['cart_style'])){
+            $cart_notify = $_GET['cart_style'];
+        }else{
+            $cart_notify        = isset($templaza_options['templaza-shop-notify'])?$templaza_options['templaza-shop-notify']:'panel';
+       }
         $cart_notify_autohide = isset($templaza_options['templaza-shop-notify-autohide'])?$templaza_options['templaza-shop-notify-autohide']:'3';
         if ( $cart_notify == 'simple' ) {
             $data['added_to_cart_notice'] = array(

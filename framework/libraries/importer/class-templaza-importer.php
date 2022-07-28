@@ -42,6 +42,7 @@ if( class_exists( 'WP_Import') ) {
     class TemplazaFramework_Importer extends WP_Import {
 
         var $processed_parent_menu_items = array();
+        protected $process_menu_items_alias = array();
 
         public function __construct($options = array())
         {
@@ -110,7 +111,8 @@ if( class_exists( 'WP_Import') ) {
                 return;
             }
 
-            $id = $this->processed_menu_items[intval($item['post_id'])];
+            $id = $this->processed_menu_items[$post_id];
+            $this -> process_menu_items_alias[$item['post_name']]   = $id;
 
             foreach ( $item['postmeta'] as $meta ) {
                 ${$meta['key']} = $meta['value'];
@@ -135,6 +137,21 @@ if( class_exists( 'WP_Import') ) {
                     update_post_meta($__parent_id, '_templaza_megamenu_layout', $__parent_layout);
                 }
 
+            }else{
+                // Check missing menu id
+                $missing_ids    = wp_list_pluck($this -> missing_menu_items, 'post_id');
+
+                if(in_array($post_id, $missing_ids) && !empty($_templaza_megamenu_layout)){
+                    $__menu_element    = unserialize($_templaza_megamenu_layout);
+
+                    if(!empty($__menu_element)) {
+                        $index  = 0;
+                        $this->process_menu_layout($__menu_element, $id, intval($item['post_id']),
+                            $this->processed_parent_menu_items[$id], $index);
+
+                        $_templaza_megamenu_layout  = $__menu_element;
+                    }
+                }
             }
 
             // Update post meta for menu
@@ -178,12 +195,21 @@ if( class_exists( 'WP_Import') ) {
                         }
                         $__parent_layout[$index] = $new_id;
                         return $elements;
+                    }elseif(isset($element['menu_slug'])
+                        && isset($this ->process_menu_items_alias[$element['menu_slug']])){
+
+                        // Change menu_slug if it was changed
+                        $__menu_item    = get_post($this ->process_menu_items_alias[$element['menu_slug']]);
+                        if(!empty($__menu_item) && !is_wp_error($__menu_item)){
+                            $element['menu_slug']   = $__menu_item -> post_name;
+                        }
                     }
                     $index++;
                 }
 
                 if($subitems) {
-                    $this -> process_menu_layout($element['elements'], $new_id, $import_id, $__parent_layout,  $index);
+                    $this -> process_menu_layout($element['elements'], $new_id, $import_id,
+                        $__parent_layout,  $index);
                 }
 
             }
