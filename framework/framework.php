@@ -135,7 +135,6 @@ class Framework{
             }
 
             $file = $folder . '/setting.json';
-            $wp_filesystem->put_contents($file, json_encode($options));
             file_put_contents($file, json_encode($options), FS_CHMOD_FILE);
 //        }
     }
