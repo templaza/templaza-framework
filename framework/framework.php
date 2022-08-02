@@ -135,6 +135,10 @@ class Framework{
             }
 
             $file = $folder . '/setting.json';
+
+            if(file_exists($file)){
+                unlink($file);
+            }
             file_put_contents($file, json_encode($options), FS_CHMOD_FILE);
 //        }
     }
