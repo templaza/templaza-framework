@@ -111,7 +111,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                         ),
                     ),
                     array(
-                        'id'     => 'margin-test',
+                        'id'     => 'heading_margin',
                         'type'   => 'spacing',
                         'mode'   => 'margin',
                         'all'    => false,

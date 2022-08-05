@@ -27,7 +27,7 @@ if(!empty($image)){
 				$svg    =    $ext == 'svg' ? 'uk-svg' : '';
 				echo '<div id="'.$tz_id.'" class="'.$tz_class.'">';
 				if ($svg) {
-					echo '<img data-uk-img="data-src:'.esc_url($image->url).'" src="'.esc_url($image->url).'" alt="'.esc_attr('Logo').'" data-uk-svg>';
+					echo '<img class="uk-preserve" data-uk-img="data-src:'.esc_url($image->url).'" src="'.esc_url($image->url).'" alt="'.esc_attr('Logo').'" data-uk-svg>';
 				} else {
 					echo '<img data-src="'.esc_url($image->url).'" src="'.esc_url($image->url).'" alt="'.esc_attr('Logo').'" data-uk-img>';
 				}
