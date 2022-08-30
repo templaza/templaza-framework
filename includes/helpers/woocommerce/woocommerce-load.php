@@ -1,5 +1,4 @@
 <?php
-require_once 'woocommerce-setup.php';
 require_once 'woocommerce-helper.php';
 require_once 'template-general.php';
 require_once 'template-catalog.php';

@@ -58,6 +58,11 @@ if($cart_icon_type == 'fontawesome' ){
         $cart_icon_html = '<img src="'.$cart_icon['url'].'" alt="'.esc_attr__('Cart','templaza-framework').'" '.$log_svg.'/>';
     }
 }
+if($header_stack_search || $header_stack_cart || $header_stack_account){
+    ?>
+    <div class="header-icon-wrap uk-flex">
+    <?php
+
 if($header_stack_search){ ?>
     <div class="header-search uk-position-relative header-icon">
         <span>
@@ -99,3 +104,6 @@ if($header_stack_search){ ?>
         <?php endif; ?>
     </div>
 <?php } ?>
+</div>
+<?php
+}

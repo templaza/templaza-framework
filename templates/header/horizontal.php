@@ -31,6 +31,7 @@ $dropdown_trigger           = isset($options['dropdown-trigger'])?$options['drop
 $header_menu                = isset($options['header-menu'])?$options['header-menu']:'header';
 $header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
 $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options['header-block-1-sidebar']:'';
+$block_2_sidebar            = isset($options['header-block-2-horizontal-sidebar'])?$options['header-block-2-horizontal-sidebar']:'';
 $header_menu_level          = isset($options['header-menu-level'])?(int) $options['header-menu-level']:0;
 $login_modals               = isset($gb_options['templaza-shop-account-login'])?$gb_options['templaza-shop-account-login']:'modal';
 $header_cart                = isset($gb_options['templaza-shop-mini-cart'])?$gb_options['templaza-shop-mini-cart']:'';
@@ -109,6 +110,15 @@ $menu_datas = Functions::get_attributes('header');
             // header nav ends
         }
         ?>
+        <?php
+        if ($mode == 'right' && is_active_sidebar($block_2_sidebar)){
+            echo '<div class="header-block-item uk-visible@m header-block-2-horizontal">';
+            echo '<div class="sidebar">';
+            dynamic_sidebar($block_2_sidebar);
+            echo '</div>';
+            echo '</div>';
+        }
+        ?>
     </div>
     <?php
     if ($mode == 'center') {
@@ -128,6 +138,7 @@ $menu_datas = Functions::get_attributes('header');
     }
     ?>
     <?php if ($block_1_type != 'blank' || $mode == 'right' || $mode == 'center' || $enable_offcanvas): ?>
+
         <div class="header-right-section uk-flex uk-flex-right uk-flex-middle">
             <?php
             if ($mode == 'right') {

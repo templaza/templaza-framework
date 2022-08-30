@@ -377,6 +377,7 @@ $designs    = array(
         'class'     => '.templaza-sidebar',
         'options' => array(
             'sidebar_bg',
+            'sidebar_padding',
         ),
     ),
     array(
@@ -447,7 +448,7 @@ $designs    = array(
     ),
     array(
         'enable'    => true,
-        'class'     => 'div.templaza-single .templaza-single-box',
+        'class'     => 'div.templaza-single .templaza-single-feature',
         'options' => array(
             'blog_single_media_padding',
         ),

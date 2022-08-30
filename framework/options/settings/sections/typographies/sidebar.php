@@ -17,6 +17,13 @@ Templaza_API::set_section('settings',
                 'subtitle' => __( 'background for sidebar.', $this -> text_domain ),
             ),
             array(
+                'id'       => 'sidebar_padding',
+                'type'     => 'spacing',
+                'allow_responsive'    => true,
+                'title'    => __('Sidebar Padding', $this -> text_domain),
+                'default'  => ''
+            ),
+            array(
                 'id'       => 'widget_box_bg',
                 'type'     => 'background',
                 'title'    => __( 'Widget Background', $this -> text_domain ),

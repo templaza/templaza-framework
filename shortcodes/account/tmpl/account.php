@@ -20,6 +20,7 @@ extract(shortcode_atts(array(
     'dashboard_text'                => esc_html__('Dashboard', $this -> text_domain),
     'logout_text'                   => esc_html__('Logout', $this -> text_domain),
     'dashboard_url'                 => '',
+    'separator_text'                 => '',
     'typography_account_font'       => '',
     'typography_account_sub_font'   => '',
     'enable_account_custom_font'    => true,
@@ -67,6 +68,11 @@ extract(shortcode_atts(array(
                         <?php echo esc_html($login_text); ?>
                     </a>
                 </li>
+                <?php if($separator_text){ ?>
+                    <li>
+                        <?php echo esc_html( $separator_text ); ?>
+                    </li>
+                <?php } ?>
                 <?php if($enable_user_register){ ?>
                 <li>
                     <a href="<?php echo esc_url( wp_registration_url() ); ?>">
