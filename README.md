@@ -3,6 +3,17 @@
 
 Changelogs:
 
+Version 1.0.9 - September 08, 2022
+    
+    Fix issue save setting options to file
+    Fix icon header html
+    Update sidebar background
+    Update quickview advanced product style
+    Update fontawesome v5.15.4
+    Update UIkit v3.15.6
+    Update scssphp library (compile scss) v1.11.0
+    Update System Information and system requirement notice in back-end
+
 Version 1.0.8 - July 28, 2022
     
     Fix issue multiple redux localize script added.

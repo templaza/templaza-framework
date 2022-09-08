@@ -59,6 +59,7 @@ $slider-container-margin-right:                      -25px !default;
 /*
  * 1. Optimize animation
  * 2. Create a containing block. In Safari it's neither created by `transform` nor `will-change`.
+ * 3. Disable horizontal panning gestures
  */
 
 .uk-slider-items {
@@ -66,6 +67,8 @@ $slider-container-margin-right:                      -25px !default;
     will-change: transform;
     /* 2 */
     position: relative;
+    /* 3 */
+    touch-action: pan-y;
 }
 
 /*
@@ -93,8 +96,6 @@ $slider-container-margin-right:                      -25px !default;
  * 1. Let items take content dimensions (0 0 auto)
  *    `max-width` needed to keep image responsiveness and prevent content overflow
  * 3. Create position context
- * 4. Disable horizontal panning gestures in IE11 and Edge
- * 5. Suppress outline on focus
  */
 
 .uk-slider-items > * {
@@ -103,12 +104,7 @@ $slider-container-margin-right:                      -25px !default;
     max-width: 100%;
     /* 3 */
     position: relative;
-    /* 4 */
-    touch-action: pan-y;
 }
-
-/* 5 */
-.uk-slider-items > :focus { outline: none; }
 
 
 // Hooks

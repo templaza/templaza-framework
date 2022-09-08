@@ -36,7 +36,7 @@ if(!class_exists('TemPlazaFramework\Admin\Application')){
 //            }
 //        }
 
-        public function enqueue_message($msg, $type = 'message'){
+        public function enqueue_message($msg, $type = 'message', $options = array()){
 
             // Don't add empty messages.
             if (trim($msg) === '')
@@ -47,7 +47,7 @@ if(!class_exists('TemPlazaFramework\Admin\Application')){
             // For empty queue, if messages exists in the session, enqueue them first.
             $messages = $this->get_message_queue();
 
-            $message = array('message' => $msg, 'type' => strtolower($type));
+            $message = array('message' => $msg, 'type' => strtolower($type), 'options' => $options);
 
             if (!in_array($message, $this->_message_queue))
             {

@@ -12,6 +12,8 @@ $queues = $app -> get_message_queue();
 
 if($queues && count($queues)) {
     foreach ($queues as $notice) {
+        $notice_option      = isset($notice['options'])?$notice['options']:array();
+        $show_close_button  = isset($notice_option['show_close_button'])?(bool) $notice_option['show_close_button']:true;
 
         switch ($notice['type']){
             default:
@@ -30,8 +32,10 @@ if($queues && count($queues)) {
         }
         ?>
         <div class="uk-alert-<?php echo $notice_type; ?> uk-box-shadow-small uk-margin-bottom" data-uk-alert>
+            <?php if($show_close_button){ ?>
             <a class="uk-alert-close" data-uk-close></a>
-            <p><?php echo $notice['message']; ?></p>
+            <?php } ?>
+            <div><?php echo $notice['message']; ?></div>
         </div>
     <?php }
 }

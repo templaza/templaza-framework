@@ -215,22 +215,5 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
                 wp_dequeue_script('autosave');
             }
         }
-
-//        /**
-//         * Modify query of post type (added filter by theme name for list page).
-//         */
-//        public function parse_query($query ){
-//            if(isset($query -> query_vars['post_type']) && $query -> query_vars['post_type'] == $this -> get_post_type()) {
-//                $query->set('meta_query', array(
-//                    array(
-//                        'key' => '_' . $query->query_vars['post_type'] . '_theme',
-//                        'value' => basename(get_template_directory()), // This cannot be empty because of a bug in WordPress
-//                        'compare' => '='
-//                    )
-//                ));
-//            }
-//            $query->query_vars['post__in']  = array();
-//            return $query;
-//        }
     }
 }
