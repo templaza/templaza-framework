@@ -32,23 +32,23 @@ $card-body-padding-horizontal-l:                $global-medium-gutter !default;
 $card-body-padding-vertical-l:                  $global-medium-gutter !default;
 
 $card-header-padding-horizontal:                $global-gutter !default;
-$card-header-padding-vertical:                  round($global-gutter / 2) !default;
+$card-header-padding-vertical:                  round(($global-gutter * 0.5)) !default;
 
 $card-header-padding-horizontal-l:              $global-medium-gutter !default;
-$card-header-padding-vertical-l:                round($global-medium-gutter / 2) !default;
+$card-header-padding-vertical-l:                round(($global-medium-gutter * 0.5)) !default;
 
 $card-footer-padding-horizontal:                $global-gutter !default;
-$card-footer-padding-vertical:                  ($global-gutter / 2) !default;
+$card-footer-padding-vertical:                  ($global-gutter * 0.5) !default;
 
 $card-footer-padding-horizontal-l:              $global-medium-gutter !default;
-$card-footer-padding-vertical-l:                round($global-medium-gutter / 2) !default;
+$card-footer-padding-vertical-l:                round(($global-medium-gutter * 0.5)) !default;
 
 $card-title-font-size:                          $global-large-font-size !default;
 $card-title-line-height:                        1.4 !default;
 
 $card-badge-top:                                15px !default;
 $card-badge-right:                              15px !default;
-$card-badge-height:                             30px !default;
+$card-badge-height:                             22px !default;
 $card-badge-padding-horizontal:                 10px !default;
 $card-badge-background:                         $global-primary-background !default;
 $card-badge-color:                              $global-inverse-color !default;
@@ -76,16 +76,16 @@ $card-secondary-color-mode:                     light !default;
 $card-small-body-padding-horizontal:            $global-margin !default;
 $card-small-body-padding-vertical:              $global-margin !default;
 $card-small-header-padding-horizontal:          $global-margin !default;
-$card-small-header-padding-vertical:            round($global-margin / 1.5) !default;
+$card-small-header-padding-vertical:            round(($global-margin * 0.66667)) !default;
 $card-small-footer-padding-horizontal:          $global-margin !default;
-$card-small-footer-padding-vertical:            round($global-margin / 1.5) !default;
+$card-small-footer-padding-vertical:            round(($global-margin * 0.66667)) !default;
 
 $card-large-body-padding-horizontal-l:          $global-large-gutter !default;
 $card-large-body-padding-vertical-l:            $global-large-gutter !default;
 $card-large-header-padding-horizontal-l:        $global-large-gutter !default;
-$card-large-header-padding-vertical-l:          round($global-large-gutter / 2) !default;
+$card-large-header-padding-vertical-l:          round(($global-large-gutter * 0.5)) !default;
 $card-large-footer-padding-horizontal-l:        $global-large-gutter !default;
-$card-large-footer-padding-vertical-l:          round($global-large-gutter / 2) !default;
+$card-large-footer-padding-vertical-l:          round(($global-large-gutter * 0.5)) !default;
 
 
 /* ========================================================================
@@ -199,8 +199,7 @@ $card-large-footer-padding-vertical-l:          round($global-large-gutter / 2) 
     z-index: 1;
     /* 2 */
     height: $card-badge-height;
-    padding-left: $card-badge-padding-horizontal;
-    padding-right: $card-badge-padding-horizontal;
+    padding: 0 $card-badge-padding-horizontal;
     /* 3 */
     background: $card-badge-background;
     color: $card-badge-color;
@@ -209,6 +208,7 @@ $card-large-footer-padding-vertical-l:          round($global-large-gutter / 2) 
     display: flex;
     justify-content: center;
     align-items: center;
+    line-height: 0;
     @if(mixin-exists(hook-card-badge)) {@include hook-card-badge();}
 }
 
@@ -223,7 +223,7 @@ $card-large-footer-padding-vertical-l:          round($global-large-gutter / 2) 
  ========================================================================== */
 
 .uk-card-hover:not(.uk-card-default):not(.uk-card-primary):not(.uk-card-secondary):hover {
-    background: $card-hover-background;
+    background-color: $card-hover-background;
     @if(mixin-exists(hook-card-hover)) {@include hook-card-hover();}
 }
 
@@ -237,7 +237,7 @@ $card-large-footer-padding-vertical-l:          round($global-large-gutter / 2) 
  */
 
 .uk-card-default {
-    background: $card-default-background;
+    background-color: $card-default-background;
     color: $card-default-color;
     @if(mixin-exists(hook-card-default)) {@include hook-card-default();}
 }
@@ -265,7 +265,7 @@ $card-large-footer-padding-vertical-l:          round($global-large-gutter / 2) 
  */
 
 .uk-card-primary {
-    background: $card-primary-background;
+    background-color: $card-primary-background;
     color: $card-primary-color;
     @if(mixin-exists(hook-card-primary)) {@include hook-card-primary();}
 }
@@ -291,7 +291,7 @@ $card-large-footer-padding-vertical-l:          round($global-large-gutter / 2) 
  */
 
 .uk-card-secondary {
-    background: $card-secondary-background;
+    background-color: $card-secondary-background;
     color: $card-secondary-color;
     @if(mixin-exists(hook-card-secondary)) {@include hook-card-secondary();}
 }

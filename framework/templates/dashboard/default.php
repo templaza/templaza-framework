@@ -13,6 +13,9 @@ defined( 'ABSPATH' ) || exit;
                 <div class="uk-card uk-card-default uk-card-body rounded-3"><?php echo $this -> load_template('license');?></div>
             </div>
         <?php } ?>
+        <div class="uk-width-1-1">
+            <?php echo $this -> load_template('sysinfo'); ?>
+        </div>
         <div class="uk-width-1-3@m uk-width-1-1">
             <div class="uk-card uk-card-default uk-card-body rounded-3"><?php echo $this -> load_template('support');?></div>
         </div>

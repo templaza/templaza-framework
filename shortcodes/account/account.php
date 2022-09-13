@@ -83,6 +83,11 @@ if(!class_exists('TemplazaFramework_ShortCode_Account')){
                         'required'    => array( 'enable_user_register', '=', true ),
                     ),
                     array(
+                        'id'       => 'separator_text',
+                        'type'     => 'text',
+                        'title'    => esc_html__('Separator text', $this -> text_domain),
+                    ),
+                    array(
                         'id'       => 'welcome_text',
                         'type'     => 'text',
                         'title'    => esc_html__('Welcome text', $this -> text_domain),

@@ -4,7 +4,9 @@ namespace TemPlazaFramework\Admin\Controller;
 
 defined( 'ABSPATH' ) || exit;
 
+use TemPlazaFramework\Admin\Admin_Page_Function;
 use TemPlazaFramework\Admin\Application;
+use TemPlazaFramework\Admin_Functions;
 use TemPlazaFramework\Controller\BaseController;
 use TemPlazaFramework\Helpers\HelperLicense;
 
@@ -18,6 +20,8 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
             parent::__construct($config);
 
             $this -> hooks();
+
+            $this -> system_requirement_notice();
         }
 
         public function hooks(){
@@ -113,6 +117,30 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
             echo json_encode(array('success' => true, 'redirect' => admin_url('admin.php?page='
             .TEMPLAZA_FRAMEWORK.(($this -> get_name() != 'dashboard')?'_'.$this -> get_name():''))));
             wp_die();
+        }
+
+        public function get_system_info() {
+            return Admin_Functions::get_system_info();
+        }
+
+        /* Check system requirement */
+        public function system_requirement_notice(){
+            $pass   = Admin_Functions::check_system_requirement();
+
+            if(!$pass){
+                $app    = Application::get_instance();
+                ob_start();
+
+                $file   = Admin_Page_Function::get_template_directory().'/sysinfo_notice.php';
+
+                if(file_exists($file)){
+                    require_once $file;
+                }
+                $message    = ob_get_contents();
+                ob_end_clean();
+
+                $app -> enqueue_message($message, 'error', array('show_close_button' => false));
+            }
         }
     }
 }

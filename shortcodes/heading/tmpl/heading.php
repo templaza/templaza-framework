@@ -13,6 +13,7 @@ extract(shortcode_atts(array(
     'heading_custom_class'          => '',
     'enable_heading_custom_font'     => false,
     'typography_heading_element'    => '',
+    'heading_margin'                => '',
     'enable_custom_heading'         => false,
     'enable_heading_inner_tag'      => false,
     'enable_heading_single'         => false,
@@ -90,6 +91,24 @@ if(!empty($heading)){
             )
         )
     );
+    $designs    = array(
+        array(
+            'id'        => 'heading_margin',
+            'enable'    => true,
+            'class'     => array(
+                'desktop' => '#'.$tz_id.' h1, #'.$tz_id.' h2,'
+                    .'#'.$tz_id.' h3,#'.$tz_id.' h4,#'.$tz_id.' h5,'
+                    .'#'.$tz_id.' h6',
+                'tablet' => '#'.$tz_id.' h1, #'.$tz_id.' h2,'
+                    .'#'.$tz_id.' h3,#'.$tz_id.' h4,#'.$tz_id.' h5,'
+                    .'#'.$tz_id.' h6',
+                'mobile' => '#'.$tz_id.' h1, #'.$tz_id.' h2,'
+                    .'#'.$tz_id.' h3,#'.$tz_id.' h4,#'.$tz_id.' h5,'
+                    .'#'.$tz_id.' h6',
+            )
+        ),
+
+    );
 
     // Get typographies
     $typographies   = apply_filters('templaza-framework/typography/list', $typographies);
@@ -117,6 +136,7 @@ if(!empty($heading)){
             }
         }
     }
+
 }
 
 ?>

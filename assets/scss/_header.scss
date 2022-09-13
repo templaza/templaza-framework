@@ -60,6 +60,11 @@
   .moduletable {
     width: 100%;
   }
+  .header-block-2-horizontal{
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-left: 70px;
+  }
 }
 .templaza-header-section {
   box-shadow: none;
@@ -67,7 +72,6 @@
     position: absolute;
     z-index: 1050;
     width: 100%;
-    background-color: transparent !important;
   }
 }
 /* Sidebar Header */

@@ -3,6 +3,7 @@
 namespace TemPlazaFramework\Core;
 
 use Composer\Installers\VanillaInstaller;
+use TemPlazaFramework\Admin\Admin_Page_Function;
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Admin_Functions;
 use TemPlazaFramework\Core\Fields;
@@ -83,7 +84,6 @@ class Framework{
 
         add_action('admin_init', array($this, 'enqueue'));
 
-
         if(is_admin()) {
             add_action('admin_init', array($this, 'update_checker'));
             add_action('admin_menu', function(){
@@ -111,12 +111,39 @@ class Framework{
             // Filter to remove redux adv
             add_filter("redux/{$this -> args['opt_name']}/localize", array($this, 'redux_localize'));
 
-
             $glb_args   = $this -> get_arguments();
             add_action('update_option_'.$glb_args['opt_name'], array($this, 'save_settings_to_file'),10,2);
+
+            add_action('templaza-framework/admin_notices', array($this, 'admin_notices'));
         }
 
         do_action('templaza-framework/framework/hooks');
+    }
+
+    public function admin_notices(){
+        global $pagenow, $page;
+
+        $pass   = Admin_Functions::check_system_requirement();
+
+        if(!$pass){
+            $slugs  = Menu_Admin::get_submenu_slugs();
+            if(($pagenow == 'admin.php' && isset($_GET['page'])
+                    && (in_array($_GET['page'], $slugs)))) {
+                return false;
+            }
+            ?>
+            <div class="notice notice-error uk-text-danger">
+                <div class="uk-padding-small uk-padding-remove-left"><?php
+                    $file   = Admin_Page_Function::get_template_directory().'/sysinfo_notice.php';
+
+                    if(file_exists($file)){
+                        require_once $file;
+                    }
+                    ?>
+                </div>
+            </div>
+            <?php
+        }
     }
 
     public function save_settings_to_file($old_value, $options){
@@ -135,7 +162,10 @@ class Framework{
             }
 
             $file = $folder . '/setting.json';
-            $wp_filesystem->put_contents($file, json_encode($options));
+
+            if(file_exists($file)){
+                unlink($file);
+            }
             file_put_contents($file, json_encode($options), FS_CHMOD_FILE);
 //        }
     }
@@ -149,13 +179,20 @@ class Framework{
         return $nav_tabs;
     }
     public function remove_admin_notices(){
-        global $pagenow;
+        global $pagenow, $post_type;
         if(is_admin()) {
+            $my_post_types  = array_keys($this -> post_types);
             $slugs  = Menu_Admin::get_submenu_slugs();
-            if(($pagenow == 'admin.php' && isset($_GET['page'])
+            if((!empty($my_post_types) && in_array($post_type, $my_post_types))
+                || ($pagenow == 'admin.php' && isset($_GET['page'])
                 && (in_array($_GET['page'], $slugs) || $_GET['page'] == $this -> args['opt_name'].'_options'))) {
                 remove_all_actions('admin_notices');
                 remove_all_actions('all_admin_notices');
+
+                // Create templaza framework admin_notices action
+                add_action('admin_notices', function(){
+                    do_action('templaza-framework/admin_notices');
+                });
             }
         }
     }

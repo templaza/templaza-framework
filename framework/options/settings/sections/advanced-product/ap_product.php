@@ -186,6 +186,7 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'options'  => array(
                     'style1' => esc_html__('Style1', $this -> text_domain),
                     'style2' => esc_html__('Style2', $this -> text_domain),
+                    'style3' => esc_html__('Style3', $this -> text_domain),
                 ),
                 'default'  => 'style1',
             ),
@@ -239,6 +240,13 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'allow_responsive'    => true,
                 'title'    => esc_html__('Product Loop Border radius', $this -> text_domain),
                 'default'  => ''
+            ),
+            array(
+                'id'       => 'ap_product-loop-shadow',
+                'type'     => 'text',
+                'title'    => __('Product Loop box shadow', $this -> text_domain),
+                'default'  => '',
+                'desc'     => __( 'Example: 10px 10px 5px 0px rgba(0,0,0,0.75). You can generator <a href="https://cssgenerator.org/box-shadow-css-generator.html">Here</a> ', $this -> text_domain ),
             ),
 
         )
@@ -340,6 +348,12 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'allow_responsive'    => true,
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                 'title'  => esc_html__('Single Box Margin', $this -> text_domain),
+            ),
+            array(
+                'id'       => 'ap_product-side-box-bg-color',
+                'type'     => 'background',
+                'title'    => esc_html__( 'Single Side Box Background', $this -> text_domain ),
+                'subtitle' => esc_html__( 'Select the background for single side box item.', $this -> text_domain ),
             ),
             array(
                 'id'     => 'ap_product-side-box-padding',

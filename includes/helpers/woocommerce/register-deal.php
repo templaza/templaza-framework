@@ -148,7 +148,7 @@ class Templaza_Product_Deal {
 		if ( sizeof( $order->get_items() ) > 0 ) {
 			foreach ( $order->get_items() as $item ) {
 				if ( $product_id = $item->get_product_id() ) {
-					if ( ! Helper::is_product_deal ( $product_id ) ) {
+					if ( ! Templaza_Woo_Helper::is_product_deal ( $product_id ) ) {
 						continue;
 					}
 

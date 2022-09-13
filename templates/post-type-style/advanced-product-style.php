@@ -32,7 +32,7 @@ $ap_styles    = array(
         'options' => array(
             'ap_product-side-box-padding',
             'ap_product-side-box-margin',
-            'ap_product-box-bg-color',
+            'ap_product-side-box-bg-color',
         ),
     ),
     // Archive
@@ -44,11 +44,12 @@ $ap_styles    = array(
             'ap_product-loop-bg-color',
             'ap_product-loop-border',
             'ap_product-loop-border-radius',
+            'ap_product-loop-shadow',
         ),
     ),
     array(
         'enable'    => true,
-        'class'     => '.ap-inner .ap-info-inner',
+        'class'     => '.ap-item .ap-inner .ap-info-inner',
         'options' => array(
             'ap_product-loop-info-padding',
         ),
@@ -75,6 +76,11 @@ if(count($ap_styles)) {
                 'tablet' => '',
                 'mobile' => '',
             );
+            if($index = array_search('ap_product-loop-shadow', $design['options'])){
+                $box_shadow = isset($options['ap_product-loop-shadow'])?$options['ap_product-loop-shadow']:'';
+                $ap_css_responsive['desktop'] .= CSS::box_shadow($box_shadow);
+                unset($design['options'][$index]);
+            }
             $ap_css    = Templates::make_css_design_style($design['options'], $options,false);
             if(!empty($ap_css)){
                 if(is_array($ap_css)){

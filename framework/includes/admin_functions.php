@@ -163,5 +163,74 @@ if(!class_exists('TemPlazaFramework\Admin_Functions')){
 
             return (bool) preg_match_all('/var '.addslashes($object_name).'/', $localize_data);
         }
+
+        public static function get_system_info() {
+
+            $system_info = array(
+                'php_memory_limit'   => array(
+                    'title'    => esc_html__( 'PHP Memory Limit', static::get_my_text_domain()),
+                    'value'    => size_format( wp_convert_hr_to_bytes( @ini_get( 'memory_limit' ) ) ),
+                    'required' => '128',
+                    'pass'     => ( wp_convert_hr_to_bytes( @ini_get( 'memory_limit' ) ) >= 134217728 ) ? true : false,
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to 128 in order to meet the theme requirements. ', static::get_my_text_domain() )
+                ),
+                'php_version'        => array(
+                    'title'    => esc_html__( 'PHP Version', static::get_my_text_domain() ),
+                    'value'    => phpversion(),
+                    'required' => '5.6',
+                    'pass'     => version_compare( PHP_VERSION, '5.6.0' ) >= 0 ? true : false
+                ),
+                'php_post_max_size'  => array(
+                    'title'    => esc_html__( 'PHP Post Max Size', static::get_my_text_domain() ),
+                    'value'    => ini_get( 'post_max_size' ),
+                    'required' => '256',
+                    'pass'     => ( ini_get( 'post_max_size' ) >= 256 ) ? true : false,
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to 256 in order to meet the theme requirements. ', static::get_my_text_domain() )
+                ),
+                'php_time_limit'     => array(
+                    'title'    => esc_html__( 'PHP Time Limit', static::get_my_text_domain() ),
+                    'value'    => ini_get( 'max_execution_time' ),
+                    'required' => '300',
+                    'pass'     => ( ini_get( 'max_execution_time' ) >= 300 ) ? true : false,
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to 300 in order to meet the theme requirements. ', static::get_my_text_domain() )
+                ),
+                'php_max_input_vars' => array(
+                    'title'    => esc_html__( 'PHP Max Input Vars', static::get_my_text_domain() ),
+                    'value'    => ini_get( 'max_input_vars' ),
+                    'required' => '5000',
+                    'pass'     => ( ini_get( 'max_input_vars' ) >= 5000 ) ? true : false,
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to 5000 in order to meet the theme requirements. ', static::get_my_text_domain() )
+                ),
+                'max_upload_size'    => array(
+                    'title'    => esc_html__( 'Max Upload Size', static::get_my_text_domain() ),
+                    'value'    => size_format( wp_max_upload_size() ),
+                    'required' => '30',
+                    'pass'     => ( wp_max_upload_size() >= 31457280) ? true : false,
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to 128 in order to meet the theme requirements. ', static::get_my_text_domain() )
+                )
+            );
+
+            $system_info    = apply_filters('templaza-framework/system-info', $system_info);
+
+            return $system_info;
+        }
+
+        /**
+         * Check system requirement
+         * */
+        public static function check_system_requirement(){
+
+            $sysinfo    = Admin_Functions::get_system_info();
+
+            $pass   = true;
+            foreach($sysinfo as $sys){
+                if(!$sys['pass']){
+                    $pass   = false;
+                    break;
+                }
+            }
+
+            return $pass;
+        }
     }
 }

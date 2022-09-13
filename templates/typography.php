@@ -100,9 +100,9 @@ $typographies = array(
         'id'        => 'typography-footer-widget-heading',
         'enable'    => (isset($options['typography-footer']) && $options['typography-footer'] =='custom'?true:false),
         'class'     => array(
-            'desktop'    => '.templaza-footer .widgettitle',
-            'tablet'     => '.templaza-footer .widgettitle',
-            'mobile'     => '.templaza-footer .widgettitle',
+            'desktop'    => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3',
+            'tablet'     => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3',
+            'mobile'     => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3',
         )
     ),
     array(
@@ -374,6 +374,14 @@ $designs    = array(
     // Widget Sidebar Design
     array(
         'enable'    => true,
+        'class'     => '.templaza-sidebar',
+        'options' => array(
+            'sidebar_bg',
+            'sidebar_padding',
+        ),
+    ),
+    array(
+        'enable'    => true,
         'class'     => '.templaza-sidebar .widget-area >.widget',
         'options' => array(
             'widget_box_bg',
@@ -440,7 +448,7 @@ $designs    = array(
     ),
     array(
         'enable'    => true,
-        'class'     => 'div.templaza-single .templaza-single-box',
+        'class'     => 'div.templaza-single .templaza-single-feature',
         'options' => array(
             'blog_single_media_padding',
         ),

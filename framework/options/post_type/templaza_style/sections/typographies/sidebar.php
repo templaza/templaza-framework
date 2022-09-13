@@ -11,6 +11,12 @@ Templaza_API::set_section('templaza_style',
         'subsection' => true,
         'fields'     => array(
             array(
+                'id'       => 'sidebar_bg',
+                'type'     => 'background',
+                'title'    => __( 'Sidebar Background', $this -> text_domain ),
+                'subtitle' => __( 'background for sidebar.', $this -> text_domain ),
+            ),
+            array(
                 'id'       => 'widget_box_bg',
                 'type'     => 'background',
                 'title'    => __( 'Widget Background', $this -> text_domain ),

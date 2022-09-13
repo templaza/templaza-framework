@@ -73,6 +73,9 @@
                                 }
                             }
                         }
+                        if($notice.length){
+                            $notice.insertAfter($(".wrap hr.wp-header-end"));
+                        }
                         tzinst_heartbeat.connecting = false;
                         window.clearInterval( tzinst_heartbeat.beatIntTimer );
                         tzinst_heartbeat.beatIntTimer  = window.setInterval(tzinst_heartbeat.init, tzinst_heartbeat.interval * 1000);

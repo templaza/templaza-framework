@@ -8,7 +8,6 @@ use TemPlazaFramework\Functions;
 $gb_options                 = Functions::get_theme_options();
 $options                    = Functions::get_header_options();
 
-
 $login_modals               = isset($gb_options['templaza-shop-account-login'])?$gb_options['templaza-shop-account-login']:'modal';
 $header_cart                = isset($gb_options['templaza-shop-mini-cart'])?$gb_options['templaza-shop-mini-cart']:'';
 $header_stack_search        = isset($options['stacked-divided-search'])?filter_var($options['stacked-divided-search'], FILTER_VALIDATE_BOOLEAN):true;
@@ -17,9 +16,9 @@ $header_stack_cart          = isset($options['stacked-divided-cart'])?filter_var
 $search_icon_type           = isset($options['search-icon-type'])?$options['search-icon-type']:'default';
 $account_icon_type          = isset($options['account-icon-type'])?$options['account-icon-type']:'default';
 $cart_icon_type             = isset($options['cart-icon-type'])?$options['cart-icon-type']:'default';
-$search_icon = 'fas fa-search';
-$account_icon = 'fas fa-user';
-$cart_icon = 'fas fa-shopping-cart';
+$search_icon_html = '<i class="fas fa-search"></i>';
+$account_icon_html = '<i class="fas fa-user"></i>';
+$cart_icon_html = '<i class="fas fa-shopping-cart"></i>';
 if($search_icon_type == 'fontawesome' ){
     $search_icon = isset($options['search-icon'])?$options['search-icon']:'';
     $search_icon_html = '<i class="'.$search_icon.'"></i>';
@@ -59,6 +58,11 @@ if($cart_icon_type == 'fontawesome' ){
         $cart_icon_html = '<img src="'.$cart_icon['url'].'" alt="'.esc_attr__('Cart','templaza-framework').'" '.$log_svg.'/>';
     }
 }
+if($header_stack_search || $header_stack_cart || $header_stack_account){
+    ?>
+    <div class="header-icon-wrap uk-flex">
+    <?php
+
 if($header_stack_search){ ?>
     <div class="header-search uk-position-relative header-icon">
         <span>
@@ -100,3 +104,6 @@ if($header_stack_search){ ?>
         <?php endif; ?>
     </div>
 <?php } ?>
+</div>
+<?php
+}
