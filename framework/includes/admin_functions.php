@@ -171,8 +171,8 @@ if(!class_exists('TemPlazaFramework\Admin_Functions')){
                     'title'    => esc_html__( 'PHP Memory Limit', static::get_my_text_domain()),
                     'value'    => size_format( wp_convert_hr_to_bytes( @ini_get( 'memory_limit' ) ) ),
                     'required' => '128',
-                    'pass'     => ( wp_convert_hr_to_bytes( @ini_get( 'memory_limit' ) ) >= 134217728 ) ? true : false,
-                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to 128 in order to meet the theme requirements. ', static::get_my_text_domain() )
+                    'pass'     => ( wp_convert_hr_to_bytes( @ini_get( 'memory_limit' ) ) >= (128 * 1024 * 1024) ) ? true : false,
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', static::get_my_text_domain() )
                 ),
                 'php_version'        => array(
                     'title'    => esc_html__( 'PHP Version', static::get_my_text_domain() ),
@@ -183,30 +183,30 @@ if(!class_exists('TemPlazaFramework\Admin_Functions')){
                 'php_post_max_size'  => array(
                     'title'    => esc_html__( 'PHP Post Max Size', static::get_my_text_domain() ),
                     'value'    => ini_get( 'post_max_size' ),
-                    'required' => '256',
-                    'pass'     => ( ini_get( 'post_max_size' ) >= 256 ) ? true : false,
-                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to 256 in order to meet the theme requirements. ', static::get_my_text_domain() )
+                    'required' => '30',
+                    'pass'     => ( ini_get( 'post_max_size' ) >= 30 ) ? true : false,
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', static::get_my_text_domain() )
                 ),
                 'php_time_limit'     => array(
                     'title'    => esc_html__( 'PHP Time Limit', static::get_my_text_domain() ),
                     'value'    => ini_get( 'max_execution_time' ),
-                    'required' => '300',
-                    'pass'     => ( ini_get( 'max_execution_time' ) >= 300 ) ? true : false,
-                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to 300 in order to meet the theme requirements. ', static::get_my_text_domain() )
+                    'required' => '600',
+                    'pass'     => ( ini_get( 'max_execution_time' ) >= 600 ) ? true : false,
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', static::get_my_text_domain() )
                 ),
                 'php_max_input_vars' => array(
                     'title'    => esc_html__( 'PHP Max Input Vars', static::get_my_text_domain() ),
                     'value'    => ini_get( 'max_input_vars' ),
-                    'required' => '5000',
-                    'pass'     => ( ini_get( 'max_input_vars' ) >= 5000 ) ? true : false,
-                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to 5000 in order to meet the theme requirements. ', static::get_my_text_domain() )
+                    'required' => '4000',
+                    'pass'     => ( ini_get( 'max_input_vars' ) >= 4000 ) ? true : false,
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', static::get_my_text_domain() )
                 ),
                 'max_upload_size'    => array(
                     'title'    => esc_html__( 'Max Upload Size', static::get_my_text_domain() ),
                     'value'    => size_format( wp_max_upload_size() ),
                     'required' => '30',
-                    'pass'     => ( wp_max_upload_size() >= 31457280) ? true : false,
-                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to 128 in order to meet the theme requirements. ', static::get_my_text_domain() )
+                    'pass'     => ( wp_max_upload_size() >= (30 * 1024 * 1024)) ? true : false,
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', static::get_my_text_domain() )
                 )
             );
 

@@ -16,7 +16,7 @@ if($sysinfo = $this -> get_system_info()){
             <td><?php echo $sys['title'];?></td>
             <td class="<?php echo !$sys['pass']?'uk-text-danger':'uk-text-success';?>">
                 <span><?php echo $sys['value'];?></span>
-                <?php echo !$sys['pass']?$sys['notice']:''; ?>
+                <?php echo !$sys['pass']?sprintf($sys['notice'], $sys['required']):''; ?>
             </td>
         </tr>
         <?php } ?>
