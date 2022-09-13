@@ -204,8 +204,8 @@ if(!class_exists('TemPlazaFramework\Admin_Functions')){
                 'max_upload_size'    => array(
                     'title'    => esc_html__( 'Max Upload Size', static::get_my_text_domain() ),
                     'value'    => size_format( wp_max_upload_size() ),
-                    'required' => '128',
-                    'pass'     => ( wp_max_upload_size() >= 134217728 ) ? true : false,
+                    'required' => '30',
+                    'pass'     => ( wp_max_upload_size() >= 31457280) ? true : false,
                     'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to 128 in order to meet the theme requirements. ', static::get_my_text_domain() )
                 )
             );

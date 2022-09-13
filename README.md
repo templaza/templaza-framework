@@ -3,7 +3,7 @@
 
 Changelogs:
 
-Version 1.0.9 - September 08, 2022
+Version 1.0.9 - September 13, 2022
     
     Fix issue save setting options to file
     Fix icon header html
