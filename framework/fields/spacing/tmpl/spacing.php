@@ -9,15 +9,15 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
 
 //$devices    = array(
 //    'desktop' => array(
-//        'title'=> esc_html__('Desktop', $this -> text_domain),
+//        'title'=> esc_html__('Desktop', 'templaza-framework'),
 //        'icon' => 'dashicons dashicons-desktop',
 //    ),
 //    'tablet'  => array(
-//        'title'=> esc_html__('Tablet', $this -> text_domain),
+//        'title'=> esc_html__('Tablet', 'templaza-framework'),
 //        'icon' => 'dashicons dashicons-tablet',
 //    ),
 //    'mobile'  => array(
-//        'title'=> esc_html__('Mobile', $this -> text_domain),
+//        'title'=> esc_html__('Mobile', 'templaza-framework'),
 //        'icon' => 'dashicons dashicons-smartphone',
 //        'uk-icon' => 'dashicons dashicons-smartphone',
 //    ),
@@ -43,10 +43,10 @@ if($allow_responsive){
         'bottom'    => 'bottom'
     );
     $hints          = isset($this -> field['hint'])?$this -> field['hint']:array(
-        'top'    => esc_html__('Top', $this -> text_domain),
-        'right'  => esc_html__('Right', $this -> text_domain),
-        'bottom' => esc_html__('Bottom', $this -> text_domain),
-        'left'   => esc_html__('Left', $this -> text_domain),
+        'top'    => esc_html__('Top', 'templaza-framework'),
+        'right'  => esc_html__('Right', 'templaza-framework'),
+        'bottom' => esc_html__('Bottom', 'templaza-framework'),
+        'left'   => esc_html__('Left', 'templaza-framework'),
     );
 
     $unit_responsive    = array();
@@ -93,10 +93,10 @@ if($allow_responsive){
             $position   = array_merge($position, $this -> field['custom-position']);
         }
 
-        $hints['top']       = esc_html__('Top Left', $this -> text_domain);
-        $hints['right']     = esc_html__('Top Right', $this -> text_domain);
-        $hints['bottom']    = esc_html__('Bottom Right', $this -> text_domain);
-        $hints['left']      = esc_html__('Bottom Left', $this -> text_domain);
+        $hints['top']       = esc_html__('Top Left', 'templaza-framework');
+        $hints['right']     = esc_html__('Top Right', 'templaza-framework');
+        $hints['bottom']    = esc_html__('Bottom Right', 'templaza-framework');
+        $hints['left']      = esc_html__('Bottom Left', 'templaza-framework');
 
     }
 

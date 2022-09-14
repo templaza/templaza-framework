@@ -116,7 +116,7 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                 array(
                     'id'    => 'enabled',
                     'type'  => 'switch',
-                    'title' => esc_html__('Enable', $this -> text_domain),
+                    'title' => esc_html__('Enable', 'templaza-framework'),
                     'default' => 0,
                 ),
             );
@@ -125,7 +125,7 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
 
 //            $metaboxes[] = array(
 //                'id'            => 'tz_megamenu-main',
-//                'title'         => __( 'TZ Mengamenu Options', $this -> text_domain ),
+//                'title'         => __( 'TZ Mengamenu Options', 'templaza-framework' ),
 //                'post_types'    => 'nav-menus',
 //                'position'      => 'side', // normal, advanced, side
 //                'priority'      => 'high', // high, core, default, low - Priorities of placement
@@ -152,13 +152,13 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                 array(
                     'id'     => 'megamenu-layout-section',
                     'icon'   => 'dashicons dashicons-welcome-widgets-menus',
-//                    'title'  => esc_html__('Mega Menu', $this -> text_domain),
+//                    'title'  => esc_html__('Mega Menu', 'templaza-framework'),
                     'fields' => array(
                         array(
                             'id'       => 'icon',
                             'type'     => 'select',
-                            'title'    => __( 'Icon Select', $this -> text_domain ),
-                            'subtitle' => __( 'Select an icon for your menu item.', $this -> text_domain ),
+                            'title'    => __( 'Icon Select', 'templaza-framework' ),
+                            'subtitle' => __( 'Select an icon for your menu item.', 'templaza-framework' ),
                             'data'     => 'fontawesome',
 //                            'default'  => 'fas fa-arrow-up',
 //                            'required' => array('backtotop','=','1'),
@@ -166,38 +166,38 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
                         array(
                             'id'       => 'hide_text',
                             'type'     => 'switch',
-                            'title'    => __( 'Icon/Thumbnail Only', $this -> text_domain ),
-                            'subtitle' => __( 'Select an icon for your menu item.', $this -> text_domain ),
+                            'title'    => __( 'Icon/Thumbnail Only', 'templaza-framework' ),
+                            'subtitle' => __( 'Select an icon for your menu item.', 'templaza-framework' ),
                         ),
                         array(
                             'id'       => 'highlight_text',
                             'type'     => 'text',
-                            'title'    => __( 'Menu Highlight Label', $this -> text_domain ),
-                            'subtitle' => __( 'Set the highlight label for menu item.', $this -> text_domain ),
+                            'title'    => __( 'Menu Highlight Label', 'templaza-framework' ),
+                            'subtitle' => __( 'Set the highlight label for menu item.', 'templaza-framework' ),
                             'required' => array('hide_text', '!=', true),
                         ),
                         array(
                             'id'          => 'highlight_text_bg_color',
                             'type'        => 'color',
-                            'title'       => __( 'Menu Highlight Label Background Color', $this -> text_domain ),
-                            'subtitle'    => __( 'Set the highlight label background color.', $this -> text_domain ),
+                            'title'       => __( 'Menu Highlight Label Background Color', 'templaza-framework' ),
+                            'subtitle'    => __( 'Set the highlight label background color.', 'templaza-framework' ),
                             'transparent' => false,
                             'required'    => array('hide_text', '!=', true),
                         ),
                         array(
                             'id'          => 'highlight_text_color',
                             'type'        => 'color',
-                            'title'       => __( 'Menu Highlight Label Text Color', $this -> text_domain ),
-                            'subtitle'    => __( 'Set the highlight label text color.', $this -> text_domain ),
+                            'title'       => __( 'Menu Highlight Label Text Color', 'templaza-framework' ),
+                            'subtitle'    => __( 'Set the highlight label text color.', 'templaza-framework' ),
                             'transparent' => false,
                             'required'    => array('hide_text', '!=', true),
                         ),
                         array(
                             'id'          => 'background',
                             'type'        => 'background',
-                            'title'       => __( 'Mega Menu / Flyout Menu Background Image', $this -> text_domain ),
+                            'title'       => __( 'Mega Menu / Flyout Menu Background Image', 'templaza-framework' ),
                             'subtitle'    => __( 'Select an image for the mega menu or flyout menu background.\nMega Menu: In case of mega menu, if left empty, the Main Menu Dropdown Background Color will be used. Each mega menu column can have its own background image, or you can have one image that spreads across the entire mega menu width.
-Flyout Menu: When used in the flyout menu, the image will be shown full screen when hovering the corresponding menu item.', $this -> text_domain ),
+Flyout Menu: When used in the flyout menu, the image will be shown full screen when hovering the corresponding menu item.', 'templaza-framework' ),
                             'transparent' => false,
                             'background-color'  => false,
 //                            'required'    => array('hide_text', 'not', '1'),
@@ -205,18 +205,18 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                         array(
                             'id'    => 'megamenu_enable',
                             'type'  => 'switch',
-                            'title' => esc_html__('Enable', $this -> text_domain)
+                            'title' => esc_html__('Enable', 'templaza-framework')
                         ),
                         array(
                             'id'      => 'submenu_direction',
                             'type'    => 'select',
-                            'title'   => __('Sub Menu Alignment', $this -> text_domain),
+                            'title'   => __('Sub Menu Alignment', 'templaza-framework'),
                             'options' => array(
-                                'left'   => esc_html__('Left', $this -> text_domain),
-                                'right'  => esc_html__('Right', $this -> text_domain),
-                                'center' => esc_html__('Center', $this -> text_domain),
-                                'full'   => esc_html__('Container', $this -> text_domain),
-                                'edge'   => esc_html__('Full', $this -> text_domain),
+                                'left'   => esc_html__('Left', 'templaza-framework'),
+                                'right'  => esc_html__('Right', 'templaza-framework'),
+                                'center' => esc_html__('Center', 'templaza-framework'),
+                                'full'   => esc_html__('Container', 'templaza-framework'),
+                                'edge'   => esc_html__('Full', 'templaza-framework'),
                             ),
                             'default' => 'left',
                             'required'  => array('megamenu_enable', '=', true),
@@ -224,8 +224,8 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                         array(
                             'id'        => 'width',
                             'type'      => 'text',
-                            'title'     => __('Sub Menu Width', $this -> text_domain),
-                            'subtitle'  => __('Controls the max width of the mega menu. In pixels.', $this -> text_domain),
+                            'title'     => __('Sub Menu Width', 'templaza-framework'),
+                            'subtitle'  => __('Controls the max width of the mega menu. In pixels.', 'templaza-framework'),
 //                            'placeholder' => '980px',
                             'required' => array(
                                 array('submenu_direction', '!=', 'full'),
@@ -246,41 +246,41 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                 ),
 //                array(
 //                    'id'     => 'megamenu-settings-section',
-//                    'title'  => esc_html__('Settings', $this -> text_domain),
+//                    'title'  => esc_html__('Settings', 'templaza-framework'),
 //                    'fields' => array(
 //                        array(
 //                            'id'    => 'hide_text',
 //                            'type'  => 'switch',
-//                            'title' => esc_html__('Hide Text', $this -> text_domain)
+//                            'title' => esc_html__('Hide Text', 'templaza-framework')
 //                        ),
 ////                        array(
 ////                            'id'    => 'hide_arrow',
 ////                            'type'  => 'switch',
-////                            'title' => esc_html__('Hide Arrow', $this -> text_domain)
+////                            'title' => esc_html__('Hide Arrow', 'templaza-framework')
 ////                        ),
 //                        array(
 //                            'id'    => 'disable_link',
 //                            'type'  => 'switch',
-//                            'title' => esc_html__('Disable Link', $this -> text_domain)
+//                            'title' => esc_html__('Disable Link', 'templaza-framework')
 //                        ),
 //                        array(
 //                            'id'    => 'hide_on_mobile',
 //                            'type'  => 'switch',
-//                            'title' => esc_html__('Hide Item on Mobile', $this -> text_domain)
+//                            'title' => esc_html__('Hide Item on Mobile', 'templaza-framework')
 //                        ),
 //                        array(
 //                            'id'    => 'hide_on_desktop',
 //                            'type'  => 'switch',
-//                            'title' => esc_html__('Hide Item on Desktop', $this -> text_domain)
+//                            'title' => esc_html__('Hide Item on Desktop', 'templaza-framework')
 //                        ),
 //                        array(
 //                            'id'    => 'item_align',
 //                            'type'  => 'select',
-//                            'title' => esc_html__('Menu Item Align', $this -> text_domain),
+//                            'title' => esc_html__('Menu Item Align', 'templaza-framework'),
 //                            'options' => array(
-//                                'float-left' => esc_html__('Left', $this -> text_domain),
-//                                'left'       => esc_html__('Default', $this -> text_domain),
-//                                'right'      => esc_html__('Right', $this -> text_domain),
+//                                'float-left' => esc_html__('Left', 'templaza-framework'),
+//                                'left'       => esc_html__('Default', 'templaza-framework'),
+//                                'right'      => esc_html__('Right', 'templaza-framework'),
 //                            ),
 //                            'default' => 'left'
 //                        ),
@@ -288,27 +288,27 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 //                ),
 //                array(
 //                    'id'         =>'megamenu-submenu-setting-section',
-//                    'title'      => __('Sub Menu Settings', $this -> text_domain),
-//                    'desc'       => __('Configure Submenu settings.', $this -> text_domain),
+//                    'title'      => __('Sub Menu Settings', 'templaza-framework'),
+//                    'desc'       => __('Configure Submenu settings.', 'templaza-framework'),
 //                    'subsection' => true,
 //                    'fields'     => array(
 //                        array(
 //                            'id'      => 'submenu_direction',
 //                            'type'    => 'select',
-//                            'title'   => __('Sub Menu Alignment', $this -> text_domain),
+//                            'title'   => __('Sub Menu Alignment', 'templaza-framework'),
 //                            'options' => array(
-//                                'left'   => esc_html__('Left', $this -> text_domain),
-//                                'right'  => esc_html__('Right', $this -> text_domain),
-//                                'center' => esc_html__('Center', $this -> text_domain),
-//                                'full'   => esc_html__('Container', $this -> text_domain),
-//                                'edge'   => esc_html__('Full', $this -> text_domain),
+//                                'left'   => esc_html__('Left', 'templaza-framework'),
+//                                'right'  => esc_html__('Right', 'templaza-framework'),
+//                                'center' => esc_html__('Center', 'templaza-framework'),
+//                                'full'   => esc_html__('Container', 'templaza-framework'),
+//                                'edge'   => esc_html__('Full', 'templaza-framework'),
 //                            ),
 //                            'default' => 'left'
 //                        ),
 //                        array(
 //                            'id'    => 'width',
 //                            'type'  => 'text',
-//                            'title' => __('Sub Menu Width', $this -> text_domain),
+//                            'title' => __('Sub Menu Width', 'templaza-framework'),
 //                            'placeholder' => '980px',
 //                            'required' => array(
 //                                array('submenu_direction', '!=', 'full'),
@@ -318,43 +318,43 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 ////                        array(
 ////                            'id'    => 'align',
 ////                            'type'  => 'select',
-////                            'title' => __('Sub Menu Align', $this -> text_domain),
+////                            'title' => __('Sub Menu Align', 'templaza-framework'),
 ////                            'options' => array(
-////                                'bottom-left'  => esc_html__('Left edge of Parent', $this -> text_domain),
-////                                'bottom-right'   => esc_html__('Right edge of Parent', $this -> text_domain),
+////                                'bottom-left'  => esc_html__('Left edge of Parent', 'templaza-framework'),
+////                                'bottom-right'   => esc_html__('Right edge of Parent', 'templaza-framework'),
 ////                            ),
 ////                            'default' => 'bottom-left'
 ////                        ),
 //                        array(
 //                            'id'    => 'hide_sub_menu_on_mobile',
 //                            'type'  => 'switch',
-//                            'title' => __('Hide Sub Menu on Mobile', $this -> text_domain),
+//                            'title' => __('Hide Sub Menu on Mobile', 'templaza-framework'),
 //                        ),
 //                    ),
 //                ),
 //                array(
 //                    'id'         => 'megamenu-icon-section',
 ////                    'icon'       => 'dashicons dashicons-format-image',
-//                    'title'      => esc_html__('Icon', $this -> text_domain),
+//                    'title'      => esc_html__('Icon', 'templaza-framework'),
 //                    'subsection' => true,
 //                    'fields'     => array(
 //                        array(
 //                            'id'    => 'icon_position',
 //                            'type'  => 'select',
-//                            'title' => esc_html__('Icon Position', $this -> text_domain),
+//                            'title' => esc_html__('Icon Position', 'templaza-framework'),
 //                            'options' => array(
-//                                'left'   => esc_html__('Left', $this -> text_domain),
-//                                'top'    => esc_html__('Top', $this -> text_domain),
-//                                'right'  => esc_html__('Right', $this -> text_domain),
-//                                'bottom' => esc_html__('Bottom', $this -> text_domain),
+//                                'left'   => esc_html__('Left', 'templaza-framework'),
+//                                'top'    => esc_html__('Top', 'templaza-framework'),
+//                                'right'  => esc_html__('Right', 'templaza-framework'),
+//                                'bottom' => esc_html__('Bottom', 'templaza-framework'),
 //                            ),
 //                            'default' => 'left'
 //                        ),
 //                        array(
 //                            'id'       => 'icon',
 //                            'type'     => 'select',
-//                            'title'    => __( 'Menu Item Icon', $this -> text_domain ),
-////                            'subtitle' => __( 'Select a Back to Top Icon from the list', $this -> text_domain ),
+//                            'title'    => __( 'Menu Item Icon', 'templaza-framework' ),
+////                            'subtitle' => __( 'Select a Back to Top Icon from the list', 'templaza-framework' ),
 //                            'data'     => 'fontawesome',
 ////                            'default'  => 'fas fa-arrow-up',
 ////                            'required' => array('backtotop','=','1'),
@@ -362,7 +362,7 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 //                        array(
 //                            'id'         => 'dropdown-arrow-icon',
 //                            'type'       => 'select',
-//                            'title'      => __('Dropdown Arrow Icon', $this -> text_domain),
+//                            'title'      => __('Dropdown Arrow Icon', 'templaza-framework'),
 //                            'data'       => 'fontawesome',
 ////                            'data'       => 'icons',
 ////                            'data-icons' => array(
@@ -434,7 +434,7 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 
         public function megamenu_button() {
             echo '<p><button type="button" class="button button-primary tz_mm_launch"><i class="fas fa-box-open"></i> '.
-                __('Menu Options', $this -> text_domain).'</button></p>';
+                __('Menu Options', 'templaza-framework').'</button></p>';
         }
 
         public function prepare_layout_elements($elements){
@@ -1052,8 +1052,8 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                         'admin_ajax_action' => $action,
                         'admin_ajax_nonce'=> esc_attr( wp_create_nonce($action)),
                         'l10nStrings'=> array(
-                            'megamenu' => esc_html__('TZ Mega Menu', $this -> text_domain),
-                            'menu_item' => esc_html__('Megamenu Menu Item', $this -> text_domain),
+                            'megamenu' => esc_html__('TZ Mega Menu', 'templaza-framework'),
+                            'menu_item' => esc_html__('Megamenu Menu Item', 'templaza-framework'),
                         )
                     )
                 );
@@ -1206,7 +1206,7 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 
                     echo '<a href="#" class="button button-primary button-micro megamenu-save-option" style="float:right;">'
                         .'<i class="fas fa-save"></i> '
-                        .esc_html__('Save', $this -> text_domain).'</a>';
+                        .esc_html__('Save', 'templaza-framework').'</a>';
                     echo '<span class="spinner"></span>';
 
                     echo '</div>';
@@ -1216,8 +1216,8 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                 }
             }else{
 //                echo "<div style='padding: 15px;'>";
-                echo '<p>' . esc_html__( 'Please assign this menu to a theme location to enable the Mega Menu settings.', $this -> text_domain ) . '</p>';
-                echo '<p>' . esc_html__( "To assign this menu to a theme location, scroll to the bottom of this page and tag the menu to a 'Display location'.", $this -> text_domain ) . '</p>';
+                echo '<p>' . esc_html__( 'Please assign this menu to a theme location to enable the Mega Menu settings.', 'templaza-framework' ) . '</p>';
+                echo '<p>' . esc_html__( "To assign this menu to a theme location, scroll to the bottom of this page and tag the menu to a 'Display location'.", 'templaza-framework' ) . '</p>';
 //                echo "</div>";
             }
         }

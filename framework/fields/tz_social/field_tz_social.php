@@ -35,7 +35,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                 'options' => array(
                     'behance' => array(
                         'id'      => 'behance',
-                        'title'   => __('Behance', $this -> text_domain),
+                        'title'   => __('Behance', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-behance', 'fab fa-behance-square'),
                         'color'   => '#2252FF',
@@ -44,7 +44,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'dribbble' => array(
                         'id'      => 'dribbble',
-                        'title'   => __('Dribbble', $this -> text_domain),
+                        'title'   => __('Dribbble', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-dribbble','fab fa-dribbble-square'),
                         'color'   => '#F10A77',
@@ -53,7 +53,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'facebook' => array(
                         'id'      => 'facebook',
-                        'title'   => __('Facebook', $this -> text_domain),
+                        'title'   => __('Facebook', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-facebook-f', 'fab fa-facebook', 'fab fa-facebook-square'),
                         'color'   => '#39539E',
@@ -62,7 +62,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'flickr' => array(
                         'id'      => 'flickr',
-                        'title'   => __('Flickr', $this -> text_domain),
+                        'title'   => __('Flickr', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-flickr'),
                         'color'   => '#0054E3',
@@ -71,7 +71,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'gitHub' => array(
                         'id'      => 'gitHub',
-                        'title'   => __('GitHub', $this -> text_domain),
+                        'title'   => __('GitHub', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-github', 'fab fa-github-square', 'fab fa-github-alt'),
                         'color'   => '#171515',
@@ -80,7 +80,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'instagram' => array(
                         'id'      => 'instagram',
-                        'title'   => __('Instagram', $this -> text_domain),
+                        'title'   => __('Instagram', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-instagram'),
                         'color'   => '#467FAA',
@@ -89,7 +89,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'linkedIn' => array(
                         'id'      => 'linkedIn',
-                        'title'   => __('LinkedIn', $this -> text_domain),
+                        'title'   => __('LinkedIn', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-linkedin-in', 'fab fa-linkedin'),
                         'color'   => '#006FB8',
@@ -98,7 +98,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'messenger' => array(
                         'id'      => 'messenger',
-                        'title'   => __('Messenger', $this -> text_domain),
+                        'title'   => __('Messenger', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-facebook-messenger'),
                         'color'   => '#3876C4',
@@ -107,7 +107,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'pinterest' => array(
                         'id'      => 'pinterest',
-                        'title'   => __('Pinterest', $this -> text_domain),
+                        'title'   => __('Pinterest', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-pinterest', 'fab fa-pinterest-square', 'fab fa-pinterest-p'),
                         'color'   => '#DB0000',
@@ -116,7 +116,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'reddit' => array(
                         'id'      => 'reddit',
-                        'title'   => __('Reddit', $this -> text_domain),
+                        'title'   => __('Reddit', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-reddit', 'fab fa-reddit-square', 'fab fa-reddit-alien'),
                         'color'   => '#FF2400',
@@ -125,7 +125,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'skype' => array(
                         'id'               => 'skype',
-                        'title'            => __('Skype', $this -> text_domain),
+                        'title'            => __('Skype', 'templaza-framework'),
                         'link'             => '',
                         'icons'            => array('fab fa-skype'),
                         'color'            => '#00A6F7',
@@ -135,7 +135,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'slack' => array(
                         'id'      => 'slack',
-                        'title'   => __('Slack', $this -> text_domain),
+                        'title'   => __('Slack', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-slack', 'fab fa-slack-hash'),
                         'color'   => '#50364C',
@@ -144,7 +144,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'soundcloud' => array(
                         'id'      => 'soundcloud',
-                        'title'   => __('SoundCloud', $this -> text_domain),
+                        'title'   => __('SoundCloud', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-soundcloud'),
                         'color'   => '#FF0000',
@@ -153,7 +153,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'spotify' => array(
                         'id'      => 'spotify',
-                        'title'   => __('Spotify', $this -> text_domain),
+                        'title'   => __('Spotify', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-spotify'),
                         'color'   => '#00E155',
@@ -162,7 +162,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'twitter' => array(
                         'id'      => 'twitter',
-                        'title'   => __('Twitter', $this -> text_domain),
+                        'title'   => __('Twitter', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-twitter', 'fab fa-twitter-square'),
                         'color'   => '#3DA9F6',
@@ -171,7 +171,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'telegram' => array(
                         'id'               => 'telegram',
-                        'title'            => __('Telegram', $this -> text_domain),
+                        'title'            => __('Telegram', 'templaza-framework'),
                         'link'             => '',
                         'icons'            => array('fab fa-telegram-plane', 'fab fa-telegram'),
                         'color'            => '#004056',
@@ -181,7 +181,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'tumblr' => array(
                         'id'      => 'tumblr',
-                        'title'   => __('Tumblr', $this -> text_domain),
+                        'title'   => __('Tumblr', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-tumblr', 'fab fa-tumblr-square'),
                         'color'   => '#00263C',
@@ -190,7 +190,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'vk' => array(
                         'id'      => 'vk',
-                        'title'   => __('VK', $this -> text_domain),
+                        'title'   => __('VK', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-vk'),
                         'color'   => '#4273AD',
@@ -199,7 +199,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'whatsapp' => array(
                         'id'               => 'whatsapp',
-                        'title'            => __('WhatsApp', $this -> text_domain),
+                        'title'            => __('WhatsApp', 'templaza-framework'),
                         'link'             => '',
                         'icons'            => array('fab fa-whatsapp', 'fab fa-whatsapp-square'),
                         'color'            => '#00C033',
@@ -209,7 +209,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                     ),
                     'youtube' => array(
                         'id'      => 'youtube',
-                        'title'   => __('YouTube', $this -> text_domain),
+                        'title'   => __('YouTube', 'templaza-framework'),
                         'link'    => '',
                         'icons'   => array('fab fa-youtube', 'fab fa-youtube-square'),
                         'color'   => '#DE0000',
@@ -253,16 +253,16 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
             ?>"><?php echo html_entity_decode(stripslashes ($this -> value)); ?></textarea>
             <div class="row">
                 <div class="col-sm-8">
-                    <h2 class="text-center my-5 hide"><?php echo __('No Profile Selected', $this -> text_domain);?></h2>
+                    <h2 class="text-center my-5 hide"><?php echo __('No Profile Selected', 'templaza-framework');?></h2>
                     <div class="field-tz-social" data-field-form="<?php //echo ($value && !empty($value))?htmlspecialchars(json_encode((array) $value)):''; ?>"></div>
                     <div class="mt-4 text-center">
                         <button type="button" class="button" data-add-custom-field><?php echo __('Add Custom Profile');?></button>
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <h3><?php echo __('Social Brands', $this -> text_domain);?></h3>
+                    <h3><?php echo __('Social Brands', 'templaza-framework');?></h3>
                     <input type="text"placeholder="Search Brand" class="form-control mb-3 w-100" data-search-brand>
-                    <small><em class="mb-3 d-block text-center text-info"><?php echo __('Click to Add Profile', $this -> text_domain);?></em></small>
+                    <small><em class="mb-3 d-block text-center text-info"><?php echo __('Click to Add Profile', 'templaza-framework');?></em></small>
 
                     <div data-sources-list="<?php echo count($options)?htmlspecialchars(json_encode(array_values($options))):''; ?>"></div>
                 </div>

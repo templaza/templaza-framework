@@ -52,11 +52,11 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
                 'admin_ajax_url'        => \admin_url('admin-ajax.php'),
                 'admin_url'             => \admin_url('admin.php'),
                 'strings'               =>  array(
-                    'theme_active_title'    => sprintf(__('%s &ndash; Theme Activation', $this -> text_domain),(isset($config['productname']) && !empty($config['productname']))?$config['productname']:'' ),
-                    'delete_question'       => __('Are you sure you want to delete template activation?', $this -> text_domain),
-                    'browser_warning'       => __('Your browser is blocking popups, activation process cannot continue!', $this -> text_domain),
-                    'loading'               => __('Please wait&hellip;', $this -> text_domain),
-                    'loading_desc'          => __('You will be redirected to Envato website in few seconds', $this -> text_domain)
+                    'theme_active_title'    => sprintf(__('%s &ndash; Theme Activation', 'templaza-framework'),(isset($config['productname']) && !empty($config['productname']))?$config['productname']:'' ),
+                    'delete_question'       => __('Are you sure you want to delete template activation?', 'templaza-framework'),
+                    'browser_warning'       => __('Your browser is blocking popups, activation process cannot continue!', 'templaza-framework'),
+                    'loading'               => __('Please wait&hellip;', 'templaza-framework'),
+                    'loading_desc'          => __('You will be redirected to Envato website in few seconds', 'templaza-framework')
                 )
             ));
         }
@@ -102,7 +102,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
                 $app    = Application::get_instance();
                 $app -> enqueue_message(__('Congratulations! '.$_POST['buyer']
                     .' has been successfully activated and now you can get latest updates of the theme.',
-                    $this -> text_domain), 'success');
+                    'templaza-framework'), 'success');
                 echo '<script>window.close();</script>';
                 wp_die();
             }
@@ -113,7 +113,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
                 delete_option(HelperLicense::get_option_name($this -> theme_name));
             }
             $app    = new Application();
-            $app -> enqueue_message(__('The license deleted!', $this -> text_domain), 'success');
+            $app -> enqueue_message(__('The license deleted!', 'templaza-framework'), 'success');
             echo json_encode(array('success' => true, 'redirect' => admin_url('admin.php?page='
             .TEMPLAZA_FRAMEWORK.(($this -> get_name() != 'dashboard')?'_'.$this -> get_name():''))));
             wp_die();

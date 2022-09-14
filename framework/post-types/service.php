@@ -30,17 +30,17 @@ if(!class_exists('TemPlazaFramework\Post_Type\Service')){
         public function register()
         {
             $labels = array(
-                'name'               => esc_html_x('Service', 'Service General Name', $this -> text_domain),
-                'singular_name'      => esc_html_x('Service Item', 'Service Singular Name', $this -> text_domain),
-                'add_new'            => esc_html_x('Add New', 'Add New Service Name', $this -> text_domain),
-                'add_new_item'       => esc_html__('Add New Service', $this -> text_domain),
-                'all_items'          => esc_html__( 'All Services', $this -> text_domain),
-                'edit_item'          => esc_html__('Edit Service', $this -> text_domain),
-                'new_item'           => esc_html__('New Service', $this -> text_domain),
-                'view_item'          => esc_html__('View Service', $this -> text_domain),
-                'search_items'       => esc_html__('Search Service', $this -> text_domain),
-                'not_found'          => esc_html__('Nothing found', $this -> text_domain),
-                'not_found_in_trash' => esc_html__('Nothing found in Trash', $this -> text_domain),
+                'name'               => esc_html_x('Service', 'Service General Name', 'templaza-framework'),
+                'singular_name'      => esc_html_x('Service Item', 'Service Singular Name', 'templaza-framework'),
+                'add_new'            => esc_html_x('Add New', 'Add New Service Name', 'templaza-framework'),
+                'add_new_item'       => esc_html__('Add New Service', 'templaza-framework'),
+                'all_items'          => esc_html__( 'All Services', 'templaza-framework'),
+                'edit_item'          => esc_html__('Edit Service', 'templaza-framework'),
+                'new_item'           => esc_html__('New Service', 'templaza-framework'),
+                'view_item'          => esc_html__('View Service', 'templaza-framework'),
+                'search_items'       => esc_html__('Search Service', 'templaza-framework'),
+                'not_found'          => esc_html__('Nothing found', 'templaza-framework'),
+                'not_found_in_trash' => esc_html__('Nothing found in Trash', 'templaza-framework'),
                 'parent_item_colon'  => ''
             );
             $args = array(
@@ -80,8 +80,8 @@ if(!class_exists('TemPlazaFramework\Post_Type\Service')){
                 "hierarchical"   => true,
                 "show_in_rest"   => true,
                 'show_admin_column'          => true,
-                "label"          => esc_html__("Service Categories",$this -> text_domain),
-                "singular_label" => esc_html__("Service Categories",$this -> text_domain),
+                "label"          => esc_html__("Service Categories",'templaza-framework'),
+                "singular_label" => esc_html__("Service Categories",'templaza-framework'),
                 "rewrite"        => true ));
             register_taxonomy_for_object_type('service-category', $this -> get_post_type());
 
@@ -91,8 +91,8 @@ if(!class_exists('TemPlazaFramework\Post_Type\Service')){
                     "hierarchical"   => '',
                     "show_in_rest"   => true,
                     'show_admin_column'          => true,
-                    "label"          => esc_html__("Service Tags",$this -> text_domain),
-                    "singular_label" => esc_html__("Service Tags",$this -> text_domain),
+                    "label"          => esc_html__("Service Tags",'templaza-framework'),
+                    "singular_label" => esc_html__("Service Tags",'templaza-framework'),
                     "rewrite"        => ''
                 )
             );

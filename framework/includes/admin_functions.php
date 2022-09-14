@@ -168,45 +168,45 @@ if(!class_exists('TemPlazaFramework\Admin_Functions')){
 
             $system_info = array(
                 'php_memory_limit'   => array(
-                    'title'    => esc_html__( 'PHP Memory Limit', static::get_my_text_domain()),
+                    'title'    => esc_html__( 'PHP Memory Limit', 'templaza-framework'),
                     'value'    => size_format( wp_convert_hr_to_bytes( @ini_get( 'memory_limit' ) ) ),
                     'required' => '128',
                     'pass'     => ( wp_convert_hr_to_bytes( @ini_get( 'memory_limit' ) ) >= (128 * 1024 * 1024) ) ? true : false,
-                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', static::get_my_text_domain() )
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', 'templaza-framework' )
                 ),
                 'php_version'        => array(
-                    'title'    => esc_html__( 'PHP Version', static::get_my_text_domain() ),
+                    'title'    => esc_html__( 'PHP Version', 'templaza-framework' ),
                     'value'    => phpversion(),
                     'required' => '5.6',
                     'pass'     => version_compare( PHP_VERSION, '5.6.0' ) >= 0 ? true : false
                 ),
                 'php_post_max_size'  => array(
-                    'title'    => esc_html__( 'PHP Post Max Size', static::get_my_text_domain() ),
+                    'title'    => esc_html__( 'PHP Post Max Size', 'templaza-framework' ),
                     'value'    => ini_get( 'post_max_size' ),
                     'required' => '30',
                     'pass'     => ( ini_get( 'post_max_size' ) >= 30 ) ? true : false,
-                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', static::get_my_text_domain() )
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', 'templaza-framework' )
                 ),
                 'php_time_limit'     => array(
-                    'title'    => esc_html__( 'PHP Time Limit', static::get_my_text_domain() ),
+                    'title'    => esc_html__( 'PHP Time Limit', 'templaza-framework' ),
                     'value'    => ini_get( 'max_execution_time' ),
                     'required' => '600',
                     'pass'     => ( ini_get( 'max_execution_time' ) >= 600 ) ? true : false,
-                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', static::get_my_text_domain() )
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', 'templaza-framework' )
                 ),
                 'php_max_input_vars' => array(
-                    'title'    => esc_html__( 'PHP Max Input Vars', static::get_my_text_domain() ),
+                    'title'    => esc_html__( 'PHP Max Input Vars', 'templaza-framework' ),
                     'value'    => ini_get( 'max_input_vars' ),
                     'required' => '4000',
                     'pass'     => ( ini_get( 'max_input_vars' ) >= 4000 ) ? true : false,
-                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', static::get_my_text_domain() )
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', 'templaza-framework' )
                 ),
                 'max_upload_size'    => array(
-                    'title'    => esc_html__( 'Max Upload Size', static::get_my_text_domain() ),
+                    'title'    => esc_html__( 'Max Upload Size', 'templaza-framework' ),
                     'value'    => size_format( wp_max_upload_size() ),
                     'required' => '30',
                     'pass'     => ( wp_max_upload_size() >= (30 * 1024 * 1024)) ? true : false,
-                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', static::get_my_text_domain() )
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', 'templaza-framework' )
                 )
             );
 

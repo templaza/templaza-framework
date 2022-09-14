@@ -69,7 +69,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 			$this->parent = $parent;
 			$this->field  = $field;
 			$this->value  = $value;
-			$this -> text_domain    = \TemPlazaFramework\Functions::get_my_text_domain();
+            $this -> text_domain    = \TemPlazaFramework\Functions::get_my_text_domain();
 
 			$this->set_defaults();
 
@@ -949,27 +949,27 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
             $devices    = array(
                 'xlarge' => array(
-                    'title'=> esc_html__('Large Screen', $this -> text_domain),
+                    'title'=> esc_html__('Large Screen', 'templaza-framework'),
 //                    'icon' => 'dashicons dashicons-desktop',
                     'uk-icon' => 'tv',
                 ),
                 'desktop' => array(
-                    'title'=> esc_html__('Desktop', $this -> text_domain),
+                    'title'=> esc_html__('Desktop', 'templaza-framework'),
                     'icon' => 'dashicons dashicons-desktop',
                     'uk-icon' => 'desktop',
                 ),
                 'laptop' => array(
-                    'title'=> esc_html__('Laptop', $this -> text_domain),
+                    'title'=> esc_html__('Laptop', 'templaza-framework'),
                     'icon' => 'dashicons dashicons-laptop',
                     'uk-icon' => 'laptop',
                 ),
                 'tablet'  => array(
-                    'title'=> esc_html__('Tablet', $this -> text_domain),
+                    'title'=> esc_html__('Tablet', 'templaza-framework'),
                     'icon' => 'dashicons dashicons-tablet',
                     'uk-icon' => 'tablet',
                 ),
                 'mobile'  => array(
-                    'title'=> esc_html__('Mobile', $this -> text_domain),
+                    'title'=> esc_html__('Mobile', 'templaza-framework'),
                     'icon' => 'dashicons dashicons-smartphone',
                     'uk-icon' => 'phone',
                 ),

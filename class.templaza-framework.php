@@ -56,7 +56,7 @@ class TemPlazaFrameWork{
         add_action('init', array($this, 'init'), 99999);
 
         add_action('init', array($this, 'frontend_init'), 99999);
-
+        add_action( 'init', array( $this, 'tz_load_plugin_textdomain' ) );
         add_action('template_include', array($this, 'template_include'), 999999);
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 99999);
 
@@ -70,6 +70,9 @@ class TemPlazaFrameWork{
         add_action( 'after_setup_theme', array($this, 'create_post_default') );
 
         do_action( 'templaza-framework/plugin/hooks', $this );
+    }
+    public function tz_load_plugin_textdomain() {
+        load_plugin_textdomain( 'templaza-framework', false, TEMPLAZA_FRAMEWORK_PATH . '/languages' );
     }
 
     public function load_gutenberg_blocks(){
@@ -332,9 +335,9 @@ class TemPlazaFrameWork{
 
         // Register menu locations
         $locations = array(
-            'header' => __('Header Menu', $this->text_domain),
-            'primary' => __('Primary Menu', $this->text_domain),
-            'footer' => __('Footer Menu', $this->text_domain),
+            'header' => __('Header Menu', 'templaza-framework'),
+            'primary' => __('Primary Menu', 'templaza-framework'),
+            'footer' => __('Footer Menu', 'templaza-framework'),
         );
         register_nav_menus($locations);
     }
@@ -559,7 +562,7 @@ class TemPlazaFrameWork{
                 'post_author'   => $author,
                 'post_date'     => $now,
                 'post_date_gmt' => $now,
-                'post_title'    => esc_html__('Default', $this -> text_domain),
+                'post_title'    => esc_html__('Default', 'templaza-framework'),
                 'post_status'   => 'publish',
                 'post_name'     => 'default',
                 'post_type'     => $ptype,

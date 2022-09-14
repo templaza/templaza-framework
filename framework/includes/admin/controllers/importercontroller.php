@@ -33,7 +33,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 $app    = Application::get_instance();
                 $app -> enqueue_message(sprintf(__(
                     'Theme %s not Activated! To install any of the demo content sites below you must <a href="%s">Activate theme</a>',
-                    $this -> text_domain), wp_get_theme()->get('Name'),
+                    'templaza-framework'), wp_get_theme()->get('Name'),
                     admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK) ), 'message');
             }
 
@@ -92,7 +92,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                             'success' => false,
                             'installed' => false,
                             'activated' => false,
-                            'message' => __('Not found plugin', $this -> text_domain)
+                            'message' => __('Not found plugin', 'templaza-framework')
                         ));
                         echo '</div>';
                         exit();
@@ -113,22 +113,22 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                     );
 
                     $tgmConfig  = array(
-                        'id'            => $this -> text_domain,
+                        'id'            => 'templaza-framework',
                         'has_notices'   => true,
                         'is_automatic'  => true,
                         'strings'       => array(
-                            'updating'              => __( 'Updating Plugin: %s', $this -> text_domain ),
+                            'updating'              => __( 'Updating Plugin: %s', 'templaza-framework' ),
                             'plugin_updated'      => _n_noop( 'Plugin "%s" updated successfully.',
-                                'Plugins "%s" updated successfully.', $this -> text_domain ),
+                                'Plugins "%s" updated successfully.', 'templaza-framework' ),
                             'plugin_activated'      => _n_noop( 'Plugin "%s" activated successfully.',
-                                'Plugins "%s" activated successfully.', $this -> text_domain ),
+                                'Plugins "%s" activated successfully.', 'templaza-framework' ),
                             'plugin_update_error'   => _n_noop('Can not update plugin "%s". Please check it again!',
-                                'Can not update plugins "%s". Please check it again!', $this->text_domain),
+                                'Can not update plugins "%s". Please check it again!', 'templaza-framework'),
                             'plugin_install_error'  => _n_noop('Can not install plugin "%s". Please check it again!',
-                                'Can not install plugins "%s". Please check it again!', $this->text_domain),
+                                'Can not install plugins "%s". Please check it again!', 'templaza-framework'),
                             'plugin_activate_error' => _n_noop( 'Can not activate plugin "%s".',
-                                'Can not activate plugins "%s".', $this -> text_domain ),
-                            'complete'              => __( 'All plugins installed and activated successfully. %1$s',  $this -> text_domain ),
+                                'Can not activate plugins "%s".', 'templaza-framework' ),
+                            'complete'              => __( 'All plugins installed and activated successfully. %1$s',  'templaza-framework' ),
                         )
                     );
                     if(isset($_GET['tgmpa-update']) && 'update-plugin' === $_GET['tgmpa-update']){
@@ -159,7 +159,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                            $passed['install']       = $install;
                            $msgCount                = count($install);
                            $pluginNames             = $msgCount?implode(", ", $install):$plugin['name'];
-                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_updated'],$msgCount, $this -> text_domain);
+                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_updated'],$msgCount, 'templaza-framework');
 
                            $resultJSON['passed']    = $passed;
                            $resultJSON['message']   = sprintf($message, $pluginNames);
@@ -169,7 +169,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                            $failed['install']       = $install;
                            $msgCount                = count($install);
                            $pluginNames             = $msgCount?implode(", ", $install):$plugin['name'];
-                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_install_error'],$msgCount, $this -> text_domain);
+                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_install_error'],$msgCount, 'templaza-framework');
 
                            $resultJSON['success']   = false;
                            $resultJSON['install']   = true; /* Enable text install */
@@ -193,7 +193,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                            $passed['update']        = $update;
                            $msgCount                = count($update);
                            $pluginNames             = $msgCount?implode(", ", $update):$plugin['name'];
-                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_updated'],$msgCount, $this -> text_domain);
+                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_updated'],$msgCount, 'templaza-framework');
 
                            $resultJSON['passed']    = $passed;
                            $resultJSON['message']   = sprintf($message, $pluginNames);
@@ -203,7 +203,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                            $failed['update']       = $update;
                            $msgCount                = count($update);
                            $pluginNames             = $msgCount?implode(", ", $update):$plugin['name'];
-                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_update_error'],$msgCount, $this -> text_domain);
+                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_update_error'],$msgCount, 'templaza-framework');
 
                            $resultJSON['success']   = false;
                            $resultJSON['update']    = true; /* Enable text update */
@@ -218,7 +218,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                            $passed['activate']      = $activate;
                            $msgCount                = count($activate);
                            $pluginNames             = $msgCount?implode(", ", $activate):$plugin['name'];
-                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_activated'],$msgCount, $this -> text_domain);
+                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_activated'],$msgCount, 'templaza-framework');
 
                            $resultJSON['success']   = true;
                            $resultJSON['activated'] = true; /* Enable text activated */
@@ -230,7 +230,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                            $failed['activate']      = $activate;
                            $msgCount                = count($activate);
                            $pluginNames             = $msgCount?implode(", ", $activate):$plugin['name'];
-                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_activate_error'],$msgCount, $this -> text_domain);
+                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_activate_error'],$msgCount, 'templaza-framework');
 
                            $resultJSON['success']   = true;
                            $resultJSON['activate']  = true; /* Enable text activate */
@@ -300,7 +300,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
                 // Check license
                 if(!HelperLicense::is_authorised($theme)){
-                    $this -> info -> set_message(esc_html__('You have not a valid license.', $this -> text_domain), true);
+                    $this -> info -> set_message(esc_html__('You have not a valid license.', 'templaza-framework'), true);
                     echo $this -> info -> output(true);
                     die();
                 }
@@ -508,7 +508,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                 // Remove package import file
                                 $wp_filesystem->delete($filePath);
 
-                                $this->info->set_message(esc_html__('Imported demo content successfully.', $this->text_domain), false);
+                                $this->info->set_message(esc_html__('Imported demo content successfully.', 'templaza-framework'), false);
 
                                 // Store the demo import type
                                 //'_tzinst_demo_imported'
@@ -529,16 +529,16 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                 update_option($this -> imported_key, $options);
 
                             }else {
-                                $this->info->set_message(sprintf(esc_html__('Imported %s successfully.', $this->text_domain), $demo_title), false);
+                                $this->info->set_message(sprintf(esc_html__('Imported %s successfully.', 'templaza-framework'), $demo_title), false);
                             }
                         }catch (\Exception $e){
                             $this -> info -> set_message(esc_html__('Error: '.$e -> getCode().' '
-                                .$e -> getMessage(), $this -> text_domain), true);
+                                .$e -> getMessage(), 'templaza-framework'), true);
                         }
                     }
                     else{
                         $this -> info -> set_message(esc_html__('Not found file to import. Please contact us to support it.',
-                            $this -> text_domain), true);
+                            'templaza-framework'), true);
                     }
                 }
 
@@ -559,7 +559,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             }
 
             if(!class_exists('TemplazaFramework_Importer')){
-                $this -> info -> set_message(esc_html__('The class TemplazaFramework_WXR_Importer not found.', $this -> text_domain), true);
+                $this -> info -> set_message(esc_html__('The class TemplazaFramework_WXR_Importer not found.', 'templaza-framework'), true);
                 echo $this -> info -> output(true);
                 die();
             }
@@ -588,7 +588,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
             if(!class_exists('RevSliderSliderImport') && !class_exists('RevSlider')){
                 $this -> info -> set_message(esc_html__('Class RevSlider not found. Please install the revslider plugin to continue import it.',
-                    $this -> text_domain), true);
+                    'templaza-framework'), true);
                 echo $this -> info -> output();
                 die();
             }
@@ -705,7 +705,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             // Import WooCommerce if WooCommerce Exists.
             if (!class_exists( 'WooCommerce' )) {
                 $this -> info -> set_message(esc_html__('Please install and active the woocommerce plugin to continue import it.',
-                    $this -> text_domain), true);
+                    'templaza-framework'), true);
                 echo $this -> info -> output();
                 die();
             }
@@ -735,7 +735,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
             if (!class_exists( 'Mega_Menu_Themes' ) && !class_exists( 'Mega_Menu_Settings' )) {
                 $this -> info -> set_message(esc_html__('Please install and active the Mega Menu plugin to continue import it.',
-                    $this -> text_domain), true);
+                    'templaza-framework'), true);
                 echo $this -> info -> output();
                 die();
             }
@@ -743,7 +743,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             $file   = $this -> get_substeps($folder_path, $filename, $file_filter);
 
             if(!$file){
-                $this -> info -> set_message(esc_html__('File not found.', $this -> text_domain), true);
+                $this -> info -> set_message(esc_html__('File not found.', 'templaza-framework'), true);
                 echo $this -> info -> output();
                 die();
             }
@@ -762,7 +762,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
                 $next_id = $megamenu->get_next_theme_id();
 
-                $import['title'] = $import['title'] . " " . __(' - Imported', $this -> text_domain);
+                $import['title'] = $import['title'] . " " . __(' - Imported', 'templaza-framework');
 
                 $new_theme_id = "custom_theme_" . $next_id;
 
@@ -811,7 +811,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 return true;
             }
 
-            $this -> info -> set_message(esc_html__('Can not import mega menu. Please check it again', $this -> text_domain), true);
+            $this -> info -> set_message(esc_html__('Can not import mega menu. Please check it again', 'templaza-framework'), true);
             echo $this -> info -> output();
             die();
         }
@@ -847,7 +847,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
             if(!class_exists('Elementor\Core\App\Modules\ImportExport\Import')){
                 $this -> info -> set_message(esc_html__('Class Import not found. Please install the elementor plugin to continue import it.',
-                    $this -> text_domain), true);
+                    'templaza-framework'), true);
                 echo $this -> info -> output();
                 die();
             }
@@ -951,7 +951,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             $file_path  = $folder_path.'/'.$file;
 
             if(!$file || !file_exists($file_path)){
-                $this -> info -> set_message(esc_html__('File not found.', $this -> text_domain), true);
+                $this -> info -> set_message(esc_html__('File not found.', 'templaza-framework'), true);
                 echo $this -> info -> output();
                 die();
             }
@@ -959,7 +959,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             $forms    = json_decode( file_get_contents( $file_path ) , true );
 
             if(!$forms){
-                $this -> info -> set_message(esc_html__('Forms not found.', $this -> text_domain), true);
+                $this -> info -> set_message(esc_html__('Forms not found.', 'templaza-framework'), true);
                 echo $this -> info -> output();
                 die();
             }
@@ -999,7 +999,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             }
 
             if(!count($_files)){
-                $this -> info -> set_message(esc_html__('Files not found.', $this -> text_domain), true);
+                $this -> info -> set_message(esc_html__('Files not found.', 'templaza-framework'), true);
                 return false;
             }
 

@@ -5,9 +5,9 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 // -> START Typography
 Templaza_API::set_section('settings',
     array(
-        'title'  => __( 'Typography', $this -> text_domain ),
+        'title'  => __( 'Typography', 'templaza-framework' ),
         'id'     => 'typographies',
-        'desc'   => __( 'These settings control the typography', $this -> text_domain ),
+        'desc'   => __( 'These settings control the typography', 'templaza-framework' ),
         'icon'   => 'el el-font',
         'fields' => array(
         )
@@ -17,27 +17,27 @@ Templaza_API::set_section('settings',
 // -> START Body Typography
 Templaza_API::set_section('settings',
     array(
-        'title'      => __( 'Body Typography', $this -> text_domain ),
+        'title'      => __( 'Body Typography', 'templaza-framework' ),
         'id'         => 'typography-bodies',
-        'desc'       => __( 'These settings control the typography for all body text.', $this -> text_domain ),
+        'desc'       => __( 'These settings control the typography for all body text.', 'templaza-framework' ),
         'subsection' => true,
         'fields'     => array(
             array(
                 'id'       => 'typography-body',
                 'type'     => 'button_set',
-                'title'    => __( 'Typography Properties', $this -> text_domain ),
-                'subtitle' => __( 'Choose typography properties for this section. If <code>Default</code> selected then properties will inherit from CSS code.', $this -> text_domain ),
+                'title'    => __( 'Typography Properties', 'templaza-framework' ),
+                'subtitle' => __( 'Choose typography properties for this section. If <code>Default</code> selected then properties will inherit from CSS code.', 'templaza-framework' ),
                 'options'  => array(
-                    'default'     => __('Default', $this -> text_domain),
-                    'custom'      => __('Custom', $this -> text_domain),
+                    'default'     => __('Default', 'templaza-framework'),
+                    'custom'      => __('Custom', 'templaza-framework'),
                 ),
                 'default'  => 'default',
             ),
             array(
                 'id'                      => 'typography-body-option',
                 'type'                    => 'typography',
-                'title'                   => __( 'Body Font', $this -> text_domain ),
-                'subtitle'                => __( 'Specify the body font properties.', $this -> text_domain ),
+                'title'                   => __( 'Body Font', 'templaza-framework' ),
+                'subtitle'                => __( 'Specify the body font properties.', 'templaza-framework' ),
                 'required'                => array('typography-body', '=', 'custom'),
                 'color'                   => false,
                 'text-align'              => false,

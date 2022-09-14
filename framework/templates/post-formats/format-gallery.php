@@ -3,7 +3,7 @@ defined( 'TEMPLAZA_FRAMEWORK' ) || exit;
 
 ?>
 <div id="vp-pfui-format-gallery-preview" class="vp-pfui-format-wrap vp-pfui-elm-block vp-pfui-elm-block-image" style="display: none;">
-	<label><span><?php _e('Gallery Images', $this -> text_domain); ?></span></label>
+	<label><span><?php _e('Gallery Images', 'templaza-framework'); ?></span></label>
 	<div class="vp-pfui-elm-container">
 
 		<?php do_action( 'vp_pfui_before_gallery_meta' ); ?>
@@ -24,7 +24,7 @@ defined( 'TEMPLAZA_FRAMEWORK' ) || exit;
 				echo '</div>';
 			?>
 			<input type="hidden" name="_format_gallery_images" value="<?php echo (empty($images) ? "" : implode(',', $images)); ?>" />
-			<p class="none"><a href="#" class="button vp-pfui-gallery-button"><?php _e('Pick Images', $this -> text_domain); ?></a></p>
+			<p class="none"><a href="#" class="button vp-pfui-gallery-button"><?php _e('Pick Images', 'templaza-framework'); ?></a></p>
 		</div>
 
 		<?php do_action( 'vp_pfui_after_gallery_meta' ); ?>

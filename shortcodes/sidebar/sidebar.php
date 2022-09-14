@@ -20,8 +20,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Sidebar')){
                         'id'       => 'sidebar',
                         'type'     => 'select',
                         'data'     => 'sidebars',
-                        'title'    => __( 'Sidebar', $this -> text_domain ),
-                        'subtitle' => __( 'Select Sidebar.', $this -> text_domain ),
+                        'title'    => __( 'Sidebar', 'templaza-framework' ),
+                        'subtitle' => __( 'Select Sidebar.', 'templaza-framework' ),
                     ),
                 )
             );

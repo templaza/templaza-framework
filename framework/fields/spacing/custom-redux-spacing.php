@@ -104,11 +104,11 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
 //                    'left'         => 'bottom-left',
                 ),
                 'hint'           => array(
-                    'all'    => esc_html__('All', $this -> text_domain),
-                    'top'    => esc_html__('Top', $this -> text_domain),
-                    'bottom' => esc_html__('Bottom', $this -> text_domain),
-                    'left'   => esc_html__('Left', $this -> text_domain),
-                    'right'  => esc_html__('Right', $this -> text_domain),
+                    'all'    => esc_html__('All', 'templaza-framework'),
+                    'top'    => esc_html__('Top', 'templaza-framework'),
+                    'bottom' => esc_html__('Bottom', 'templaza-framework'),
+                    'left'   => esc_html__('Left', 'templaza-framework'),
+                    'right'  => esc_html__('Right', 'templaza-framework'),
                 ),
             );
 
@@ -136,27 +136,27 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
 
             $devices    = array(
                 'xlarge' => array(
-                    'title'=> esc_html__('Large Screen', $this -> text_domain),
+                    'title'=> esc_html__('Large Screen', 'templaza-framework'),
 //                    'icon' => 'dashicons dashicons-desktop',
                     'uk-icon' => 'tv',
                 ),
                 'desktop' => array(
-                    'title'=> esc_html__('Desktop', $this -> text_domain),
+                    'title'=> esc_html__('Desktop', 'templaza-framework'),
                     'icon' => 'dashicons dashicons-desktop',
                     'uk-icon' => 'desktop',
                 ),
                 'laptop' => array(
-                    'title'=> esc_html__('Laptop', $this -> text_domain),
+                    'title'=> esc_html__('Laptop', 'templaza-framework'),
                     'icon' => 'dashicons dashicons-laptop',
                     'uk-icon' => 'laptop',
                 ),
                 'tablet'  => array(
-                    'title'=> esc_html__('Tablet', $this -> text_domain),
+                    'title'=> esc_html__('Tablet', 'templaza-framework'),
                     'icon' => 'dashicons dashicons-tablet',
                     'uk-icon' => 'tablet',
                 ),
                 'mobile'  => array(
-                    'title'=> esc_html__('Mobile', $this -> text_domain),
+                    'title'=> esc_html__('Mobile', 'templaza-framework'),
                     'icon' => 'dashicons dashicons-smartphone',
                     'uk-icon' => 'phone',
                 ),

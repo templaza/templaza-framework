@@ -30,7 +30,7 @@ if($items && count($items)){
                         <h3 class="uk-card-title"><?php echo $item['title']; ?><?php
                             if(isset($optImported['pack']) && in_array($theme_name, $optImported['pack'] )) {
                                 ?><small class="badge badge-success btn-sm font-weight-normal"><?php
-                                echo __('Imported', $this -> text_domain); ?></small><?php
+                                echo __('Imported', 'templaza-framework'); ?></small><?php
                             }?></h3>
                         <p><?php echo $item['desc'];?></p>
                     </div>
@@ -39,18 +39,18 @@ if($items && count($items)){
                             <button type="button" data-toggle="modal" data-target="#tzinst-modal__import-<?php
                             echo $theme_name; ?>" uk-toggle="target: #tzinst-modal__import-<?php
                             echo $theme_name; ?>" class="uk-button uk-button-primary uk-margin-small-bottom uk-width-1-1" data-install-demo-data><?php
-                                _e('Install Demo Data', $this -> text_domain);
+                                _e('Install Demo Data', 'templaza-framework');
                                 ?></button>
                         <?php } ?>
                         <div class="uk-button-group uk-width-1-1">
                             <?php if(isset($item['demo_url']) && !empty($item['demo_url'])){ ?>
                                 <a href="<?php echo $item['demo_url']; ?>" target="_blank" class="uk-button uk-button-default uk-margin-small-bottom uk-width-1-1"><?php
-                                    _e('Preview', $this -> text_domain);
+                                    _e('Preview', 'templaza-framework');
                                     ?></a>
                             <?php } ?>
                             <?php if(isset($item['doc_url']) && !empty($item['doc_url'])){ ?>
                                 <a href="<?php echo $item['doc_url']; ?>" target="_blank" class="uk-button uk-button-default uk-margin-small-bottom uk-width-1-1"><?php
-                                    _e('Manual', $this -> text_domain);
+                                    _e('Manual', 'templaza-framework');
                                     ?></a>
                             <?php } ?>
                         </div>
@@ -59,17 +59,17 @@ if($items && count($items)){
                 <?php if(isset($item['demo-datas']) && count($item['demo-datas']) && !HelperLicense::has_expired($this -> theme_name)){ ?>
                     <div id="tzinst-modal__import-<?php echo $theme_name;
                     ?>" tabindex="-1" role="dialog" data-install-demo-data__modal data-modal-title="<?php
-                    echo esc_attr(sprintf(__('Demo Content Pack » %s', $this -> text_domain), $item['title']));
+                    echo esc_attr(sprintf(__('Demo Content Pack » %s', 'templaza-framework'), $item['title']));
                     ?>" uk-modal="bg-close: false;">
                         <div class="uk-modal-dialog uk-width-2xlarge">
                             <div class="uk-modal-header">
                                 <h3 class="uk-modal-title"><?php
-                                    echo esc_attr(sprintf(__('Demo Content Pack » %s', $this -> text_domain), $item['title']));
+                                    echo esc_attr(sprintf(__('Demo Content Pack » %s', 'templaza-framework'), $item['title']));
                                     ?></h3>
                             </div>
                             <div class="uk-modal-body" uk-overflow-auto>
                                 <?php if(isset($optImported['pack']) && $optImported['pack'] == $theme_name) { ?>
-                                    <div class="alert alert-warning"><?php echo _e('The data of Home Version 1 has been imported. You should consider importing it again, because it may cause duplicated data.', $this -> text_domain); ?></div>
+                                    <div class="alert alert-warning"><?php echo _e('The data of Home Version 1 has been imported. You should consider importing it again, because it may cause duplicated data.', 'templaza-framework'); ?></div>
                                 <?php } ?>
                                 <div data-import-message-box></div>
                                 <?php echo $this -> load_template('plugins'); ?>
@@ -86,12 +86,12 @@ if($items && count($items)){
                                 </div>
                                 <div class="action">
                                     <button type="button" class="uk-button uk-button-default uk-margin-small-right uk-modal-close" data-dismiss="modal"><?php
-                                        echo _e('Close', $this -> text_domain); ?></button>
+                                        echo _e('Close', 'templaza-framework'); ?></button>
                                     <button type="button" class="uk-button uk-button-danger uk-margin-small-right uk-hidden" data-tzinst-stop-importing><?php
-                                        echo _e('Stop Importing', $this -> text_domain); ?></button>
+                                        echo _e('Stop Importing', 'templaza-framework'); ?></button>
                                     <button type="button" class="uk-button uk-button-primary js-tzinst-import">
                                         <span class="spinner-border spinner-border-sm uk-margin-small-right uk-hidden js-tzinst-importing-icon"></span><?php
-                                        _e('Install Demo Data', $this -> text_domain);
+                                        _e('Install Demo Data', 'templaza-framework');
                                         ?></button>
                                 </div>
                             </div>

@@ -338,15 +338,15 @@ if ( true === $this -> field['text-decoration'] ) {
 /* Font Size */
 $devices    = array(
     'desktop' => array(
-        'title'=> esc_html__('Desktop', $this -> text_domain),
+        'title'=> esc_html__('Desktop', 'templaza-framework'),
         'icon' => 'dashicons dashicons-desktop',
     ),
     'tablet'  => array(
-        'title'=> esc_html__('Tablet', $this -> text_domain),
+        'title'=> esc_html__('Tablet', 'templaza-framework'),
         'icon' => 'dashicons dashicons-tablet',
     ),
     'mobile'  => array(
-        'title'=> esc_html__('Mobile', $this -> text_domain),
+        'title'=> esc_html__('Mobile', 'templaza-framework'),
         'icon' => 'dashicons dashicons-smartphone',
     ),
 );
@@ -360,7 +360,7 @@ $units      = array(
 if ( true === $this -> field['font-size'] ) {
     echo '<div class="input_wrapper font-size redux-container-typography tabs">';
 
-    $nav_tab    = '<li><label>' . esc_html__( 'Font Size', $this -> text_domain ) . '</label></li>';
+    $nav_tab    = '<li><label>' . esc_html__( 'Font Size', 'templaza-framework' ) . '</label></li>';
     $tab_pane   = '';
     foreach($devices as $device => $item) {
         $uniquid    = uniqid();
@@ -422,7 +422,7 @@ if ( true === $this -> field['line-height'] ) {
 
     echo '<div class="input_wrapper line-height redux-container-typography tabs">';
 
-    $nav_tab    = '<li><label>' . esc_html__( 'Line Height', $this -> text_domain ) . '</label></li>';
+    $nav_tab    = '<li><label>' . esc_html__( 'Line Height', 'templaza-framework' ) . '</label></li>';
     $tab_pane   = '';
     foreach($devices as $device =>  $item) {
         $uniquid    = uniqid();
@@ -485,7 +485,7 @@ array_pop($units);
 if ( true === $this -> field['word-spacing'] ) {
     echo '<div class="input_wrapper line-height redux-container-typography tabs">';
 
-    $nav_tab    = '<li><label>' . esc_html__( 'Word Spacing', $this -> text_domain ) . '</label></li>';
+    $nav_tab    = '<li><label>' . esc_html__( 'Word Spacing', 'templaza-framework' ) . '</label></li>';
     $tab_pane   = '';
     foreach($devices as $device => $item) {
         $uniquid    = uniqid();
@@ -546,7 +546,7 @@ if ( true === $this -> field['letter-spacing'] ) {
 
     echo '<div class="input_wrapper line-height redux-container-typography tabs">';
 
-    $nav_tab    = '<li><label>' . esc_html__( 'Letter Spacing', $this -> text_domain ) . '</label></li>';
+    $nav_tab    = '<li><label>' . esc_html__( 'Letter Spacing', 'templaza-framework' ) . '</label></li>';
     $tab_pane   = '';
     foreach($devices as $device => $item) {
         $uniquid    = uniqid();

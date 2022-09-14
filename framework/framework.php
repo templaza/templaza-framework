@@ -90,8 +90,8 @@ class Framework{
                 $theme  = $this -> theme;
 
                 add_menu_page(
-                    _x( $theme->get('Name').' Options', 'templaza-framework', $this -> text_domain ),
-                    _x( $theme->get('Name').' Options', 'templaza-framework', $this -> text_domain ),
+                    _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                    _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
                     'manage_options',
                     TEMPLAZA_FRAMEWORK,
                     '',
@@ -172,7 +172,7 @@ class Framework{
 
     public function admin_nav_tabs($nav_tabs){
         $nav_tabs[] = array(
-            'label' => __('Settings', $this -> text_domain),
+            'label' => __('Settings', 'templaza-framework'),
             'url'   => 'admin.php?page='.$this -> args['opt_name'].'_options',
         );
 
@@ -343,12 +343,12 @@ class Framework{
         $this->args = array(
             // TYPICAL -> Change these values as you need/desire
             'opt_name'            => Functions::get_theme_option_name(),            // This is where your data is stored in the database and also becomes your global variable name.
-            'display_name'        => sprintf(__( '%s Settings',  $this -> text_domain), $theme->get('Name')),     // Name that appears at the top of your panel
+            'display_name'        => sprintf(__( '%s Settings',  'templaza-framework'), $theme->get('Name')),     // Name that appears at the top of your panel
             'display_version'     => $theme->get('Version'),  // Version that appears at the top of your panel
             'menu_type'           => 'submenu',                  //Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
             'allow_sub_menu'      => true,                    // Show the sections below the admin menu item or not
-            'menu_title'          => __( 'Settings', $this -> text_domain),
-            'page_title'          => sprintf(__( '%s Settings',  $this -> text_domain), $theme->get('Name')),
+            'menu_title'          => __( 'Settings', 'templaza-framework'),
+            'page_title'          => sprintf(__( '%s Settings',  'templaza-framework'), $theme->get('Name')),
 
             // You will need to generate a Google API key to use this feature.
             // Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
@@ -468,22 +468,22 @@ class Framework{
                 $tzfrm_post_type_obj  = get_post_type_object($tzfrm_post_type);
                 $tzfrm_subsection   = array(
                     'id'    => $tzfrm_post_type.'-subsections',
-                    'title' => sprintf(__('%s Options', $this -> text_domain),$tzfrm_post_type_obj -> label),
+                    'title' => sprintf(__('%s Options', 'templaza-framework'),$tzfrm_post_type_obj -> label),
                     'subsection' => true,
                     'fields'     => array(
                         array(
                             'id'    => $tzfrm_post_type.'-archive-style',
                             'type'  => 'select',
-                            'title' => sprintf(__('%s Archive Style', $this -> text_domain), $tzfrm_post_type_obj -> label),
-                            'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+                            'title' => sprintf(__('%s Archive Style', 'templaza-framework'), $tzfrm_post_type_obj -> label),
+                            'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                             'data'     => 'callback',
                             'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
                         ),
                         array(
                             'id'    => $tzfrm_post_type.'-single-style',
                             'type'  => 'select',
-                            'title' => sprintf(__('%s Single Style', $this -> text_domain), $tzfrm_post_type_obj -> label),
-                            'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+                            'title' => sprintf(__('%s Single Style', 'templaza-framework'), $tzfrm_post_type_obj -> label),
+                            'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                             'data'     => 'callback',
                             'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
                         )

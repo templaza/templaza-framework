@@ -5,11 +5,11 @@
         <!-- Column Top control -->
         <div class="fl_controls fl_controls-column">
             <a href="#" class="fl_control fl_column-add" data-fl-control="add" data-uk-tooltip="<?php
-            echo __('Add Element', $this -> text_domain); ?>"><i class="fas fa-plus"></i></a>
+            echo __('Add Element', 'templaza-framework'); ?>"><i class="fas fa-plus"></i></a>
             <a href="#" class="fl_control fl_column-edit" data-fl-control="edit" data-uk-tooltip="<?php
-            echo __('Edit Column', $this -> text_domain);?>"><i class="far fa-edit"></i></a>
+            echo __('Edit Column', 'templaza-framework');?>"><i class="far fa-edit"></i></a>
             <a href="#" class="fl_control fl_column-delete" data-fl-control="delete" data-uk-tooltip="<?php
-            echo __('Delete Column', $this -> text_domain);?>"><i class="far fa-trash-alt"></i></a>
+            echo __('Delete Column', 'templaza-framework');?>"><i class="far fa-trash-alt"></i></a>
         </div><!-- End Column Top control -->
 
         <!-- Column Element Wrapper -->
@@ -21,7 +21,7 @@
 
         <div class="fl_controls fl_controls-column bottom-controls">
             <a href="#" class="fl_control fl_column-add" data-fl-control="add"><i class="far fa-plus-square"></i> <?php
-                echo __('Add Element', $this -> text_domain); ?></a>
+                echo __('Add Element', 'templaza-framework'); ?></a>
         </div>
     </div>
 </script>

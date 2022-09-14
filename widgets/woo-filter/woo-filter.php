@@ -43,10 +43,10 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
         public function register(){
             return array(
 //                'id'                => strtolower(__CLASS__),
-                'title'             => esc_html__( 'TemPlaza - Woocommerce Filter', $this -> text_domain ),
+                'title'             => esc_html__( 'TemPlaza - Woocommerce Filter', 'templaza-framework' ),
                 'widget_options'    => array(
                     'classname'                   => 'products-filter-widget woocommerce',
-                    'description'                 => esc_html__( 'WooCommerce products filter.', $this -> text_domain ),
+                    'description'                 => esc_html__( 'WooCommerce products filter.', 'templaza-framework' ),
                     'customize_selective_refresh' => true,
                 ),
                 'control_options'   => array( 'width' => 560 )

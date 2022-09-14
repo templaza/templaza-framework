@@ -34,8 +34,8 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
             $core_field = array(
                 'id'    => 'admin_label',
                 'type'  => 'text',
-                'title' => esc_html__('Admin Label', $this -> text_domain),
-                'subtitle' => esc_html__('Set title for this option.', $this -> text_domain)
+                'title' => esc_html__('Admin Label', 'templaza-framework'),
+                'subtitle' => esc_html__('Set title for this option.', 'templaza-framework')
             );
              array_unshift($fields, $core_field);
             $this -> title_field    = 'admin_label';
@@ -151,7 +151,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
                 wp_localize_script('field-tz_repeater-js', 'field_tz_repeater_obj', array(
                         'title_field'       => $this -> title_field,
                         'ignore_fields'     => $this -> ignore_fields,
-                        'ask_remove_option' => esc_html__('Are you sure to delete this option?', $this -> text_domain)
+                        'ask_remove_option' => esc_html__('Are you sure to delete this option?', 'templaza-framework')
                 ));
             }
         }

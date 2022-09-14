@@ -25,7 +25,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
                         'all'    => false,
                         'allow_responsive'    => true,
                         'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
-                        'title'  => esc_html__('Social Item Margin', $this -> text_domain),
+                        'title'  => esc_html__('Social Item Margin', 'templaza-framework'),
                         'default' => array(
                             'units' => 'px',
                         ),

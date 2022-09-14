@@ -30,17 +30,17 @@ if(!class_exists('TemPlazaFramework\Post_Type\Our_Team')){
         public function register()
         {
             $labels = array(
-                'name'               => esc_html_x('Our Team', 'Our Team General Name', $this -> text_domain),
-                'singular_name'      => esc_html_x('Our Team Item', 'Our Team Singular Name', $this -> text_domain),
-                'add_new'            => esc_html_x('Add New', 'Add New Our Team Name', $this -> text_domain),
-                'add_new_item'       => esc_html__('Add New Our Team', $this -> text_domain),
-                'all_items'          => esc_html__( 'All Our Teams', $this -> text_domain),
-                'edit_item'          => esc_html__('Edit Our Team', $this -> text_domain),
-                'new_item'           => esc_html__('New Our Team', $this -> text_domain),
-                'view_item'          => esc_html__('View Our Team', $this -> text_domain),
-                'search_items'       => esc_html__('Search Our Team', $this -> text_domain),
-                'not_found'          => esc_html__('Nothing found', $this -> text_domain),
-                'not_found_in_trash' => esc_html__('Nothing found in Trash', $this -> text_domain),
+                'name'               => esc_html_x('Our Team', 'Our Team General Name', 'templaza-framework'),
+                'singular_name'      => esc_html_x('Our Team Item', 'Our Team Singular Name', 'templaza-framework'),
+                'add_new'            => esc_html_x('Add New', 'Add New Our Team Name', 'templaza-framework'),
+                'add_new_item'       => esc_html__('Add New Our Team', 'templaza-framework'),
+                'all_items'          => esc_html__( 'All Our Teams', 'templaza-framework'),
+                'edit_item'          => esc_html__('Edit Our Team', 'templaza-framework'),
+                'new_item'           => esc_html__('New Our Team', 'templaza-framework'),
+                'view_item'          => esc_html__('View Our Team', 'templaza-framework'),
+                'search_items'       => esc_html__('Search Our Team', 'templaza-framework'),
+                'not_found'          => esc_html__('Nothing found', 'templaza-framework'),
+                'not_found_in_trash' => esc_html__('Nothing found in Trash', 'templaza-framework'),
                 'parent_item_colon'  => ''
             );
             $args = array(
@@ -80,8 +80,8 @@ if(!class_exists('TemPlazaFramework\Post_Type\Our_Team')){
                 "hierarchical"   => true,
                 "show_in_rest"   => true,
                 'show_admin_column'          => true,
-                "label"          => esc_html__("Our Team Categories",$this -> text_domain),
-                "singular_label" => esc_html__("Our Team Categories",$this -> text_domain),
+                "label"          => esc_html__("Our Team Categories",'templaza-framework'),
+                "singular_label" => esc_html__("Our Team Categories",'templaza-framework'),
                 "rewrite"        => true ));
             register_taxonomy_for_object_type('our_team-category', $this -> get_post_type());
 
@@ -91,8 +91,8 @@ if(!class_exists('TemPlazaFramework\Post_Type\Our_Team')){
                     "hierarchical"   => '',
                     "show_in_rest"   => true,
                     'show_admin_column'          => true,
-                    "label"          => esc_html__("Our Team Tags",$this -> text_domain),
-                    "singular_label" => esc_html__("Our Team Tags",$this -> text_domain),
+                    "label"          => esc_html__("Our Team Tags",'templaza-framework'),
+                    "singular_label" => esc_html__("Our Team Tags",'templaza-framework'),
                     "rewrite"        => ''
                 )
             );

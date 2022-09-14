@@ -10,7 +10,7 @@ foreach ($post_formats as $format) {
 	$class = ($format == $current_post_format || (empty($current_post_format) && $format == 'standard') ? 'current' : '');
 	
 	if ($format == 'standard') {
-		$format_string = __('Standard', $this -> text_domain);
+		$format_string = __('Standard', 'templaza-framework');
 		$format_hash = 'post-format-0';
 	}
 	else {

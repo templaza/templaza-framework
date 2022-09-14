@@ -14,25 +14,25 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
         {
             $theme  = $this -> theme;
             $labels = array(
-                'name'               => _x( 'Templaza Library', 'templaza-framework', $this -> text_domain ),
-                'singular_name'      => _x( 'Templaza Library', 'templaza-framework', $this -> text_domain ),
-                'menu_name'          => _x( 'Templaza Library', 'templaza-framework', $this -> text_domain ),
-                'name_admin_bar'     => _x( 'Templaza Libraries', 'templaza-framework', $this -> text_domain ),
-                'add_new'            => _x( 'Add New', 'templaza-framework', $this -> text_domain ),
-                'add_new_item'       => __( 'Add New template library', $this -> text_domain),
-                'new_item'           => __( 'New template', $this -> text_domain ),
-                'edit_item'          => __( 'Edit template', $this -> text_domain),
-                'view_item'          => __( 'View template', $this -> text_domain ),
-                'all_items'          => __( 'Templaza Libraries', $this -> text_domain ),
-                'search_items'       => __( 'Search templates', $this -> text_domain ),
-                'parent_item_colon'  => __( 'Parent templates:', $this -> text_domain ),
-                'not_found'          => __( 'No templates found.', $this -> text_domain ),
-                'not_found_in_trash' => __( 'No templates found in Trash.', $this -> text_domain )
+                'name'               => _x( 'Templaza Library', 'templaza-framework', 'templaza-framework' ),
+                'singular_name'      => _x( 'Templaza Library', 'templaza-framework', 'templaza-framework' ),
+                'menu_name'          => _x( 'Templaza Library', 'templaza-framework', 'templaza-framework' ),
+                'name_admin_bar'     => _x( 'Templaza Libraries', 'templaza-framework', 'templaza-framework' ),
+                'add_new'            => _x( 'Add New', 'templaza-framework', 'templaza-framework' ),
+                'add_new_item'       => __( 'Add New template library', 'templaza-framework'),
+                'new_item'           => __( 'New template', 'templaza-framework' ),
+                'edit_item'          => __( 'Edit template', 'templaza-framework'),
+                'view_item'          => __( 'View template', 'templaza-framework' ),
+                'all_items'          => __( 'Templaza Libraries', 'templaza-framework' ),
+                'search_items'       => __( 'Search templates', 'templaza-framework' ),
+                'parent_item_colon'  => __( 'Parent templates:', 'templaza-framework' ),
+                'not_found'          => __( 'No templates found.', 'templaza-framework' ),
+                'not_found_in_trash' => __( 'No templates found in Trash.', 'templaza-framework' )
             );
 
             $args = array(
                 'labels'             => $labels,
-                'description'        => __( 'Description.', $this -> text_domain ),
+                'description'        => __( 'Description.', 'templaza-framework' ),
                 'public'             => false,
                 'publicly_queryable' => false,
 //                'show_ui'            => true,
@@ -69,8 +69,8 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
             ));
             $data   = array();
             $data[] = array(
-                'title'         => __('Blank Section', $this -> text_domain),
-                'author'        => __('Templaza Framework', $this -> text_domain),
+                'title'         => __('Blank Section', 'templaza-framework'),
+                'author'        => __('Templaza Framework', 'templaza-framework'),
                 'lib_data'      => '',
                 'human_date'    => '',
                 'human_modified_date' => '',
@@ -124,10 +124,10 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
             $result = wp_delete_post($lib_id);
 
             if($result){
-                wp_send_json_success(__('Deleted post successfully', $this -> text_domain));
+                wp_send_json_success(__('Deleted post successfully', 'templaza-framework'));
             }
 
-            wp_send_json_error(__('Can not delete post', $this -> text_domain));
+            wp_send_json_error(__('Can not delete post', 'templaza-framework'));
         }
 
         public function save_field_section(){
@@ -166,7 +166,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
             }
 
             if(!$postId){
-                wp_send_json_error(__('Insert post error', $this -> text_domain));
+                wp_send_json_error(__('Insert post error', 'templaza-framework'));
             }
 
             // Update postmeta library type is: section or page
@@ -179,7 +179,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
 //                wp_send_json_error(__('Update post meta error'));
 //            }
 
-            wp_send_json(array('success' => true, 'message' => __('Section Saved', $this -> text_domain)));
+            wp_send_json(array('success' => true, 'message' => __('Section Saved', 'templaza-framework')));
         }
 
         /* *
@@ -190,7 +190,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
             $new_columns['cb']      = $columns['cb'];
             $new_columns['title']   = $columns['title'];
 
-            $new_columns['lib_type']   = __('Type', $this->text_domain);
+            $new_columns['lib_type']   = __('Type', 'templaza-framework');
 
             return array_merge($new_columns, $columns);
         }

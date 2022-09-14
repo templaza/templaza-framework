@@ -11,7 +11,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Portfolio')){
             // Get all post types without templaza_style
             $metaboxes[] = array(
                 'id'            => 'portfolio-options',
-                'title'         => esc_html__( 'Portfolio Options', $this -> text_domain ),
+                'title'         => esc_html__( 'Portfolio Options', 'templaza-framework' ),
                 'post_types'    => array('portfolio'),
                 'position'      => 'normal', // normal, advanced, side
                 'priority'      => 'default', // high, core, default, low - Priorities of placement
@@ -22,12 +22,12 @@ if(!class_exists('TemplazaFramework_MetaBox_Portfolio')){
                             array(
                                 'id'        => 'gallery',
                                 'type'      => 'gallery',
-                                'title'     => esc_html__('Gallery', $this -> text_domain),
+                                'title'     => esc_html__('Gallery', 'templaza-framework'),
                             ),
                             array(
                                 'id'        => 'oembed',
                                 'type'      => 'text',
-                                'title'     => esc_html__( 'Embed Code', $this -> text_domain ),
+                                'title'     => esc_html__( 'Embed Code', 'templaza-framework' ),
                                 'validate'  => 'url',
                             ),
                         ),
@@ -68,9 +68,9 @@ if(!class_exists('TemplazaFramework_MetaBox_Portfolio')){
         public function post_type_table_head($columns){
             $columns = array(
                 "cb"                 => "<input type=\"checkbox\" />",
-                "title"              => esc_html__("Title", $this -> text_domain),
-//                "home"             => esc_html__("Default",$this -> text_domain),
-                "date"               => esc_html__("Date",$this -> text_domain)
+                "title"              => esc_html__("Title", 'templaza-framework'),
+//                "home"             => esc_html__("Default",'templaza-framework'),
+                "date"               => esc_html__("Date",'templaza-framework')
             );
             return $columns;
         }
@@ -150,7 +150,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Portfolio')){
 //            }
 //            $post_id    = isset($_GET['post'])?$_GET['post']:0;
 //            if(!$post_id){
-//                wp_die(__('Post or Page creation failed, could not find original post:', $this -> text_domain) . $post_id);
+//                wp_die(__('Post or Page creation failed, could not find original post:', 'templaza-framework') . $post_id);
 //            }
 //
 //            $this -> _disable_home_without_post_id($post_id);

@@ -7,7 +7,7 @@ $theme  = wp_get_theme();
 ?>
 <div class="tzinst-footer uk-margin-medium-top" data-uk-grid>
     <div class="uk-width-expand@s">
-        <strong><?php echo __("© TemPlaza.com", $this -> text_domain); ?></strong> - Thank you for choosing <?php echo $theme -> get('Name'); ?>. We are honored and are fully dedicated to making your experience perfect.
+        <strong><?php echo __("© TemPlaza.com", 'templaza-framework'); ?></strong> - Thank you for choosing <?php echo $theme -> get('Name'); ?>. We are honored and are fully dedicated to making your experience perfect.
     </div>
     <div class="uk-width-auto@s">
         <div class="uk-grid-small" data-uk-grid>

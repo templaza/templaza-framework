@@ -11,7 +11,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Our_Team')){
             // Get all post types without templaza_style
             $metaboxes[] = array(
                 'id'            => 'our_team-options',
-                'title'         => esc_html__( 'Our Team Options', $this -> text_domain ),
+                'title'         => esc_html__( 'Our Team Options', 'templaza-framework' ),
                 'post_types'    => array('our_team'),
                 'position'      => 'normal', // normal, advanced, side
                 'priority'      => 'default', // high, core, default, low - Priorities of placement
@@ -22,34 +22,34 @@ if(!class_exists('TemplazaFramework_MetaBox_Our_Team')){
                             array(
                                 'id'          => 'birthday',
                                 'type'        => 'text',
-                                'title'       => esc_html__('Birthday', $this -> text_domain),
-                                'placeholder' => esc_html__('Click to enter a date', $this -> text_domain),
+                                'title'       => esc_html__('Birthday', 'templaza-framework'),
+                                'placeholder' => esc_html__('Click to enter a date', 'templaza-framework'),
                             ),
                             array(
                                 'id'          => 'phone',
                                 'type'        => 'text',
-                                'title'       => esc_html__('Phone Number', $this -> text_domain),
+                                'title'       => esc_html__('Phone Number', 'templaza-framework'),
                             ),
                             array(
                                 'id'          => 'email',
                                 'type'        => 'text',
-                                'title'       => esc_html__('Email', $this -> text_domain),
+                                'title'       => esc_html__('Email', 'templaza-framework'),
                             ),
 
                             array(
                                 'id'       => 'social',
                                 'type'     => 'tz_repeater',
-                                'title' => esc_html__('Social', $this -> text_domain),
+                                'title' => esc_html__('Social', 'templaza-framework'),
                                 'fields' => array(
                                     array(
                                         'id'       => 'social_url',
                                         'type'     => 'text',
-                                        'title'    => esc_html__( 'Social url', $this -> text_domain ),
+                                        'title'    => esc_html__( 'Social url', 'templaza-framework' ),
                                     ),
                                     array(
                                         'id'          => 'social_icon',
                                         'type'        => 'select',
-                                        'title'       => esc_html__( 'Login icon', $this -> text_domain ),
+                                        'title'       => esc_html__( 'Login icon', 'templaza-framework' ),
                                         'data'        => 'fontawesome',
                                         'default'     => 'fas fa-facebook',
                                     ),
@@ -94,9 +94,9 @@ if(!class_exists('TemplazaFramework_MetaBox_Our_Team')){
         public function post_type_table_head($columns){
             $columns = array(
                 "cb"                 => "<input type=\"checkbox\" />",
-                "title"              => esc_html__("Title", $this -> text_domain),
-//                "home"             => esc_html__("Default",$this -> text_domain),
-                "date"               => esc_html__("Date",$this -> text_domain)
+                "title"              => esc_html__("Title", 'templaza-framework'),
+//                "home"             => esc_html__("Default",'templaza-framework'),
+                "date"               => esc_html__("Date",'templaza-framework')
             );
             return $columns;
         }

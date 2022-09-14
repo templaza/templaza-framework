@@ -12,7 +12,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Post_Format')){
             // Get all post types without templaza_style
             $metaboxes[] = array(
                 'id'            => 'templaza-post-format',
-                'title'         => __( 'Post Format Data', $this -> text_domain ),
+                'title'         => __( 'Post Format Data', 'templaza-framework' ),
                 'post_types'    => array('post'),
                 'position'      => 'side', // normal, advanced, side
                 'priority'      => 'default', // high, core, default, low - Priorities of placement
@@ -23,12 +23,12 @@ if(!class_exists('TemplazaFramework_MetaBox_Post_Format')){
 //                            array(
 //                                'id'        => 'gallery',
 //                                'type'      => 'gallery',
-//                                'title'     => esc_html__('Gallery', $this -> text_domain),
+//                                'title'     => esc_html__('Gallery', 'templaza-framework'),
 //                            ),
 //                            array(
 //                                'id'        => 'oembed',
 //                                'type'      => 'text',
-//                                'title'     => esc_html__( 'Embed Code', $this -> text_domain ),
+//                                'title'     => esc_html__( 'Embed Code', 'templaza-framework' ),
 //                                'validate'  => 'url',
 //                            ),
 //                        ),
@@ -53,10 +53,10 @@ if(!class_exists('TemplazaFramework_MetaBox_Post_Format')){
                     'templaza-post-formats-ui',
                     'vp_pfui_post_format',
                     array(
-                        'loading'      => __('Loading...', $this -> text_domain),
+                        'loading'      => __('Loading...', 'templaza-framework'),
                         'wpspin_light' => admin_url('images/wpspin_light.gif'),
-                        'media_title'  => __('Pick Gallery Images', $this -> text_domain),
-                        'media_button' => __('Add Image(s)', $this -> text_domain)
+                        'media_title'  => __('Pick Gallery Images', 'templaza-framework'),
+                        'media_button' => __('Add Image(s)', 'templaza-framework')
                     )
                 );
 

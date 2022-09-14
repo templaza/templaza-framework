@@ -11,19 +11,19 @@ if(!class_exists('TemplazaFramework_ShortCode_UIImage')){
 			return array(
 				'id'          => 'uiimage',
 				'icon'        => 'fas fa-image',
-				'title'       => __('UI Image', $this -> text_domain),
-				'param_title' => esc_html__('UI Image Settings', $this -> text_domain),
-				'desc'        => __('Insert an Image or SVG', $this -> text_domain),
+				'title'       => __('UI Image', 'templaza-framework'),
+				'param_title' => esc_html__('UI Image Settings', 'templaza-framework'),
+				'desc'        => __('Insert an Image or SVG', 'templaza-framework'),
 				'admin_label' => true,
 				'params'      => array(
 					array(
 						'id'       => 'image',
 						'type'     => 'media',
 						'url'      => true,
-						'title'    => __( 'Select Image', $this -> text_domain ),
+						'title'    => __( 'Select Image', 'templaza-framework' ),
 						'compiler' => 'true',
-						'desc'     => __( 'Basic media uploader with disabled URL input field.', $this -> text_domain ),
-						'subtitle' => __( 'Select an image', $this -> text_domain )
+						'desc'     => __( 'Basic media uploader with disabled URL input field.', 'templaza-framework' ),
+						'subtitle' => __( 'Select an image', 'templaza-framework' )
 					),
 				)
 			);

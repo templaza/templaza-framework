@@ -12,7 +12,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
             $tzfrm_post_types  = Post_TypeFunctions::getPostTypes();
             $metaboxes[] = array(
                 'id'            => 'templaza-options',
-                'title'         => __( 'Templaza Options', $this -> text_domain ),
+                'title'         => __( 'Templaza Options', 'templaza-framework' ),
                 'post_types'    => $tzfrm_post_types,
                 'position'      => 'side', // normal, advanced, side
                 'priority'      => 'default', // high, core, default, low - Priorities of placement
@@ -25,8 +25,8 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
                                 'type'     => 'select',
                                 'data'     => 'callback',
                                 'width'    => '100%',
-                                'title'    => esc_html__('Templaza Style', $this -> text_domain),
-                                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+                                'title'    => esc_html__('Templaza Style', 'templaza-framework'),
+                                'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                                 'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
                             ),
                         ),
@@ -106,8 +106,8 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
         public function post_type_table_head($columns){
             $columns = array(
                 "cb"                 => "<input type=\"checkbox\" />",
-                "title"              => esc_html__("Title", $this -> text_domain),
-                "date"               => esc_html__("Date",$this -> text_domain)
+                "title"              => esc_html__("Title", 'templaza-framework'),
+                "date"               => esc_html__("Date",'templaza-framework')
             );
             return $columns;
         }
@@ -186,7 +186,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
             }
             $post_id    = isset($_GET['post'])?$_GET['post']:0;
             if(!$post_id){
-                wp_die(__('Post or Page creation failed, could not find original post:', $this -> text_domain) . $post_id);
+                wp_die(__('Post or Page creation failed, could not find original post:', 'templaza-framework') . $post_id);
             }
 
             $this -> _disable_home_without_post_id($post_id);

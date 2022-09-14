@@ -10,7 +10,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
         public function register(){
             $metaboxes[] = array(
                 'id'            => 'layout-assignment',
-                'title'         => __( 'Default Layout', $this -> text_domain ),
+                'title'         => __( 'Default Layout', 'templaza-framework' ),
                 'post_types'    => array('templaza_header', 'templaza_footer'),
                 'position'      => 'side', // normal, advanced, side
                 'priority'      => 'default', // high, core, default, low - Priorities of placement
@@ -21,8 +21,8 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
                             array(
                                 'id'       => '__home',
                                 'type'     => 'switch',
-                                'title'    => esc_html__('Default', $this -> text_domain),
-//                                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+                                'title'    => esc_html__('Default', 'templaza-framework'),
+//                                'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                             ),
                         ),
                     ),
@@ -30,7 +30,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
             );
             $metaboxes[] = array(
                 'id'            => 'header-layout-assign',
-                'title'         => __( 'Template Assignment', $this -> text_domain ),
+                'title'         => __( 'Template Assignment', 'templaza-framework' ),
                 'post_types'    => array('templaza_header'),
                 'position'      => 'side', // normal, advanced, side
                 'priority'      => 'default', // high, core, default, low - Priorities of placement
@@ -41,8 +41,8 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
                             array(
                                 'id'       => '__h_template_assign',
                                 'type'     => 'checkbox',
-//                                'title'    => esc_html__('Default', $this -> text_domain),
-//                                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+//                                'title'    => esc_html__('Default', 'templaza-framework'),
+//                                'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                                 'data'     => 'callback',
                                 'args'     => array('TemPlazaFramework\AdminHelper\Templaza_Style', 'get_items_by_slug'),
                             ),
@@ -52,7 +52,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
             );
             $metaboxes[] = array(
                 'id'            => 'footer-layout-assign',
-                'title'         => __( 'Template Assignment', $this -> text_domain ),
+                'title'         => __( 'Template Assignment', 'templaza-framework' ),
                 'post_types'    => 'templaza_footer',
                 'position'      => 'side', // normal, advanced, side
                 'priority'      => 'default', // high, core, default, low - Priorities of placement
@@ -63,8 +63,8 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
                             array(
                                 'id'       => '__f_template_assign',
                                 'type'     => 'checkbox',
-//                                'title'    => esc_html__('Default', $this -> text_domain),
-//                                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+//                                'title'    => esc_html__('Default', 'templaza-framework'),
+//                                'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                                 'data'     => 'callback',
                                 'args'     => array('TemPlazaFramework\AdminHelper\Templaza_Style', 'get_items_by_slug'),
                             ),
@@ -74,7 +74,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
             );
             $metaboxes[] = array(
                 'id'            => 'header-footer-assign',
-                'title'         => __( 'Assignment', $this -> text_domain ),
+                'title'         => __( 'Assignment', 'templaza-framework' ),
                 'post_types'    => 'templaza_style',
                 'position'      => 'side', // normal, advanced, side
                 'priority'      => 'default', // high, core, default, low - Priorities of placement
@@ -86,8 +86,8 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
                                 'id'       => '__header_assign',
                                 'type'     => 'select',
                                 'width'    => '100%',
-                                'title'    => esc_html__('Header Assignment', $this -> text_domain),
-//                                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+                                'title'    => esc_html__('Header Assignment', 'templaza-framework'),
+//                                'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                                 'data'     => 'callback',
                                 'args'     => array('TemPlazaFramework\AdminHelper\Templaza_Header', 'get_items_by_slug'),
                             ),
@@ -95,8 +95,8 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
                                 'id'       => '__footer_assign',
                                 'type'     => 'select',
                                 'width'    => '100%',
-                                'title'    => esc_html__('Footer Assignment', $this -> text_domain),
-//                                'subtitle' => __('This template style will be defined as the global default template style.', $this -> text_domain),
+                                'title'    => esc_html__('Footer Assignment', 'templaza-framework'),
+//                                'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                                 'data'     => 'callback',
                                 'args'     => array('TemPlazaFramework\AdminHelper\Templaza_Footer', 'get_items_by_slug'),
                             ),
@@ -171,16 +171,16 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
             $new_columns    = array();
             if($post_type == 'templaza_header' || $post_type == 'templaza_footer'){
                 $new_columns    = array(
-                    '__home' => esc_html__('Default', $this -> text_domain)
+                    '__home' => esc_html__('Default', 'templaza-framework')
                 );
                 if($post_type == 'templaza_header'){
-                    $new_columns['__h_template_assign'] = esc_html__('Template Assigned', $this -> text_domain);
+                    $new_columns['__h_template_assign'] = esc_html__('Template Assigned', 'templaza-framework');
                 }elseif($post_type == 'templaza_footer'){
-                    $new_columns['__f_template_assign'] = esc_html__('Template Assigned', $this -> text_domain);
+                    $new_columns['__f_template_assign'] = esc_html__('Template Assigned', 'templaza-framework');
                 }
             }elseif($post_type == 'templaza_style'){
                 $new_columns    = array(
-                    '__header_assign' => esc_html__('Header Assigned', $this -> text_domain)
+                    '__header_assign' => esc_html__('Header Assigned', 'templaza-framework')
                 );
             }
 
@@ -291,8 +291,8 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
 
             $pos            = array_search('title', array_keys($columns)) + 1;
             $new_columns    = array(
-                '__header_assign' => esc_html__('Header Assigned', $this -> text_domain),
-                '__footer_assign' => esc_html__('Footer Assigned', $this -> text_domain)
+                '__header_assign' => esc_html__('Header Assigned', 'templaza-framework'),
+                '__footer_assign' => esc_html__('Footer Assigned', 'templaza-framework')
             );
 
             return array_merge(
@@ -388,7 +388,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
             }
             $post_id    = isset($_GET['post'])?$_GET['post']:0;
             if(!$post_id){
-                wp_die(__('Post or Page creation failed, could not find original post:', $this -> text_domain) . $post_id);
+                wp_die(__('Post or Page creation failed, could not find original post:', 'templaza-framework') . $post_id);
             }
 
             $this -> _disable_home_without_post_id($post_id);

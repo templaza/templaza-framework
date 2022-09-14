@@ -43,22 +43,22 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                     array(
                         'id'       => 'enable_custom_heading',
                         'type'     => 'switch',
-                        'title'    => esc_html__('Enable Custom Heading', $this -> text_domain),
-                        'subtitle' => esc_html__('If set to on, the heading will be display custom heading.', $this -> text_domain),
-                        'desc'     => esc_html__('Default is get_the_title()', $this -> text_domain),
+                        'title'    => esc_html__('Enable Custom Heading', 'templaza-framework'),
+                        'subtitle' => esc_html__('If set to on, the heading will be display custom heading.', 'templaza-framework'),
+                        'desc'     => esc_html__('Default is get_the_title()', 'templaza-framework'),
                         'default'  => false,
                     ),
                     array(
                         'id'       => 'custom_heading',
                         'type'     => 'text',
-                        'title'    => esc_html__('Custom Heading', $this -> text_domain),
+                        'title'    => esc_html__('Custom Heading', 'templaza-framework'),
                         'required' => array('enable_custom_heading', '=', true),
                     ),
                     array(
                         'id'       => 'heading_tag',
                         'type'     => 'select',
-                        'title'    => esc_html__('Heading Tag', $this -> text_domain),
-                        'subtitle' => esc_html__('Select heading tag from the list', $this -> text_domain),
+                        'title'    => esc_html__('Heading Tag', 'templaza-framework'),
+                        'subtitle' => esc_html__('Select heading tag from the list', 'templaza-framework'),
                         'options'  => array(
                             'h1'   => 'h1',
                             'h2'   => 'h2',
@@ -72,22 +72,22 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                     array(
                         'id'       => 'enable_heading_inner_tag',
                         'type'     => 'switch',
-                        'title'    => esc_html__('Heading Inner Tag', $this -> text_domain),
-                        'subtitle' => esc_html__('The heading will be added span tag to heading tag', $this -> text_domain),
+                        'title'    => esc_html__('Heading Inner Tag', 'templaza-framework'),
+                        'subtitle' => esc_html__('The heading will be added span tag to heading tag', 'templaza-framework'),
                         'default'  => false,
                     ),
                     array(
                         'id'       => 'enable_heading_custom_font',
                         'type'     => 'switch',
-                        'title'    => esc_html__('Heading Custom font', $this -> text_domain),
+                        'title'    => esc_html__('Heading Custom font', 'templaza-framework'),
                         'default'  => false,
                     ),
                     array(
                         /* To use this id is a variable. You should create id with "_" character*/
                         'id'                      => 'typography_heading_element',
                         'type'                    => 'typography',
-                        'title'                   => esc_html__( 'Heading Font', $this -> text_domain ),
-                        'subtitle'                => esc_html__( 'Specify Heading font properties.', $this -> text_domain ),
+                        'title'                   => esc_html__( 'Heading Font', 'templaza-framework' ),
+                        'subtitle'                => esc_html__( 'Specify Heading font properties.', 'templaza-framework' ),
                         'required'                => array('enable_heading_custom_font', '=', 'true'),
                         'color'                   => true,
                         'text-align'              => false,
@@ -117,7 +117,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                         'all'    => false,
                         'allow_responsive'    => true,
                         'units'  => array( 'em', 'rem', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
-                        'title'  => esc_html__('Custom Margin', $this -> text_domain),
+                        'title'  => esc_html__('Custom Margin', 'templaza-framework'),
                         'default' => array(
                             'units' => 'px'
                         ),
@@ -125,22 +125,22 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                     array(
                         'id'       => 'enable_heading_single',
                         'type'     => 'switch',
-                        'title'    => esc_html__('Show heading in single post', $this -> text_domain),
-                        'subtitle' => esc_html__('The heading will be show in single post', $this -> text_domain),
+                        'title'    => esc_html__('Show heading in single post', 'templaza-framework'),
+                        'subtitle' => esc_html__('The heading will be show in single post', 'templaza-framework'),
                         'default'  => false,
                     ),
                     array(
                         'id'       => 'enable_heading_single_meta',
                         'type'     => 'switch',
-                        'title'    => esc_html__('Show meta in single post', $this -> text_domain),
+                        'title'    => esc_html__('Show meta in single post', 'templaza-framework'),
                         'default'  => false,
                         'required' => array('enable_heading_single', '=', true),
                     ),
                     array(
                         'id'       => 'heading_custom_class',
                         'type'     => 'text',
-                        'title'    => esc_html__('Heading Custom Class', $this -> text_domain),
-                        'subtitle' => esc_html__('Custom class will be added to heading tag.', $this -> text_domain),
+                        'title'    => esc_html__('Heading Custom Class', 'templaza-framework'),
+                        'subtitle' => esc_html__('Custom class will be added to heading tag.', 'templaza-framework'),
                     ),
                 )
             );

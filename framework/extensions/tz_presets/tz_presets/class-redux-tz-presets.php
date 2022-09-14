@@ -142,9 +142,9 @@ if ( ! class_exists( 'Redux_TZ_Presets' ) ) {
                 wp_localize_script('field-tz_presets', 'field_tz_presets', array(
                     'i18n' => array(
                         'messages' => array(
-                            'valid_name' => esc_html__('Please insert name of preset!', $this->text_domain),
-                            'load_confirm' => esc_html__('Your current configure will be lost and overwritten by new data. Are you sure?', $this->text_domain),
-                            'remove_confirm' => esc_html__('This preset will be deleted! Are you sure?', $this->text_domain)
+                            'valid_name' => esc_html__('Please insert name of preset!', 'templaza-framework'),
+                            'load_confirm' => esc_html__('Your current configure will be lost and overwritten by new data. Are you sure?', 'templaza-framework'),
+                            'remove_confirm' => esc_html__('This preset will be deleted! Are you sure?', 'templaza-framework')
                         )
                     )
                 ));

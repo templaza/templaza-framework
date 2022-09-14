@@ -5,8 +5,8 @@ if(isset($this -> item) && isset($this -> item['demo-datas']) && count($this -> 
     $item   = $this -> item;
     $code   = $this -> product_code;
     ?>
-    <h5><?php echo sprintf(__('Import Demo Content %s', $this -> text_domain), $item['title']);?></h5>
-    <p class="text-muted"><?php echo __('Select what type of content do you want to import:', $this -> text_domain); ?></p>
+    <h5><?php echo sprintf(__('Import Demo Content %s', 'templaza-framework'), $item['title']);?></h5>
+    <p class="text-muted"><?php echo __('Select what type of content do you want to import:', 'templaza-framework'); ?></p>
     <form id="tzinst-import__<?php echo $code; ?>" data-demo-id="<?php echo $code; ?>">
     <?php foreach($item['demo-datas'] as $i => $data){?>
 

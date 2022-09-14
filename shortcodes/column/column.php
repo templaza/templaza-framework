@@ -39,20 +39,20 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
                             // General settings
                             array(
                                 'id' => 'settings',
-                                'title'  => esc_html__('General Settings', $this -> text_domain),
+                                'title'  => esc_html__('General Settings', 'templaza-framework'),
                                 'fields' => array(
 //                                    array(
 //                                        'id'       => 'customclass',
 //                                        'type'     => 'text',
-//                                        'title'    => esc_html__('Custom Class', $this -> text_domain),
-//                                        'subtitle' => esc_html__('Custom Class can be used for writing custom CSS or JS.', $this -> text_domain),
+//                                        'title'    => esc_html__('Custom Class', 'templaza-framework'),
+//                                        'subtitle' => esc_html__('Custom Class can be used for writing custom CSS or JS.', 'templaza-framework'),
 //                                        'default'  => 'test',
 //                                    ),
 //                                    array(
 //                                        'id'       => 'customid',
 //                                        'type'     => 'text',
-//                                        'title'    => esc_html__('Custom ID', $this -> text_domain),
-//                                        'subtitle' => esc_html__('Custom ID can be used for overriding the auto-generated id.', $this -> text_domain),
+//                                        'title'    => esc_html__('Custom ID', 'templaza-framework'),
+//                                        'subtitle' => esc_html__('Custom ID can be used for overriding the auto-generated id.', 'templaza-framework'),
 //                                        'default'  => time(),
 //                                    ),
                                 ),
@@ -61,7 +61,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
                             // Design settings
                             array(
                                 'id'     => 'design-settings',
-                                'title'  => esc_html__('Design Settings', $this -> text_domain),
+                                'title'  => esc_html__('Design Settings', 'templaza-framework'),
                                 'fields' => array(
                                     array(
                                         'id'    => 'background',
@@ -71,24 +71,24 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
                                     array(
                                         'id'         => 'border',
                                         'type'       => 'border',
-                                        'title'      => __('Border', $this -> text_domain),
+                                        'title'      => __('Border', 'templaza-framework'),
                                     ),
                                     array(
                                         'id'     => 'tab-custom_colors',
                                         'type'   => 'section',
                                         'indent' => true,
-                                        'title'  => esc_html__('Custom Colors', $this -> text_domain),
+                                        'title'  => esc_html__('Custom Colors', 'templaza-framework'),
                                     ),
                                     array(
                                         'id'       => 'text_color',
                                         'type'     => 'color',
-                                        'title'    => esc_html__('Text Color', $this -> text_domain),
+                                        'title'    => esc_html__('Text Color', 'templaza-framework'),
 //                                        'required' => array('custom_colors', '=', '1'),
                                     ),
                                     array(
                                         'id'       => 'link_color',
                                         'type'     => 'link_color',
-                                        'title'    => esc_html__('Link Color', $this -> text_domain),
+                                        'title'    => esc_html__('Link Color', 'templaza-framework'),
 //                                        'required' => array('custom_colors', '=', '1'),
                                     ),
                                     array(
@@ -102,51 +102,51 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
                             // Responsive settings
                             array(
                                 'id'     => 'responsive-settings',
-                                'title'  => esc_html__('Responsive Settings', $this -> text_domain),
+                                'title'  => esc_html__('Responsive Settings', 'templaza-framework'),
                                 'fields' => array(
 
                                     array(
                                         'id'      => 'xs_size',
                                         'type'    => 'select',
-                                        'title'   => esc_html__('Phone Portrait', $this -> text_domain),
-                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', $this -> text_domain),
+                                        'title'   => esc_html__('Phone Portrait', 'templaza-framework'),
+                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', 'templaza-framework'),
                                         'options' => $this -> column_width_options(),
                                         'default' => '1-1'
                                     ),
                                     array(
                                         'id'      => 'sm_size',
                                         'type'    => 'select',
-                                        'title'   => esc_html__('Phone Landscape', $this -> text_domain),
-                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', $this -> text_domain),
+                                        'title'   => esc_html__('Phone Landscape', 'templaza-framework'),
+                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', 'templaza-framework'),
                                         'options' => $this -> column_width_options()
                                     ),
                                     array(
                                         'id'      => 'md_size',
                                         'type'    => 'select',
-                                        'title'   => esc_html__('Tablet Landscape', $this -> text_domain),
-                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', $this -> text_domain),
+                                        'title'   => esc_html__('Tablet Landscape', 'templaza-framework'),
+                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', 'templaza-framework'),
                                         'options' => $this -> column_width_options()
                                     ),
                                     array(
                                         'id'      => 'lg_size',
                                         'type'    => 'select',
-                                        'title'   => esc_html__('Desktop (Default Device)', $this -> text_domain),
-                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', $this -> text_domain),
+                                        'title'   => esc_html__('Desktop (Default Device)', 'templaza-framework'),
+                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', 'templaza-framework'),
                                         'options' => $this -> column_width_options()
                                     ),
                                     array(
                                         'id'      => 'xl_size',
                                         'type'    => 'select',
-                                        'title'   => esc_html__('Large Screen', $this -> text_domain),
-                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', $this -> text_domain),
+                                        'title'   => esc_html__('Large Screen', 'templaza-framework'),
+                                        'subtitle'   => __('Set the column width for each breakpoint. Mix fraction widths or combine fixed widths with the <i>Expand</i> value. If no value is selected, the column width of the next smaller screen size is applied. The combination of widths should always take the full width.', 'templaza-framework'),
                                         'options' => $this -> column_width_options()
                                     ),
                                     array(
                                         'id'     => 'tab-visibility-options',
                                         'type'   => 'section',
                                         'indent' => true,
-                                        'title'  => esc_html__('Visibility Options', $this -> text_domain),
-//                                        'subtitle'   => esc_html__('<576px', $this -> text_domain),
+                                        'title'  => esc_html__('Visibility Options', 'templaza-framework'),
+//                                        'subtitle'   => esc_html__('<576px', 'templaza-framework'),
                                     ),
 //                                    array(
 //                                        'id'      => 'xs_visibility',
@@ -158,7 +158,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
                                     array(
                                         'id'      => 'sm_visibility',
                                         'type'    => 'switch',
-                                        'title'   => esc_html__('Visible On Phone Landscape', $this -> text_domain),
+                                        'title'   => esc_html__('Visible On Phone Landscape', 'templaza-framework'),
                                         'subtitle'=> esc_html__('Disable to hide this section on phone landscape device'),
                                         'default' => true,
                                     ),
@@ -198,28 +198,28 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
 
         protected function column_width_options(){
             return array(
-                esc_html__('Fraction width', $this -> text_domain) => array(
-                    '1-1'      => esc_html__('1/1', $this -> text_domain), // 12
-                    '1-2'       => esc_html__('1/2', $this -> text_domain), // 6
-                    '1-3'       => esc_html__('1/3', $this -> text_domain),  // 4
-                    '2-3'       => esc_html__('2/3', $this -> text_domain), // 8
-                    '1-4'       => esc_html__('1/4', $this -> text_domain), // 3
-                    '3-4'       => esc_html__('3/4', $this -> text_domain), // 9
-                    '1-5'      => esc_html__('1/5', $this -> text_domain), // 2
-                    '2-5'       => esc_html__('2/5', $this -> text_domain), // 5
-                    '3-5'       => esc_html__('3/5', $this -> text_domain), // 7
-                    '4-5'       => esc_html__('4/5', $this -> text_domain), // 10
-                    '1-6'      => esc_html__('1/6', $this -> text_domain), // 1
-                    '5-6'       => esc_html__('5/6', $this -> text_domain), // 11
+                esc_html__('Fraction width', 'templaza-framework') => array(
+                    '1-1'      => esc_html__('1/1', 'templaza-framework'), // 12
+                    '1-2'       => esc_html__('1/2', 'templaza-framework'), // 6
+                    '1-3'       => esc_html__('1/3', 'templaza-framework'),  // 4
+                    '2-3'       => esc_html__('2/3', 'templaza-framework'), // 8
+                    '1-4'       => esc_html__('1/4', 'templaza-framework'), // 3
+                    '3-4'       => esc_html__('3/4', 'templaza-framework'), // 9
+                    '1-5'      => esc_html__('1/5', 'templaza-framework'), // 2
+                    '2-5'       => esc_html__('2/5', 'templaza-framework'), // 5
+                    '3-5'       => esc_html__('3/5', 'templaza-framework'), // 7
+                    '4-5'       => esc_html__('4/5', 'templaza-framework'), // 10
+                    '1-6'      => esc_html__('1/6', 'templaza-framework'), // 1
+                    '5-6'       => esc_html__('5/6', 'templaza-framework'), // 11
                 ),
-                                                esc_html__('Fixed width', $this -> text_domain) => array(
-                    'expand'  => esc_html__('Expand', $this -> text_domain),
-                    'auto'    => esc_html__('Auto', $this -> text_domain),
-                    'small'   => esc_html__('Small', $this -> text_domain),
-                    'medium'  => esc_html__('Medium', $this -> text_domain),
-                    'large'   => esc_html__('Large', $this -> text_domain),
-                    'xlarge'  => esc_html__('XLarge', $this -> text_domain),
-                    '2xlarge' => esc_html__('2XLarge', $this -> text_domain),
+                                                esc_html__('Fixed width', 'templaza-framework') => array(
+                    'expand'  => esc_html__('Expand', 'templaza-framework'),
+                    'auto'    => esc_html__('Auto', 'templaza-framework'),
+                    'small'   => esc_html__('Small', 'templaza-framework'),
+                    'medium'  => esc_html__('Medium', 'templaza-framework'),
+                    'large'   => esc_html__('Large', 'templaza-framework'),
+                    'xlarge'  => esc_html__('XLarge', 'templaza-framework'),
+                    '2xlarge' => esc_html__('2XLarge', 'templaza-framework'),
                 )
             );
         }

@@ -21,25 +21,25 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Footer')) {
         {
             $theme  = $this -> theme;
             $labels = array(
-                'name'               => _x( $theme->get('Name').' Footers', 'templaza-framework', $this -> text_domain ),
-                'singular_name'      => _x( $theme->get('Name').' Footers', 'templaza-framework', $this -> text_domain ),
-                'menu_name'          => _x( $theme->get('Name').' Options', 'templaza-framework', $this -> text_domain ),
-                'name_admin_bar'     => _x( $theme->get('Name').' Options', 'templaza-framework', $this -> text_domain ),
-                'add_new'            => _x( 'Add New', 'templaza-framework', $this -> text_domain ),
-                'add_new_item'       => __( 'Add New footer', $this -> text_domain),
-                'new_item'           => __( 'New footer', $this -> text_domain ),
-                'edit_item'          => __( 'Edit footer', $this -> text_domain),
-                'view_item'          => __( 'View footer', $this -> text_domain ),
-                'all_items'          => __( 'Footers', $this -> text_domain ),
-                'search_items'       => __( 'Search footers', $this -> text_domain ),
-                'parent_item_colon'  => __( 'Parent footers:', $this -> text_domain ),
-                'not_found'          => __( 'No footers found.', $this -> text_domain ),
-                'not_found_in_trash' => __( 'No footers found in Trash.', $this -> text_domain )
+                'name'               => _x( $theme->get('Name').' Footers', 'templaza-framework', 'templaza-framework' ),
+                'singular_name'      => _x( $theme->get('Name').' Footers', 'templaza-framework', 'templaza-framework' ),
+                'menu_name'          => _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                'name_admin_bar'     => _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                'add_new'            => _x( 'Add New', 'templaza-framework', 'templaza-framework' ),
+                'add_new_item'       => __( 'Add New footer', 'templaza-framework'),
+                'new_item'           => __( 'New footer', 'templaza-framework' ),
+                'edit_item'          => __( 'Edit footer', 'templaza-framework'),
+                'view_item'          => __( 'View footer', 'templaza-framework' ),
+                'all_items'          => __( 'Footers', 'templaza-framework' ),
+                'search_items'       => __( 'Search footers', 'templaza-framework' ),
+                'parent_item_colon'  => __( 'Parent footers:', 'templaza-framework' ),
+                'not_found'          => __( 'No footers found.', 'templaza-framework' ),
+                'not_found_in_trash' => __( 'No footers found in Trash.', 'templaza-framework' )
             );
 
             $args = array(
                 'labels'             => $labels,
-                'description'        => __( 'Description.', $this -> text_domain ),
+                'description'        => __( 'Description.', 'templaza-framework' ),
                 'public'             => false,
                 'publicly_queryable' => false,
                 'show_ui'            => true,
