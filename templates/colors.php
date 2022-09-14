@@ -188,12 +188,12 @@ $woo_icon_bg_color_hover  = CSS::make_color_rgba_redux($woo_icon_bg_color_hover)
 
 $woo_css             = !empty($woo_icon_color)?'color:'.$woo_icon_color.';':'';
 $woo_css            .= !empty($woo_icon_bg_color)?'background-color:'.$woo_icon_bg_color.';':'';
-$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .tz-loop-button{'.$woo_css.'}':'';
+$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .product-loop__buttons .tz-loop-button{'.$woo_css.'}':'';
 Templates::add_inline_style($woo_css);
 $woo_css             = '';
 $woo_css            .= !empty($woo_icon_color_hover)?'color:'.$woo_icon_color_hover.';':'';
 $woo_css            .= !empty($woo_icon_bg_color_hover)?'background-color:'.$woo_icon_bg_color_hover.';':'';
-$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .tz-loop-button:hover:hover{'.$woo_css.'}':'';
+$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .product-loop__buttons .tz-loop-button:hover{'.$woo_css.'}':'';
 Templates::add_inline_style($woo_css);
 ?>
 
