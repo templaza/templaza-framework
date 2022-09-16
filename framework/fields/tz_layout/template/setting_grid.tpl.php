@@ -51,6 +51,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
             array('width' => 'medium', 'title' => __('Fixed', 'templaza-framework')),
         ),
         array('auto' => __('Auto', 'templaza-framework'),'expand' => __('Expand', 'templaza-framework')),
+        array('expand' => __('Expand', 'templaza-framework'), 'auto' => __('Auto', 'templaza-framework')),
         array('auto' => __('Auto', 'templaza-framework'),'1-3','expand' => __('Expand', 'templaza-framework')),
     );
     ?>
