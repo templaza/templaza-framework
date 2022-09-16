@@ -2,6 +2,8 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
+use TemPlazaFramework\CSS;
+use TemPlazaFramework\Templates;
 use TemPlazaFramework\Functions;
 
 if(!class_exists('TemplazaFramework_ShortCode_Heading')){
@@ -117,7 +119,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                         'all'    => false,
                         'allow_responsive'    => true,
                         'units'  => array( 'em', 'rem', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
-                        'title'  => esc_html__('Custom Margin', 'templaza-framework'),
+                        'title'  => esc_html__('Heading Margin', 'templaza-framework'),
                         'default' => array(
                             'units' => 'px'
                         ),
@@ -145,12 +147,51 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                 )
             );
         }
-//        public function prepare_params($params, $element){
-//            $params = parent::prepare_params($params, $element);
-//
-//
-//            return $params;
-//        }
+
+
+        public function prepare_params($params, $element, $parent_el)
+        {
+
+//            $css = array('desktop' => '', 'tablet' => '', 'mobile' => '');
+            $css = Templates::get_devices(true);
+
+            $custom_css_name    = 'tz_custom_'.$element['id'].' '
+                .(isset($params['heading_tag'])?$params['heading_tag']:'h1');
+            if(isset($params['heading_margin']) && !empty($params['heading_margin'])){
+
+                $margin    = CSS::make_spacing_redux('margin', $params['heading_margin'], true, 'px');
+
+                if(!empty($margin)){
+                    if(is_array($margin)){
+                        foreach($margin as $device => $pcss){
+                            if(!isset($css[$device])){
+                                $css[$device]   = '';
+                            }
+                            $css[$device] .= $pcss;
+                        }
+                    }else{
+                        $css['desktop'] .= $margin;
+                    }
+                }
+
+                if(!empty($css)){
+                    if(is_array($css)){
+                        if(count($css)){
+                            foreach ($css as $device => $style){
+                                if(!empty($style)) {
+                                    $style  = '.'.$custom_css_name.'{'.$style.'}';
+                                    Templates::add_inline_style($style, $device);
+                                }
+                            }
+                        }
+                    }else{
+                        Templates::add_inline_style($css);
+                    }
+                }
+            }
+
+            return parent::prepare_params($params, $element, $parent_el);
+        }
     }
 
 }
