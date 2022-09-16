@@ -35,7 +35,20 @@
 			"default": ""
 		},
 		"enable_keyword":{
-			"type": "boolean"
+			"type": "boolean",
+			"default": true
+		},
+		"enable_ajax":{
+			"type": "boolean",
+			"default": true
+		},
+		"update_url":{
+			"type": "boolean",
+			"default": true
+		},
+		"instant":{
+			"type": "boolean",
+			"default": false
 		},
 		"submit_text":{
 			"type": "string",

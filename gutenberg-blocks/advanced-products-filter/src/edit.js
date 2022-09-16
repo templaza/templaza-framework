@@ -51,7 +51,7 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 	};
 
 	const [ isChecked, setChecked ] = useState( true );
-	const [ className, setClassName ] = useState( __('Inventory Search') );
+	const [ className, setClassName ] = useState( __('Inventory Search', 'templaza-framework') );
 
 	const title_display = [
 		{"label":__("Inline"),
@@ -127,7 +127,7 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 									}
 									placeholder='Select Custom Fields'
 									textFieldProps={{
-										label: __('Select Custom Fields'),
+										label: __('Select Custom Fields', 'templaza-framework'),
 										variant: 'outlined',
 										InputLabelProps: {
 											shrink: true
@@ -150,15 +150,44 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 							</BaseControl>
 
 							<ToggleControl
-								label={__('Filter By Keyword')}
-								help={ isChecked ? 'Enabled filter by keyword.' : 'Disabled filter by keyword.' }
-								checked={ isChecked }
-								onChange={ (val) => {setChecked(( state ) => ! state); setAttributes({enable_keyword: isChecked})}}
+								label={__('Filter By Keyword', 'templaza-framework')}
+								help={ attributes.enable_keyword ? __('Enabled filter by keyword.',
+									'templaza-framework') : __('Disabled filter by keyword.', 'templaza-framework') }
+								checked={ attributes.enable_keyword }
+								onChange={ (val) => {setAttributes({enable_keyword: val})}}
 							/>
 							<TextControl
-								label={__('Submit Text')}
+								label={__('Submit Text', 'templaza-framework')}
 								value={ attributes.submit_text }
 								onChange={ ( value ) => {setAttributes({submit_text: value})} }/>
+							<ToggleControl
+								label={__('Use ajax for filtering', 'templaza-framework')}
+								help={ attributes.enable_ajax ? __('Enabled ajax for filtering.',
+									'templaza-framework') : __('Disabled ajax for filtering.',
+									'templaza-framework') }
+								checked={ attributes.enable_ajax }
+								onChange={ (val) => {setAttributes({enable_ajax: val});}}
+							/>
+							{attributes.enable_ajax &&
+								(<ToggleControl
+								label={__('Update URL', 'templaza-framework')}
+								help={attributes.update_url ? __('Enabled update url for filtering.', 'templaza-framework')
+									: __('Disabled update url for filtering.', 'templaza-framework')}
+								checked={attributes.update_url}
+								onChange={(val) => {
+									setAttributes({update_url: val});
+								}}/>)
+							}
+							{attributes.enable_ajax &&
+								(<ToggleControl
+										label={__('Filtering products instantly (no buttons required)', 'templaza-framework')}
+										help={ attributes.instant ? __('Enabled filtering products instantly',
+											'templaza-framework') : __('Disabled filtering products instantly',
+											'templaza-framework') }
+										checked={ attributes.instant }
+										onChange={ (val) => {setAttributes({instant: val});}}
+									/>)
+							}
 						</div>
 					</PanelBody>
 				</InspectorControls>
@@ -166,7 +195,9 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 				<div { ...useBlockProps() }>
 					[advanced-product-form include="{
 						typeof attributes.ap_custom_fields === "object"?attributes.ap_custom_fields.join(','):attributes.ap_custom_fields
-				}" enable_keyword="{isChecked?1:0}" submit_text="{attributes.submit_text}"]
+				}" enable_keyword="{attributes.enable_keyword?1:0}" submit_text="{attributes.submit_text
+				}" enable_ajax="{attributes.enable_ajax?1:0}" update_url="{attributes.update_url?1:0
+				}" instant="{attributes.instant?1:0}"]
 				</div>
 		</Fragment>
 	)

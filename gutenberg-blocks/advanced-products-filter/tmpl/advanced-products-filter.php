@@ -11,7 +11,10 @@ $title              = (isset($attributes['title']) && !empty($attributes['title'
 $title_tag          = (isset($attributes['title_tag']) && !empty($attributes['title_tag']))?$attributes['title_tag']:'h3';
 $title_display      = (isset($attributes['title_display']) && !empty($attributes['title_display']))?$attributes['title_display']:'uk-display-block';
 $submit_text        = (isset($attributes['submit_text']) && !empty($attributes['submit_text']))?$attributes['submit_text']:esc_html__('Search', 'templaza-framework');
-$enable_keyword     = (isset($attributes['enable_keyword']) && !empty($attributes['enable_keyword']))?$attributes['enable_keyword']:false;
+$instant            = (isset($attributes['instant']))?$attributes['instant']:false;
+$update_url         = (isset($attributes['update_url']))?$attributes['update_url']:true;
+$enable_ajax        = (isset($attributes['enable_ajax']))?$attributes['enable_ajax']:true;
+$enable_keyword     = (isset($attributes['enable_keyword']))?$attributes['enable_keyword']:false;
 $fields_include     = (isset($attributes['ap_custom_fields']) && !empty($attributes['ap_custom_fields']))?$attributes['ap_custom_fields']:'';
 $shortcode          = '';
 $shortcode          = '[advanced-product-form';
@@ -33,6 +36,10 @@ if(!empty($submit_icon)){
 if(!empty($submit_icon_pos)){
     $shortcode  .= ' submit_icon_position="'.$submit_icon_pos.'"';
 }
+
+$shortcode .= ' enable_ajax="'.($enable_ajax?1:0).'"';
+$shortcode .= ' instant="'.($instant?1:0).'"';
+$shortcode .= ' update_url="'.($update_url?1:0).'"';
 $shortcode .= ' enable_keyword="'.($enable_keyword?1:0).'"]';
 ?>
 <div class="templaza-framework-gutenberg-adv-product-filters">
