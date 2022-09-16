@@ -19,22 +19,25 @@ if (!empty($price)) {
 
     $html = '<p class="uk-background-primary uk-padding-small uk-light ap-pricing">';
     $html .= sprintf('<span class="ap-price uk-h3"><b> %s</b> %s </span>',
-        esc_html__(' ', 'baressco'), AP_Helper::format_price($price));
+        esc_html__(' ', 'templaza-framework'), AP_Helper::format_price($price));
     if (!empty($msrp)/* && $show_price_msrp*/) {
         $html .= sprintf('<span class="ap-price-msrp"> %s  %s </span>',
-            esc_html__('MSRP:', 'baressco'), AP_Helper::format_price($msrp));
+            esc_html__('MSRP:', 'templaza-framework'), AP_Helper::format_price($msrp));
     }
     $html .= '</p>';
 
     ?>
+    <label class="single-price-label"><?php esc_html_e('PRICE:','templaza-framework');?></label>
     <span class="price">
         <?php
         echo esc_html(AP_Helper::format_price($price));
         ?>
     </span>
+    <?php if($f_value){ ?>
     <span class="meta">
             <?php echo esc_html($f_value);?>
     </span>
+    <?php } ?>
     <?php
     if($price_notice_value){
         ?>
@@ -42,15 +45,5 @@ if (!empty($price)) {
             <?php echo esc_html($price_notice_value);?>
         </div>
         <?php
-    }
-    if($call2buy_value){
-    ?>
-    <div class="call-to-buy">
-        <span class="label uk-display-block uk-margin-small-bottom"><?php echo esc_html($call2buy['label']);?></span>
-        <div class="phone-box templaza-btn">
-            <i class="fas fa-phone-alt"></i> <?php echo esc_html($call2buy_value);?>
-        </div>
-    </div>
-    <?php
     }
 } ?>

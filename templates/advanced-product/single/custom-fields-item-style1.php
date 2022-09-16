@@ -15,9 +15,9 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
     if(!empty($f_value)){
         if($acf_f['type'] !='taxonomy'){
     ?>
-    <div class="ap-custom-fields">
-        <div class="ap-field-label"><?php echo esc_html($acf_f['label']); ?></div>
-        <div class="ap-field-value">
+    <div class="uk-grid-small" data-uk-grid>
+        <div class="uk-width-expand" data-uk-leader><?php echo esc_html($acf_f['label']); ?></div>
+        <div class="field-value">
             <?php
             if($acf_f['type'] == 'file'){
                 $file_url   = '';
@@ -30,7 +30,7 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                 }
                 ?>
                 <a href="<?php echo esc_url($file_url); ?>" download><?php
-                    echo esc_html__('Download', 'templaza-framework')?></a>
+                    echo esc_html__('Download', 'agruco')?></a>
                 <?php
             }else{
                 ?><?php echo esc_html(the_field($acf_f['name'], $product_id)); ?>

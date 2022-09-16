@@ -12,10 +12,14 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }else{
     $templaza_options = Functions::get_theme_options();
 }
+if(isset($_GET['columns'])){
+    $ap_col = $ap_col_large = $ap_col_laptop = $_GET['columns'];
+}else{
+    $ap_col_laptop       = isset($templaza_options['ap_product-column-laptop'])?$templaza_options['ap_product-column-laptop']:3;
+    $ap_col_large        = isset($templaza_options['ap_product-column-large'])?$templaza_options['ap_product-column-large']:3;
+    $ap_col              = isset($templaza_options['ap_product-column'])?$templaza_options['ap_product-column']:3;
+}
 $ap_layout           = isset($templaza_options['ap_product-layout'])?$templaza_options['ap_product-layout']:'grid';
-$ap_col_large        = isset($templaza_options['ap_product-column-large'])?$templaza_options['ap_product-column-large']:3;
-$ap_col              = isset($templaza_options['ap_product-column'])?$templaza_options['ap_product-column']:3;
-$ap_col_laptop       = isset($templaza_options['ap_product-column-laptop'])?$templaza_options['ap_product-column-laptop']:3;
 $ap_col_tablet       = isset($templaza_options['ap_product-column-tablet'])?$templaza_options['ap_product-column-tablet']:2;
 $ap_col_mobile       = isset($templaza_options['ap_product-column-mobile'])?$templaza_options['ap_product-column-mobile']:1;
 $ap_col_gap          = isset($templaza_options['ap_product-column-gap'])?$templaza_options['ap_product-column-gap']:'';

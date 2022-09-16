@@ -1,4 +1,5 @@
 <?php
+
 defined('ADVANCED_PRODUCT') or exit();
 
 use Advanced_Product\AP_Functions;
@@ -13,20 +14,17 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }
 $fields     = AP_Custom_Field_Helper::get_custom_fields_display_flag_by_product_id('show_in_listing',get_the_ID());
 $ap_product_related_spec      = isset($templaza_options['ap_product-related-spec-limit'])?$templaza_options['ap_product-related-spec-limit']:3;
-if(is_single()){
-    $max=$ap_product_related_spec;
-}else{
-    $max = 1000;
-}
+
 if(!empty($fields)){
 ?>
-<div class="ap-specification">
-    <?php $d=0; foreach($fields as $field){
-        if($d < $max){
+<div class="ap-specification ap-specification-style2">
+    <?php foreach($fields as $field){
         $f_attr             = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);
         $f_value            = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name']):null;
+        if($f_value){
             ?>
-            <div class="ap-spec-item uk-display-inline-block" >
+            <div class="ap-spec-item" >
+                <span class="ap-field-label"><?php echo esc_html($f_attr['label']); esc_html_e(': ','templaza-framework')?></span>
                 <?php
                 $html   = apply_filters('advanced-product/field/value_html/type='.$f_attr['type'], '', $f_value, $f_attr, $field);
                 if(!empty($html)){
@@ -34,18 +32,17 @@ if(!empty($fields)){
                 }elseif(is_array($f_value)){
                     $f_value    = array_values($f_value);
                     ?>
-                    <span><?php echo esc_html(join(',', $f_value)); ?></span>
+                    <span class="ap-spec-value"><?php echo esc_html(join(',', $f_value)); ?></span>
                     <?php
                 }else{
                     ?>
-                    <span><?php echo esc_html($f_value); ?></span>
+                    <span class="ap-spec-value"><?php echo esc_html($f_value); ?></span>
                     <?php
                 }
                 ?>
             </div>
         <?php
         }
-        $d++;
     } ?>
 </div>
 <?php }?>
