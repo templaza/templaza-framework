@@ -1830,7 +1830,8 @@
 
                                 });
 
-                                $.redux.checkRequired(_dialog.find(".redux-container"));
+                                tz_required(control.closest(".redux-group-tab"));
+                                // $.redux.checkRequired(_dialog.find(".redux-container"));
 
                             }
                         },
