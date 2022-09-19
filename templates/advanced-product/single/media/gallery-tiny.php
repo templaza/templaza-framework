@@ -2,8 +2,8 @@
 use Advanced_Product\AP_Functions;
 
 defined('ADVANCED_PRODUCT') or exit();
-wp_enqueue_style('plazart-tiny-slider-style');
-wp_enqueue_script( 'plazart-tiny-slider-script' );
+wp_enqueue_style('templaza-tiny-slider-style');
+wp_enqueue_script( 'templaza-tiny-slider-script' );
 $ap_video   = get_field('ap_video', get_the_ID());
 $ap_gallery = get_field('ap_gallery', get_the_ID());
 $no_cookie      =   0;

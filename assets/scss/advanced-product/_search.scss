@@ -9,6 +9,11 @@
       &:last-child{
         margin-bottom: 0;
       }
+      &.field-keyword{
+        .search-field{
+          border: 1px solid $tztheme-border-color;
+        }
+      }
     }
   }
 }

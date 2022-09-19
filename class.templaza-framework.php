@@ -283,7 +283,15 @@ class TemPlazaFrameWork{
             $this -> woo_enqueue_scripts();
         }
 
+        if(class_exists( 'Advanced_Product\Advanced_Product' )){
+            $this -> advanced_enqueue_scripts();
+        }
+
         do_action('templaza-framework/plugin/enqueue_scripts', $this);
+    }
+    protected function advanced_enqueue_scripts(){
+        wp_register_style( 'templaza-tiny-slider-style', Functions::get_my_url() . '/assets/css/tiny-slider.css', false );
+        wp_register_script( 'templaza-tiny-slider-script', Functions::get_my_url() . '/assets/js/vendor/tiny-slider.js', array('jquery'),false,true );
     }
 
     protected function woo_enqueue_scripts(){
