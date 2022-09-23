@@ -460,6 +460,7 @@ $designs    = array(
             'blog_single_bg',
             'blog_single_margin',
             'blog_single_border_radius',
+            'blog_single_shadow',
         ),
     ),
     array(

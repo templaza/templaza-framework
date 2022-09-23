@@ -73,4 +73,5 @@ require_once 'typographies/footer.php';
 require_once 'typographies/archive.php';
 require_once 'typographies/single.php';
 require_once 'typographies/advanced-product.php';
+require_once 'typographies/woocommerce.php';
 require_once 'typographies/page-404.php';

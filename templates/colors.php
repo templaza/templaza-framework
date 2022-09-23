@@ -62,6 +62,10 @@ $sticky_header_background_color     = CSS::make_color_rgba_redux($sticky_header_
 $topbar_bordercolor         = isset($options['topbar-bordercolor'])?$options['topbar-bordercolor']:'';
 $topbar_bordercolor         = CSS::make_color_rgba_redux($topbar_bordercolor);
 
+$header_iconcolor         = isset($options['header-icon-color'])?$options['header-icon-color']:'';
+$header_iconcolor         = CSS::make_color_rgba_redux($header_iconcolor);
+
+
 // Main Menu
 $main_link_color            = isset($options['main-menu-link-color'])?$options['main-menu-link-color']:'';
 $main_link_color            = CSS::make_color_rgba_redux($main_link_color);
@@ -243,6 +247,10 @@ if (!empty($sticky_header_background_color)) {
 }
 if (!empty($topbar_bordercolor)) {
 	$header_styles[]    = '.top-bar, .top-bar .templaza-contact-info > span,.top-bar .templaza-social-icons > li,.top-bar .jollyany-hikacart, .top-bar .jollyany-login, .top-bar .border-right {border-color:'.$topbar_bordercolor.' !important;}';
+}
+if (!empty($header_iconcolor)) {
+	$header_styles[]    = 'header .header-icon i{color:'.$header_iconcolor.';}';
+	$header_styles[]    = 'header .header-icon svg{fill:'.$header_iconcolor.';}';
 }
 ?>
 

@@ -114,6 +114,24 @@ Templaza_API::set_section('settings',
                 'title'    => __( 'Top-bar Border Color', 'templaza-framework' ),
                 'subtitle' => __( 'Select border color for top bar.', 'templaza-framework' ),
             ),
+            array(
+                'id'       => 'background-logo-section',
+                'type'     => 'color_rgba',
+                'title'    => esc_html__( 'Background Logo Section', 'tzautoshowroom' ),
+                'default'  => '',
+            ),
+            array(
+                'id'       => 'background-menu-section',
+                'type'     => 'color_rgba',
+                'title'    => esc_html__( 'Background Menu Section', 'tzautoshowroom' ),
+                'default'  => '',
+            ),
+            array(
+                'id'       => 'header-icon-color',
+                'type'     => 'color_rgba',
+                'title'    => esc_html__( 'Header icon color', 'tzautoshowroom' ),
+                'default'  => '',
+            ),
         ),
     )
 );
