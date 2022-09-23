@@ -60,6 +60,26 @@
 		},
 		"ap_custom_fields":{
 			"type": "array"
+		},
+		"column_large":{
+			"type": "integer",
+			"default": "1"
+		},
+		"column":{
+			"type": "integer",
+			"default": "1"
+		},
+		"column_laptop":{
+			"type": "integer",
+			"default": "1"
+		},
+		"column_tablet":{
+			"type": "integer",
+			"default": "1"
+		},
+		"column_mobile":{
+			"type": "integer",
+			"default": "1"
 		}
 	},
 	"textdomain": "templaza-framework",

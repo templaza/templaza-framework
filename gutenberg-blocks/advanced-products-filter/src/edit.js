@@ -190,6 +190,84 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 							}
 						</div>
 					</PanelBody>
+					<Panel>
+						<PanelBody title={__("General", "templaza-framework")}>
+							<PanelRow>
+								<div id="templaza-framework-adv-products-filter-controls__general">
+								<SelectControl
+									label={__('Large Desktop Columns', 'tempaza-framework')}
+									help={__('Number products per row large desktop (1600px and larger)', 'tempaza-framework')}
+									value={ attributes.column_large }
+									options={ [
+										{ label: __('1 Column', 'tempaza-framework'), value: '1' },
+										{ label: __('2 Columns', 'tempaza-framework'), value: '2' },
+										{ label: __('3 Columns', 'tempaza-framework'), value: '3' },
+										{ label: __('4 Columns', 'tempaza-framework'), value: '4' },
+										{ label: __('5 Columns', 'tempaza-framework'), value: '5' },
+										{ label: __('6 Columns', 'tempaza-framework'), value: '6' },
+									] }
+									onChange={ (val) => {setAttributes({column_large: val});}}
+								/>
+								<SelectControl
+									label={__('Desktop Columns', 'tempaza-framework')}
+									help={__('Number products per row (1200px and larger)', 'tempaza-framework')}
+									value={ attributes.column }
+									options={ [
+										{ label: __('1 Column', 'tempaza-framework'), value: '1' },
+										{ label: __('2 Columns', 'tempaza-framework'), value: '2' },
+										{ label: __('3 Columns', 'tempaza-framework'), value: '3' },
+										{ label: __('4 Columns', 'tempaza-framework'), value: '4' },
+										{ label: __('5 Columns', 'tempaza-framework'), value: '5' },
+										{ label: __('6 Columns', 'tempaza-framework'), value: '6' },
+									] }
+									onChange={ (val) => {setAttributes({column: val});}}
+								/>
+								<SelectControl
+									label={__('Laptop Columns', 'tempaza-framework')}
+									help={__('Number products per row (960px and larger)', 'tempaza-framework')}
+									value={ attributes.column_laptop }
+									options={ [
+										{ label: __('1 Column', 'tempaza-framework'), value: '1' },
+										{ label: __('2 Columns', 'tempaza-framework'), value: '2' },
+										{ label: __('3 Columns', 'tempaza-framework'), value: '3' },
+										{ label: __('4 Columns', 'tempaza-framework'), value: '4' },
+										{ label: __('5 Columns', 'tempaza-framework'), value: '5' },
+										{ label: __('6 Columns', 'tempaza-framework'), value: '6' },
+									] }
+									onChange={ (val) => {setAttributes({column_laptop: val});}}
+								/>
+								<SelectControl
+									label={__('Tablet Columns', 'tempaza-framework')}
+									help={__('Number products per row (640px and larger)', 'tempaza-framework')}
+									value={ attributes.column_tablet }
+									options={ [
+										{ label: __('1 Column', 'tempaza-framework'), value: '1' },
+										{ label: __('2 Columns', 'tempaza-framework'), value: '2' },
+										{ label: __('3 Columns', 'tempaza-framework'), value: '3' },
+										{ label: __('4 Columns', 'tempaza-framework'), value: '4' },
+										{ label: __('5 Columns', 'tempaza-framework'), value: '5' },
+										{ label: __('6 Columns', 'tempaza-framework'), value: '6' },
+									] }
+									onChange={ (val) => {setAttributes({column_tablet: val});}}
+								/>
+								<SelectControl
+									label={__('Mobile Columns', 'tempaza-framework')}
+									help={__('Number products per row mobile', 'tempaza-framework')}
+									value={ attributes.column_mobile }
+									options={ [
+										{ label: __('1 Column', 'tempaza-framework'), value: '1' },
+										{ label: __('2 Columns', 'tempaza-framework'), value: '2' },
+										{ label: __('3 Columns', 'tempaza-framework'), value: '3' },
+										{ label: __('4 Columns', 'tempaza-framework'), value: '4' },
+										{ label: __('5 Columns', 'tempaza-framework'), value: '5' },
+										{ label: __('6 Columns', 'tempaza-framework'), value: '6' },
+									] }
+									onChange={ (val) => {setAttributes({column_mobile: val});}}
+								/>
+								</div>
+							</PanelRow>
+						</PanelBody>
+					</Panel>
 				</InspectorControls>
 
 				<div { ...useBlockProps() }>
@@ -197,7 +275,11 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 						typeof attributes.ap_custom_fields === "object"?attributes.ap_custom_fields.join(','):attributes.ap_custom_fields
 				}" enable_keyword="{attributes.enable_keyword?1:0}" submit_text="{attributes.submit_text
 				}" enable_ajax="{attributes.enable_ajax?1:0}" update_url="{attributes.update_url?1:0
-				}" instant="{attributes.instant?1:0}"]
+				}" instant="{attributes.instant?1:0}" column="{attributes.column?attributes.column:1
+				}" column_large="{attributes.column_large?attributes.column_large:1
+				}" column_laptop="{attributes.column_laptop?attributes.column_laptop:1
+				}" column_tablet="{attributes.column_tablet?attributes.column_tablet:1
+				}" column_mobile="{attributes.column_mobile?attributes.column_mobile:1}"]
 				</div>
 		</Fragment>
 	)
