@@ -19,12 +19,14 @@ $ap_office_form_custom     = isset($templaza_options['ap_product-office-price-fo
 
 $ap_product_related           = isset($templaza_options['ap_product-related'])?$templaza_options['ap_product-related']:true;
 $ap_product_related_title     = isset($templaza_options['ap_product-related-title'])?$templaza_options['ap_product-related-title']:'RELATED PRODUCT';
+$ap_product_related_column     = isset($templaza_options['ap_product-related-columns'])?$templaza_options['ap_product-related-columns']:3;
 if(isset($_GET['related_number'])){
     $ap_product_related_number = $_GET['related_number'];
 }else {
     $ap_product_related_number = isset($templaza_options['ap_product-related-number']) ? $templaza_options['ap_product-related-number'] : 3;
 }
 $ap_single_fields_top         = isset($templaza_options['ap_product-single-style2-top'])?$templaza_options['ap_product-single-style2-top']:array();
+var_dump($ap_single_fields_top);
 do_action('templaza_set_postviews',get_the_ID());
 $call2buy_value     = get_field('call-to-buy', get_the_ID());
 $call2buy = AP_Custom_Field_Helper::get_custom_field_option_by_field_name('call-to-buy');
@@ -219,7 +221,7 @@ $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields'
                 <h2 class="box-title">
                     <?php echo esc_html($ap_product_related_title);?>
                 </h2>
-                <div class="templaza-ap-archive uk-child-width-1-1 uk-grid-medium uk-child-width-1-4@l uk-child-width-1-4@m uk-child-width-1-2@s" data-uk-grid>
+                <div class="templaza-ap-archive uk-child-width-1-1 uk-grid-medium uk-child-width-1-<?php echo esc_attr($ap_product_related_column); ?>@l uk-child-width-1-3@m uk-child-width-1-2@s" data-uk-grid>
                     <?php
                     while ( $related -> have_posts() ): $related -> the_post() ;
                         ?>

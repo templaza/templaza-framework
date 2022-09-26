@@ -49,5 +49,12 @@ if($use_sticky){
 }
 ?>
 <div<?php echo isset($tz_id)?' id="'.$tz_id.'"':''; ?> class="<?php
-echo isset($tz_class)?$tz_class:''?>"<?php echo $_sticky;?>>
-    <?php echo !empty($content)?$content:''; ?></div>
+echo isset($tz_class)?$tz_class:''?>">
+    <?php if(!empty($_sticky_option)){?>
+    <div <?php echo $_sticky;?>>
+    <?php } ?>
+    <?php echo !empty($content)?$content:''; ?>
+    <?php if(!empty($_sticky_option)){ ?>
+    </div>
+    <?php } ?>
+</div>

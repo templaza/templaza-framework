@@ -20,13 +20,7 @@ $ap_vendor_contact     = isset($templaza_options['ap_product-vendor-contact'])?$
 $show_compare_button= get_field('ap_show_archive_compare_button', 'option');
 $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
-if(isset($_GET['related_number'])){
-    $ap_product_related_number = $_GET['related_number'];
-}else {
-    $ap_product_related_number    = isset($templaza_options['ap_product-related-number'])?$templaza_options['ap_product-related-number']:3;
-}
-$ap_product_related_title     = isset($templaza_options['ap_product-related-title'])?$templaza_options['ap_product-related-title']:'RELATED PRODUCT';
-$ap_product_related = isset($templaza_options['ap_product-related']) ? $templaza_options['ap_product-related'] : true;
+
 do_action('templaza_set_postviews',get_the_ID());
 $author_id = get_post_field( 'post_author', get_the_ID() );
 $ap_count = count_user_posts( $author_id,'ap_product' );
@@ -107,7 +101,7 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                 </div>
                 <?php AP_Templates::load_my_layout('single.meta');?>
 
-                <div class="ap-single-box"><?php the_content(); ?></div>
+                <div class="ap-single-box ap-single-content"><?php the_content(); ?></div>
 
                 <div class="templaza-single-comment ap-single-box">
                     <?php comments_template('', true); ?>
@@ -186,118 +180,7 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
             </div>
         </div>
         <?php
-        if($ap_product_related){
-            $ap_cat = '';
-            $ap_cats = wp_get_post_terms(get_the_ID(), 'ap_category');
-            foreach ($ap_cats as $item) {
-                $ap_cat = $item->slug;
-            }
-            $related_args =
-                array(
-                    'post_type' => 'ap_product',
-                    'posts_per_page' => $ap_product_related_number,
-                    'post__not_in' => array(get_the_ID())
-                );
-
-            $related = new WP_Query( $related_args ) ;
-            if ( $related -> have_posts() ):?>
-                <div class="ap-related-product uk-margin-large-top">
-                    <h3 class="box-title">
-                        <?php echo esc_html($ap_product_related_title);?>
-                    </h3>
-                    <div class="templaza-ap-archive uk-child-width-1-1 uk-grid-medium uk-child-width-1-3@l uk-child-width-1-3@m uk-child-width-1-2@s" data-uk-grid>
-                        <?php
-                        while ( $related -> have_posts() ): $related -> the_post() ;
-                            $pid =$related->post->ID;
-                            ?>
-                            <div class="ap-item ap-item-style3">
-                                <div class="ap-inner uk-box-shadow-small">
-                                    <div class="ap-info">
-                                        <div class="ap-info-inner ap-info-top uk-flex uk-flex-middle uk-flex-between">
-                                            <div class="ap-title-info">
-                                                <h4 class="ap-title">
-                                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                                                </h4>
-                                                <span class="ap-info-author">
-                                                            <?php echo esc_html__('Powered by', 'templaza-framework') .' '. get_the_author_posts_link();?>
-                                                        </span>
-                                            </div>
-                                            <div class="ap-button-info uk-flex uk-flex-between">
-                    <span class="ap-button ap-button-quickview" data-ap-quickview-button="<?php echo $pid?$pid:'';
-                    ?>" data-uk-tooltip="<?php echo esc_attr(__('Quick View', AP_Functions::get_my_text_domain())); ?>">
-                        <i class="fas fa-eye"></i>
-                    </span>
-                                                <?php
-                                                ob_start();
-                                                do_action('advanced-product/archive/compare/action', get_the_ID(), $args);
-                                                $action_html    = ob_get_contents();
-                                                ob_end_clean();
-
-                                                $action_html    = !empty($action_html)?trim($action_html):'';
-
-                                                if($show_compare_button || (isset($actions) && !empty($actions)) || !empty($action_html)){ ?>
-                                                    <?php if($show_compare_button){ ?>
-
-                                                        <?php
-                                                        $compare_list   = AP_Product_Helper::get_compare_product_ids_list();
-                                                        $pid            = $related->post->ID;
-                                                        $has_compare    = (!empty($compare_list) && in_array($pid, $compare_list))?true:false;
-                                                        $active_text    = $has_compare?'In compare list':'Add to compare';
-                                                        ?>
-                                                        <span class="ap-button ap-button-compare <?php echo $has_compare?' ap-in-compare-list':'';
-                                                        ?>" data-ap-compare-button="id: <?php the_ID();
-                                                        ?>; active_icon: fas fa-clipboard-list; icon: fas fa-balance-scale" data-uk-tooltip="<?php
-                                                        _e($active_text, AP_Functions::get_my_text_domain());?>">
-                                        <?php if($has_compare){?>
-                                            <i class="fas fa-exchange-alt"></i>
-
-                                        <?php }else{?>
-                                            <i class="fas fa-exchange-alt"></i>
-                                        <?php }?>
-                                    </span>
-                                                    <?php } ?>
-                                                    <?php
-                                                    if(isset($actions) && !empty($actions)){
-                                                        foreach($actions as $_action){
-                                                            echo $_action;
-                                                        }
-                                                    }
-                                                    echo $action_html;
-                                                    ?>
-                                                <?php } ?>
-
-                                                <?php do_action('advanced-product/archive/after_content');?>
-
-                                                <span class="ap-button ap-button-viewmore">
-                        <a href="<?php the_permalink(); ?>" data-uk-tooltip="<?php echo esc_attr(__('View Detail', AP_Functions::get_my_text_domain())); ?>">
-                        <i class="fas fa-plus"></i>
-                        </a>
-                    </span>
-                                            </div>
-                                        </div>
-                                        <?php AP_Templates::load_my_layout('archive.media'); ?>
-                                        <div class="ap-info-inner  ap-info-fields">
-                                            <?php AP_Templates::load_my_layout('archive.custom-fields-style3'); ?>
-                                        </div>
-                                        <div class="ap-info-inner  ap-info-bottom uk-flex uk-flex-between uk-flex-middle">
-                                            <?php AP_Templates::load_my_layout('archive.price');?>
-                                            <div class="ap-readmore-box">
-                                                <a href="<?php the_permalink(); ?>" class="templaza-btn"><?php esc_html_e('View more','templaza-framework');?></a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php
-                        endwhile;
-                        ?>
-                    </div>
-                </div>
-            <?php
-            endif;
-            wp_reset_postdata();
-        }
+        AP_Templates::load_my_layout('single.related');
         ?>
     </div>
 <?php if($ap_office_price){ ?>

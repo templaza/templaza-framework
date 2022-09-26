@@ -39,6 +39,7 @@
     ul{
       margin: 0;
       li{
+        clear:both;
         margin: 0;
         text-transform: capitalize;
         color: #666666;
@@ -84,12 +85,49 @@
           }
         }
       }
+      ul.radio{
+        label{
+          font-weight:normal;
+        }
+      }
     }
     select{
       background-color:transparent;
     }
     input[type="number"]{
       width:100%;
+    }
+  }
+  &.ap-search-inline{
+    display:flex;
+    .ap-search-item{
+      label{
+        border:none !important;
+        padding-bottom:0 !important;
+        margin-bottom:15px !important;
+        font-size:14px;
+        font-weight:600;
+        text-transform: capitalize;
+      }
+      input[type="text"],input[type="number"], select{
+        margin:0;
+        height:$tztheme-input-height !important;
+        font-size:0.9em;
+        padding: 0 20px;
+      }
+      &.uk-margin{
+        margin:0 !important;
+      }
+      ul{
+        &.radio{
+          li{
+            label{
+              margin:0 !important;
+              font-weight: normal;
+            }
+          }
+        }
+      }
     }
   }
 }
