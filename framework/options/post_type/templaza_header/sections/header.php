@@ -396,6 +396,23 @@ Templaza_API::set_section('templaza_header',
                 'default'  => 'left',
             ),
             array(
+                'id'        => 'sticky-max-width',
+                'type'      => 'select',
+                'title'     =>  esc_html__('Sticky Max Width', 'templaza-framework'),
+                'options' => array(
+                    'default'   => esc_html__('Default', 'templaza-framework'),
+                    'xsmall'    => esc_html__('XSmall', 'templaza-framework'),
+                    'small'     => esc_html__('Small', 'templaza-framework'),
+                    'large'     => esc_html__('Large', 'templaza-framework'),
+                    'xlarge'    => esc_html__('XLarge', 'templaza-framework'),
+                    'expand'    => esc_html__('Expand', 'templaza-framework'),
+                    'none'      => esc_html__('None', 'templaza-framework'),
+                ),
+                'default'       => 'none',
+                'required' => array(
+                    array('enable-sticky', '=', '1') ),
+            ),
+            array(
                 'id'       => 'sticky-logo',
                 'type'     => 'media',
                 'url'      => true,

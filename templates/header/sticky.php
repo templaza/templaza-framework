@@ -35,6 +35,7 @@ $block_1_type               = isset($options['header-block-1-type'])?$options['h
 $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options['header-block-1-sidebar']:'';
 $block_1_custom             = isset($options['header-block-1-custom'])?$options['header-block-1-custom']:'';
 
+$sticky_width               = isset($options['sticky-max-width'])?$options['sticky-max-width']:'';
 
 $dropdown_arrow             = isset($options['dropdown-arrow'])?(bool) $options['dropdown-arrow']:true;
 $dropdown_animation_speed   = isset($options['dropdown-animation-speed'])?$options['dropdown-animation-speed']:300;
@@ -65,55 +66,21 @@ $attribs    = join(' ', array_map(function($v, $k){
 $attribs    = ' '.$attribs;
 ?>
 <?php /* header starts*/ ?>
-<div id="templaza-sticky-header" class="<?php echo implode(' ', $class); ?> uk-hidden"<?php echo $attribs;?>>
-    <div class="uk-width uk-padding uk-flex uk-flex-row uk-flex-between uk-flex-middle">
-<!--        --><?php //if (!empty($header_mobile_menu)) { ?>
-            <div class="uk-flex uk-flex-left uk-hidden@m uk-flex-middle">
-                <div class="header-mobilemenu-trigger burger-menu-button uk-hidden@m" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
-                    <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
+<div id="templaza-sticky-header" class="<?php echo implode(' ', $class); ?> uk-hidden">
+    <div class="templaza-sticky-inner uk-container uk-container-<?php echo esc_attr($sticky_width);?>" <?php echo $attribs;?>>
+        <div class="uk-width uk-flex uk-flex-row uk-flex-between uk-flex-middle">
+    <!--        --><?php //if (!empty($header_mobile_menu)) { ?>
+                <div class="uk-flex uk-flex-left uk-hidden@m uk-flex-middle">
+                    <div class="header-mobilemenu-trigger burger-menu-button uk-hidden@m" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
+                        <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
+                    </div>
                 </div>
-            </div>
-<!--        --><?php //} ?>
-        <div class="header-left-section uk-flex uk-flex-between uk-flex-middle">
-            <?php
-            Templates::load_my_layout('logo', true, false); ?>
-            <?php
-            if ($sticky_mode == 'left') {
-                // header nav starts
-                Menu::get_nav_menu(array(
-                    'theme_location'  => $header_menu,
-                    'menu_class'      => implode(' ', $navClass),
-                    'container_class' => implode(' ', $navWrapperClass),
-                    'menu_id'         => '',
-                    'depth'           => $header_menu_level, // Level
-					'templaza_is_sticky'    => true,
-                    'templaza_megamenu_html_data' => $menu_datas
-                ));
-                // header nav ends
-            }
-            ?>
-        </div>
-        <?php
-        if ($sticky_mode == 'center') {
-            echo '<div class="header-center-section uk-flex uk-flex-center uk-flex-middle">';
-            // header nav starts
-            Menu::get_nav_menu(array(
-                'theme_location'  => $header_menu,
-                'menu_class'      => implode(' ', $navClass),
-                'container_class' => implode(' ', $navWrapperClass),
-                'menu_id'         => '',
-                'depth'           => $header_menu_level, // Level
-				'templaza_is_sticky'    => true,
-                'templaza_megamenu_html_data' => $menu_datas
-            ));
-            // header nav ends
-            echo '</div>';
-        }
-        ?>
-        <?php if ($block_1_type != 'blank' || $sticky_mode == 'right' || $enable_offcanvas): ?>
-            <div class="header-right-section uk-flex uk-flex-right uk-flex-middle">
+    <!--        --><?php //} ?>
+            <div class="header-left-section uk-flex uk-flex-between uk-flex-middle">
                 <?php
-                if ($sticky_mode == 'right') {
+                Templates::load_my_layout('logo', true, false); ?>
+                <?php
+                if ($sticky_mode == 'left') {
                     // header nav starts
                     Menu::get_nav_menu(array(
                         'theme_location'  => $header_menu,
@@ -121,23 +88,59 @@ $attribs    = ' '.$attribs;
                         'container_class' => implode(' ', $navWrapperClass),
                         'menu_id'         => '',
                         'depth'           => $header_menu_level, // Level
-						'templaza_is_sticky'    => true,
+                        'templaza_is_sticky'    => true,
                         'templaza_megamenu_html_data' => $menu_datas
                     ));
                     // header nav ends
                 }
                 ?>
-                <?php if ($enable_offcanvas) { ?>
-                    <div class="header-offcanvas-trigger burger-menu-button <?php echo $offcanvas_togglevisibility; ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>">
-                        <button type="button" class="button">
-                     <span class="box">
-                        <span class="inner"></span>
-                     </span>
-                        </button>
-                    </div>
-                <?php } ?>
             </div>
-        <?php endif; ?>
+            <?php
+            if ($sticky_mode == 'center') {
+                echo '<div class="header-center-section uk-flex uk-flex-center uk-flex-middle">';
+                // header nav starts
+                Menu::get_nav_menu(array(
+                    'theme_location'  => $header_menu,
+                    'menu_class'      => implode(' ', $navClass),
+                    'container_class' => implode(' ', $navWrapperClass),
+                    'menu_id'         => '',
+                    'depth'           => $header_menu_level, // Level
+                    'templaza_is_sticky'    => true,
+                    'templaza_megamenu_html_data' => $menu_datas
+                ));
+                // header nav ends
+                echo '</div>';
+            }
+            ?>
+            <?php if ($block_1_type != 'blank' || $sticky_mode == 'right' || $enable_offcanvas): ?>
+                <div class="header-right-section uk-flex uk-flex-right uk-flex-middle">
+                    <?php
+                    if ($sticky_mode == 'right') {
+                        // header nav starts
+                        Menu::get_nav_menu(array(
+                            'theme_location'  => $header_menu,
+                            'menu_class'      => implode(' ', $navClass),
+                            'container_class' => implode(' ', $navWrapperClass),
+                            'menu_id'         => '',
+                            'depth'           => $header_menu_level, // Level
+                            'templaza_is_sticky'    => true,
+                            'templaza_megamenu_html_data' => $menu_datas
+                        ));
+                        // header nav ends
+                    }
+                    ?>
+                    <?php if ($enable_offcanvas) { ?>
+                        <div class="header-offcanvas-trigger burger-menu-button <?php echo $offcanvas_togglevisibility; ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>">
+                            <button type="button" class="button">
+                         <span class="box">
+                            <span class="inner"></span>
+                         </span>
+                            </button>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
 <?php /* header ends*/ ?>

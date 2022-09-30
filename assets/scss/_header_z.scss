@@ -58,7 +58,7 @@ header {
     padding-bottom: $tztheme-sticky-header-padding-y;
   }
 
-  &.d-flex, &.uk-flex {
+  &.tz-sticky {
     -webkit-animation-name: slideInDown;
     animation-name: slideInDown;
   }
