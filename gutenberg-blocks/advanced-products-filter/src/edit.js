@@ -25,7 +25,7 @@ import './editor.scss';
 
 import { useState ,Fragment} from '@wordpress/element';
 // import { /*Spinner,*/ IconButton/*, TextControl, Panel, PanelBody, PanelRow*/  } from '@wordpress/components';
-import { SelectControl,Panel,PanelBody,PanelRow,
+import { SelectControl,Panel,PanelBody,PanelRow,Spinner,
 	ToggleControl,TextControl,BaseControl,BoxControl,ComboboxControl} from '@wordpress/components';
 // import { more } from '@wordpress/icons';
 // import React from 'react';
@@ -111,6 +111,61 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 		setAttributes({ap_custom_fields: items.map((item, index) => item.value)});
 	}
 
+	const formData = new FormData();
+	if(typeof tz_gt_advanced_products_filter.filter_form_action !== "undefined") {
+		formData.append('action', tz_gt_advanced_products_filter.filter_form_action);
+		formData.append('_nonce', tz_gt_advanced_products_filter.filter_form_nonce);
+	}else{
+		formData.append('action', "advanced_product_filter_form_gutenberg");
+	}
+
+	const shortcode	= '[advanced-product-form include="'+
+		(typeof attributes.ap_custom_fields === "object"?attributes.ap_custom_fields.join(','):attributes.ap_custom_fields)
+		+'" enable_keyword="'+(attributes.enable_keyword?1:0)+'" submit_text="'+attributes.submit_text
+		+'" instant="'+(attributes.instant?1:0)+'" update_url="'+(attributes.update_url?1:0)
+		+'" column="'+(attributes.column?attributes.column:1)
+		+'" column_large="'+(attributes.column_large?attributes.column_large:1)
+		+'" column_laptop="'+(attributes.column_laptop?attributes.column_laptop:1)
+		+'" column_tablet="'+(attributes.column_tablet?attributes.column_tablet:1)
+		+'" column_mobile="'+(attributes.column_mobile?attributes.column_mobile:1)+'"'
+		+(typeof attributes.max_height !== "undefined" && attributes.max_height.length?' max_height="'
+			+ attributes.max_height +'"':'')
+		+']';
+
+	formData.append("shortcode", shortcode.toString());
+
+	fetch(ajaxurl, {
+		method: "POST",
+		mode: "no-cors",
+		cache: "no-cache",
+		credentials: "same-origin",
+		headers: {
+			'Content-Type': 'application/json'
+			// "Content-Type": "form-data"
+		},
+		body: formData
+	})
+		.then((response) => { return response.json(); })
+		.then(response => {
+			var __form_html	= "";
+			if(typeof response.success !== "undefined"){
+				if(response.success){
+					if(typeof response.data){
+						__form_html	= response.data;
+					}
+				}else if(typeof response.message !== "undefined"){
+					__form_html	= response.message;
+				}
+			}
+			if(document.getElementById("block-"+clientId)) {
+				document.getElementById("block-" + clientId).innerHTML = __form_html;
+			}
+		}).catch((error) => {
+
+			if(document.getElementById("block-"+clientId)) {
+				document.getElementById("block-" + clientId).innerHTML = error;
+			}
+		});
 	return (
 		<Fragment>
 				{/*Block settings*/}
@@ -194,6 +249,11 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 						<PanelBody title={__("General", "templaza-framework")}>
 							<PanelRow>
 								<div id="templaza-framework-adv-products-filter-controls__general">
+									<TextControl
+										label={__('Max Height', 'templaza-framework')}
+										value={ attributes.max_height }
+										onChange={ ( val ) => {setAttributes({max_height: val});} }
+									/>
 								<SelectControl
 									label={__('Large Desktop Columns', 'tempaza-framework')}
 									help={__('Number products per row large desktop (1600px and larger)', 'tempaza-framework')}
@@ -271,16 +331,22 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 				</InspectorControls>
 
 				<div { ...useBlockProps() }>
-					[advanced-product-form include="{
-						typeof attributes.ap_custom_fields === "object"?attributes.ap_custom_fields.join(','):attributes.ap_custom_fields
-				}" enable_keyword="{attributes.enable_keyword?1:0}" submit_text="{attributes.submit_text
-				}" enable_ajax="{attributes.enable_ajax?1:0}" update_url="{attributes.update_url?1:0
-				}" instant="{attributes.instant?1:0}" column="{attributes.column?attributes.column:1
-				}" column_large="{attributes.column_large?attributes.column_large:1
-				}" column_laptop="{attributes.column_laptop?attributes.column_laptop:1
-				}" column_tablet="{attributes.column_tablet?attributes.column_tablet:1
-				}" column_mobile="{attributes.column_mobile?attributes.column_mobile:1}"]
+					<Spinner />
 				</div>
+				{/*<div { ...useBlockProps() }>*/}
+				{/*	[advanced-product-form include="{*/}
+				{/*		typeof attributes.ap_custom_fields === "object"?attributes.ap_custom_fields.join(','):attributes.ap_custom_fields*/}
+				{/*}" enable_keyword="{attributes.enable_keyword?1:0}" submit_text="{attributes.submit_text*/}
+				{/*}" enable_ajax="{attributes.enable_ajax?1:0}" update_url="{attributes.update_url?1:0*/}
+				{/*}" instant="{attributes.instant?1:0}" column="{attributes.column?attributes.column:1*/}
+				{/*}" column_large="{attributes.column_large?attributes.column_large:1*/}
+				{/*}" column_laptop="{attributes.column_laptop?attributes.column_laptop:1*/}
+				{/*}" column_tablet="{attributes.column_tablet?attributes.column_tablet:1*/}
+				{/*}" column_mobile="{attributes.column_mobile?attributes.column_mobile:1}"{*/}
+				{/*	typeof attributes.max_height !== "undefined" && attributes.max_height.length?" max_height=\""*/}
+				{/*		+ attributes.max_height +"\"":""*/}
+				{/*}]*/}
+				{/*</div>*/}
 		</Fragment>
 	)
 }

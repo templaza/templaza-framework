@@ -80,6 +80,10 @@
 		"column_mobile":{
 			"type": "integer",
 			"default": "1"
+		},
+		"max_height":{
+			"type": "string",
+			"default": ""
 		}
 	},
 	"textdomain": "templaza-framework",

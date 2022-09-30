@@ -11,6 +11,7 @@ $title              = (isset($attributes['title']) && !empty($attributes['title'
 $title_tag          = (isset($attributes['title_tag']) && !empty($attributes['title_tag']))?$attributes['title_tag']:'h3';
 $title_display      = (isset($attributes['title_display']) && !empty($attributes['title_display']))?$attributes['title_display']:'uk-display-block';
 $submit_text        = (isset($attributes['submit_text']) && !empty($attributes['submit_text']))?$attributes['submit_text']:esc_html__('Search', 'templaza-framework');
+$max_height         = (isset($attributes['max_height']))?$attributes['max_height']:'';
 $column             = (isset($attributes['column']))?$attributes['column']:1;
 $column_large       = (isset($attributes['column_large']))?$attributes['column_large']:1;
 $column_laptop      = (isset($attributes['column_laptop']))?$attributes['column_laptop']:1;
@@ -50,6 +51,9 @@ $shortcode .= ' column_large="'.($column_large?$column_large:1).'"';
 $shortcode .= ' column_laptop="'.($column_laptop?$column_laptop:1).'"';
 $shortcode .= ' column_tablet="'.($column_tablet?$column_tablet:1).'"';
 $shortcode .= ' column_mobile="'.($column_mobile?$column_mobile:1).'"';
+if(!empty($max_height)) {
+    $shortcode .= ' max_height="' . ($max_height ? $max_height : "") . '"';
+}
 $shortcode .= ' enable_keyword="'.($enable_keyword?1:0).'"]';
 ?>
 <div class="templaza-framework-gutenberg-adv-product-filters">
