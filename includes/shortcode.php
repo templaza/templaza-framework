@@ -201,6 +201,14 @@ class TemplazaFramework_ShortCode{
                         'title'      => __('Border', 'templaza-framework'),
                     ),
                     array(
+                        'id'       => 'border_radius',
+                        'type'     => 'spacing',
+                        'mode'     => 'border-radius',
+                        'allow_responsive'    => true,
+                        'title'    => __('Border radius', 'templaza-framework'),
+                        'default'  => '',
+                    ),
+                    array(
                         'id'     => 'tab-spacing',
                         'type'   => 'section',
                         'indent' => true,
@@ -304,6 +312,37 @@ class TemplazaFramework_ShortCode{
                         ),
 //                        'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
                     ),
+                    array(
+                        'id'       => 'position',
+                        'type'     => 'select',
+                        'title'    => esc_html__('Position', 'templaza-framework'),
+                        'subtitle' => esc_html__('Set position for block', 'templaza-framework'),
+                        //Must provide key => value pairs for options
+                        'options' => array(
+                                    'inherit' => esc_html__('Inherit', 'templaza-framework'),
+                                    'relative' => esc_html__('Relative', 'templaza-framework'),
+                                    'absolute' => esc_html__('Absolute', 'templaza-framework'),
+                                ),
+                    ),
+                    array(
+                        'id'     => 'position_type',
+                        'type'   => 'select',
+                        'title'    => esc_html__('Position Type', 'templaza-framework'),
+                        'options' => array(
+                            'uk-position-top-left'  => esc_html__('Top Left', 'templaza-framework'),
+                            'uk-position-top-center' => esc_html__('Top Center', 'templaza-framework'),
+                            'uk-position-top-right'    => esc_html__('Top Right', 'templaza-framework'),
+                            'uk-position-center'    => esc_html__('Center', 'templaza-framework'),
+                            'uk-position-center-left'    => esc_html__('Center Left', 'templaza-framework'),
+                            'uk-position-center-right'    => esc_html__('Center Right', 'templaza-framework'),
+                            'uk-position-bottom-left'    => esc_html__('Bottom Left', 'templaza-framework'),
+                            'uk-position-bottom-center'    => esc_html__('Bottom Center', 'templaza-framework'),
+                            'uk-position-bottom-right'    => esc_html__('Bottom Right', 'templaza-framework'),
+                            'custom'    => esc_html__('Custom', 'templaza-framework'),
+                        ),
+                        'required'  => array('position', '=', 'absolute'),
+                    ),
+
                     array(
                         'id'     => 'tab-spacing-end',
                         'type'   => 'section',
@@ -487,6 +526,12 @@ class TemplazaFramework_ShortCode{
         $params['tz_class'].= ' '.$custom_css_name;
 
         $margin_type   = isset($params['margin_type'])?$params['margin_type']:'custom';
+        if(isset($params['position']) && $params['position']=='absolute'){
+            $params['tz_class']   .= ' '.$params['position_type'];
+        }
+        if(isset($params['position']) && $params['position']=='relative'){
+            $params['tz_class']   .= ' uk-position-relative';
+        }
 
         switch ($margin_type){
             case 'xsmall':
@@ -688,6 +733,22 @@ class TemplazaFramework_ShortCode{
             }
 
             unset($params['padding']);
+        }
+        if(isset($params['border_radius'])){
+            $border_radius    = CSS::make_spacing_redux('border-radius', $params['border_radius'], true, 'px');
+            if(!empty($border_radius)){
+                if(is_array($border_radius)){
+                    foreach($border_radius as $device => $bdcss){
+                        if(!isset($css[$device])){
+                            $css[$device]   = '';
+                        }
+                        $css[$device] .= $bdcss;
+                    }
+                }else{
+                    $css['desktop'] .= $border_radius;
+                }
+            }
+            unset($params['border_radius']);
         }
 
         return $css;

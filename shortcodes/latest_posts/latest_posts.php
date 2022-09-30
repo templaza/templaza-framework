@@ -81,6 +81,25 @@ if(!class_exists('TemplazaFramework_ShortCode_Latest_Posts')){
                         'default'  => true,
                     ),
                     array(
+                        'id'       => 'latest_post_slider_item',
+                        'type'     => 'number',
+                        'title'    => esc_html__('Slider number', 'templaza-framework'),
+                    ),
+                    array(
+                        'id'       => 'latest_post_slider_item',
+                        'type'     => 'select',
+                        'title'    => esc_html__('Slider item', 'templaza-framework'),
+                        'options'  => array(
+                            '1' => esc_html__('1', 'templaza-framework'),
+                            '2' => esc_html__('2', 'templaza-framework'),
+                            '3' => esc_html__('3', 'templaza-framework'),
+                            '4' => esc_html__('4', 'templaza-framework'),
+                            '5' => esc_html__('5', 'templaza-framework'),
+                            '6' => esc_html__('6', 'templaza-framework'),
+                        ),
+                        'default'  => '3',
+                    ),
+                    array(
                         'id'       => 'latest_post_show_nav',
                         'type'     => 'switch',
                         'title'    => esc_html__('Show nav (next, preview button)', 'templaza-framework'),

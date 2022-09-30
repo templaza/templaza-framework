@@ -97,6 +97,12 @@
     input[type="number"]{
       width:100%;
     }
+    .acf-input-append{
+      position:absolute;
+      font-size:0.875em;
+      right:3px;
+      top:10px;
+    }
   }
   &.ap-search-inline{
     display:flex;
@@ -113,10 +119,13 @@
         margin:0;
         height:$tztheme-input-height !important;
         font-size:0.9em;
-        padding: 0 20px;
+        padding: 0 15px;
+      }
+      input[type="number"]{
+        padding: 0 25px 0 15px;
       }
       &.uk-margin{
-        margin:0 !important;
+
       }
       ul{
         &.radio{

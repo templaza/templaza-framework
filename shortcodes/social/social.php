@@ -44,7 +44,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
                     ),
                     array(
                         'id'       => 'social-bg-color',
-                        'type'     => 'color_rgba',
+                        'type'     => 'color',
                         'title'    => esc_html__( 'Social Background Color', 'templaza-framework' ),
                         'subtitle' => esc_html__( 'Set the background color of social.', 'templaza-framework' ),
                     ),

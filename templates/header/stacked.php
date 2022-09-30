@@ -51,6 +51,7 @@ $header_stack_search         = isset($options['stacked-divided-search'])?filter_
 $header_stack_account         = isset($options['stacked-divided-account'])?filter_var($options['stacked-divided-account'], FILTER_VALIDATE_BOOLEAN):true;
 $header_stack_cart         = isset($options['stacked-divided-cart'])?filter_var($options['stacked-divided-cart'], FILTER_VALIDATE_BOOLEAN):true;
 $header_stack_logo_border = isset($options['logo-section-border'])?$options['logo-section-border']:'';
+$login_modals               = isset($gb_options['templaza-shop-account-login'])?$gb_options['templaza-shop-account-login']:'modal';
 $navClass[] = $dropdown_animation_effect;
 $navClassLeft[] = $dropdown_animation_effect;
 // Get data attributes - them added from header shortcode
@@ -60,7 +61,48 @@ $data_attribs    = join(' ', array_map(function($v, $k){
     return !empty($v)?$k . '="' . $v . '"':$k;
 }, $data_attribs, array_keys($data_attribs)));
 $data_attribs   = ' '.$data_attribs;
-
+$search_icon_html = '<i class="fas fa-search"></i>';
+$account_icon_html = '<i class="fas fa-user"></i>';
+$cart_icon_html = '<i class="fas fa-shopping-cart"></i>';
+if($search_icon_type == 'fontawesome' ){
+    $search_icon = isset($options['search-icon'])?$options['search-icon']:'';
+    $search_icon_html = '<i class="'.$search_icon.'"></i>';
+}elseif ($search_icon_type == 'custom'){
+    $search_icon = isset($options['search-icon-custom'])?$options['search-icon-custom']:'';
+    if($search_icon){
+        $log_svg              = '';
+        if(Functions::file_ext_exists($search_icon['url'], 'svg')){
+            $log_svg  = ' data-uk-svg';
+        }
+        $search_icon_html = '<img src="'.$search_icon['url'].'" alt="'.esc_attr__('Search','templaza-framework').'" '.$log_svg.'/>';
+    }
+}
+if($account_icon_type == 'fontawesome' ){
+    $account_icon = isset($options['account-icon'])?$options['account-icon']:'';
+    $account_icon_html = '<i class="'.$account_icon.'"></i>';
+}elseif ($account_icon_type == 'custom'){
+    $account_icon = isset($options['account-icon-custom'])?$options['account-icon-custom']:'';
+    if($account_icon){
+        $log_svg              = '';
+        if(Functions::file_ext_exists($account_icon['url'], 'svg')){
+            $log_svg  = ' data-uk-svg';
+        }
+        $account_icon_html = '<img src="'.$account_icon['url'].'" alt="'.esc_attr__('Account','templaza-framework').'" '.$log_svg.'/>';
+    }
+}
+if($cart_icon_type == 'fontawesome' ){
+    $cart_icon = isset($options['cart-icon'])?$options['cart-icon']:'';
+    $cart_icon_html = '<i class="'.$account_icon.'"></i>';
+}elseif ($cart_icon_type == 'custom'){
+    $cart_icon = isset($options['cart-icon-custom'])?$options['cart-icon-custom']:'';
+    if($account_icon){
+        $log_svg              = '';
+        if(Functions::file_ext_exists($cart_icon['url'], 'svg')){
+            $log_svg  = ' data-uk-svg';
+        }
+        $cart_icon_html = '<img src="'.$cart_icon['url'].'" alt="'.esc_attr__('Cart','templaza-framework').'" '.$log_svg.'/>';
+    }
+}
 $header_menu_bg     = CSS::make_color_rgba_redux($header_stack_menu_bg);
 $header_logo_bg     = CSS::make_color_rgba_redux($header_stack_logo_bg);
 if($header_stack_divi == true) {
@@ -75,7 +117,7 @@ if($header_stack_divi == true) {
     $header_stack_designs = array(
         array(
             'enable' => true,
-            'class' => '.templaza-divi-logo-wrap',
+            'class' => '.templaza-divi-logo-wrap, .menu-item-logo',
             'options' => array(
                 'stacked-divided-top-padding',
                 'logo-section-border',
@@ -144,7 +186,9 @@ if($header_stack_divi == true) {
             <?php if($header_stack_search){ ?>
             <div class="uk-flex uk-flex-left uk-flex-middle">
                 <div class="header-search uk-position-relative header-icon">
-                    <span><i class="fas fa-search"></i></span>
+                    <span>
+                        <?php echo $search_icon_html; ?>
+                    </span>
                     <form method="get" class="searchform " action="<?php echo esc_url( home_url( '/' ) ); ?>">
                         <input type="text" class="field uk-input inputbox search-query uk-margin-remove-vertical" name="s" placeholder="<?php esc_attr_e( 'Search...', 'medil');?>" />
                         <button type="submit" class="submit searchsubmit has-button-icon uk-position-right" name="submit" data-uk-icon="search"></button>
@@ -165,17 +209,39 @@ if($header_stack_divi == true) {
                ?>
             </div>
             <?php
-            if ($enable_offcanvas || $header_stack_cart) {
+            if ($enable_offcanvas || $header_stack_cart || $header_stack_account) {
                 ?>
                 <div class="uk-flex uk-flex-right uk-flex-middle">
                     <?php
                     if($header_stack_cart && class_exists( 'woocommerce' )){ ?>
                         <div class="header-cart header-icon">
                             <a href="<?php echo esc_url( wc_get_cart_url() ) ?>" data-toggle="<?php echo esc_attr($header_cart); ?>" data-target="cart-modal">
-                                <i class="fas fa-shopping-cart"></i>
+                                <?php echo $cart_icon_html; ?>
                                 <span class="counter cart-counter"><?php echo esc_html(WC()->cart->get_cart_contents_count()); ?></span>
                             </a>
                         </div>
+                    <?php }
+                    if($header_stack_account && class_exists( 'woocommerce' )){ ?>
+                    <div class="header-account header-icon">
+                        <a class="account-icon" href="<?php echo esc_url( wc_get_account_endpoint_url( 'dashboard' ) ) ?>"
+                           data-toggle="<?php echo esc_attr($login_modals);?>"
+                           data-target="account-modal">
+                            <?php echo $account_icon_html; ?>
+                        </a>
+                        <?php if ( is_user_logged_in() ) : ?>
+                            <div class="account-links">
+                                <ul>
+                                    <?php foreach ( wc_get_account_menu_items() as $endpoint => $label ) : ?>
+                                        <li class="account-link--<?php echo esc_attr( $endpoint ); ?>">
+                                            <a href="<?php echo esc_url( wc_get_account_endpoint_url( $endpoint ) ); ?>" class="underline-hover">
+                                                <?php echo esc_html( $label ); ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                     <?php }
                     if ($enable_offcanvas) {
                         ?>

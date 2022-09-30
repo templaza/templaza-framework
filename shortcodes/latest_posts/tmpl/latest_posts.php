@@ -16,6 +16,7 @@ extract(shortcode_atts(array(
     'latest_post_image_cover_height'  => 300,
     'latest_post_show_date'    => true,
     'latest_post_show_author'  => true,
+    'latest_post_slider_item'  => '3',
     'latest_post_show_nav'     => true,
     'latest_post_show_dot'     => false,
 ), $atts));
@@ -36,9 +37,9 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
 
     <div class="uk-slider-container-offset" data-uk-slider>
 
-        <div class="uk-position-relative uk-visible-toggle uk-margin-top uk-margin-bottom uk-light" tabindex="-1">
+        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
 
-            <div class="uk-slider-items uk-child-width-1-3@s " data-uk-grid>
+            <div class="uk-slider-items uk-grid-medium uk-child-width-1-<?php echo esc_attr($latest_post_slider_item);?>@s " data-uk-grid>
                 <?php
                 if($latest_cause){
                 foreach ($latest_cause as $post_item) {

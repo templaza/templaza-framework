@@ -915,6 +915,12 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     $json_file_name = $_header_opt[0] -> post_name;
                 }
             }
+            if(isset($_GET['header_style']) && $post_type =='templaza_header'){
+                $json_file_name = $_GET['header_style'];
+            }
+            if(isset($_GET['footer_style']) && $post_type =='templaza_footer'){
+                $json_file_name = $_GET['footer_style'];
+            }
 
             if(!empty($json_file_name)){
                 static::$cache[$store_id]   = $json_file_name;
@@ -953,7 +959,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
             // Get header options from json file
             $base_path      = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/'.$post_type;
             $default_path   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$post_type;
-
             $json_file  = $default_path.'/'.$json_file_name.'.json';
 
             if(!file_exists($json_file)){
