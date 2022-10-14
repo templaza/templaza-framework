@@ -12,6 +12,8 @@ use TemPlazaFramework\Controller\BaseController;
 use TemPlazaFramework\Helpers\Files;
 use TemPlazaFramework\Helpers\HelperLicense;
 use TemPlazaFramework\Helpers\Info;
+use TemPlazaFramework\Admin_Functions;
+use TemPlazaFramework\Admin\Admin_Page_Function;
 
 if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
     class ImporterController extends BaseController{
@@ -38,6 +40,8 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             }
 
             $this -> imported_key   = '_'.TEMPLAZA_FRAMEWORK.'_'.$this -> theme_name.'__demo_imported';
+
+            $this -> system_requirement_notice();
         }
 
         public function get_theme_demo_datas(){
@@ -547,6 +551,27 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 die();
             }
         }
+
+        /* Check system requirement */
+        public function system_requirement_notice(){
+            $pass   = Admin_Functions::check_system_requirement();
+
+            if(!$pass){
+                $app    = Application::get_instance();
+                ob_start();
+
+                $file   = Admin_Page_Function::get_template_directory().'/sysinfo_notice.php';
+
+                if(file_exists($file)){
+                    require_once $file;
+                }
+                $message    = ob_get_contents();
+                ob_end_clean();
+
+                $app -> enqueue_message($message, 'error', array('show_close_button' => false));
+            }
+        }
+
         protected function import_content($folder_path, $filename = '',  $file_filter = '.xml'){
 
             require_once TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/importer/class-templaza-importer.php';
