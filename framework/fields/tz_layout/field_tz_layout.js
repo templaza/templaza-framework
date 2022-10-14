@@ -973,6 +973,22 @@
                             }
                         });
                     }
+
+                    // Fix issue search value of select field
+                    $(event.target).find("select").on("select2:opening", function(){
+                        $(event.target).removeAttr("tabindex");
+                    }).on("select2:close", function(){
+                        $(event.target).attr("tabindex", "-1");
+                    });
+
+                    // Fix issue put color of color rgba field
+                    $(event.target).find(".redux-color-rgba").on("beforeShow.spectrum",
+                        function(){
+                            $(event.target).removeAttr("tabindex");
+                        }).on("hide.spectrum",
+                        function(){
+                            $(event.target).attr("tabindex", "-1");
+                        });
                 }
             });
 
