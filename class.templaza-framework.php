@@ -589,7 +589,7 @@ class TemPlazaFrameWork{
                 $dest_file      = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$ptype;
                 if(!is_dir($dest_file)){
                     require_once(ABSPATH . '/wp-admin/includes/file.php');
-                    mkdir($dest_file, FS_CHMOD_DIR, true);
+                    mkdir($dest_file, \FS_CHMOD_DIR, true);
                 }
                 $dest_file     .= '/'.$postdata['post_name'].'.json';
                 if(file_exists($source_file) && !file_exists($dest_file)){
