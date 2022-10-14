@@ -51,6 +51,18 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 			'Verdana, Geneva, sans-serif'             => 'Verdana, Geneva, sans-serif',
 		);
 
+        /**
+         * Default font weights.
+         *
+         * @var string[]
+         */
+        private $default_font_weights = array(
+            '400'       => 'Normal 400',
+            '700'       => 'Bold 700',
+            '400italic' => 'Normal 400 Italic',
+            '700italic' => 'Bold 700 Italic',
+        );
+
 		/**
 		 * User font array.
 		 *
@@ -170,6 +182,8 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				$this->user_fonts     = false;
 				$this->field['fonts'] = $this->std_fonts;
 			}
+
+            $this->field['weights'] = $this->field['weights'] ?? $this->default_font_weights;
 
 			// Localize std fonts.
 			$this->localize_std_fonts();
