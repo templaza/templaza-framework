@@ -69,27 +69,24 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
         protected function _load_meta_boxes($metaboxes, $post_type = null){
             if(count($metaboxes)){
 
-                // Init redux if it not exists
-                if($args   = $this -> post_type -> setting_args) {
-                    $opt_name   = $args['settings']['opt_name'];
-                    $redux  = \Redux::instance($opt_name);
-                    if(!property_exists($redux, 'core_instance')){
-                        \Redux::set_args($opt_name, $args);
-                        \Redux::init($opt_name);
-                        $redux  = \Redux::instance($opt_name);
-                    }
-                    if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
-                        $redux->_register_settings();
-//                        $enqueue    = new \Redux_Enqueue($redux);
-//                        $enqueue -> init();
-                    }else{
-                        $redux -> options_class -> register();
-//                        $redux -> enqueue_class -> init();
-                    }
-
-                    $enqueue    = new Enqueue($redux);
-                    $enqueue -> framework_init();
-                }
+//                // Init redux if it not exists
+//                if($args   = $this -> post_type -> setting_args) {
+//                    $opt_name   = $args['settings']['opt_name'];
+//                    $redux  = \Redux::instance($opt_name);
+//                    if(!property_exists($redux, 'core_instance')){
+//                        \Redux::set_args($opt_name, $args);
+//                        \Redux::init($opt_name);
+//                        $redux  = \Redux::instance($opt_name);
+//                    }
+//                    if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+//                        $redux->_register_settings();
+//                    }else{
+//                        $redux -> options_class -> register();
+//                    }
+//
+//                    $enqueue    = new Enqueue($redux);
+//                    $enqueue -> framework_init();
+//                }
 
                 foreach($metaboxes as $k => $metabox){
                     $metabox    = apply_filters('templaza-framework/metabox/change', $metabox);
