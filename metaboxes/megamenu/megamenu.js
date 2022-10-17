@@ -786,6 +786,22 @@
                             tz_required(_dialog);
 
                             _dialog.data("field_shown", false);
+
+                            // Fix issue search value of select field
+                            $(_dialog).find("select").on("select2:opening", function(){
+                                $(_dialog).removeAttr("tabindex");
+                            }).on("select2:close", function(){
+                                $(_dialog).attr("tabindex", "-1");
+                            });
+
+                            // Fix issue put color of color rgba field
+                            $(_dialog).find(".redux-color-rgba").on("beforeShow.spectrum",
+                                function(){
+                                    $(_dialog).removeAttr("tabindex");
+                                }).on("hide.spectrum",
+                                function(){
+                                    $(_dialog).attr("tabindex", "-1");
+                                });
                         }
                     },
                     "hidden": function(){
