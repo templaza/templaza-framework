@@ -37,7 +37,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
 
     <div class="uk-slider-container-offset" data-uk-slider>
 
-        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+        <div class="uk-position-relative uk-visible-toggle" tabindex="-1">
 
             <div class="uk-slider-items uk-grid-medium uk-child-width-1-<?php echo esc_attr($latest_post_slider_item);?>@s " data-uk-grid>
                 <?php

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-14 10:50+0700\n"
+"POT-Creation-Date: 2022-10-13 10:01+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,23 +22,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: class.templaza-framework.php:338
+#: class.templaza-framework.php:346
 msgid "Header Menu"
 msgstr ""
 
-#: class.templaza-framework.php:339
+#: class.templaza-framework.php:347
 msgid "Primary Menu"
 msgstr ""
 
-#: class.templaza-framework.php:340
+#: class.templaza-framework.php:348
 msgid "Footer Menu"
 msgstr ""
 
-#: class.templaza-framework.php:565
-#: framework/options/post_type/templaza_header/sections/header.php:652
-#: framework/options/post_type/templaza_header/sections/header.php:697
-#: framework/options/post_type/templaza_header/sections/header.php:723
-#: framework/options/post_type/templaza_header/sections/header.php:749
+#: class.templaza-framework.php:573
+#: framework/options/post_type/templaza_header/sections/header.php:403
+#: framework/options/post_type/templaza_header/sections/header.php:669
+#: framework/options/post_type/templaza_header/sections/header.php:714
+#: framework/options/post_type/templaza_header/sections/header.php:740
+#: framework/options/post_type/templaza_header/sections/header.php:766
 #: framework/options/post_type/templaza_style/sections/social.php:19
 #: framework/options/post_type/templaza_style/sections/typography.php:31
 #: framework/options/post_type/templaza_style/sections/typographies/footer.php:19
@@ -50,7 +51,7 @@ msgstr ""
 #: framework/options/post_type/templaza_style/sections/typographies/heading.php:318
 #: framework/options/post_type/templaza_style/sections/typographies/menu.php:19
 #: framework/options/post_type/templaza_style/sections/typographies/menu.php:79
-#: framework/options/settings/sections/social.php:31
+#: framework/options/settings/sections/social.php:30
 #: framework/options/settings/sections/typography.php:31
 #: framework/options/settings/sections/advanced-product/ap_product.php:152
 #: framework/options/settings/sections/typographies/footer.php:19
@@ -66,7 +67,7 @@ msgstr ""
 #: framework/options/settings/sections/woocommerce/product-template-style.php:244
 #: framework/options/settings/sections/woocommerce/product.php:114
 #: framework/options/settings/sections/woocommerce/product.php:217
-#: includes/shortcode.php:265
+#: includes/shortcode.php:273
 #: includes/helpers/woocommerce/template-catalog.php:883
 #: metaboxes/layout-assignment/layout-assignment.php:24
 #: metaboxes/layout-assignment/layout-assignment.php:174
@@ -93,7 +94,7 @@ msgstr ""
 
 #: framework/framework.php:175 framework/framework.php:350
 #: framework/options/post_type/post_type.php:7
-#: framework/options/settings/settings.php:10 includes/shortcode.php:744
+#: framework/options/settings/settings.php:10 includes/shortcode.php:805
 msgid "Settings"
 msgstr ""
 
@@ -169,8 +170,7 @@ msgstr ""
 #: framework/options/settings/sections/woocommerce/product-template-style.php:608
 #: framework/options/settings/sections/woocommerce/product.php:522
 #: framework/templates/post-formats/format-link.php:12
-#: metaboxes/basic/basic.php:109 metaboxes/our_team/our_team.php:97
-#: metaboxes/portfolio/portfolio.php:71
+#: metaboxes/basic/basic.php:109 metaboxes/portfolio/portfolio.php:71
 #: shortcodes/latest_posts/latest_posts.php:35
 #: widgets/woo-filter/woo-filter.php:1266
 msgid "Title"
@@ -191,12 +191,13 @@ msgstr ""
 #: framework/options/settings/sections/header.php:317
 #: framework/options/settings/sections/miscellaneous.php:178
 #: framework/options/settings/sections/miscellaneous.php:248
-#: includes/shortcode.php:784
+#: includes/shortcode.php:845
 #: includes/helpers/woocommerce/register-product-brand.php:382
 msgid "Image"
 msgstr ""
 
 #: framework/extensions/tz_presets/class-redux-extension-tz-presets.php:310
+#: templates/advanced-product/single/single-style2.php:204
 msgid "Description"
 msgstr ""
 
@@ -401,20 +402,21 @@ msgstr ""
 #: framework/options/settings/sections/woocommerce/product-template-style.php:728
 #: framework/options/settings/sections/woocommerce/product-template-style.php:741
 #: framework/options/settings/sections/woocommerce/product-template-style.php:754
-#: framework/options/settings/sections/woocommerce/product-template-style.php:787
-#: framework/options/settings/sections/woocommerce/product-template-style.php:825
-#: framework/options/settings/sections/woocommerce/product-template-style.php:837
-#: framework/options/settings/sections/woocommerce/product-template-style.php:851
-#: framework/options/settings/sections/woocommerce/product-template-style.php:934
-#: framework/options/settings/sections/woocommerce/product-template-style.php:948
-#: framework/options/settings/sections/woocommerce/product-template-style.php:961
-#: framework/options/settings/sections/woocommerce/product-template-style.php:974
-#: framework/options/settings/sections/woocommerce/product-template-style.php:988
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1007
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1036
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1055
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1126
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1148
+#: framework/options/settings/sections/woocommerce/product-template-style.php:785
+#: framework/options/settings/sections/woocommerce/product-template-style.php:823
+#: framework/options/settings/sections/woocommerce/product-template-style.php:835
+#: framework/options/settings/sections/woocommerce/product-template-style.php:849
+#: framework/options/settings/sections/woocommerce/product-template-style.php:932
+#: framework/options/settings/sections/woocommerce/product-template-style.php:946
+#: framework/options/settings/sections/woocommerce/product-template-style.php:959
+#: framework/options/settings/sections/woocommerce/product-template-style.php:972
+#: framework/options/settings/sections/woocommerce/product-template-style.php:986
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1005
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1034
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1053
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1124
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1146
+#: includes/shortcode.php:322
 msgid "Inherit"
 msgstr ""
 
@@ -519,7 +521,7 @@ msgid "No media selected"
 msgstr ""
 
 #: framework/fields/background/tmpl/background.php:371
-#: includes/shortcode.php:821
+#: includes/shortcode.php:882
 msgid "Upload"
 msgstr ""
 
@@ -536,7 +538,7 @@ msgstr ""
 #: framework/fields/border/override-redux-border.php:123
 #: framework/fields/spacing/custom-redux-spacing.php:108
 #: framework/fields/spacing/tmpl/spacing.php:46
-#: framework/options/post_type/templaza_header/sections/header.php:668
+#: framework/options/post_type/templaza_header/sections/header.php:685
 #: framework/options/settings/sections/woocommerce/product-template-style.php:565
 #: framework/options/settings/sections/woocommerce/product.php:485
 #: shortcodes/section/section.php:134
@@ -554,7 +556,7 @@ msgstr ""
 #: framework/options/post_type/templaza_header/sections/header.php:157
 #: framework/options/post_type/templaza_header/sections/header.php:390
 #: framework/options/post_type/templaza_header/sections/header.php:391
-#: framework/options/post_type/templaza_header/sections/header.php:538
+#: framework/options/post_type/templaza_header/sections/header.php:555
 #: framework/options/post_type/templaza_style/sections/header.php:77
 #: framework/options/post_type/templaza_style/sections/header.php:78
 #: framework/options/post_type/templaza_style/sections/header.php:139
@@ -579,7 +581,7 @@ msgstr ""
 #: framework/fields/border/override-redux-border.php:147
 #: framework/fields/spacing/custom-redux-spacing.php:109
 #: framework/fields/spacing/tmpl/spacing.php:48
-#: framework/options/post_type/templaza_header/sections/header.php:669
+#: framework/options/post_type/templaza_header/sections/header.php:686
 #: framework/options/settings/sections/woocommerce/product-template-style.php:566
 #: framework/options/settings/sections/woocommerce/product.php:486
 #: shortcodes/section/section.php:136
@@ -596,7 +598,7 @@ msgstr ""
 #: framework/options/post_type/templaza_header/sections/header.php:132
 #: framework/options/post_type/templaza_header/sections/header.php:378
 #: framework/options/post_type/templaza_header/sections/header.php:379
-#: framework/options/post_type/templaza_header/sections/header.php:537
+#: framework/options/post_type/templaza_header/sections/header.php:554
 #: framework/options/post_type/templaza_style/sections/header.php:65
 #: framework/options/post_type/templaza_style/sections/header.php:66
 #: framework/options/post_type/templaza_style/sections/header.php:133
@@ -636,7 +638,8 @@ msgstr ""
 
 #: framework/fields/border/override-redux-border.php:173
 #: framework/options/post_type/templaza_header/sections/header.php:293
-#: framework/options/post_type/templaza_header/sections/header.php:658
+#: framework/options/post_type/templaza_header/sections/header.php:409
+#: framework/options/post_type/templaza_header/sections/header.php:675
 #: framework/options/post_type/templaza_style/pages/blog.php:11
 #: framework/options/post_type/templaza_style/sections/header.php:329
 #: framework/options/post_type/templaza_style/sections/miscellaneous.php:199
@@ -651,7 +654,7 @@ msgstr ""
 #: framework/options/settings/sections/woocommerce/product.php:334
 #: framework/options/settings/sections/woocommerce/product.php:344
 #: framework/options/settings/sections/woocommerce/product.php:512
-#: includes/shortcode.php:220 includes/shortcode.php:268
+#: includes/shortcode.php:228 includes/shortcode.php:276
 #: shortcodes/navigation/navigation.php:154
 #: shortcodes/navigation/navigation.php:193 shortcodes/row/row.php:56
 #: shortcodes/row/row.php:71 shortcodes/row/row.php:97
@@ -749,27 +752,27 @@ msgstr ""
 
 #: framework/fields/spacing/custom-redux-spacing.php:139
 #: framework/fields/typography/override-redux-typography.php:952
-#: shortcodes/column/column.php:140
+#: shortcodes/column/column.php:236
 msgid "Large Screen"
 msgstr ""
 
 #: framework/fields/spacing/custom-redux-spacing.php:144
 #: framework/fields/typography/override-redux-typography.php:957
 #: framework/fields/typography/tmpl/typography_bak.php:341
-#: includes/shortcode.php:803
+#: includes/shortcode.php:864
 msgid "Desktop"
 msgstr ""
 
 #: framework/fields/spacing/custom-redux-spacing.php:149
 #: framework/fields/typography/override-redux-typography.php:962
-#: includes/shortcode.php:804
+#: includes/shortcode.php:865
 msgid "Laptop"
 msgstr ""
 
 #: framework/fields/spacing/custom-redux-spacing.php:154
 #: framework/fields/typography/override-redux-typography.php:967
 #: framework/fields/typography/tmpl/typography_bak.php:345
-#: includes/shortcode.php:805
+#: includes/shortcode.php:866
 msgid "Tablet"
 msgstr ""
 
@@ -779,19 +782,19 @@ msgstr ""
 msgid "Mobile"
 msgstr ""
 
-#: framework/fields/spacing/tmpl/spacing.php:96
+#: framework/fields/spacing/tmpl/spacing.php:96 includes/shortcode.php:332
 msgid "Top Left"
 msgstr ""
 
-#: framework/fields/spacing/tmpl/spacing.php:97
+#: framework/fields/spacing/tmpl/spacing.php:97 includes/shortcode.php:334
 msgid "Top Right"
 msgstr ""
 
-#: framework/fields/spacing/tmpl/spacing.php:98
+#: framework/fields/spacing/tmpl/spacing.php:98 includes/shortcode.php:340
 msgid "Bottom Right"
 msgstr ""
 
-#: framework/fields/spacing/tmpl/spacing.php:99
+#: framework/fields/spacing/tmpl/spacing.php:99 includes/shortcode.php:338
 msgid "Bottom Left"
 msgstr ""
 
@@ -1126,7 +1129,7 @@ msgid "Automated updates"
 msgstr ""
 
 #: framework/fields/tz_layout/field_tz_layout.php:155
-#: framework/templates/importer/default.php:89 includes/shortcode.php:796
+#: framework/templates/importer/default.php:89 includes/shortcode.php:857
 msgid "Close"
 msgstr ""
 
@@ -1140,9 +1143,9 @@ msgstr ""
 
 #: framework/fields/tz_layout/field_tz_layout.php:159
 #: gutenberg-blocks/advanced-products-filter/tmpl/advanced-products-filter.php:13
-#: includes/shortcode.php:756 templates/header/horizontal.php:57
-#: templates/inc/icon.php:32 widgets/woo-filter/woo-filter.php:707
-#: widgets/woo-filter/woo-filter.php:710
+#: includes/shortcode.php:817 templates/header/horizontal.php:57
+#: templates/header/stacked.php:77 templates/inc/icon.php:29
+#: widgets/woo-filter/woo-filter.php:707 widgets/woo-filter/woo-filter.php:710
 msgid "Search"
 msgstr ""
 
@@ -1206,9 +1209,11 @@ msgstr ""
 #: framework/fields/tz_layout/template/setting_grid.tpl.php:50
 #: framework/fields/tz_layout/template/setting_grid.tpl.php:53
 #: framework/fields/tz_layout/template/setting_grid.tpl.php:54
-#: framework/options/post_type/templaza_header/sections/header.php:657
+#: framework/fields/tz_layout/template/setting_grid.tpl.php:55
+#: framework/options/post_type/templaza_header/sections/header.php:408
+#: framework/options/post_type/templaza_header/sections/header.php:674
 #: framework/templates/redux-panel/header_stickybar.tpl.php:15
-#: includes/shortcode.php:824 shortcodes/column/column.php:216
+#: includes/shortcode.php:885 shortcodes/column/column.php:312
 #: shortcodes/row/row.php:96 shortcodes/section/section.php:80
 #: shortcodes/section/section.php:124
 msgid "Expand"
@@ -1216,18 +1221,19 @@ msgstr ""
 
 #: framework/fields/tz_layout/template/setting_grid.tpl.php:53
 #: framework/fields/tz_layout/template/setting_grid.tpl.php:54
-#: shortcodes/column/column.php:217 widgets/woo-filter/woo-filter.php:1502
+#: framework/fields/tz_layout/template/setting_grid.tpl.php:55
+#: shortcodes/column/column.php:313 widgets/woo-filter/woo-filter.php:1502
 msgid "Auto"
 msgstr ""
 
-#: framework/fields/tz_layout/template/setting_grid.tpl.php:58
+#: framework/fields/tz_layout/template/setting_grid.tpl.php:59
 msgid "Select a grid layout"
 msgstr ""
 
-#: framework/fields/tz_layout/template/setting_grid.tpl.php:106
-#: framework/options/post_type/templaza_header/sections/header.php:699
-#: framework/options/post_type/templaza_header/sections/header.php:725
-#: framework/options/post_type/templaza_header/sections/header.php:751
+#: framework/fields/tz_layout/template/setting_grid.tpl.php:107
+#: framework/options/post_type/templaza_header/sections/header.php:716
+#: framework/options/post_type/templaza_header/sections/header.php:742
+#: framework/options/post_type/templaza_header/sections/header.php:768
 #: framework/options/post_type/templaza_style/sections/typography.php:32
 #: framework/options/post_type/templaza_style/sections/typographies/footer.php:20
 #: framework/options/post_type/templaza_style/sections/typographies/heading.php:19
@@ -1238,7 +1244,6 @@ msgstr ""
 #: framework/options/post_type/templaza_style/sections/typographies/heading.php:319
 #: framework/options/post_type/templaza_style/sections/typographies/menu.php:20
 #: framework/options/post_type/templaza_style/sections/typographies/menu.php:80
-#: framework/options/settings/sections/social.php:21
 #: framework/options/settings/sections/typography.php:32
 #: framework/options/settings/sections/advanced-product/ap_product.php:33
 #: framework/options/settings/sections/typographies/footer.php:20
@@ -1250,12 +1255,12 @@ msgstr ""
 #: framework/options/settings/sections/typographies/heading.php:279
 #: framework/options/settings/sections/typographies/menu.php:20
 #: framework/options/settings/sections/typographies/menu.php:72
-#: includes/shortcode.php:221 includes/shortcode.php:269
-#: shortcodes/section/section.php:220
+#: includes/shortcode.php:229 includes/shortcode.php:277
+#: includes/shortcode.php:341 shortcodes/section/section.php:220
 msgid "Custom"
 msgstr ""
 
-#: framework/fields/tz_layout/tmpl/tz_layout.php:12 includes/shortcode.php:810
+#: framework/fields/tz_layout/tmpl/tz_layout.php:12 includes/shortcode.php:871
 msgid "Copy"
 msgstr ""
 
@@ -1351,22 +1356,22 @@ msgid "Delete"
 msgstr ""
 
 #: framework/fields/tz_social/field_tz_social.php:38
-#: includes/shortcode.php:844
+#: includes/shortcode.php:905
 msgid "Behance"
 msgstr ""
 
 #: framework/fields/tz_social/field_tz_social.php:47
-#: includes/shortcode.php:845
+#: includes/shortcode.php:906
 msgid "Dribbble"
 msgstr ""
 
 #: framework/fields/tz_social/field_tz_social.php:56
-#: includes/shortcode.php:846
+#: includes/shortcode.php:907
 msgid "Facebook"
 msgstr ""
 
 #: framework/fields/tz_social/field_tz_social.php:65
-#: includes/shortcode.php:847
+#: includes/shortcode.php:908
 msgid "Flickr"
 msgstr ""
 
@@ -1375,7 +1380,7 @@ msgid "GitHub"
 msgstr ""
 
 #: framework/fields/tz_social/field_tz_social.php:83
-#: includes/shortcode.php:854
+#: includes/shortcode.php:915
 msgid "Instagram"
 msgstr ""
 
@@ -1388,12 +1393,12 @@ msgid "Messenger"
 msgstr ""
 
 #: framework/fields/tz_social/field_tz_social.php:110
-#: includes/shortcode.php:858
+#: includes/shortcode.php:919
 msgid "Pinterest"
 msgstr ""
 
 #: framework/fields/tz_social/field_tz_social.php:119
-#: includes/shortcode.php:872
+#: includes/shortcode.php:933
 msgid "Reddit"
 msgstr ""
 
@@ -1415,7 +1420,7 @@ msgstr ""
 
 #: framework/fields/tz_social/field_tz_social.php:165
 #: framework/templates/dashboard/default_info.php:24
-#: includes/shortcode.php:862
+#: includes/shortcode.php:923
 msgid "Twitter"
 msgstr ""
 
@@ -1424,7 +1429,7 @@ msgid "Telegram"
 msgstr ""
 
 #: framework/fields/tz_social/field_tz_social.php:184
-#: includes/shortcode.php:861
+#: includes/shortcode.php:922
 msgid "Tumblr"
 msgstr ""
 
@@ -1461,11 +1466,11 @@ msgid "Custom social profile"
 msgstr ""
 
 #: framework/fields/tz_social/tmpl/tz_social.tpl.php:27
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1124
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1146
-#: framework/options/settings/sections/woocommerce/product.php:943
-#: framework/options/settings/sections/woocommerce/product.php:963
-#: includes/shortcode.php:780
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1122
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1144
+#: framework/options/settings/sections/woocommerce/product.php:955
+#: framework/options/settings/sections/woocommerce/product.php:975
+#: includes/shortcode.php:841
 msgid "Link"
 msgstr ""
 
@@ -2230,7 +2235,7 @@ msgid "Select a preloader type."
 msgstr ""
 
 #: framework/options/post_type/settings/general.php:68
-#: framework/options/post_type/templaza_header/sections/header.php:561
+#: framework/options/post_type/templaza_header/sections/header.php:578
 #: framework/options/post_type/templaza_style/pages/blog.php:554
 #: framework/options/post_type/templaza_style/sections/general.php:65
 #: framework/options/post_type/templaza_style/sections/header.php:634
@@ -2371,7 +2376,9 @@ msgid "Icon size by: px"
 msgstr ""
 
 #: framework/options/post_type/settings/general.php:175
+#: framework/options/post_type/templaza_style/sections/color.php:211
 #: framework/options/post_type/templaza_style/sections/general.php:183
+#: framework/options/settings/sections/color.php:214
 #: framework/options/settings/sections/general.php:165
 msgid "Icon color"
 msgstr ""
@@ -2462,7 +2469,7 @@ msgstr ""
 #: framework/options/settings/sections/general.php:226
 #: framework/options/settings/sections/miscellaneous.php:262
 #: includes/shortcode.php:196 shortcodes/breadcrumb/breadcrumb.php:23
-#: shortcodes/column/column.php:69 shortcodes/section/section.php:162
+#: shortcodes/column/column.php:165 shortcodes/section/section.php:162
 msgid "Background"
 msgstr ""
 
@@ -2609,8 +2616,8 @@ msgstr ""
 #: framework/options/settings/sections/header.php:72
 #: framework/options/settings/sections/header.php:411
 #: framework/options/settings/sections/header.php:412
-#: includes/shortcode.php:167 metaboxes/megamenu/megamenu.php:217
-#: shortcodes/navigation/navigation.php:94
+#: includes/shortcode.php:167 includes/shortcode.php:335
+#: metaboxes/megamenu/megamenu.php:217 shortcodes/navigation/navigation.php:94
 msgid "Center"
 msgstr ""
 
@@ -2874,8 +2881,8 @@ msgstr ""
 #: framework/options/post_type/templaza_header/sections/header.php:292
 #: framework/options/post_type/templaza_style/sections/header.php:328
 #: framework/options/settings/sections/header.php:318
-#: framework/options/settings/sections/woocommerce/product-template-style.php:984
-#: framework/options/settings/sections/woocommerce/product.php:818
+#: framework/options/settings/sections/woocommerce/product-template-style.php:982
+#: framework/options/settings/sections/woocommerce/product.php:830
 #: shortcodes/navigation/navigation.php:104 shortcodes/text/text.php:98
 msgid "Text"
 msgstr ""
@@ -2888,7 +2895,7 @@ msgstr ""
 
 #: framework/options/post_type/templaza_header/sections/header.php:303
 #: framework/options/post_type/templaza_header/sections/header.php:314
-#: framework/options/post_type/templaza_header/sections/header.php:404
+#: framework/options/post_type/templaza_header/sections/header.php:421
 #: framework/options/post_type/templaza_style/sections/header.php:342
 #: framework/options/post_type/templaza_style/sections/header.php:352
 #: framework/options/post_type/templaza_style/sections/header.php:454
@@ -2960,9 +2967,9 @@ msgid "Enter Tag Line."
 msgstr ""
 
 #: framework/options/post_type/templaza_header/sections/header.php:354
-#: framework/options/post_type/templaza_header/sections/header.php:416
-#: framework/options/post_type/templaza_header/sections/header.php:432
-#: framework/options/post_type/templaza_header/sections/header.php:448
+#: framework/options/post_type/templaza_header/sections/header.php:433
+#: framework/options/post_type/templaza_header/sections/header.php:449
+#: framework/options/post_type/templaza_header/sections/header.php:465
 #: framework/options/post_type/templaza_style/sections/header.php:397
 #: framework/options/post_type/templaza_style/sections/header.php:465
 #: framework/options/post_type/templaza_style/sections/header.php:482
@@ -3000,33 +3007,95 @@ msgstr ""
 msgid "Sticky Menu Mode"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:402
+#: framework/options/post_type/templaza_header/sections/header.php:401
+msgid "Sticky Max Width"
+msgstr ""
+
+#: framework/options/post_type/templaza_header/sections/header.php:404
+#: framework/options/post_type/templaza_header/sections/header.php:670
+#: shortcodes/row/row.php:92 shortcodes/section/section.php:76
+#: shortcodes/section/section.php:215
+msgid "XSmall"
+msgstr ""
+
+#: framework/options/post_type/templaza_header/sections/header.php:405
+#: framework/options/post_type/templaza_header/sections/header.php:671
+#: framework/options/settings/sections/social.php:31
+#: framework/options/settings/sections/advanced-product/ap_product.php:153
+#: framework/options/settings/sections/woocommerce/product-template-style.php:127
+#: framework/options/settings/sections/woocommerce/product.php:115
+#: includes/shortcode.php:224 includes/shortcode.php:274
+#: shortcodes/column/column.php:314 shortcodes/row/row.php:53
+#: shortcodes/row/row.php:68 shortcodes/row/row.php:93
+#: shortcodes/section/section.php:77 shortcodes/section/section.php:216
+#: shortcodes/text/text.php:85 shortcodes/widget/widget.php:134
+#: shortcodes/wp_archives/wp_archives.php:53
+#: shortcodes/wp_categories/wp_categories.php:53
+#: shortcodes/wp_menu/wp_menu.php:75
+#: shortcodes/wp_recent_posts/wp_recent_posts.php:53
+#: shortcodes/wp_tag_cloud/wp_tag_cloud.php:53
+msgid "Small"
+msgstr ""
+
+#: framework/options/post_type/templaza_header/sections/header.php:406
+#: framework/options/post_type/templaza_header/sections/header.php:672
+#: framework/options/settings/sections/social.php:33
+#: framework/options/settings/sections/advanced-product/ap_product.php:155
+#: framework/options/settings/sections/woocommerce/product-template-style.php:129
+#: framework/options/settings/sections/woocommerce/product.php:117
+#: includes/shortcode.php:226 includes/shortcode.php:275
+#: shortcodes/column/column.php:316 shortcodes/row/row.php:55
+#: shortcodes/row/row.php:70 shortcodes/row/row.php:94
+#: shortcodes/section/section.php:78 shortcodes/section/section.php:217
+#: shortcodes/text/text.php:83 shortcodes/widget/widget.php:132
+#: shortcodes/wp_archives/wp_archives.php:51
+#: shortcodes/wp_categories/wp_categories.php:51
+#: shortcodes/wp_menu/wp_menu.php:73
+#: shortcodes/wp_recent_posts/wp_recent_posts.php:51
+#: shortcodes/wp_tag_cloud/wp_tag_cloud.php:51
+msgid "Large"
+msgstr ""
+
+#: framework/options/post_type/templaza_header/sections/header.php:407
+#: framework/options/post_type/templaza_header/sections/header.php:673
+#: includes/shortcode.php:227 shortcodes/column/column.php:317
+#: shortcodes/row/row.php:95 shortcodes/section/section.php:79
+#: shortcodes/section/section.php:218 shortcodes/text/text.php:82
+#: shortcodes/widget/widget.php:131 shortcodes/wp_archives/wp_archives.php:50
+#: shortcodes/wp_categories/wp_categories.php:50
+#: shortcodes/wp_menu/wp_menu.php:72
+#: shortcodes/wp_recent_posts/wp_recent_posts.php:50
+#: shortcodes/wp_tag_cloud/wp_tag_cloud.php:50
+msgid "XLarge"
+msgstr ""
+
+#: framework/options/post_type/templaza_header/sections/header.php:419
 #: framework/options/post_type/templaza_style/sections/header.php:452
 #: framework/options/settings/sections/header.php:429
 msgid "Sticky Logo"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:405
+#: framework/options/post_type/templaza_header/sections/header.php:422
 #: framework/options/post_type/templaza_style/sections/header.php:455
 #: framework/options/settings/sections/header.php:432
 msgid "Select an image for your sticky header logo."
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:412
+#: framework/options/post_type/templaza_header/sections/header.php:429
 #: framework/options/post_type/templaza_style/sections/header.php:461
 #: framework/options/settings/sections/header.php:439
 msgid "Sticky on Desktop"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:413
+#: framework/options/post_type/templaza_header/sections/header.php:430
 #: framework/options/post_type/templaza_style/sections/header.php:462
 #: framework/options/settings/sections/header.php:440
 msgid "Select the type of the Sticky Header for Desktop."
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:417
-#: framework/options/post_type/templaza_header/sections/header.php:433
-#: framework/options/post_type/templaza_header/sections/header.php:449
+#: framework/options/post_type/templaza_header/sections/header.php:434
+#: framework/options/post_type/templaza_header/sections/header.php:450
+#: framework/options/post_type/templaza_header/sections/header.php:466
 #: framework/options/post_type/templaza_style/sections/header.php:466
 #: framework/options/post_type/templaza_style/sections/header.php:483
 #: framework/options/post_type/templaza_style/sections/header.php:500
@@ -3036,20 +3105,20 @@ msgstr ""
 msgid "Sticky On Scroll Up"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:427
+#: framework/options/post_type/templaza_header/sections/header.php:444
 #: framework/options/post_type/templaza_style/sections/header.php:477
 #: framework/options/settings/sections/header.php:454
 msgid "Sticky on Tablets"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:428
+#: framework/options/post_type/templaza_header/sections/header.php:445
 #: framework/options/post_type/templaza_style/sections/header.php:478
 #: framework/options/settings/sections/header.php:455
 msgid "Select the type of the Sticky Header for Tablet."
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:431
-#: framework/options/post_type/templaza_header/sections/header.php:447
+#: framework/options/post_type/templaza_header/sections/header.php:448
+#: framework/options/post_type/templaza_header/sections/header.php:464
 #: framework/options/post_type/templaza_style/sections/header.php:481
 #: framework/options/post_type/templaza_style/sections/header.php:498
 #: framework/options/settings/sections/header.php:458
@@ -3057,20 +3126,20 @@ msgstr ""
 msgid "Static"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:443
+#: framework/options/post_type/templaza_header/sections/header.php:460
 #: framework/options/post_type/templaza_style/sections/header.php:494
 #: framework/options/settings/sections/header.php:470
 msgid "Sticky on Mobile"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:444
+#: framework/options/post_type/templaza_header/sections/header.php:461
 #: framework/options/post_type/templaza_style/sections/header.php:495
 #: framework/options/settings/sections/header.php:471
 msgid "Select the type of the Sticky Header for Mobile."
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:461
-#: framework/options/post_type/templaza_header/sections/header.php:471
+#: framework/options/post_type/templaza_header/sections/header.php:478
+#: framework/options/post_type/templaza_header/sections/header.php:488
 #: framework/options/post_type/templaza_style/sections/header.php:513
 #: framework/options/post_type/templaza_style/sections/header.php:524
 #: framework/options/settings/sections/header.php:488
@@ -3078,7 +3147,7 @@ msgstr ""
 msgid "Off-Canvas menu"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:462
+#: framework/options/post_type/templaza_header/sections/header.php:479
 #: framework/options/post_type/templaza_style/sections/header.php:514
 #: framework/options/settings/sections/header.php:489
 msgid ""
@@ -3086,142 +3155,142 @@ msgid ""
 "Off-Canvas module position or you'll see a blank off-canvas menu."
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:472
+#: framework/options/post_type/templaza_header/sections/header.php:489
 #: framework/options/post_type/templaza_style/sections/header.php:525
 #: framework/options/settings/sections/header.php:501
 msgid "Enable or disable to show or hide Off-Canvas menu."
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:480
+#: framework/options/post_type/templaza_header/sections/header.php:497
 #: framework/options/post_type/templaza_style/sections/header.php:548
 #: framework/options/settings/sections/header.php:518
 msgid "Off-Canvas Sidebar"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:481
+#: framework/options/post_type/templaza_header/sections/header.php:498
 #: framework/options/post_type/templaza_style/sections/header.php:549
 #: framework/options/settings/sections/header.php:519
 msgid "Select Sidebar for Off-Canvas"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:490
+#: framework/options/post_type/templaza_header/sections/header.php:507
 #: framework/options/post_type/templaza_style/sections/header.php:558
 #: framework/options/settings/sections/header.php:528
 msgid "Toggle Visibility"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:491
+#: framework/options/post_type/templaza_header/sections/header.php:508
 #: framework/options/post_type/templaza_style/sections/header.php:559
 #: framework/options/settings/sections/header.php:529
 msgid "Select to toggle off-canvas visibility on mobile or desktop."
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:494
+#: framework/options/post_type/templaza_header/sections/header.php:511
 #: framework/options/post_type/templaza_style/sections/header.php:562
 #: framework/options/settings/sections/header.php:532
 msgid "Always"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:495
+#: framework/options/post_type/templaza_header/sections/header.php:512
 #: framework/options/post_type/templaza_style/sections/header.php:563
 #: framework/options/settings/sections/header.php:533
 msgid "Only on X-Small Devices"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:496
+#: framework/options/post_type/templaza_header/sections/header.php:513
 #: framework/options/post_type/templaza_style/sections/header.php:564
 #: framework/options/settings/sections/header.php:534
 msgid "Upto Small Devices"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:497
+#: framework/options/post_type/templaza_header/sections/header.php:514
 #: framework/options/post_type/templaza_style/sections/header.php:565
 #: framework/options/settings/sections/header.php:535
 msgid "Upto Medium Devices"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:498
+#: framework/options/post_type/templaza_header/sections/header.php:515
 #: framework/options/post_type/templaza_style/sections/header.php:566
 #: framework/options/settings/sections/header.php:536
 msgid "Upto Large Devices"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:499
+#: framework/options/post_type/templaza_header/sections/header.php:516
 #: framework/options/post_type/templaza_style/sections/header.php:567
 #: framework/options/settings/sections/header.php:537
 msgid "Upto Only on X-Large Devices"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:510
+#: framework/options/post_type/templaza_header/sections/header.php:527
 #: framework/options/post_type/templaza_style/sections/header.php:577
 #: framework/options/settings/sections/header.php:548
 msgid "Panel Width"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:511
+#: framework/options/post_type/templaza_header/sections/header.php:528
 #: framework/options/post_type/templaza_style/sections/header.php:578
 #: framework/options/settings/sections/header.php:549
 msgid "Set off-canvas size in rem, em, px or percentage unit values."
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:520
+#: framework/options/post_type/templaza_header/sections/header.php:537
 #: framework/options/post_type/templaza_style/sections/header.php:584
 #: framework/options/settings/sections/header.php:558
 msgid "Off-Canvas Animation"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:521
+#: framework/options/post_type/templaza_header/sections/header.php:538
 #: framework/options/post_type/templaza_style/sections/header.php:585
 #: framework/options/settings/sections/header.php:559
 msgid "Select an animation for Off-canvas Menu from dropdown options."
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:524
+#: framework/options/post_type/templaza_header/sections/header.php:541
 #: framework/options/post_type/templaza_style/sections/header.php:588
 #: framework/options/settings/sections/header.php:562
 msgid "Slide in On Top"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:525
+#: framework/options/post_type/templaza_header/sections/header.php:542
 #: framework/options/post_type/templaza_style/sections/header.php:589
 #: framework/options/settings/sections/header.php:563
 msgid "Reveal"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:526
+#: framework/options/post_type/templaza_header/sections/header.php:543
 #: framework/options/post_type/templaza_style/pages/blog.php:560
 #: framework/options/post_type/templaza_style/sections/header.php:590
 #: framework/options/settings/pages/blog.php:441
 #: framework/options/settings/sections/header.php:564
-#: includes/shortcode.php:814
+#: includes/shortcode.php:875
 msgid "Push"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:534
+#: framework/options/post_type/templaza_header/sections/header.php:551
 #: framework/options/post_type/templaza_style/sections/header.php:600
 #: framework/options/settings/sections/header.php:572
 msgid "Off-Canvas Direction"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:535
+#: framework/options/post_type/templaza_header/sections/header.php:552
 #: framework/options/post_type/templaza_style/sections/header.php:601
 #: framework/options/settings/sections/header.php:573
 msgid "Select the direction for Off-canvas Menu"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:550
+#: framework/options/post_type/templaza_header/sections/header.php:567
 #: framework/options/post_type/templaza_style/sections/header.php:619
 #: framework/options/settings/sections/header.php:589
 msgid "Dropdown Animation"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:551
+#: framework/options/post_type/templaza_header/sections/header.php:568
 #: framework/options/post_type/templaza_style/sections/header.php:620
 #: framework/options/settings/sections/header.php:590
 msgid "Customize dropdown animation for mega/dropdown menu."
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:564
+#: framework/options/post_type/templaza_header/sections/header.php:581
 #: framework/options/post_type/templaza_style/pages/blog.php:56
 #: framework/options/post_type/templaza_style/pages/blog.php:70
 #: framework/options/post_type/templaza_style/pages/blog.php:83
@@ -3287,20 +3356,20 @@ msgstr ""
 #: framework/options/settings/sections/woocommerce/product-template-style.php:725
 #: framework/options/settings/sections/woocommerce/product-template-style.php:738
 #: framework/options/settings/sections/woocommerce/product-template-style.php:751
-#: framework/options/settings/sections/woocommerce/product-template-style.php:784
-#: framework/options/settings/sections/woocommerce/product-template-style.php:822
-#: framework/options/settings/sections/woocommerce/product-template-style.php:834
-#: framework/options/settings/sections/woocommerce/product-template-style.php:848
-#: framework/options/settings/sections/woocommerce/product-template-style.php:931
-#: framework/options/settings/sections/woocommerce/product-template-style.php:958
-#: framework/options/settings/sections/woocommerce/product-template-style.php:971
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1004
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1033
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1052
+#: framework/options/settings/sections/woocommerce/product-template-style.php:782
+#: framework/options/settings/sections/woocommerce/product-template-style.php:820
+#: framework/options/settings/sections/woocommerce/product-template-style.php:832
+#: framework/options/settings/sections/woocommerce/product-template-style.php:846
+#: framework/options/settings/sections/woocommerce/product-template-style.php:929
+#: framework/options/settings/sections/woocommerce/product-template-style.php:956
+#: framework/options/settings/sections/woocommerce/product-template-style.php:969
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1002
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1031
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1050
 msgid "On"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:565
+#: framework/options/post_type/templaza_header/sections/header.php:582
 #: framework/options/post_type/templaza_style/pages/blog.php:57
 #: framework/options/post_type/templaza_style/pages/blog.php:71
 #: framework/options/post_type/templaza_style/pages/blog.php:84
@@ -3366,219 +3435,165 @@ msgstr ""
 #: framework/options/settings/sections/woocommerce/product-template-style.php:726
 #: framework/options/settings/sections/woocommerce/product-template-style.php:739
 #: framework/options/settings/sections/woocommerce/product-template-style.php:752
-#: framework/options/settings/sections/woocommerce/product-template-style.php:785
-#: framework/options/settings/sections/woocommerce/product-template-style.php:823
-#: framework/options/settings/sections/woocommerce/product-template-style.php:835
-#: framework/options/settings/sections/woocommerce/product-template-style.php:849
-#: framework/options/settings/sections/woocommerce/product-template-style.php:932
-#: framework/options/settings/sections/woocommerce/product-template-style.php:959
-#: framework/options/settings/sections/woocommerce/product-template-style.php:972
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1005
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1034
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1053
+#: framework/options/settings/sections/woocommerce/product-template-style.php:783
+#: framework/options/settings/sections/woocommerce/product-template-style.php:821
+#: framework/options/settings/sections/woocommerce/product-template-style.php:833
+#: framework/options/settings/sections/woocommerce/product-template-style.php:847
+#: framework/options/settings/sections/woocommerce/product-template-style.php:930
+#: framework/options/settings/sections/woocommerce/product-template-style.php:957
+#: framework/options/settings/sections/woocommerce/product-template-style.php:970
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1003
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1032
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1051
 msgid "Off"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:573
+#: framework/options/post_type/templaza_header/sections/header.php:590
 #: framework/options/post_type/templaza_style/sections/header.php:648
 #: framework/options/settings/sections/header.php:616
 msgid "Effect"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:576
+#: framework/options/post_type/templaza_header/sections/header.php:593
 #: framework/options/post_type/templaza_style/sections/header.php:651
 #: framework/options/settings/sections/header.php:619
 msgid "Fade Down"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:577
+#: framework/options/post_type/templaza_header/sections/header.php:594
 #: framework/options/post_type/templaza_style/sections/header.php:652
 #: framework/options/settings/sections/header.php:620
 msgid "Fade Left"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:578
+#: framework/options/post_type/templaza_header/sections/header.php:595
 #: framework/options/post_type/templaza_style/sections/header.php:653
 #: framework/options/settings/sections/header.php:621
 msgid "Fade Right"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:579
+#: framework/options/post_type/templaza_header/sections/header.php:596
 #: framework/options/post_type/templaza_style/sections/header.php:654
 #: framework/options/settings/sections/header.php:622
 msgid "Fade Up"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:580
+#: framework/options/post_type/templaza_header/sections/header.php:597
 #: framework/options/post_type/templaza_style/sections/header.php:655
 #: framework/options/settings/sections/header.php:623
 msgid "Rotate X"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:581
+#: framework/options/post_type/templaza_header/sections/header.php:598
 #: framework/options/post_type/templaza_style/sections/header.php:656
 #: framework/options/settings/sections/header.php:624
 msgid "Rotate Y"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:596
+#: framework/options/post_type/templaza_header/sections/header.php:613
 #: framework/options/post_type/templaza_style/sections/header.php:742
 #: framework/options/settings/sections/header.php:713
 msgid "Dropdown Arrow"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:597
+#: framework/options/post_type/templaza_header/sections/header.php:614
 #: framework/options/post_type/templaza_style/sections/header.php:743
 #: framework/options/settings/sections/header.php:714
 msgid "Enable or Disable if you want to show the dropdown arrow"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:606
+#: framework/options/post_type/templaza_header/sections/header.php:623
 #: framework/options/post_type/templaza_style/sections/header.php:763
 #: framework/options/settings/sections/header.php:724
 msgid "Dropdown Trigger"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:607
+#: framework/options/post_type/templaza_header/sections/header.php:624
 #: framework/options/post_type/templaza_style/sections/header.php:764
 #: framework/options/settings/sections/header.php:725
 msgid "Choose the action for the menu items to view the megamenu"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:609
+#: framework/options/post_type/templaza_header/sections/header.php:626
 #: framework/options/post_type/templaza_style/sections/header.php:766
 #: framework/options/settings/sections/header.php:727
 msgid "Hover"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:610
+#: framework/options/post_type/templaza_header/sections/header.php:627
 #: framework/options/post_type/templaza_style/sections/header.php:767
 #: framework/options/settings/sections/header.php:728
 msgid "Click"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:623
+#: framework/options/post_type/templaza_header/sections/header.php:640
 msgid "Logo Section Padding"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:629
+#: framework/options/post_type/templaza_header/sections/header.php:646
 msgid "Divided background"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:636
+#: framework/options/post_type/templaza_header/sections/header.php:653
 msgid "Logo section Border"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:643
+#: framework/options/post_type/templaza_header/sections/header.php:660
 msgid "Input Border"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:650
+#: framework/options/post_type/templaza_header/sections/header.php:667
 #: shortcodes/row/row.php:89
 msgid "Max Width"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:653
-#: shortcodes/row/row.php:92 shortcodes/section/section.php:76
-#: shortcodes/section/section.php:215
-msgid "XSmall"
-msgstr ""
-
-#: framework/options/post_type/templaza_header/sections/header.php:654
-#: framework/options/settings/sections/social.php:32
-#: framework/options/settings/sections/advanced-product/ap_product.php:153
-#: framework/options/settings/sections/woocommerce/product-template-style.php:127
-#: framework/options/settings/sections/woocommerce/product.php:115
-#: includes/shortcode.php:216 includes/shortcode.php:266
-#: shortcodes/column/column.php:218 shortcodes/row/row.php:53
-#: shortcodes/row/row.php:68 shortcodes/row/row.php:93
-#: shortcodes/section/section.php:77 shortcodes/section/section.php:216
-#: shortcodes/text/text.php:85 shortcodes/widget/widget.php:134
-#: shortcodes/wp_archives/wp_archives.php:53
-#: shortcodes/wp_categories/wp_categories.php:53
-#: shortcodes/wp_menu/wp_menu.php:75
-#: shortcodes/wp_recent_posts/wp_recent_posts.php:53
-#: shortcodes/wp_tag_cloud/wp_tag_cloud.php:53
-msgid "Small"
-msgstr ""
-
-#: framework/options/post_type/templaza_header/sections/header.php:655
-#: framework/options/settings/sections/social.php:34
-#: framework/options/settings/sections/advanced-product/ap_product.php:155
-#: framework/options/settings/sections/woocommerce/product-template-style.php:129
-#: framework/options/settings/sections/woocommerce/product.php:117
-#: includes/shortcode.php:218 includes/shortcode.php:267
-#: shortcodes/column/column.php:220 shortcodes/row/row.php:55
-#: shortcodes/row/row.php:70 shortcodes/row/row.php:94
-#: shortcodes/section/section.php:78 shortcodes/section/section.php:217
-#: shortcodes/text/text.php:83 shortcodes/widget/widget.php:132
-#: shortcodes/wp_archives/wp_archives.php:51
-#: shortcodes/wp_categories/wp_categories.php:51
-#: shortcodes/wp_menu/wp_menu.php:73
-#: shortcodes/wp_recent_posts/wp_recent_posts.php:51
-#: shortcodes/wp_tag_cloud/wp_tag_cloud.php:51
-msgid "Large"
-msgstr ""
-
-#: framework/options/post_type/templaza_header/sections/header.php:656
-#: includes/shortcode.php:219 shortcodes/column/column.php:221
-#: shortcodes/row/row.php:95 shortcodes/section/section.php:79
-#: shortcodes/section/section.php:218 shortcodes/text/text.php:82
-#: shortcodes/widget/widget.php:131 shortcodes/wp_archives/wp_archives.php:50
-#: shortcodes/wp_categories/wp_categories.php:50
-#: shortcodes/wp_menu/wp_menu.php:72
-#: shortcodes/wp_recent_posts/wp_recent_posts.php:50
-#: shortcodes/wp_tag_cloud/wp_tag_cloud.php:50
-msgid "XLarge"
-msgstr ""
-
-#: framework/options/post_type/templaza_header/sections/header.php:666
+#: framework/options/post_type/templaza_header/sections/header.php:683
 msgid "Icon Position"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:677
+#: framework/options/post_type/templaza_header/sections/header.php:694
 msgid "Show search icon"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:683
+#: framework/options/post_type/templaza_header/sections/header.php:700
 msgid "Show account icon"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:689
+#: framework/options/post_type/templaza_header/sections/header.php:706
 msgid "Show cart icon"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:695
+#: framework/options/post_type/templaza_header/sections/header.php:712
 msgid "Search Icon Type"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:698
-#: framework/options/post_type/templaza_header/sections/header.php:724
-#: framework/options/post_type/templaza_header/sections/header.php:750
+#: framework/options/post_type/templaza_header/sections/header.php:715
+#: framework/options/post_type/templaza_header/sections/header.php:741
+#: framework/options/post_type/templaza_header/sections/header.php:767
 msgid "fontawesome"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:706
-#: framework/options/post_type/templaza_header/sections/header.php:714
+#: framework/options/post_type/templaza_header/sections/header.php:723
+#: framework/options/post_type/templaza_header/sections/header.php:731
 msgid "Search icon"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:721
+#: framework/options/post_type/templaza_header/sections/header.php:738
 msgid "Account Icon Type"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:732
-#: framework/options/post_type/templaza_header/sections/header.php:740
+#: framework/options/post_type/templaza_header/sections/header.php:749
+#: framework/options/post_type/templaza_header/sections/header.php:757
 #: shortcodes/account/account.php:55 widgets/woo-account/woo-account.php:94
 msgid "Account icon"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:747
+#: framework/options/post_type/templaza_header/sections/header.php:764
 msgid "Cart Icon Type"
 msgstr ""
 
-#: framework/options/post_type/templaza_header/sections/header.php:758
-#: framework/options/post_type/templaza_header/sections/header.php:766
+#: framework/options/post_type/templaza_header/sections/header.php:775
+#: framework/options/post_type/templaza_header/sections/header.php:783
 msgid "Cart icon"
 msgstr ""
 
@@ -3683,7 +3698,7 @@ msgstr ""
 
 #: framework/options/post_type/templaza_style/pages/blog.php:93
 #: framework/options/settings/pages/blog.php:73
-#: framework/options/settings/sections/advanced-product/ap_product.php:196
+#: framework/options/settings/sections/advanced-product/ap_product.php:203
 msgid "Thumbnail size"
 msgstr ""
 
@@ -3975,7 +3990,7 @@ msgid "Scale"
 msgstr ""
 
 #: framework/options/post_type/templaza_style/pages/blog.php:559
-#: framework/options/settings/pages/blog.php:440 includes/shortcode.php:815
+#: framework/options/settings/pages/blog.php:440 includes/shortcode.php:876
 msgid "Pull"
 msgstr ""
 
@@ -4029,16 +4044,16 @@ msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/color.php:24
 #: framework/options/post_type/templaza_style/sections/color.php:72
-#: framework/options/post_type/templaza_style/sections/color.php:166
-#: framework/options/post_type/templaza_style/sections/color.php:207
-#: framework/options/post_type/templaza_style/sections/color.php:260
+#: framework/options/post_type/templaza_style/sections/color.php:181
+#: framework/options/post_type/templaza_style/sections/color.php:228
+#: framework/options/post_type/templaza_style/sections/color.php:281
 #: framework/options/post_type/templaza_style/sections/miscellaneous.php:213
 #: framework/options/post_type/templaza_style/sections/miscellaneous.php:282
 #: framework/options/settings/sections/color.php:24
 #: framework/options/settings/sections/color.php:72
-#: framework/options/settings/sections/color.php:166
-#: framework/options/settings/sections/color.php:207
-#: framework/options/settings/sections/color.php:260
+#: framework/options/settings/sections/color.php:184
+#: framework/options/settings/sections/color.php:231
+#: framework/options/settings/sections/color.php:284
 #: framework/options/settings/sections/miscellaneous.php:189
 #: framework/options/settings/sections/miscellaneous.php:256
 #: framework/options/settings/sections/woocommerce/product-template-style.php:501
@@ -4064,11 +4079,11 @@ msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/color.php:37
 #: framework/options/post_type/templaza_style/sections/color.php:78
-#: framework/options/post_type/templaza_style/sections/color.php:266
+#: framework/options/post_type/templaza_style/sections/color.php:287
 #: framework/options/settings/sections/color.php:37
 #: framework/options/settings/sections/color.php:78
-#: framework/options/settings/sections/color.php:266
-#: includes/shortcode.php:321 shortcodes/column/column.php:85
+#: framework/options/settings/sections/color.php:290
+#: includes/shortcode.php:360 shortcodes/column/column.php:181
 #: shortcodes/section/section.php:183
 msgid "Text Color"
 msgstr ""
@@ -4094,17 +4109,17 @@ msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/color.php:49
 #: framework/options/post_type/templaza_style/sections/color.php:90
-#: framework/options/post_type/templaza_style/sections/color.php:131
-#: framework/options/post_type/templaza_style/sections/color.php:172
-#: framework/options/post_type/templaza_style/sections/color.php:213
-#: framework/options/post_type/templaza_style/sections/color.php:272
+#: framework/options/post_type/templaza_style/sections/color.php:146
+#: framework/options/post_type/templaza_style/sections/color.php:187
+#: framework/options/post_type/templaza_style/sections/color.php:234
+#: framework/options/post_type/templaza_style/sections/color.php:293
 #: framework/options/settings/sections/color.php:49
 #: framework/options/settings/sections/color.php:90
-#: framework/options/settings/sections/color.php:131
-#: framework/options/settings/sections/color.php:172
-#: framework/options/settings/sections/color.php:213
-#: framework/options/settings/sections/color.php:272
-#: includes/shortcode.php:327 shortcodes/column/column.php:91
+#: framework/options/settings/sections/color.php:149
+#: framework/options/settings/sections/color.php:190
+#: framework/options/settings/sections/color.php:237
+#: framework/options/settings/sections/color.php:296
+#: includes/shortcode.php:366 shortcodes/column/column.php:187
 #: shortcodes/section/section.php:188
 msgid "Link Color"
 msgstr ""
@@ -4116,12 +4131,12 @@ msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/color.php:55
 #: framework/options/post_type/templaza_style/sections/color.php:96
-#: framework/options/post_type/templaza_style/sections/color.php:143
-#: framework/options/post_type/templaza_style/sections/color.php:184
+#: framework/options/post_type/templaza_style/sections/color.php:158
+#: framework/options/post_type/templaza_style/sections/color.php:199
 #: framework/options/settings/sections/color.php:55
 #: framework/options/settings/sections/color.php:96
-#: framework/options/settings/sections/color.php:143
-#: framework/options/settings/sections/color.php:184
+#: framework/options/settings/sections/color.php:161
+#: framework/options/settings/sections/color.php:202
 msgid "Link Hover Color"
 msgstr ""
 
@@ -4133,9 +4148,9 @@ msgid "Set the hover color of the text links."
 msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/color.php:66
-#: framework/options/post_type/templaza_style/sections/color.php:125
+#: framework/options/post_type/templaza_style/sections/color.php:140
 #: framework/options/settings/sections/color.php:66
-#: framework/options/settings/sections/color.php:125
+#: framework/options/settings/sections/color.php:143
 msgid "Select colors for the Header"
 msgstr ""
 
@@ -4184,196 +4199,216 @@ msgstr ""
 msgid "Select border color for top bar."
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:123
+#: framework/options/post_type/templaza_style/sections/color.php:120
+#: framework/options/settings/sections/color.php:120
+msgid "Background Logo Section"
+msgstr ""
+
+#: framework/options/post_type/templaza_style/sections/color.php:125
+#: framework/options/settings/sections/color.php:126
+msgid "Background Menu Section"
+msgstr ""
+
+#: framework/options/post_type/templaza_style/sections/color.php:130
+#: framework/options/settings/sections/color.php:132
+msgid "Header icon color"
+msgstr ""
+
+#: framework/options/post_type/templaza_style/sections/color.php:138
 #: framework/options/post_type/templaza_style/sections/menu.php:21
-#: framework/options/settings/sections/color.php:123
+#: framework/options/settings/sections/color.php:141
 #: framework/options/settings/sections/menu.php:21
 msgid "Main Menu"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:132
-#: framework/options/post_type/templaza_style/sections/color.php:173
-#: framework/options/settings/sections/color.php:132
-#: framework/options/settings/sections/color.php:173
+#: framework/options/post_type/templaza_style/sections/color.php:147
+#: framework/options/post_type/templaza_style/sections/color.php:188
+#: framework/options/settings/sections/color.php:150
+#: framework/options/settings/sections/color.php:191
 msgid "Set the color of the menu items text"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:137
-#: framework/options/post_type/templaza_style/sections/color.php:178
-#: framework/options/post_type/templaza_style/sections/color.php:219
-#: framework/options/post_type/templaza_style/sections/color.php:284
-#: framework/options/settings/sections/color.php:137
-#: framework/options/settings/sections/color.php:178
-#: framework/options/settings/sections/color.php:219
-#: framework/options/settings/sections/color.php:284
+#: framework/options/post_type/templaza_style/sections/color.php:152
+#: framework/options/post_type/templaza_style/sections/color.php:193
+#: framework/options/post_type/templaza_style/sections/color.php:240
+#: framework/options/post_type/templaza_style/sections/color.php:305
+#: framework/options/settings/sections/color.php:155
+#: framework/options/settings/sections/color.php:196
+#: framework/options/settings/sections/color.php:243
+#: framework/options/settings/sections/color.php:308
 msgid "Link Active Color"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:138
-#: framework/options/post_type/templaza_style/sections/color.php:179
-#: framework/options/settings/sections/color.php:138
-#: framework/options/settings/sections/color.php:179
+#: framework/options/post_type/templaza_style/sections/color.php:153
+#: framework/options/post_type/templaza_style/sections/color.php:194
+#: framework/options/settings/sections/color.php:156
+#: framework/options/settings/sections/color.php:197
 msgid "Set the color of active menu item."
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:144
-#: framework/options/post_type/templaza_style/sections/color.php:185
-#: framework/options/post_type/templaza_style/sections/color.php:232
-#: framework/options/settings/sections/color.php:144
-#: framework/options/settings/sections/color.php:185
-#: framework/options/settings/sections/color.php:232
+#: framework/options/post_type/templaza_style/sections/color.php:159
+#: framework/options/post_type/templaza_style/sections/color.php:200
+#: framework/options/post_type/templaza_style/sections/color.php:253
+#: framework/options/settings/sections/color.php:162
+#: framework/options/settings/sections/color.php:203
+#: framework/options/settings/sections/color.php:256
 msgid "Set the color of the menu item on hover"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:149
-#: framework/options/settings/sections/color.php:149
+#: framework/options/post_type/templaza_style/sections/color.php:164
+#: framework/options/settings/sections/color.php:167
 msgid "Sidebar Separate Color"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:150
-#: framework/options/settings/sections/color.php:150
+#: framework/options/post_type/templaza_style/sections/color.php:165
+#: framework/options/settings/sections/color.php:168
 msgid "Set colors for separate menu of Sidebar"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:158
+#: framework/options/post_type/templaza_style/sections/color.php:173
 #: framework/options/post_type/templaza_style/sections/menu.php:80
-#: framework/options/settings/sections/color.php:158
+#: framework/options/settings/sections/color.php:176
 #: framework/options/settings/sections/menu.php:85
 msgid "Sticky Menu"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:160
-#: framework/options/settings/sections/color.php:160
+#: framework/options/post_type/templaza_style/sections/color.php:175
+#: framework/options/settings/sections/color.php:178
 msgid "Select colors for the Sticky Menu"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:167
-#: framework/options/settings/sections/color.php:167
+#: framework/options/post_type/templaza_style/sections/color.php:182
+#: framework/options/settings/sections/color.php:185
 msgid "Select the background color of the Sticky Header."
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:190
-#: framework/options/post_type/templaza_style/sections/color.php:278
-#: framework/options/settings/sections/color.php:190
-#: framework/options/settings/sections/color.php:278
+#: framework/options/post_type/templaza_style/sections/color.php:205
+#: framework/options/post_type/templaza_style/sections/color.php:299
+#: framework/options/settings/sections/color.php:208
+#: framework/options/settings/sections/color.php:302
 msgid "Off Canvas Button"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:191
-#: framework/options/post_type/templaza_style/sections/color.php:279
-#: framework/options/settings/sections/color.php:191
-#: framework/options/settings/sections/color.php:279
+#: framework/options/post_type/templaza_style/sections/color.php:206
+#: framework/options/post_type/templaza_style/sections/color.php:300
+#: framework/options/settings/sections/color.php:209
+#: framework/options/settings/sections/color.php:303
 msgid "Set the color of offcanvas button"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:199
-#: framework/options/settings/sections/color.php:199
-msgid "Dropdown Menu"
-msgstr ""
-
-#: framework/options/post_type/templaza_style/sections/color.php:201
-#: framework/options/settings/sections/color.php:201
-msgid "Select colors for the Dropdown Menu"
-msgstr ""
-
-#: framework/options/post_type/templaza_style/sections/color.php:208
-#: framework/options/settings/sections/color.php:208
-msgid "Set the background color of the dropdown"
-msgstr ""
-
-#: framework/options/post_type/templaza_style/sections/color.php:214
-#: framework/options/settings/sections/color.php:214
-msgid "Set the sub menu item text colour"
+#: framework/options/post_type/templaza_style/sections/color.php:212
+#: framework/options/settings/sections/color.php:215
+msgid "Set the color of icon"
 msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/color.php:220
-#: framework/options/post_type/templaza_style/sections/color.php:285
-#: framework/options/settings/sections/color.php:220
-#: framework/options/settings/sections/color.php:285
+#: framework/options/settings/sections/color.php:223
+msgid "Dropdown Menu"
+msgstr ""
+
+#: framework/options/post_type/templaza_style/sections/color.php:222
+#: framework/options/settings/sections/color.php:225
+msgid "Select colors for the Dropdown Menu"
+msgstr ""
+
+#: framework/options/post_type/templaza_style/sections/color.php:229
+#: framework/options/settings/sections/color.php:232
+msgid "Set the background color of the dropdown"
+msgstr ""
+
+#: framework/options/post_type/templaza_style/sections/color.php:235
+#: framework/options/settings/sections/color.php:238
+msgid "Set the sub menu item text colour"
+msgstr ""
+
+#: framework/options/post_type/templaza_style/sections/color.php:241
+#: framework/options/post_type/templaza_style/sections/color.php:306
+#: framework/options/settings/sections/color.php:244
+#: framework/options/settings/sections/color.php:309
 msgid "Set the color of the sub-menu item’s active text link"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:225
-#: framework/options/post_type/templaza_style/sections/color.php:290
-#: framework/options/settings/sections/color.php:225
-#: framework/options/settings/sections/color.php:290
+#: framework/options/post_type/templaza_style/sections/color.php:246
+#: framework/options/post_type/templaza_style/sections/color.php:311
+#: framework/options/settings/sections/color.php:249
+#: framework/options/settings/sections/color.php:314
 msgid "Active Background Color"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:226
-#: framework/options/post_type/templaza_style/sections/color.php:291
-#: framework/options/settings/sections/color.php:226
-#: framework/options/settings/sections/color.php:291
+#: framework/options/post_type/templaza_style/sections/color.php:247
+#: framework/options/post_type/templaza_style/sections/color.php:312
+#: framework/options/settings/sections/color.php:250
+#: framework/options/settings/sections/color.php:315
 msgid "Set the background color of the active link sub menu item"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:231
-#: framework/options/settings/sections/color.php:231
+#: framework/options/post_type/templaza_style/sections/color.php:252
+#: framework/options/settings/sections/color.php:255
 msgid "Hover Link Color"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:237
-#: framework/options/settings/sections/color.php:237
+#: framework/options/post_type/templaza_style/sections/color.php:258
+#: framework/options/settings/sections/color.php:261
 msgid "Hover Background Color"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:238
-#: framework/options/settings/sections/color.php:238
+#: framework/options/post_type/templaza_style/sections/color.php:259
+#: framework/options/settings/sections/color.php:262
 msgid "Set the background color on hovering a sub menu item"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:246
-#: framework/options/settings/sections/color.php:246
+#: framework/options/post_type/templaza_style/sections/color.php:267
+#: framework/options/settings/sections/color.php:270
 msgid "Off-Canvas Menu"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:248
-#: framework/options/settings/sections/color.php:248
+#: framework/options/post_type/templaza_style/sections/color.php:269
+#: framework/options/settings/sections/color.php:272
 msgid "Select colors for the Off-Canvas Menu"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:254
-#: framework/options/settings/sections/color.php:254
+#: framework/options/post_type/templaza_style/sections/color.php:275
+#: framework/options/settings/sections/color.php:278
 msgid "Off Canvas Close Button"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:255
-#: framework/options/settings/sections/color.php:255
+#: framework/options/post_type/templaza_style/sections/color.php:276
+#: framework/options/settings/sections/color.php:279
 msgid "Set the color of offcanvas Close button"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:261
-#: framework/options/settings/sections/color.php:261
+#: framework/options/post_type/templaza_style/sections/color.php:282
+#: framework/options/settings/sections/color.php:285
 msgid "Set the background color of the offcanvas menu"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:267
-#: framework/options/settings/sections/color.php:267
+#: framework/options/post_type/templaza_style/sections/color.php:288
+#: framework/options/settings/sections/color.php:291
 msgid "Set the color of the text in the offcanvas menu"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:273
-#: framework/options/settings/sections/color.php:273
+#: framework/options/post_type/templaza_style/sections/color.php:294
+#: framework/options/settings/sections/color.php:297
 msgid "Set the menu & sub menu items text colour"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:299
-#: framework/options/settings/sections/color.php:299
+#: framework/options/post_type/templaza_style/sections/color.php:320
+#: framework/options/settings/sections/color.php:323
 msgid "Contact icon"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:301
-#: framework/options/settings/sections/color.php:301
+#: framework/options/post_type/templaza_style/sections/color.php:322
+#: framework/options/settings/sections/color.php:325
 msgid "Select colors for contact icon"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:307
-#: framework/options/settings/sections/color.php:307
+#: framework/options/post_type/templaza_style/sections/color.php:328
+#: framework/options/settings/sections/color.php:331
 msgid "Contact icon color"
 msgstr ""
 
-#: framework/options/post_type/templaza_style/sections/color.php:308
-#: framework/options/settings/sections/color.php:308
+#: framework/options/post_type/templaza_style/sections/color.php:329
+#: framework/options/settings/sections/color.php:332
 msgid "Set the color of contact icon"
 msgstr ""
 
@@ -4493,7 +4528,7 @@ msgid "Enable or disable the Header Element."
 msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/menu.php:9
-#: framework/options/settings/sections/menu.php:9 includes/shortcode.php:788
+#: framework/options/settings/sections/menu.php:9 includes/shortcode.php:849
 #: shortcodes/wp_menu/wp_menu.php:89
 msgid "Menu"
 msgstr ""
@@ -4508,7 +4543,7 @@ msgstr ""
 #: framework/options/post_type/templaza_style/sections/menu.php:92
 #: framework/options/settings/sections/menu.php:33
 #: framework/options/settings/sections/menu.php:68
-#: framework/options/settings/sections/menu.php:97 includes/shortcode.php:262
+#: framework/options/settings/sections/menu.php:97 includes/shortcode.php:270
 #: shortcodes/navigation/navigation.php:116 shortcodes/section/section.php:211
 msgid "Padding"
 msgstr ""
@@ -4518,7 +4553,7 @@ msgstr ""
 #: framework/options/post_type/templaza_style/sections/menu.php:102
 #: framework/options/settings/sections/menu.php:45
 #: framework/options/settings/sections/menu.php:77
-#: framework/options/settings/sections/menu.php:106 includes/shortcode.php:213
+#: framework/options/settings/sections/menu.php:106 includes/shortcode.php:221
 #: shortcodes/section/section.php:203
 msgid "Margin"
 msgstr ""
@@ -4573,7 +4608,7 @@ msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/miscellaneous.php:47
 #: framework/options/settings/sections/miscellaneous.php:41
-#: includes/shortcode.php:757
+#: includes/shortcode.php:818
 msgid "Location"
 msgstr ""
 
@@ -4615,7 +4650,7 @@ msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/miscellaneous.php:82
 #: framework/options/settings/sections/miscellaneous.php:76
-#: metaboxes/our_team/our_team.php:52 shortcodes/account/account.php:39
+#: shortcodes/account/account.php:39
 msgid "Login icon"
 msgstr ""
 
@@ -4638,14 +4673,13 @@ msgstr ""
 #: framework/options/post_type/templaza_style/sections/miscellaneous.php:106
 #: framework/options/post_type/templaza_style/sections/social.php:29
 #: framework/options/settings/sections/miscellaneous.php:100
-#: framework/options/settings/sections/social.php:87
+#: framework/options/settings/sections/social.php:41
 msgid "Branding"
 msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/miscellaneous.php:107
 #: framework/options/post_type/templaza_style/sections/social.php:30
 #: framework/options/settings/sections/miscellaneous.php:101
-#: framework/options/settings/sections/social.php:88
 msgid "Enable or disable the footer copyright bar."
 msgstr ""
 
@@ -4718,6 +4752,7 @@ msgstr ""
 #: framework/options/post_type/templaza_style/sections/miscellaneous.php:273
 #: framework/options/settings/sections/miscellaneous.php:179
 #: framework/options/settings/sections/miscellaneous.php:249
+#: templates/advanced-product/single/media/gallery-tiny.php:75
 msgid "Video"
 msgstr ""
 
@@ -4762,8 +4797,8 @@ msgid "Blog Options"
 msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/social.php:8
-#: framework/options/settings/sections/social.php:8 includes/shortcode.php:769
-#: metaboxes/our_team/our_team.php:42 shortcodes/social/social.php:16
+#: framework/options/settings/sections/social.php:8 includes/shortcode.php:830
+#: shortcodes/social/social.php:16
 msgid "Social"
 msgstr ""
 
@@ -4882,7 +4917,7 @@ msgstr ""
 #: framework/options/post_type/templaza_style/sections/typographies/single.php:67
 #: framework/options/settings/pages/blog.php:219
 #: framework/options/settings/pages/blog.php:399
-#: framework/options/settings/sections/advanced-product/ap_product.php:249
+#: framework/options/settings/sections/advanced-product/ap_product.php:256
 #: framework/options/settings/sections/typographies/sidebar.php:66
 msgid ""
 "Example: 10px 10px 5px 0px rgba(0,0,0,0.75). You can generator <a href="
@@ -5173,15 +5208,15 @@ msgid "Choose Heading Style."
 msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/typographies/sidebar.php:85
-#: framework/options/settings/sections/advanced-product/ap_product.php:266
-#: framework/options/settings/sections/advanced-product/ap_product.php:310
+#: framework/options/settings/sections/advanced-product/ap_product.php:273
+#: framework/options/settings/sections/advanced-product/ap_product.php:317
 #: framework/options/settings/sections/typographies/sidebar.php:75
 msgid "Style 1"
 msgstr ""
 
 #: framework/options/post_type/templaza_style/sections/typographies/sidebar.php:89
-#: framework/options/settings/sections/advanced-product/ap_product.php:267
-#: framework/options/settings/sections/advanced-product/ap_product.php:311
+#: framework/options/settings/sections/advanced-product/ap_product.php:274
+#: framework/options/settings/sections/advanced-product/ap_product.php:318
 #: framework/options/settings/sections/typographies/sidebar.php:79
 msgid "Style 2"
 msgstr ""
@@ -5334,85 +5369,85 @@ msgstr ""
 msgid "Show/hide Ken Burns effect."
 msgstr ""
 
-#: framework/options/settings/sections/color.php:316
+#: framework/options/settings/sections/color.php:340
 #: framework/options/settings/sections/woocommerce/product-template-style.php:579
 #: framework/options/settings/sections/woocommerce/product.php:497
 msgid "Button"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:318
+#: framework/options/settings/sections/color.php:342
 msgid "Select colors for Button"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:324
+#: framework/options/settings/sections/color.php:348
 msgid "Button background color"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:325
+#: framework/options/settings/sections/color.php:349
 msgid "Set background color button"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:330
+#: framework/options/settings/sections/color.php:354
 msgid "Button color"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:331
+#: framework/options/settings/sections/color.php:355
 msgid "Set color button"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:336
+#: framework/options/settings/sections/color.php:360
 msgid "Button hover background color"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:337
+#: framework/options/settings/sections/color.php:361
 msgid "Set background color button hover"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:342
+#: framework/options/settings/sections/color.php:366
 msgid "Button color hover"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:343
+#: framework/options/settings/sections/color.php:367
 msgid "Set color button hover"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:351
+#: framework/options/settings/sections/color.php:375
 msgid "WooCommerce Color"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:353
+#: framework/options/settings/sections/color.php:377
 msgid "Config color on WooCommerce page"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:359
+#: framework/options/settings/sections/color.php:383
 msgid "Catalog icon background color"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:360
+#: framework/options/settings/sections/color.php:384
 msgid "Set background color icon"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:365
+#: framework/options/settings/sections/color.php:389
 msgid "Catalog icon color"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:366
+#: framework/options/settings/sections/color.php:390
 msgid "Set color icon"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:371
+#: framework/options/settings/sections/color.php:395
 msgid "Catalog icon background color hover"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:372
+#: framework/options/settings/sections/color.php:396
 msgid "Set background color icon hover"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:377
+#: framework/options/settings/sections/color.php:401
 msgid "Catalog icon color hover"
 msgstr ""
 
-#: framework/options/settings/sections/color.php:378
+#: framework/options/settings/sections/color.php:402
 msgid "Set color icon hover"
 msgstr ""
 
@@ -5424,19 +5459,19 @@ msgstr ""
 msgid "Color Overlay"
 msgstr ""
 
-#: framework/options/settings/sections/social.php:28
+#: framework/options/settings/sections/social.php:27
 msgid "Social Gap"
 msgstr ""
 
-#: framework/options/settings/sections/social.php:29
+#: framework/options/settings/sections/social.php:28
 msgid "Choose the space between socials"
 msgstr ""
 
-#: framework/options/settings/sections/social.php:33
+#: framework/options/settings/sections/social.php:32
 #: framework/options/settings/sections/advanced-product/ap_product.php:154
 #: framework/options/settings/sections/woocommerce/product-template-style.php:128
 #: framework/options/settings/sections/woocommerce/product.php:116
-#: includes/shortcode.php:217 shortcodes/column/column.php:219
+#: includes/shortcode.php:225 shortcodes/column/column.php:315
 #: shortcodes/row/row.php:54 shortcodes/row/row.php:69
 #: shortcodes/text/text.php:84 shortcodes/widget/widget.php:133
 #: shortcodes/wp_archives/wp_archives.php:52
@@ -5447,7 +5482,7 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
-#: framework/options/settings/sections/social.php:35
+#: framework/options/settings/sections/social.php:34
 #: framework/options/settings/sections/advanced-product/ap_product.php:156
 #: framework/options/settings/sections/woocommerce/product-template-style.php:130
 #: framework/options/settings/sections/woocommerce/product.php:118
@@ -5455,43 +5490,7 @@ msgid "Collapse"
 msgstr ""
 
 #: framework/options/settings/sections/social.php:42
-msgid "Social Color"
-msgstr ""
-
-#: framework/options/settings/sections/social.php:43
-msgid "Set the color of social."
-msgstr ""
-
-#: framework/options/settings/sections/social.php:49
-msgid "Social Hover Color"
-msgstr ""
-
-#: framework/options/settings/sections/social.php:50
-msgid "Set the color hover of social."
-msgstr ""
-
-#: framework/options/settings/sections/social.php:56
-msgid "Social Background Color"
-msgstr ""
-
-#: framework/options/settings/sections/social.php:57
-msgid "Set the background color of social."
-msgstr ""
-
-#: framework/options/settings/sections/social.php:63
-msgid "Social Background Hover Color"
-msgstr ""
-
-#: framework/options/settings/sections/social.php:64
-msgid "Set the color background hover of social."
-msgstr ""
-
-#: framework/options/settings/sections/social.php:70
-msgid "Social Fix Width Height"
-msgstr ""
-
-#: framework/options/settings/sections/social.php:77
-msgid "Social Width Height"
+msgid "Add your socials."
 msgstr ""
 
 #: framework/options/settings/sections/advanced-product/ap_product.php:7
@@ -5515,7 +5514,7 @@ msgstr ""
 #: framework/options/settings/sections/advanced-product/ap_product.php:61
 #: framework/options/settings/sections/woocommerce/product-template-style.php:23
 #: framework/options/settings/sections/woocommerce/product.php:23
-#: includes/shortcode.php:789
+#: includes/shortcode.php:850
 msgid "Grid"
 msgstr ""
 
@@ -5731,165 +5730,177 @@ msgstr ""
 msgid "Style3"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:197
-msgid "choose image size."
+#: framework/options/settings/sections/advanced-product/ap_product.php:190
+msgid "Style4"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:203
-msgid "Product Loop Background"
+#: framework/options/settings/sections/advanced-product/ap_product.php:197
+msgid "Limit Description"
 msgstr ""
 
 #: framework/options/settings/sections/advanced-product/ap_product.php:204
+msgid "choose image size."
+msgstr ""
+
+#: framework/options/settings/sections/advanced-product/ap_product.php:210
+msgid "Product Loop Background"
+msgstr ""
+
+#: framework/options/settings/sections/advanced-product/ap_product.php:211
 msgid "Select the background for product loop item."
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:213
+#: framework/options/settings/sections/advanced-product/ap_product.php:220
 msgid "Product Loop Padding"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:222
+#: framework/options/settings/sections/advanced-product/ap_product.php:229
 msgid "Product Info Padding"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:227
+#: framework/options/settings/sections/advanced-product/ap_product.php:234
 msgid "Product Loop Border"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:228
+#: framework/options/settings/sections/advanced-product/ap_product.php:235
 msgid "Border for product loop item in archive page."
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:233
+#: framework/options/settings/sections/advanced-product/ap_product.php:240
 msgid "Product Border Hover Option"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:234
+#: framework/options/settings/sections/advanced-product/ap_product.php:241
 msgid "Border hover for product loop item in archive page."
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:241
+#: framework/options/settings/sections/advanced-product/ap_product.php:248
 msgid "Product Loop Border radius"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:247
+#: framework/options/settings/sections/advanced-product/ap_product.php:254
 msgid "Product Loop box shadow"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:257
+#: framework/options/settings/sections/advanced-product/ap_product.php:264
 msgid "Advanced Product Single"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:264
+#: framework/options/settings/sections/advanced-product/ap_product.php:271
 msgid "Single Style"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:275
+#: framework/options/settings/sections/advanced-product/ap_product.php:282
 msgid "Choose fields display horizontal"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:282
+#: framework/options/settings/sections/advanced-product/ap_product.php:289
 msgid "Show Office Price"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:288
+#: framework/options/settings/sections/advanced-product/ap_product.php:295
 msgid "Show Media"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:294
+#: framework/options/settings/sections/advanced-product/ap_product.php:301
 msgid "Office Price Label"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:295
+#: framework/options/settings/sections/advanced-product/ap_product.php:302
 msgid "MAKE AN OFFICE PRICE"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:301
+#: framework/options/settings/sections/advanced-product/ap_product.php:308
 msgid "Office Price Form"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:308
+#: framework/options/settings/sections/advanced-product/ap_product.php:315
 msgid "Custom Fields Style"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:318
+#: framework/options/settings/sections/advanced-product/ap_product.php:325
 msgid "Custom Form"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:319
+#: framework/options/settings/sections/advanced-product/ap_product.php:326
 msgid "Insert Form Shortcode"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:325
+#: framework/options/settings/sections/advanced-product/ap_product.php:332
 msgid "Vendor Contact Form"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:331
+#: framework/options/settings/sections/advanced-product/ap_product.php:338
 msgid "Single Box Background"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:332
+#: framework/options/settings/sections/advanced-product/ap_product.php:339
 msgid "Select the background for single box item."
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:341
+#: framework/options/settings/sections/advanced-product/ap_product.php:348
 #: framework/options/settings/sections/woocommerce/product-template-style.php:511
 #: framework/options/settings/sections/woocommerce/product.php:443
 msgid "Single Box Padding"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:350
+#: framework/options/settings/sections/advanced-product/ap_product.php:357
 #: framework/options/settings/sections/woocommerce/product-template-style.php:523
 #: framework/options/settings/sections/woocommerce/product.php:455
 msgid "Single Box Margin"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:355
+#: framework/options/settings/sections/advanced-product/ap_product.php:362
 msgid "Single Side Box Background"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:356
+#: framework/options/settings/sections/advanced-product/ap_product.php:363
 msgid "Select the background for single side box item."
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:365
+#: framework/options/settings/sections/advanced-product/ap_product.php:372
 msgid "Single Side Box Padding"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:374
+#: framework/options/settings/sections/advanced-product/ap_product.php:381
 msgid "Single Side Box Margin"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:383
+#: framework/options/settings/sections/advanced-product/ap_product.php:390
 msgid "Media Box Padding"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:392
+#: framework/options/settings/sections/advanced-product/ap_product.php:399
 msgid "Custom Field Item Margin"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:399
+#: framework/options/settings/sections/advanced-product/ap_product.php:406
 msgid "Advanced Product Related"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:406
+#: framework/options/settings/sections/advanced-product/ap_product.php:413
 msgid "Show Product Related"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:412
+#: framework/options/settings/sections/advanced-product/ap_product.php:419
 #: framework/options/settings/sections/woocommerce/product-template-style.php:716
 #: framework/options/settings/sections/woocommerce/product.php:607
 msgid "Related Title"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:413
+#: framework/options/settings/sections/advanced-product/ap_product.php:420
 msgid "RELATED PRODUCT"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:419
+#: framework/options/settings/sections/advanced-product/ap_product.php:426
 msgid "Number Product Related"
 msgstr ""
 
-#: framework/options/settings/sections/advanced-product/ap_product.php:429
+#: framework/options/settings/sections/advanced-product/ap_product.php:436
+msgid "Related Columns"
+msgstr ""
+
+#: framework/options/settings/sections/advanced-product/ap_product.php:446
 msgid "Limit Specifications"
 msgstr ""
 
@@ -6158,8 +6169,8 @@ msgstr ""
 
 #: framework/options/settings/sections/woocommerce/product-template-style.php:261
 #: framework/options/settings/sections/woocommerce/product.php:232
-#: includes/shortcode.php:752 templates/header/horizontal.php:83
-#: templates/inc/icon.php:58
+#: includes/shortcode.php:813 templates/header/horizontal.php:83
+#: templates/header/stacked.php:103 templates/inc/icon.php:55
 msgid "Cart"
 msgstr ""
 
@@ -6167,6 +6178,8 @@ msgstr ""
 #: framework/options/settings/sections/woocommerce/product.php:233
 #: includes/helpers/woocommerce/woocommerce-helper.php:268
 #: includes/helpers/woocommerce/woocommerce-helper.php:270
+#: templates/advanced-product/archive/content-item-btn-action.php:18
+#: templates/advanced-product/archive/content-item-style3.php:29
 msgid "Quick View"
 msgstr ""
 
@@ -6339,9 +6352,9 @@ msgid "Image Light box"
 msgstr ""
 
 #: framework/options/settings/sections/woocommerce/product-template-style.php:479
-#: framework/options/settings/sections/woocommerce/product-template-style.php:862
+#: framework/options/settings/sections/woocommerce/product-template-style.php:860
 #: framework/options/settings/sections/woocommerce/product.php:413
-#: framework/options/settings/sections/woocommerce/product.php:714
+#: framework/options/settings/sections/woocommerce/product.php:726
 msgid "Single Product"
 msgstr ""
 
@@ -6351,16 +6364,16 @@ msgid "Single Product Layout"
 msgstr ""
 
 #: framework/options/settings/sections/woocommerce/product-template-style.php:488
-#: framework/options/settings/sections/woocommerce/product-template-style.php:944
+#: framework/options/settings/sections/woocommerce/product-template-style.php:942
 #: framework/options/settings/sections/woocommerce/product.php:422
-#: framework/options/settings/sections/woocommerce/product.php:792
+#: framework/options/settings/sections/woocommerce/product.php:804
 msgid "Layout 1"
 msgstr ""
 
 #: framework/options/settings/sections/woocommerce/product-template-style.php:489
-#: framework/options/settings/sections/woocommerce/product-template-style.php:945
+#: framework/options/settings/sections/woocommerce/product-template-style.php:943
 #: framework/options/settings/sections/woocommerce/product.php:423
-#: framework/options/settings/sections/woocommerce/product.php:793
+#: framework/options/settings/sections/woocommerce/product.php:805
 msgid "Layout 2"
 msgstr ""
 
@@ -6511,283 +6524,283 @@ msgstr ""
 msgid "Related Products Numbers"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:775
-#: framework/options/settings/sections/woocommerce/product.php:649
+#: framework/options/settings/sections/woocommerce/product-template-style.php:773
+#: framework/options/settings/sections/woocommerce/product.php:661
 msgid "Upsells Products "
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:781
-#: framework/options/settings/sections/woocommerce/product.php:656
+#: framework/options/settings/sections/woocommerce/product-template-style.php:779
+#: framework/options/settings/sections/woocommerce/product.php:668
 msgid "Show Upsells Products"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:794
-#: framework/options/settings/sections/woocommerce/product.php:662
+#: framework/options/settings/sections/woocommerce/product-template-style.php:792
+#: framework/options/settings/sections/woocommerce/product.php:674
 msgid "Upsells Title"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:800
-#: framework/options/settings/sections/woocommerce/product.php:669
+#: framework/options/settings/sections/woocommerce/product-template-style.php:798
+#: framework/options/settings/sections/woocommerce/product.php:681
 msgid "Upsells Products Numbers"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:813
-#: framework/options/settings/sections/woocommerce/product.php:683
+#: framework/options/settings/sections/woocommerce/product-template-style.php:811
+#: framework/options/settings/sections/woocommerce/product.php:695
 msgid "Recent Viewed Products "
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:819
-#: framework/options/settings/sections/woocommerce/product.php:690
+#: framework/options/settings/sections/woocommerce/product-template-style.php:817
+#: framework/options/settings/sections/woocommerce/product.php:702
 msgid "Show Recent Viewed Products"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:831
-#: framework/options/settings/sections/woocommerce/product.php:696
+#: framework/options/settings/sections/woocommerce/product-template-style.php:829
+#: framework/options/settings/sections/woocommerce/product.php:708
 msgid "Load With Ajax"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:844
-#: framework/options/settings/sections/woocommerce/product.php:703
+#: framework/options/settings/sections/woocommerce/product-template-style.php:842
+#: framework/options/settings/sections/woocommerce/product.php:715
 msgid "Hide Empty Products"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:845
-#: framework/options/settings/sections/woocommerce/product.php:704
+#: framework/options/settings/sections/woocommerce/product-template-style.php:843
+#: framework/options/settings/sections/woocommerce/product.php:716
 msgid "Check this option to hide the recently viewed products when empty."
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:859
-#: framework/options/settings/sections/woocommerce/product.php:711
+#: framework/options/settings/sections/woocommerce/product-template-style.php:857
+#: framework/options/settings/sections/woocommerce/product.php:723
 msgid "Display on page"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:863
-#: framework/options/settings/sections/woocommerce/product.php:715
+#: framework/options/settings/sections/woocommerce/product-template-style.php:861
+#: framework/options/settings/sections/woocommerce/product.php:727
 msgid "Catalog Page"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:864
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1074
-#: framework/options/settings/sections/woocommerce/product.php:716
-#: framework/options/settings/sections/woocommerce/product.php:893
+#: framework/options/settings/sections/woocommerce/product-template-style.php:862
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1072
+#: framework/options/settings/sections/woocommerce/product.php:728
+#: framework/options/settings/sections/woocommerce/product.php:905
 msgid "Cart Page"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:865
-#: framework/options/settings/sections/woocommerce/product.php:717
+#: framework/options/settings/sections/woocommerce/product-template-style.php:863
+#: framework/options/settings/sections/woocommerce/product.php:729
 msgid "Checkout Page"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:880
-#: framework/options/settings/sections/woocommerce/product.php:732
+#: framework/options/settings/sections/woocommerce/product-template-style.php:878
+#: framework/options/settings/sections/woocommerce/product.php:744
 msgid "Recently Viewed Title"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:881
-#: framework/options/settings/sections/woocommerce/product.php:733
+#: framework/options/settings/sections/woocommerce/product-template-style.php:879
+#: framework/options/settings/sections/woocommerce/product.php:745
 msgid "Recently Viewed"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:887
-#: framework/options/settings/sections/woocommerce/product.php:739
+#: framework/options/settings/sections/woocommerce/product-template-style.php:885
+#: framework/options/settings/sections/woocommerce/product.php:751
 msgid "Read more text"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:893
-#: framework/options/settings/sections/woocommerce/product.php:745
+#: framework/options/settings/sections/woocommerce/product-template-style.php:891
+#: framework/options/settings/sections/woocommerce/product.php:757
 msgid "Read more url"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:899
-#: framework/options/settings/sections/woocommerce/product.php:751
+#: framework/options/settings/sections/woocommerce/product-template-style.php:897
+#: framework/options/settings/sections/woocommerce/product.php:763
 msgid "Recent viewed columns"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:908
-#: framework/options/settings/sections/woocommerce/product.php:761
+#: framework/options/settings/sections/woocommerce/product-template-style.php:906
+#: framework/options/settings/sections/woocommerce/product.php:773
 msgid "Recent viewed numbers"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:921
-#: framework/options/settings/sections/woocommerce/product-template-style.php:954
-#: framework/options/settings/sections/woocommerce/product.php:775
-#: framework/options/settings/sections/woocommerce/product.php:801
+#: framework/options/settings/sections/woocommerce/product-template-style.php:919
+#: framework/options/settings/sections/woocommerce/product-template-style.php:952
+#: framework/options/settings/sections/woocommerce/product.php:787
+#: framework/options/settings/sections/woocommerce/product.php:813
 msgid "Product Badges"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:927
-#: framework/options/settings/sections/woocommerce/product.php:782
+#: framework/options/settings/sections/woocommerce/product-template-style.php:925
+#: framework/options/settings/sections/woocommerce/product.php:794
 msgid "Catalog Badges"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:928
-#: framework/options/settings/sections/woocommerce/product.php:783
+#: framework/options/settings/sections/woocommerce/product-template-style.php:926
+#: framework/options/settings/sections/woocommerce/product.php:795
 msgid "Display the badges in the catalog page"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:941
-#: framework/options/settings/sections/woocommerce/product.php:789
+#: framework/options/settings/sections/woocommerce/product-template-style.php:939
+#: framework/options/settings/sections/woocommerce/product.php:801
 msgid "Badges Layout"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:942
-#: framework/options/settings/sections/woocommerce/product.php:790
+#: framework/options/settings/sections/woocommerce/product-template-style.php:940
+#: framework/options/settings/sections/woocommerce/product.php:802
 msgid "Badges Layout."
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:955
-#: framework/options/settings/sections/woocommerce/product.php:802
+#: framework/options/settings/sections/woocommerce/product-template-style.php:953
+#: framework/options/settings/sections/woocommerce/product.php:814
 msgid "Display the badges in the single page"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:967
-#: framework/options/settings/sections/woocommerce/product.php:808
+#: framework/options/settings/sections/woocommerce/product-template-style.php:965
+#: framework/options/settings/sections/woocommerce/product.php:820
 msgid "Enable Sale Badge"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:968
-#: framework/options/settings/sections/woocommerce/product.php:809
+#: framework/options/settings/sections/woocommerce/product-template-style.php:966
+#: framework/options/settings/sections/woocommerce/product.php:821
 msgid "Display a badge for sale products"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:981
-#: framework/options/settings/sections/woocommerce/product.php:815
+#: framework/options/settings/sections/woocommerce/product-template-style.php:979
+#: framework/options/settings/sections/woocommerce/product.php:827
 msgid "Badges Sale type"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:983
-#: framework/options/settings/sections/woocommerce/product.php:817
+#: framework/options/settings/sections/woocommerce/product-template-style.php:981
+#: framework/options/settings/sections/woocommerce/product.php:829
 msgid "Percent"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:985
-#: framework/options/settings/sections/woocommerce/product.php:819
+#: framework/options/settings/sections/woocommerce/product-template-style.php:983
+#: framework/options/settings/sections/woocommerce/product.php:831
 msgid "Both"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:995
-#: framework/options/settings/sections/woocommerce/product.php:827
+#: framework/options/settings/sections/woocommerce/product-template-style.php:993
+#: framework/options/settings/sections/woocommerce/product.php:839
 msgid "Badge Sale text"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:996
-#: framework/options/settings/sections/woocommerce/product.php:828
+#: framework/options/settings/sections/woocommerce/product-template-style.php:994
+#: framework/options/settings/sections/woocommerce/product.php:840
 msgid "Use {%} to display discount percent, {$} to display discount amount."
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1000
-#: framework/options/settings/sections/woocommerce/product.php:834
+#: framework/options/settings/sections/woocommerce/product-template-style.php:998
+#: framework/options/settings/sections/woocommerce/product.php:846
 msgid "Enable New Badge"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1001
-#: framework/options/settings/sections/woocommerce/product.php:835
+#: framework/options/settings/sections/woocommerce/product-template-style.php:999
+#: framework/options/settings/sections/woocommerce/product.php:847
 msgid "Display a badge for new products"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1014
-#: framework/options/settings/sections/woocommerce/product.php:841
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1012
+#: framework/options/settings/sections/woocommerce/product.php:853
 msgid "Badge New text"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1020
-#: framework/options/settings/sections/woocommerce/product.php:848
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1018
+#: framework/options/settings/sections/woocommerce/product.php:860
 msgid "Product Newness"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1021
-#: framework/options/settings/sections/woocommerce/product.php:849
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1019
+#: framework/options/settings/sections/woocommerce/product.php:861
 msgid "Display the \"New\" badge for how many days?"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1029
-#: framework/options/settings/sections/woocommerce/product.php:859
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1027
+#: framework/options/settings/sections/woocommerce/product.php:871
 msgid "Enable Featured Badge"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1030
-#: framework/options/settings/sections/woocommerce/product.php:860
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1028
+#: framework/options/settings/sections/woocommerce/product.php:872
 msgid "Display a badge for featured products"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1043
-#: framework/options/settings/sections/woocommerce/product.php:866
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1041
+#: framework/options/settings/sections/woocommerce/product.php:878
 msgid "Badge Featured text"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1048
-#: framework/options/settings/sections/woocommerce/product.php:873
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1046
+#: framework/options/settings/sections/woocommerce/product.php:885
 msgid "Enable Sold Out Badge"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1049
-#: framework/options/settings/sections/woocommerce/product.php:874
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1047
+#: framework/options/settings/sections/woocommerce/product.php:886
 msgid "Display a badge for out of stock products"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1062
-#: framework/options/settings/sections/woocommerce/product.php:880
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1060
+#: framework/options/settings/sections/woocommerce/product.php:892
 msgid "Badge Sold out text"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1081
-#: framework/options/settings/sections/woocommerce/product.php:900
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1079
+#: framework/options/settings/sections/woocommerce/product.php:912
 msgid "Update Cart Automatically"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1082
-#: framework/options/settings/sections/woocommerce/product.php:901
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1080
+#: framework/options/settings/sections/woocommerce/product.php:913
 msgid "Automatically update cart when change product"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1088
-#: framework/options/settings/sections/woocommerce/product.php:907
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1086
+#: framework/options/settings/sections/woocommerce/product.php:919
 msgid "Show Cross-Sells Products "
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1094
-#: framework/options/settings/sections/woocommerce/product.php:913
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1092
+#: framework/options/settings/sections/woocommerce/product.php:925
 msgid "Cross-Sells Products Title"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1095
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1093
 #: framework/options/settings/sections/woocommerce/product.php:360
-#: framework/options/settings/sections/woocommerce/product.php:663
-#: framework/options/settings/sections/woocommerce/product.php:914
+#: framework/options/settings/sections/woocommerce/product.php:675
+#: framework/options/settings/sections/woocommerce/product.php:926
 msgid "You may also like"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1101
-#: framework/options/settings/sections/woocommerce/product.php:920
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1099
+#: framework/options/settings/sections/woocommerce/product.php:932
 msgid "Cross-Sells Products Numbers"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1114
-#: framework/options/settings/sections/woocommerce/product.php:933
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1112
+#: framework/options/settings/sections/woocommerce/product.php:945
 msgid "Mini cart"
+msgstr ""
+
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1119
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1141
+#: framework/options/settings/sections/woocommerce/product.php:952
+#: framework/options/settings/sections/woocommerce/product.php:972
+msgid "Login type"
 msgstr ""
 
 #: framework/options/settings/sections/woocommerce/product-template-style.php:1121
 #: framework/options/settings/sections/woocommerce/product-template-style.php:1143
-#: framework/options/settings/sections/woocommerce/product.php:940
-#: framework/options/settings/sections/woocommerce/product.php:960
-msgid "Login type"
-msgstr ""
-
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1123
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1145
-#: framework/options/settings/sections/woocommerce/product.php:942
-#: framework/options/settings/sections/woocommerce/product.php:962
+#: framework/options/settings/sections/woocommerce/product.php:954
+#: framework/options/settings/sections/woocommerce/product.php:974
 msgid "Modal"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1136
-#: framework/options/settings/sections/woocommerce/product.php:953
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1134
+#: framework/options/settings/sections/woocommerce/product.php:965
 msgid "Account Login"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product-template-style.php:1155
-#: framework/options/settings/sections/woocommerce/product.php:970
+#: framework/options/settings/sections/woocommerce/product-template-style.php:1153
+#: framework/options/settings/sections/woocommerce/product.php:982
 #: shortcodes/account/account.php:75
 msgid "Login text"
 msgstr ""
@@ -6796,19 +6809,35 @@ msgstr ""
 msgid "Show/hide Title."
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product.php:829
+#: framework/options/settings/sections/woocommerce/product.php:645
+msgid "Related Products Navigation"
+msgstr ""
+
+#: framework/options/settings/sections/woocommerce/product.php:647
+msgid "Scrollbar"
+msgstr ""
+
+#: framework/options/settings/sections/woocommerce/product.php:648
+msgid "Arrows"
+msgstr ""
+
+#: framework/options/settings/sections/woocommerce/product.php:649
+msgid "Dots"
+msgstr ""
+
+#: framework/options/settings/sections/woocommerce/product.php:841
 msgid "Sale"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product.php:842
+#: framework/options/settings/sections/woocommerce/product.php:854
 msgid "New"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product.php:867
+#: framework/options/settings/sections/woocommerce/product.php:879
 msgid "Hot"
 msgstr ""
 
-#: framework/options/settings/sections/woocommerce/product.php:881
+#: framework/options/settings/sections/woocommerce/product.php:893
 msgid "Sold Out"
 msgstr ""
 
@@ -7231,7 +7260,7 @@ msgid "FanPage"
 msgstr ""
 
 #: framework/templates/dashboard/default_info.php:28
-#: includes/shortcode.php:852
+#: includes/shortcode.php:913
 msgid "Google"
 msgstr ""
 
@@ -7599,6 +7628,11 @@ msgstr ""
 msgid "Ask a question"
 msgstr ""
 
+#: gutenberg-blocks/advanced-products-filter/advanced-products-filter.php:40
+#: gutenberg-blocks/advanced-products-filter/advanced-products-filter.php:52
+msgid "No preview available."
+msgstr ""
+
 #: includes/gutenberg.php:45
 #, php-format
 msgid "Templaza: %s"
@@ -7624,508 +7658,552 @@ msgstr ""
 msgid "Custom ID can be used for overriding the auto-generated id."
 msgstr ""
 
-#: includes/shortcode.php:191 shortcodes/column/column.php:64
+#: includes/shortcode.php:191 shortcodes/column/column.php:160
 #: shortcodes/section/section.php:157
 msgid "Design Settings"
 msgstr ""
 
-#: includes/shortcode.php:201 shortcodes/column/column.php:74
+#: includes/shortcode.php:201 shortcodes/column/column.php:170
 #: shortcodes/section/section.php:172
 msgid "Border"
 msgstr ""
 
-#: includes/shortcode.php:207 shortcodes/section/section.php:194
+#: includes/shortcode.php:208
+msgid "Border radius"
+msgstr ""
+
+#: includes/shortcode.php:215 shortcodes/section/section.php:194
 msgid "Spacing"
 msgstr ""
 
-#: includes/shortcode.php:215
+#: includes/shortcode.php:223
 msgid "Keep existing"
 msgstr ""
 
-#: includes/shortcode.php:233 shortcodes/account/account.php:183
-#: shortcodes/heading/heading.php:120
+#: includes/shortcode.php:241 shortcodes/account/account.php:183
 msgid "Custom Margin"
 msgstr ""
 
-#: includes/shortcode.php:242
+#: includes/shortcode.php:250
 msgid "Remove top margin"
 msgstr ""
 
-#: includes/shortcode.php:252
+#: includes/shortcode.php:260
 msgid "Remove bottom margin"
 msgstr ""
 
-#: includes/shortcode.php:263 shortcodes/section/section.php:212
+#: includes/shortcode.php:271 shortcodes/section/section.php:212
 msgid "Set the vertical padding."
 msgstr ""
 
-#: includes/shortcode.php:281
+#: includes/shortcode.php:289
 msgid "Custom Padding"
 msgstr ""
 
-#: includes/shortcode.php:290 shortcodes/section/section.php:228
+#: includes/shortcode.php:298 shortcodes/section/section.php:228
 msgid "Remove top padding"
 msgstr ""
 
-#: includes/shortcode.php:300 shortcodes/section/section.php:235
+#: includes/shortcode.php:308 shortcodes/section/section.php:235
 msgid "Remove bottom padding"
 msgstr ""
 
-#: includes/shortcode.php:316 shortcodes/column/column.php:80
+#: includes/shortcode.php:318
+msgid "Position"
+msgstr ""
+
+#: includes/shortcode.php:319
+msgid "Set position for block"
+msgstr ""
+
+#: includes/shortcode.php:323
+msgid "Relative"
+msgstr ""
+
+#: includes/shortcode.php:324
+msgid "Absolute"
+msgstr ""
+
+#: includes/shortcode.php:330
+msgid "Position Type"
+msgstr ""
+
+#: includes/shortcode.php:333
+msgid "Top Center"
+msgstr ""
+
+#: includes/shortcode.php:336
+msgid "Center Left"
+msgstr ""
+
+#: includes/shortcode.php:337
+msgid "Center Right"
+msgstr ""
+
+#: includes/shortcode.php:339
+msgid "Bottom Center"
+msgstr ""
+
+#: includes/shortcode.php:355 shortcodes/column/column.php:176
 #: shortcodes/section/section.php:178
 msgid "Custom Colors"
 msgstr ""
 
-#: includes/shortcode.php:736
+#: includes/shortcode.php:797
 msgid "Choose an icon..."
 msgstr ""
 
-#: includes/shortcode.php:737
+#: includes/shortcode.php:798
 msgid "Home"
 msgstr ""
 
-#: includes/shortcode.php:738
+#: includes/shortcode.php:799
 msgid "Sign-in"
 msgstr ""
 
-#: includes/shortcode.php:739
+#: includes/shortcode.php:800
 msgid "Sign-out"
 msgstr ""
 
-#: includes/shortcode.php:740
+#: includes/shortcode.php:801
 msgid "User"
 msgstr ""
 
-#: includes/shortcode.php:741
+#: includes/shortcode.php:802
 msgid "Users"
 msgstr ""
 
-#: includes/shortcode.php:742
+#: includes/shortcode.php:803
 msgid "Lock"
 msgstr ""
 
-#: includes/shortcode.php:743
+#: includes/shortcode.php:804
 msgid "Unlock"
 msgstr ""
 
-#: includes/shortcode.php:745
+#: includes/shortcode.php:806
 msgid "Cog"
 msgstr ""
 
-#: includes/shortcode.php:746
+#: includes/shortcode.php:807
 msgid "Nut"
 msgstr ""
 
-#: includes/shortcode.php:747
+#: includes/shortcode.php:808
+#: templates/advanced-product/single/single-style2.php:205
 msgid "Comment"
 msgstr ""
 
-#: includes/shortcode.php:748
+#: includes/shortcode.php:809
 msgid "Commenting"
 msgstr ""
 
-#: includes/shortcode.php:749
+#: includes/shortcode.php:810
 msgid "Comments"
 msgstr ""
 
-#: includes/shortcode.php:750
+#: includes/shortcode.php:811
 msgid "Hashtag"
 msgstr ""
 
-#: includes/shortcode.php:751
+#: includes/shortcode.php:812
 msgid "Tag"
 msgstr ""
 
-#: includes/shortcode.php:753
+#: includes/shortcode.php:814
 msgid "Credit-card"
 msgstr ""
 
-#: includes/shortcode.php:754
+#: includes/shortcode.php:815
 msgid "Mail"
 msgstr ""
 
-#: includes/shortcode.php:755
+#: includes/shortcode.php:816
 msgid "Receiver"
 msgstr ""
 
-#: includes/shortcode.php:758
+#: includes/shortcode.php:819
 msgid "Bookmark"
 msgstr ""
 
-#: includes/shortcode.php:759
+#: includes/shortcode.php:820
 msgid "Code"
 msgstr ""
 
-#: includes/shortcode.php:760
+#: includes/shortcode.php:821
 msgid "Paint-bucket"
 msgstr ""
 
-#: includes/shortcode.php:761
+#: includes/shortcode.php:822
 msgid "Camera"
 msgstr ""
 
-#: includes/shortcode.php:762
+#: includes/shortcode.php:823
 msgid "Bell"
 msgstr ""
 
-#: includes/shortcode.php:763
+#: includes/shortcode.php:824
 msgid "Bolt"
 msgstr ""
 
-#: includes/shortcode.php:764
+#: includes/shortcode.php:825
 msgid "Star"
 msgstr ""
 
-#: includes/shortcode.php:765
+#: includes/shortcode.php:826
 msgid "Heart"
 msgstr ""
 
-#: includes/shortcode.php:766
+#: includes/shortcode.php:827
 msgid "Happy"
 msgstr ""
 
-#: includes/shortcode.php:767
+#: includes/shortcode.php:828
 msgid "Lifesaver"
 msgstr ""
 
-#: includes/shortcode.php:768
+#: includes/shortcode.php:829
 msgid "Rss"
 msgstr ""
 
-#: includes/shortcode.php:770
+#: includes/shortcode.php:831
 msgid "Git-branch"
 msgstr ""
 
-#: includes/shortcode.php:771
+#: includes/shortcode.php:832
 msgid "Git-fork"
 msgstr ""
 
-#: includes/shortcode.php:772
+#: includes/shortcode.php:833
 msgid "World"
 msgstr ""
 
-#: includes/shortcode.php:773
+#: includes/shortcode.php:834
 msgid "Calendar"
 msgstr ""
 
-#: includes/shortcode.php:774
+#: includes/shortcode.php:835
 msgid "Clock"
 msgstr ""
 
-#: includes/shortcode.php:775
+#: includes/shortcode.php:836
 msgid "History"
 msgstr ""
 
-#: includes/shortcode.php:776
+#: includes/shortcode.php:837
 msgid "Future"
 msgstr ""
 
-#: includes/shortcode.php:777
+#: includes/shortcode.php:838
 msgid "Pencil"
 msgstr ""
 
-#: includes/shortcode.php:778
+#: includes/shortcode.php:839
 msgid "Trash"
 msgstr ""
 
-#: includes/shortcode.php:779
+#: includes/shortcode.php:840
 msgid "Move"
 msgstr ""
 
-#: includes/shortcode.php:781
+#: includes/shortcode.php:842
 msgid "Question"
 msgstr ""
 
-#: includes/shortcode.php:782
+#: includes/shortcode.php:843
 msgid "Info"
 msgstr ""
 
-#: includes/shortcode.php:783
+#: includes/shortcode.php:844
 msgid "Warning"
 msgstr ""
 
-#: includes/shortcode.php:785
+#: includes/shortcode.php:846
 msgid "Thumbnails"
 msgstr ""
 
-#: includes/shortcode.php:786
+#: includes/shortcode.php:847
 msgid "Table"
 msgstr ""
 
-#: includes/shortcode.php:787
+#: includes/shortcode.php:848
 msgid "List"
 msgstr ""
 
-#: includes/shortcode.php:790
+#: includes/shortcode.php:851
 msgid "More"
 msgstr ""
 
-#: includes/shortcode.php:791
+#: includes/shortcode.php:852
 msgid "More-vertical"
 msgstr ""
 
-#: includes/shortcode.php:792
+#: includes/shortcode.php:853
 msgid "Plus"
 msgstr ""
 
-#: includes/shortcode.php:793
+#: includes/shortcode.php:854
 msgid "Plus-circle"
 msgstr ""
 
-#: includes/shortcode.php:794
+#: includes/shortcode.php:855
 msgid "Minus"
 msgstr ""
 
-#: includes/shortcode.php:795
+#: includes/shortcode.php:856
 msgid "Minus-circle"
 msgstr ""
 
-#: includes/shortcode.php:797
+#: includes/shortcode.php:858
 msgid "Check"
 msgstr ""
 
-#: includes/shortcode.php:798
+#: includes/shortcode.php:859
 msgid "Ban"
 msgstr ""
 
-#: includes/shortcode.php:799
+#: includes/shortcode.php:860
 msgid "Refresh"
 msgstr ""
 
-#: includes/shortcode.php:800
+#: includes/shortcode.php:861
 msgid "Play"
 msgstr ""
 
-#: includes/shortcode.php:801
+#: includes/shortcode.php:862
 msgid "Play-circle"
 msgstr ""
 
-#: includes/shortcode.php:802
+#: includes/shortcode.php:863
 msgid "Tv"
 msgstr ""
 
-#: includes/shortcode.php:806
+#: includes/shortcode.php:867
 msgid "Phone"
 msgstr ""
 
-#: includes/shortcode.php:807
+#: includes/shortcode.php:868
 msgid "Tablet-landscape"
 msgstr ""
 
-#: includes/shortcode.php:808
+#: includes/shortcode.php:869
 msgid "Phone-landscape"
 msgstr ""
 
-#: includes/shortcode.php:809
+#: includes/shortcode.php:870
 msgid "File"
 msgstr ""
 
-#: includes/shortcode.php:811
+#: includes/shortcode.php:872
 msgid "File-edit"
 msgstr ""
 
-#: includes/shortcode.php:812
+#: includes/shortcode.php:873
 msgid "Folder"
 msgstr ""
 
-#: includes/shortcode.php:813
+#: includes/shortcode.php:874
 msgid "Album"
 msgstr ""
 
-#: includes/shortcode.php:816
+#: includes/shortcode.php:877
 msgid "Server"
 msgstr ""
 
-#: includes/shortcode.php:817
+#: includes/shortcode.php:878
 msgid "Database"
 msgstr ""
 
-#: includes/shortcode.php:818
+#: includes/shortcode.php:879
 msgid "Cloud-upload"
 msgstr ""
 
-#: includes/shortcode.php:819
+#: includes/shortcode.php:880
 msgid "Cloud-download"
 msgstr ""
 
-#: includes/shortcode.php:820
+#: includes/shortcode.php:881
+#: templates/advanced-product/single/custom-fields-item-style1.php:33
+#: templates/advanced-product/single/custom-fields-item-style2.php:33
 #: templates/advanced-product/single/custom-fields-item.php:33
+#: templates/advanced-product/single/single-style2.php:102
+#: templates/advanced-product/single/single-style2.php:160
 msgid "Download"
 msgstr ""
 
-#: includes/shortcode.php:822
+#: includes/shortcode.php:883
 msgid "Reply"
 msgstr ""
 
-#: includes/shortcode.php:823
+#: includes/shortcode.php:884
 msgid "Forward"
 msgstr ""
 
-#: includes/shortcode.php:825
+#: includes/shortcode.php:886
 msgid "Shrink"
 msgstr ""
 
-#: includes/shortcode.php:826
+#: includes/shortcode.php:887
 msgid "Arrow-up"
 msgstr ""
 
-#: includes/shortcode.php:827
+#: includes/shortcode.php:888
 msgid "Arrow-down"
 msgstr ""
 
-#: includes/shortcode.php:828
+#: includes/shortcode.php:889
 msgid "Arrow-left"
 msgstr ""
 
-#: includes/shortcode.php:829
+#: includes/shortcode.php:890
 msgid "Arrow-right"
 msgstr ""
 
-#: includes/shortcode.php:830
+#: includes/shortcode.php:891
 msgid "Chevron-up"
 msgstr ""
 
-#: includes/shortcode.php:831
+#: includes/shortcode.php:892
 msgid "Chevron-down"
 msgstr ""
 
-#: includes/shortcode.php:832
+#: includes/shortcode.php:893
 msgid "Chevron-left"
 msgstr ""
 
-#: includes/shortcode.php:833
+#: includes/shortcode.php:894
 msgid "Chevron-right"
 msgstr ""
 
-#: includes/shortcode.php:834
+#: includes/shortcode.php:895
 msgid "Triangle-up"
 msgstr ""
 
-#: includes/shortcode.php:835
+#: includes/shortcode.php:896
 msgid "Triangle-down"
 msgstr ""
 
-#: includes/shortcode.php:836
+#: includes/shortcode.php:897
 msgid "Triangle-left"
 msgstr ""
 
-#: includes/shortcode.php:837
+#: includes/shortcode.php:898
 msgid "Triangle-right"
 msgstr ""
 
-#: includes/shortcode.php:838
+#: includes/shortcode.php:899
 msgid "Bold"
 msgstr ""
 
-#: includes/shortcode.php:839
+#: includes/shortcode.php:900
 msgid "Italic"
 msgstr ""
 
-#: includes/shortcode.php:840
+#: includes/shortcode.php:901
 msgid "Strikethrough"
 msgstr ""
 
-#: includes/shortcode.php:841
+#: includes/shortcode.php:902
 msgid "Video-camera"
 msgstr ""
 
-#: includes/shortcode.php:842
+#: includes/shortcode.php:903
 msgid "Quote-right"
 msgstr ""
 
-#: includes/shortcode.php:843
+#: includes/shortcode.php:904
 msgid "500px"
 msgstr ""
 
-#: includes/shortcode.php:848
+#: includes/shortcode.php:909
 msgid "Foursquare"
 msgstr ""
 
-#: includes/shortcode.php:849
+#: includes/shortcode.php:910
 msgid "Github"
 msgstr ""
 
-#: includes/shortcode.php:850
+#: includes/shortcode.php:911
 msgid "Github-alt"
 msgstr ""
 
-#: includes/shortcode.php:851
+#: includes/shortcode.php:912
 msgid "Gitter"
 msgstr ""
 
-#: includes/shortcode.php:853
+#: includes/shortcode.php:914
 msgid "Google-plus"
 msgstr ""
 
-#: includes/shortcode.php:855
+#: includes/shortcode.php:916
 msgid "Joomla"
 msgstr ""
 
-#: includes/shortcode.php:856
+#: includes/shortcode.php:917
 msgid "Linkedin"
 msgstr ""
 
-#: includes/shortcode.php:857
+#: includes/shortcode.php:918
 msgid "Pagekit"
 msgstr ""
 
-#: includes/shortcode.php:859
+#: includes/shortcode.php:920
 msgid "Soundcloud"
 msgstr ""
 
-#: includes/shortcode.php:860
+#: includes/shortcode.php:921
 msgid "Tripadvisor"
 msgstr ""
 
-#: includes/shortcode.php:863
+#: includes/shortcode.php:924
 msgid "Uikit"
 msgstr ""
 
-#: includes/shortcode.php:864
+#: includes/shortcode.php:925
 msgid "Etsy"
 msgstr ""
 
-#: includes/shortcode.php:865
+#: includes/shortcode.php:926
 msgid "Vimeo"
 msgstr ""
 
-#: includes/shortcode.php:866
+#: includes/shortcode.php:927
 msgid "Whatsapp"
 msgstr ""
 
-#: includes/shortcode.php:867
+#: includes/shortcode.php:928
 msgid "Wordpress"
 msgstr ""
 
-#: includes/shortcode.php:868
+#: includes/shortcode.php:929
 msgid "Xing"
 msgstr ""
 
-#: includes/shortcode.php:869
+#: includes/shortcode.php:930
 msgid "Yelp"
 msgstr ""
 
-#: includes/shortcode.php:870
+#: includes/shortcode.php:931
 msgid "Youtube"
 msgstr ""
 
-#: includes/shortcode.php:871
+#: includes/shortcode.php:932
 msgid "Print"
 msgstr ""
 
-#: includes/shortcode.php:873
+#: includes/shortcode.php:934
 msgid "File Text"
 msgstr ""
 
-#: includes/shortcode.php:874
+#: includes/shortcode.php:935
 msgid "File Pdf"
 msgstr ""
 
-#: includes/shortcode.php:875
+#: includes/shortcode.php:936
 msgid "Chevron Double Left"
 msgstr ""
 
-#: includes/shortcode.php:876
+#: includes/shortcode.php:937
 msgid "Chevron Double Right"
 msgstr ""
 
@@ -8333,6 +8411,8 @@ msgid "Sale Products"
 msgstr ""
 
 #: includes/helpers/woocommerce/template-catalog.php:786
+#: templates/advanced-product/single/single-style1.php:69
+#: templates/advanced-product/single/single-style1.php:148
 msgid "Products"
 msgstr ""
 
@@ -8601,8 +8681,7 @@ msgstr ""
 msgid "Templaza Style"
 msgstr ""
 
-#: metaboxes/basic/basic.php:110 metaboxes/our_team/our_team.php:99
-#: metaboxes/portfolio/portfolio.php:73
+#: metaboxes/basic/basic.php:110 metaboxes/portfolio/portfolio.php:73
 #: shortcodes/latest_posts/latest_posts.php:33
 #: shortcodes/wc_products/wc_products.php:65
 msgid "Date"
@@ -8745,30 +8824,6 @@ msgid ""
 "and tag the menu to a 'Display location'."
 msgstr ""
 
-#: metaboxes/our_team/our_team.php:14
-msgid "Our Team Options"
-msgstr ""
-
-#: metaboxes/our_team/our_team.php:25
-msgid "Birthday"
-msgstr ""
-
-#: metaboxes/our_team/our_team.php:26
-msgid "Click to enter a date"
-msgstr ""
-
-#: metaboxes/our_team/our_team.php:31
-msgid "Phone Number"
-msgstr ""
-
-#: metaboxes/our_team/our_team.php:36
-msgid "Email"
-msgstr ""
-
-#: metaboxes/our_team/our_team.php:47
-msgid "Social url"
-msgstr ""
-
 #: metaboxes/portfolio/portfolio.php:14
 msgid "Portfolio Options"
 msgstr ""
@@ -8798,7 +8853,7 @@ msgid "Add Image(s)"
 msgstr ""
 
 #: shortcodes/account/account.php:19 templates/header/horizontal.php:70
-#: templates/inc/icon.php:45
+#: templates/header/stacked.php:90 templates/inc/icon.php:42
 msgid "Account"
 msgstr ""
 
@@ -8927,18 +8982,114 @@ msgstr ""
 msgid "General Settings"
 msgstr ""
 
-#: shortcodes/column/column.php:105 shortcodes/row/row.php:154
+#: shortcodes/column/column.php:47
+msgid "Use Sticky"
+msgstr ""
+
+#: shortcodes/column/column.php:48
+msgid "Make column remain at the top of the viewport."
+msgstr ""
+
+#: shortcodes/column/column.php:55
+msgid "Sticky Options"
+msgstr ""
+
+#: shortcodes/column/column.php:65
+msgid "Sticky position"
+msgstr ""
+
+#: shortcodes/column/column.php:66
+msgid "The position the element should be stuck to."
+msgstr ""
+
+#: shortcodes/column/column.php:73
+msgid "Sticky start"
+msgstr ""
+
+#: shortcodes/column/column.php:74
+msgid "Start offset. The value can be in vh, % and px"
+msgstr ""
+
+#: shortcodes/column/column.php:81
+msgid "Sticky End"
+msgstr ""
+
+#: shortcodes/column/column.php:82
+msgid "End offset. The value can be in vh, % and px"
+msgstr ""
+
+#: shortcodes/column/column.php:89
+msgid "Sticky Offset"
+msgstr ""
+
+#: shortcodes/column/column.php:90
+msgid ""
+"The offset the Sticky should be fixed to. The value can be in vh, % and px"
+msgstr ""
+
+#: shortcodes/column/column.php:97
+msgid "Sticky Overflow Flip"
+msgstr ""
+
+#: shortcodes/column/column.php:98
+msgid ""
+"Flip the Sticky's position option if the element overflows the viewport and "
+"disable overflow scrolling"
+msgstr ""
+
+#: shortcodes/column/column.php:105
+msgid "Sticky Animation"
+msgstr ""
+
+#: shortcodes/column/column.php:106
+msgid "The animation to use when the element becomes sticky"
+msgstr ""
+
+#: shortcodes/column/column.php:113 shortcodes/column/column.php:120
+msgid "Sticky Active Class"
+msgstr ""
+
+#: shortcodes/column/column.php:127
+msgid "Only Show Sticky"
+msgstr ""
+
+#: shortcodes/column/column.php:128
+msgid "Only show sticky element when scrolling up"
+msgstr ""
+
+#: shortcodes/column/column.php:135
+msgid "Sticky Media"
+msgstr ""
+
+#: shortcodes/column/column.php:136
+msgid ""
+"Condition for the active status - a width as integer (e.g. 640) or a "
+"breakpoint (e.g. @s, @m, @l, @xl) or any valid media query (e.g. (min-width: "
+"900px))"
+msgstr ""
+
+#: shortcodes/column/column.php:143
+msgid "Sticky Target Offset"
+msgstr ""
+
+#: shortcodes/column/column.php:144
+msgid ""
+"Initially make sure that the Sticky element is not over a referenced element "
+"via the page's location hash"
+msgstr ""
+
+#: shortcodes/column/column.php:201 shortcodes/row/row.php:154
 #: shortcodes/section/section.php:262
 msgid "Responsive Settings"
 msgstr ""
 
-#: shortcodes/column/column.php:111
+#: shortcodes/column/column.php:207
 msgid "Phone Portrait"
 msgstr ""
 
-#: shortcodes/column/column.php:112 shortcodes/column/column.php:120
-#: shortcodes/column/column.php:127 shortcodes/column/column.php:134
-#: shortcodes/column/column.php:141
+#: shortcodes/column/column.php:208 shortcodes/column/column.php:216
+#: shortcodes/column/column.php:223 shortcodes/column/column.php:230
+#: shortcodes/column/column.php:237
 msgid ""
 "Set the column width for each breakpoint. Mix fraction widths or combine "
 "fixed widths with the <i>Expand</i> value. If no value is selected, the "
@@ -8946,111 +9097,111 @@ msgid ""
 "widths should always take the full width."
 msgstr ""
 
-#: shortcodes/column/column.php:119
+#: shortcodes/column/column.php:215
 msgid "Phone Landscape"
 msgstr ""
 
-#: shortcodes/column/column.php:126
+#: shortcodes/column/column.php:222
 msgid "Tablet Landscape"
 msgstr ""
 
-#: shortcodes/column/column.php:133
+#: shortcodes/column/column.php:229
 msgid "Desktop (Default Device)"
 msgstr ""
 
-#: shortcodes/column/column.php:148
+#: shortcodes/column/column.php:244
 msgid "Visibility Options"
 msgstr ""
 
-#: shortcodes/column/column.php:161
+#: shortcodes/column/column.php:257
 msgid "Visible On Phone Landscape"
 msgstr ""
 
-#: shortcodes/column/column.php:162
+#: shortcodes/column/column.php:258
 msgid "Disable to hide this section on phone landscape device"
 msgstr ""
 
-#: shortcodes/column/column.php:168
+#: shortcodes/column/column.php:264
 msgid "Visible On Tablet Landscape"
 msgstr ""
 
-#: shortcodes/column/column.php:169
+#: shortcodes/column/column.php:265
 msgid "Disable to hide this section on tablet landscape device"
 msgstr ""
 
-#: shortcodes/column/column.php:175
+#: shortcodes/column/column.php:271
 msgid "Visible On Desktop"
 msgstr ""
 
-#: shortcodes/column/column.php:176
+#: shortcodes/column/column.php:272
 msgid "Disable to hide this section on desktop device"
 msgstr ""
 
-#: shortcodes/column/column.php:182
+#: shortcodes/column/column.php:278
 msgid "Visible On Large Screen"
 msgstr ""
 
-#: shortcodes/column/column.php:183
+#: shortcodes/column/column.php:279
 msgid "Disable to hide this section on large screen device"
 msgstr ""
 
-#: shortcodes/column/column.php:201
+#: shortcodes/column/column.php:297
 msgid "Fraction width"
 msgstr ""
 
-#: shortcodes/column/column.php:202
+#: shortcodes/column/column.php:298
 msgid "1/1"
 msgstr ""
 
-#: shortcodes/column/column.php:203
+#: shortcodes/column/column.php:299
 msgid "1/2"
 msgstr ""
 
-#: shortcodes/column/column.php:204
+#: shortcodes/column/column.php:300
 msgid "1/3"
 msgstr ""
 
-#: shortcodes/column/column.php:205
+#: shortcodes/column/column.php:301
 msgid "2/3"
 msgstr ""
 
-#: shortcodes/column/column.php:206
+#: shortcodes/column/column.php:302
 msgid "1/4"
 msgstr ""
 
-#: shortcodes/column/column.php:207
+#: shortcodes/column/column.php:303
 msgid "3/4"
 msgstr ""
 
-#: shortcodes/column/column.php:208
+#: shortcodes/column/column.php:304
 msgid "1/5"
 msgstr ""
 
-#: shortcodes/column/column.php:209
+#: shortcodes/column/column.php:305
 msgid "2/5"
 msgstr ""
 
-#: shortcodes/column/column.php:210
+#: shortcodes/column/column.php:306
 msgid "3/5"
 msgstr ""
 
-#: shortcodes/column/column.php:211
+#: shortcodes/column/column.php:307
 msgid "4/5"
 msgstr ""
 
-#: shortcodes/column/column.php:212
+#: shortcodes/column/column.php:308
 msgid "1/6"
 msgstr ""
 
-#: shortcodes/column/column.php:213
+#: shortcodes/column/column.php:309
 msgid "5/6"
 msgstr ""
 
-#: shortcodes/column/column.php:215
+#: shortcodes/column/column.php:311
 msgid "Fixed width"
 msgstr ""
 
-#: shortcodes/column/column.php:222 shortcodes/text/text.php:81
+#: shortcodes/column/column.php:318 shortcodes/text/text.php:81
 #: shortcodes/widget/widget.php:130 shortcodes/wp_archives/wp_archives.php:49
 #: shortcodes/wp_categories/wp_categories.php:49
 #: shortcodes/wp_menu/wp_menu.php:71
@@ -9112,79 +9263,83 @@ msgstr ""
 msgid "Load a header."
 msgstr ""
 
-#: shortcodes/heading/heading.php:38 shortcodes/navigation/navigation.php:105
+#: shortcodes/heading/heading.php:40 shortcodes/navigation/navigation.php:105
 msgid "Heading"
 msgstr ""
 
-#: shortcodes/heading/heading.php:39
+#: shortcodes/heading/heading.php:41
 msgid "Heading settings"
 msgstr ""
 
-#: shortcodes/heading/heading.php:40
+#: shortcodes/heading/heading.php:42
 msgid "Load a heading."
 msgstr ""
 
-#: shortcodes/heading/heading.php:46
+#: shortcodes/heading/heading.php:48
 msgid "Enable Custom Heading"
 msgstr ""
 
-#: shortcodes/heading/heading.php:47
+#: shortcodes/heading/heading.php:49
 msgid "If set to on, the heading will be display custom heading."
 msgstr ""
 
-#: shortcodes/heading/heading.php:48
+#: shortcodes/heading/heading.php:50
 msgid "Default is get_the_title()"
 msgstr ""
 
-#: shortcodes/heading/heading.php:54
+#: shortcodes/heading/heading.php:56
 msgid "Custom Heading"
 msgstr ""
 
-#: shortcodes/heading/heading.php:60
+#: shortcodes/heading/heading.php:62
 msgid "Heading Tag"
 msgstr ""
 
-#: shortcodes/heading/heading.php:61
+#: shortcodes/heading/heading.php:63
 msgid "Select heading tag from the list"
 msgstr ""
 
-#: shortcodes/heading/heading.php:75
+#: shortcodes/heading/heading.php:77
 msgid "Heading Inner Tag"
 msgstr ""
 
-#: shortcodes/heading/heading.php:76
+#: shortcodes/heading/heading.php:78
 msgid "The heading will be added span tag to heading tag"
 msgstr ""
 
-#: shortcodes/heading/heading.php:82
+#: shortcodes/heading/heading.php:84
 msgid "Heading Custom font"
 msgstr ""
 
-#: shortcodes/heading/heading.php:89
+#: shortcodes/heading/heading.php:91
 msgid "Heading Font"
 msgstr ""
 
-#: shortcodes/heading/heading.php:90
+#: shortcodes/heading/heading.php:92
 msgid "Specify Heading font properties."
 msgstr ""
 
-#: shortcodes/heading/heading.php:128
+#: shortcodes/heading/heading.php:122
+msgid "Heading Margin"
+msgstr ""
+
+#: shortcodes/heading/heading.php:130
 msgid "Show heading in single post"
 msgstr ""
 
-#: shortcodes/heading/heading.php:129
+#: shortcodes/heading/heading.php:131
 msgid "The heading will be show in single post"
 msgstr ""
 
-#: shortcodes/heading/heading.php:135
+#: shortcodes/heading/heading.php:137
 msgid "Show meta in single post"
 msgstr ""
 
-#: shortcodes/heading/heading.php:142
+#: shortcodes/heading/heading.php:144
 msgid "Heading Custom Class"
 msgstr ""
 
-#: shortcodes/heading/heading.php:143
+#: shortcodes/heading/heading.php:145
 msgid "Custom class will be added to heading tag."
 msgstr ""
 
@@ -9294,14 +9449,46 @@ msgid "Show author)"
 msgstr ""
 
 #: shortcodes/latest_posts/latest_posts.php:86
+msgid "Slider number"
+msgstr ""
+
+#: shortcodes/latest_posts/latest_posts.php:91
+msgid "Slider item"
+msgstr ""
+
+#: shortcodes/latest_posts/latest_posts.php:93
+msgid "1"
+msgstr ""
+
+#: shortcodes/latest_posts/latest_posts.php:94
+msgid "2"
+msgstr ""
+
+#: shortcodes/latest_posts/latest_posts.php:95
+msgid "3"
+msgstr ""
+
+#: shortcodes/latest_posts/latest_posts.php:96
+msgid "4"
+msgstr ""
+
+#: shortcodes/latest_posts/latest_posts.php:97
+msgid "5"
+msgstr ""
+
+#: shortcodes/latest_posts/latest_posts.php:98
+msgid "6"
+msgstr ""
+
+#: shortcodes/latest_posts/latest_posts.php:105
 msgid "Show nav (next, preview button)"
 msgstr ""
 
-#: shortcodes/latest_posts/latest_posts.php:92
+#: shortcodes/latest_posts/latest_posts.php:111
 msgid "Show dots"
 msgstr ""
 
-#: shortcodes/latest_posts/tmpl/latest_posts.php:85
+#: shortcodes/latest_posts/tmpl/latest_posts.php:86
 msgid "By"
 msgstr ""
 
@@ -9770,6 +9957,46 @@ msgstr ""
 msgid "Social Item Margin"
 msgstr ""
 
+#: shortcodes/social/social.php:36
+msgid "Social Color"
+msgstr ""
+
+#: shortcodes/social/social.php:37
+msgid "Set the color of social."
+msgstr ""
+
+#: shortcodes/social/social.php:42
+msgid "Social Hover Color"
+msgstr ""
+
+#: shortcodes/social/social.php:43
+msgid "Set the color hover of social."
+msgstr ""
+
+#: shortcodes/social/social.php:48
+msgid "Social Background Color"
+msgstr ""
+
+#: shortcodes/social/social.php:49
+msgid "Set the background color of social."
+msgstr ""
+
+#: shortcodes/social/social.php:54
+msgid "Social Background Hover Color"
+msgstr ""
+
+#: shortcodes/social/social.php:55
+msgid "Set the color background hover of social."
+msgstr ""
+
+#: shortcodes/social/social.php:60
+msgid "Social Fix Width Height"
+msgstr ""
+
+#: shortcodes/social/social.php:66
+msgid "Social Width Height"
+msgstr ""
+
 #: shortcodes/text/text.php:46
 msgid "Text Block"
 msgstr ""
@@ -10149,6 +10376,29 @@ msgstr ""
 msgid "If set to On, tag count will be display."
 msgstr ""
 
+#: templates/advanced-product/archive/content-item-btn-action.php:62
+#: templates/advanced-product/archive/content-item-style3.php:73
+msgid "View Detail"
+msgstr ""
+
+#: templates/advanced-product/archive/content-item-style2.php:36
+#: templates/advanced-product/archive/content-item-style3.php:86
+#: templates/advanced-product/single/single-style2.php:267
+msgid "View more"
+msgstr ""
+
+#: templates/advanced-product/archive/content-item-style3.php:24
+msgid "Powered by"
+msgstr ""
+
+#: templates/advanced-product/archive/custom-fields-style2.php:27
+msgid ": "
+msgstr ""
+
+#: templates/advanced-product/archive/price.php:21
+msgid "Total Price"
+msgstr ""
+
 #: templates/advanced-product/archive/price.php:24
 #: templates/advanced-product/single/price.php:22
 msgid " "
@@ -10160,7 +10410,7 @@ msgid "MSRP:"
 msgstr ""
 
 #: templates/advanced-product/single/content-custom-fields.php:17
-#: templates/advanced-product/single/custom-fields.php:67
+#: templates/advanced-product/single/custom-fields.php:77
 msgid "Specifications"
 msgstr ""
 
@@ -10168,7 +10418,20 @@ msgstr ""
 msgid "Branch"
 msgstr ""
 
-#: templates/header/stacked.php:149 templates/inc/icon.php:72
+#: templates/advanced-product/single/price.php:30
+msgid "PRICE:"
+msgstr ""
+
+#: templates/advanced-product/single/single-style1.php:90
+#: templates/advanced-product/single/single-style1.php:169
+msgid "Contact Vendor"
+msgstr ""
+
+#: templates/advanced-product/single/single-style1.php:132
+msgid "Vendor Profile"
+msgstr ""
+
+#: templates/header/stacked.php:193 templates/inc/icon.php:69
 msgid "Search..."
 msgstr ""
 

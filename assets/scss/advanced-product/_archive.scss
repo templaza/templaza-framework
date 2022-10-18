@@ -38,3 +38,16 @@
     }
   }
 }
+.templaza-ap-archive{
+  .uk-alert-warning{
+    padding:60px 40px;
+    background:$tztheme-shop-detail-box-bg;
+    @include box-shadow($tztheme-box-shadow-default);
+    width:100%;
+  }
+  &.uk-grid{
+    .uk-alert-warning{
+      margin-left:40px;
+    }
+  }
+}

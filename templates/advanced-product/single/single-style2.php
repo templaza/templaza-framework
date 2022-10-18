@@ -26,7 +26,6 @@ if(isset($_GET['related_number'])){
     $ap_product_related_number = isset($templaza_options['ap_product-related-number']) ? $templaza_options['ap_product-related-number'] : 3;
 }
 $ap_single_fields_top         = isset($templaza_options['ap_product-single-style2-top'])?$templaza_options['ap_product-single-style2-top']:array();
-var_dump($ap_single_fields_top);
 do_action('templaza_set_postviews',get_the_ID());
 $call2buy_value     = get_field('call-to-buy', get_the_ID());
 $call2buy = AP_Custom_Field_Helper::get_custom_field_option_by_field_name('call-to-buy');
@@ -79,7 +78,6 @@ $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields'
                         <div class="uk-flex uk-flex-between@s  ap-single-top-fields">
                         <?php
                         foreach ($ap_single_fields_top as $field_item){
-                            $item = get_field($field_item, get_the_ID());
                             $item = AP_Custom_Field_Helper::get_custom_field_option_by_field_name($field_item);
                             $product_id = get_the_ID();
                             $f_value    = get_field($item['name'], $product_id);
@@ -109,6 +107,24 @@ $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields'
                                         </div>
                                     </div>
                                     <?php
+                                }elseif($item['type'] == 'taxonomy'){
+                                    ?>
+                                    <div class="ap-custom-fields">
+                                        <div class="ap-field-label"><?php echo esc_html($item['label']); ?></div>
+                                        <div class="ap-field-value">
+                                            <?php
+                                            $ap_taxonomy = get_field($item['name'], $product_id);
+                                            if(is_array($ap_taxonomy) && isset($ap_taxonomy) && !empty($ap_taxonomy)){
+                                                foreach ($ap_taxonomy as $item){
+                                                    if(is_object($item)){
+                                                        echo esc_html($item->name);
+                                                    }
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <?php
                                 }
                             }
                         }
@@ -120,7 +136,6 @@ $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields'
                         <div class="ap-single-other-field">
                         <?php
                             foreach ($display_fields as $field_item){
-                                $item = get_field($field_item, get_the_ID());
                                 $item = AP_Custom_Field_Helper::get_custom_field_option_by_field_name($field_item);
                                 $product_id = get_the_ID();
                                 $f_value    = get_field($field_item, $product_id);

@@ -8,7 +8,6 @@
             templaza_woo.$header = $('#site-header');
 
         // Single product
-        this.relatedProductsCarousel();
         this.productVariation();
 
         // Product Layout
@@ -22,6 +21,10 @@
         this.stickyATC();
 
         this.productVideo();
+        this.productVideoPopup();
+
+        this.relatedProductsCarousel($('.products.related'));
+        this.relatedProductsCarousel($('.products.upsells'));
     };
 
     /**
@@ -102,6 +105,9 @@
             return;
         }
         templaza_woo.productThumbnails(false);
+        $('.woocommerce-product-gallery').on('product_thumbnails_slider_horizontal', function(){
+            templaza_woo.productThumbnails(false);
+        });
     };
 
     /**
@@ -262,45 +268,40 @@
     /**
      * Related & ppsell products carousel.
      */
-    templaza_woo.relatedProductsCarousel = function () {
-        var $related = $('.products.related, .products.upsells');
-
+    templaza_woo.relatedProductsCarousel = function ($related) {
         if (!$related.length) {
             return;
         }
 
-        var $products = $related.find('div.products');
+        var $products = $related.find('ul.products');
+        var spaceBetween = templaza_woo.$body.hasClass('templaza-product-card-solid') ? false : true;
 
         $products.wrap('<div class="swiper-container linked-products-carousel" style="opacity: 0;"></div>');
-        $products.after('<div class="swiper-scrollbar"></div>');
         $products.addClass('swiper-wrapper');
-        $products.find('div.product').addClass('swiper-slide');
+        $products.find('li.product').addClass('swiper-slide');
 
-        new Swiper($related.find('.linked-products-carousel'), {
+        var $number = templaza_woo.$body.hasClass('product-full-width') ? 5 : 4;
+
+        var options = {
             loop: false,
-            scrollbar: {
-                el: '.swiper-scrollbar',
-                hide: false,
-                draggable: true
-            },
             on: {
                 init: function () {
                     this.$el.css('opacity', 1);
                 }
             },
-            spaceBetween: 0,
+            spaceBetween: spaceBetween,
             breakpoints: {
                 300: {
                     slidesPerView: templazaData.mobile_portrait == '' ? 2 : templazaData.mobile_portrait,
                     slidesPerGroup: templazaData.mobile_portrait == '' ? 2 : templazaData.mobile_portrait,
-                    spaceBetween: 15,
+                    spaceBetween: spaceBetween == true ? 15 : 0,
                 },
                 480: {
                     slidesPerView: templazaData.mobile_landscape == '' ? 3 : templazaData.mobile_landscape,
                     slidesPerGroup: templazaData.mobile_landscape == '' ? 3 : templazaData.mobile_landscape,
                 },
                 768: {
-                    spaceBetween: 0,
+                    spaceBetween: spaceBetween == true ? 30 : 0,
                     slidesPerView: 3,
                     slidesPerGroup: 3
                 },
@@ -309,11 +310,41 @@
                     slidesPerGroup: 3
                 },
                 1200: {
-                    slidesPerView: 4,
-                    slidesPerGroup: 4
+                    slidesPerView: $number,
+                    slidesPerGroup: $number,
+                    spaceBetween: spaceBetween == true ? 30 : 0,
                 }
             }
-        });
+        };
+
+        if( templazaProductData.related_product_navigation == 'scrollbar' ) {
+            $products.after('<div class="swiper-scrollbar"></div>');
+            options['scrollbar'] = {
+                el: '.swiper-scrollbar',
+                hide: false,
+                draggable: true
+            };
+        } else if( templazaProductData.related_product_navigation == 'arrows' ) {
+            $products.after('<span class="razzi-svg-icon rz-swiper-button-prev rz-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></span>');
+            $products.after('<span class="razzi-svg-icon rz-swiper-button-next rz-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>');
+
+            options['navigation'] = {
+                nextEl: $related.find('.rz-swiper-button-next'),
+                prevEl: $related.find('.rz-swiper-button-prev'),
+            };
+
+        } else {
+            $products.after('<div class="swiper-pagination"></div>');
+
+            options['pagination'] = {
+                el: $related.find('.swiper-pagination'),
+                type: 'bullets',
+                clickable: true
+            };
+        }
+        console.log(options);
+
+        new Swiper($related.find('.linked-products-carousel'), options);
     };
 
     templaza_woo.productVariation = function () {
@@ -589,6 +620,48 @@
             e.preventDefault();
             $(this).closest('li').find('img').trigger('click');
         });
+    };
+
+    /**
+     * Init product video
+     */
+    templaza_woo.productVideoPopup = function () {
+        var $video_icon = $('.woocommerce-product-gallery').find('.templaza-product-video--icon');
+        if ($video_icon.length < 1) {
+            return;
+        }
+
+        var options = {
+            type: 'iframe',
+            mainClass: 'mfp-fade',
+            removalDelay: 300,
+            preloader: false,
+            fixedContentPos: false,
+            iframe: {
+                markup: '<div class="mfp-iframe-scaler">' +
+                    '<div class="mfp-close"></div>' +
+                    '<iframe class="mfp-iframe" frameborder="0" allow="autoplay"></iframe>' +
+                    '</div>',
+                patterns: {
+                    youtube: {
+                        index: 'youtube.com/', // String that detects type of video (in this case YouTube). Simply via url.indexOf(index).
+
+                        id: 'v=', // String that splits URL in a two parts, second part should be %id%
+                        src: 'https://www.youtube.com/embed/%id%?autoplay=1' // URL that will be set as a source for iframe.
+                    },
+                    vimeo: {
+                        index: 'vimeo.com/',
+                        id: '/',
+                        src: '//player.vimeo.com/video/%id%?autoplay=1'
+                    }
+                },
+
+                srcAction: 'iframe_src', // Templating object key. First part defines CSS selector, second attribute. "iframe_src" means: find "iframe" and set attribute "src".
+            }
+        };
+
+        //$video_icon.magnificPopup( options);
+
     };
 
 
