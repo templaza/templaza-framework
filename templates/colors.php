@@ -124,6 +124,9 @@ $off_canvas_button_color        = CSS::make_color_rgba_redux($off_canvas_button_
 $sticky_off_canvas_button_color = isset($options['sticky-off-canvas-button-color'])?$options['sticky-off-canvas-button-color']:'';
 $sticky_off_canvas_button_color = CSS::make_color_rgba_redux($sticky_off_canvas_button_color);
 
+$sticky_icon_color = isset($options['sticky-icon-color'])?$options['sticky-icon-color']:'';
+$sticky_icon_color = CSS::make_color_rgba_redux($sticky_icon_color);
+
 $off_canvas_button_color_close  = isset($options['off-canvas-button-color-close'])?$options['off-canvas-button-color-close']:'';
 $off_canvas_button_color_close  = CSS::make_color_rgba_redux($off_canvas_button_color_close);
 
@@ -294,6 +297,9 @@ if (!empty($sticky_link_active_color)) {
 }
 if (!empty($sticky_off_canvas_button_color)) {
 	$sticky_menu_styles[] = '#templaza-sticky-header .burger-menu-button .inner, #templaza-sticky-header .burger-menu-button .inner::before, #templaza-sticky-header .burger-menu-button .inner::after { background-color: ' . $sticky_off_canvas_button_color . ' !important;}';
+}
+if (!empty($sticky_icon_color)) {
+	$sticky_menu_styles[] = '#templaza-sticky-header .header-icon a, #templaza-sticky-header .header-icon i { color: ' . $sticky_icon_color . ' !important;}';
 }
 ?>
 
