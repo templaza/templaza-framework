@@ -45,8 +45,6 @@
             data,
             function (response) {
                 var $gallery = $(response.data);
-                console.log($gallery.html());
-
                 $productGallery.html( $gallery.html() );
                 if ( typeof wc_single_product_params !== 'undefined' && $.fn.wc_product_gallery) {
                     $productGallery.removeData('flexslider');

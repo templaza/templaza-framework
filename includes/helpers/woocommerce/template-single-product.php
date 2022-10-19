@@ -122,19 +122,15 @@ class Templaza_Single_Product {
 			'get_upsell_display_args'
 		) );
 
-		add_filter( 'woocommerce_product_upsells_heading', array(
-			$this,
-			'product_upsells_heading'
-		) );
+		add_filter( 'woocommerce_product_upsells_heading', array($this,'product_upsells_heading') );
 
 		// Related options
         $product_related           = isset($templaza_options['templaza-shop-related'])?filter_var($templaza_options['templaza-shop-related'], FILTER_VALIDATE_BOOLEAN):true;
-
 		if ( $product_related == false ) {
 			remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 		}
 
-		add_filter( 'woocommerce_product_related_products_by_category', array(
+		add_filter( 'woocommerce_product_related_posts_relate_by_category', array(
 			$this,
 			'related_products_by_category'
 		) );
@@ -144,16 +140,17 @@ class Templaza_Single_Product {
 			'related_products_by_parent_category'
 		), 20, 2 );
 
-		add_filter( 'woocommerce_product_related_products_by_tag', array(
+		add_filter( 'woocommerce_product_related_posts_relate_by_tag', array(
 			$this,
 			'related_products_by_tag'
 		) );
-		add_filter( 'woocommerce_related_products_heading', array(
-			$this,
-			'related_products_heading'
-		) );
+//        add_filter( 'woocommerce_get_related_product_tag_terms', array(
+//            $this,
+//            'related_product_tag_terms'
+//        ) );
+		add_filter( 'woocommerce_product_related_products_heading', array($this,'related_products_heading'),20 );
 
-		add_filter( 'woocommerce_get_related_products_args', array(
+		add_filter( 'woocommerce_output_related_products_args', array(
 			$this,
 			'get_related_products_args'
 		) );
@@ -208,9 +205,25 @@ class Templaza_Single_Product {
 	 * @return void
 	 */
 	public function scripts() {
+        if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
+            $templaza_options = array();
+        }else{
+            $templaza_options = Functions::get_theme_options();
+        }
 		wp_enqueue_script( 'templaza-single-product', Functions::get_my_url() . '/assets/js/woo/single-product.js', array(
 			'templaza-woo-scripts',
 		), false, true );
+
+        $related_product_navi = isset($templaza_options['templaza-shop-related-nav'])?$templaza_options['templaza-shop-related-nav']:'scrollbar';
+        $templaza_product_data = array(
+            'related_product_navigation' => $related_product_navi ? $related_product_navi : 'scrollbar'
+        );
+
+        $templaza_product_data = apply_filters('templaza_get_product_localize_data', $templaza_product_data);
+
+        wp_localize_script(
+            'templaza-single-product', 'templazaProductData', $templaza_product_data
+        );
 	}
 
 	/**
@@ -494,6 +507,19 @@ class Templaza_Single_Product {
 		return $related_tag;
 	}
 
+    /**
+     * Related products by tag terms
+     *
+     * @since 1.0.0
+     *
+     * @return string
+     */
+    public function related_product_tag_terms($term_ids) {
+        $tag_ids = maybe_unserialize( get_post_meta( get_the_ID(), 'templaza_related_tag_ids', true ) );
+        $term_ids = $tag_ids ? $tag_ids : $term_ids;
+        return $term_ids;
+    }
+
 	/**
 	 * Related products heading
 	 *
@@ -525,7 +551,6 @@ class Templaza_Single_Product {
             $templaza_options = Functions::get_theme_options();
         }
         $related_number        = isset($templaza_options['templaza-shop-related-number'])?$templaza_options['templaza-shop-related-number']:4;
-
 		$args = array(
 			'posts_per_page' => intval( $related_number ),
 			'columns'        => 4,

@@ -205,6 +205,12 @@ Templaza_API::set_section('templaza_style',
                 'title'    => __( 'Off Canvas Button', 'templaza-framework' ),
                 'subtitle' => __( 'Set the color of offcanvas button', 'templaza-framework' ),
             ),
+            array(
+                'id'       => 'sticky-icon-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Icon color', 'templaza-framework' ),
+                'subtitle' => __( 'Set the color of icon', 'templaza-framework' ),
+            ),
         ),
     )
 );

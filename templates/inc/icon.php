@@ -1,13 +1,10 @@
 <?php
-
 // No direct access.
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
 use TemPlazaFramework\Functions;
-
 $gb_options                 = Functions::get_theme_options();
 $options                    = Functions::get_header_options();
-
 $login_modals               = isset($gb_options['templaza-shop-account-login'])?$gb_options['templaza-shop-account-login']:'modal';
 $header_cart                = isset($gb_options['templaza-shop-mini-cart'])?$gb_options['templaza-shop-mini-cart']:'';
 $header_stack_search        = isset($options['stacked-divided-search'])?filter_var($options['stacked-divided-search'], FILTER_VALIDATE_BOOLEAN):true;

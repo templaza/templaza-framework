@@ -140,6 +140,9 @@ $attribs    = ' '.$attribs;
                     <?php } ?>
                 </div>
             <?php endif; ?>
+            <?php
+            Templates::load_my_layout('inc.icon',true,false);
+            ?>
         </div>
     </div>
 </div>
