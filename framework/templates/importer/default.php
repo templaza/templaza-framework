@@ -3,7 +3,9 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
+use TemPlazaFramework\Admin_Functions;
 use TemPlazaFramework\Helpers\HelperLicense;
+use TemPlazaFramework\Admin\Admin_Page_Function;
 
 $items  = method_exists($this, 'get_theme_demo_datas')?$this -> get_theme_demo_datas():array();
 
@@ -12,6 +14,7 @@ if($items && count($items)){
     if(isset($optImported['pack']) && !is_array($optImported['pack'])){
         $optImported['pack']    = (array) $optImported['pack'];
     }
+    $pass   = Admin_Functions::check_system_requirement();
     ?>
     <div class="tzinst-demo-import<?php echo !HelperLicense::is_authorised($this -> theme_name)?' no-license':''?>">
         <div class="uk-child-width-expand@s" uk-grid>
@@ -37,8 +40,8 @@ if($items && count($items)){
                     <div class="action uk-padding-small uk-padding-remove-top uk-flex uk-flex-wrap">
                         <?php if(isset($item['demo-datas']) && count($item['demo-datas'])){ ?>
                             <button type="button" data-toggle="modal" data-target="#tzinst-modal__import-<?php
-                            echo $theme_name; ?>" uk-toggle="target: #tzinst-modal__import-<?php
-                            echo $theme_name; ?>" class="uk-button uk-button-primary uk-margin-small-bottom uk-width-1-1" data-install-demo-data><?php
+                            echo !$pass?'sysinfo':$theme_name; ?>" uk-toggle="target: #tzinst-modal__import-<?php
+                            echo !$pass?'sysinfo':$theme_name; ?>" class="uk-button uk-button-primary uk-margin-small-bottom uk-width-1-1" data-install-demo-data><?php
                                 _e('Install Demo Data', 'templaza-framework');
                                 ?></button>
                         <?php } ?>
@@ -57,6 +60,32 @@ if($items && count($items)){
                     </div>
                 </div>
                 <?php if(isset($item['demo-datas']) && count($item['demo-datas']) && !HelperLicense::has_expired($this -> theme_name)){ ?>
+                    <?php if(!$pass){ ?>
+                    <div id="tzinst-modal__import-sysinfo" uk-modal>
+                        <div class="uk-modal-dialog">
+                            <div class="uk-modal-body uk-text-danger">
+                                <p><?php $text = __('Currently, there are some values in PHP settings not sufficient enough for the theme to work properly.'
+                                        .' Please configure them again to ensure the theme has a smooth performance.', 'templaza-framework');
+                                    echo $text;
+                                ?></p>
+                                <p><?php _e('Do you want to continue import demo data?', 'templaza-framework');?></p>
+                                <div class="action uk-margin-small-top">
+                                    <a class="uk-button uk-button-danger uk-button-small" target="_blank" href="<?php
+                                    echo esc_url(admin_url('admin.php?page=templaza-framework#system-information'));
+                                    ?>"><?php _e('See PHP Settings', 'templaza-framework');?></a>
+                                </div>
+                            </div>
+                            <div class="uk-modal-footer uk-text-right">
+                                <button class="uk-button uk-button-default uk-modal-close" type="button"><?php
+                                    _e('Cancel', 'templaza-framework');?></button>
+                                <a href="#tzinst-modal__import-<?php echo $theme_name;
+                                ?>" class="uk-button uk-button-primary" uk-toggle><?php
+                                    _e('Ok', 'templaza-framework');?></a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php }?>
+
                     <div id="tzinst-modal__import-<?php echo $theme_name;
                     ?>" tabindex="-1" role="dialog" data-install-demo-data__modal data-modal-title="<?php
                     echo esc_attr(sprintf(__('Demo Content Pack » %s', 'templaza-framework'), $item['title']));
@@ -76,9 +105,6 @@ if($items && count($items)){
                                 <?php echo $this -> load_template('demo_datas'); ?>
                             </div>
                             <div class="uk-modal-footer uk-text-right uk-position-relative">
-                                <!--                                    <div class="js-processing-box processing-box uk-margin-small-bottom uk-hidden">-->
-                                <!--                                        <progress class="uk-progress js-progress-bar uk-position-top progress-rounded-0" value="10" max="100"></progress>-->
-                                <!--                                    </div>-->
                                 <div class="js-processing-box processing-box uk-margin-small-bottom uk-hidden">
                                     <div class="progress uk-position-absolute uk-width-1-1 uk-position-top-left rounded-0">
                                         <div class="progress-bar progress-bar-striped progress-bar-animated js-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
