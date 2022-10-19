@@ -4,8 +4,11 @@
 	}
 }
 
-.hideonsm {
-	@include media-breakpoint-only(sm) {
+@media (max-width: 639px) {
+	.hideonsm {
+		//@include media-breakpoint-only(xs) {
+		//	display: none !important;
+		//}
 		display: none !important;
 	}
 }
