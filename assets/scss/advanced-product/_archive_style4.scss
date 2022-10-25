@@ -52,6 +52,9 @@
           font-size:14px;
           color:$tztheme-content-color;
           font-weight:normal;
+          i{
+            padding-right:5px;
+          }
         }
         .ap-field-label{
           text-transform: capitalize;
@@ -59,7 +62,7 @@
       }
     }
     .ap-info-bottom{
-      padding:1px;
+      padding:2px;
       border:none;
     }
   }

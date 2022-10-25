@@ -21,6 +21,8 @@ if(!empty($fields)){
     <?php foreach($fields as $field){
         $f_attr             = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);
         $f_value            = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name']):null;
+        $f_icon     = isset($f_attr['icon'])?$f_attr['icon']:'';
+        $show_icon  = get_field('ap_show_archive_custom_field_icon', 'option');
         if($f_value){
             ?>
             <div class="ap-spec-item" >
@@ -36,7 +38,20 @@ if(!empty($fields)){
                     <?php
                 }else{
                     ?>
-                    <span class="ap-spec-value"><?php echo esc_html($f_value); ?></span>
+                    <span class="ap-spec-value"><?php
+                        if( !empty($f_icon) && $show_icon){
+                            if($f_icon['type'] == 'uikit-icon'){
+                                ?>
+                                <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
+                                <?php
+                            }else {
+                                ?>
+                                <i class="<?php echo $f_icon['icon']; ?>"></i>
+                                <?php
+                            }
+                        }
+                        echo esc_html($f_value); ?>
+                    </span>
                     <?php
                 }
                 ?>
