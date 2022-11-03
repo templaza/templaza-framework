@@ -647,7 +647,9 @@ Templaza_API::set_section('templaza_header',
                 'type'     => 'spacing',
                 'allow_responsive'    => true,
                 'title'    => esc_html__('Logo Section Padding', 'templaza-framework'),
-                'default'  => ''
+                'default'  => '',
+                'required' => array(
+                    array('header-mode', '=', 'stacked') ),
             ),
             array(
                 'id'       => 'stacked-divided-background',
@@ -697,6 +699,14 @@ Templaza_API::set_section('templaza_header',
                 'default'       => 'top',
                 'required' => array('header-stacked-menu-mode', '=' , 'divided')
             ),
+            // -> START Header icon
+            array(
+                'id'         => 'section-header-icon',
+                'title'      => __( 'Header Icon', 'templaza-framework' ),
+                'type'     => 'section',
+                'indent'   => true, // Indent all options below until the next 'section' option is set.
+
+            ),
             array(
                 'id'       => 'stacked-divided-search',
                 'type'     => 'switch',
@@ -725,6 +735,7 @@ Templaza_API::set_section('templaza_header',
                     'custom'     => esc_html__('Custom', 'templaza-framework'),
                 ),
                 'default'       => 'default',
+                'required' => array( 'stacked-divided-search', '=', true ),
             ),
             array(
                 'id'          => 'search-icon',
@@ -751,6 +762,7 @@ Templaza_API::set_section('templaza_header',
                     'custom'     => esc_html__('Custom', 'templaza-framework'),
                 ),
                 'default'       => 'default',
+                'required' => array( 'stacked-divided-account', '=', true ),
             ),
             array(
                 'id'          => 'account-icon',
@@ -777,6 +789,7 @@ Templaza_API::set_section('templaza_header',
                     'custom'     => esc_html__('Custom', 'templaza-framework'),
                 ),
                 'default'       => 'default',
+                'required' => array( 'stacked-divided-cart', '=', true ),
             ),
             array(
                 'id'          => 'cart-icon',
@@ -792,6 +805,16 @@ Templaza_API::set_section('templaza_header',
                 'title'    => esc_html__( 'Cart icon', 'templaza-framework' ),
                 'compiler' => 'true',
                 'required' => array( 'cart-icon-type', '=', 'custom' ),
+            ),
+            array(
+                'id'       => 'header-icon-size',
+                'type'     => 'text',
+                'required' => array(
+                    array('enable-offcanvas', '=', '1' )
+                ),
+                'title'    => __( 'Icon Size', 'templaza-framework' ),
+                'subtitle' => __( 'Set icon size in rem, em, px or percentage unit values.', 'templaza-framework' ),
+                'default'  => ''
             ),
 
         ),

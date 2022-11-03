@@ -7,7 +7,7 @@ use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 
 $options = Functions::get_theme_options();
-
+$header_options    = Functions::get_header_options();
 // Body
 $body_css               = '';
 $body_text_color        = isset($options['body-text-color'])?$options['body-text-color']:'';
@@ -64,6 +64,7 @@ $topbar_bordercolor         = CSS::make_color_rgba_redux($topbar_bordercolor);
 
 $header_iconcolor         = isset($options['header-icon-color'])?$options['header-icon-color']:'';
 $header_iconcolor         = CSS::make_color_rgba_redux($header_iconcolor);
+$header_iconsize         = isset($header_options['header-icon-size'])?$header_options['header-icon-size']:'';
 
 
 // Main Menu
@@ -254,6 +255,10 @@ if (!empty($topbar_bordercolor)) {
 if (!empty($header_iconcolor)) {
 	$header_styles[]    = 'header .header-icon i{color:'.$header_iconcolor.';}';
 	$header_styles[]    = 'header .header-icon svg{fill:'.$header_iconcolor.';}';
+}
+if (!empty($header_iconsize)) {
+	$header_styles[]    = 'header .header-icon i, .templaza-header-sticky .header-icon i{font-size:'.$header_iconsize.';}';
+	$header_styles[]    = 'header .header-icon svg, .templaza-header-sticky .header-icon svg{width:'.$header_iconsize.';}';
 }
 ?>
 

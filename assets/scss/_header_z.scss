@@ -79,6 +79,10 @@ header {
   }
   .header-icon{
     padding-left:20px;
+    align-items: end;
+    display: flex;
+    line-height: 1;
+    position: relative;
   }
 }
 
