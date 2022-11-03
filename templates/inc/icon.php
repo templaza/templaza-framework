@@ -13,6 +13,7 @@ $header_stack_cart          = isset($options['stacked-divided-cart'])?filter_var
 $search_icon_type           = isset($options['search-icon-type'])?$options['search-icon-type']:'default';
 $account_icon_type          = isset($options['account-icon-type'])?$options['account-icon-type']:'default';
 $cart_icon_type             = isset($options['cart-icon-type'])?$options['cart-icon-type']:'default';
+$enable_offcanvas           = isset($options['enable-offcanvas'])?filter_var($options['enable-offcanvas'],FILTER_VALIDATE_BOOLEAN):false;
 $search_icon_html = '<i class="fas fa-search"></i>';
 $account_icon_html = '<i class="fas fa-user"></i>';
 $cart_icon_html = '<i class="fas fa-shopping-cart"></i>';
@@ -55,9 +56,14 @@ if($cart_icon_type == 'fontawesome' ){
         $cart_icon_html = '<img src="'.$cart_icon['url'].'" alt="'.esc_attr__('Cart','templaza-framework').'" '.$log_svg.'/>';
     }
 }
+if($enable_offcanvas == true){
+    $canvas_cl ='enable_canvas_btn';
+}else{
+    $canvas_cl ='';
+}
 if($header_stack_search || $header_stack_cart || $header_stack_account){
     ?>
-    <div class="header-icon-wrap uk-flex">
+    <div class="header-icon-wrap uk-flex <?php echo esc_attr($canvas_cl);?>">
     <?php
 
 if($header_stack_search){ ?>

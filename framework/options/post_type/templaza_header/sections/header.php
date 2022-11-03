@@ -413,6 +413,15 @@ Templaza_API::set_section('templaza_header',
                     array('enable-sticky', '=', '1') ),
             ),
             array(
+                'id'       => 'sticky-padding',
+                'type'     => 'spacing',
+                'allow_responsive'    => true,
+                'title'    => esc_html__('Sticky Padding', 'templaza-framework'),
+                'default'  => '',
+                'required' => array(
+                    array('enable-sticky', '=', '1') ),
+            ),
+            array(
                 'id'       => 'sticky-logo',
                 'type'     => 'media',
                 'url'      => true,

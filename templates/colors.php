@@ -307,13 +307,13 @@ if (!empty($sticky_icon_color)) {
 // Dropdown Coloring
 $dropdown_styles = [];
 if (!empty($dropdown_main_background_color)) {
-   $dropdown_styles[] = '.templaza-nav .sub-menu{ background: ' . $dropdown_main_background_color . ' !important;}';
+   $dropdown_styles[] = '.templaza-nav .sub-menu, .header-account .account-links ul{ background: ' . $dropdown_main_background_color . ' !important;}';
 }
 if (!empty($dropdown_main_background_color)) {
    $dropdown_styles[] = '.has-megamenu.open .arrow{ border-bottom-color: ' . $dropdown_main_background_color . ' !important;}';
 }
 if (!empty($dropdown_main_link_color)) {
-   $dropdown_styles[] = '.templaza-nav .sub-menu .menu-item > a{ color: ' . $dropdown_main_link_color . ' !important;}';
+   $dropdown_styles[] = '.templaza-nav .sub-menu .menu-item > a, .header-account .account-links ul li a{ color: ' . $dropdown_main_link_color . ' !important;}';
 }
 if (!empty($dropdown_main_active_link_color)) {
    $dropdown_styles[] = '.templaza-nav .sub-menu .menu-item.current-menu-item > a, .menu_open .menu-go-back .fas{ color: ' . $dropdown_main_active_link_color . ' !important;}';

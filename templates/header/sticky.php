@@ -64,10 +64,54 @@ $attribs    = join(' ', array_map(function($v, $k){
     return !empty($v)?$k . '="' . $v . '"':$k;
 }, $attribs, array_keys($attribs)));
 $attribs    = ' '.$attribs;
+if(isset($sticky_width) && $sticky_width !='none'){
+    $sticky_width = 'uk-container '.'uk-container-'.$sticky_width.'';
+}else{
+    $sticky_width = '';
+}
+$header_sticky_designs = array(
+    array(
+        'enable' => true,
+        'class' => '.templaza-sticky-inner',
+        'options' => array(
+            'sticky-padding',
+        ),
+    )
+);
+if (count($header_sticky_designs)) {
+    $styles = array();
+
+    foreach ($header_sticky_designs as $design) {
+        $enable = isset($design['enable']) ? (bool)$design['enable'] : false;
+        if ($enable) {
+            $css_responsive = array(
+                'desktop' => '',
+                'tablet' => '',
+                'mobile' => '',
+            );
+            $css = Templates::make_css_design_style($design['options'], $options,$important = true);
+            if (!empty($css)) {
+                if (is_array($css)) {
+                    foreach ($css as $device => $stack_style) {
+                        if (isset($css_responsive[$device]) && !empty($css_responsive[$device])) {
+                            $stack_style .= $css_responsive[$device];
+                        }
+                        if (!empty($stack_style)) {
+                            $stack_style = $design['class'] . '{' . $stack_style . '}';
+                            Templates::add_inline_style($stack_style, $device);
+                        }
+                    }
+                } else {
+                    Templates::add_inline_style($design['class'] . '{' . $css . '}');
+                }
+            }
+        }
+    }
+}
 ?>
 <?php /* header starts*/ ?>
 <div id="templaza-sticky-header" class="<?php echo implode(' ', $class); ?> uk-hidden">
-    <div class="templaza-sticky-inner uk-container uk-container-<?php echo esc_attr($sticky_width);?>" <?php echo $attribs;?>>
+    <div class="templaza-sticky-inner  <?php echo esc_attr($sticky_width);?>" <?php echo $attribs;?>>
         <div class="uk-width uk-flex uk-flex-row uk-flex-between uk-flex-middle">
     <!--        --><?php //if (!empty($header_mobile_menu)) { ?>
                 <div class="uk-flex uk-flex-left uk-hidden@m uk-flex-middle">
@@ -112,6 +156,16 @@ $attribs    = ' '.$attribs;
                 echo '</div>';
             }
             ?>
+            <?php if ($sticky_mode == 'left' || $sticky_mode == 'center' && $enable_offcanvas==false){
+                ?>
+            <div class="header-right-section uk-flex uk-flex-right uk-flex-middle">
+                <?php
+                Templates::load_my_layout('inc.icon',true,false);
+                ?>
+            </div>
+            <?php
+            } ?>
+
             <?php if ($block_1_type != 'blank' || $sticky_mode == 'right' || $enable_offcanvas): ?>
                 <div class="header-right-section uk-flex uk-flex-right uk-flex-middle">
                     <?php
@@ -130,6 +184,9 @@ $attribs    = ' '.$attribs;
                     }
                     ?>
                     <?php if ($enable_offcanvas) { ?>
+                        <?php
+                        Templates::load_my_layout('inc.icon',true,false);
+                        ?>
                         <div class="header-offcanvas-trigger burger-menu-button <?php echo $offcanvas_togglevisibility; ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>">
                             <button type="button" class="button">
                          <span class="box">
@@ -137,12 +194,12 @@ $attribs    = ' '.$attribs;
                          </span>
                             </button>
                         </div>
-                    <?php } ?>
+                    <?php } else{
+                        Templates::load_my_layout('inc.icon',true,false);
+                    }?>
                 </div>
             <?php endif; ?>
-            <?php
-            Templates::load_my_layout('inc.icon',true,false);
-            ?>
+
         </div>
     </div>
 </div>

@@ -65,6 +65,13 @@
     padding-right: 40px;
     margin-left: 70px;
   }
+  .enable_canvas_btn{
+    .header-icon{
+      &:last-child{
+        padding-right:15px;
+      }
+    }
+  }
 }
 .templaza-header-section {
   box-shadow: none;
