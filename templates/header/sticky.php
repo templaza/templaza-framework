@@ -166,7 +166,7 @@ if (count($header_sticky_designs)) {
             <?php
             } ?>
 
-            <?php if ($block_1_type != 'blank' || $sticky_mode == 'right' || $enable_offcanvas): ?>
+            <?php if ($sticky_mode == 'right' || $enable_offcanvas): ?>
                 <div class="header-right-section uk-flex uk-flex-right uk-flex-middle">
                     <?php
                     if ($sticky_mode == 'right') {

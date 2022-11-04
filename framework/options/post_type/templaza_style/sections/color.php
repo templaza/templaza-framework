@@ -117,17 +117,29 @@ Templaza_API::set_section('templaza_style',
             array(
                 'id'       => 'background-logo-section',
                 'type'     => 'color_rgba',
-                'title'    => esc_html__( 'Background Logo Section', 'tzautoshowroom' ),
+                'title'    => esc_html__( 'Background Logo Section', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'background-stacked-top-section',
+                'type'     => 'color_rgba',
+                'title'    => esc_html__( 'Background Stacked Top Section', 'templaza-framework' ),
+                'default'  => '',
+            ),
+            array(
+                'id'       => 'color-stacked-top-section',
+                'type'     => 'color_rgba',
+                'title'    => esc_html__( 'Stacked Top Section Color', 'templaza-framework' ),
+                'default'  => '',
             ),
             array(
                 'id'       => 'background-menu-section',
                 'type'     => 'color_rgba',
-                'title'    => esc_html__( 'Background Menu Section', 'tzautoshowroom' ),
+                'title'    => esc_html__( 'Background Menu Section', 'templaza-framework' ),
             ),
             array(
                 'id'       => 'header-icon-color',
                 'type'     => 'color_rgba',
-                'title'    => esc_html__( 'Header icon color', 'tzautoshowroom' ),
+                'title'    => esc_html__( 'Header icon color', 'templaza-framework' ),
             ),
         ),
     )

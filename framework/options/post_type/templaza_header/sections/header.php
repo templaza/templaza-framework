@@ -94,6 +94,12 @@ Templaza_API::set_section('templaza_header',
                         'class' => 'w-px-150 h-px-103',
                         'img'   => Functions::get_my_frame_url().'/options/patterns/stacked_style3.svg',
                     ),
+                    'left' => array(
+                        'alt'   => __('Stacked Left', 'templaza-framework'),
+                        'title' => __('Stacked Left', 'templaza-framework'),
+                        'class' => 'w-px-150 h-px-103',
+                        'img'   => Functions::get_my_frame_url().'/options/patterns/stacked-left.svg',
+                    ),
                 ),
                 'required' => array(
                     array('header-mode', '=', 'stacked')
@@ -144,6 +150,8 @@ Templaza_API::set_section('templaza_header',
                 'options'  => array(
                     'blank'     => __('Blank', 'templaza-framework'),
                     'sidebar'   => __('Sidebar', 'templaza-framework'),
+                    'contact'   => __('Contact', 'templaza-framework'),
+                    'social'    => __('Social', 'templaza-framework'),
                     'custom'    => __('Custom HTML', 'templaza-framework'),
                 ),
                 'select2'       => array( 'allowClear' => false ),
@@ -186,7 +194,9 @@ Templaza_API::set_section('templaza_header',
                 'subtitle' => __( 'Select Sidebar for Header Block 2.', 'templaza-framework' ),
                 'data'     => 'sidebars',
                 'default'  => '',
-                'required' => array( array('header-horizontal-menu-mode', '=', 'right')),
+                'required' => array(
+                    array('header-horizontal-menu-mode', '=', 'right')
+                ),
             ),
             array(
                 'id'       => 'header-block-2-type',
@@ -197,6 +207,8 @@ Templaza_API::set_section('templaza_header',
                 'options'  => array(
                     'blank'     => __('Blank', 'templaza-framework'),
                     'sidebar'   => __('Sidebar', 'templaza-framework'),
+                    'contact'    => __('Contact', 'templaza-framework'),
+                    'social'    => __('Social', 'templaza-framework'),
                     'custom'    => __('Custom HTML', 'templaza-framework'),
                 ),
                 'default'  => 'blank',
@@ -226,6 +238,91 @@ Templaza_API::set_section('templaza_header',
                 'required' => array(
                     array('header-block-2-type', '=', 'custom'),
                 ),
+            ),
+            array(
+                'id'       => 'logo-section-border',
+                'type'     => 'border',
+                'title'    => esc_html__('Logo section Border', 'templaza-framework'),
+                'default'  => '',
+                'required' => array(
+                    array('header-mode', '=', 'stacked') ),
+            ),
+            array(
+                'id'       => 'stacked-divided-top-padding',
+                'type'     => 'spacing',
+                'allow_responsive'    => true,
+                'title'    => esc_html__('Logo Section Padding', 'templaza-framework'),
+                'default'  => '',
+                'required' => array(
+                    array('header-mode', '=', 'stacked') ),
+            ),
+            array(
+                'id'       => 'stacked-divided-header-top-padding',
+                'type'     => 'spacing',
+                'allow_responsive'    => true,
+                'title'    => esc_html__('Stacked Top Section Padding', 'templaza-framework'),
+                'default'  => '',
+                'required' => array(
+                    array('header-mode', '=', 'stacked') ),
+            ),
+            array(
+                'id'       => 'stacked-top-section-border',
+                'type'     => 'border',
+                'title'    => esc_html__('Top section Border', 'templaza-framework'),
+                'default'  => '',
+                'required' => array(
+                    array('header-mode', '=', 'stacked') ),
+            ),
+            array(
+                'id'       => 'stacked-divided-header-menu-padding',
+                'type'     => 'spacing',
+                'allow_responsive'    => true,
+                'title'    => esc_html__('Stacked Menu Section Padding', 'templaza-framework'),
+                'default'  => '',
+                'required' => array(
+                    array('header-mode', '=', 'stacked') ),
+            ),
+            array(
+                'id'       => 'stacked-divided-background',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Divided background', 'templaza-framework' ),
+                'default'  => true,
+                'required' => array('header-stacked-menu-mode', '=' , array('divided','center'))
+            ),
+
+            array(
+                'id'       => 'input-border',
+                'type'     => 'border',
+                'title'    => esc_html__('Input Border', 'templaza-framework'),
+                'default'  => '',
+                'required' => array('stacked-divided-background', '=' , true)
+            ),
+            array(
+                'id'        => 'stacked-divided-inner-width',
+                'type'      => 'select',
+                'title'     =>  esc_html__('Max Width', 'templaza-framework'),
+                'options' => array(
+                    'default'   => esc_html__('Default', 'templaza-framework'),
+                    'xsmall'    => esc_html__('XSmall', 'templaza-framework'),
+                    'small'     => esc_html__('Small', 'templaza-framework'),
+                    'large'     => esc_html__('Large', 'templaza-framework'),
+                    'xlarge'    => esc_html__('XLarge', 'templaza-framework'),
+                    'expand'    => esc_html__('Expand', 'templaza-framework'),
+                    'none'      => esc_html__('None', 'templaza-framework'),
+                ),
+                'default'       => 'none',
+                'required' => array('stacked-divided-background', '=' , true)
+            ),
+            array(
+                'id'        => 'stacked-icon-position',
+                'type'      => 'select',
+                'title'     =>  esc_html__('Icon Position', 'templaza-framework'),
+                'options' => array(
+                    'top'   => esc_html__('Top', 'templaza-framework'),
+                    'bottom'    => esc_html__('Bottom', 'templaza-framework'),
+                ),
+                'default'       => 'top',
+                'required' => array('header-stacked-menu-mode', '=' , 'divided')
             ),
             array(
                 'id'       => 'header-menu',
@@ -642,63 +739,7 @@ Templaza_API::set_section('templaza_header',
                 'type'   => 'section',
                 'indent' => false, // Indent all options below until the next 'section' option is set.
             ),
-            array(
-                'id'       => 'stacked-divided-top-padding',
-                'type'     => 'spacing',
-                'allow_responsive'    => true,
-                'title'    => esc_html__('Logo Section Padding', 'templaza-framework'),
-                'default'  => '',
-                'required' => array(
-                    array('header-mode', '=', 'stacked') ),
-            ),
-            array(
-                'id'       => 'stacked-divided-background',
-                'type'     => 'switch',
-                'title'    => esc_html__( 'Divided background', 'templaza-framework' ),
-                'default'  => true,
-                'required' => array('header-stacked-menu-mode', '=' , array('divided','center'))
-            ),
-            array(
-                'id'       => 'logo-section-border',
-                'type'     => 'border',
-                'title'    => esc_html__('Logo section Border', 'templaza-framework'),
-                'default'  => '',
-                'required' => array('stacked-divided-background', '=' , true)
-            ),
-            array(
-                'id'       => 'input-border',
-                'type'     => 'border',
-                'title'    => esc_html__('Input Border', 'templaza-framework'),
-                'default'  => '',
-                'required' => array('stacked-divided-background', '=' , true)
-            ),
-            array(
-                'id'        => 'stacked-divided-inner-width',
-                'type'      => 'select',
-                'title'     =>  esc_html__('Max Width', 'templaza-framework'),
-                'options' => array(
-                    'default'   => esc_html__('Default', 'templaza-framework'),
-                    'xsmall'    => esc_html__('XSmall', 'templaza-framework'),
-                    'small'     => esc_html__('Small', 'templaza-framework'),
-                    'large'     => esc_html__('Large', 'templaza-framework'),
-                    'xlarge'    => esc_html__('XLarge', 'templaza-framework'),
-                    'expand'    => esc_html__('Expand', 'templaza-framework'),
-                    'none'      => esc_html__('None', 'templaza-framework'),
-                ),
-                'default'       => 'none',
-                'required' => array('stacked-divided-background', '=' , true)
-            ),
-            array(
-                'id'        => 'stacked-icon-position',
-                'type'      => 'select',
-                'title'     =>  esc_html__('Icon Position', 'templaza-framework'),
-                'options' => array(
-                    'top'   => esc_html__('Top', 'templaza-framework'),
-                    'bottom'    => esc_html__('Bottom', 'templaza-framework'),
-                ),
-                'default'       => 'top',
-                'required' => array('header-stacked-menu-mode', '=' , 'divided')
-            ),
+
             // -> START Header icon
             array(
                 'id'         => 'section-header-icon',

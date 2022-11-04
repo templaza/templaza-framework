@@ -72,6 +72,18 @@
       }
     }
   }
+  .tz-header-contact{
+    >span{
+      padding:0 20px;
+      border-right:1px solid #ccc;
+      &:last-child{
+        border:none;
+      }
+      i{
+        padding-right:5px;
+      }
+    }
+  }
 }
 .templaza-header-section {
   box-shadow: none;
