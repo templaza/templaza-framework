@@ -60,9 +60,9 @@ $astyle .= CSS::make_border_redux($backtotop_icon_border);
 if($icon_padding = CSS::make_spacing_redux('padding', $backtotop_icon_padding)){
     if (!empty($icon_padding)) {
         if(is_array($icon_padding)){
-            foreach($icon_padding as $device => $style){
-                $style  = '#templaza-backtotop{' . $style . '}';
-                Templates::add_inline_style($style, $device);
+            foreach($icon_padding as $device => $p_style){
+                $p_style  = '#templaza-backtotop{' . $p_style . '}';
+                Templates::add_inline_style($p_style, $device);
             }
         }else {
             $astyle .= $icon_padding;
