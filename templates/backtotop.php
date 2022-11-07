@@ -24,6 +24,8 @@ $backtotop_icon_size        = isset($options['backtotop-icon-size'])?(int) $opti
 $backtotop_icon_color       = isset($options['backtotop-icon-color'])?$options['backtotop-icon-color']: '#000';
 $backtotop_icon_color       = CSS::make_color_rgba_redux($backtotop_icon_color);
 $backtotop_icon_color       = !empty($backtotop_icon_color)?$backtotop_icon_color: '#000';
+$backtotop_icon_border      = isset($options['backtotop-icon-border'])?$options['backtotop-icon-border']:'';
+$backtotop_icon_padding     = isset($options['backtotop-icon-padding'])?$options['backtotop-icon-padding']:'';
 //if(is_array($backtotop_icon_color) && isset($backtotop_icon_color['rgba'])) {
 //    $backtotop_icon_color    = $backtotop_icon_color['rgba'];
 //}
@@ -53,6 +55,22 @@ switch ($backtotop_icon_style) {
       break;
 }
 $astyle .= $backtotop_icon_bgcolor?'background:' . $backtotop_icon_bgcolor . ';':'';
+$astyle .= CSS::make_border_redux($backtotop_icon_border);
+
+if($icon_padding = CSS::make_spacing_redux('padding', $backtotop_icon_padding)){
+    if (!empty($icon_padding)) {
+        if(is_array($icon_padding)){
+            foreach($icon_padding as $device => $style){
+                $style  = '#templaza-backtotop{' . $style . '}';
+                Templates::add_inline_style($style, $device);
+            }
+        }else {
+            $astyle .= $icon_padding;
+        }
+    }
+}
+
+//$astyle .= CSS::make_border($backtotop_icon_border);
 $class[] = $backtotop_icon_style;
 
 if (!$backtotop_on_mobile) {

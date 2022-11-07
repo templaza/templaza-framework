@@ -160,6 +160,27 @@ Templaza_API::set_section('settings',
                 'required' => array('backtotop','=','1'),
             ),
             array(
+                'id'       => 'backtotop-icon-padding',
+                'type'   => 'spacing',
+                'mode'   => 'padding',
+                'all'    => false,
+                'allow_responsive'    => true,
+                'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                'title'    => __( 'Icon Padding', 'templaza-framework' ),
+                'subtitle' => __( 'Set padding for the Back to Top Icon, set a value by moving an indicator in a horizontal fashion.', 'templaza-framework' ),
+                'required' => array('backtotop','=','1'),
+                'default' => array(
+                    'units' => 'px',
+                ),
+            ),
+            array(
+                'id'       => 'backtotop-icon-border',
+                'type'   => 'border',
+                'title'    => __( 'Icon border', 'templaza-framework' ),
+                'subtitle' => __( 'Set border for the Back to Top Icon, set a value by moving an indicator in a horizontal fashion.', 'templaza-framework' ),
+                'required' => array('backtotop','=','1'),
+            ),
+            array(
                 'id'       => 'backtotop-icon-color',
                 'type'     => 'color_rgba',
                 'title'    => __( 'Icon color', 'templaza-framework' ),
