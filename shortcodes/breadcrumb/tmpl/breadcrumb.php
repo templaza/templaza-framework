@@ -14,6 +14,7 @@ extract(shortcode_atts(array(
 if (is_single() && $enable_breadcrumb_single == false){
     return;
 }
+$tz_class = '';
 ?>
 <div<?php echo !empty($tz_id)?' id="'.esc_attr__($tz_id).'"':''; ?> class="<?php echo esc_attr__($tz_class); ?>">
 <?php
