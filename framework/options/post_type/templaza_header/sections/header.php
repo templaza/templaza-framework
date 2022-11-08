@@ -850,9 +850,6 @@ Templaza_API::set_section('templaza_header',
             array(
                 'id'       => 'header-icon-size',
                 'type'     => 'text',
-                'required' => array(
-                    array('enable-offcanvas', '=', '1' )
-                ),
                 'title'    => __( 'Icon Size', 'templaza-framework' ),
                 'subtitle' => __( 'Set icon size in rem, em, px or percentage unit values.', 'templaza-framework' ),
                 'default'  => ''

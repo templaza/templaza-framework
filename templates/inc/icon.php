@@ -40,7 +40,7 @@ if($account_icon_type == 'fontawesome' ){
         if(Functions::file_ext_exists($account_icon['url'], 'svg')){
             $log_svg  = ' data-uk-svg';
         }
-        $account_icon_html = '<img src="'.$account_icon['url'].'" alt="'.esc_attr__('Account','templaza-framework').'" '.$log_svg.'/>';
+        $account_icon_html = '<img  src="'.$account_icon['url'].'" alt="'.esc_attr__('Account','templaza-framework').'" '.$log_svg.'/>';
     }
 }
 if($cart_icon_type == 'fontawesome' ){
@@ -53,7 +53,7 @@ if($cart_icon_type == 'fontawesome' ){
         if(Functions::file_ext_exists($cart_icon['url'], 'svg')){
             $log_svg  = ' data-uk-svg';
         }
-        $cart_icon_html = '<img src="'.$cart_icon['url'].'" alt="'.esc_attr__('Cart','templaza-framework').'" '.$log_svg.'/>';
+        $cart_icon_html = '<img  src="'.$cart_icon['url'].'" alt="'.esc_attr__('Cart','templaza-framework').'" '.$log_svg.'/>';
     }
 }
 if($enable_offcanvas == true){

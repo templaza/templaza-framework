@@ -195,17 +195,20 @@ if($header_stack_divi == true) {
 $social_profiles    = isset($gb_options['social'])?$gb_options['social']:'';
 
 if ($mode == 'left') {
-    echo '<div class="uk-grid-match uk-grid-collapse " data-uk-grid>';
+    echo '<div class="uk-grid-match uk-flex uk-flex-between uk-grid-collapse uk-position-relative">';
     ?>
-    <div class="uk-hidden@m uk-flex uk-flex-left uk-flex-middle">
-        <div class="header-mobilemenu-trigger uk-position-center-left uk-margin-left burger-menu-button uk-text-left" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
+    <div class="uk-flex uk-hidden@m uk-flex-left uk-flex-middle">
+        <div class="header-mobilemenu-trigger burger-menu-button " data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
             <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
         </div>
     </div>
     <div class="uk-width-auto@m templaza-divi-logo-wrap stacked-left-logo-wrap">
-        <div class="tz-stacked-left-logo uk-flex uk-flex-middle">
+        <div class="tz-stacked-left-logo uk-flex uk-flex-center uk-flex-middle">
             <?php Templates::load_my_layout('logo'); ?>
         </div>
+    </div>
+    <div class="uk-hidden@m uk-width-auto uk-flex uk-flex-right uk-flex-middle">
+        <?php Templates::load_my_layout('inc.icon',true,false); ?>
     </div>
     <div class="uk-width-expand@m uk-visible@m templaza-stacked-left-right">
         <?php
@@ -526,11 +529,19 @@ echo '</div>';
         }
         // header block ends
         ?>
+            <?php
+            if($icon_position == 'bottom'){
+            ?>
+            <div class="uk-hidden@m uk-width-auto uk-flex uk-flex-right uk-flex-middle">
+                <?php Templates::load_my_layout('inc.icon',true,false); ?>
+            </div>
+            <?php } ?>
             <?php if ( (($header_stack_search || $header_stack_cart || $header_stack_account) && $icon_position == 'top') || $enable_offcanvas){ ?>
             <div class="uk-flex uk-flex-right uk-flex-middle">
+
                 <?php
                 if($icon_position == 'top'){
-                    Templates::load_my_layout('inc.icon');
+                    Templates::load_my_layout('inc.icon',true,false);
                 }
                 if ($enable_offcanvas) {
                     ?>
@@ -595,7 +606,7 @@ echo '</div>';
         }
         if($icon_position == 'bottom'){
             echo '<div class="header-block-icon uk-flex uk-flex-right uk-flex-middle">';
-            Templates::load_my_layout('inc.icon');
+            Templates::load_my_layout('inc.icon',true,false);
             echo '</div>';
         }
         ?>

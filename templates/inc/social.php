@@ -15,7 +15,7 @@ if(!empty($social_profiles)){
     $social_gap         = isset($options['social-gap']) ? 'uk-grid-' . $options['social-gap'] : '';
 ?>
 
-<ul class="uk-child-width-auto <?php echo $social_gap; ?> " data-uk-grid>
+<ul class=" tz-header-social uk-child-width-auto <?php echo $social_gap; ?> " data-uk-grid>
    <?php
    foreach ($social_profiles as $social_profile) {
        $social_profile_link = $social_profile->link;

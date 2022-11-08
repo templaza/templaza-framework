@@ -175,3 +175,8 @@
     margin-right: 0;
   }
 }
+@media (max-width:1199.99px) {
+  body .templaza-divi-logo-wrap, body .menu-item-logo{
+    border:none !important;
+  }
+}
