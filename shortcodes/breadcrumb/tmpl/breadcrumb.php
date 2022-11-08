@@ -6,9 +6,11 @@ use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 
 extract(shortcode_atts(array(
+    'tz_id'  => '',
+    'tz_class'  => '',
     'enable_breadcrumb_single'    => false,
-
 ), $atts));
+
 if (is_single() && $enable_breadcrumb_single == false){
     return;
 }
