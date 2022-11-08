@@ -89,6 +89,22 @@ if ( ! class_exists( 'ReduxFramework_TZ_Preloader' ) ) {
                         'title' => __('Donut', 'templaza-framework'),
                         'html'  => '<div class="donut"></div>',
                     ),
+                    'triple-spinner' => array(
+                        'title' => __('Triple Spinner', 'templaza-framework'),
+                        'html'  => '<div class="triple-spinner"></div>',
+                    ),
+                    'cm-spinner' => array(
+                        'title' => __('CM Spinner', 'templaza-framework'),
+                        'html'  => '<div class="cm-spinner"></div>',
+                    ),
+                    'hm-spinner' => array(
+                        'title' => __('HM Spinner', 'templaza-framework'),
+                        'html'  => '<div class="hm-spinner"></div>',
+                    ),
+                    'reverse-spinner' => array(
+                        'title' => __('Reverse Spinner', 'templaza-framework'),
+                        'html'  => '<div class="reverse-spinner"></div>',
+                    ),
                 ),
             );
 

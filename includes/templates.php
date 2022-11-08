@@ -152,7 +152,34 @@ class Templates{
             return '';
         }
 
-        $css_name   = $prefix.'-'.md5_file($sass_file).'.css';
+        $md5file    = md5_file($sass_file);
+
+        $has_import = false;
+        $a = fopen($sass_file,'r');
+        while(!feof($a)){
+            $line   = fgets($a);
+            if(strpos($line,'@import') === false){
+                continue;
+            }
+
+            list($import_str, $import_file) = explode('"', $line);
+            $import_file    = preg_replace('/\/(.*)$/', '/_$1', $import_file);
+
+            $import_file    = $sass_path.'/'.$import_file.'.scss';
+
+            if(file_exists($import_file)){
+                $md5file    .= '-'.md5_file($import_file);
+                $has_import = true;
+            }
+        }
+        fclose($a);
+
+        if($has_import) {
+            $md5file = md5($md5file);
+        }
+
+//        $css_name   = $prefix.'-'.md5_file($sass_file).'.css';
+        $css_name   = $prefix.'-'.$md5file.'.css';
         $css_file   = $css_path.'/'.$css_name;
 
         if(!file_exists($css_file)){

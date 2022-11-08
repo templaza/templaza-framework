@@ -17,6 +17,9 @@ $preloder_setting       = isset($options['preloader-setting'])?$options['preload
 $preloader_animation    = isset($options['preloader-animation'])?$options['preloader-animation']:'circle';
 $preloader_size         = isset($options['preloader-size']) && $options['preloader-size']?$options['preloader-size'].'px':'50px';
 $preloader_color        = isset($options['preloader-color'])?$options['preloader-color']:'';
+$preloader_color_2      = isset($options['preloader-color-2'])?$options['preloader-color-2']:'';
+$preloader_color_3      = isset($options['preloader-color-3'])?$options['preloader-color-3']:'';
+
 if(is_array($preloader_color) && isset($preloader_color['rgba'])) {
     if($preloader_color['alpha'] == 1){
         $preloader_color  = $preloader_color['color'];
@@ -26,6 +29,22 @@ if(is_array($preloader_color) && isset($preloader_color['rgba'])) {
 }
 
 $preloader_color    = !empty($preloader_color)?$preloader_color:'#000';
+
+if(is_array($preloader_color_2) && isset($preloader_color_2['rgba'])) {
+    if($preloader_color_2['alpha'] == 1){
+        $preloader_color_2  = $preloader_color_2['color'];
+    }else {
+        $preloader_color_2  = $preloader_color_2['rgba'];
+    }
+}
+
+if(is_array($preloader_color_3) && isset($preloader_color_3['rgba'])) {
+    if($preloader_color_3['alpha'] == 1){
+        $preloader_color_3  = $preloader_color_3['color'];
+    }else {
+        $preloader_color_3  = $preloader_color_3['rgba'];
+    }
+}
 
 $preloader_bgcolor      = isset($options['preloader-bgcolor'])?$options['preloader-bgcolor']:'';
 if(is_array($preloader_bgcolor) && isset($preloader_bgcolor['rgba'])) {
@@ -40,6 +59,8 @@ $preloader_image        = isset($options['preloader-image'])?$options['preloader
 
 Templates::add_inline_style('#templaza-preloader {--tztheme-preloader-size: '.$preloader_size.';'
     .'--tztheme-preloader-color: '.$preloader_color.';'
+    .'--tztheme-preloader-color-2: '.$preloader_color_2.';'
+    .'--tztheme-preloader-color-3: '.$preloader_color_3.';'
     .($preloader_bgcolor?'--tztheme-preloader-bgcolor: '.$preloader_bgcolor.';':'')
     .($preloader_image && !empty($preloader_image['background-image'])?'--tztheme-preloader-image: url('.$preloader_image['background-image'].');':'')
     .($preloader_image && !empty($preloader_image['background-repeat'])?'--tztheme-preloader-bg-repeat: '.$preloader_image['background-repeat'].';':'')

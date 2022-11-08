@@ -93,7 +93,26 @@ Templaza_API::set_section('settings',
                 'title'    => __( 'Preloader color', 'templaza-framework' ),
                 'subtitle' => __( 'Select a color for the preloader.', 'templaza-framework' ),
                 'required' => array('preloader-setting','=',array('animations', 'fontawesome')),
-    //            'required' => array('preloader','=','1'),
+            ),
+            array(
+                'id'       => 'preloader-color-2',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Preloader color 2', 'templaza-framework' ),
+                'subtitle' => __( 'Select a color for the preloader.', 'templaza-framework' ),
+                'required' => array(
+                    array('preloader-setting','=',array('animations', 'fontawesome')),
+                    array('preloader-animation','=', array('triple-spinner', 'cm-spinner', 'hm-spinner','reverse-spinner'))
+                ),
+            ),
+            array(
+                'id'       => 'preloader-color-3',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Preloader color 3', 'templaza-framework' ),
+                'subtitle' => __( 'Select a color for the preloader.', 'templaza-framework' ),
+                'required' => array(
+                    array('preloader-setting','=',array('animations', 'fontawesome')),
+                    array('preloader-animation','=', array('triple-spinner', 'cm-spinner', 'hm-spinner'))
+                ),
             ),
             array(
                 'id'       => 'preloader-bgcolor',
