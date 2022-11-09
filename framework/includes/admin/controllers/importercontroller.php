@@ -88,166 +88,166 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 $prefix = TEMPLAZA_FRAMEWORK;
 //                if ( isset( $_GET[$prefix.'_activate'] ) && 'activate-plugin' === $_GET[$prefix.'_activate'] ) {
 
-                    check_admin_referer( TEMPLAZA_FRAMEWORK_NAME.'-action','_nonce' );
+                check_admin_referer( TEMPLAZA_FRAMEWORK_NAME.'-action','_nonce' );
 
-                    if(!isset($_GET['plugin']) && !$_GET['plugin']){
-                        echo '<div data-tzinst-install-plugin-message>';
-                        wp_send_json(array(
-                            'success' => false,
-                            'installed' => false,
-                            'activated' => false,
-                            'message' => __('Not found plugin', 'templaza-framework')
-                        ));
-                        echo '</div>';
-                        exit();
-                    }
-
-                    $_plugin    = $_GET['plugin'];
-                    $plugins    = $this -> get_all_plugins();
-                    $plugin     = $plugins[$_plugin];
-                    $failed     = isset($_GET['failed']) && $_GET['failed']?$_GET['failed']:array();
-                    $passed     = isset($_GET['passed']) && $_GET['passed']?$_GET['passed']:array();
-
-                    $resultJSON = array(
-                        'success'   => false,
-                        'update'    => false,
-                        'install'   => false,
-                        'activate'  => false,
-                        'activated' => false
-                    );
-
-                    $tgmConfig  = array(
-                        'id'            => 'templaza-framework',
-                        'has_notices'   => true,
-                        'is_automatic'  => true,
-                        'strings'       => array(
-                            'updating'              => __( 'Updating Plugin: %s', 'templaza-framework' ),
-                            'plugin_updated'      => _n_noop( 'Plugin "%s" updated successfully.',
-                                'Plugins "%s" updated successfully.', 'templaza-framework' ),
-                            'plugin_activated'      => _n_noop( 'Plugin "%s" activated successfully.',
-                                'Plugins "%s" activated successfully.', 'templaza-framework' ),
-                            'plugin_update_error'   => _n_noop('Can not update plugin "%s". Please check it again!',
-                                'Can not update plugins "%s". Please check it again!', 'templaza-framework'),
-                            'plugin_install_error'  => _n_noop('Can not install plugin "%s". Please check it again!',
-                                'Can not install plugins "%s". Please check it again!', 'templaza-framework'),
-                            'plugin_activate_error' => _n_noop( 'Can not activate plugin "%s".',
-                                'Can not activate plugins "%s".', 'templaza-framework' ),
-                            'complete'              => __( 'All plugins installed and activated successfully. %1$s',  'templaza-framework' ),
-                        )
-                    );
-                    if(isset($_GET['tgmpa-update']) && 'update-plugin' === $_GET['tgmpa-update']){
-                        $tgmConfig['is_automatic']  = false;
-                    }
-
-                    tgmpa( $plugins, $tgmConfig);
-
-                    $tgmpa_instance = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) );
-
-                    // Unfortunately 'output buffering' doesn't work here as eventually 'wp_ob_end_flush_all' function is called.
-                    $tgmpa_instance->install_plugins_page();
-
+                if(!isset($_GET['plugin']) && !$_GET['plugin']){
                     echo '<div data-tzinst-install-plugin-message>';
-                    if(isset($_GET['tgmpa-install']) && 'install-plugin' === $_GET['tgmpa-install']){
-                       // Install Plugin
-                       if ($tgmpa_instance->is_plugin_installed($_plugin)) {
-                           if($tgmConfig['is_automatic'] && $tgmpa_instance -> is_plugin_active($_plugin)){
-                               $resultJSON['success']   = true;
-                               $resultJSON['activated'] = true; /* Enable text actived */
-                           }else{
-                               $resultJSON['success']   = true;
-                               $resultJSON['activate']  = true; /* Enable text activate */
-                           }
+                    wp_send_json(array(
+                        'success' => false,
+                        'installed' => false,
+                        'activated' => false,
+                        'message' => __('Not found plugin', 'templaza-framework')
+                    ));
+                    echo '</div>';
+                    exit();
+                }
 
-                           $install                 = isset($passed['install']) && $passed['install']?$passed['install']:array();
-                           $install[]               = $plugin['name'];
-                           $passed['install']       = $install;
-                           $msgCount                = count($install);
-                           $pluginNames             = $msgCount?implode(", ", $install):$plugin['name'];
-                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_updated'],$msgCount, 'templaza-framework');
+                $_plugin    = $_GET['plugin'];
+                $plugins    = $this -> get_all_plugins();
+                $plugin     = $plugins[$_plugin];
+                $failed     = isset($_GET['failed']) && $_GET['failed']?$_GET['failed']:array();
+                $passed     = isset($_GET['passed']) && $_GET['passed']?$_GET['passed']:array();
 
-                           $resultJSON['passed']    = $passed;
-                           $resultJSON['message']   = sprintf($message, $pluginNames);
-                       }else {
-                           $install                 = isset($failed['install']) && $failed['install']?$failed['install']:array();
-                           $install[]               = $plugin['name'];
-                           $failed['install']       = $install;
-                           $msgCount                = count($install);
-                           $pluginNames             = $msgCount?implode(", ", $install):$plugin['name'];
-                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_install_error'],$msgCount, 'templaza-framework');
+                $resultJSON = array(
+                    'success'   => false,
+                    'update'    => false,
+                    'install'   => false,
+                    'activate'  => false,
+                    'activated' => false
+                );
 
-                           $resultJSON['success']   = false;
-                           $resultJSON['install']   = true; /* Enable text install */
-                           $resultJSON['failed']    = $failed;
+                $tgmConfig  = array(
+                    'id'            => 'templaza-framework',
+                    'has_notices'   => true,
+                    'is_automatic'  => true,
+                    'strings'       => array(
+                        'updating'              => __( 'Updating Plugin: %s', 'templaza-framework' ),
+                        'plugin_updated'      => _n_noop( 'Plugin "%s" updated successfully.',
+                            'Plugins "%s" updated successfully.', 'templaza-framework' ),
+                        'plugin_activated'      => _n_noop( 'Plugin "%s" activated successfully.',
+                            'Plugins "%s" activated successfully.', 'templaza-framework' ),
+                        'plugin_update_error'   => _n_noop('Can not update plugin "%s". Please check it again!',
+                            'Can not update plugins "%s". Please check it again!', 'templaza-framework'),
+                        'plugin_install_error'  => _n_noop('Can not install plugin "%s". Please check it again!',
+                            'Can not install plugins "%s". Please check it again!', 'templaza-framework'),
+                        'plugin_activate_error' => _n_noop( 'Can not activate plugin "%s".',
+                            'Can not activate plugins "%s".', 'templaza-framework' ),
+                        'complete'              => __( 'All plugins installed and activated successfully. %1$s',  'templaza-framework' ),
+                    )
+                );
+                if(isset($_GET['tgmpa-update']) && 'update-plugin' === $_GET['tgmpa-update']){
+                    $tgmConfig['is_automatic']  = false;
+                }
+
+                tgmpa( $plugins, $tgmConfig);
+
+                $tgmpa_instance = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) );
+
+                // Unfortunately 'output buffering' doesn't work here as eventually 'wp_ob_end_flush_all' function is called.
+                $tgmpa_instance->install_plugins_page();
+
+                echo '<div data-tzinst-install-plugin-message>';
+                if(isset($_GET['tgmpa-install']) && 'install-plugin' === $_GET['tgmpa-install']){
+                    // Install Plugin
+                    if ($tgmpa_instance->is_plugin_installed($_plugin)) {
+                        if($tgmConfig['is_automatic'] && $tgmpa_instance -> is_plugin_active($_plugin)){
+                            $resultJSON['success']   = true;
+                            $resultJSON['activated'] = true; /* Enable text actived */
+                        }else{
+                            $resultJSON['success']   = true;
+                            $resultJSON['activate']  = true; /* Enable text activate */
+                        }
+
+                        $install                 = isset($passed['install']) && $passed['install']?$passed['install']:array();
+                        $install[]               = $plugin['name'];
+                        $passed['install']       = $install;
+                        $msgCount                = count($install);
+                        $pluginNames             = $msgCount?implode(", ", $install):$plugin['name'];
+                        $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_updated'],$msgCount, 'templaza-framework');
+
+                        $resultJSON['passed']    = $passed;
+                        $resultJSON['message']   = sprintf($message, $pluginNames);
+                    }else {
+                        $install                 = isset($failed['install']) && $failed['install']?$failed['install']:array();
+                        $install[]               = $plugin['name'];
+                        $failed['install']       = $install;
+                        $msgCount                = count($install);
+                        $pluginNames             = $msgCount?implode(", ", $install):$plugin['name'];
+                        $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_install_error'],$msgCount, 'templaza-framework');
+
+                        $resultJSON['success']   = false;
+                        $resultJSON['install']   = true; /* Enable text install */
+                        $resultJSON['failed']    = $failed;
 //                           $resultJSON['message']   = sprintf($message, $pluginNames);
-                       }
-                    }elseif(isset($_GET['tgmpa-update']) && 'update-plugin' === $_GET['tgmpa-update']){
-                       // Update Plugin
-                       $installedVersion    = $tgmpa_instance->get_installed_version($_plugin);
-                       if(version_compare($installedVersion, $plugin['version'], '=')){
-                           if($tgmpa_instance -> is_plugin_active($_plugin)){
-                               $resultJSON['success']   = true;
-                               $resultJSON['activated'] = true; /* Enable text activated */
-                           }else{
-                               $resultJSON['success']   = true;
-                               $resultJSON['activate']  = true; /* Enable text activate */
-                           }
-
-                           $update                  = isset($passed['update']) && $passed['update']?$passed['update']:array();
-                           $update[]                = $plugin['name'];
-                           $passed['update']        = $update;
-                           $msgCount                = count($update);
-                           $pluginNames             = $msgCount?implode(", ", $update):$plugin['name'];
-                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_updated'],$msgCount, 'templaza-framework');
-
-                           $resultJSON['passed']    = $passed;
-                           $resultJSON['message']   = sprintf($message, $pluginNames);
-                       }else{
-                           $update                  = isset($failed['update']) && $failed['update']?$failed['update']:array();
-                           $update[]                = $plugin['name'];
-                           $failed['update']       = $update;
-                           $msgCount                = count($update);
-                           $pluginNames             = $msgCount?implode(", ", $update):$plugin['name'];
-                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_update_error'],$msgCount, 'templaza-framework');
-
-                           $resultJSON['success']   = false;
-                           $resultJSON['update']    = true; /* Enable text update */
-                           $resultJSON['failed']    = $failed;
-                           $resultJSON['message']   = sprintf($message, $pluginNames);
-                       }
-                    }elseif(isset($_GET['tgmpa-activate']) && 'activate-plugin' === $_GET['tgmpa-activate']){
-                       // Activate Plugin
-                       if($tgmpa_instance -> is_plugin_active($_plugin)){
-                           $activate                = isset($passed['activate']) && $passed['activate']?$passed['activate']:array();
-                           $activate[]              = $plugin['name'];
-                           $passed['activate']      = $activate;
-                           $msgCount                = count($activate);
-                           $pluginNames             = $msgCount?implode(", ", $activate):$plugin['name'];
-                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_activated'],$msgCount, 'templaza-framework');
-
-                           $resultJSON['success']   = true;
-                           $resultJSON['activated'] = true; /* Enable text activated */
-                           $resultJSON['passed']    = $passed;
-                           $resultJSON['message']   = sprintf($message, $pluginNames);
-                       }else{
-                           $activate                = isset($failed['activate']) && $failed['activate']?$failed['activate']:array();
-                           $activate[]              = $plugin['name'];
-                           $failed['activate']      = $activate;
-                           $msgCount                = count($activate);
-                           $pluginNames             = $msgCount?implode(", ", $activate):$plugin['name'];
-                           $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_activate_error'],$msgCount, 'templaza-framework');
-
-                           $resultJSON['success']   = true;
-                           $resultJSON['activate']  = true; /* Enable text activate */
-                           $resultJSON['failed']    = $failed;
-                           $resultJSON['message']   = sprintf($message, $pluginNames);
-                       }
                     }
+                }elseif(isset($_GET['tgmpa-update']) && 'update-plugin' === $_GET['tgmpa-update']){
+                    // Update Plugin
+                    $installedVersion    = $tgmpa_instance->get_installed_version($_plugin);
+                    if(version_compare($installedVersion, $plugin['version'], '=')){
+                        if($tgmpa_instance -> is_plugin_active($_plugin)){
+                            $resultJSON['success']   = true;
+                            $resultJSON['activated'] = true; /* Enable text activated */
+                        }else{
+                            $resultJSON['success']   = true;
+                            $resultJSON['activate']  = true; /* Enable text activate */
+                        }
 
-                   if(count($resultJSON)){
-                       wp_send_json($resultJSON);
-                   }
-                   echo '</div>';
-                   exit();
+                        $update                  = isset($passed['update']) && $passed['update']?$passed['update']:array();
+                        $update[]                = $plugin['name'];
+                        $passed['update']        = $update;
+                        $msgCount                = count($update);
+                        $pluginNames             = $msgCount?implode(", ", $update):$plugin['name'];
+                        $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_updated'],$msgCount, 'templaza-framework');
+
+                        $resultJSON['passed']    = $passed;
+                        $resultJSON['message']   = sprintf($message, $pluginNames);
+                    }else{
+                        $update                  = isset($failed['update']) && $failed['update']?$failed['update']:array();
+                        $update[]                = $plugin['name'];
+                        $failed['update']       = $update;
+                        $msgCount                = count($update);
+                        $pluginNames             = $msgCount?implode(", ", $update):$plugin['name'];
+                        $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_update_error'],$msgCount, 'templaza-framework');
+
+                        $resultJSON['success']   = false;
+                        $resultJSON['update']    = true; /* Enable text update */
+                        $resultJSON['failed']    = $failed;
+                        $resultJSON['message']   = sprintf($message, $pluginNames);
+                    }
+                }elseif(isset($_GET['tgmpa-activate']) && 'activate-plugin' === $_GET['tgmpa-activate']){
+                    // Activate Plugin
+                    if($tgmpa_instance -> is_plugin_active($_plugin)){
+                        $activate                = isset($passed['activate']) && $passed['activate']?$passed['activate']:array();
+                        $activate[]              = $plugin['name'];
+                        $passed['activate']      = $activate;
+                        $msgCount                = count($activate);
+                        $pluginNames             = $msgCount?implode(", ", $activate):$plugin['name'];
+                        $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_activated'],$msgCount, 'templaza-framework');
+
+                        $resultJSON['success']   = true;
+                        $resultJSON['activated'] = true; /* Enable text activated */
+                        $resultJSON['passed']    = $passed;
+                        $resultJSON['message']   = sprintf($message, $pluginNames);
+                    }else{
+                        $activate                = isset($failed['activate']) && $failed['activate']?$failed['activate']:array();
+                        $activate[]              = $plugin['name'];
+                        $failed['activate']      = $activate;
+                        $msgCount                = count($activate);
+                        $pluginNames             = $msgCount?implode(", ", $activate):$plugin['name'];
+                        $message                 = translate_nooped_plural($tgmConfig['strings']['plugin_activate_error'],$msgCount, 'templaza-framework');
+
+                        $resultJSON['success']   = true;
+                        $resultJSON['activate']  = true; /* Enable text activate */
+                        $resultJSON['failed']    = $failed;
+                        $resultJSON['message']   = sprintf($message, $pluginNames);
+                    }
+                }
+
+                if(count($resultJSON)){
+                    wp_send_json($resultJSON);
+                }
+                echo '</div>';
+                exit();
 //                }
             }
         }
@@ -870,7 +870,8 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
         protected function import_elementor($folder_path, $filename = '',  $file_filter = '.json|.zip'){
 
-            if(!class_exists('Elementor\Core\App\Modules\ImportExport\Import')){
+            if(!class_exists('Elementor\App\Modules\ImportExport\Processes\Import') &&
+                !class_exists('Elementor\Core\App\Modules\ImportExport\Import')){
                 $this -> info -> set_message(esc_html__('Class Import not found. Please install the elementor plugin to continue import it.',
                     'templaza-framework'), true);
                 echo $this -> info -> output();
@@ -896,6 +897,8 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
                 if($fileExt == 'zip'){
                     $filePath   = $folder_path.'/'.$file;
+
+                    /* Old code used for Elementor version < 3.8.0
                     $sub_folder_path    = $folder_path.'/'.$_filename;
                     $unziped    = unzip_file($filePath, $sub_folder_path);
                     if($unziped){
@@ -904,6 +907,11 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
                     // Import elementor kit
                     $result = $this -> _import_elementor_kit($sub_folder_path);
+                    */
+
+                    // Import elementor kit
+                    $result = $this -> _import_elementor_kit($filePath);
+
                 }elseif($fileExt == 'json'){
 
                     // Import elementor settings
@@ -926,7 +934,8 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
         }
 
         protected function _import_elementor_kit($folder_path){
-            if(!class_exists('Elementor\Core\App\Modules\ImportExport\Import')){
+            if(!class_exists('Elementor\App\Modules\ImportExport\Processes\Import') &&
+                !class_exists('Elementor\Core\App\Modules\ImportExport\Import')){
                 return false;
             }
 
@@ -953,8 +962,12 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
             $importer_opt['post_id']    = $kit -> get_id();
 
-
-            $importer   = new Import($importer_opt);
+            if(class_exists('Elementor\App\Modules\ImportExport\Processes\Import')){
+                $importer   = new \Elementor\App\Modules\ImportExport\Processes\Import($folder_path, $importer_opt);
+                $importer -> register_default_runners();
+            }else{
+                $importer   = new \Elementor\Core\App\Modules\ImportExport\Import($importer_opt);
+            }
 
             // Import
             $el_result = $importer -> run();
