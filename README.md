@@ -3,6 +3,10 @@
 
 Changelogs:
 
+Version 1.1.1 - November 10, 2022
+    
+    Fix backtotop padding setting
+
 Version 1.1.0 - November 10, 2022
 
     Fix color woo catalog
