@@ -3,6 +3,49 @@
 
 Changelogs:
 
+Version 1.1.0 - November 10, 2022
+
+    Fix color woo catalog
+    Fix sticky in column settings
+    Fix style keyword form search
+    Fix issue uk-grid for row inner
+    Fix issue import elementor data
+    Fix issue undefined FS_CHMOD_DIR
+    Fix issue redux undefined of metabox
+    Fix issue nav tabs menu in dashboard
+    Fix translate and add language file Templaza Framework
+    Fix issue Visible On Phone Landscape of column setting
+    Fix issue undefined $tz_class of breadcrumb shortcode
+    Fix issue font update and font weight of typography field
+    Fix issue fields required don't show when edit element setting
+    Fix issue search in select field and change color in input of color_rgba field
+    Added tiny slider
+    Added uipost style 1
+    Added max width sticky menu
+    Added Header stacked Left type
+    Added style2 advanced product filter
+    Added style 4 advanced product
+    Added social color in social element
+    Added style default advanced product in framework
+    Added Border radius, position for element in design tab
+    Added system requirement notice for demo importer page in back-end
+    Update breadcrumb
+    Update Header icon size
+    Update preloader option
+    Update sticky for column
+    Update options social element
+    Update border and padding for backtotop
+    Update slider options latest post element
+    Update mobile style for header stacked left
+    Update grid layout expand-auto for row's grid
+    Update icon view for advanced product style 4
+    Update Heading Margin option for Heading element
+    Update search elements when add element in layout
+    Update Sticky header padding, show icon cart, search, user
+    Update filter ajax option for advanced-product-filter gutenberg
+    Update dialog display system requirement notice to continue import demo data
+    Update column, max-height option and generate filter form in advanced-product-filter gutenberg
+
 Version 1.0.9 - September 13, 2022
     
     Fix issue save setting options to file
