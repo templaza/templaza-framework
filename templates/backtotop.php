@@ -56,19 +56,21 @@ switch ($backtotop_icon_style) {
 }
 $astyle .= $backtotop_icon_bgcolor?'background:' . $backtotop_icon_bgcolor . ';':'';
 $astyle .= CSS::make_border_redux($backtotop_icon_border);
-
-if($icon_padding = CSS::make_spacing_redux('padding', $backtotop_icon_padding)){
-    if (!empty($icon_padding)) {
-        if(is_array($icon_padding)){
-            foreach($icon_padding as $device => $p_style){
-                $p_style  = '#templaza-backtotop{' . $p_style . '}';
-                Templates::add_inline_style($p_style, $device);
+if(is_array($backtotop_icon_padding) && count($backtotop_icon_padding)) {
+    if($icon_padding = CSS::make_spacing_redux('padding', $backtotop_icon_padding)){
+        if (!empty($icon_padding)) {
+            if(is_array($icon_padding)){
+                foreach($icon_padding as $device => $p_style){
+                    $p_style  = '#templaza-backtotop{' . $p_style . '}';
+                    Templates::add_inline_style($p_style, $device);
+                }
+            }else {
+                $astyle .= $icon_padding;
             }
-        }else {
-            $astyle .= $icon_padding;
         }
     }
 }
+
 
 //$astyle .= CSS::make_border($backtotop_icon_border);
 $class[] = $backtotop_icon_style;
