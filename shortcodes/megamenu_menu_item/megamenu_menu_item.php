@@ -25,7 +25,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Megamenu_Menu_Item')){
                     array(
                         'id' => 'menu_id',
                         'type' => 'text',
-                        'title'      => __('Menu Id', $this -> text_domain),
+                        'title'      => __('Menu Id', 'templaza-framework'),
                         'attributes' => array(
                             'readonly'     => 'readonly',
                         )
@@ -33,7 +33,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Megamenu_Menu_Item')){
 //                    array(
 //                        'id'         => 'menu_slug',
 //                        'type'       => 'text',
-//                        'title'      => __('Menu Slug', $this -> text_domain),
+//                        'title'      => __('Menu Slug', 'templaza-framework'),
 //                        'attributes' => array(
 ////                            'type' => 'hidden'
 //                            'readonly'     => 'readonly',

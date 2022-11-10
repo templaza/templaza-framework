@@ -51,6 +51,18 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 			'Verdana, Geneva, sans-serif'             => 'Verdana, Geneva, sans-serif',
 		);
 
+        /**
+         * Default font weights.
+         *
+         * @var string[]
+         */
+        private $default_font_weights = array(
+            '400'       => 'Normal 400',
+            '700'       => 'Bold 700',
+            '400italic' => 'Normal 400 Italic',
+            '700italic' => 'Bold 700 Italic',
+        );
+
 		/**
 		 * User font array.
 		 *
@@ -69,7 +81,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 			$this->parent = $parent;
 			$this->field  = $field;
 			$this->value  = $value;
-			$this -> text_domain    = \TemPlazaFramework\Functions::get_my_text_domain();
+            $this -> text_domain    = \TemPlazaFramework\Functions::get_my_text_domain();
 
 			$this->set_defaults();
 
@@ -170,6 +182,8 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				$this->user_fonts     = false;
 				$this->field['fonts'] = $this->std_fonts;
 			}
+
+            $this->field['weights'] = $this->field['weights'] ?? $this->default_font_weights;
 
 			// Localize std fonts.
 			$this->localize_std_fonts();
@@ -949,27 +963,27 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
             $devices    = array(
                 'xlarge' => array(
-                    'title'=> esc_html__('Large Screen', $this -> text_domain),
+                    'title'=> esc_html__('Large Screen', 'templaza-framework'),
 //                    'icon' => 'dashicons dashicons-desktop',
                     'uk-icon' => 'tv',
                 ),
                 'desktop' => array(
-                    'title'=> esc_html__('Desktop', $this -> text_domain),
+                    'title'=> esc_html__('Desktop', 'templaza-framework'),
                     'icon' => 'dashicons dashicons-desktop',
                     'uk-icon' => 'desktop',
                 ),
                 'laptop' => array(
-                    'title'=> esc_html__('Laptop', $this -> text_domain),
+                    'title'=> esc_html__('Laptop', 'templaza-framework'),
                     'icon' => 'dashicons dashicons-laptop',
                     'uk-icon' => 'laptop',
                 ),
                 'tablet'  => array(
-                    'title'=> esc_html__('Tablet', $this -> text_domain),
+                    'title'=> esc_html__('Tablet', 'templaza-framework'),
                     'icon' => 'dashicons dashicons-tablet',
                     'uk-icon' => 'tablet',
                 ),
                 'mobile'  => array(
-                    'title'=> esc_html__('Mobile', $this -> text_domain),
+                    'title'=> esc_html__('Mobile', 'templaza-framework'),
                     'icon' => 'dashicons dashicons-smartphone',
                     'uk-icon' => 'phone',
                 ),

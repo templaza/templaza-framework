@@ -103,11 +103,11 @@ class TemplazaFramework_GutenbergBlock{
              * plugin_dir_path( MY_PLUGIN ) . 'languages' ) ). For details see
              * https://make.wordpress.org/core/2018/11/09/new-javascript-i18n-support-in-wordpress/
              */
-            wp_set_script_translations('tz-gutenberg-'.$this -> get_name(), $this -> text_domain);
+            wp_set_script_translations('tz-gutenberg-'.$this -> get_name(), 'templaza-framework');
         }
     }
 
     public function load_textdomain(){
-        load_plugin_textdomain($this -> text_domain, false, basename(__DIR__) . '/languages');
+        load_plugin_textdomain('templaza-framework', false, basename(__DIR__) . '/languages');
     }
 }

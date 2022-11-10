@@ -493,8 +493,11 @@ class CSS{
     public static function make_spacing_redux($mode = 'padding', $spacing_option = array(),
                                               $important = false, $default_unit = '', $selector = ''){
         $store_id   = __METHOD__;
+        $store_id  .= ':'.$mode;
         $store_id  .= ':'.serialize($spacing_option);
         $store_id  .= ':'.$important;
+        $store_id  .= ':'.$default_unit;
+        $store_id  .= ':'.$selector;
         $store_id   = md5($store_id);
 
         if(isset(static::$cache[$store_id])){
@@ -586,5 +589,26 @@ class CSS{
         }
 
         return '';
+    }
+
+    public static function make_border_redux($border = array(), $important = false){
+        $store_id   = __METHOD__;
+        $store_id  .= ':'.serialize($border);
+        $store_id  .= ':'.$important;
+        $store_id   = md5($store_id);
+
+        if(isset(static::$cache[$store_id])){
+            return static::$cache[$store_id];
+        }
+
+        if(empty($border)){
+            return '';
+        }
+
+        if(is_string($border)){
+            return $border;
+        }
+
+        return self::border($border['border-top'], $border['border-right'], $border['border-bottom'],$border['border-left'],$border['border-style'],$border['border-color'],$important);
     }
 }

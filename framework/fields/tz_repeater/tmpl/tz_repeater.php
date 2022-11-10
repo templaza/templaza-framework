@@ -9,6 +9,6 @@ if(isset($this -> field) && !empty($this -> field)){
     ?>"><?php echo $this -> value; ?></textarea>
     <div class="field-tz_repeater-accordion" id="<?php echo $content_id; ?>"></div>
 
-    <a href="#" class="add-more button button-primary" data-content="#<?php echo $content_id; ?>"><i class="far fa-plus-square"></i> <?php echo __('Add More', $this -> text_domain); ?></a>
+    <a href="#" class="add-more button button-primary" data-content="#<?php echo $content_id; ?>"><i class="far fa-plus-square"></i> <?php echo __('Add More', 'templaza-framework'); ?></a>
 
 <?php } ?>

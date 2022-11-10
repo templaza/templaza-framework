@@ -60,6 +60,18 @@ if($preloder_setting == "animations"){
 		case 'donut':
 			$preloaderHTML = '<div class="donut"></div>';
 			break;
+		case 'triple-spinner':
+			$preloaderHTML = '<div class="triple-spinner"></div>';
+			break;
+		case 'cm-spinner':
+			$preloaderHTML = '<div class="cm-spinner"></div>';
+			break;
+		case 'hm-spinner':
+			$preloaderHTML = '<div class="hm-spinner"></div>';
+			break;
+		case 'reverse-spinner':
+			$preloaderHTML = '<div class="reverse-spinner"></div>';
+			break;
 		default:
 			$preloaderHTML = '';
 			break;

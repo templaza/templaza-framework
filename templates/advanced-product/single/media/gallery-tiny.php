@@ -2,23 +2,54 @@
 use Advanced_Product\AP_Functions;
 
 defined('ADVANCED_PRODUCT') or exit();
-wp_enqueue_style('baressco-tiny-slider-style');
-wp_enqueue_script( 'baressco-tiny-slider-script' );
+wp_enqueue_style('templaza-tiny-slider-style');
+wp_enqueue_script( 'templaza-tiny-slider-script' );
 $ap_video   = get_field('ap_video', get_the_ID());
 $ap_gallery = get_field('ap_gallery', get_the_ID());
-
+$no_cookie      =   0;
 if (isset($ap_video) && !empty($ap_video)) {
-    preg_match("/iframe/", $ap_video, $output_array);
-    if ($output_array && !empty($output_array)) {
-        preg_match("/src=\"([^\"]+)\"/", $ap_video, $output_array);
-        $ap_video = $output_array[1];
-    }
+    if (wp_oembed_get($ap_video)) :
+        $video = parse_url($ap_video);
+        $youtube_no_cookie = $no_cookie ? '-nocookie' : '';
+        switch($video['host']) {
+            case 'youtu.be':
+                $id = trim($video['path'],'/');
+                $src = '//www.youtube'.$youtube_no_cookie.'.com/embed/' . $id .'?autoplay=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1';
+                break;
+
+            case 'www.youtube.com':
+            case 'youtube.com':
+                parse_str($video['query'], $query);
+                $id = $query['v'];
+                $src = '//www.youtube'.$youtube_no_cookie.'.com/embed/' . $id .'?autoplay=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1';
+                break;
+
+            case 'vimeo.com':
+            case 'www.vimeo.com':
+                $id = trim($video['path'],'/');
+                $src = "//player.vimeo.com/video/{$id}?".implode('&amp;', $attrb);
+        }
+    endif;
+    $video_thumbnail="http://img.youtube.com/vi/".$id."/maxresdefault.jpg";
 }
 
 if(!empty($ap_gallery)){
 ?>
 <div class="uk-inline tz-slideshow-wrap">
     <div class="ap-slideshow ap-tiny-slider">
+        <?php
+        if (isset($ap_video) && !empty($ap_video)) {
+        ?>
+        <div class="ap-tiny-slider-item item-video">
+            <?php if(wp_oembed_get( $ap_video )) : ?>
+                <iframe class="tz-embed-responsive-item" src="<?php echo esc_url($src);?>" allowFullScreen width="1920" height="1080" allowfullscreen uk-responsive data-uk-video></iframe>
+            <?php else : ?>
+                <?php echo wp_kses($ap_video,'post'); ?>
+            <?php endif; ?>
+        </div>
+        <?php
+        }
+        ?>
         <?php foreach ($ap_gallery as $image) {
             ?>
             <div class="ap-tiny-slider-item">
@@ -37,6 +68,15 @@ if(!empty($ap_gallery)){
 </div>
 <div class="tz-control-wrap uk-inline">
     <div class="tz-ap-thumbnails">
+        <?php
+        if (isset($ap_video) && !empty($ap_video)) {
+            ?>
+            <div class="ap-tiny-slider-thumbnail item-video-thumbnail">
+                <img src="<?php echo esc_url($video_thumbnail);?>" alt="<?php esc_attr_e('Video','templaza-framework');?>">
+            </div>
+            <?php
+        }
+        ?>
         <?php foreach ($ap_gallery as $image) {
             ?>
             <div class="ap-tiny-slider-thumbnail">
@@ -59,7 +99,7 @@ if(!empty($ap_gallery)){
         var slider = tns({
             container: '.ap-tiny-slider',
             items: 1,
-            mode: 'gallery',
+            mode: 'carousel',
             navContainer: '.tz-ap-thumbnails',
             navAsThumbnails: true,
             animateIn: 'tns-fadeIn',
@@ -79,6 +119,16 @@ if(!empty($ap_gallery)){
             mouseDrag: true,
             loop: false,
             controlsContainer:'.tz-slideshow-control-thumb',
+            responsive: {
+                640: {
+                    gutter: 10,
+                    items: 5,
+                },
+                960: {
+                    gutter: 20,
+                    items: 5,
+                }
+            }
         });
     })
 </script>

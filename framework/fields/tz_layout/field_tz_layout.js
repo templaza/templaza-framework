@@ -973,6 +973,22 @@
                             }
                         });
                     }
+
+                    // Fix issue search value of select field
+                    $(event.target).find("select").on("select2:opening", function(){
+                        $(event.target).removeAttr("tabindex");
+                    }).on("select2:close", function(){
+                        $(event.target).attr("tabindex", "-1");
+                    });
+
+                    // Fix issue put color of color rgba field
+                    $(event.target).find(".redux-color-rgba").on("beforeShow.spectrum",
+                        function(){
+                            $(event.target).removeAttr("tabindex");
+                        }).on("hide.spectrum",
+                        function(){
+                            $(event.target).attr("tabindex", "-1");
+                        });
                 }
             });
 
@@ -1160,6 +1176,20 @@
                         "current_target": control,
                         "beforeshow":function(){
                             element_click_event($(this), control);
+
+                            // Filter elements
+                            var __modal = $(this);
+                            __modal.find(".fl_tz_layout__search-input").on("keyup change", function(){
+                                var search = $(this).val().toLowerCase();
+
+                                if(!search){
+                                    __modal.find(".fl_tz_layout__grid-filter [data-fl_tz_layout-filter]").removeClass("uk-hidden");
+                                }else{
+                                    __modal.find(".fl_tz_layout__grid-filter [data-fl_tz_layout-filter]").addClass("uk-hidden")
+                                        .siblings(".fl_tz_layout__grid-filter [data-fl_tz_layout-filter*='" + search.toLowerCase() + "']").removeClass("uk-hidden");
+                                }
+                            });
+
                         },
                         "hidden":function(){
                             $(this).remove();
@@ -1830,7 +1860,8 @@
 
                                 });
 
-                                $.redux.checkRequired(_dialog.find(".redux-container"));
+                                tz_required(control.closest(".redux-group-tab"));
+                                // $.redux.checkRequired(_dialog.find(".redux-container"));
 
                             }
                         },

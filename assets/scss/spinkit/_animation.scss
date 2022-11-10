@@ -557,3 +557,182 @@
   0% { transform:rotate(0deg); }
   100% { transform:rotate(360deg); }
 }
+
+// triple, cm, hm, reverse spinner
+// 15
+.triple-spinner {
+  display: block;
+  position: relative;
+  width: $tztheme-spinkit-size;
+  height: $tztheme-spinkit-size;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top: 2px solid $tztheme-spinkit-spinner-color;
+  border-left: 2px solid $tztheme-spinkit-spinner-color;
+  -webkit-animation: preload-spin 2s linear infinite;
+  animation: preload-spin 2s linear infinite;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid transparent;
+  }
+  &::before {
+    opacity: 0.85;
+    top: 8%;
+    left: 8%;
+    right: 8%;
+    bottom: 8%;
+    border-top-color: $tztheme-spinkit-spinner-color-2;
+    border-left-color: $tztheme-spinkit-spinner-color-2;
+    -webkit-animation: preload-spin 3s linear infinite;
+    animation: preload-spin 3.5s linear infinite;
+  }
+  &::after {
+    opacity: 0.7;
+    top: 18%;
+    left: 18%;
+    right: 18%;
+    bottom: 18%;
+    border-top-color: $tztheme-spinkit-spinner-color-3;
+    border-left-color: $tztheme-spinkit-spinner-color-3;
+    -webkit-animation: preload-spin 1.5s linear infinite;
+    animation: preload-spin 1.75s linear infinite;
+  }
+}
+
+// 16
+.cm-spinner {
+  width: $tztheme-spinkit-size;
+  height: $tztheme-spinkit-size;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  border-top: 2px solid $tztheme-spinkit-spinner-color;
+  -webkit-animation: preload-spin 4s linear infinite;
+  animation: preload-spin 4s linear infinite;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 10%;
+    right: 10%;
+    border-radius: 50%;
+    border: 2px solid transparent;
+  }
+
+  &::before {
+    opacity: 0.8;
+    border-top-color: $tztheme-spinkit-spinner-color-2;
+    -webkit-animation: 3s preload-spin linear infinite;
+    animation: 3s preload-spin linear infinite;
+  }
+
+  &::after {
+    opacity: 0.9;
+    border-top-color: $tztheme-spinkit-spinner-color-3;
+    -webkit-animation: preload-spin 1.5s linear infinite;
+    animation: preload-spin 1.5s linear infinite;
+  }
+}
+
+// 17
+.hm-spinner{
+  width: $tztheme-spinkit-size;
+  height: $tztheme-spinkit-size;
+  border: 2px solid transparent;
+  border-top-color: $tztheme-spinkit-spinner-color;
+  border-bottom-color: $tztheme-spinkit-spinner-color;
+  border-radius: 50%;
+  position: relative;
+  -webkit-animation: preload-spin 3s linear infinite;
+  animation: preload-spin 3s linear infinite;
+
+  &::before{
+    opacity: 0.7;
+    content: "";
+    position: absolute;
+    top: 15%;
+    right: 15%;
+    bottom: 15%;
+    left: 15%;
+    border: 2px solid transparent;
+    border-top-color: $tztheme-spinkit-spinner-color-2;
+    border-bottom-color: $tztheme-spinkit-spinner-color-2;
+    border-radius: 50%;
+    -webkit-animation: preload-spin 1.5s linear infinite;
+    animation: preload-spin 1.5s linear infinite;
+  }
+}
+
+// 18
+.reverse-spinner {
+  position: relative;
+  width: $tztheme-spinkit-size;
+  height: $tztheme-spinkit-size;
+  border: 2px solid transparent;
+  border-top-color: $tztheme-spinkit-spinner-color;
+  border-left-color: $tztheme-spinkit-spinner-color;
+  border-radius: 50%;
+  -webkit-animation: preload-spin 1.5s linear infinite;
+  animation: preload-spin 1.5s linear infinite;
+
+  &::before {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    right: 15%;
+    bottom: 15%;
+    content: "";
+    border: 2px solid transparent;
+    border-top-color: $tztheme-spinkit-spinner-color-2;
+    border-left-color: $tztheme-spinkit-spinner-color-2;
+    border-radius: 50%;
+    -webkit-animation: preload-spin-back 1s linear infinite;
+    animation: preload-spin-back 1s linear infinite;
+  }
+}
+@-webkit-keyframes preload-spin-back {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-720deg);
+    transform: rotate(-720deg);
+  }
+}
+@keyframes preload-spin-back {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-720deg);
+    transform: rotate(-720deg);
+  }
+}
+@-webkit-keyframes preload-spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes preload-spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

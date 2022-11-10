@@ -58,7 +58,7 @@ header {
     padding-bottom: $tztheme-sticky-header-padding-y;
   }
 
-  &.d-flex, &.uk-flex {
+  &.tz-sticky {
     -webkit-animation-name: slideInDown;
     animation-name: slideInDown;
   }
@@ -76,6 +76,13 @@ header {
   }
   .admin-bar .templaza-container &{
     top: 32px;
+  }
+  .header-icon{
+    padding-left:20px;
+    align-items: end;
+    display: flex;
+    line-height: 1;
+    position: relative;
   }
 }
 

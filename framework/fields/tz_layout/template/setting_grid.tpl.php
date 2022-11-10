@@ -38,20 +38,21 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
         array('1-5','3-5','1-5'),
         array('2-5','1-5','1-5','1-5'),
         array('1-5','1-5','1-5','2-5'),
-        array('medium' => __('Fixed', $this -> text_domain),'expand' => __('Expand', $this -> text_domain)),
-        array('expand' => __('Expand', $this -> text_domain),'medium' => __('Fixed', $this -> text_domain)),
+        array('medium' => __('Fixed', 'templaza-framework'),'expand' => __('Expand', 'templaza-framework')),
+        array('expand' => __('Expand', 'templaza-framework'),'medium' => __('Fixed', 'templaza-framework')),
         array(
-            array('width' => 'expand', 'title' => __('Expand', $this -> text_domain)),
-            array('width' => 'medium', 'title' => __('Fixed', $this -> text_domain)),
-            array('width' => 'expand', 'title' => __('Expand', $this -> text_domain)),
+            array('width' => 'expand', 'title' => __('Expand', 'templaza-framework')),
+            array('width' => 'medium', 'title' => __('Fixed', 'templaza-framework')),
+            array('width' => 'expand', 'title' => __('Expand', 'templaza-framework')),
         ),
         array(
-            array('width' => 'medium', 'title' => __('Fixed', $this -> text_domain)),
-            array('width' => 'expand', 'title' => __('Expand', $this -> text_domain)),
-            array('width' => 'medium', 'title' => __('Fixed', $this -> text_domain)),
+            array('width' => 'medium', 'title' => __('Fixed', 'templaza-framework')),
+            array('width' => 'expand', 'title' => __('Expand', 'templaza-framework')),
+            array('width' => 'medium', 'title' => __('Fixed', 'templaza-framework')),
         ),
-        array('auto' => __('Auto', $this -> text_domain),'expand' => __('Expand', $this -> text_domain)),
-        array('auto' => __('Auto', $this -> text_domain),'1-3','expand' => __('Expand', $this -> text_domain)),
+        array('auto' => __('Auto', 'templaza-framework'),'expand' => __('Expand', 'templaza-framework')),
+        array('expand' => __('Expand', 'templaza-framework'), 'auto' => __('Auto', 'templaza-framework')),
+        array('auto' => __('Auto', 'templaza-framework'),'1-3','expand' => __('Expand', 'templaza-framework')),
     );
     ?>
     <div class="fl-grid-items" data-fl-setting-title="<?php
@@ -103,7 +104,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
             <div class="fl-grid-item" data-cells="custom">
                 <div class="m-0 uk-child-width-1-1" data-uk-grid>
                     <div class="fl-grid-item-col">
-                        <span><?php echo esc_html__('Custom', $this -> text_domain); ?></span>
+                        <span><?php echo esc_html__('Custom', 'templaza-framework'); ?></span>
                     </div>
                 </div>
             </div>

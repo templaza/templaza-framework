@@ -65,6 +65,25 @@
     padding-right: 40px;
     margin-left: 70px;
   }
+  .enable_canvas_btn{
+    .header-icon{
+      &:last-child{
+        padding-right:15px;
+      }
+    }
+  }
+  .tz-header-contact{
+    >span{
+      padding:0 20px;
+      border-right:1px solid #ccc;
+      &:last-child{
+        border:none;
+      }
+      i{
+        padding-right:5px;
+      }
+    }
+  }
 }
 .templaza-header-section {
   box-shadow: none;
@@ -154,5 +173,10 @@
   }
   body.header-sidebar-right{
     margin-right: 0;
+  }
+}
+@media (max-width:1199.99px) {
+  body .templaza-divi-logo-wrap, body .menu-item-logo{
+    border:none !important;
   }
 }

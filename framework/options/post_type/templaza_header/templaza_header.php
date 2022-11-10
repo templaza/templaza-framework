@@ -6,9 +6,9 @@ require_once 'sections/header.php';
 // -> START Layout
 Templaza_API::set_section('templaza_header',
     array(
-        'title'  => __( 'Layout', $this -> text_domain ),
+        'title'  => __( 'Layout', 'templaza-framework' ),
         'id'     => 'section-layouts',
-        'desc'   => __( 'These settings control the layout', $this -> text_domain ),
+        'desc'   => __( 'These settings control the layout', 'templaza-framework' ),
         'icon'   => 'el el-website',
         'fields'     => array(
             array(

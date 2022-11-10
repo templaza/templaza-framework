@@ -124,7 +124,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
             $opt_name   = $this -> opt_name;
             if ( ! isset( $_GET['secret'] ) || md5( md5( \Redux_Functions_Ex::hash_key() ) . '-'
                     . $opt_name ) !== $_GET['secret'] ) { // phpcs:ignore WordPress.Security.NonceVerification
-                wp_die( __('Invalid Secret for options use', $this -> text_domain) );
+                wp_die( __('Invalid Secret for options use', 'templaza-framework') );
                 exit;
             }
 
@@ -193,7 +193,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
             $args['show_presets']   = false;
             $args['show_import_export']   = false;
 
-            $args['display_name']   = __('Template Settings', $this->text_domain);
+            $args['display_name']   = __('Template Settings', 'templaza-framework');
 
             return $args;
         }
@@ -435,7 +435,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
                 $action = $this -> get_post_type().'_duplicate';
                 $nonce  = wp_create_nonce( $action );
                 $actions['duplicate'] = '<a href="admin.php?action='.$action.'&post='.$post -> ID.'&_wpnonce='
-                    .$nonce.'" title="" rel="permalink">'.esc_html__('Duplicate', $this -> text_domain).'</a>';
+                    .$nonce.'" title="" rel="permalink">'.esc_html__('Duplicate', 'templaza-framework').'</a>';
             }
             return $actions;
         }
@@ -476,7 +476,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
             }
             $post_id    = isset($_GET['post'])?$_GET['post']:0;
             if(!$post_id){
-                wp_die(__('Post or Page creation failed, could not find original post:', $this -> text_domain) . $post_id);
+                wp_die(__('Post or Page creation failed, could not find original post:', 'templaza-framework') . $post_id);
             }
 
             $post = get_post( $post_id );

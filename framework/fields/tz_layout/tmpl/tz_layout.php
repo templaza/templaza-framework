@@ -9,8 +9,8 @@ if($allow_copy){
 ?>
     <div class="uk-clearfix uk-margin-bottom">
         <div class="uk-button-group uk-float-right">
-            <button type="button" class="uk-button uk-button-default uk-button-small js-copy-layout"><?php echo __('Copy', $this -> text_domain); ?></button>
-            <button type="button" class="uk-button uk-button-default uk-button-small js-paste-layout"><?php echo __('Paste', $this -> text_domain); ?></button>
+            <button type="button" class="uk-button uk-button-default uk-button-small js-copy-layout"><?php echo __('Copy', 'templaza-framework'); ?></button>
+            <button type="button" class="uk-button uk-button-default uk-button-small js-paste-layout"><?php echo __('Paste', 'templaza-framework'); ?></button>
         </div>
     </div>
 <?php } ?>
@@ -29,6 +29,6 @@ if($allow_copy){
     $one_row        = (isset($field['one_row']) && $field['one_row'])?filter_var($field['one_row'], FILTER_VALIDATE_BOOLEAN):false;
     if(!$one_row){
     ?>
-    <a href="#" class="fl_add-element-not-empty-button"><i class="far fa-plus-square"></i> <?php echo __($text, $this -> text_domain); ?></a>
+    <a href="#" class="fl_add-element-not-empty-button"><i class="far fa-plus-square"></i> <?php echo __($text, 'templaza-framework'); ?></a>
     <?php } ?>
 </div>

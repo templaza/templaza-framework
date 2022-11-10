@@ -21,25 +21,25 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Header')) {
         {
             $theme  = $this -> theme;
             $labels = array(
-                'name'               => _x( $theme->get('Name').' Headers', 'templaza-framework', $this -> text_domain ),
-                'singular_name'      => _x( $theme->get('Name').' Headers', 'templaza-framework', $this -> text_domain ),
-                'menu_name'          => _x( $theme->get('Name').' Options', 'templaza-framework', $this -> text_domain ),
-                'name_admin_bar'     => _x( $theme->get('Name').' Options', 'templaza-framework', $this -> text_domain ),
-                'add_new'            => _x( 'Add New', 'templaza-framework', $this -> text_domain ),
-                'add_new_item'       => __( 'Add New header', $this -> text_domain),
-                'new_item'           => __( 'New header', $this -> text_domain ),
-                'edit_item'          => __( 'Edit header', $this -> text_domain),
-                'view_item'          => __( 'View header', $this -> text_domain ),
-                'all_items'          => __( 'Headers', $this -> text_domain ),
-                'search_items'       => __( 'Search headers', $this -> text_domain ),
-                'parent_item_colon'  => __( 'Parent headers:', $this -> text_domain ),
-                'not_found'          => __( 'No headers found.', $this -> text_domain ),
-                'not_found_in_trash' => __( 'No headers found in Trash.', $this -> text_domain )
+                'name'               => _x( $theme->get('Name').' Headers', 'templaza-framework', 'templaza-framework' ),
+                'singular_name'      => _x( $theme->get('Name').' Headers', 'templaza-framework', 'templaza-framework' ),
+                'menu_name'          => _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                'name_admin_bar'     => _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                'add_new'            => _x( 'Add New', 'templaza-framework', 'templaza-framework' ),
+                'add_new_item'       => __( 'Add New header', 'templaza-framework'),
+                'new_item'           => __( 'New header', 'templaza-framework' ),
+                'edit_item'          => __( 'Edit header', 'templaza-framework'),
+                'view_item'          => __( 'View header', 'templaza-framework' ),
+                'all_items'          => __( 'Headers', 'templaza-framework' ),
+                'search_items'       => __( 'Search headers', 'templaza-framework' ),
+                'parent_item_colon'  => __( 'Parent headers:', 'templaza-framework' ),
+                'not_found'          => __( 'No headers found.', 'templaza-framework' ),
+                'not_found_in_trash' => __( 'No headers found in Trash.', 'templaza-framework' )
             );
 
             $args = array(
                 'labels'             => $labels,
-                'description'        => __( 'Description.', $this -> text_domain ),
+                'description'        => __( 'Description.', 'templaza-framework' ),
                 'public'             => false,
                 'publicly_queryable' => false,
                 'show_ui'            => true,

@@ -14,7 +14,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
 <script type="text/html" id="tmpl-tzfrm-field-tz_social__<?php echo $this -> field['id'];?>-form">
     <div class="card mb-2 tz-social-item">
         <#
-        var title = (typeof data.title !== "undefined" && data.title.trim().length)?data.title:"<?php echo __('Custom social profile', $this -> text_domain);?>";
+        var title = (typeof data.title !== "undefined" && data.title.trim().length)?data.title:"<?php echo __('Custom social profile', 'templaza-framework');?>";
         #>
         <div class="card-header">
             <span><i class="<# if (data.icon){ #>{{{data.icon}}}<# }else if (data.icon_class){ #>{{{data.icon_class}}}<# } #>" style="<# if (data.color){ #>color: {{{data.color}}}<# } #>"></i> {{{title}}}</span>
@@ -24,7 +24,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
         <div class="card-body">
             <div class="row mb-2">
                 <div class="col-sm-4">
-                    <label><?php echo __('Link', $this -> text_domain);?></label>
+                    <label><?php echo __('Link', 'templaza-framework');?></label>
                 </div>
                 <div class="col-sm-8">
                     <#
@@ -39,7 +39,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
             <# if (data.icons && data.icons.length > 1){ #>
             <div class="row mb-2">
                 <div class="col-sm-4">
-                    <label><?php echo __('Icon', $this -> text_domain);?></label>
+                    <label><?php echo __('Icon', 'templaza-framework');?></label>
                 </div>
                 <div class="col-sm-8">
                     <ul class="list-inline m-0">
@@ -52,7 +52,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
             <# }else if(data.icon.length == 0 || (data.icon.length > 0 && data.icons.length == 0)){ #>
             <div class="row mt-2">
                 <div class="col-sm-4">
-                    <label><?php echo __('Icon Class', $this -> text_domain); ?></label>
+                    <label><?php echo __('Icon Class', 'templaza-framework'); ?></label>
                 </div>
                 <div class="col-sm-8">
                     <input type="text" class="form-control w-100" autocomplete="off" data-input="icon" value="{{{data.icon}}}" placeholder="fab fa-youtube"/>
@@ -60,7 +60,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
             </div>
             <div class="mt-2 row">
                 <div class="col-sm-4">
-                    <label><?php echo __('Color', $this -> text_domain); ?></label>
+                    <label><?php echo __('Color', 'templaza-framework'); ?></label>
                 </div>
                 <div class="col-sm-8">
                     <div class="redux-color-rgba-container " data-id="color" data-show-input="1"

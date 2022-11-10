@@ -13,7 +13,7 @@ if(isset($this -> item) && isset($this -> item['plugins']) && count($this -> ite
     ?>
     <?php $uniqid  = uniqid();?>
     <div class="border-bottom border-gray uk-margin-top uk-margin-bottom uk-padding-small uk-padding-remove-horizontal tzinst-plugin__install">
-        <h5 class="mb-3"><?php echo __('The following plugins are required to import content:', $this -> text_domain); ?></h5>
+        <h5 class="mb-3"><?php echo __('The following plugins are required to import content:', 'templaza-framework'); ?></h5>
         <?php if($this -> item['plugins'] && count($this -> item['plugins'])){?>
             <div class="uk-grid-small" uk-grid>
                 <div class="uk-width-expand uk-text-muted" uk-leader="fill: .">
@@ -21,11 +21,11 @@ if(isset($this -> item) && isset($this -> item['plugins']) && count($this -> ite
                 </div>
                 <div class="tzinst-plugin__actions">
                     <a href="javascript:" class="js-tzinst-plugin__install-all text-danger uk-hidden"><?php
-                        echo __('Install Selected', $this -> text_domain); ?></a>
+                        echo __('Install Selected', 'templaza-framework'); ?></a>
                     <a href="javascript:" class="js-tzinst-plugin__update-all text-info uk-hidden"><?php
-                        echo __('Update Selected', $this -> text_domain); ?></a>
+                        echo __('Update Selected', 'templaza-framework'); ?></a>
                     <a href="javascript:" class="js-tzinst-plugin__activate-all text-primary uk-hidden"><?php
-                        echo __('Activate Selected', $this -> text_domain); ?></a>
+                        echo __('Activate Selected', 'templaza-framework'); ?></a>
                 </div>
             </div>
             <div class="items uk-padding-small uk-padding-remove-horizontal uk-overflow-auto uk-height-max-medium">
@@ -45,7 +45,7 @@ if(isset($this -> item) && isset($this -> item['plugins']) && count($this -> ite
                             <?php
                             if($canUpdate){
                                 ?>
-                                <span class="uk-label uk-label-danger uk-text-small uk-text-capitalize"><?php echo __('New version', $this -> text_domain); ?></span>
+                                <span class="uk-label uk-label-danger uk-text-small uk-text-capitalize"><?php echo __('New version', 'templaza-framework'); ?></span>
                             <?php } ?>
                         </div>
                         <div>
@@ -74,7 +74,7 @@ if(isset($this -> item) && isset($this -> item['plugins']) && count($this -> ite
                                data-tgmpa_nonce="<?php echo esc_attr( wp_create_nonce( 'tgmpa-install' ) ); ?>"
                                data-tgmpa-update_nonce="<?php echo esc_attr( wp_create_nonce( 'tgmpa-update' ) ); ?>"
                                data-tgmpa-activate_nonce="<?php echo esc_attr( wp_create_nonce( 'tgmpa-activate' ) ); ?>"><?php
-                                echo __($btnText, $this -> text_domain); ?></a>
+                                echo __($btnText, 'templaza-framework'); ?></a>
                         </div>
                     </div>
                 <?php } ?>

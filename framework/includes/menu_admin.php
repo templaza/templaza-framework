@@ -33,7 +33,7 @@ if(!class_exists('TemPlazaFramework\Menu_Admin')){
             return self::$sections;
         }
         public static function get_nav_tabs(){
-            $nav_tabs = apply_filters( TEMPLAZA_FRAMEWORK.'_admin_nav_tabs', self::$sections );;
+            $nav_tabs = apply_filters( TEMPLAZA_FRAMEWORK.'_admin_nav_tabs', self::$sections );
             return $nav_tabs;
         }
 

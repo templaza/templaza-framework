@@ -34,60 +34,76 @@ if ( ! class_exists( 'ReduxFramework_TZ_Preloader' ) ) {
             $defaults   = array(
                 'options' => array(
                     'rotating-plane' => array(
-                        'title' => __('Rotating Plane', $this -> text_domain),
+                        'title' => __('Rotating Plane', 'templaza-framework'),
                         'html'  => '<div class="sk-rotating-plane"></div>',
                     ),
                     'fading-circle' => array(
-                        'title' => __('Fading Circle', $this -> text_domain),
+                        'title' => __('Fading Circle', 'templaza-framework'),
                         'html'  => '<div class="sk-fading-circle"><div class="sk-circle1 sk-circle"></div><div class="sk-circle2 sk-circle"></div><div class="sk-circle3 sk-circle"></div><div class="sk-circle4 sk-circle"></div><div class="sk-circle5 sk-circle"></div><div class="sk-circle6 sk-circle"></div><div class="sk-circle7 sk-circle"></div><div class="sk-circle8 sk-circle"></div><div class="sk-circle9 sk-circle"></div><div class="sk-circle10 sk-circle"></div><div class="sk-circle11 sk-circle"></div><div class="sk-circle12 sk-circle"></div></div>',
                     ),
                     'folding-cube' => array(
-                        'title' => __('Folding Cube', $this -> text_domain),
+                        'title' => __('Folding Cube', 'templaza-framework'),
                         'html'  => '<div class="sk-folding-cube"><div class="sk-cube1 sk-cube"></div><div class="sk-cube2 sk-cube"></div><div class="sk-cube4 sk-cube"></div><div class="sk-cube3 sk-cube"></div></div>',
                     ),
                     'double-bounce' => array(
-                        'title' => __('Double Bounce', $this -> text_domain),
+                        'title' => __('Double Bounce', 'templaza-framework'),
                         'html'  => '<div class="sk-double-bounce"><div class="sk-child sk-double-bounce1"></div><div class="sk-child sk-double-bounce2"></div></div>',
                     ),
                     'wave' => array(
-                        'title' => __('Wave', $this -> text_domain),
+                        'title' => __('Wave', 'templaza-framework'),
                         'html'  => '<div class="sk-wave"><div class="sk-rect sk-rect1"></div><div class="sk-rect sk-rect2"></div><div class="sk-rect sk-rect3"></div><div class="sk-rect sk-rect4"></div><div class="sk-rect sk-rect5"></div></div>',
                     ),
                     'wandering-cubes' => array(
-                        'title' => __('Wandering Cubes', $this -> text_domain),
+                        'title' => __('Wandering Cubes', 'templaza-framework'),
                         'html'  => '<div class="sk-wandering-cubes"><div class="sk-cube sk-cube1"></div><div class="sk-cube sk-cube2"></div></div>',
                     ),
                     'pulse' => array(
-                        'title' => __('Pulse', $this -> text_domain),
+                        'title' => __('Pulse', 'templaza-framework'),
                         'html'  => '<div class="sk-spinner sk-spinner-pulse"></div>',
                     ),
                     'chase' => array(
-                        'title' => __('Chase', $this -> text_domain),
+                        'title' => __('Chase', 'templaza-framework'),
                         'html'  => '<div class="sk-chase"><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div><div class="sk-chase-dot"></div></div>',
                     ),
                     'chasing-dots' => array(
-                        'title' => __('Chasing Dots', $this -> text_domain),
+                        'title' => __('Chasing Dots', 'templaza-framework'),
                         'html'  => '<div class="sk-chasing-dots"><div class="sk-child sk-dot1"></div><div class="sk-child sk-dot2"></div></div>',
                     ),
                     'three-bounce' => array(
-                        'title' => __('Three Bounce', $this -> text_domain),
+                        'title' => __('Three Bounce', 'templaza-framework'),
                         'html'  => '<div class="sk-three-bounce"><div class="sk-child sk-bounce1"></div><div class="sk-child sk-bounce2"></div><div class="sk-child sk-bounce3"></div></div>',
                     ),
                     'circle' => array(
-                        'title' => __('Circle', $this -> text_domain),
+                        'title' => __('Circle', 'templaza-framework'),
                         'html'  => '<div class="sk-circle"><div class="sk-circle1 sk-child"></div><div class="sk-circle2 sk-child"></div><div class="sk-circle3 sk-child"></div><div class="sk-circle4 sk-child"></div><div class="sk-circle5 sk-child"></div><div class="sk-circle6 sk-child"></div><div class="sk-circle7 sk-child"></div><div class="sk-circle8 sk-child"></div><div class="sk-circle9 sk-child"></div><div class="sk-circle10 sk-child"></div><div class="sk-circle11 sk-child"></div><div class="sk-circle12 sk-child"></div></div>',
                     ),
                     'cube-grid' => array(
-                        'title' => __('Cube Grid', $this -> text_domain),
+                        'title' => __('Cube Grid', 'templaza-framework'),
                         'html'  => '<div class="sk-cube-grid"><div class="sk-cube sk-cube1"></div><div class="sk-cube sk-cube2"></div><div class="sk-cube sk-cube3"></div><div class="sk-cube sk-cube4"></div><div class="sk-cube sk-cube5"></div><div class="sk-cube sk-cube6"></div><div class="sk-cube sk-cube7"></div><div class="sk-cube sk-cube8"></div><div class="sk-cube sk-cube9"></div></div>',
                     ),
                     'bouncing-loader' => array(
-                        'title' => __('Bouncing Loader', $this -> text_domain),
+                        'title' => __('Bouncing Loader', 'templaza-framework'),
                         'html'  => '<div class="bouncing-loader"><div></div><div></div><div></div></div>',
                     ),
                     'donut' => array(
-                        'title' => __('Donut', $this -> text_domain),
+                        'title' => __('Donut', 'templaza-framework'),
                         'html'  => '<div class="donut"></div>',
+                    ),
+                    'triple-spinner' => array(
+                        'title' => __('Triple Spinner', 'templaza-framework'),
+                        'html'  => '<div class="triple-spinner"></div>',
+                    ),
+                    'cm-spinner' => array(
+                        'title' => __('CM Spinner', 'templaza-framework'),
+                        'html'  => '<div class="cm-spinner"></div>',
+                    ),
+                    'hm-spinner' => array(
+                        'title' => __('HM Spinner', 'templaza-framework'),
+                        'html'  => '<div class="hm-spinner"></div>',
+                    ),
+                    'reverse-spinner' => array(
+                        'title' => __('Reverse Spinner', 'templaza-framework'),
+                        'html'  => '<div class="reverse-spinner"></div>',
                     ),
                 ),
             );
@@ -148,7 +164,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Preloader' ) ) {
                 </div>
                 <div class="uk-modal-footer uk-text-right">
                     <button class="uk-button uk-button-default uk-modal-close" type="button"><?php
-                        echo __('Cancel', $this -> text_domain);?></button>
+                        echo __('Cancel', 'templaza-framework');?></button>
                 </div>
             </div>
         </div>

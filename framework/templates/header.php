@@ -13,10 +13,10 @@ $theme  = wp_get_theme();
 			    if (file_exists(get_template_directory().'/assets/images/logo-admin.png')) {
 				    echo '<img src="'.get_template_directory_uri().'/assets/images/logo-admin.png'.'" alt="'.$theme->get('Name').'" />';
 			    } else {
-				    echo  wp_get_theme()->get('Name')? $theme->get('Name') .__(' theme dashboard', $this -> text_domain):__('TemPlaza Framework', $this -> text_domain);
+				    echo  wp_get_theme()->get('Name')? $theme->get('Name') .__(' theme dashboard', 'templaza-framework'):__('TemPlaza Framework', 'templaza-framework');
 			    } ?></h1>
             <div class="uk-text-meta">
-                <span class="desc-meta"><?php echo sprintf(__("Version %s", $this -> text_domain),$theme->get('Version')); ?></span>
+                <span class="desc-meta"><?php echo sprintf(__("Version %s", 'templaza-framework'),$theme->get('Version')); ?></span>
             </div>
         </div>
 	    <?php

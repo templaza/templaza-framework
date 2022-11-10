@@ -25,10 +25,10 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Account') && is_plugin_active( 'w
         }
         public function register(){
             return array(
-                'title'             => esc_html__( 'TemPlaza - Woocommerce Account', $this -> text_domain ),
+                'title'             => esc_html__( 'TemPlaza - Woocommerce Account', 'templaza-framework' ),
                 'widget_options'    => array(
                     'classname'                   => 'woocommerce-account',
-                    'description'                 => esc_html__( 'WooCommerce Account login.', $this -> text_domain ),
+                    'description'                 => esc_html__( 'WooCommerce Account login.', 'templaza-framework' ),
                     'customize_selective_refresh' => true,
                 ),
                 'control_options'   => array( 'width' => 560 )

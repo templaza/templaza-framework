@@ -30,7 +30,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                 'id'          => 'section',
                 'title'       => esc_html__('Section'),
                 'param_title' => esc_html__('Section Settings'),
-                'desc'        => esc_html__('Place content elements inside the row', $this -> text_domain),
+                'desc'        => esc_html__('Place content elements inside the row', 'templaza-framework'),
                 'admin_label' => true,
                 'core'        => true,
                 'params'      => array(
@@ -41,15 +41,15 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                             // General settings
                             array(
                                 'id' => 'settings',
-                                'title'  => esc_html__('General', $this -> text_domain),
+                                'title'  => esc_html__('General', 'templaza-framework'),
                                 'fields' => array(
                                     array(
                                         'id'       => 'section_type',
                                         'type'     => 'select',
-                                        'title'    => esc_html__('Section Type', $this -> text_domain),
+                                        'title'    => esc_html__('Section Type', 'templaza-framework'),
                                         'options'  => array(
-                                            'default'         => esc_html__('Default', $this -> text_domain),
-                                            'templaza-footer' => esc_html__('Footer', $this -> text_domain),
+                                            'default'         => esc_html__('Default', 'templaza-framework'),
+                                            'templaza-footer' => esc_html__('Footer', 'templaza-framework'),
                                         ),
                                         'select2'       => array( 'allowClear' => false ),
                                         'default' => 'default'
@@ -57,29 +57,29 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
 									array(
                                         'id'       => 'hideon_single',
                                         'type'     => 'switch',
-                                        'title'    => esc_html__('Hide on Single Post', $this -> text_domain),
-                                        'subtitle' => esc_html__('Enable to hide this section on Single Post', $this -> text_domain),
+                                        'title'    => esc_html__('Hide on Single Post', 'templaza-framework'),
+                                        'subtitle' => esc_html__('Enable to hide this section on Single Post', 'templaza-framework'),
                                         'default'  => false,
                                     ),
 //                                    array(
 //                                        'id'       => 'title',
 //                                        'type'     => 'text',
-//                                        'title'    => esc_html__('Section Title', $this -> text_domain),
+//                                        'title'    => esc_html__('Section Title', 'templaza-framework'),
 //                                    ),
 
                                     array(
                                         'id'      => 'container_width',
                                         'type'    => 'select',
-                                        'title'   => esc_html__('Max width', $this -> text_domain),
+                                        'title'   => esc_html__('Max width', 'templaza-framework'),
                                         'options' => array(
-                                            'default'   => esc_html__('Default', $this -> text_domain),
-                                            'xsmall'    => esc_html__('XSmall', $this -> text_domain),
-                                            'small'     => esc_html__('Small', $this -> text_domain),
-                                            'large'     => esc_html__('Large', $this -> text_domain),
-                                            'xlarge'    => esc_html__('XLarge', $this -> text_domain),
-                                            'expand'    => esc_html__('Expand', $this -> text_domain),
-                                            'none'      => esc_html__('None', $this -> text_domain),
-                                            'custom'    => esc_html__('Custom (Add Custom class to use customized container)', $this -> text_domain),
+                                            'default'   => esc_html__('Default', 'templaza-framework'),
+                                            'xsmall'    => esc_html__('XSmall', 'templaza-framework'),
+                                            'small'     => esc_html__('Small', 'templaza-framework'),
+                                            'large'     => esc_html__('Large', 'templaza-framework'),
+                                            'xlarge'    => esc_html__('XLarge', 'templaza-framework'),
+                                            'expand'    => esc_html__('Expand', 'templaza-framework'),
+                                            'none'      => esc_html__('None', 'templaza-framework'),
+                                            'custom'    => esc_html__('Custom (Add Custom class to use customized container)', 'templaza-framework'),
                                         ),
                                         'select2'       => array( 'allowClear' => false ),
                                         'default' => 'default',
@@ -87,14 +87,14 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                     array(
                                         'id'       => 'padding_remove_horizontal',
                                         'type'     => 'switch',
-                                        'title'    => esc_html__('Remove horizontal padding', $this -> text_domain),
-                                        'subtitle' => __('Set the maximum content width.', $this -> text_domain),
+                                        'title'    => esc_html__('Remove horizontal padding', 'templaza-framework'),
+                                        'subtitle' => __('Set the maximum content width.', 'templaza-framework'),
                                         'required' => array('container_width', '=', array('default', 'xsmall', 'small', 'large', 'xlarge')),
                                     ),
                                     array(
                                         'id'    => 'custom_container_class',
                                         'type'  => 'text',
-                                        'title' => esc_html__('Container Custom Class', $this -> text_domain),
+                                        'title' => esc_html__('Container Custom Class', 'templaza-framework'),
                                         'required' => array('container_width', '!=', 'none'), /* required: container_width != 'none' */
 //                                        'required' => array('container_width', '=', array('default', 'xsmall', 'small',
 //                                            'large', 'xlarge','expand', 'custom')), /* required: container_width != 'none' */
@@ -102,38 +102,38 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                     array(
                                         'id'       => 'container_width_expand',
                                         'type'     => 'select',
-                                        'title'    => esc_html__('Expand One Side', $this -> text_domain),
-                                        'subtitle' => __('Expand the width of one side to the left or right while the other side keeps within the constraints of the max width.', $this -> text_domain),
+                                        'title'    => esc_html__('Expand One Side', 'templaza-framework'),
+                                        'subtitle' => __('Expand the width of one side to the left or right while the other side keeps within the constraints of the max width.', 'templaza-framework'),
                                         'options'  => array(
-                                            ''  => esc_html__("Don't expand", $this ->text_domain),
-                                            'left'  => esc_html__("To left", $this ->text_domain),
-                                            'right'  => esc_html__("To right", $this ->text_domain),
+                                            ''  => esc_html__("Don't expand", 'templaza-framework'),
+                                            'left'  => esc_html__("To left", 'templaza-framework'),
+                                            'right'  => esc_html__("To right", 'templaza-framework'),
                                         ),
                                         'select2'       => array( 'allowClear' => false ),
                                     ),
                                     array(
                                         'id'       => 'height',
                                         'type'     => 'select',
-                                        'title'    => esc_html__('Height', $this -> text_domain),
-                                        'subtitle' => __('Expand the width of one side to the left or right while the other side keeps within the constraints of the max width.', $this -> text_domain),
+                                        'title'    => esc_html__('Height', 'templaza-framework'),
+                                        'subtitle' => __('Expand the width of one side to the left or right while the other side keeps within the constraints of the max width.', 'templaza-framework'),
                                         'options'  => array(
-                                            ''        => esc_html__("None", $this ->text_domain),
-                                            'full'    => esc_html__("Viewport", $this ->text_domain),
-                                            'percent' => esc_html__("Viewport (Minus 20%)", $this ->text_domain),
-                                            'section' => esc_html__("Viewport (Minus the following section)", $this ->text_domain),
-                                            'expand'  => esc_html__("Expand", $this ->text_domain),
+                                            ''        => esc_html__("None", 'templaza-framework'),
+                                            'full'    => esc_html__("Viewport", 'templaza-framework'),
+                                            'percent' => esc_html__("Viewport (Minus 20%)", 'templaza-framework'),
+                                            'section' => esc_html__("Viewport (Minus the following section)", 'templaza-framework'),
+                                            'expand'  => esc_html__("Expand", 'templaza-framework'),
                                         ),
                                         'select2'       => array( 'allowClear' => false ),
                                     ),
                                     array(
                                         'id'       => 'vertical_align',
                                         'type'     => 'select',
-                                        'title'    => esc_html__('Vertical Alignment', $this -> text_domain),
-                                        'subtitle' => __('Align the section content vertically, if the section height is larger than the content itself.', $this -> text_domain),
+                                        'title'    => esc_html__('Vertical Alignment', 'templaza-framework'),
+                                        'subtitle' => __('Align the section content vertically, if the section height is larger than the content itself.', 'templaza-framework'),
                                         'options'  => array(
-                                            ''        => esc_html__("Top", $this ->text_domain),
-                                            'middle'    => esc_html__("Middle", $this ->text_domain),
-                                            'bottom' => esc_html__("Bottom", $this ->text_domain),
+                                            ''        => esc_html__("Top", 'templaza-framework'),
+                                            'middle'    => esc_html__("Middle", 'templaza-framework'),
+                                            'bottom' => esc_html__("Bottom", 'templaza-framework'),
                                         ),
                                         'select2'       => array( 'allowClear' => false ),
 //                                        'required' => array('height', '!=', 'expand')
@@ -144,7 +144,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                     array(
                                         'id'    => 'custom_zindex',
                                         'type'  => 'text',
-                                        'title' => esc_html__('Custom Z-Index', $this -> text_domain),
+                                        'title' => esc_html__('Custom Z-Index', 'templaza-framework'),
                                         'attributes'   => array(
                                             'type'  => 'number'
                                         )
@@ -154,44 +154,44 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                             // Design settings
                             array(
                                 'id'     => 'design-settings',
-                                'title'  => esc_html__('Design Settings', $this -> text_domain),
+                                'title'  => esc_html__('Design Settings', 'templaza-framework'),
                                 'fields' => array(
                                     array(
                                         'id'         => 'background',
                                         'type'       => 'background',
-                                        'title'      => esc_html__('Background', $this -> text_domain),
+                                        'title'      => esc_html__('Background', 'templaza-framework'),
                                     ),
 									array(
                                         'id'       => 'background_overlay',
                                         'type'     => 'color_rgba',
-                                        'title'    => esc_html__('Background Overlay', $this -> text_domain),
+                                        'title'    => esc_html__('Background Overlay', 'templaza-framework'),
                                     ),
                                     array(
                                         'id'         => 'border',
                                         'type'       => 'border',
-                                        'title'      => __('Border', $this -> text_domain),
+                                        'title'      => __('Border', 'templaza-framework'),
                                     ),
                                     array(
                                         'id'     => 'tab-custom_colors',
                                         'type'   => 'section',
                                         'indent' => true,
-                                        'title'  => esc_html__('Custom Colors', $this -> text_domain),
+                                        'title'  => esc_html__('Custom Colors', 'templaza-framework'),
                                     ),
                                     array(
                                         'id'       => 'text_color',
                                         'type'     => 'color',
-                                        'title'    => esc_html__('Text Color', $this -> text_domain),
+                                        'title'    => esc_html__('Text Color', 'templaza-framework'),
                                     ),
                                     array(
                                         'id'       => 'link_color',
                                         'type'     => 'link_color',
-                                        'title'    => esc_html__('Link Color', $this -> text_domain),
+                                        'title'    => esc_html__('Link Color', 'templaza-framework'),
                                     ),
                                     array(
                                         'id'     => 'tab-spacing',
                                         'type'   => 'section',
                                         'indent' => true,
-                                        'title'  => esc_html__('Spacing', $this -> text_domain),
+                                        'title'  => esc_html__('Spacing', 'templaza-framework'),
                                     ),
                                     array(
                                         'id'     => 'margin',
@@ -200,7 +200,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'all'    => false,
                                         'allow_responsive'  => true,
                                         'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
-                                        'title'  => esc_html__('Margin', $this -> text_domain),
+                                        'title'  => esc_html__('Margin', 'templaza-framework'),
                                         'default'   => array(
                                             'units' => 'px',
                                         ),
@@ -208,16 +208,16 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                     array(
                                         'id'        => 'padding_type',
                                         'type'      => 'select',
-                                        'title'     =>  esc_html__('Padding', $this -> text_domain),
-                                        'subtitle'  =>  esc_html__('Set the vertical padding.', $this -> text_domain),
+                                        'title'     =>  esc_html__('Padding', 'templaza-framework'),
+                                        'subtitle'  =>  esc_html__('Set the vertical padding.', 'templaza-framework'),
                                         'options' => array(
-                                            'default'   => esc_html__('Default', $this -> text_domain),
-                                            'xsmall'    => esc_html__('XSmall', $this -> text_domain),
-                                            'small'     => esc_html__('Small', $this -> text_domain),
-                                            'large'     => esc_html__('Large', $this -> text_domain),
-                                            'xlarge'    => esc_html__('XLarge', $this -> text_domain),
-                                            'none'      => esc_html__('None', $this -> text_domain),
-                                            'custom'    => esc_html__('Custom', $this -> text_domain),
+                                            'default'   => esc_html__('Default', 'templaza-framework'),
+                                            'xsmall'    => esc_html__('XSmall', 'templaza-framework'),
+                                            'small'     => esc_html__('Small', 'templaza-framework'),
+                                            'large'     => esc_html__('Large', 'templaza-framework'),
+                                            'xlarge'    => esc_html__('XLarge', 'templaza-framework'),
+                                            'none'      => esc_html__('None', 'templaza-framework'),
+                                            'custom'    => esc_html__('Custom', 'templaza-framework'),
                                         ),
                                         'select2'       => array( 'allowClear' => false ),
                                         'default' => 'custom',
@@ -225,14 +225,14 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                     array(
                                         'id'       => 'padding_remove_top',
                                         'type'     => 'switch',
-                                        'title'    => esc_html__('Remove top padding', $this -> text_domain),
+                                        'title'    => esc_html__('Remove top padding', 'templaza-framework'),
                                         'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
 //                                        'required' => array('padding_type', '!=', array('none','custom')),
                                     ),
                                     array(
                                         'id'       => 'padding_remove_bottom',
                                         'type'     => 'switch',
-                                        'title'    => esc_html__('Remove bottom padding', $this -> text_domain),
+                                        'title'    => esc_html__('Remove bottom padding', 'templaza-framework'),
                                         'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
 //                                        'required' => array('padding_type', '!=', array('none','custom')),
                                     ),
@@ -243,7 +243,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'all'    => false,
                                         'allow_responsive'  => true,
                                         'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
-                                        'title'  => esc_html__('Custom padding', $this -> text_domain),
+                                        'title'  => esc_html__('Custom padding', 'templaza-framework'),
                                         'default'   => array(
                                             'units' => 'px',
                                         ),
@@ -259,54 +259,54 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                             // Responsive settings
                             array(
                                 'id'     => 'responsive-settings',
-                                'title'  => esc_html__('Responsive Settings', $this -> text_domain),
+                                'title'  => esc_html__('Responsive Settings', 'templaza-framework'),
                                 'fields' => array(
                                     array(
                                         'id'       => 'tab-device-visibility',
                                         'type'     => 'section',
                                         'indent'   => true,
-                                        'title'    => esc_html__('Device Visibility', $this -> text_domain),
+                                        'title'    => esc_html__('Device Visibility', 'templaza-framework'),
                                     ),
                                     array(
                                         'id'       => 'hideonxs',
                                         'type'     => 'switch',
-                                        'title'    => esc_html__('Hide on Extra-Small Devices', $this -> text_domain),
-                                        'subtitle' => esc_html__('Enable to hide this section on extra-small Devices', $this -> text_domain),
+                                        'title'    => esc_html__('Hide on Extra-Small Devices', 'templaza-framework'),
+                                        'subtitle' => esc_html__('Enable to hide this section on extra-small Devices', 'templaza-framework'),
                                         'default'  => false,
                                     ),
                                     array(
                                         'id'       => 'hideonsm',
                                         'type'     => 'switch',
-                                        'title'    => esc_html__('Hide on Small Devices', $this -> text_domain),
-                                        'subtitle' => esc_html__('Enable to hide this section on Small Devices.', $this -> text_domain),
+                                        'title'    => esc_html__('Hide on Small Devices', 'templaza-framework'),
+                                        'subtitle' => esc_html__('Enable to hide this section on Small Devices.', 'templaza-framework'),
                                         'default'  => false,
                                     ),
                                     array(
                                         'id'       => 'hideonmd',
                                         'type'     => 'switch',
-                                        'title'    => esc_html__('Hide on Medium Devices', $this -> text_domain),
-                                        'subtitle' => esc_html__('Enable to hide this section on medium Devices.', $this -> text_domain),
+                                        'title'    => esc_html__('Hide on Medium Devices', 'templaza-framework'),
+                                        'subtitle' => esc_html__('Enable to hide this section on medium Devices.', 'templaza-framework'),
                                         'default'  => false,
                                     ),
                                     array(
                                         'id'       => 'hideonlg',
                                         'type'     => 'switch',
-                                        'title'    => esc_html__('Hide on Large Devices', $this -> text_domain),
-                                        'subtitle' => esc_html__('Enable to hide this section on Large Devices.', $this -> text_domain),
+                                        'title'    => esc_html__('Hide on Large Devices', 'templaza-framework'),
+                                        'subtitle' => esc_html__('Enable to hide this section on Large Devices.', 'templaza-framework'),
                                         'default'  => false,
                                     ),
                                     array(
                                         'id'       => 'hideonxl',
                                         'type'     => 'switch',
-                                        'title'    => esc_html__('Hide on Extra-Large Devices', $this -> text_domain),
-                                        'subtitle' => esc_html__('Enable to hide this section on Extra-Large Devices.', $this -> text_domain),
+                                        'title'    => esc_html__('Hide on Extra-Large Devices', 'templaza-framework'),
+                                        'subtitle' => esc_html__('Enable to hide this section on Extra-Large Devices.', 'templaza-framework'),
                                         'default'  => false,
                                     ),
                                     array(
                                         'id'       => 'hideonxxl',
                                         'type'     => 'switch',
-                                        'title'    => esc_html__('Hide on Extra-Extra-Large Devices', $this -> text_domain),
-                                        'subtitle' => esc_html__('Enable to hide this section on Extra-Extra-Large Devices.', $this -> text_domain),
+                                        'title'    => esc_html__('Hide on Extra-Extra-Large Devices', 'templaza-framework'),
+                                        'subtitle' => esc_html__('Enable to hide this section on Extra-Extra-Large Devices.', 'templaza-framework'),
                                         'default'  => false,
                                     ),
                                     array(

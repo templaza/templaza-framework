@@ -14,7 +14,7 @@ if($redux = $this -> redux){
     foreach ($redux -> sections as $k => $section) {
         echo '<div class="field-tz_repeater-accordion-group">';
             echo '<fieldset class="redux-field">';
-                echo '<h3><span class="title">'.esc_html__('New Option', $this -> text_domain).'</span></h3>';
+                echo '<h3><span class="title">'.esc_html__('New Option', 'templaza-framework').'</span></h3>';
                 echo '<div>';
 
                 $section['class'] = isset($section['class']) ? ' ' . $section['class'] : '';
@@ -24,7 +24,7 @@ if($redux = $this -> redux){
                 do_action("redux/page/{$redux->args['opt_name']}/section/after", $section);
 
                     echo '<a href="#" class="button button-danger button-micro remove-option" style="float:right;">'
-                        .'<i class="far fa-trash-alt"></i> '.esc_html__('Delete', $this -> text_domain).'</a>';
+                        .'<i class="far fa-trash-alt"></i> '.esc_html__('Delete', 'templaza-framework').'</a>';
                 echo '</div>';
             echo '</fieldset>';
         echo '</div>';

@@ -50,7 +50,7 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 		public function __construct( $parent ) {
 			parent::__construct( $parent, __FILE__ );
 
-			$this -> text_domain        = Functions::get_my_text_domain();
+            $this -> text_domain        = Functions::get_my_text_domain();
             $this -> preset_opt_name    = 'presets__opt_name';
             $this -> preset_path        = TEMPLAZA_FRAMEWORK_THEME_PATH.'/presets';
 
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
             $file   = $preset_path.'/'.$name.'.json';
 
             if(!file_exists($file)){
-                wp_send_json_error(array('message' => __('Preset file not found', $this -> text_domain)));
+                wp_send_json_error(array('message' => __('Preset file not found', 'templaza-framework')));
                 wp_die();
             }
 
@@ -141,17 +141,17 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
                 }
 
                 if(!file_exists($dest_file)){
-                    wp_send_json_error(array('message' => __(sprintf('Preset not loaded: File %s not found', $dest_file), $this -> text_domain)));
+                    wp_send_json_error(array('message' => __(sprintf('Preset not loaded: File %s not found', $dest_file), 'templaza-framework')));
                     wp_die();
                 }
 
                 file_put_contents($dest_file, json_encode($preset['preset']));
 
-                wp_send_json_success(array('message' => __('Preset loaded', $this -> text_domain)));
+                wp_send_json_success(array('message' => __('Preset loaded', 'templaza-framework')));
                 wp_die();
             }
 
-            wp_send_json_error(array('message' => __('Preset not loaded', $this -> text_domain)));
+            wp_send_json_error(array('message' => __('Preset not loaded', 'templaza-framework')));
             wp_die();
         }
 
@@ -165,7 +165,7 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
             $file   = $preset_path.'/'.$name.'.json';
 
             if(!file_exists($file)){
-                wp_send_json_error(array('message' => __(sprintf('Preset file %s not found', $file), $this -> text_domain)));
+                wp_send_json_error(array('message' => __(sprintf('Preset file %s not found', $file), 'templaza-framework')));
                 wp_die();
             }
 
@@ -185,7 +185,7 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 
             unlink($file);
 
-            wp_send_json_success(array('message' => __('Preset removed', $this -> text_domain)));
+            wp_send_json_success(array('message' => __('Preset removed', 'templaza-framework')));
             wp_die();
         }
 
@@ -255,7 +255,7 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
                 }
 
                 if(!copy($image['url'], $dest_path)){
-                    wp_send_json_error(array('message' => __('Preset saved error: Can not copy image!', $this -> text_domain)));
+                    wp_send_json_error(array('message' => __('Preset saved error: Can not copy image!', 'templaza-framework')));
                     wp_die();
                 }
 
@@ -265,11 +265,11 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
             $result = file_put_contents($file_path, json_encode($data), FS_CHMOD_FILE);
 
             if(!$result){
-                wp_send_json_error(array('message' => __('Preset saved error: Can not save preset data!', $this -> text_domain)));
+                wp_send_json_error(array('message' => __('Preset saved error: Can not save preset data!', 'templaza-framework')));
                 wp_die();
             }
 
-            wp_send_json_success(array('message' => __('Preset saved successfully!', $this -> text_domain)));
+            wp_send_json_success(array('message' => __('Preset saved successfully!', 'templaza-framework')));
             wp_die();
         }
 
@@ -279,7 +279,7 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 		public function add_section() {
 			$this->parent->sections[] = array(
 				'id'         => 'presets_section',
-				'title'      => esc_html__( 'Presets', $this -> text_domain ),
+				'title'      => esc_html__( 'Presets', 'templaza-framework' ),
 				'heading'    => '',
 				'icon'       => 'fas fa-rocket',
 				'customizer' => false,
@@ -295,19 +295,19 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
                                 'type'          => 'text',
                                 'full_width'    => true,
                                 'validate'      => 'not_empty',
-                                'title'         => esc_html__('Title', $this -> text_domain),
-                                'placeholder'   => esc_html__('Some text...', $this -> text_domain)
+                                'title'         => esc_html__('Title', 'templaza-framework'),
+                                'placeholder'   => esc_html__('Some text...', 'templaza-framework')
                             ),
                             array(
                                 'id'    => 'image',
                                 'type'  => 'media',
-                                'title' => esc_html__('Image', $this -> text_domain),
+                                'title' => esc_html__('Image', 'templaza-framework'),
                                 'full_width'    => true,
                             ),
                             array(
                                 'id'    => 'description',
                                 'type'  => 'textarea',
-                                'title' => esc_html__('Description', $this -> text_domain),
+                                'title' => esc_html__('Description', 'templaza-framework'),
                                 'full_width'    => true,
                             )
                         )

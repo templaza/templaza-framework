@@ -12,13 +12,13 @@ $options    = array();
 $widget_heading_style       = isset($options['widget_box_heading_style'])?$options['widget_box_heading_style']:'';
 
 ?>
-<div class="widget <?php echo esc_attr($widget_heading_style);?> ap-box ap-single-side-box ap-specs">
+<div class="widget ap-box ap-single-side-box ap-specs">
     <div class="widget-content">
-        <h3 class="widget-title is-style-templaza-heading-style1"><span><?php esc_html_e('Specifications', 'baressco'); ?></span>
+        <h3 class="widget-title is-style-templaza-heading-style3"><span><?php esc_html_e('Specifications', 'templaza-framework'); ?></span>
         </h3>
         <div class="ap-specs">
             <div class="uk-grid-small" data-uk-grid>
-                <label class="uk-width-2-5"><?php esc_html_e('Branch', 'baressco'); ?></label>
+                <label class="uk-width-2-5"><?php esc_html_e('Branch', 'templaza-framework'); ?></label>
                 <span class=" uk-width-expand">
                         <?php
                         $branches = wp_get_post_terms(get_the_ID(), 'ap_branch');
@@ -30,7 +30,7 @@ $widget_heading_style       = isset($options['widget_box_heading_style'])?$optio
                 </span>
             </div>
             <div class="uk-grid-small" data-uk-grid>
-                <label class="uk-width-2-5"><?php esc_html_e('Category', 'baressco'); ?></label>
+                <label class="uk-width-2-5"><?php esc_html_e('Category', 'templaza-framework'); ?></label>
                 <span class=" uk-width-expand">
                         <?php $categories = wp_get_post_terms(get_the_ID(), 'ap_category');
                         foreach ($categories as $category) {

@@ -25,8 +25,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Breadcrumb')){
                     array(
                         'id'       => 'enable_breadcrumb_single',
                         'type'     => 'switch',
-                        'title'    => esc_html__('Show Breadcrumb in single post', $this -> text_domain),
-                        'subtitle' => esc_html__('The Breadcrumb will be show in single post', $this -> text_domain),
+                        'title'    => esc_html__('Show Breadcrumb in single post', 'templaza-framework'),
+                        'subtitle' => esc_html__('The Breadcrumb will be show in single post', 'templaza-framework'),
                         'default'  => false,
                     ),
 

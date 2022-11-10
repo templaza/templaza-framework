@@ -20,25 +20,25 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
         {
             $theme  = $this -> theme;
             $labels = array(
-                'name'               => _x( $theme->get('Name').' Templates', 'templaza-framework', $this -> text_domain ),
-                'singular_name'      => _x( $theme->get('Name').' Templates', 'templaza-framework', $this -> text_domain ),
-                'menu_name'          => _x( $theme->get('Name').' Options', 'templaza-framework', $this -> text_domain ),
-                'name_admin_bar'     => _x( $theme->get('Name').' Options', 'templaza-framework', $this -> text_domain ),
-                'add_new'            => _x( 'Add New', 'templaza-framework', $this -> text_domain ),
-                'add_new_item'       => __( 'Add New template', $this -> text_domain),
-                'new_item'           => __( 'New template', $this -> text_domain ),
-                'edit_item'          => __( 'Edit template', $this -> text_domain),
-                'view_item'          => __( 'View template', $this -> text_domain ),
-                'all_items'          => __( 'Templates', $this -> text_domain ),
-                'search_items'       => __( 'Search templates', $this -> text_domain ),
-                'parent_item_colon'  => __( 'Parent templates:', $this -> text_domain ),
-                'not_found'          => __( 'No templates found.', $this -> text_domain ),
-                'not_found_in_trash' => __( 'No templates found in Trash.', $this -> text_domain )
+                'name'               => _x( $theme->get('Name').' Templates', 'templaza-framework', 'templaza-framework' ),
+                'singular_name'      => _x( $theme->get('Name').' Templates', 'templaza-framework', 'templaza-framework' ),
+                'menu_name'          => _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                'name_admin_bar'     => _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                'add_new'            => _x( 'Add New', 'templaza-framework', 'templaza-framework' ),
+                'add_new_item'       => __( 'Add New template', 'templaza-framework'),
+                'new_item'           => __( 'New template', 'templaza-framework' ),
+                'edit_item'          => __( 'Edit template', 'templaza-framework'),
+                'view_item'          => __( 'View template', 'templaza-framework' ),
+                'all_items'          => __( 'Templates', 'templaza-framework' ),
+                'search_items'       => __( 'Search templates', 'templaza-framework' ),
+                'parent_item_colon'  => __( 'Parent templates:', 'templaza-framework' ),
+                'not_found'          => __( 'No templates found.', 'templaza-framework' ),
+                'not_found_in_trash' => __( 'No templates found in Trash.', 'templaza-framework' )
             );
 
             $args = array(
                 'labels'             => $labels,
-                'description'        => __( 'Description.', $this -> text_domain ),
+                'description'        => __( 'Description.', 'templaza-framework' ),
                 'public'             => false,
                 'publicly_queryable' => false,
                 'show_ui'            => true,
@@ -121,7 +121,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             $opt_name       = $global_args['opt_name'].'-templaza_style';
             if ( ! isset( $_GET['secret'] ) || md5( md5( \Redux_Functions_Ex::hash_key() ) . '-'
                     . $opt_name ) !== $_GET['secret'] ) { // phpcs:ignore WordPress.Security.NonceVerification
-                wp_die( __('Invalid Secret for options use', $this -> text_domain) );
+                wp_die( __('Invalid Secret for options use', 'templaza-framework') );
                 exit;
             }
 
@@ -298,8 +298,8 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             register_sidebar(
                 array(
                     'id' => 'templaza-framework__sidebar',
-                    'name' => __("TemPlaza Framework Widgets", $this -> text_domain),
-                    'description'   => sprintf(__("This is where TemPlaza Framework stores widgets that you have added to layout or sub menus using layout or mega menu builder. You can edit existing widgets here, but new widgets must be added through layout or mega menu interface (under %s or Appearance > Menus).", $this -> text_domain), $my_args['page_title'])
+                    'name' => __("TemPlaza Framework Widgets", 'templaza-framework'),
+                    'description'   => sprintf(__("This is where TemPlaza Framework stores widgets that you have added to layout or sub menus using layout or mega menu builder. You can edit existing widgets here, but new widgets must be added through layout or mega menu interface (under %s or Appearance > Menus).", 'templaza-framework'), $my_args['page_title'])
                 )
             );
         }
@@ -325,7 +325,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             $args['hide_reset']     = true;
             $args['show_presets']   = true;
 
-            $args['display_name']   = __('Template Settings', $this->text_domain);
+            $args['display_name']   = __('Template Settings', 'templaza-framework');
 
             // Get option values from file and load to fields
             add_filter("pre_option_{$args['opt_name']}", function($options){
@@ -453,7 +453,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 $action = $this -> get_post_type().'_duplicate';
                 $nonce  = wp_create_nonce( $action );
                 $actions['duplicate'] = '<a href="admin.php?action='.$action.'&post='.$post -> ID.'&_wpnonce='
-                    .$nonce.'" title="" rel="permalink">'.esc_html__('Duplicate', $this -> text_domain).'</a>';
+                    .$nonce.'" title="" rel="permalink">'.esc_html__('Duplicate', 'templaza-framework').'</a>';
             }
             return $actions;
         }
@@ -497,7 +497,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             }
             $post_id    = isset($_GET['post'])?$_GET['post']:0;
             if(!$post_id){
-                wp_die(__('Post or Page creation failed, could not find original post:', $this -> text_domain) . $post_id);
+                wp_die(__('Post or Page creation failed, could not find original post:', 'templaza-framework') . $post_id);
             }
 
             $post = get_post( $post_id );

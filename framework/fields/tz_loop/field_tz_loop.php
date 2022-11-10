@@ -134,7 +134,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Loop' ) ) {
                 wp_localize_script('field-tz_loop-js', 'field_tz_loop_obj', array(
                         'title_field'       => $this -> title_field,
                         'ignore_fields'     => $this -> ignore_fields,
-                        'ask_remove_option' => esc_html__('Are you sure to delete this option?', $this -> text_domain)
+                        'ask_remove_option' => esc_html__('Are you sure to delete this option?', 'templaza-framework')
                 ));
             }
         }

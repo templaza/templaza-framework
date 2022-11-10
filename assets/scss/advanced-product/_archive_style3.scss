@@ -1,0 +1,186 @@
+.ap-item.ap-item-style3{
+  .ap-inner{
+    padding:30px 30px 0;
+    .ap-info-inner{
+      padding:0 0 25px 0;
+    }
+    .ap-title{
+      margin-bottom: 0;
+    }
+    .ap-info-author{
+      color:$tztheme-postmeta;
+      a{
+        color:$tztheme-global-color;
+      }
+    }
+    .ap-specification-style3{
+      .ap-spec-item{
+        line-height: 1.5em;
+        padding:0;
+        margin:7px 0;
+        &:first-child{
+          background:none;
+          color:inherit;
+        }
+        .ap-spec-value{
+          font-size:18px;
+          color:$tztheme-heading-color;
+          margin-bottom: 3px;
+        }
+        .ap-field-label{
+          text-transform: capitalize;
+        }
+      }
+    }
+    .ap-info-fields{
+      padding:20px 0;
+    }
+    .ap-info-bottom{
+      padding:20px 0;
+      .templaza-btn{
+        display:flex;
+      }
+      .ap-price-box{
+        span{
+          display: flex;
+          &.ap-field-label{
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-size:13px;
+            color:$tztheme-content-color;
+            font-weight:600;
+          }
+          &.ap-price{
+            font-size:20px;
+            font-weight:bold;
+            color:$tztheme-global-color;
+          }
+        }
+      }
+    }
+  }
+}
+.ap-button-info{
+  .ap-button{
+    height:40px;
+    width:40px;
+    border:1px solid $tztheme-border-color;
+    cursor: pointer;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    margin-left: 10px;
+    justify-content: center;
+    font-size: 14px;
+    @include transition($tztheme-transition-all);
+    color:$tztheme-postmeta;
+    a{
+      color:$tztheme-postmeta
+    }
+    &:hover, &.ap-in-compare-list{
+      background:$tztheme-button_background;
+      color:$tztheme-button_text_color;
+      border-color:$tztheme-button_background;
+      @include transition($tztheme-transition-all);
+      a{
+        color:$tztheme-button_text_color;
+      }
+    }
+  }
+}
+#ap-product-modal{
+  .ap-item .ap-inner{
+    box-shadow:0 5px 20px rgba(0,0,0,0.075);
+    border:none;
+  }
+  .uk-position-top-right{
+    top:5px;
+    right:5px;
+  }
+  .ap-in-compare-list{
+    display:none;
+  }
+  .uk-modal-dialog{
+    width:80%;
+  }
+  .uk-container{
+    background:#f2f2f2;
+  }
+  .uk-slider .uk-slidenav:hover, .uk-slider .uk-slidenav:active{
+    background:$tztheme-button_background;
+    color:$tztheme-button_text_color;
+  }
+}
+#ap-product-modal__quickview{
+  &.uk-modal button.uk-close{
+    color:#222;
+  }
+  .ap-quickview-product_title{
+    font-size:36px;
+    margin-bottom:10px;
+  }
+  .widget-title{
+    font-size:24px;
+    margin-top:40px;
+  }
+  .ap-quickview-excerpt{
+    border-top:1px solid #eee;
+    padding-top:25px;
+    margin-top:30px;
+  }
+  .field-value{
+    font-weight:600;
+  }
+  .product-more-infor{
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    padding: 14px 20px;
+    text-align: center;
+    background-color: $tztheme-button_background;
+    color: $tztheme-button_text_color;
+    z-index: 1;
+    i{
+      margin-left:10px;
+      font-size:20px;
+    }
+  }
+  .ap-quickview-content{
+    .ap-pricing{
+      color:$tztheme-global-color;
+      font-size:30px;
+      font-weight:bold;
+    }
+  }
+}
+.ap-compare-btn-wrap{
+  position:fixed;
+  bottom:0;
+  right:80px;
+  .uk-button{
+    border:none;
+    i{
+      margin-right:5px;
+    }
+    &:hover{
+      background:$tztheme-button_background;
+    }
+    .ap-compare-count{
+      margin-left:5px;
+      font-weight:normal;
+    }
+  }
+}
+@media screen and (max-width: 639.99px) {
+  #ap-product-modal{
+    .uk-slider .uk-slidenav.uk-position-center-left-out{
+      margin-right:10px;
+    }
+    .uk-slider .uk-slidenav.uk-position-center-right-out{
+      margin-left:10px;
+    }
+  }
+}

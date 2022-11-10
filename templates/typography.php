@@ -82,9 +82,9 @@ $typographies = array(
         'id'        => 'typography-submenu-option',
         'enable'    => (isset($options['typography-submenu']) && $options['typography-submenu'] =='custom'?true:false),
         'class'     => array(
-            'desktop'    => '.templaza-nav .sub-menu > li, .nav-submenu',
-            'tablet'     => '.templaza-nav .sub-menu > li, .nav-submenu',
-            'mobile'     => '.templaza-nav .nav-submenu-container .nav-submenu > li, .nav-submenu',
+            'desktop'    => '.templaza-nav .sub-menu > li, .nav-submenu, .header-account .account-links ul li a',
+            'tablet'     => '.templaza-nav .sub-menu > li, .nav-submenu, .header-account .account-links ul li a',
+            'mobile'     => '.templaza-nav .nav-submenu-container .nav-submenu > li, .nav-submenu, .header-account .account-links ul li a',
         )
     ),
     array(
@@ -460,6 +460,7 @@ $designs    = array(
             'blog_single_bg',
             'blog_single_margin',
             'blog_single_border_radius',
+            'blog_single_shadow',
         ),
     ),
     array(

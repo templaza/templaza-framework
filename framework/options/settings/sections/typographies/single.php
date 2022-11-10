@@ -4,7 +4,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 
 Templaza_API::set_section('settings',
     array(
-        'title'      => __( 'Single Typography', $this -> text_domain ),
+        'title'      => __( 'Single Typography', 'templaza-framework' ),
         'id'         => 'single-typo',
         'subsection' => true,
         'fields'     => array(
@@ -16,7 +16,7 @@ Templaza_API::set_section('settings',
                 'font-backup' => true,
                 'text-transform' => true,
                 'letter-spacing' => true,
-                'title'    => __('Blog single blockquote', $this -> text_domain),
+                'title'    => __('Blog single blockquote', 'templaza-framework'),
                 'default'  => ''
             ),
             array(
@@ -27,7 +27,7 @@ Templaza_API::set_section('settings',
                 'font-backup' => true,
                 'text-transform' => true,
                 'letter-spacing' => true,
-                'title'    => __('Blog single heading H1', $this -> text_domain),
+                'title'    => __('Blog single heading H1', 'templaza-framework'),
                 'default'  => ''
             ),
             array(
@@ -38,9 +38,9 @@ Templaza_API::set_section('settings',
                 'font-backup' => true,
                 'text-transform' => true,
                 'letter-spacing' => true,
-                'title'    => __('Blog single heading box', $this -> text_domain),
+                'title'    => __('Blog single heading box', 'templaza-framework'),
                 'default'  => '',
-                'desc'     => __( 'Typo for heading box example: author, comment, related', $this -> text_domain ),
+                'desc'     => __( 'Typo for heading box example: author, comment, related', 'templaza-framework' ),
             ),
             array(
                 'id'       => 'blog_single_h2',
@@ -50,7 +50,7 @@ Templaza_API::set_section('settings',
                 'font-backup' => true,
                 'text-transform' => true,
                 'letter-spacing' => true,
-                'title'    => __('Blog single heading H2', $this -> text_domain),
+                'title'    => __('Blog single heading H2', 'templaza-framework'),
                 'default'  => ''
             ),
             array(
@@ -61,7 +61,7 @@ Templaza_API::set_section('settings',
                 'font-backup' => true,
                 'text-transform' => true,
                 'letter-spacing' => true,
-                'title'    => __('Blog single heading H3', $this -> text_domain),
+                'title'    => __('Blog single heading H3', 'templaza-framework'),
                 'default'  => ''
             ),
             array(
@@ -72,7 +72,7 @@ Templaza_API::set_section('settings',
                 'font-backup' => true,
                 'text-transform' => true,
                 'letter-spacing' => true,
-                'title'    => __('Blog single heading H4', $this -> text_domain),
+                'title'    => __('Blog single heading H4', 'templaza-framework'),
                 'default'  => ''
             ),
             array(
@@ -83,7 +83,7 @@ Templaza_API::set_section('settings',
                 'font-backup' => true,
                 'text-transform' => true,
                 'letter-spacing' => true,
-                'title'    => __('Blog single heading H5', $this -> text_domain),
+                'title'    => __('Blog single heading H5', 'templaza-framework'),
                 'default'  => ''
             ),
             array(
@@ -94,7 +94,7 @@ Templaza_API::set_section('settings',
                 'font-backup' => true,
                 'text-transform' => true,
                 'letter-spacing' => true,
-                'title'    => __('Blog single heading H6', $this -> text_domain),
+                'title'    => __('Blog single heading H6', 'templaza-framework'),
                 'default'  => ''
             ),
             array(
@@ -105,7 +105,7 @@ Templaza_API::set_section('settings',
                 'font-backup' => true,
                 'text-transform' => true,
                 'letter-spacing' => true,
-                'title'    => __('Blog single content', $this -> text_domain),
+                'title'    => __('Blog single content', 'templaza-framework'),
                 'default'  => ''
             ),
         )

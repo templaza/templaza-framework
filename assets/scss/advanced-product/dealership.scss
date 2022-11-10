@@ -1,0 +1,64 @@
+.ap-dealer-navbar{
+  padding:0 40px;
+  background:#ffffff !important;
+  @include box-shadow($tztheme-box-shadow-default);
+}
+#dealership_login{
+  @include box-shadow($tztheme-box-shadow-default);
+  padding:40px;
+  max-width: 500px;
+  margin:0 auto;
+  background: #fff;
+  .field, .dls-field{
+    margin-bottom: 20px;
+    p.label{
+      margin-bottom: 10px;
+    }
+    label{
+      font-size: 14px;
+    }
+  }
+  .dls-field{
+    margin-bottom:10px;
+    input{
+      &.checkbox{
+        width:14px;
+        height:14px;
+        margin-right:10px;
+        display: inline-block;
+        padding:0;
+        overflow: hidden;
+        margin-top: -4px;
+        vertical-align: middle;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        border: 1px solid $tztheme-border-color;
+        transition: .2s ease-in-out;
+        transition-property: background-color,border;
+        cursor: pointer;
+        @include box-shadow(none);
+        &:checked,&:hover{
+          background:$tztheme-button_background;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2214%22%20height%3D%2211%22%20viewBox%3D%220%200%2014%2011%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolygon%20fill%3D%22%23ffffff%22%20points%3D%2212%201%205%207.5%202%205%201%205.5%205%2010%2013%201.5%22%20%2F%3E%0A%3C%2Fsvg%3E%0A");
+        }
+        &:before{
+          display:none;
+        }
+      }
+    }
+  }
+  input{
+    margin-top:0;
+    width:100%;
+    @include border-radius($tztheme-button_radius);
+    &:focus{
+      border-color:$tztheme-border-color;
+      box-shadow: none;
+    }
+  }
+}

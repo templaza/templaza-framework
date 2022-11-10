@@ -76,7 +76,7 @@ if(!isset($_GET['post']) || ((isset($_GET['post']) && !empty($_GET['post']) || $
                 <p><?php echo $preset['description']; ?></p>
                 <?php } ?>
                 <button type="button" class="uk-button uk-button-primary uk-margin-top uk-margin-bottom js-load-preset" data-name="<?php
-                echo $preset['name']; ?>"><?php echo __('Load Preset', $this -> text_domain);?></button>
+                echo $preset['name']; ?>"><?php echo __('Load Preset', 'templaza-framework');?></button>
             </div>
         </div>
     </div>
@@ -85,7 +85,7 @@ if(!isset($_GET['post']) || ((isset($_GET['post']) && !empty($_GET['post']) || $
     <div class="uk-width-2-5@m">
         <div class="uk-card uk-card-default uk-card-small uk-border-rounded">
             <div class="uk-card-header">
-                <h4 class="uk-card-title"><?php echo __('Create Preset', $this -> text_domain);?></h4>
+                <h4 class="uk-card-title"><?php echo __('Create Preset', 'templaza-framework');?></h4>
             </div>
             <div class="uk-card-body uk-form-stacked">
                 <?php
@@ -134,7 +134,7 @@ if(!isset($_GET['post']) || ((isset($_GET['post']) && !empty($_GET['post']) || $
 
                 <button type="button" class="uk-button uk-button-primary uk-margin-top uk-margin-bottom js-save-preset" data-secret="<?php
                 echo $secret; ?>"><?php
-                    echo __('Save Preset', $this -> text_domain);?></button>
+                    echo __('Save Preset', 'templaza-framework');?></button>
             </div>
         </div>
     </div>

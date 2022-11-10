@@ -1,6 +1,8 @@
 @import "../../../assets/scss/spinkit/variables";
 $tztheme-spinkit-size: 40px;
-$tztheme-spinkit-spinner-color: #727cf5;
+$tztheme-spinkit-spinner-color:   #727cf5;
+$tztheme-spinkit-spinner-color-2: $tztheme-spinkit-spinner-color;
+$tztheme-spinkit-spinner-color-3: $tztheme-spinkit-spinner-color;
 @import "../../../assets/scss/spinkit/animation";
 
 //@include sk-rotating-plane(40px, #210048);
@@ -154,10 +156,16 @@ $tztheme-spinkit-spinner-color: #727cf5;
     width: 100px;
     padding: 0px;
     text-align: center;
-    padding-top: 25px;
+    //padding-top: 25px;
     margin: 10px;
     display: inline-block;
     float: left;
+    .tz-preloader-select-inner{
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
 .redux-container-tz_preloader{

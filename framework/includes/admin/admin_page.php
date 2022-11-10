@@ -110,7 +110,7 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
         public function global_admin_enqueue_scripts(){
 
             $react      = '<a href="admin.php?page=tzinst-dashboard" class="button-primary">'
-                .__('Reactivate license', $this -> text_domain).'</a>';
+                .__('Reactivate license', 'templaza-framework').'</a>';
 
             wp_enqueue_script('tzinst-admin-js__hearbeat',
                 Functions::get_my_frame_url().'/assets/js/heartbeat.js',
@@ -217,13 +217,13 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                         update_option($option_name, $options);
                         $result['auth_check']  = false;
 
-                        $authMsg    = '<strong>'.sprintf(__('Welcome to %s', $this -> text_domain),  wp_get_theme()->get('Name')).'</strong>';
-                        $authMsg   .= __(' - Your license under this domain is invalid. Please reactivate your license to verify your domain again.', $this -> text_domain);
+                        $authMsg    = '<strong>'.sprintf(__('Welcome to %s', 'templaza-framework'),  wp_get_theme()->get('Name')).'</strong>';
+                        $authMsg   .= __(' - Your license under this domain is invalid. Please reactivate your license to verify your domain again.', 'templaza-framework');
                         if($themeConfig = $this -> theme_config_registered){
                             if(isset($themeConfig['envato_url']) && $themeConfig['envato_url']){
                                 $authMsg    .= ' <a href="'.$themeConfig['envato_url'].'" target="_blank" rel="nofollow">';
                             }
-                            $authMsg    .= __('Or purchase a new license for your domain', $this -> text_domain);
+                            $authMsg    .= __('Or purchase a new license for your domain', 'templaza-framework');
                             if(isset($themeConfig['envato_url']) && $themeConfig['envato_url']){
                                 $authMsg    .= '</a>';
                             }
@@ -248,11 +248,11 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                 'page' => $this -> _get_page(),
                 'demoImportNonce' => esc_attr( wp_create_nonce( TEMPLAZA_FRAMEWORK_NAME.'-demo-ajax' ) ),
                 'l10nStrings' => array(
-                    'update' => __('Update', $this -> text_domain),
-                    'install' => __('Install', $this -> text_domain),
-                    'activate' => __('Activate', $this -> text_domain),
-                    'activated' => __('Activated', $this -> text_domain),
-                    'plugin_install_failed' => __( 'Plugin install failed. Please try again.', $this -> text_domain),
+                    'update' => __('Update', 'templaza-framework'),
+                    'install' => __('Install', 'templaza-framework'),
+                    'activate' => __('Activate', 'templaza-framework'),
+                    'activated' => __('Activated', 'templaza-framework'),
+                    'plugin_install_failed' => __( 'Plugin install failed. Please try again.', 'templaza-framework'),
                 )
             ));
             do_action('tzinst_enqueue_admin_scripts');
@@ -260,7 +260,7 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
 
         public function register_admin_menu(){
             Menu_Admin::add_submenu_section(TEMPLAZA_FRAMEWORK, array(
-                'label'             => esc_html__('Dashboard', $this->text_domain),
+                'label'             => esc_html__('Dashboard', 'templaza-framework'),
                 'description'       => '',
                 'add_admin_menu'    => true,
                 'callback'          => array($this, 'render')
@@ -268,14 +268,14 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
 
             if($this -> theme_demo_datas && count($this -> theme_demo_datas)) {
                 Menu_Admin::add_submenu_section('importer', array(
-                    'label' => esc_html__('Demo Importer', $this->text_domain),
+                    'label' => esc_html__('Demo Importer', 'templaza-framework'),
                     'description' => '',
                     'add_admin_menu' => true,
                     'callback' => array($this, 'render')
                 ));
             }
             Menu_Admin::add_submenu_section('support', array(
-                'label' => esc_html__('Support', $this->text_domain),
+                'label' => esc_html__('Support', 'templaza-framework'),
                 'description' => '',
                 'add_admin_menu' => true,
                 'callback' => array($this, 'render')

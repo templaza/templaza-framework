@@ -5,16 +5,16 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 // -> START Footer
 Templaza_API::set_section('settings',
     array(
-        'title'      => __( '404 Typography', $this -> text_domain ),
+        'title'      => __( '404 Typography', 'templaza-framework' ),
         'id'         => 'typography-404',
-        'desc'       => __( 'These settings control the typography for 404 page.', $this -> text_domain ),
+        'desc'       => __( 'These settings control the typography for 404 page.', 'templaza-framework' ),
         'subsection' => true,
         'fields'     => array(
             array(
                 'id'        => 'typography-404-heading',
                 'type'      => 'typography',
-                'title'     => __( '404 Heading H1', $this -> text_domain ),
-                'subtitle'  => __( 'Specify the 404 heading font properties.', $this -> text_domain ),
+                'title'     => __( '404 Heading H1', 'templaza-framework' ),
+                'subtitle'  => __( 'Specify the 404 heading font properties.', 'templaza-framework' ),
                 'color'          => true,
                 'text-align'     => false,
                 'preview'        => true, // Disable the previewer
@@ -33,8 +33,8 @@ Templaza_API::set_section('settings',
             array(
                 'id'        => 'typography-404-content',
                 'type'      => 'typography',
-                'title'     => __( '404 Content', $this -> text_domain ),
-                'subtitle'  => __( 'Specify the 404 content font properties.', $this -> text_domain ),
+                'title'     => __( '404 Content', 'templaza-framework' ),
+                'subtitle'  => __( 'Specify the 404 content font properties.', 'templaza-framework' ),
                 'color'          => true,
                 'text-align'     => false,
                 'preview'        => true, // Disable the previewer

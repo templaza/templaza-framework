@@ -1,13 +1,10 @@
 <?php
-
 // No direct access.
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
 use TemPlazaFramework\Functions;
-
 $gb_options                 = Functions::get_theme_options();
 $options                    = Functions::get_header_options();
-
 $login_modals               = isset($gb_options['templaza-shop-account-login'])?$gb_options['templaza-shop-account-login']:'modal';
 $header_cart                = isset($gb_options['templaza-shop-mini-cart'])?$gb_options['templaza-shop-mini-cart']:'';
 $header_stack_search        = isset($options['stacked-divided-search'])?filter_var($options['stacked-divided-search'], FILTER_VALIDATE_BOOLEAN):true;
@@ -16,6 +13,7 @@ $header_stack_cart          = isset($options['stacked-divided-cart'])?filter_var
 $search_icon_type           = isset($options['search-icon-type'])?$options['search-icon-type']:'default';
 $account_icon_type          = isset($options['account-icon-type'])?$options['account-icon-type']:'default';
 $cart_icon_type             = isset($options['cart-icon-type'])?$options['cart-icon-type']:'default';
+$enable_offcanvas           = isset($options['enable-offcanvas'])?filter_var($options['enable-offcanvas'],FILTER_VALIDATE_BOOLEAN):false;
 $search_icon_html = '<i class="fas fa-search"></i>';
 $account_icon_html = '<i class="fas fa-user"></i>';
 $cart_icon_html = '<i class="fas fa-shopping-cart"></i>';
@@ -42,7 +40,7 @@ if($account_icon_type == 'fontawesome' ){
         if(Functions::file_ext_exists($account_icon['url'], 'svg')){
             $log_svg  = ' data-uk-svg';
         }
-        $account_icon_html = '<img src="'.$account_icon['url'].'" alt="'.esc_attr__('Account','templaza-framework').'" '.$log_svg.'/>';
+        $account_icon_html = '<img  src="'.$account_icon['url'].'" alt="'.esc_attr__('Account','templaza-framework').'" '.$log_svg.'/>';
     }
 }
 if($cart_icon_type == 'fontawesome' ){
@@ -55,12 +53,17 @@ if($cart_icon_type == 'fontawesome' ){
         if(Functions::file_ext_exists($cart_icon['url'], 'svg')){
             $log_svg  = ' data-uk-svg';
         }
-        $cart_icon_html = '<img src="'.$cart_icon['url'].'" alt="'.esc_attr__('Cart','templaza-framework').'" '.$log_svg.'/>';
+        $cart_icon_html = '<img  src="'.$cart_icon['url'].'" alt="'.esc_attr__('Cart','templaza-framework').'" '.$log_svg.'/>';
     }
+}
+if($enable_offcanvas == true){
+    $canvas_cl ='enable_canvas_btn';
+}else{
+    $canvas_cl ='';
 }
 if($header_stack_search || $header_stack_cart || $header_stack_account){
     ?>
-    <div class="header-icon-wrap uk-flex">
+    <div class="header-icon-wrap uk-flex <?php echo esc_attr($canvas_cl);?>">
     <?php
 
 if($header_stack_search){ ?>

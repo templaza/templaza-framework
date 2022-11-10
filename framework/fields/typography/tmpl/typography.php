@@ -158,7 +158,8 @@ if(!empty($unit) && is_array($unit)){
 
     /* Font Style/Weight */
     if ( true === $this -> field['font-style'] || true === $this -> field['font-weight'] ) {
-        echo '<div class="select_wrapper typography-style" original-title="' . esc_html__( 'Font style', 'redux-framework' ) . '">';
+        echo '<div data-weights="' . rawurlencode( wp_json_encode( $this->field['weights'] ) ) . '" class="select_wrapper typography-style" original-title="' . esc_html__( 'Font style', 'redux-framework' ) . '">';
+//        echo '<div class="select_wrapper typography-style" original-title="' . esc_html__( 'Font style', 'redux-framework' ) . '">';
         echo '<label>' . esc_html__( 'Font Weight &amp; Style', 'redux-framework' ) . '</label>';
 
         $style = $this -> value['font-weight'] . $this -> value['font-style'];
@@ -340,15 +341,15 @@ if(!empty($unit) && is_array($unit)){
     /* Font Size */
 //    $devices    = array(
 //        'desktop' => array(
-//            'title'=> esc_html__('Desktop', $this -> text_domain),
+//            'title'=> esc_html__('Desktop', 'templaza-framework'),
 //            'icon' => 'dashicons dashicons-desktop',
 //        ),
 //        'tablet'  => array(
-//            'title'=> esc_html__('Tablet', $this -> text_domain),
+//            'title'=> esc_html__('Tablet', 'templaza-framework'),
 //            'icon' => 'dashicons dashicons-tablet',
 //        ),
 //        'mobile'  => array(
-//            'title'=> esc_html__('Mobile', $this -> text_domain),
+//            'title'=> esc_html__('Mobile', 'templaza-framework'),
 //            'icon' => 'dashicons dashicons-smartphone',
 //        ),
 //    );
@@ -369,11 +370,11 @@ if(!empty($unit) && is_array($unit)){
         echo '<div class="input_wrapper font-size redux-container-typography">';
         echo '<div data-uk-grid>';
         echo '  <div class="uk-width-auto uk-margin-small-right">';
-        echo '    <label>' . esc_html__( 'Font Size', $this -> text_domain ) . '</label>';
+        echo '    <label>' . esc_html__( 'Font Size', 'templaza-framework' ) . '</label>';
         echo '  </div>';
 
         $nav_tab    = '';
-//        $nav_tab    = '<li><label>' . esc_html__( 'Font Size', $this -> text_domain ) . '</label></li>';
+//        $nav_tab    = '<li><label>' . esc_html__( 'Font Size', 'templaza-framework' ) . '</label></li>';
         $tab_pane   = '';
         foreach($devices as $device => $item) {
             $uniquid    = uniqid();
@@ -418,7 +419,7 @@ if(!empty($unit) && is_array($unit)){
                                 data-value="' . esc_attr(preg_replace('#'.$_unit.'$#i','', $value)). '">';
                 /* My customize */
             $tab_pane  .= '<select id="' . $this -> field['id'] . '-unit" class="redux-typography-unit" data-placeholder="'.
-                esc_html__('Units', $this -> text_domain).'"'.$select2_data.' data-name="unit">';
+                esc_html__('Units', 'templaza-framework').'"'.$select2_data.' data-name="unit">';
                 foreach ($font_size_units as $un) {
                     if(!empty($un)){
                         $tab_pane  .= '<option value="' . $un . '"' . selected($un, $_unit, false) . '>' . $un . '</option>';
@@ -457,7 +458,7 @@ if(!empty($unit) && is_array($unit)){
 
         echo '<div data-uk-grid>';
         echo '<div class="uk-width-auto uk-margin-small-right">';
-        echo '<label>' . esc_html__( 'Line Height', $this -> text_domain ) . '</label>';
+        echo '<label>' . esc_html__( 'Line Height', 'templaza-framework' ) . '</label>';
         echo '</div>';
 
         $nav_tab    = '';
@@ -506,7 +507,7 @@ if(!empty($unit) && is_array($unit)){
                             data-value="' . esc_attr( preg_replace('#'.$_unit.'$#i','', $value) ) . '">';
             /* My customize */
             $tab_pane  .= '<select id="' . $this -> field['id'] . '-unit" class="redux-typography-unit"'
-                .$select2_data.' data-placeholder="'.esc_html__('Units', $this -> text_domain).'" data-name="unit">';
+                .$select2_data.' data-placeholder="'.esc_html__('Units', 'templaza-framework').'" data-name="unit">';
             foreach ($line_height_units as $un) {
                 if(!empty($un)) {
                     $tab_pane .= '<option value="' . $un . '"' . selected($un, $_unit, false) . '>' . $un . '</option>';
@@ -545,7 +546,7 @@ if(!empty($unit) && is_array($unit)){
 
         echo '<div data-uk-grid>';
         echo '<div class="uk-width-auto uk-margin-small-right">';
-        echo '<label>' . esc_html__( 'Word Spacing', $this -> text_domain ) . '</label>';
+        echo '<label>' . esc_html__( 'Word Spacing', 'templaza-framework' ) . '</label>';
         echo '</div>';
 
         $nav_tab    = '';
@@ -595,7 +596,7 @@ if(!empty($unit) && is_array($unit)){
                             data-value="' . esc_attr( preg_replace('#'.$_unit.'$#i','', $value)) . '">';
             /* My customize */
             $tab_pane  .= '<select id="' . $this -> field['id'] . '-unit"'.$select2_data
-                .' data-placeholder="'.esc_html__('Units', $this -> text_domain)
+                .' data-placeholder="'.esc_html__('Units', 'templaza-framework')
                 .'" class="redux-typography-unit" data-name="unit">';
             foreach ($word_units as $un) {
                 if(!empty($un)) {
@@ -634,7 +635,7 @@ if(!empty($unit) && is_array($unit)){
 
         echo '<div data-uk-grid>';
         echo '<div class="uk-width-auto uk-margin-small-right">';
-        echo '<label>' . esc_html__( 'Letter Spacing', $this -> text_domain ) . '</label>';
+        echo '<label>' . esc_html__( 'Letter Spacing', 'templaza-framework' ) . '</label>';
         echo '</div>';
 
         $nav_tab    = '';
@@ -681,7 +682,7 @@ if(!empty($unit) && is_array($unit)){
                             data-value="' . esc_attr( preg_replace('#'.$_unit.'$#i','', $value) ) . '">';
             /* My customize */
             $tab_pane  .= '<select id="' . $this -> field['id'] . '-unit"'.$select2_data
-                .' data-placeholder="'.esc_html__('Units', $this -> text_domain)
+                .' data-placeholder="'.esc_html__('Units', 'templaza-framework')
                 .'" class="redux-typography-unit" data-name="unit" data-value="'.preg_replace('/[a-zA-Z]+$/i','', $value).'">';
             foreach ($letter_units as $un) {
                 if(!empty($un)) {
@@ -791,24 +792,12 @@ if(!empty($unit) && is_array($unit)){
             $in_use = '0';
         }
 
-        if ( Redux_Helpers::google_fonts_update_needed() && ! get_option( 'auto_update_redux_google_fonts', false ) && $this -> field['font-family'] && $this -> field['google'] ) {
+        if ( Redux_Helpers::google_fonts_update_needed() && ! get_option( 'auto_update_redux_google_fonts', false ) && $this->field['font-family'] && $this->field['google'] ) {
             $nonce = wp_create_nonce( 'redux_update_google_fonts' );
 
             echo '<div data-nonce="' . esc_attr( $nonce ) . '" class="redux-update-google-fonts update-message notice inline notice-warning notice-alt">';
             echo '<p>' . esc_html__( 'Your Google Fonts are out of date. In order to update them you must register for Redux to enable updates.', 'redux-framework' );
-            if ( ! Redux_Functions_Ex::activated() ) {
-                echo '&nbsp;<a href="#" class="update-google-fonts" data-action="activate" aria-label="' . esc_attr__( 'Register', 'redux-framework' ) . '">' . esc_html__( 'Register', 'redux-framework' ) . '</a> ' . esc_html__( 'to enable font updates', 'redux-framework' ) . '.';
-                echo ' (<a class="redux-insights-data-we-collect-typography" href="#" style="white-space: nowrap;">' . esc_html__( 'learn more', 'redux-framework' ) . '</a>)';
-                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                echo '<small class="description" style="display:none;"><br />' . Redux_Connection_Banner::tos_blurb( 'google_fonts' ) . ' </small>';
-            } else {
-                if ( ! Redux_Helpers::mokama() ) {
-                    echo '&nbsp;' . esc_html__( 'Run a', 'redux-framework' ) . ' <a href="#" class="update-google-fonts" data-action="manual" aria-label="' . esc_attr__( 'one-time update', 'redux-framework' ) . '">' . esc_html__( 'one-time update', 'redux-framework' ) . '</a>.';
-                } else {
-                    echo '&nbsp;<a href="#" class="update-google-fonts" data-action="automatic" aria-label="' . esc_attr__( 'Automated updates', 'redux-framework' ) . '">' . esc_html__( 'Automated updates', 'redux-framework' ) . '</a> or <a href="#" class="update-google-fonts" data-action="manual" aria-label="' . esc_attr__( 'one-time update', 'redux-framework' ) . '">' . esc_html__( 'one-time update', 'redux-framework' ) . '</a>.';
-                }
-            }
-
+            echo '&nbsp;<a href="#" class="update-google-fonts" data-action="automatic" aria-label="' . esc_attr__( 'Automated updates', 'redux-framework' ) . '">' . esc_html__( 'Automated updates', 'redux-framework' ) . '</a> or <a href="#" class="update-google-fonts" data-action="manual" aria-label="' . esc_attr__( 'one-time update', 'redux-framework' ) . '">' . esc_html__( 'one-time update', 'redux-framework' ) . '</a>.';
             echo '</p>';
             echo '</div>';
         }

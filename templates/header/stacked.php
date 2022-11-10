@@ -43,6 +43,8 @@ $icon_position         = isset($options['stacked-icon-position'])?$options['stac
 $block1_position         = isset($options['header-block-1-position'])?$options['header-block-1-position']:'center';
 
 $header_stack_divi         = isset($options['stacked-divided-background'])?filter_var($options['stacked-divided-background'], FILTER_VALIDATE_BOOLEAN):true;
+$header_stack_top_bg = isset($gb_options['background-stacked-top-section'])?$gb_options['background-stacked-top-section']:'';
+$header_stack_top_color = isset($gb_options['color-stacked-top-section'])?$gb_options['color-stacked-top-section']:'';
 $header_stack_logo_bg = isset($gb_options['background-logo-section'])?$gb_options['background-logo-section']:'';
 $header_stack_menu_bg = isset($gb_options['background-menu-section'])?$gb_options['background-menu-section']:'';
 $header_stack_inner_width = isset($options['stacked-divided-inner-width'])?$options['stacked-divided-inner-width']:'none';
@@ -51,6 +53,12 @@ $header_stack_search         = isset($options['stacked-divided-search'])?filter_
 $header_stack_account         = isset($options['stacked-divided-account'])?filter_var($options['stacked-divided-account'], FILTER_VALIDATE_BOOLEAN):true;
 $header_stack_cart         = isset($options['stacked-divided-cart'])?filter_var($options['stacked-divided-cart'], FILTER_VALIDATE_BOOLEAN):true;
 $header_stack_logo_border = isset($options['logo-section-border'])?$options['logo-section-border']:'';
+$login_modals               = isset($gb_options['templaza-shop-account-login'])?$gb_options['templaza-shop-account-login']:'modal';
+
+$search_icon_type           = isset($options['search-icon-type'])?$options['search-icon-type']:'default';
+$account_icon_type          = isset($options['account-icon-type'])?$options['account-icon-type']:'default';
+$cart_icon_type             = isset($options['cart-icon-type'])?$options['cart-icon-type']:'default';
+
 $navClass[] = $dropdown_animation_effect;
 $navClassLeft[] = $dropdown_animation_effect;
 // Get data attributes - them added from header shortcode
@@ -60,9 +68,52 @@ $data_attribs    = join(' ', array_map(function($v, $k){
     return !empty($v)?$k . '="' . $v . '"':$k;
 }, $data_attribs, array_keys($data_attribs)));
 $data_attribs   = ' '.$data_attribs;
-
+$search_icon_html = '<i class="fas fa-search"></i>';
+$account_icon_html = '<i class="fas fa-user"></i>';
+$cart_icon_html = '<i class="fas fa-shopping-cart"></i>';
+if($search_icon_type == 'fontawesome' ){
+    $search_icon = isset($options['search-icon'])?$options['search-icon']:'';
+    $search_icon_html = '<i class="'.$search_icon.'"></i>';
+}elseif ($search_icon_type == 'custom'){
+    $search_icon = isset($options['search-icon-custom'])?$options['search-icon-custom']:'';
+    if($search_icon){
+        $log_svg              = '';
+        if(Functions::file_ext_exists($search_icon['url'], 'svg')){
+            $log_svg  = ' data-uk-svg';
+        }
+        $search_icon_html = '<img src="'.$search_icon['url'].'" alt="'.esc_attr__('Search','templaza-framework').'" '.$log_svg.'/>';
+    }
+}
+if($account_icon_type == 'fontawesome' ){
+    $account_icon = isset($options['account-icon'])?$options['account-icon']:'';
+    $account_icon_html = '<i class="'.$account_icon.'"></i>';
+}elseif ($account_icon_type == 'custom'){
+    $account_icon = isset($options['account-icon-custom'])?$options['account-icon-custom']:'';
+    if($account_icon){
+        $log_svg              = '';
+        if(Functions::file_ext_exists($account_icon['url'], 'svg')){
+            $log_svg  = ' data-uk-svg';
+        }
+        $account_icon_html = '<img src="'.$account_icon['url'].'" alt="'.esc_attr__('Account','templaza-framework').'" '.$log_svg.'/>';
+    }
+}
+if($cart_icon_type == 'fontawesome' ){
+    $cart_icon = isset($options['cart-icon'])?$options['cart-icon']:'';
+    $cart_icon_html = '<i class="'.$account_icon.'"></i>';
+}elseif ($cart_icon_type == 'custom'){
+    $cart_icon = isset($options['cart-icon-custom'])?$options['cart-icon-custom']:'';
+    if($account_icon){
+        $log_svg              = '';
+        if(Functions::file_ext_exists($cart_icon['url'], 'svg')){
+            $log_svg  = ' data-uk-svg';
+        }
+        $cart_icon_html = '<img src="'.$cart_icon['url'].'" alt="'.esc_attr__('Cart','templaza-framework').'" '.$log_svg.'/>';
+    }
+}
 $header_menu_bg     = CSS::make_color_rgba_redux($header_stack_menu_bg);
 $header_logo_bg     = CSS::make_color_rgba_redux($header_stack_logo_bg);
+$header_stacked_top_bg     = CSS::make_color_rgba_redux($header_stack_top_bg);
+$header_stacked_top_color     = CSS::make_color_rgba_redux($header_stack_top_color);
 if($header_stack_divi == true) {
     $header_styles = [];
     if (!empty($header_menu_bg)) {
@@ -71,14 +122,35 @@ if($header_stack_divi == true) {
     if (!empty($header_logo_bg)) {
         $header_styles[] = '.templaza-divi-logo-wrap{background-color: ' . $header_logo_bg . ' !important;}';
     }
+    if (!empty($header_stacked_top_bg)) {
+        $header_styles[] = '.templaza-stacked-top-section{background-color: ' . $header_stacked_top_bg . ' !important;}';
+    }
+    if (!empty($header_stacked_top_bg)) {
+        $header_styles[] = '.templaza-stacked-top-section *{color: ' . $header_stacked_top_color . ' !important;}';
+    }
     Templates::add_inline_style(implode('', $header_styles));
     $header_stack_designs = array(
         array(
             'enable' => true,
-            'class' => '.templaza-divi-logo-wrap',
+            'class' => '.templaza-divi-logo-wrap, .menu-item-logo',
             'options' => array(
                 'stacked-divided-top-padding',
                 'logo-section-border',
+            ),
+        ),
+        array(
+            'enable' => true,
+            'class' => '.templaza-stacked-top-section',
+            'options' => array(
+                'stacked-divided-header-top-padding',
+                'stacked-top-section-border',
+            ),
+        ),
+        array(
+            'enable' => true,
+            'class' => '.templaza-stacked-menu-section',
+            'options' => array(
+                'stacked-divided-header-menu-padding',
             ),
         ),
         array(
@@ -120,7 +192,113 @@ if($header_stack_divi == true) {
         }
     }
 }
+$social_profiles    = isset($gb_options['social'])?$gb_options['social']:'';
 
+if ($mode == 'left') {
+    echo '<div class="uk-grid-match uk-flex uk-flex-between uk-grid-collapse uk-position-relative">';
+    ?>
+    <div class="uk-flex uk-hidden@m uk-flex-left uk-flex-middle">
+        <div class="header-mobilemenu-trigger burger-menu-button " data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
+            <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
+        </div>
+    </div>
+    <div class="uk-width-auto@m templaza-divi-logo-wrap stacked-left-logo-wrap">
+        <div class="tz-stacked-left-logo uk-flex uk-flex-center uk-flex-middle">
+            <?php Templates::load_my_layout('logo'); ?>
+        </div>
+    </div>
+    <div class="uk-hidden@m uk-width-auto uk-flex uk-flex-right uk-flex-middle">
+        <?php Templates::load_my_layout('inc.icon',true,false); ?>
+    </div>
+    <div class="uk-width-expand@m uk-visible@m templaza-stacked-left-right">
+        <?php
+        if($block_1_type !='blank' || $block_2_type !='blank'){
+            echo '<div class="templaza-stacked-left-top uk-grid-collapse uk-flex uk-flex-middle templaza-stacked-top-section" data-uk-grid>';
+        }
+        if ($block_1_type != 'blank'): ?>
+            <div class=" uk-text-left uk-visible@m uk-width-auto@m">
+                <?php
+                if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
+                    echo '<div class="header-block-item">';
+                    echo '<div class="templaza-sidebar">';
+                    dynamic_sidebar($block_1_sidebar);
+                    echo '</div>';
+                    echo '</div>';
+                }
+                if ($block_1_type == 'custom') {
+                    echo '<div class="header-block-item">';
+                    echo wp_kses($block_1_custom,'post');
+                    echo '</div>';
+                }
+                if ($block_1_type == 'social') {
+                    Templates::load_my_layout('inc.social');
+                }
+                if ($block_1_type == 'contact') {
+                    Templates::load_my_layout('inc.contact');
+                }
+                ?>
+            </div>
+        <?php endif; ?>
+        <?php if ($block_2_type != 'blank'): ?>
+            <div class=" uk-text-right uk-flex uk-flex-right uk-visible@m uk-width-expand@m">
+                <?php
+                if ($block_2_type == 'sidebar' && is_active_sidebar($block_2_sidebar)){
+                    echo '<div class="header-block-item">';
+                    echo '<div class="templaza-sidebar">';
+                    dynamic_sidebar($block_2_sidebar);
+                    echo '</div>';
+                    echo '</div>';
+                }
+                if ($block_2_type == 'custom') {
+                    echo '<div class="header-block-item">';
+                    echo wp_kses($block_2_custom,'post');
+                    echo '</div>';
+                }
+                if ($block_2_type == 'social') {
+                    Templates::load_my_layout('inc.social');
+                }
+                if ($block_2_type == 'contact') {
+                    Templates::load_my_layout('inc.contact');
+                }
+                ?>
+            </div>
+        <?php endif;
+        if($block_1_type !='blank' || $block_2_type !='blank'){
+            echo '</div>';
+        }
+        ?>
+        <div class="uk-flex uk-flex-middle uk-flex-left templaza-stacked-menu-section" <?php echo wp_kses($data_attribs,'data');?>>
+            <?php
+            // header nav starts
+            Menu::get_nav_menu(array(
+                'theme_location'  => $header_menu,
+                'menu_class'      => implode(' ', $navClassLeft),
+                'container_class' => implode(' ', $navWrapperClass),
+                'menu_id'         => '',
+                'depth'           => $header_menu_level, // Level
+                'templaza_megamenu_html_data' => $menu_datas
+            ));
+            // header nav ends
+            ?>
+            <?php if ($enable_offcanvas) {
+                Templates::load_my_layout('inc.icon',true,false);
+                ?>
+                <div class="header-offcanvas-trigger uk-margin-left burger-menu-button <?php echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>" >
+                    <button type="button" class="button">
+                         <span class="box">
+                            <span class="inner"></span>
+                         </span>
+                    </button>
+                </div>
+            <?php }else{
+                Templates::load_my_layout('inc.icon',true,false);
+            } ?>
+        </div>
+    </div>
+
+    <?php
+echo '</div>';
+}
 ?>
 <div class="uk-flex">
   <div class="header-stacked-section uk-flex uk-width uk-flex-column uk-flex-between ">
@@ -144,7 +322,9 @@ if($header_stack_divi == true) {
             <?php if($header_stack_search){ ?>
             <div class="uk-flex uk-flex-left uk-flex-middle">
                 <div class="header-search uk-position-relative header-icon">
-                    <span><i class="fas fa-search"></i></span>
+                    <span>
+                        <?php echo $search_icon_html; ?>
+                    </span>
                     <form method="get" class="searchform " action="<?php echo esc_url( home_url( '/' ) ); ?>">
                         <input type="text" class="field uk-input inputbox search-query uk-margin-remove-vertical" name="s" placeholder="<?php esc_attr_e( 'Search...', 'medil');?>" />
                         <button type="submit" class="submit searchsubmit has-button-icon uk-position-right" name="submit" data-uk-icon="search"></button>
@@ -165,17 +345,39 @@ if($header_stack_divi == true) {
                ?>
             </div>
             <?php
-            if ($enable_offcanvas || $header_stack_cart) {
+            if ($enable_offcanvas || $header_stack_cart || $header_stack_account) {
                 ?>
                 <div class="uk-flex uk-flex-right uk-flex-middle">
                     <?php
                     if($header_stack_cart && class_exists( 'woocommerce' )){ ?>
                         <div class="header-cart header-icon">
                             <a href="<?php echo esc_url( wc_get_cart_url() ) ?>" data-toggle="<?php echo esc_attr($header_cart); ?>" data-target="cart-modal">
-                                <i class="fas fa-shopping-cart"></i>
+                                <?php echo $cart_icon_html; ?>
                                 <span class="counter cart-counter"><?php echo esc_html(WC()->cart->get_cart_contents_count()); ?></span>
                             </a>
                         </div>
+                    <?php }
+                    if($header_stack_account && class_exists( 'woocommerce' )){ ?>
+                    <div class="header-account header-icon">
+                        <a class="account-icon" href="<?php echo esc_url( wc_get_account_endpoint_url( 'dashboard' ) ) ?>"
+                           data-toggle="<?php echo esc_attr($login_modals);?>"
+                           data-target="account-modal">
+                            <?php echo $account_icon_html; ?>
+                        </a>
+                        <?php if ( is_user_logged_in() ) : ?>
+                            <div class="account-links">
+                                <ul>
+                                    <?php foreach ( wc_get_account_menu_items() as $endpoint => $label ) : ?>
+                                        <li class="account-link--<?php echo esc_attr( $endpoint ); ?>">
+                                            <a href="<?php echo esc_url( wc_get_account_endpoint_url( $endpoint ) ); ?>" class="underline-hover">
+                                                <?php echo esc_html( $label ); ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                     <?php }
                     if ($enable_offcanvas) {
                         ?>
@@ -327,11 +529,19 @@ if($header_stack_divi == true) {
         }
         // header block ends
         ?>
+            <?php
+            if($icon_position == 'bottom'){
+            ?>
+            <div class="uk-hidden@m uk-width-auto uk-flex uk-flex-right uk-flex-middle">
+                <?php Templates::load_my_layout('inc.icon',true,false); ?>
+            </div>
+            <?php } ?>
             <?php if ( (($header_stack_search || $header_stack_cart || $header_stack_account) && $icon_position == 'top') || $enable_offcanvas){ ?>
             <div class="uk-flex uk-flex-right uk-flex-middle">
+
                 <?php
                 if($icon_position == 'top'){
-                    Templates::load_my_layout('inc.icon');
+                    Templates::load_my_layout('inc.icon',true,false);
                 }
                 if ($enable_offcanvas) {
                     ?>
@@ -396,7 +606,7 @@ if($header_stack_divi == true) {
         }
         if($icon_position == 'bottom'){
             echo '<div class="header-block-icon uk-flex uk-flex-right uk-flex-middle">';
-            Templates::load_my_layout('inc.icon');
+            Templates::load_my_layout('inc.icon',true,false);
             echo '</div>';
         }
         ?>

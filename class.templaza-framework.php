@@ -56,7 +56,7 @@ class TemPlazaFrameWork{
         add_action('init', array($this, 'init'), 99999);
 
         add_action('init', array($this, 'frontend_init'), 99999);
-
+        add_action( 'init', array( $this, 'tz_load_plugin_textdomain' ) );
         add_action('template_include', array($this, 'template_include'), 999999);
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 99999);
 
@@ -70,6 +70,9 @@ class TemPlazaFrameWork{
         add_action( 'after_setup_theme', array($this, 'create_post_default') );
 
         do_action( 'templaza-framework/plugin/hooks', $this );
+    }
+    public function tz_load_plugin_textdomain() {
+        load_plugin_textdomain( 'templaza-framework', false, TEMPLAZA_FRAMEWORK_PATH . '/languages' );
     }
 
     public function load_gutenberg_blocks(){
@@ -280,7 +283,15 @@ class TemPlazaFrameWork{
             $this -> woo_enqueue_scripts();
         }
 
+        if(class_exists( 'Advanced_Product\Advanced_Product' )){
+            $this -> advanced_enqueue_scripts();
+        }
+
         do_action('templaza-framework/plugin/enqueue_scripts', $this);
+    }
+    protected function advanced_enqueue_scripts(){
+        wp_register_style( 'templaza-tiny-slider-style', Functions::get_my_url() . '/assets/css/tiny-slider.css', false );
+        wp_register_script( 'templaza-tiny-slider-script', Functions::get_my_url() . '/assets/js/vendor/tiny-slider.js', array('jquery'),false,true );
     }
 
     protected function woo_enqueue_scripts(){
@@ -332,9 +343,9 @@ class TemPlazaFrameWork{
 
         // Register menu locations
         $locations = array(
-            'header' => __('Header Menu', $this->text_domain),
-            'primary' => __('Primary Menu', $this->text_domain),
-            'footer' => __('Footer Menu', $this->text_domain),
+            'header' => __('Header Menu', 'templaza-framework'),
+            'primary' => __('Primary Menu', 'templaza-framework'),
+            'footer' => __('Footer Menu', 'templaza-framework'),
         );
         register_nav_menus($locations);
     }
@@ -559,7 +570,7 @@ class TemPlazaFrameWork{
                 'post_author'   => $author,
                 'post_date'     => $now,
                 'post_date_gmt' => $now,
-                'post_title'    => esc_html__('Default', $this -> text_domain),
+                'post_title'    => esc_html__('Default', 'templaza-framework'),
                 'post_status'   => 'publish',
                 'post_name'     => 'default',
                 'post_type'     => $ptype,
@@ -578,7 +589,7 @@ class TemPlazaFrameWork{
                 $dest_file      = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$ptype;
                 if(!is_dir($dest_file)){
                     require_once(ABSPATH . '/wp-admin/includes/file.php');
-                    mkdir($dest_file, FS_CHMOD_DIR, true);
+                    mkdir($dest_file, \FS_CHMOD_DIR, true);
                 }
                 $dest_file     .= '/'.$postdata['post_name'].'.json';
                 if(file_exists($source_file) && !file_exists($dest_file)){

@@ -93,12 +93,12 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
 //                        'ajax'     => true,
 //                        'data'     => 'sidebars',
                         'data'     => 'callback',
-                        'title'    => __( 'Widget', $this -> text_domain ),
-                        'subtitle' => __( 'Select Widget.', $this -> text_domain ),
-                        'desc'     => __( 'The widget will be add to framework sidebar first after save change.', $this -> text_domain ),
+                        'title'    => __( 'Widget', 'templaza-framework' ),
+                        'subtitle' => __( 'Select Widget.', 'templaza-framework' ),
+                        'desc'     => __( 'The widget will be add to framework sidebar first after save change.', 'templaza-framework' ),
                         'args'     => array('TemplazaFramework_Widget_Shortcode_Helper', 'get_widgets'),
 //                        'options'  => array(
-//                            '' => esc_html__('- Select Widget -', $this -> text_domain),
+//                            '' => esc_html__('- Select Widget -', 'templaza-framework'),
 ////                            'recent-post-1' => 'Recent Post'
 //                        ),
                         'default' => ''
@@ -106,8 +106,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
                     array(
                         'id'       => 'widget_heading',
                         'type'     => 'select',
-                        'title'    => esc_html__('Widget Title HTML Element', $this -> text_domain),
-                        'subtitle' => esc_html__('Select Widget title HTML element from the list', $this -> text_domain),
+                        'title'    => esc_html__('Widget Title HTML Element', 'templaza-framework'),
+                        'subtitle' => esc_html__('Select Widget title HTML element from the list', 'templaza-framework'),
                         'options'  => array(
                             'h1'   => 'h1',
                             'h2'   => 'h2',
@@ -123,29 +123,29 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
                     array(
                         'type'          => 'select',
                         'id'            => 'widget_heading_style',
-                        'title'         => esc_html__('Widget Title Style',  $this -> text_domain),
-                        'subtitle'      => esc_html__('Heading styles differ in font-size but may also come with a predefined color, size and font',  $this -> text_domain),
+                        'title'         => esc_html__('Widget Title Style',  'templaza-framework'),
+                        'subtitle'      => esc_html__('Heading styles differ in font-size but may also come with a predefined color, size and font',  'templaza-framework'),
                         'options'       => array(
-                            ''                  => esc_html__('None',  $this -> text_domain),
-                            'heading-2xlarge'   => esc_html__('2XLarge',  $this -> text_domain),
-                            'heading-xlarge'    => esc_html__('XLarge',  $this -> text_domain),
-                            'heading-large'     => esc_html__('Large',  $this -> text_domain),
-                            'heading-medium'    => esc_html__('Medium',  $this -> text_domain),
-                            'heading-small'     => esc_html__('Small',  $this -> text_domain),
-                            'h1'                => esc_html__('H1',  $this -> text_domain),
-                            'h2'                => esc_html__('H2',  $this -> text_domain),
-                            'h3'                => esc_html__('H3',  $this -> text_domain),
-                            'h4'                => esc_html__('H4',  $this -> text_domain),
-                            'h5'                => esc_html__('H5',  $this -> text_domain),
-                            'h6'                => esc_html__('H6',  $this -> text_domain),
+                            ''                  => esc_html__('None',  'templaza-framework'),
+                            'heading-2xlarge'   => esc_html__('2XLarge',  'templaza-framework'),
+                            'heading-xlarge'    => esc_html__('XLarge',  'templaza-framework'),
+                            'heading-large'     => esc_html__('Large',  'templaza-framework'),
+                            'heading-medium'    => esc_html__('Medium',  'templaza-framework'),
+                            'heading-small'     => esc_html__('Small',  'templaza-framework'),
+                            'h1'                => esc_html__('H1',  'templaza-framework'),
+                            'h2'                => esc_html__('H2',  'templaza-framework'),
+                            'h3'                => esc_html__('H3',  'templaza-framework'),
+                            'h4'                => esc_html__('H4',  'templaza-framework'),
+                            'h5'                => esc_html__('H5',  'templaza-framework'),
+                            'h6'                => esc_html__('H6',  'templaza-framework'),
                         ),
                         'default'       => '',
                     ),
 //                    array(
 //                        'id'         => 'widget_id',
 //                        'type'       => 'text',
-////                        'title'      => __( 'Widget', $this -> text_domain ),
-////                        'subtitle'   => __( 'Select Sidebar.', $this -> text_domain ),
+////                        'title'      => __( 'Widget', 'templaza-framework' ),
+////                        'subtitle'   => __( 'Select Sidebar.', 'templaza-framework' ),
 //                        'attributes' => array(
 //                            'type'   => 'hidden',
 //                        ),
@@ -154,8 +154,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
 //                        'id'       => 'sidebar',
 //                        'type'     => 'select',
 //                        'data'     => 'sidebars',
-//                        'title'    => __( 'Sidebar', $this -> text_domain ),
-//                        'subtitle' => __( 'Select Sidebar.', $this -> text_domain ),
+//                        'title'    => __( 'Sidebar', 'templaza-framework' ),
+//                        'subtitle' => __( 'Select Sidebar.', 'templaza-framework' ),
 //                    ),
                 )
             );
@@ -300,14 +300,14 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
                 $this->send_json_success( array(
                     'new_widget_id' => $new_widget_id,
 //                    'next_number' => $next_number,
-                    'message' => sprintf( __("Saved %s", $this -> text_domain), $id_base )
+                    'message' => sprintf( __("Saved %s", 'templaza-framework'), $id_base )
                 ) );
             }else{
                 $this -> send_json_error(
                     array(
                         'new_widget_id' => $new_widget_id,
 //                        'next_number' => $next_number,
-                        'message' => sprintf( __("Failed to clone %s", $this -> text_domain), $id_base )
+                        'message' => sprintf( __("Failed to clone %s", 'templaza-framework'), $id_base )
                     )
                 );
             }
@@ -348,9 +348,9 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
             $saved = $this->save_widget( $id_base );
 
             if ( $saved ) {
-                $this->send_json_success( sprintf( __("Saved %s", $this -> text_domain), $id_base ) );
+                $this->send_json_success( sprintf( __("Saved %s", 'templaza-framework'), $id_base ) );
             }else{
-                $this -> send_json_error(sprintf( __("Failed to save %s", $this -> text_domain), $id_base ));
+                $this -> send_json_error(sprintf( __("Failed to save %s", 'templaza-framework'), $id_base ));
             }
             wp_die();
         }
@@ -410,12 +410,12 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
                             ?>
 
 <!--                            <div class="widget-controls">-->
-<!--                                <a class="delete" href="#delete">--><?php //_e("Delete", $this -> text_domain); ?><!--</a>-->
-<!--                                 | <a class='close' href='#close'>--><?php //_e("Close", $this -> text_domain); ?><!--</a>-->
+<!--                                <a class="delete" href="#delete">--><?php //_e("Delete", 'templaza-framework'); ?><!--</a>-->
+<!--                                 | <a class='close' href='#close'>--><?php //_e("Close", 'templaza-framework'); ?><!--</a>-->
 <!--                            </div>-->
 
 <!--                            --><?php
-//                            submit_button( __( 'Save', $this -> text_domain ), 'button-primary alignright', 'savewidget', false );
+//                            submit_button( __( 'Save', 'templaza-framework' ), 'button-primary alignright', 'savewidget', false );
 //                            ?>
                         </div>
                     </form>

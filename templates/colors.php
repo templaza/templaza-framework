@@ -7,7 +7,7 @@ use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 
 $options = Functions::get_theme_options();
-
+$header_options    = Functions::get_header_options();
 // Body
 $body_css               = '';
 $body_text_color        = isset($options['body-text-color'])?$options['body-text-color']:'';
@@ -61,6 +61,11 @@ $sticky_header_background_color     = CSS::make_color_rgba_redux($sticky_header_
 
 $topbar_bordercolor         = isset($options['topbar-bordercolor'])?$options['topbar-bordercolor']:'';
 $topbar_bordercolor         = CSS::make_color_rgba_redux($topbar_bordercolor);
+
+$header_iconcolor         = isset($options['header-icon-color'])?$options['header-icon-color']:'';
+$header_iconcolor         = CSS::make_color_rgba_redux($header_iconcolor);
+$header_iconsize         = isset($header_options['header-icon-size'])?$header_options['header-icon-size']:'';
+
 
 // Main Menu
 $main_link_color            = isset($options['main-menu-link-color'])?$options['main-menu-link-color']:'';
@@ -119,6 +124,9 @@ $off_canvas_button_color        = CSS::make_color_rgba_redux($off_canvas_button_
 
 $sticky_off_canvas_button_color = isset($options['sticky-off-canvas-button-color'])?$options['sticky-off-canvas-button-color']:'';
 $sticky_off_canvas_button_color = CSS::make_color_rgba_redux($sticky_off_canvas_button_color);
+
+$sticky_icon_color = isset($options['sticky-icon-color'])?$options['sticky-icon-color']:'';
+$sticky_icon_color = CSS::make_color_rgba_redux($sticky_icon_color);
 
 $off_canvas_button_color_close  = isset($options['off-canvas-button-color-close'])?$options['off-canvas-button-color-close']:'';
 $off_canvas_button_color_close  = CSS::make_color_rgba_redux($off_canvas_button_color_close);
@@ -188,12 +196,12 @@ $woo_icon_bg_color_hover  = CSS::make_color_rgba_redux($woo_icon_bg_color_hover)
 
 $woo_css             = !empty($woo_icon_color)?'color:'.$woo_icon_color.';':'';
 $woo_css            .= !empty($woo_icon_bg_color)?'background-color:'.$woo_icon_bg_color.';':'';
-$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .tz-loop-button{'.$woo_css.'}':'';
+$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .product-loop__buttons .tz-loop-button{'.$woo_css.'}':'';
 Templates::add_inline_style($woo_css);
 $woo_css             = '';
 $woo_css            .= !empty($woo_icon_color_hover)?'color:'.$woo_icon_color_hover.';':'';
 $woo_css            .= !empty($woo_icon_bg_color_hover)?'background-color:'.$woo_icon_bg_color_hover.';':'';
-$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .tz-loop-button:hover:hover{'.$woo_css.'}':'';
+$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .product-loop__buttons .tz-loop-button:hover{'.$woo_css.'}':'';
 Templates::add_inline_style($woo_css);
 ?>
 
@@ -244,6 +252,14 @@ if (!empty($sticky_header_background_color)) {
 if (!empty($topbar_bordercolor)) {
 	$header_styles[]    = '.top-bar, .top-bar .templaza-contact-info > span,.top-bar .templaza-social-icons > li,.top-bar .jollyany-hikacart, .top-bar .jollyany-login, .top-bar .border-right {border-color:'.$topbar_bordercolor.' !important;}';
 }
+if (!empty($header_iconcolor)) {
+	$header_styles[]    = 'header .header-icon i{color:'.$header_iconcolor.';}';
+	$header_styles[]    = 'header .header-icon svg{fill:'.$header_iconcolor.';}';
+}
+if (!empty($header_iconsize)) {
+	$header_styles[]    = 'header .header-icon i, .templaza-header-sticky .header-icon i{font-size:'.$header_iconsize.';}';
+	$header_styles[]    = 'header .header-icon svg, .templaza-header-sticky .header-icon svg{width:'.$header_iconsize.';}';
+}
 ?>
 
 <?php
@@ -287,19 +303,22 @@ if (!empty($sticky_link_active_color)) {
 if (!empty($sticky_off_canvas_button_color)) {
 	$sticky_menu_styles[] = '#templaza-sticky-header .burger-menu-button .inner, #templaza-sticky-header .burger-menu-button .inner::before, #templaza-sticky-header .burger-menu-button .inner::after { background-color: ' . $sticky_off_canvas_button_color . ' !important;}';
 }
+if (!empty($sticky_icon_color)) {
+	$sticky_menu_styles[] = '#templaza-sticky-header .header-icon a, #templaza-sticky-header .header-icon i { color: ' . $sticky_icon_color . ' !important;}';
+}
 ?>
 
 <?php
 // Dropdown Coloring
 $dropdown_styles = [];
 if (!empty($dropdown_main_background_color)) {
-   $dropdown_styles[] = '.templaza-nav .sub-menu{ background: ' . $dropdown_main_background_color . ' !important;}';
+   $dropdown_styles[] = '.templaza-nav .sub-menu, .header-account .account-links ul{ background: ' . $dropdown_main_background_color . ' !important;}';
 }
 if (!empty($dropdown_main_background_color)) {
    $dropdown_styles[] = '.has-megamenu.open .arrow{ border-bottom-color: ' . $dropdown_main_background_color . ' !important;}';
 }
 if (!empty($dropdown_main_link_color)) {
-   $dropdown_styles[] = '.templaza-nav .sub-menu .menu-item > a{ color: ' . $dropdown_main_link_color . ' !important;}';
+   $dropdown_styles[] = '.templaza-nav .sub-menu .menu-item > a, .header-account .account-links ul li a{ color: ' . $dropdown_main_link_color . ' !important;}';
 }
 if (!empty($dropdown_main_active_link_color)) {
    $dropdown_styles[] = '.templaza-nav .sub-menu .menu-item.current-menu-item > a, .menu_open .menu-go-back .fas{ color: ' . $dropdown_main_active_link_color . ' !important;}';

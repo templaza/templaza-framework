@@ -4,7 +4,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 
 Templaza_API::set_section('settings',
     array(
-        'title'      => __( 'Archive Typography', $this -> text_domain ),
+        'title'      => __( 'Archive Typography', 'templaza-framework' ),
         'id'         => 'archive-typo',
         'subsection' => true,
         'fields'     => array(
@@ -16,7 +16,7 @@ Templaza_API::set_section('settings',
                 'font-backup' => true,
                 'text-transform' => true,
                 'letter-spacing' => true,
-                'title'    => __('Blog item heading', $this -> text_domain),
+                'title'    => __('Blog item heading', 'templaza-framework'),
                 'default'  => ''
             ),
             array(
@@ -25,7 +25,7 @@ Templaza_API::set_section('settings',
                 'google'      => true,
                 'font-backup' => true,
                 'allow_responsive'        => true,
-                'title'    => __('Blog item content', $this -> text_domain),
+                'title'    => __('Blog item content', 'templaza-framework'),
                 'default'  => ''
             ),
         )
