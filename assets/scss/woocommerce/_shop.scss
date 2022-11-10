@@ -16,7 +16,7 @@
     transform: rotate(360deg);
   }
 }
-.TemplazaFadeInUp {
+.templazaFadeInUp {
   animation-name: TemplazaFadeInUp;
   animation-duration: 0.8s;
   animation-fill-mode: both;
@@ -44,3 +44,21 @@ table{
      transform: scale(1);
    }
  }
+@mixin templaza-shop-loading() {
+  position: relative;
+  &:before{
+    content: '';
+    display: block;
+    border-radius: 100px;
+    position: absolute;
+  }
+
+  &:before{
+    background-color: $tztheme-global-color;
+    height: 13px;
+    width: 13px;
+    top: 0;
+    left: 0;
+    animation: templaza-scale 1s 0s cubic-bezier(0.09, 0.57, 0.49, 0.9) infinite;
+  }
+}
