@@ -52,13 +52,12 @@
             var $select = $(this),
                 $searchBoxText = $select.prev('.products-filter__search-box'),
                 searchText = $searchBoxText.length ? $searchBoxText.text() : false;
-            console.log(direction);
             $select.select2({
                 dir: direction,
                 width: '100%',
                 minimumResultsForSearch: searchText ? 3 : -1,
                 dropdownCssClass: 'products-filter-dropdown',
-                // dropdownParent: $select.parent()
+                dropdownParent: $select.parent()
             });
         });
     }
@@ -109,7 +108,7 @@
 
         var $item = $(this).closest('.products-filter__option'),
             $filter = $item.closest('.filter'),
-            $input = $item.closest('.products-filter__options').next('input[type=hidden]'),
+            $input = $item.closest('.templaza_woo_filter-control').find('input[type=hidden]'),
             current = $input.val(),
             value = $item.data('value'),
             form = $item.closest('form').get(0),
@@ -190,7 +189,7 @@
         $form.find(':input').not('[type="button"], [type="submit"], [type="reset"]')
             .val('')
             .trigger('change')
-            .filter('[type="hidden"]').prop('disabled', true);
+            .filter('[type="hidden"],[name="min_price"], [name="max_price"]').prop('disabled', true);
 
         $form.trigger('submit');
         $(document.body).trigger('templaza_products_filter_reseted');
@@ -330,7 +329,7 @@
         }
 
         if (!$container.length) {
-            $container = $('<div class="products"/>');
+            $container = $('<ul class="products"/>');
             $('#templaza-shop-container .woocommerce-info').replaceWith($container);
         }
 
