@@ -431,7 +431,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                             switch ($demo_type) {
                                 default:
                                 case 'classic':
-                                    $this -> import_content($folder_path, $file_name);
+                                    $this -> import_content($folder_path, $file_name, '.xml|.zip');
                                     break;
                                 case 'revslider':
                                     $result = $this -> import_revslider($folder_path, $file_name);
@@ -588,6 +588,23 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 echo $this -> info -> output(true);
                 die();
             }
+
+            $fetch_remote_file  = strpos($file_filter, '.zip') !== false?false:true;
+
+            // Has zip file in package
+            $zip_file   = $this -> get_substeps($folder_path, $filename, '.zip');
+
+            if($zip_file){
+                $uploads = wp_upload_dir();
+
+                // Extract media.zip file
+                $unziped    = unzip_file($folder_path.'/'.$zip_file, $uploads['basedir']);
+                if($unziped){
+                    $file_filter    = preg_replace('/\|.zip/', '', $file_filter);
+                    unlink($zip_file);
+                }
+            }
+
             $_file   = $this -> get_substeps($folder_path, $filename, $file_filter);
 
             // Replace demo url to client url
@@ -599,7 +616,10 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 }
             },10,3);
 
-            $importer   = new \TemplazaFramework_Importer();
+            $importer   = new \TemplazaFramework_Importer(array(
+                'fetch_remote_file' => $fetch_remote_file,
+//                'fetch_attachments' => $fetch_attachments,
+            ));
 
             ob_start();
             $importer->import($folder_path.'/'.$_file);
