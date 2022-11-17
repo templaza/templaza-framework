@@ -25,6 +25,12 @@ if(!class_exists('TemPlazaFramework\Helpers\Info')){
             }
         }
 
+        public function remove($key){
+            if(isset($this -> info[$key])){
+                unset($this -> info[$key]);
+            }
+        }
+
         public function set_message($message = '', $error = true)
         {
             if($message){

@@ -7,6 +7,7 @@ defined( 'TEMPLAZA_FRAMEWORK' ) || exit;
 use Elementor\Core\App\Modules\ImportExport\Import;
 use Elementor\Core\Kits\Manager;
 use Elementor\Plugin;
+use PHPMailer\PHPMailer\Exception;
 use TemPlazaFramework\Admin\Application;
 use TemPlazaFramework\Controller\BaseController;
 use TemPlazaFramework\Helpers\Files;
@@ -14,6 +15,7 @@ use TemPlazaFramework\Helpers\HelperLicense;
 use TemPlazaFramework\Helpers\Info;
 use TemPlazaFramework\Admin_Functions;
 use TemPlazaFramework\Admin\Admin_Page_Function;
+use um\core\Validation;
 
 if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
     class ImporterController extends BaseController{
@@ -42,6 +44,14 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             $this -> imported_key   = '_'.TEMPLAZA_FRAMEWORK.'_'.$this -> theme_name.'__demo_imported';
 
             $this -> system_requirement_notice();
+
+//            $folder_path    = '/home/wp2021/public_html/duongtv/wordpress_plugin/wp-content/uploads/tzinst-demo-datas/wp_alita_wp_test_content_media';
+//            $file   = $this -> get_substeps($folder_path
+//                , '', '.xml|.zip');
+//            var_dump($file);
+//            var_dump(Files::get_files_of_folder($folder_path, '.xml|.zip'));
+//            var_dump($this -> info);
+//            die(__FILE__);
         }
 
         public function get_theme_demo_datas(){
@@ -382,14 +392,23 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                         // Put multiple parts of package files to one file
                         file_put_contents($filePath, $body, FILE_APPEND);
 
-                        $this -> info -> set_message(esc_html__('Download file completed'), false);
+                        $total_files_part   = (isset($header['files-part-count']) && $header['files-part-count'])?(int)$header['files-part-count']:1;
+
+                        if($total_files_part > 1 && $step < $total_files_part){
+                            $this -> info -> set_message(sprintf(esc_html__('Download file part %d completed',
+                                'templaza-framework'), $step), false);
+                        }else {
+                            $folder_path = $upgrade_folder . '/' . $produce . '_' . $pack_type;
+                            unzip_file($filePath, $folder_path);
+                            $this -> info -> set_message(esc_html__('Download file completed', 'templaza-framework'), false);
+                        }
 
                         $next_step  = array(
                             'action'    => $action,
                             'page'      => $page,
                             'security'  => $security,
                             'pack'      => $produce,
-                            'pack_type' => $pack_type,
+                            'pack_type' => $pack_type
                         );
                         if($pack_main){
                             $next_step['pack_main']  = $pack_main;
@@ -425,13 +444,17 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
                             set_time_limit( 0 );
 
-                            $folder_path    = $upgrade_folder . '/' . $produce . '_' . $pack_type;
-                            unzip_file($filePath, $folder_path);
+//                            $next_step  = $this -> info -> get('nextstep');
+//
+//                            if(!isset($next_step['substeps']) || empty($next_step['substeps'])) {
+                            $folder_path = $upgrade_folder . '/' . $produce . '_' . $pack_type;
+//                                unzip_file($filePath, $folder_path);
+//                            }
 
                             switch ($demo_type) {
                                 default:
                                 case 'classic':
-                                    $this -> import_content($folder_path, $file_name, '.xml|.zip');
+                                    $this -> import_content($folder_path, $file_name);
                                     break;
                                 case 'revslider':
                                     $result = $this -> import_revslider($folder_path, $file_name);
@@ -504,36 +527,65 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                 }
                             }
 
-                            // Remove package import folder when import successfully.
-                            $wp_filesystem -> delete($folder_path, true, 'd');
+
+//                            // Added from version 1.1.2
+//                            $next_step  = $this -> info -> get('nextstep');
+//                            if(!isset($next_step['substeps']) || empty($next_step['substeps'])) {
+//
+//                                // Remove package import folder when import successfully.
+//                                $wp_filesystem -> delete($folder_path, true, 'd');
+//
+//                            }
+
+
 
                             if(!$this -> info -> get('nextstep')) {
 
-                                // Remove package import file
-                                $wp_filesystem->delete($filePath);
+                                if($itmImportLast < 2){
 
-                                $this->info->set_message(esc_html__('Imported demo content successfully.', 'templaza-framework'), false);
+                                    // Remove package import folder when import successfully.
+                                    $wp_filesystem->delete($folder_path, true, 'd');
 
-                                // Store the demo import type
-                                //'_tzinst_demo_imported'
+                                    // Remove package import file
+                                    $wp_filesystem->delete($filePath);
+
+                                    $this->info->set_message(esc_html__('Imported demo content successfully.', 'templaza-framework'), false);
+
+                                    // Store the demo import type
+                                    //'_tzinst_demo_imported'
 //                                $optionName = $this -> imported_key;
 
-                                $pack_slug       = $pack_main?$pack_main:$produce;
-                                $options         = get_option($this -> imported_key, array());
-                                if(!isset($options['pack'])){
-                                    $options['pack']    = array();
+                                    $pack_slug = $pack_main ? $pack_main : $produce;
+                                    $options = get_option($this->imported_key, array());
+                                    if (!isset($options['pack'])) {
+                                        $options['pack'] = array();
+                                    }
+                                    if (!is_array($options['pack'])) {
+                                        $options['pack'] = (array)$options['pack'];
+                                    }
+                                    if (!in_array($pack_slug, $options['pack'])) {
+                                        $options['pack'][] = $pack_slug;
+                                    }
+
+                                    update_option($this->imported_key, $options);
                                 }
-                                if(!is_array($options['pack'])){
-                                    $options['pack']    = (array) $options['pack'];
-                                }
-                                if(!in_array($pack_slug, $options['pack'])){
-                                    $options['pack'][]  = $pack_slug;
+                                else{
+                                    $this->info->set_message(sprintf(esc_html__('Imported %s successfully.',
+                                        'templaza-framework'), $demo_title), false);
                                 }
 
-                                update_option($this -> imported_key, $options);
-
-                            }else {
-                                $this->info->set_message(sprintf(esc_html__('Imported %s successfully.', 'templaza-framework'), $demo_title), false);
+                            }
+                            else {
+                                $next_step  = $this -> info -> get('nextstep');
+                                if(isset($next_step['substeps']) && !empty($next_step['substeps'])) {
+                                    $substeps   = $next_step['substeps'];
+                                    $cur_substep    = array_shift($substeps);
+                                    $this->info->set_message(sprintf(esc_html__('Imported substep: %s successfully.',
+                                        'templaza-framework'), $cur_substep), false);
+                                }else{
+                                    $this->info->set_message(sprintf(esc_html__('Imported %s successfully.',
+                                        'templaza-framework'), $demo_title), false);
+                                }
                             }
                         }catch (\Exception $e){
                             $this -> info -> set_message(esc_html__('Error: '.$e -> getCode().' '
@@ -572,7 +624,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             }
         }
 
-        protected function import_content($folder_path, $filename = '',  $file_filter = '.xml'){
+        protected function import_content($folder_path, $filename = '',  $file_filter = '.xml|.zip'){
 
             require_once TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/importer/class-templaza-importer.php';
 
@@ -584,47 +636,103 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             }
 
             if(!class_exists('TemplazaFramework_Importer')){
-                $this -> info -> set_message(esc_html__('The class TemplazaFramework_WXR_Importer not found.', 'templaza-framework'), true);
+                $this -> info -> set_message(esc_html__('The class TemplazaFramework_WXR_Importer not found.',
+                    'templaza-framework'), true);
                 echo $this -> info -> output(true);
                 die();
             }
 
-            $fetch_remote_file  = strpos($file_filter, '.zip') !== false?false:true;
+            try {
+                $fetch_remote_file = strpos($file_filter, '.zip') !== false ? false : true;
 
-            // Has zip file in package
-            $zip_file   = $this -> get_substeps($folder_path, $filename, '.zip');
+                // Has zip file in package
+                $has_zip = Files::get_files_of_folder($folder_path, '.zip');
 
-            if($zip_file){
-                $uploads = wp_upload_dir();
-
-                // Extract media.zip file
-                $unziped    = unzip_file($folder_path.'/'.$zip_file, $uploads['basedir']);
-                if($unziped){
-                    $file_filter    = preg_replace('/\|.zip/', '', $file_filter);
-                    unlink($zip_file);
+                $zip_file = '';
+                if ($has_zip && !empty($has_zip)) {
+                    // Get each zip file
+                    $zip_file = $this->get_substeps($folder_path, $filename, '.zip');
                 }
+
+                if (!empty($zip_file)) {
+                    $uploads = wp_upload_dir();
+
+                    $zip_file = $folder_path . '/' . $zip_file;
+
+                    // Extract media.zip file
+                    $unziped = unzip_file($zip_file, $uploads['basedir']);
+                    if ($unziped) {
+                        $file_filter = preg_replace('/\|\.zip/', '', $file_filter);
+                        unlink($zip_file);
+                    }
+
+                    $nextstep = $this->_get_substeps($folder_path, $filename, $file_filter);
+
+                    $this->info->set('nextstep', $nextstep);
+
+                    $this->info->set_message(esc_html__('Unzipped media files successfully.', 'templaza-framework'), false);
+
+                    echo $this->info->output(true);
+                    die();
+                } else {
+                    $file_filter = preg_replace('/\|\.zip/', '', $file_filter);
+                }
+
+                $_file = $this->get_substeps($folder_path, $filename, $file_filter);
+
+                if(!$_file){
+                    $demo_title = isset($_POST['demo_title'])?$_POST['demo_title']:'';
+                    $demo_title = !empty($demo_title)?$demo_title:$_POST['pack_type'];
+
+                    $this -> info -> set_message(sprintf(esc_html__('Not found compatible files of "%s". Please contact us to support it.',
+                        'templaza-framework'), $demo_title), true);
+                    echo $this -> info -> output(true);
+                    die();
+                }
+
+                // Replace demo url to client url
+                add_action('import_post_meta', function ($post_id, $key, $value) {
+                    $config = $this->get_theme_demo_datas();
+                    if (isset($config['source_url']) && preg_match('#' . $config['source_url'] . '#is', $value)) {
+                        $value = preg_replace('#' . $config['source_url'] . '#is', get_home_url(), $value);
+                        update_post_meta($post_id, $key, $value);
+                    }
+                }, 10, 3);
+
+                $importer = new \TemplazaFramework_Importer(array(
+                    'fetch_remote_file' => $fetch_remote_file,
+                ));
+
+                ob_start();
+                $importer->import($folder_path . '/' . $_file);
+                $result = ob_get_contents();
+                ob_end_clean();
+
+                $deleted = false;
+                if ($result) {
+                    $deleted = unlink($folder_path . '/' . $_file);
+                }
+
+                if($deleted){
+                    $_file   = $this -> get_substeps($folder_path, $filename, $file_filter);
+                    $nextstep = $this-> info -> get('nextstep');
+
+                    if(isset($nextstep['substeps']) && !empty($nextstep['substeps'])) {
+
+                        $this->info->set_message(sprintf(esc_html__('Imported %s successfully', 'templaza-framework'), $_file), false);
+
+                        echo $this->info->output(true);
+                        die();
+                    }else{
+                        $this -> info -> remove('nextstep');
+                        return true;
+                    }
+                }
+            }catch (\Exception $e){
+                $this -> info -> set_message($e -> getMessage(), true);
+                echo $this -> info -> output(true);
+                die();
             }
-
-            $_file   = $this -> get_substeps($folder_path, $filename, $file_filter);
-
-            // Replace demo url to client url
-            add_action('import_post_meta', function($post_id, $key, $value){
-                $config = $this -> get_theme_demo_datas();
-                if(isset($config['source_url']) && preg_match('#'.$config['source_url'].'#is', $value)){
-                    $value  = preg_replace('#'.$config['source_url'].'#is', get_home_url(), $value);
-                    update_post_meta($post_id, $key, $value);
-                }
-            },10,3);
-
-            $importer   = new \TemplazaFramework_Importer(array(
-                'fetch_remote_file' => $fetch_remote_file,
-//                'fetch_attachments' => $fetch_attachments,
-            ));
-
-            ob_start();
-            $importer->import($folder_path.'/'.$_file);
-            $result = ob_get_contents();
-            ob_end_clean();
 
             return true;
         }
@@ -1048,23 +1156,12 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             return true;
         }
 
-        protected function get_substeps($folder_path, $filename = '', $file_filter = '.'){
+        protected function _get_substeps($folder_path, $filename = '', $file_filter = '.'){
             $_files  = array();
             if(!$filename){
                 $_files  = Files::get_files_of_folder($folder_path, $file_filter);
             }else {
                 $_files[]    = $filename;
-            }
-
-            if(!count($_files)){
-                $this -> info -> set_message(esc_html__('Files not found.', 'templaza-framework'), true);
-                return false;
-            }
-
-            $substeps      = isset($_POST['substeps']) && $_POST['substeps']?$_POST['substeps']:$_files;
-
-            if(!$substeps || ($substeps && !count($substeps))){
-                return array();
             }
 
             $page           = $_POST['page'];
@@ -1094,9 +1191,94 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 $next_step['demo_key'] = $demo_key;
             }
 
-            $current_step               = array_shift($substeps);
+            $substeps      = isset($_POST['substeps']) && $_POST['substeps']?$_POST['substeps']:$_files;
+
+//            if(!$substeps || ($substeps && !count($substeps))){
+//                return array();
+//            }
+
+//            $current_step               = array_shift($substeps);
             $next_step['substeps']      = $substeps;
             $next_step['total_step']    = count($substeps);
+
+//            if($next_step && count($next_step) && $next_step['total_step']) {
+//                $this -> info -> set('nextstep', $next_step);
+//            }
+
+            return $next_step;
+        }
+
+        protected function get_substeps($folder_path, $filename = '', $file_filter = '.'){
+            $_files  = array();
+            if(!$filename){
+                $_files  = Files::get_files_of_folder($folder_path, $file_filter);
+            }else {
+                $_files[]    = $filename;
+            }
+
+            if(!count($_files)){
+                $this -> info -> set_message(esc_html__('Files not found.', 'templaza-framework'), true);
+                return false;
+            }
+
+//            $substeps      = isset($_POST['substeps']) && $_POST['substeps']?$_POST['substeps']:$_files;
+//
+//            if(!$substeps || ($substeps && !count($substeps))){
+//                return array();
+//            }
+//
+//            $page           = $_POST['page'];
+//            $pack_type      = $_POST['pack_type'];
+//            $action         = $_POST['action'];
+//            $demo_type      = isset($_POST['demo_type']) && $_POST['demo_type']?$_POST['demo_type']:'';
+//            $demo_title     = isset($_POST['demo_title']) && $_POST['demo_title']?$_POST['demo_title']:'';
+//            $demo_key       = isset($_POST['demo_key']) && $_POST['demo_key']?$_POST['demo_key']:'';
+//            $produce        = $_POST['pack'];
+//            $security       = $_POST['security'];
+//
+//            $next_step  = array(
+//                'action'    => $action,
+//                'page'      => $page,
+//                'security'  => $security,
+//                'pack'      => $produce,
+//                'pack_type' => $pack_type,
+//            );
+//
+//            if($demo_title){
+//                $next_step['demo_title'] = $demo_title;
+//            }
+//            if($demo_type){
+//                $next_step['demo_type'] = $demo_type;
+//            }
+//            if($demo_key){
+//                $next_step['demo_key'] = $demo_key;
+//            }
+//
+//            $current_step               = array_shift($substeps);
+//            $next_step['substeps']      = $substeps;
+//            $next_step['total_step']    = count($substeps);
+//
+//            if($next_step && count($next_step) && $next_step['total_step']) {
+//                $this -> info -> set('nextstep', $next_step);
+//            }
+//
+//            return $current_step;
+
+            $next_step  = $this -> _get_substeps($folder_path, $filename, $file_filter);
+
+            if(!$next_step || ($next_step && !count($next_step))){
+                return array();
+            }
+
+            $itmImportLast  = $_POST['demo_item_last'];
+            $current_step   = array_shift($next_step['substeps']);
+
+//            $next_step['total_substep']    = count($next_step['substeps']);
+//            if($itmImportLast < 2) {
+                $next_step['total_step'] = count($next_step['substeps']);
+//            }
+//            var_dump($next_step);
+//            die(__METHOD__);
 
             if($next_step && count($next_step) && $next_step['total_step']) {
                 $this -> info -> set('nextstep', $next_step);

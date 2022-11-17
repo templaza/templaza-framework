@@ -50,6 +50,7 @@ if( class_exists( 'WP_Import') ) {
         {
             $options = wp_parse_args( $options, array(
                 'fetch_attachments'         => true,
+                'fetch_remote_file'         => false,
             ) );
 
             if(count($options)){
@@ -218,9 +219,6 @@ if( class_exists( 'WP_Import') ) {
 
             return $elements;
         }
-
-//        function process_attachment( $post, $url ) {
-//        }
 
         /**
          * Attempt to download a remote file attachment
