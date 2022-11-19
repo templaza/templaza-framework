@@ -44,14 +44,6 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             $this -> imported_key   = '_'.TEMPLAZA_FRAMEWORK.'_'.$this -> theme_name.'__demo_imported';
 
             $this -> system_requirement_notice();
-
-//            $folder_path    = '/home/wp2021/public_html/duongtv/wordpress_plugin/wp-content/uploads/tzinst-demo-datas/wp_alita_wp_test_content_media';
-//            $file   = $this -> get_substeps($folder_path
-//                , '', '.xml|.zip');
-//            var_dump($file);
-//            var_dump(Files::get_files_of_folder($folder_path, '.xml|.zip'));
-//            var_dump($this -> info);
-//            die(__FILE__);
         }
 
         public function get_theme_demo_datas(){
@@ -668,6 +660,16 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
                     $nextstep = $this->_get_substeps($folder_path, $filename, $file_filter);
 
+                    // Add prepare theme option step if theme option files exists
+                    if(($theme_option_dir = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION) && is_dir($theme_option_dir)){
+                        // Check theme options file extracted
+                        $_files  = Files::get_files_of_folder($theme_option_dir, '.json',true, true);
+                        if(!empty($_files)){
+                            array_unshift($nextstep['substeps'], 'prepare-theme-option');
+                            $nextstep['total_step']+=1;
+                        }
+                    }
+
                     $this->info->set('nextstep', $nextstep);
 
                     $this->info->set_message(esc_html__('Unzipped media files successfully.', 'templaza-framework'), false);
@@ -676,6 +678,17 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                     die();
                 } else {
                     $file_filter = preg_replace('/\|\.zip/', '', $file_filter);
+                }
+
+                $_file = $this->get_substeps($folder_path, $filename, $file_filter);
+                if(!empty($_file) && $_file == 'prepare-theme-option'){
+                    if($this -> prepare_theme_options_file(TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION)){
+
+                        $this->info->set_message(esc_html__('Prepared theme options successfully', 'templaza-framework'), false);
+
+                        echo $this->info->output(true);
+                        die();
+                    }
                 }
 
                 $_file = $this->get_substeps($folder_path, $filename, $file_filter);
@@ -735,6 +748,34 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             }
 
             return true;
+        }
+
+        protected function prepare_theme_options_file($folder_path, $file_filter = '.json'){
+
+            if(!is_dir($folder_path)){
+                return false;
+            }
+
+            $files  = Files::get_files_of_folder($folder_path, $file_filter,true, true);
+
+            if(!empty($files)){
+                foreach($files as $file){
+                    $this -> prepare_image_url_from_file($file);
+                }
+            }
+            return true;
+        }
+
+        protected function prepare_image_url_from_file($file){
+//            $pattern = "/((https?|ftp|gopher|telnet|file|notes|ms-help):((\/\/)|(\\\\))+[\w\d:#@%\/;$()~_?\+-=\\\.&]*\.(jpg|jpeg|webp|ico|png|gif|tif|exf|svg|wfm))/ims";
+            $pattern = "/(((https?|ftp|gopher|telnet|file|notes|ms-help):((\/\/)|(\\\\))+[\w\d:#@%\/;$()~_?\+-=\\\.&]*)(\/wp-content\\\\\/uploads.*?)\.(jpg|jpeg|webp|ico|png|gif|tif|exf|svg|wfm))/ims";
+            $fh = fopen($file, 'r');
+
+            $content = fread($fh,filesize($file));
+            $content = preg_replace($pattern, addcslashes(get_site_url(), '/') . '$7', $content);
+            $fh = fopen($file, 'w');
+            fwrite($fh, $content);
+            fclose($fh);
         }
 
         protected function import_revslider($folder_path, $filename = '',  $file_filter = '.zip'){
