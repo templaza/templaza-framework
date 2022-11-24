@@ -772,7 +772,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             $fh = fopen($file, 'r');
 
             $content = fread($fh,filesize($file));
-            $content = preg_replace($pattern, addcslashes(get_site_url(), '/') . '$7', $content);
+            $content = preg_replace($pattern, addcslashes(get_site_url(), '/') . '$7.$8', $content);
             $fh = fopen($file, 'w');
             fwrite($fh, $content);
             fclose($fh);
