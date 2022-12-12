@@ -31,6 +31,11 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
         {
             parent::__construct($config);
 
+            if(isset($_POST['action']) && $_POST['action'] == 'tzinst_import_demo_data'
+                && !defined('WP_LOAD_IMPORTERS')) {
+                define('WP_LOAD_IMPORTERS', true);
+            }
+
             $this -> info   = new Info();
 
             if(!HelperLicense::is_authorised($this -> theme_name)){
@@ -620,7 +625,6 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
             require_once TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/importer/class-templaza-importer.php';
 
-
             if ( ! class_exists( 'TemplazaFramework_Importer' ) ) {
                 $class_wp_importer = TEMPLAZA_FRAMEWORK_LIBRARY_PATH.'/importer/class-templaza-importer.php';
                 if ( file_exists( $class_wp_importer ) )
@@ -691,7 +695,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                     }
                 }
 
-                $_file = $this->get_substeps($folder_path, $filename, $file_filter);
+//                $_file = $this->get_substeps($folder_path, $filename, $file_filter);
 
                 if(!$_file){
                     $demo_title = isset($_POST['demo_title'])?$_POST['demo_title']:'';
@@ -701,6 +705,79 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                         'templaza-framework'), $demo_title), true);
                     echo $this -> info -> output(true);
                     die();
+                }
+
+                if(!isset($_POST['import_id'])){
+                    /**
+                     * Create import file by post with post type is attachment
+                     *
+                     */
+                    $upload = wp_upload_dir();
+
+                    global $wpdb;
+                    $query = "SELECT ID FROM $wpdb->posts AS p";
+                    $query .= "  INNER JOIN $wpdb->postmeta AS pm ON pm.post_id = p.ID";
+                    $query .= "  AND pm.meta_key=%s";
+                    $query .= "  WHERE 1=1";
+                    $query .= ' AND p.post_title = %s';
+                    $query .= ' AND p.post_content = %s';
+                    $query .= ' AND p.post_type = %s';
+                    $query .= ' AND p.post_status = %s';
+                    $query .= ' AND pm.meta_value = %s';
+
+                    $import_file_sub    = $_POST['pack'] . '_' . $_POST['pack_type'];
+                    $import_file_url    = $upload['baseurl'].'/tzinst-demo-datas/'.$import_file_sub.'/'.$_file;
+
+                    $args  = array(
+                        '_templaza-framework__context',
+                        $_file,
+                        $import_file_url,
+                        'attachment',
+                        'private',
+                        'import-content'
+                    );
+
+                    $post_import_id   = (int) $wpdb->get_var( $wpdb->prepare( $query, $args ) );
+
+                    if(!$post_import_id) {
+                        // Construct the attachment array.
+                        $attachment = array(
+                            'post_title' => $_file,
+                            'post_content' => $import_file_url,
+                            'guid' => $import_file_url,
+                            'context' => 'import',
+                            'post_status' => 'private',
+                            'meta_input' => array(
+                                '_templaza-framework__context' => 'import-content'
+                            ),
+                        );
+
+                        // Save the data.
+                        $post_import_id = wp_insert_attachment($attachment, 'tzinst-demo-datas/'.$import_file_sub.'/' . $_file);
+
+                    }
+
+                    if($post_import_id){
+                        $nextstep   = $this->_get_substeps($folder_path, $filename, $file_filter);
+
+                        /**
+                         * Must this option data: import_id to some plugin (woocomerce,...) run with import hook
+                         * Special With woocommerce to import Product Attributes
+                         * @param string import
+                         * @param int import_id
+                         * */
+                        $nextstep['import']     = 'wordpress';
+                        $nextstep['import_id']  = $post_import_id;
+
+                        $this->info->set('nextstep', $nextstep);
+
+                        $this->info->set_message(sprintf(esc_html__('Start Import %s.', 'templaza-framework'), $nextstep['demo_title']), false);
+
+                        echo $this->info->output(true);
+                        die();
+                    }
+                }else{
+                    $post_import_id = isset($_POST['import_id'])?$_POST['import_id']:0;
                 }
 
                 // Replace demo url to client url
@@ -724,6 +801,9 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 $deleted = false;
                 if ($result) {
                     $deleted = unlink($folder_path . '/' . $_file);
+                    if($post_import_id){
+                        wp_delete_post($post_import_id);
+                    }
                 }
 
                 if($deleted){
@@ -1316,7 +1396,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
 //            $next_step['total_substep']    = count($next_step['substeps']);
 //            if($itmImportLast < 2) {
-                $next_step['total_step'] = count($next_step['substeps']);
+            $next_step['total_step'] = count($next_step['substeps']);
 //            }
 //            var_dump($next_step);
 //            die(__METHOD__);

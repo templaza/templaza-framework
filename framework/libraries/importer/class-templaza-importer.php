@@ -186,8 +186,8 @@ if( class_exists( 'WP_Import') ) {
                     $is_menu_slug   = isset($element['menu_slug']) && is_numeric($element['menu_slug'])
                         && (intval($element['menu_slug']) == $import_id);
 
-                    $id_index_exists = array_search($new_id, $__parent_layout);
-                    $id_keys        = array_keys($__parent_layout);
+                    $id_index_exists = is_array($__parent_layout)?array_search($new_id, $__parent_layout):false;
+                    $id_keys        = is_array($__parent_layout)?array_keys($__parent_layout):array();
 
                     if(($is_menu_slug || $is_menu_id) && !in_array($new_id, $__parent_layout) && !in_array($index, $id_keys)
                         && ($id_index_exists == false || ($id_index_exists != false && $id_index_exists != $index))){
