@@ -192,6 +192,12 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'default'  => 'style1',
             ),
             array(
+                'id'       => 'ap_product-loop-author',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Author', 'templaza-framework' ),
+                'default'  => false,
+            ),
+            array(
                 'id'       => 'ap_product-loop-desc-limit',
                 'type'     => 'text',
                 'title'    => __('Limit Description', 'templaza-framework'),

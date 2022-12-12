@@ -1257,4 +1257,29 @@ ul.products.product-loop-layout-9.show-wishlist {
     }
   }
 }
+.templaza-loading{
+  @include templaza-shop-loading();
+}
+.templaza-posts__loading{
+  background:$tztheme-body-bg;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: -50px;
+  right: 0;
+  z-index: 998;
+  display: none;
+  text-align: center;
+  width:100%;
+  margin:0 !important;
+  padding-top:40px;
 
+  .templaza-loading{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &.show{
+    display: block;
+  }
+}

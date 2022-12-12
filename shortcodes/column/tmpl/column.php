@@ -35,8 +35,8 @@ if($use_sticky){
     if(isset($sticky_show_on_up) && !empty($sticky_show_on_up)) {
         $_sticky_option[] = 'show-on-up: true';
     }
-    if(isset($media) && !empty($media)) {
-        $_sticky_option[] = 'media: '.$media;
+    if(isset($sticky_media) && !empty($sticky_media)) {
+        $_sticky_option[] = 'media: '.$sticky_media;
     }
     if(isset($sticky_target_offset) && !empty($sticky_target_offset)) {
         $_sticky_option[] = 'target-offset: '.$sticky_target_offset;

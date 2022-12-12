@@ -196,6 +196,14 @@ Templaza_API::set_section('settings',
 		        'default'  => ''
 	        ),
 	        array(
+		        'id'       => 'blog_media_margin',
+		        'type'     => 'spacing',
+                'mode'     => 'margin',
+                'allow_responsive'    => true,
+		        'title'    => __('Blog media margin', 'templaza-framework'),
+		        'default'  => ''
+	        ),
+	        array(
 		        'id'       => 'blog_item_margin',
 		        'type'     => 'spacing',
 		        'mode'     => 'margin',

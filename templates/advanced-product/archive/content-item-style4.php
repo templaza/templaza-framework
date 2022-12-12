@@ -11,6 +11,16 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }else{
     $templaza_options = Functions::get_theme_options();
 }
+if(isset($args['ap_class'])){
+    $ap_class = $args['ap_class'];
+}else{
+    $ap_class = '';
+}
+if(isset($args['show_author'])){
+    $ap_author = isset($args['show_author'])?filter_var($args['show_author'], FILTER_VALIDATE_BOOLEAN):false;
+}else{
+    $ap_author       = isset($templaza_options['ap_product-loop-author'])?filter_var($templaza_options['ap_product-loop-author'], FILTER_VALIDATE_BOOLEAN):false;
+}
 $ap_desc_limit       = isset($templaza_options['ap_product-loop-desc-limit'])?$templaza_options['ap_product-loop-desc-limit']:100;
 $price = get_field('ap_price', get_the_ID());
 $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields' => 'names' ) );
@@ -20,7 +30,7 @@ $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['s
 $pid    = get_the_ID();
 
 ?>
-<div class="ap-item ap-item-style4">
+<div class="ap-item ap-item-style4 <?php echo esc_attr($ap_class);?>">
     <div class="ap-inner ">
         <div class="ap-info">
             <div class="uk-inline">
@@ -28,7 +38,7 @@ $pid    = get_the_ID();
                 <?php
                 if(isset($price) && $price !=''){
                   ?>
-                    <div class="uk-position-bottom-left uk-padding-small tz-theme-bg-color">
+                    <div class="uk-position-bottom-left uk-padding-small tz-theme-bg-color ap-price-wrap">
                         <?php AP_Templates::load_my_layout('archive.price');?>
                     </div>
                 <?php
@@ -50,7 +60,13 @@ $pid    = get_the_ID();
                         the_excerpt();
                     }
                 ?>
+                <?php
+                if($ap_author){
+                    AP_Templates::load_my_layout('archive.author.style1');
+                }
+                ?>
             </div>
+
             <div class="ap-info-inner ap-info-bottom">
                 <?php AP_Templates::load_my_layout('archive.custom-fields-style4'); ?>
             </div>

@@ -87,8 +87,13 @@ $navClass[] = $dropdown_animation_effect;
 
 // Get data attributes - them added from header shortcode
 $menu_datas = Functions::get_attributes('header');
+if($header_stack_search || $header_stack_account || $header_stack_cart){
+    $header_icon = 'header-show-icon';
+}else{
+    $header_icon = '';
+}
 ?>
-<div class="uk-flex uk-flex-row uk-flex-between">
+<div class="uk-flex uk-flex-row uk-flex-between <?php echo esc_attr($header_icon);?>">
     <div class="uk-flex uk-hidden@m uk-flex-left uk-flex-middle">
         <div class="header-mobilemenu-trigger burger-menu-button" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
             <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>

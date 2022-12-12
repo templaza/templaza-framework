@@ -44,10 +44,13 @@ if( class_exists( 'WP_Import') ) {
         var $processed_parent_menu_items = array();
         protected $process_menu_items_alias = array();
 
+        var $fetch_remote_file;
+
         public function __construct($options = array())
         {
             $options = wp_parse_args( $options, array(
                 'fetch_attachments'         => true,
+                'fetch_remote_file'         => false,
             ) );
 
             if(count($options)){
@@ -183,8 +186,8 @@ if( class_exists( 'WP_Import') ) {
                     $is_menu_slug   = isset($element['menu_slug']) && is_numeric($element['menu_slug'])
                         && (intval($element['menu_slug']) == $import_id);
 
-                    $id_index_exists = array_search($new_id, $__parent_layout);
-                    $id_keys        = array_keys($__parent_layout);
+                    $id_index_exists = is_array($__parent_layout)?array_search($new_id, $__parent_layout):false;
+                    $id_keys        = is_array($__parent_layout)?array_keys($__parent_layout):array();
 
                     if(($is_menu_slug || $is_menu_id) && !in_array($new_id, $__parent_layout) && !in_array($index, $id_keys)
                         && ($id_index_exists == false || ($id_index_exists != false && $id_index_exists != $index))){
@@ -215,6 +218,66 @@ if( class_exists( 'WP_Import') ) {
             }
 
             return $elements;
+        }
+
+        /**
+         * Attempt to download a remote file attachment
+         *
+         * @param string $url URL of item to fetch
+         * @param array $post Attachment details
+         * @return array|WP_Error Local file location details on success, WP_Error otherwise
+         */
+        public function fetch_remote_file( $url, $post ) {
+            if($this -> fetch_remote_file){
+                return parent::fetch_remote_file($url, $post);
+            }else {
+
+                $postmeta   = isset($post['postmeta']) ?$post['postmeta']:array();
+
+//                if(!empty($postmeta)){
+//                    return parent::fetch_remote_file($url, $post);
+//                }
+
+                $uploads = wp_upload_dir( $post['upload_date'] );
+                if ( ! ( $uploads && false === $uploads['error'] ) ) {
+                    return new WP_Error( 'upload_dir_error', $uploads['error'] );
+                }
+
+                $file_name  = (isset($postmeta['_wp_attached_file']) && !empty($postmeta['_wp_attached_file']))?$postmeta['_wp_attached_file']:'';
+
+                $file_name  = !empty($file_name)?$file_name:(!empty($post['attachment_url']) ? $post['attachment_url'] : $post['guid']);
+
+                $file_name  = basename($file_name);
+
+//                // Move the file to the uploads dir.
+//                $file_name     = wp_unique_filename( $uploads['path'], $file_name );
+
+//                var_dump($file_name);
+
+                $new_file      = $uploads['path'] . "/$file_name";
+
+                // Handle the upload like _wp_handle_upload() does.
+                $wp_filetype     = wp_check_filetype_and_ext( $new_file, $file_name );
+
+                $upload = array(
+                    'file' => $new_file,
+                    'url' => $uploads['url'] . "/$file_name",
+                    'type' => $wp_filetype['type'],
+                    'error' => false,
+                );
+
+//                var_dump($upload); die(__METHOD__);
+
+                // keep track of the old and new urls so we can substitute them later
+                $this->url_remap[$url] = $upload['url'];
+                $this->url_remap[$post['guid']] = $upload['url']; // r13735, really needed?
+//                // keep track of the destination if the remote url is redirected somewhere else
+//                if ( isset($headers['x-final-location']) && $headers['x-final-location'] != $url )
+//                    $this->url_remap[$headers['x-final-location']] = $upload['url'];
+
+                return $upload;
+            }
+
         }
     }
 }

@@ -105,6 +105,7 @@ $tztheme-button-font:                         'Barlow Semi Condensed', Arial, He
 
 
 $tztheme-body-color:                          #212529 !default;
+$tztheme-body-bg:                             #ffffff !default;
 $tztheme-white:                               #fff !default;
 $tztheme-black:                               #000 !default;
 
@@ -113,11 +114,11 @@ $tztheme-enable-shadows:                      false !default;
 // scss-docs-start grid-breakpoints
 $tztheme-grid-breakpoints: (
         xs: 0,
-        sm: 576px,
-        md: 768px,
-        lg: 992px,
+        sm: 480px,
+        md: 640px,
+        lg: 960px,
         xl: 1200px,
-        xxl: 1400px
+        xxl: 1600px
 ) !default;
 // scss-docs-end grid-breakpoints
 
