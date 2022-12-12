@@ -424,6 +424,7 @@ $designs    = array(
         'class'     => 'div.templaza-archive .templaza-blog-item-media',
         'options' => array(
             'blog_media_padding',
+            'blog_media_margin',
         ),
     ),
     // Single
@@ -499,7 +500,7 @@ if(count($designs)) {
                 $wd_css_responsive['desktop'] .= CSS::box_shadow($box_shadow);
                 unset($design['options'][$index]);
             }
-            $wd_css    = Templates::make_css_design_style($design['options'], $options);
+            $wd_css    = Templates::make_css_design_style($design['options'], $options,true);
 
             if(!empty($wd_css)){
                 if(is_array($wd_css)){

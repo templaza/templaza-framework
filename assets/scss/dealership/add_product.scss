@@ -1,0 +1,65 @@
+.templaza-add-product{
+  background:$tztheme-ap-single-price-bg;
+  padding:40px;
+  @include box-shadow($tztheme-box-shadow-default);
+  p.label{
+    margin-bottom: 15px;
+    font-weight:600;
+  }
+  .field{
+    margin-bottom:25px;
+    input{
+      margin:0;
+    }
+    .acf_wysiwyg .wp-editor-container{
+      border:none;
+      box-shadow: none;
+    }
+    a{
+      &:focus{
+        outline: none;
+        box-shadow: none;
+      }
+    }
+  }
+  .uk-accordion-content{
+    padding: 0 10px;
+  }
+  .uk-accordion-title{
+    padding:10px;
+    background:#eee;
+    font-size:1.15em;
+    &:focus{
+      outline: none;
+      box-shadow: none;
+    }
+    &:hover,&:active{
+      color:$tztheme-heading-color;
+    }
+  }
+  select:not([multiple]):not([size]){
+    background-position: 99% 50%;
+  }
+  .acf-gallery .thumbnails{
+    min-height:200px;
+  }
+  textarea{
+  height:200px;
+  }
+  input[type="radio"]:checked::before{
+    background:#fff;
+  }
+  input,textarea,select{
+    &:focus{
+      outline: none;
+      box-shadow: none;
+      border-color:$tztheme-border-color;
+    }
+  }
+  button.add_media{
+    text-transform: capitalize;
+    background:#ababab;
+    padding:0 20px;
+    height:40px;
+  }
+}

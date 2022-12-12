@@ -14,7 +14,7 @@
           font-family:$tztheme-button-font;
         }
         &.ap-price-msrp{
-          font-weight:300;
+          font-weight:400;
           border-left:1px solid #fff;
           padding-left:12px;
           margin-left:12px;
@@ -25,7 +25,7 @@
       padding:30px 30px 0 30px;
       &.ap-info-desc{
         padding-bottom:30px;
-        padding-top:25px;
+        padding-top:20px;
       }
     }
     .ap-title{
@@ -52,6 +52,7 @@
           font-size:14px;
           color:$tztheme-content-color;
           font-weight:normal;
+          text-transform: capitalize;
           i{
             padding-right:5px;
           }
@@ -64,6 +65,40 @@
     .ap-info-bottom{
       padding:2px;
       border:none;
+    }
+  }
+}
+@media screen and (max-width: 1199.99px) {
+  .ap-item.ap-item-style4 .ap-inner .ap-price-box{
+    padding:10px 15px;
+  }
+  .ap-item.ap-item-style4 .ap-inner .ap-price-box{
+    padding:0;
+  }
+  .ap-item.ap-item-style4{
+    .ap-inner{
+      .ap-price-wrap{
+        padding:10px 15px;
+      }
+      .ap-price-box{
+        padding:0;
+      }
+      .ap-info-inner{
+        padding:25px 20px 0 20px;
+        &.ap-info-desc {
+          padding-bottom: 20px;
+          padding-top: 18px;
+        }
+        &.ap-info-bottom{
+          padding:2px;
+        }
+      }
+      .ap-specification-style4 .ap-spec-item{
+        padding:10px 2px;
+        .ap-spec-value i{
+          padding-right:2px;
+        }
+      }
     }
   }
 }

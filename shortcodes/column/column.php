@@ -255,28 +255,35 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
                                         'id'      => 'sm_visibility',
                                         'type'    => 'switch',
                                         'title'   => esc_html__('Visible On Phone Landscape', 'templaza-framework'),
-                                        'subtitle'=> esc_html__('Disable to hide this section on phone landscape device'),
+                                        'subtitle'=> esc_html__('Disable to hide this section on phone landscape device( max-width:639px )'),
                                         'default' => true,
                                     ),
                                     array(
                                         'id'      => 'md_visibility',
                                         'type'    => 'switch',
                                         'title'   => esc_html__('Visible On Tablet Landscape'),
-                                        'subtitle'=> esc_html__('Disable to hide this section on tablet landscape device'),
+                                        'subtitle'=> esc_html__('Disable to hide this section on tablet landscape device(from 640px to 959px)'),
                                         'default' => true,
                                     ),
                                     array(
                                         'id'      => 'lg_visibility',
                                         'type'    => 'switch',
                                         'title'   => esc_html__('Visible On Desktop'),
-                                        'subtitle'=> esc_html__('Disable to hide this section on desktop device'),
+                                        'subtitle'=> esc_html__('Disable to hide this section on desktop device(from 960px to 1199px)'),
                                         'default' => true,
                                     ),
                                     array(
                                         'id'      => 'xl_visibility',
                                         'type'    => 'switch',
                                         'title'   => esc_html__('Visible On Large Screen'),
-                                        'subtitle'=> esc_html__('Disable to hide this section on large screen device'),
+                                        'subtitle'=> esc_html__('Disable to hide this section on large screen device(from 1200px to 1599px)'),
+                                        'default' => true,
+                                    ),
+                                    array(
+                                        'id'      => 'xxl_visibility',
+                                        'type'    => 'switch',
+                                        'title'   => esc_html__('Visible On Extra Large Screen'),
+                                        'subtitle'=> esc_html__('Disable to hide this section on large screen device(1600px and large)'),
                                         'default' => true,
                                     ),
                                     array(
@@ -421,9 +428,9 @@ if(!class_exists('TemplazaFramework_ShortCode_Column')){
                 $params['xs_visibility']   = 1;
             }
 
-//            if(isset($params['xxl_visibility']) && (!(bool) $params['xxl_visibility'])){
-//                $params['tz_class'] .= ' hideonxxl';
-//            }
+            if(isset($params['xxl_visibility']) && (!(bool) $params['xxl_visibility'])){
+                $params['tz_class'] .= ' hideonxxl';
+            }
             if(isset($params['xl_visibility']) && (!(bool) $params['xl_visibility'])){
 //                $params['tz_class'] .= ' uk-visible@xl';
                 $params['tz_class'] .= ' hideonxl';

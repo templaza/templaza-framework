@@ -128,3 +128,28 @@
       }
    }
 }
+@mixin tz-loading($top,$bottom,$bg) {
+   .templaza-posts__loading{
+      background:$bg;
+      position: absolute;
+      top: $top;
+      left: 0;
+      bottom: $bottom;
+      right: 0;
+      z-index: 998;
+      display: none;
+      text-align: center;
+      width:100%;
+      margin:0 !important;
+      padding-top:40px;
+
+      .templaza-loading{
+         position: absolute;
+         left: 50%;
+         transform: translateX(-50%);
+      }
+      &.show{
+         display: block;
+      }
+   }
+}

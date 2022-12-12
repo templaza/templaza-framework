@@ -58,7 +58,11 @@ $login_modals               = isset($gb_options['templaza-shop-account-login'])?
 $search_icon_type           = isset($options['search-icon-type'])?$options['search-icon-type']:'default';
 $account_icon_type          = isset($options['account-icon-type'])?$options['account-icon-type']:'default';
 $cart_icon_type             = isset($options['cart-icon-type'])?$options['cart-icon-type']:'default';
-
+if($header_stack_search || $header_stack_account || $header_stack_cart){
+    $header_icon = 'header-show-icon';
+}else{
+    $header_icon = '';
+}
 $navClass[] = $dropdown_animation_effect;
 $navClassLeft[] = $dropdown_animation_effect;
 // Get data attributes - them added from header shortcode
@@ -195,7 +199,7 @@ if($header_stack_divi == true) {
 $social_profiles    = isset($gb_options['social'])?$gb_options['social']:'';
 
 if ($mode == 'left') {
-    echo '<div class="uk-grid-match uk-flex uk-flex-between uk-grid-collapse uk-position-relative">';
+    echo '<div class="uk-grid-match uk-flex uk-flex-between uk-grid-collapse uk-position-relative '.$header_icon.'">';
     ?>
     <div class="uk-flex uk-hidden@m uk-flex-left uk-flex-middle">
         <div class="header-mobilemenu-trigger burger-menu-button " data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
@@ -300,7 +304,7 @@ if ($mode == 'left') {
 echo '</div>';
 }
 ?>
-<div class="uk-flex">
+<div class="uk-flex <?php echo esc_attr($header_icon);?>">
   <div class="header-stacked-section uk-flex uk-width uk-flex-column uk-flex-between ">
      <?php
      if ($mode == 'center') {
