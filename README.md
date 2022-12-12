@@ -3,6 +3,16 @@
 
 Changelogs:
 
+Version 1.1.2 - November 12, 2022
+
+    Fix Product filter when using wpml
+    Fix issue import demo data on local
+    Fix logo in mobile when show header icon
+    Update import (unzip) media files
+    Update style loading product filter
+    Update change image url from demo to current url
+    Update extract media files when import demo content data
+
 Version 1.1.1 - November 10, 2022
     
     Fix backtotop padding setting
