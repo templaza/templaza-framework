@@ -3,7 +3,7 @@
 
 Changelogs:
 
-Version 1.1.2 - November 12, 2022
+Version 1.1.2 - December 12, 2022
 
     Fix Product filter when using wpml
     Fix issue import demo data on local
