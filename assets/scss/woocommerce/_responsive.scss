@@ -278,6 +278,7 @@
   }
   .woocommerce-cart .woocommerce-cart-form {
     padding-right: 50px;
+    width:60%;
   }
   .woocommerce-cart table.shop_table .coupon-form td {
     width: 100%;
@@ -292,6 +293,7 @@
   .woocommerce-cart table.shop_table .coupon-form .coupon input {
     width: 100%;
     min-width: auto;
+    margin:0;
   }
   .woocommerce-cart table.shop_table .coupon-form .actions > button {
     width: inherit;
@@ -381,10 +383,11 @@
     left: auto;
     background: transparent;
   }
+
   ul.products li.product .product-inner .product-loop__buttons .tz-loop-button {
     width: auto;
     height: auto;
-    background-color: transparent;
+    background-color: transparent !important;
     margin: 15px 0 0;
     --tz-background-text-color-primary: var(--tz-color-dark);
     transform: translateX(0);
@@ -393,6 +396,7 @@
   }
   ul.products li.product .product-inner .product-loop__buttons .tz-loop-button:hover {
     background-color: transparent;
+    color: inherit !important;
   }
   ul.products li.product .product-inner .product-loop__buttons .tz-loop-button:before {
     right: 30px;

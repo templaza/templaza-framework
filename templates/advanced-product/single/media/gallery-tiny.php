@@ -122,7 +122,7 @@ if(!empty($ap_gallery)){
             responsive: {
                 640: {
                     gutter: 10,
-                    items: 5,
+                    items: 3,
                 },
                 960: {
                     gutter: 20,

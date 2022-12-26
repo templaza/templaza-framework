@@ -1,3 +1,6 @@
+.templaza-ap-archive{
+  position:relative;
+}
 .ap-item{
   .ap-inner{
     @include transition($tztheme-transition-all);
@@ -66,5 +69,5 @@
   }
 }
 .tz-loading{
-  @include tz-loading(-5px,-10px,'transparent');
+  @include tz-loading(-5px,-10px,transparent);
 }

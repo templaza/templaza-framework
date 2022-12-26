@@ -11,8 +11,13 @@ $show_compare_button= get_field('ap_show_archive_compare_button', 'option');
 $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
 $pid            = get_the_ID();
+if(isset($args['ap_class'])){
+    $ap_class = $args['ap_class'];
+}else{
+    $ap_class = ' templazaFadeInUp';
+}
 ?>
-<div class="ap-item ap-item-style3">
+<div class="ap-item ap-item-style3 <?php echo esc_attr($ap_class);?>">
     <div class="ap-inner ">
         <div class="ap-info">
             <div class="ap-info-inner ap-info-top uk-flex uk-flex-middle uk-flex-between">

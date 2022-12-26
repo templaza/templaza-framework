@@ -159,7 +159,7 @@ if($header_stack_search || $header_stack_account || $header_stack_cart){
                 // header nav ends
 
             }
-            Templates::load_my_layout('inc.icon');
+            Templates::load_my_layout('inc.icon', true, false);
             if ($enable_offcanvas) { ?>
                 <div class="header-offcanvas-trigger burger-menu-button <?php echo $offcanvas_togglevisibility; ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>" >
                     <button type="button" class="button">

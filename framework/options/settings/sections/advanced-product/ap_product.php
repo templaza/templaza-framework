@@ -284,6 +284,7 @@ Templaza_API::set_subsection('settings','ap_product-page',
             array(
                 'id'       => 'ap_product-single-style2-top',
                 'type'     => 'select',
+                'sortable' => true,
                 'multi'     => true,
                 'title'    => esc_html__( 'Choose fields display horizontal', 'templaza-framework' ),
                 'options'  => $arr_fields,

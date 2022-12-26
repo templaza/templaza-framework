@@ -8,8 +8,13 @@ use Advanced_Product\Helper\AP_Product_Helper;
 
 $price = get_field('ap_price', get_the_ID());
 $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields' => 'names' ) );
+if(isset($args['ap_class'])){
+    $ap_class = $args['ap_class'];
+}else{
+    $ap_class = ' templazaFadeInUp';
+}
 ?>
-<div class="ap-item ap-item-style2">
+<div class="ap-item ap-item-style2 <?php echo esc_attr($ap_class);?>">
     <div class="ap-inner ">
         <?php AP_Templates::load_my_layout('archive.media'); ?>
         <div class="ap-info">

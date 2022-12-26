@@ -27,6 +27,7 @@ if(!empty($fields)){
         $f_value            = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name']):null;
             $f_icon     = isset($f_attr['icon'])?$f_attr['icon']:'';
             $show_icon  = get_field('ap_show_archive_custom_field_icon', 'option');
+            if($f_value){
             ?>
             <div class="ap-spec-item uk-display-inline-block" >
                 <?php
@@ -58,6 +59,7 @@ if(!empty($fields)){
                 ?>
             </div>
         <?php
+            }
         }
         $d++;
     } ?>
