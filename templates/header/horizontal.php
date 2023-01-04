@@ -160,6 +160,12 @@ if($header_stack_search || $header_stack_account || $header_stack_cart){
 
             }
             Templates::load_my_layout('inc.icon', true, false);
+
+            if ($block_1_type == 'social' || $block_1_type == 'contact') {
+                Templates::load_my_layout('inc.' . $block_1_type);
+            }
+            ?>
+            <?php
             if ($enable_offcanvas) { ?>
                 <div class="header-offcanvas-trigger burger-menu-button <?php echo $offcanvas_togglevisibility; ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>" >
                     <button type="button" class="button">
@@ -169,7 +175,7 @@ if($header_stack_search || $header_stack_account || $header_stack_cart){
                     </button>
                 </div>
             <?php } ?>
-            <?php if ($block_1_type != 'blank'): ?>
+            <?php if ($block_1_type != 'blank' && in_array($block_1_type, array('sidebar', 'custom'))): ?>
                 <div class="header-right-block uk-visible@m uk-margin-small-left uk-margin-small-right">
                     <?php
                     if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
