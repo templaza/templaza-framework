@@ -635,7 +635,7 @@
                         menu_item_setting.push(_row_setting_new);
 
                     }
-                }else{
+                }else if(!menu_item_setting.length){
                     // Create row and column when this menu doesn't have childs
                     _row_setting_new.elements.push(_column_setting_new);
                     menu_item_setting.push(_row_setting_new);
