@@ -142,6 +142,20 @@ Templaza_API::set_section('templaza_header',
                 'required' => array('header-stacked-menu-mode', '=', 'seperated'),
             ),
             array(
+                'id'       => 'header-menu-item-align',
+                'type'     => 'select',
+                'title'    => __( 'Menu item align', 'templaza-framework' ),
+                'options'  => array(
+                    'default'     => __('Default', 'templaza-framework'),
+                    'justify'   => __('Justify', 'templaza-framework'),
+                ),
+                'select2'       => array( 'allowClear' => false ),
+                'default'  => 'default',
+                'required' => array(
+                    array('header-mode', '=', 'stacked')
+                ),
+            ),
+            array(
                 'id'       => 'header-block-1-type',
                 'type'     => 'select',
                 'title'    => __( 'Header Block 1', 'templaza-framework' ),

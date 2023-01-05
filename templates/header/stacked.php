@@ -27,9 +27,14 @@ $dropdown_animation_type    = isset($options['dropdown-animation-type'])?(bool) 
 $dropdown_animation_effect  = isset($options['dropdown-animation-effect'])?$options['dropdown-animation-effect']:'fade-down';
 $dropdown_animation_effect  = $dropdown_animation_type === 'none'?'':$dropdown_animation_effect;
 $dropdown_trigger           = isset($options['dropdown-trigger'])?$options['dropdown-trigger']:'hover';
-
-$navClass = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-flex-center', 'uk-flex-middle'];
-$navClassLeft = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-flex-left', 'uk-flex-top', 'uk-padding-remove-left'];
+$header_item_align           = isset($options['header-menu-item-align'])?$options['header-menu-item-align']:'default';
+if($header_item_align == 'justify'){
+    $navClass = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-flex-center', 'uk-flex-middle', 'uk-flex-between menu-justify'];
+    $navClassLeft = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-flex-left', 'uk-flex-top', 'uk-padding-remove-left', 'uk-flex-between menu-justify'];
+}else{
+    $navClass = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-flex-center', 'uk-flex-middle'];
+    $navClassLeft = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-flex-left', 'uk-flex-top', 'uk-padding-remove-left'];
+}
 $navClassDivided = ['nav', 'navbar-nav', 'templaza-nav'];
 $navWrapperClass = ['templaza-nav-wraper', 'uk-width', 'uk-visible@m', 'px-2'];
 

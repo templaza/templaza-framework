@@ -31,6 +31,13 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
                         ),
                     ),
                     array(
+                        'id'       => 'social-item-border-radius',
+                        'type'     => 'text',
+                        'title'    => __('Social Border Radius', 'templaza-framework'),
+                        'subtitle' => esc_html__( 'Set border radius, example: 5px or 50%.', 'templaza-framework' ),
+                        'default'  => '',
+                    ),
+                    array(
                         'id'       => 'social-color',
                         'type'     => 'color_rgba',
                         'title'    => esc_html__( 'Social Color', 'templaza-framework' ),
@@ -106,6 +113,9 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
             }
             if (!empty($social_bg_color_hover)) {
                 $social_styles[] = '.'. $custom_css_name . ' li a:hover{ background-color: ' . $social_bg_color_hover . ' !important;}';
+            }
+            if (!empty($params['social-item-border-radius'])) {
+                $social_styles[] = '.'. $custom_css_name . ' li a{ border-radius: ' . $params['social-item-border-radius'] . ' !important;}';
             }
             if($social_fix_size ==1 || $social_fix_size == true){
                 $social_size = isset($params['social-width-height'])?$params['social-width-height']:'';

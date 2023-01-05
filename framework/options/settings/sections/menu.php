@@ -47,6 +47,13 @@ Templaza_API::set_section('settings',
                     'units' => 'px',
                 ),
             ),
+            array(
+                'id'       => 'main-menu-border',
+                'type'     => 'border',
+                'title'    => __('Menu item border', 'templaza-framework'),
+                'default'  => '',
+                'color_alpha'  => true
+            ),
         ),
     )
 );

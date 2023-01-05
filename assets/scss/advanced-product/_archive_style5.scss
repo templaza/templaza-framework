@@ -1,0 +1,91 @@
+.ap-item.ap-item-style5{
+  .ap-inner{
+    .ap-meta-top{
+      font-size:12px;
+      color:$tztheme-global-color;
+      text-transform: uppercase;
+    }
+    .ap-title{
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+    .ap-readmore-box{
+      display:flex;
+      .templaza-btn{
+        background:none;
+        border: 1px solid $tztheme-border-color;
+        font-size:14px;
+        color:#333;
+        height:auto;
+        line-height: 1em;
+        padding:10px 20px;
+        &:hover{
+          border-color:#777;
+        }
+      }
+    }
+    .ap-price-box{
+      color:#333;
+      font-weight:bold;
+      font-size:1.2em;
+      .ap-field-label{
+        text-transform: uppercase;
+        font-size:12px;
+        color:$tztheme-content-color;
+        display:block;
+        margin-bottom:5px;
+      }
+      .meta{
+        color:$tztheme-postmeta;
+      }
+      .ap-price-msrp{
+        display:block;
+        margin-top: 5px;
+      }
+      .ap-price{
+        color:$tztheme-global-color;
+      }
+    }
+    .ap-info-inner{
+      padding:20px 0;
+      &.ap-info-bottom{
+        border-top:1px solid $tztheme-border-color;
+      }
+      &.ap-info-desc{
+        padding-top:0;
+        padding-bottom:25px;
+      }
+      &.ap-info-top{
+        padding-top:32px;
+        padding-bottom:15px;
+      }
+    }
+    .ap-specification{
+      &.ap-specification-style5{
+        .ap-spec-item{
+          position: relative;
+          padding: 5px 15px;
+          color:$tztheme-postmeta;
+          font-size:0.875em;
+          &:first-child{
+            background:transparent;
+          }
+          .ap-field-label{
+            i{
+              padding-right:10px;
+            }
+          }
+          .ap-spec-value{
+            color:$tztheme-content-color;
+            font-weight:normal;
+          }
+        }
+      }
+    }
+  }
+  &:hover{
+    .ap-inner{
+      @include transition($tztheme-transition-all);
+    }
+  }
+}
