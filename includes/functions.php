@@ -388,7 +388,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
                         if(!is_array($param)) {
                             $attribs .= ' ' . $key . '=\'' . $param . '\'';
                         }else{
-                            $attribs    .= ' '.$key.'=\''.json_encode($param).'\'';
+                            $attribs    .= ' '.$key.'=\''.json_encode($param, JSON_FORCE_OBJECT).'\'';
                         }
                     }
                 }
