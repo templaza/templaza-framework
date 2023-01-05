@@ -22,12 +22,33 @@ extract(shortcode_atts(array(
 ), $atts));
 
 $options        = Functions::get_theme_options();
+
 $args = array(
     'post_type'  => ''.$latest_post_type.'',
     'numberposts' => $latest_post_number,
     'orderby' => ''.$latest_post_order_by.'',
     'order' => ''.$latest_post_order.'',
 );
+
+if(!empty($latest_post_type) && isset($atts[$latest_post_type.'_category'])
+    && !empty($atts[$latest_post_type.'_category'])){
+    $cats_sync  = $atts[$latest_post_type.'_category'];
+    if(preg_match('/^\{.*?\}$/', $cats_sync)){
+        $cats_sync  = json_decode($cats_sync, true);
+        $tax_name   = \TemPlazaFramework\Shortcode\Helper\Latest_PostsHelper::get_taxonomy_by_post_type($latest_post_type);
+        if($latest_post_type == 'post'){
+            $args['category']   = $cats_sync;
+        }else {
+            $args['tax_query'] = array(
+                'taxonomy'  => $tax_name,
+                'field'     => 'id',
+                'operator' => 'IN',
+                'terms'     => $cats_sync,
+            );
+        }
+    }
+}
+
 $latest_cause = get_posts( $args );
 $date_format = get_option('date_format');
 ?>
