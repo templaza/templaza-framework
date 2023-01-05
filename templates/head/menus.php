@@ -23,6 +23,12 @@ if(is_array($main_menu_margin) && count($main_menu_margin)) {
     $main_menu_margin_css  = CSS::make_spacing_redux('margin', $main_menu_margin, true);
 }
 
+$main_menu_border_css   = '';
+$main_menu_border  = isset($options['main-menu-border'])?$options['main-menu-border']:'';
+if(is_array($main_menu_border) && count($main_menu_border)) {
+    $main_menu_border_css = CSS::make_border_redux($main_menu_border, true);
+}
+
 // Style for drop-down menu
 $dropdown_menu_padding_css  = '';
 $dropdown_menu_padding  = isset($options['dropdown-menu-padding'])?$options['dropdown-menu-padding']:'';
@@ -73,6 +79,16 @@ if (!empty($main_menu_margin_css)) {
         }
     }else {
         $menu_styles[] = '.templaza-nav > .menu-item > a {' . $main_menu_margin_css . '}';
+    }
+}
+if (!empty($main_menu_border_css)) {
+    if(is_array($main_menu_border_css)){
+        foreach($main_menu_border_css as $device => $style){
+            $style  = '.templaza-nav > .menu-item > a {' . $style . '}';
+            Templates::add_inline_style($style, $device);
+        }
+    }else {
+        $menu_styles[] = '.templaza-nav > .menu-item > a {' . $main_menu_border_css . '}';
     }
 }
 
