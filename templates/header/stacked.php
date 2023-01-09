@@ -336,7 +336,7 @@ echo '</div>';
                  echo wp_kses($block_1_custom,'post');
                  echo '</div>';
              }elseif($block_1_type == 'social' || $block_1_type == 'contact'){
-                 echo '<div class="uk-flex uk-flex-left uk-width uk-visible@m">';
+                 echo '<div class="uk-flex uk-flex-left uk-width uk-visible@m header-block-item">';
                  Templates::load_my_layout('inc.'.$block_1_type);
                  echo '</div>';
              }
@@ -515,7 +515,11 @@ echo '</div>';
            echo wp_kses($block_1_custom,'post');
            echo '</div>';
         }
-
+         if($block_1_type == 'social' || $block_1_type == 'contact'){
+             echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item">';
+             Templates::load_my_layout('inc.'.$block_1_type);
+             echo '</div>';
+         }
         // header block ends
      }
      if ($mode == 'seperated') {
@@ -532,6 +536,11 @@ echo '</div>';
            echo wp_kses($block_1_custom,'post');
            echo '</div>';
         }
+         if($block_1_type == 'social' || $block_1_type == 'contact'){
+             echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item">';
+             Templates::load_my_layout('inc.'.$block_1_type);
+             echo '</div>';
+         }
         // header nav starts
         ?>
         <div class="header-stacked-inner uk-flex uk-width uk-flex-center uk-flex-middle"<?php echo wp_kses($data_attribs,'post');?>>
@@ -589,6 +598,11 @@ echo '</div>';
            echo wp_kses($block_2_custom,'post');
            echo '</div>';
         }
+         if($block_2_type == 'social' || $block_2_type == 'contact'){
+             echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item">';
+             Templates::load_my_layout('inc.'.$block_2_type);
+             echo '</div>';
+         }
         // header block ends
      }
      if ($mode == 'divided') {
@@ -628,6 +642,11 @@ echo '</div>';
            echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m header-block-item">';
            echo wp_kses($block_1_custom,'post');
            echo '</div>';
+        }
+        if($block_1_type == 'social' || $block_1_type == 'contact'){
+            echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m header-block-item">';
+            Templates::load_my_layout('inc.'.$block_1_type);
+            echo '</div>';
         }
         // header block ends
         ?>
@@ -705,6 +724,11 @@ echo '</div>';
            echo '<div class="header-block-item  uk-flex uk-flex-right uk-flex-middle ">';
            echo wp_kses($block_2_custom,'post');
            echo '</div>';
+        }
+        if($block_2_type == 'social' || $block_2_type == 'contact'){
+            echo '<div class="header-block-item  uk-flex uk-flex-right uk-flex-middle ">';
+            Templates::load_my_layout('inc.'.$block_2_type);
+            echo '</div>';
         }
         if($icon_position == 'bottom'){
             echo '<div class="header-block-icon uk-flex uk-flex-right uk-flex-middle">';
