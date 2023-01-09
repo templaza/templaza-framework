@@ -126,7 +126,8 @@ $header_stacked_top_color     = CSS::make_color_rgba_redux($header_stack_top_col
 if($header_stack_divi == true) {
     $header_styles = [];
     if (!empty($header_menu_bg)) {
-        $header_styles[] = '.templaza-divi-menu-wrap{background-color: ' . $header_menu_bg . ' !important;}';
+        $header_styles[] = '.templaza-stacked-menu-section,
+        .templaza-divi-menu-wrap{background-color: ' . $header_menu_bg . ' !important;}';
     }
     if (!empty($header_logo_bg)) {
         $header_styles[] = '.templaza-divi-logo-wrap{background-color: ' . $header_logo_bg . ' !important;}';
@@ -312,6 +313,98 @@ echo '</div>';
 <div class="uk-flex <?php echo esc_attr($header_icon);?>">
   <div class="header-stacked-section uk-flex uk-width uk-flex-column uk-flex-between ">
      <?php
+     if ($mode == 'center-balance') {
+         ?>
+         <div class="templaza-stacked-top-section header-center-balance uk-flex uk-flex-center uk-width">
+             <?php if (!empty($header_mobile_menu)) { ?>
+             <div class="uk-flex uk-width uk-flex-left uk-flex-middle uk-hidden@m">
+                 <div class="header-mobilemenu-trigger d-lg-none burger-menu-button" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
+                     <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
+                 </div>
+             </div>
+             <?php } ?>
+             <?php
+             // header block starts
+             if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
+                 echo '<div class="uk-flex uk-width uk-flex-left uk-visible@m header-block-item py-3">';
+                 echo '<ul id="sidebar">';
+                 dynamic_sidebar($block_1_sidebar);
+                 echo '</ul>';
+                 echo '</div>';
+             }elseif ($block_1_type == 'custom') {
+                 echo '<div class="uk-flex uk-width uk-flex-left uk-visible@m header-block-item py-3">';
+                 echo wp_kses($block_1_custom,'post');
+                 echo '</div>';
+             }elseif($block_1_type == 'social' || $block_1_type == 'contact'){
+                 echo '<div class="uk-flex uk-flex-left uk-width uk-visible@m">';
+                 Templates::load_my_layout('inc.'.$block_1_type);
+                 echo '</div>';
+             }
+             // header nav starts
+
+             echo '<div class="uk-flex uk-width uk-flex-center">';
+                 Templates::load_my_layout('logo', true, false);
+             echo '</div>';
+
+             // header nav ends
+             // header block starts
+             if($block_2_type || $enable_offcanvas){
+                 ?>
+                 <div class="uk-flex uk-flex-right uk-flex-middle uk-width">
+                     <?php
+                     if ($block_2_type == 'sidebar' && is_active_sidebar($block_2_sidebar)){
+                         echo '<div class="uk-flex uk-width uk-flex-right uk-visible@m block-sidebar header-block-item py-3">';
+                         dynamic_sidebar($block_2_sidebar);
+                         echo '</div>';
+                     }
+                     if ($block_2_type == 'custom') {
+                         echo '<div class="uk-flex uk-width uk-flex-right uk-visible@m header-block-item py-3">';
+                         echo wp_kses($block_2_custom,'post');
+                         echo '</div>';
+                     }elseif($block_2_type == 'social' || $block_2_type == 'contact'){
+                         echo '<div class="uk-flex uk-width uk-flex-right uk-visible@m header-block-item">';
+                         Templates::load_my_layout('inc.'.$block_2_type);
+                         echo '</div>';
+                     }
+                     // header block ends
+                 ?>
+                 <?php
+                     if ($enable_offcanvas) {
+                         ?>
+                         <div class="uk-flex uk-flex-right uk-flex-middle">
+                             <div class="header-offcanvas-trigger burger-menu-button <?php
+                             echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
+                             echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
+                                 <button type="button" class="button">
+                               <span class="box">
+                                  <span class="inner"></span>
+                               </span>
+                                 </button>
+                             </div>
+                         </div>
+                         <?php
+                     }
+                 }
+                 ?>
+             </div>
+         </div>
+
+         <div class="templaza-stacked-menu-section header-stacked-inner uk-flex uk-width uk-flex-center uk-flex-middle"<?php echo wp_kses($data_attribs,'post');?>>
+             <?php
+             Menu::get_nav_menu(array(
+                 'theme_location'  => $header_menu,
+                 'menu_class'      => implode(' ', $navClass),
+                 'container_class' => implode(' ', $navWrapperClass),
+                 'menu_id'         => '',
+                 'depth'           => $header_menu_level, // Level
+                 'templaza_is_header'          => true,
+                 'templaza_megamenu_html_data' => $menu_datas
+             ));
+             ?>
+         </div>
+         <?php
+     }
+
      if ($mode == 'center') {
         echo '<div class="uk-flex uk-width templaza-logo-center-wrap">';
         ?>

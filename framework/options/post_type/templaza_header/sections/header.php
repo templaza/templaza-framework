@@ -76,6 +76,12 @@ Templaza_API::set_section('templaza_header',
                 'subtitle' => __( 'Select your stacked menu mode. Select between top, middle or bottom menu.', 'templaza-framework' ),
                 'default'  => 'center',
                 'options'  => array(
+                    'center-balance' => array(
+                        'alt'   => __('Center Balance', 'templaza-framework'),
+                        'title' => __('Center Balance', 'templaza-framework'),
+                        'class' => 'w-px-150 h-px-103',
+                        'img'   => Functions::get_my_frame_url().'/options/patterns/stacked_style0.svg',
+                    ),
                     'center' => array(
                         'alt'   => __('Stacked Center', 'templaza-framework'),
                         'title' => __('Stacked Center', 'templaza-framework'),
