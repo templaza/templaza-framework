@@ -90,13 +90,13 @@ if(!class_exists('TemplazaFramework_ShortCode_Latest_Posts')){
                 array(
                     'id'       => 'latest_post_image_cover',
                     'type'     => 'switch',
-                    'title'    => esc_html__('Thumbnail Cover)', 'templaza-framework'),
+                    'title'    => esc_html__('Thumbnail Cover', 'templaza-framework'),
                     'default'  => false,
                 ),
                 array(
                     'id'       => 'latest_post_image_cover_height',
                     'type'     => 'text',
-                    'title'    => esc_html__('Thumbnail Cover height)', 'templaza-framework'),
+                    'title'    => esc_html__('Thumbnail Cover height', 'templaza-framework'),
                     'default'  => '300',
                     'required' => array('latest_post_image_cover', '=' , true)
                 ),
@@ -104,13 +104,13 @@ if(!class_exists('TemplazaFramework_ShortCode_Latest_Posts')){
                 array(
                     'id'       => 'latest_post_show_date',
                     'type'     => 'switch',
-                    'title'    => esc_html__('Show created date)', 'templaza-framework'),
+                    'title'    => esc_html__('Show created date', 'templaza-framework'),
                     'default'  => true,
                 ),
                 array(
                     'id'       => 'latest_post_show_author',
                     'type'     => 'switch',
-                    'title'    => esc_html__('Show author)', 'templaza-framework'),
+                    'title'    => esc_html__('Show author', 'templaza-framework'),
                     'default'  => true,
                 ),
                 array(
