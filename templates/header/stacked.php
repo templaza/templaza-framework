@@ -307,254 +307,89 @@ if ($mode == 'left') {
     </div>
 
     <?php
-echo '</div>';
+    echo '</div>';
 }
 ?>
 <div class="uk-flex <?php echo esc_attr($header_icon);?>">
-  <div class="header-stacked-section uk-flex uk-width uk-flex-column uk-flex-between ">
-     <?php
-     if ($mode == 'center-balance') {
-         ?>
-         <div class="templaza-stacked-top-section header-center-balance uk-flex uk-flex-center uk-width">
-             <?php if (!empty($header_mobile_menu)) { ?>
-             <div class="uk-flex uk-width uk-flex-left uk-flex-middle uk-hidden@m">
-                 <div class="header-mobilemenu-trigger d-lg-none burger-menu-button" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
-                     <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
-                 </div>
-             </div>
-             <?php } ?>
-             <?php
-             // header block starts
-             if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-                 echo '<div class="uk-flex uk-width uk-flex-left uk-visible@m header-block-item py-3">';
-                 echo '<ul id="sidebar">';
-                 dynamic_sidebar($block_1_sidebar);
-                 echo '</ul>';
-                 echo '</div>';
-             }elseif ($block_1_type == 'custom') {
-                 echo '<div class="uk-flex uk-width uk-flex-left uk-visible@m header-block-item py-3">';
-                 echo wp_kses($block_1_custom,'post');
-                 echo '</div>';
-             }elseif($block_1_type == 'social' || $block_1_type == 'contact'){
-                 echo '<div class="uk-flex uk-flex-left uk-width uk-visible@m header-block-item">';
-                 Templates::load_my_layout('inc.'.$block_1_type);
-                 echo '</div>';
-             }
-             // header nav starts
+    <div class="header-stacked-section uk-flex uk-width uk-flex-column uk-flex-between ">
+        <?php
+        if ($mode == 'center-balance') {
+            ?>
+            <div class="templaza-stacked-top-section header-center-balance uk-flex uk-flex-center uk-width">
+                <?php if (!empty($header_mobile_menu)) { ?>
+                    <div class="uk-flex uk-width uk-flex-left uk-flex-middle uk-hidden@m">
+                        <div class="header-mobilemenu-trigger d-lg-none burger-menu-button" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
+                            <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
+                        </div>
+                    </div>
+                <?php } ?>
+                <?php
+                // header block starts
+                if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
+                    echo '<div class="uk-flex uk-width uk-flex-left uk-visible@m header-block-item py-3">';
+                    echo '<ul id="sidebar">';
+                    dynamic_sidebar($block_1_sidebar);
+                    echo '</ul>';
+                    echo '</div>';
+                }elseif ($block_1_type == 'custom') {
+                    echo '<div class="uk-flex uk-width uk-flex-left uk-visible@m header-block-item py-3">';
+                    echo wp_kses($block_1_custom,'post');
+                    echo '</div>';
+                }elseif($block_1_type == 'social' || $block_1_type == 'contact'){
+                    echo '<div class="uk-flex uk-flex-left uk-width uk-visible@m header-block-item">';
+                    Templates::load_my_layout('inc.'.$block_1_type);
+                    echo '</div>';
+                }
+                // header nav starts
 
-             echo '<div class="uk-flex uk-width uk-flex-center">';
-                 Templates::load_my_layout('logo', true, false);
-             echo '</div>';
+                echo '<div class="uk-flex uk-width uk-flex-center">';
+                Templates::load_my_layout('logo', true, false);
+                echo '</div>';
 
-             // header nav ends
-             // header block starts
-             if($block_2_type || $enable_offcanvas){
-                 ?>
-                 <div class="uk-flex uk-flex-right uk-flex-middle uk-width">
-                     <?php
-                     if ($block_2_type == 'sidebar' && is_active_sidebar($block_2_sidebar)){
-                         echo '<div class="uk-flex uk-width uk-flex-right uk-visible@m block-sidebar header-block-item py-3">';
-                         dynamic_sidebar($block_2_sidebar);
-                         echo '</div>';
-                     }
-                     if ($block_2_type == 'custom') {
-                         echo '<div class="uk-flex uk-width uk-flex-right uk-visible@m header-block-item py-3">';
-                         echo wp_kses($block_2_custom,'post');
-                         echo '</div>';
-                     }elseif($block_2_type == 'social' || $block_2_type == 'contact'){
-                         echo '<div class="uk-flex uk-width uk-flex-right uk-visible@m header-block-item">';
-                         Templates::load_my_layout('inc.'.$block_2_type);
-                         echo '</div>';
-                     }
-                     // header block ends
-                 ?>
-                 <?php
-                     if ($enable_offcanvas) {
-                         ?>
-                         <div class="uk-flex uk-flex-right uk-flex-middle">
-                             <div class="header-offcanvas-trigger burger-menu-button <?php
-                             echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
-                             echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
-                                 <button type="button" class="button">
+                // header nav ends
+                // header block starts
+                if($block_2_type || $enable_offcanvas){
+                ?>
+                <div class="uk-flex uk-flex-right uk-flex-middle uk-width">
+                    <?php
+                    if ($block_2_type == 'sidebar' && is_active_sidebar($block_2_sidebar)){
+                        echo '<div class="uk-flex uk-width uk-flex-right uk-visible@m block-sidebar header-block-item py-3">';
+                        dynamic_sidebar($block_2_sidebar);
+                        echo '</div>';
+                    }
+                    if ($block_2_type == 'custom') {
+                        echo '<div class="uk-flex uk-width uk-flex-right uk-visible@m header-block-item py-3">';
+                        echo wp_kses($block_2_custom,'post');
+                        echo '</div>';
+                    }elseif($block_2_type == 'social' || $block_2_type == 'contact'){
+                        echo '<div class="uk-flex uk-width uk-flex-right uk-visible@m header-block-item">';
+                        Templates::load_my_layout('inc.'.$block_2_type);
+                        echo '</div>';
+                    }
+                    // header block ends
+                    ?>
+                    <?php
+                    if ($enable_offcanvas) {
+                        ?>
+                        <div class="uk-flex uk-flex-right uk-flex-middle">
+                            <div class="header-offcanvas-trigger burger-menu-button <?php
+                            echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
+                            echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
+                                <button type="button" class="button">
                                <span class="box">
                                   <span class="inner"></span>
                                </span>
-                                 </button>
-                             </div>
-                         </div>
-                         <?php
-                     }
-                 }
-                 ?>
-             </div>
-         </div>
-
-         <div class="templaza-stacked-menu-section header-stacked-inner uk-flex uk-width uk-flex-center uk-flex-middle"<?php echo wp_kses($data_attribs,'post');?>>
-             <?php
-             Menu::get_nav_menu(array(
-                 'theme_location'  => $header_menu,
-                 'menu_class'      => implode(' ', $navClass),
-                 'container_class' => implode(' ', $navWrapperClass),
-                 'menu_id'         => '',
-                 'depth'           => $header_menu_level, // Level
-                 'templaza_is_header'          => true,
-                 'templaza_megamenu_html_data' => $menu_datas
-             ));
-             ?>
-         </div>
-         <?php
-     }
-
-     if ($mode == 'center') {
-        echo '<div class="uk-flex uk-width templaza-logo-center-wrap">';
-        ?>
-           <div class="uk-flex uk-flex-first uk-flex-middle uk-hidden@m">
-              <div class="header-mobilemenu-trigger burger-menu-button uk-hidden@m" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
-                 <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
-              </div>
-           </div>
-        <?php
-        echo '<div class="uk-flex uk-width-expand uk-flex-center templaza-logo-center-wrap">';
-        Templates::load_my_layout('logo');
-        echo '</div>';
-        echo '</div>';
-        // header nav starts -->
-        ?>
-        <div class="uk-flex uk-width-auto uk-flex-center uk-flex-middle templaza-center-menu-wrap uk-visible@m"<?php echo wp_kses($data_attribs,'post');?>>
-            <?php if($header_stack_search){ ?>
-            <div class="uk-flex uk-flex-left uk-flex-middle">
-                <div class="header-search uk-position-relative header-icon">
-                    <span>
-                        <?php echo $search_icon_html; ?>
-                    </span>
-                    <form method="get" class="searchform " action="<?php echo esc_url( home_url( '/' ) ); ?>">
-                        <input type="text" class="field uk-input inputbox search-query uk-margin-remove-vertical" name="s" placeholder="<?php esc_attr_e( 'Search...', 'medil');?>" />
-                        <button type="submit" class="submit searchsubmit has-button-icon uk-position-right" name="submit" data-uk-icon="search"></button>
-                    </form>
-                </div>
-            </div>
-            <?php } ?>
-            <div class="<?php echo implode(' ', $navWrapperClass)?>">
-               <?php
-               Menu::get_nav_menu(array(
-                   'theme_location'              => $header_menu,
-                   'menu_class'                  => implode(' ', $navClass),
-                   'container_class'             => implode(' ', $navWrapperClass),
-                   'menu_id'                     => '',
-                   'depth'                       => $header_menu_level, // Level
-                   'templaza_megamenu_html_data' => $menu_datas
-               ));
-               ?>
-            </div>
-            <?php
-            if ($enable_offcanvas || $header_stack_cart || $header_stack_account) {
-                ?>
-                <div class="uk-flex uk-flex-right uk-flex-middle">
-                    <?php
-                    if($header_stack_cart && class_exists( 'woocommerce' )){ ?>
-                        <div class="header-cart header-icon">
-                            <a href="<?php echo esc_url( wc_get_cart_url() ) ?>" data-toggle="<?php echo esc_attr($header_cart); ?>" data-target="cart-modal">
-                                <?php echo $cart_icon_html; ?>
-                                <span class="counter cart-counter"><?php echo esc_html(WC()->cart->get_cart_contents_count()); ?></span>
-                            </a>
-                        </div>
-                    <?php }
-                    if($header_stack_account && class_exists( 'woocommerce' )){ ?>
-                    <div class="header-account header-icon">
-                        <a class="account-icon" href="<?php echo esc_url( wc_get_account_endpoint_url( 'dashboard' ) ) ?>"
-                           data-toggle="<?php echo esc_attr($login_modals);?>"
-                           data-target="account-modal">
-                            <?php echo $account_icon_html; ?>
-                        </a>
-                        <?php if ( is_user_logged_in() ) : ?>
-                            <div class="account-links">
-                                <ul>
-                                    <?php foreach ( wc_get_account_menu_items() as $endpoint => $label ) : ?>
-                                        <li class="account-link--<?php echo esc_attr( $endpoint ); ?>">
-                                            <a href="<?php echo esc_url( wc_get_account_endpoint_url( $endpoint ) ); ?>" class="underline-hover">
-                                                <?php echo esc_html( $label ); ?>
-                                            </a>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
+                                </button>
                             </div>
-                        <?php endif; ?>
-                    </div>
-                    <?php }
-                    if ($enable_offcanvas) {
-                        ?>
-                        <div class="header-offcanvas-trigger burger-menu-button <?php
-                        echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
-                        echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
-                            <button type="button" class="button">
-                       <span class="box">
-                          <span class="inner"></span>
-                       </span>
-                            </button>
                         </div>
                         <?php
                     }
+                    }
                     ?>
                 </div>
-                <?php
-            }
-            ?>
-        </div>
-        <?php
-        // header nav ends
-        // header block starts
-         if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-             echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item py-3">';
-             echo '<ul id="sidebar">';
-             dynamic_sidebar($block_1_sidebar);
-             echo '</ul>';
-             echo '</div>';
-         }
-        if ($block_1_type == 'custom') {
-           echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item py-3">';
-           echo wp_kses($block_1_custom,'post');
-           echo '</div>';
-        }
-         if($block_1_type == 'social' || $block_1_type == 'contact'){
-             echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item">';
-             Templates::load_my_layout('inc.'.$block_1_type);
-             echo '</div>';
-         }
-        // header block ends
-     }
-     if ($mode == 'seperated') {
-        // header block starts
-         if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-             echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item py-3">';
-             echo '<ul id="sidebar">';
-             dynamic_sidebar($block_1_sidebar);
-             echo '</ul>';
-             echo '</div>';
-         }
-        if ($block_1_type == 'custom') {
-            echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item py-3">';
-           echo wp_kses($block_1_custom,'post');
-           echo '</div>';
-        }
-         if($block_1_type == 'social' || $block_1_type == 'contact'){
-             echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item">';
-             Templates::load_my_layout('inc.'.$block_1_type);
-             echo '</div>';
-         }
-        // header nav starts
-        ?>
-        <div class="header-stacked-inner uk-flex uk-width uk-flex-center uk-flex-middle"<?php echo wp_kses($data_attribs,'post');?>>
-              <div class="uk-flex uk-flex-left uk-flex-middle uk-hidden@m">
-                 <div class="header-mobilemenu-trigger d-lg-none burger-menu-button" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
-                    <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
-                 </div>
-              </div>
-              <?php
-           echo '<div class="uk-flex uk-width uk-flex-center">';
-           echo '<div class="uk-hidden@m">';
-           Templates::load_my_layout('logo', true, false);
-           echo '</div>';
-           ?>
+            </div>
+
+            <div class="templaza-stacked-menu-section header-stacked-inner uk-flex uk-width uk-flex-center uk-flex-middle"<?php echo wp_kses($data_attribs,'post');?>>
                 <?php
                 Menu::get_nav_menu(array(
                     'theme_location'  => $header_menu,
@@ -566,183 +401,346 @@ echo '</div>';
                     'templaza_megamenu_html_data' => $menu_datas
                 ));
                 ?>
+            </div>
             <?php
-           echo '</div>';
-           if ($enable_offcanvas) {
-              ?>
-              <div class="uk-flex uk-flex-right uk-flex-middle">
-                 <div class="header-offcanvas-trigger burger-menu-button <?php
-                 echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
-                 echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
-                    <button type="button" class="button">
+        }
+
+        if ($mode == 'center') {
+            echo '<div class="uk-flex uk-width templaza-logo-center-wrap">';
+            ?>
+            <div class="uk-flex uk-flex-first uk-flex-middle uk-hidden@m">
+                <div class="header-mobilemenu-trigger burger-menu-button uk-hidden@m" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
+                    <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
+                </div>
+            </div>
+            <?php
+            echo '<div class="uk-flex uk-width-expand uk-flex-center templaza-logo-center-wrap">';
+            Templates::load_my_layout('logo');
+            echo '</div>';
+            echo '</div>';
+            // header nav starts -->
+            ?>
+            <div class="uk-flex uk-width-auto uk-flex-center uk-flex-middle templaza-center-menu-wrap uk-visible@m"<?php echo wp_kses($data_attribs,'post');?>>
+                <?php if($header_stack_search){ ?>
+                    <div class="uk-flex uk-flex-left uk-flex-middle">
+                        <div class="header-search uk-position-relative header-icon">
+                    <span>
+                        <?php echo $search_icon_html; ?>
+                    </span>
+                            <form method="get" class="searchform " action="<?php echo esc_url( home_url( '/' ) ); ?>">
+                                <input type="text" class="field uk-input inputbox search-query uk-margin-remove-vertical" name="s" placeholder="<?php esc_attr_e( 'Search...', 'medil');?>" />
+                                <button type="submit" class="submit searchsubmit has-button-icon uk-position-right" name="submit" data-uk-icon="search"></button>
+                            </form>
+                        </div>
+                    </div>
+                <?php } ?>
+                <div class="<?php echo implode(' ', $navWrapperClass)?>">
+                    <?php
+                    Menu::get_nav_menu(array(
+                        'theme_location'              => $header_menu,
+                        'menu_class'                  => implode(' ', $navClass),
+                        'container_class'             => implode(' ', $navWrapperClass),
+                        'menu_id'                     => '',
+                        'depth'                       => $header_menu_level, // Level
+                        'templaza_megamenu_html_data' => $menu_datas
+                    ));
+                    ?>
+                </div>
+                <?php
+                if ($enable_offcanvas || $header_stack_cart || $header_stack_account) {
+                    ?>
+                    <div class="uk-flex uk-flex-right uk-flex-middle">
+                        <?php
+                        if($header_stack_cart && class_exists( 'woocommerce' )){ ?>
+                            <div class="header-cart header-icon">
+                                <a href="<?php echo esc_url( wc_get_cart_url() ) ?>" data-toggle="<?php echo esc_attr($header_cart); ?>" data-target="cart-modal">
+                                    <?php echo $cart_icon_html; ?>
+                                    <span class="counter cart-counter"><?php echo esc_html(WC()->cart->get_cart_contents_count()); ?></span>
+                                </a>
+                            </div>
+                        <?php }
+                        if($header_stack_account && class_exists( 'woocommerce' )){ ?>
+                            <div class="header-account header-icon">
+                                <a class="account-icon" href="<?php echo esc_url( wc_get_account_endpoint_url( 'dashboard' ) ) ?>"
+                                   data-toggle="<?php echo esc_attr($login_modals);?>"
+                                   data-target="account-modal">
+                                    <?php echo $account_icon_html; ?>
+                                </a>
+                                <?php if ( is_user_logged_in() ) : ?>
+                                    <div class="account-links">
+                                        <ul>
+                                            <?php foreach ( wc_get_account_menu_items() as $endpoint => $label ) : ?>
+                                                <li class="account-link--<?php echo esc_attr( $endpoint ); ?>">
+                                                    <a href="<?php echo esc_url( wc_get_account_endpoint_url( $endpoint ) ); ?>" class="underline-hover">
+                                                        <?php echo esc_html( $label ); ?>
+                                                    </a>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php }
+                        if ($enable_offcanvas) {
+                            ?>
+                            <div class="header-offcanvas-trigger burger-menu-button <?php
+                            echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
+                            echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
+                                <button type="button" class="button">
                        <span class="box">
                           <span class="inner"></span>
                        </span>
-                    </button>
-                 </div>
-              </div>
-              <?php
-           }
-           ?>
-        </div>
-        <?php
-        // header nav ends
-        // header block starts
-         if ($block_2_type == 'sidebar' && is_active_sidebar($block_2_sidebar)){
-             echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m block-sidebar header-block-item py-3">';
-             dynamic_sidebar($block_2_sidebar);
-             echo '</div>';
-         }
-        if ($block_2_type == 'custom') {
-           echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item py-3">';
-           echo wp_kses($block_2_custom,'post');
-           echo '</div>';
-        }
-         if($block_2_type == 'social' || $block_2_type == 'contact'){
-             echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item">';
-             Templates::load_my_layout('inc.'.$block_2_type);
-             echo '</div>';
-         }
-        // header block ends
-     }
-     if ($mode == 'divided') {
-         if($header_stack_divi == true){
-             echo '<div class="templaza-divi-logo-wrap">';
-             ?>
-        <div class="uk-container uk-flex uk-flex-between  uk-container-<?php echo esc_attr($header_stack_inner_width);?>">
-        <?php
-         }else{
-             echo '<div class="uk-flex uk-width uk-flex-between templaza-divi-logo-wrap">';
-         }
-        ?>
-
-        <?php if (!empty($header_mobile_menu)) { ?>
-           <div class="uk-flex uk-flex-left uk-flex-middle uk-hidden@m">
-              <div class="uk-hidden@m header-mobilemenu-trigger burger-menu-button" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
-                 <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
-              </div>
-           </div>
-           <?php
-            }
-            if (!empty($block_1_type)) {
-               echo '<div class="uk-flex uk-width-auto uk-flex-center uk-flex-left@m tz-logo-block">';
-            } else {
-               echo '<div class="uk-flex uk-width-auto uk-flex-center tz-logo-block">';
-            }
-        Templates::load_my_layout('logo');
-        echo '</div>';
-
-        // header block starts
-         if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-             echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m block-sidebar header-block-item">';
-             dynamic_sidebar($block_1_sidebar);
-             echo '</div>';
-         }
-        if ($block_1_type == 'custom') {
-           echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m header-block-item">';
-           echo wp_kses($block_1_custom,'post');
-           echo '</div>';
-        }
-        if($block_1_type == 'social' || $block_1_type == 'contact'){
-            echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m header-block-item">';
-            Templates::load_my_layout('inc.'.$block_1_type);
-            echo '</div>';
-        }
-        // header block ends
-        ?>
-            <?php
-            if($icon_position == 'bottom'){
-            ?>
-            <div class="uk-hidden@m uk-width-auto uk-flex uk-flex-right uk-flex-middle">
-                <?php Templates::load_my_layout('inc.icon',true,false); ?>
-            </div>
-            <?php } ?>
-            <?php if ( (($header_stack_search || $header_stack_cart || $header_stack_account) && $icon_position == 'top') || $enable_offcanvas){ ?>
-            <div class="uk-flex uk-flex-right uk-flex-middle">
-
-                <?php
-                if($icon_position == 'top'){
-                    Templates::load_my_layout('inc.icon',true,false);
-                }
-                if ($enable_offcanvas) {
-                    ?>
-                    <div class="header-offcanvas-trigger header-icon burger-menu-button <?php echo esc_attr($offcanvas_togglevisibility);
-                    ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo esc_attr($offcanvas_animation);
-                    ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
-                        <button type="button" class="button">
-                            <span class="box">
-                               <span class="inner"></span>
-                            </span>
-                        </button>
+                                </button>
+                            </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                     <?php
                 }
                 ?>
             </div>
-            <?php } ?>
-        <?php
-        if($header_stack_divi == true){
-            echo '</div>';
-        }
-        echo '</div>';
-        // header nav starts -->
-        if($header_stack_divi == true){
-            echo '<div class="templaza-divi-menu-wrap uk-visible@m ">';
-        ?>
-        <div class="uk-container uk-flex uk-flex-center  uk-container-<?php echo esc_attr($header_stack_inner_width);?>">
             <?php
-        }else{
-            echo '<div class="uk-flex uk-width uk-visible@m templaza-divi-menu-wrap">';
+            // header nav ends
+            // header block starts
+            if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
+                echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item py-3">';
+                echo '<ul id="sidebar">';
+                dynamic_sidebar($block_1_sidebar);
+                echo '</ul>';
+                echo '</div>';
+            }
+            if ($block_1_type == 'custom') {
+                echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item py-3">';
+                echo wp_kses($block_1_custom,'post');
+                echo '</div>';
+            }
+            if($block_1_type == 'social' || $block_1_type == 'contact'){
+                echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item">';
+                Templates::load_my_layout('inc.'.$block_1_type);
+                echo '</div>';
+            }
+            // header block ends
         }
-        ?>
-        <div class="uk-flex uk-flex-left uk-flex-1 uk-flex-middle "<?php echo wp_kses($data_attribs,'post');?>>
-            <div class="<?php echo implode(' ', $navWrapperClass)?>">
+        if ($mode == 'seperated') {
+            // header block starts
+            if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
+                echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item py-3">';
+                echo '<ul id="sidebar">';
+                dynamic_sidebar($block_1_sidebar);
+                echo '</ul>';
+                echo '</div>';
+            }
+            if ($block_1_type == 'custom') {
+                echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item py-3">';
+                echo wp_kses($block_1_custom,'post');
+                echo '</div>';
+            }
+            if($block_1_type == 'social' || $block_1_type == 'contact'){
+                echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item">';
+                Templates::load_my_layout('inc.'.$block_1_type);
+                echo '</div>';
+            }
+            // header nav starts
+            ?>
+            <div class="header-stacked-inner uk-flex uk-width uk-flex-center uk-flex-middle"<?php echo wp_kses($data_attribs,'post');?>>
+                <div class="uk-flex uk-flex-left uk-flex-middle uk-hidden@m">
+                    <div class="header-mobilemenu-trigger d-lg-none burger-menu-button" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
+                        <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
+                    </div>
+                </div>
                 <?php
-                // header nav starts
+                echo '<div class="uk-flex uk-width uk-flex-center">';
+                echo '<div class="uk-hidden@m">';
+                Templates::load_my_layout('logo', true, false);
+                echo '</div>';
+                ?>
+                <?php
                 Menu::get_nav_menu(array(
                     'theme_location'  => $header_menu,
-                    'menu_class'      => implode(' ', $navClassLeft),
+                    'menu_class'      => implode(' ', $navClass),
                     'container_class' => implode(' ', $navWrapperClass),
                     'menu_id'         => '',
                     'depth'           => $header_menu_level, // Level
                     'templaza_is_header'          => true,
                     'templaza_megamenu_html_data' => $menu_datas
                 ));
+                ?>
+                <?php
+                echo '</div>';
+                if ($enable_offcanvas) {
+                    ?>
+                    <div class="uk-flex uk-flex-right uk-flex-middle">
+                        <div class="header-offcanvas-trigger burger-menu-button <?php
+                        echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
+                        echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
+                            <button type="button" class="button">
+                       <span class="box">
+                          <span class="inner"></span>
+                       </span>
+                            </button>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+            <?php
+            // header nav ends
+            // header block starts
+            if ($block_2_type == 'sidebar' && is_active_sidebar($block_2_sidebar)){
+                echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m block-sidebar header-block-item py-3">';
+                dynamic_sidebar($block_2_sidebar);
+                echo '</div>';
+            }
+            if ($block_2_type == 'custom') {
+                echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item py-3">';
+                echo wp_kses($block_2_custom,'post');
+                echo '</div>';
+            }
+            if($block_2_type == 'social' || $block_2_type == 'contact'){
+                echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item">';
+                Templates::load_my_layout('inc.'.$block_2_type);
+                echo '</div>';
+            }
+            // header block ends
+        }
+        if ($mode == 'divided') {
+        if($header_stack_divi == true){
+        echo '<div class="templaza-divi-logo-wrap templaza-stacked-top-section">';
+        ?>
+        <div class="uk-container uk-flex uk-flex-between  uk-container-<?php echo esc_attr($header_stack_inner_width);?>">
+            <?php
+            }else{
+                echo '<div class="uk-flex uk-width uk-flex-between templaza-divi-logo-wrap templaza-stacked-top-section">';
+            }
+            ?>
+
+            <?php if (!empty($header_mobile_menu)) { ?>
+                <div class="uk-flex uk-flex-left uk-flex-middle uk-hidden@m">
+                    <div class="uk-hidden@m header-mobilemenu-trigger burger-menu-button" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
+                        <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
+                    </div>
+                </div>
+                <?php
+            }
+            if (!empty($block_1_type)) {
+                echo '<div class="uk-flex uk-width-auto uk-flex-center uk-flex-left@m tz-logo-block">';
+            } else {
+                echo '<div class="uk-flex uk-width-auto uk-flex-center tz-logo-block">';
+            }
+            Templates::load_my_layout('logo');
+            echo '</div>';
+
+            // header block starts
+            if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
+                echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m block-sidebar header-block-item">';
+                dynamic_sidebar($block_1_sidebar);
+                echo '</div>';
+            }
+            if ($block_1_type == 'custom') {
+                echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m header-block-item">';
+                echo wp_kses($block_1_custom,'post');
+                echo '</div>';
+            }
+            if($block_1_type == 'social' || $block_1_type == 'contact'){
+                echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m header-block-item">';
+                Templates::load_my_layout('inc.'.$block_1_type);
+                echo '</div>';
+            }
+            // header block ends
+            ?>
+            <?php
+            if($icon_position == 'bottom'){
+                ?>
+                <div class="uk-hidden@m uk-width-auto uk-flex uk-flex-right uk-flex-middle">
+                    <?php Templates::load_my_layout('inc.icon',true,false); ?>
+                </div>
+            <?php } ?>
+            <?php if ( (($header_stack_search || $header_stack_cart || $header_stack_account) && $icon_position == 'top') || $enable_offcanvas){ ?>
+                <div class="uk-flex uk-flex-right uk-flex-middle">
+
+                    <?php
+                    if($icon_position == 'top'){
+                        Templates::load_my_layout('inc.icon',true,false);
+                    }
+                    if ($enable_offcanvas) {
+                        ?>
+                        <div class="header-offcanvas-trigger header-icon burger-menu-button <?php echo esc_attr($offcanvas_togglevisibility);
+                        ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo esc_attr($offcanvas_animation);
+                        ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
+                            <button type="button" class="button">
+                            <span class="box">
+                               <span class="inner"></span>
+                            </span>
+                            </button>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            <?php } ?>
+            <?php
+            if($header_stack_divi == true){
+                echo '</div>';
+            }
+            echo '</div>';
+            // header nav starts -->
+            if($header_stack_divi == true){
+            echo '<div class="templaza-divi-menu-wrap uk-visible@m templaza-stacked-menu-section">';
+            ?>
+            <div class="uk-container uk-flex uk-flex-center  uk-container-<?php echo esc_attr($header_stack_inner_width);?>">
+                <?php
+                }else{
+                    echo '<div class="uk-flex uk-width uk-visible@m templaza-divi-menu-wrap templaza-stacked-menu-section">';
+                }
+                ?>
+                <div class="uk-flex uk-flex-left uk-flex-1 uk-flex-middle "<?php echo wp_kses($data_attribs,'post');?>>
+                    <?php
+                    // header nav starts
+                    Menu::get_nav_menu(array(
+                        'theme_location'  => $header_menu,
+                        'menu_class'      => implode(' ', $navClassLeft),
+                        'container_class' => implode(' ', $navWrapperClass),
+                        'menu_id'         => '',
+                        'depth'           => $header_menu_level, // Level
+                        'templaza_is_header'          => true,
+                        'templaza_megamenu_html_data' => $menu_datas
+                    ));
+                    // header nav ends
+                    ?>
+                </div>
+                <?php
                 // header nav ends
+                // header block starts
+                if ($block_2_type == 'sidebar' && is_active_sidebar($block_2_sidebar)){
+                    echo '<div class="block-sidebar header-block-item uk-flex uk-flex-right uk-flex-middle">';
+                    dynamic_sidebar($block_2_sidebar);
+                    echo '</div>';
+                }
+                if ($block_2_type == 'custom') {
+                    echo '<div class="header-block-item  uk-flex uk-flex-right uk-flex-middle ">';
+                    echo wp_kses($block_2_custom,'post');
+                    echo '</div>';
+                }
+                if($block_2_type == 'social' || $block_2_type == 'contact'){
+                    echo '<div class="header-block-item  uk-flex uk-flex-right uk-flex-middle ">';
+                    Templates::load_my_layout('inc.'.$block_2_type);
+                    echo '</div>';
+                }
+                if($icon_position == 'bottom'){
+                    echo '<div class="header-block-icon uk-flex uk-flex-right uk-flex-middle">';
+                    Templates::load_my_layout('inc.icon',true,false);
+                    echo '</div>';
+                }
+                ?>
+                <?php
+                if($header_stack_divi == true){
+                    echo '</div>';
+                }
+                echo '</div>';
+                // header block ends
+                }
                 ?>
             </div>
         </div>
-        <?php
-        // header nav ends
-        // header block starts
-         if ($block_2_type == 'sidebar' && is_active_sidebar($block_2_sidebar)){
-             echo '<div class="block-sidebar header-block-item uk-flex uk-flex-right uk-flex-middle">';
-             dynamic_sidebar($block_2_sidebar);
-             echo '</div>';
-         }
-        if ($block_2_type == 'custom') {
-           echo '<div class="header-block-item  uk-flex uk-flex-right uk-flex-middle ">';
-           echo wp_kses($block_2_custom,'post');
-           echo '</div>';
-        }
-        if($block_2_type == 'social' || $block_2_type == 'contact'){
-            echo '<div class="header-block-item  uk-flex uk-flex-right uk-flex-middle ">';
-            Templates::load_my_layout('inc.'.$block_2_type);
-            echo '</div>';
-        }
-        if($icon_position == 'bottom'){
-            echo '<div class="header-block-icon uk-flex uk-flex-right uk-flex-middle">';
-            Templates::load_my_layout('inc.icon',true,false);
-            echo '</div>';
-        }
-        ?>
-            <?php
-        if($header_stack_divi == true){
-            echo '</div>';
-        }
-        echo '</div>';
-        // header block ends
-     }
-     ?>
-  </div>
-</div>
