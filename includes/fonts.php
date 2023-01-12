@@ -146,14 +146,28 @@ class Fonts{
         return apply_filters('templaza-framework/typography/google-font/list', $fonts);
     }
 
-    /* */
-    public static function make_css_style($font_option, $devices = array('desktop' => '', 'tablet' => '', 'mobile' => '')){
+    /**
+     * Generate font option to css by each devices
+     * @param array $font_option Font option value from typography field
+     * @param string|array $devices_selector The css selector
+     * @return array
+     *  */
+    public static function make_css_style($font_option, $devices_selector = ''){
 
-//        $_org_devices   = Templates::get_devices(true);
-
-
-        $open_devices   = array_filter($devices);
         $def_devices    = Templates::get_devices(true);
+        $open_devices   = array('desktop' => '', 'tablet' => '', 'mobile' => '');
+
+        if(!empty($devices_selector)){
+            if(is_array($devices_selector)){
+                $open_devices   = array_filter($devices_selector);
+            }else{
+                foreach ($def_devices as $d => $val){
+                    $open_devices[$d] = $devices_selector;
+                }
+            }
+        }
+
+//        $open_devices   = array_filter($devices);
         $devices        = $def_devices;
 
         $diff_devices   = array_diff_key($def_devices, $open_devices);
@@ -172,7 +186,7 @@ class Fonts{
         }
 
         $libraryFonts   = static::get_uploaded_fonts();
-        $font_family    = $font_option['font-family'];
+        $font_family    = isset($font_option['font-family'])?$font_option['font-family']:'';
         $is_google_font = (isset($font_option['google']) && (bool) $font_option['google'])?true:false;
 
         // Create font-family css style
