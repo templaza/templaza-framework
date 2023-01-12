@@ -189,8 +189,8 @@ Templaza_API::set_section('templaza_style',
                 'title'       => esc_html__( 'Register icon', 'tztodaynews' ),
                 'data'        => 'fontawesome',
                 'required'    => array(
-                    array( 'enable-contact', '=', true ),
-                    array( 'enable-contact-register', '=', true ),
+                    array( 'enable-contact', '!=', 'off' ),
+                    array( 'enable-contact-register', '!=', 'off' ),
                 ),
             ),
             array(
@@ -199,8 +199,8 @@ Templaza_API::set_section('templaza_style',
                 'title'    => esc_html__( 'Register label', 'tztodaynews' ),
                 'subtitle' => esc_html__( 'Enter your register label.', 'tztodaynews' ),
                 'required'    => array(
-                    array( 'enable-contact', '=', true ),
-                    array( 'enable-contact-register', '=', true ),
+                    array( 'enable-contact', '!=', 'off' ),
+                    array( 'enable-contact-register', '!=', 'off' ),
                 ),
             ),
         )
