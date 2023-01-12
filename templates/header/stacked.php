@@ -525,25 +525,25 @@ if ($mode == 'left') {
         if ($mode == 'seperated') {
             // header block starts
             if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-                echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item py-3">';
+                echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item py-3 templaza-stacked-top-section">';
                 echo '<ul id="sidebar">';
                 dynamic_sidebar($block_1_sidebar);
                 echo '</ul>';
                 echo '</div>';
             }
             if ($block_1_type == 'custom') {
-                echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item py-3">';
+                echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item py-3 templaza-stacked-top-section">';
                 echo wp_kses($block_1_custom,'post');
                 echo '</div>';
             }
             if($block_1_type == 'social' || $block_1_type == 'contact'){
-                echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item">';
+                echo '<div class="uk-flex uk-width-expand uk-flex-center uk-visible@m header-block-item templaza-stacked-top-section">';
                 Templates::load_my_layout('inc.'.$block_1_type);
                 echo '</div>';
             }
             // header nav starts
             ?>
-            <div class="header-stacked-inner uk-flex uk-width uk-flex-center uk-flex-middle"<?php echo wp_kses($data_attribs,'post');?>>
+            <div class="templaza-stacked-menu-section header-stacked-inner uk-flex uk-width uk-flex-center uk-flex-middle"<?php echo wp_kses($data_attribs,'post');?>>
                 <div class="uk-flex uk-flex-left uk-flex-middle uk-hidden@m">
                     <div class="header-mobilemenu-trigger d-lg-none burger-menu-button" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
                         <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
