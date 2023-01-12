@@ -431,7 +431,7 @@ if(!empty($unit) && is_array($unit)){
             /* End my customize */
             $tab_pane  .= '<input type="hidden" name="'
                     . esc_attr( $this -> field['name'] . $this -> field['name_suffix'] )
-                    . '[font-size]['.$device.']" value="' . esc_attr( $value)
+                    . '[font-size]['.$device.']" value="' . ((float)$value?esc_attr( $value):'')
                     . '" data-id="' . esc_attr( $this -> field['id'] ) . '" data-device="'.$device.'"/>';
 
             $tab_pane  .= '</div>';
