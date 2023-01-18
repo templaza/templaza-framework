@@ -107,7 +107,7 @@ class Templaza_Woo_Login_AJAX {
 			}
 
 			if ( empty( $creds['user_login'] ) ) {
-				wp_send_json_error( esc_html__( 'Username is required.', 'agruco' ) );
+				wp_send_json_error( esc_html__( 'Username is required.', 'templaza-framework' ) );
 			}
 
 			// On multisite, ensure user exists on current site, if not add them before allowing login.

@@ -1,4 +1,4 @@
-div.templaza-breadcrumb {
+div.templaza-basic-breadcrumb {
   padding:120px 0;
   position:relative;
   &:before{
@@ -30,6 +30,6 @@ div.templaza-breadcrumb {
     }
   }
 }
-ul.templaza-breadcrumb{
+ul.templaza-basic-breadcrumb{
   padding-left:0;
 }

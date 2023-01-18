@@ -118,9 +118,9 @@ class Templaza_Woo_Recently_Viewed {
 				'<ul class="product-list no-products">' .
 				'<li class="text-center">%s <br><a href="%s" class="templaza-button">%s</a></li>' .
 				'</ul>',
-				esc_html__( 'Recently Viewed Products is a function which helps you keep track of your recent viewing history.', 'agruco' ),
+				esc_html__( 'Recently Viewed Products is a function which helps you keep track of your recent viewing history.', 'templaza-framework' ),
 				esc_url( get_permalink( get_option( 'woocommerce_shop_page_id' ) ) ),
-				esc_html__( 'Shop Now', 'agruco' )
+				esc_html__( 'Shop Now', 'templaza-framework' )
 			);
 		} else {
 

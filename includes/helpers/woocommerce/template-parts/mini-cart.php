@@ -8,7 +8,7 @@
 ?>
 
 <div class="modal-header">
-    <h3 class="modal-title"><?php esc_html_e( 'Your Cart', 'agruco' ) ?>
+    <h3 class="modal-title"><?php esc_html_e( 'Your Cart', 'templaza-framework' ) ?>
         <span class="cart-panel-counter">(<?php echo WC()->cart->get_cart_contents_count(); ?>)</span>
     </h3>
     <a href="#" class="close-account-panel button-close"><i class="fas fa-close"></i></a>

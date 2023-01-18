@@ -27,6 +27,7 @@ if(isset($_GET['related_number'])){
 $ap_product_related_title     = isset($templaza_options['ap_product-related-title'])?$templaza_options['ap_product-related-title']:'RELATED PRODUCT';
 $ap_product_related = isset($templaza_options['ap_product-related']) ? $templaza_options['ap_product-related'] : true;
 $ap_product_related_column     = isset($templaza_options['ap_product-related-columns'])?$templaza_options['ap_product-related-columns']:3;
+$ap_product_related_column_gap     = isset($templaza_options['ap_product-related-columns-gap'])?$templaza_options['ap_product-related-columns-gap']:'medium';
 if($ap_product_related){
     $ap_cat = '';
     $ap_cats = wp_get_post_terms(get_the_ID(), 'ap_category');
@@ -46,7 +47,7 @@ if($ap_product_related){
             <h3 class="box-title">
                 <?php echo esc_html($ap_product_related_title);?>
             </h3>
-            <div class="templaza-ap-archive uk-child-width-1-1 uk-grid-medium uk-child-width-1-3@l uk-child-width-1-3@m uk-child-width-1-2@s" data-uk-grid>
+            <div class="templaza-ap-archive uk-child-width-1-1 uk-grid-<?php echo esc_attr($ap_product_related_column_gap);?> uk-child-width-1-3@l uk-child-width-1-3@m uk-child-width-1-2@s" data-uk-grid>
                 <?php
                 while ( $related -> have_posts() ): $related -> the_post() ;
                     $pid =$related->post->ID;

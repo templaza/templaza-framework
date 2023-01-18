@@ -28,6 +28,14 @@ $ap_styles    = array(
     ),
     array(
         'enable'    => true,
+        'class'     => '.single .ap-single-box.ap-single-box-media',
+        'options' => array(
+            'ap_product-media-padding',
+            'ap_product-media-margin',
+        ),
+    ),
+    array(
+        'enable'    => true,
         'class'     => '.single .ap-single-side-box',
         'options' => array(
             'ap_product-side-box-padding',

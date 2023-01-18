@@ -96,27 +96,27 @@ class Templaza_Product_Brands {
 		}
 
 		$labels = array(
-			'name'                       => esc_html__( 'Product Brands', 'agruco' ),
-			'singular_name'              => esc_html__( 'Brand', 'agruco' ),
-			'menu_name'                  => esc_html__( 'Brands', 'agruco' ),
-			'all_items'                  => esc_html__( 'All Brands', 'agruco' ),
-			'edit_item'                  => esc_html__( 'Edit Brand', 'agruco' ),
-			'view_item'                  => esc_html__( 'View Brand', 'agruco' ),
-			'update_item'                => esc_html__( 'Update Brand', 'agruco' ),
-			'add_new_item'               => esc_html__( 'Add New Brand', 'agruco' ),
-			'new_item_name'              => esc_html__( 'New Brand Name', 'agruco' ),
-			'parent_item'                => esc_html__( 'Parent Brand', 'agruco' ),
-			'parent_item_colon'          => esc_html__( 'Parent Brand:', 'agruco' ),
-			'search_items'               => esc_html__( 'Search Brands', 'agruco' ),
-			'popular_items'              => esc_html__( 'Popular Brands', 'agruco' ),
-			'separate_items_with_commas' => esc_html__( 'Separate brands with commas', 'agruco' ),
-			'add_or_remove_items'        => esc_html__( 'Add or remove brands', 'agruco' ),
-			'choose_from_most_used'      => esc_html__( 'Choose from the most used brands', 'agruco' ),
-			'not_found'                  => esc_html__( 'No brands found', 'agruco' )
+			'name'                       => esc_html__( 'Product Brands', 'templaza-framework' ),
+			'singular_name'              => esc_html__( 'Brand', 'templaza-framework' ),
+			'menu_name'                  => esc_html__( 'Brands', 'templaza-framework' ),
+			'all_items'                  => esc_html__( 'All Brands', 'templaza-framework' ),
+			'edit_item'                  => esc_html__( 'Edit Brand', 'templaza-framework' ),
+			'view_item'                  => esc_html__( 'View Brand', 'templaza-framework' ),
+			'update_item'                => esc_html__( 'Update Brand', 'templaza-framework' ),
+			'add_new_item'               => esc_html__( 'Add New Brand', 'templaza-framework' ),
+			'new_item_name'              => esc_html__( 'New Brand Name', 'templaza-framework' ),
+			'parent_item'                => esc_html__( 'Parent Brand', 'templaza-framework' ),
+			'parent_item_colon'          => esc_html__( 'Parent Brand:', 'templaza-framework' ),
+			'search_items'               => esc_html__( 'Search Brands', 'templaza-framework' ),
+			'popular_items'              => esc_html__( 'Popular Brands', 'templaza-framework' ),
+			'separate_items_with_commas' => esc_html__( 'Separate brands with commas', 'templaza-framework' ),
+			'add_or_remove_items'        => esc_html__( 'Add or remove brands', 'templaza-framework' ),
+			'choose_from_most_used'      => esc_html__( 'Choose from the most used brands', 'templaza-framework' ),
+			'not_found'                  => esc_html__( 'No brands found', 'templaza-framework' )
 		);
 
 		$permalinks         = get_option( 'product_brand_permalinks' );
-		$product_brand_base = empty( $permalinks['product_brand_base'] ) ? _x( 'product-brand', 'slug', 'agruco' ) : $permalinks['product_brand_base'];
+		$product_brand_base = empty( $permalinks['product_brand_base'] ) ? _x( 'product-brand', 'slug', 'templaza-framework' ) : $permalinks['product_brand_base'];
 
 		$args = array(
 			'hierarchical'          => true,
@@ -175,14 +175,14 @@ class Templaza_Product_Brands {
 	public function settings_api_init() {
 		add_settings_section(
 			'templaza_brand_section',
-			'<span id="brand-options">' . esc_html__( 'Product brand', 'agruco' ) . '</span>',
+			'<span id="brand-options">' . esc_html__( 'Product brand', 'templaza-framework' ) . '</span>',
 			array( $this, 'writing_section_html' ),
 			'writing'
 		);
 
 		add_settings_field(
 			$this->option,
-			'<span class="brand-options">' . esc_html__( 'Product brand', 'agruco' ) . '</span>',
+			'<span class="brand-options">' . esc_html__( 'Product brand', 'templaza-framework' ) . '</span>',
 			array( $this, 'disable_field_html' ),
 			'writing',
 			'templaza_brand_section'
@@ -195,7 +195,7 @@ class Templaza_Product_Brands {
 
 		add_settings_field(
 			'product_brand_slug',
-			'<label for="product_brand_slug">' . esc_html__( 'Product brand base', 'agruco' ) . '</label>',
+			'<label for="product_brand_slug">' . esc_html__( 'Product brand base', 'templaza-framework' ) . '</label>',
 			array( $this, 'product_brand_slug_input' ),
 			'permalink',
 			'optional'
@@ -221,7 +221,7 @@ class Templaza_Product_Brands {
 		?>
         <input name="product_brand_slug" type="text" class="regular-text code"
                value="<?php echo esc_attr( $brand_base ); ?>"
-               placeholder="<?php echo esc_attr_x( 'product-brand', 'slug', 'agruco' ) ?>"/>
+               placeholder="<?php echo esc_attr_x( 'product-brand', 'slug', 'templaza-framework' ) ?>"/>
 		<?php
 	}
 
@@ -286,7 +286,7 @@ class Templaza_Product_Brands {
 	public function add_category_fields() {
 		?>
         <div class="form-field" id="product-brand-thumb-box">
-            <label><?php esc_html_e( 'Thumbnail', 'agruco' ); ?></label>
+            <label><?php esc_html_e( 'Thumbnail', 'templaza-framework' ); ?></label>
 
             <div id="product_brand_thumb" class="product-brand-thumb"
                  data-rel="<?php echo esc_url( $this->placeholder_img_src ); ?>">
@@ -294,9 +294,9 @@ class Templaza_Product_Brands {
             <div class="product-brand-thumb-box">
                 <input type="hidden" id="product_brand_thumb_id" name="product_brand_thumb_id"/>
                 <button type="button"
-                        class="upload_image_button button"><?php esc_html_e( 'Upload/Add image', 'agruco' ); ?></button>
+                        class="upload_image_button button"><?php esc_html_e( 'Upload/Add image', 'templaza-framework' ); ?></button>
                 <button type="button"
-                        class="remove_image_button button"><?php esc_html_e( 'Remove image', 'agruco' ); ?></button>
+                        class="remove_image_button button"><?php esc_html_e( 'Remove image', 'templaza-framework' ); ?></button>
             </div>
             <div class="clear"></div>
         </div>
@@ -325,7 +325,7 @@ class Templaza_Product_Brands {
 		}
 		?>
         <tr class="form-field product-brand-thumb" id="product-brand-thumb-box">
-            <th scope="row" valign="top"><label><?php esc_html_e( 'Thumbnail', 'agruco' ); ?></label></th>
+            <th scope="row" valign="top"><label><?php esc_html_e( 'Thumbnail', 'templaza-framework' ); ?></label></th>
             <td>
                 <div id="product_brand_thumb" class="product-brand-thumb"
                      data-rel="<?php echo esc_url( $this->placeholder_img_src ); ?>">
@@ -335,9 +335,9 @@ class Templaza_Product_Brands {
                     <input type="hidden" id="product_brand_thumb_id" name="product_brand_thumb_id"
                            value="<?php echo esc_attr( $thumbnail_id ); ?>"/>
                     <button type="button"
-                            class="upload_image_button button"><?php esc_html_e( 'Upload/Add image', 'agruco' ); ?></button>
+                            class="upload_image_button button"><?php esc_html_e( 'Upload/Add image', 'templaza-framework' ); ?></button>
                     <button type="button"
-                            class="remove_image_button button"><?php esc_html_e( 'Remove image', 'agruco' ); ?></button>
+                            class="remove_image_button button"><?php esc_html_e( 'Remove image', 'templaza-framework' ); ?></button>
                 </div>
                 <div class="clear"></div>
             </td>
@@ -379,7 +379,7 @@ class Templaza_Product_Brands {
 			unset( $columns['cb'] );
 		}
 
-		$new_columns['thumb'] = esc_html__( 'Image', 'agruco' );
+		$new_columns['thumb'] = esc_html__( 'Image', 'templaza-framework' );
 
 		return array_merge( $new_columns, $columns );
 	}
@@ -410,7 +410,7 @@ class Templaza_Product_Brands {
 			// Ref: https://core.trac.wordpress.org/ticket/23605
 			$image = str_replace( ' ', '%20', $image );
 
-			$columns .= '<img src="' . esc_url( $image ) . '" alt="' . esc_attr__( 'Thumbnail', 'agruco' ) . '" class="wp-post-image" height="48" width="120" />';
+			$columns .= '<img src="' . esc_url( $image ) . '" alt="' . esc_attr__( 'Thumbnail', 'templaza-framework' ) . '" class="wp-post-image" height="48" width="120" />';
 
 		}
 
@@ -427,7 +427,7 @@ class Templaza_Product_Brands {
 	public function writing_section_html() {
 		?>
         <p>
-			<?php esc_html_e( 'Use these settings to disable custom types of content on your site', 'agruco' ); ?>
+			<?php esc_html_e( 'Use these settings to disable custom types of content on your site', 'templaza-framework' ); ?>
         </p>
 		<?php
 	}
@@ -447,7 +447,7 @@ class Templaza_Product_Brands {
             <input name="<?php echo esc_attr( $this->option ); ?>"
                    id="<?php echo esc_attr( $this->option ); ?>" <?php checked( get_option( $this->option ), true ); ?>
                    type="checkbox" value="1"/>
-			<?php esc_html_e( 'Disable Brand for this site.', 'agruco' ); ?>
+			<?php esc_html_e( 'Disable Brand for this site.', 'templaza-framework' ); ?>
         </label>
 
 		<?php

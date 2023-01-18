@@ -311,10 +311,10 @@ class Templaza_Woo_General {
 
 		if ( 0 < $count ) {
 			/* translators: 1: rating 2: rating count */
-			$html .= sprintf( _n( 'Rated %1$s out of 5 based on %2$s customer rating', 'Rated %1$s out of 5 based on %2$s customer ratings', $count, 'agruco' ), '<strong class="rating">' . esc_html( $rating ) . '</strong>', '<span class="rating">' . esc_html( $count ) . '</span>' );
+			$html .= sprintf( _n( 'Rated %1$s out of 5 based on %2$s customer rating', 'Rated %1$s out of 5 based on %2$s customer ratings', $count, 'templaza-framework' ), '<strong class="rating">' . esc_html( $rating ) . '</strong>', '<span class="rating">' . esc_html( $count ) . '</span>' );
 		} else {
 			/* translators: %s: rating */
-			$html .= sprintf( esc_html__( 'Rated %s out of 5', 'agruco' ), '<strong class="rating">' . esc_html( $rating ) . '</strong>' );
+			$html .= sprintf( esc_html__( 'Rated %s out of 5', 'templaza-framework' ), '<strong class="rating">' . esc_html( $rating ) . '</strong>' );
 		}
 
 		$html .= '</span>';
@@ -338,7 +338,7 @@ class Templaza_Woo_General {
 		}
 
 		if ( ! $product->managing_stock() && $product->get_stock_status() == 'instock' ) {
-			$availability = esc_html__( 'In stock', 'agruco' );
+			$availability = esc_html__( 'In stock', 'templaza-framework' );
 		}
 
 		return $availability;

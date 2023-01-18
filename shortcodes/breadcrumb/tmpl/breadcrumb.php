@@ -16,7 +16,8 @@ if (is_single() && $enable_breadcrumb_single == false){
 }
 $tz_class = '';
 ?>
-<div<?php echo !empty($tz_id)?' id="'.esc_attr__($tz_id).'"':''; ?> class="<?php echo esc_attr__($tz_class); ?>">
+<div <?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="<?php
+echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
 <?php
 get_template_part( 'template-parts/breadcrumb' );
 ?>

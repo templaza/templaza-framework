@@ -60,7 +60,6 @@ $pid    = get_the_ID();
                     <div class="ap-readmore-box">
                         <a href="<?php the_permalink(); ?>" class="templaza-btn"><?php esc_html_e('View more','templaza-framework');?></a>
                     </div>
-
                 </div>
             </div>
         </div>

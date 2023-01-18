@@ -15,9 +15,9 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
     if(!empty($f_value)){
         if($acf_f['type'] !='taxonomy'){
     ?>
-    <div class="uk-grid-small" data-uk-grid>
-        <div class="uk-width-expand" data-uk-leader><?php echo esc_html($acf_f['label']); ?></div>
-        <div class="field-value">
+    <div class="uk-grid-collapse ap-custom-fields-style3 " data-uk-grid>
+        <div class="uk-width-expand ap-field-label"><?php echo esc_html($acf_f['label']); ?></div>
+        <div class="field-value ap-field-value">
             <?php
             if($acf_f['type'] == 'file'){
                 $file_url   = '';
