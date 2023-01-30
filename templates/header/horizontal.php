@@ -162,7 +162,11 @@ if($header_stack_search || $header_stack_account || $header_stack_cart){
             Templates::load_my_layout('inc.icon', true, false);
 
             if ($block_1_type == 'social' || $block_1_type == 'contact') {
-                Templates::load_my_layout('inc.' . $block_1_type);
+                ?>
+            <div class="uk-visible@m">
+                <?php Templates::load_my_layout('inc.' . $block_1_type);?>
+            </div>
+            <?php
             }
             ?>
             <?php

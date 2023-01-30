@@ -41,7 +41,12 @@
     //border-color: $tz-border-color;
     &[style]{
       .wp-color-result-text {
-        color: #fff;
+        color: #111;
+        background: #fff;
+        line-height: 2.54545455;
+      }
+      &.wp-color-result {
+        padding: 0 0 0 30px;
       }
     }
     &[style=""],
