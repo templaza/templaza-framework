@@ -171,6 +171,12 @@ Templaza_API::set_section('templaza_style',
                 'subtitle' => __( 'Set the color of the menu item on hover', 'templaza-framework' ),
             ),
             array(
+                'id'       => 'main-menu-border-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Link Border Hover Color', 'templaza-framework' ),
+                'subtitle' => __( 'Set the color of the menu item border on hover', 'templaza-framework' ),
+            ),
+            array(
                 'id'       => 'sidebar-separate-color',
                 'type'     => 'color_rgba',
                 'title'    => __( 'Sidebar Separate Color', 'templaza-framework' ),

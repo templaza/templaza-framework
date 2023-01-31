@@ -47,7 +47,7 @@ $show_quickview_button= isset($args['show_archive_quickview_button'])?(bool)$arg
                 <a href="javascript:" class="uk-icon-button<?php echo $has_compare?' ap-in-compare-list':'';
                 ?>" data-ap-compare-button="id: <?php the_ID();
                 ?>; active_icon: fas fa-clipboard-list; icon: fas fa-balance-scale" data-uk-tooltip="<?php
-                _e($active_text, AP_Functions::get_my_text_domain());?>">
+                _e($active_text, 'templaza-framework');?>">
                     <?php if($has_compare){?>
                         <i class="fas fa-clipboard-list js-ap-icon"></i>
                     <?php }else{?>

@@ -423,6 +423,28 @@ Templaza_API::set_subsection('settings','ap_product-page',
 );
 Templaza_API::set_subsection('settings','ap_product-page',
     array(
+        'title'      => esc_html__( 'Advanced Product Compare', 'templaza-framework' ),
+        'id'         => 'ap_product-single-compare',
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'ap_product-compare-layout',
+                'type'     => 'select',
+                'title'    => esc_html__('Compare Layout', 'templaza-framework'),
+                'options'  => array(
+                    'style1' => esc_html__('Style1', 'templaza-framework'),
+                    'style2' => esc_html__('Style2', 'templaza-framework'),
+                    'style3' => esc_html__('Style3', 'templaza-framework'),
+                    'style4' => esc_html__('Style4', 'templaza-framework'),
+                    'style5' => esc_html__('Style5', 'templaza-framework'),
+                ),
+                'default'  => 'style1',
+            ),
+        )
+    )
+);
+Templaza_API::set_subsection('settings','ap_product-page',
+    array(
         'title'      => esc_html__( 'Advanced Product Related', 'templaza-framework' ),
         'id'         => 'ap_product-single-related',
         'subsection' => true,

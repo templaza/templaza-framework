@@ -77,6 +77,9 @@ $main_link_hover_color      = CSS::make_color_rgba_redux($main_link_hover_color)
 $main_link_active_color     = isset($options['main-menu-link-active-color'])?$options['main-menu-link-active-color']:'';
 $main_link_active_color     = CSS::make_color_rgba_redux($main_link_active_color);
 
+$main_link_border_active_color     = isset($options['main-menu-border-color'])?$options['main-menu-border-color']:'';
+$main_link_border_active_color     = CSS::make_color_rgba_redux($main_link_active_color);
+
 $sidebar_separate_color     = isset($options['sidebar-separate-color'])?$options['sidebar-separate-color']:'';
 $sidebar_separate_color     = CSS::make_color_rgba_redux($sidebar_separate_color);
 
@@ -276,6 +279,10 @@ if (!empty($main_link_hover_color)) {
 if (!empty($main_link_active_color)) {
    $main_menu_styles[] = '.templaza-nav .menu-item.current-menu-item > a{ color: ' . $main_link_active_color . ' !important;}';
    $main_menu_styles[] = '.templaza-sidebar-menu .menu-item.current-menu-item > a{ color: ' . $main_link_active_color . ' !important;}';
+}
+if (!empty($main_link_border_active_color)) {
+   $main_menu_styles[] = '.templaza-nav .menu-item.current-menu-item > a, .templaza-nav .menu-item > a:hover, .templaza-nav .menu-item > a:focus{ border-color: ' . $main_link_border_active_color . ' !important;}';
+   $main_menu_styles[] = '.templaza-sidebar-menu .menu-item.current-menu-item > a, .templaza-sidebar-menu .menu-item > a:hover, .templaza-sidebar-menu .menu-item > a:focus{ border-color: ' . $main_link_border_active_color . ' !important;}';
 }
 if (!empty($off_canvas_button_color)) {
    $main_menu_styles[] = '.burger-menu-button .inner, .burger-menu-button .inner::before, .burger-menu-button .inner::after { background-color: ' . $off_canvas_button_color . ' !important;}';

@@ -31,7 +31,7 @@ if(isset($args['ap_class'])){
                 </div>
                 <div class="ap-button-info uk-flex uk-flex-between">
                     <span class="ap-button ap-button-quickview" data-ap-quickview-button="<?php echo $pid?$pid:'';
-                    ?>" data-uk-tooltip="<?php echo esc_attr(__('Quick View', AP_Functions::get_my_text_domain())); ?>">
+                    ?>" data-uk-tooltip="<?php echo esc_attr(__('Quick View', 'templaza-framework')); ?>">
                         <i class="fas fa-eye"></i>
                     </span>
                     <?php
@@ -54,7 +54,7 @@ if(isset($args['ap_class'])){
                                     <span class="ap-button ap-button-compare <?php echo $has_compare?' ap-in-compare-list':'';
                                     ?>" data-ap-compare-button="id: <?php the_ID();
                                     ?>; active_icon: fas fa-clipboard-list; icon: fas fa-balance-scale" data-uk-tooltip="<?php
-                                    _e($active_text, AP_Functions::get_my_text_domain());?>">
+                                    _e($active_text, 'templaza-framework');?>">
                                         <?php if($has_compare){?>
                                             <i class="fas fa-exchange-alt"></i>
                                         <?php }else{?>
@@ -75,7 +75,7 @@ if(isset($args['ap_class'])){
                     <?php do_action('advanced-product/archive/after_content');?>
 
                     <span class="ap-button ap-button-viewmore">
-                        <a href="<?php the_permalink(); ?>" data-uk-tooltip="<?php echo esc_attr(__('View Detail', AP_Functions::get_my_text_domain())); ?>">
+                        <a href="<?php the_permalink(); ?>" data-uk-tooltip="<?php echo esc_attr(__('View Detail', 'templaza-framework')); ?>">
                         <i class="fas fa-plus"></i>
                         </a>
                     </span>

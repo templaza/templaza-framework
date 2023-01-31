@@ -23,6 +23,18 @@ if(!class_exists('TemplazaFramework_ShortCode_Breadcrumb')){
                         'title'      => __('Background'),
                     ),
                     array(
+                        'id'       => 'breadcrumb_color',
+                        'type'     => 'color_rgba',
+                        'title'    => esc_html__( 'Breadcrumb Color', 'templaza-framework' ),
+                        'subtitle' => esc_html__( 'Set the color of Breadcrumb.', 'templaza-framework' ),
+                    ),
+                    array(
+                        'id'       => 'breadcrumb_color_hover',
+                        'type'     => 'color_rgba',
+                        'title'    => esc_html__( 'Breadcrumb Hover Color', 'templaza-framework' ),
+                        'subtitle' => esc_html__( 'Set the color hover of Breadcrumb.', 'templaza-framework' ),
+                    ),
+                    array(
                         'id'       => 'enable_breadcrumb_single',
                         'type'     => 'switch',
                         'title'    => esc_html__('Show Breadcrumb in single post', 'templaza-framework'),

@@ -33,7 +33,6 @@ if($ap_layout == 'masonry'){
     $grid_option = '';
 }
 
-
 ?>
 
 <?php

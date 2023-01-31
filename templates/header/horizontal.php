@@ -176,7 +176,7 @@ if($header_stack_search || $header_stack_account || $header_stack_cart){
                 </div>
             <?php } ?>
             <?php if ($block_1_type != 'blank' && in_array($block_1_type, array('sidebar', 'custom'))): ?>
-                <div class="header-right-block uk-visible@m uk-margin-small-left uk-margin-small-right">
+                <div class="header-right-block uk-visible@m uk-margin-small-left">
                     <?php
                     if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
                         echo '<div class="header-block-item">';
