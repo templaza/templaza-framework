@@ -133,6 +133,21 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			$this->field = wp_parse_args( $this->field, $defaults );
 
+            if ( isset( $this->field['color_alpha'] ) ) {
+                if ( is_array( $this->field['color_alpha'] ) ) {
+                    $this->field['color_alpha']['color']        = $this->field['color_alpha']['color'] ?? false;
+                    $this->field['color_alpha']['shadow-color'] = $this->field['color_alpha']['shadow-color'] ?? false;
+                } else {
+                    $mode                                       = $this->field['color_alpha'];
+                    $this->field['color_alpha']                 = array();
+                    $this->field['color_alpha']['color']        = $mode;
+                    $this->field['color_alpha']['shadow-color'] = $mode;
+                }
+            } else {
+                $this->field['color_alpha']['color']        = false;
+                $this->field['color_alpha']['shadow-color'] = false;
+            }
+
 			// Set value defaults.
 			$defaults = array(
 				'font-family'     => '',
@@ -269,6 +284,12 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 				wp_enqueue_style( 'redux-field-typography-css', Redux_Core::$url . 'inc/fields/typography/redux-typography.css', array(), $this->timestamp, 'all' );
 			}
+
+            if ( isset( $this->field['color_alpha'] ) && is_array( $this->field['color_alpha'] ) ) {
+                if ( $this->field['color_alpha']['color'] || $this->field['color_alpha']['shadow-color'] ) {
+                    wp_enqueue_script( 'redux-wp-color-picker-alpha-js' );
+                }
+            }
 
             if(isset($this -> field['allow_responsive']) && $this -> field['allow_responsive']) {
                 $dep_array = array('jquery-ui-tabs', 'redux-field-typography-js');

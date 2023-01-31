@@ -752,6 +752,14 @@ if(!empty($unit) && is_array($unit)){
             echo esc_html( apply_filters( 'redux/pro/render/color_alpha', $data ) );
         }
 
+        if(method_exists('Redux_Functions_Ex', 'output_alpha_data')) {
+            $data = array(
+                'field' => $this->field,
+                'index' => 'color',
+            );
+            echo Redux_Functions_Ex::output_alpha_data($data);
+        }
+
         echo '/>';
         echo '</div>';
     }
