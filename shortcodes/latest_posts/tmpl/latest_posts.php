@@ -8,6 +8,7 @@ use TemPlazaFramework\Templates;
 extract(shortcode_atts(array(
     'tz_id'                    => '',
     'tz_class'                 => '',
+    'show_featured'            => '',
     'latest_post_type'         => 'post',
     'latest_post_order_by'     => 'date',
     'latest_post_order'        => 'DESC',
@@ -23,12 +24,45 @@ extract(shortcode_atts(array(
 
 $options        = Functions::get_theme_options();
 
+$featured_posttypes = array();
+if(isset($options['enable-featured-for-posttypes'])&& !empty($options['enable-featured-for-posttypes'])){
+    $featured_posttypes = $options['enable-featured-for-posttypes'];
+}
+if(!in_array($latest_post_type, $featured_posttypes)){
+    $show_featured  = '';
+}
+
 $args = array(
     'post_type'  => ''.$latest_post_type.'',
     'numberposts' => $latest_post_number,
     'orderby' => ''.$latest_post_order_by.'',
     'order' => ''.$latest_post_order.'',
 );
+
+if(isset($show_featured)){
+    if($show_featured == '1') {
+        $args['meta_query'] = array(
+            array(
+                'key' => 'templaza-featured',
+                'value' => '1'
+            )
+        );
+    }elseif($show_featured == '0'){
+        $args['meta_query'] = array(
+            'relation' => 'OR',
+            array(
+                'key'       => 'templaza-featured',
+                'compare'   => '!=',
+                'value'     => '1'
+            ),
+            array(
+                'key' => 'templaza-featured',
+                'compare' => 'NOT EXISTS',
+                'value' => 'null',
+            )
+        );
+    }
+}
 
 if(!empty($latest_post_type) && isset($atts[$latest_post_type.'_category'])
     && !empty($atts[$latest_post_type.'_category'])){

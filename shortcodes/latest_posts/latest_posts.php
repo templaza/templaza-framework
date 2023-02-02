@@ -59,6 +59,16 @@ if(!class_exists('TemplazaFramework_ShortCode_Latest_Posts')){
 
             $fields     = array_merge($fields, array(
                 array(
+                    'id'       => 'show_featured',
+                    'type'     => 'select',
+                    'title'    => esc_html__('Show Featured', 'templaza-framework'),
+                    'options'  => array(
+                        ''     => esc_html__('Show', 'templaza-framework'),
+                        0      => esc_html__('Hide', 'templaza-framework'),
+                        1      => esc_html__('Featured Only', 'templaza-framework'),
+                    )
+                ),
+                array(
                     'id'       => 'latest_post_order_by',
                     'type'     => 'select',
                     'title'    => esc_html__('Order By', 'templaza-framework'),
@@ -156,6 +166,30 @@ if(!class_exists('TemplazaFramework_ShortCode_Latest_Posts')){
 				'params'      => $fields
 			);
 		}
+
+        public function enqueue() {
+            if (!wp_script_is('templaza-shortcode-'.$this -> get_shortcode_name())) {
+                wp_enqueue_script(
+                    'templaza-shortcode-'.$this -> get_shortcode_name(),
+                    Functions::get_my_url() . '/shortcodes/'.$this -> get_shortcode_name()
+                    .'/'.$this -> get_shortcode_name().'.js',
+                    array( 'jquery', 'jquery-ui-tabs', 'wp-util', 'redux-js', TEMPLAZA_FRAMEWORK_NAME.'__js'),
+                    time(),
+                    'all'
+                );
+
+                $latest_posts  = array();
+                if (class_exists('TemPlazaFramework\Functions')) {
+                    $options = Functions::get_global_settings();
+
+                    if (isset($options['enable-featured-for-posttypes']) && !empty($options['enable-featured-for-posttypes'])) {
+                        $latest_posts['enable_featured_for_posttypes'] = $options['enable-featured-for-posttypes'];
+                    }
+                }
+                wp_localize_script('templaza-shortcode-'.$this -> get_shortcode_name(),
+                    'templaza_shortcode__latest_posts', $latest_posts);
+            }
+        }
 	}
 
 }
