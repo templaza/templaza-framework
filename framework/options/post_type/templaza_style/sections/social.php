@@ -69,6 +69,7 @@ Templaza_API::set_section('templaza_style',
                     'large'   => esc_html__('Large', 'templaza-framework'),
                     'collapse'   => esc_html__('Collapse', 'templaza-framework'),
                 ),
+                'select2'       => array( 'allowClear' => true ),
                 'placeholder'   => esc_html__('Inherit', 'templaza-framework'),
             ),
             array(

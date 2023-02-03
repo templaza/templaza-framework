@@ -166,6 +166,16 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'type'     => 'color_rgba',
                                         'title'    => esc_html__('Background Overlay', 'templaza-framework'),
                                     ),
+									array(
+                                        'id'       => 'background_overlay_top',
+                                        'type'     => 'color_rgba',
+                                        'title'    => esc_html__('Background Overlay Gradient Top', 'templaza-framework'),
+                                    ),
+									array(
+                                        'id'       => 'background_overlay_bottom',
+                                        'type'     => 'color_rgba',
+                                        'title'    => esc_html__('Background Overlay Gradient Bottom', 'templaza-framework'),
+                                    ),
                                     array(
                                         'id'         => 'border',
                                         'type'       => 'border',
