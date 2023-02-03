@@ -70,18 +70,9 @@
                }
             });
 
-            // if (settings.dropdownArrows) {
-            //    _megamenu.append('<span class="arrow" />');
-            // }
-
             _megamenu.each(function () {
-               // var _content = $(this).find(settings.contentClass);
                var _content = $(this).find(">" + settings.contentClass);
 
-               // console.log(_container);
-               // console.log(_content);
-               // console.log($(this));
-               // console.log(settings.contentClass);
                // var _width = _content.data('width');
                // if (typeof _width != 'undefined' && _width != '') {
                //    if (_width == 'container') {
@@ -107,11 +98,6 @@
                    ($(this).data("position") == "right" || $(this).data("position") == "left")){
                   return true;
                }
-
-               // console.log($(this));
-               // console.log(_container);
-               // console.log(_content);
-               // console.log(settings.contentClass);
 
                if($(this).data('position') == 'edge') {
                   var _leftoverflow = 0;
@@ -151,16 +137,6 @@
                         break;
                   }
 
-                  // if()
-               // var _left = _content.outerWidth()/2 - $(this).outerWidth()/2;
-               //    _content.css('left', -(_left));
-               //    _content.css('right', 'inherit');
-
-               // console.log("offsetleft: " + offsetleft);
-               // console.log("_content_w: " + _content.outerWidth());
-               // console.log("container_rightoverflow: " + _rightoverflow);
-               // console.log("container_leftoverflow: " + _leftoverflow);
-
                   if ((offsetleft + _content.outerWidth()) > _rightoverflow) {
                      var _left = _content.outerWidth() - (_rightoverflow - offsetleft);
                      if ($(this).data('position') == 'center' || $(this).data('position') == 'edge' || $(this).data('position') == 'full') {
@@ -184,16 +160,6 @@
                         _content.css('left', _left);
                         _content.css('right', 'inherit');
                      }
-
-                     //    var _left = ($(this).outerWidth() - _content.outerWidth()) /2;
-                     // console.log("_left: "+_left);
-                     // console.log("_right: "+_right);
-
-                     // var _right = (offsetleft - _leftoverflow);
-                     // if ($(this).data('position') == 'center'){
-                     //    var _left = ($(this).outerWidth() - _content.outerWidth()) /2;
-                     //    _content.css('left', _left);
-                     // }
                   }
 
                // }
@@ -203,7 +169,7 @@
 
          init();
 
-
+         // Recall init function when DOM element has changed
          var observering = function (_this) {
             var callback = function (mutationsList, observer) {
 				mutationsList.forEach(function(mutation) {
@@ -216,7 +182,11 @@
             observer.observe(_this, {attributes: true});
          };
 
-         observering($(this)[0]);
+         if($(this).hasClass("templaza-sticky-inner")) {
+            observering($(this).parent()[0]);
+         }else{
+            observering($(this)[0]);
+         }
 
          var openMe = function (_this) {
             // _this.addClass('open');
