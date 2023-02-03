@@ -20,7 +20,7 @@ if($ap_single_media){
     <?php
     if ((!empty($ap_video) && !empty($ap_gallery)) ||
         (empty($ap_video) && !empty($ap_gallery))) {
-        AP_Templates::load_my_layout('single.media.gallery-grid');
+        AP_Templates::load_my_layout('single.media.gallery-tiny');
     } elseif (!empty($ap_video) && empty($ap_gallery)) {
         AP_Templates::load_my_layout('single.media.video');
     } else {

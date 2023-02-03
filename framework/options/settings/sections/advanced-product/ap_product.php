@@ -280,7 +280,6 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'options'  => array(
                     'style1' => esc_html__('Style 1', 'templaza-framework'),
                     'style2' => esc_html__('Style 2', 'templaza-framework'),
-                    'style3' => esc_html__('Style 3', 'templaza-framework'),
                 ),
                 'default'  => 'style1',
             ),
