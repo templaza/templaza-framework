@@ -57,10 +57,10 @@ if(is_array($preloader_bgcolor) && isset($preloader_bgcolor['rgba'])) {
 
 $preloader_image        = isset($options['preloader-image'])?$options['preloader-image']:'';
 
-Templates::add_inline_style('#templaza-preloader {--tztheme-preloader-size: '.$preloader_size.';'
-    .'--tztheme-preloader-color: '.$preloader_color.';'
-    .'--tztheme-preloader-color-2: '.$preloader_color_2.';'
-    .'--tztheme-preloader-color-3: '.$preloader_color_3.';'
+Templates::add_inline_style('#templaza-preloader {'.($preloader_size?'--tztheme-preloader-size: '.$preloader_size.';':'')
+    .($preloader_color?'--tztheme-preloader-color: '.$preloader_color.';':'')
+    .($preloader_color_2?'--tztheme-preloader-color-2: '.$preloader_color_2.';':'')
+    .($preloader_color_3?'--tztheme-preloader-color-3: '.$preloader_color_3.';':'')
     .($preloader_bgcolor?'--tztheme-preloader-bgcolor: '.$preloader_bgcolor.';':'')
     .($preloader_image && !empty($preloader_image['background-image'])?'--tztheme-preloader-image: url('.$preloader_image['background-image'].');':'')
     .($preloader_image && !empty($preloader_image['background-repeat'])?'--tztheme-preloader-bg-repeat: '.$preloader_image['background-repeat'].';':'')
