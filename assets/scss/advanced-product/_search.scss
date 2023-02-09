@@ -20,6 +20,11 @@
 .advanced-product-search-form{
   .ap-search-item{
     margin-bottom: 30px;
+    &.field-keyword{
+      .search-field{
+        margin-top:0;
+      }
+    }
   }
   label.search-label{
     font-family: $tztheme-heading-font;

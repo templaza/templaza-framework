@@ -32,13 +32,12 @@ if($ap_layout == 'masonry'){
 }else{
     $grid_option = '';
 }
-
 ?>
 
 <?php
 if ( have_posts()) {
     ?>
-<div class="templaza-ap-archive-view uk-text-right" data-uk-switcher data-ap-archive-view="<?php echo $grid_view;?>">
+<div class="templaza-ap-archive-view uk-flex uk-flex-right uk-text-right" data-uk-switcher data-ap-archive-view="<?php echo $grid_view;?>">
     <span class="grid<?php echo $grid_view == 'grid'?' uk-active':'';?>" data-uk-icon="grid" data-ap-archive-view-item="grid"></span>
     <span class="list<?php echo $grid_view == 'list'?' uk-active':'';?>" data-uk-icon="list" data-ap-archive-view-item="list"></span>
 </div>

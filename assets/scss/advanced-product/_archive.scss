@@ -71,3 +71,70 @@
 .tz-loading{
   @include tz-loading(-5px,-10px,transparent);
 }
+.templaza-ap-archive-view{
+  margin-bottom:40px;
+  span{
+    cursor: pointer;
+    width:40px;
+    height:40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include border-radius(3px);
+    background:$tztheme-quote-bg;
+    @include transition($tztheme-transition-all);
+    &:hover,&.uk-active{
+      background:$tztheme-button_background;
+      color:$tztheme-button_text_color;
+    }
+    &:first-child{
+      margin-right:5px;
+    }
+  }
+}
+.ap-ribbon {
+  width: 140px;
+  height: 140px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  .ap-ribbon-content{
+    left: -25px;
+    top: 30px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    display: block;
+    width: 225px;
+    padding: 8px 0;
+    background-color: $tztheme-global-color;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight:bold;
+  }
+}
+.ap-archive-btn-action{
+  margin-bottom:20px;
+  margin-right:15px;
+  .uk-icon-button{
+    width:40px;
+    height:40px;
+    background:#fff;
+    color:$tztheme-heading-color;
+    @include border-radius(0);
+    margin:0 4px;
+    @include transition($tztheme-transition-all);
+    &:hover{
+      background:$tztheme-button_background;
+      color:$tztheme-button_text_color;
+    }
+    i{
+      font-size:0.8rem;
+    }
+  }
+}

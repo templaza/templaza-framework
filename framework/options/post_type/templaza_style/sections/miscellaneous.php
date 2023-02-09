@@ -372,7 +372,7 @@ Templaza_API::set_section('templaza_style',
                 'type'        => 'text',
                 'title'       => __( 'Call To Action', 'templaza-framework' ),
                 'subtitle'    => __( 'Enter text to dislay on Call To Action Button.', 'templaza-framework' ),
-                'default'     => 'Go Home',
+                'default'     => '',
                 'placeholder'     => 'Go Home',
             ),
             array(

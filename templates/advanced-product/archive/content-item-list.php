@@ -35,36 +35,42 @@ if(isset($args['ap_class'])){
 
 while (have_posts()): the_post();
     ?>
-    <div class="ap-item ap-item-list <?php echo esc_attr($ap_class);?>">
+    <div class="ap-item  ap-item-style5 ap-item-list <?php echo esc_attr($ap_class);?>">
         <div class="ap-inner">
-            <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" data-uk-grid>
-                <div class="uk-card-media-left uk-cover-container">
+            <div class="uk-card uk-child-width-1-2@s uk-margin" data-uk-grid>
+                <div class="uk-card-media-left uk-cover-container uk-width-2-5">
+                    <?php AP_Templates::load_my_layout('archive.badges'); ?>
+                    <?php the_post_thumbnail($thumbnail,['data-uk-cover' => '']);?>
                     <a href="<?php the_permalink(); ?>">
-                        <?php the_post_thumbnail($thumbnail);?>
                     </a>
-                    <canvas width="600" height="400"></canvas>
                 </div>
-                <div class="ap-info">
-                    <div class="uk-card-body">
+                <div class="ap-info uk-width-3-5">
+                    <div class="ap-info-inner ap-info-top">
                         <h2 class="ap-title">
                             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                         </h2>
+                    </div>
+                    <div class="ap-info-inner ap-info-desc">
+                        <?php if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
+                            <p><?php echo substr(strip_tags(get_the_excerpt()), 0, $ap_desc_limit); ?></p>
+                        <?php } else {
+                            the_excerpt();
+                        }
+                        ?>
+                        <?php
+                        if($ap_author){
+                            AP_Templates::load_my_layout('archive.author.style1');
+                        }
+                        ?>
+                    </div>
+                    <div class="ap-info-inner ap">
+                        <?php AP_Templates::load_my_layout('archive.custom-fields-style5'); ?>
+                    </div>
+                    <div class="ap-info-inner  ap-info-bottom uk-flex uk-flex-between uk-flex-middle">
                         <?php AP_Templates::load_my_layout('archive.price');?>
-                        <div class="ap-info-desc">
-                            <?php if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
-                                <p><?php echo substr(strip_tags(get_the_excerpt()), 0, $ap_desc_limit); ?></p>
-                            <?php } else {
-                                the_excerpt();
-                            }
-                            if($ap_author){
-                                AP_Templates::load_my_layout('archive.author.style1');
-                            }
-                            ?>
+                        <div class="ap-readmore-box">
+                            <a href="<?php the_permalink(); ?>" class="templaza-btn"><?php esc_html_e('View more','templaza-framework');?></a>
                         </div>
-                        <div class="ap-info-inner  ap-info-bottom">
-                            <?php AP_Templates::load_my_layout('archive.custom-fields'); ?>
-                        </div>
-
                     </div>
                 </div>
             </div>

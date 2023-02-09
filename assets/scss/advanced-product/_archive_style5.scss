@@ -64,7 +64,7 @@
       &.ap-specification-style5{
         .ap-spec-item{
           position: relative;
-          padding: 5px 15px;
+          padding: 2px 15px;
           color:$tztheme-postmeta;
           font-size:0.875em;
           &:first-child{
@@ -73,6 +73,11 @@
           .ap-field-label{
             i{
               padding-right:10px;
+              color:$tztheme-global-color;
+            }
+            svg{
+              padding-right:10px;
+              fill:$tztheme-global-color;
             }
           }
           .ap-spec-value{
