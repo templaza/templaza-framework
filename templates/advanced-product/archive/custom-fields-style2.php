@@ -21,8 +21,9 @@ if(!empty($fields)){
     <?php foreach($fields as $field){
         $f_attr             = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);
         $f_value            = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name']):null;
-        $f_icon     = isset($f_attr['icon'])?$f_attr['icon']:'';
-        $show_icon  = get_field('ap_show_archive_custom_field_icon', 'option');
+        $f_icon         = isset($f_attr['icon'])?$f_attr['icon']:'';
+        $show_icon      = get_field('ap_show_archive_custom_field_icon', 'option');
+        $f_icon_image   = isset($f_attr['icon_image']) && !empty($f_attr['icon_image'])?$f_attr['icon_image']:'';
         if($f_value){
             ?>
             <div class="ap-spec-item" >
@@ -44,7 +45,10 @@ if(!empty($fields)){
                                 ?>
                                 <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
                                 <?php
-                            }else {
+                            }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
+                                echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
+                                    array('data-uk-svg' => ''));
+                            }else{
                                 ?>
                                 <i class="<?php echo $f_icon['icon']; ?>"></i>
                                 <?php
