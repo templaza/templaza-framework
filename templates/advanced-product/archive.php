@@ -32,28 +32,34 @@ if($ap_layout == 'masonry'){
 }else{
     $grid_option = '';
 }
+$post_count = $GLOBALS['wp_query']->found_posts;
 ?>
 
 <?php
 if ( have_posts()) {
     ?>
-    <div class="uk-flex uk-flex-middle uk-flex-right">
-    <div class="templaza-ap-archive-sort uk-flex uk-flex-middle">
-        <label class="uk-width-auto"><?php echo esc_html__('Sort By', 'templaza-framework')?></label>
-        <div class="uk-form-controls">
-            <select>
-                <option value="date_high"><?php echo esc_html__('Date: Newest First', 'templaza-framework')?></option>
-                <option value="date_low"><?php echo esc_html__('Date: Oldest First', 'templaza-framework')?></option>
-                <option value="title_low"><?php echo esc_html__('Title: A - Z', 'templaza-framework')?></option>
-                <option value="title_high"><?php echo esc_html__('Title: Z - A', 'templaza-framework')?></option>
-                <option value="price_high"><?php echo esc_html__('Price: High To Low', 'templaza-framework')?></option>
-                <option value="price_low"><?php echo esc_html__('Price: Low To High', 'templaza-framework')?></option>
-            </select>
-        </div>
+<div class="uk-flex uk-flex-middle uk-flex-between templaza-ap-archive-view">
+    <div class="uk-flex uk-flex-left ap-number-product">
+        <h3 class="uk-margin-remove"><span><?php echo esc_html($post_count);?></span> <?php esc_html_e(' Products available','templaza-framework');?></h3>
     </div>
-    <div class="templaza-ap-archive-view uk-flex uk-flex-right uk-text-right" data-uk-switcher data-ap-archive-view="<?php echo $grid_view;?>">
-        <span class="grid<?php echo $grid_view == 'grid'?' uk-active':'';?>" data-uk-icon="grid" data-ap-archive-view-item="grid"></span>
-        <span class="list<?php echo $grid_view == 'list'?' uk-active':'';?>" data-uk-icon="list" data-ap-archive-view-item="list"></span>
+    <div class="uk-flex uk-flex-middle">
+        <div class="templaza-ap-archive-sort uk-flex uk-flex-middle">
+            <label class="uk-width-auto"><?php echo esc_html__('Sort By', 'templaza-framework')?></label>
+            <div class="uk-form-controls">
+                <select>
+                    <option value="date_high"><?php echo esc_html__('Date: Newest First', 'templaza-framework')?></option>
+                    <option value="date_low"><?php echo esc_html__('Date: Oldest First', 'templaza-framework')?></option>
+                    <option value="title_low"><?php echo esc_html__('Title: A - Z', 'templaza-framework')?></option>
+                    <option value="title_high"><?php echo esc_html__('Title: Z - A', 'templaza-framework')?></option>
+                    <option value="price_high"><?php echo esc_html__('Price: High To Low', 'templaza-framework')?></option>
+                    <option value="price_low"><?php echo esc_html__('Price: Low To High', 'templaza-framework')?></option>
+                </select>
+            </div>
+        </div>
+        <div class="ap-switcher-wrap uk-flex uk-flex-right uk-text-right" data-uk-switcher data-ap-archive-view="<?php echo $grid_view;?>">
+            <span class="switcher_btn grid<?php echo $grid_view == 'grid'?' uk-active':'';?>" data-uk-icon="grid" data-ap-archive-view-item="grid"></span>
+            <span class="switcher_btn list<?php echo $grid_view == 'list'?' uk-active':'';?>" data-uk-icon="list" data-ap-archive-view-item="list"></span>
+        </div>
     </div>
 </div>
 <div class="templaza-ap-archive templaza-ap-grid
