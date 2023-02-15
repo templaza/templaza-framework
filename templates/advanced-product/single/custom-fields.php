@@ -17,7 +17,7 @@ if(isset($_GET['customfield_layout'])){
 }else {
     $ap_single_customfield_layout = isset($templaza_options['ap_product-single-customfield-style']) ? $templaza_options['ap_product-single-customfield-style'] : 'style1';
 }
-$ap_content_group     = isset($templaza_options['ap_product-single-group-content'])?$templaza_options['ap_product-single-group-content']:'';
+$ap_content_group     = isset($templaza_options['ap_product-single-group-content'])?$templaza_options['ap_product-single-group-content']:array();
 $widget_heading_style       = isset($templaza_options['widget_box_heading_style'])?$templaza_options['widget_box_heading_style']:'';
 $product_id     = get_the_ID();
 
@@ -86,7 +86,9 @@ if($fields_wgs = AP_Custom_Field_Helper::get_fields_without_group_field()){
                 <h3 class="widget-title is-style-templaza-heading-style1">
                     <span><?php esc_html_e('Specifications', 'templaza-framework'); ?></span>
                 </h3>
-                <div class="ap-group-content"><?php echo wp_kses($html,'post'); ?></div>
+                <div class="ap-group-content<?php echo ($ap_single_customfield_layout == 'style2')?' uk-grid-small':'';
+                ?>"<?php echo ($ap_single_customfield_layout == 'style2')?' data-uk-grid':'';?>><?php
+                    echo wp_kses($html,'post'); ?></div>
             </div>
         </div>
         <?php

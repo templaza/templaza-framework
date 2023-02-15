@@ -167,7 +167,7 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                             </div>
                         </div>
                     </div>
-                    <div class="ap-single-side-box widget ">
+                    <div class="widget">
                         <?php
                         AP_Templates::load_my_layout('single.custom-fields');
                         ?>

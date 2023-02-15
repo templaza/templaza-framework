@@ -13,13 +13,15 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
 
     $f_value    = get_field($acf_f['name'], $product_id);
     if(!empty($f_value)){
-        if($acf_f['type'] !='taxonomy'){
+        $html   = apply_filters('advanced-product/field/value_html/type='.$acf_f['type'], '', $f_value, $acf_f, $field);
     ?>
     <div class="uk-grid-collapse ap-custom-fields-style3 " data-uk-grid>
         <div class="uk-width-expand ap-field-label"><?php echo esc_html($acf_f['label']); ?></div>
         <div class="field-value ap-field-value">
             <?php
-            if($acf_f['type'] == 'file'){
+            if(!empty($html)){
+                echo $html;
+            }elseif($acf_f['type'] == 'file'){
                 $file_url   = '';
                 if(is_array($f_value)){
                     $file_url   = $f_value['url'];
@@ -34,10 +36,9 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                 <?php
             }else{
                 ?><?php echo esc_html(the_field($acf_f['name'], $product_id)); ?>
-            <?php } ?>
+        <?php } ?>
         </div>
     </div>
     <?php
-    }
     }
 } ?>
