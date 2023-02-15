@@ -5,6 +5,7 @@ defined('ADVANCED_PRODUCT') or exit();
 use Advanced_Product\AP_Templates;
 use Advanced_Product\AP_Functions;
 use Advanced_Product\Helper\AP_Product_Helper;
+use Advanced_Product\Helper\AP_Custom_Field_Helper;
 use TemPlazaFramework\Functions;
 if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
     $templaza_options = array();
@@ -16,6 +17,7 @@ $ap_office_price           = isset($templaza_options['ap_product-office-price'])
 $ap_office_price_label     = isset($templaza_options['ap_product-office-price-label'])?$templaza_options['ap_product-office-price-label']:'MAKE AN OFFICE PRICE';
 $ap_office_price_form      = isset($templaza_options['ap_product-office-price-form'])?$templaza_options['ap_product-office-price-form']:'';
 $ap_office_form_custom     = isset($templaza_options['ap_product-office-price-form-custom'])?$templaza_options['ap_product-office-price-form-custom']:'';
+$ap_content_group     = isset($templaza_options['ap_product-single-group-content'])?$templaza_options['ap_product-single-group-content']:'';
 $ap_vendor_contact     = isset($templaza_options['ap_product-vendor-contact'])?$templaza_options['ap_product-vendor-contact']:'';
 $show_compare_button= get_field('ap_show_archive_compare_button', 'option');
 $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
@@ -101,7 +103,15 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                 </div>
                 <?php AP_Templates::load_my_layout('single.meta');?>
 
-                <div class="ap-single-box ap-single-content"><?php the_content(); ?></div>
+                <div class="ap-single-box ap-single-content">
+                    <?php
+                    the_content();
+                    if($ap_content_group !=''){
+                        AP_Templates::load_my_layout('single.group-fields-content');
+                    }
+                    ?>
+
+                </div>
 
                 <div class="templaza-single-comment ap-single-box">
                     <?php comments_template('', true); ?>
