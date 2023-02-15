@@ -32,7 +32,7 @@ if(!empty($fields)){
             ?>
             <div class="ap-spec-item" >
                 <span class="ap-field-label"><?php
-                    if( !empty($f_icon) && $show_icon){
+                    if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
                         if($f_icon['type'] == 'uikit-icon'){
                             ?>
                             <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
@@ -40,7 +40,7 @@ if(!empty($fields)){
                         }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
                             echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
                                 array('data-uk-svg' => ''));
-                        }else{
+                        }elseif(!empty($f_icon['icon'])){
                             ?>
                             <i class="<?php echo $f_icon['icon']; ?>"></i>
                             <?php

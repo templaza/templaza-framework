@@ -31,7 +31,7 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                 <div class="ap-field-value">
                     <a href="<?php echo esc_url($file_url); ?>" download>
                         <?php
-                        if( !empty($f_icon)){
+                        if( !empty($f_icon) || !empty($f_icon_image)){
                             ?>
                             <span>
                             <?php
@@ -42,7 +42,7 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                             }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
                                 echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
                                     array('data-uk-svg' => ''));
-                            }else{
+                            }elseif(!empty($f_icon['icon'])){
                                 ?>
                                 <i class="<?php echo $f_icon['icon']; ?>"></i>
                                 <?php
