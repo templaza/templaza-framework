@@ -468,7 +468,8 @@ if(!class_exists('TemPlazaFramework\Configuration')){
             require_once ( ABSPATH . '/wp-admin/includes/file.php' );
             global $wp_filesystem;
             WP_Filesystem();
-            $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$file_name.'.json';
+            $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$this -> get_post_type()
+                .'/'.$file_name.'.json';
 
             if(file_exists($file)){
                 $wp_filesystem -> delete($file);
