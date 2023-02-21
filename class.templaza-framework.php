@@ -559,6 +559,13 @@ class TemPlazaFrameWork{
 
             $pexists    = \get_posts($args);
             if(is_wp_error($pexists) || !empty($pexists)){
+                if(!empty($pexists)){
+                    $mkey       = '_' . $ptype . '__theme';
+                    $hthemes    = get_post_meta($pexists[0] -> ID, $mkey);
+                    if(!$hthemes || !in_array(get_template(), $hthemes)) {
+                        add_post_meta($pexists[0]->ID, $mkey, get_template());
+                    }
+                }
                 continue;
             }
 
