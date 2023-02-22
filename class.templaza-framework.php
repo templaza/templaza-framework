@@ -592,7 +592,12 @@ class TemPlazaFrameWork{
                 update_post_meta($post_id, '__home', 1);
 
                 // Copy json file
-                $source_file    = TEMPLAZA_FRAMEWORK_CORE_PATH.'/data-import/'.$ptype.'.json';
+                $source_file    = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/'.$ptype.'/'.$postdata['post_name'].'.json';
+
+                if(!file_exists($source_file)) {
+                    $source_file = TEMPLAZA_FRAMEWORK_CORE_PATH . '/data-import/' . $ptype . '.json';
+                }
+
                 $dest_file      = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$ptype;
                 if(!is_dir($dest_file)){
                     require_once(ABSPATH . '/wp-admin/includes/file.php');
