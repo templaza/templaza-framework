@@ -26,8 +26,8 @@ if ($enable_contact) {
     $contact_login_icon       = $enable_contact_login && isset($options['contact-login-icon'])?$options['contact-login-icon']:'';
 
     $enable_contact_register  = isset($options['enable-contact-register'])?filter_var($options['enable-contact-register'], FILTER_VALIDATE_BOOLEAN):true;
-    $contact_register         = $enable_contact_login && isset($options['contact-register'])?$options['contact-register']:'';
-    $contact_register_icon    = $enable_contact_login && isset($options['contact-register-icon'])?$options['contact-register-icon']:'';
+    $contact_register         = $enable_contact_register && isset($options['contact-register'])?$options['contact-register']:'';
+    $contact_register_icon    = $enable_contact_register && isset($options['contact-register-icon'])?$options['contact-register-icon']:'';
 
 
 }
