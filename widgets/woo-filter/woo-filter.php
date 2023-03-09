@@ -112,7 +112,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
             echo '<div class="products-filter__activated">';
             $this->activated_filters( $instance['filter'] );
             echo '</div>';
-
+            echo '<div class="uk-position-top-right templaza-filter-closed uk-padding-small uk-hidden@m"><i class="fas fa-times"></i> </div>';
             if ( ! empty( $instance['filter'] ) ) {
                 echo '<form action="' . esc_url( $form_action ) . '" method="get" class="' . esc_attr( implode( ' ', $classes ) ) . '" data-settings="' . esc_attr( json_encode( $settings ) ) . '">';
                 echo '<div class="templaza_woo_filters filters">';

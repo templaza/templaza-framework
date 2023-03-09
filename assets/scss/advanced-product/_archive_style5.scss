@@ -62,22 +62,31 @@
     }
     .ap-specification{
       &.ap-specification-style5{
+        margin-left: -10px;
         .ap-spec-item{
           position: relative;
-          padding: 2px 15px;
+          padding: 3px 10px;
           color:$tztheme-postmeta;
           font-size:0.875em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
           &:first-child{
             background:transparent;
           }
           .ap-field-label{
             i{
-              padding-right:10px;
+              margin-right:10px;
               color:$tztheme-global-color;
+              svg{
+                padding-right:0;
+                margin-right:0;
+              }
             }
             svg{
-              padding-right:10px;
+              margin-right:10px;
               fill:$tztheme-global-color;
+              width:20px;
             }
           }
           .ap-spec-value{
@@ -91,6 +100,46 @@
   &:hover{
     .ap-inner{
       @include transition($tztheme-transition-all);
+    }
+  }
+}
+@media screen and (max-width: 1199.99px) {
+  .ap-item.ap-item-style5{
+    .ap-inner{
+      .ap-specification.ap-specification-style5{
+        .ap-spec-item{
+          .ap-field-label{
+            i, svg{
+              margin-right:3px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 959.99px) {
+  .ap-item.ap-item-style5{
+    .ap-inner{
+      .ap-specification.ap-specification-style5{
+        margin-left:-5px;
+        .ap-spec-item{
+          padding:3px 5px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 480px) {
+  .ap-item.ap-item-style5{
+    .ap-inner{
+      .ap-specification.ap-specification-style5{
+        margin-left:-8px;
+        .ap-spec-item{
+          padding:3px 8px;
+        }
+      }
     }
   }
 }

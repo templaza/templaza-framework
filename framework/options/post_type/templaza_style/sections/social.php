@@ -71,6 +71,7 @@ Templaza_API::set_section('templaza_style',
                 ),
                 'select2'       => array( 'allowClear' => true ),
                 'placeholder'   => esc_html__('Inherit', 'templaza-framework'),
+                'default'       => '',
             ),
             array(
                 'id'       => 'social',

@@ -38,11 +38,14 @@ $post_count = $GLOBALS['wp_query']->found_posts;
 <?php
 if ( have_posts()) {
     ?>
-<div class="uk-flex uk-flex-middle uk-flex-between templaza-ap-archive-view">
-    <div class="uk-flex uk-flex-left ap-number-product">
+    <div class="templaza-ap-product-filter uk-margin-bottom uk-flex uk-flex-right uk-hidden@m uk-text-right  uk-position-z-index" data-uk-sticky="start: 20vh; end: !.templaza-content_area; offset: 30vh">
+        <span class="ap-filter-btn"><i class="fas fa-sliders-h"></i><?php esc_html_e('Filter','templaza-framework');?></span>
+    </div>
+<div class="uk-flex uk-grid-collapse uk-flex-middle uk-flex-between templaza-ap-archive-view" data-uk-grid>
+    <div class="uk-width-1-3@s uk-flex ap-number-product">
         <h3 class="uk-margin-remove"><span><?php echo esc_html($post_count);?></span> <?php esc_html_e(' Products available','templaza-framework');?></h3>
     </div>
-    <div class="uk-flex uk-flex-middle">
+    <div class="uk-width-2-3@s uk-flex uk-flex-middle uk-flex-between uk-flex-right@s">
         <div class="templaza-ap-archive-sort uk-flex uk-flex-middle">
             <label class="uk-width-auto"><?php echo esc_html__('Sort By', 'templaza-framework')?></label>
             <div class="uk-form-controls">
@@ -58,7 +61,7 @@ if ( have_posts()) {
         </div>
         <div class="ap-switcher-wrap uk-flex uk-flex-right uk-text-right" data-uk-switcher data-ap-archive-view="<?php echo $grid_view;?>">
             <span class="switcher_btn grid<?php echo $grid_view == 'grid'?' uk-active':'';?>" data-uk-icon="grid" data-ap-archive-view-item="grid"></span>
-            <span class="switcher_btn list<?php echo $grid_view == 'list'?' uk-active':'';?>" data-uk-icon="list" data-ap-archive-view-item="list"></span>
+            <span class="switcher_btn uk-visible@s list<?php echo $grid_view == 'list'?' uk-active':'';?>" data-uk-icon="list" data-ap-archive-view-item="list"></span>
         </div>
     </div>
 </div>

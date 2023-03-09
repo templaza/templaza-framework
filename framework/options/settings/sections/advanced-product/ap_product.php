@@ -32,6 +32,8 @@ if(function_exists('wpforms')){
 }
 $arr_wpform['custom'] = esc_html__('Custom','templaza-framework');
 $arr_fields = array();
+$arr_groups = array();
+$arr_taxs = array();
 if(is_plugin_active( 'advanced-product/advanced-product.php' )) {
     $args = array(
         'numberposts' => -1,
@@ -45,6 +47,24 @@ if(is_plugin_active( 'advanced-product/advanced-product.php' )) {
         }
         wp_reset_postdata();
     }
+    $terms = get_terms( array(
+        'taxonomy' => 'ap_group_field',
+        'hide_empty' => false,
+    ) );
+    $gfields_assigned   = AP_Custom_Field_Helper::get_group_fields_by_product();
+    if($terms && count($terms)) {
+        foreach ($terms as $group) {
+            $arr_groups[$group->slug] = $group->name;
+        }
+    }
+
+    $taxonomies = get_object_taxonomies('ap_product');
+    if($taxonomies){
+        foreach ($taxonomies as $tax) {
+            $arr_taxs[$tax] = $tax;
+        }
+    }
+
 }
 Templaza_API::set_section('settings',
     array(
@@ -305,6 +325,19 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'default'  => true,
             ),
             array(
+                'id'       => 'ap_product-single-share',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Social Share', 'templaza-framework' ),
+                'default'  => false,
+            ),
+            array(
+                'id'       => 'ap_product-single-share-label',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Share Label', 'templaza-framework' ),
+                'default'  => esc_html__( 'Share This', 'templaza-framework' ),
+                'required' => array('ap_product-single-share', '=' , true),
+            ),
+            array(
                 'id'       => 'ap_product-office-price-label',
                 'type'     => 'text',
                 'title'    => esc_html__( 'Office Price Label', 'templaza-framework' ),
@@ -317,6 +350,32 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'title'    => esc_html__( 'Office Price Form', 'templaza-framework' ),
                 'options'  => $arr_wpform,
                 'required' => array('ap_product-office-price', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-single-group-content',
+                'type'     => 'select',
+                'sortable' => true,
+                'multi'     => true,
+                'title'    => esc_html__( 'Choose Group Fields show under content', 'templaza-framework' ),
+                'options'  => $arr_groups,
+                'required' => array('ap_product-single-layout', '=' , 'style1'),
+            ),
+            array(
+                'id'       => 'ap_product-single-group-taxonomy',
+                'type'     => 'select',
+                'multi'     => false,
+                'title'    => esc_html__( 'Show taxonomy in group', 'templaza-framework' ),
+                'options'  => $arr_groups,
+                'required' => array('ap_product-single-layout', '=' , 'style1'),
+            ),
+            array(
+                'id'       => 'ap_product-single-taxonomy-show',
+                'type'     => 'select',
+                'sortable' => true,
+                'multi'     => true,
+                'title'    => esc_html__( 'Choose taxonomy display on single', 'templaza-framework' ),
+                'options'  => $arr_taxs,
+                'required' => array('ap_product-single-layout', '=' , 'style1'),
             ),
             array(
                 'id'       => 'ap_product-single-customfield-style',
@@ -504,6 +563,98 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'max'      => '50',
                 'required' => array('ap_product-related', '=' , true),
             ),
+        )
+    )
+);
+Templaza_API::set_subsection('settings','ap_product-page',
+    array(
+        'title'      => esc_html__( 'Advanced Product Badges', 'templaza-framework' ),
+        'id'         => 'ap_product-single-badges',
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'ap_product-badges',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Badges', 'templaza-framework' ),
+                'default'  => true,
+            ),
+            array(
+                'id'       => 'ap_product-sale-label',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Sale Label', 'templaza-framework' ),
+                'default'  => esc_html__( 'For Sale', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-sale-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Sale Color', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-sale-bg-color',
+                'type'     => 'background',
+                'title'    => __( 'Sale Background Color', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-rent-label',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Rent Label', 'templaza-framework' ),
+                'default'  => esc_html__( 'For Rent', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-rent-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Rent Color', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-rent-bg-color',
+                'type'     => 'background',
+                'title'    => __( 'Rent Background Color', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-sale-rent-label',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Sale & Rent Label', 'templaza-framework' ),
+                'default'  => esc_html__( 'Sale / Rent', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+
+            array(
+                'id'       => 'ap_product-sale-rent-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Sale & Rent Color', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-sale-rent-bg-color',
+                'type'     => 'background',
+                'title'    => __( 'Sale & Rent Background Color', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+
+        )
+    )
+);
+Templaza_API::set_subsection('settings','ap_product-page',
+    array(
+        'title'      => esc_html__( 'Advanced Product Quickview', 'templaza-framework' ),
+        'id'         => 'ap_product-quickview',
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'ap_product-quickview-group',
+                'type'     => 'select',
+                'sortable' => true,
+                'multi'     => true,
+                'title'    => esc_html__( 'Choose Group Fields show in Quickview', 'templaza-framework' ),
+                'options'  => $arr_groups,
+            ),
+
         )
     )
 );

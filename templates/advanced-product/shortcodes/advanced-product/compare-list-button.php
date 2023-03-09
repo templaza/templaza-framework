@@ -17,7 +17,8 @@ $has_compare    = $compare_count?true:false;
         <span class="js-ap-text"><?php _e('Compare list', 'templaza-framework'); ?></span>
         <span class="uk-badge uk-background-default uk-text-emphasis ap-compare-count" data-ap-compare-count><?php echo $compare_count; ?></span>
     </a>
-    <span class="ap-compare-close">
+    <span class="ap-compare-close uk-position-top-right">
         <i class="fas fa-times"></i>
+        <i class="fas fa-plus"></i>
     </span>
 </div>

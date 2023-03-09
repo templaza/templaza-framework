@@ -76,6 +76,11 @@
       padding:35px 30px;
       margin-bottom: 30px;
     }
+    .ap-group{
+      ~ .ap-group{
+        margin-top: 40px;
+      }
+    }
     .field-value{
       color:$tztheme-heading-color;
       font-weight:600;
@@ -102,11 +107,135 @@
           &[type="text"],
           &[type="email"]
           {
-            height:$tz-basic-input-height !important;
+            height:$tztheme-input-height !important;
           }
         }
         button{
-          height:$tz-basic-input-height !important;
+          height:$tztheme-input-height !important;
+        }
+      }
+    }
+  }
+  .ap-content-group-scroll{
+    border-bottom:1px solid $tztheme-border-color;
+    display:flex;
+    margin-bottom:50px;
+    .ap-scroll-item{
+      padding:15px 20px;
+      position:relative;
+      font-weight:700;
+      color:$tztheme-heading-color;
+      &:after{
+        content:"";
+        position:absolute;
+        left:0;
+        bottom:-1px;
+        width:100%;
+        height:1px;
+        background:$tztheme-border-color;
+        @include transition($tztheme-transition-all);
+      }
+      &:hover{
+        color:$tztheme-global-color;
+        &:after{
+          background:$tztheme-global-color;
+        }
+      }
+    }
+    &:before{
+      content:"";
+      position:absolute;
+      left:-100%;
+      top:0;
+      width:auto;
+      bottom:0;
+      right:-100%;
+      background:#fff;
+      border-bottom:1px solid $tztheme-border-color;
+      opacity:0;
+    }
+    .uk-active{
+      .ap-scroll-item{
+        color:$tztheme-global-color;
+        &:after{
+          background:$tztheme-global-color;
+        }
+      }
+    }
+    &.uk-sticky{
+      &.uk-active{
+        border:none;
+        z-index: 999;
+        &:before{
+          opacity:1;
+        }
+        .uk-active{
+          a{
+            background:$tztheme-button_background;
+            color:$tztheme-button_text_color;
+            @include transition($tztheme-transition-all);
+          }
+        }
+        .ap-scroll-item{
+          &:after{
+            display:none;
+          }
+          &:first-child{
+            padding-left: 20px;
+          }
+          &:hover{
+            background:$tztheme-button_background;
+            color:$tztheme-button_text_color;
+          }
+        }
+      }
+    }
+  }
+  .ap-single-box{
+    &.ap-group{
+      .ap-single-field-content{
+        i{
+          margin-right:5px;
+          color:$tztheme-global-color;
+        }
+        svg{
+          fill:$tztheme-global-color;
+          width:30px;
+          margin-right:20px;
+        }
+      }
+    }
+  }
+  .ap-custom-fields-style3{
+    border-bottom:1px solid $tztheme-border-color;
+    padding:16px 0;
+  }
+  .ap-custom-fields-style1{
+
+  }
+  .ap-custom-fields-style2{
+    &:first-child{
+      padding-top:0;
+    }
+    .ap-field-label{
+      font-weight:400;
+    }
+    .ap-field-value{
+      font-size:1.2em;
+      font-weight:700;
+    }
+  }
+  .ap-single-button-wrap{
+    .ap-share{
+      cursor: pointer;
+      .ap-share-item{
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        text-align: center;
+        a{
+          padding:5px;
         }
       }
     }
@@ -114,16 +243,16 @@
 }
 .ap-modal{
   button.uk-close{
-    color:$tz-basic-body-color !important;
+    color:$tztheme-content-color !important;
   }
   .wpforms-container{
     margin-bottom: 10px;
     form{
       label{
-        font-family: $tz-basic-heading-font !important;
+        font-family: $tztheme-heading-font !important;
         font-size:1em !important;
         font-weight:600;
-        color:$tz-basic-heading-color !important;
+        color:$tztheme-heading-color !important;
       }
       input{
         &[type="text"],
@@ -156,6 +285,42 @@
   .item-video{
     iframe{
       width:100%;
+    }
+  }
+}
+@media (max-width: 639.9px) {
+  div.templaza-ap-single{
+    .ap-single-button-wrap{
+      display:block;
+      .ap-btn{
+        width:49%;
+        float:left;
+        &.ap-share{
+          width:100%;
+          margin:10px 0 40px 0 !important;
+        }
+        &.ap-register-form{
+          margin-left:2% !important;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 480px) {
+  div.templaza-ap-single{
+    .ap-single-button-wrap{
+      display:block;
+      .ap-btn{
+        width:100%;
+        &.ap-share{
+          width:100%;
+          margin:10px 0 40px 0 !important;
+        }
+        &.ap-register-form{
+          margin-top:10px !important;
+          margin-left:0 !important;
+        }
+      }
     }
   }
 }

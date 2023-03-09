@@ -13,13 +13,13 @@ $price          = get_field('ap_price', get_the_ID());
 $rental         = get_field('ap_rental_price', get_the_ID());
 $rental_unit    = get_field('ap_rental_unit', get_the_ID());
 $product_type   = get_field('ap_product_type', get_the_ID());
+$price_notice_value = get_field('price-notice', get_the_ID());
 
 $show_price         = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price');
 $show_price_msrp    = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price_msrp');
 $show_price_notice  = AP_Custom_Field_Helper::get_field_display_flag('show_in_listing', 'unit-price');
 $show_price_rental  = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_rental_price');
 $f_value            = get_field('unit-price', get_the_ID());
-
 if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $show_price) {
     ?>
     <div class="ap-price-box">
@@ -31,13 +31,11 @@ if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $sh
             $html .= sprintf('<span class="ap-price-msrp"> %s  %s </span>',
                 esc_html__('MSRP:', 'templaza-framework'), AP_Helper::format_price($msrp));
         }
-        ?>
-        <?php
         echo wp_kses($html,'post');
+        if(!empty($price_notice_value)){
         ?>
-        <?php if(!empty($f_value)){ ?>
         <span class="meta">
-            <?php echo esc_html($f_value);?>
+            <?php echo esc_html($price_notice_value);?>
         </span>
         <?php } ?>
     </div>
@@ -54,7 +52,7 @@ if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $sh
         echo wp_kses($html,'post');
         ?>
         <?php if(!empty($rental_unit)){ ?>
-        <span class="meta ap-unit uk-display-inline-block">
+        <span class="meta ap-unit">
             <?php echo ' / '.esc_html($rental_unit);?>
         </span>
         <?php } ?>

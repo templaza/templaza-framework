@@ -31,7 +31,7 @@ $pid    = get_the_ID();
 
 ?>
     <div class="ap-item ap-item-style5 <?php echo esc_attr($ap_class);?>">
-        <div class="ap-inner ">
+        <div class="ap-inner">
             <?php AP_Templates::load_my_layout('archive.badges'); ?>
             <?php AP_Templates::load_my_layout('archive.media'); ?>
             <div class="ap-info">

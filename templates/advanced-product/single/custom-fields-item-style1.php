@@ -14,7 +14,7 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
     $f_value    = get_field($acf_f['name'], $product_id);
     if(!empty($f_value)){
     ?>
-    <div class="uk-grid-small" data-uk-grid>
+    <div class="uk-grid-small ap-custom-fields-style2" data-uk-grid>
         <div class="uk-width-expand" data-uk-leader><?php echo esc_html($acf_f['label']); ?></div>
         <div class="field-value">
             <?php

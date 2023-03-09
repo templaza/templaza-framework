@@ -18,10 +18,8 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
     $templaza_options = Functions::get_theme_options();
 }
 $price = get_field('ap_price', get_the_ID());
-$show_compare_button= get_field('ap_show_archive_compare_button', 'option');
-$show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
-$show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
 $thumbnail       = isset($templaza_options['ap_product-thumbnail-size'])?$templaza_options['ap_product-thumbnail-size']:'large';
+
 if(isset($args['show_author'])){
     $ap_author = isset($args['show_author'])?filter_var($args['show_author'], FILTER_VALIDATE_BOOLEAN):false;
 }else{
@@ -38,13 +36,15 @@ while (have_posts()): the_post();
     <div class="ap-item  ap-item-style5 ap-item-list <?php echo esc_attr($ap_class);?>">
         <div class="ap-inner">
             <div class="uk-card uk-child-width-1-2@s uk-margin" data-uk-grid>
-                <div class="uk-card-media-left uk-cover-container uk-width-2-5">
+                <div class="uk-card-media-left uk-cover-container uk-width-2-5@s uk-transition-toggle">
                     <?php AP_Templates::load_my_layout('archive.badges'); ?>
                     <?php the_post_thumbnail($thumbnail,['data-uk-cover' => '']);?>
                     <a href="<?php the_permalink(); ?>">
                     </a>
+                    <canvas width="" height="300"></canvas>
+                    <?php AP_Templates::load_my_layout('archive.btn-actions'); ?>
                 </div>
-                <div class="ap-info uk-width-3-5">
+                <div class="ap-info uk-width-3-5@s">
                     <div class="ap-info-inner ap-info-top">
                         <h2 class="ap-title">
                             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>

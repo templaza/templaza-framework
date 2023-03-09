@@ -232,6 +232,7 @@ class Templaza_Woo_Catalog {
 	 */
 	public function shop_content_open_wrapper() {
 		echo '<div id="templaza-shop-container" class="templaza-shop-container">';
+		echo '<div class="templaza-shop-filter uk-margin-bottom uk-flex uk-flex-right uk-hidden@m uk-text-right"><span class="shop-filter-btn"><i class="fas fa-sliders-h"></i> '.__('Filter','templaza-framework').'</span> </div>';
 	}
 
 	/**

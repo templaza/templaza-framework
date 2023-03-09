@@ -198,6 +198,7 @@ class TemplazaFramework_ShortCode{
                     array(
                         'id'         => 'border',
                         'type'       => 'border',
+                        'color_alpha'=> 'true',
                         'title'      => __('Border', 'templaza-framework'),
                     ),
                     array(
