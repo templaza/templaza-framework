@@ -105,6 +105,8 @@ ul.products {
           padding: 6px 12px 7px;
           line-height: 1;
           pointer-events: none;
+          text-transform: capitalize;
+          font-weight:normal;
         }
         &:after {
           content: "";

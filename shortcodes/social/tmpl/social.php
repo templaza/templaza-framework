@@ -16,6 +16,7 @@ if(isset($atts['text_align'])){
         $atts['tz_class'] .= ' uk-flex-right';
     }
 }
+$social_gap = '';
 if(!empty($social_profiles)){
     $social_profiles    = json_decode($social_profiles);
     $style              = isset($options['social-style']) ? $options['social-style'] : 'inherit';

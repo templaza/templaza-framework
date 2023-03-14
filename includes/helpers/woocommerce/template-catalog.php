@@ -60,6 +60,9 @@ class Templaza_Woo_Catalog {
         add_filter( 'loop_shop_columns', array( $this, 'templaza_products_per_row' ), 10 );
         add_filter( 'loop_shop_per_page', array( $this, 'templaza_products_per_page' ), 10 );
 
+        // Catalog pagination
+        add_filter( 'woocommerce_pagination_args', array( $this, 'templaza_products_pagination_args' ), 10 );
+
         // Remove Woo Breadcrumb
         remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0);
 
@@ -165,6 +168,16 @@ class Templaza_Woo_Catalog {
         }
         $cols       = isset($templaza_options['templaza-shop-products_per_page'])?$templaza_options['templaza-shop-products_per_page']:9;
         return $cols;
+    }
+
+    /**
+     * Override theme default pagination icon
+     */
+	public function templaza_products_pagination_args($args) {
+        $args['prev_text'] = '<i class="fa fa fa-angle-double-left"></i>';
+        $args['next_text'] = '<i class="fa fa fa-angle-double-right"></i>';
+
+        return $args;
     }
 
 	/**

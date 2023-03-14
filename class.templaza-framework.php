@@ -72,7 +72,7 @@ class TemPlazaFrameWork{
         do_action( 'templaza-framework/plugin/hooks', $this );
     }
     public function tz_load_plugin_textdomain() {
-        load_plugin_textdomain( 'templaza-framework', false, TEMPLAZA_FRAMEWORK_PATH . '/languages' );
+        load_plugin_textdomain( 'templaza-framework', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
     }
 
     public function load_gutenberg_blocks(){
@@ -324,8 +324,8 @@ class TemPlazaFrameWork{
             'header_search_number' => get_option( 'header_search_number' ),
             'header_ajax_search'   => intval( get_option( 'header_search_ajax' ) ),
             'sticky_header'        => intval( get_option( 'header_sticky' ) ),
-            'mobile_landscape'     => get_option( 'mobile_landscape_product_columns' ),
-            'mobile_portrait'      => get_option( 'mobile_portrait_product_columns' ),
+            'mobile_landscape'     => 2,
+            'mobile_portrait'      => 2,
             'popup'                => get_option( 'newsletter_popup_enable' ),
             'popup_frequency'      => get_option( 'newsletter_popup_frequency' ),
             'popup_visible'        => get_option( 'newsletter_popup_visible' ),

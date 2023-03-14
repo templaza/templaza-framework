@@ -147,3 +147,19 @@
     }
   }
 }
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover{
+  background:$tztheme-global-color;
+  border-color:$tztheme-global-color;
+  outline: none;
+}
+.ui-state-default, .ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-button, html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active{
+  outline:none;
+}

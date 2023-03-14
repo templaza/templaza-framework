@@ -45,7 +45,7 @@ if($account_icon_type == 'fontawesome' ){
 }
 if($cart_icon_type == 'fontawesome' ){
     $cart_icon = isset($options['cart-icon'])?$options['cart-icon']:'';
-    $cart_icon_html = '<i class="'.$account_icon.'"></i>';
+    $cart_icon_html = '<i class="'.$cart_icon.'"></i>';
 }elseif ($cart_icon_type == 'custom'){
     $cart_icon = isset($options['cart-icon-custom'])?$options['cart-icon-custom']:'';
     if($account_icon){
