@@ -522,6 +522,15 @@ class Templates{
         $core_path  = !empty($core_path)?$core_path:TEMPLAZA_FRAMEWORK_SCSS_PATH;
         $theme_path = !empty($theme_path)?$theme_path:TEMPLAZA_FRAMEWORK_THEME_SCSS_PATH;
 
+        $store_id   = __METHOD__;
+        $store_id  .= ':'.$core_path;
+        $store_id  .= ':'.$theme_path;
+        $store_id   = md5($store_id);
+
+        if(isset(static::$cache[$store_id])){
+            return static::$cache[$store_id];
+        }
+
         // Get framework scss core files
         if(is_dir($core_path)){
             $frm_files  = Functions::list_files($core_path, '.scss');
@@ -548,7 +557,12 @@ class Templates{
                 }
             }
         }
-        return !empty($css_name)?md5($css_name):'';
+
+        if(!empty($css_name)){
+            return static::$cache[$store_id]   = md5($css_name);
+        }
+
+        return '';
     }
 
     public static function get_devices($reset = false){
