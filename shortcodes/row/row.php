@@ -146,6 +146,19 @@ if(!class_exists('TemplazaFramework_ShortCode_Row')){
                                         'default'  => '>.templaza-column>*',
                                         'required' => array('match_height', '=', '1'),
                                     ),
+                                    array(
+                                        'id'       => 'vertical_align',
+                                        'type'     => 'select',
+                                        'title'    => esc_html__('Vertical Align', 'templaza-framework'),
+                                        'subtitle' => esc_html__('Set vertical alignment of content in row/column.', 'templaza-framework'),
+                                        'options'  => array(
+                                            'stretch'   => esc_html__('Stretch', 'templaza-framework'),
+                                            'top'       => esc_html__('Top', 'templaza-framework'),
+                                            'middle'    => esc_html__('Middle', 'templaza-framework'),
+                                            'bottom'    => esc_html__('Bottom', 'templaza-framework'),
+                                        ),
+                                        'default'   => '',
+                                    ),
                                 ),
                             ),
                             // Responsive settings
@@ -226,6 +239,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Row')){
             $row_gap        = (isset($params['row_gap']) && !empty($params['row_gap']))?$params['row_gap']:'default';
             $column_gap     = (isset($params['column_gap']) && !empty($params['column_gap']))?$params['column_gap']:'default';
             $width_expand   = (isset($params['width_expand']) && !empty($params['width_expand']))?$params['width_expand']:'no_expand';
+            $vertical_align = (isset($params['vertical_align']) && !empty($params['vertical_align']))?$params['vertical_align']:'';
 
             $pad_rm_h   = isset($params['padding_remove_horizontal'])?filter_var($params['padding_remove_horizontal'], FILTER_VALIDATE_BOOLEAN):false;
             $grid_gap   = '';
@@ -293,6 +307,10 @@ if(!class_exists('TemplazaFramework_ShortCode_Row')){
                     $params['tz_class'] .= ' uk-grid-collapse';
 //                    $params['tz_class'] .= ' gx-0';
                 }
+            }
+
+            if(!empty($vertical_align)){
+                $params['tz_class'] .= ' uk-flex-'.$vertical_align;
             }
 
             if(isset($params['hideonxxl']) && (bool) $params['hideonxxl']){
