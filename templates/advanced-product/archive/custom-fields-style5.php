@@ -39,7 +39,7 @@ if(!empty($fields)){
                             <?php
                         }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
                             echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
-                                array('data-uk-svg' => ''));
+                                array('data-uk-svg' => '', 'loading'=>'lazy'));
                         }elseif(!empty($f_icon['icon'])){
                             ?>
                             <i class="<?php echo $f_icon['icon']; ?>"></i>
