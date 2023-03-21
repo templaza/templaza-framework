@@ -36,8 +36,7 @@ if($enable_smooth_scroll) {
 add_action('wp_head', function() use($options){
     $favicon    = isset($options['favicon'])?$options['favicon']:array();
     $favicon_url = Functions::get_theme_default_logo_url('favicon', '.ico');
-    if(!empty($favicon) && isset($favicon['url']) && !empty($favicon['url'])
-        && !Functions::is_external_url($favicon['url'])){
+    if(!empty($favicon) && isset($favicon['url']) && !empty($favicon['url'])){
         $favicon_url = $favicon['url'];
     }
 
