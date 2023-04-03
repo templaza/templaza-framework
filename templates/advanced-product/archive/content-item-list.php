@@ -35,7 +35,7 @@ while (have_posts()): the_post();
     ?>
     <div class="ap-item  ap-item-style5 ap-item-list <?php echo esc_attr($ap_class);?>">
         <div class="ap-inner">
-            <div class="uk-card uk-child-width-1-2@s uk-margin" data-uk-grid>
+            <div class="uk-card uk-child-width-1-2@s" data-uk-grid>
                 <div class="uk-card-media-left uk-cover-container uk-width-2-5@s uk-transition-toggle">
                     <?php AP_Templates::load_my_layout('archive.badges'); ?>
                     <?php the_post_thumbnail($thumbnail,['data-uk-cover' => '']);?>
