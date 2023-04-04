@@ -281,7 +281,7 @@ if (!empty($main_link_active_color)) {
    $main_menu_styles[] = '.templaza-sidebar-menu .menu-item.current-menu-item > a{ color: ' . $main_link_active_color . ' !important;}';
 }
 if (!empty($main_link_border_active_color)) {
-   $main_menu_styles[] = '.templaza-nav .menu-item.current-menu-item > a, .templaza-nav .menu-item > a:hover, .templaza-nav .menu-item > a:focus{ border-color: ' . $main_link_border_active_color . ' !important;}';
+   $main_menu_styles[] = '.templaza-nav > .menu-item.current-menu-item > a, .templaza-nav > .menu-item > a:hover, .templaza-nav > .menu-item > a:focus{ border-color: ' . $main_link_border_active_color . ' !important;}';
    $main_menu_styles[] = '.templaza-sidebar-menu .menu-item.current-menu-item > a, .templaza-sidebar-menu .menu-item > a:hover, .templaza-sidebar-menu .menu-item > a:focus{ border-color: ' . $main_link_border_active_color . ' !important;}';
 }
 if (!empty($off_canvas_button_color)) {
