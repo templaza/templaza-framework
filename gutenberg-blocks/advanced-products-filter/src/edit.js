@@ -68,7 +68,7 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 	let _custom_fields=[];
 
 	if(typeof attributes.ap_custom_fields !== "undefined" && attributes.ap_custom_fields.length
-		&& typeof tz_gt_advanced_products_filter.custom_fields_options !== "undefined"
+		&& typeof tz_gt_advanced_products_filter !== "undefined" && typeof tz_gt_advanced_products_filter.custom_fields_options !== "undefined"
 		&& tz_gt_advanced_products_filter.custom_fields_options.length){
 		_custom_fields	= tz_gt_advanced_products_filter.custom_fields_options.filter((item) => {
 			return (attributes.ap_custom_fields.indexOf(item.value) !== -1);
@@ -112,7 +112,7 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 	}
 
 	const formData = new FormData();
-	if(typeof tz_gt_advanced_products_filter.filter_form_action !== "undefined") {
+	if(typeof tz_gt_advanced_products_filter !== "undefined" && typeof tz_gt_advanced_products_filter.filter_form_action !== "undefined") {
 		formData.append('action', tz_gt_advanced_products_filter.filter_form_action);
 		formData.append('_nonce', tz_gt_advanced_products_filter.filter_form_nonce);
 	}else{
