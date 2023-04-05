@@ -10,78 +10,82 @@
 		"html": false
 	},
 	"attributes": {
-		"title":{
+		"title": {
 			"type": "string",
 			"default": "Inventory Search"
 		},
-		"form_title":{
+		"form_title": {
 			"type": "string",
 			"default": "Inventory Search"
 		},
-		"title_tag":{
+		"title_tag": {
 			"type": "string",
 			"default": "h3"
 		},
-		"title_display":{
+		"title_display": {
 			"type": "string",
 			"default": "uk-display-block"
 		},
-		"title_padding":{
+		"title_padding": {
 			"type": "array",
 			"default": ""
 		},
-		"title_margin":{
+		"title_margin": {
 			"type": "array",
 			"default": ""
 		},
-		"enable_keyword":{
+		"enable_keyword": {
 			"type": "boolean",
 			"default": true
 		},
-		"enable_ajax":{
+		"limit_height": {
 			"type": "boolean",
 			"default": true
 		},
-		"update_url":{
+		"enable_ajax": {
 			"type": "boolean",
 			"default": true
 		},
-		"instant":{
+		"update_url": {
+			"type": "boolean",
+			"default": true
+		},
+		"instant": {
 			"type": "boolean",
 			"default": false
 		},
-		"submit_text":{
+		"submit_text": {
 			"type": "string",
 			"default": "Search"
 		},
-		"submit_icon":{
+		"submit_icon": {
 			"type": "string",
 			"default": ""
 		},
-		"ap_custom_fields":{
+		"ap_custom_fields": {
 			"type": "array"
 		},
-		"column_large":{
+		"column_large": {
 			"type": "integer",
 			"default": "1"
 		},
-		"column":{
+		"column": {
 			"type": "integer",
 			"default": "1"
 		},
-		"column_laptop":{
+		"column_laptop": {
 			"type": "integer",
 			"default": "1"
 		},
-		"column_tablet":{
+		"column_tablet": {
 			"type": "integer",
 			"default": "1"
 		},
-		"column_mobile":{
+		"column_mobile": {
 			"type": "integer",
 			"default": "1"
 		},
-		"max_height":{
+		"max_height": {
 			"type": "string",
 			"default": ""
 		}

@@ -146,6 +146,32 @@
       }
     }
   }
+  &.advanced-product-search-limit-height{
+    .uk-form-controls{
+      > .checkbox,
+      .acf-taxonomy-field .acf-checkbox-list{
+        max-height:275px;
+        overflow-y: auto;
+        scrollbar-color: #1f1f1f #e2e2e278;
+        scrollbar-width: thin;
+        &::-webkit-scrollbar-track {
+          background-color: #e2e2e2;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: #1f1f1f;
+        }
+      }
+    }
+  }
+}
+.advanced-product-search-form.advanced-product-search-limit-height .uk-form-controls>.checkbox::-webkit-scrollbar {
+  width: 2px;
+}
+.advanced-product-search-form.advanced-product-search-limit-height .uk-form-controls>.checkbox::-webkit-scrollbar-track {
+  background-color: #e2e2e2;
+}
+.advanced-product-search-form.advanced-product-search-limit-height .uk-form-controls>.checkbox::-webkit-scrollbar-thumb {
+  background-color: #1f1f1f;
 }
 .ui-state-active,
 .ui-widget-content .ui-state-active,

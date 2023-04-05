@@ -21,6 +21,7 @@ $instant            = (isset($attributes['instant']))?$attributes['instant']:fal
 $update_url         = (isset($attributes['update_url']))?$attributes['update_url']:true;
 $enable_ajax        = (isset($attributes['enable_ajax']))?$attributes['enable_ajax']:true;
 $enable_keyword     = (isset($attributes['enable_keyword']))?$attributes['enable_keyword']:false;
+$limit_height     = (isset($attributes['limit_height']))?$attributes['limit_height']:false;
 $fields_include     = (isset($attributes['ap_custom_fields']) && !empty($attributes['ap_custom_fields']))?$attributes['ap_custom_fields']:'';
 $shortcode          = '';
 $shortcode          = '[advanced-product-form';
@@ -54,6 +55,7 @@ $shortcode .= ' column_mobile="'.($column_mobile?$column_mobile:1).'"';
 if(!empty($max_height)) {
     $shortcode .= ' max_height="' . ($max_height ? $max_height : "") . '"';
 }
+$shortcode .= ' limit_height="'.($limit_height?1:0).'"';
 $shortcode .= ' enable_keyword="'.($enable_keyword?1:0).'"]';
 ?>
 <div class="templaza-framework-gutenberg-adv-product-filters">

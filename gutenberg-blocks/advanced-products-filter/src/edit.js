@@ -1,7 +1,7 @@
 /**
  * Retrieves the translation of text.
  *
- * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
+ * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
 import { __ } from '@wordpress/i18n';
 
@@ -9,7 +9,7 @@ import { __ } from '@wordpress/i18n';
  * React hook that is used to mark the block wrapper element.
  * It provides all the necessary props like the class name.
  *
- * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
+ * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 // import { useBlockProps } from '@wordpress/block-editor';
 import { useBlockProps, Inserter, RichText,
@@ -40,7 +40,7 @@ import SortableSelectInput from 'react-sortable-select';
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
  *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#edit
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
  * @return {WPElement} Element to render.
  */
@@ -122,6 +122,7 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 	const shortcode	= '[advanced-product-form include="'+
 		(typeof attributes.ap_custom_fields === "object"?attributes.ap_custom_fields.join(','):attributes.ap_custom_fields)
 		+'" enable_keyword="'+(attributes.enable_keyword?1:0)+'" submit_text="'+attributes.submit_text
+		+'" limit_height="'+(attributes.limit_height?1:0)
 		+'" instant="'+(attributes.instant?1:0)+'" update_url="'+(attributes.update_url?1:0)
 		+'" column="'+(attributes.column?attributes.column:1)
 		+'" column_large="'+(attributes.column_large?attributes.column_large:1)
@@ -210,6 +211,14 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 									'templaza-framework') : __('Disabled filter by keyword.', 'templaza-framework') }
 								checked={ attributes.enable_keyword }
 								onChange={ (val) => {setAttributes({enable_keyword: val})}}
+							/>
+
+							<ToggleControl
+								label={__('Limit Height Fields', 'templaza-framework')}
+								help={ attributes.limit_height ? __('Enabled limit height.',
+									'templaza-framework') : __('Disabled limit height.', 'templaza-framework') }
+								checked={ attributes.limit_height }
+								onChange={ (val) => {setAttributes({limit_height: val})}}
 							/>
 							<TextControl
 								label={__('Submit Text', 'templaza-framework')}

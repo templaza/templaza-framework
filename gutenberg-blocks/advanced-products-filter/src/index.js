@@ -19,6 +19,7 @@ import './style.scss';
  */
 import Edit from './edit';
 import save from './save';
+import metadata from './block.json';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -37,31 +38,3 @@ registerBlockType( 'templaza-framework/advanced-products-filter', {
 	 */
 	save,
 } );
-
-//
-// /**
-//  * Internal dependencies
-//  */
-// import Edit_Template from './edit-template';
-// // import {InnerBlocks, useBlockProps} from "@wordpress/block-editor";
-// // import Save_Template from './save-template';
-//
-// /**
-//  * Every block starts by registering a new block type definition.
-//  *
-//  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
-//  */
-// registerBlockType( 'gutenberg-test/add-icon', {
-// 	title: 'Icon',
-// 	parent: [ 'gutenberg-test/gutenberg-test' ],
-// 	/**
-// 	 * @see ./edit-template.js
-// 	 */
-// 	edit: Edit_Template,
-//
-// 	// /**
-// 	//  * @see ./save-template.js
-// 	//  */
-// 	// Save_Template,
-// } );
-
