@@ -15,7 +15,6 @@ if(!class_exists('TemplazaFramework_Gutenberg_Advanced_Products_Filter')) {
                 }
             }
             parent::__construct();
-
         }
 
         public function hooks()
