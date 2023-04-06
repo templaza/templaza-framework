@@ -17,7 +17,9 @@ $fields     = AP_Custom_Field_Helper::get_custom_fields_display_flag_by_product_
 // Get custom fields with no group
 $fields_no_group    = AP_Custom_Field_Helper::get_custom_fields_without_group_display_flag_by_product_id('show_in_listing', get_the_ID());
 
-$fields = !empty($fields)?array_merge($fields_no_group, $fields):$fields_no_group;
+if(is_array($fields_no_group) && !empty($fields_no_group)){
+    $fields = !empty($fields)?array_merge($fields_no_group, $fields):$fields_no_group;
+}
 
 $ap_product_related_spec      = isset($templaza_options['ap_product-related-spec-limit'])?$templaza_options['ap_product-related-spec-limit']:3;
 
