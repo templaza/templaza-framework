@@ -34,6 +34,25 @@ $arr_wpform['custom'] = esc_html__('Custom','templaza-framework');
 $arr_fields = array();
 $arr_groups = array();
 $arr_taxs = array();
+if(is_plugin_active( 'uipro/uipro.php' )){
+    require_once WP_CONTENT_DIR .'/plugins/uipro/widgets/uiadvancedproducts/helper.php';
+    $categories = UIPro_UIAdvancedProducts_Helper::get_custom_categories();
+    $store_id   = md5(__METHOD__);
+    if(isset(static::$cache[$store_id])){
+        return static::$cache[$store_id];
+    }
+    $slug_cat = array(
+        'ap_category' => esc_html__( 'Advanced Product Category', 'templaza-framework' ),
+        'ap_branch' => esc_html__( 'Branch', 'templaza-framework' )
+    );
+    $slug_tax = array();
+    if(!empty($categories) && count($categories)){
+        foreach ($categories as $cat){
+            $slug_tax[''.get_post_meta($cat -> ID, 'slug', true)]   = $cat -> post_title;
+        }
+    }
+    $all_tax = array_merge($slug_cat,$slug_tax);
+}
 if(is_plugin_active( 'advanced-product/advanced-product.php' )) {
     $args = array(
         'numberposts' => -1,
@@ -512,6 +531,14 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'type'     => 'switch',
                 'title'    => esc_html__( 'Show Product Related', 'templaza-framework' ),
                 'default'  => true,
+            ),
+            array(
+                'id'       => 'ap_product-related-by',
+                'type'     => 'select',
+                'multi'     => false,
+                'title'    => esc_html__( 'Related by', 'templaza-framework' ),
+                'options'  => $all_tax,
+                'required' => array('ap_product-related', '=' , true),
             ),
             array(
                 'id'       => 'ap_product-related-title',

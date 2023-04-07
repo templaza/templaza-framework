@@ -22,11 +22,9 @@ $ap_taxonomy_group     = isset($templaza_options['ap_product-single-group-taxono
 $ap_taxonomy_show     = isset($templaza_options['ap_product-single-taxonomy-show'])?$templaza_options['ap_product-single-taxonomy-show']:array();
 $widget_heading_style       = isset($templaza_options['widget_box_heading_style'])?$templaza_options['widget_box_heading_style']:'';
 $product_id     = get_the_ID();
-
 $gfields_assigned   = AP_Custom_Field_Helper::get_group_fields_by_product();
 $ap_content_group[]='pricing';
 $term_list = wp_get_post_terms( $product_id);
-
 if($gfields_assigned && count($gfields_assigned)){
     foreach ($gfields_assigned as $group) {
         if(in_array($group->slug, $ap_content_group) == false){

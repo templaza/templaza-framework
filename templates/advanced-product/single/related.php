@@ -28,18 +28,39 @@ $ap_product_related_title     = isset($templaza_options['ap_product-related-titl
 $ap_product_related = isset($templaza_options['ap_product-related']) ? $templaza_options['ap_product-related'] : true;
 $ap_product_related_column     = isset($templaza_options['ap_product-related-columns'])?$templaza_options['ap_product-related-columns']:3;
 $ap_product_related_column_gap     = isset($templaza_options['ap_product-related-columns-gap'])?$templaza_options['ap_product-related-columns-gap']:'medium';
+$ap_product_related_by     = isset($templaza_options['ap_product-related-by'])?$templaza_options['ap_product-related-by']:'';
 if($ap_product_related){
-    $ap_cat = '';
-    $ap_cats = wp_get_post_terms(get_the_ID(), 'ap_category');
-    foreach ($ap_cats as $item) {
-        $ap_cat = $item->slug;
+
+    if($ap_product_related_by !=''){
+        $ap_cat = '';
+        $ap_cats = wp_get_post_terms(get_the_ID(), $ap_product_related_by);
+        if($ap_cats){
+            foreach ($ap_cats as $item) {
+                $ap_cat = $item->slug;
+            }
+            $related_args =
+                array(
+                    'post_type' => 'ap_product',
+                    'posts_per_page' => $ap_product_related_number,
+                    'post__not_in' => array(get_the_ID()),
+                    'tax_query' => array(
+                        array(
+                            'taxonomy' => $ap_product_related_by,
+                            'field'    => 'slug',
+                            'terms'    => $ap_cat,
+                        ),
+                    ),
+                );
+        }
+    }else{
+        $related_args =
+            array(
+                'post_type' => 'ap_product',
+                'posts_per_page' => $ap_product_related_number,
+                'post__not_in' => array(get_the_ID())
+            );
     }
-    $related_args =
-        array(
-            'post_type' => 'ap_product',
-            'posts_per_page' => $ap_product_related_number,
-            'post__not_in' => array(get_the_ID())
-        );
+
 
     $related = new WP_Query( $related_args ) ;
     if ( $related -> have_posts() ):?>
