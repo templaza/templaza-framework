@@ -39,7 +39,7 @@ while (have_posts()): the_post();
                 <div class="uk-card-media-left uk-cover-container uk-width-2-5@s uk-transition-toggle">
                     <?php AP_Templates::load_my_layout('archive.badges'); ?>
                     <?php the_post_thumbnail($thumbnail,['data-uk-cover' => '']);?>
-                    <a href="<?php the_permalink(); ?>">
+                    <a class="uk-position-absolute uk-position-top-left uk-width-1-1 uk-height-1-1" href="<?php the_permalink(); ?>">
                     </a>
                     <canvas width="" height="300"></canvas>
                     <?php AP_Templates::load_my_layout('archive.btn-actions'); ?>

@@ -344,6 +344,13 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'default'  => true,
             ),
             array(
+                'id'       => 'ap_product-single-vendor',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Vendor', 'templaza-framework' ),
+                'default'  => true,
+                'required' => array('ap_product-single-layout', '=' , 'style1'),
+            ),
+            array(
                 'id'       => 'ap_product-single-share',
                 'type'     => 'switch',
                 'title'    => esc_html__( 'Show Social Share', 'templaza-framework' ),
