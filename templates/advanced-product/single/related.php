@@ -26,6 +26,8 @@ if(isset($_GET['related_number'])){
 }
 $ap_product_related_title     = isset($templaza_options['ap_product-related-title'])?$templaza_options['ap_product-related-title']:'RELATED PRODUCT';
 $ap_product_related = isset($templaza_options['ap_product-related']) ? $templaza_options['ap_product-related'] : true;
+$ap_product_related_nav = isset($templaza_options['ap_product-related-nav']) ? $templaza_options['ap_product-related-nav'] : true;
+$ap_product_related_dot = isset($templaza_options['ap_product-related-dot']) ? $templaza_options['ap_product-related-dot'] : true;
 $ap_product_related_column     = isset($templaza_options['ap_product-related-columns'])?$templaza_options['ap_product-related-columns']:3;
 $ap_product_related_column_gap     = isset($templaza_options['ap_product-related-columns-gap'])?$templaza_options['ap_product-related-columns-gap']:'medium';
 $ap_product_related_by     = isset($templaza_options['ap_product-related-by'])?$templaza_options['ap_product-related-by']:'';
@@ -68,33 +70,60 @@ if($ap_product_related){
             <h3 class="box-title">
                 <?php echo esc_html($ap_product_related_title);?>
             </h3>
-            <div class="templaza-ap-archive uk-child-width-1-1 uk-grid-<?php echo esc_attr($ap_product_related_column_gap);?> uk-child-width-1-3@l uk-child-width-1-3@m uk-child-width-1-2@s" data-uk-grid>
-                <?php
-                while ( $related -> have_posts() ): $related -> the_post() ;
-                    $pid =$related->post->ID;
-                    if($ap_loop_layout){
-                        AP_Templates::load_my_layout('archive.content-item-'.$ap_loop_layout.'');
-                    }else{
-                        ?>
-                        <div class="ap-item">
-                            <div class="ap-inner ">
-                                <?php AP_Templates::load_my_layout('archive.media'); ?>
-                                <div class="ap-info">
-                                    <div class="ap-info-inner ap-info-top">
-                                        <h2 class="ap-title">
-                                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                                        </h2>
-                                        <?php AP_Templates::load_my_layout('archive.price');?>
-                                    </div>
-                                    <div class="ap-info-inner  ap-info-bottom">
-                                        <?php AP_Templates::load_my_layout('archive.custom-fields'); ?>
+            <div data-uk-slider >
+                <div class="uk-position-relative">
+                    <div class="uk-slider-container">
+                        <div class="templaza-ap-archive uk-position-relative uk-slider-items uk-child-width-1-1 uk-grid-<?php echo esc_attr($ap_product_related_column_gap);?> uk-child-width-1-<?php echo esc_attr($ap_product_related_column);?>@l uk-child-width-1-3@m uk-child-width-1-2@s uk-grid">
+                        <?php
+                        while ( $related -> have_posts() ): $related -> the_post() ;
+                            $pid =$related->post->ID;
+                            if($ap_loop_layout){
+                                AP_Templates::load_my_layout('archive.content-item-'.$ap_loop_layout.'');
+                            }else{
+                                ?>
+                                <div class="ap-item">
+                                    <div class="ap-inner ">
+                                        <?php AP_Templates::load_my_layout('archive.media'); ?>
+                                        <div class="ap-info">
+                                            <div class="ap-info-inner ap-info-top">
+                                                <h2 class="ap-title">
+                                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?>hhhh</a>
+                                                </h2>
+                                                <?php AP_Templates::load_my_layout('archive.price');?>
+                                            </div>
+                                            <div class="ap-info-inner  ap-info-bottom">
+                                                <?php AP_Templates::load_my_layout('archive.custom-fields'); ?>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                <?php
+                            }
+                        endwhile;
+                        ?>
+                        </div>
+                    </div>
+                    <?php
+                    if($ap_product_related_nav){
+                        ?>
+                        <div class="uk-hidden@s uk-light">
+                            <a class="uk-position-center-left uk-position-small" href="#" data-uk-slidenav-previous data-uk-slider-item="previous"></a>
+                            <a class="uk-position-center-right uk-position-small" href="#" data-uk-slidenav-next data-uk-slider-item="next"></a>
+                        </div>
+
+                        <div class="uk-visible@s">
+                            <a class="uk-position-center-left-out uk-position-small" href="#" data-uk-slidenav-previous data-uk-slider-item="previous"></a>
+                            <a class="uk-position-center-right-out uk-position-small" href="#" data-uk-slidenav-next data-uk-slider-item="next"></a>
                         </div>
                         <?php
                     }
-                endwhile;
+                    ?>
+                </div>
+                <?php if($ap_product_related_dot){
+                    ?>
+                    <ul class="uk-slider-nav uk-dotnav uk-flex-center"></ul>
+                <?php
+                }
                 ?>
             </div>
         </div>

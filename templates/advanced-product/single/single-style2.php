@@ -215,72 +215,10 @@ $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields'
             </li>
         </ul>
     </div>
-
     <?php
-    if($ap_product_related){
-        $ap_cat = '';
-        $ap_cats = wp_get_post_terms(get_the_ID(), 'ap_category');
-        foreach ($ap_cats as $item) {
-            $ap_cat = $item->slug;
-        }
-        $related_args =
-            array(
-                'post_type' => 'ap_product',
-                'posts_per_page' => $ap_product_related_number,
-                'post__not_in' => array(get_the_ID())
-            );
-
-        $related = new WP_Query( $related_args ) ;
-        if ( $related -> have_posts() ):?>
-            <div class="ap-related-product uk-margin-large-top">
-                <h2 class="box-title">
-                    <?php echo esc_html($ap_product_related_title);?>
-                </h2>
-                <div class="templaza-ap-archive uk-child-width-1-1 uk-grid-medium uk-child-width-1-<?php echo esc_attr($ap_product_related_column); ?>@l uk-child-width-1-3@m uk-child-width-1-2@s" data-uk-grid>
-                    <?php
-                    while ( $related -> have_posts() ): $related -> the_post() ;
-                        ?>
-                        <div class="ap-item ap-item-style2">
-                            <div class="ap-inner ">
-                                <?php AP_Templates::load_my_layout('archive.media'); ?>
-                                <div class="ap-info">
-                                    <div class="ap-info-inner ap-info-top">
-                                        <?php
-                                        if($ap_category){
-                                            foreach ($ap_category as $item){
-                                                ?>
-                                                <div class="ap-meta-top"><?php echo esc_html($item); ?></div>
-                                                <?php
-                                            }
-                                        }
-                                        ?>
-                                        <h2 class="ap-title">
-                                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                                        </h2>
-                                    </div>
-                                    <div class="ap-info-inner  ap-info-bottom">
-                                        <?php AP_Templates::load_my_layout('archive.custom-fields-style2'); ?>
-                                    </div>
-                                    <div class="ap-info-inner  ap-info-bottom uk-flex uk-flex-between uk-flex-middle">
-                                        <?php AP_Templates::load_my_layout('archive.price');?>
-                                        <div class="ap-readmore-box">
-                                            <a href="<?php the_permalink(); ?>" class="templaza-btn"><?php esc_html_e('View more','templaza-framework');?></a>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php
-                    endwhile;
-                    ?>
-                </div>
-            </div>
-        <?php
-        endif;
-        wp_reset_postdata();
-    }
+    AP_Templates::load_my_layout('single.related');
     ?>
+
 </div>
 <?php if($ap_office_price){ ?>
     <div id="modal-center" class="uk-flex-top ap-modal" data-uk-modal>
