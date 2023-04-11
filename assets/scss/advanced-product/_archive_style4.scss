@@ -19,6 +19,9 @@
           padding-left:12px;
           margin-left:12px;
         }
+        &.ap-unit{
+          color:$tztheme-button_text_color;
+        }
       }
     }
     .ap-info-inner{
@@ -70,6 +73,7 @@
   .ap-archive-btn-action{
     top:20px;
     bottom:auto !important;
+    left:10px;
   }
 }
 @media screen and (max-width: 1199.99px) {

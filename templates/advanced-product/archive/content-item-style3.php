@@ -81,6 +81,7 @@ if(isset($args['ap_class'])){
                     </span>
                 </div>
             </div>
+            <?php AP_Templates::load_my_layout('archive.badges'); ?>
             <?php AP_Templates::load_my_layout('archive.media'); ?>
             <div class="ap-info-inner ap-info-fields">
                 <?php AP_Templates::load_my_layout('archive.custom-fields-style3'); ?>

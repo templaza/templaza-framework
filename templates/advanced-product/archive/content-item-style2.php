@@ -16,6 +16,7 @@ if(isset($args['ap_class'])){
 ?>
 <div class="ap-item ap-item-style2 <?php echo esc_attr($ap_class);?>">
     <div class="ap-inner ">
+        <?php AP_Templates::load_my_layout('archive.badges'); ?>
         <?php AP_Templates::load_my_layout('archive.media'); ?>
         <div class="ap-info">
             <div class="ap-info-inner ap-info-top">

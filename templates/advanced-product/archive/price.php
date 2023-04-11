@@ -47,13 +47,10 @@ if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $sh
         <?php
         $html = sprintf('<span class="ap-price ap-price-rental uk-display-inline-block">%s</span>',
             AP_Helper::format_price($rental));
-        ?>
-        <?php
         echo wp_kses($html,'post');
-        ?>
-        <?php if(!empty($rental_unit)){ ?>
+        if(!empty($rental_unit)){ ?>
         <span class="meta ap-unit">
-            <?php echo ' / '.esc_html($rental_unit);?>
+            <?php esc_html_e('/ ','templaza-framework'); echo esc_html($rental_unit);?>
         </span>
         <?php } ?>
     </div>
