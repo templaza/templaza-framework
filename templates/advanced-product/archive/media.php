@@ -10,10 +10,19 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
     $templaza_options            = Functions::get_theme_options();
 }
 $thumbnail       = isset($templaza_options['ap_product-thumbnail-size'])?$templaza_options['ap_product-thumbnail-size']:'large';
+if(isset($_GET['product_loop'])){
+    $ap_loop_layout = $_GET['product_loop'];
+}else {
+    $ap_loop_layout = isset($templaza_options['ap_product-loop-layout']) ? $templaza_options['ap_product-loop-layout'] : 'style1';
+}
 ?>
 <div class="uk-card-media-top uk-position-relative uk-transition-toggle">
     <a href="<?php the_permalink(); ?>">
         <?php the_post_thumbnail($thumbnail);?>
     </a>
-    <?php AP_Templates::load_my_layout('archive.btn-actions'); ?>
+    <?php
+    if($ap_loop_layout !='style3'){
+        AP_Templates::load_my_layout('archive.btn-actions');
+    }
+    ?>
 </div>

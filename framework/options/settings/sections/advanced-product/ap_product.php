@@ -199,6 +199,33 @@ Templaza_API::set_section('settings',
                 'required' => array('ap_product-layout', '=' , array('grid','masonry'))
             ),
             array(
+                'id'       => 'ap_product-archive-layout-switch',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Switch layout (List / Grid)', 'templaza-framework' ),
+                'default'  => true,
+            ),
+            array(
+                'id'       => 'ap_product-archive-product-result',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Product Result', 'templaza-framework' ),
+                'default'  => true,
+                'required' => array('ap_product-archive-layout-switch', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-archive-product-sortby',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Sort by', 'templaza-framework' ),
+                'default'  => true,
+                'required' => array('ap_product-archive-layout-switch', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-archive-product-list-grid',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show list / grid', 'templaza-framework' ),
+                'default'  => true,
+                'required' => array('ap_product-archive-layout-switch', '=' , true),
+            ),
+            array(
                 'id'       => 'ap_product-products_per_page',
                 'type'     => 'spinner',
                 'title'    => esc_html__('Products per page.', 'templaza-framework'),
