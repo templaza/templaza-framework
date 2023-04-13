@@ -144,6 +144,8 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     }
                 }
                 $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
+                $post_type  = !empty($post_type)?$post_type: get_query_var( 'post_type' );
+
                 if(!empty($post_type)){
                     $key    = null;
                     if(is_single()){
@@ -744,6 +746,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     }
                 }
                 $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
+                $post_type  = !empty($post_type)?$post_type: get_query_var( 'post_type' );
                 if(!empty($post_type)){
                     $key    = null;
                     if(is_single()){
@@ -791,6 +794,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
 //            if(empty($result_id)){
 //                // Get default
 //            }
+            var_dump($result_id);
 
 
             return $result_id;
