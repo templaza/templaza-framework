@@ -794,8 +794,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
 //            if(empty($result_id)){
 //                // Get default
 //            }
-            var_dump($result_id);
-
 
             return $result_id;
         }
