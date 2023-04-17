@@ -62,3 +62,37 @@ table{
     animation: templaza-scale 1s 0s cubic-bezier(0.09, 0.57, 0.49, 0.9) infinite;
   }
 }
+.templaza-shop-filter{
+  .shop-filter-btn{
+    cursor: pointer;
+    i{
+      margin-right:5px;
+    }
+  }
+}
+.templaza-column{
+  &.sidebar-fixed{
+    position:fixed;
+    top:0;
+    bottom:0;
+    right:0;
+    width:450px;
+    overflow: scroll;
+    overflow-y: auto;
+    scrollbar-color: #1f1f1f #e2e2e278;
+    scrollbar-width: thin;
+    display:block !important;
+    z-index: 9999;
+  }
+}
+.templaza-filter-closed{
+  cursor: pointer;
+  z-index: 9;
+}
+@media(max-width: 639.99px) {
+  .templaza-column {
+    &.sidebar-fixed {
+      width:80%;
+    }
+  }
+}

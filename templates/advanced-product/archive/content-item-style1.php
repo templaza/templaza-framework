@@ -14,9 +14,15 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
     $templaza_options = Functions::get_theme_options();
 }
 $price = get_field('ap_price', get_the_ID());
+if(isset($args['ap_class'])){
+    $ap_class = $args['ap_class'];
+}else{
+    $ap_class = ' templazaFadeInUp';
+}
 ?>
-<div class="ap-item">
+<div class="ap-item ap-item-style1 <?php echo esc_attr($ap_class);?>">
     <div class="ap-inner ">
+        <?php AP_Templates::load_my_layout('archive.badges'); ?>
         <?php AP_Templates::load_my_layout('archive.media'); ?>
         <div class="ap-info">
             <div class="ap-info-inner ap-info-top">

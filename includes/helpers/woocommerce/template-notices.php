@@ -99,7 +99,7 @@ class Templaza_Woo_Notices {
                 </div>
                 <div class="product-modal-content">
                 <div class="templaza-product-popup-atc__notice">
-                    <?php esc_html_e( 'Successfully added to your cart.', 'agruco' ) ?>
+                    <?php esc_html_e( 'Successfully added to your cart.', 'templaza-framework' ) ?>
                 </div>
                <div class="widget_shopping_cart_content"></div>
                <?php do_action( 'templaza_product_popup_atc_recommendation' ); ?>
@@ -300,9 +300,9 @@ class Templaza_Woo_Notices {
         $cart_notify_autohide = isset($templaza_options['templaza-shop-notify-autohide'])?$templaza_options['templaza-shop-notify-autohide']:'3';
         if ( $cart_notify == 'simple' ) {
             $data['added_to_cart_notice'] = array(
-                'added_to_cart_text'              => esc_html__( 'has been added to your cart.', 'agruco' ),
-                'successfully_added_to_cart_text' => esc_html__( 'Successfully added to your cart.', 'agruco' ),
-                'cart_view_text'                  => esc_html__( 'View Cart', 'agruco' ),
+                'added_to_cart_text'              => esc_html__( 'has been added to your cart.', 'templaza-framework' ),
+                'successfully_added_to_cart_text' => esc_html__( 'Successfully added to your cart.', 'templaza-framework' ),
+                'cart_view_text'                  => esc_html__( 'View Cart', 'templaza-framework' ),
                 'cart_view_link'                  => function_exists( 'wc_get_cart_url' ) ? esc_url( wc_get_cart_url() ) : '',
                 'cart_notice_auto_hide'           => intval( $cart_notify_autohide ) > 0 ? intval( $cart_notify_autohide ) * 1000 : 0,
             );
@@ -315,9 +315,9 @@ class Templaza_Woo_Notices {
         $wishlist_notify_autohide = isset($templaza_options['templaza-shop-notify-wishlist-autohide'])?$templaza_options['templaza-shop-notify-wishlist-autohide']:'3';
         if ( $wishlist_notify && defined( 'YITH_WCWL' ) ) {
             $data['added_to_wishlist_notice'] = array(
-                'added_to_wishlist_text'    => esc_html__( 'has been added to your wishlist.', 'agruco' ),
-                'added_to_wishlist_texts'   => esc_html__( 'have been added to your wishlist.', 'agruco' ),
-                'wishlist_view_text'        => esc_html__( 'View Wishlist', 'agruco' ),
+                'added_to_wishlist_text'    => esc_html__( 'has been added to your wishlist.', 'templaza-framework' ),
+                'added_to_wishlist_texts'   => esc_html__( 'have been added to your wishlist.', 'templaza-framework' ),
+                'wishlist_view_text'        => esc_html__( 'View Wishlist', 'templaza-framework' ),
                 'wishlist_view_link'        => esc_url( get_permalink( get_option( 'yith_wcwl_wishlist_page_id' ) ) ),
                 'wishlist_notice_auto_hide' => intval( $wishlist_notify_autohide ) > 0 ? intval( $wishlist_notify_autohide ) * 1000 : 0,
             );
@@ -336,7 +336,7 @@ class Templaza_Woo_Notices {
 	public function widget_shopping_cart_count_notice() {
 		echo '<span class="woocommerce-mini-cart__count_notice hidden">';
 		$count = WC()->cart->get_cart_contents_count();
-		echo sprintf( 'There %s %s %s in your cart', _n( 'are', 'is', $count > 1, 'agruco' ), $count, _n( 'items', 'item', $count > 1, 'agruco' ) );
+		echo sprintf( 'There %s %s %s in your cart', _n( 'are', 'is', $count > 1, 'templaza-framework' ), $count, _n( 'items', 'item', $count > 1, 'templaza-framework' ) );
 		echo '</span>';
 	}
 }

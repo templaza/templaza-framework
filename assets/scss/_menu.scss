@@ -165,6 +165,17 @@
       margin-left: .75em;
       line-height: 1;
    }
+   &.menu-justify{
+      margin-left:-40px !important;
+      > .menu-item{
+         width:100%;
+         padding-left:40px;
+         >a{
+            width:100%;
+            border-top:2px solid $tztheme-border-color;
+         }
+      }
+   }
 }
 
 ul{

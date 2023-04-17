@@ -53,7 +53,16 @@ if(!empty($ap_gallery)){
         <?php foreach ($ap_gallery as $image) {
             ?>
             <div class="ap-tiny-slider-item">
+                <?php if(isset($image['url'])){
+                    ?>
                 <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['title']); ?>">
+                <?php
+                }else{
+                  ?>
+                    <img src="<?php echo wp_get_attachment_url($image); ?>" alt="<?php echo get_post_meta($image, '_wp_attachment_image_alt', TRUE); ?>">
+                <?php
+                }
+                ?>
             </div>
         <?php } ?>
     </div>
@@ -80,7 +89,16 @@ if(!empty($ap_gallery)){
         <?php foreach ($ap_gallery as $image) {
             ?>
             <div class="ap-tiny-slider-thumbnail">
-                <img src="<?php echo esc_url($image['sizes']['medium']); ?>" alt="<?php echo esc_attr($image['title']); ?>">
+                <?php if(isset($image['sizes']['medium'])){
+                    ?>
+                    <img src="<?php echo esc_url($image['sizes']['medium']); ?>" alt="<?php echo esc_attr($image['title']); ?>">
+                    <?php
+                }else{
+                    ?>
+                    <img src="<?php echo wp_get_attachment_url($image); ?>" alt="<?php echo get_post_meta($image, '_wp_attachment_image_alt', TRUE); ?>">
+                    <?php
+                }
+                ?>
             </div>
         <?php } ?>
     </div>
@@ -122,7 +140,7 @@ if(!empty($ap_gallery)){
             responsive: {
                 640: {
                     gutter: 10,
-                    items: 5,
+                    items: 3,
                 },
                 960: {
                     gutter: 20,

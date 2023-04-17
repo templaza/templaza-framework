@@ -72,7 +72,8 @@ class TemPlazaFrameWork{
         do_action( 'templaza-framework/plugin/hooks', $this );
     }
     public function tz_load_plugin_textdomain() {
-        load_plugin_textdomain( 'templaza-framework', false, TEMPLAZA_FRAMEWORK_PATH . '/languages' );
+        load_plugin_textdomain( 'wordpress-importer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+        load_plugin_textdomain( 'templaza-framework', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
     }
 
     public function load_gutenberg_blocks(){
@@ -242,8 +243,12 @@ class TemPlazaFrameWork{
         $trans_name = 'templaza-'.$theme -> get_template().'-transients';
         $transient  = get_option($trans_name, array());
 
+        $cur_sass_name  = Templates::get_sass_name_hash();
+        $no_transient   = (!isset($transient['sass_code']) || (isset($transient['sass_code'])
+                && $transient['sass_code'] != $cur_sass_name));
+
         if($dev_mode){
-            $cur_sass_name = Templates::get_sass_name_hash();
+//            $cur_sass_name = Templates::get_sass_name_hash();
             if(!isset($transient['sass_code']) || (isset($transient['sass_code']) && !empty($transient['sass_code'])
                 && $cur_sass_name != $transient['sass_code'])){
                 $transient['sass_code']    = $cur_sass_name;
@@ -253,13 +258,14 @@ class TemPlazaFrameWork{
             }
         }
 
-        if(!file_exists($css_path.'/style.min.css') || !file_exists($css_path.'/style.css')) {
-            $cur_sass_name = Templates::get_sass_name_hash();
+        if((!file_exists($css_path.'/style.min.css') || !file_exists($css_path.'/style.css'))
+            || $no_transient) {
+//            $cur_sass_name = Templates::get_sass_name_hash();
             $transient['sass_code']    = $cur_sass_name;
-            if(!file_exists($css_path.'/style.css')) {
+            if(!file_exists($css_path.'/style.css') || $no_transient) {
                 Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.css', false);
             }
-            if(!file_exists($css_path.'/style.min.css')) {
+            if(!file_exists($css_path.'/style.min.css') || $no_transient) {
                 Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.min.css', true);
             }
             update_option($trans_name, $transient);
@@ -324,8 +330,8 @@ class TemPlazaFrameWork{
             'header_search_number' => get_option( 'header_search_number' ),
             'header_ajax_search'   => intval( get_option( 'header_search_ajax' ) ),
             'sticky_header'        => intval( get_option( 'header_sticky' ) ),
-            'mobile_landscape'     => get_option( 'mobile_landscape_product_columns' ),
-            'mobile_portrait'      => get_option( 'mobile_portrait_product_columns' ),
+            'mobile_landscape'     => 2,
+            'mobile_portrait'      => 2,
             'popup'                => get_option( 'newsletter_popup_enable' ),
             'popup_frequency'      => get_option( 'newsletter_popup_frequency' ),
             'popup_visible'        => get_option( 'newsletter_popup_visible' ),
@@ -559,6 +565,13 @@ class TemPlazaFrameWork{
 
             $pexists    = \get_posts($args);
             if(is_wp_error($pexists) || !empty($pexists)){
+                if(!empty($pexists)){
+                    $mkey       = '_' . $ptype . '__theme';
+                    $hthemes    = get_post_meta($pexists[0] -> ID, $mkey);
+                    if(!$hthemes || !in_array(get_template(), $hthemes)) {
+                        add_post_meta($pexists[0]->ID, $mkey, get_template());
+                    }
+                }
                 continue;
             }
 
@@ -585,7 +598,12 @@ class TemPlazaFrameWork{
                 update_post_meta($post_id, '__home', 1);
 
                 // Copy json file
-                $source_file    = TEMPLAZA_FRAMEWORK_CORE_PATH.'/data-import/'.$ptype.'.json';
+                $source_file    = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/'.$ptype.'/'.$postdata['post_name'].'.json';
+
+                if(!file_exists($source_file)) {
+                    $source_file = TEMPLAZA_FRAMEWORK_CORE_PATH . '/data-import/' . $ptype . '.json';
+                }
+
                 $dest_file      = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$ptype;
                 if(!is_dir($dest_file)){
                     require_once(ABSPATH . '/wp-admin/includes/file.php');

@@ -22,6 +22,40 @@ Templaza_API::set_section('settings',
                 'default'  => 'inherit',
             ),
             array(
+                'id'       => 'social-icon-color',
+                'type'     => 'color',
+                'title'    => __( 'Social Icon Color', 'templaza-framework' ),
+                'subtitle' => __( 'Select color for Social Icon', 'templaza-framework' ),
+                'transparent'=> false,
+                'required' => array(
+                    array('social-style', '=', 'inherit'),
+                )
+            ),
+            array(
+                'id'       => 'social-icon-color-hover',
+                'type'     => 'color',
+                'title'    => __( 'Social Icon Color Hover', 'templaza-framework' ),
+                'subtitle' => __( 'Select color for Social Icon when mouse hover', 'templaza-framework' ),
+                'transparent'=> false,
+                'required' => array(
+                    array('social-style', '=', 'inherit'),
+                )
+            ),
+            array(
+                'id'       => 'social-icon-font',
+                'type' => 'typography',
+                'allow_responsive'        => true,
+                'color'       => false,
+                'font-style'  => false,
+                'font-family' => false,
+                'font-backup' => false,
+                'font-weight' => false,
+                'text-transform' => false,
+                'letter-spacing' => false,
+                'title'    => __('Social Icon Font Style', 'templaza-framework'),
+                'default'  => ''
+            ),
+            array(
                 'id'       => 'social-gap',
                 'type'     => 'select',
                 'title'    => __( 'Social Gap', 'templaza-framework' ),

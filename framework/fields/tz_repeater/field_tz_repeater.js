@@ -204,6 +204,7 @@
                                         field.find("[name]").val(value[f_name]);
                                     }
                                 }
+
                                 field_on_change(field);
                             });
                             content.append(field_list_obj);
@@ -215,6 +216,14 @@
                             var field = $(this),
                                 field_type = field.data("type"),
                                 tz_redux = redux.field_objects;
+
+                            if(field.data("type") === "select"){
+                                const d = new Date();
+                                field.find("select").attr("id", function (i, val) {
+                                    return val + "__" + d.getTime();
+                                });
+                            }
+
                             if (typeof tz_redux[field_type] !== typeof undefined) {
                                 tz_redux[field_type].init(field);
 
@@ -248,6 +257,14 @@
                             var field = $(this),
                                 field_type = field.data("type"),
                                 tz_redux = redux.field_objects;
+
+                            if(field.data("type") === "select"){
+                                const d = new Date();
+                                field.find("select").attr("id", function (i, val) {
+                                    return val + "__" + d.getTime();
+                                });
+                            }
+
                             if (typeof tz_redux[field_type] !== typeof undefined) {
                                 tz_redux[field_type].init(field);
                             }
@@ -273,6 +290,14 @@
                         icons: {
                             'header': 'ui-icon-plus',
                             'activeHeader': 'ui-icon-minus'
+                        },
+                        activate: function( event, ui ) {
+                            // Fix issue search value of select field
+                            el.find("select").on("select2:opening", function(){
+                                el.closest(".uk-modal").removeAttr("tabindex");
+                            }).on("select2:close", function(){
+                                el.closest(".uk-modal").attr("tabindex", "-1");
+                            });
                         }
                     }
                 ).sortable(

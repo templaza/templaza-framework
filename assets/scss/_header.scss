@@ -180,3 +180,14 @@
     border:none !important;
   }
 }
+@media (max-width:959.99px) {
+  body{
+    header{
+      .header-show-icon{
+        .templaza-logo{
+          margin-left:-50px;
+        }
+      }
+    }
+  }
+}

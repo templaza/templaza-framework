@@ -28,6 +28,14 @@ $ap_styles    = array(
     ),
     array(
         'enable'    => true,
+        'class'     => '.single .ap-single-box.ap-single-box-media',
+        'options' => array(
+            'ap_product-media-padding',
+            'ap_product-media-margin',
+        ),
+    ),
+    array(
+        'enable'    => true,
         'class'     => '.single .ap-single-side-box',
         'options' => array(
             'ap_product-side-box-padding',
@@ -61,7 +69,30 @@ $ap_styles    = array(
             'ap_product-loop-border_hover',
         ),
     ),
-
+    array(
+        'enable'    => true,
+        'class'     => '.rental .ap-ribbon-content',
+        'options' => array(
+            'ap_product-rent-color',
+            'ap_product-rent-bg-color',
+        ),
+    ),
+    array(
+        'enable'    => true,
+        'class'     => '.sale .ap-ribbon-content',
+        'options' => array(
+            'ap_product-sale-color',
+            'ap_product-sale-bg-color',
+        ),
+    ),
+    array(
+        'enable'    => true,
+        'class'     => '.sale-rent .ap-ribbon-content',
+        'options' => array(
+            'ap_product-sale-rent-color',
+            'ap_product-sale-rent-bg-color',
+        ),
+    ),
 );
 
 // Generate design styles.
@@ -81,7 +112,7 @@ if(count($ap_styles)) {
                 $ap_css_responsive['desktop'] .= CSS::box_shadow($box_shadow);
                 unset($design['options'][$index]);
             }
-            $ap_css    = Templates::make_css_design_style($design['options'], $options,false);
+            $ap_css    = Templates::make_css_design_style($design['options'], $options,true);
             if(!empty($ap_css)){
                 if(is_array($ap_css)){
                     foreach ($ap_css as $device => $ad_style){

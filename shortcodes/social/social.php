@@ -31,6 +31,25 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
                         ),
                     ),
                     array(
+                        'id'     => 'social-item-padding',
+                        'type'   => 'spacing',
+                        'mode'   => 'padding',
+                        'all'    => false,
+                        'allow_responsive'    => true,
+                        'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                        'title'  => esc_html__('Social Item Padding', 'templaza-framework'),
+                        'default' => array(
+                            'units' => 'px',
+                        ),
+                    ),
+                    array(
+                        'id'       => 'social-item-border-radius',
+                        'type'     => 'text',
+                        'title'    => __('Social Border Radius', 'templaza-framework'),
+                        'subtitle' => esc_html__( 'Set border radius, example: 5px or 50%.', 'templaza-framework' ),
+                        'default'  => '',
+                    ),
+                    array(
                         'id'       => 'social-color',
                         'type'     => 'color_rgba',
                         'title'    => esc_html__( 'Social Color', 'templaza-framework' ),
@@ -107,6 +126,9 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
             if (!empty($social_bg_color_hover)) {
                 $social_styles[] = '.'. $custom_css_name . ' li a:hover{ background-color: ' . $social_bg_color_hover . ' !important;}';
             }
+            if (!empty($params['social-item-border-radius'])) {
+                $social_styles[] = '.'. $custom_css_name . ' li a{ border-radius: ' . $params['social-item-border-radius'] . ' !important;}';
+            }
             if($social_fix_size ==1 || $social_fix_size == true){
                 $social_size = isset($params['social-width-height'])?$params['social-width-height']:'';
                 if($social_size['width']){
@@ -133,6 +155,25 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
                     }
                     else{
                         Templates::add_inline_style('.' . $custom_css_name . ' li{' . $margin . '}');
+                    }
+                }
+            }
+
+            if(isset($params['social-item-padding']) && !empty($params['social-item-padding'])){
+
+                $padding    = CSS::make_spacing_redux('padding', $params['social-item-padding'], true, 'px');
+
+                if(!empty($padding)){
+                    if(is_array($padding)){
+                        foreach($css as $device => $pcss){
+                            if(!empty($padding[$device])) {
+                                $style =  '.' . $custom_css_name . ' li{' . $padding[$device] . '}';
+                                Templates::add_inline_style($style, $device);
+                            }
+                        }
+                    }
+                    else{
+                        Templates::add_inline_style('.' . $custom_css_name . ' li{' . $padding . '}');
                     }
                 }
             }

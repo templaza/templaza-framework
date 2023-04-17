@@ -83,7 +83,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Account') && is_plugin_active( 'w
             ?>
             <p>
                 <label for="<?php echo esc_attr($this->get_field_id('account-text')); ?>">
-                    <?php esc_html_e('Account text','templaza-elements'); ?>
+                    <?php esc_html_e('Account text','templaza-framework'); ?>
                 </label>
                 <br>
                 <input type="text" name="<?php echo esc_attr($this->get_field_name('account-text')); ?>" id="<?php echo esc_attr($this->get_field_id('account-text')); ?>" class="widefat" value="<?php echo esc_html($instance['account-text']); ?>" >
@@ -91,7 +91,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Account') && is_plugin_active( 'w
 
             <p>
                 <label for="<?php echo esc_attr($this->get_field_name('account-icon')); ?>">
-                    <?php esc_html_e('Account icon','templaza-elements'); ?>
+                    <?php esc_html_e('Account icon','templaza-framework'); ?>
                 </label>
                 <br>
                 <input type="text" name="<?php echo esc_attr($this->get_field_name('account-icon')); ?>" class="widefat" id="<?php echo esc_attr($this->get_field_name('account-icon')); ?>" value="<?php echo esc_html($instance['account-icon']); ?>" >

@@ -29,11 +29,9 @@ body{
   }
   a{
     color:$tztheme-heading-color;
-    @include transition($tztheme-transition-all);
     &:hover{
       text-decoration: none;
       color:$tztheme-global-color;
-      @include transition($tztheme-transition-all);
     }
   }
   .templaza-content-element,

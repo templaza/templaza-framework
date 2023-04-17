@@ -1,0 +1,15 @@
+.table-view-list{
+  th.column-templaza-featured{
+    width: 130px;
+    text-align: center;
+  }
+  td.column-templaza-featured{
+    text-align: center;
+    a {
+      color: lighten(#50575e, 22%);
+      &.is-featured {
+        color: #ffb900;
+      }
+    }
+  }
+}

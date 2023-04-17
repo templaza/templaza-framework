@@ -100,7 +100,7 @@ class Templaza_Woo_Cart {
 			'<a href="%s" class="templaza-button button-light continue-button">%s%s</a>',
 			esc_url( get_permalink( get_option( 'woocommerce_shop_page_id' ) ) ),
 			'<i class="fas fa-arrow-left"></i>',
-			esc_html__( 'Continue Shopping', 'agruco' )
+			esc_html__( 'Continue Shopping', 'templaza-framework' )
 		);
 	}
 

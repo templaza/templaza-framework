@@ -1,0 +1,30 @@
+.ap-item.ap-item-style5.ap-item-list{
+  .ap-inner{
+    .ap-info-inner{
+      padding:15px 0;
+      .ap-specification{
+        padding-bottom:5px;
+      }
+      &.ap-info-bottom{
+        border-top:1px solid $tztheme-border-color;
+        padding:20px 0;
+      }
+      &.ap-info-desc{
+        padding-top:0;
+        padding-bottom:0;
+      }
+      &.ap-info-top{
+        padding-top:0;
+        padding-bottom:15px;
+      }
+    }
+    .ap-archive-btn-action{
+      margin-bottom:20px;
+    }
+  }
+  &:hover{
+    .ap-inner{
+      @include transition($tztheme-transition-all);
+    }
+  }
+}

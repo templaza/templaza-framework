@@ -1039,7 +1039,7 @@ class Templaza_Product_Loop {
 			'<a href="#" class="product-quick-shop-button templaza-btn" data-product_id="%s" >%s%s</a>',
 			esc_attr( $product->get_id() ),
 			'<i class="fas fa-shopping-cart"></i>',
-			esc_html__( 'Quick Shop', 'agruco' )
+			esc_html__( 'Quick Shop', 'templaza-framework' )
 		);
 	}
 
@@ -1160,7 +1160,7 @@ class Templaza_Product_Loop {
 		}
 
 		if ( $product->is_purchasable() ) {
-			$text = esc_html__( 'Add to cart', 'agruco' );
+			$text = esc_html__( 'Add to cart', 'templaza-framework' );
 
 		}
 

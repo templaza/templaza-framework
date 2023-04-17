@@ -24,6 +24,14 @@ Templaza_API::set_section('settings', array(
             'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
             'data'     => 'callback',
             'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
+        ),
+        array(
+            'id'       => 'enable-featured-for-posttypes',
+            'type'     => 'select',
+            'title'    => __('Enable Featured For', 'templaza-framework'),
+//            'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
+            'data'     => 'post_types',
+            'multi'    => true,
         )
     ),
 ));

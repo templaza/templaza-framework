@@ -274,7 +274,7 @@
         }
 
         var $products = $related.find('ul.products');
-        var spaceBetween = templaza_woo.$body.hasClass('templaza-product-card-solid') ? false : true;
+        var spaceBetween = true;
 
         $products.wrap('<div class="swiper-container linked-products-carousel" style="opacity: 0;"></div>');
         $products.addClass('swiper-wrapper');
@@ -294,14 +294,14 @@
                 300: {
                     slidesPerView: templazaData.mobile_portrait == '' ? 2 : templazaData.mobile_portrait,
                     slidesPerGroup: templazaData.mobile_portrait == '' ? 2 : templazaData.mobile_portrait,
-                    spaceBetween: spaceBetween == true ? 15 : 0,
+                    spaceBetween: 15,
                 },
                 480: {
                     slidesPerView: templazaData.mobile_landscape == '' ? 3 : templazaData.mobile_landscape,
                     slidesPerGroup: templazaData.mobile_landscape == '' ? 3 : templazaData.mobile_landscape,
                 },
                 768: {
-                    spaceBetween: spaceBetween == true ? 30 : 0,
+                    spaceBetween: 15,
                     slidesPerView: 3,
                     slidesPerGroup: 3
                 },

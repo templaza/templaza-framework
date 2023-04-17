@@ -51,7 +51,8 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
         <?php if($contact_phone_icon){ ?>
             <i class="contact-icon <?php echo esc_attr($contact_phone_icon);?>"></i>
         <?php } ?>
-        <a href="tel:<?php echo esc_attr($contact_phone);?>"><?php echo esc_attr($contact_phone);?></a>
+        <a href="tel:<?php echo str_replace(array( '(', ')',' ' ),'', esc_attr($contact_phone));?>"><?php
+            echo esc_attr($contact_phone);?></a>
         </span>
         <?php
     }

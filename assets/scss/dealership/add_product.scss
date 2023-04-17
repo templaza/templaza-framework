@@ -56,10 +56,19 @@
       border-color:$tztheme-border-color;
     }
   }
-  button.add_media{
-    text-transform: capitalize;
-    background:#ababab;
-    padding:0 20px;
-    height:40px;
+  .wp-media-buttons{
+    display:flex;
+  }
+  .wp-editor-tools{
+    button{
+      text-transform: capitalize;
+      background:#ababab;
+      padding:0 20px;
+      height:40px;
+      margin-right:5px;
+      &:hover{
+        background:#ccc;
+      }
+    }
   }
 }

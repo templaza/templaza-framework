@@ -60,6 +60,9 @@ class Templaza_Woo_Catalog {
         add_filter( 'loop_shop_columns', array( $this, 'templaza_products_per_row' ), 10 );
         add_filter( 'loop_shop_per_page', array( $this, 'templaza_products_per_page' ), 10 );
 
+        // Catalog pagination
+        add_filter( 'woocommerce_pagination_args', array( $this, 'templaza_products_pagination_args' ), 10 );
+
         // Remove Woo Breadcrumb
         remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0);
 
@@ -167,6 +170,16 @@ class Templaza_Woo_Catalog {
         return $cols;
     }
 
+    /**
+     * Override theme default pagination icon
+     */
+	public function templaza_products_pagination_args($args) {
+        $args['prev_text'] = '<i class="fa fa fa-angle-double-left"></i>';
+        $args['next_text'] = '<i class="fa fa fa-angle-double-right"></i>';
+
+        return $args;
+    }
+
 	/**
 	 * Add 'woocommerce-active' class to the body tag.
 	 *
@@ -197,13 +210,13 @@ class Templaza_Woo_Catalog {
 		}
 
 		wp_enqueue_script( 'templaza-product-catalog', Functions::get_my_url() . '/assets/js/woo/woo-catalog.js', array(
-			'agruco',
+			'templaza-framework',
 		), '20211209', true );
 
 		$templaza_catalog_data = array(
 			'filtered_price' => array(
-				'min' => esc_html__( 'Min', 'agruco' ),
-				'max' => esc_html__( 'Max', 'agruco' ),
+				'min' => esc_html__( 'Min', 'templaza-framework' ),
+				'max' => esc_html__( 'Max', 'templaza-framework' ),
 			)
 		);
 
@@ -232,6 +245,7 @@ class Templaza_Woo_Catalog {
 	 */
 	public function shop_content_open_wrapper() {
 		echo '<div id="templaza-shop-container" class="templaza-shop-container">';
+		echo '<div class="templaza-shop-filter uk-margin-bottom uk-flex uk-flex-right uk-hidden@m uk-text-right"><span class="shop-filter-btn"><i class="fas fa-sliders-h"></i> '.__('Filter','templaza-framework').'</span> </div>';
 	}
 
 	/**
@@ -459,7 +473,7 @@ class Templaza_Woo_Catalog {
 
 				$classes[] = $pagination_type == 'scroll' ? 'loading' : '';
 
-				$nav_html = sprintf( '<span class="button-text">%s</span>', esc_html__( 'Load More', 'agruco' ) );
+				$nav_html = sprintf( '<span class="button-text">%s</span>', esc_html__( 'Load More', 'templaza-framework' ) );
 
 				echo '<nav class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 				echo '<div id="templaza-catalog-previous-ajax" class="nav-previous-ajax">';
@@ -622,7 +636,7 @@ class Templaza_Woo_Catalog {
             <div class="off-modal-layer"></div>
             <div class="filters-panel-content panel-content">
                 <div class="modal-header">
-                    <h3 class="modal-title"><?php esc_html_e( 'Filter By', 'agruco' ) ?></h3>
+                    <h3 class="modal-title"><?php esc_html_e( 'Filter By', 'templaza-framework' ) ?></h3>
                     <a href="#"
                            class="close-account-panel button-close"><i class="fas fa-times"></i></a>
                 </div>
@@ -740,10 +754,10 @@ class Templaza_Woo_Catalog {
 			}
 
 			$labels = array(
-				'best_sellers' => esc_html__( 'Best Sellers', 'agruco' ),
-				'featured'     => esc_html__( 'Hot Products', 'agruco' ),
-				'new'          => esc_html__( 'New Products', 'agruco' ),
-				'sale'         => esc_html__( 'Sale Products', 'agruco' ),
+				'best_sellers' => esc_html__( 'Best Sellers', 'templaza-framework' ),
+				'featured'     => esc_html__( 'Hot Products', 'templaza-framework' ),
+				'new'          => esc_html__( 'New Products', 'templaza-framework' ),
+				'sale'         => esc_html__( 'Sale Products', 'templaza-framework' ),
 			);
 
 			foreach ( $groups as $group ) {
@@ -780,10 +794,10 @@ class Templaza_Woo_Catalog {
 			'<a href="%s" class="tab-all %s">%s</a>',
 			esc_url( $btn_url ),
 			$active ? '' : 'active',
-			esc_html__( 'All', 'agruco' )
+			esc_html__( 'All', 'templaza-framework' )
 		) );
 
-		$text_toggle = $type == 'group' ? esc_html__( 'Products', 'agruco' ) : esc_html__( 'Categories', 'agruco' );
+		$text_toggle = $type == 'group' ? esc_html__( 'Products', 'templaza-framework' ) : esc_html__( 'Categories', 'templaza-framework' );
 
 		echo '<div class="catalog-toolbar-tabs__title">' . $text_toggle . '<i class="far fa-chevron-down"></i></div>';
 		echo '<div class="catalog-toolbar-tabs__content">';
@@ -813,7 +827,7 @@ class Templaza_Woo_Catalog {
         <a href="#catalog-filters" class="toggle-filters catalog-toolbar-item__control"
            data-toggle="<?php echo esc_attr( $open ) ?>"
            data-target="catalog-filters-<?php echo esc_attr( $open ) ?>">
-            <span class="text-filter"><?php esc_html_e( 'Filter', 'agruco' ) ?></span>
+            <span class="text-filter"><?php esc_html_e( 'Filter', 'templaza-framework' ) ?></span>
         </a>
 		<?php
 	}
@@ -834,7 +848,7 @@ class Templaza_Woo_Catalog {
 		?>
         <a href="#primary-sidebar" class="toggle-filters"
            data-toggle="modal" data-target="primary-sidebar">
-            <span class="text-filter"><?php esc_html_e( 'Filter', 'agruco' ) ?></span>
+            <span class="text-filter"><?php esc_html_e( 'Filter', 'templaza-framework' ) ?></span>
         </a>
 		<?php
 	}
@@ -848,12 +862,12 @@ class Templaza_Woo_Catalog {
 	 */
 	public function products_ordering() {
 		$catalog_orderby_options = apply_filters( 'templaza_products_filter_order_by', array(
-			'menu_order' => esc_html__( 'Default sorting', 'agruco' ),
-			'popularity' => esc_html__( 'Sort by popularity', 'agruco' ),
-			'rating'     => esc_html__( 'Sort by average rating', 'agruco' ),
-			'date'       => esc_html__( 'Sort by latest', 'agruco' ),
-			'price'      => esc_html__( 'Sort by price: low to high', 'agruco' ),
-			'price-desc' => esc_html__( 'Sort by price: high to low', 'agruco' ),
+			'menu_order' => esc_html__( 'Default sorting', 'templaza-framework' ),
+			'popularity' => esc_html__( 'Sort by popularity', 'templaza-framework' ),
+			'rating'     => esc_html__( 'Sort by average rating', 'templaza-framework' ),
+			'date'       => esc_html__( 'Sort by latest', 'templaza-framework' ),
+			'price'      => esc_html__( 'Sort by price: low to high', 'templaza-framework' ),
+			'price-desc' => esc_html__( 'Sort by price: high to low', 'templaza-framework' ),
 		) );
 
 		// get form action url
@@ -880,7 +894,7 @@ class Templaza_Woo_Catalog {
 		?>
         <div class="woocommerce-ordering">
             <span class="woocommerce-ordering__button"><span
-                        class="woocommerce-ordering__button-label"><?php echo ! empty( $orderby ) ? $order_current : esc_html__( 'Default', 'agruco' ) ?> </span> <i class="far fa-chevron-down"></i></span>
+                        class="woocommerce-ordering__button-label"><?php echo ! empty( $orderby ) ? $order_current : esc_html__( 'Default', 'templaza-framework' ) ?> </span> <i class="far fa-chevron-down"></i></span>
 
             <ul class="woocommerce-ordering__submenu">
 				<?php echo wp_kses_post( $order_html ); ?>

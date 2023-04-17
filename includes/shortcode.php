@@ -198,6 +198,7 @@ class TemplazaFramework_ShortCode{
                     array(
                         'id'         => 'border',
                         'type'       => 'border',
+                        'color_alpha'=> 'true',
                         'title'      => __('Border', 'templaza-framework'),
                     ),
                     array(
@@ -627,11 +628,18 @@ class TemplazaFramework_ShortCode{
                 if(!empty($css_overlay)){
                     Templates::add_inline_style($css_overlay);
                 }
-//                if(isset($params['tz_css'])){
-//                    $params['tz_css']   .= $css_overlay;
-//                }else{
-//                    $params['tz_css']   = $css_overlay;
-//                }
+            }
+        }
+		if(isset($params['background_overlay_top']) && !empty($params['background_overlay_top']) || isset($params['background_overlay_bottom']) && !empty($params['background_overlay_bottom']) ){
+            $overlay_color_gradient_top = CSS::make_color_rgba_redux($params['background_overlay_top']);
+            $overlay_color_gradient_bottom = CSS::make_color_rgba_redux($params['background_overlay_bottom']);
+            if(!empty($overlay_color_gradient_top) || !empty($overlay_color_gradient_top)){
+                $params['tz_class'] .=' tz_background_overlay ';
+                $css_overlay_gradient   = '';
+                $css_overlay_gradient   .= '.'.$custom_css_name.'::before {background:linear-gradient(0deg, '.$overlay_color_gradient_bottom.' 0%, '.$overlay_color_gradient_top.' 100%);}';
+                if(!empty($css_overlay_gradient)){
+                    Templates::add_inline_style($css_overlay_gradient);
+                }
             }
         }
 

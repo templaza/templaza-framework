@@ -112,7 +112,7 @@ class Templaza_Woo_Sticky_ATC {
 			$alt_text          = trim( wp_strip_all_tags( get_post_meta( $post_thumbnail_id, '_wp_attachment_image_alt', true ) ) );
 		} else {
 			$thumbnail_src = wc_placeholder_img_src( 'gallery_thumbnail' );
-			$alt_text      = esc_html__( 'Awaiting product image', 'agruco' );
+			$alt_text      = esc_html__( 'Awaiting product image', 'templaza-framework' );
 		}
 		?>
         <section id="templaza-sticky-add-to-cart" class="<?php echo esc_attr( $sticky_class ) ?>">
@@ -139,7 +139,7 @@ class Templaza_Woo_Sticky_ATC {
 							esc_attr( $product->get_id() ),
 							esc_attr( $product->add_to_cart_text() ),
 							esc_attr( $product->get_title() ),
-							esc_html__( 'Add to cart', 'agruco' ) );
+							esc_html__( 'Add to cart', 'templaza-framework' ) );
 					}
 					?>
                 </div>

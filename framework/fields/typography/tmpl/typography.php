@@ -431,7 +431,7 @@ if(!empty($unit) && is_array($unit)){
             /* End my customize */
             $tab_pane  .= '<input type="hidden" name="'
                     . esc_attr( $this -> field['name'] . $this -> field['name_suffix'] )
-                    . '[font-size]['.$device.']" value="' . esc_attr( $value)
+                    . '[font-size]['.$device.']" value="' . ((float)$value?esc_attr( $value):'')
                     . '" data-id="' . esc_attr( $this -> field['id'] ) . '" data-device="'.$device.'"/>';
 
             $tab_pane  .= '</div>';
@@ -519,7 +519,7 @@ if(!empty($unit) && is_array($unit)){
             /* End my customize */
             $tab_pane  .= '<input type="hidden" name="'
                 . esc_attr( $this -> field['name'] . $this -> field['name_suffix'] )
-                . '[line-height]['.$device.']" value="' . esc_attr( $value )
+                . '[line-height]['.$device.']" value="' . ((float)$value?esc_attr( $value):'')
                 . '" data-id="' . esc_attr( $this -> field['id'] ) . '" data-device="'.$device.'"/>';
             $tab_pane  .= '</div>';
         }
@@ -750,6 +750,14 @@ if(!empty($unit) && is_array($unit)){
 
             // phpcs:ignore WordPress.NamingConventions.ValidHookName
             echo esc_html( apply_filters( 'redux/pro/render/color_alpha', $data ) );
+        }
+
+        if(method_exists('Redux_Functions_Ex', 'output_alpha_data')) {
+            $data = array(
+                'field' => $this->field,
+                'index' => 'color',
+            );
+            echo Redux_Functions_Ex::output_alpha_data($data);
         }
 
         echo '/>';

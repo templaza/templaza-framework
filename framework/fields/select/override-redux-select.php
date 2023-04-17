@@ -82,7 +82,7 @@ if ( ! class_exists( 'Redux_Select', false ) ) {
 				}
 
 				$name_brackets = '';
-				if ( ! empty( $multi ) ) {
+				if ( ! empty( $multi ) && (!isset($this -> field['name_bracket']) || ($this -> field['name_bracket']))) {
 					$name_brackets = '[]';
 				}
 

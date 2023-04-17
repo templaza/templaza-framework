@@ -118,7 +118,7 @@ class Templaza_Woo_Quick_View {
 	 */
 	public function templaza_quick_view() {
 		if ( empty( $_POST['product_id'] ) ) {
-			wp_send_json_error( esc_html__( 'No product.', 'agruco' ) );
+			wp_send_json_error( esc_html__( 'No product.', 'templaza-framework' ) );
 			exit;
 		}
 
@@ -128,7 +128,7 @@ class Templaza_Woo_Quick_View {
 				'product_variation',
 				true
 			) ) ) {
-			wp_send_json_error( esc_html__( 'Invalid product.', 'agruco' ) );
+			wp_send_json_error( esc_html__( 'Invalid product.', 'templaza-framework' ) );
 			exit;
 		}
 		$GLOBALS['post'] = $post_object;
@@ -192,7 +192,7 @@ class Templaza_Woo_Quick_View {
 				<span class="product-more-infor__text">%s</span>%s
 			</a>',
 			is_customize_preview() ? '#' : esc_url( get_permalink() ),
-			apply_filters( 'product_quick_view_more_infor_text', esc_html__( 'More Product Info', 'agruco' ) ),
+			apply_filters( 'product_quick_view_more_infor_text', esc_html__( 'More Product Info', 'templaza-framework' ) ),
 			'<i class="fas fa-info-circle"></i>'
 		);
 	}

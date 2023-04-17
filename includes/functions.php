@@ -96,7 +96,9 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 if(file_exists($setting_file)){
                     $def_options    = file_get_contents($setting_file);
                     $def_options    = (is_string($def_options) && !empty($def_options))?json_decode($def_options, true):$def_options;
-                    $options        = count($def_options)?$def_options:$options;
+                    if(is_array($def_options)){
+                        $options        = count($def_options)?$def_options:$options;
+                    }
                 }
             }
 
@@ -144,6 +146,8 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     }
                 }
                 $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
+                $post_type  = !empty($post_type)?$post_type: get_query_var( 'post_type' );
+
                 if(!empty($post_type)){
                     $key    = null;
                     if(is_single()){
@@ -388,7 +392,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
                         if(!is_array($param)) {
                             $attribs .= ' ' . $key . '=\'' . $param . '\'';
                         }else{
-                            $attribs    .= ' '.$key.'=\''.json_encode($param).'\'';
+                            $attribs    .= ' '.$key.'=\''.json_encode($param, JSON_FORCE_OBJECT).'\'';
                         }
                     }
                 }
@@ -744,6 +748,7 @@ if(!class_exists('TemPlazaFramework\Functions')){
                     }
                 }
                 $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
+                $post_type  = !empty($post_type)?$post_type: get_query_var( 'post_type' );
                 if(!empty($post_type)){
                     $key    = null;
                     if(is_single()){
@@ -791,7 +796,6 @@ if(!class_exists('TemPlazaFramework\Functions')){
 //            if(empty($result_id)){
 //                // Get default
 //            }
-
 
             return $result_id;
         }

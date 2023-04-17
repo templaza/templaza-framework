@@ -11,8 +11,13 @@ $show_compare_button= get_field('ap_show_archive_compare_button', 'option');
 $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
 $pid            = get_the_ID();
+if(isset($args['ap_class'])){
+    $ap_class = $args['ap_class'];
+}else{
+    $ap_class = ' templazaFadeInUp';
+}
 ?>
-<div class="ap-item ap-item-style3">
+<div class="ap-item ap-item-style3 <?php echo esc_attr($ap_class);?>">
     <div class="ap-inner ">
         <div class="ap-info">
             <div class="ap-info-inner ap-info-top uk-flex uk-flex-middle uk-flex-between">
@@ -26,7 +31,7 @@ $pid            = get_the_ID();
                 </div>
                 <div class="ap-button-info uk-flex uk-flex-between">
                     <span class="ap-button ap-button-quickview" data-ap-quickview-button="<?php echo $pid?$pid:'';
-                    ?>" data-uk-tooltip="<?php echo esc_attr(__('Quick View', AP_Functions::get_my_text_domain())); ?>">
+                    ?>" data-uk-tooltip="<?php echo esc_attr(__('Quick View', 'templaza-framework')); ?>">
                         <i class="fas fa-eye"></i>
                     </span>
                     <?php
@@ -49,7 +54,7 @@ $pid            = get_the_ID();
                                     <span class="ap-button ap-button-compare <?php echo $has_compare?' ap-in-compare-list':'';
                                     ?>" data-ap-compare-button="id: <?php the_ID();
                                     ?>; active_icon: fas fa-clipboard-list; icon: fas fa-balance-scale" data-uk-tooltip="<?php
-                                    _e($active_text, AP_Functions::get_my_text_domain());?>">
+                                    _e($active_text, 'templaza-framework');?>">
                                         <?php if($has_compare){?>
                                             <i class="fas fa-exchange-alt"></i>
                                         <?php }else{?>
@@ -70,13 +75,16 @@ $pid            = get_the_ID();
                     <?php do_action('advanced-product/archive/after_content');?>
 
                     <span class="ap-button ap-button-viewmore">
-                        <a href="<?php the_permalink(); ?>" data-uk-tooltip="<?php echo esc_attr(__('View Detail', AP_Functions::get_my_text_domain())); ?>">
+                        <a href="<?php the_permalink(); ?>" data-uk-tooltip="<?php echo esc_attr(__('View Detail', 'templaza-framework')); ?>">
                         <i class="fas fa-plus"></i>
                         </a>
                     </span>
                 </div>
             </div>
-            <?php AP_Templates::load_my_layout('archive.media'); ?>
+            <div class="uk-inline uk-position-relative">
+                <?php AP_Templates::load_my_layout('archive.badges'); ?>
+                <?php AP_Templates::load_my_layout('archive.media'); ?>
+            </div>
             <div class="ap-info-inner ap-info-fields">
                 <?php AP_Templates::load_my_layout('archive.custom-fields-style3'); ?>
             </div>

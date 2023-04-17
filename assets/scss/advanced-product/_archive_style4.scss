@@ -19,6 +19,9 @@
           padding-left:12px;
           margin-left:12px;
         }
+        &.ap-unit{
+          color:$tztheme-button_text_color;
+        }
       }
     }
     .ap-info-inner{
@@ -40,7 +43,7 @@
     .ap-specification-style4{
       .ap-spec-item{
         line-height: 1.5em;
-        padding:10px;
+        padding:10px 5px;
         border:1px solid #fff;
         background:#f1f1f1;
         text-align: center;
@@ -54,7 +57,7 @@
           font-weight:normal;
           text-transform: capitalize;
           i{
-            padding-right:5px;
+            padding-right:3px;
           }
         }
         .ap-field-label{
@@ -66,6 +69,11 @@
       padding:2px;
       border:none;
     }
+  }
+  .ap-archive-btn-action{
+    top:20px;
+    bottom:auto !important;
+    left:10px;
   }
 }
 @media screen and (max-width: 1199.99px) {

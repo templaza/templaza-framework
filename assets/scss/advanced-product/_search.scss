@@ -20,6 +20,11 @@
 .advanced-product-search-form{
   .ap-search-item{
     margin-bottom: 30px;
+    &.field-keyword{
+      .search-field{
+        margin-top:0;
+      }
+    }
   }
   label.search-label{
     font-family: $tztheme-heading-font;
@@ -102,7 +107,8 @@
       font-size:0.875em;
       right:3px;
       top:50%;
-      margin-top:-14px;
+      margin-top:-25px;
+      padding:0 2px;
     }
   }
   &.ap-search-inline{
@@ -140,4 +146,46 @@
       }
     }
   }
+  &.advanced-product-search-limit-height{
+    .uk-form-controls{
+      > .checkbox,
+      .acf-taxonomy-field .acf-checkbox-list{
+        max-height:275px;
+        overflow-y: auto;
+        scrollbar-color: #1f1f1f #e2e2e278;
+        scrollbar-width: thin;
+        &::-webkit-scrollbar-track {
+          background-color: #e2e2e2;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: #1f1f1f;
+        }
+      }
+    }
+  }
+}
+.advanced-product-search-form.advanced-product-search-limit-height .uk-form-controls>.checkbox::-webkit-scrollbar {
+  width: 2px;
+}
+.advanced-product-search-form.advanced-product-search-limit-height .uk-form-controls>.checkbox::-webkit-scrollbar-track {
+  background-color: #e2e2e2;
+}
+.advanced-product-search-form.advanced-product-search-limit-height .uk-form-controls>.checkbox::-webkit-scrollbar-thumb {
+  background-color: #1f1f1f;
+}
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover{
+  background:$tztheme-global-color;
+  border-color:$tztheme-global-color;
+  outline: none;
+}
+.ui-state-default, .ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-button, html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active{
+  outline:none;
 }

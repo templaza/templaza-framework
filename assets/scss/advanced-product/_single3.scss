@@ -1,0 +1,78 @@
+.templaza-ap-single{
+  &.ap-single-style3{
+    .ap-image-color{
+      background:$tztheme-quote-bg;
+      &.bg-transparent{
+        background:transparent;
+      }
+    }
+    .one_image{
+      img{
+        width:100%;
+        height:auto;
+      }
+      canvas{
+        display:none;
+      }
+    }
+    .ap-single-nav{
+     z-index: 999;
+    }
+    .ap-single-nav-scroll{
+      margin:0;
+      list-style: none;
+      padding:0;
+      li{
+        padding:0;
+        margin:0;
+        a{
+          font-family: $tztheme-heading-font;
+          padding:15px 30px;
+          display:block;
+        }
+      }
+    }
+    #ap-wrap-content{
+      margin-top:80px;
+    }
+    h3{
+      &.widget-title{
+        font-weight:$tztheme-ap-single-side-title-weight;
+        font-size:$tztheme-ap-single-side-title;
+      }
+    }
+    .ap-custom-fields-style3{
+      border-bottom:1px solid $tztheme-border-color;
+      padding:16px 0;
+    }
+    .ap-group{
+      margin-bottom:80px;
+      padding-bottom:80px;
+      border-bottom:1px solid $tztheme-border-color;
+    }
+  }
+}
+@media(max-width: 1199.99px) {
+  .templaza-ap-single.ap-single-style2 .ap-wrap-content{
+    display:block;
+    .ap-single-right,
+    .ap-single-left{
+      width:100%;
+    }
+    .ap-single-right{
+      padding:40px 0 0;
+    }
+  }
+}
+@media(max-width: 639.99px) {
+  .templaza-ap-single.ap-single-style2 {
+    .ap-single-top-fields{
+      flex-direction: column;
+      .ap-custom-fields {
+        .ap-field-value{
+          font-size:16px;
+        }
+      }
+    }
+  }
+}

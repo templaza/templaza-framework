@@ -8,6 +8,7 @@ use TemPlazaFramework\Templates;
 extract(shortcode_atts(array(
     'tz_id'                    => '',
     'tz_class'                 => '',
+    'show_featured'            => '',
     'latest_post_type'         => 'post',
     'latest_post_order_by'     => 'date',
     'latest_post_order'        => 'DESC',
@@ -22,12 +23,66 @@ extract(shortcode_atts(array(
 ), $atts));
 
 $options        = Functions::get_theme_options();
+
+$featured_posttypes = array();
+if(isset($options['enable-featured-for-posttypes'])&& !empty($options['enable-featured-for-posttypes'])){
+    $featured_posttypes = $options['enable-featured-for-posttypes'];
+}
+if(!in_array($latest_post_type, $featured_posttypes)){
+    $show_featured  = '';
+}
+
 $args = array(
     'post_type'  => ''.$latest_post_type.'',
     'numberposts' => $latest_post_number,
     'orderby' => ''.$latest_post_order_by.'',
     'order' => ''.$latest_post_order.'',
 );
+
+if(isset($show_featured)){
+    if($show_featured == '1') {
+        $args['meta_query'] = array(
+            array(
+                'key' => 'templaza-featured',
+                'value' => '1'
+            )
+        );
+    }elseif($show_featured == '0'){
+        $args['meta_query'] = array(
+            'relation' => 'OR',
+            array(
+                'key'       => 'templaza-featured',
+                'compare'   => '!=',
+                'value'     => '1'
+            ),
+            array(
+                'key' => 'templaza-featured',
+                'compare' => 'NOT EXISTS',
+                'value' => 'null',
+            )
+        );
+    }
+}
+
+if(!empty($latest_post_type) && isset($atts[$latest_post_type.'_category'])
+    && !empty($atts[$latest_post_type.'_category'])){
+    $cats_sync  = $atts[$latest_post_type.'_category'];
+    if(preg_match('/^\{.*?\}$/', $cats_sync)){
+        $cats_sync  = json_decode($cats_sync, true);
+        $tax_name   = \TemPlazaFramework\Shortcode\Helper\Latest_PostsHelper::get_taxonomy_by_post_type($latest_post_type);
+        if($latest_post_type == 'post'){
+            $args['category']   = $cats_sync;
+        }else {
+            $args['tax_query'] = array(
+                'taxonomy'  => $tax_name,
+                'field'     => 'id',
+                'operator' => 'IN',
+                'terms'     => $cats_sync,
+            );
+        }
+    }
+}
+
 $latest_cause = get_posts( $args );
 $date_format = get_option('date_format');
 ?>
@@ -51,7 +106,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
                                 <?php if($latest_post_image_cover == true){
                                     ?>
                                 <div class="uk-cover-container">
-                                    <canvas width="" height="<?php echo esc_attr($latest_post_image_cover_height);?>>"></canvas>
+                                    <canvas height="<?php echo esc_attr($latest_post_image_cover_height);?>"></canvas>
                                     <img src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?>" data-uk-cover>
                                 </div>
                             <?php
@@ -83,7 +138,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
                                     if($latest_post_show_author==true){
                                     ?>
                                         <span class="author">
-                                    <?php echo esc_html__('By', 'golden-hearts');?>
+                                    <?php echo esc_html__('By', 'templaza-framework');?>
                                         <a href="<?php echo esc_url(get_author_posts_url($author_id));?>"><?php the_author_meta( 'display_name' , $author_id ); ?></a>
                                     </span>
                                     <?php

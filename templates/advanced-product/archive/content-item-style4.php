@@ -14,7 +14,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 if(isset($args['ap_class'])){
     $ap_class = $args['ap_class'];
 }else{
-    $ap_class = '';
+    $ap_class = ' templazaFadeInUp';
 }
 if(isset($args['show_author'])){
     $ap_author = isset($args['show_author'])?filter_var($args['show_author'], FILTER_VALIDATE_BOOLEAN):false;
@@ -34,6 +34,7 @@ $pid    = get_the_ID();
     <div class="ap-inner ">
         <div class="ap-info">
             <div class="uk-inline">
+                <?php AP_Templates::load_my_layout('archive.badges'); ?>
                 <?php AP_Templates::load_my_layout('archive.media'); ?>
                 <?php
                 if(isset($price) && $price !=''){

@@ -1,3 +1,6 @@
+.templaza-ap-archive{
+  position:relative;
+}
 .ap-item{
   .ap-inner{
     @include transition($tztheme-transition-all);
@@ -37,6 +40,18 @@
       @include transition($tztheme-transition-all);
     }
   }
+  &.ap-item-style1{
+    .ap-inner{
+      .ap-specification{
+        .ap-spec-item{
+          svg{
+            width:18px;
+            margin-right:3px;
+          }
+        }
+      }
+    }
+  }
 }
 .templaza-ap-archive{
   .uk-alert-warning{
@@ -66,5 +81,143 @@
   }
 }
 .tz-loading{
-  @include tz-loading(-5px,-10px,'transparent');
+  @include tz-loading(-5px,-10px,transparent);
+}
+.templaza-ap-archive-view{
+  margin-bottom:40px;
+  border-bottom:1px solid $tztheme-border-color;
+  padding-bottom:25px;
+  label{
+    margin-right:20px;
+    font-weight:700;
+  }
+  span.switcher_btn{
+    cursor: pointer;
+    width:$tztheme-input-height;
+    height:$tztheme-input-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:$tztheme-quote-bg;
+    @include transition($tztheme-transition-all);
+    &:hover,&.uk-active{
+      background:$tztheme-button_background;
+      color:$tztheme-button_text_color;
+    }
+    &:first-child{
+      margin-right:10px;
+    }
+  }
+  .templaza-ap-archive-sort{
+    margin-right:20px;
+    select{
+      height:$tztheme-input-height;
+      line-height: $tztheme-input-height;
+      padding:0 40px 0 25px;
+    }
+  }
+}
+.ap-ribbon {
+  width: 140px;
+  height: 140px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  .ap-ribbon-content{
+    left: -25px;
+    top: 30px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    display: block;
+    width: 225px;
+    padding: 8px 0;
+    background-color: $tztheme-global-color;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight:bold;
+  }
+}
+.ap-archive-btn-action{
+  margin-bottom:20px;
+  margin-right:15px;
+  .uk-icon-button{
+    width:40px;
+    height:40px;
+    background:#fff;
+    color:$tztheme-heading-color;
+    @include border-radius(0);
+    margin:0 4px;
+    @include transition($tztheme-transition-all);
+    &:hover{
+      background:$tztheme-button_background;
+      color:$tztheme-button_text_color;
+    }
+    i{
+      font-size:0.8rem;
+    }
+  }
+}
+.ap-product-compare-items{
+  .ap-inner{
+    .ap-spec-item{
+      i,svg{
+        display:none;
+      }
+    }
+  }
+}
+.templaza-ap-product-filter{
+  i{
+    margin-right:10px;
+  }
+  .ap-filter-btn{
+    cursor: pointer;
+  }
+  &.uk-sticky-fixed{
+    .ap-filter-btn{
+      background:$tztheme-button_background;
+      color:$tztheme-button_text_color;
+      padding:3px 15px;
+      margin-right: -20px;
+      @include box-shadow(0 0px 30px rgba(0,0,0,0.1));
+    }
+  }
+}
+@media screen and (max-width: 1199.99px) {
+  .templaza-ap-product-filter{
+    &.uk-sticky-fixed{
+      .ap-filter-btn{
+        margin-right:-40px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 959.99px) {
+  .templaza-ap-product-filter{
+    &.uk-sticky-fixed{
+      .ap-filter-btn{
+        margin-right:-30px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 639.99px) {
+  .templaza-ap-archive-view{
+    .ap-number-product{
+      margin-bottom: 20px;
+    }
+    span.switcher_btn{
+      width:40px;
+      height:40px;
+    }
+    label{
+      margin-right:10px;
+    }
+  }
 }

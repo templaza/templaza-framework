@@ -383,6 +383,19 @@ if(!class_exists('TemPlazaFramework\Configuration')){
 
                     $file       = $folder .'/' . $post -> post_name . '.json';
 
+                    $old_slugs   = get_post_meta($post_id, '_wp_old_slug');
+                    if(!empty($old_slugs) && !in_array($post -> post_name, $old_slugs)){
+                        foreach ($old_slugs as $old_slug){
+                            // Rename old slug file to new slug file
+                            if(file_exists($folder.'/'.$old_slug.'.json') && !file_exists($folder.'/'.$post -> post_name.'.json')){
+                                rename($folder.'/'.$old_slug.'.json', $folder.'/'.$post -> post_name.'.json');
+                            }elseif(file_exists($folder.'/'.$old_slug.'.json')){
+                                // Remove old file
+                                unlink($folder.'/'.$old_slug.'.json');
+                            }
+                        }
+                    }
+
                     // Rename option file by post id to post name (slug)
                     if(file_exists($file_by_id)){
                         rename($file_by_id, $file);
@@ -455,7 +468,8 @@ if(!class_exists('TemPlazaFramework\Configuration')){
             require_once ( ABSPATH . '/wp-admin/includes/file.php' );
             global $wp_filesystem;
             WP_Filesystem();
-            $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$file_name.'.json';
+            $file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$this -> get_post_type()
+                .'/'.$file_name.'.json';
 
             if(file_exists($file)){
                 $wp_filesystem -> delete($file);

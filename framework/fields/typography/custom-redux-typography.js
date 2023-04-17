@@ -139,19 +139,6 @@
 							parent.find(".typography-input").addClass(input_class)
 								.end().find("input[type=hidden][data-device=" + device + "]").addClass(input_hidden_class);
 
-							// 	var attr_class = $(this).attr("data-hidden-name");
-							// 	var device = parent.attr("data-device");
-							//
-							// 	_el.find(".typography-input[data-hidden-name]").removeClass("redux-typography-"+$(this).attr("data-name"));
-							// 	$(this).addClass("redux-typography-"+$(this).attr("data-name"));
-							//
-							// 	_el.find("input[type=hidden][data-device]").removeClass("typography-"+attr_class)
-							// 		.end()
-							// 		.find("input[type=hidden][data-device="+device+"]").addClass("typography-"+attr_class);
-							// var mainID = $(selector).parents('.redux-container-typography:first').data('id');
-							// if (undefined === mainID) {
-							// 	mainID = $(selector).data('id');
-							// }
 							var main = _el.closest('.redux-container-typography');
 							var mainID = _el.closest('.redux-container-typography').data('id');
 							if (undefined === mainID) {
@@ -165,7 +152,11 @@
 
 							redux.field_objects.typography.select(main);
 
-							parent.find("input[data-device="+device+"]").val($( this ).val() + unit);
+							if($( this ).val().length) {
+								parent.find("input[data-device=" + device + "]").val($(this).val() + unit);
+							}else{
+								parent.find("input[data-device=" + device + "]").val("");
+							}
 						}
 
 						// redux.field_objects.typography.select(main);
@@ -183,22 +174,6 @@
 
 							parent.find(".typography-input").addClass(input_class)
 								.end().find("input[type=hidden][data-device=" + device + "]").addClass(input_hidden_class);
-
-
-							// var device = parent.attr("data-device");
-							// var attr_class = parent.find("input[type=text][data-hidden-name]").attr("data-hidden-name");
-							// _el.find("input[type=hidden][data-device]").removeClass("typography-"+attr_class)
-							// 	.end()
-							// 	.find("input[type=hidden][data-device="+device+"]").addClass("typography-"+attr_class);
-							//
-							// _el.find(".typography-input[data-hidden-name]").removeClass("redux-typography-"+$(this).attr("data-name"));
-							// parent.find(".typography-input[data-hidden-name]").addClass("redux-typography-"+$(this).attr("data-name"));
-							//
-
-							// var mainID = $(selector).parents('.redux-container-typography:first').data('id');
-							// if (undefined === mainID) {
-							// 	mainID = $(selector).data('id');
-							// }
 
 							var main = _el.closest('.redux-container-typography');
 							var mainID = _el.closest('.redux-container-typography').data('id');
