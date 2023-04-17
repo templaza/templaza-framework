@@ -106,7 +106,7 @@ if(!empty($ap_gallery)){
                             <a class="uk-inline uk-width-1-1 uk-height-1-1" href="<?php echo esc_url($image['url']); ?>" data-caption="<?php echo esc_attr($image['caption']); ?>">
                                 <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['title']); ?>" data-uk-cover>
                                 <canvas width="100%" height="350"></canvas>
-                                <span class="ap-image-color <?php echo esc_attr($bg);?> uk-flex uk-flex-center uk-flex-middle uk-position-top-left uk-width-1-1 uk-height-1-1"><?php esc_html_e('+','amanus'); echo ($total_images-4);esc_html_e(' Photos >','amanus');?></span>
+                                <span class="ap-image-color <?php echo esc_attr($bg);?> uk-flex uk-flex-center uk-flex-middle uk-position-top-left uk-width-1-1 uk-height-1-1"><?php esc_html_e('+','templaza-framework'); echo ($total_images-4);esc_html_e(' Photos >','templaza-framework');?></span>
                             </a>
                         </div>
                     </div>

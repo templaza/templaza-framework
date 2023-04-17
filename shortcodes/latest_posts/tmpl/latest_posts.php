@@ -138,7 +138,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
                                     if($latest_post_show_author==true){
                                     ?>
                                         <span class="author">
-                                    <?php echo esc_html__('By', 'golden-hearts');?>
+                                    <?php echo esc_html__('By', 'templaza-framework');?>
                                         <a href="<?php echo esc_url(get_author_posts_url($author_id));?>"><?php the_author_meta( 'display_name' , $author_id ); ?></a>
                                     </span>
                                     <?php

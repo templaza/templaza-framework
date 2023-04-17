@@ -428,7 +428,7 @@ if ($mode == 'left') {
                         <?php echo $search_icon_html; ?>
                     </span>
                             <form method="get" class="searchform " action="<?php echo esc_url( home_url( '/' ) ); ?>">
-                                <input type="text" class="field uk-input inputbox search-query uk-margin-remove-vertical" name="s" placeholder="<?php esc_attr_e( 'Search...', 'medil');?>" />
+                                <input type="text" class="field uk-input inputbox search-query uk-margin-remove-vertical" name="s" placeholder="<?php esc_attr_e( 'Search...', 'templaza-framework');?>" />
                                 <button type="submit" class="submit searchsubmit has-button-icon uk-position-right" name="submit" data-uk-icon="search"></button>
                             </form>
                         </div>

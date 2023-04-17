@@ -40,7 +40,7 @@ if($gfields_assigned && count($gfields_assigned)){
             }
         }
         ?>
-            <li class="uk-margin-remove"><a class="ap-scroll-item" href="#comments"><?php esc_html_e( 'Leave a Comment','amanus'); ?></a> </li>
+            <li class="uk-margin-remove"><a class="ap-scroll-item" href="#comments"><?php esc_html_e( 'Leave a Comment','templaza-framework'); ?></a> </li>
         </ul>
     </div>
     <?php

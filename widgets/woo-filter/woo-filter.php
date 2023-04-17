@@ -134,8 +134,8 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 echo '<input type="hidden" name="filter" value="1">';
 
                 echo '<div class="templaza_woo_filters-buttons products-filter__control-buttons">';
-                echo '<button type="submit" value="' . esc_attr__( 'Filter', 'templaza-elements' ) . '" class="button filter-button">' . esc_html__( 'Filter', 'templaza-elements' ) . '</button>';
-                echo '<button type="reset" value="' . esc_attr__( 'Reset Filter', 'templaza-elements' ) . '" class="button alt reset-button button-lg">' . esc_html__( 'Reset Filter', 'templaza-elements' ) . '</button>';
+                echo '<button type="submit" value="' . esc_attr__( 'Filter', 'templaza-framework' ) . '" class="button filter-button">' . esc_html__( 'Filter', 'templaza-framework' ) . '</button>';
+                echo '<button type="reset" value="' . esc_attr__( 'Reset Filter', 'templaza-framework' ) . '" class="button alt reset-button button-lg">' . esc_html__( 'Reset Filter', 'templaza-framework' ) . '</button>';
                 echo '</div>';
 
                 if ( $instance['ajax'] ) {
@@ -194,7 +194,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                             $list[] = sprintf(
                                 '<a href="#" class="remove-filtered" data-name="price" data-value="%s">%s: %s%s</a>',
                                 esc_attr( $price ),
-                                esc_html__('Price', 'templaza-elements'),
+                                esc_html__('Price', 'templaza-framework'),
                                 $price,
                                 '<i class="fas fa-close"></i>'
                             );
@@ -207,7 +207,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                             break;
 
                         case 'rating':
-                            $text = _n( 'Rated %d star', 'Rated %d stars', $term, 'templaza-elements' );
+                            $text = _n( 'Rated %d star', 'Rated %d stars', $term, 'templaza-framework' );
                             $text = sprintf( $text, $term );
                             break;
 
@@ -309,15 +309,15 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                     return;
                 }
 
-                $args['all']        = sprintf( esc_html__( 'Any %s', 'templaza-elements' ), wc_attribute_label( $attr->attribute_label ) );
+                $args['all']        = sprintf( esc_html__( 'Any %s', 'templaza-framework' ), wc_attribute_label( $attr->attribute_label ) );
                 $args['type']       = $attr->attribute_type;
                 $args['query_type'] = $filter['query_type'];
                 $args['attribute']  = $filter['attribute'];
             } elseif ( taxonomy_exists( $filter['source'] ) ) {
                 $taxonomy    = get_taxonomy( $filter['source'] );
-                $args['all'] = sprintf( esc_html__( 'Select a %s', 'templaza-elements' ), $taxonomy->labels->singular_name );
+                $args['all'] = sprintf( esc_html__( 'Select a %s', 'templaza-framework' ), $taxonomy->labels->singular_name );
             } else {
-                $args['all'] = esc_html__( 'All Products', 'templaza-elements' );
+                $args['all'] = esc_html__( 'All Products', 'templaza-framework' );
             }
 
             // Correct the "current" argument.
@@ -411,10 +411,10 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                     }
                     ?>
                     <div class="products-filter__control-buttons">
-                        <button type="button" value="<?php esc_attr_e( 'Clear', 'templaza-elements' ); ?>"
-                                class="button alt clear-button"><?php esc_html_e( 'Clear', 'templaza-elements' ); ?></button>
-                        <button type="submit" value="<?php esc_attr_e( 'Show Results', 'templaza-elements' ) ?>"
-                                class="button filter-button button-lg"><?php esc_html_e( 'Show Results', 'templaza-elements' ); ?></button>
+                        <button type="button" value="<?php esc_attr_e( 'Clear', 'templaza-framework' ); ?>"
+                                class="button alt clear-button"><?php esc_html_e( 'Clear', 'templaza-framework' ); ?></button>
+                        <button type="submit" value="<?php esc_attr_e( 'Show Results', 'templaza-framework' ) ?>"
+                                class="button filter-button button-lg"><?php esc_html_e( 'Show Results', 'templaza-framework' ); ?></button>
                     </div>
                 </div>
             </div>
@@ -510,15 +510,15 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
 
                 case 'products_group':
                     $filter_groups = apply_filters( 'templaza_products_filter_groups', array(
-                        'best_sellers' => esc_html__( 'Best Sellers', 'templaza-elements' ),
-                        'new'          => esc_html__( 'New Products', 'templaza-elements' ),
-                        'sale'         => esc_html__( 'Sale Products', 'templaza-elements' ),
-                        'featured'     => esc_html__( 'Hot Products', 'templaza-elements' ),
+                        'best_sellers' => esc_html__( 'Best Sellers', 'templaza-framework' ),
+                        'new'          => esc_html__( 'New Products', 'templaza-framework' ),
+                        'sale'         => esc_html__( 'Sale Products', 'templaza-framework' ),
+                        'featured'     => esc_html__( 'Hot Products', 'templaza-framework' ),
                     ) );
 
                     if ( 'dropdown' != $filter['display'] ) {
                         $options[''] = array(
-                            'name'  => esc_html__( 'All Products', 'templaza-elements' ),
+                            'name'  => esc_html__( 'All Products', 'templaza-framework' ),
                             'count' => 0,
                             'id'    => 0,
                             'level' => 0,
@@ -536,12 +536,12 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
 
                 case 'orderby':
                     $orderby = apply_filters( 'templaza_products_filter_orderby', array(
-                        'menu_order' => esc_html__( 'Default sorting', 'templaza-elements' ),
-                        'popularity' => esc_html__( 'Sort by popularity', 'templaza-elements' ),
-                        'rating'     => esc_html__( 'Sort by average rating', 'templaza-elements' ),
-                        'date'       => esc_html__( 'Sort by latest', 'templaza-elements' ),
-                        'price'      => esc_html__( 'Sort by price: low to high', 'templaza-elements' ),
-                        'price-desc' => esc_html__( 'Sort by price: high to low', 'templaza-elements' ),
+                        'menu_order' => esc_html__( 'Default sorting', 'templaza-framework' ),
+                        'popularity' => esc_html__( 'Sort by popularity', 'templaza-framework' ),
+                        'rating'     => esc_html__( 'Sort by average rating', 'templaza-framework' ),
+                        'date'       => esc_html__( 'Sort by latest', 'templaza-framework' ),
+                        'price'      => esc_html__( 'Sort by price: low to high', 'templaza-framework' ),
+                        'price-desc' => esc_html__( 'Sort by price: high to low', 'templaza-framework' ),
                     ) );
 
                     foreach ( $orderby as $name => $label ) {
@@ -704,10 +704,10 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
         protected function filter_search_box( $filter ) {
             if ( 'attribute' == $filter['source'] ) {
                 $attributes  = $this->get_filter_attribute_options();
-                $placeholder = __( 'Search', 'templaza-elements' ) . ' ' . strtolower( $attributes[ $filter['attribute'] ] );
+                $placeholder = __( 'Search', 'templaza-framework' ) . ' ' . strtolower( $attributes[ $filter['attribute'] ] );
             } else {
                 $sources     = $this->get_filter_source_options();
-                $placeholder = __( 'Search', 'templaza-elements' ) . ' ' . strtolower( $sources[ $filter['source'] ] );
+                $placeholder = __( 'Search', 'templaza-framework' ) . ' ' . strtolower( $sources[ $filter['source'] ] );
             }
 
             if ( 'dropdown' == $filter['display'] ) {
@@ -926,7 +926,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 'name'        => '',
                 'current'     => array(),
                 'options'     => array(),
-                'all'         => esc_html__( 'Any', 'templaza-elements' ),
+                'all'         => esc_html__( 'Any', 'templaza-framework' ),
                 'show_counts' => false,
             ) );
 
@@ -1263,24 +1263,24 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
             $this->setting_field( array(
                 'type'  => 'text',
                 'name'  => 'title',
-                'label' => esc_html__( 'Title', 'templaza-elements' ),
+                'label' => esc_html__( 'Title', 'templaza-framework' ),
                 'value' => $instance['title'],
             ) );
             ?>
 
             <div class="templaza-products-filter-form__sub-nav">
                 <button type="button" data-section="filters"
-                        class="button-link active"><?php esc_html_e( 'Filters', 'templaza-elements' ); ?></button>
+                        class="button-link active"><?php esc_html_e( 'Filters', 'templaza-framework' ); ?></button>
                 |
                 <button type="button" data-section="options"
-                        class="button-link"><?php esc_html_e( 'Options', 'templaza-elements' ); ?></button>
+                        class="button-link"><?php esc_html_e( 'Options', 'templaza-framework' ); ?></button>
             </div>
 
             <p>
             <hr/></p>
 
             <div class="templaza-products-filter-form__section active" data-section="filters">
-                <p class="templaza-products-filter-form__message <?php echo ! empty( $instance['filter'] ) ? 'hidden' : '' ?>"><?php esc_html_e( 'There is no filter yet.', 'templaza-elements' ) ?></p>
+                <p class="templaza-products-filter-form__message <?php echo ! empty( $instance['filter'] ) ? 'hidden' : '' ?>"><?php esc_html_e( 'There is no filter yet.', 'templaza-framework' ) ?></p>
 
                 <div class="templaza-products-filter-form__filter-fields">
                     <?php $this->filter_setting_fields( $instance['filter'] ); ?>
@@ -1290,7 +1290,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                     <button type="button" class="templaza-products-filter-form__add-new button-link"
                             data-name="<?php echo esc_attr( $this->get_field_name( 'filter' ) ); ?>"
                             data-count="<?php echo count( $instance['filter'] ) ?>">
-                        + <?php esc_html_e( 'Add a new filter', 'templaza-elements' ) ?></button>
+                        + <?php esc_html_e( 'Add a new filter', 'templaza-framework' ) ?></button>
                 </p>
             </div>
 
@@ -1302,14 +1302,14 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 $this->setting_field( array(
                     'type'  => 'checkbox',
                     'name'  => 'ajax',
-                    'label' => esc_html__( 'Use ajax for filtering', 'templaza-elements' ),
+                    'label' => esc_html__( 'Use ajax for filtering', 'templaza-framework' ),
                     'value' => $instance['ajax'],
                 ) );
 
                 $this->setting_field( array(
                     'type'      => 'checkbox',
                     'name'      => 'instant',
-                    'label'     => esc_html__( 'Filtering products instantly (no buttons required)', 'templaza-elements' ),
+                    'label'     => esc_html__( 'Filtering products instantly (no buttons required)', 'templaza-framework' ),
                     'value'     => $instance['instant'],
                     'condition' => array(
                         'ajax' => true,
@@ -1319,11 +1319,11 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 $this->setting_field( array(
                     'type'      => 'select',
                     'name'      => 'filter_buttons',
-                    'label'     => esc_html__( 'Filter buttons position', 'templaza-elements' ),
+                    'label'     => esc_html__( 'Filter buttons position', 'templaza-framework' ),
                     'value'     => $instance['filter_buttons'],
                     'options'   => array(
-                        'form'   => __( 'Bottom of form', 'templaza-elements' ),
-                        'fitems' => __( 'Bottom of filter items', 'templaza-elements' ),
+                        'form'   => __( 'Bottom of form', 'templaza-framework' ),
+                        'fitems' => __( 'Bottom of filter items', 'templaza-framework' ),
                     ),
                     'condition' => array(
                         'instant' => false,
@@ -1333,7 +1333,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 $this->setting_field( array(
                     'type'      => 'checkbox',
                     'name'      => 'change_url',
-                    'label'     => esc_html__( 'Update URL', 'templaza-elements' ),
+                    'label'     => esc_html__( 'Update URL', 'templaza-framework' ),
                     'value'     => $instance['change_url'],
                     'condition' => array(
                         'ajax' => true,
@@ -1365,7 +1365,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                         <div class="templaza-products-filter-form__filter-actions">
                             <button type="button"
                                     class="templaza-products-filter-form__remove-filter button-link button-link-delete">
-                                <span class="screen-reader-text"><?php esc_html_e( 'Remove filter', 'templaza-elements' ) ?></span>
+                                <span class="screen-reader-text"><?php esc_html_e( 'Remove filter', 'templaza-framework' ) ?></span>
                                 <span class="dashicons dashicons-no-alt"></span>
                             </button>
                         </div>
@@ -1438,11 +1438,11 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
          */
         protected function get_filter_source_options() {
             $sources = array(
-                'orderby'        => esc_html__( 'Order By', 'templaza-elements' ),
-                'products_group' => esc_html__( 'Group', 'templaza-elements' ),
-                'price'          => esc_html__( 'Price', 'templaza-elements' ),
-                'attribute'      => esc_html__( 'Attributes', 'templaza-elements' ),
-                'rating'         => esc_html__( 'Rating', 'templaza-elements' ),
+                'orderby'        => esc_html__( 'Order By', 'templaza-framework' ),
+                'products_group' => esc_html__( 'Group', 'templaza-framework' ),
+                'price'          => esc_html__( 'Price', 'templaza-framework' ),
+                'attribute'      => esc_html__( 'Attributes', 'templaza-framework' ),
+                'rating'         => esc_html__( 'Rating', 'templaza-framework' ),
             );
 
             // Getting other taxonomies.
@@ -1495,25 +1495,25 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
         protected function get_filter_display_options( $source = 'product_cat' ) {
             $options = array(
                 'price'     => array(
-                    'slider' => esc_html__( 'Slider', 'templaza-elements' ),
-                    'ranges' => esc_html__( 'Ranges', 'templaza-elements' ),
+                    'slider' => esc_html__( 'Slider', 'templaza-framework' ),
+                    'ranges' => esc_html__( 'Ranges', 'templaza-framework' ),
                 ),
                 'attribute' => array(
-                    'auto'       => esc_html__( 'Auto', 'templaza-elements' ),
-                    'dropdown'   => esc_html__( 'Dropdown', 'templaza-elements' ),
-                    'list'       => esc_html__( 'Vertical List', 'templaza-elements' ),
-                    'h-list'     => esc_html__( 'Horizontal List', 'templaza-elements' ),
-                    'checkboxes' => esc_html__( 'Checkbox List', 'templaza-elements' ),
+                    'auto'       => esc_html__( 'Auto', 'templaza-framework' ),
+                    'dropdown'   => esc_html__( 'Dropdown', 'templaza-framework' ),
+                    'list'       => esc_html__( 'Vertical List', 'templaza-framework' ),
+                    'h-list'     => esc_html__( 'Horizontal List', 'templaza-framework' ),
+                    'checkboxes' => esc_html__( 'Checkbox List', 'templaza-framework' ),
                 ),
                 'rating'    => array(
-                    'dropdown'   => esc_html__( 'Dropdown', 'templaza-elements' ),
-                    'checkboxes' => esc_html__( 'Checkbox List', 'templaza-elements' ),
+                    'dropdown'   => esc_html__( 'Dropdown', 'templaza-framework' ),
+                    'checkboxes' => esc_html__( 'Checkbox List', 'templaza-framework' ),
                 ),
                 'default'   => array(
-                    'dropdown'   => esc_html__( 'Dropdown', 'templaza-elements' ),
-                    'list'       => esc_html__( 'Vertical List', 'templaza-elements' ),
-                    'h-list'     => esc_html__( 'Horizontal List', 'templaza-elements' ),
-                    'checkboxes' => esc_html__( 'Checkbox List', 'templaza-elements' ),
+                    'dropdown'   => esc_html__( 'Dropdown', 'templaza-framework' ),
+                    'list'       => esc_html__( 'Vertical List', 'templaza-framework' ),
+                    'h-list'     => esc_html__( 'Horizontal List', 'templaza-framework' ),
+                    'checkboxes' => esc_html__( 'Checkbox List', 'templaza-framework' ),
                 ),
             );
 
@@ -1543,17 +1543,17 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
             $this->filter_settings = array(
                 'name'        => array(
                     'type'  => 'text',
-                    'label' => __( 'Filter Name', 'templaza-elements' ),
+                    'label' => __( 'Filter Name', 'templaza-framework' ),
                 ),
                 'source'      => array(
                     'type'    => 'select',
-                    'label'   => __( 'Filter By', 'templaza-elements' ),
+                    'label'   => __( 'Filter By', 'templaza-framework' ),
                     'options' => $this->get_filter_source_options(),
                 ),
                 'attribute'   => array(
                     'type'      => 'select',
                     'name'      => 'attribute',
-                    'label'     => __( 'Attribute', 'templaza-elements' ),
+                    'label'     => __( 'Attribute', 'templaza-framework' ),
                     'options'   => $this->get_filter_attribute_options(),
                     'condition' => array(
                         'source' => 'attribute',
@@ -1561,13 +1561,13 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 ),
                 'display'     => array(
                     'type'    => 'select',
-                    'label'   => __( 'Display Type', 'templaza-elements' ),
+                    'label'   => __( 'Display Type', 'templaza-framework' ),
                     'options' => $this->get_filter_display_options(),
                 ),
                 'ranges'      => array(
                     'type'      => 'textarea',
-                    'label'     => __( 'Ranges', 'templaza-elements' ),
-                    'desc'      => __( 'Each range on a line, separate by the <code>-</code> symbol. Do not include the currency symbol.', 'templaza-elements' ),
+                    'label'     => __( 'Ranges', 'templaza-framework' ),
+                    'desc'      => __( 'Each range on a line, separate by the <code>-</code> symbol. Do not include the currency symbol.', 'templaza-framework' ),
                     'condition' => array(
                         'display' => 'ranges',
                         'source'  => 'price',
@@ -1575,10 +1575,10 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 ),
                 'multiple'    => array(
                     'type'      => 'select',
-                    'label'     => __( 'Selection Type', 'templaza-elements' ),
+                    'label'     => __( 'Selection Type', 'templaza-framework' ),
                     'options'   => array(
-                        0 => __( 'Single select', 'templaza-elements' ),
-                        1 => __( 'Multiple select', 'templaza-elements' ),
+                        0 => __( 'Single select', 'templaza-framework' ),
+                        1 => __( 'Multiple select', 'templaza-framework' ),
                     ),
                     'condition' => array(
                         'source!'  => [ 'products_group', 'price', 'orderby' ],
@@ -1587,10 +1587,10 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 ),
                 'query_type'  => array(
                     'type'      => 'select',
-                    'label'     => __( 'Query Type', 'templaza-elements' ),
+                    'label'     => __( 'Query Type', 'templaza-framework' ),
                     'options'   => array(
-                        'and' => __( 'AND', 'templaza-elements' ),
-                        'or'  => __( 'OR', 'templaza-elements' ),
+                        'and' => __( 'AND', 'templaza-framework' ),
+                        'or'  => __( 'OR', 'templaza-framework' ),
                     ),
                     'condition' => array(
                         'source' => 'attribute',
@@ -1598,7 +1598,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 ),
                 'collapsible' => array(
                     'type'      => 'checkbox',
-                    'label'     => __( 'Collapsible', 'templaza-elements' ),
+                    'label'     => __( 'Collapsible', 'templaza-framework' ),
                     'condition' => array(
                         'source'  => array( 'product_cat' ),
                         'display' => array( 'list', 'checkboxes' ),
@@ -1606,21 +1606,21 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 ),
                 'show_counts' => array(
                     'type'      => 'checkbox',
-                    'label'     => __( 'Show product counts', 'templaza-elements' ),
+                    'label'     => __( 'Show product counts', 'templaza-framework' ),
                     'condition' => array(
                         'source!' => array( 'price', 'products_group', 'orderby' ),
                     ),
                 ),
                 'searchable'  => array(
                     'type'      => 'checkbox',
-                    'label'     => __( 'Show the search box', 'templaza-elements' ),
+                    'label'     => __( 'Show the search box', 'templaza-framework' ),
                     'condition' => array(
                         'display!' => array( 'auto', 'slider', 'ranges' ),
                     ),
                 ),
                 'scrollable'  => array(
                     'type'      => 'checkbox',
-                    'label'     => __( 'Limit the height of items list (scrollable)', 'templaza-elements' ),
+                    'label'     => __( 'Limit the height of items list (scrollable)', 'templaza-framework' ),
                     'condition' => array(
                         'display' => array( 'list', 'checkboxes' ),
                     ),
