@@ -72,6 +72,7 @@ class TemPlazaFrameWork{
         do_action( 'templaza-framework/plugin/hooks', $this );
     }
     public function tz_load_plugin_textdomain() {
+        load_plugin_textdomain( 'wordpress-importer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
         load_plugin_textdomain( 'templaza-framework', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
     }
 
