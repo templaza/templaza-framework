@@ -96,7 +96,9 @@ if(!class_exists('TemPlazaFramework\Functions')){
                 if(file_exists($setting_file)){
                     $def_options    = file_get_contents($setting_file);
                     $def_options    = (is_string($def_options) && !empty($def_options))?json_decode($def_options, true):$def_options;
-                    $options        = count($def_options)?$def_options:$options;
+                    if(is_array($def_options)){
+                        $options        = count($def_options)?$def_options:$options;
+                    }
                 }
             }
 
