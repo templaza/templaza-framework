@@ -154,7 +154,7 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
 //                    $enqueue -> init();
                 }else{
                     $redux -> options_class -> register();
-//                    $redux -> enqueue_class -> init();
+                    $redux -> enqueue_class -> init();
                 }
                 $enqueue    = new Enqueue($redux);
                 $enqueue -> framework_init();
