@@ -1,8 +1,7 @@
 jQuery( function ( $ ) {
 	'use strict';
-	$(document).ready(function(){
+	$(window).load(function(){
 		$('#post-format-selector-0').on('change', function(e) {
-
 			var format = $(this).val();
 
 			switch (format) {
