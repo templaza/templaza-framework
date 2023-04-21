@@ -54,6 +54,9 @@ if(!class_exists('TemPlazaFramework\Admin\Application')){
                 // Enqueue the message.
                 $this->_message_queue[] = $message;
             }
+            if( empty(session_id()) && !headers_sent()){
+                session_start();
+            }
             $_SESSION[TEMPLAZA_FRAMEWORK . '_application.queue']   = $this -> _message_queue;
         }
 
@@ -62,6 +65,9 @@ if(!class_exists('TemPlazaFramework\Admin\Application')){
             // For empty queue, if messages exists in the session, enqueue them.
             if (!$this->_message_queue)
             {
+                if( empty(session_id()) && !headers_sent()){
+                    session_start();
+                }
                 $sessionQueue = (isset($_SESSION[TEMPLAZA_FRAMEWORK . '_application.queue'])
                     && $_SESSION[TEMPLAZA_FRAMEWORK . '_application.queue'])?
                     $_SESSION[TEMPLAZA_FRAMEWORK . '_application.queue']:array();
