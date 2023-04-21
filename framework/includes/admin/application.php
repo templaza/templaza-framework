@@ -74,7 +74,7 @@ if(!class_exists('TemPlazaFramework\Admin\Application')){
 
                 if ($sessionQueue)
                 {
-                    $this->_message_queue = array_unique($sessionQueue);
+                    $this->_message_queue = is_array($sessionQueue)?array_unique($sessionQueue):$sessionQueue;
                     $_SESSION[TEMPLAZA_FRAMEWORK . '_application.queue']   = array();
                 }
             }
@@ -90,7 +90,3 @@ if(!class_exists('TemPlazaFramework\Admin\Application')){
         }
     }
 }
-
-//
-//$GLOBALS['templaza_framework_installation'] = new Application();
-//add_action('admin_init', array($GLOBALS['templaza_framework_installation'], 'init'), 1);
