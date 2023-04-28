@@ -6,7 +6,7 @@ $one_row        = (isset($field_parent['one_row']) && $field_parent['one_row'])?
 ?>
 <script type="text/html" id="tmpl-field-tz_layout-template-<?php echo $this -> element['id']; ?>">
     <div class="fl_row" data-fl-element_type="<?php echo $this -> element['id']; ?>">
-        <div class="fl_controls fl_controls-row clearfix">
+        <div class="fl_controls fl_controls-row uk-clearfix">
             <?php if(!$one_row){ ?>
             <div class="fl_controls-row-left">
                 <a href="#" class="fl_control fl_column-move" data-fl-control="move" data-uk-tooltip="<?php

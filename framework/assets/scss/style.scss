@@ -2,22 +2,20 @@ $grid-gutter-width:           2.5rem !default;
 @import "../../../assets/scss/vendor/uikit/variables-theme.scss";
 @import "../../../assets/scss/vendor/uikit/mixins-theme.scss";
 
+:root { --uk-position-margin-offset: 0px; }
+
 .templaza-framework__body {
   *,
   *::before,
   *::after {
     box-sizing: border-box;
   }
-  //@import "../../../assets/scss/vendor/bootstrap_grid/mixins.scss";
-  //@import "../../../assets/scss/vendor/bootstrap_grid/bootstrap-grid.scss";
-  //@import "../../../assets/scss/vendor/bootstrap_grid/bootstrap-utilities.scss";
 
   @import "variables_override.scss";
-  @import "bootstrap_custom.scss";
+  //@import "bootstrap_custom.scss";
   @import "../../../assets/scss/vendor/uikit/uikit-theme.scss";
   &:not(.nav-menus-php){
-    //@import "../../../assets/scss/vendor/bootstrap_grid/reboot.scss";
-    @import "bootstrap/bootstrap_addition.scss";
+    //@import "bootstrap/bootstrap_addition.scss";
     .progress-bar-animated.bg-success {
       background-image:none;
     }
@@ -60,13 +58,13 @@ $grid-gutter-width:           2.5rem !default;
 
   $enable-shadows:              true !default;
 
-  .redux-container-tz_layout{
-    .container-fluid .field-tz_layout-content{
-      --#{$variable-prefix}gutter-x: #{$grid-gutter-width};
-      margin-right: calc(var(--#{$variable-prefix}gutter-x) / -2); // stylelint-disable-line function-disallowed-list
-      margin-left: calc(var(--#{$variable-prefix}gutter-x) / -2); // stylelint-disable-line function-disallowed-list
-    }
-  }
+  //.redux-container-tz_layout{
+  //  .container-fluid .field-tz_layout-content{
+  //    --#{$variable-prefix}gutter-x: #{$grid-gutter-width};
+  //    margin-right: calc(var(--#{$variable-prefix}gutter-x) / -2); // stylelint-disable-line function-disallowed-list
+  //    margin-left: calc(var(--#{$variable-prefix}gutter-x) / -2); // stylelint-disable-line function-disallowed-list
+  //  }
+  //}
   &.tzfrm-postype{
     a{
       color: $tz-global-color;

@@ -1,4 +1,10 @@
 
+$tz-white:                      #fff !default;
+
+$variable-prefix:               bs- !default;
+$grid-gutter-width:             1.5rem !default;
+
+
 $tz-global-color:               #727cf5 !default;
 $tz-global-text-color:          #686868 !default;
 $tz-body-color:                 #f0f0f1 !default;
@@ -22,6 +28,7 @@ $tzhover:                       $tz-global-color !default;
 $tzdelete:                      #ff3366 !default;
 $tzspin:                        #007bff !default;
 
+$tz-warning-color:              #faa05a !default;
 $tz-danger-color:               #f0506e !default;
 $tz-success-color:              #32d296 !default;
 $tz-secondary-color:            #7987a1 !default;
