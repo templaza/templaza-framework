@@ -4,6 +4,7 @@ namespace TemPlazaFramework\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
+use TemPlazaFramework\AdminHelper\ThemeHelper;
 use \TemPlazaFramework\Functions;
 use \TemPlazaFramework\Admin\Admin_Page_Function;
 use TemPlazaFramework\Controller\BaseController;
@@ -280,6 +281,18 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                 'add_admin_menu' => true,
                 'callback' => array($this, 'render')
             ));
+
+            if(ThemeHelper::getThemesPackage('', array('ignore_notice' => true))) {
+                Menu_Admin::add_submenu_section('theme', array(
+                    'label' => esc_html__('Themes', 'templaza-framework'),
+                    'description' => '',
+                    'add_admin_menu' => true,
+                    'callback' => array($this, 'render')
+                ));
+            }
+
+            do_action('templaza-framework/register_admin_menu', $this);
+
             $this -> add_submenus();
         }
 

@@ -25,13 +25,16 @@
     -moz-appearance: none;
     appearance: none;
   }
-  .tzinst-demo-import.no-license{
-    opacity: .3;
-    pointer-events: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  .tzinst-demo-import,
+  .tzinst-theme-install{
+    &.no-license{
+      opacity: .3;
+      pointer-events: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
   }
   .tzfrm-ui-dialog-installation{
     max-width: 800px;
