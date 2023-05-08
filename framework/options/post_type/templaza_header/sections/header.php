@@ -539,6 +539,15 @@ Templaza_API::set_section('templaza_header',
                     array('enable-sticky', '=', '1') ),
             ),
             array(
+                'id'       => 'sticky-border',
+                'type'     => 'border',
+                'title'    => esc_html__('Sticky Border', 'templaza-framework'),
+                'default'  => '',
+                'color_alpha'  => true,
+                'required' => array(
+                    array('enable-sticky', '=', '1') ),
+            ),
+            array(
                 'id'       => 'sticky-logo',
                 'type'     => 'media',
                 'url'      => true,

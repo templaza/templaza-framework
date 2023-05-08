@@ -189,3 +189,35 @@ a.ui-button:active,
 html .ui-button.ui-state-disabled:active{
   outline:none;
 }
+.ap-search-max-height{
+  height:120px;
+  overflow: hidden;
+  @include transition($tztheme-transition-all);
+  .ap-search-ep{
+    opacity:0;
+    visibility: hidden;
+    margin-bottom: 25px;
+    margin-right:40px;
+    color:$tztheme-content-color;
+    i{
+      margin-right:8px;
+      font-size:0.8em;
+    }
+    &.active{
+      opacity:1;
+      visibility: visible;
+    }
+  }
+  .ap-search-close{
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    opacity:0;
+    visibility: hidden;
+  }
+  .ap-search-item{
+    margin-top:0 !important;
+  }
+}

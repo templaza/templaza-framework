@@ -606,7 +606,31 @@ Templaza_API::set_section('templaza_style',
                 'min'      => '1',
                 'step'     => '1',
                 'max'      => '21',
-            )
+            ),
+            array(
+                'id'       => 'blog-related-nav',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Next/Preview', 'templaza-framework' ),
+                'options'       => array(
+                    'on'         => esc_html__('On', 'templaza-framework'),
+                    'off'         => esc_html__('Off', 'templaza-framework'),
+                ),
+                'placeholder'   => esc_html__('Inherit', 'templaza-framework'),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
+            ),
+            array(
+                'id'       => 'blog-related-dot',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Dots', 'templaza-framework' ),
+                'options'       => array(
+                    'on'         => esc_html__('On', 'templaza-framework'),
+                    'off'         => esc_html__('Off', 'templaza-framework'),
+                ),
+                'placeholder'   => esc_html__('Inherit', 'templaza-framework'),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
+            ),
         )
     )
 );

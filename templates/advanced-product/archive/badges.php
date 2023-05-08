@@ -12,6 +12,8 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 $thumbnail       = isset($templaza_options['ap_product-thumbnail-size'])?$templaza_options['ap_product-thumbnail-size']:'large';
 $sale_label       = isset($templaza_options['ap_product-sale-label'])?$templaza_options['ap_product-sale-label']:'';
 $rent_label       = isset($templaza_options['ap_product-rent-label'])?$templaza_options['ap_product-rent-label']:'';
+$sold_label       = isset($templaza_options['ap_product-sold-label'])?$templaza_options['ap_product-sold-label']:'';
+$contact_label       = isset($templaza_options['ap_product-contact-label'])?$templaza_options['ap_product-contact-label']:'';
 $rent_sale       = isset($templaza_options['ap_product-sale-rent-label'])?$templaza_options['ap_product-sale-rent-label']:'';
 $product_type   = get_field('ap_product_type', get_the_ID());
 $label = $cl = '';
@@ -26,6 +28,12 @@ if($product_type){
         }elseif(in_array('rental', $product_type)){
             $label = $rent_label;
             $cl = 'rental';
+        }elseif(in_array('sold', $product_type)){
+            $label = $sold_label;
+            $cl = 'sold';
+        }elseif(in_array('contact', $product_type)){
+            $label = $contact_label;
+            $cl = 'contact';
         }else{
             $label = __('All','templaza-framework');
             $cl = 'sale-rent';

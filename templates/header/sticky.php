@@ -75,6 +75,7 @@ $header_sticky_designs = array(
         'class' => '.templaza-sticky-inner',
         'options' => array(
             'sticky-padding',
+            'sticky-border',
         ),
     )
 );

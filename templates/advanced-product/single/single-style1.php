@@ -18,22 +18,61 @@ $ap_office_price_label     = isset($templaza_options['ap_product-office-price-la
 $ap_office_price_form      = isset($templaza_options['ap_product-office-price-form'])?$templaza_options['ap_product-office-price-form']:'';
 $ap_office_form_custom     = isset($templaza_options['ap_product-office-price-form-custom'])?$templaza_options['ap_product-office-price-form-custom']:'';
 $ap_content_group     = isset($templaza_options['ap_product-single-group-content'])?$templaza_options['ap_product-single-group-content']:'';
+$ap_content_group_sticky     = isset($templaza_options['ap_product-single-group-content-sticky'])?$templaza_options['ap_product-single-group-content-sticky']:false;
 $ap_vendor_contact     = isset($templaza_options['ap_product-vendor-contact'])?$templaza_options['ap_product-vendor-contact']:'';
+$ap_vendor_title     = isset($templaza_options['ap_product-vendor-contact-label'])?$templaza_options['ap_product-vendor-contact-label']:__('Contact Vendor','templaza-framework');
 $show_compare_button= get_field('ap_show_archive_compare_button', 'option');
 $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
 $ap_show_vendor           = isset($templaza_options['ap_product-single-vendor'])?$templaza_options['ap_product-single-vendor']:true;
+$ap_share           = isset($templaza_options['ap_product-single-share'])?$templaza_options['ap_product-single-share']:false;
+$ap_share_label     = isset($templaza_options['ap_product-single-share-label'])?$templaza_options['ap_product-single-share-label']:'';
 
 do_action('templaza_set_postviews',get_the_ID());
 $author_id = get_post_field( 'post_author', get_the_ID() );
 $ap_count = count_user_posts( $author_id,'ap_product' );
 ?>
     <div class="templaza-ap-single uk-article">
-
-        <div id="ap-wrap-content" data-uk-grid>
+        <?php
+        if($ap_content_group_sticky){
+            ?>
+            <div id="ap-single-wrap-sticky" class="uk-flex">
+            <?php
+        }
+        ?>
+        <div id="ap-wrap-content" class="ap-content-single" data-uk-grid>
             <div class="uk-width-expand@m ap-content">
-                <div class="ap-single-box">
-                <?php AP_Templates::load_my_layout('single.media'); ?>
+                <div class="uk-inline uk-position-relative ap-single-box ap-single-box-media">
+                    <?php AP_Templates::load_my_layout('single.media'); ?>
+                    <div class="ap-single-button-wrap uk-flex uk-flex-middle uk-position-absolute uk-margin uk-margin-right uk-position-top-right" >
+                        <?php
+                        if($show_compare_button) {
+                            AP_Templates::load_my_layout('shortcodes.advanced-product.compare-button', true, false,
+                                array('atts' => array('id' => get_the_ID())));
+                        }
+                        ?>
+                        <?php if($ap_share){ ?>
+                            <div class="ap-btn ap-share uk-flex uk-flex-center  uk-flex-middle uk-animation-toggle uk-transition-toggle  uk-margin-small-left  uk-position-relative">
+                                <i class="fas fa-share-alt"></i>
+                                <?php echo esc_html($ap_share_label);?>
+                                <div class="ap-share-item  uk-transition-slide-bottom-small">
+                                    <a class="facebook" title="<?php esc_attr_e('Share on Facebook','amanus');?>" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_the_permalink(get_the_ID())); ?>">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a class="twitter" title="<?php esc_attr_e('Share on Twitter','amanus');?>" target="_blank" href="https://twitter.com/home?status=Check%20out%20this%20article:%20<?php print esc_attr($tweet_title); ?>%20-%20<?php echo urlencode(get_the_permalink(get_the_ID())); ?>">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <?php $templaza_pin_image = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID())); ?>
+                                    <a class="pinterest" title="<?php esc_attr_e('Share on Pinterest','amanus');?>"  data-pin-do="skipLink" target="_blank" href="https://pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>&media=<?php echo esc_attr($templaza_pin_image); ?>&description=<?php echo urlencode(get_the_title(get_the_ID())); ?>">
+                                        <i class="fab fa-pinterest"></i>
+                                    </a>
+                                    <a class="linkedin" title="<?php esc_attr_e('Share on Linkedin','amanus');?>"  target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url=<?php the_permalink(get_the_ID()); ?>">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
                 </div>
                 <div class="uk-width-1-3@m ap-templaza-sidebar uk-hidden@m">
                     <div class="ap-sidebar-inner">
@@ -93,11 +132,16 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                         ?>
                         </div>
                         <?php if(function_exists('wpforms') && $ap_vendor_contact !='') { ?>
-                            <div class="widget ap-single-side-box  ap-box ap-single-box">
+                            <div class="widget ap-single-side-box  ap-box ap-single-box ap-contact-vendor">
                                 <div class="widget-content">
-                                    <h3 class="widget-title ap-group-title is-style-templaza-heading-style1">
-                                        <span><?php esc_html_e('Contact Vendor','templaza-framework');?></span>
-                                    </h3>
+                                    <?php if($ap_vendor_title !=''){
+                                        ?>
+                                        <h3 class="widget-title ap-group-title is-style-templaza-heading-style1">
+                                            <span><?php echo esc_html($ap_vendor_title);?></span>
+                                        </h3>
+                                    <?php
+                                    }
+                                    ?>
                                     <div class="ap-group-content">
                                         <?php
                                         echo do_shortcode('[wpforms id="' . $ap_vendor_contact . '"]');
@@ -119,10 +163,16 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                     ?>
 
                 </div>
+                <?php
+                if($ap_content_group ==''){
+                    ?>
+                    <div class="templaza-single-comment ap-single-box">
+                        <?php comments_template('', true); ?>
+                    </div>
+                    <?php
+                }
+                ?>
 
-                <div class="templaza-single-comment ap-single-box">
-                    <?php comments_template('', true); ?>
-                </div>
             </div>
             <div class="uk-width-1-3@m ap-templaza-sidebar uk-visible@m">
                 <div class="ap-sidebar-inner">
@@ -144,6 +194,9 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                         <?php } ?>
 
                     </div>
+                    <?php
+                    AP_Templates::load_my_layout('single.custom-fields');
+                    ?>
                     <?php
                     if($ap_show_vendor){
                         ?>
@@ -180,17 +233,17 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                         <?php
                     }
                     ?>
-                    <div class="widget">
-                        <?php
-                        AP_Templates::load_my_layout('single.custom-fields');
-                        ?>
-                    </div>
                     <?php if(function_exists('wpforms') && $ap_vendor_contact !='') { ?>
-                        <div class="widget ap-single-side-box ap-box">
+                        <div class="widget ap-single-side-box ap-box ap-specs ap-contact-vendor">
                             <div class="widget-content">
-                                <h3 class="widget-title ap-group-title is-style-templaza-heading-style3">
-                                    <span><?php esc_html_e('Contact Vendor','templaza-framework');?></span>
-                                </h3>
+                                <?php if($ap_vendor_title !=''){
+                                    ?>
+                                    <h3 class="widget-title ap-group-title ">
+                                        <span><?php echo esc_html($ap_vendor_title);?></span>
+                                    </h3>
+                                    <?php
+                                }
+                                ?>
                                 <div class="ap-group-content">
                                     <?php
                                     echo do_shortcode('[wpforms id="' . $ap_vendor_contact . '"]');
@@ -204,6 +257,13 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
         </div>
         <?php
         AP_Templates::load_my_layout('single.related');
+        ?>
+        <?php
+        if($ap_content_group_sticky){
+            ?>
+            </div>
+            <?php
+        }
         ?>
     </div>
 <?php if($ap_office_price){ ?>

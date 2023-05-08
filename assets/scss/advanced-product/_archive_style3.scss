@@ -31,6 +31,14 @@
           text-transform: capitalize;
         }
       }
+      .ap-style3-icon{
+        padding-right:15px;
+        font-size:20px;
+        color:$tztheme-global-color;
+        svg{
+          fill:$tztheme-global-color;
+        }
+      }
     }
     .ap-info-fields{
       padding:20px 0;
