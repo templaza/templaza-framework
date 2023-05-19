@@ -35,6 +35,7 @@ $arr_wpform['custom_url'] = esc_html__('Custom Url','templaza-framework');
 $arr_fields = array();
 $arr_groups = array();
 $arr_taxs = array();
+$all_tax = array();
 if(is_plugin_active( 'uipro/uipro.php' )){
     require_once WP_CONTENT_DIR .'/plugins/uipro/widgets/uiadvancedproducts/helper.php';
     $categories = UIPro_UIAdvancedProducts_Helper::get_custom_categories();
@@ -419,6 +420,16 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'type'     => 'switch',
                 'title'    => esc_html__( 'Enable sticky group fields content when scroll', 'templaza-framework' ),
                 'default'  => false,
+                'required' => array('ap_product-single-group-content', '!=' , ''),
+            ),
+            array(
+                'id'       => 'ap_product-single-group-content-sticky-offset',
+                'type'     => 'spinner',
+                'title'    => esc_html__('Sticky group fields content nav offset top', 'templaza-framework'),
+                'default'  => '117',
+                'min'      => '-500',
+                'step'     => '1',
+                'max'      => '500',
                 'required' => array('ap_product-single-group-content', '!=' , ''),
             ),
             array(
