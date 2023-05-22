@@ -30,7 +30,11 @@ if(!empty($fields)){
         $f_attr             = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);
         $f_value            = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name']):null;
         $f_icon         = isset($f_attr['icon'])?$f_attr['icon']:'';
-        $show_icon      = get_field('ap_show_archive_custom_field_icon', 'option');
+        if(isset($_GET['show_icon'])){
+            $show_icon = $_GET['show_icon'];
+        }else {
+            $show_icon      = get_field('ap_show_archive_custom_field_icon', 'option');
+        }
         $f_icon_image   = isset($f_attr['icon_image']) && !empty($f_attr['icon_image'])?$f_attr['icon_image']:'';
         if($f_value){
             ?>
