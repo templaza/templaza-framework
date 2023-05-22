@@ -14,6 +14,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }
 
 $ap_content_group     = isset($templaza_options['ap_product-single-group-content'])?$templaza_options['ap_product-single-group-content']:'';
+$ap_content_group_sticky_offset     = isset($templaza_options['ap_product-single-group-content-sticky-offset'])?$templaza_options['ap_product-single-group-content-sticky-offset']:117;
 
 if(isset($_GET['customfield_layout'])){
     $ap_single_customfield_layout = $_GET['customfield_layout'];
@@ -25,7 +26,7 @@ $gfields_assigned   = AP_Custom_Field_Helper::get_group_fields_by_product();
 if($gfields_assigned && count($gfields_assigned)){
     ?>
     <div class="ap-group-scroll-wrap">
-    <div class="ap-content-group-scroll uk-visible@s" data-uk-sticky="start: 100%; offset: 117; end: !.ap-content-single; media: 1200">
+    <div class="ap-content-group-scroll uk-visible@s" data-uk-sticky="start: 100%; offset: <?php echo esc_attr($ap_content_group_sticky_offset);?>; end: !.ap-content-single; media: 1200">
         <ul class="uk-nav uk-nav-default uk-flex uk-width-1-1" data-uk-scrollspy-nav="closest: li; offset:220; scroll: true">
         <?php
         foreach ($gfields_assigned as $group) {

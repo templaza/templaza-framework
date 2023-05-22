@@ -2,7 +2,9 @@
 * Body Wrapper
 */
 
-.elementor-section.elementor-section-boxed > .elementor-container {
+.elementor-section.elementor-section-boxed > .elementor-container,
+.elementor-element.e-con-boxed > .e-con-inner {
+	position:relative;
 	@media (min-width: 640px) {
 		padding-left: 30px;
 		padding-right: 30px;

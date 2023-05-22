@@ -20,7 +20,7 @@ $price_contact = get_field('ap_price_contact', get_the_ID());
 
 $show_price         = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price');
 $show_price_msrp    = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price_msrp');
-$show_price_notice  = AP_Custom_Field_Helper::get_field_display_flag('show_in_listing', 'unit-price');
+$show_price_notice  = AP_Custom_Field_Helper::get_field_display_flag('show_in_listing', 'price-notice');
 $show_price_rental  = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_rental_price');
 $show_price_contact  = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price_contact');
 $show_price_sold  = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price_contact');
@@ -38,7 +38,7 @@ if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $sh
                 esc_html__('MSRP:', 'templaza-framework'), AP_Helper::format_price($msrp));
         }
         echo wp_kses($html,'post');
-        if(!empty($price_notice_value)){
+        if(!empty($price_notice_value) && $show_price_notice){
         ?>
         <span class="meta">
             <?php echo esc_html($price_notice_value);?>

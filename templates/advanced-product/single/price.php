@@ -51,6 +51,18 @@ if ((!$product_type || in_array('sale', $product_type)) && !empty($price)) {
         </div>
         <?php
     }
+    if (!empty($msrp)) {
+        ?>
+        <div class="uk-grid">
+            <label class="single-price-label"><?php esc_html_e('MSRP:','templaza-framework');?></label>
+            <span class="price">
+            <?php
+            echo esc_html(AP_Helper::format_price($msrp));
+            ?>
+            </span>
+        </div>
+    <?php
+    }
 } ?>
 <?php if (!empty($product_type) && in_array('rental', $product_type) && !empty($rental)) { ?>
     <label class="single-price-label"><?php esc_html_e('RENTAL PRICE:','templaza-framework');?></label>
