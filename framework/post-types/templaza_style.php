@@ -16,6 +16,8 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
     class Templaza_Style extends Post_Type{
         public $setting_args;
 
+        protected $metaboxes    = array();
+
         public function register()
         {
             $theme  = $this -> theme;
@@ -713,10 +715,21 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
 
                     $class_name = 'TemplazaFramework_MetaBox_'.$mtname;
                     if(class_exists($class_name)){
-                        new $class_name($this, $this -> framework);
+                        if(!isset($this -> metaboxes[$mtname])){
+                            $this -> metaboxes[$mtname] = new $class_name($this, $this -> framework);
+                        }
                     }
+
+                    $is_last    = ($folder == end($folders));
+                    if($is_last){
+                        do_action('templaza-framework/post-type/metabox/last/loaded', $this, $path);
+                    }
+
+                    do_action('templaza-framework/post-type/metabox/loaded', $this, $path);
                 }
             }
+            do_action('templaza-framework/post-type/'.$this -> get_post_type().'/metaboxes/loaded',$this, $path);
+            do_action('templaza-framework/post-type/metaboxes/loaded',$this, $path);
         }
 
         public function custom_view_count($views){

@@ -73,6 +73,7 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                     $metabox    = apply_filters("templaza-framework/metabox/{$metabox['id']}/change", $metabox);
                     $metabox_args['metabox']   = $metabox;
 
+                    $metabox_args['last']   = false;
                     if($metabox == end($metaboxes)){
                         $metabox_args['last']   = true;
                     }
@@ -89,6 +90,8 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                         $metabox['post_types'],$metabox['position'], $metabox['priority'], $metabox_args);
 
                     add_filter('postbox_classes_'.$this -> post_type -> get_post_type().'_'.$metabox['id'],array($this, 'add_metabox_class'));
+
+                    do_action('templaza-framework/metabox/loaded', $metabox, $metabox_args);
                 }
             }
         }
@@ -138,6 +141,23 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                 Redux::init($metabox['id']);
                 \Templaza_API::load_my_fields($metabox['id']);
 
+                $post_type          = isset($post -> post_type)?$post -> post_type:'';
+                if(isset($_metabox['post_types']) && !empty($_metabox['post_types']) && !empty($post_type)){
+                    $global_args    = $this -> framework -> get_arguments();
+                    if(is_array($_metabox['post_types']) && in_array($post_type, $_metabox['post_types'])){
+                        $parent_opt_name    = $global_args['opt_name'].'-'.$post_type;
+                    }elseif($post_type == $_metabox['post_types']){
+                        $parent_opt_name    = $global_args['opt_name'].'-'.$post_type;
+                    }
+
+                    if(isset($parent_opt_name)) {
+                        add_filter("redux/{$parent_opt_name}/repeater", function ($repeater_data) use ($redux_args) {
+                            $repeater_data['opt_names'][] = $redux_args['opt_name'];
+                            return $repeater_data;
+                        });
+                    }
+                }
+
                 add_filter("redux/{$setting_args['opt_name']}/repeater", function($repeater_data) use($redux_args){
                     $repeater_data['opt_names'][]   = $redux_args['opt_name'];
                     return $repeater_data;
@@ -154,7 +174,7 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
 //                    $enqueue -> init();
                 }else{
                     $redux -> options_class -> register();
-                    $redux -> enqueue_class -> init();
+//                    $redux -> enqueue_class -> init();
                 }
                 $enqueue    = new Enqueue($redux);
                 $enqueue -> framework_init();
@@ -180,6 +200,8 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
             }else{
                 $this -> render_fields($post, $metabox);
             }
+
+            do_action('templaza-framework/metabox/after_render',$post, $metabox);
         }
 
         public function add_metabox_class($classes){

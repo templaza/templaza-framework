@@ -88,5 +88,14 @@
         $( "#poststuff .redux-group-menu .redux-group-tab-link-li" ).on("click", function( event, ui ) {
             UIkit.update( document.body, 'update');
         });
+
+        // Fix issue redux image select field with required
+        var _image_select   = $.redux.getSelector( undefined, 'image_select' );
+        _image_select.find( '.redux-image-select label img, .redux-image-select label .tiles' )
+            .each(function(){
+                var __el = $( this ).closest( 'label' ).find( 'input[type="radio"]' );
+                $.redux.getOptName(__el);
+                // $.redux.check_dependencies(__el);
+        });
     });
 })(jQuery, window);
