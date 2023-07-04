@@ -47,7 +47,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Featured')){
                                 'type'     => 'switch',
                                 'title'    => esc_html__('Featured', 'templaza-framework'),
                                 'subtitle' => esc_html__('Enable this to make featured.', 'templaza-framework'),
-                                'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
+                                'args'     => 'TemPlazaFramework\Functions::get_templaza_style_by_slug',
                                 'on'       => esc_html__('Yes', 'templaza-framework'),
                                 'off'      => esc_html__('No', 'templaza-framework'),
                             ),
