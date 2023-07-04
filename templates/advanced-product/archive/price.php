@@ -34,8 +34,8 @@ if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $sh
         $html = sprintf('<span class="ap-price"><b> %s</b> %s </span>',
             esc_html__(' ', 'templaza-framework'), AP_Helper::format_price($price));
         if (!empty($msrp) && $show_price_msrp) {
-            $html .= sprintf('<span class="ap-price-msrp"> %s  %s </span>',
-                esc_html__('MSRP:', 'templaza-framework'), AP_Helper::format_price($msrp));
+            $html .= sprintf('<span class="ap-price-msrp"><span> %s </span>  %s </span>',
+                esc_html__('MSRP: ', 'templaza-framework'), AP_Helper::format_price($msrp));
         }
         echo wp_kses($html,'post');
         if(!empty($price_notice_value) && $show_price_notice){
@@ -76,7 +76,7 @@ if (!empty($product_type) && in_array('rental', $product_type) && !empty($rental
         echo wp_kses($html,'post');
         if(!empty($rental_unit)){ ?>
         <span class="meta ap-unit">
-            <?php esc_html_e('/ ','templaza-framework'); echo esc_html($rental_unit);?>
+            <?php esc_html_e(' / ','templaza-framework'); echo esc_html($rental_unit);?>
         </span>
         <?php } ?>
     </div>

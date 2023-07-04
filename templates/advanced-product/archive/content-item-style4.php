@@ -23,21 +23,24 @@ if(isset($args['show_author'])){
 }
 $ap_desc_limit       = isset($templaza_options['ap_product-loop-desc-limit'])?$templaza_options['ap_product-loop-desc-limit']:100;
 $price = get_field('ap_price', get_the_ID());
+$rental         = get_field('ap_rental_price', get_the_ID());
+$price_sold = get_field('ap_price_sold', get_the_ID());
+$price_contact = get_field('ap_price_contact', get_the_ID());
 $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields' => 'names' ) );
 $show_compare_button= get_field('ap_show_archive_compare_button', 'option');
 $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
 $pid    = get_the_ID();
-
+$compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
 ?>
 <div class="ap-item ap-item-style4 <?php echo esc_attr($ap_class);?>">
     <div class="ap-inner ">
         <div class="ap-info">
             <div class="uk-inline">
                 <?php AP_Templates::load_my_layout('archive.badges'); ?>
-                <?php AP_Templates::load_my_layout('archive.media'); ?>
+                <?php AP_Templates::load_my_layout('archive.media',true,false,array('compare_layout'    => $compare_layout)); ?>
                 <?php
-                if(isset($price) && $price !=''){
+                if(isset($price) && $price !='' || $rental !='' || $price_contact !='' || $price_sold !=''){
                   ?>
                     <div class="uk-position-bottom-left uk-padding-small tz-theme-bg-color ap-price-wrap">
                         <?php AP_Templates::load_my_layout('archive.price');?>

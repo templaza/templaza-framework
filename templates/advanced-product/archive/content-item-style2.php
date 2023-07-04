@@ -8,6 +8,7 @@ use Advanced_Product\Helper\AP_Product_Helper;
 
 $price = get_field('ap_price', get_the_ID());
 $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields' => 'names' ) );
+$compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
 if(isset($args['ap_class'])){
     $ap_class = $args['ap_class'];
 }else{
@@ -17,7 +18,7 @@ if(isset($args['ap_class'])){
 <div class="ap-item ap-item-style2 <?php echo esc_attr($ap_class);?>">
     <div class="ap-inner ">
         <?php AP_Templates::load_my_layout('archive.badges'); ?>
-        <?php AP_Templates::load_my_layout('archive.media'); ?>
+        <?php AP_Templates::load_my_layout('archive.media',true,false,array('compare_layout'    => $compare_layout)); ?>
         <div class="ap-info">
             <div class="ap-info-inner ap-info-top">
                 <?php

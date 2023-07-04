@@ -27,6 +27,7 @@ if(!empty($fields)){
     <?php foreach($fields as $field){
         $f_attr         = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);
         $f_value        = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name']):null;
+        $f_icon         = isset($f_attr['icon'])?$f_attr['icon']:'';
         if(isset($_GET['show_icon'])){
             $show_icon = $_GET['show_icon'];
         }else {
@@ -39,6 +40,8 @@ if(!empty($fields)){
             <div class="ap-spec-item" >
                 <span class="ap-field-label"><?php
                     if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
+                        ?> <span class="ap-style5-icon">
+                        <?php
                         if($f_icon['type'] == 'uikit-icon'){
                             ?>
                             <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
@@ -51,6 +54,8 @@ if(!empty($fields)){
                             <i class="<?php echo $f_icon['icon']; ?>"></i>
                             <?php
                         }
+                        ?> </span>
+                        <?php
                     }
                     echo esc_html($f_attr['label']); esc_html_e(': ','templaza-framework')?></span>
                 <span class="ap-spec-value"><?php

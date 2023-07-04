@@ -43,33 +43,34 @@ if(!empty($fields)){
                 <?php
                 $html   = apply_filters('advanced-product/field/value_html/type='.$f_attr['type'], '', $f_value, $f_attr, $field);
                 ?>
-                <span class="ap-spec-value"><?php if(!empty($html)){
-                    echo wp_kses($html,'post');
-                }elseif(is_array($f_value)){
-                    $f_value    = array_values($f_value);
-                    ?>
-                    <?php echo esc_html(join(',', $f_value)); ?>
+                <span class="ap-spec-value">
                     <?php
-                }else{
-                    ?>
-                    <?php
-                        if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
-                            if($f_icon['type'] == 'uikit-icon'){
-                                ?>
-                                <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
-                                <?php
-                            }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
-                                echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
-                                    array('data-uk-svg' => ''));
-                            }elseif(!empty($f_icon['icon'])){
-                                ?>
-                                <i class="<?php echo $f_icon['icon']; ?>"></i>
-                                <?php
-                            }
+                    if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
+                        echo '<span class="ap-style2-icon">';
+                        if($f_icon['type'] == 'uikit-icon'){
+                            ?>
+                            <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
+                            <?php
+                        }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
+                            echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
+                                array('data-uk-svg' => ''));
+                        }elseif(!empty($f_icon['icon'])){
+                            ?>
+                            <i class="<?php echo $f_icon['icon']; ?>"></i>
+                            <?php
                         }
-                        echo esc_html($f_value); ?>
-                    <?php
-                }
+                        echo '</span>';
+                    }
+                    if(!empty($html)){
+                        echo wp_kses($html,'post');
+                        }elseif(is_array($f_value)){
+                            $f_value    = array_values($f_value);
+                            ?>
+                            <?php echo esc_html(join(',', $f_value)); ?>
+                            <?php
+                        }else{
+                            echo esc_html($f_value);
+                    }
                 ?></span>
             </div>
         <?php

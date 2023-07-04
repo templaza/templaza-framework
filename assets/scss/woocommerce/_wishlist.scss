@@ -332,7 +332,7 @@ table.shop_table tbody dl.variation dd {
 }
 
 table.shop_table tbody tr:not(:last-child) {
-  border-bottom: 1px solid $tztheme-bg-color-gray;
+  border-bottom: 1px solid $tztheme-border-color;
 }
 
 table.shop_table tfoot td {
@@ -345,7 +345,7 @@ table.shop_table tfoot td {
 }
 
 .woocommerce-wishlist table.wishlist_table tbody tr:last-child {
-  border-bottom: 1px solid $tztheme-bg-color-gray;
+  border-bottom: 1px solid $tztheme-border-color;
 }
 
 .woocommerce-wishlist table.wishlist_table tr td.product-name {

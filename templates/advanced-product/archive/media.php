@@ -10,9 +10,13 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
     $templaza_options            = Functions::get_theme_options();
 }
 $thumbnail       = isset($templaza_options['ap_product-thumbnail-size'])?$templaza_options['ap_product-thumbnail-size']:'large';
+$compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
+
 if(isset($_GET['product_loop'])){
     $ap_loop_layout = $_GET['product_loop'];
-}else {
+}elseif($compare_layout !='') {
+    $ap_loop_layout = $compare_layout;
+}else{
     $ap_loop_layout = isset($templaza_options['ap_product-loop-layout']) ? $templaza_options['ap_product-loop-layout'] : 'style1';
 }
 ?>

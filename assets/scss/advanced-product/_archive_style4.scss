@@ -47,21 +47,27 @@
         border:1px solid #fff;
         background:#f1f1f1;
         text-align: center;
-        &:first-child{
-          background:#f1f1f1;;
-          color:inherit;
-        }
         .ap-spec-value{
           font-size:14px;
           color:$tztheme-content-color;
           font-weight:normal;
           text-transform: capitalize;
-          i{
-            padding-right:3px;
-          }
         }
         .ap-field-label{
           text-transform: capitalize;
+        }
+        .ap-style4-icon{
+          width:18px;
+          display:inline-block;
+          margin-right:3px;
+          svg, img{
+            max-width:100%;
+            fill:$tztheme-global-color;
+          }
+          i{
+            font-size:14px;
+            color:$tztheme-global-color;
+          }
         }
       }
     }

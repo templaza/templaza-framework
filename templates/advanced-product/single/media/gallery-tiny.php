@@ -30,7 +30,7 @@ if (isset($ap_video) && !empty($ap_video)) {
                 $src = "//player.vimeo.com/video/{$id}?".implode('&amp;', $attrb);
         }
     endif;
-    $video_thumbnail="http://img.youtube.com/vi/".$id."/maxresdefault.jpg";
+    $video_thumbnail="https://img.youtube.com/vi/".$id."/maxresdefault.jpg";
 }
 
 if(!empty($ap_gallery)){
@@ -123,6 +123,7 @@ if(!empty($ap_gallery)){
             animateIn: 'tns-fadeIn',
             animateOut: 'tns-fadeOut',
             speed: 1000,
+            autoHeight:true,
             mouseDrag: true,
             slideBy: 'page',
             center: true,

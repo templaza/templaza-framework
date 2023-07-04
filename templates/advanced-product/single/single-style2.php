@@ -5,8 +5,8 @@ defined('ADVANCED_PRODUCT') or exit();
 use Advanced_Product\AP_Templates;
 use Advanced_Product\AP_Functions;
 use Advanced_Product\Helper\AP_Custom_Field_Helper;
-
 use TemPlazaFramework\Functions;
+
 if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
     $templaza_options = array();
 }else{
@@ -20,20 +20,44 @@ $ap_office_form_custom     = isset($templaza_options['ap_product-office-price-fo
 $ap_product_related           = isset($templaza_options['ap_product-related'])?$templaza_options['ap_product-related']:true;
 $ap_product_related_title     = isset($templaza_options['ap_product-related-title'])?$templaza_options['ap_product-related-title']:'RELATED PRODUCT';
 $ap_product_related_column     = isset($templaza_options['ap_product-related-columns'])?$templaza_options['ap_product-related-columns']:3;
+$show_compare_button= get_field('ap_show_archive_compare_button', 'option');
+$show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
+$show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
+$ap_show_vendor           = isset($templaza_options['ap_product-single-vendor'])?$templaza_options['ap_product-single-vendor']:true;
+$ap_share           = isset($templaza_options['ap_product-single-share'])?$templaza_options['ap_product-single-share']:false;
+$ap_share_label     = isset($templaza_options['ap_product-single-share-label'])?$templaza_options['ap_product-single-share-label']:'';
+
+
 if(isset($_GET['related_number'])){
     $ap_product_related_number = $_GET['related_number'];
 }else {
     $ap_product_related_number = isset($templaza_options['ap_product-related-number']) ? $templaza_options['ap_product-related-number'] : 3;
 }
 $ap_single_fields_top         = isset($templaza_options['ap_product-single-style2-top'])?$templaza_options['ap_product-single-style2-top']:array();
+
+$ap_content_group     = isset($templaza_options['ap_product-single-group-content'])?$templaza_options['ap_product-single-group-content']:'';
+$gfields_assigned   = AP_Custom_Field_Helper::get_group_fields_by_product();
+$ap_fields_in_content = array();
+if($ap_content_group !='' && is_array($ap_content_group)) {
+    foreach ($gfields_assigned as $group) {
+        if (in_array($group->slug, $ap_content_group)) {
+            $fields = AP_Custom_Field_Helper::get_fields_by_group_fields($group);
+            if($fields && count($fields)) {
+                foreach ($fields as $field) {
+                    $ap_fields_in_content[] =$field->post_excerpt;
+                }
+            }
+        }
+    }
+}
 do_action('templaza_set_postviews',get_the_ID());
 $call2buy_value     = get_field('call-to-buy', get_the_ID());
 $call2buy = AP_Custom_Field_Helper::get_custom_field_option_by_field_name('call-to-buy');
 
 $arr_fields = array();
-$default_arr = array('ap_price','ap_gallery','ap_video','ap_category','ap_branch','call-to-buy');
+$default_arr = array('ap_price','ap_product_type','ap_price_contact','ap_price_sold','ap_rental_price','ap_rental_unit','ap_gallery','ap_video','ap_category','ap_branch','call-to-buy');
 
-$arr_fields_none = array_merge($ap_single_fields_top,$default_arr);
+$arr_fields_none = array_merge($ap_single_fields_top,$default_arr,$ap_fields_in_content);
 $args = array(
     'numberposts' => -1,
     'post_type'   => 'ap_custom_field'
@@ -48,11 +72,40 @@ if ( $wpfields ) {
 $display_fields = array_diff($arr_fields,$arr_fields_none);
 $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields' => 'names' ) );
 ?>
-<div class="templaza-ap-single uk-article ap-single-style2">
+<div class="templaza-ap-single uk-article ap-single-style2 ap-content-single">
     <div class="ap-single-box">
         <div class="ap-wrap-content">
-            <div class="ap-single-left">
+            <div class="ap-single-left uk-position-relative ">
                 <?php AP_Templates::load_my_layout('single.media'); ?>
+                <div class="ap-single-button-wrap uk-flex uk-flex-middle uk-position-absolute uk-margin uk-margin-right uk-position-top-right" >
+                <?php
+                if($show_compare_button) {
+                    AP_Templates::load_my_layout('shortcodes.advanced-product.compare-button', true, false,
+                        array('atts' => array('id' => get_the_ID())));
+                }
+                ?>
+                <?php if($ap_share){ ?>
+                    <div class="ap-btn ap-share uk-flex uk-flex-center  uk-flex-middle uk-animation-toggle uk-transition-toggle  uk-margin-small-left  uk-position-relative">
+                        <i class="fas fa-share-alt"></i>
+                        <?php echo esc_html($ap_share_label);?>
+                        <div class="ap-share-item  uk-transition-slide-bottom-small">
+                            <a class="facebook" title="<?php esc_attr_e('Share on Facebook','amanus');?>" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_the_permalink(get_the_ID())); ?>">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a class="twitter" title="<?php esc_attr_e('Share on Twitter','amanus');?>" target="_blank" href="https://twitter.com/home?status=Check%20out%20this%20article:%20<?php print esc_attr($tweet_title); ?>%20-%20<?php echo urlencode(get_the_permalink(get_the_ID())); ?>">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <?php $templaza_pin_image = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID())); ?>
+                            <a class="pinterest" title="<?php esc_attr_e('Share on Pinterest','amanus');?>"  data-pin-do="skipLink" target="_blank" href="https://pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>&media=<?php echo esc_attr($templaza_pin_image); ?>&description=<?php echo urlencode(get_the_title(get_the_ID())); ?>">
+                                <i class="fab fa-pinterest"></i>
+                            </a>
+                            <a class="linkedin" title="<?php esc_attr_e('Share on Linkedin','amanus');?>"  target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url=<?php the_permalink(get_the_ID()); ?>">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                <?php } ?>
+                </div>
 
                 <?php AP_Templates::load_my_layout('single.meta');?>
 
@@ -115,9 +168,14 @@ $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields'
                                             <?php
                                             $ap_taxonomy = get_field($item['name'], $product_id);
                                             if(is_array($ap_taxonomy) && isset($ap_taxonomy) && !empty($ap_taxonomy)){
-                                                foreach ($ap_taxonomy as $item){
-                                                    if(is_object($item)){
-                                                        echo esc_html($item->name);
+                                                foreach ($ap_taxonomy as $item_tax){
+                                                    if(is_object($item_tax)){
+                                                        echo esc_html($item_tax->name);
+                                                    }else{
+                                                        $ap_term = get_term_by('id', $item_tax, $item['name']);
+                                                        if(is_object($ap_term)){
+                                                            echo esc_html($ap_term->name);
+                                                        }
                                                     }
                                                 }
                                             }
@@ -199,23 +257,41 @@ $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields'
             </div>
         </div>
     </div>
-    <div class="ap-single-box ap-single-content-tab">
-        <ul class="uk-flex-center ap-tab-title" data-uk-tab>
-            <li class="uk-active"><a href="#"><?php esc_html_e('Description','templaza-framework');?></a></li>
-            <li><a href="#"><?php esc_html_e('Comment','templaza-framework');?></a></li>
-        </ul>
-        <ul class="uk-switcher">
-            <li class="uk-active">
-                <?php the_content(); ?>
-            </li>
-            <li>
-                <div class="templaza-single-comment">
-                    <?php comments_template('', true); ?>
-                </div>
-            </li>
-        </ul>
-    </div>
     <?php
+        if($ap_content_group !=''){
+            ?>
+            <div class="ap-single-box">
+                <?php the_content();
+                if($ap_content_group !=''){
+                    AP_Templates::load_my_layout('single.group-fields-content');
+                }
+                ?>
+            </div>
+            <?php
+        }else{
+            ?>
+            <div class="ap-single-box ap-single-content-tab">
+                <ul class="uk-flex-center ap-tab-title" data-uk-tab>
+                    <li class="uk-active"><a href="#"><?php esc_html_e('Description','templaza-framework');?></a></li>
+                    <li><a href="#"><?php esc_html_e('Comment','templaza-framework');?></a></li>
+                </ul>
+                <ul class="uk-switcher">
+                    <li class="uk-active">
+                        <?php the_content();
+                        if($ap_content_group !=''){
+                            AP_Templates::load_my_layout('single.group-fields-content');
+                        }
+                        ?>
+                    </li>
+                    <li>
+                        <div class="templaza-single-comment">
+                            <?php comments_template('', true); ?>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <?php
+        }
     AP_Templates::load_my_layout('single.related');
     ?>
 

@@ -33,48 +33,49 @@ if(!empty($fields)){
         if($d < $max){
         $f_attr             = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);
         $f_value            = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name']):null;
-            $f_icon         = isset($f_attr['icon'])?$f_attr['icon']:'';
-            if(isset($_GET['show_icon'])){
-                $show_icon = $_GET['show_icon'];
-            }else {
-                $show_icon      = get_field('ap_show_archive_custom_field_icon', 'option');
-            }
+        $f_icon         = isset($f_attr['icon'])?$f_attr['icon']:'';
+        if(isset($_GET['show_icon'])){
+            $show_icon = $_GET['show_icon'];
+        }else {
+            $show_icon      = get_field('ap_show_archive_custom_field_icon', 'option');
+        }
 
-            $f_icon_image   = isset($f_attr['icon_image']) && !empty($f_attr['icon_image'])?$f_attr['icon_image']:'';
-            if($f_value){
-            ?>
-            <div class="ap-spec-item uk-display-inline-block" >
-                <?php
-                $html   = apply_filters('advanced-product/field/value_html/type='.$f_attr['type'], '', $f_value, $f_attr, $field);
-                if(!empty($html)){
-                    echo wp_kses($html,'post');
-                }elseif(is_array($f_value)){
-                    $f_value    = array_values($f_value);
-                    ?>
-                    <span><?php echo esc_html(join(',', $f_value)); ?></span>
-                    <?php
-                }else{
-                    ?>
-                    <span><?php
-                        if( !empty($f_icon) && $show_icon){
-                            if($f_icon['type'] == 'uikit-icon'){
-                                ?>
-                                <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
-                                <?php
-                            }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
-                                echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
-                                    array('data-uk-svg' => ''));
-                            }else{
-                                ?>
-                                <i class="<?php echo $f_icon['icon']; ?>"></i>
-                                <?php
-                            }
-                        }
-                        echo esc_html($f_value); ?></span>
-                    <?php
-                }
+        $f_icon_image   = isset($f_attr['icon_image']) && !empty($f_attr['icon_image'])?$f_attr['icon_image']:'';
+        if($f_value){
+        ?>
+        <div class="ap-spec-item uk-display-inline-block" >
+            <span>
+            <?php
+            if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
+                echo '<span class="ap-style1-icon">';
+                if($f_icon['type'] == 'uikit-icon'){
                 ?>
-            </div>
+                    <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
+                    <?php
+                    }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
+                        echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
+                            array('data-uk-svg' => ''));
+                    }elseif(!empty($f_icon['icon'])){
+                    ?>
+                    <i class="<?php echo $f_icon['icon']; ?>"></i>
+                    <?php
+                    }
+                echo '</span>';
+                }
+            ?>
+            <?php
+            $html   = apply_filters('advanced-product/field/value_html/type='.$f_attr['type'], '', $f_value, $f_attr, $field);
+            if(!empty($html)){
+                echo wp_kses($html,'post');
+            }elseif(is_array($f_value)){
+                $f_value    = array_values($f_value);
+                echo esc_html(join(',', $f_value));
+            }else{
+                echo esc_html($f_value);
+            }
+            ?>
+            </span>
+        </div>
         <?php
             }
         }

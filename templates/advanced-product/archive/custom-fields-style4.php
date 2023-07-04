@@ -45,6 +45,7 @@ if(!empty($fields)){
             <div class="ap-spec-item uk-flex uk-flex-column" >
                 <span class="ap-spec-value"><?php
                     if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
+                        echo '<span class="ap-style4-icon">';
                         if($f_icon['type'] == 'uikit-icon'){
                             ?>
                             <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
@@ -57,6 +58,7 @@ if(!empty($fields)){
                             <i class="<?php echo $f_icon['icon']; ?>"></i>
                             <?php
                         }
+                        echo '</span>';
                     }
                     $html   = apply_filters('advanced-product/field/value_html/type='.$f_attr['type'], '', $f_value, $f_attr, $field);
                     if(!empty($html)){
