@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use ScssPhp\ScssPhp\Compiler;
 
-if(!class_exists('TemPlazaFramework\Functions')){
+if(!class_exists('\TemPlazaFramework\Functions')){
 
     class Functions{
         protected static $cache         = array();

@@ -477,7 +477,7 @@ class Framework{
                             'title' => sprintf(__('%s Archive Style', 'templaza-framework'), $tzfrm_post_type_obj -> label),
                             'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                             'data'     => 'callback',
-                            'args'     => 'TemPlazaFramework\Functions::get_templaza_style_by_slug',
+                            'args'     => 'templaza_framework_get_templaza_style_by_slug',
                         ),
                         array(
                             'id'    => $tzfrm_post_type.'-single-style',
@@ -485,7 +485,7 @@ class Framework{
                             'title' => sprintf(__('%s Single Style', 'templaza-framework'), $tzfrm_post_type_obj -> label),
                             'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                             'data'     => 'callback',
-                            'args'     => 'TemPlazaFramework\Functions::get_templaza_style_by_slug',
+                            'args'     => 'templaza_framework_get_templaza_style_by_slug',
                         )
                     )
                 );

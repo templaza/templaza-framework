@@ -23,7 +23,7 @@ Templaza_API::set_section('settings', array(
             'title'    => __('404 Page Style', 'templaza-framework'),
             'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
             'data'     => 'callback',
-            'args'     => 'TemPlazaFramework\Functions::get_templaza_style_by_slug',
+            'args'     => 'templaza_framework_get_templaza_style_by_slug',
         ),
         array(
             'id'       => 'enable-featured-for-posttypes',
