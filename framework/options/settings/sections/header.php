@@ -24,7 +24,7 @@ Templaza_API::set_section('settings',
                 'data'     => 'callback',
                 'title'    => esc_html__('Header Layout', 'templaza-framework'),
                 'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
-                'args'     => array('TemPlazaFramework\AdminHelper\Templaza_Header', 'get_items_by_slug'),
+                'args'     => 'templaza_framework_get_templaza_header_items_by_slug',
                 'required' => array( 'enable-header', '=', '1' ),
             ),
             array(
