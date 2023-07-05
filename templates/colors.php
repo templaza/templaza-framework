@@ -311,7 +311,7 @@ if (!empty($sticky_off_canvas_button_color)) {
 	$sticky_menu_styles[] = '#templaza-sticky-header .burger-menu-button .inner, #templaza-sticky-header .burger-menu-button .inner::before, #templaza-sticky-header .burger-menu-button .inner::after { background-color: ' . $sticky_off_canvas_button_color . ' !important;}';
 }
 if (!empty($sticky_icon_color)) {
-	$sticky_menu_styles[] = '#templaza-sticky-header .header-icon a, #templaza-sticky-header .header-icon i { color: ' . $sticky_icon_color . ' !important;}';
+	$sticky_menu_styles[] = '#templaza-sticky-header .header-icon a,#templaza-sticky-header .header-icon span, #templaza-sticky-header .header-icon i { color: ' . $sticky_icon_color . ' !important;}';
 }
 ?>
 

@@ -305,7 +305,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                 wp_enqueue_script(
                     'field-tz_social-js',
                     Functions::get_my_frame_url() . '/fields/tz_social/field_tz_social.js',
-                    array( 'jquery', 'wp-util', 'redux-js', 'redux-spectrum-js', 'redux-field-color-rgba-js'),
+                    array( 'jquery', 'wp-util', 'redux-js', 'redux-spectrum-js'),
                     time(),
                     'all'
                 );

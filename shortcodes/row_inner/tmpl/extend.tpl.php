@@ -3,7 +3,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 ?>
 <script type="text/html" id="tmpl-field-tz_layout-template-<?php echo $this -> element['id']; ?>">
     <div class="fl_row fl_row_inner" data-fl-element_type="<?php echo $this -> element['id']; ?>">
-        <div class="fl_controls fl_controls-row clearfix">
+        <div class="fl_controls fl_controls-row uk-clearfix">
             <div class="fl_controls-row-left">
                 <a href="#" class="fl_control fl_column-move" data-fl-control="move" title="<?php
                 echo __('Drag to reorder', 'templaza-framework'); ?>"><i class="fas fa-arrows-alt"></i></a>

@@ -13,6 +13,8 @@ $price          = get_field('ap_price', get_the_ID());
 $rental         = get_field('ap_rental_price', get_the_ID());
 $rental_unit    = get_field('ap_rental_unit', get_the_ID());
 $product_type   = get_field('ap_product_type', get_the_ID());
+$price_sold = get_field('ap_price_sold', get_the_ID());
+$price_contact = get_field('ap_price_contact', get_the_ID());
 
 $f_value            = get_field('unit-price', get_the_ID());
 $call2buy_value     = get_field('call-to-buy', get_the_ID());
@@ -49,6 +51,18 @@ if ((!$product_type || in_array('sale', $product_type)) && !empty($price)) {
         </div>
         <?php
     }
+    if (!empty($msrp)) {
+        ?>
+        <div class="uk-grid">
+            <label class="single-price-label"><?php esc_html_e('MSRP:','templaza-framework');?></label>
+            <span class="price">
+            <?php
+            echo esc_html(AP_Helper::format_price($msrp));
+            ?>
+            </span>
+        </div>
+    <?php
+    }
 } ?>
 <?php if (!empty($product_type) && in_array('rental', $product_type) && !empty($rental)) { ?>
     <label class="single-price-label"><?php esc_html_e('RENTAL PRICE:','templaza-framework');?></label>
@@ -59,5 +73,21 @@ if ((!$product_type || in_array('sale', $product_type)) && !empty($price)) {
         <?php if(!empty($rental_unit)){?>
             <span class="rental-unit uk-text-meta"><?php echo ' / '.esc_html($rental_unit);?></span>
         <?php } ?>
+    </span>
+<?php } ?>
+<?php if (!empty($product_type) && in_array('sold', $product_type) && !empty($price_sold)) { ?>
+    <label class="single-price-label"><?php esc_html_e('PRICE:','templaza-framework');?></label>
+    <span class="price sold-price">
+        <?php
+        echo esc_html($price_sold);
+        ?>
+    </span>
+<?php } ?>
+<?php if (!empty($product_type) && in_array('contact', $product_type) && !empty($price_contact)) { ?>
+    <label class="single-price-label"><?php esc_html_e('PRICE:','templaza-framework');?></label>
+    <span class="price contact-price">
+        <?php
+        echo esc_html($price_contact);
+        ?>
     </span>
 <?php } ?>

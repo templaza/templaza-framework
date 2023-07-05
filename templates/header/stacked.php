@@ -16,6 +16,8 @@ $block_1_type   = isset($options['header-block-1-type'])?$options['header-block-
 $block_1_custom = isset($options['header-block-1-custom'])?$options['header-block-1-custom']:'';
 $block_2_type   = isset($options['header-block-2-type'])?$options['header-block-2-type']:'blank';
 $block_2_custom = isset($options['header-block-2-custom'])?$options['header-block-2-custom']:'';
+$block_3_type   = isset($options['header-block-3-type'])?$options['header-block-3-type']:'blank';
+$block_3_custom = isset($options['header-block-3-custom'])?$options['header-block-3-custom']:'';
 
 $enable_offcanvas           = isset($options['enable-offcanvas'])?filter_var($options['enable-offcanvas'], FILTER_VALIDATE_BOOLEAN):false;
 $offcanvas_animation        = isset($options['offcanvas-animation'])?$options['offcanvas-animation']:'st-effect-1';
@@ -42,6 +44,7 @@ $header_menu                = isset($options['header-menu'])?$options['header-me
 $header_menu_level          = isset($options['header-menu-level'])?(int) $options['header-menu-level']:0;
 $block_1_sidebar            = isset($options['header-block-1-sidebar'])?$options['header-block-1-sidebar']:'';
 $block_2_sidebar            = isset($options['header-block-2-sidebar'])?$options['header-block-2-sidebar']:'';
+$block_3_sidebar            = isset($options['header-block-3-sidebar'])?$options['header-block-3-sidebar']:'';
 $header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
 
 $icon_position         = isset($options['stacked-icon-position'])?$options['stacked-icon-position']:'top';
@@ -303,6 +306,31 @@ if ($mode == 'left') {
             <?php }else{
                 Templates::load_my_layout('inc.icon',true,false);
             } ?>
+            <?php if ($block_3_type != 'blank'): ?>
+            <div class=" uk-text-right uk-flex uk-flex-right uk-visible@m uk-width-auto">
+                <?php
+                if ($block_3_type == 'sidebar' && is_active_sidebar($block_3_sidebar)){
+                    echo '<div class="header-block-item">';
+                    echo '<div class="templaza-sidebar">';
+                    dynamic_sidebar($block_3_sidebar);
+                    echo '</div>';
+                    echo '</div>';
+                }
+                if ($block_3_type == 'custom') {
+                    echo '<div class="header-block-item">';
+                    echo wp_kses($block_3_custom,'post');
+                    echo '</div>';
+                }
+                if ($block_3_type == 'social') {
+                    Templates::load_my_layout('inc.social');
+                }
+                if ($block_3_type == 'contact') {
+                    Templates::load_my_layout('inc.contact');
+                }
+                ?>
+            </div>
+            <?php endif;
+            ?>
         </div>
     </div>
 

@@ -487,7 +487,19 @@ Templaza_API::set_section('settings',
                 'min'      => '1',
                 'step'     => '1',
                 'max'      => '21',
-            )
+            ),
+            array(
+                'id'       => 'blog-related-nav',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Next/Preview', 'templaza-framework' ),
+                'default'  => true,
+            ),
+            array(
+                'id'       => 'blog-related-dot',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Dots', 'templaza-framework' ),
+                'default'  => true,
+            ),
         )
     )
 );

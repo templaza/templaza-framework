@@ -15,6 +15,8 @@ if(!class_exists('TemPlazaFramework\Configuration')){
         protected $meta_key;
         protected $meta_key_theme;
 
+        protected $redux_script_loaded = false;
+
         public function __construct($framework = null)
         {
             $this -> opt_name  = $this -> get_post_type();
@@ -86,6 +88,24 @@ if(!class_exists('TemPlazaFramework\Configuration')){
 
                 // After registered post type
                 add_action('templaza-framework/post_type/registered', array($this, 'post_type_registered'));
+
+                // Fix issue init field required option
+                add_action('templaza-framework/post-type/metabox/last/loaded', array($this, 'metabox_last_loaded'));
+            }
+        }
+
+
+        /**
+         * Function to Fix issue init field required option
+         * */
+        public function metabox_last_loaded(){
+            $args       = $this -> setting_args[$this -> get_post_type()];
+            $opt_name   = $args['opt_name'];
+            $redux  = \Redux::instance($opt_name);
+
+            if($redux && isset($redux -> enqueue_class) && !$this -> redux_script_loaded) {
+                $redux->enqueue_class->init();
+                $this -> redux_script_loaded    = true;
             }
         }
 
@@ -319,7 +339,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
                             $enqueue -> init();
                         }else{
                             $redux -> options_class -> register();
-                            $redux -> enqueue_class -> init();
+//                            $redux -> enqueue_class -> init();
                         }
                     }
                 }

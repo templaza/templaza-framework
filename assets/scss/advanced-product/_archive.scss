@@ -21,7 +21,7 @@
     .ap-info-inner{
       padding:20px;
       &.ap-info-bottom{
-        border-top:1px solid #f7f4ed;
+        border-top:1px solid $tztheme-border-color;
         padding:15px 20px;
       }
     }
@@ -44,9 +44,22 @@
     .ap-inner{
       .ap-specification{
         .ap-spec-item{
-          svg{
+          .ap-style1-icon{
             width:18px;
+            display:inline-block;
             margin-right:3px;
+            svg, img{
+              max-width:100%;
+              fill:$tztheme-global-color;
+            }
+            i{
+              color:$tztheme-global-color;
+            }
+          }
+          &:first-child{
+            i{
+              color:$tztheme-button_text_color;
+            }
           }
         }
       }

@@ -11,6 +11,7 @@ $show_compare_button= get_field('ap_show_archive_compare_button', 'option');
 $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
 $pid            = get_the_ID();
+$compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
 if(isset($args['ap_class'])){
     $ap_class = $args['ap_class'];
 }else{
@@ -26,7 +27,7 @@ if(isset($args['ap_class'])){
                         <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                     </h2>
                     <span class="ap-info-author">
-                        <?php echo esc_html__('Powered by', 'templaza-framework') .' '. get_the_author_posts_link();?>
+                        <?php echo esc_html__('By', 'templaza-framework') .' '. get_the_author_posts_link();?>
                     </span>
                 </div>
                 <div class="ap-button-info uk-flex uk-flex-between">
@@ -83,7 +84,7 @@ if(isset($args['ap_class'])){
             </div>
             <div class="uk-inline uk-position-relative">
                 <?php AP_Templates::load_my_layout('archive.badges'); ?>
-                <?php AP_Templates::load_my_layout('archive.media'); ?>
+                <?php AP_Templates::load_my_layout('archive.media',true,false,array('compare_layout'    => $compare_layout)); ?>
             </div>
             <div class="ap-info-inner ap-info-fields">
                 <?php AP_Templates::load_my_layout('archive.custom-fields-style3'); ?>

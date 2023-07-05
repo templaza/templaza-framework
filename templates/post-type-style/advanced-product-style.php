@@ -87,6 +87,22 @@ $ap_styles    = array(
     ),
     array(
         'enable'    => true,
+        'class'     => '.sold .ap-ribbon-content',
+        'options' => array(
+            'ap_product-sold-color',
+            'ap_product-sold-bg-color',
+        ),
+    ),
+    array(
+        'enable'    => true,
+        'class'     => '.contact .ap-ribbon-content',
+        'options' => array(
+            'ap_product-contact-color',
+            'ap_product-contact-bg-color',
+        ),
+    ),
+    array(
+        'enable'    => true,
         'class'     => '.sale-rent .ap-ribbon-content',
         'options' => array(
             'ap_product-sale-rent-color',

@@ -22,7 +22,7 @@ Templaza_API::set_section('settings',
             array(
                 'id'       => 'blog_single_h1',
                 'type' => 'typography',
-                'allow_responsive'        => true,
+                'allow_responsive'  => true,
                 'google'      => true,
                 'font-backup' => true,
                 'text-transform' => true,

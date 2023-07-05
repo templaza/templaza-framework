@@ -31,9 +31,11 @@ if(function_exists('wpforms')){
     }
 }
 $arr_wpform['custom'] = esc_html__('Custom','templaza-framework');
+$arr_wpform['custom_url'] = esc_html__('Custom Url','templaza-framework');
 $arr_fields = array();
 $arr_groups = array();
 $arr_taxs = array();
+$all_tax = array();
 if(is_plugin_active( 'uipro/uipro.php' )){
     require_once WP_CONTENT_DIR .'/plugins/uipro/widgets/uiadvancedproducts/helper.php';
     $categories = UIPro_UIAdvancedProducts_Helper::get_custom_categories();
@@ -411,7 +413,23 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'multi'     => true,
                 'title'    => esc_html__( 'Choose Group Fields show under content', 'templaza-framework' ),
                 'options'  => $arr_groups,
-                'required' => array('ap_product-single-layout', '=' , 'style1'),
+            ),
+            array(
+                'id'       => 'ap_product-single-group-content-sticky',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Enable sticky group fields content when scroll', 'templaza-framework' ),
+                'default'  => false,
+                'required' => array('ap_product-single-group-content', '!=' , ''),
+            ),
+            array(
+                'id'       => 'ap_product-single-group-content-sticky-offset',
+                'type'     => 'spinner',
+                'title'    => esc_html__('Sticky group fields content nav offset top', 'templaza-framework'),
+                'default'  => '117',
+                'min'      => '-500',
+                'step'     => '1',
+                'max'      => '500',
+                'required' => array('ap_product-single-group-content', '!=' , ''),
             ),
             array(
                 'id'       => 'ap_product-single-group-taxonomy',
@@ -431,6 +449,13 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'required' => array('ap_product-single-layout', '=' , 'style1'),
             ),
             array(
+                'id'       => 'ap_product-single-group-field-acc',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Display group field sidebar accordion', 'templaza-framework' ),
+                'default'  => false,
+                'required' => array('ap_product-single-layout', '=' , 'style1'),
+            ),
+            array(
                 'id'       => 'ap_product-single-customfield-style',
                 'type'     => 'select',
                 'title'    => esc_html__('Custom Fields Style', 'templaza-framework'),
@@ -440,6 +465,7 @@ Templaza_API::set_subsection('settings','ap_product-page',
                     'style3' => esc_html__('Style 3', 'templaza-framework'),
                 ),
                 'default'  => 'style1',
+                'required' => array('ap_product-single-layout', '=' , 'style1'),
             ),
             array(
                 'id'       => 'ap_product-office-price-form-custom',
@@ -453,6 +479,13 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'type'     => 'select',
                 'title'    => esc_html__( 'Vendor Contact Form', 'templaza-framework' ),
                 'options'  => $arr_wpform,
+            ),
+            array(
+                'id'       => 'ap_product-vendor-contact-label',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Vendor Contact Title', 'templaza-framework' ),
+                'default'  => esc_html__( 'Contact Vendor', 'templaza-framework' ),
+                'required' => array('ap_product-vendor-contact', '!=' , ''),
             ),
             array(
                 'id'       => 'ap_product-box-bg-color',
@@ -689,6 +722,44 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'id'       => 'ap_product-rent-bg-color',
                 'type'     => 'background',
                 'title'    => __( 'Rent Background Color', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-sold-label',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Sold Label', 'templaza-framework' ),
+                'default'  => esc_html__( 'Sold', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-sold-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Sold Color', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-sold-bg-color',
+                'type'     => 'background',
+                'title'    => __( 'Sold Background Color', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-contact-label',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Contact Label', 'templaza-framework' ),
+                'default'  => esc_html__( 'Contact', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-contact-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Contact Color', 'templaza-framework' ),
+                'required' => array('ap_product-badges', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-contact-bg-color',
+                'type'     => 'background',
+                'title'    => __( 'Contact Background Color', 'templaza-framework' ),
                 'required' => array('ap_product-badges', '=' , true),
             ),
             array(

@@ -179,6 +179,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                     array(
                                         'id'         => 'border',
                                         'type'       => 'border',
+                                        'color_alpha'=> 'true',
                                         'title'      => __('Border', 'templaza-framework'),
                                     ),
                                     array(

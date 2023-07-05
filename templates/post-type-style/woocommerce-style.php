@@ -97,9 +97,12 @@ if($single_box_background_color){
 // Style for Single Shop Description max width
 
 $single_shop_max_width  = isset($options['templaza-shop-single-content-max-width'])?$options['templaza-shop-single-content-max-width']:70;
-if((int)$single_shop_max_width['width'] > 0 ){
-    $templaza_shop_styles[] = '.single-product div.product .woocommerce-tabs .panel{ max-width:' . $single_shop_max_width['width'] . '}';
+if(is_array($single_shop_max_width)){
+    if((int)$single_shop_max_width['width'] > 0 ){
+        $templaza_shop_styles[] = '.single-product div.product .woocommerce-tabs .panel{ max-width:' . $single_shop_max_width['width'] . '}';
+    }
 }
+
 if(count($templaza_shop_styles)) {
     Templates::add_inline_style(implode('', $templaza_shop_styles));
 }

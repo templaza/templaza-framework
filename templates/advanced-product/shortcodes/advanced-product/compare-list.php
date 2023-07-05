@@ -21,7 +21,7 @@ if(isset($products) && !empty($products) && $products -> have_posts()){
         <?php while($products -> have_posts()){ ?>
             <div class="ap-product-compare-item">
                 <?php $products -> the_post();
-                AP_Templates::load_my_layout('archive.content-item-'.$ap_compare_layout.'',true,false,$args);
+                AP_Templates::load_my_layout('archive.content-item-'.$ap_compare_layout.'',true,false,array('compare_layout'    => $ap_compare_layout));
                 ?>
             </div>
             <?php }?>

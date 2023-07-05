@@ -89,6 +89,19 @@
       font-weight:$tztheme-ap-single-side-title-weight;
       font-size:$tztheme-ap-single-side-title;
       margin-bottom: 35px !important;
+      text-transform: $tz-basic-sidebar-heading-transform;
+    }
+    &.uk-accordion{
+      .uk-accordion-title{
+        color:$tztheme-heading-color;
+        margin:0 !important;
+        &:hover{
+          cursor: pointer;
+        }
+      }
+      .uk-accordion-content{
+        margin-top:35px;
+      }
     }
   }
   .elementor-tabs{
@@ -153,6 +166,7 @@
       background:#fff;
       border-bottom:1px solid $tztheme-border-color;
       opacity:0;
+      visibility: hidden;
     }
     .uk-active{
       .ap-scroll-item{
@@ -168,6 +182,7 @@
         z-index: 999;
         &:before{
           opacity:1;
+          visibility: visible;
         }
         .uk-active{
           a{

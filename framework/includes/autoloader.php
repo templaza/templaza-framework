@@ -16,6 +16,7 @@ require_once TEMPLAZA_FRAMEWORK_CORE_INCLUDES_PATH . '/admin/admin_autoloader.ph
 require_once TEMPLAZA_FRAMEWORK_CORE_INCLUDES_PATH.'/helpers/AdminHelper/templaza_style.php';
 require_once TEMPLAZA_FRAMEWORK_CORE_INCLUDES_PATH.'/helpers/AdminHelper/templaza_header.php';
 require_once TEMPLAZA_FRAMEWORK_CORE_INCLUDES_PATH.'/helpers/AdminHelper/templaza_footer.php';
+require_once TEMPLAZA_FRAMEWORK_CORE_INCLUDES_PATH.'/helpers/AdminHelper/themehelper.php';
 
 
 require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH.'/templates.php';

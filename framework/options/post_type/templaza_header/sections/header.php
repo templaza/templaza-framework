@@ -260,6 +260,47 @@ Templaza_API::set_section('templaza_header',
                 ),
             ),
             array(
+                'id'       => 'header-block-3-type',
+                'type'     => 'select',
+                'title'    => __( 'Header Block 3', 'templaza-framework' ),
+                'subtitle' => __( 'Select the content you want to display in the Header Block 3.', 'templaza-framework' ),
+                //Must provide key => value pairs for select options
+                'options'  => array(
+                    'blank'     => __('Blank', 'templaza-framework'),
+                    'sidebar'   => __('Sidebar', 'templaza-framework'),
+                    'contact'    => __('Contact', 'templaza-framework'),
+                    'social'    => __('Social', 'templaza-framework'),
+                    'custom'    => __('Custom HTML', 'templaza-framework'),
+                ),
+                'default'  => 'blank',
+                'required' => array(
+                    array('header-stacked-menu-mode', '=', 'left'),
+                ),
+            ),
+            array(
+                'id'       => 'header-block-3-sidebar',
+                'type'     => 'select',
+                'title'    => __( 'Block 3 Sidebar', 'templaza-framework' ),
+                'subtitle' => __( 'Select Sidebar for Header Block 3.', 'templaza-framework' ),
+                'data'     => 'sidebars',
+                'default'  => '',
+                'required' => array( array('header-block-3-type', '=', 'sidebar')),
+            ),
+            array(
+                'id'       => 'header-block-3-custom',
+                'type'     => 'textarea',
+                'title'    => __( 'Block 3 Custom HTML', 'templaza-framework' ),
+                'subtitle' => __( 'Enter your Custom HTML code for Header Block 3.', 'templaza-framework' ),
+                //Must provide key => value pairs for select options
+                'options'  => array(
+                    'blank'         => __('Blank', 'templaza-framework'),
+                    'custom' => __('Custom HTML', 'templaza-framework'),
+                ),
+                'required' => array(
+                    array('header-block-3-type', '=', 'custom'),
+                ),
+            ),
+            array(
                 'id'       => 'logo-section-border',
                 'type'     => 'border',
                 'title'    => esc_html__('Logo section Border', 'templaza-framework'),
@@ -535,6 +576,15 @@ Templaza_API::set_section('templaza_header',
                 'allow_responsive'    => true,
                 'title'    => esc_html__('Sticky Padding', 'templaza-framework'),
                 'default'  => '',
+                'required' => array(
+                    array('enable-sticky', '=', '1') ),
+            ),
+            array(
+                'id'       => 'sticky-border',
+                'type'     => 'border',
+                'title'    => esc_html__('Sticky Border', 'templaza-framework'),
+                'default'  => '',
+                'color_alpha'  => true,
                 'required' => array(
                     array('enable-sticky', '=', '1') ),
             ),

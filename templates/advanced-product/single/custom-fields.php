@@ -21,10 +21,12 @@ $ap_content_group     = isset($templaza_options['ap_product-single-group-content
 $ap_taxonomy_group     = isset($templaza_options['ap_product-single-group-taxonomy'])?$templaza_options['ap_product-single-group-taxonomy']:'';
 $ap_taxonomy_show     = isset($templaza_options['ap_product-single-taxonomy-show'])?$templaza_options['ap_product-single-taxonomy-show']:array();
 $widget_heading_style       = isset($templaza_options['widget_box_heading_style'])?$templaza_options['widget_box_heading_style']:'';
+$ap_group_accordion       = isset($templaza_options['ap_product-single-group-field-acc'])?$templaza_options['ap_product-single-group-field-acc']:false;
 $product_id     = get_the_ID();
 $gfields_assigned   = AP_Custom_Field_Helper::get_group_fields_by_product();
 $ap_content_group[]='pricing';
 $term_list = wp_get_post_terms( $product_id);
+$d=1;
 if($gfields_assigned && count($gfields_assigned)){
     foreach ($gfields_assigned as $group) {
         if(in_array($group->slug, $ap_content_group) == false){
@@ -58,11 +60,44 @@ if($gfields_assigned && count($gfields_assigned)){
 
                 $html = trim($html);
             }
+            if($d==1){
+                $acc_open = 'uk-open ';
+            }else{
+                $acc_open = ' uk-open';
+            }
             if(!empty($html)){
+                if($ap_group_accordion){
+                    ?>
+                    <div  data-uk-accordion="multiple: true" class="ap-single-side-box ap-specs ap-box ap-group ap-group-<?php echo esc_attr($group -> slug); ?>">
+                        <div class="widget-content <?php echo esc_attr($acc_open);?>">
+                            <h3 class="widget-title ap-group-title uk-accordion-title">
+                                <span><?php echo esc_html($group -> name); ?></span>
+                            </h3>
+                            <?php
+                            if($ap_single_customfield_layout == 'style2'){
+                                ?>
+                                <div class="ap-group-content uk-grid-small uk-accordion-content" data-uk-grid>
+                                    <?php echo wp_kses($html_tax,'post');?>
+                                    <?php echo wp_kses($html,'post');?>
+                                </div>
+                                <?php
+                            }else{
+                                ?>
+                                <div class="ap-group-content uk-accordion-content">
+                                    <?php echo wp_kses($html_tax,'post');?>
+                                    <?php echo wp_kses($html,'post');?>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <?php
+                }else{
             ?>
-            <div class="ap-single-side-box ap-specs ap-box ap-group ap-group-<?php echo esc_attr($group -> slug); ?>">
+            <div  class="ap-single-side-box ap-specs ap-box ap-group ap-group-<?php echo esc_attr($group -> slug); ?>">
                 <div class="widget-content">
-                    <h3 class="widget-title ap-group-title is-style-templaza-heading-style3">
+                    <h3 class="widget-title ap-group-title">
                         <span><?php echo esc_html($group -> name); ?></span>
                     </h3>
                     <?php
@@ -85,6 +120,8 @@ if($gfields_assigned && count($gfields_assigned)){
                 </div>
             </div>
             <?php
+                }
+                $d++;
             }
         }
     }

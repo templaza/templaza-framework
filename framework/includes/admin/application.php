@@ -54,6 +54,9 @@ if(!class_exists('TemPlazaFramework\Admin\Application')){
                 // Enqueue the message.
                 $this->_message_queue[] = $message;
             }
+            if( empty(session_id()) && !headers_sent()){
+                session_start();
+            }
             $_SESSION[TEMPLAZA_FRAMEWORK . '_application.queue']   = $this -> _message_queue;
         }
 
@@ -62,13 +65,16 @@ if(!class_exists('TemPlazaFramework\Admin\Application')){
             // For empty queue, if messages exists in the session, enqueue them.
             if (!$this->_message_queue)
             {
+                if( empty(session_id()) && !headers_sent()){
+                    session_start();
+                }
                 $sessionQueue = (isset($_SESSION[TEMPLAZA_FRAMEWORK . '_application.queue'])
                     && $_SESSION[TEMPLAZA_FRAMEWORK . '_application.queue'])?
                     $_SESSION[TEMPLAZA_FRAMEWORK . '_application.queue']:array();
 
                 if ($sessionQueue)
                 {
-                    $this->_message_queue = array_unique($sessionQueue);
+                    $this->_message_queue = is_array($sessionQueue)?array_unique($sessionQueue):$sessionQueue;
                     $_SESSION[TEMPLAZA_FRAMEWORK . '_application.queue']   = array();
                 }
             }
@@ -84,7 +90,3 @@ if(!class_exists('TemPlazaFramework\Admin\Application')){
         }
     }
 }
-
-//
-//$GLOBALS['templaza_framework_installation'] = new Application();
-//add_action('admin_init', array($GLOBALS['templaza_framework_installation'], 'init'), 1);

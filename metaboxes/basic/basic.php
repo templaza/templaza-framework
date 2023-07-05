@@ -27,7 +27,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
                                 'width'    => '100%',
                                 'title'    => esc_html__('Templaza Style', 'templaza-framework'),
                                 'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
-                                'args'     => array('TemPlazaFramework\Functions', 'get_templaza_style_by_slug'),
+                                'args'     => 'templaza_framework_get_templaza_style_by_slug',
                             ),
                         ),
                     ),

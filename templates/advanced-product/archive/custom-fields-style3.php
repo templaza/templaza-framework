@@ -29,27 +29,53 @@ if(!empty($fields)){
         $f_attr         = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);
         $f_value        = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name']):null;
         $f_icon         = isset($f_attr['icon'])?$f_attr['icon']:'';
-        $show_icon      = get_field('ap_show_archive_custom_field_icon', 'option');
+        if(isset($_GET['show_icon'])){
+            $show_icon = $_GET['show_icon'];
+        }else {
+            $show_icon      = get_field('ap_show_archive_custom_field_icon', 'option');
+        }
         $f_icon_image   = isset($f_attr['icon_image']) && !empty($f_attr['icon_image'])?$f_attr['icon_image']:'';
         if($f_value){
+            $c_class = ' uk-flex uk-flex-column';
             ?>
-            <div class="ap-spec-item uk-flex uk-flex-column" >
-                <span class="ap-spec-value"><?php
-                $html   = apply_filters('advanced-product/field/value_html/type='.$f_attr['type'], '', $f_value, $f_attr, $field);
-                if(!empty($html)){
-                    echo wp_kses($html,'post');
-                }elseif(is_array($f_value)){
-                    $f_value    = array_values($f_value);
-                    ?>
-                    <?php echo esc_html(join(',', $f_value)); ?>
-                    <?php
-                }else{
-                    ?>
-                    <?php echo esc_html($f_value); ?>
-                    <?php
+            <div class="ap-spec-item uk-flex uk-flex-left" >
+                <?php
+                if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
+                    echo '<div class="uk-width-auto ap-style3-icon">';
+                    if($f_icon['type'] == 'uikit-icon'){
+                        ?>
+                        <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
+                        <?php
+                    }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
+                        echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
+                            array('data-uk-svg' => ''));
+                    }elseif(!empty($f_icon['icon'])){
+                        ?>
+                        <i class="<?php echo $f_icon['icon']; ?>"></i>
+                        <?php
+                    }
+                    echo '</div>';
                 }
-                ?></span>
-                <span class="ap-field-label"><?php echo esc_html($f_attr['label']); ?></span>
+                ?>
+                <div class="<?php echo esc_attr($c_class);?>">
+                    <span class="ap-spec-value"><?php
+                        $html   = apply_filters('advanced-product/field/value_html/type='.$f_attr['type'], '', $f_value, $f_attr, $field);
+                        if(!empty($html)){
+                            echo wp_kses($html,'post');
+                        }elseif(is_array($f_value)){
+                            $f_value    = array_values($f_value);
+                            ?>
+                            <?php echo esc_html(join(',', $f_value)); ?>
+                            <?php
+                        }else{
+                            ?>
+                            <?php echo esc_html($f_value); ?>
+                            <?php
+                        }
+                        ?>
+                    </span>
+                    <span class="ap-field-label"><?php echo esc_html($f_attr['label']); ?></span>
+                </div>
             </div>
         <?php
         }
