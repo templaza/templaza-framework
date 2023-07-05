@@ -1,5 +1,32 @@
 # Changelog
 
+## Version 1.1.4 - July 05, 2023
+
+**Fix bugs:**
+
+- Fix issue function_exists of ReduxFramework
+- Fix issue init field required option when first loading
+- Fix issue session
+- Fix issue of tz_social field
+- Fix issue post format
+- Fix issue redux is not defined when add new post
+- Fix issue Undefined property: ReduxFramework::$core_instance
+
+**Improvement:**
+
+- Update related slider
+- Update share advanced product
+- Update product sold & contact
+- Update show icon in advanced product archive demo page
+- Change color alpha in section
+- Support elementor container element
+
+**Added:**
+
+- Added switch theme
+- Add button action in layouts advanced product
+- Add sticky option in advanced product single style1
+
 ## Version 1.1.3 - April 17, 2023
 
 **Fix bugs:**
