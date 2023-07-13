@@ -1,5 +1,17 @@
 # Changelog
 
+## Version 1.1.5 - July 13, 2023
+
+**Fix bugs:**
+
+- Fix issue load js of fields
+- Fix issue redux js when edit header & footer
+- Fix Add to cart in detail product with open panel
+
+**Improvement**
+
+- Check plugin is active to display options in settings
+
 ## Version 1.1.4 - July 05, 2023
 
 **Fix bugs:**
