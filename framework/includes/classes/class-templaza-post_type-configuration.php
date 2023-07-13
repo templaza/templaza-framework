@@ -289,6 +289,19 @@ if(!class_exists('TemPlazaFramework\Configuration')){
                     return TEMPLAZA_FRAMEWORK_CORE_TEMPLATE . '/redux-panel/footer.tpl.php';
                 });
             }
+
+            add_action('admin_footer', function(){
+                $redux  = \Redux::instance($this -> setting_args[$this -> get_post_type()]['opt_name']);
+                if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                    if($redux && method_exists($redux, '_enqueue')) {
+                        $redux->_enqueue();
+                    }
+                }else{
+                    if($redux && isset($redux->enqueue_class) && $redux->enqueue_class) {
+                        $redux->enqueue_class->init();
+                    }
+                }
+            }, 99);
         }
 
         /**

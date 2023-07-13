@@ -131,6 +131,7 @@ class Templaza_Woo_General {
 		if ( wp_script_is( 'wc-add-to-cart-variation', 'registered' ) ) {
 			wp_enqueue_script( 'wc-add-to-cart-variation' );
 		}
+        wp_enqueue_script( 'wc-cart-fragments' );
 	}
 
 	/**

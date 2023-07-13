@@ -3,6 +3,7 @@
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
 use TemPlazaFramework\Post_TypeFunctions;
+use TemPlazaFramework\Admin\Admin_Page_Function;
 
 // Global configs of post ty
 Templaza_API::set_section('settings', array(
@@ -46,6 +47,12 @@ require_once 'sections/layout.php';
 require_once 'sections/social.php';
 require_once 'sections/miscellaneous.php';
 require_once 'sections/custom.php';
-require_once 'sections/woocommerce/product.php';
-require_once 'sections/woocommerce/product-template-style.php';
-require_once 'sections/advanced-product/ap_product.php';
+
+if(Admin_Page_Function::is_plugin_active('woocommerce')) {
+    require_once 'sections/woocommerce/product.php';
+    require_once 'sections/woocommerce/product-template-style.php';
+}
+
+if(Admin_Page_Function::is_plugin_active('advanced-product')) {
+    require_once 'sections/advanced-product/ap_product.php';
+}
