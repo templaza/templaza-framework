@@ -475,6 +475,13 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'required' => array('ap_product-office-price-form', '=' , 'custom'),
             ),
             array(
+                'id'       => 'ap_product-office-price-form-custom-url',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Custom Url', 'templaza-framework' ),
+                'subtitle' => esc_html__('Insert Form Shortcode', 'templaza-framework'),
+                'required' => array('ap_product-office-price-form', '=' , 'custom_url'),
+            ),
+            array(
                 'id'       => 'ap_product-vendor-contact',
                 'type'     => 'select',
                 'title'    => esc_html__( 'Vendor Contact Form', 'templaza-framework' ),
