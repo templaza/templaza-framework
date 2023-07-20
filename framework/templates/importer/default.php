@@ -24,107 +24,112 @@ if($items && count($items)){
                 $this -> product_code   = $theme_name;
 
                 ?>
-            <div class="uk-width-1-3">
-                <div class="uk-card uk-card-default uk-card-small uk-border-rounded uk-overflow-hidden">
-                    <div class="uk-card-media-top">
-                        <img src="<?php echo $item['thumb']; ?>" alt="<?php echo $item['title']; ?>"/>
-                    </div>
-                    <div class="uk-card-body">
-                        <h3 class="uk-card-title"><?php echo $item['title']; ?><?php
-                            if(isset($optImported['pack']) && in_array($theme_name, $optImported['pack'] )) {
-                                ?><small class="badge badge-success btn-sm font-weight-normal"><?php
-                                echo __('Imported', 'templaza-framework'); ?></small><?php
-                            }?></h3>
-                        <p><?php echo $item['desc'];?></p>
-                    </div>
-                    <div class="action uk-padding-small uk-padding-remove-top uk-flex uk-flex-wrap">
-                        <?php if(isset($item['demo-datas']) && count($item['demo-datas'])){ ?>
-                            <button type="button" data-toggle="modal" data-target="#tzinst-modal__import-<?php
-                            echo !$pass?'sysinfo':$theme_name; ?>" uk-toggle="target: #tzinst-modal__import-<?php
-                            echo !$pass?'sysinfo':$theme_name; ?>" class="uk-button uk-button-primary uk-margin-small-bottom uk-width-1-1" data-install-demo-data><?php
-                                _e('Install Demo Data', 'templaza-framework');
-                                ?></button>
-                        <?php } ?>
-                        <div class="uk-button-group uk-width-1-1">
-                            <?php if(isset($item['demo_url']) && !empty($item['demo_url'])){ ?>
-                                <a href="<?php echo $item['demo_url']; ?>" target="_blank" class="uk-button uk-button-default uk-margin-small-bottom uk-width-1-1"><?php
-                                    _e('Preview', 'templaza-framework');
-                                    ?></a>
-                            <?php } ?>
-                            <?php if(isset($item['doc_url']) && !empty($item['doc_url'])){ ?>
-                                <a href="<?php echo $item['doc_url']; ?>" target="_blank" class="uk-button uk-button-default uk-margin-small-bottom uk-width-1-1"><?php
-                                    _e('Manual', 'templaza-framework');
-                                    ?></a>
-                            <?php } ?>
+                <div class="uk-width-1-3">
+                    <div class="uk-card uk-card-default uk-card-small uk-border-rounded uk-overflow-hidden">
+                        <div class="uk-card-media-top">
+                            <img src="<?php echo $item['thumb']; ?>" alt="<?php echo $item['title']; ?>"/>
                         </div>
-                    </div>
-                </div>
-                <?php if(isset($item['demo-datas']) && count($item['demo-datas']) && !HelperLicense::has_expired($this -> theme_name)){ ?>
-                    <?php if(!$pass){ ?>
-                    <div id="tzinst-modal__import-sysinfo" uk-modal>
-                        <div class="uk-modal-dialog">
-                            <div class="uk-modal-body uk-text-danger">
-                                <p><?php $text = __('Currently, there are some values in PHP settings not sufficient enough for the theme to work properly.'
-                                        .' Please configure them again to ensure the theme has a smooth performance.', 'templaza-framework');
-                                    echo $text;
-                                ?></p>
-                                <p><?php _e('Do you want to continue import demo data?', 'templaza-framework');?></p>
-                                <div class="action uk-margin-small-top">
-                                    <a class="uk-button uk-button-danger uk-button-small" target="_blank" href="<?php
-                                    echo esc_url(admin_url('admin.php?page=templaza-framework#system-information'));
-                                    ?>"><?php _e('See PHP Settings', 'templaza-framework');?></a>
-                                </div>
-                            </div>
-                            <div class="uk-modal-footer uk-text-right">
-                                <button class="uk-button uk-button-default uk-modal-close" type="button"><?php
-                                    _e('Cancel', 'templaza-framework');?></button>
-                                <a href="#tzinst-modal__import-<?php echo $theme_name;
-                                ?>" class="uk-button uk-button-primary" uk-toggle><?php
-                                    _e('Ok', 'templaza-framework');?></a>
-                            </div>
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title"><?php echo $item['title']; ?><?php
+                                if(isset($optImported['pack']) && in_array($theme_name, $optImported['pack'] )) {
+                                    ?><sup class="badge badge-success btn-sm font-weight-normal uk-label uk-label-success uk-text-normal uk-text-capitalize uk-text-capitalize uk-margin-small-left uk-margin-small-bottom"><?php
+                                    echo __('Imported', 'templaza-framework'); ?></sup><?php
+                                }?></h3>
+                            <p><?php echo $item['desc'];?></p>
                         </div>
-                    </div>
-                    <?php }?>
-
-                    <div id="tzinst-modal__import-<?php echo $theme_name;
-                    ?>" tabindex="-1" role="dialog" data-install-demo-data__modal data-modal-title="<?php
-                    echo esc_attr(sprintf(__('Demo Content Pack » %s', 'templaza-framework'), $item['title']));
-                    ?>" uk-modal="bg-close: false;">
-                        <div class="uk-modal-dialog uk-width-2xlarge">
-                            <div class="uk-modal-header">
-                                <h3 class="uk-modal-title"><?php
-                                    echo esc_attr(sprintf(__('Demo Content Pack » %s', 'templaza-framework'), $item['title']));
-                                    ?></h3>
-                            </div>
-                            <div class="uk-modal-body" uk-overflow-auto>
-                                <?php if(isset($optImported['pack']) && $optImported['pack'] == $theme_name) { ?>
-                                    <div class="alert alert-warning"><?php echo _e('The data of Home Version 1 has been imported. You should consider importing it again, because it may cause duplicated data.', 'templaza-framework'); ?></div>
+                        <div class="action uk-padding-small uk-padding-remove-top uk-flex uk-flex-wrap">
+                            <?php if(isset($item['demo-datas']) && count($item['demo-datas'])){ ?>
+                                <button type="button" data-toggle="modal" data-target="#tzinst-modal__import-<?php
+                                echo !$pass?'sysinfo':$theme_name; ?>" uk-toggle="target: #tzinst-modal__import-<?php
+                                echo !$pass?'sysinfo':$theme_name; ?>" class="uk-button uk-button-primary uk-margin-small-bottom uk-width-1-1" data-install-demo-data><?php
+                                    _e('Install Demo Data', 'templaza-framework');
+                                    ?></button>
+                            <?php } ?>
+                            <div class="uk-button-group uk-width-1-1">
+                                <?php if(isset($item['demo_url']) && !empty($item['demo_url'])){ ?>
+                                    <a href="<?php echo $item['demo_url']; ?>" target="_blank" class="uk-button uk-button-default uk-margin-small-bottom uk-width-1-1"><?php
+                                        _e('Preview', 'templaza-framework');
+                                        ?></a>
                                 <?php } ?>
-                                <div data-import-message-box></div>
-                                <?php echo $this -> load_template('plugins'); ?>
-                                <?php echo $this -> load_template('demo_datas'); ?>
+                                <?php if(isset($item['doc_url']) && !empty($item['doc_url'])){ ?>
+                                    <a href="<?php echo $item['doc_url']; ?>" target="_blank" class="uk-button uk-button-default uk-margin-small-bottom uk-width-1-1"><?php
+                                        _e('Manual', 'templaza-framework');
+                                        ?></a>
+                                <?php } ?>
                             </div>
-                            <div class="uk-modal-footer uk-text-right uk-position-relative">
-                                <div class="js-processing-box processing-box uk-margin-small-bottom uk-hidden">
-                                    <div class="progress uk-position-absolute uk-width-1-1 uk-position-top-left rounded-0">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated js-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <?php if(isset($item['demo-datas']) && count($item['demo-datas']) && !HelperLicense::has_expired($this -> theme_name)){ ?>
+                        <?php if(!$pass){ ?>
+                            <div id="tzinst-modal__import-sysinfo" uk-modal>
+                                <div class="uk-modal-dialog">
+                                    <div class="uk-modal-body uk-text-danger">
+                                        <p><?php $text = __('Currently, there are some values in PHP settings not sufficient enough for the theme to work properly.'
+                                                .' Please configure them again to ensure the theme has a smooth performance.', 'templaza-framework');
+                                            echo $text;
+                                            ?></p>
+                                        <p><?php _e('Do you want to continue import demo data?', 'templaza-framework');?></p>
+                                        <div class="action uk-margin-small-top">
+                                            <a class="uk-button uk-button-danger uk-button-small" target="_blank" href="<?php
+                                            echo esc_url(admin_url('admin.php?page=templaza-framework#system-information'));
+                                            ?>"><?php _e('See PHP Settings', 'templaza-framework');?></a>
+                                        </div>
+                                    </div>
+                                    <div class="uk-modal-footer uk-text-right">
+                                        <button class="uk-button uk-button-default uk-modal-close" type="button"><?php
+                                            _e('Cancel', 'templaza-framework');?></button>
+                                        <a href="#tzinst-modal__import-<?php echo $theme_name;
+                                        ?>" class="uk-button uk-button-primary" uk-toggle><?php
+                                            _e('Ok', 'templaza-framework');?></a>
                                     </div>
                                 </div>
-                                <div class="action">
-                                    <button type="button" class="uk-button uk-button-default uk-margin-small-right uk-modal-close" data-dismiss="modal"><?php
-                                        echo _e('Close', 'templaza-framework'); ?></button>
-                                    <button type="button" class="uk-button uk-button-danger uk-margin-small-right uk-hidden" data-tzinst-stop-importing><?php
-                                        echo _e('Stop Importing', 'templaza-framework'); ?></button>
-                                    <button type="button" class="uk-button uk-button-primary js-tzinst-import">
-                                        <span class="spinner-border spinner-border-sm uk-margin-small-right uk-hidden js-tzinst-importing-icon"></span><?php
-                                        _e('Install Demo Data', 'templaza-framework');
-                                        ?></button>
+                            </div>
+                        <?php }?>
+
+                        <div id="tzinst-modal__import-<?php echo $theme_name;
+                        ?>" tabindex="-1" role="dialog" data-install-demo-data__modal data-modal-title="<?php
+                        echo esc_attr(sprintf(__('Demo Content Pack » %s', 'templaza-framework'), $item['title']));
+                        ?>" uk-modal="bg-close: false;">
+                            <div class="uk-modal-dialog uk-width-2xlarge">
+                                <div class="uk-modal-header">
+                                    <h3 class="uk-modal-title"><?php
+                                        echo esc_attr(sprintf(__('Demo Content Pack » %s', 'templaza-framework'), $item['title']));
+                                        ?></h3>
+                                </div>
+                                <div class="uk-modal-body" uk-overflow-auto>
+                                    <?php if(isset($optImported['pack']) && $optImported['pack'] == $theme_name) { ?>
+                                        <div class="alert alert-warning"><?php echo _e('The data of Home Version 1 has been imported. You should consider importing it again, because it may cause duplicated data.', 'templaza-framework'); ?></div>
+                                    <?php } ?>
+                                    <div data-import-message-box></div>
+                                    <?php echo $this -> load_template('plugins'); ?>
+                                    <?php echo $this -> load_template('demo_datas'); ?>
+                                </div>
+                                <div class="uk-modal-footer uk-text-right uk-position-relative">
+                                    <!--                                <div class="js-processing-box processing-box uk-margin-small-bottom uk-hidden">-->
+                                    <!--                                    <div class="progress uk-position-absolute uk-width-1-1 uk-position-top-left rounded-0">-->
+                                    <!--                                        <div class="progress-bar progress-bar-striped progress-bar-animated js-progress-bar uk-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>-->
+                                    <!--                                    </div>-->
+                                    <!--                                </div>-->
+                                    <div class="js-processing-box processing-box uk-margin-small-bottom uk-hidden">
+                                        <div class="progress uk-position-absolute uk-width-1-1 uk-position-top-left rounded-0">
+                                            <progress class="uk-progress uk-border-square" value="" max="100"></progress>
+                                        </div>
+                                    </div>
+                                    <div class="action">
+                                        <button type="button" class="uk-button uk-button-default uk-margin-small-right uk-modal-close" data-dismiss="modal"><?php
+                                            echo _e('Close', 'templaza-framework'); ?></button>
+                                        <button type="button" class="uk-button uk-button-danger uk-margin-small-right uk-hidden" data-tzinst-stop-importing><?php
+                                            echo _e('Stop Importing', 'templaza-framework'); ?></button>
+                                        <button type="button" class="uk-button uk-button-primary js-tzinst-import">
+                                            <span class="spinner-border spinner-border-sm uk-margin-small-right uk-hidden js-tzinst-importing-icon"></span><?php
+                                            _e('Install Demo Data', 'templaza-framework');
+                                            ?></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                <?php } ?>
-            </div>
+                    <?php } ?>
+                </div>
 
             <?php } ?>
         </div>
