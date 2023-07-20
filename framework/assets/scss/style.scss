@@ -261,24 +261,15 @@ $grid-gutter-width:           2.5rem !default;
       }
     }
   }
-  //.button {
-  //  background: $tz-button-background-color;
-  //  color: $tz-button-color;
-  //  border-color: $tz-toolbar-border-color;
-  //}
-  //input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea {
-  //  border-color: $tz-toolbar-border-color;
-  //}
 
   @import "notices.scss";
   @import "button.scss";
   @import "form.scss";
   @import "spinner.scss";
-  //@import "options.scss";
-  //@import "component/options.scss";
   @import "ui_dialog";
   @import "_ui_tooltip";
   @import "_progress";
+  @import "_border_radius";
   @import "_media_lightbox";
   @import "heartbeat.scss";
   @import "main.scss";
