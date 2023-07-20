@@ -5,21 +5,39 @@ defined('ADVANCED_PRODUCT') or exit();
 use Advanced_Product\AP_Functions;
 use Advanced_Product\Helper\AP_Helper;
 use Advanced_Product\Helper\AP_Custom_Field_Helper;
-
+use TemPlazaFramework\Functions;
 ?>
 <?php
+if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
+    $templaza_options = array();
+}else{
+    $templaza_options = Functions::get_theme_options();
+}
+$sold_text     = isset($templaza_options['ap_product-sold-label'])?$templaza_options['ap_product-sold-label']:'';
+$contact_text     = isset($templaza_options['ap_product-contact-label'])?$templaza_options['ap_product-contact-label']:'';
+
 $msrp           = get_field('ap_price_msrp', get_the_ID());
 $price          = get_field('ap_price', get_the_ID());
 $rental         = get_field('ap_rental_price', get_the_ID());
 $rental_unit    = get_field('ap_rental_unit', get_the_ID());
 $product_type   = get_field('ap_product_type', get_the_ID());
-$price_sold = get_field('ap_price_sold', get_the_ID());
-$price_contact = get_field('ap_price_contact', get_the_ID());
+$price_sold     = get_field('ap_price_sold', get_the_ID());
+$price_contact  = get_field('ap_price_contact', get_the_ID());
 
 $f_value            = get_field('unit-price', get_the_ID());
 $call2buy_value     = get_field('call-to-buy', get_the_ID());
 $price_notice_value = get_field('price-notice', get_the_ID());
 $call2buy = AP_Custom_Field_Helper::get_custom_field_option_by_field_name('call-to-buy');
+if($product_type == 'sale'){
+    $product_type = array('sale');
+}
+if($price_sold == ''){
+    $price_sold = $sold_text;
+}
+if($price_contact == ''){
+    $price_contact = $contact_text;
+}
+
 if ((!$product_type || in_array('sale', $product_type)) && !empty($price)) {
 
     $html = '<p class="uk-background-primary uk-padding-small uk-light ap-pricing">';

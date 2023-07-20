@@ -9,6 +9,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }else{
     $templaza_options            = Functions::get_theme_options();
 }
+$show_badges   = isset($templaza_options['ap_product-badges'])?filter_var($templaza_options['ap_product-badges'], FILTER_VALIDATE_BOOLEAN):true;
 $thumbnail       = isset($templaza_options['ap_product-thumbnail-size'])?$templaza_options['ap_product-thumbnail-size']:'large';
 $sale_label       = isset($templaza_options['ap_product-sale-label'])?$templaza_options['ap_product-sale-label']:'';
 $rent_label       = isset($templaza_options['ap_product-rent-label'])?$templaza_options['ap_product-rent-label']:'';
@@ -17,7 +18,7 @@ $contact_label       = isset($templaza_options['ap_product-contact-label'])?$tem
 $rent_sale       = isset($templaza_options['ap_product-sale-rent-label'])?$templaza_options['ap_product-sale-rent-label']:'';
 $product_type   = get_field('ap_product_type', get_the_ID());
 $label = $cl = '';
-if($product_type){
+if($show_badges && is_array($product_type)){
     if(count($product_type) == 2){
         $label = $rent_sale;
         $cl = 'sale-rent';

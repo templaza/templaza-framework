@@ -32,8 +32,10 @@ $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
 ?>
     <div class="ap-item ap-item-style5 <?php echo esc_attr($ap_class);?>">
         <div class="ap-inner">
-            <?php AP_Templates::load_my_layout('archive.badges'); ?>
-            <?php AP_Templates::load_my_layout('archive.media',true,false,array('compare_layout'    => $compare_layout)); ?>
+            <div class="uk-inline uk-position-relative">
+                <?php AP_Templates::load_my_layout('archive.badges'); ?>
+                <?php AP_Templates::load_my_layout('archive.media',true,false,array('compare_layout'    => $compare_layout)); ?>
+            </div>
             <div class="ap-info">
                 <div class="ap-info-inner ap-info-top">
                     <h2 class="ap-title">
