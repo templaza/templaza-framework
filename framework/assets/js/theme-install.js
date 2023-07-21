@@ -15,54 +15,25 @@
 
         $installer.ajax = function(url, data, el_ajax){
             var __preload_item = __preloader.clone(),
-                __can_preloader = __preloader.length && el_ajax.closest($var.item_preload_dest).length;
+                __can_preloader = __preloader.length && typeof el_ajax !== "undefined"
+                    && el_ajax.closest($var.item_preload_dest).length;
             if(__can_preloader) {
                 __preload_item.appendTo(el_ajax.closest($var.item_preload_dest))
                     .fadeIn();
             }
 
             $.post(url, data, function (response) {
-                console.log(response);
-
                 if (response.success) {
                     if (response.nextstep !== undefined) {
-                        //
-                        // var totalStep = 1;
-
-                        // if(response.action_import === undefined){
-                        //     each    = each / 2;
-                        // }
-
-                        // console.log(response.nextstep);
-
-                        // /* Total step is total package files from server */
-                        // if (response.nextstep.total_step !== undefined) {
-                        //     if(count === totalItem) {
-                        //         totalStep = response.nextstep.total_step;
-                        //     }else {
-                        //         totalStep = response.nextstep.total_step + 1;
-                        //     }
-                        // }
-                        // var eachStep = each/ totalStep;
-
-                        // /* Set current step */
-                        // item.data("tzinst_import_ajax_current_step", eachStep);
-                        //
-                        // percentage = currentWidth + eachStep;
-                        //
-                        // progress_bar.css('width', percentage + '%');
-
-                        /* Call ajax with the next step */
-                        // tzinst_import_ajax(response.nextstep, button, form, totalItem, totalItemCheck, count);
-
-                        $installer.ajax($var.ajaxurl, postdata);
+                        $installer.ajax($var.ajaxurl, response.nextstep);
+                    }else {
+                        __preload_item.fadeOut(400, function () {
+                            $(this).remove();
+                            if (typeof response.redirect !== "undefined") {
+                                window.location = response.redirect;
+                            }
+                        });
                     }
-                    __preload_item.fadeOut(400, function(){
-                        $(this).remove();
-                        if(typeof response.redirect !== "undefined"){
-                            window.location    = response.redirect;
-                        }
-                    });
                 }else{
                     if(typeof response.redirect !== "undefined"){
                         window.location    = response.redirect;
@@ -73,7 +44,7 @@
 
         if($selector.length){
             $selector.off("click").on("click", function(){
-               var __input = $(this);
+                var __input = $(this);
 
                 UIkit.modal.confirm(__i18n.install_theme_question).then(function () {
 
@@ -130,71 +101,11 @@
     };
 
     $(document).ready(function(){
-       $(".tzinst-theme-install").Templaza_FrameworkThemeInstall({
-           ajaxurl: ajaxurl,
-           i18n: tzinst_theme_install.l10nStrings,
-           page: templazaInstallationSettings.page,
-           theme_install: tzinst_theme_install,
-       });
+        $(".tzinst-theme-install").Templaza_FrameworkThemeInstall({
+            ajaxurl: ajaxurl,
+            i18n: tzinst_theme_install.l10nStrings,
+            page: templazaInstallationSettings.page,
+            theme_install: tzinst_theme_install,
+        });
     });
-    // $(document).on("click", ".tzinst-theme-install [data-install-theme]", function(){
-    //     var __input = $(this),
-    //         __theme_install = typeof tzinst_theme_install !== "undefined"?tzinst_theme_install:{},
-    //         __i18n  = typeof __theme_install.l10nStrings !== "undefined"?__theme_install.l10nStrings:{};
-    //
-    //     UIkit.modal.confirm(__i18n.install_theme_question).then(function () {
-    //
-    //         var postdata    = {
-    //             "action": "tzinst_theme_install",
-    //             page: templazaInstallationSettings.page,
-    //             security: __theme_install.theme_install_nonce,
-    //         };
-    //
-    //         if(__input.data("theme-pack") !== undefined){
-    //             postdata['pack'] = __input.data("theme-pack");
-    //         }
-    //         if(__input.data("theme-pack-type")) {
-    //             postdata['pack_type'] = __input.data("theme-pack-type");
-    //         }
-    //         if(__input.data("theme-title") !== undefined){
-    //             postdata["theme_title"] = __input.data("theme-title");
-    //         }
-    //
-    //         $.post(ajaxurl, postdata, function (response) {
-    //
-    //             if (response.success) {
-    //                 if (response.nextstep !== undefined) {
-    //
-    //                     var totalStep = 1;
-    //
-    //                     // if(response.action_import === undefined){
-    //                     //     each    = each / 2;
-    //                     // }
-    //
-    //                     /* Total step is total package files from server */
-    //                     if (response.nextstep.total_step !== undefined) {
-    //                         if(count === totalItem) {
-    //                             totalStep = response.nextstep.total_step;
-    //                         }else {
-    //                             totalStep = response.nextstep.total_step + 1;
-    //                         }
-    //                     }
-    //                     // var eachStep = each/ totalStep;
-    //
-    //                     // /* Set current step */
-    //                     // item.data("tzinst_import_ajax_current_step", eachStep);
-    //                     //
-    //                     // percentage = currentWidth + eachStep;
-    //                     //
-    //                     // progress_bar.css('width', percentage + '%');
-    //
-    //                     /* Call ajax with the next step */
-    //                     tzinst_import_ajax(response.nextstep, button, form, totalItem, totalItemCheck, count);
-    //                 }
-    //             }
-    //         });
-    //     }, function () {
-    //         return false;
-    //     });
-    // });
 })(jQuery, UIkit);
