@@ -73,8 +73,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
             $security       = $_POST['security'];
             $step           = isset($_POST['step'])?$_POST['step']:1;
 
-//            $url            = $this -> api.'/index.php?option=com_tz_membership';
-            $url            = 'http://joomla.templaza.com/templazaplus/index.php';
+            $url            = $this -> api.'/index.php?option=com_tz_membership';
             $produce        = isset($_POST['pack']) && $_POST['pack']?$_POST['pack']:'';
             $pack           = isset($_POST['pack_type']) && $_POST['pack_type']?$_POST['pack_type']:'';
             $theme_title    = isset($_POST['theme_title']) && $_POST['theme_title']?$_POST['theme_title']:'';
@@ -102,6 +101,9 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
                 'domain'        => get_site_url()
             );
 
+            $app        = Application::get_instance();
+            $redirect   = admin_url('admin.php?page='
+                .TEMPLAZA_FRAMEWORK.(($this -> get_name() != 'dashboard')?'_'.$this -> get_name():''));
 
             // Bump the max execution time because not using built in php zip libs are slow
             @set_time_limit(ini_get('max_execution_time'));
@@ -117,9 +119,6 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
                 )
             );
 
-            $app        = Application::get_instance();
-            $redirect   = admin_url('admin.php?page='
-                .TEMPLAZA_FRAMEWORK.(($this -> get_name() != 'dashboard')?'_'.$this -> get_name():''));
             if(is_wp_error($response)){
                 $app -> enqueue_message(esc_html__($response -> get_error_message()), 'error');
 
@@ -155,6 +154,21 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
                 if($total_files_part > 1 && $step < $total_files_part){
                     $this -> info -> set_message(sprintf(esc_html__('Download file part %d completed',
                         'templaza-framework'), $step), false);
+
+                    if($total_files_part > 1) {
+                        $next_step  = array(
+                            'action'    => $action,
+                            'page'      => $page,
+                            'security'  => $security,
+                            'pack'      => $produce,
+                            'pack_type' => $pack
+                        );
+                        $next_step['total_step'] = (int)$header['files-part-count'];
+                        if($step < $header['files-part-count']){
+                            $next_step['step']              = $step + 1;
+                        }
+                        $this -> info -> set('nextstep', $next_step);
+                    }
                 }
                 else {
                     // Install theme downloaded
@@ -190,25 +204,8 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
 
                         $this -> info -> set_message(esc_html__('Downloaded and installed theme successfully', 'templaza-framework'), false);
                         $this -> info -> set('redirect', admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK));
-//                        $this -> info -> set('redirect', $redirect);
                     }
 
-                }
-
-                if($total_files_part > 1) {
-                    $next_step  = array(
-                        'action'    => $action,
-                        'page'      => $page,
-                        'security'  => $security,
-                        'pack'      => $produce,
-                        'pack_type' => $pack
-                    );
-                    $next_step['total_step'] = (int)$header['files-part-count'];
-                    if($step < $header['files-part-count']){
-                        $next_step['step']              = $step + 1;
-//                    $next_step['action_import']     = $action_import;
-                    }
-                    $this -> info -> set('nextstep', $next_step);
                 }
             }
 
