@@ -128,7 +128,7 @@
 				});
 			}
 
-			if($(selector).closest(".tzfrm-ui-dialog").length){
+			if($(selector).closest(".tzfrm-ui-dialog,.uk-modal").length){
 				// if(typeof el.find("> [data-responsive]") !== "undefined" && el.find("> [data-responsive]").length){
 				// 	var __responsive_main = el.find("> [data-responsive]"),
 				// 	__device = __responsive_main.data("field-device");
@@ -154,23 +154,6 @@
 				// // });
 			}
 		});
-
-		// if($(selector).closest(".tzfrm-ui-dialog").length){
-		// 	$(selector).each(function () {
-		// 		var el     = $( this );
-		//
-		// 		var _spacing_unit	= el.find(".field-units").val();
-		// 		el.find(".redux-spacing-units").val(_spacing_unit);
-		//
-		// 		el.find( '.redux-spacing-input' ).each(function(){
-		// 			var	_spacing_value = $( '#' + $( this ).attr( 'rel' ) ).val();
-		// 			_spacing_value	= _spacing_value.replace(_spacing_unit, "");
-		//
-		// 			$(this).val(_spacing_value);
-		// 		});
-		// 	});
-		// }
-		// tzfrm_org_redux_field_spacing(selector);
 	};
 	redux.field_objects.spacing.templaza_methods.setting_edit_after_init_field = function(selector, parent, element){
 		var __uk_item = $(this),

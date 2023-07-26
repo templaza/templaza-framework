@@ -28,8 +28,8 @@
                 }
 
                 // Remove form settings of layout in dialog
-                if(el.closest(".tzfrm-ui-dialog").length){
-                    el.closest(".tzfrm-ui-dialog").on("templaza-framework/setting/save/before", function(event, $setting,  $element, $selector, $settings){
+                if(el.closest(".tzfrm-ui-dialog,.uk-modal").length){
+                    el.closest(".tzfrm-ui-dialog,.uk-modal").on("templaza-framework/setting/save/before", function(event, $setting,  $element, $selector, $settings){
                         if(typeof $setting.params[el.attr("data-id")+"__opt_name"] !== "undefined"){
                             delete $setting.params[el.attr("data-id")+"__opt_name"];
                         }
