@@ -66,7 +66,7 @@ if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $sh
     </div>
 <?php }
 
-if ((!$product_type || in_array('contact', $product_type)) && !empty($price_contact) && $show_price_contact) {
+if ((!empty($product_type) && in_array('contact', $product_type)) && !empty($price_contact) && $show_price_contact) {
     ?>
     <div class="ap-price-box">
         <span class="ap-field-label"><?php esc_html_e('Price','templaza-framework')?></span>
@@ -76,7 +76,7 @@ if ((!$product_type || in_array('contact', $product_type)) && !empty($price_cont
     </div>
 <?php }
 
-if ((!$product_type || in_array('sold', $product_type)) && !empty($price_sold) && $show_price_sold) {
+if ((!empty($product_type) && in_array('sold', $product_type)) && !empty($price_sold) && $show_price_sold) {
     ?>
     <div class="ap-price-box">
         <span class="ap-field-label"><?php esc_html_e('Price','templaza-framework')?></span>
