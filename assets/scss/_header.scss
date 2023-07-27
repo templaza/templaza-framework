@@ -166,6 +166,14 @@
       }
     }
   }
+  &.templaza-horizontal-justify-header {
+    .header-icon-wrap{
+      height:100%;
+    }
+    .header-icon {
+      align-items:center;
+    }
+  }
 }
 @media (min-width:1201px) {
   body.header-sidebar-left{

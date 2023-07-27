@@ -12,13 +12,13 @@ if ($enable_contact) {
     $contact_location         = isset($options['contact-location'])?$options['contact-location']:'';
     $contact_email            = isset($options['contact-email'])?$options['contact-email']:'';
     $contact_phone            = isset($options['contact-phone'])?$options['contact-phone']:'';
+    $contact_enable_login     = isset($options['enable-contact-login'])?filter_var($options['enable-contact-login'], FILTER_VALIDATE_BOOLEAN):false;
     $contact_login            = isset($options['contact-login'])?$options['contact-login']:'';
     $contact_location_icon    = isset($options['contact-location-icon'])?$options['contact-location-icon']:'';
+    $contact_enable_email     = isset($options['enable-contact-email'])?filter_var($options['enable-contact-email'], FILTER_VALIDATE_BOOLEAN):false;
     $contact_email_icon       = isset($options['contact-email-icon'])?$options['contact-email-icon']:'';
     $contact_phone_icon       = isset($options['contact-phone-icon'])?$options['contact-phone-icon']:'';
     $contact_login_icon       = isset($options['contact-login-icon'])?$options['contact-login-icon']:'';
-
-
 }
 
 if(!empty($contact_location) || !empty($contact_email)  || !empty($contact_phone ) || !empty($contact_phone)){
@@ -35,7 +35,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
         </span>
         <?php
     }
-    if(!empty($contact_email)){
+    if($contact_enable_email){
         ?>
         <span class="contact-email">
         <?php if($contact_email_icon){ ?>
@@ -56,7 +56,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
         </span>
         <?php
     }
-    if(!empty($contact_login)){
+    if($contact_enable_login){
         ?>
         <span class="contact-login">
         <?php if($contact_login_icon){ ?>

@@ -642,34 +642,31 @@ class TemplazaFramework_ShortCode{
                 }
             }
         }
+        if(isset($params['text_color']) && !empty($params['text_color'])){
+            $custom_text_name    = '.'.$custom_css_name;
+            $css_text   = '';
+            $css_text   .= $custom_text_name.' p{color:'.$params['text_color'].' !important;}';
+            Templates::add_inline_style($css_text);
+        }
 
         if(isset($params['link_color']) && !empty($params['link_color'])){
-            $custom_css_name    = '.'.$custom_css_name;
-
+            $custom_link_name    = '.'.$custom_css_name;
 
             $css_link   = '';
             $link_color = $params['link_color'];
 
             if(isset($link_color['regular']) && !empty($link_color['regular'])){
-                $css_link   .= $custom_css_name.' a{color:'.$link_color['regular'].' !important;}';
+                $css_link   .= $custom_link_name.' a{color:'.$link_color['regular'].' !important;}';
             }
             if(isset($link_color['hover']) && !empty($link_color['hover'])){
-                $css_link   .= $custom_css_name.' a:hover{color:'.$link_color['hover'].' !important;}';
+                $css_link   .= $custom_link_name.' a:hover{color:'.$link_color['hover'].' !important;}';
             }
             if(isset($link_color['active']) && !empty($link_color['active'])){
-                $css_link   .= $custom_css_name.' a:active{color:'.$link_color['active'].' !important;}';
+                $css_link   .= $custom_link_name.' a:active{color:'.$link_color['active'].' !important;}';
             }
             if(!empty($css_link)){
                 Templates::add_inline_style($css_link);
             }
-//            if(!empty($css_link)){
-//                if(isset($params['tz_css'])){
-//                    $params['tz_css']   .= $css_link;
-//                }else{
-//                    $params['tz_css']   = $css_link;
-//                }
-//
-//            }
         }
 
         return $params;
@@ -678,10 +675,7 @@ class TemplazaFramework_ShortCode{
     public function custom_css(&$params, &$element){
         $css = array('desktop' => '', 'tablet' => '', 'mobile' => '');
 
-        if(isset($params['text_color']) && !empty($params['text_color'])){
-            $css['desktop'] .= 'color: '.$params['text_color'].' !important;';
-            unset($params['text_color']);
-        }
+
 
         if(isset($params['background'])){
             $background = $params['background'];

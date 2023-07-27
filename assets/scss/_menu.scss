@@ -176,6 +176,14 @@
          }
       }
    }
+   &.menu-horizontal-justify{
+      > .menu-item{
+         width:100%;
+         >a{
+            width:100%;
+         }
+      }
+   }
 }
 
 ul{
