@@ -80,3 +80,27 @@
     }
   }
 }
+#dealership_edit-account{
+  .field{
+    p{
+      &.label{
+        margin:0;
+      }
+    }
+    input{
+      width:100%;
+    }
+  }
+}
+.dls-product-items{
+  .product-stt{
+    font-size:0.875em;
+  }
+  .dls-product-item{
+    &:hover{
+      .product-stt-box {
+        display:none;
+      }
+    }
+  }
+}
