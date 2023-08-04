@@ -7,9 +7,8 @@
   }
 }
 .templaza-add-product{
-  background:$tztheme-ap-single-price-bg;
-  padding:40px;
-  @include box-shadow($tztheme-box-shadow-default);
+  background:none;
+  padding:0;
   p.label{
     margin-bottom: 15px;
     font-weight:600;
@@ -20,8 +19,7 @@
       margin:0;
     }
     .acf_wysiwyg .wp-editor-container{
-      border:none;
-      box-shadow: none;
+
     }
     a{
       &:focus{
@@ -100,6 +98,29 @@
     &:hover{
       .product-stt-box {
         display:none;
+      }
+    }
+  }
+}
+.dealer-page{
+  .dealer-nav{
+    border-top: 1px solid $tztheme-border-color;
+    margin-top: 25px;
+    padding-top: 10px;
+    li{
+      a{
+        &:focus{
+          box-shadow:none;
+          outline:none;
+        }
+      }
+    }
+  }
+  form{
+    input{
+      &:focus{
+        border-color:#dedede;
+        box-shadow: none;
       }
     }
   }
