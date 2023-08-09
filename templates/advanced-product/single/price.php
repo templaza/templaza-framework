@@ -19,7 +19,11 @@ $contact_text     = isset($templaza_options['ap_product-contact-label'])?$templa
 $msrp           = get_field('ap_price_msrp', get_the_ID());
 $price          = get_field('ap_price', get_the_ID());
 $rental         = get_field('ap_rental_price', get_the_ID());
-$rental_unit    = get_field('ap_rental_unit', get_the_ID());
+$rental_value    = get_field('ap_rental_unit', get_the_ID());
+if($rental_value){
+    $field_rental = get_field_object('ap_rental_unit');
+    $rental_unit = $field_rental['choices'][ $rental_value ];
+}
 $product_type   = get_field('ap_product_type', get_the_ID());
 $price_sold     = get_field('ap_price_sold', get_the_ID());
 $price_contact  = get_field('ap_price_contact', get_the_ID());

@@ -811,3 +811,46 @@ Templaza_API::set_subsection('settings','ap_product-page',
         )
     )
 );
+Templaza_API::set_subsection('settings','ap_product-page',
+    array(
+        'title'      => esc_html__( 'Get a Quote', 'templaza-framework' ),
+        'id'         => 'ap_product-quote',
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'ap_product-quote',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Enable Get a Quote ', 'templaza-framework' ),
+                'default'  => false,
+            ),
+            array(
+                'id'       => 'ap_product-quote-label',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Quote Label', 'templaza-framework' ),
+                'default'  => '',
+                'required' => array('ap_product-quote', '=' , true),
+            ),
+            array(
+                'id'       => 'ap_product-quote-form',
+                'type'     => 'select',
+                'title'    => esc_html__( 'Choose Form', 'templaza-framework' ),
+                'options'  => $arr_wpform,
+            ),
+            array(
+                'id'       => 'ap_product-quote-form-custom',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Custom Form', 'templaza-framework' ),
+                'subtitle' => esc_html__('Insert Form Shortcode', 'templaza-framework'),
+                'required' => array('ap_product-quote-form', '=' , 'custom'),
+            ),
+            array(
+                'id'       => 'ap_product-quote-custom-url',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Custom Url', 'templaza-framework' ),
+                'subtitle' => esc_html__('Insert Custom Url', 'templaza-framework'),
+                'required' => array('ap_product-quote-form', '=' , 'custom_url'),
+            ),
+
+        )
+    )
+);

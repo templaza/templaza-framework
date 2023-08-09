@@ -18,7 +18,7 @@ if ($enable_footer) {
     $footertext = str_replace($find, $replace, $footer_copyright);
 
 }
-
+var_dump($enable_footer);
 if(isset($footertext)){
 ?>
 <div<?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="<?php

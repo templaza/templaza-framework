@@ -114,6 +114,11 @@
           outline:none;
         }
       }
+      &.uk-active{
+        a{
+          color:$tztheme-global-color;
+        }
+      }
     }
   }
   form{
@@ -122,6 +127,17 @@
         border-color:#dedede;
         box-shadow: none;
       }
+    }
+  }
+  .dealer-pd-action{
+    margin-top:12px;
+    a.uk-icon-button{
+      margin-right:8px;
+    }
+  }
+  .add-product{
+    a{
+
     }
   }
 }

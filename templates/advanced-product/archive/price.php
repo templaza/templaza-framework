@@ -20,7 +20,12 @@ $contact_text     = isset($templaza_options['ap_product-contact-label'])?$templa
 $msrp           = get_field('ap_price_msrp', get_the_ID());
 $price          = get_field('ap_price', get_the_ID());
 $rental         = get_field('ap_rental_price', get_the_ID());
-$rental_unit    = get_field('ap_rental_unit', get_the_ID());
+$rental_value    = get_field('ap_rental_unit', get_the_ID());
+if($rental_value){
+    $field_rental = get_field_object('ap_rental_unit');
+    $rental_unit = $field_rental['choices'][ $rental_value ];
+}
+
 $price_contact  = get_field('ap_price_contact', get_the_ID());
 $product_type   = get_field('ap_product_type', get_the_ID());
 $price_notice_value = get_field('price-notice', get_the_ID());
@@ -33,7 +38,6 @@ $show_price_notice  = AP_Custom_Field_Helper::get_field_display_flag('show_in_li
 $show_price_rental  = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_rental_price');
 $show_price_contact  = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price_contact');
 $show_price_sold  = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price_sold');
-
 if($product_type == 'sale'){
     $product_type = array('sale');
 }

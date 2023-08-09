@@ -224,7 +224,7 @@ Templaza_API::set_section('templaza_style',
                 ),
                 'placeholder'   => esc_html__('Inherit', 'templaza-framework'),
                 'select2'       => array( 'allowClear' => true ),
-                'default'       => '',
+                'default'       => 'off',
             ),
             array(
                 'id'       => 'footer-copyright',
@@ -233,7 +233,7 @@ Templaza_API::set_section('templaza_style',
                 'subtitle' => __( 'Enter the text that displays in the copyright bar. You can use <code>{year}</code> for current year and <code>{sitetitle}</code> for site name.', 'templaza-framework' ),
                 'desc'     => __('HTML is allowed in here.', 'templaza-framework'),
                 'validate' => 'html', //see http://codex.wordpress.org/Function_Reference/wp_kses_post
-                'default'  => '© {sitetitle} {year}. Design by <a href="https://www.templaza.com/" title="TemPlaza">TemPlaza</a>',
+                'default'  => '',
                 'required' => array( 'enable-footer', '!=', 'off' ),
             ),
         )
