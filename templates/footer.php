@@ -50,7 +50,7 @@ if($ap_quote){
                         echo do_shortcode($ap_quote_form_custom);
                     }else{
                         ?>
-                        <h2 class="uk-modal-title"><?php echo esc_html(get_the_title($ap_quote_form)); ?></h2>
+                        <h3 class="uk-modal-title"><?php echo esc_html(get_the_title($ap_quote_form)); ?></h3>
                         <?php
                         if(function_exists('wpforms')) {
                             echo do_shortcode('[wpforms id="' . $ap_quote_form . '"]');

@@ -645,7 +645,7 @@ class TemplazaFramework_ShortCode{
         if(isset($params['text_color']) && !empty($params['text_color'])){
             $custom_text_name    = '.'.$custom_css_name;
             $css_text   = '';
-            $css_text   .= $custom_text_name.' p{color:'.$params['text_color'].' !important;}';
+            $css_text   .= $custom_text_name.' p, '.$custom_text_name.'{color:'.$params['text_color'].' !important;}';
             Templates::add_inline_style($css_text);
         }
 
