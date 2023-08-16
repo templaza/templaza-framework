@@ -103,6 +103,10 @@
   }
 }
 .dealer-page{
+  .dealer-avatar{
+    height:100px;
+    object-fit: cover;
+  }
   .dealer-nav{
     border-top: 1px solid $tztheme-border-color;
     margin-top: 25px;
