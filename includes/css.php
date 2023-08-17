@@ -380,7 +380,11 @@ class CSS{
             return $color_options;
         }
 
-        return self::make_color_rgba($color_options['color'], $color_options['alpha'], $color_options['rgba']);
+        $color  = isset($color_options['color'])?$color_options['color']:'';
+        $alpha  = isset($color_options['alpha'])?$color_options['alpha']:'';
+        $rgba   = isset($color_options['rgba'])?$color_options['rgba']:'';
+
+        return self::make_color_rgba($color, $alpha, $rgba);
     }
 
     public static function background_redux($background_options = array(), $important = false){
