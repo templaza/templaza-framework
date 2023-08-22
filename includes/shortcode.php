@@ -769,6 +769,7 @@ class TemplazaFramework_ShortCode{
             $file = TEMPLAZA_FRAMEWORK_SHORTCODES_PATH . '/' . $this->get_shortcode_name() . '/tmpl/'
                 .$this -> get_shortcode_name().'.php';
         }
+        $file   = apply_filters('templaza-framework/shortcode/'.$this -> get_shortcode_name().'/tmpl', $file);
         ob_start();
 
         if(file_exists($file)){

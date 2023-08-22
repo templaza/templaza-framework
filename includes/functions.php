@@ -344,6 +344,9 @@ if(!class_exists('\TemPlazaFramework\Functions')){
                 if(class_exists($shortcode_class) && !isset(self::$cache['shortcode'][$shortcode_storeId])) {
                     self::$cache['shortcode'][$shortcode_storeId] = new $shortcode_class();
                 }
+                do_action('templaza-framework/layout/generate/shortcode/init', $item, $parent_el);
+                do_action('templaza-framework/layout/generate/shortcode/'.$item['type'].'/init', $item, $parent_el);
+//                self::$cache['shortcode']   = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/after_init')
 
                 $item = apply_filters('templaza-framework/layout/generate/shortcode/prepare', $item, $parent_el);
                 $item = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/prepare', $item, $parent_el);
