@@ -91,11 +91,11 @@ class Templaza_Product_Loop {
 
 		// Remove rating
 		remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
-		if ( is_array($attributes) && $attributes['rating']=='1' ) {
+		if ( is_array($attributes) && isset($attributes['rating']) && $attributes['rating']=='1' ) {
 			add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 20 );
 		}
 
-		if ( is_array($attributes) && $attributes['taxonomy']=='1' ) {
+		if ( is_array($attributes) && isset($attributes['taxonomy']) && $attributes['taxonomy']=='1' ) {
 			add_action( 'woocommerce_shop_loop_item_title', array(
 				$this,
 				'product_loop_category'
@@ -662,7 +662,7 @@ class Templaza_Product_Loop {
 					'product_loop_buttons_close'
 				), 100 );
 
-				if (!empty($attributes) && $attributes['rating']=='1' ) {
+				if (!empty($attributes) && isset($attributes['rating']) && $attributes['rating']=='1' ) {
 					add_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
 					remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 20 );
 				}
