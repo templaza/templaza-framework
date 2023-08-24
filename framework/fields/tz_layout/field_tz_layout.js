@@ -1657,6 +1657,8 @@
 
                                 var fieldset = obj_selector.find( '#' + _opt_name + '-' + i );
                                 // var fieldset = obj_selector.find( '#' + redux.opt_names[x] + '-' + i );
+                                console.log(fieldset);
+                                console.log(v);
 
                                 fieldset.parents( 'tr:first, li:first' ).addClass( 'fold' );
 
@@ -1772,12 +1774,7 @@
                             },
                         ],
                         "hidden": function () {
-                            // console.log(event);
-                            // // if(!$(this).is(':visible')) {
-                                $(this).remove();
-                            //
-                            //     // redux.field_objects.tz_layout.init_tooltip(selector);
-                            // // }
+                            $(this).remove();
                         },
                         "beforeshow": function(){
                             if(!$(this).closest(".templaza-framework-options").length){
@@ -1785,8 +1782,6 @@
                             }
                         },
                         "shown": function () {
-
-                            // $.redux.required();
 
                             var shortcode = templaza.shortcode;
                             var _dialog = $(this);
@@ -1804,6 +1799,7 @@
 
                                 main_wrap.data("opt-name", undefined);
                                 main_wrap.removeData("data-opt-name");
+                                // tz_required(_dialog);
                                 fields.each(function () {
                                     var field = $(this),
                                         field_type = field.data("type"),
@@ -1833,9 +1829,9 @@
                                             }
                                         }
 
-
                                         tz_redux_field.init(field);
-                                        redux_change(field.find(" input,  textarea, select"));
+                                        // redux_change(field.find(" input,  textarea, select"));
+                                        // $.redux.check_dependencies(field.find(" input,  textarea, select"));
 
                                         // After init field in setting edit
                                         // Trigger of field (setting_edit_after_init_field)
@@ -1860,8 +1856,24 @@
 
                                 });
 
-                                tz_required(control.closest(".redux-group-tab"));
-                                // $.redux.checkRequired(_dialog.find(".redux-container"));
+                                var opt_name;
+                                var tempArr = [];
+                                var container;
+                                container = _dialog.find(".redux-container");
+
+                                container.each(
+                                    function() {
+                                        opt_name = $.redux.getOptName( this );
+
+                                        if ( $.inArray( opt_name, tempArr ) === -1 ) {
+                                            tempArr.push( opt_name );
+                                            $.redux.checkRequired( $( this ) );
+                                            $.redux.initEvents( $( this ) );
+                                        }
+                                    }
+                                );
+
+
 
                             }
                         },
