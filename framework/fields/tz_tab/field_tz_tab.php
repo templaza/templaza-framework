@@ -64,8 +64,23 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
                     \Redux::set_args($opt_name, $redux_args);
                     \Redux::set_sections($opt_name, $field['tabs']);
 
+                    // Rename of field's name
+                    foreach($field['tabs'] as $k => $tab){
+                        if(isset($tab['fields']) && count($tab['fields'])){
+                            foreach ($tab['fields'] as $fd) {
+                                Fields::load_field($fd, '', $this -> parent);
+
+                                add_filter("redux/options/{$opt_name}/field/{$fd['id']}", function($_field)use($field){
+                                    $_field['name'] = $_field['id'];
+                                    return $_field;
+                                });
+                            }
+                        }
+                    }
+
                     \Redux::init($opt_name);
                     \Templaza_API::load_my_fields($opt_name);
+
 
                     add_filter("redux/{$opt_name}/repeater", function($repeater_data) use($redux_args){
                         $repeater_data['opt_names'][]   = $redux_args['opt_name'];
@@ -73,23 +88,35 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
                     });
                     $redux  = \Redux::instance($opt_name );
 
-                    foreach($field['tabs'] as $k => $tab){
-                        if(isset($tab['fields']) && count($tab['fields'])){
-                            foreach ($tab['fields'] as $field) {
-                                if(version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
-                                    $redux->field_default_values($field);
-                                    $redux->check_dependencies($field);
-                                }else {
-                                    $redux -> options_defaults_class -> field_default_values($redux->args['opt_name'], $field);
-                                    $redux -> required_class -> check_dependencies($field);
-                                }
+//                    foreach($field['tabs'] as $k => $tab){
+//                        if(isset($tab['fields']) && count($tab['fields'])){
+//                            foreach ($tab['fields'] as $_field) {
+//                                if(version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+////                                    $redux->field_default_values($_field);
+//                                    $redux->check_dependencies($_field);
+//                                }else {
+////                                    $redux -> options_defaults_class -> field_default_values($redux->args['opt_name'], $_field);
+//                                    $redux -> required_class -> check_dependencies($_field);
+//                                }
+//
+////                                TemPlazaFramework\Helpers\FieldHelper::check_required_dependencies($field,
+////                                    array('id' => $opt_name), $redux);
+//                            }
+//                        }
+//                    }
 
-//                                TemPlazaFramework\Helpers\FieldHelper::check_required_dependencies($field,
-//                                    array('id' => $opt_name), $redux);
-                            }
-                        }
-                    }
+//                    if(!$this -> value) {
+//                        $redux -> options   =  $redux -> _default_values();
+//                    }
 
+
+//                    $redux-> _register_settings();
+
+
+//                    $enqueue    = new Enqueue($redux);
+//                    $enqueue -> init();
+
+//                    $this -> redux_args          = $redux_args;
                     $this -> redux          = $redux;
 
                     if($has_media){

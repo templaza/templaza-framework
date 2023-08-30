@@ -19,6 +19,27 @@
         return origParseFloat(el);
     };
 
+    /**
+     * Override $.redux.getContainerValue function for use in block edit settings
+     * To fix issue required field when parent field change value
+     * */
+    var origGetContainerValue   = $.redux.getContainerValue;
+    $.redux.getContainerValue   = function( id ) {
+        var theId;
+        var value;
+
+        theId = $( '#' + redux.optName.args.opt_name + '-' + id );
+        value = theId.serializeForm();
+
+        if ( null !== value && 'object' === typeof value && !value.hasOwnProperty( redux.optName.args.opt_name )
+            && value.hasOwnProperty(id) ) {
+            value   = value[id];
+            return value;
+        }
+
+        return origGetContainerValue(id);
+    };
+
     redux.field_objects.tz_layout.init = function( selector ) {
 
         if (!selector) {
@@ -1799,7 +1820,24 @@
 
                                 main_wrap.data("opt-name", undefined);
                                 main_wrap.removeData("data-opt-name");
-                                // tz_required(_dialog);
+
+                                var opt_name;
+                                var tempArr = [];
+                                var container;
+                                container = _dialog.find(".redux-container");
+
+                                container.each(
+                                    function() {
+                                        opt_name = $.redux.getOptName( this );
+
+                                        if ( $.inArray( opt_name, tempArr ) === -1 ) {
+                                            tempArr.push( opt_name );
+                                            $.redux.checkRequired( $( this ) );
+                                            // $.redux.initEvents( $( this ) );
+                                        }
+                                    }
+                                );
+
                                 fields.each(function () {
                                     var field = $(this),
                                         field_type = field.data("type"),
@@ -1830,7 +1868,7 @@
                                         }
 
                                         tz_redux_field.init(field);
-                                        // redux_change(field.find(" input,  textarea, select"));
+                                        redux_change(field.find(" input,  textarea, select"));
                                         // $.redux.check_dependencies(field.find(" input,  textarea, select"));
 
                                         // After init field in setting edit
@@ -1856,22 +1894,22 @@
 
                                 });
 
-                                var opt_name;
-                                var tempArr = [];
-                                var container;
-                                container = _dialog.find(".redux-container");
-
-                                container.each(
-                                    function() {
-                                        opt_name = $.redux.getOptName( this );
-
-                                        if ( $.inArray( opt_name, tempArr ) === -1 ) {
-                                            tempArr.push( opt_name );
-                                            $.redux.checkRequired( $( this ) );
-                                            $.redux.initEvents( $( this ) );
-                                        }
-                                    }
-                                );
+                                // var opt_name;
+                                // var tempArr = [];
+                                // var container;
+                                // container = _dialog.find(".redux-container");
+                                //
+                                // container.each(
+                                //     function() {
+                                //         opt_name = $.redux.getOptName( this );
+                                //
+                                //         if ( $.inArray( opt_name, tempArr ) === -1 ) {
+                                //             tempArr.push( opt_name );
+                                //             $.redux.checkRequired( $( this ) );
+                                //             $.redux.initEvents( $( this ) );
+                                //         }
+                                //     }
+                                // );
 
 
 
