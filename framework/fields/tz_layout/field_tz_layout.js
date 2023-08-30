@@ -1833,7 +1833,7 @@
                                         if ( $.inArray( opt_name, tempArr ) === -1 ) {
                                             tempArr.push( opt_name );
                                             $.redux.checkRequired( $( this ) );
-                                            // $.redux.initEvents( $( this ) );
+                                            $.redux.initEvents( $( this ) );
                                         }
                                     }
                                 );
