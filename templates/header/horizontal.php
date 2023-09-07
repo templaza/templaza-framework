@@ -86,7 +86,10 @@ if($cart_icon_type == 'fontawesome' ){
         $cart_icon_html = '<img src="'.$cart_icon['url'].'" alt="'.esc_attr__('Cart','templaza-framework').'" '.$log_svg.'/>';
     }
 }
-$navClass[] = $dropdown_animation_effect;
+$navClass[]         = $dropdown_animation_effect;
+if(!empty($dropdown_animation_effect)) {
+    $navClassJustify[] = $dropdown_animation_effect;
+}
 
 // Get data attributes - them added from header shortcode
 $menu_datas = Functions::get_attributes('header');
