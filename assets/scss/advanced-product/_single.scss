@@ -152,6 +152,7 @@
         color:$tztheme-global-color;
         &:after{
           background:$tztheme-global-color;
+          @include transition($tztheme-transition-all);
         }
       }
     }
@@ -201,6 +202,7 @@
           &:hover{
             background:$tztheme-button_background;
             color:$tztheme-button_text_color;
+            @include transition($tztheme-transition-all);
           }
         }
       }

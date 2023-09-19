@@ -10,6 +10,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
     $templaza_options            = Functions::get_theme_options();
 }
 $thumbnail       = isset($templaza_options['ap_product-thumbnail-size'])?$templaza_options['ap_product-thumbnail-size']:'large';
+$thumbnail_eff       = isset($templaza_options['ap_product-thumbnail-effect'])?$templaza_options['ap_product-thumbnail-effect']:'';
 $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
 
 if(isset($_GET['product_loop'])){
@@ -19,8 +20,12 @@ if(isset($_GET['product_loop'])){
 }else{
     $ap_loop_layout = isset($templaza_options['ap_product-loop-layout']) ? $templaza_options['ap_product-loop-layout'] : 'style1';
 }
+$thumb_class_eff = '';
+if($thumbnail_eff == 'flash'){
+    $thumb_class_eff = 'templaza-thumb-flash ';
+}
 ?>
-<div class="uk-card-media-top uk-position-relative uk-transition-toggle">
+<div class="uk-card-media-top uk-position-relative uk-transition-toggle <?php echo esc_attr($thumb_class_eff);?>">
     <a href="<?php the_permalink(); ?>">
         <?php the_post_thumbnail($thumbnail);?>
     </a>

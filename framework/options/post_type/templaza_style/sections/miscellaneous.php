@@ -224,7 +224,7 @@ Templaza_API::set_section('templaza_style',
                 ),
                 'placeholder'   => esc_html__('Inherit', 'templaza-framework'),
                 'select2'       => array( 'allowClear' => true ),
-                'default'       => 'off',
+                'default'       => 'on',
             ),
             array(
                 'id'       => 'footer-copyright',

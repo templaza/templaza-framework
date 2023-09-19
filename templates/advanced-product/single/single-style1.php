@@ -26,6 +26,7 @@ $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:tr
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
 $ap_show_vendor           = isset($templaza_options['ap_product-single-vendor'])?$templaza_options['ap_product-single-vendor']:true;
 $ap_share           = isset($templaza_options['ap_product-single-share'])?$templaza_options['ap_product-single-share']:false;
+$ap_comment           = isset($templaza_options['ap_product-single-comment'])?$templaza_options['ap_product-single-comment']:true;
 $ap_share_label     = isset($templaza_options['ap_product-single-share-label'])?$templaza_options['ap_product-single-share-label']:'';
 
 do_action('templaza_set_postviews',get_the_ID());
@@ -164,11 +165,13 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
             </div>
             <?php
             if($ap_content_group ==''){
+                if($ap_comment){
                 ?>
                 <div class="templaza-single-comment ap-single-box">
                     <?php comments_template('', true); ?>
                 </div>
                 <?php
+                }
             }
             ?>
 

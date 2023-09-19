@@ -29,6 +29,8 @@ if($taxonomy == true){
         $product_id  = isset($args['product_id'])?$args['product_id']:'';
 
         $f_value    = get_field($acf_f['name'], $product_id);
+        $f_icon     = isset($acf_f['icon'])?$acf_f['icon']:'';
+        $f_icon_image   = isset($acf_f['icon_image']) && !empty($acf_f['icon_image'])?$acf_f['icon_image']:'';
         if(!empty($f_value)){
             if($acf_f['type'] == 'taxonomy' && $taxonomy == false){
 
@@ -53,11 +55,32 @@ if($taxonomy == true){
                                 }
                                 ?>
                                 <a href="<?php echo esc_url($file_url); ?>" download><?php
-                                    echo esc_html__('Download', 'templaza-framework')?></a>
+                                    if( !empty($f_icon) || !empty($f_icon_image)){
+                                        ?>
+                                        <span>
+                                        <?php
+                                        if($f_icon['type'] == 'uikit-icon'){
+                                            ?>
+                                            <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
+                                            <?php
+                                        }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
+                                            echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
+                                                array('data-uk-svg' => ''));
+                                        }elseif(!empty($f_icon['icon'])){
+                                            ?>
+                                            <i class="<?php echo $f_icon['icon']; ?>"></i>
+                                            <?php
+                                        }
+                                        ?>
+                                        </span>
+                                        <?php
+                                    }
+                                    echo esc_html($acf_f['label']);?>
+                                </a>
                                 <?php
                             }else{
-                                ?><?php echo esc_html(the_field($acf_f['name'], $product_id)); ?>
-                            <?php }
+                                echo esc_html(the_field($acf_f['name'], $product_id));
+                            }
                         } ?>
                     </div>
                 </div>

@@ -30,8 +30,15 @@ $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:tr
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
 $pid    = get_the_ID();
 $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
+$ap_tax_before     = isset($templaza_options['ap_product-tax-style6'])?$templaza_options['ap_product-tax-style6']:'';
+if($ap_tax_before !=''){
+    $ap_taxs = get_the_terms( $pid, $ap_tax_before );
+    $terms_string = join(', ', wp_list_pluck($ap_taxs, 'name'));
+}else{
+    $terms_string = '';
+}
 ?>
-    <div class="ap-item ap-item-style5 <?php echo esc_attr($ap_class);?>">
+    <div class="ap-item ap-item-style5 ap-item-style6 <?php echo esc_attr($ap_class);?>">
         <div class="ap-inner">
             <div class="uk-inline uk-position-relative">
                 <?php AP_Templates::load_my_layout('archive.badges'); ?>
@@ -39,6 +46,13 @@ $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
             </div>
             <div class="ap-info">
                 <div class="ap-info-inner ap-info-top">
+                    <?php
+                    if($terms_string !=''){
+                        ?>
+                        <span class="ap-before-title"><?php echo esc_html($terms_string);?></span>
+                        <?php
+                    }
+                    ?>
                     <h2 class="ap-title">
                         <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                     </h2>
@@ -64,10 +78,11 @@ $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
                 <div class="ap-info-inner  ap-info-bottom">
                     <?php AP_Templates::load_my_layout('archive.custom-fields-style5'); ?>
                 </div>
-                <div class="ap-info-inner  ap-info-bottom uk-flex uk-flex-between uk-flex-middle">
-                    <?php AP_Templates::load_my_layout('archive.price');?>
+                <div class="ap-info-inner ap-info-button">
                     <div class="ap-readmore-box">
-                        <a href="<?php the_permalink(); ?>" class="templaza-btn"><?php esc_html_e('View more','templaza-framework');?></a>
+                        <span class="readmore-label"><?php esc_html_e('View more','templaza-framework');?></span>
+                        <a href="<?php the_permalink(); ?>" class="ap-view-detail"></a>
+                        <span class="before-price"><?php esc_html_e('(','templaza-framework');?></span><?php AP_Templates::load_my_layout('archive.price');?><span class="after-price"><?php esc_html_e(')','templaza-framework');?></span>
                     </div>
                 </div>
             </div>

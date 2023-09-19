@@ -11,3 +11,14 @@ ul.templaza-social{
     }
   }
 }
+.tz-visible-right{
+  overflow:visible;
+  clip-path: inset(-100vw -100vw -100vw 0);
+}
+.tz-visible-left{
+  overflow:visible;
+  clip-path: inset(0 -100vw -100vw -100vw);
+}
+.tz-visible{
+  overflow:visible;
+}

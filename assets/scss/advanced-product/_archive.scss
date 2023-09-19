@@ -17,6 +17,12 @@
       .meta{
         color:$tztheme-postmeta;
       }
+      + .ap-price-box{
+        &:before{
+          content: " - ";
+          margin-left:3px;
+        }
+      }
     }
     .ap-info-inner{
       padding:20px;
@@ -155,6 +161,28 @@
     font-size: 0.875rem;
     font-weight:bold;
   }
+  &.style1{
+    width:auto;
+    height:auto;
+    top:20px;
+    left:0;
+    right:auto;
+    .ap-ribbon-content{
+      position:relative;
+      left:0;
+      top:0;
+      -webkit-transform: none;
+      -ms-transform: none;
+      transform: none;
+      width:auto;
+      padding:8px 30px;
+      span{
+        &:last-child{
+          display:none;
+        }
+      }
+    }
+  }
 }
 .ap-archive-btn-action{
   margin-bottom:20px;
@@ -242,10 +270,10 @@
 
   }
 }
-#modal-quote{
+.ap-modal{
   .uk-modal-title{
     font-size:1.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     padding-bottom: 15px;
     border-bottom: 1px solid $tztheme-border-color;
     position: relative;
