@@ -7,7 +7,7 @@ use TemPlazaFramework\Templates;
 
 $options    = Functions::get_theme_options();
 
-$enable_footer         = isset($options['enable-footer'])?filter_var($options['enable-footer'], FILTER_VALIDATE_BOOLEAN):false;
+$enable_footer         = isset($options['enable-footer'])?filter_var($options['enable-footer'], FILTER_VALIDATE_BOOLEAN):true;
 if ($enable_footer) {
     $footer_copyright         = isset($options['footer-copyright'])?$options['footer-copyright']:'';
     // values to find & replace
