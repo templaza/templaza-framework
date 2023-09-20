@@ -535,7 +535,7 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'required' => array('ap_product-vendor-contact', '=' , 'custom'),
             ),
             array(
-                'id'       => 'ap_product-vendor-form-custom-custom-url',
+                'id'       => 'ap_product-vendor-form-custom-url',
                 'type'     => 'text',
                 'title'    => esc_html__( 'Custom Url', 'templaza-framework' ),
                 'subtitle' => esc_html__('Insert url', 'templaza-framework'),
