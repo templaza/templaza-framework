@@ -7,12 +7,31 @@ defined('ADVANCED_PRODUCT') or exit();
 $ap_video   = get_field('ap_video', get_the_ID());
 $ap_gallery = get_field('ap_gallery', get_the_ID());
 
+$no_cookie      =   0;
 if (isset($ap_video) && !empty($ap_video)) {
-    preg_match("/iframe/", $ap_video, $output_array);
-    if ($output_array && !empty($output_array)) {
-        preg_match("/src=\"([^\"]+)\"/", $ap_video, $output_array);
-        $ap_video = $output_array[1];
-    }
+    if (wp_oembed_get($ap_video)) :
+        $video = parse_url($ap_video);
+        $youtube_no_cookie = $no_cookie ? '-nocookie' : '';
+        switch($video['host']) {
+            case 'youtu.be':
+                $id = trim($video['path'],'/');
+                $src = '//www.youtube'.$youtube_no_cookie.'.com/embed/' . $id .'?autoplay=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1';
+                break;
+
+            case 'www.youtube.com':
+            case 'youtube.com':
+                parse_str($video['query'], $query);
+                $id = $query['v'];
+                $src = '//www.youtube'.$youtube_no_cookie.'.com/embed/' . $id .'?autoplay=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1';
+                break;
+
+            case 'vimeo.com':
+            case 'www.vimeo.com':
+                $id = trim($video['path'],'/');
+                $src = "//player.vimeo.com/video/{$id}?".implode('&amp;', $attrb);
+        }
+    endif;
+    $video_thumbnail="https://img.youtube.com/vi/".$id."/maxresdefault.jpg";
 }
 
 if(!empty($ap_gallery)){
@@ -20,7 +39,19 @@ if(!empty($ap_gallery)){
 <div class="ap-slideshow uk-position-relative " data-uk-slideshow="animation: fade">
     <div class="uk-position-relative uk-visible-toggle">
         <ul class="uk-slideshow-items">
-            <?php foreach ($ap_gallery as $image) {
+            <?php
+            if (isset($ap_video) && !empty($ap_video)) {
+                ?>
+                <li>
+                    <?php if(wp_oembed_get( $ap_video )) : ?>
+                        <iframe class="tz-embed-responsive-item" src="<?php echo esc_url($src);?>" allowFullScreen width="1920" height="1080" allowfullscreen uk-responsive data-uk-video></iframe>
+                    <?php else : ?>
+                        <?php echo wp_kses($ap_video,'post'); ?>
+                    <?php endif; ?>
+                </li>
+                <?php
+            }
+            foreach ($ap_gallery as $image) {
                 ?>
                 <li>
                     <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['title']); ?>" data-uk-cover>
@@ -36,12 +67,22 @@ if(!empty($ap_gallery)){
     <div class="uk-position-relative uk-margin-small-top uk-visible-toggle" data-uk-slider>
         <ul class="uk-slider-items  uk-child-width-1-5 uk-child-width-1-5@m uk-grid uk-grid-small">
             <?php
-            $d=0;
+            if (isset($ap_video) && !empty($ap_video)) {
+                $d=0;
+                ?>
+                <li data-uk-slideshow-item="<?php echo esc_attr($d);?>" >
+                    <a href="#" data-uk-cover-container class="uk-display-block uk-position-relative">
+                        <img data-uk-cover src="<?php echo esc_url($video_thumbnail);?>" alt="<?php esc_attr_e('Video','templaza-framework');?>">
+                    </a>
+                </li>
+                <?php
+                $d++;
+            }
             foreach ($ap_gallery as $image) {
                 ?>
-                <li data-uk-slideshow-item="<?php echo esc_attr($d);?>">
-                    <a href="#">
-                        <img src="<?php echo esc_url($image['url']); ?>" width="180" alt="<?php echo esc_attr($image['title']); ?>">
+                <li data-uk-slideshow-item="<?php echo esc_attr($d);?>" >
+                    <a href="#" data-uk-cover-container class="uk-display-block uk-position-relative">
+                        <img data-uk-cover src="<?php echo esc_url($image['sizes']['medium']); ?>" width="180" alt="<?php echo esc_attr($image['title']); ?>">
                     </a>
                 </li>
             <?php

@@ -399,6 +399,16 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'default'  => true,
             ),
             array(
+                'id'       => 'ap_product-single-slider',
+                'type'     => 'select',
+                'title'    => esc_html__('Single Slider', 'templaza-framework'),
+                'options'  => array(
+                    'gallery' => esc_html__('Fade Slide', 'templaza-framework'),
+                    'gallery-tiny' => esc_html__('Tiny Slider', 'templaza-framework'),
+                ),
+                'default'  => 'gallery-tiny',
+            ),
+            array(
                 'id'       => 'ap_product-single-vendor',
                 'type'     => 'switch',
                 'title'    => esc_html__( 'Show Vendor', 'templaza-framework' ),
@@ -913,6 +923,40 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'title'    => esc_html__( 'Custom Url', 'templaza-framework' ),
                 'subtitle' => esc_html__('Insert Custom Url', 'templaza-framework'),
                 'required' => array('ap_product-quote-form', '=' , 'custom_url'),
+            ),
+
+        )
+    )
+);
+Templaza_API::set_subsection('settings','ap_product-page',
+    array(
+        'title'      => esc_html__( 'Dealer', 'templaza-framework' ),
+        'id'         => 'ap_product-dealer',
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'ap_product-dealer-listing',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Dealer Listing label', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap_product-dealer-form-title',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Dealer Contact Title', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap_product-dealer-form',
+                'type'     => 'select',
+                'title'    => esc_html__( 'Form Contact Dealer', 'templaza-framework' ),
+                'options'  => $arr_wpform,
+            ),
+
+            array(
+                'id'       => 'ap_product-dealer-form-url',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Dealer Contact Url', 'templaza-framework' ),
+                'subtitle' => esc_html__('Insert Custom Url', 'templaza-framework'),
+                'required' => array('ap_product-dealer-form', '=' , 'custom_url'),
             ),
 
         )

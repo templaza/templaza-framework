@@ -30,6 +30,12 @@
         width:30px;
         height:30px;
       }
+      li{
+        a{
+          height:100px;
+          overflow: hidden;
+        }
+      }
     }
     ul{
       li{

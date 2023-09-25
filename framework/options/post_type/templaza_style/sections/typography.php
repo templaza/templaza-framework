@@ -77,7 +77,5 @@ Templaza_API::set_section('templaza_style',
 
 require_once 'typographies/heading.php';
 require_once 'typographies/menu.php';
-require_once 'typographies/sidebar.php';
 require_once 'typographies/footer.php';
 require_once 'typographies/archive.php';
-require_once 'typographies/single.php';
