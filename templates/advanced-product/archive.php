@@ -38,8 +38,8 @@ if($ap_layout == 'masonry'){
     $grid_option = '';
 }
 $post_count = $GLOBALS['wp_query']->found_posts;
-$cat_id         = get_queried_object()->term_id;
-if($cat_id){
+if(!is_post_type_archive('ap_product')){
+    $cat_id         = get_queried_object()->term_id;
     ?>
     <div class="ap-archive-descirtion uk-margin-medium-bottom">
         <?php

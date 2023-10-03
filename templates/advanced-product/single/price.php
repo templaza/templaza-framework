@@ -98,7 +98,7 @@ if ((!$product_type || in_array('sale', $product_type)) && !empty($price)) {
     </span>
 <?php } ?>
 <?php if (!empty($product_type) && in_array('sold', $product_type) && !empty($price_sold)) { ?>
-    <label class="single-price-label"><?php esc_html_e('PRICE:','templaza-framework');?></label>
+    <label class="single-price-label"><?php esc_html_e('STATUS:','templaza-framework');?></label>
     <span class="price sold-price">
         <?php
         echo esc_html($price_sold);
@@ -112,4 +112,4 @@ if ((!$product_type || in_array('sale', $product_type)) && !empty($price)) {
         echo esc_html($price_contact);
         ?>
     </span>
-<?php } ?>
+<?php }

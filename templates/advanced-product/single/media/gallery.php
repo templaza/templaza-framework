@@ -67,6 +67,7 @@ if(!empty($ap_gallery)){
     <div class="uk-position-relative uk-margin-small-top uk-visible-toggle" data-uk-slider>
         <ul class="uk-slider-items  uk-child-width-1-5 uk-child-width-1-5@m uk-grid uk-grid-small">
             <?php
+            $d=0;
             if (isset($ap_video) && !empty($ap_video)) {
                 $d=0;
                 ?>

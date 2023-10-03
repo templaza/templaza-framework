@@ -307,6 +307,9 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                 if($ap_office_price_form == 'custom'){
                     echo do_shortcode($ap_office_form_custom);
                 }else{
+                    ?>
+                    <h3 class="uk-modal-title"><?php echo esc_html(get_the_title($ap_office_price_form)); ?></h3>
+                    <?php
                     if(function_exists('wpforms')) {
                         echo do_shortcode('[wpforms id="' . $ap_office_price_form . '"]');
                     }
