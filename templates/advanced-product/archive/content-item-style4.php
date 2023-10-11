@@ -21,6 +21,11 @@ if(isset($args['show_author'])){
 }else{
     $ap_author       = isset($templaza_options['ap_product-loop-author'])?filter_var($templaza_options['ap_product-loop-author'], FILTER_VALIDATE_BOOLEAN):false;
 }
+if(isset($args['show_intro'])){
+    $ap_intro = isset($args['show_intro'])?filter_var($args['show_intro'], FILTER_VALIDATE_BOOLEAN):false;
+}else{
+    $ap_intro       = isset($templaza_options['ap_product-loop-desc'])?filter_var($templaza_options['ap_product-loop-desc'], FILTER_VALIDATE_BOOLEAN):false;
+}
 if(isset($_GET['description'])){
     $ap_desc_limit = $_GET['description'];
 }else{
@@ -63,11 +68,14 @@ $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
             </div>
 
             <div class="ap-info-inner ap-info-desc">
-                <?php if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
-                    <p><?php echo wp_trim_words(strip_tags(get_the_excerpt()), $ap_desc_limit); ?></p>
-                <?php } else {
-                        the_excerpt();
-                    }
+                <?php
+                if($ap_intro){
+                    if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
+                        <p><?php echo wp_trim_words(strip_tags(get_the_excerpt()), $ap_desc_limit); ?></p>
+                    <?php } else {
+                            the_excerpt();
+                        }
+                }
                 ?>
                 <?php
                 if($ap_author){
