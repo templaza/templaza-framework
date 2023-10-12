@@ -4,7 +4,7 @@
 
 **Fix bugs:**
 
-- ix issue install theme
+- Fix issue install theme
 - Fix translate rental unit
 - Fix copyright in template
 - Fix warning generate color
