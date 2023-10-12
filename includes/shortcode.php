@@ -16,6 +16,9 @@ class TemplazaFramework_ShortCode{
     protected $text_domain;
     protected $admin_template_settings;
 
+    protected $parent;
+    protected $field_parent;
+
     public function __construct($field_parent = array(), $value = '', $parent = ''){
         $this->parent = $parent;
         $this->field_parent = $field_parent;
@@ -58,8 +61,6 @@ class TemplazaFramework_ShortCode{
                 }
             }
 
-//            $this -> _init_admin_template_settings();
-
             add_filter('templaza-framework/field/tz_layout/element/template', array($this, '__admin_template'));
         }else{
             add_filter('templaza-framework/layout/generate/shortcode/'.$this -> get_shortcode_name().'/prepare',
@@ -79,9 +80,13 @@ class TemplazaFramework_ShortCode{
         return $this -> element;
     }
 
-//    public function set_element($element){
-//        $this -> element    = $element;
-//    }
+    public function get_property($name){
+        if(isset($this -> {$name})){
+            return $this -> {$name};
+        }
+
+        return false;
+    }
 
     public function get_shortcode_name(){
         $store_id   = __METHOD__;
@@ -91,9 +96,7 @@ class TemplazaFramework_ShortCode{
             return $this -> cache[$store_id];
         }
 
-//        $class_name = __CLASS__;
         $class_name = get_class($this);
-//        $class_name = preg_replace('/^TemplazaFramework_ShortCode_/i', '', $class_name);
         $class_name = preg_replace('/^'.__CLASS__.'_/i', '', $class_name);
         $class_name = strtolower($class_name);
 
@@ -181,8 +184,7 @@ class TemplazaFramework_ShortCode{
                     'subtitle' => esc_html__('Custom ID can be used for overriding the auto-generated id.', 'templaza-framework'),
                 ),
             );
-//            $element_first          = &$element['params'][0];
-//            $tab_first              = &$element_first['tabs'][0];
+
             $tab_first['fields']    = array_merge($tab_first['fields'], $default_params);
 
             // Default Design tab parameters
@@ -253,7 +255,6 @@ class TemplazaFramework_ShortCode{
                             array('margin_type', '!=', 'custom'),
                             array('margin_type', '!=', 'remove-vertical'),
                         ),
-//                        'required' => array('margin_type', '=', array('default','small','medium','large','xlarge')),
                     ),
                     array(
                         'id'       => 'margin_remove_bottom',
@@ -263,7 +264,6 @@ class TemplazaFramework_ShortCode{
                             array('margin_type', '!=', 'custom'),
                             array('margin_type', '!=', 'remove-vertical'),
                         ),
-//                        'required' => array('margin_type', '=', array('default','small','medium','large','xlarge')),
                     ),
                     array(
                         'id'        => 'padding_type',
@@ -301,7 +301,6 @@ class TemplazaFramework_ShortCode{
                             array('padding_type', '!=', 'none'),
                             array('padding_type', '!=', 'custom'),
                         ),
-//                        'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
                     ),
                     array(
                         'id'       => 'padding_remove_bottom',
@@ -311,7 +310,6 @@ class TemplazaFramework_ShortCode{
                             array('padding_type', '!=', 'none'),
                             array('padding_type', '!=', 'custom'),
                         ),
-//                        'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
                     ),
                     array(
                         'id'       => 'position',
@@ -359,13 +357,11 @@ class TemplazaFramework_ShortCode{
                         'id'       => 'text_color',
                         'type'     => 'color',
                         'title'    => esc_html__('Text Color', 'templaza-framework'),
-//                                        'required' => array('custom_colors', '=', '1'),
                     ),
                     array(
                         'id'       => 'link_color',
                         'type'     => 'link_color',
                         'title'    => esc_html__('Link Color', 'templaza-framework'),
-//                                        'required' => array('custom_colors', '=', '1'),
                     ),
                     array(
                         'id'     => 'tab-custom_colors-end',
@@ -439,7 +435,6 @@ class TemplazaFramework_ShortCode{
                     <table class="form-table">
                         <?php
                         if(class_exists('reduxCoreEnqueue')) {
-//                            $enqueue = new reduxCoreEnqueue ( $this -> parent );
                             $enqueue    = new Redux_Enqueue($this -> parent);
                         }
                         foreach($params as &$param){
@@ -448,17 +443,16 @@ class TemplazaFramework_ShortCode{
                                 $enqueue -> enqueue_field($this -> parent, $param);
                             }
 
-//                            apply_filters('templaza-framework/element/param/before', $param, $this);
-
-                            if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
-                                $this->parent->field_default_values($param);
-                                $this->parent->check_dependencies($param);
-                            }else {
-                                $parent -> options_defaults_class -> field_default_values($parent->args['opt_name'], $param);
-                                $parent -> required_class -> check_dependencies($param);
-                            }
-
-                            TemPlazaFramework\Helpers\FieldHelper::check_required_dependencies($param, $this -> field_parent, $this -> parent);
+                            $this -> check_dependencies($param, $this -> field_parent, $this -> parent);
+//                            if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+//                                $this->parent->field_default_values($param);
+//                                $this->parent->check_dependencies($param);
+//                            }else {
+//                                $parent -> options_defaults_class -> field_default_values($parent->args['opt_name'], $param);
+//                                $parent -> required_class -> check_dependencies($param);
+//                            }
+//
+//                            TemPlazaFramework\Helpers\FieldHelper::check_required_dependencies($param, $this -> field_parent, $this -> parent);
 
                             do_action('templaza-framework/element/param/before', $param, $this);
                             $param  = apply_filters('templaza-framework/element/param/before', $param, $this);
@@ -500,6 +494,22 @@ class TemplazaFramework_ShortCode{
                 ob_end_clean();
             }
         }
+    }
+
+    public function check_dependencies($field, $parent_field = null, &$parent = null){
+        $parent         = !empty($parent)?$parent:$this -> parent;
+        $parent_field   = !empty($parent_field)?$parent_field:$this -> field_parent;
+
+        if(version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+            $parent->field_default_values($field);
+            $parent->check_dependencies($field);
+        }else {
+            $parent -> options_defaults_class -> field_default_values($parent->args['opt_name'], $field);
+            $parent -> required_class -> check_dependencies($field);
+        }
+
+//        TemPlazaFramework\Helpers\FieldHelper::check_required_dependencies($field, $parent_field, $parent);
+
     }
 
     public function front_end_prepare_element($element, $parent_el){
@@ -642,34 +652,31 @@ class TemplazaFramework_ShortCode{
                 }
             }
         }
+        if(isset($params['text_color']) && !empty($params['text_color'])){
+            $custom_text_name    = '.'.$custom_css_name;
+            $css_text   = '';
+            $css_text   .= $custom_text_name.' p, '.$custom_text_name.'{color:'.$params['text_color'].' !important;}';
+            Templates::add_inline_style($css_text);
+        }
 
         if(isset($params['link_color']) && !empty($params['link_color'])){
-            $custom_css_name    = '.'.$custom_css_name;
-
+            $custom_link_name    = '.'.$custom_css_name;
 
             $css_link   = '';
             $link_color = $params['link_color'];
 
             if(isset($link_color['regular']) && !empty($link_color['regular'])){
-                $css_link   .= $custom_css_name.' a{color:'.$link_color['regular'].' !important;}';
+                $css_link   .= $custom_link_name.' a{color:'.$link_color['regular'].' !important;}';
             }
             if(isset($link_color['hover']) && !empty($link_color['hover'])){
-                $css_link   .= $custom_css_name.' a:hover{color:'.$link_color['hover'].' !important;}';
+                $css_link   .= $custom_link_name.' a:hover{color:'.$link_color['hover'].' !important;}';
             }
             if(isset($link_color['active']) && !empty($link_color['active'])){
-                $css_link   .= $custom_css_name.' a:active{color:'.$link_color['active'].' !important;}';
+                $css_link   .= $custom_link_name.' a:active{color:'.$link_color['active'].' !important;}';
             }
             if(!empty($css_link)){
                 Templates::add_inline_style($css_link);
             }
-//            if(!empty($css_link)){
-//                if(isset($params['tz_css'])){
-//                    $params['tz_css']   .= $css_link;
-//                }else{
-//                    $params['tz_css']   = $css_link;
-//                }
-//
-//            }
         }
 
         return $params;
@@ -678,10 +685,7 @@ class TemplazaFramework_ShortCode{
     public function custom_css(&$params, &$element){
         $css = array('desktop' => '', 'tablet' => '', 'mobile' => '');
 
-        if(isset($params['text_color']) && !empty($params['text_color'])){
-            $css['desktop'] .= 'color: '.$params['text_color'].' !important;';
-            unset($params['text_color']);
-        }
+
 
         if(isset($params['background'])){
             $background = $params['background'];
@@ -775,6 +779,7 @@ class TemplazaFramework_ShortCode{
             $file = TEMPLAZA_FRAMEWORK_SHORTCODES_PATH . '/' . $this->get_shortcode_name() . '/tmpl/'
                 .$this -> get_shortcode_name().'.php';
         }
+        $file   = apply_filters('templaza-framework/shortcode/'.$this -> get_shortcode_name().'/tmpl', $file);
         ob_start();
 
         if(file_exists($file)){

@@ -31,6 +31,12 @@ $ap_product_related_dot = isset($templaza_options['ap_product-related-dot']) ? $
 $ap_product_related_column     = isset($templaza_options['ap_product-related-columns'])?$templaza_options['ap_product-related-columns']:3;
 $ap_product_related_column_gap     = isset($templaza_options['ap_product-related-columns-gap'])?$templaza_options['ap_product-related-columns-gap']:'medium';
 $ap_product_related_by     = isset($templaza_options['ap_product-related-by'])?$templaza_options['ap_product-related-by']:'';
+$related_args =
+    array(
+        'post_type' => 'ap_product',
+        'posts_per_page' => $ap_product_related_number,
+        'post__not_in' => array(get_the_ID()),
+    );
 if($ap_product_related){
 
     if($ap_product_related_by !=''){

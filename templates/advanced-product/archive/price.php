@@ -5,13 +5,27 @@ defined('ADVANCED_PRODUCT') or exit();
 use Advanced_Product\AP_Functions;
 use Advanced_Product\Helper\AP_Helper;
 use Advanced_Product\Helper\AP_Custom_Field_Helper;
-
+use TemPlazaFramework\Functions;
 ?>
 <?php
+if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
+    $templaza_options = array();
+}else{
+    $templaza_options = Functions::get_theme_options();
+}
+$sold_text     = isset($templaza_options['ap_product-sold-label'])?$templaza_options['ap_product-sold-label']:'';
+$contact_text     = isset($templaza_options['ap_product-contact-label'])?$templaza_options['ap_product-contact-label']:'';
+
+
 $msrp           = get_field('ap_price_msrp', get_the_ID());
 $price          = get_field('ap_price', get_the_ID());
 $rental         = get_field('ap_rental_price', get_the_ID());
-$rental_unit    = get_field('ap_rental_unit', get_the_ID());
+$rental_value    = get_field('ap_rental_unit', get_the_ID());
+if($rental_value){
+    $field_rental = get_field_object('ap_rental_unit');
+    $rental_unit = $field_rental['choices'][ $rental_value ];
+}
+
 $price_contact  = get_field('ap_price_contact', get_the_ID());
 $product_type   = get_field('ap_product_type', get_the_ID());
 $price_notice_value = get_field('price-notice', get_the_ID());
@@ -23,7 +37,16 @@ $show_price_msrp    = AP_Custom_Field_Helper::get_field_display_flag_by_field_na
 $show_price_notice  = AP_Custom_Field_Helper::get_field_display_flag('show_in_listing', 'price-notice');
 $show_price_rental  = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_rental_price');
 $show_price_contact  = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price_contact');
-$show_price_sold  = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price_contact');
+$show_price_sold  = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price_sold');
+if($product_type == 'sale'){
+    $product_type = array('sale');
+}
+if($price_sold == ''){
+    $price_sold = $sold_text;
+}
+if($price_contact == ''){
+    $price_contact = $contact_text;
+}
 
 $f_value            = get_field('unit-price', get_the_ID());
 if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $show_price) {
@@ -47,7 +70,7 @@ if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $sh
     </div>
 <?php }
 
-if ((!$product_type || in_array('contact', $product_type)) && !empty($price_contact) && $show_price_contact) {
+if ((!empty($product_type) && in_array('contact', $product_type)) && !empty($price_contact) && $show_price_contact) {
     ?>
     <div class="ap-price-box">
         <span class="ap-field-label"><?php esc_html_e('Price','templaza-framework')?></span>
@@ -57,7 +80,7 @@ if ((!$product_type || in_array('contact', $product_type)) && !empty($price_cont
     </div>
 <?php }
 
-if ((!$product_type || in_array('sold', $product_type)) && !empty($price_sold) && $show_price_sold) {
+if ((!empty($product_type) && in_array('sold', $product_type)) && !empty($price_sold) && $show_price_sold) {
     ?>
     <div class="ap-price-box">
         <span class="ap-field-label"><?php esc_html_e('Price','templaza-framework')?></span>

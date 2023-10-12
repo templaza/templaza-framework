@@ -21,7 +21,17 @@ if(isset($args['show_author'])){
 }else{
     $ap_author       = isset($templaza_options['ap_product-loop-author'])?filter_var($templaza_options['ap_product-loop-author'], FILTER_VALIDATE_BOOLEAN):false;
 }
-$ap_desc_limit       = isset($templaza_options['ap_product-loop-desc-limit'])?$templaza_options['ap_product-loop-desc-limit']:100;
+if(isset($args['show_intro'])){
+    $ap_intro = isset($args['show_intro'])?filter_var($args['show_intro'], FILTER_VALIDATE_BOOLEAN):false;
+}else{
+    $ap_intro       = isset($templaza_options['ap_product-loop-desc'])?filter_var($templaza_options['ap_product-loop-desc'], FILTER_VALIDATE_BOOLEAN):false;
+}
+if(isset($_GET['description'])){
+    $ap_desc_limit = $_GET['description'];
+}else{
+    $ap_desc_limit       = isset($templaza_options['ap_product-loop-desc-limit'])?$templaza_options['ap_product-loop-desc-limit']:100;
+}
+
 $price = get_field('ap_price', get_the_ID());
 $rental         = get_field('ap_rental_price', get_the_ID());
 $price_sold = get_field('ap_price_sold', get_the_ID());
@@ -58,11 +68,14 @@ $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
             </div>
 
             <div class="ap-info-inner ap-info-desc">
-                <?php if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
-                    <p><?php echo substr(strip_tags(get_the_excerpt()), 0, $ap_desc_limit); ?></p>
-                <?php } else {
-                        the_excerpt();
-                    }
+                <?php
+                if($ap_intro){
+                    if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
+                        <p><?php echo wp_trim_words(strip_tags(get_the_excerpt()), $ap_desc_limit); ?></p>
+                    <?php } else {
+                            the_excerpt();
+                        }
+                }
                 ?>
                 <?php
                 if($ap_author){

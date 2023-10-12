@@ -98,7 +98,7 @@ if($single_box_background_color){
 
 $single_shop_max_width  = isset($options['templaza-shop-single-content-max-width'])?$options['templaza-shop-single-content-max-width']:70;
 if(is_array($single_shop_max_width)){
-    if((int)$single_shop_max_width['width'] > 0 ){
+    if(isset($single_shop_max_width['width']) && (int)$single_shop_max_width['width'] > 0 ){
         $templaza_shop_styles[] = '.single-product div.product .woocommerce-tabs .panel{ max-width:' . $single_shop_max_width['width'] . '}';
     }
 }

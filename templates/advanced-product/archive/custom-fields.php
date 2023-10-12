@@ -24,7 +24,11 @@ $ap_product_related_spec      = isset($templaza_options['ap_product-related-spec
 if(is_single()){
     $max=$ap_product_related_spec;
 }else{
-    $max = 1000;
+    if(isset($_GET['field_limit'])){
+        $max = $_GET['field_limit'];
+    }else{
+        $max = 1000;
+    }
 }
 if(!empty($fields)){
 ?>

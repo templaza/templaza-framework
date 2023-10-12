@@ -88,6 +88,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
                     }
                 }
             }
+            $this -> elements   = apply_filters('templaza-framework/field/tz_layout/after_load', $this -> elements, $this);
         }
 
         public function render(){

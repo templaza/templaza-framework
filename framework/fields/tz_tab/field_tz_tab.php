@@ -67,10 +67,10 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
                     // Rename of field's name
                     foreach($field['tabs'] as $k => $tab){
                         if(isset($tab['fields']) && count($tab['fields'])){
-                            foreach ($tab['fields'] as $field) {
-                                Fields::load_field($field, '', $this -> parent);
+                            foreach ($tab['fields'] as $fd) {
+                                Fields::load_field($fd, '', $this -> parent);
 
-                                add_filter("redux/options/{$opt_name}/field/{$field['id']}", function($_field)use($field){
+                                add_filter("redux/options/{$opt_name}/field/{$fd['id']}", function($_field)use($field){
                                     $_field['name'] = $_field['id'];
                                     return $_field;
                                 });
@@ -87,6 +87,23 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
                         return $repeater_data;
                     });
                     $redux  = \Redux::instance($opt_name );
+
+//                    foreach($field['tabs'] as $k => $tab){
+//                        if(isset($tab['fields']) && count($tab['fields'])){
+//                            foreach ($tab['fields'] as $_field) {
+//                                if(version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+////                                    $redux->field_default_values($_field);
+//                                    $redux->check_dependencies($_field);
+//                                }else {
+////                                    $redux -> options_defaults_class -> field_default_values($redux->args['opt_name'], $_field);
+//                                    $redux -> required_class -> check_dependencies($_field);
+//                                }
+//
+////                                TemPlazaFramework\Helpers\FieldHelper::check_required_dependencies($field,
+////                                    array('id' => $opt_name), $redux);
+//                            }
+//                        }
+//                    }
 
 //                    if(!$this -> value) {
 //                        $redux -> options   =  $redux -> _default_values();

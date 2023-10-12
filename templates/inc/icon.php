@@ -63,7 +63,7 @@ if($enable_offcanvas == true){
 }
 if($header_stack_search || $header_stack_cart || $header_stack_account){
     ?>
-    <div class="header-icon-wrap uk-flex <?php echo esc_attr($canvas_cl);?>">
+    <div class="header-icon-wrap uk-flex <?php echo esc_attr($canvas_cl);?>" >
     <?php
 
 if($header_stack_search){ ?>

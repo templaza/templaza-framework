@@ -25,7 +25,7 @@
 	});
 
 	redux.field_objects.border.init = function( selector ) {
-		if($(selector).closest(".tzfrm-ui-dialog").length){
+		if($(selector).closest(".tzfrm-ui-dialog,.uk-modal").length){
 			$(selector).each(function () {
 				var el     = $( this );
 

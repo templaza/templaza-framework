@@ -32,8 +32,6 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
     $f_icon     = isset($acf_f['icon'])?$acf_f['icon']:'';
     $f_icon_image   = isset($acf_f['icon_image']) && !empty($acf_f['icon_image'])?$acf_f['icon_image']:'';
     if(!empty($f_value)){
-        $html   = apply_filters('advanced-product/field/value_html/type='.$acf_f['type'], '', $f_value, $acf_f, $field);
-
         if($acf_f['type'] == 'taxonomy' && $taxonomy == false){
 
         }else{
@@ -81,7 +79,7 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                 <div class="ap-custom-fields uk-width-1-2 ap-custom-fields-style2">
                     <div class="ap-field-label"><?php echo esc_html($acf_f['label']); ?></div>
                     <div class="ap-field-value">
-                        <?php echo !empty($html)?$html:esc_html(the_field($acf_f['name'], $product_id)); ?>
+                        <?php the_field($acf_f['name'], $product_id); ?>
                     </div>
                 </div>
                 <?php

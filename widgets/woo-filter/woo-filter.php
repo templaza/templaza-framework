@@ -984,7 +984,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                         $color = $this->get_attribute_swatches( $option['id'], 'color' );
 
                         printf(
-                            '<span class="products-filter__option swatch swatch-color swatch-%s %s" data-value="%s"  title="%s"><span class="bg-color" style="background-color:%s;"></span>%s%s</span>',
+                            '<span class="products-filter__option swatch swatch-color swatch-%s %s" data-value="%s"  title="%s"><span class="color_name"><span class="bg-color" style="background-color:%s;"></span>%s</span>%s</span>',
                             esc_attr( $slug ),
                             in_array( $slug, (array) $args['current'] ) ? 'selected' : '',
                             esc_attr( $slug ),

@@ -1,21 +1,21 @@
 .ap-item.ap-item-style5.ap-item-list{
   .ap-inner{
     .ap-info-inner{
-      padding:15px 0;
+      padding:15px 0 !important;
       .ap-specification{
-        padding-bottom:5px;
+        padding-bottom:5px !important;
       }
       &.ap-info-bottom{
         border-top:1px solid $tztheme-border-color;
         padding:20px 0;
       }
       &.ap-info-desc{
-        padding-top:0;
-        padding-bottom:0;
+        padding-top:0 !important;
+        padding-bottom:0 !important;
       }
       &.ap-info-top{
-        padding-top:0;
-        padding-bottom:15px;
+        padding-top:0 !important;
+        padding-bottom:15px !important;
       }
     }
     .ap-archive-btn-action{

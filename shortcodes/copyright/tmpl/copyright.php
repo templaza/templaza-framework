@@ -7,7 +7,7 @@ use TemPlazaFramework\Templates;
 
 $options    = Functions::get_theme_options();
 
-$enable_footer         = isset($options['enable-footer'])?filter_var($options['enable-footer'], FILTER_VALIDATE_BOOLEAN):false;
+$enable_footer         = isset($options['enable-footer'])?filter_var($options['enable-footer'], FILTER_VALIDATE_BOOLEAN):true;
 if ($enable_footer) {
     $footer_copyright         = isset($options['footer-copyright'])?$options['footer-copyright']:'';
     // values to find & replace
@@ -18,7 +18,6 @@ if ($enable_footer) {
     $footertext = str_replace($find, $replace, $footer_copyright);
 
 }
-
 if(isset($footertext)){
 ?>
 <div<?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="<?php

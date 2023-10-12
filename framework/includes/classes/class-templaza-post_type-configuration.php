@@ -290,18 +290,31 @@ if(!class_exists('TemPlazaFramework\Configuration')){
                 });
             }
 
-            add_action('admin_footer', function(){
-                $redux  = \Redux::instance($this -> setting_args[$this -> get_post_type()]['opt_name']);
-                if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
-                    if($redux && method_exists($redux, '_enqueue')) {
-                        $redux->_enqueue();
-                    }
-                }else{
-                    if($redux && isset($redux->enqueue_class) && $redux->enqueue_class) {
-                        $redux->enqueue_class->init();
-                    }
+            add_action('admin_footer', array($this, 'admin_footer'), 99);
+        }
+
+        public function admin_footer(){
+            $store_id   = __METHOD__;
+            $store_id  .= '::'.$this -> get_post_type();
+            $store_id   = md5($store_id);
+
+            if(isset($this -> cache[$store_id])){
+                return;
+            }
+
+            $redux  = \Redux::instance($this -> setting_args[$this -> get_post_type()]['opt_name']);
+            if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
+                if($redux && method_exists($redux, '_enqueue')) {
+                    $redux->_enqueue();
                 }
-            }, 99);
+            }else{
+                if($redux && isset($redux->enqueue_class) && $redux->enqueue_class) {
+                    $redux->enqueue_class->init();
+                }
+            }
+
+            $this -> cache[$store_id]   = true;
+
         }
 
         /**
@@ -327,6 +340,15 @@ if(!class_exists('TemPlazaFramework\Configuration')){
                 return;
             }
 
+            $store_id   = __METHOD__;
+            $store_id  .= '::'.$_pagenow;
+            $store_id  .= '::'.$this -> get_post_type();
+            $store_id   = md5($store_id);
+
+            if(isset($this -> cache[$store_id])){
+                return $this -> cache[$store_id];
+            }
+
             if($sections = \Templaza_API::construct_sections($this -> get_post_type())) {
 
                 if(count($sections)) {
@@ -344,19 +366,10 @@ if(!class_exists('TemPlazaFramework\Configuration')){
                         $redux -> transients    = count($redux -> transients)?$redux -> transients:array('changed_values' => '');
 
                         \Templaza_API::load_my_fields($opt_name);
-
-                        if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
-                            $redux->_register_settings();
-
-                            $enqueue    = new Enqueue($redux);
-                            $enqueue -> init();
-                        }else{
-                            $redux -> options_class -> register();
-//                            $redux -> enqueue_class -> init();
-                        }
                     }
                 }
             }
+            $this -> cache[$store_id]   = true;
         }
 
         /**

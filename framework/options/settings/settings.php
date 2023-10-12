@@ -50,7 +50,6 @@ require_once 'sections/custom.php';
 
 if(Admin_Page_Function::is_plugin_active('woocommerce')) {
     require_once 'sections/woocommerce/product.php';
-    require_once 'sections/woocommerce/product-template-style.php';
 }
 
 if(Admin_Page_Function::is_plugin_active('advanced-product')) {

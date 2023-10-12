@@ -63,6 +63,12 @@ Templaza_API::set_section('templaza_header',
                         'class' => 'w-px-150 h-px-103',
                         'img'   => Functions::get_my_frame_url().'/options/patterns/horizontal-right.svg',
                     ),
+                    'justify' => array(
+                        'alt'   => __('Justify', 'templaza-framework'),
+                        'title' => __('Justify', 'templaza-framework'),
+                        'class' => 'w-px-150 h-px-103',
+                        'img'   => Functions::get_my_frame_url().'/options/patterns/horizontal-center.svg',
+                    ),
                 ),
                 'default'  => 'left',
                 'required' => array(
@@ -305,8 +311,9 @@ Templaza_API::set_section('templaza_header',
                 'type'     => 'border',
                 'title'    => esc_html__('Logo section Border', 'templaza-framework'),
                 'default'  => '',
+                'color_alpha'  => true,
                 'required' => array(
-                    array('header-mode', '=', 'stacked') ),
+                    array('header-mode', '=', array('stacked','horizontal')) ),
             ),
             array(
                 'id'       => 'stacked-divided-top-padding',
@@ -315,7 +322,7 @@ Templaza_API::set_section('templaza_header',
                 'title'    => esc_html__('Logo Section Padding', 'templaza-framework'),
                 'default'  => '',
                 'required' => array(
-                    array('header-mode', '=', 'stacked') ),
+                    array('header-mode', '=', array('stacked','horizontal')) ),
             ),
             array(
                 'id'       => 'stacked-divided-header-top-padding',
@@ -329,6 +336,7 @@ Templaza_API::set_section('templaza_header',
             array(
                 'id'       => 'stacked-top-section-border',
                 'type'     => 'border',
+                'color_alpha'  => true,
                 'title'    => esc_html__('Top section Border', 'templaza-framework'),
                 'default'  => '',
                 'required' => array(
@@ -354,6 +362,7 @@ Templaza_API::set_section('templaza_header',
             array(
                 'id'       => 'input-border',
                 'type'     => 'border',
+                'color_alpha'  => true,
                 'title'    => esc_html__('Input Border', 'templaza-framework'),
                 'default'  => '',
                 'required' => array('stacked-divided-background', '=' , true)

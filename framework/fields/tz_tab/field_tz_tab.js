@@ -14,8 +14,7 @@
             function () {
                 var el = $(this);
                 var parent = el;
-                // console.log("field_tz_tab");
-                // console.log(el);
+
                 if (!el.hasClass('redux-field-container')) {
                     parent = el.parents('.redux-field-container:first');
                 }
@@ -29,8 +28,6 @@
                 }
 
                 if(el.find("[data-fl-tz_layout-tab]").length) {
-                    // console.log(el.find("[data-opt-name]:eq(0)"));
-                    // console.log(el.find("[data-opt-name]:eq(0)").attr("data-opt-name").replace( /\-/g, '_'));
                     var tz_required = function(obj_selector) {
                         if(obj_selector.find("[data-opt-name]").length) {
                             $.each(obj_selector.find("[data-opt-name]"), function(){
@@ -43,6 +40,8 @@
                                         var rawTable;
 
                                         var fieldset = obj_selector.find('#' + _opt_name + '-' + i);
+                                        console.log(_opt_name);
+                                        console.log(v);
 
                                         fieldset.parents('tr:first, li:first').addClass('fold');
 
@@ -81,20 +80,6 @@
                         }
                     };
 
-
-                    // if(el.find("[data-opt-name]").length) {
-                    //     $.each(el.find("[data-opt-name]"), function () {
-                    //
-                    //         var _opt_name = $(this).attr("data-opt-name");
-                    //
-                    //         if(redux.opt_names.indexOf(_opt_name) === -1) {
-                    //             redux.opt_names.push(_opt_name);
-                    //         }
-                    //         // redux.opt_names.push(_opt_name.replace( /\-/g, '_'));
-                    //     });
-                    //     // $.redux.required();
-                    // }
-
                     el.find("[data-fl-tz_layout-tab]").tabs({
                         "activate": function (event, ui) {
                             var tab = $(this),
@@ -119,7 +104,7 @@
 
                                         tz_redux_field.init(field);
 
-                                        // redux_change(field.find(" input,  textarea, select"));
+                                        redux_change(field.find(" input,  textarea, select"));
                                         // $.redux.check_dependencies(field.find(" input,  textarea, select"));
 
                                         // After init field in setting edit
@@ -141,9 +126,6 @@
                             }
                         },
                     });
-
-                    // $.redux.required();
-                    // redux.optName   = __redux_tmp;
                 }
 
             });

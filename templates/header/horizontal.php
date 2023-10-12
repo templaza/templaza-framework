@@ -22,6 +22,9 @@ $offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$opt
 $navClass                   = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-visible@m'];
 $navWrapperClass            = [ 'uk-margin-small-left', 'uk-margin-small-right', 'uk-visible@m'];
 
+$navClassJustify            = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'menu-horizontal-justify', 'uk-visible@m', 'uk-text-center'];
+$navWrapperClassJustify     = [ 'uk-width-1-1', 'uk-visible@m'];
+
 $dropdown_arrow             = isset($options['dropdown-arrow'])?filter_var($options['dropdown-arrow'], FILTER_VALIDATE_BOOLEAN):true;
 $dropdown_animation_type    = isset($options['dropdown-animation-type'])?$options['dropdown-animation-type']:'fade';
 $dropdown_animation_effect  = isset($options['dropdown-animation-effect'])?$options['dropdown-animation-effect']:'fade-down';
@@ -83,7 +86,10 @@ if($cart_icon_type == 'fontawesome' ){
         $cart_icon_html = '<img src="'.$cart_icon['url'].'" alt="'.esc_attr__('Cart','templaza-framework').'" '.$log_svg.'/>';
     }
 }
-$navClass[] = $dropdown_animation_effect;
+$navClass[]         = $dropdown_animation_effect;
+if(!empty($dropdown_animation_effect)) {
+    $navClassJustify[] = $dropdown_animation_effect;
+}
 
 // Get data attributes - them added from header shortcode
 $menu_datas = Functions::get_attributes('header');
@@ -92,6 +98,46 @@ if($header_stack_search || $header_stack_account || $header_stack_cart){
 }else{
     $header_icon = '';
 }
+$header_stack_designs = array(
+    array(
+        'enable' => true,
+        'class' => '.header-horizontal-logo',
+        'options' => array(
+            'stacked-divided-top-padding',
+            'logo-section-border',
+        ),
+    ),
+);
+if (count($header_stack_designs)) {
+    $styles = array();
+
+    foreach ($header_stack_designs as $design) {
+        $enable = isset($design['enable']) ? (bool)$design['enable'] : false;
+        if ($enable) {
+            $css_responsive = array(
+                'desktop' => '',
+                'tablet' => '',
+                'mobile' => '',
+            );
+            $css = Templates::make_css_design_style($design['options'], $options,$important = true);
+            if (!empty($css)) {
+                if (is_array($css)) {
+                    foreach ($css as $device => $stack_style) {
+                        if (isset($css_responsive[$device]) && !empty($css_responsive[$device])) {
+                            $stack_style .= $css_responsive[$device];
+                        }
+                        if (!empty($stack_style)) {
+                            $stack_style = $design['class'] . '{' . $stack_style . '}';
+                            Templates::add_inline_style($stack_style, $device);
+                        }
+                    }
+                } else {
+                    Templates::add_inline_style($design['class'] . '{' . $css . '}');
+                }
+            }
+        }
+    }
+}
 ?>
 <div class="uk-flex uk-flex-row uk-flex-between <?php echo esc_attr($header_icon);?>">
     <div class="uk-flex uk-hidden@m uk-flex-left uk-flex-middle">
@@ -99,7 +145,7 @@ if($header_stack_search || $header_stack_account || $header_stack_cart){
             <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
         </div>
     </div>
-    <div class="header-left-section uk-flex uk-flex-between uk-flex-middle">
+    <div class="header-left-section header-horizontal-logo uk-flex uk-flex-between uk-flex-middle">
         <?php Templates::load_my_layout('logo'); ?>
         <?php
         if ($mode == 'left') {
@@ -141,8 +187,23 @@ if($header_stack_search || $header_stack_account || $header_stack_cart){
         // header nav ends
         echo '</div>';
     }
+    if ($mode == 'justify') {
+        echo '<div class="header-justify-section uk-flex uk-width-expand uk-flex-middle uk-visible@m">';
+        // header nav starts
+          Menu::get_nav_menu(array(
+              'theme_location'  => $header_menu,
+              'menu_class'      => implode(' ', $navClassJustify),
+              'container_class' => implode(' ', $navWrapperClassJustify),
+              'menu_id'         => '',
+              'depth'           => $header_menu_level, // Level
+              'templaza_megamenu_html_data' => $menu_datas
+          ));
+
+        // header nav ends
+        echo '</div>';
+    }
     ?>
-    <?php if ($block_1_type != 'blank' || $mode == 'right' || $mode == 'center' || $enable_offcanvas): ?>
+    <?php if ($block_1_type != 'blank' || $mode == 'right' ||  $mode == 'justify' ||  $mode == 'center' || $enable_offcanvas): ?>
 
         <div class="header-right-section uk-flex uk-flex-right uk-flex-middle">
             <?php
@@ -173,9 +234,9 @@ if($header_stack_search || $header_stack_account || $header_stack_cart){
             if ($enable_offcanvas) { ?>
                 <div class="header-offcanvas-trigger burger-menu-button <?php echo $offcanvas_togglevisibility; ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>" >
                     <button type="button" class="button">
-                 <span class="box">
-                    <span class="inner"></span>
-                 </span>
+                         <span class="box">
+                            <span class="inner"></span>
+                         </span>
                     </button>
                 </div>
             <?php } ?>

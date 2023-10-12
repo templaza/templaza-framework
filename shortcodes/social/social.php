@@ -43,6 +43,12 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
                         ),
                     ),
                     array(
+                        'id'         => 'social-item-border',
+                        'type'       => 'border',
+                        'color_alpha'=> 'true',
+                        'title'      => __('Social Border', 'templaza-framework'),
+                    ),
+                    array(
                         'id'       => 'social-item-border-radius',
                         'type'     => 'text',
                         'title'    => __('Social Border Radius', 'templaza-framework'),
@@ -87,7 +93,9 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
                             'Width'   => '40',
                             'Height'  => '40'
                         ),
-                        'required'                => array('social-fix-width-height', '=', 'true'),
+                        'required' => array(
+                            array('social-fix-width-height', '=', true),
+                        )
                     ),
                 )
             );
@@ -102,6 +110,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
             $social_color     = isset($params['social-color'])?$params['social-color']:'';
             $social_color     = CSS::make_color_rgba_redux($social_color);
 
+
             $social_color_hover     = isset($params['social-color-hover'])?$params['social-color-hover']:'';
             $social_color_hover     = CSS::make_color_rgba_redux($social_color_hover);
 
@@ -113,12 +122,33 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
 
             $social_fix_size     = isset($params['social-fix-width-height'])?$params['social-fix-width-height']:'';
 
+            $social_border     = isset($params['social-item-border'])?$params['social-item-border']:'';
+
+
             $social_styles = [];
             if (!empty($social_color)) {
                 $social_styles[] = '.'. $custom_css_name . ' li a{ color: ' . $social_color . ' !important;}';
             }
             if (!empty($social_color_hover)) {
                 $social_styles[] = '.'. $custom_css_name . ' li a:hover{ color: ' . $social_color_hover . ' !important;}';
+            }
+            if (!empty($social_border['border-top'])) {
+                $social_styles[] = '.'. $custom_css_name . ' li a{ border-top: ' . $social_border['border-top'] . ' !important;}';
+            }
+            if (!empty($social_border['border-right'])) {
+                $social_styles[] = '.'. $custom_css_name . ' li a{ border-right: ' . $social_border['border-right'] . ' !important;}';
+            }
+            if (!empty($social_border['border-bottom'])) {
+                $social_styles[] = '.'. $custom_css_name . ' li a{ border-bottom: ' . $social_border['border-bottom'] . ' !important;}';
+            }
+            if (!empty($social_border['border-left'])) {
+                $social_styles[] = '.'. $custom_css_name . ' li a{ border-left: ' . $social_border['border-left'] . ' !important;}';
+            }
+            if (!empty($social_border['border-color'])) {
+                $social_styles[] = '.'. $custom_css_name . ' li a{ border-color: ' . $social_border['border-color'] . ' !important;}';
+            }
+            if (!empty($social_border['border-style'])) {
+                $social_styles[] = '.'. $custom_css_name . ' li a{ border-style: ' . $social_border['border-style'] . ' !important;}';
             }
             if (!empty($social_bg_color)) {
                 $social_styles[] = '.'. $custom_css_name . ' li a{ background-color: ' . $social_bg_color . ' !important;}';

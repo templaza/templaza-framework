@@ -29,9 +29,16 @@ if(!class_exists('Templaza_Custom_Redux_Switch')){
         }
 
         public function custom_enqueues(){
-            if(!wp_script_is('custom-redux-'.$this -> redux_field_type.'-js')) {
-                $dep_array = array('redux-field-'.$this -> redux_field_type.'-js');
-                wp_enqueue_script('custom-redux-'.$this -> redux_field_type.'-js', Functions::get_my_frame_url()
+            if((wp_script_is('redux-field-'.$this -> redux_field_type)
+                    || wp_script_is('redux-field-'.$this -> redux_field_type.'-js')) &&
+                !wp_script_is('custom-redux-'.$this -> redux_field_type.'-js')) {
+
+                if(wp_script_is('redux-field-'.$this -> redux_field_type)){
+                    $dep_array = array('redux-field-' . $this->redux_field_type);
+                }elseif(wp_script_is('redux-field-'.$this -> redux_field_type.'-js')) {
+                    $dep_array = array('redux-field-' . $this->redux_field_type . '-js');
+                }
+                wp_enqueue_script('custom-redux-'.$this -> redux_field_type, Functions::get_my_frame_url()
                     . "/fields/{$this -> redux_field_type}/custom-redux-{$this -> redux_field_type}.js", $dep_array, time(), true);
 
             }

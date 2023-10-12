@@ -5,7 +5,13 @@ defined('ADVANCED_PRODUCT') or exit();
 use Advanced_Product\AP_Templates;
 use Advanced_Product\AP_Functions;
 use Advanced_Product\Helper\AP_Product_Helper;
+use TemPlazaFramework\Functions;
 
+if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
+    $templaza_options = array();
+}else{
+    $templaza_options            = Functions::get_theme_options();
+}
 $price = get_field('ap_price', get_the_ID());
 $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields' => 'names' ) );
 $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
@@ -14,12 +20,20 @@ if(isset($args['ap_class'])){
 }else{
     $ap_class = ' templazaFadeInUp';
 }
+$thumbnail       = isset($templaza_options['ap_product-thumbnail-size'])?$templaza_options['ap_product-thumbnail-size']:'large';
 ?>
 <div class="ap-item ap-item-style2 <?php echo esc_attr($ap_class);?>">
     <div class="ap-inner ">
         <div class="uk-inline uk-position-relative">
             <?php AP_Templates::load_my_layout('archive.badges'); ?>
-            <?php AP_Templates::load_my_layout('archive.media',true,false,array('compare_layout'    => $compare_layout)); ?>
+            <div class="uk-card-media-top uk-position-relative uk-transition-toggle">
+                <a href="<?php the_permalink(); ?>">
+                    <?php the_post_thumbnail($thumbnail);?>
+                </a>
+                <?php
+                    AP_Templates::load_my_layout('archive.btn-actions');
+                ?>
+            </div>
         </div>
         <div class="ap-info">
             <div class="ap-info-inner ap-info-top">

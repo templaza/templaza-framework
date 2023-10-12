@@ -14,13 +14,14 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
     $templaza_options = Functions::get_theme_options();
 }
 $ap_single_media = isset($templaza_options['ap_product-single-media']) ? $templaza_options['ap_product-single-media'] : '';
+$ap_single_slider = isset($templaza_options['ap_product-single-slider']) ? $templaza_options['ap_product-single-slider'] : 'gallery-tiny';
 if($ap_single_media){
 ?>
 <div class="ap-media entry-image full-image  uk-container-expand">
     <?php
     if ((!empty($ap_video) && !empty($ap_gallery)) ||
         (empty($ap_video) && !empty($ap_gallery))) {
-        AP_Templates::load_my_layout('single.media.gallery-tiny');
+        AP_Templates::load_my_layout('single.media.'.$ap_single_slider.'');
     } elseif (!empty($ap_video) && empty($ap_gallery)) {
         AP_Templates::load_my_layout('single.media.video');
     } else {

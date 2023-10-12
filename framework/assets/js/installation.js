@@ -10,7 +10,7 @@
             if(typeof tzinst_license_ajax !== "undefined")try {
                 templatejson = tzinst_license_ajax.license_active;
             }catch (window) {}
-            
+
             if (null != templatejson) {
                 var doc = $("<html>"),
                     head = $("<head>"),
@@ -375,7 +375,8 @@
                 inputEl = $this.closest(".item").find("input[type=checkbox]"),
                 totalItem = form.find(".js-tzinst-demoitem:not(.is-finished) input[data-pack-type]:checked").length,
                 totalItemCheck = form.find(".js-tzinst-demoitem input[data-pack-type]:checked").length,
-                progress_bar = $this.closest(".uk-modal-footer").find(".js-processing-box .js-progress-bar");
+                progress_bar = $this.closest(".uk-modal-footer").find(".js-processing-box .js-progress-bar"),
+                uk_progress_bar = $this.closest(".uk-modal-footer").find(".js-processing-box progress");
 
             if($this.hasClass("importing")){
                 return;
@@ -397,10 +398,16 @@
             form.find("input[data-pack-type]")
                 .prop("disabled", true);
 
-            if(parseInt(progress_bar[0].style.width) === 100){
-                progress_bar.removeClass("bg-success").css("width", "0%");
+            if(progress_bar.length) {
+                if (parseInt(progress_bar[0].style.width) === 100) {
+                    progress_bar.removeClass("bg-success").css("width", "0%");
+                }
+                progress_bar.parent().css("padding-right", 0);
+            }else if(uk_progress_bar.length){
+                if (parseInt(uk_progress_bar.val()) === 100) {
+                    uk_progress_bar.removeClass("bg-success").val(0);
+                }
             }
-            progress_bar.parent().css("padding-right", 0);
 
             modal.find("[data-tzinst-stop-importing]").removeClass("uk-hidden");
 
@@ -435,7 +442,8 @@
                     var postdata    = data,
                         modal   = button.closest(".uk-modal"),
                         message_box = button.closest(".uk-modal").find("[data-import-message-box]"),
-                        progress_bar = button.closest(".uk-modal-footer").find(".js-processing-box .progress-bar");
+                        progress_bar = button.closest(".uk-modal-footer").find(".js-processing-box .progress-bar"),
+                        uk_progress_bar = button.closest(".uk-modal-footer").find(".js-processing-box progress");
 
                     if(!Object.keys(postdata).length){
                         postdata    = {
@@ -474,116 +482,152 @@
 
                     button.data("ajaxRequest", $.post(ajaxurl, postdata, function (response) {
 
-                        if (response.success) {
-                            var currentWidth = parseFloat(progress_bar[0].style.width),
-                                percentage = currentWidth + each;
-                            // percentage = Math.round(currentWidth + each);
-                            if (response.nextstep !== undefined) {
+                            if (response.success) {
+                                var currentWidth = 0,
+                                    percentage = currentWidth + each;
 
-                                var totalStep = 1;
-
-                                if(response.action_import === undefined){
-                                    each    = each / 2;
+                                if(progress_bar.length){
+                                    currentWidth = parseFloat(progress_bar[0].style.width);
+                                }else if(uk_progress_bar.length){
+                                    currentWidth = parseFloat(uk_progress_bar.val());
                                 }
+                                // percentage = Math.round(currentWidth + each);
+                                if (response.nextstep !== undefined) {
 
-                                /* Total step is total package files from server */
-                                if (response.nextstep.total_step !== undefined) {
-                                    if(count === totalItem) {
-                                        totalStep = response.nextstep.total_step;
-                                    }else {
-                                        totalStep = response.nextstep.total_step + 1;
+                                    var totalStep = 1;
+
+                                    if(response.action_import === undefined){
+                                        each    = each / 2;
+                                    }
+
+                                    /* Total step is total package files from server */
+                                    if (response.nextstep.total_step !== undefined) {
+                                        if(count === totalItem) {
+                                            totalStep = response.nextstep.total_step;
+                                        }else {
+                                            totalStep = response.nextstep.total_step + 1;
+                                        }
+                                    }
+                                    var eachStep = each/ totalStep;
+
+                                    /* Set current step */
+                                    item.data("tzinst_import_ajax_current_step", eachStep);
+
+                                    percentage = currentWidth + eachStep;
+
+                                    if(progress_bar.length) {
+                                        progress_bar.css('width', percentage + '%');
+                                    }else if(uk_progress_bar.length){
+                                        uk_progress_bar.val(percentage);
+                                    }
+
+                                    /* Call ajax with the next step */
+                                    tzinst_import_ajax(response.nextstep, button, form, totalItem, totalItemCheck, count);
+                                } else {
+                                    count -= 1;
+                                    if(count > 0 && count <= totalItem) {
+
+                                        /* Set width of progress bar with the current item */
+                                        // percentage = Math.round(each * (totalItem - count));
+                                        percentage = each * (totalItem - count);
+                                        if(progress_bar.length) {
+                                            progress_bar.css('width', percentage + '%');
+                                        }else if(uk_progress_bar.length){
+                                            uk_progress_bar.val(percentage);
+                                        }
+                                        item.removeClass("importing").addClass("is-finished");
+
+                                        /* Call ajax with next item */
+                                        tzinst_import_ajax({}, button, form, totalItem, totalItemCheck, count);
+                                    }else{
+                                        item.removeClass("importing").addClass("is-finished");
+
+                                        /* Set width of progress bar is 100% with the last item */
+                                        if(progress_bar.length) {
+                                            progress_bar.css('width', '100%').addClass("bg-success");
+                                        }else if(uk_progress_bar.length){
+                                            uk_progress_bar.val(100).addClass("uk-progress-success");
+                                        }
+
+                                        /* Reset current step */
+                                        item.data("tzinst_import_ajax_current_step", undefined);
+
+                                        form.find(".js-tzinst-demoitem input[data-pack-type]:checked")
+                                            .prop("disabled");
+
+                                        modal.find(".uk-modal-close").prop("disabled", false);
+
+                                        form.find(".js-tzinst-demoitem input[data-pack-type]:not(:checked)")
+                                            .removeProp("disabled");
+
+                                        button.removeClass("importing disabled")
+                                            .find("> .js-tzinst-importing-icon").addClass("uk-hidden");
+
+                                        modal.find("[data-tzinst-stop-importing]").addClass("uk-hidden");
+
+                                        message_box.html("<div class=\"alert alert-success rounded-0 uk-alert-success\" data-uk-alert>"+
+                                            response.message
+                                            +"</div>");
+                                        modal.find(".uk-modal-body").scrollTop(message_box.position().top);
+
+                                        button.addClass("uk-button-success");
                                     }
                                 }
-                                var eachStep = each/ totalStep;
-
-                                /* Set current step */
-                                item.data("tzinst_import_ajax_current_step", eachStep);
-
-                                percentage = currentWidth + eachStep;
-
-                                progress_bar.css('width', percentage + '%');
-
-                                /* Call ajax with the next step */
-                                tzinst_import_ajax(response.nextstep, button, form, totalItem, totalItemCheck, count);
                             } else {
-                                count -= 1;
-                                if(count > 0 && count <= totalItem) {
+                                message_box.html("<div class=\"alert alert-danger rounded-0 uk-alert-danger\" data-uk-alert>"+
+                                    response.message
+                                    +"</div>");
+                                modal.find(".uk-modal-body").scrollTop(message_box.position().top);
+                                modal.find(".uk-modal-close").prop("disabled", false);
 
-                                    /* Set width of progress bar with the current item */
-                                    // percentage = Math.round(each * (totalItem - count));
-                                    percentage = each * (totalItem - count);
-                                    progress_bar.css('width', percentage + '%');
-                                    item.removeClass("importing").addClass("is-finished");
+                                /* Minus the value of progress bar */
+                                if(item.data("tzinst_import_ajax_current_step") !== undefined){
+                                    // var _percentage = parseFloat(progress_bar[0].style.width) - item.data("tzinst_import_ajax_current_step");
+                                    var _percentage = item.data("tzinst_import_ajax_current_step");
 
-                                    /* Call ajax with next item */
-                                    tzinst_import_ajax({}, button, form, totalItem, totalItemCheck, count);
-                                }else{
-                                    item.removeClass("importing").addClass("is-finished");
-
-                                    /* Set width of progress bar is 100% with the last item */
-                                    progress_bar.css('width', '100%').addClass("bg-success");
-
-                                    /* Reset current step */
-                                    item.data("tzinst_import_ajax_current_step", undefined);
-
-                                    form.find(".js-tzinst-demoitem input[data-pack-type]:checked")
-                                        .prop("disabled");
-
-                                    modal.find(".uk-modal-close").prop("disabled", false);
-
-                                    form.find(".js-tzinst-demoitem input[data-pack-type]:not(:checked)")
-                                        .removeProp("disabled");
-
-                                    button.removeClass("importing disabled")
-                                        .find("> .js-tzinst-importing-icon").addClass("uk-hidden");
-
-                                    modal.find("[data-tzinst-stop-importing]").addClass("uk-hidden");
-
-                                    message_box.html("<div class=\"alert alert-success rounded-0 uk-alert-success\" data-uk-alert>"+
-                                        response.message
-                                        +"</div>");
-                                    modal.find(".uk-modal-body").scrollTop(message_box.position().top);
+                                    if(progress_bar.length) {
+                                        _percentage = parseFloat(progress_bar[0].style.width) - _percentage;
+                                        progress_bar.css("width", _percentage + "%");
+                                    }else if(uk_progress_bar.length){
+                                        _percentage = parseFloat(uk_progress_bar.val()) - _percentage;
+                                        uk_progress_bar.val(_percentage);
+                                    }
                                 }
+
+                                item.removeClass("importing");
+                                form.find(".js-tzinst-demoitem input[data-pack-type]:not(:checked), .js-tzinst-demoitem input[data-pack-type]:not(.is-finished)")
+                                    .removeProp("disabled");
+                                button.removeClass("importing disabled");
                             }
-                        } else {
+                        }, 'json').fail(function(jqXHR, textStatus, errorThrown){
+
                             message_box.html("<div class=\"alert alert-danger rounded-0 uk-alert-danger\" data-uk-alert>"+
-                                response.message
+                                errorThrown + ": " +jqXHR.responseText
                                 +"</div>");
                             modal.find(".uk-modal-body").scrollTop(message_box.position().top);
+
                             modal.find(".uk-modal-close").prop("disabled", false);
+                            item.removeClass("importing");
 
                             /* Minus the value of progress bar */
                             if(item.data("tzinst_import_ajax_current_step") !== undefined){
-                                var _percentage = parseFloat(progress_bar[0].style.width) - item.data("tzinst_import_ajax_current_step");
-                                progress_bar.css( "width", _percentage + "%");
+                                // var _percentage = parseFloat(progress_bar[0].style.width) - item.data("tzinst_import_ajax_current_step");
+                                var _percentage = item.data("tzinst_import_ajax_current_step");
+
+                                if(progress_bar.length) {
+                                    _percentage = parseFloat(progress_bar[0].style.width) - _percentage;
+                                    progress_bar.css("width", _percentage + "%");
+                                }else if(uk_progress_bar.length){
+                                    _percentage = parseFloat(uk_progress_bar.val()) - _percentage;
+                                    uk_progress_bar.val(_percentage);
+                                }
                             }
 
-                            item.removeClass("importing");
                             form.find(".js-tzinst-demoitem input[data-pack-type]:not(:checked), .js-tzinst-demoitem input[data-pack-type]:not(.is-finished)")
                                 .removeProp("disabled");
                             button.removeClass("importing disabled");
-                        }
-                    }, 'json').fail(function(jqXHR, textStatus, errorThrown){
-
-                        message_box.html("<div class=\"alert alert-danger rounded-0 uk-alert-danger\" data-uk-alert>"+
-                            errorThrown + ": " +jqXHR.responseText
-                            +"</div>");
-                        modal.find(".uk-modal-body").scrollTop(message_box.position().top);
-
-                        modal.find(".uk-modal-close").prop("disabled", false);
-                        item.removeClass("importing");
-
-                        /* Minus the value of progress bar */
-                        if(item.data("tzinst_import_ajax_current_step") !== undefined){
-                            var _percentage = parseFloat(progress_bar[0].style.width) - item.data("tzinst_import_ajax_current_step");
-                            progress_bar.css( "width", _percentage + "%");
-                        }
-
-                        form.find(".js-tzinst-demoitem input[data-pack-type]:not(:checked), .js-tzinst-demoitem input[data-pack-type]:not(.is-finished)")
-                            .removeProp("disabled");
-                        button.removeClass("importing disabled");
-                    })
-                );
+                        })
+                    );
 
                     // button.data("ajaxRequest", ajaxRequest);
                     // button.data("ajaxRequest", "ajaxRequest");

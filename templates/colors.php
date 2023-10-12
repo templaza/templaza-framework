@@ -78,7 +78,7 @@ $main_link_active_color     = isset($options['main-menu-link-active-color'])?$op
 $main_link_active_color     = CSS::make_color_rgba_redux($main_link_active_color);
 
 $main_link_border_active_color     = isset($options['main-menu-border-color'])?$options['main-menu-border-color']:'';
-$main_link_border_active_color     = CSS::make_color_rgba_redux($main_link_active_color);
+$main_link_border_active_color     = CSS::make_color_rgba_redux($main_link_border_active_color);
 
 $sidebar_separate_color     = isset($options['sidebar-separate-color'])?$options['sidebar-separate-color']:'';
 $sidebar_separate_color     = CSS::make_color_rgba_redux($sidebar_separate_color);
@@ -206,6 +206,22 @@ $woo_css            .= !empty($woo_icon_color_hover)?'color:'.$woo_icon_color_ho
 $woo_css            .= !empty($woo_icon_bg_color_hover)?'background-color:'.$woo_icon_bg_color_hover.';':'';
 $woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .product-loop__buttons .tz-loop-button:hover{'.$woo_css.'}':'';
 Templates::add_inline_style($woo_css);
+
+$footer_css             = '';
+$footer_link_color      = isset($options['footer-link-color'])?$options['footer-link-color']:'';
+$footer_link_color_hover     = isset($options['footer-link-color-hover'])?$options['footer-link-color-hover']:'';
+
+$footer_link_color           = CSS::make_color_rgba_redux($footer_link_color);
+$footer_link_color_hover        = CSS::make_color_rgba_redux($footer_link_color_hover);
+
+$footer_css             = !empty($footer_link_color)?'color:'.$footer_link_color.';':'';
+$footer_css             = !empty($footer_css)?'.templaza-footer a{'.$footer_css.'}':'';
+Templates::add_inline_style($footer_css);
+
+$footer_css             = !empty($footer_link_color_hover)?'color:'.$footer_link_color_hover.';':'';
+$footer_css             = !empty($footer_css)?'.templaza-footer a:hover{'.$footer_css.'}':'';
+Templates::add_inline_style($footer_css);
+
 ?>
 
 <?php

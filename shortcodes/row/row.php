@@ -27,10 +27,10 @@ if(!class_exists('TemplazaFramework_ShortCode_Row')){
         public function register(){
             return array(
                 'id'          => 'row',
-                'title'       => __('Row'),
+                'title'       => __('Row', 'templaza-framework'),
                 'icon'        => 'el el-align-left',
-                'param_title' => esc_html__('Row Settings'),
-                'desc'        => __('Load a row'),
+                'param_title' => esc_html__('Row Settings', 'templaza-framework'),
+                'desc'        => __('Load a row', 'templaza-framework'),
                 'core'        => true,
                 'params'      => array(
                     array(

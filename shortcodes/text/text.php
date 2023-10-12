@@ -7,20 +7,13 @@ use TemPlazaFramework\Functions;
 if(!class_exists('TemplazaFramework_ShortCode_Text')){
     class TemplazaFramework_ShortCode_Text extends TemplazaFramework_ShortCode {
 
+        protected $_text_html	= '';
+
         public function __construct($field_parent = array(), $value = '', $parent = '')
         {
             $this -> hooks();
 
             parent::__construct($field_parent, $value, $parent);
-
-//            add_action( 'admin_print_footer_scripts', array( '_WP_Editors', 'enqueue_scripts' ), 1 );
-//            add_action( 'admin_print_footer_scripts', function(){
-////                var_dump(__METHOD__); die();
-//            }, 1 );
-
-//            _WP_Editors::enqueue_scripts();
-//            var_dump('text block shortcode');
-//            add_action( 'admin_print_footer_scripts', array( '_WP_Editors', 'enqueue_scripts' ), 1 );
         }
 
         public function hooks(){
@@ -28,12 +21,29 @@ if(!class_exists('TemplazaFramework_ShortCode_Text')){
                 array($this, 'after_shortcode'), 10, 4);
         }
 
+        public function prepare_params($params, $element, $parent_el){
+            if(isset($params['text'])){
+                $this -> _text_html	= isset($params['text'])?$params['text']:'';
+                unset($params['text']);
+            }
+
+            return parent::prepare_params($params, $element, $parent_el);
+        }
+
         public function after_shortcode($shortcode, $level, $params, $item){
-            if(isset($item['text']) && !empty($item['text']) && !empty($shortcode)
+            $_text  = isset($item['text'])?$item['text']:'';
+
+            if(isset($item['text'])){
+                $_text  = $item['text'];
+            }elseif(isset($params['text'])){
+                $_text  = $params['text'];
+            }elseif(!empty($this -> _text_html)){
+                $_text	= $this -> _text_html;
+            }
+            if(!empty($_text) && !empty($shortcode)
                 && !preg_match('/\[\/templaza_text\]$/ism', $shortcode)){
-                $shortcode  .= $item['text'].'[/templaza_'.$item['type'].']';
-            }elseif(!isset($item['text']) && !empty($shortcode)
-                && !preg_match('/\[\/templaza_text\]$/ism', $shortcode)){
+                $shortcode  .= $_text.'[/templaza_'.$item['type'].']';
+            }else{
                 $shortcode  .= '[/templaza_'.$item['type'].']';
             }
             return $shortcode;

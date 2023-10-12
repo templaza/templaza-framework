@@ -387,6 +387,30 @@ Templaza_API::set_section('settings',
         ),
     )
 );
+// -> START Footer Color
+Templaza_API::set_section('settings',
+    array(
+        'title'      => __( 'Footer', 'templaza-framework' ),
+        'id'         => 'colors-footer',
+        'desc'       => __( 'Select colors for Footer', 'templaza-framework' ),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'footer-link-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Footer link color', 'templaza-framework' ),
+                'subtitle' => __( 'Set color link in footer', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'footer-link-color-hover',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Footer link hover color', 'templaza-framework' ),
+                'subtitle' => __( 'Set color link hover in footer', 'templaza-framework' ),
+            ),
+
+        ),
+    )
+);
 // -> START WooCommerce Color
 Templaza_API::set_section('settings',
     array(

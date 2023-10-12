@@ -600,10 +600,12 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 
                 if($element['type'] == 'megamenu_menu_item'){
                     $layout_item['title']   = $element['admin_label'];
-                    $items_to_move[$element['menu_id']] = array(
-                        'new_parent' => $menu_item_parent,
-                        'new_order'  => $next_order,
-                    );
+                    if(isset($element['menu_id'])) {
+                        $items_to_move[$element['menu_id']] = array(
+                            'new_parent' => $menu_item_parent,
+                            'new_order' => $next_order,
+                        );
+                    }
 
                 }
 

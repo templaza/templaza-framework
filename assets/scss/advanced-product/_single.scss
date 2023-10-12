@@ -30,6 +30,12 @@
         width:30px;
         height:30px;
       }
+      li{
+        a{
+          height:100px;
+          overflow: hidden;
+        }
+      }
     }
     ul{
       li{
@@ -152,6 +158,7 @@
         color:$tztheme-global-color;
         &:after{
           background:$tztheme-global-color;
+          @include transition($tztheme-transition-all);
         }
       }
     }
@@ -201,6 +208,7 @@
           &:hover{
             background:$tztheme-button_background;
             color:$tztheme-button_text_color;
+            @include transition($tztheme-transition-all);
           }
         }
       }

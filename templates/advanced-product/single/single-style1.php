@@ -14,18 +14,22 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }
 $widget_heading_style       = isset($templaza_options['widget_box_heading_style'])?$templaza_options['widget_box_heading_style']:'';
 $ap_office_price           = isset($templaza_options['ap_product-office-price'])?$templaza_options['ap_product-office-price']:true;
-$ap_office_price_label     = isset($templaza_options['ap_product-office-price-label'])?$templaza_options['ap_product-office-price-label']:'MAKE AN OFFICE PRICE';
+$ap_office_price_label     = isset($templaza_options['ap_product-office-price-label'])?$templaza_options['ap_product-office-price-label']:'MAKE AN OFFER PRICE';
 $ap_office_price_form      = isset($templaza_options['ap_product-office-price-form'])?$templaza_options['ap_product-office-price-form']:'';
 $ap_office_form_custom     = isset($templaza_options['ap_product-office-price-form-custom'])?$templaza_options['ap_product-office-price-form-custom']:'';
+$ap_office_form_custom_url     = isset($templaza_options['ap_product-office-price-form-custom-url'])?$templaza_options['ap_product-office-price-form-custom-url']:'';
 $ap_content_group     = isset($templaza_options['ap_product-single-group-content'])?$templaza_options['ap_product-single-group-content']:'';
 $ap_content_group_sticky     = isset($templaza_options['ap_product-single-group-content-sticky'])?$templaza_options['ap_product-single-group-content-sticky']:false;
 $ap_vendor_contact     = isset($templaza_options['ap_product-vendor-contact'])?$templaza_options['ap_product-vendor-contact']:'';
+$ap_vendor_contact_custom     = isset($templaza_options['ap_product-vendor-form-custom'])?$templaza_options['ap_product-vendor-form-custom']:'';
+$ap_vendor_contact_custom_url     = isset($templaza_options['ap_product-vendor-form-custom-url'])?$templaza_options['ap_product-vendor-form-custom-url']:'';
 $ap_vendor_title     = isset($templaza_options['ap_product-vendor-contact-label'])?$templaza_options['ap_product-vendor-contact-label']:__('Contact Vendor','templaza-framework');
 $show_compare_button= get_field('ap_show_archive_compare_button', 'option');
 $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
 $ap_show_vendor           = isset($templaza_options['ap_product-single-vendor'])?$templaza_options['ap_product-single-vendor']:true;
 $ap_share           = isset($templaza_options['ap_product-single-share'])?$templaza_options['ap_product-single-share']:false;
+$ap_comment           = isset($templaza_options['ap_product-single-comment'])?$templaza_options['ap_product-single-comment']:true;
 $ap_share_label     = isset($templaza_options['ap_product-single-share-label'])?$templaza_options['ap_product-single-share-label']:'';
 
 do_action('templaza_set_postviews',get_the_ID());
@@ -82,14 +86,29 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                             AP_Templates::load_my_layout('single.price');
                             ?>
                         </div>
-                        <?php if($ap_office_price){ ?>
-                            <div class=" hightlight-box uk-margin-left">
-                                <a class="highlight uk-flex uk-flex-between uk-flex-middle" href="#modal-center" data-uk-toggle>
+                        <?php if($ap_office_price){
+                            if($ap_office_price_form == 'custom_url'){
+                                ?>
+                                <div class=" hightlight-box uk-margin-left">
+                                    <a class="highlight uk-flex uk-flex-between uk-flex-middle" href="<?php echo esc_url($ap_office_form_custom_url);?>">
                                     <span>
                                         <?php echo esc_html($ap_office_price_label);?>
                                     </span>
-                                </a>
-                            </div>
+                                    </a>
+                                </div>
+                                <?php
+                            }else{
+                                ?>
+                                <div class=" hightlight-box uk-margin-left">
+                                    <a class="highlight uk-flex uk-flex-between uk-flex-middle" href="#modal-center" data-uk-toggle>
+                                    <span>
+                                        <?php echo esc_html($ap_office_price_label);?>
+                                    </span>
+                                    </a>
+                                </div>
+                                <?php
+                            }
+                            ?>
                         <?php } ?>
                     </div>
                     <?php
@@ -130,7 +149,7 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                     AP_Templates::load_my_layout('single.custom-fields');
                     ?>
                     </div>
-                    <?php if(function_exists('wpforms') && $ap_vendor_contact !='') { ?>
+                    <?php if(function_exists('wpforms') && $ap_vendor_contact !='' && $ap_vendor_contact !='custom_url') { ?>
                         <div class="widget ap-single-side-box  ap-box ap-single-box ap-contact-vendor">
                             <div class="widget-content">
                                 <?php if($ap_vendor_title !=''){
@@ -140,12 +159,18 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                                     </h3>
                                 <?php
                                 }
-                                ?>
-                                <div class="ap-group-content">
-                                    <?php
-                                    echo do_shortcode('[wpforms id="' . $ap_vendor_contact . '"]');
+                                if($ap_vendor_contact =='custom'){
+                                    echo do_shortcode($ap_vendor_contact);
+                                }else{
                                     ?>
-                                </div>
+                                    <div class="ap-group-content">
+                                        <?php
+                                        echo do_shortcode('[wpforms id="' . $ap_vendor_contact . '"]');
+                                        ?>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     <?php } ?>
@@ -164,11 +189,13 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
             </div>
             <?php
             if($ap_content_group ==''){
+                if($ap_comment){
                 ?>
                 <div class="templaza-single-comment ap-single-box">
                     <?php comments_template('', true); ?>
                 </div>
                 <?php
+                }
             }
             ?>
 
@@ -230,7 +257,7 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                     <?php
                 }
                 ?>
-                <?php if(function_exists('wpforms') && $ap_vendor_contact !='') { ?>
+                <?php if(function_exists('wpforms') && $ap_vendor_contact !='' && $ap_vendor_contact !='custom_url') { ?>
                     <div class="widget ap-single-side-box ap-box ap-specs ap-contact-vendor">
                         <div class="widget-content">
                             <?php if($ap_vendor_title !=''){
@@ -239,13 +266,19 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                                     <span><?php echo esc_html($ap_vendor_title);?></span>
                                 </h3>
                                 <?php
+                                if($ap_vendor_contact =='custom'){
+                                    echo do_shortcode($ap_vendor_contact);
+                                }else{
+                                    ?>
+                                    <div class="ap-group-content">
+                                        <?php
+                                        echo do_shortcode('[wpforms id="' . $ap_vendor_contact . '"]');
+                                        ?>
+                                    </div>
+                                    <?php
+                                }
                             }
                             ?>
-                            <div class="ap-group-content">
-                                <?php
-                                echo do_shortcode('[wpforms id="' . $ap_vendor_contact . '"]');
-                                ?>
-                            </div>
                         </div>
                     </div>
                 <?php } ?>
@@ -274,6 +307,9 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                 if($ap_office_price_form == 'custom'){
                     echo do_shortcode($ap_office_form_custom);
                 }else{
+                    ?>
+                    <h3 class="uk-modal-title"><?php echo esc_html(get_the_title($ap_office_price_form)); ?></h3>
+                    <?php
                     if(function_exists('wpforms')) {
                         echo do_shortcode('[wpforms id="' . $ap_office_price_form . '"]');
                     }

@@ -73,7 +73,6 @@ require_once 'typographies/menu.php';
 require_once 'typographies/sidebar.php';
 require_once 'typographies/footer.php';
 require_once 'typographies/archive.php';
-require_once 'typographies/single.php';
 if(Admin_Page_Function::is_plugin_active('advanced-product')) {
     require_once 'typographies/advanced-product.php';
 }

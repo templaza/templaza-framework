@@ -38,7 +38,16 @@ if($ap_layout == 'masonry'){
     $grid_option = '';
 }
 $post_count = $GLOBALS['wp_query']->found_posts;
-
+if(!is_post_type_archive('ap_product')){
+    $cat_id         = get_queried_object()->term_id;
+    ?>
+    <div class="ap-archive-descirtion uk-margin-medium-bottom">
+        <?php
+        echo wp_kses_post(term_description($cat_id));
+        ?>
+    </div>
+    <?php
+}
 if ( have_posts()) {
     ?>
     <div class="templaza-ap-product-filter uk-margin-bottom uk-flex uk-flex-right uk-hidden@m uk-text-right  uk-position-z-index" data-uk-sticky="start: 20vh; end: !.templaza-content_area; offset: 30vh">
