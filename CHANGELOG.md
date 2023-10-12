@@ -1,5 +1,55 @@
 # Changelog
 
+## Version 1.1.6 - October 12, 2023
+
+**Fix bugs:**
+
+- ix issue install theme
+- Fix translate rental unit
+- Fix copyright in template
+- Fix warning generate color
+- Fix term id in archive page
+- Fix breadcrumb ap category child
+- Fix with product has not category
+- Fix display product type sold, contact
+- Fix issue text-domain of row shortcode
+- Fix issue load field value in lightbox
+- Fix issue progress bar of demo import data
+- Fix issue field required when edit element
+- Fix issue warning parameter of woocomerce-style
+- Fix issue text block doesn't display on front-end
+- Fix issue menu dropdown effect of Justify horizontal menu
+- Fix issue undefined array key reating of woocommerce helper
+- Fix issue load switch field value when edit element setting
+- Fix price display in archive adv product page when product type is false
+
+**Improvement**
+
+- Update dealer pages
+- Update advanced layout 6
+- Update style cart filter
+- Update style dealer ship
+- Update style badges product
+- Update Form custom single advanced product
+- Update css input type search advanced product search module
+- Show ap category description
+- Remove options not use in template
+- Edit style dealer product page when no product
+
+**Added:**
+  
+- Added some hooks
+- Add Dealer options
+- Add border social module
+- Add Justify menu horizontal
+- Add get a quote advanced product
+- Add ui slider in single inventory
+- Add setting product status for deader
+- Add custom url for advanced product detail
+- Add option show hide product sold in archive page
+- Add option show introtext in element uiadvanced product
+- Added hook templaza-framework/field/tz_layout/after_load for tz_layout field
+
 ## Version 1.1.5 - July 13, 2023
 
 **Fix bugs:**
