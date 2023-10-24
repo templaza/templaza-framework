@@ -164,10 +164,10 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
                         'id'      => 'twitter',
                         'title'   => __('Twitter', 'templaza-framework'),
                         'link'    => '',
-                        'icons'   => array('fab fa-twitter', 'fab fa-twitter-square'),
+                        'icons'   => array('fa-brands fa-x-twitter', 'fa-brands fa-square-x-twitter'),
                         'color'   => '#3DA9F6',
                         'enabled' => false,
-                        'icon'    => 'fab fa-twitter'
+                        'icon'    => 'fa-brands fa-x-twitter'
                     ),
                     'telegram' => array(
                         'id'               => 'telegram',

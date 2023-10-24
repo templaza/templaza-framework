@@ -41,6 +41,7 @@ Templaza_API::set_section('settings',
                 'title'                   => __( 'Body Font', 'templaza-framework' ),
                 'subtitle'                => __( 'Specify the body font properties.', 'templaza-framework' ),
                 'required'                => array('typography-body', '=', 'custom'),
+                'weights'                => array('400', '700'),
                 'color'                   => false,
                 'text-align'              => false,
                 'preview'                 => true, // Disable the previewer

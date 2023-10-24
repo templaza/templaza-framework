@@ -311,6 +311,72 @@
     }
   }
 }
+
+.tz-slideshow-wrap{
+  &.modegallery{
+    width:100%;
+    .tns-outer{
+      width:100%;
+    }
+  }
+  &.slider-custom_height{
+    .tns-item{
+      text-align: center;
+      overflow: hidden;
+      .sl-img-wrap{
+        display:flex;
+        justify-content: center;
+        height:100%;
+        align-items: center;
+      }
+      img{
+        height:100%;
+        width:auto;
+        max-width: none;
+      }
+    }
+    &.img-cover{
+      .tns-item{
+        img{
+          width:100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+.tz-control-wrap{
+  &.slider-custom_height{
+    .tz-ap-thumbnails{
+      .tns-item{
+        height:100px;
+        text-align: center;
+        overflow: hidden;
+        .thumb-img-wrap{
+          display:flex;
+          justify-content: center;
+          height:100%;
+          align-items: center;
+          overflow: hidden;
+        }
+        img{
+          height:100%;
+          width:auto;
+          max-width: none;
+        }
+      }
+    }
+    &.img-cover{
+      .tns-item{
+        img{
+          width:100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 639.9px) {
   div.templaza-ap-single{
     .ap-single-button-wrap{

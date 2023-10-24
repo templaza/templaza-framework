@@ -63,7 +63,7 @@ if($ap_tax_before !=''){
                     <div class="ap-info-inner ap-info-desc">
                         <?php
                         if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
-                            <p><?php echo substr(strip_tags(get_the_excerpt()), 0, $ap_desc_limit); ?></p>
+                            <p><?php echo wp_trim_words(strip_tags(get_the_excerpt()), $ap_desc_limit); ?></p>
                         <?php } else {
                             the_excerpt();
                         }

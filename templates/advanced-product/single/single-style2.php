@@ -93,7 +93,7 @@ $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields'
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                             <a class="twitter" title="<?php esc_attr_e('Share on Twitter','amanus');?>" target="_blank" href="https://twitter.com/home?status=Check%20out%20this%20article:%20<?php print esc_attr($tweet_title); ?>%20-%20<?php echo urlencode(get_the_permalink(get_the_ID())); ?>">
-                                <i class="fab fa-twitter"></i>
+                                <i class="fa-brands fa-x-twitter"></i>
                             </a>
                             <?php $templaza_pin_image = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID())); ?>
                             <a class="pinterest" title="<?php esc_attr_e('Share on Pinterest','amanus');?>"  data-pin-do="skipLink" target="_blank" href="https://pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>&media=<?php echo esc_attr($templaza_pin_image); ?>&description=<?php echo urlencode(get_the_title(get_the_ID())); ?>">

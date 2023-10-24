@@ -97,7 +97,6 @@ class Fonts{
         if(!count($fonts)){
             return false;
         }
-
         $link    = '';
         $subsets = array();
 

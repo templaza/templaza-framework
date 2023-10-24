@@ -1,0 +1,59 @@
+.ap-item-style7{
+  .ap-inner{
+    border:1px solid $tztheme-border-color;
+    .ap-info-inner{
+      padding:25px 30px;
+      &.ap-info-fields{
+        padding-top:10px;
+        padding-bottom:30px;
+      }
+    }
+  }
+  .templaza-btn{
+    height:60px;
+  }
+  .ap-info-price{
+    border-top:1px solid $tztheme-border-color;
+    border-bottom:1px solid $tztheme-border-color;
+    margin:30px 0 0;
+    padding:30px 0;
+    .ap-price{
+      font-size:30px;
+      font-weight:700;
+    }
+  }
+  .ap-price-box{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    .ap-field-label{
+      text-transform:uppercase;
+      font-weight:700;
+    }
+  }
+  .ap-specification{
+    .ap-field-label{
+      text-transform:uppercase;
+      font-size:12px;
+    }
+    .ap-spec-value{
+      text-transform:uppercase;
+      font-weight:700;
+      color:$tztheme-heading-color;
+    }
+    .ap-style7-icon{
+      margin-right:20px;
+      i{
+        color:$tztheme-global-color;
+        font-size:24px;
+        margin-top: 5px;
+      }
+      svg{
+        fill:$tztheme-global-color;
+      }
+    }
+    .ap-spec-item{
+      padding: 10px 0;
+    }
+  }
+}
