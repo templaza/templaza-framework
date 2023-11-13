@@ -24,7 +24,7 @@ $ap_product_related_spec      = isset($templaza_options['ap_product-related-spec
 
 if(!empty($fields)){
 ?>
-<div class="ap-specification ap-specification-style3 uk-child-width-1-2 uk-grid-collapse" data-uk-grid>
+<div class="ap-specification ap-specification-style3 uk-child-width-1-2 uk-grid-collapse uk-grid" data-uk-grid>
     <?php foreach($fields as $field){
         $f_attr         = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);
         $f_value        = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name']):null;

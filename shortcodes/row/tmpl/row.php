@@ -39,6 +39,6 @@ if($match_height){
 <?php if($has_outer){?>
 <div<?php echo isset($tz_id)?' id="'.$tz_id.'"':''; ?> class="<?php echo $_tz_outer_class; ?>">
 <?php } ?>
-<div<?php echo isset($tz_id) && !$has_outer?' id="'.$tz_id.'"':''; ?> class="<?php echo isset($tz_class)?$tz_class:'';
+<div<?php echo isset($tz_id) && !$has_outer?' id="'.$tz_id.'"':''; ?> class="uk-grid <?php echo isset($tz_class)?$tz_class:'';
 ?>"<?php echo !empty($_attributes)?$_attributes:''; ?>><?php echo $content; ?></div>
 <?php if($has_outer){ ?></div><?php } ?>

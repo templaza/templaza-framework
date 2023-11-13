@@ -87,7 +87,7 @@ if ((!empty($product_type) && in_array('contact', $product_type)) && !empty($pri
 if ((!empty($product_type) && in_array('sold', $product_type)) && !empty($price_sold) && $show_price_sold) {
     ?>
     <div class="ap-price-box">
-        <span class="ap-field-label"><?php esc_html_e('Price','templaza-framework')?></span>
+        <span class="ap-field-label"><?php esc_html_e('Status','templaza-framework')?></span>
         <span class="ap-price">
             <?php echo esc_html($price_sold);?>
         </span>

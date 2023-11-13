@@ -62,7 +62,7 @@ if($ap_tiny_image =='cover'){
 if(!empty($ap_gallery)){
 ?>
 <div class="uk-inline tz-slideshow-wrap <?php echo esc_attr($tiny_cls);?>">
-    <div class="ap-slideshow ap-tiny-slider">
+    <div class="ap-slideshow ap-tiny-slider"  data-uk-lightbox="animation: fade">
         <?php
         if (isset($ap_video) && !empty($ap_video)) {
         ?>
@@ -82,7 +82,10 @@ if(!empty($ap_gallery)){
                 <div class="sl-img-wrap">
                 <?php if(isset($image['url'])){
                     ?>
-                <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['title']); ?>">
+                    <a data-elementor-open-lightbox="no" class="uk-inline" href="<?php echo esc_url($image['url']); ?>" data-caption="<?php echo esc_attr($image['title']); ?>">
+                        <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['title']); ?>">
+                    </a>
+
                 <?php
                 }else{
                   ?>
@@ -164,14 +167,14 @@ if(!empty($ap_gallery)){
             container: '.tz-ap-thumbnails',
             items: 5,
             nav: false,
-            gutter: 20,
+            gutter: 10,
             mouseDrag: true,
             loop: false,
             controlsContainer:'.tz-slideshow-control-thumb',
             responsive: {
                 640: {
                     gutter: 10,
-                    items: 3,
+                    items: 4,
                 },
                 960: {
                     gutter: 20,

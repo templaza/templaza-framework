@@ -33,7 +33,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
         </div><!-- End row controls -->
         <!-- Row element wrapper -->
         <div class="fl_element-wrapper">
-            <div class="fl_row_container uk-child-width" data-uk-grid>
+            <div class="fl_row_container uk-child-width uk-grid" data-uk-grid>
                 <!-- Column -->
                 <div class="fl_column">
                     <!-- Column Element Wrapper -->

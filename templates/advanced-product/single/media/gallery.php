@@ -38,7 +38,7 @@ if(!empty($ap_gallery)){
 ?>
 <div class="ap-slideshow uk-position-relative " data-uk-slideshow="animation: fade">
     <div class="uk-position-relative uk-visible-toggle">
-        <ul class="uk-slideshow-items">
+        <ul class="uk-slideshow-items"  data-uk-lightbox="animation: fade">
             <?php
             if (isset($ap_video) && !empty($ap_video)) {
                 ?>

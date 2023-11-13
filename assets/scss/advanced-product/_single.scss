@@ -328,6 +328,11 @@
         justify-content: center;
         height:100%;
         align-items: center;
+        a{
+          display:block;
+          height:100%;
+          width:100%;
+        }
       }
       img{
         height:100%;
@@ -394,6 +399,18 @@
       }
     }
   }
+  .tz-slideshow-wrap.slider-custom_height{
+    .tns-item{
+      height:370px;
+    }
+  }
+  .tz-control-wrap.slider-custom_height{
+    .tz-ap-thumbnails{
+      .tns-item{
+        height:60px;
+      }
+    }
+  }
 }
 @media (max-width: 480px) {
   div.templaza-ap-single{
@@ -409,6 +426,18 @@
           margin-top:10px !important;
           margin-left:0 !important;
         }
+      }
+    }
+  }
+  .tz-slideshow-wrap.slider-custom_height{
+    .tns-item{
+      height:300px;
+    }
+  }
+  .tz-control-wrap.slider-custom_height{
+    .tz-ap-thumbnails{
+      .tns-item{
+        height:50px;
       }
     }
   }

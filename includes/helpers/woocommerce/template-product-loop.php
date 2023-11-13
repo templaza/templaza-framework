@@ -1036,7 +1036,7 @@ class Templaza_Product_Loop {
 		}
 
 		echo sprintf(
-			'<a href="#" class="product-quick-shop-button templaza-btn" data-product_id="%s" >%s%s</a>',
+			'<a href="#" class="product-quick-shop-button templaza-btn" data-product_id="%s" >%s<span>%s</span></a>',
 			esc_attr( $product->get_id() ),
 			'<i class="fas fa-shopping-cart"></i>',
 			esc_html__( 'Quick Shop', 'templaza-framework' )

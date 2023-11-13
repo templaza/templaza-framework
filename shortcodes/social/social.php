@@ -127,10 +127,10 @@ if(!class_exists('TemplazaFramework_ShortCode_Social')){
 
             $social_styles = [];
             if (!empty($social_color)) {
-                $social_styles[] = '.'. $custom_css_name . ' li a{ color: ' . $social_color . ' !important;}';
+                $social_styles[] = '.'. $custom_css_name . ' li a i{ color: ' . $social_color . ' !important;}';
             }
             if (!empty($social_color_hover)) {
-                $social_styles[] = '.'. $custom_css_name . ' li a:hover{ color: ' . $social_color_hover . ' !important;}';
+                $social_styles[] = '.'. $custom_css_name . ' li a:hover i{ color: ' . $social_color_hover . ' !important;}';
             }
             if (!empty($social_border['border-top'])) {
                 $social_styles[] = '.'. $custom_css_name . ' li a{ border-top: ' . $social_border['border-top'] . ' !important;}';

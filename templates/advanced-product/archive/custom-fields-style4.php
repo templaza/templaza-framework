@@ -28,7 +28,7 @@ if(isset($_GET['field_limit'])){
 }
 if(!empty($fields)){
 ?>
-<div class="ap-specification ap-specification-style4 uk-child-width-1-3 uk-grid-collapse" data-uk-grid>
+<div class="ap-specification ap-specification-style4 uk-child-width-1-3 uk-grid-collapse uk-grid" data-uk-grid>
     <?php $d=0; foreach($fields as $field){
         if($d < $field_limit){
         $f_attr         = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);

@@ -19,6 +19,9 @@ extract(shortcode_atts(array(
     'edit_profile_text'             => esc_html__('Edit Profile', 'templaza-framework'),
     'dashboard_text'                => esc_html__('Dashboard', 'templaza-framework'),
     'logout_text'                   => esc_html__('Logout', 'templaza-framework'),
+    'enable_login_url'              => false,
+    'login_url'                     => '',
+    'register_url'                  => '',
     'dashboard_url'                 => '',
     'separator_text'                 => '',
     'typography_account_font'       => '',
@@ -26,6 +29,16 @@ extract(shortcode_atts(array(
     'enable_account_custom_font'    => true,
     'submenu_background'            => '',
 ), $atts));
+if($enable_login_url && $login_url !=''){
+    $login = $login_url;
+}else{
+    $login = wp_login_url( get_permalink() );
+}
+if($enable_login_url && $register_url !=''){
+    $register = $register_url;
+}else{
+    $register = wp_registration_url();
+}
 ?>
 <div<?php echo !empty($tz_id)?' id="'.esc_attr__($tz_id).'"':''; ?> class="<?php echo esc_attr__($tz_class); ?>">
 <nav class="uk-navbar-container uk-navbar-transparent tz-navbar-login" data-uk-navbar>
@@ -40,7 +53,7 @@ extract(shortcode_atts(array(
                             <i class="<?php echo esc_attr($account_icon);?>"></i>
                         <?php } ?>
                         <?php
-                        echo esc_html($welcome_text);
+                        echo esc_html($welcome_text.' ');
                         echo esc_html( $current_user->display_name );
                         ?>
                     </a>
@@ -61,7 +74,7 @@ extract(shortcode_atts(array(
                 </li>
             <?php } else { ?>
                 <li>
-                    <a href="<?php echo esc_url( wp_login_url( get_permalink() ) ); ?>">
+                    <a href="<?php echo esc_url($login); ?>">
                         <?php if($enable_icons && isset($login_icon)){ ?>
                             <i class="<?php echo esc_attr($login_icon);?>"></i>
                         <?php } ?>
@@ -75,7 +88,7 @@ extract(shortcode_atts(array(
                 <?php } ?>
                 <?php if($enable_user_register){ ?>
                 <li>
-                    <a href="<?php echo esc_url( wp_registration_url() ); ?>">
+                    <a href="<?php echo esc_url( $register); ?>">
                         <?php if($enable_icons && isset($register_icon)){ ?>
                             <i class="<?php echo esc_attr($register_icon);?>"></i>
                         <?php } ?>
