@@ -70,6 +70,8 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 */
 		private $user_fonts = true;
 
+        protected $text_domain;
+
 		/**
 		 * Redux_Field constructor.
 		 *
