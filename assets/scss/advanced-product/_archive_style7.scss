@@ -1,4 +1,4 @@
-.ap-item-style7{
+.ap-item.ap-item-style7{
   .ap-inner{
     border:1px solid $tztheme-border-color;
     .ap-info-inner{
@@ -36,14 +36,16 @@
     .ap-field-label{
       text-transform:uppercase;
       font-size:12px;
+      line-height:1.5em;
     }
     .ap-spec-value{
       text-transform:uppercase;
       font-weight:700;
       color:$tztheme-heading-color;
+      line-height:1.4em;
     }
     .ap-style7-icon{
-      margin-right:20px;
+      margin-right:16px;
       i{
         color:$tztheme-global-color;
         font-size:24px;
