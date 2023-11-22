@@ -91,12 +91,14 @@
     templaza_woo.filter_btn = function () {
 
         if($('#templaza-shop-container').length){
-            if($('.products-filter-widget').parents('.templaza-column').hasClass('hideonsm')){
+            if($(window).width()<1200){
                 templaza_woo.$body.on('click', '.shop-filter-btn', function (e) {
                     $('.products-filter-widget').parents('.templaza-column').toggleClass('sidebar-fixed');
+                    $('.products-filter-widget').parents('section').addClass('fix-index');
                 });
                 templaza_woo.$body.on('click', '.templaza-filter-closed', function (e) {
                     $('.products-filter-widget').parents('.templaza-column').removeClass('sidebar-fixed');
+                    $('.products-filter-widget').parents('section').removeClass('fix-index');
                 });
             }
         }
