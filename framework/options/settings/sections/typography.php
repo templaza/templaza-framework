@@ -52,6 +52,7 @@ Templaza_API::set_section('settings',
                 'allow_responsive'        => true,
                 'allow_empty_line_height' => true,
                 'google'                  => true,
+                'multi_styles'            => true,
                 'units'                   => array(
                     'font-size'   => 'px',
                     'line-height' => 'em',
