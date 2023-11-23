@@ -242,7 +242,8 @@ class Fonts{
         $end_key    = @end(array_keys($font_option));
         foreach($font_option as $key => $option){
             if($key == 'font-family' || $key == 'font-backup'
-                || $key == 'font-options' || $key == 'google' || $key == 'subsets'){
+                || $key == 'font-options' || $key == 'google' || $key == 'subsets'
+                || $key == 'font-multi-styles'){
                 continue;
             }
             if(is_array($option)){
