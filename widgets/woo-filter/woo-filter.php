@@ -361,7 +361,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
 
             <div class="<?php echo esc_attr( join( ' ', $classes ) ) ?>">
                 <?php if ( ! empty( $filter['name'] ) ) : ?>
-                    <span class="templaza_woo_filter-name filter-name"><?php echo esc_html( $filter['name'] ) ?></span>
+                    <h3 class="templaza_woo_filter-name filter-name"><span><?php echo esc_html( $filter['name'] ) ?></span></h3>
                 <?php endif; ?>
 
                 <div class="templaza_woo_filter-control uk-position-relative filter-control">

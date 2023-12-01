@@ -32,66 +32,68 @@
      */
     templaza_woo.productThumbnails = function ($vertical) {
         var $gallery = $('.woocommerce-product-gallery'),
-            $thumbnail = $gallery.find('.flex-control-thumbs'),
             $video = $gallery.find('.woocommerce-product-gallery__image.templaza_woo-product-video');
 
-        $gallery.imagesLoaded(function () {
-            setTimeout(function () {
+        $gallery.on('wc-product-gallery-after-init', function(){
+            $gallery.imagesLoaded(function () {
+                setTimeout(function () {
 
-                var columns = $gallery.data('columns');
+                    var columns = $gallery.data('columns'),
+                        $thumbnail = $gallery.find('.flex-control-thumbs');
 
-                $thumbnail.wrap('<div class="woocommerce-product-gallery__thumbs-carousel swiper-container" style="opacity:0"></div>');
-                $thumbnail.addClass('swiper-wrapper');
-                $thumbnail.find('li').addClass('swiper-slide');
-                $thumbnail.after('<span class="templaza_woo-svg-icon templaza-thumbs-button-prev templaza-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></span>');
-                $thumbnail.after('<span class="templaza_woo-svg-icon templaza-thumbs-button-next templaza-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>');
+                    $thumbnail.wrap('<div class="woocommerce-product-gallery__thumbs-carousel swiper-container" style="opacity:0"></div>');
+                    $thumbnail.addClass('swiper-wrapper');
+                    $thumbnail.find('li').addClass('swiper-slide');
+                    $thumbnail.after('<span class="templaza_woo-svg-icon templaza-thumbs-button-prev templaza-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></span>');
+                    $thumbnail.after('<span class="templaza_woo-svg-icon templaza-thumbs-button-next templaza-swiper-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>');
 
-                var options = {
-                    slidesPerView: columns,
-                    loop: false,
-                    autoplay: false,
-                    speed: 800,
-                    watchOverflow: true,
-                    spaceBetween: 15,
-                    navigation: {
-                        nextEl: '.templaza-thumbs-button-next',
-                        prevEl: '.templaza-thumbs-button-prev',
-                    },
-                    on: {
-                        init: function () {
-                            $thumbnail.parent().css('opacity', 1);
+                    var options = {
+                        slidesPerView: columns,
+                        loop: false,
+                        autoplay: false,
+                        speed: 800,
+                        watchOverflow: true,
+                        spaceBetween: 15,
+                        navigation: {
+                            nextEl: '.templaza-thumbs-button-next',
+                            prevEl: '.templaza-thumbs-button-prev',
+                        },
+                        on: {
+                            init: function () {
+                                $thumbnail.parent().css('opacity', 1);
+                            }
+                        },
+                        breakpoints: {
+                            300: {
+                                spaceBetween: 0,
+                                allowTouchMove: false,
+                            },
+                            991: {
+                                spaceBetween: 15,
+                            },
                         }
-                    },
-                    breakpoints: {
-                        300: {
-                            spaceBetween: 0,
-                            allowTouchMove: false,
-                        },
-                        991: {
-                            spaceBetween: 15,
-                        },
+                    };
+
+                    if ($vertical) {
+                        options.direction = 'vertical';
+                    } else {
+                        options.direction = 'horizontal';
                     }
-                };
 
-                if ($vertical) {
-                    options.direction = 'vertical';
-                } else {
-                    options.direction = 'horizontal';
-                }
+                    new Swiper($thumbnail.parent(), options);
 
-                new Swiper($thumbnail.parent(), options);
+                    // Add an <span> to thumbnails for responsive bullets.
+                    $('li', $thumbnail).append('<span/>');
 
-                // Add an <span> to thumbnails for responsive bullets.
-                $('li', $thumbnail).append('<span/>');
+                    if ($video.length > 0) {
+                        var videoNumber = $('.woocommerce-product-gallery').data('video') - 1;
+                        $('.woocommerce-product-gallery').addClass('has-video');
+                        $thumbnail.find('li').eq(videoNumber).append('<div class="i-video"></div>');
+                    }
 
-                if ($video.length > 0) {
-                    var videoNumber = $('.woocommerce-product-gallery').data('video') - 1;
-                    $('.woocommerce-product-gallery').addClass('has-video');
-                    $thumbnail.find('li').eq(videoNumber).append('<div class="i-video"></div>');
-                }
+                }, 200);
 
-            }, 200);
-
+            });
         });
     };
 
@@ -134,7 +136,7 @@
         }
 
         // Init zoom for product gallery images
-        if ('1' === templaza_wooData.product_image_zoom) {
+        if ('1' === templazaData.product_image_zoom) {
             $product.find('.woocommerce-product-gallery .woocommerce-product-gallery__image').each(function () {
                 templaza_woo.zoomSingleProductImage(this);
             });
@@ -342,7 +344,6 @@
                 clickable: true
             };
         }
-        console.log(options);
 
         new Swiper($related.find('.linked-products-carousel'), options);
     };

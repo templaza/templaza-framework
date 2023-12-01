@@ -1431,3 +1431,20 @@
 .single-product-extra-content{
   margin-top: 30px;
 }
+.layout-4{
+  .woocommerce-product-gallery{
+    .templaza-swiper-button{
+      position:absolute;
+      top:50%;
+      margin-top:-20px;
+      z-index: 10;
+      cursor: pointer;
+      &.templaza-swiper-button-next{
+        right:0;
+      }
+      &.templaza-swiper-button-prev{
+        left:0;
+      }
+    }
+  }
+}
