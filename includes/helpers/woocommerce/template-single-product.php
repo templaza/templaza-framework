@@ -195,6 +195,7 @@ class Templaza_Single_Product {
 		}
 
         add_action( 'woocommerce_single_product_summary', array( $this, 'product_extra_content' ), 200 );
+        add_filter('woocommerce_single_product_carousel_options', array( $this, 'product_gallery_carousel_options' ) );
 	}
 
 	/**
@@ -701,6 +702,10 @@ class Templaza_Single_Product {
             echo $extra;
             echo '</div>';
         }
+    }
+    public function product_gallery_carousel_options( $options ) {
+        $options['directionNav'] = false;
+        return  $options;
     }
 
 }

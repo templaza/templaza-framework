@@ -1297,6 +1297,7 @@
 					if ($container.find('.deal-expire-countdown').length > 0) {
 						$(document.body).trigger('templaza_countdown', [$('.deal-expire-countdown')]);
 					}
+					$container.find('.single_add_to_cart_button').wrapInner( "<span></span>");
 				}
 			).fail(function () {
 				// window.location.href = $el.attr('href');

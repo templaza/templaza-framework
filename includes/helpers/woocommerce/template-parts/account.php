@@ -43,7 +43,7 @@
             <button type="submit" class="templaza-button" name="login"
                     value="<?php esc_attr_e( 'Sign in', 'templaza-framework' ); ?>"
                     data-signing="<?php esc_attr_e( 'Siging in...', 'templaza-framework' ); ?>"
-                    data-signed="<?php esc_attr_e( 'Signed In', 'templaza-framework' ); ?>"><?php esc_html_e( 'Sign in', 'templaza-framework' ); ?></button>
+                    data-signed="<?php esc_attr_e( 'Signed In', 'templaza-framework' ); ?>"><span><?php esc_html_e( 'Sign in', 'templaza-framework' ); ?></span></button>
 
 			<?php if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) : ?>
                 <span class="create-account templaza-button button-outline button-medium"><?php esc_html_e( 'Create An Account', 'templaza-framework' ); ?></span>
@@ -90,7 +90,7 @@
             <p class="form-row form-row-wide">
 				<?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
                 <button type="submit" class="templaza-button" name="register"
-                        value="<?php esc_attr_e( 'Sign up', 'templaza-framework' ); ?>"><?php esc_html_e( 'Sign up', 'templaza-framework' ); ?></button>
+                        value="<?php esc_attr_e( 'Sign up', 'templaza-framework' ); ?>"><span><?php esc_html_e( 'Sign up', 'templaza-framework' ); ?></span></button>
             </p>
 
             <p class="form-row form-row-wide already_registered">
