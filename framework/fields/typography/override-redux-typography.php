@@ -170,6 +170,12 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				'font-style'        => '',
 				'color'             => '',
 				'font-size'         => '',
+                'margin-top'        => '',
+                'margin-bottom'     => '',
+                'shadow-color'      => '#000000',
+                'shadow-horizontal' => '1',
+                'shadow-vertical'   => '1',
+                'shadow-blur'       => '4',
                 'font-multi-styles' => '',
 			);
 

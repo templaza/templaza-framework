@@ -16,6 +16,7 @@
 	var isSelecting = false;
 	var org_redux_field_typography__select	 = redux.field_objects.typography.select;
 	redux.field_objects.typography.select = function( selector, skipCheck, destroy, fontName, active ) {
+		console.log("Typography select");
 
 		org_redux_field_typography__select(selector, skipCheck, destroy, fontName, active);
 
@@ -56,6 +57,7 @@
 		var typekit  = false;
 		var details  = '';
 		var html     = '<option value=""></option>';
+		var html_multi     = '<option value=""></option>';
 		var selected = '';
 
 		// Main id for selected field.
@@ -145,36 +147,31 @@
 				}
 			}
 
-			// if ($(selector).hasClass('redux-typography-subsets')) {
-			// 	that.find('input.typography-subsets').val(script);
-			// }
-
 			// If we changed the font.
 			// if ($(selector).hasClass('redux-typography-family')) {
 
 				// Google specific stuff.
 				if (true === google) {
-					console.log("multi_style");
-					console.log(multi_style);
-					console.log(active);
-					console.log(that.hasClass('tz-typography-initialized'));
-					console.log(that.find( 'select.redux-typography-multi-style' ).data('value'));
 
 					// STYLES.
+					var selected_style	= [];
 					$.each(
 						details.variants,
 						function (index, variant) {
 							index = null;
 							if (multi_style.indexOf(variant.id) !== -1 || 1 === redux.field_objects.typography.size(details.variants)) {
 								selected = ' selected="selected"';
+								selected_style.push(variant.id);
 								// multi_style = variant.id;
 							} else {
 								selected = '';
 							}
 
-							html += '<option value="' + variant.id + '"' + selected + '>' + variant.name.replace(/\+/g, ' ') + '</option>';
+							html_multi += '<option value="' + variant.id + '"' + selected + '>' + variant.name.replace(/\+/g, ' ') + '</option>';
 						}
 					);
+
+					multi_style	= selected_style;
 
 					// Destroy select2.
 					if ( destroy ) {
@@ -182,7 +179,7 @@
 					}
 
 					// Insert new HTML.
-					that.find( '.redux-typography-multi-style' ).html( html ).select2();
+					that.find( '.redux-typography-multi-style' ).html( html_multi ).select2();
 
 					isSelecting = false;
 
@@ -193,9 +190,6 @@
 					}
 				}
 			// }
-
-			// console.log(redux.field_objects.typography.size());
-			console.log(details.variants);
 
 		}
 	}
@@ -220,7 +214,6 @@
 				}else if(field.closest(".select_wrapper").length && f_name.match(/\[font-style\]$/) === null){
 					field.closest(".select_wrapper").find(".redux-typography").data("value", field.val());
 				}
-
 			}
 		});
 

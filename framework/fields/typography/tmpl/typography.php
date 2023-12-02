@@ -191,21 +191,19 @@ if(!empty($unit) && is_array($unit)){
     }
 
     if($this -> field['multi_styles'] === true && true === $this -> field['google'] ){
-        echo '<div data-weights="' . rawurlencode( wp_json_encode( $this->field['weights'] ) ) . '" class="select_wrapper typography-multi-style" original-title="'
+        echo '<div class="select_wrapper typography-multi-style" original-title="'
             . esc_html__( 'Font style', 'redux-framework' ) . '">';
         echo '<label>' . esc_html__( 'Load Other Font Weight &amp; Style', 'templaza-framework' ) . '</label>';
+
         echo '<select multiple="multiple" name="'. esc_attr( $this -> field['name'] . $this -> field['name_suffix'] ).'[font-multi-styles][]"
                             data-placeholder="' . esc_html__( 'Style', 'redux-framework' ) . '"
-                            class="redux-typography redux-typography-multi-style select ' . esc_attr( $this -> field['class'] ) . '"
+                            class="uk-float-left uk-width-expand redux-typography-multi-style ' . esc_attr( $this -> field['class'] ) . '"
                             original-title="' . esc_html__( 'Load Other Font Weight &amp; Style', 'templaza-framework' ) . '"
-                            id="' . esc_attr( $this -> field['id'] ) . '_multi_styles" data-id="' . esc_attr( $this -> field['id'] ) . '"
+                            id="' . esc_attr( $this -> field['id'] ) . '_multi_styles"
                             data-value="' . esc_attr( json_encode($this -> value['font-multi-styles']) ) . '"' . esc_attr( $select2_data ) . '>';
+
         echo '</select></div>';
     }
-//    if($this -> field['all-styles'] === true && true === $this -> field['google'] ){
-//        echo '<input type="hidden" name="'. esc_attr( $this -> field['name'] . $this -> field['name_suffix'] )
-//            .'[all-styles]" value="1"/>';
-//    }
 
     /* Font Script */
     if ( true === $this -> field['font-family'] && true === $this -> field['subsets'] && true === $this -> field['google'] ) {
