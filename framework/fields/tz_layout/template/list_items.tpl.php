@@ -4,7 +4,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 <script type="text/html" id="tmpl-field-tz_layout-list__items">
     <?php if($this -> elements && count($this -> elements)){ ?>
         <div data-fl_tz_layout-elements data-modal-title="<?php
-        echo esc_html__('Add Element', 'templaza-framework');?>" class="hide">
+        echo esc_html__('Add Element', 'templaza-framework');?>">
             <div class="fl_ui-panel-content-container">
                 <div class="fl_add-element-container">
                     <div class="uk-margin">
