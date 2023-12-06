@@ -57,6 +57,25 @@ if(!class_exists('TemplazaFramework_ShortCode_Account')){
                         'default'     => 'fas fa-user',
                         'required'    => array( 'enable_icons', '=', true ),
                     ),
+
+                    array(
+                        'id'       => 'enable_login_url',
+                        'type'     => 'switch',
+                        'title'    => esc_html__('Custom login, register url', 'templaza-framework'),
+                        'default'  => false,
+                    ),
+                    array(
+                        'id'       => 'login_url',
+                        'type'     => 'text',
+                        'title'    => esc_html__('Login url', 'templaza-framework'),
+                        'required'    => array( 'enable_login_url', '=', true ),
+                    ),
+                    array(
+                        'id'       => 'register_url',
+                        'type'     => 'text',
+                        'title'    => esc_html__('Register url', 'templaza-framework'),
+                        'required'    => array( 'enable_login_url', '=', true ),
+                    ),
                     array(
                         'id'       => 'enable_dasboard_url',
                         'type'     => 'switch',

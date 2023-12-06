@@ -38,7 +38,7 @@ if(!empty($ap_gallery)){
 ?>
 <div class="ap-slideshow uk-position-relative " data-uk-slideshow="animation: fade">
     <div class="uk-position-relative uk-visible-toggle">
-        <ul class="uk-slideshow-items">
+        <ul class="uk-slideshow-items uk-width-1-1"  data-uk-lightbox="animation: fade">
             <?php
             if (isset($ap_video) && !empty($ap_video)) {
                 ?>
@@ -54,8 +54,9 @@ if(!empty($ap_gallery)){
             foreach ($ap_gallery as $image) {
                 ?>
                 <li>
+                    <a  class="uk-height-1-1 uk-width-1-1 uk-cover-container uk-display-block uk-position-relative" href="<?php echo esc_url($image['url']); ?>" data-caption="<?php echo esc_attr($image['caption']); ?>">
                     <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['title']); ?>" data-uk-cover>
-
+                    </a>
                 </li>
             <?php } ?>
         </ul>

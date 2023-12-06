@@ -1,11 +1,23 @@
 <?php
 use Advanced_Product\AP_Functions;
-
+use TemPlazaFramework\Functions;
+use TemPlazaFramework\Templates;
+use TemPlazaFramework\CSS;
 defined('ADVANCED_PRODUCT') or exit();
+
+if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
+    $templaza_options = array();
+}else{
+    $templaza_options = Functions::get_theme_options();
+}
 wp_enqueue_style('templaza-tiny-slider-style');
 wp_enqueue_script( 'templaza-tiny-slider-script' );
 $ap_video   = get_field('ap_video', get_the_ID());
 $ap_gallery = get_field('ap_gallery', get_the_ID());
+$ap_tiny_mode = isset($templaza_options['ap_product-single-tiny-mode']) ? $templaza_options['ap_product-single-tiny-mode'] : 'carousel';
+$ap_tiny_height = isset($templaza_options['ap_product-single-tiny-custom_height']) ? $templaza_options['ap_product-single-tiny-custom_height'] : '';
+$ap_tiny_image = isset($templaza_options['ap_product-single-tiny-cover']) ? $templaza_options['ap_product-single-tiny-cover'] : 'cover';
+$ap_tiny_autoheight               = isset($templaza_options['ap_product-single-tiny-autoheight'])?filter_var($templaza_options['ap_product-single-tiny-autoheight'], FILTER_VALIDATE_BOOLEAN):true;
 $no_cookie      =   0;
 if (isset($ap_video) && !empty($ap_video)) {
     if (wp_oembed_get($ap_video)) :
@@ -32,11 +44,25 @@ if (isset($ap_video) && !empty($ap_video)) {
     endif;
     $video_thumbnail="https://img.youtube.com/vi/".$id."/maxresdefault.jpg";
 }
+$tiny_cls = '';
+$tiny_cls .= 'mode'.$ap_tiny_mode;
+if ( class_exists( 'TemPlazaFramework\TemPlazaFramework' ) ) {
+
+    if ($ap_tiny_height != '') {
+        $koer_css = '.tz-slideshow-wrap .tns-item {height: ' . $ap_tiny_height . ';}';
+        Templates::add_inline_style($koer_css);
+        $tiny_cls .= ' slider-custom_height';
+    }
+}
+
+if($ap_tiny_image =='cover'){
+    $tiny_cls .= ' img-cover';
+}
 
 if(!empty($ap_gallery)){
 ?>
-<div class="uk-inline tz-slideshow-wrap">
-    <div class="ap-slideshow ap-tiny-slider">
+<div class="uk-inline tz-slideshow-wrap <?php echo esc_attr($tiny_cls);?>">
+    <div class="ap-slideshow ap-tiny-slider"  data-uk-lightbox="animation: fade">
         <?php
         if (isset($ap_video) && !empty($ap_video)) {
         ?>
@@ -53,9 +79,13 @@ if(!empty($ap_gallery)){
         <?php foreach ($ap_gallery as $image) {
             ?>
             <div class="ap-tiny-slider-item">
+                <div class="sl-img-wrap">
                 <?php if(isset($image['url'])){
                     ?>
-                <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['title']); ?>">
+                    <a data-elementor-open-lightbox="no" class="uk-inline" href="<?php echo esc_url($image['url']); ?>" data-caption="<?php echo esc_attr($image['title']); ?>">
+                        <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['title']); ?>">
+                    </a>
+
                 <?php
                 }else{
                   ?>
@@ -63,6 +93,7 @@ if(!empty($ap_gallery)){
                 <?php
                 }
                 ?>
+                </div>
             </div>
         <?php } ?>
     </div>
@@ -75,7 +106,7 @@ if(!empty($ap_gallery)){
         </div>
     </div>
 </div>
-<div class="tz-control-wrap uk-inline">
+<div class="tz-control-wrap uk-inline <?php echo esc_attr($tiny_cls);?>">
     <div class="tz-ap-thumbnails">
         <?php
         if (isset($ap_video) && !empty($ap_video)) {
@@ -89,6 +120,7 @@ if(!empty($ap_gallery)){
         <?php foreach ($ap_gallery as $image) {
             ?>
             <div class="ap-tiny-slider-thumbnail">
+                <div class="thumb-img-wrap">
                 <?php if(isset($image['sizes']['medium'])){
                     ?>
                     <img src="<?php echo esc_url($image['sizes']['medium']); ?>" alt="<?php echo esc_attr($image['title']); ?>">
@@ -99,6 +131,7 @@ if(!empty($ap_gallery)){
                     <?php
                 }
                 ?>
+                </div>
             </div>
         <?php } ?>
     </div>
@@ -117,13 +150,13 @@ if(!empty($ap_gallery)){
         var slider = tns({
             container: '.ap-tiny-slider',
             items: 1,
-            mode: 'carousel',
+            mode: '<?php echo esc_attr($ap_tiny_mode);?>',
             navContainer: '.tz-ap-thumbnails',
             navAsThumbnails: true,
             animateIn: 'tns-fadeIn',
             animateOut: 'tns-fadeOut',
             speed: 1000,
-            autoHeight:true,
+            autoHeight:<?php if($ap_tiny_autoheight){ echo 'true';} else{ echo 'false';}?>,
             mouseDrag: true,
             slideBy: 'page',
             center: true,
@@ -134,14 +167,14 @@ if(!empty($ap_gallery)){
             container: '.tz-ap-thumbnails',
             items: 5,
             nav: false,
-            gutter: 20,
+            gutter: 10,
             mouseDrag: true,
             loop: false,
             controlsContainer:'.tz-slideshow-control-thumb',
             responsive: {
                 640: {
                     gutter: 10,
-                    items: 3,
+                    items: 4,
                 },
                 960: {
                     gutter: 20,

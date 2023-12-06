@@ -27,42 +27,44 @@ $ap_quote_form_url          = isset($templaza_options['ap_product-quote-custom-u
 if($ap_quote){
     ?>
 <div class="ap_product_quote  uk-position-fixed uk-position-center-right">
-
-    <?php
-    if($ap_quote_form =='custom_url'){
-        if($ap_quote_form_url !=''){
+    <span class="quote_open" data-uk-icon="icon:chevron-double-left; ratio: 0.9"></span>
+    <div class="ap_quote_inner">
+        <span class="quote_close" data-uk-icon="icon:chevron-double-right; ratio: 0.9"></span>
+        <?php
+        if($ap_quote_form =='custom_url'){
+            if($ap_quote_form_url !=''){
+                ?>
+                <a href="<?php echo esc_url($ap_quote_form_url);?>" target="_blank" class="templaza-btn"><?php echo esc_html($ap_quote_label);?></a>
+                <?php
+            }
+        }else{
             ?>
-            <a href="<?php echo esc_url($ap_quote_form_url);?>" target="_blank" class="templaza-btn"><?php echo esc_html($ap_quote_label);?></a>
+            <a class="templaza-btn" href="#modal-quote" data-uk-toggle>
+                <?php echo esc_html($ap_quote_label);?>
+            </a>
             <?php
         }
-    }else{
         ?>
-        <a class="templaza-btn" href="#modal-quote" data-uk-toggle>
-            <?php echo esc_html($ap_quote_label);?>
-        </a>
-
-        <div id="modal-quote" class="uk-flex-top ap-modal" data-uk-modal>
-            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-                <button class="uk-modal-close-default" type="button" data-uk-close></button>
-                <div class="get-price">
-                    <?php
-                    if($ap_quote_form == 'custom'){
-                        echo do_shortcode($ap_quote_form_custom);
-                    }else{
-                        ?>
-                        <h3 class="uk-modal-title"><?php echo esc_html(get_the_title($ap_quote_form)); ?></h3>
-                        <?php
-                        if(function_exists('wpforms')) {
-                            echo do_shortcode('[wpforms id="' . $ap_quote_form . '"]');
-                        }
-                    }
-                    ?>
-                </div>
-            </div>
+    </div>
+</div>
+<div id="modal-quote" class="uk-flex-top ap-modal" data-uk-modal>
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+        <button class="uk-modal-close-default" type="button" data-uk-close></button>
+        <div class="get-price">
+            <?php
+            if($ap_quote_form == 'custom'){
+                echo do_shortcode($ap_quote_form_custom);
+            }else{
+                ?>
+                <h3 class="uk-modal-title"><?php echo esc_html(get_the_title($ap_quote_form)); ?></h3>
+                <?php
+                if(function_exists('wpforms')) {
+                    echo do_shortcode('[wpforms id="' . $ap_quote_form . '"]');
+                }
+            }
+            ?>
         </div>
-        <?php
-    }
-    ?>
+    </div>
 </div>
 <?php
 }

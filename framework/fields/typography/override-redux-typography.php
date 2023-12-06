@@ -70,6 +70,8 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 */
 		private $user_fonts = true;
 
+        protected $text_domain;
+
 		/**
 		 * Redux_Field constructor.
 		 *
@@ -128,6 +130,7 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				'letter-spacing'          => false,
 				'google'                  => true,
 				'font_family_clear'       => true,
+				'font-multi-styles'       => false,
 				'allow_empty_line_height' => false,
 			);
 
@@ -150,23 +153,30 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 			// Set value defaults.
 			$defaults = array(
-				'font-family'     => '',
-				'font-options'    => '',
-				'font-backup'     => '',
-				'text-align'      => '',
-				'text-transform'  => '',
-				'font-variant'    => '',
-				'text-decoration' => '',
-				'line-height'     => '',
-				'word-spacing'    => '',
-				'letter-spacing'  => '',
-				'subsets'         => '',
-				'google'          => false,
-				'font-script'     => '',
-				'font-weight'     => '',
-				'font-style'      => '',
-				'color'           => '',
-				'font-size'       => '',
+				'font-family'       => '',
+				'font-options'      => '',
+				'font-backup'       => '',
+				'text-align'        => '',
+				'text-transform'    => '',
+				'font-variant'      => '',
+				'text-decoration'   => '',
+				'line-height'       => '',
+				'word-spacing'      => '',
+				'letter-spacing'    => '',
+				'subsets'           => '',
+				'google'            => false,
+				'font-script'       => '',
+				'font-weight'       => '',
+				'font-style'        => '',
+				'color'             => '',
+				'font-size'         => '',
+                'margin-top'        => '',
+                'margin-bottom'     => '',
+                'shadow-color'      => '#000000',
+                'shadow-horizontal' => '1',
+                'shadow-vertical'   => '1',
+                'shadow-blur'       => '4',
+                'font-multi-styles' => '',
 			);
 
 			$this->value = wp_parse_args( $this->value, $defaults );

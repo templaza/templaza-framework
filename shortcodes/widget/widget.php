@@ -96,7 +96,8 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
                         'title'    => __( 'Widget', 'templaza-framework' ),
                         'subtitle' => __( 'Select Widget.', 'templaza-framework' ),
                         'desc'     => __( 'The widget will be add to framework sidebar first after save change.', 'templaza-framework' ),
-                        'args'     => array('TemplazaFramework_Widget_Shortcode_Helper', 'get_widgets'),
+                        'args'     => 'templaza_framework_shortcode_widget_get_widgets',
+//                        'args'     => array('TemplazaFramework_Widget_Shortcode_Helper', 'get_widgets'),
 //                        'options'  => array(
 //                            '' => esc_html__('- Select Widget -', 'templaza-framework'),
 ////                            'recent-post-1' => 'Recent Post'

@@ -55,7 +55,7 @@ if ( have_posts()) {
     </div>
     <?php if($ap_switch_layout){
       ?>
-        <div class="uk-flex uk-grid-collapse uk-flex-middle uk-flex-between templaza-ap-archive-view" data-uk-grid>
+        <div class="uk-flex uk-grid-collapse uk-flex-middle uk-flex-between templaza-ap-archive-view uk-grid" data-uk-grid>
             <?php
             if($ap_result){
                 ?>

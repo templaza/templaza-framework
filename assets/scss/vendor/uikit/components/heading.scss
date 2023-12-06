@@ -18,40 +18,24 @@ $heading-medium-font-size:                       $heading-medium-font-size-m * 0
 $heading-large-font-size:                        $heading-large-font-size-m * 0.85 !default;      // 50px 0.78
 $heading-xlarge-font-size:                       $heading-large-font-size-m !default;             // 4rem / 64px
 $heading-2xlarge-font-size:                      $heading-xlarge-font-size-m !default;            // 6rem / 96px
+$heading-3xlarge-font-size:                      $heading-2xlarge-font-size-m !default;           // 8rem / 128px
 
 $heading-small-font-size-m:                      $heading-medium-font-size-l * 0.8125 !default;   // 3.25rem / 52px
 $heading-medium-font-size-m:                     $heading-medium-font-size-l * 0.875 !default;    // 3.5rem / 56px
 $heading-large-font-size-m:                      $heading-medium-font-size-l !default;            // 4rem / 64px
 $heading-xlarge-font-size-m:                     $heading-large-font-size-l !default;             // 6rem / 96px
 $heading-2xlarge-font-size-m:                    $heading-xlarge-font-size-l !default;            // 8rem / 128px
+$heading-3xlarge-font-size-m:                    $heading-2xlarge-font-size-l !default;           // 11rem / 176px
 
 $heading-medium-font-size-l:                     4rem !default;                                   // 64px
 $heading-large-font-size-l:                      6rem !default;                                   // 96px
 $heading-xlarge-font-size-l:                     8rem !default;                                   // 128px
 $heading-2xlarge-font-size-l:                    11rem !default;                                  // 176px
+$heading-3xlarge-font-size-l:                    15rem !default;                                  // 240px
 
-$heading-small-line-height:                      1.2 !default;
-$heading-medium-line-height:                     1.1 !default;
-$heading-large-line-height:                      1.1 !default;
-$heading-xlarge-line-height:                     1 !default;
-$heading-2xlarge-line-height:                    1 !default;
 
-$heading-divider-padding-bottom:                 unquote('calc(5px + 0.1em)') !default;
-$heading-divider-border-width:                   unquote('calc(0.2px + 0.05em)') !default;
-$heading-divider-border:                         $global-border !default;
 
-$heading-bullet-top:                             unquote('calc(-0.1 * 1em)') !default;
-$heading-bullet-height:                          unquote('calc(4px + 0.7em)') !default;
-$heading-bullet-margin-right:                    unquote('calc(5px + 0.2em)') !default;
-$heading-bullet-border-width:                    unquote('calc(5px + 0.1em)') !default;
-$heading-bullet-border:                          $global-border !default;
 
-$heading-line-top:                               50% !default;
-$heading-line-height:                            $heading-line-border-width !default;
-$heading-line-width:                             2000px !default;
-$heading-line-border-width:                      unquote('calc(0.2px + 0.05em)') !default;
-$heading-line-border:                            $global-border !default;
-$heading-line-margin-horizontal:                 unquote('calc(5px + 0.3em)') !default;
 
 
 /* ========================================================================
@@ -88,6 +72,12 @@ $heading-line-margin-horizontal:                 unquote('calc(5px + 0.3em)') !d
     @if(mixin-exists(hook-heading-2xlarge)) {@include hook-heading-2xlarge();}
 }
 
+.uk-heading-3xlarge {
+    font-size: $heading-3xlarge-font-size;
+    line-height: $heading-3xlarge-line-height;
+    @if(mixin-exists(hook-heading-3xlarge)) {@include hook-heading-3xlarge();}
+}
+
 /* Tablet Landscape and bigger */
 @media (min-width: $breakpoint-medium) {
 
@@ -96,6 +86,7 @@ $heading-line-margin-horizontal:                 unquote('calc(5px + 0.3em)') !d
     .uk-heading-large { font-size: $heading-large-font-size-m; }
     .uk-heading-xlarge { font-size: $heading-xlarge-font-size-m; }
     .uk-heading-2xlarge { font-size: $heading-2xlarge-font-size-m; }
+    .uk-heading-3xlarge { font-size: $heading-3xlarge-font-size-m; }
 
 }
 
@@ -106,6 +97,7 @@ $heading-line-margin-horizontal:                 unquote('calc(5px + 0.3em)') !d
     .uk-heading-large { font-size: $heading-large-font-size-l; }
     .uk-heading-xlarge { font-size: $heading-xlarge-font-size-l; }
     .uk-heading-2xlarge { font-size: $heading-2xlarge-font-size-l; }
+    .uk-heading-3xlarge { font-size: $heading-3xlarge-font-size-l; }
 
 }
 
@@ -115,12 +107,10 @@ $heading-line-margin-horizontal:                 unquote('calc(5px + 0.3em)') !d
  ========================================================================== */
 
 $heading-primary-font-size-l:                    3.75rem !default;  // 60px
-$heading-primary-line-height-l:                  1.1 !default;
 
 $heading-primary-font-size-m:                    $heading-primary-font-size-l * 0.9 !default; // 54px
 
 $heading-primary-font-size:                      $heading-primary-font-size-l * 0.8 !default; // 48px
-$heading-primary-line-height:                    1.2 !default;
 
 @if ($deprecated == true) {
 .uk-heading-primary {
@@ -157,13 +147,10 @@ $heading-primary-line-height:                    1.2 !default;
  ========================================================================== */
 
 $heading-hero-font-size-l:                       8rem !default; // 128px
-$heading-hero-line-height-l:                     1 !default;
 
 $heading-hero-font-size-m:                       $heading-hero-font-size-l * 0.75 !default; // 96px
-$heading-hero-line-height-m:                     1 !default;
 
 $heading-hero-font-size:                         $heading-hero-font-size-l * 0.5 !default; // 64px
-$heading-hero-line-height:                       1.1 !default;
 
 @if ($deprecated == true) {
 .uk-heading-hero {
@@ -292,6 +279,7 @@ $heading-hero-line-height:                       1.1 !default;
 // @mixin hook-heading-large(){}
 // @mixin hook-heading-xlarge(){}
 // @mixin hook-heading-2xlarge(){}
+// @mixin hook-heading-3xlarge(){}
 // @mixin hook-heading-primary(){}
 // @mixin hook-heading-hero(){}
 // @mixin hook-heading-divider(){}
@@ -303,9 +291,6 @@ $heading-hero-line-height:                       1.1 !default;
 // Inverse
 // ========================================================================
 
-$inverse-heading-divider-border:                   $inverse-global-border !default;
-$inverse-heading-bullet-border:                    $inverse-global-border !default;
-$inverse-heading-line-border:                      $inverse-global-border !default;
 
 
 
@@ -314,6 +299,7 @@ $inverse-heading-line-border:                      $inverse-global-border !defau
 // @mixin hook-inverse-heading-large(){}
 // @mixin hook-inverse-heading-xlarge(){}
 // @mixin hook-inverse-heading-2xlarge(){}
+// @mixin hook-inverse-heading-3xlarge(){}
 // @mixin hook-inverse-heading-primary(){}
 // @mixin hook-inverse-heading-hero(){}
 // @mixin hook-inverse-heading-divider(){}

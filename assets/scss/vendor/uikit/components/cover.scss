@@ -22,8 +22,8 @@
  */
 
 /* 1 */
-[uk-cover],
-[data-uk-cover] {
+[uk-cover]:where(canvas, iframe, svg),
+[data-uk-cover]:where(canvas, iframe, svg) {
     /* 2 */
     max-width: none;
     /* 3 */
@@ -37,6 +37,19 @@
 
 iframe[uk-cover],
 iframe[data-uk-cover] { pointer-events: none; }
+
+[uk-cover]:where(img, video),
+[data-uk-cover]:where(img, video) {
+    /* 3 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    object-fit: cover;
+    object-position: center;
+}
 
 
 /* Container

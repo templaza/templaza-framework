@@ -48,6 +48,11 @@
   }
   &.ap-item-style1{
     .ap-inner{
+      .ap-info-inner{
+        &.ap-info-desc{
+          padding-top:0;
+        }
+      }
       .ap-specification{
         .ap-spec-item{
           .ap-style1-icon{

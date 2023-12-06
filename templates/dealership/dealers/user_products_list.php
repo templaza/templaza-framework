@@ -16,7 +16,7 @@ $dealer_form     = isset($templaza_options['ap_product-dealer-form'])?$templaza_
 $dealer_form_title     = isset($templaza_options['ap_product-dealer-form-title'])?$templaza_options['ap_product-dealer-form-title']:'';
 $dealer_listing_label     = isset($templaza_options['ap_product-dealer-listing'])?$templaza_options['ap_product-dealer-listing']:'';
 $dealer_form_url     = isset($templaza_options['ap_product-dealer-form-url'])?$templaza_options['ap_product-dealer-form-url']:'';
-
+$ap_col_large        = isset($templaza_options['ap_product-column-large'])?$templaza_options['ap_product-column-large']:3;
 $endpoint   = QueryHelper::get_current_endpoint();
 
 if($endpoint){
@@ -36,7 +36,7 @@ if($endpoint){
             $url            = get_permalink($pageid).$author -> user_login;
             $author_desc    =  get_user_meta($author->ID, 'description', true);
             ?>
-            <div class="dealer-page " data-uk-grid>
+            <div class="dealer-page templaza-ap-single " data-uk-grid>
                 <div class="uk-width-3-4@m">
                     <div class="uk-card">
                         <div class="dealer-info-box sidebar-bg">
@@ -86,7 +86,7 @@ if($endpoint){
                     }
                     ?>
 
-                    <div class="dls-product-items uk-margin-medium-top uk-child-width-1-2@l uk-child-width-1-3@xl uk-child-width-1-2@m uk-child-width-1-2@s uk-child-width-1-1 uk-grid-default" data-uk-grid>
+                    <div class="dls-product-items uk-margin-medium-top uk-child-width-1-<?php echo esc_attr($ap_col_large);?>@l uk-child-width-1-<?php echo esc_attr($ap_col_large);?>@xl uk-child-width-1-2@m uk-child-width-1-2@s uk-child-width-1-1 uk-grid-default" data-uk-grid>
                         <?php
                         if($products && $products -> have_posts()){
                             while($products -> have_posts()){ ?>
@@ -113,14 +113,32 @@ if($endpoint){
                         ?>
                     </div>
                 </div>
-                <div class="uk-width-1-4@m ">
+                <div class="uk-width-1-4@m ap-templaza-sidebar">
                     <div class="dealer-info-sidebar-box" data-uk-sticky="end: !.dealer-page; offset: 100">
+                        <?php
+                        $map_location   = get_field('_dls_map_location', 'user_'.$author -> ID);
+                        if(!empty($map_location)){
+                            ?>
+                            <div class="uk-width-1-1 dealer-map">
+                                <div class="uk-text-small">
+                                    <?php
+                                    $map_url    = 'https://maps.google.com/maps?';
+                                    $map_url   .= 'q='.urlencode($map_location);
+                                    $map_url   .= '&t=m';
+                                    $map_url   .= '&z=10';
+                                    $map_url   .= '&output=embed';
+                                    $map_url   .= '&iwloc=near';
+                                    ?>
+                                    <iframe src="<?php echo esc_url($map_url); ?>" class="uk-height-medium uk-width-1-1"></iframe>
+                                </div>
+                            </div>
+                        <?php } ?>
                         <?php if($dealer_form_title || $dealer_form ){?>
-                            <div class="dealer-contact-box">
+                            <div class="dealer-contact-box ap-single-side-box ">
                         <?php
                             if($dealer_form_title){
                                 ?>
-                                <h3 class="widget-title"><?php echo esc_html($dealer_form_title);?></h3>
+                                <h3 class="widget-title"><span><?php echo esc_html($dealer_form_title);?></span></h3>
                                 <?php
                             }
                             if($dealer_form =='custom'){

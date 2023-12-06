@@ -12,6 +12,7 @@
 //                  `uk-transition-slide-right-*`
 //                  `uk-transition-opaque`
 //                  `uk-transition-slow`
+//                  `uk-transition-disable`
 //
 // Sub-objects:     `uk-transition-toggle`,
 //                  `uk-transition-active`
@@ -24,14 +25,9 @@
 // Variables
 // ========================================================================
 
-$transition-duration:                            0.3s !default;
 
-$transition-scale:                               1.03 !default;
 
-$transition-slide-small-translate:               10px !default;
-$transition-slide-medium-translate:              50px !default;
 
-$transition-slow-duration:                       0.7s !default;
 
 
 /* ========================================================================
@@ -151,10 +147,16 @@ $transition-slow-duration:                       0.7s !default;
 .uk-transition-opaque { opacity: 1; }
 
 
-/* Duration modifiers
+/* Duration modifier
  ========================================================================== */
 
 .uk-transition-slow { transition-duration: $transition-slow-duration; }
+
+/* Disable modifier
+ ========================================================================== */
+
+.uk-transition-disable,
+.uk-transition-disable * { transition: none !important; }
 
 
 // Hooks

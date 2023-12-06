@@ -149,7 +149,7 @@ class Templaza_Woo_Mini_Cart {
 	 * @return void
 	 */
 	public function button_view_cart() {
-		echo '<a href="' . esc_url( wc_get_cart_url() ) . '" class="button wc-forward templaza-btn">' . esc_html__( 'View cart', 'templaza-framework' ) . '</a>';
+		echo '<a href="' . esc_url( wc_get_cart_url() ) . '" class="button wc-forward templaza-btn tz-view-cart"><span>' . esc_html__( 'View cart', 'templaza-framework' ) . '</span></a>';
 	}
 
 	/**
@@ -160,7 +160,7 @@ class Templaza_Woo_Mini_Cart {
 	 * @return void
 	 */
 	public function button_proceed_to_checkout() {
-		echo '<a href="' . esc_url( wc_get_checkout_url() ) . '" class="button checkout wc-forward templaza-btn templaza-btn-outline">' . esc_html__( 'Checkout', 'templaza-framework' ) . '</a>';
+		echo '<a href="' . esc_url( wc_get_checkout_url() ) . '" class="button checkout wc-forward templaza-btn templaza-btn-outline"><span>' . esc_html__( 'Checkout', 'templaza-framework' ) . '</span></a>';
 	}
 
 }

@@ -311,6 +311,80 @@
     }
   }
 }
+
+.tz-slideshow-wrap{
+  &.modegallery{
+    width:100%;
+    .tns-outer{
+      width:100%;
+    }
+  }
+  &.slider-custom_height{
+    overflow: hidden;
+    .tns-item{
+      text-align: center;
+      overflow: hidden;
+      .sl-img-wrap{
+        display:flex;
+        justify-content: center;
+        height:100%;
+        align-items: center;
+        a{
+          display:block;
+          height:100%;
+          width:100%;
+        }
+      }
+      img{
+        height:100%;
+        width:auto;
+        max-width: 100%;
+        object-fit: cover;
+      }
+    }
+    &.img-cover{
+      .tns-item{
+        img{
+          width:100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+.tz-control-wrap{
+  &.slider-custom_height{
+    .tz-ap-thumbnails{
+      .tns-item{
+        height:100px;
+        text-align: center;
+        overflow: hidden;
+        .thumb-img-wrap{
+          display:flex;
+          justify-content: center;
+          height:100%;
+          align-items: center;
+          overflow: hidden;
+        }
+        img{
+          height:100%;
+          width:auto;
+          max-width: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+    &.img-cover{
+      .tns-item{
+        img{
+          width:100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 639.9px) {
   div.templaza-ap-single{
     .ap-single-button-wrap{
@@ -320,11 +394,59 @@
         float:left;
         &.ap-share{
           width:100%;
-          margin:10px 0 40px 0 !important;
+          margin:10px 0 0 0 !important;
+          display:flex;
+          .ap-share-item{
+            display:inline;
+            width:auto;
+            position:relative;
+            transform: none;
+            top:auto;
+            opacity:1;
+            margin-left:10px;
+            a{
+              &:hover{
+                color:#fff;
+                i{
+                  color:#fff;
+                }
+              }
+            }
+          }
         }
         &.ap-register-form{
           margin-left:2% !important;
         }
+      }
+      &:after{
+        content:"";
+        clear:both;
+        display:block;
+      }
+    }
+    .ap-slideshow{
+      .uk-slider {
+        li {
+          a{
+            height:60px;
+          }
+        }
+      }
+      .uk-slidenav{
+        width:40px;
+        height:40px;
+      }
+    }
+  }
+  .tz-slideshow-wrap.slider-custom_height{
+    .tns-item{
+      height:370px;
+    }
+  }
+  .tz-control-wrap.slider-custom_height{
+    .tz-ap-thumbnails{
+      .tns-item{
+        height:60px;
       }
     }
   }
@@ -332,17 +454,27 @@
 @media (max-width: 480px) {
   div.templaza-ap-single{
     .ap-single-button-wrap{
-      display:block;
       .ap-btn{
-        width:100%;
+        width:49%;
+        padding:0 2px;
         &.ap-share{
           width:100%;
-          margin:10px 0 40px 0 !important;
         }
         &.ap-register-form{
-          margin-top:10px !important;
-          margin-left:0 !important;
+
         }
+      }
+    }
+  }
+  .tz-slideshow-wrap.slider-custom_height{
+    .tns-item{
+      height:300px;
+    }
+  }
+  .tz-control-wrap.slider-custom_height{
+    .tz-ap-thumbnails{
+      .tns-item{
+        height:50px;
       }
     }
   }

@@ -23,7 +23,7 @@ if(is_array($fields_no_group) && !empty($fields_no_group)){
 
 if(!empty($fields)){
 ?>
-<div class="ap-specification uk-grid-column-small uk-grid-row-collapse ap-specification-style5 uk-child-width-1-2" data-uk-grid>
+<div class="ap-specification uk-grid-column-small uk-grid-row-collapse ap-specification-style5 uk-child-width-1-2 uk-grid" data-uk-grid>
     <?php foreach($fields as $field){
         $f_attr         = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);
         $f_value        = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name']):null;

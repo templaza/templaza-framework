@@ -97,7 +97,6 @@ class Fonts{
         if(!count($fonts)){
             return false;
         }
-
         $link    = '';
         $subsets = array();
 
@@ -209,6 +208,14 @@ class Fonts{
                     $google_font_subset   = $font_option['subsets'];
                 }
 
+                if(isset($font_option['font-multi-styles']) && $font_option['font-multi-styles']){
+                    $multi_style  = (array) $font_option['font-multi-styles'];
+                    $google_font_style  = array_unique(array_merge($multi_style, $google_font_style));
+                }elseif(isset($font_option['all-styles']) && $font_option['all-styles']){
+                    $google_font_style  = '100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
+                    $google_font_style  = explode(',', $google_font_style);
+                }
+
                 static::$_google_fonts[$font_family]    = array(
                     'font-style' => $google_font_style,
                     'subset'     => $google_font_subset,
@@ -235,7 +242,8 @@ class Fonts{
         $end_key    = @end(array_keys($font_option));
         foreach($font_option as $key => $option){
             if($key == 'font-family' || $key == 'font-backup'
-                || $key == 'font-options' || $key == 'google' || $key == 'subsets'){
+                || $key == 'font-options' || $key == 'google' || $key == 'subsets'
+                || $key == 'font-multi-styles'){
                 continue;
             }
             if(is_array($option)){

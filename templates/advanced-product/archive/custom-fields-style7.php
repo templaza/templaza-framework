@@ -24,7 +24,7 @@ $ap_product_related_spec      = isset($templaza_options['ap_product-related-spec
 
 if(!empty($fields)){
 ?>
-<div class="ap-specification ap-specification-style3 uk-child-width-1-2 uk-grid-collapse uk-grid" data-uk-grid>
+<div class="ap-specification ap-specification-style7 uk-child-width-1-2 uk-grid-collapse uk-grid" data-uk-grid>
     <?php foreach($fields as $field){
         $f_attr         = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);
         $f_value        = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name']):null;
@@ -41,7 +41,7 @@ if(!empty($fields)){
             <div class="ap-spec-item uk-flex uk-flex-left" >
                 <?php
                 if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
-                    echo '<div class="uk-width-auto ap-style3-icon">';
+                    echo '<div class="uk-width-auto ap-style7-icon">';
                     if($f_icon['type'] == 'uikit-icon'){
                         ?>
                         <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
@@ -58,6 +58,7 @@ if(!empty($fields)){
                 }
                 ?>
                 <div class="<?php echo esc_attr($c_class);?>">
+                    <span class="ap-field-label"><?php echo esc_html($f_attr['label']); ?></span>
                     <span class="ap-spec-value"><?php
                         $html   = apply_filters('advanced-product/field/value_html/type='.$f_attr['type'], '', $f_value, $f_attr, $field);
                         if(!empty($html)){
@@ -74,7 +75,7 @@ if(!empty($fields)){
                         }
                         ?>
                     </span>
-                    <span class="ap-field-label"><?php echo esc_html($f_attr['label']); ?></span>
+
                 </div>
             </div>
         <?php

@@ -13,6 +13,187 @@
 (function( $ ) {
 	'use strict';
 
+	var isSelecting = false;
+	var org_redux_field_typography__select	 = redux.field_objects.typography.select;
+	redux.field_objects.typography.select = function( selector, skipCheck, destroy, fontName, active ) {
+		console.log("Typography select");
+
+		org_redux_field_typography__select(selector, skipCheck, destroy, fontName, active);
+
+		var mainID;
+		var that;
+		var family;
+		var google;
+		var familyBackup;
+		var size;
+		var height;
+		var word;
+		var letter;
+		var align;
+		var transform;
+		var fontVariant;
+		var decoration;
+		var style;
+		var multi_style;
+		var script;
+		var color;
+		var units;
+		var weights;
+		var marginTopUnit;
+		var marginBottomUnit;
+		var lineHeightUnit;
+		var wordSpacingUnit;
+		var letterSpacingUnit;
+		var baseUnits;
+		var _linkclass;
+		var the_font;
+		var link;
+		var isPreviewSize;
+		var marginTop;
+		var marginBottom;
+		var allowEmptyLineHeight;
+		var defaultFontWeights;
+
+		var typekit  = false;
+		var details  = '';
+		var html     = '<option value=""></option>';
+		var html_multi     = '<option value=""></option>';
+		var selected = '';
+
+		// Main id for selected field.
+		mainID = $( selector ).parents( '.redux-container-typography:first' ).data( 'id' );
+		if ( undefined === mainID ) {
+			mainID = $( selector ).data( 'id' );
+		}
+
+		that   = $( '#' + mainID );
+		family = $( '#' + mainID + '-family' ).val();
+
+		if ( ! family ) {
+			family = null; // 'inherit';
+		}
+
+		if ( fontName ) {
+			family = fontName;
+		}
+
+		familyBackup = that.find( 'select.redux-typography-family-backup' ).val();
+		size         = that.find( '.redux-typography-size' ).val();
+		height       = that.find( '.redux-typography-height' ).val();
+		word         = that.find( '.redux-typography-word' ).val();
+		letter       = that.find( '.redux-typography-letter' ).val();
+		align        = that.find( 'select.redux-typography-align' ).val();
+		transform    = that.find( 'select.redux-typography-transform' ).val();
+		fontVariant  = that.find( 'select.redux-typography-font-variant' ).val();
+		decoration   = that.find( 'select.redux-typography-decoration' ).val();
+		multi_style  = that.find( 'select.redux-typography-multi-style' ).val();
+		script       = that.find( 'select.redux-typography-subsets' ).val();
+		color        = that.find( '.redux-typography-color' ).val();
+		marginTop    = that.find( '.redux-typography-margin-top' ).val();
+		marginBottom = that.find( '.redux-typography-margin-bottom' ).val();
+		weights      = that.find( '.typography-style' );
+		baseUnits    = that.data( 'units' );
+
+		if ( undefined === word ) {
+			word = '0';
+		}
+
+		if ( undefined === letter ) {
+			letter = '0';
+		}
+
+		if ( weights.length > 0 ) {
+			defaultFontWeights = JSON.parse( decodeURIComponent( weights.data( 'weights' ) ) );
+		}
+
+		// Is selected font a Google font?
+		if ( true === isSelecting ) {
+			google = redux.field_objects.typography.makeBool( selVals['data-google'] );
+			that.find( '.redux-typography-google-font' ).val( google );
+		} else {
+			google = redux.field_objects.typography.makeBool( that.find( '.redux-typography-google-font' ).val() ); // Check if font is a Google font.
+		}
+
+		if ( active ) {
+
+			// Page load. Speeds things up memory wise to offload to client.
+			if (!that.hasClass('tz-typography-initialized')) {
+				multi_style = that.find('select.redux-typography-multi-style').data('value');
+				// script = that.find('select.redux-typography-subsets').data('value');
+
+				// if ('' !== multi_style) {
+				// 	multi_style = String(multi_style);
+				// }
+
+				// if (undefined !== typeof (script)) {
+				// 	script = String(script);
+				// }
+			}
+
+			// Something went wrong trying to read google fonts, so turn google off.
+			if (undefined === redux.fonts.google) {
+				google = false;
+			}
+
+			// Get font details.
+			if (true === google && (family in redux.fonts.google)) {
+				details = redux.fonts.google[family];
+			} else {
+				if (undefined !== redux.fonts.typekit && (family in redux.fonts.typekit)) {
+					typekit = true;
+					details = redux.fonts.typekit[family];
+				} else {
+					details = defaultFontWeights;
+				}
+			}
+
+			// If we changed the font.
+			// if ($(selector).hasClass('redux-typography-family')) {
+
+				// Google specific stuff.
+				if (true === google) {
+
+					// STYLES.
+					var selected_style	= [];
+					$.each(
+						details.variants,
+						function (index, variant) {
+							index = null;
+							if (multi_style.indexOf(variant.id) !== -1 || 1 === redux.field_objects.typography.size(details.variants)) {
+								selected = ' selected="selected"';
+								selected_style.push(variant.id);
+								// multi_style = variant.id;
+							} else {
+								selected = '';
+							}
+
+							html_multi += '<option value="' + variant.id + '"' + selected + '>' + variant.name.replace(/\+/g, ' ') + '</option>';
+						}
+					);
+
+					multi_style	= selected_style;
+
+					// Destroy select2.
+					if ( destroy ) {
+						that.find( '.redux-typography-multi-style' ).select2( 'destroy' );
+					}
+
+					// Insert new HTML.
+					that.find( '.redux-typography-multi-style' ).html( html_multi ).select2();
+
+					isSelecting = false;
+
+					// End preview stuff.
+					// If not preview showing, then set preview to show.
+					if ( ! that.hasClass( 'tz-typography-initialized' ) ) {
+						that.addClass( 'tz-typography-initialized' );
+					}
+				}
+			// }
+
+		}
+	}
+
 	var org_redux_field_typography = redux.field_objects.typography.init;
 
 	$(document).on("templaza-framework/field/tz_layout/load_setting/typography/field_value",
@@ -33,7 +214,6 @@
 				}else if(field.closest(".select_wrapper").length && f_name.match(/\[font-style\]$/) === null){
 					field.closest(".select_wrapper").find(".redux-typography").data("value", field.val());
 				}
-
 			}
 		});
 
@@ -85,6 +265,22 @@
 
 			var field_id = el.data("id");
 			el.find("#"+field_id).removeClass("typography-initialized");
+
+			// // STYLES.
+			// $.each(
+			// 	details.variants,
+			// 	function( index, variant ) {
+			// 		index = null;
+			// 		if ( variant.id === style || 1 === redux.field_objects.typography.size( details.variants ) ) {
+			// 			selected = ' selected="selected"';
+			// 			style    = variant.id;
+			// 		} else {
+			// 			selected = '';
+			// 		}
+			//
+			// 		html += '<option value="' + variant.id + '"' + selected + '>' + variant.name.replace( /\+/g, ' ' ) + '</option>';
+			// 	}
+			// );
 
 			if(el.find("[data-responsive]").length) {
 

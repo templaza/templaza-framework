@@ -14,10 +14,6 @@
 // Variables
 // ========================================================================
 
-$slider-container-margin-top:                        -11px !default;
-$slider-container-margin-bottom:                     -39px !default;
-$slider-container-margin-left:                       -25px !default;
-$slider-container-margin-right:                      -25px !default;
 
 
 /* ========================================================================
@@ -39,10 +35,16 @@ $slider-container-margin-right:                      -25px !default;
  ========================================================================== */
 
 /*
- * Clip child elements
+ * 1. Clip child elements
+ * 2. Prevent accidental scrolling through elements in slide getting focused
  */
 
-.uk-slider-container { overflow: hidden; }
+.uk-slider-container {
+    /* 1 */
+    overflow: hidden;
+    /* 2 */
+    overflow: clip;
+}
 
 /*
  * Widen container to prevent box-shadows from clipping, `large-box-shadow`
@@ -95,14 +97,15 @@ $slider-container-margin-right:                      -25px !default;
 /*
  * 1. Let items take content dimensions (0 0 auto)
  *    `max-width` needed to keep image responsiveness and prevent content overflow
- * 3. Create position context
+ * 2. Create position context
  */
 
 .uk-slider-items > * {
     /* 1 */
     flex: none;
+    box-sizing: border-box;
     max-width: 100%;
-    /* 3 */
+    /* 2 */
     position: relative;
 }
 

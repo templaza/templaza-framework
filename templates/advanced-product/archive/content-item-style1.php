@@ -20,6 +20,16 @@ if(isset($args['ap_class'])){
 }else{
     $ap_class = ' templazaFadeInUp';
 }
+if(isset($args['show_intro'])){
+    $ap_intro = isset($args['show_intro'])?filter_var($args['show_intro'], FILTER_VALIDATE_BOOLEAN):false;
+}else{
+    $ap_intro       = isset($templaza_options['ap_product-loop-desc'])?filter_var($templaza_options['ap_product-loop-desc'], FILTER_VALIDATE_BOOLEAN):false;
+}
+if(isset($_GET['description'])){
+    $ap_desc_limit = $_GET['description'];
+}else{
+    $ap_desc_limit       = isset($templaza_options['ap_product-loop-desc-limit'])?$templaza_options['ap_product-loop-desc-limit']:100;
+}
 ?>
 <div class="ap-item ap-item-style1 <?php echo esc_attr($ap_class);?>">
     <div class="ap-inner ">
@@ -34,6 +44,21 @@ if(isset($args['ap_class'])){
                 </h2>
                 <?php AP_Templates::load_my_layout('archive.price');?>
             </div>
+            <?php
+            if($ap_intro){
+                ?>
+            <div class="ap-info-inner ap-info-desc">
+            <?php
+                if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
+                    <p><?php echo wp_trim_words(strip_tags(get_the_excerpt()), $ap_desc_limit); ?></p>
+                <?php } else {
+                    the_excerpt();
+                }
+                ?>
+            </div>
+            <?php
+            }
+            ?>
             <div class="ap-info-inner  ap-info-bottom">
                 <?php AP_Templates::load_my_layout('archive.custom-fields'); ?>
             </div>

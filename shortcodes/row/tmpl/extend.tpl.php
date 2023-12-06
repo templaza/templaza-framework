@@ -37,7 +37,7 @@ $one_row        = (isset($field_parent['one_row']) && $field_parent['one_row'])?
         </div>
 
         <div class="fl_element-wrapper">
-            <div class="fl_row_container fl_container_for_children uk-grid-small" data-uk-grid>
+            <div class="fl_row_container fl_container_for_children uk-grid-small uk-grid" data-uk-grid>
                 {{{data.element}}}
             </div>
         </div>

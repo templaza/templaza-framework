@@ -159,3 +159,7 @@ class TemplazaFramework_Widget_Shortcode_Helper{
 
     }
 }
+
+function templaza_framework_shortcode_widget_get_widgets(){
+    return TemplazaFramework_Widget_Shortcode_Helper::get_widgets();
+}

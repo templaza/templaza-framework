@@ -162,7 +162,7 @@
             field.append("<div class=\"widgets\"/>");
 
             var _input = $("<input type='hidden' name='widget_id'>");
-            var _loading = $("<div class=\"text-center d-none\"><div class=\"spinner-border spinner-border-sm\" role=\"status\">\n" +
+            var _loading = $("<div class=\"uk-text-center uk-hidden\"><div class=\"spinner-border spinner-border-sm\" role=\"status\">\n" +
                 "  <span class=\"sr-only\">Loading...</span>\n" +
                 "</div></div>");
             var _widget_delete_stores   = [];
@@ -184,7 +184,10 @@
                     return;
                 }
 
-                _loading.removeClass("d-none");
+                if(!_widgets.find(_loading).length) {
+                    _widgets.html(_loading);
+                }
+                _loading.removeClass("uk-hidden");
 
                 var _data   = {
                     post_type: templaza_shortcode_widget.post_type
@@ -202,7 +205,7 @@
                 }
 
                 $.post(templaza_shortcode_widget.admin_ajax_url, _data, function(response) {
-                    _loading.addClass("d-none");
+                    _loading.addClass("uk-hidden");
 
                     var $response = $(response);
                     var $form = $response.find("form");
@@ -260,8 +263,6 @@
                     var widget = _widgets.find(".widget").first();
 
                     widget.data("loaded", true).toggleClass("open");
-
-                    console.log(widget);
 
                     // Init Black Studio TinyMCE
                     if (widget.is("[id*=black-studio-tinymce]")) {

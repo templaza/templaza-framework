@@ -542,6 +542,7 @@ class TemPlazaFrameWork{
         if(isset($this -> template_init['footer'])){
             echo $this -> template_init['footer'];
         }
+        wp_dequeue_style('core-block-supports');
     }
 
     /**

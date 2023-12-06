@@ -15,8 +15,8 @@ if($taxonomy == true){
         foreach ($all_tax as $key=>$tax){
             ?>
             <div class="uk-grid-collapse ap-custom-fields-style3" data-uk-grid>
-                <div class="uk-width-expand ap-field-label"><?php echo esc_html($key); ?></div>
-                <div class="field-value ap-field-value">
+                <div class="uk-width-2-5 ap-field-label"><?php echo esc_html($key); ?></div>
+                <div class="field-value uk-width-3-5 uk-text-right ap-field-value">
                     <?php echo esc_html($tax); ?>
                 </div>
             </div>
@@ -43,7 +43,7 @@ if($taxonomy == true){
                     }
                     ?>
                     <div class="uk-grid-collapse ap-custom-field-file ap-custom-fields-style3">
-                        <div class="field-value ap-field-value">
+                        <div class="field-value  uk-width-3-5 uk-text-right ap-field-value">
                             <a href="<?php echo esc_url($file_url); ?>" download><?php
                                 if( !empty($f_icon) || !empty($f_icon_image)){
                                     ?>
@@ -73,8 +73,8 @@ if($taxonomy == true){
                 }else{
                     ?>
                     <div class="uk-grid-collapse ap-custom-fields-style3" data-uk-grid>
-                        <div class="uk-width-expand ap-field-label"><?php echo esc_html($acf_f['label']); ?></div>
-                        <div class="field-value ap-field-value">
+                        <div class="uk-width-2-5 ap-field-label"><?php echo esc_html($acf_f['label']); ?></div>
+                        <div class="field-value uk-width-3-5 uk-text-right ap-field-value">
                             <?php
                             echo esc_html(the_field($acf_f['name'], $product_id));
                             ?>

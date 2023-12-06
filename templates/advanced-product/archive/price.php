@@ -47,7 +47,11 @@ if($price_sold == ''){
 if($price_contact == ''){
     $price_contact = $contact_text;
 }
-
+if(isset($_GET['product_loop'])){
+    $ap_loop_layout = $_GET['product_loop'];
+}else {
+    $ap_loop_layout = isset($templaza_options['ap_product-loop-layout']) ? $templaza_options['ap_product-loop-layout'] : 'style1';
+}
 $f_value            = get_field('unit-price', get_the_ID());
 if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $show_price) {
     ?>
@@ -83,7 +87,7 @@ if ((!empty($product_type) && in_array('contact', $product_type)) && !empty($pri
 if ((!empty($product_type) && in_array('sold', $product_type)) && !empty($price_sold) && $show_price_sold) {
     ?>
     <div class="ap-price-box">
-        <span class="ap-field-label"><?php esc_html_e('Price','templaza-framework')?></span>
+        <span class="ap-field-label"><?php esc_html_e('Status','templaza-framework')?></span>
         <span class="ap-price">
             <?php echo esc_html($price_sold);?>
         </span>
@@ -94,6 +98,9 @@ if (!empty($product_type) && in_array('rental', $product_type) && !empty($rental
     <div class="ap-price-box">
         <span class="ap-field-label"><?php esc_html_e('Rental price','templaza-framework')?></span>
         <?php
+        if($ap_loop_layout == 'style7'){
+            echo '<div class="ap-price-value-wrap">';
+        }
         $html = sprintf('<span class="ap-price ap-price-rental uk-display-inline-block">%s</span>',
             AP_Helper::format_price($rental));
         echo wp_kses($html,'post');
@@ -101,6 +108,10 @@ if (!empty($product_type) && in_array('rental', $product_type) && !empty($rental
         <span class="meta ap-unit">
             <?php esc_html_e(' / ','templaza-framework'); echo esc_html($rental_unit);?>
         </span>
-        <?php } ?>
+        <?php }
+        if($ap_loop_layout == 'style7'){
+            echo '</div>';
+        }
+        ?>
     </div>
 <?php } ?>

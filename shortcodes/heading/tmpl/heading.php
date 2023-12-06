@@ -28,7 +28,15 @@ if ( is_category() ) {
 } elseif ( is_author() ) {
     $title = '<span class="vcard">' . get_the_author() . '</span>';
 } elseif ( is_post_type_archive() ) {
-    $title = post_type_archive_title( '', false);
+    if(is_plugin_active( 'woocommerce/woocommerce.php' )) {
+        if ( is_shop() ) {
+            $title =  woocommerce_page_title(false);
+        }else{
+            $title = post_type_archive_title( '', false);
+        }
+    }else{
+        $title = post_type_archive_title( '', false);
+    }
 } elseif ( is_tax() ) {
     $title = single_term_title( '', false );
 } elseif ( is_home() ) {
