@@ -27,6 +27,7 @@ if (!$logo_type) {
     $mobile_logo        = isset($options['mobile-logo'])?$options['mobile-logo']:false;
     $sticky_header_logo= isset($options['sticky-logo'])?$options['sticky-logo']:false;
 }
+
 $class = ['templaza-logo', 'templaza-logo-' . $logo_type, 'uk-flex uk-flex-middle'];
 ?>
 <!-- logo starts -->
@@ -64,18 +65,21 @@ $class = ['templaza-logo', 'templaza-logo-' . $logo_type, 'uk-flex uk-flex-middl
          echo $log_svg; ?>/>
       <?php } ?>
       <?php
-      $logo_url = Functions::get_theme_default_logo_url('logo_mobile');
+      $logo_mobile_url = Functions::get_theme_default_logo_url('logo_mobile');
       if(!empty($mobile_logo) && isset($mobile_logo['url']) && !empty($mobile_logo['url'])
           && !Functions::is_external_url($mobile_logo['url'])){
-          $logo_url = $mobile_logo['url'];
+          $logo_mobile_url = $mobile_logo['url'];
       }
-      if(!empty($logo_url)){
+      if(empty($mobile_logo['url']) && !empty($default_logo) && !empty($default_logo['url'])){
+          $logo_mobile_url = $default_logo['url'];
+      }
+      if(!empty($logo_mobile_url)){
           $log_svg              = '';
-          if(Functions::file_ext_exists($logo_url, 'svg')){
+          if(Functions::file_ext_exists($logo_mobile_url, 'svg')){
               $log_svg  = ' data-uk-svg';
           }
           ?>
-         <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-mobile uk-preserve"<?php
+         <img src="<?php echo $logo_mobile_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-mobile uk-preserve"<?php
          echo $log_svg; ?>/>
       <?php } ?>
       <?php
