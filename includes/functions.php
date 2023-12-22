@@ -330,146 +330,155 @@ if(!class_exists('\TemPlazaFramework\Functions')){
                 return;
             }
 
-            foreach($layout as $i => $item){
+            try {
+//            foreach($layout as $i => $item){
+                for ($i = 0; $i < count($layout); $i++) {
+                    $item = $layout[$i];
 
-                $item   = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/before_register', $item, $parent_el);
+                    $item = apply_filters('templaza-framework/layout/generate/shortcode/' . $item['type'] . '/before_register', $item, $parent_el);
 
-                $shortcode_file = TEMPLAZA_FRAMEWORK_SHORTCODES_PATH.'/'.$item['type'].'/'.$item['type'].'.php';
-                if(file_exists($shortcode_file)){
-                    require $shortcode_file;
-                }
+                    $shortcode_file = TEMPLAZA_FRAMEWORK_SHORTCODES_PATH . '/' . $item['type'] . '/' . $item['type'] . '.php';
+                    if (file_exists($shortcode_file)) {
+                        require $shortcode_file;
+                    }
 
-                $shortcode_class    = 'TemplazaFramework_Shortcode_'.$item['type'];
-                $shortcode_storeId  = md5($shortcode_class);
-                if(class_exists($shortcode_class) && !isset(self::$cache['shortcode'][$shortcode_storeId])) {
-                    self::$cache['shortcode'][$shortcode_storeId] = new $shortcode_class();
-                }
-                do_action('templaza-framework/layout/generate/shortcode/init', $item, $parent_el);
-                do_action('templaza-framework/layout/generate/shortcode/'.$item['type'].'/init', $item, $parent_el);
+                    $shortcode_class = 'TemplazaFramework_Shortcode_' . $item['type'];
+                    $shortcode_storeId = md5($shortcode_class);
+                    if (class_exists($shortcode_class) && !isset(self::$cache['shortcode'][$shortcode_storeId])) {
+                        self::$cache['shortcode'][$shortcode_storeId] = new $shortcode_class();
+                    }
+                    do_action('templaza-framework/layout/generate/shortcode/init', $item, $parent_el);
+                    do_action('templaza-framework/layout/generate/shortcode/' . $item['type'] . '/init', $item, $parent_el);
 //                self::$cache['shortcode']   = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/after_init')
 
-                $item = apply_filters('templaza-framework/layout/generate/shortcode/prepare', $item, $parent_el);
-                $item = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/prepare', $item, $parent_el);
+                    $item = apply_filters('templaza-framework/layout/generate/shortcode/prepare', $item, $parent_el);
+                    $item = apply_filters('templaza-framework/layout/generate/shortcode/' . $item['type'] . '/prepare', $item, $parent_el);
 
-                $shortcode_name = 'templaza_'.$item['type'];
-                $subitems       = is_array($item) && isset($item['elements']) && !empty($item['elements']);
+                    $shortcode_name = 'templaza_' . $item['type'];
+                    $subitems = is_array($item) && isset($item['elements']) && !empty($item['elements']);
 
-                // Init shortcode_tmp variable
-                if(!isset($shortcode['shortcode'])){
-                    $shortcode['shortcode']   = array();
-                }
+                    // Init shortcode_tmp variable
+                    if (!isset($shortcode['shortcode'])) {
+                        $shortcode['shortcode'] = array();
+                    }
 
-                if(!isset($shortcode['shortcode']['open'])) {
-                    $shortcode['shortcode']['open'] = array();
-                }
-                if(!isset($shortcode['shortcode']['close'])) {
-                    $shortcode['shortcode']['close'] = array();
-                }
+                    if (!isset($shortcode['shortcode']['open'])) {
+                        $shortcode['shortcode']['open'] = array();
+                    }
+                    if (!isset($shortcode['shortcode']['close'])) {
+                        $shortcode['shortcode']['close'] = array();
+                    }
 
-                if(!isset($shortcode['level'])){
-                    $shortcode['level']   = 0;
-                }
+                    if (!isset($shortcode['level'])) {
+                        $shortcode['level'] = 0;
+                    }
 
-                if($subitems) {
-                    $level++;
-                }
+                    if ($subitems) {
+                        $level++;
+                    }
 
 
-                // Call back function if shortcode has child shortcode
-                if($subitems){
-//                    $parent_el  = $item;
-                    self::__generate_option_to_shortcode($item['elements'],$level, $shortcode, $item);
-                }
+                    // Call back function if shortcode has child shortcode
+                    if ($subitems) {
+                        self::__generate_option_to_shortcode($item['elements'], $level, $shortcode, $item);
+                    }
 
-                $attribs    = "";
-                $params     = isset($item['params'])?$item['params']: array();
+                    $attribs = "";
+                    $params = isset($item['params']) ? $item['params'] : array();
 
-                $params = apply_filters('templaza-framework/layout/generate/shortcode/'
-                    .$item['type'].'/params/prepare', $params, $item, $parent_el);
+                    $params = apply_filters('templaza-framework/layout/generate/shortcode/'
+                        . $item['type'] . '/params/prepare', $params, $item, $parent_el);
 
-                if(count($params)){
-                    $params = array_filter($params, function($v, $k){
-                        return (!is_null($v) && !is_string($v)) || (!is_null($v) && is_string($v) && strlen($v));
-                    }, ARRAY_FILTER_USE_BOTH);
-                    foreach($params as $key => $param){
-                        if(!is_array($param)) {
-                            $attribs .= ' ' . $key . '=\'' . $param . '\'';
-                        }else{
-                            $attribs    .= ' '.$key.'=\''.json_encode($param, JSON_FORCE_OBJECT).'\'';
+                    $params = apply_filters('templaza-framework/layout/generate/shortcode/'
+                        . $item['type'] . '/params/prepare/admin', $params, $item, $parent_el);
+
+                    if (count($params)) {
+                        $params = array_filter($params, function ($v, $k) {
+                            return (!is_null($v) && !is_string($v)) || (!is_null($v) && is_string($v) && strlen($v));
+                        }, ARRAY_FILTER_USE_BOTH);
+                        foreach ($params as $key => $param) {
+                            if (!is_array($param)) {
+                                $attribs .= ' ' . $key . '=\'' . addslashes($param) . '\'';
+                            } else {
+                                $attribs .= ' ' . $key . '=\'' . json_encode($param, JSON_FORCE_OBJECT) . '\'';
+                            }
                         }
                     }
-                }
 
-                if($subitems) {
-                    $level--;
-                }
+                    if ($subitems) {
+                        $level--;
+                    }
 
-                // Create open and close shortcode
-                $_shortcode = '['.$shortcode_name.$attribs.']';
-                $shortcode['shortcode']['close'][$level]  = '[/'.$shortcode_name.']';
+                    // Create open and close shortcode
+                    $_shortcode = '[' . $shortcode_name . $attribs . ']';
+                    if (!isset($shortcode['shortcode']['close'][$level])) {
+                        $shortcode['shortcode']['close'][$level] = '[/' . $shortcode_name . ']';
+                    }
 
-                // Push child shortcode to parent of it.
-                if($level > $shortcode['level'] && isset($shortcode['shortcode']['open'][$level])){
-                    $shortcode['shortcode']['open'][$shortcode['level']]    .= $shortcode['shortcode']['open'][$level];
-                    unset($shortcode['shortcode']['open'][$level]);
-                }
+                    // Push child shortcode to parent of it.
+                    if ($level > $shortcode['level'] && isset($shortcode['shortcode']['open'][$level])) {
+                        $shortcode['shortcode']['open'][$shortcode['level']] .= $shortcode['shortcode']['open'][$level];
+                        unset($shortcode['shortcode']['open'][$level]);
+                    }
 
-                // Remove shortcode if the element is parent but it doesn't have children
-                // Should create has_children_shortcode option for element to remove
-                if(isset($item['has_children_shortcode']) && $item['has_children_shortcode']){
-                    if(empty($shortcode['shortcode']['open'][$level + 1])){
-                        if(!isset($shortcode['shortcode']['open'][$level])) {
-                            unset($shortcode['shortcode']['open'][$level]);
+                    // Remove shortcode if the element is parent but it doesn't have children
+                    // Should create has_children_shortcode option for element to remove
+                    if (isset($item['has_children_shortcode']) && $item['has_children_shortcode']) {
+                        if (empty($shortcode['shortcode']['open'][$level + 1])) {
+                            if (!isset($shortcode['shortcode']['open'][$level])) {
+                                unset($shortcode['shortcode']['open'][$level]);
+                            }
+                        } else {
+                            if (!isset($shortcode['shortcode']['open'][$level])) {
+                                $shortcode['shortcode']['open'][$level] = $_shortcode;
+                            } else {
+                                $shortcode['shortcode']['open'][$level] .= $_shortcode;
+                            }
                         }
-                    }else{
-                        if(!isset($shortcode['shortcode']['open'][$level])) {
+                    } else {
+                        // Create shortcode
+                        if (!isset($shortcode['shortcode']['open'][$level])) {
                             $shortcode['shortcode']['open'][$level] = $_shortcode;
-                        }else{
+                        } else {
                             $shortcode['shortcode']['open'][$level] .= $_shortcode;
                         }
                     }
-                }else{
-                    // Create shortcode
-                    if(!isset($shortcode['shortcode']['open'][$level])) {
-                        $shortcode['shortcode']['open'][$level] = $_shortcode;
-                    }else{
-                        $shortcode['shortcode']['open'][$level] .= $_shortcode;
+
+                    // Push shortcode to parent of it when next shortcode has level the same
+                    if ($level < $shortcode['level']) {
+                        if (!empty($shortcode['shortcode']['open'][$level + 1])) {
+                            $shortcode['shortcode']['open'][$level] .= $shortcode['shortcode']['open'][$level + 1]
+                                . $shortcode['shortcode']['close'][$level];
+                            unset($shortcode['shortcode']['open'][$level + 1]);
+                        }
                     }
-                }
 
-                // Push shortcode to parent of it when next shortcode has level the same
-                if($level < $shortcode['level']){
-                    if(!empty($shortcode['shortcode']['open'][$level + 1])){
-                        $shortcode['shortcode']['open'][$level]   .= $shortcode['shortcode']['open'][$level+1]
-                            .$shortcode['shortcode']['close'][$level];
-                        unset($shortcode['shortcode']['open'][$level+1]);
+                    if (!isset($shortcode['shortcode']['open'][$level])) {
+                        $shortcode['shortcode']['open'][$level] = '';
                     }
-                }
+                    $shortcode['shortcode']['open'][$level] = apply_filters('templaza-framework/layout/generate/shortcode/' . $item['type'] . '/after_shortcode',
+                        $shortcode['shortcode']['open'][$level], $level, $params, $item, $parent_el);
 
-                if(!isset($shortcode['shortcode']['open'][$level])){
-                    $shortcode['shortcode']['open'][$level] = '';
-                }
-                $shortcode['shortcode']['open'][$level] = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/after_shortcode',
-                    $shortcode['shortcode']['open'][$level], $level, $params, $item, $parent_el);
-
-                // Reset shortcode tree when level is zero
-                if($level == 0){
-                    if(isset($shortcode['shortcode']['open'][$level])) {
-                        self::$shortcode .= $shortcode['shortcode']['open'][$level];
+                    // Reset shortcode tree when level is zero
+                    if ($level == 0) {
+                        if (isset($shortcode['shortcode']['open'][$level])) {
+                            self::$shortcode .= $shortcode['shortcode']['open'][$level];
+                        }
+                        $shortcode['shortcode'] = array();
                     }
-                    $shortcode['shortcode']   = array();
-                }
 
-                if(!isset($shortcode['shortcode']['open'][$level])){
-                    $shortcode['shortcode']['open'][$level] = '';
-                }
+                    if (!isset($shortcode['shortcode']['open'][$level])) {
+                        $shortcode['shortcode']['open'][$level] = '';
+                    }
 
 //                $shortcode['shortcode']['open'][$level] = apply_filters('templaza-framework/layout/generate/shortcode/'.$item['type'].'/after_shortcode',
 //                    $shortcode['shortcode']['open'][$level], $level, $params, $item);
 
-                // Store prev shortcode
-                $shortcode['item']    = $item;
-                $shortcode['level']   = $level;
+                    // Store prev shortcode
+                    $shortcode['item'] = $item;
+                    $shortcode['level'] = $level;
+                }
+            }catch (\Exception $exception){
             }
         }
 
@@ -551,7 +560,7 @@ if(!class_exists('\TemPlazaFramework\Functions')){
             $data    = array();
             $tz_posts = \get_posts($args);
             if($tz_posts && count($tz_posts)){
-    //            $data    = array();
+                //            $data    = array();
                 foreach($tz_posts as $_tz_post){
                     $data[$_tz_post -> post_name] = $_tz_post -> post_title;
                 }
@@ -643,94 +652,94 @@ if(!class_exists('\TemPlazaFramework\Functions')){
         }
 
         public static function get_padding($padding) {
-	        $css    =   array('desktop' => '', 'tablet' => '', 'mobile' => '');
-	        if ($padding['padding-top']) {
-		        $css['desktop'] .= !empty($padding['padding-top']['desktop']) ? 'padding-top: '.$padding['padding-top']['desktop'].';' : '';
-		        $css['tablet'] .= !empty($padding['padding-top']['tablet']) ? 'padding-top: '.$padding['padding-top']['tablet'].';' : '';
-		        $css['mobile'] .= !empty($padding['padding-top']['mobile']) ? 'padding-top: '.$padding['padding-top']['mobile'].';' : '';
-	        }
-	        if ($padding['padding-right']) {
-		        $css['desktop'] .= !empty($padding['padding-right']['desktop']) ? 'padding-right: '.$padding['padding-right']['desktop'].';' : '';
-		        $css['tablet'] .= !empty($padding['padding-right']['tablet']) ? 'padding-right: '.$padding['padding-right']['tablet'].';' : '';
-		        $css['mobile'] .= !empty($padding['padding-right']['mobile']) ? 'padding-right: '.$padding['padding-right']['mobile'].';' : '';
-	        }
-	        if ($padding['padding-bottom']) {
-		        $css['desktop'] .= !empty($padding['padding-bottom']['desktop']) ? 'padding-bottom: '.$padding['padding-bottom']['desktop'].';' : '';
-		        $css['tablet'] .= !empty($padding['padding-bottom']['tablet']) ? 'padding-bottom: '.$padding['padding-bottom']['tablet'].';' : '';
-		        $css['mobile'] .= !empty($padding['padding-bottom']['mobile']) ? 'padding-bottom: '.$padding['padding-bottom']['mobile'].';' : '';
-	        }
-	        if ($padding['padding-left']) {
-		        $css['desktop'] .= !empty($padding['padding-left']['desktop']) ? 'padding-left: '.$padding['padding-left']['desktop'].';' : '';
-		        $css['tablet'] .= !empty($padding['padding-left']['tablet']) ? 'padding-left: '.$padding['padding-left']['tablet'].';' : '';
-		        $css['mobile'] .= !empty($padding['padding-left']['mobile']) ? 'padding-left: '.$padding['padding-left']['mobile'].';' : '';
-	        }
-	        return $css;
+            $css    =   array('desktop' => '', 'tablet' => '', 'mobile' => '');
+            if ($padding['padding-top']) {
+                $css['desktop'] .= !empty($padding['padding-top']['desktop']) ? 'padding-top: '.$padding['padding-top']['desktop'].';' : '';
+                $css['tablet'] .= !empty($padding['padding-top']['tablet']) ? 'padding-top: '.$padding['padding-top']['tablet'].';' : '';
+                $css['mobile'] .= !empty($padding['padding-top']['mobile']) ? 'padding-top: '.$padding['padding-top']['mobile'].';' : '';
+            }
+            if ($padding['padding-right']) {
+                $css['desktop'] .= !empty($padding['padding-right']['desktop']) ? 'padding-right: '.$padding['padding-right']['desktop'].';' : '';
+                $css['tablet'] .= !empty($padding['padding-right']['tablet']) ? 'padding-right: '.$padding['padding-right']['tablet'].';' : '';
+                $css['mobile'] .= !empty($padding['padding-right']['mobile']) ? 'padding-right: '.$padding['padding-right']['mobile'].';' : '';
+            }
+            if ($padding['padding-bottom']) {
+                $css['desktop'] .= !empty($padding['padding-bottom']['desktop']) ? 'padding-bottom: '.$padding['padding-bottom']['desktop'].';' : '';
+                $css['tablet'] .= !empty($padding['padding-bottom']['tablet']) ? 'padding-bottom: '.$padding['padding-bottom']['tablet'].';' : '';
+                $css['mobile'] .= !empty($padding['padding-bottom']['mobile']) ? 'padding-bottom: '.$padding['padding-bottom']['mobile'].';' : '';
+            }
+            if ($padding['padding-left']) {
+                $css['desktop'] .= !empty($padding['padding-left']['desktop']) ? 'padding-left: '.$padding['padding-left']['desktop'].';' : '';
+                $css['tablet'] .= !empty($padding['padding-left']['tablet']) ? 'padding-left: '.$padding['padding-left']['tablet'].';' : '';
+                $css['mobile'] .= !empty($padding['padding-left']['mobile']) ? 'padding-left: '.$padding['padding-left']['mobile'].';' : '';
+            }
+            return $css;
         }
 
-	    public static function get_margin($margin) {
-		    $css    =   array('desktop' => '', 'tablet' => '', 'mobile' => '');
-		    if ($margin['margin-top']) {
-			    $css['desktop'] .= !empty($margin['margin-top']['desktop']) ? 'margin-top: '.$margin['margin-top']['desktop'].';' : '';
-			    $css['tablet'] .= !empty($margin['margin-top']['tablet']) ? 'margin-top: '.$margin['margin-top']['tablet'].';' : '';
-			    $css['mobile'] .= !empty($margin['margin-top']['mobile']) ? 'margin-top: '.$margin['margin-top']['mobile'].';' : '';
-		    }
-		    if ($margin['margin-right']) {
-			    $css['desktop'] .= !empty($margin['margin-right']['desktop']) ? 'margin-right: '.$margin['margin-right']['desktop'].';' : '';
-			    $css['tablet'] .= !empty($margin['margin-right']['tablet']) ? 'margin-right: '.$margin['margin-right']['tablet'].';' : '';
-			    $css['mobile'] .= !empty($margin['margin-right']['mobile']) ? 'margin-right: '.$margin['margin-right']['mobile'].';' : '';
-		    }
-		    if ($margin['margin-bottom']) {
-			    $css['desktop'] .= !empty($margin['margin-bottom']['desktop']) ? 'margin-bottom: '.$margin['margin-bottom']['desktop'].';' : '';
-			    $css['tablet'] .= !empty($margin['margin-bottom']['tablet']) ? 'margin-bottom: '.$margin['margin-bottom']['tablet'].';' : '';
-			    $css['mobile'] .= !empty($margin['margin-bottom']['mobile']) ? 'margin-bottom: '.$margin['margin-bottom']['mobile'].';' : '';
-		    }
-		    if ($margin['margin-left']) {
-			    $css['desktop'] .= !empty($margin['margin-left']['desktop']) ? 'margin-left: '.$margin['margin-left']['desktop'].';' : '';
-			    $css['tablet'] .= !empty($margin['margin-left']['tablet']) ? 'margin-left: '.$margin['margin-left']['tablet'].';' : '';
-			    $css['mobile'] .= !empty($margin['margin-left']['mobile']) ? 'margin-left: '.$margin['margin-left']['mobile'].';' : '';
-		    }
-		    return $css;
-	    }
+        public static function get_margin($margin) {
+            $css    =   array('desktop' => '', 'tablet' => '', 'mobile' => '');
+            if ($margin['margin-top']) {
+                $css['desktop'] .= !empty($margin['margin-top']['desktop']) ? 'margin-top: '.$margin['margin-top']['desktop'].';' : '';
+                $css['tablet'] .= !empty($margin['margin-top']['tablet']) ? 'margin-top: '.$margin['margin-top']['tablet'].';' : '';
+                $css['mobile'] .= !empty($margin['margin-top']['mobile']) ? 'margin-top: '.$margin['margin-top']['mobile'].';' : '';
+            }
+            if ($margin['margin-right']) {
+                $css['desktop'] .= !empty($margin['margin-right']['desktop']) ? 'margin-right: '.$margin['margin-right']['desktop'].';' : '';
+                $css['tablet'] .= !empty($margin['margin-right']['tablet']) ? 'margin-right: '.$margin['margin-right']['tablet'].';' : '';
+                $css['mobile'] .= !empty($margin['margin-right']['mobile']) ? 'margin-right: '.$margin['margin-right']['mobile'].';' : '';
+            }
+            if ($margin['margin-bottom']) {
+                $css['desktop'] .= !empty($margin['margin-bottom']['desktop']) ? 'margin-bottom: '.$margin['margin-bottom']['desktop'].';' : '';
+                $css['tablet'] .= !empty($margin['margin-bottom']['tablet']) ? 'margin-bottom: '.$margin['margin-bottom']['tablet'].';' : '';
+                $css['mobile'] .= !empty($margin['margin-bottom']['mobile']) ? 'margin-bottom: '.$margin['margin-bottom']['mobile'].';' : '';
+            }
+            if ($margin['margin-left']) {
+                $css['desktop'] .= !empty($margin['margin-left']['desktop']) ? 'margin-left: '.$margin['margin-left']['desktop'].';' : '';
+                $css['tablet'] .= !empty($margin['margin-left']['tablet']) ? 'margin-left: '.$margin['margin-left']['tablet'].';' : '';
+                $css['mobile'] .= !empty($margin['margin-left']['mobile']) ? 'margin-left: '.$margin['margin-left']['mobile'].';' : '';
+            }
+            return $css;
+        }
 
-	    public static function get_background($background) {
-		    $css = '';
-		    if (!empty($background['background-color'])) {
-			    $css     .=  'background-color: '.$background['background-color'].';';
-		    }
-		    if (!empty($background['background-repeat'])) {
-			    $css     .=  'background-repeat: '.$background['background-repeat'].';';
-		    }
-		    if (!empty($background['background-size'])) {
-			    $css     .=  'background-size: '.$background['background-size'].';';
-		    }
-		    if (!empty($background['background-attachment'])) {
-			    $css     .=  'background-attachment: '.$background['background-attachment'].';';
-		    }
-		    if (!empty($background['background-position'])) {
-			    $css     .=  'background-position: '.$background['background-position'].';';
-		    }
-		    if (!empty($background['background-image'])) {
-			    $css     .=  'background-image: url("'.$background['background-image'].'");';
-		    }
-		    return $css;
-	    }
+        public static function get_background($background) {
+            $css = '';
+            if (!empty($background['background-color'])) {
+                $css     .=  'background-color: '.$background['background-color'].';';
+            }
+            if (!empty($background['background-repeat'])) {
+                $css     .=  'background-repeat: '.$background['background-repeat'].';';
+            }
+            if (!empty($background['background-size'])) {
+                $css     .=  'background-size: '.$background['background-size'].';';
+            }
+            if (!empty($background['background-attachment'])) {
+                $css     .=  'background-attachment: '.$background['background-attachment'].';';
+            }
+            if (!empty($background['background-position'])) {
+                $css     .=  'background-position: '.$background['background-position'].';';
+            }
+            if (!empty($background['background-image'])) {
+                $css     .=  'background-image: url("'.$background['background-image'].'");';
+            }
+            return $css;
+        }
 
-	    public static function get_border($border) {
-		    $css     =      'border-top: '.(!empty($border['border-top']) ? $border['border-top'] : '0' ).';';
-		    $css     .=     'border-right: '.(!empty($border['border-right']) ? $border['border-right'] : '0' ).';';
-		    $css     .=     'border-bottom: '.(!empty($border['border-bottom']) ? $border['border-bottom'] : '0' ).';';
-		    $css     .=     'border-left: '.(!empty($border['border-left']) ? $border['border-left'] : '0' ).';';
+        public static function get_border($border) {
+            $css     =      'border-top: '.(!empty($border['border-top']) ? $border['border-top'] : '0' ).';';
+            $css     .=     'border-right: '.(!empty($border['border-right']) ? $border['border-right'] : '0' ).';';
+            $css     .=     'border-bottom: '.(!empty($border['border-bottom']) ? $border['border-bottom'] : '0' ).';';
+            $css     .=     'border-left: '.(!empty($border['border-left']) ? $border['border-left'] : '0' ).';';
 
-		    if (!empty($border['border-style'])) {
-			    $css     .=  'border-style: '.$border['border-style'].';';
-		    }
-		    if (!empty($border['border-color'])) {
-			    $css     .=  'border-color: '.$border['border-color'].';';
-		    }
-		    return $css;
-	    }
+            if (!empty($border['border-style'])) {
+                $css     .=  'border-style: '.$border['border-style'].';';
+            }
+            if (!empty($border['border-color'])) {
+                $css     .=  'border-color: '.$border['border-color'].';';
+            }
+            return $css;
+        }
 
-	    public static function get_template_id(){
+        public static function get_template_id(){
 //            $store_id   = __METHOD__;
 
             $result_id   = false;
@@ -803,12 +812,12 @@ if(!class_exists('\TemPlazaFramework\Functions')){
             return $result_id;
         }
 
-	    /**
-	     * Get header options
+        /**
+         * Get header options
          * @param string $layout An optional of header
          * @return array Header options
-	     * */
-	    public static function get_header_options(){
+         * */
+        public static function get_header_options(){
 
             $store_id   = __METHOD__;
             $store_id   = md5($store_id);
@@ -826,12 +835,12 @@ if(!class_exists('\TemPlazaFramework\Functions')){
             return $options;
         }
 
-	    /**
-	     * Get footer options
+        /**
+         * Get footer options
          * @param string $layout An optional of header
          * @return array Header options
-	     * */
-	    public static function get_footer_options(){
+         * */
+        public static function get_footer_options(){
 
             $store_id   = __METHOD__;
             $store_id   = md5($store_id);
@@ -861,6 +870,331 @@ if(!class_exists('\TemPlazaFramework\Functions')){
          * */
         public static function get_header_id(){
             return static::__get_post_type_file_name('templaza_header', '__h_template_assign');
+        }
+
+        /**
+         * Get header layout
+         * */
+        public static function get_header_layout(){
+            $options    = self::get_header_options();
+            $post       = self::get_header_post();
+
+            $shortcode  = $post && !empty($post -> post_content)?$post -> post_content:'';
+
+            if(empty($shortcode)){
+                $shortcode  = self::generate_option_to_shortcode($options['h_layout']);
+            }
+
+            return $shortcode;
+        }
+
+        /**
+         * Get footer layout
+         * */
+        public static function get_footer_layout(){
+            $options    = self::get_footer_options();
+            $post       = self::get_footer_post();
+
+            $shortcode  = $post && !empty($post -> post_content)?$post -> post_content:'';
+
+            if(empty($shortcode)){
+                $shortcode  = self::generate_option_to_shortcode($options['f_layout']);
+            }
+
+            return $shortcode;
+        }
+
+        /**
+         * Get header post
+         * */
+        public static function get_header_post(){
+            return self::__get_post_assigned('templaza_header', '__h_template_assign');
+        }
+
+        /**
+         * Get footer post
+         * */
+        public static function get_footer_post(){
+            return self::__get_post_assigned('templaza_footer', '__f_template_assign');
+        }
+
+        /**
+         * Get template layout (main layout)
+         * */
+        public static function get_template_layout(){
+
+            $options    = self::get_theme_options();
+            $post       = self::get_template_post();
+
+            $opt_key    = self::get_theme_option_name().'__layout';
+            $shortcode  = $post && !empty($post -> post_content)?$post -> post_content:'';
+
+            // Generate layout from option
+            if(empty($shortcode)){
+                $shortcode  = self::generate_option_to_shortcode($options['layout']);
+            }
+
+            // Get layout of global
+            if(empty($shortcode)){
+                $shortcode  = get_option($opt_key, '');
+            }
+
+            return $shortcode;
+
+        }
+
+        /**
+         * Get template style post
+         * */
+        public static function get_template_post(){
+
+
+            $result_id   = false;
+
+            $the_ID = \get_the_ID();
+            global $wp;
+
+
+            $store_id   = __METHOD__;
+            $store_id  .= '::'.$the_ID;
+            $store_id   = md5($store_id);
+
+            if(isset(static::$cache[$store_id])){
+                return static::$cache[$store_id];
+            }
+
+            if(is_single() || is_archive()){
+                if(is_archive() && \get_page_by_path($wp -> request)){
+                    // Get page
+                    $page   = \get_page_by_path($wp -> request);
+                    if($page -> ID){
+                        $result_id   = get_post_meta($page -> ID, 'templaza-style', true);
+                    }
+                }
+                $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
+                $post_type  = !empty($post_type)?$post_type: get_query_var( 'post_type' );
+                if(!empty($post_type)){
+                    $key    = null;
+                    if(is_single()){
+                        $key    = $post_type.'-single-style';
+                    }elseif(is_archive()){
+                        $key    = $post_type.'-archive-style';
+                    }
+                    if($key) {
+                        if($style_id = \Redux::get_option(self::get_theme_option_name(), $key)){
+                            $result_id  = $style_id;
+                        }
+                    }
+                }
+            }elseif(is_404()){
+                if($style_id = \Redux::get_option(self::get_theme_option_name(), '404-page-style')){
+                    $result_id  = $style_id;
+                }
+            }
+
+
+            if(!$result_id){
+                $result_id   = get_post_meta($the_ID, 'templaza-style', true);
+            }
+
+            // Is slug
+            if($result_id && is_numeric($result_id)) {
+                // Get style id by style slug
+                $style_args = array(
+                    'name'          => $result_id,
+                    'post_type'     => $post_type,
+                    'numberposts'   => 1
+                );
+                $posts = \get_posts($style_args);
+                if(!empty($posts)){
+                    return $posts[0];
+                }
+            }
+
+            if(!empty($result_id)){
+                // Get style id by style slug
+                $style_args = array(
+                    'name'          => $result_id,
+                    'post_type'     => 'templaza_style',
+                    'numberposts'   => 1
+                );
+                $posts = \get_posts($style_args);
+                if(!empty($posts)){
+                    return self::$cache[$store_id] = $posts[0];
+                }
+            }
+
+            return false;
+        }
+
+        /**
+         * Get global color options
+         * @return array
+         * */
+        public static function get_global_colors_options(){
+
+            $store_id   = __METHOD__;
+            $store_id   = md5($store_id);
+
+            if(isset(static::$cache[$store_id])){
+                return static::$cache[$store_id];
+            }
+
+            $options    = array();
+
+            $json_file_name = 'global_colors';
+
+            // Get header options from json file
+            $base_path      = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/global_colors';
+            $default_path   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/global_colors';
+            $json_file  = $default_path.'/'.$json_file_name.'.json';
+
+            if(!file_exists($json_file)){
+                $json_file  = $base_path.'/'.$json_file_name.'.json';
+            }
+
+            // If json file does not exists
+            if(!file_exists($json_file)){
+                return $options;
+            }
+
+            $data   = file_get_contents($json_file);
+
+            $data   = (!empty($data) && is_string($data))?json_decode($data, true):$data;
+
+            if(!empty($data)){
+                $options    = $data;
+            }
+
+            if(!empty($options)) {
+                static::$cache[$store_id]   = $options;
+            }
+
+            return $options;
+        }
+
+        /**
+         * Get global colors
+         * @return array Color options
+         * */
+        public static function get_global_colors($group = false){
+            $colors     = array();
+            $gboptions  = self::get_global_colors_options();
+
+            if(isset($gboptions['custom_colors']) && ($customColors = $gboptions['custom_colors'])){
+                $customColors   = is_string($customColors)?json_decode($customColors, true):$customColors;
+                if($group){
+                    $colors['custom_colors']    = array(
+                        'title'     => __('Custom Color', 'templaza-framework'),
+                        'colors'    => $customColors
+                    );
+                }else{
+                    $colors = $customColors;
+                }
+            }
+
+            return $colors;
+        }
+
+        /**
+         * Get a global color
+         * @return array
+         * */
+        public static function get_global_color_by_id($id){
+            if(empty($id)){
+                return array();
+            }
+
+            $store_id   = __METHOD__;
+            $store_id  .= '::'.$id;
+            $store_id   = md5($store_id);
+
+            if(isset(self::$cache[$store_id])){
+                return self::$cache[$store_id];
+            }
+
+            $color  = array();
+            $list   = self::get_global_colors();
+
+            $index  = array_search($id, array_column($list, 'id'));
+
+            if($index !== false){
+                return self::$cache[$store_id]  = $list[$index];
+            }
+
+            return $color;
+        }
+
+        /**
+         * Get post (header, footer) assigned
+         * @param string $post_type
+         * @param string $meta_key_assigned The meta key stored to post meta
+         * */
+        protected static function __get_post_assigned($post_type, $meta_key_assigned){
+
+            if(!$post_type || !$meta_key_assigned){
+                return false;
+            }
+
+            $template_id  = static::get_template_id();
+
+            $store_id   = __METHOD__;
+            $store_id  .= '::'.$post_type;
+            $store_id  .= '::'.$template_id;
+            $store_id  .= '::'.$meta_key_assigned;
+            $store_id   = md5($store_id);
+
+            if(isset(static::$cache[$store_id])){
+                return static::$cache[$store_id];
+            }
+
+            $args   = array(
+                'post_type'     => $post_type,
+                'post_status'   => 'publish',
+                'numberposts'   => 1,
+                'meta_query'    => array(
+                    array(
+                        'key'   => '__home',
+                        'value' => 1
+                    ),
+                    array(
+                        'key'   => '_'.$post_type.'__theme',
+                        'value' => get_template()
+                    )
+                )
+            );
+
+            // Get default header options
+            $_header_opt = get_posts($args);
+
+            // Get header options assigned
+            if($template_id){
+                $args['meta_query'] = array(
+                    array(
+                        'key'   => $meta_key_assigned,
+                        'value' => $template_id
+                    ),
+                    array(
+                        'key'   => '_'.$post_type.'__theme',
+                        'value' => get_template()
+                    )
+                );
+
+                // Get header options assigned
+                $_header_opt_t = get_posts($args);
+
+                if(!empty($_header_opt_t) && !is_wp_error($_header_opt_t)){
+                    $_header_opt    = $_header_opt_t;
+                }
+                wp_reset_postdata();
+
+            }
+
+            if(!empty($_header_opt) && !is_wp_error($_header_opt)){
+                return self::$cache[$store_id] = $_header_opt[0];
+            }
+
+            return false;
         }
 
         /**
@@ -936,13 +1270,13 @@ if(!class_exists('\TemPlazaFramework\Functions')){
             return $json_file_name;
         }
 
-	    /**
-	     * Get header options
+        /**
+         * Get header options
          * @param string $post_type An optional of post type
          * @param string $meta_key_assigned An optional which post type stored with template
          * @return array Post type options
-	     * */
-	    protected static function __get_post_type_options($post_type = '', $meta_key_assigned = ''){
+         * */
+        protected static function __get_post_type_options($post_type = '', $meta_key_assigned = ''){
 
             $template_id  = static::get_template_id();
 

@@ -1,0 +1,68 @@
+.field-tz_color_repeater__tr{
+  .redux-container &{
+    > th{
+      display: none;
+    }
+  }
+}
+.redux-container-tz_color_repeater{
+  .tzfrm-field-inline{
+    .field-tz_color_repeater__item{
+      >.form-table{
+        flex: 1;
+        > tbody{
+          display: flex;
+          > tr{
+            border: none;
+            &:nth-child(1) {
+              flex: 1;
+            }
+            > th{
+              display: none;
+            }
+            > td{
+              display: block;
+            }
+          }
+        }
+      }
+      .redux-container-color_rgba{
+        .sp-replacer{
+          display: flex;
+        }
+        .sp-preview{
+          order: 1;
+          margin-right: 0;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+  .field-tz_color_repeater__item{
+    .redux-field{
+      padding-top: 0 !important;
+      margin-bottom: 0;
+    }
+    input[type="text"]{
+      width: 100%;
+      height: 30px;
+      margin-bottom: 0;
+    }
+    //.action{
+    //  > .uk-button-small{
+    //    padding: 7px 10px;
+    //  }
+    //}
+    .redux_hide_field{
+      display: none;
+    }
+  }
+  .ui-state-highlight{
+    border-color: #feecb9;
+    background-image: none;
+    background-color: #fef2cd;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+  }
+}

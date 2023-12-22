@@ -24,15 +24,21 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
         protected $text_domain;
         protected $theme_config_registered;
 
+        protected $framework    = null;
+
         protected $main_slug            = TEMPLAZA_FRAMEWORK;
         protected $pageHooks            = array();
         protected $theme_demo_datas     = array();
 
-        public function __construct()
+        public function __construct($framework = null)
         {
+            global $pagenow;
+
             $this -> text_domain        = Functions::get_my_text_domain();
             $this -> page_slug          = TEMPLAZA_FRAMEWORK;
             $this -> theme_name         = get_template();
+            $this -> framework          = $framework;
+
             $theme_imports  = apply_filters('templaza-framework-importer', array());
 
             if($theme_imports && count($theme_imports) && isset($theme_imports['demo-imports'])) {
@@ -41,9 +47,10 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                 $this -> theme_config_registered   = $theme_imports;
             }
 
-            $page = $this -> _get_page();
+            $my_page = $this -> _get_page();
 
-            if(strpos($page, TEMPLAZA_FRAMEWORK) !== false) {
+            if(in_array($pagenow, array( 'admin.php','admin-ajax.php'))
+                && strpos($my_page, TEMPLAZA_FRAMEWORK) !== false) {
                 //if(!session_id()) {
                 //    session_start();
                 //}
@@ -54,13 +61,17 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                     array(
                         'basePath'                  => TEMPLAZA_FRAMEWORK_CORE_INCLUDES_PATH.'/admin',
                         'theme_name'                => $this -> theme_name,
+                        'framework'                 => $this -> framework,
                         'theme_config_registered'   => $this -> theme_config_registered
                     )
                 );
-                $this -> controller -> set('theme_demo_datas', $this -> theme_demo_datas);
 
-                if($action){
-                    $this -> controller -> execute($action);
+                if($this -> controller){
+                    $this -> controller -> set('theme_demo_datas', $this -> theme_demo_datas);
+
+                    if($action){
+                        $this -> controller -> execute($action);
+                    }
                 }
                 add_action('after_switch_theme', array($this, 'plugin_redirect'));
             }
@@ -75,6 +86,34 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
         public function init(){
 
             add_action('admin_menu', array($this, 'register_admin_menu'));
+            add_action('admin_menu', function (){
+                Menu_Admin::add_submenu_section('settings', array(
+                    'label' => __('Settings', 'templaza-framework'),
+                    'url'   => 'admin.php?page='.Functions::get_theme_option_name().'_options',
+                ));
+                $section    = array(
+                    'label'             => esc_html__('Global Colors', 'templaza-framework'),
+                    'level'             => 1,
+                    'description'       => '',
+                    'add_admin_menu'    => true,
+                    'parent_slug'       => 'settings',
+                    'callback'          => array($this, 'render')
+                );
+                Menu_Admin::add_submenu_section('global_colors', $section);
+
+                $section_id = 'global_colors';
+                $section_slug   = isset($section['slug'])?$section['slug']:$this -> main_slug.'_'.$section_id;
+
+                add_submenu_page(
+                    $this->page_slug,
+                    $section['label'],
+                    $section['label'],
+                    'manage_options'
+                    , $section_slug,
+                    $section['callback'],
+                    count(Menu_Admin::get_menu_sections()) + 1
+                );
+            },20);
             /* Add admin menu */
             if($this -> theme_demo_datas && count($this -> theme_demo_datas)) {
 
@@ -381,6 +420,24 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
             if( empty( $nav_tabs ) ){
                 return;
             }
+
+//            $lastitem   = key($nav_tabs);
+            $lastitem   = 0;
+            foreach( $nav_tabs as $i => &$item ) {
+
+                $item['level']      = !isset($item['level'])?0:$item['level'];
+                $item['deeper']     = false;
+                $item['shallower']  = false;
+                $item['level_diff'] = 0;
+
+                if (isset($nav_tabs[$lastitem])) {
+                    $nav_tabs[$lastitem]['deeper']      = ($item['level'] > $nav_tabs[$lastitem]['level']);
+                    $nav_tabs[$lastitem]['shallower']   = ($item['level'] < $nav_tabs[$lastitem]['level']);
+                    $nav_tabs[$lastitem]['level_diff']  = ($nav_tabs[$lastitem]['level'] - $item['level']);
+                }
+                $lastitem   = $i;
+            }
+
             $file   = self::get_template_directory().'/nav.php';
 
             if(file_exists($file)){
