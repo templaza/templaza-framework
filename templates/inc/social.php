@@ -31,7 +31,7 @@ if(!empty($social_profiles)){
     }
 ?>
 
-<ul class=" tz-header-social uk-child-width-auto <?php echo $social_gap; ?> " data-uk-grid>
+<ul class=" tz-header-social uk-child-width-auto uk-grid <?php echo $social_gap; ?> " data-uk-grid>
    <?php
    foreach ($social_profiles as $social_profile) {
        $social_profile_link = $social_profile->link;
