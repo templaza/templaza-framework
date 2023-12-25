@@ -37,6 +37,39 @@ body .tribe-common {
   .tribe-common-c-svgicon__svg-fill{
     fill:$tztheme-content-color;
   }
+  .tribe-common-c-btn,
+  a.tribe-common-c-btn,
+  button.tribe-common-c-btn{
+    background:$tztheme-button_background;
+    color:$tztheme-button_text_color;
+    outline:none;
+    @include border-radius($tztheme-button_radius);
+    &:hover,
+    &:focus{
+      outline:none;
+      background:$tztheme-button_background_hover;
+      color:$tztheme-button_text_color_hover;
+    }
+  }
+  .tribe-tickets__rsvp-form-wrapper{
+    padding:0;
+    .tribe-tickets__rsvp-form-button{
+      height:50px;
+      padding:0 25px;
+      @include border-radius($tztheme-button_radius);
+      &.tribe-tickets__rsvp-form-button--cancel{
+        border:1px solid $tztheme-border-color;
+        margin-left: 0;
+        &:hover,
+        &:focus{
+          outline:none;
+        }
+      }
+    }
+  }
+  .tribe-tickets__rsvp-wrapper{
+    max-width:none;
+  }
 }
 body .tribe-events {
   .tribe-events-calendar-list__event-title-link{
@@ -374,6 +407,12 @@ body{
           width:auto;
           height:auto;
         }
+        &:hover,
+        &:focus{
+          &:after {
+            background: none;
+          }
+        }
       }
     }
     .tribe-events-nav-previous{
@@ -385,6 +424,12 @@ body{
           font-family: "Font Awesome 6 Free";
           width:auto;
           height:auto;
+        }
+        &:hover,
+        &:focus{
+          &:before {
+            background: none;
+          }
         }
       }
     }
