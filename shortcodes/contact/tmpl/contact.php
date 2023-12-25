@@ -19,6 +19,15 @@ if ($enable_contact) {
     $contact_email_icon       = isset($options['contact-email-icon'])?$options['contact-email-icon']:'';
     $contact_phone_icon       = isset($options['contact-phone-icon'])?$options['contact-phone-icon']:'';
     $contact_login_icon       = isset($options['contact-login-icon'])?$options['contact-login-icon']:'';
+    $contact_login_url        = isset($options['contact-login-url'])?$options['contact-login-url']:'';
+    $contact_login_url_custom = isset($options['contact-login-custom-url'])?$options['contact-login-custom-url']:'';
+    $welcome_text             = isset($options['contact-login-welcome'])?$options['contact-login-welcome']:'';
+
+    $enable_contact_register  = isset($options['enable-contact-register'])?filter_var($options['enable-contact-register'], FILTER_VALIDATE_BOOLEAN):true;
+    $contact_register         = $enable_contact_register && isset($options['contact-register'])?$options['contact-register']:'';
+    $contact_register_icon    = $enable_contact_register && isset($options['contact-register-icon'])?$options['contact-register-icon']:'';
+    $contact_register_url        = isset($options['contact-register-url'])?$options['contact-register-url']:'';
+    $contact_register_url_custom = isset($options['contact-register-custom-url'])?$options['contact-register-custom-url']:'';
 }
 
 if(!empty($contact_location) || !empty($contact_email)  || !empty($contact_phone ) || !empty($contact_phone)){
@@ -56,16 +65,62 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
         </span>
         <?php
     }
+
     if($contact_enable_login){
-        ?>
-        <span class="contact-login">
-        <?php if($contact_login_icon){ ?>
-            <i class="contact-icon <?php echo esc_attr($contact_login_icon);?>"></i>
-        <?php } ?>
-        <a href="<?php echo esc_url(admin_url());?>"><?php echo esc_attr($contact_login);?></a>
-        </span>
-        <?php
+        if ( is_user_logged_in() ) {
+            $current_user = wp_get_current_user();
+            ?>
+            <span class="contact-login">
+                <a href="javascript:">
+                    <?php if($contact_login_icon){ ?>
+                        <i class="contact-icon <?php echo esc_attr($contact_login_icon);?>"></i>
+                    <?php }
+                    echo esc_html($welcome_text.' ');
+                    echo esc_html( $current_user->display_name );
+                    ?>
+                </a>
+            </span>
+        <?php } else {
+            ?>
+            <span class="contact-login">
+            <?php if($contact_login_icon){ ?>
+                <i class="contact-icon <?php echo esc_attr($contact_login_icon);?>"></i>
+            <?php } ?>
+                <?php
+                if($contact_login_url == 'custom'){
+                    ?>
+                    <a href="<?php echo esc_url($contact_login_url_custom);?>"><?php echo esc_attr($contact_login);?></a>
+                    <?php
+                }else{
+                    ?>
+                    <a href="<?php echo esc_url(admin_url());?>"><?php echo esc_attr($contact_login);?></a>
+                <?php } ?>
+            </span>
+            <?php
+        }
     }
-     ?>
+    if($enable_contact_register){
+        if ( is_user_logged_in() ) {
+
+        }else{
+            ?>
+            <span class="contact-register">
+                <?php if($contact_register_icon){ ?>
+                    <i class="contact-icon <?php echo esc_attr($contact_register_icon);?>"></i>
+                <?php } ?>
+                    <?php
+                    if($contact_register_url == 'custom'){
+                        ?>
+                        <a href="<?php echo esc_url($contact_register_url_custom);?>"><?php echo esc_attr($contact_register);?></a>
+                        <?php
+                    }else{
+                        ?>
+                        <a href="<?php echo esc_url(site_url('/wp-login.php?action=register&redirect_to=' . get_permalink()));?>"><?php echo esc_attr($contact_register);?></a>
+                    <?php } ?>
+                </span>
+            <?php
+        }
+    }
+    ?>
 </div>
 <?php } ?>
