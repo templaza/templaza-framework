@@ -1,5 +1,10 @@
 .templaza-ap-single{
   &.ap-single-style2{
+    .ap-single-button-wrap{
+      .ap-btn{
+        background:#fff;
+      }
+    }
     .ap-single-price-box{
       padding:0 0 35px;
       border-bottom:1px solid $tztheme-border-color;
