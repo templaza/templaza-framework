@@ -384,6 +384,34 @@
     }
   }
 }
+.ap-single-box{
+  .ap-group-content{
+    &:has(.ap-custom-fields-style3){
+      margin-left:-30px;
+    }
+    .ap-custom-fields-style3{
+      border:none;
+      position:relative;
+      padding:12px 0 12px 30px;
+      margin:0;
+      &:after{
+        display:block;
+        content:"";
+        height:1px;
+        background-color:$tztheme-border-color;
+        left:30px;
+        right:0;
+        bottom:0;
+        position:absolute;
+      }
+      .ap-field-label{
+      }
+      .ap-field-value{
+        font-weight:bold;
+      }
+    }
+  }
+}
 
 @media (max-width: 639.9px) {
   div.templaza-ap-single{
