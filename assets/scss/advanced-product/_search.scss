@@ -163,6 +163,15 @@
       }
     }
   }
+  select{
+    option{
+      color:inherit;
+      &:disabled,
+      &[disabled]{
+        display:none;
+      }
+    }
+  }
 }
 .advanced-product-search-form.advanced-product-search-limit-height .uk-form-controls>.checkbox::-webkit-scrollbar {
   width: 2px;
