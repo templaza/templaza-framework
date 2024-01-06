@@ -478,6 +478,30 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                 case 'wpforms':
                                     $this -> import_wpforms($folder_path, $file_name);
                                     break;
+                                case 'package':
+                                case 'package_theme':
+                                case 'theme_package':
+                                    $result = $this -> install_theme_package($folder_path, $file_name);
+
+//                                    $theme_pack = wp_get_theme($theme, $folder_path);
+//
+//                                    if($theme_pack && !is_wp_error($theme_pack)
+//                                        && $theme_pack -> get('Version')){
+//
+//                                        // Install theme downloaded
+//                                        $overwrite  = 'update-theme';
+//                                        $skin     = new \WP_Ajax_Upgrader_Skin();
+//                                        $upgrader = new \Theme_Upgrader($skin);
+//
+//                                        $result = $upgrader->install( $filePath, array( 'overwrite_package' => $overwrite ) );
+//
+//                                    }else{
+//                                        $result = false;
+//                                        $this->info->set_message(esc_html__('Can not install theme package!',
+//                                            'templaza-framework'), true);
+//                                    }
+
+                                    break;
                             }
 
                             // Import error
@@ -1275,6 +1299,50 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 }
             }
             return true;
+        }
+
+        protected function install_theme_package($folder_path, $filename = ''){
+
+            $result = false;
+            $theme  = $this -> theme_name;
+
+            $theme_pack = wp_get_theme($theme, $folder_path);
+
+            if($theme_pack && !is_wp_error($theme_pack)
+                && $theme_pack -> get('Version')){
+
+                // Install theme downloaded
+                $overwrite  = 'update-theme';
+                $skin       = new \WP_Ajax_Upgrader_Skin();
+                $upgrader   = new \Theme_Upgrader($skin);
+
+//                $result = $upgrader->install( $file_path, array( 'overwrite_package' => $overwrite ) );
+
+                $destination    = get_theme_root();
+
+                $package = array(
+                    'source'            => $folder_path,
+                    'destination'       => $destination,
+                    'clear_working'     => true,
+                    'clear_destination' => $overwrite,
+                    'hook_extra'        => array(
+                        'type'   => 'theme',
+                        'action' => 'install',
+                    ),
+                );
+
+                $install_result = $upgrader -> install_package($package);
+
+                if(!is_wp_error($install_result)){
+                    $result = true;
+                }
+
+            }else{
+                $this->info->set_message(esc_html__('Can not install theme package!',
+                    'templaza-framework'), true);
+            }
+
+            return $result;
         }
 
         protected function _get_substeps($folder_path, $filename = '', $file_filter = '.'){

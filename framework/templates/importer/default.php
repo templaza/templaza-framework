@@ -40,8 +40,8 @@ if($items && count($items)){
                         <div class="action uk-padding-small uk-padding-remove-top uk-flex uk-flex-wrap">
                             <?php if(isset($item['demo-datas']) && count($item['demo-datas'])){ ?>
                                 <button type="button" data-toggle="modal" data-target="#tzinst-modal__import-<?php
-                                echo !$pass?'sysinfo':$theme_name; ?>" uk-toggle="target: #tzinst-modal__import-<?php
-                                echo !$pass?'sysinfo':$theme_name; ?>" class="uk-button uk-button-primary uk-margin-small-bottom uk-width-1-1" data-install-demo-data><?php
+                                echo !$pass?'sysinfo-'.$item['slug']:$theme_name; ?>" data-uk-toggle="target: #tzinst-modal__import-<?php
+                                echo !$pass?'sysinfo-'.$item['slug']:$theme_name; ?>" class="uk-button uk-button-primary uk-margin-small-bottom uk-width-1-1" data-install-demo-data><?php
                                     _e('Install Demo Data', 'templaza-framework');
                                     ?></button>
                             <?php } ?>
@@ -61,7 +61,7 @@ if($items && count($items)){
                     </div>
                     <?php if(isset($item['demo-datas']) && count($item['demo-datas']) && !HelperLicense::has_expired($this -> theme_name)){ ?>
                         <?php if(!$pass){ ?>
-                            <div id="tzinst-modal__import-sysinfo" uk-modal>
+                            <div id="tzinst-modal__import-sysinfo-<?php echo $item['slug']; ?>" uk-modal>
                                 <div class="uk-modal-dialog">
                                     <div class="uk-modal-body uk-text-danger">
                                         <p><?php $text = __('Currently, there are some values in PHP settings not sufficient enough for the theme to work properly.'
@@ -105,11 +105,6 @@ if($items && count($items)){
                                     <?php echo $this -> load_template('demo_datas'); ?>
                                 </div>
                                 <div class="uk-modal-footer uk-text-right uk-position-relative">
-                                    <!--                                <div class="js-processing-box processing-box uk-margin-small-bottom uk-hidden">-->
-                                    <!--                                    <div class="progress uk-position-absolute uk-width-1-1 uk-position-top-left rounded-0">-->
-                                    <!--                                        <div class="progress-bar progress-bar-striped progress-bar-animated js-progress-bar uk-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>-->
-                                    <!--                                    </div>-->
-                                    <!--                                </div>-->
                                     <div class="js-processing-box processing-box uk-margin-small-bottom uk-hidden">
                                         <div class="progress uk-position-absolute uk-width-1-1 uk-position-top-left rounded-0">
                                             <progress class="uk-progress uk-border-square" value="" max="100"></progress>
@@ -121,9 +116,14 @@ if($items && count($items)){
                                         <button type="button" class="uk-button uk-button-danger uk-margin-small-right uk-hidden" data-tzinst-stop-importing><?php
                                             echo _e('Stop Importing', 'templaza-framework'); ?></button>
                                         <button type="button" class="uk-button uk-button-primary js-tzinst-import">
-                                            <span class="spinner-border spinner-border-sm uk-margin-small-right uk-hidden js-tzinst-importing-icon"></span><?php
-                                            _e('Install Demo Data', 'templaza-framework');
-                                            ?></button>
+                                            <span class="spinner-border spinner-border-sm uk-margin-small-right uk-hidden js-tzinst-importing-icon"></span>
+                                            <span class="js-tzinst-installing"><?php
+                                                _e('Install Demo Data', 'templaza-framework');
+                                            ?></span>
+                                            <span class="js-tzinst-installed uk-hidden"><?php
+                                                _e('Installed', 'templaza-framework');
+                                            ?></span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
