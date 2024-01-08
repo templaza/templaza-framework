@@ -41,6 +41,9 @@ if ( is_category() ) {
         if ( AP_Helper::is_inventory() ) {
             $inventory_page_id = AP_Helper::get_page_id('inventory');
             $title =  get_the_title($inventory_page_id);
+            if($title==''){
+                $title = post_type_archive_title( '', false);
+            }
         }else{
             $title = post_type_archive_title( '', false);
         }
