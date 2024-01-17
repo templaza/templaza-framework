@@ -8,7 +8,7 @@ $themes = $this -> getThemes();
 
 ?>
 <div class="tzinst-theme-install<?php echo !HelperLicense::is_authorised($this -> theme_name)?' no-license':''?>">
-    <div class="uk-child-width-1-3 uk-grid-match" data-uk-grid>
+    <div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l uk-grid-match" data-uk-grid>
         <?php
         if(!empty($themes)){
             foreach($themes as $item){
@@ -19,7 +19,7 @@ $themes = $this -> getThemes();
             <div class="item-inner uk-card uk-card-default uk-card-small uk-border-rounded uk-overflow-hidden uk-flex uk-flex-column">
                 <?php if(!empty($item['thumbnail'])){?>
                 <div class="uk-card-media-top">
-                    <img src="<?php echo $item['thumbnail'];?>" alt="<?php echo $item['title'];?>"/>
+                    <img src="<?php echo $item['thumbnail'];?>" alt="<?php echo $item['title'];?>" class="uk-width-1-1"/>
                 </div>
                 <?php } ?>
                 <div class="uk-card-body uk-height-1-1">

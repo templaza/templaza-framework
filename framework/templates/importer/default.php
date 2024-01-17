@@ -17,17 +17,17 @@ if($items && count($items)){
     $pass   = Admin_Functions::check_system_requirement();
     ?>
     <div class="tzinst-demo-import<?php echo !HelperLicense::is_authorised($this -> theme_name)?' no-license':''?>">
-        <div class="uk-child-width-expand@s" uk-grid>
+        <div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l" data-uk-grid>
             <?php foreach($items as $code => $item){
                 $theme_name             = isset($item['slug'])?$item['slug']:$code;
                 $this -> item           = $item;
                 $this -> product_code   = $theme_name;
 
                 ?>
-                <div class="uk-width-1-3">
+                <div>
                     <div class="uk-card uk-card-default uk-card-small uk-border-rounded uk-overflow-hidden">
                         <div class="uk-card-media-top">
-                            <img src="<?php echo $item['thumb']; ?>" alt="<?php echo $item['title']; ?>"/>
+                            <img src="<?php echo $item['thumb']; ?>" alt="<?php echo $item['title']; ?>" class="uk-width-1-1"/>
                         </div>
                         <div class="uk-card-body">
                             <h3 class="uk-card-title"><?php echo $item['title']; ?><?php
