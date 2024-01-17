@@ -14,7 +14,7 @@ if($items && count($items)){
     if(isset($optImported['pack']) && !is_array($optImported['pack'])){
         $optImported['pack']    = (array) $optImported['pack'];
     }
-    $pass   = Admin_Functions::check_system_requirement();
+    $pass       = Admin_Functions::check_system_requirement();
     ?>
     <div class="tzinst-demo-import<?php echo !HelperLicense::is_authorised($this -> theme_name)?' no-license':''?>">
         <div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l" data-uk-grid>
@@ -23,6 +23,7 @@ if($items && count($items)){
                 $this -> item           = $item;
                 $this -> product_code   = $theme_name;
 
+                $isImported = isset($optImported['pack']) && in_array($theme_name, $optImported['pack']);
                 ?>
                 <div>
                     <div class="uk-card uk-card-default uk-card-small uk-border-rounded uk-overflow-hidden">
@@ -60,14 +61,28 @@ if($items && count($items)){
                         </div>
                     </div>
                     <?php if(isset($item['demo-datas']) && count($item['demo-datas']) && !HelperLicense::has_expired($this -> theme_name)){ ?>
-                        <?php if(!$pass){ ?>
-                            <div id="tzinst-modal__import-sysinfo-<?php echo $item['slug']; ?>" uk-modal>
+                        <?php if(!$pass || $isImported){ ?>
+                            <div id="tzinst-modal__import-sysinfo-<?php echo $item['slug']; ?>" data-uk-modal>
                                 <div class="uk-modal-dialog">
                                     <div class="uk-modal-body uk-text-danger">
+                                        <?php if(!$pass){ ?>
                                         <p><?php $text = __('Currently, there are some values in PHP settings not sufficient enough for the theme to work properly.'
                                                 .' Please configure them again to ensure the theme has a smooth performance.', 'templaza-framework');
                                             echo $text;
                                             ?></p>
+                                        <?php } ?>
+                                        <?php
+                                        /* Confirm clear data first */
+                                        if($isImported) {
+                                        ?>
+                                        <p><?php
+                                            $text = __('Before importing the demo content of this theme, we suggest'
+                                                .' that you should clear the database of the current theme.'
+                                                .' You can refer to "<a href=\'%s\' target=\'_blank\'>WordPress Database Reset</a>" plugin to'
+                                                .' implement the database reset.', 'templaza-framework');
+                                            echo sprintf($text, esc_url(admin_url('plugin-install.php?s=WordPress%2520Database%2520Reset&tab=search&type=term')));
+                                            ?></p>
+                                        <?php } ?>
                                         <p><?php _e('Do you want to continue import demo data?', 'templaza-framework');?></p>
                                         <div class="action uk-margin-small-top">
                                             <a class="uk-button uk-button-danger uk-button-small" target="_blank" href="<?php
