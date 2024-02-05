@@ -190,7 +190,7 @@ if(!empty($unit) && is_array($unit)){
         echo '</select></div>';
     }
 
-    if($this -> field['multi_styles'] === true && true === $this -> field['google'] ){
+    if(isset($this -> field['multi_styles']) && $this -> field['multi_styles'] === true && true === $this -> field['google'] ){
         echo '<div class="select_wrapper typography-multi-style" original-title="'
             . esc_html__( 'Font style', 'redux-framework' ) . '">';
         echo '<label>' . esc_html__( 'Load Other Font Weight &amp; Style', 'templaza-framework' ) . '</label>';
