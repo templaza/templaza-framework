@@ -31,6 +31,7 @@ if (!$logo_type) {
     $mobile_logo        = isset($options['mobile-logo'])?$options['mobile-logo']:false;
     $sticky_header_logo= isset($options['sticky-logo'])?$options['sticky-logo']:false;
 }
+
 $class = ['templaza-logo', 'templaza-logo-' . $logo_type, 'uk-flex uk-flex-middle'];
 $logo_css = '';
 if(!empty($logo_size)){
