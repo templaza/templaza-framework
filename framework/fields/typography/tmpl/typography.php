@@ -727,11 +727,6 @@ if(!empty($unit) && is_array($unit)){
 
     echo '<div class="clearfix"></div>';
 
-    if ( Redux_Core::$pro_loaded ) {
-        // phpcs:ignore WordPress.NamingConventions.ValidHookName, WordPress.Security.EscapeOutput
-        echo apply_filters( 'redux/pro/typography/render/extra_inputs', null );
-    }
-
     /* Font Color */
     if ( true === $this -> field['color'] ) {
         $default = '';
@@ -756,16 +751,6 @@ if(!empty($unit) && is_array($unit)){
         echo 'type="text"';
         echo 'value="' . esc_attr( $this -> value['color'] ) . '"';
         echo 'data-id="' . esc_attr( $this -> field['id'] ) . '"';
-
-        if ( Redux_Core::$pro_loaded ) {
-            $data = array(
-                'field' => $this -> field,
-                'index' => 'color',
-            );
-
-            // phpcs:ignore WordPress.NamingConventions.ValidHookName
-            echo esc_html( apply_filters( 'redux/pro/render/color_alpha', $data ) );
-        }
 
         if(method_exists('Redux_Functions_Ex', 'output_alpha_data')) {
             $data = array(
@@ -826,11 +811,6 @@ if(!empty($unit) && is_array($unit)){
         }
 
         echo '<p data-preview-size="' . esc_attr( $in_use ) . '" class="clear ' . esc_attr( $this -> field['id'] ) . '_previewer typography-preview" style="' . esc_attr( $style ) . '">' . esc_html( $g_text ) . '</p>';
-
-        if ( Redux_Core::$pro_loaded ) {
-            // phpcs:ignore WordPress.NamingConventions.ValidHookName, WordPress.Security.EscapeOutput
-            echo apply_filters( 'redux/pro/typography/render/text_shadow', null );
-        }
 
         echo '</div>'; // end typography container.
     }

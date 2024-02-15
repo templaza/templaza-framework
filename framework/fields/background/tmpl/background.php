@@ -106,17 +106,6 @@ if ( true === $this->field['background-color'] ) {
     echo 'data-block-id="' . esc_attr( $field_id ) . '"';
     echo 'data-output-transparent="' . esc_attr( $this->field['output_transparent'] ) . '"';
 
-
-
-    if ( Redux_Core::$pro_loaded ) {
-        $data = array(
-            'field' => $this->field,
-            'index' => 'color',
-        );
-
-        echo esc_html( apply_filters( 'redux/pro/render/color_alpha', $data ) );
-    }
-
     echo '/>';
 
 //    echo '<input type="hidden" class="redux-saved-color" id="' . esc_attr( $this->field['id'] ) . '-saved-color" value="">';
