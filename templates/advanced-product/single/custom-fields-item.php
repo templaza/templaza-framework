@@ -32,6 +32,14 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                 <a href="<?php echo esc_url($file_url); ?>" download><?php
                     echo esc_html__('Download', 'templaza-framework')?></a>
                 <?php
+            }elseif($acf_f['type'] == 'text' || $acf_f['type'] == 'number'){
+                if($acf_f['prepend']){
+                    ?><span class="custom-field-prepend"><?php echo esc_html($acf_f['prepend']);?></span> <?php
+                }
+                echo esc_html(the_field($acf_f['name'], $product_id));
+                if($acf_f['append']){
+                    ?><span class="custom-field-append"><?php echo esc_html($acf_f['append']);?></span> <?php
+                }
             }else{
                 ?><?php echo esc_html(the_field($acf_f['name'], $product_id)); ?>
             <?php } ?>

@@ -192,14 +192,6 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				$this->field['units'] = 'px';
 			}
 
-			if ( Redux_Core::$pro_loaded ) {
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				$this->field = apply_filters( 'redux/pro/typography/field/set_defaults', $this->field );
-
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				$this->value = apply_filters( 'redux/pro/typography/value/set_defaults', $this->value );
-			}
-
 			// Get the google array.
 			$this->get_google_array();
 
@@ -284,10 +276,10 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 				)
 			);
 
-			if ( Redux_Core::$pro_loaded ) {
-				// phpcs:ignore WordPress.NamingConventions.ValidHookName
-				do_action( 'redux/pro/typography/enqueue' );
-			}
+//			if ( Redux_Core::$pro_loaded ) {
+//				// phpcs:ignore WordPress.NamingConventions.ValidHookName
+//				do_action( 'redux/pro/typography/enqueue' );
+//			}
 
 			if ( $this->parent->args['dev_mode'] ) {
 				wp_enqueue_style( 'redux-color-picker-css' );
@@ -503,18 +495,6 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 
 					if ( 'google' === $key || 'subsets' === $key || 'font-backup' === $key || empty( $value ) ) {
 						continue;
-					}
-
-					if ( Redux_Core::$pro_loaded ) {
-						// phpcs:ignored WordPress.NamingConventions.ValidHookName
-						$pro_data = apply_filters( 'redux/pro/typography/output', $data, $key, $value );
-
-						// phpcs:ignore WordPress.PHP.DontExtract
-						extract( $pro_data );
-
-						if ( $continue ) {
-							continue;
-						}
 					}
 
 					/* Override style of redux typography field

@@ -74,6 +74,23 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                     </div>
                 </div>
                 <?php
+            }elseif($acf_f['type'] == 'text' || $acf_f['type'] == 'number'){
+                ?>
+                <div class="ap-custom-fields uk-width-1-2 ap-custom-fields-style2">
+                    <div class="ap-field-label"><?php echo esc_html($acf_f['label']); ?></div>
+                    <div class="ap-field-value">
+                        <?php
+                        if($acf_f['prepend']){
+                            ?><span class="custom-field-prepend"><?php echo esc_html($acf_f['prepend']);?></span> <?php
+                        }
+                        echo esc_html(the_field($acf_f['name'], $product_id));
+                        if($acf_f['append']){
+                            ?><span class="custom-field-append"><?php echo esc_html($acf_f['append']);?></span> <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                <?php
             }else{
                 ?>
                 <div class="ap-custom-fields uk-width-1-2 ap-custom-fields-style2">

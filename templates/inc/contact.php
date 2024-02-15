@@ -24,11 +24,14 @@ if ($enable_contact) {
     $enable_contact_login     = isset($options['enable-contact-login'])?filter_var($options['enable-contact-login'], FILTER_VALIDATE_BOOLEAN):true;
     $contact_login            = $enable_contact_login && isset($options['contact-login'])?$options['contact-login']:'';
     $contact_login_icon       = $enable_contact_login && isset($options['contact-login-icon'])?$options['contact-login-icon']:'';
+    $contact_login_url        = isset($options['contact-login-url'])?$options['contact-login-url']:'';
+    $contact_login_url_custom = isset($options['contact-login-custom-url'])?$options['contact-login-custom-url']:'';
 
     $enable_contact_register  = isset($options['enable-contact-register'])?filter_var($options['enable-contact-register'], FILTER_VALIDATE_BOOLEAN):true;
     $contact_register         = $enable_contact_register && isset($options['contact-register'])?$options['contact-register']:'';
     $contact_register_icon    = $enable_contact_register && isset($options['contact-register-icon'])?$options['contact-register-icon']:'';
-
+    $contact_register_url        = isset($options['contact-register-url'])?$options['contact-register-url']:'';
+    $contact_register_url_custom = isset($options['contact-register-custom-url'])?$options['contact-register-custom-url']:'';
 
 }
 
@@ -72,7 +75,15 @@ if(!empty($contact_location) || !empty($contact_email)  || !empty($contact_phone
         <?php if($contact_login_icon){ ?>
             <i class="contact-icon <?php echo esc_attr($contact_login_icon);?>"></i>
         <?php } ?>
-        <a href="<?php echo esc_url(admin_url());?>"><?php echo esc_attr($contact_login);?></a>
+        <?php
+        if($contact_login_url == 'custom'){
+            ?>
+            <a href="<?php echo esc_url($contact_login_url_custom);?>"><?php echo esc_attr($contact_login);?></a>
+            <?php
+        }else{
+            ?>
+            <a href="<?php echo esc_url(admin_url());?>"><?php echo esc_attr($contact_login);?></a>
+        <?php } ?>
         </span>
         <?php
     }
@@ -82,7 +93,15 @@ if(!empty($contact_location) || !empty($contact_email)  || !empty($contact_phone
         <?php if($contact_register_icon){ ?>
             <i class="contact-icon <?php echo esc_attr($contact_register_icon);?>"></i>
         <?php } ?>
-        <a href="<?php echo esc_url(admin_url());?>"><?php echo esc_attr($contact_register);?></a>
+        <?php
+        if($contact_register_url == 'custom'){
+            ?>
+                <a href="<?php echo esc_url($contact_register_url_custom);?>"><?php echo esc_attr($contact_register);?></a>
+            <?php
+        }else{
+            ?>
+            <a href="<?php echo esc_url(admin_url());?>"><?php echo esc_attr($contact_register);?></a>
+        <?php } ?>
         </span>
         <?php
     }

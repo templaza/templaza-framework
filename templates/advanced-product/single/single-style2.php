@@ -307,6 +307,9 @@ $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields'
                 if($ap_office_price_form == 'custom'){
                     echo do_shortcode($ap_office_form_custom);
                 }else{
+                    ?>
+                    <h3 class="uk-modal-title"><?php echo esc_html(get_the_title($ap_office_price_form)); ?></h3>
+                    <?php
                     if(function_exists('wpforms')) {
                         echo do_shortcode('[wpforms id="' . $ap_office_price_form . '"]');
                     }

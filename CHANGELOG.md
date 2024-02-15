@@ -1,5 +1,49 @@
 # Changelog
 
+## Version 1.1.8 - February 15, 2024
+
+**Fix bugs:**
+
+- Fix issue install theme
+- Fix issue of fields with redux v4.4.13
+- Fix heading with woocommerce shop page
+- Fix issue load widget of widget element
+- Fix undefined multi_styles in typography
+- Fix slideshow in single advanced product
+- Fix single gallery shop woocommerce latest version
+
+**Improvement**
+
+- Update global colors
+- Update Fontawesome 6
+- Update UIkit v3.17.11
+- Update import theme package
+- Update style option disabled
+- Update style2 single advanced product
+- Update heading title for inventory page
+- Update support The Event Calendar plugin.
+- Edit style 3 custom field advanced product
+- Modified UIkit twitter icon to x-twitter icon
+- Auto change Woo filter button in small device
+- Remove class hide for elements list of tz_layout field
+- Update style single advanced product custom field in content
+- Update clear database notice before importing the demo content
+- Update option Load Other Font Weight & Style for body typography
+- Update Advanced Product display prepend, append of text field and number field
+
+**Added**
+
+- Add option element
+- Add span in button text
+- Add class for grid column
+- Add map in dealer listing
+- Add style for event ticket
+- Add style 7 advanced product
+- Add option change with, height logo
+- Add config for advanced product slider
+- Add option show/hide Vendor product number
+- Add login url, regiter url in settings/contact
+
 ## Version 1.1.6 - October 12, 2023
 
 **Fix bugs:**

@@ -3,6 +3,7 @@
 namespace TemPlazaFramework\Core;
 
 use Composer\Installers\VanillaInstaller;
+use Matrix\Exception;
 use TemPlazaFramework\Admin\Admin_Page_Function;
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Admin_Functions;
@@ -47,9 +48,10 @@ class Framework{
             require_once dirname(__FILE__) . '/includes/autoloader.php';
         }
 
+        $this -> register_arguments();
 
         if(is_admin()) {
-            $admin = new Admin_Page();
+            $admin = new Admin_Page($this);
             $admin->init();
 
             // Import my info when import data from templaza framework
@@ -72,13 +74,31 @@ class Framework{
         }
 
         // Register arguments
-        $this -> register_arguments();
+//        $this -> register_arguments();
         $this -> __load_config();
         $this -> init_post_types();
         $this -> init_global_settings();
     }
 
+//    public function register_admin_menu(){
+////        Menu_Admin::add_submenu_section('settings', array(
+////            'label' => __('Settings', 'templaza-framework'),
+////            'url'   => 'admin.php?page='.$this -> args['opt_name'].'_options',
+////        ));
+//    }
+
     public function hooks(){
+
+        // Hooks for global_colors controller
+        remove_action('wp_ajax_tzfrm_global_colors_ajax_save', array('Redux_AJAX_Save', 'save'));
+        add_action( 'wp_ajax_tzfrm_global_colors_ajax_save', array($this, 'ajax_save_global_colors'));
+        add_action( 'wp_ajax_nopriv_tzfrm_global_colors_ajax_save', array($this, 'ajax_save_global_colors'));
+        add_action('wp_ajax_redux_link_options-tzfrm_global_colors', array($this, 'import_global_colors_options'));
+        add_action('wp_ajax_nopriv_redux_link_options-tzfrm_global_colors', array($this, 'import_global_colors_options'));
+        add_action( 'wp_ajax_redux_download_options-tzfrm_global_colors', array($this, 'ajax_download_option_global_colors'));
+        add_action( 'wp_ajax_nopriv_redux_download_options-tzfrm_global_colors', array($this, 'ajax_download_option_global_colors'));
+
+//        add_action('admin_menu', array($this, 'register_admin_menu'), 12);
 
         add_filter('admin_body_class', array($this, 'admin_body_class'));
 
@@ -106,7 +126,7 @@ class Framework{
             }, 9);
 
             add_action('in_admin_header', array($this, 'remove_admin_notices'), 1000);
-            add_filter(TEMPLAZA_FRAMEWORK.'_admin_nav_tabs', array($this, 'admin_nav_tabs'), 1000);
+//            add_filter(TEMPLAZA_FRAMEWORK.'_admin_nav_tabs', array($this, 'admin_nav_tabs'), 1000);
 
             // Filter to remove redux adv
             add_filter("redux/{$this -> args['opt_name']}/localize", array($this, 'redux_localize'));
@@ -143,6 +163,158 @@ class Framework{
                 </div>
             </div>
             <?php
+        }
+    }
+
+    /**
+     * Store global colors options to json file
+     * (Function used for global_colors controller)
+     * */
+    public function ajax_save_global_colors(){
+
+        $return_array   = array(
+            'status'   => false
+        );
+        if ( isset( $_POST['opt_name'] ) && ! empty( $_POST['opt_name'] ) && isset( $_POST['data'] ) && ! empty( $_POST['data'] ) ) {
+            $post_data = wp_unslash( $_POST['data'] );
+
+            $values = \Redux_Functions_Ex::parse_str( $post_data );
+            $values = $values[ $_POST['opt_name'] ];
+
+            if(( isset( $values['import_code'] ) && ! empty( $values['import_code'] ) ) || ( isset( $values['import_link'] ) && ! empty( $values['import_link'] ) ) ){
+                $return_array['action'] = 'reload';
+                $values = json_decode($values['import_code']);
+            }
+
+            $folder = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION . '/global_colors';
+            if(!is_dir($folder)){
+                mkdir($folder, FS_CHMOD_DIR, true);
+            }
+
+            $file   = $folder.'/global_colors.json';
+
+            if(file_exists($file)){
+                unlink($file);
+            }
+
+            file_put_contents($file, json_encode($values), FS_CHMOD_FILE);
+
+            $return_array   = array_merge($return_array, array(
+                'status'    => 'success',
+                'options'  => $values,
+                'errors'   => null,
+                'warnings' => null,
+                'sanitize' => null,
+            ));
+        }
+
+        if ( isset( $return_array ) ) {
+
+            $redux = \Redux::instance( sanitize_text_field( wp_unslash( $_POST['opt_name'] ) ) );
+            if ( 'success' === $return_array['status'] ) {
+                if(!$redux -> transients){
+                    $redux -> transients    = array();
+                }
+//                        $redux -> transients['last_save'] = time();
+                $redux -> transients['last_save_mode'] = 'normal';
+//                        $redux -> transients['changed_values'] = $values;
+//                        $redux -> transients['last_compiler'] = time();
+//                        $redux -> transients['last_import'] = time();
+                if(!$redux -> transient_class){
+                    $redux -> transient_class   = new \Redux_Transients($redux);
+                }
+
+                $panel = new \Redux_Panel( $redux );
+                ob_start();
+                $panel->notification_bar();
+                $notification_bar = ob_get_contents();
+                ob_end_clean();
+                $return_array['notification_bar'] = $notification_bar;
+            }
+
+            // phpcs:ignore WordPress.NamingConventions.ValidHookName
+            echo wp_json_encode( apply_filters( 'redux/options/' . $_POST['opt_name'] . '/ajax_save/response', $return_array ) );
+        }
+
+        die();
+    }
+
+    /**
+     * Import global colors options.
+     */
+    public function link_options() {
+        $opt_name       = TEMPLAZA_FRAMEWORK_PREFIX.'_global_colors';
+
+        if ( ! isset( $_GET['secret'] ) || md5( md5( \Redux_Functions_Ex::hash_key() ) . '-' . $opt_name) !== $_GET['secret'] ) { // phpcs:ignore WordPress.Security.NonceVerification
+            wp_die( 'Invalid Secret for options use' );
+            exit;
+        }
+
+        $var    = array();
+        if(isset($_GET['post_id']) && !empty($_GET['post_id'])){
+            $style_id   = $_GET['post_id'];
+            $var    = $this ->get_options_by_post_id($style_id);
+        }
+        $var['redux-backup'] = 1;
+
+        if ( isset( $var['REDUX_imported'] ) ) {
+            unset( $var['REDUX_imported'] );
+        }
+
+        echo wp_json_encode( $var );
+
+        die();
+    }
+
+    /**
+     * Export global colors options
+     * */
+    public function ajax_download_option_global_colors(){
+        $opt_name   = TEMPLAZA_FRAMEWORK_PREFIX.'_global_colors';
+        if ( ! isset( $_GET['secret'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['secret'] ) ),
+                'redux_io_' . $opt_name ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+            wp_die( __('Invalid Secret for options use', 'templaza-framework') );
+            exit;
+        }
+
+        $options    = Functions::get_global_colors_options();
+
+        $backup_options                 = $options;
+        $backup_options['redux-backup'] = 1;
+
+        if ( isset( $backup_options['REDUX_imported'] ) ) {
+            unset( $backup_options['REDUX_imported'] );
+        }
+
+        // No need to escape this, as it's been properly escaped previously and through json_encode.
+        $content = wp_json_encode( $backup_options );
+
+        if ( isset( $_GET['action'] ) && 'redux_download_options-' . $opt_name === $_GET['action'] ) { // phpcs:ignore WordPress.Security.NonceVerification
+            header( 'Content-Description: File Transfer' );
+            header( 'Content-type: application/txt' );
+            header( 'Content-Disposition: attachment; filename="redux_options_"' . $opt_name
+                . '_backup_' . gmdate( 'd-m-Y' ) . '.json' );
+            header( 'Content-Transfer-Encoding: binary' );
+            header( 'Expires: 0' );
+            header( 'Cache-Control: must-revalidate' );
+            header( 'Pragma: public' );
+
+            echo( $content ); // phpcs:ignore WordPress.Security.EscapeOutput
+
+            exit;
+        } else {
+            header( 'Expires: Mon, 26 Jul 1997 05:00:00 GMT' );
+            header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . 'GMT' );
+            header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' );
+            header( 'Cache-Control: no-store, no-cache, must-revalidate' );
+            header( 'Cache-Control: post-check=0, pre-check=0', false );
+            header( 'Pragma: no-cache' );
+
+            // Can't include the type. Thanks old Firefox and IE. BAH.
+            // header('Content-type: application/json');.
+            echo( $content ); // phpcs:ignore WordPress.Security.EscapeOutput
+
+            exit;
         }
     }
 
@@ -334,6 +506,7 @@ class Framework{
     }
 
     public function get_arguments(){
+
         return $this -> args;
     }
 

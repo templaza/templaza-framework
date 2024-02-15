@@ -69,9 +69,17 @@ if(!empty($fields)){
                         <?php echo esc_html(join(',', $f_value)); ?>
                         <?php
                     }else{
-                        ?>
-                        <?php echo esc_html($f_value); ?>
-                        <?php
+                        if($f_attr['type'] == 'text' || $f_attr['type'] == 'number'){
+                            if($f_attr['prepend']){
+                                ?><span class="custom-field-prepend"><?php echo esc_html($f_attr['prepend']);?></span> <?php
+                            }
+                            echo esc_html($f_value);
+                            if($f_attr['append']){
+                                ?><span class="custom-field-append"><?php echo esc_html($f_attr['append']);?></span> <?php
+                            }
+                        }else{
+                            echo esc_html($f_value);
+                        }
                     }
                     ?></span>
             </div>

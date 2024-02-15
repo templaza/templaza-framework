@@ -14,20 +14,21 @@ if($items && count($items)){
     if(isset($optImported['pack']) && !is_array($optImported['pack'])){
         $optImported['pack']    = (array) $optImported['pack'];
     }
-    $pass   = Admin_Functions::check_system_requirement();
+    $pass       = Admin_Functions::check_system_requirement();
     ?>
     <div class="tzinst-demo-import<?php echo !HelperLicense::is_authorised($this -> theme_name)?' no-license':''?>">
-        <div class="uk-child-width-expand@s" uk-grid>
+        <div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l" data-uk-grid>
             <?php foreach($items as $code => $item){
                 $theme_name             = isset($item['slug'])?$item['slug']:$code;
                 $this -> item           = $item;
                 $this -> product_code   = $theme_name;
 
+                $isImported = isset($optImported['pack']) && in_array($theme_name, $optImported['pack']);
                 ?>
-                <div class="uk-width-1-3">
+                <div>
                     <div class="uk-card uk-card-default uk-card-small uk-border-rounded uk-overflow-hidden">
                         <div class="uk-card-media-top">
-                            <img src="<?php echo $item['thumb']; ?>" alt="<?php echo $item['title']; ?>"/>
+                            <img src="<?php echo $item['thumb']; ?>" alt="<?php echo $item['title']; ?>" class="uk-width-1-1"/>
                         </div>
                         <div class="uk-card-body">
                             <h3 class="uk-card-title"><?php echo $item['title']; ?><?php
@@ -40,8 +41,8 @@ if($items && count($items)){
                         <div class="action uk-padding-small uk-padding-remove-top uk-flex uk-flex-wrap">
                             <?php if(isset($item['demo-datas']) && count($item['demo-datas'])){ ?>
                                 <button type="button" data-toggle="modal" data-target="#tzinst-modal__import-<?php
-                                echo !$pass?'sysinfo':$theme_name; ?>" uk-toggle="target: #tzinst-modal__import-<?php
-                                echo !$pass?'sysinfo':$theme_name; ?>" class="uk-button uk-button-primary uk-margin-small-bottom uk-width-1-1" data-install-demo-data><?php
+                                echo !$pass?'sysinfo-'.$item['slug']:$theme_name; ?>" data-uk-toggle="target: #tzinst-modal__import-<?php
+                                echo !$pass?'sysinfo-'.$item['slug']:$theme_name; ?>" class="uk-button uk-button-primary uk-margin-small-bottom uk-width-1-1" data-install-demo-data><?php
                                     _e('Install Demo Data', 'templaza-framework');
                                     ?></button>
                             <?php } ?>
@@ -60,14 +61,28 @@ if($items && count($items)){
                         </div>
                     </div>
                     <?php if(isset($item['demo-datas']) && count($item['demo-datas']) && !HelperLicense::has_expired($this -> theme_name)){ ?>
-                        <?php if(!$pass){ ?>
-                            <div id="tzinst-modal__import-sysinfo" uk-modal>
+                        <?php if(!$pass || $isImported){ ?>
+                            <div id="tzinst-modal__import-sysinfo-<?php echo $item['slug']; ?>" data-uk-modal>
                                 <div class="uk-modal-dialog">
                                     <div class="uk-modal-body uk-text-danger">
+                                        <?php if(!$pass){ ?>
                                         <p><?php $text = __('Currently, there are some values in PHP settings not sufficient enough for the theme to work properly.'
                                                 .' Please configure them again to ensure the theme has a smooth performance.', 'templaza-framework');
                                             echo $text;
                                             ?></p>
+                                        <?php } ?>
+                                        <?php
+                                        /* Confirm clear data first */
+                                        if($isImported) {
+                                        ?>
+                                        <p><?php
+                                            $text = __('Before importing the demo content of this theme, we suggest'
+                                                .' that you should clear the database of the current theme.'
+                                                .' You can refer to "<a href=\'%s\' target=\'_blank\'>WordPress Database Reset</a>" plugin to'
+                                                .' implement the database reset.', 'templaza-framework');
+                                            echo sprintf($text, esc_url(admin_url('plugin-install.php?s=WordPress%2520Database%2520Reset&tab=search&type=term')));
+                                            ?></p>
+                                        <?php } ?>
                                         <p><?php _e('Do you want to continue import demo data?', 'templaza-framework');?></p>
                                         <div class="action uk-margin-small-top">
                                             <a class="uk-button uk-button-danger uk-button-small" target="_blank" href="<?php
@@ -105,11 +120,6 @@ if($items && count($items)){
                                     <?php echo $this -> load_template('demo_datas'); ?>
                                 </div>
                                 <div class="uk-modal-footer uk-text-right uk-position-relative">
-                                    <!--                                <div class="js-processing-box processing-box uk-margin-small-bottom uk-hidden">-->
-                                    <!--                                    <div class="progress uk-position-absolute uk-width-1-1 uk-position-top-left rounded-0">-->
-                                    <!--                                        <div class="progress-bar progress-bar-striped progress-bar-animated js-progress-bar uk-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>-->
-                                    <!--                                    </div>-->
-                                    <!--                                </div>-->
                                     <div class="js-processing-box processing-box uk-margin-small-bottom uk-hidden">
                                         <div class="progress uk-position-absolute uk-width-1-1 uk-position-top-left rounded-0">
                                             <progress class="uk-progress uk-border-square" value="" max="100"></progress>
@@ -121,9 +131,14 @@ if($items && count($items)){
                                         <button type="button" class="uk-button uk-button-danger uk-margin-small-right uk-hidden" data-tzinst-stop-importing><?php
                                             echo _e('Stop Importing', 'templaza-framework'); ?></button>
                                         <button type="button" class="uk-button uk-button-primary js-tzinst-import">
-                                            <span class="spinner-border spinner-border-sm uk-margin-small-right uk-hidden js-tzinst-importing-icon"></span><?php
-                                            _e('Install Demo Data', 'templaza-framework');
-                                            ?></button>
+                                            <span class="spinner-border spinner-border-sm uk-margin-small-right uk-hidden js-tzinst-importing-icon"></span>
+                                            <span class="js-tzinst-installing"><?php
+                                                _e('Install Demo Data', 'templaza-framework');
+                                            ?></span>
+                                            <span class="js-tzinst-installed uk-hidden"><?php
+                                                _e('Installed', 'templaza-framework');
+                                            ?></span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

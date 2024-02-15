@@ -1,5 +1,6 @@
 $grid-gutter-width:           2.5rem !default;
 @import "../../../assets/scss/vendor/uikit/variables-theme.scss";
+@import "../../../assets/scss/vendor/uikit/components/mixin.scss";
 @import "../../../assets/scss/vendor/uikit/mixins-theme.scss";
 
 :root { --uk-position-margin-offset: 0px; }

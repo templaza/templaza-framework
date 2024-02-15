@@ -383,6 +383,18 @@ class CSS{
         $color  = isset($color_options['color'])?$color_options['color']:'';
         $alpha  = isset($color_options['alpha'])?$color_options['alpha']:'';
         $rgba   = isset($color_options['rgba'])?$color_options['rgba']:'';
+        $global = isset($color_options['_global'])?$color_options['_global']:false;
+
+        if($global !== false && !empty($global)){
+            if($gbColor = Functions::get_global_color_by_id($global)){
+                $_gbColor    = isset($gbColor['color']) && !empty($gbColor['color'])?$gbColor['color']:false;
+                if(!empty($_gbColor)){
+                    $color  = isset($_gbColor['color'])?$_gbColor['color']:'';
+                    $alpha  = isset($_gbColor['alpha'])?$_gbColor['alpha']:'';
+                    $rgba   = isset($_gbColor['rgba'])?$_gbColor['rgba']:'';
+                }
+            }
+        }
 
         return self::make_color_rgba($color, $alpha, $rgba);
     }

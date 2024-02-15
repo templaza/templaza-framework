@@ -13,7 +13,7 @@ $typographies = array(
     array(
         'id'        => 'typography-body-option',
         'enable'    => (isset($options['typography-body']) && $options['typography-body'] =='custom'?true:false),
-        'class'     => 'html,body,.body'
+        'class'     => 'html,body,.body, .single-tribe_events .tribe-events-content, .single-tribe_events .tribe-events-event-meta'
     ),
     array(
         'id'        => 'typography-h1-option',

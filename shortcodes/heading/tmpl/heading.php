@@ -5,6 +5,7 @@ use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 use TemPlazaFramework\Fonts;
 use TemPlazaFramework\CSS;
+use Advanced_Product\Helper\AP_Helper;
 extract(shortcode_atts(array(
     'tz_id'                         => '',
     'tz_class'                      => '',
@@ -28,9 +29,21 @@ if ( is_category() ) {
 } elseif ( is_author() ) {
     $title = '<span class="vcard">' . get_the_author() . '</span>';
 } elseif ( is_post_type_archive() ) {
-    if(is_plugin_active( 'woocommerce/woocommerce.php' )) {
-        if ( is_shop() ) {
-            $title =  woocommerce_page_title(false);
+    if(is_post_type_archive( 'product' )){
+        if(class_exists( 'woocommerce' )) {
+            if ( is_shop() ) {
+                $title =  woocommerce_page_title(false);
+            }else{
+                $title = post_type_archive_title( '', false);
+            }
+        }
+    }elseif(is_post_type_archive( 'ap_product' )){
+        if ( AP_Helper::is_inventory() ) {
+            $inventory_page_id = AP_Helper::get_page_id('inventory');
+            $title =  get_the_title($inventory_page_id);
+            if($title==''){
+                $title = post_type_archive_title( '', false);
+            }
         }else{
             $title = post_type_archive_title( '', false);
         }

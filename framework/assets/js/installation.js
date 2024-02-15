@@ -571,6 +571,8 @@
                                         modal.find(".uk-modal-body").scrollTop(message_box.position().top);
 
                                         button.addClass("uk-button-success");
+                                        button.find(".js-tzinst-installing").addClass("uk-hidden");
+                                        button.find(".js-tzinst-installed").removeClass("uk-hidden");
                                     }
                                 }
                             } else {

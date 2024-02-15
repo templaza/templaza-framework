@@ -473,6 +473,19 @@ Templaza_API::set_section('templaza_header',
                     array('logo-type', '=', 'image') ),
             ),
             array(
+                'id'       => 'logo_size',
+                'type'     => 'dimensions',
+                'units'    => array('em','px'),
+                'title'    => esc_html__('Logo (Width/Height) Option', 'templaza-framework'),
+                'subtitle' => esc_html__('Allow your users to choose width, height, and/or unit. Empty is auto value', 'templaza-framework'),
+            ),
+            array(
+                'id'       => 'mobile-logo-hide',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Hide logo on mobile', 'templaza-framework' ),
+                'default'  => false,
+            ),
+            array(
                 'id'       => 'mobile-logo',
                 'type'     => 'media',
                 'url'      => true,
@@ -483,6 +496,16 @@ Templaza_API::set_section('templaza_header',
                 'required' => array(
                     array('logo-type', '=', 'image') ),
             ),
+            array(
+                'id'       => 'mobi_logo_size',
+                'type'     => 'dimensions',
+                'units'    => array('em','px'),
+                'title'    => esc_html__('Mobile Logo (Width/Height) Option', 'templaza-framework'),
+                'subtitle' => esc_html__('Allow your users to choose width, height, and/or unit. Empty is auto value', 'templaza-framework'),
+                'required' => array(
+                    array('mobile-logo-hide', '!=', '1') ),
+            ),
+
             array(
                 'id'       => 'sidebar-logo',
                 'type'     => 'media',

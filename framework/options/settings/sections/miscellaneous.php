@@ -141,6 +141,39 @@ Templaza_API::set_section('settings',
                 ),
             ),
             array(
+                'id'          => 'contact-login-url',
+                'type'        => 'select',
+                'title'       => __( 'Login Url', 'templaza-framework' ),
+                'options'     => array(
+                    'default'     => __('Default', 'templaza-framework'),
+                    'custom' => __('Custom Url', 'templaza-framework'),
+                ),
+                'required'    => array(
+                    array( 'enable-contact', '=', true ),
+                    array( 'enable-contact-login', '=', true ),
+                ),
+            ),
+            array(
+                'id'       => 'contact-login-custom-url',
+                'type'     => 'text',
+                'title'    => __( 'Login Custom Url', 'templaza-framework' ),
+                'required' => array(
+                    array( 'enable-contact', '=', true ),
+                    array( 'enable-contact-login', '=', true ),
+                    array( 'contact-login-url', '=', 'custom' ),
+                ),
+            ),
+            array(
+                'id'       => 'contact-login-welcome',
+                'type'     => 'text',
+                'title'    => __( 'Welcome User login', 'templaza-framework' ),
+                'required' => array(
+                    array( 'enable-contact', '=', true ),
+                    array( 'enable-contact-login', '=', true ),
+                ),
+                'default'   =>esc_html__('Welcome','templaza-framework'),
+            ),
+            array(
                 'id'       => 'enable-contact-register',
                 'type'     => 'switch',
                 'title'    => __( 'Enable register', 'templaza-framework' ),
@@ -166,6 +199,29 @@ Templaza_API::set_section('settings',
                 'required'    => array(
                     array( 'enable-contact', '=', true ),
                     array( 'enable-contact-register', '=', true ),
+                ),
+            ),
+            array(
+                'id'          => 'contact-register-url',
+                'type'        => 'select',
+                'title'       => __( 'Register Url', 'templaza-framework' ),
+                'options'     => array(
+                    'default'     => __('Default', 'templaza-framework'),
+                    'custom' => __('Custom Url', 'templaza-framework'),
+                ),
+                'required'    => array(
+                    array( 'enable-contact', '=', true ),
+                    array( 'enable-contact-register', '=', true ),
+                ),
+            ),
+            array(
+                'id'       => 'contact-register-custom-url',
+                'type'     => 'text',
+                'title'    => __( 'Register Custom Url', 'templaza-framework' ),
+                'required' => array(
+                    array( 'enable-contact', '=', true ),
+                    array( 'enable-contact-register', '=', true ),
+                    array( 'contact-register-url', '=', 'custom' ),
                 ),
             ),
         )

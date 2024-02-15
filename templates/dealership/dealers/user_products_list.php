@@ -18,7 +18,7 @@ $dealer_listing_label     = isset($templaza_options['ap_product-dealer-listing']
 $dealer_form_url     = isset($templaza_options['ap_product-dealer-form-url'])?$templaza_options['ap_product-dealer-form-url']:'';
 $ap_col_large        = isset($templaza_options['ap_product-column-large'])?$templaza_options['ap_product-column-large']:3;
 $endpoint   = QueryHelper::get_current_endpoint();
-
+$ap_show_vendor_number    = isset($templaza_options['ap_product-single-vendor-count'])?$templaza_options['ap_product-single-vendor-count']:true;
 if($endpoint){
     $author = get_user_by('login', $endpoint);
 
@@ -50,6 +50,9 @@ if($endpoint){
                                     <h3 class="uk-card-title uk-margin-remove-bottom">
                                         <?php echo $author -> get('display_name');?>
                                     </h3>
+                                    <?php
+                                    if($ap_show_vendor_number){
+                                    ?>
                                     <p class="uk-text-meta uk-margin-remove-top">
                                         <?php
                                         if(ProductHelper::get_total_by_user_id($author -> ID) == 1){
@@ -59,6 +62,9 @@ if($endpoint){
                                         }
                                         ?>
                                     </p>
+                                    <?php
+                                    }
+                                    ?>
                                     <?php if(!empty($author_desc)){ ?>
                                         <div class="description uk-margin-bottom"><?php echo $author_desc; ?></div>
                                     <?php }?>

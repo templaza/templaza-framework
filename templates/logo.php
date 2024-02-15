@@ -5,6 +5,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
+use \TemPlazaFramework\CSS;
 
 $gb_options                 = Functions::get_theme_options();
 $options                    = Functions::get_header_options();
@@ -17,6 +18,9 @@ $tag_line   = get_bloginfo('description');
 $logo_type                  = isset($options['logo-type'])?$options['logo-type']:'image'; // Logo Type
 $header_mode                = isset($options['header-mode'])?$options['header-mode']:'horizontal';
 $header_stacked_menu_mode   = isset($options['header-stacked-menu-mode'])?$options['header-stacked-menu-mode']:'center';
+$logo_size   = isset($options['logo_size'])?$options['logo_size']:'';
+$logo_mobile_hide   = isset($options['mobile-logo-hide'])?filter_var($options['mobile-logo-hide'], FILTER_VALIDATE_BOOLEAN):false;
+$logo_mobile_size   = isset($options['mobi_logo_size'])?$options['mobi_logo_size']:'';
 
 if (!$logo_type) {
     $logo_text    = isset($options['logo-text'])?$options['logo-text']:$blog_title;
@@ -29,6 +33,32 @@ if (!$logo_type) {
 }
 
 $class = ['templaza-logo', 'templaza-logo-' . $logo_type, 'uk-flex uk-flex-middle'];
+$logo_css = '';
+if(!empty($logo_size)){
+    if(isset($logo_size['width']) && !empty($logo_size['width']) && strlen($logo_size['width'])>3){
+        $logo_css .= 'width:'.$logo_size['width'].' !important;';
+    }
+    if(isset($logo_size['height']) && !empty($logo_size['height']) && strlen($logo_size['height'])>3){
+        $logo_css .= 'height:'.$logo_size['height'].' !important;';
+    }
+}
+if($logo_css){
+    $logo_style = '.templaza-logo img, .templaza-logo svg{ ' . $logo_css . '}';
+    Templates::add_inline_style($logo_style);
+}
+$logo_mobile_css = '';
+if(!empty($logo_mobile_size)){
+    if(isset($logo_mobile_size['width']) && !empty($logo_mobile_size['width']) && strlen($logo_mobile_size['width'])>3){
+        $logo_mobile_css .= 'width:'.$logo_mobile_size['width'].' !important;';
+    }
+    if(isset($logo_mobile_size['height']) && !empty($logo_mobile_size['height']) && strlen($logo_mobile_size['height'])>3){
+        $logo_mobile_css .= 'height:'.$logo_mobile_size['height'].' !important;';
+    }
+}
+if($logo_mobile_css){
+    $logo_mobile_style = '.templaza-logo img.templaza-logo-mobile, .templaza-logo svg.templaza-logo-mobile{ ' . $logo_mobile_css . '}';
+    Templates::add_inline_style($logo_mobile_style,'mobile');
+}
 ?>
 <!-- logo starts -->
 <!-- <div class="<?php /* echo implode(' ', $class); */ ?>"> -->
@@ -63,26 +93,26 @@ $class = ['templaza-logo', 'templaza-logo-' . $logo_type, 'uk-flex uk-flex-middl
           ?>
          <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-default uk-preserve"<?php
          echo $log_svg; ?>/>
-      <?php } ?>
-      <?php
-      $logo_mobile_url = Functions::get_theme_default_logo_url('logo_mobile');
-      if(!empty($mobile_logo) && isset($mobile_logo['url']) && !empty($mobile_logo['url'])
-          && !Functions::is_external_url($mobile_logo['url'])){
-          $logo_mobile_url = $mobile_logo['url'];
-      }
-      if(empty($mobile_logo['url']) && !empty($default_logo) && !empty($default_logo['url'])){
-          $logo_mobile_url = $default_logo['url'];
-      }
-      if(!empty($logo_mobile_url)){
-          $log_svg              = '';
-          if(Functions::file_ext_exists($logo_mobile_url, 'svg')){
-              $log_svg  = ' data-uk-svg';
+      <?php }
+      if($logo_mobile_hide == false){
+          $logo_mobile_url = Functions::get_theme_default_logo_url('logo_mobile');
+          if(!empty($mobile_logo) && isset($mobile_logo['url']) && !empty($mobile_logo['url'])
+              && !Functions::is_external_url($mobile_logo['url'])){
+              $logo_mobile_url = $mobile_logo['url'];
           }
+          if(empty($mobile_logo['url']) && !empty($default_logo) && !empty($default_logo['url'])){
+              $logo_mobile_url = $default_logo['url'];
+          }
+          if(!empty($logo_mobile_url)){
+              $log_svg              = '';
+              if(Functions::file_ext_exists($logo_mobile_url, 'svg')){
+                  $log_svg  = ' data-uk-svg';
+              }
           ?>
          <img src="<?php echo $logo_mobile_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-mobile uk-preserve"<?php
          echo $log_svg; ?>/>
-      <?php } ?>
-      <?php
+      <?php }
+      }
       $logo_url = Functions::get_theme_default_logo_url('logo_sticky');
       if(!empty($sticky_header_logo) && isset($sticky_header_logo['url']) && !empty($sticky_header_logo['url'])
           && !Functions::is_external_url($sticky_header_logo['url'])){

@@ -22,7 +22,7 @@ if(!empty($social_profiles)){
     $social_gap         = isset($options['social-gap']) ? 'uk-grid-' . $options['social-gap'] : '';
 ?>
 
-<ul<?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="uk-child-width-auto uk-grid-collapse <?php
+<ul<?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="uk-child-width-auto uk-grid-collapse uk-grid <?php
 echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" data-uk-grid>
    <?php
    foreach ($social_profiles as $social_profile) {
