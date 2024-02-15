@@ -13,11 +13,11 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
     $templaza_options = Functions::get_theme_options();
 }
 $widget_heading_style       = isset($templaza_options['widget_box_heading_style'])?$templaza_options['widget_box_heading_style']:'';
-$ap_office_price           = isset($templaza_options['ap_product-office-price'])?$templaza_options['ap_product-office-price']:true;
-$ap_office_price_label     = isset($templaza_options['ap_product-office-price-label'])?$templaza_options['ap_product-office-price-label']:'MAKE AN OFFER PRICE';
-$ap_office_price_form      = isset($templaza_options['ap_product-office-price-form'])?$templaza_options['ap_product-office-price-form']:'';
-$ap_office_form_custom     = isset($templaza_options['ap_product-office-price-form-custom'])?$templaza_options['ap_product-office-price-form-custom']:'';
-$ap_office_form_custom_url     = isset($templaza_options['ap_product-office-price-form-custom-url'])?$templaza_options['ap_product-office-price-form-custom-url']:'';
+$ap_offer_price           = isset($templaza_options['ap_product-office-price'])?$templaza_options['ap_product-office-price']:true;
+$ap_offer_price_label     = isset($templaza_options['ap_product-office-price-label'])?$templaza_options['ap_product-office-price-label']:'MAKE AN OFFER PRICE';
+$ap_offer_price_form      = isset($templaza_options['ap_product-office-price-form'])?$templaza_options['ap_product-office-price-form']:'';
+$ap_offer_form_custom     = isset($templaza_options['ap_product-office-price-form-custom'])?$templaza_options['ap_product-office-price-form-custom']:'';
+$ap_offer_form_custom_url     = isset($templaza_options['ap_product-office-price-form-custom-url'])?$templaza_options['ap_product-office-price-form-custom-url']:'';
 $ap_content_group     = isset($templaza_options['ap_product-single-group-content'])?$templaza_options['ap_product-single-group-content']:'';
 $ap_content_group_sticky     = isset($templaza_options['ap_product-single-group-content-sticky'])?$templaza_options['ap_product-single-group-content-sticky']:false;
 $ap_vendor_contact     = isset($templaza_options['ap_product-vendor-contact'])?$templaza_options['ap_product-vendor-contact']:'';
@@ -28,9 +28,15 @@ $show_compare_button= get_field('ap_show_archive_compare_button', 'option');
 $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
 $ap_show_vendor           = isset($templaza_options['ap_product-single-vendor'])?$templaza_options['ap_product-single-vendor']:true;
+$ap_show_vendor_number    = isset($templaza_options['ap_product-single-vendor-count'])?$templaza_options['ap_product-single-vendor-count']:true;
 $ap_share           = isset($templaza_options['ap_product-single-share'])?$templaza_options['ap_product-single-share']:false;
 $ap_comment           = isset($templaza_options['ap_product-single-comment'])?$templaza_options['ap_product-single-comment']:true;
 $ap_share_label     = isset($templaza_options['ap_product-single-share-label'])?$templaza_options['ap_product-single-share-label']:'';
+
+$ap_form_rental     = isset($templaza_options['ap_product-form-rental'])?$templaza_options['ap_product-form-rental']:'';
+$ap_rental_label     = isset($templaza_options['ap_product-form-rental-label'])?$templaza_options['ap_product-form-rental-label']:'';
+$ap_rental_url     = isset($templaza_options['ap_product-form-rental-url'])?$templaza_options['ap_product-form-rental-url']:'';
+$ap_rental_custom     = isset($templaza_options['ap_product-form-rental-custom'])?$templaza_options['ap_product-form-rental-custom']:'';
 
 do_action('templaza_set_postviews',get_the_ID());
 $author_id = get_post_field( 'post_author', get_the_ID() );
@@ -63,7 +69,7 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                                 <a class="facebook" title="<?php esc_attr_e('Share on Facebook','amanus');?>" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_the_permalink(get_the_ID())); ?>">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a class="twitter" title="<?php esc_attr_e('Share on Twitter','amanus');?>" target="_blank" href="https://twitter.com/home?status=Check%20out%20this%20article:%20<?php print esc_attr($tweet_title); ?>%20-%20<?php echo urlencode(get_the_permalink(get_the_ID())); ?>">
+                                <a class="twitter" title="<?php esc_attr_e('Share on Twitter','amanus');?>" target="_blank" href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_the_permalink(get_the_ID())); ?>&text=<?php echo urlencode(get_the_title(get_the_ID())); ?>">
                                     <i class="fa-brands fa-x-twitter"></i>
                                 </a>
                                 <?php $templaza_pin_image = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID())); ?>
@@ -86,13 +92,13 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                             AP_Templates::load_my_layout('single.price');
                             ?>
                         </div>
-                        <?php if($ap_office_price){
-                            if($ap_office_price_form == 'custom_url'){
+                        <?php if($ap_offer_price){
+                            if($ap_offer_price_form == 'custom_url'){
                                 ?>
                                 <div class=" hightlight-box uk-margin-left">
-                                    <a class="highlight uk-flex uk-flex-between uk-flex-middle" href="<?php echo esc_url($ap_office_form_custom_url);?>">
+                                    <a class="highlight uk-flex uk-flex-between uk-flex-middle" href="<?php echo esc_url($ap_offer_form_custom_url);?>">
                                     <span>
-                                        <?php echo esc_html($ap_office_price_label);?>
+                                        <?php echo esc_html($ap_offer_price_label);?>
                                     </span>
                                     </a>
                                 </div>
@@ -102,7 +108,7 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                                 <div class=" hightlight-box uk-margin-left">
                                     <a class="highlight uk-flex uk-flex-between uk-flex-middle" href="#modal-center" data-uk-toggle>
                                     <span>
-                                        <?php echo esc_html($ap_office_price_label);?>
+                                        <?php echo esc_html($ap_offer_price_label);?>
                                     </span>
                                     </a>
                                 </div>
@@ -129,7 +135,13 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                                                     <?php the_author();?>
                                                 </a>
                                             </h3>
+                                            <?php
+                                            if($ap_show_vendor_number){
+                                            ?>
                                             <p class="uk-text-meta uk-margin-remove-top"><?php echo esc_html($ap_count);?> <?php esc_html_e('Products','templaza-framework');?></p>
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -208,11 +220,11 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                         AP_Templates::load_my_layout('single.price');
                         ?>
                     </div>
-                    <?php if($ap_office_price){ ?>
+                    <?php if($ap_offer_price){ ?>
                         <div class=" hightlight-box uk-margin-left">
                             <a class="highlight uk-flex uk-flex-between uk-flex-middle" href="#modal-center" data-uk-toggle>
                                 <span>
-                                    <?php echo esc_html($ap_office_price_label);?>
+                                    <?php echo esc_html($ap_offer_price_label);?>
                                 </span>
                             </a>
                         </div>
@@ -296,7 +308,7 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
     AP_Templates::load_my_layout('single.related');
     ?>
 </div>
-<?php if($ap_office_price){ ?>
+<?php if($ap_offer_price){ ?>
     <div id="modal-center" class="uk-flex-top ap-modal" data-uk-modal>
         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 
@@ -304,14 +316,14 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
 
             <div class="get-price">
                 <?php
-                if($ap_office_price_form == 'custom'){
-                    echo do_shortcode($ap_office_form_custom);
+                if($ap_offer_price_form == 'custom'){
+                    echo do_shortcode($ap_offer_form_custom);
                 }else{
                     ?>
-                    <h3 class="uk-modal-title"><?php echo esc_html(get_the_title($ap_office_price_form)); ?></h3>
+                    <h3 class="uk-modal-title"><?php echo esc_html(get_the_title($ap_offer_price_form)); ?></h3>
                     <?php
                     if(function_exists('wpforms')) {
-                        echo do_shortcode('[wpforms id="' . $ap_office_price_form . '"]');
+                        echo do_shortcode('[wpforms id="' . $ap_offer_price_form . '"]');
                     }
                 }
                 ?>
