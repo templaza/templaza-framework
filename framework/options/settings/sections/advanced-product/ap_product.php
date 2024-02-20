@@ -199,6 +199,15 @@ Templaza_API::set_section('settings',
                 ),
                 'default'  => 'default',
                 'required' => array('ap_product-layout', '=' , array('grid','masonry'))
+            ),array(
+                'id'       => 'ap_product-cat-description',
+                'type'     => 'select',
+                'title'    => esc_html__('Show category description on', 'templaza-framework'),
+                'options'  => array(
+                    'top' => esc_html__('Top','templaza-framework'),
+                    'bottom' => esc_html__('Bottom','templaza-framework'),
+                ),
+                'default'  => 'top',
             ),
             array(
                 'id'       => 'ap_product-archive-layout-switch',
