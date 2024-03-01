@@ -556,6 +556,7 @@ class Framework{
             'hide_reset'          => false,
             'hide_expand'         => true,
             'ajax_save'           => true,
+            'flyout_submenus'     => false, // Disables the flyout submenus for submenus on the option panel.
 
             'compiler'            => true,
             // Initiate the compiler hook
