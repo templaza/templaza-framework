@@ -16,7 +16,6 @@
 	var isSelecting = false;
 	var org_redux_field_typography__select	 = redux.field_objects.typography.select;
 	redux.field_objects.typography.select = function( selector, skipCheck, destroy, fontName, active ) {
-		console.log("Typography select");
 
 		org_redux_field_typography__select(selector, skipCheck, destroy, fontName, active);
 
@@ -159,7 +158,8 @@
 						details.variants,
 						function (index, variant) {
 							index = null;
-							if (multi_style.indexOf(variant.id) !== -1 || 1 === redux.field_objects.typography.size(details.variants)) {
+							if ((typeof multi_style !== "undefined" && multi_style.indexOf(variant.id) !== -1)
+								|| 1 === redux.field_objects.typography.size(details.variants)) {
 								selected = ' selected="selected"';
 								selected_style.push(variant.id);
 								// multi_style = variant.id;
