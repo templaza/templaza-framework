@@ -43,6 +43,20 @@ $ap_styles    = array(
             'ap_product-side-box-bg-color',
         ),
     ),
+    array(
+        'enable'    => true,
+        'class'     => '.single .ap-related-product .uk-slider-container',
+        'options' => array(
+            'ap_product-related-padding',
+        ),
+    ),
+    array(
+        'enable'    => true,
+        'class'     => '.templaza-ap-single .ap-content-group-scroll::before',
+        'options' => array(
+            'ap_product-side-box-bg-color',
+        ),
+    ),
     // Archive
     array(
         'enable'    => true,

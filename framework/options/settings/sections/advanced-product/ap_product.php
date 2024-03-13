@@ -323,12 +323,6 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'default'  => '',
             ),
             array(
-                'id'       => 'ap_product-loop-bg-color',
-                'type'     => 'background',
-                'title'    => esc_html__( 'Product Loop Background', 'templaza-framework' ),
-                'subtitle' => esc_html__( 'Select the background for product loop item.', 'templaza-framework' ),
-            ),
-            array(
                 'id'     => 'ap_product-loop-padding',
                 'type'   => 'spacing',
                 'mode'   => 'padding',
@@ -671,12 +665,7 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                 'title'  => esc_html__('Single Box Margin', 'templaza-framework'),
             ),
-            array(
-                'id'       => 'ap_product-side-box-bg-color',
-                'type'     => 'background',
-                'title'    => esc_html__( 'Single Side Box Background', 'templaza-framework' ),
-                'subtitle' => esc_html__( 'Select the background for single side box item.', 'templaza-framework' ),
-            ),
+
             array(
                 'id'     => 'ap_product-side-box-padding',
                 'type'   => 'spacing',
@@ -820,6 +809,15 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'title'    => esc_html__( 'Show Dots', 'templaza-framework' ),
                 'default'  => true,
                 'required' => array('ap_product-related', '=' , true),
+            ),
+            array(
+                'id'     => 'ap_product-related-padding',
+                'type'   => 'spacing',
+                'mode'   => 'padding',
+                'all'    => false,
+                'allow_responsive'    => true,
+                'units'  => array( 'em', 'px', '%' ),
+                'title'  => esc_html__('Related Box Padding', 'templaza-framework'),
             ),
             array(
                 'id'       => 'ap_product-related-spec-limit',

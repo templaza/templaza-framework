@@ -100,9 +100,9 @@ $typographies = array(
         'id'        => 'typography-footer-widget-heading',
         'enable'    => (isset($options['typography-footer']) && $options['typography-footer'] =='custom'?true:false),
         'class'     => array(
-            'desktop'    => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3',
-            'tablet'     => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3',
-            'mobile'     => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3',
+            'desktop'    => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3, .templaza-footer h2, .templaza-footer h4',
+            'tablet'     => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3, .templaza-footer h2, .templaza-footer h4',
+            'mobile'     => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3, .templaza-footer h2, .templaza-footer h4',
         )
     ),
     array(
