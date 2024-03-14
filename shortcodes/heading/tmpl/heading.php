@@ -12,6 +12,7 @@ extract(shortcode_atts(array(
     'heading_tag'                   => 'h1',
     'custom_heading'                => '',
     'heading_custom_class'          => '',
+    'heading_color'                 => '',
     'enable_heading_custom_font'     => false,
     'typography_heading_element'    => '',
     'heading_margin'                => '',
@@ -95,6 +96,15 @@ if(!empty($heading)){
     ?>
 </div>
 <?php
+    $heading_color_css ='';
+    if($heading_color){
+        $heading_color = json_decode($heading_color,true);
+        $heading_color = CSS::make_color_rgba_redux($heading_color);
+        if($heading_color !=''){
+            $heading_color_css .= '#'.$tz_id.'.templaza-heading *{color:'.$heading_color.'}';
+            Templates::add_inline_style($heading_color_css);
+        }
+    }
     $typographies = array(
         array(
             'id'        => 'typography-heading-element',

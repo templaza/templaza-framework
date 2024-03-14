@@ -79,6 +79,11 @@ if(!class_exists('TemplazaFramework_ShortCode_Heading')){
                         'default'  => false,
                     ),
                     array(
+                        'id'       => 'heading_color',
+                        'type'     => 'color_rgba',
+                        'title'    => esc_html__( 'Heading Color', 'templaza-framework' ),
+                    ),
+                    array(
                         'id'       => 'enable_heading_custom_font',
                         'type'     => 'switch',
                         'title'    => esc_html__('Heading Custom font', 'templaza-framework'),

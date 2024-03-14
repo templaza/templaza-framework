@@ -35,6 +35,11 @@ if(!class_exists('TemplazaFramework_ShortCode_Breadcrumb')){
                         'subtitle' => esc_html__( 'Set the color hover of Breadcrumb.', 'templaza-framework' ),
                     ),
                     array(
+                        'id'       => 'breadcrumb_color_active',
+                        'type'     => 'color_rgba',
+                        'title'    => esc_html__( 'Breadcrumb active Color', 'templaza-framework' ),
+                    ),
+                    array(
                         'id'       => 'enable_breadcrumb_single',
                         'type'     => 'switch',
                         'title'    => esc_html__('Show Breadcrumb in single post', 'templaza-framework'),
