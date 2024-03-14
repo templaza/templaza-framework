@@ -15,7 +15,7 @@ if($taxonomy == true){
         foreach ($all_tax as $key=>$tax){
             ?>
             <div class="uk-grid-collapse ap-custom-fields-style3" data-uk-grid>
-                <div class="uk-width-2-5 ap-field-label"><?php echo esc_html($key); ?></div>
+                <div class="uk-width-2-5 ap-field-label field-label"><?php echo esc_html($key); ?></div>
                 <div class="field-value uk-width-3-5 uk-text-right ap-field-value">
                     <?php echo esc_html($tax); ?>
                 </div>
@@ -73,7 +73,7 @@ if($taxonomy == true){
                 }elseif($acf_f['type'] == 'text' || $acf_f['type'] == 'number'){
                     ?>
                     <div class="uk-grid-collapse ap-custom-fields-style3" data-uk-grid>
-                        <div class="uk-width-2-5 ap-field-label"><?php echo esc_html($acf_f['label']); ?></div>
+                        <div class="uk-width-2-5 ap-field-label field-label"><?php echo esc_html($acf_f['label']); ?></div>
                         <div class="field-value uk-width-3-5 uk-text-right ap-field-value">
                             <?php
                             if($acf_f['prepend']){
@@ -90,7 +90,7 @@ if($taxonomy == true){
                 }else{
                     ?>
                     <div class="uk-grid-collapse ap-custom-fields-style3" data-uk-grid>
-                        <div class="uk-width-2-5 ap-field-label"><?php echo esc_html($acf_f['label']); ?></div>
+                        <div class="uk-width-2-5 ap-field-label field-label"><?php echo esc_html($acf_f['label']); ?></div>
                         <div class="field-value uk-width-3-5 uk-text-right ap-field-value">
                             <?php
                             echo esc_html(the_field($acf_f['name'], $product_id));

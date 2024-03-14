@@ -12,10 +12,39 @@ $errorButton    = isset($options['404-call-to-action'])?$options['404-call-to-ac
 // Background Image
 $background_setting_404    = isset($options['404-background-setting'])?$options['404-background-setting']:0;
 $background_overlay    = isset($options['404-background-overlay'])?$options['404-background-overlay']:'';
-
+$title_color    = isset($options['404-title-color'])?$options['404-title-color']:'';
+$title_color     = CSS::make_color_rgba_redux($title_color);
+$text_color    = isset($options['404-text-color'])?$options['404-text-color']:'';
+$text_color     = CSS::make_color_rgba_redux($text_color);
+$input_bg_color    = isset($options['404-input-bg'])?$options['404-input-bg']:'';
+$input_bg_color     = CSS::make_color_rgba_redux($input_bg_color);
+$input_color    = isset($options['404-input-color'])?$options['404-input-color']:'';
+$input_color     = CSS::make_color_rgba_redux($input_color);
 $styles = '';
 $style_overlay = '';
 $video  = [];
+$color_css = [];
+if (!empty($title_color)) {
+    $color_css[]    = '
+    .templaza-error-page h1 span{color:' . $title_color . ';}';
+}
+if (!empty($text_color)) {
+    $color_css[]    = '
+    .templaza-error-page h3, .templaza-error-page {color:' . $text_color . ';}';
+}
+if (!empty($input_bg_color)) {
+    $color_css[]    = '
+    .templaza-error-page .searchform input[type="text"]{background-color:' . $input_bg_color . ';}';
+}
+if (!empty($input_color)) {
+    $color_css[]    = '
+    .templaza-error-page .searchform input[type="text"]{color:' . $input_color . ';}';
+}
+if (!empty($color_css)) {
+    Templates::add_inline_style(implode('', $color_css));
+}
+
+
 if($background_setting_404){
     if($background_setting_404 =="color"){
         $background_color_404 = isset($options['404-background-color'])?$options['404-background-color']:'';

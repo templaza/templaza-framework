@@ -15,7 +15,7 @@ if($taxonomy == true){
         foreach ($all_tax as $key=>$tax){
             ?>
             <div class="uk-grid-small ap-custom-fields-style1" data-uk-grid>
-                <div class="uk-width-expand" data-uk-leader><?php echo esc_html($key); ?></div>
+                <div class="uk-width-expand field-label" data-uk-leader><?php echo esc_html($key); ?></div>
                 <div class="field-value">
                     <?php echo esc_html($tax); ?>
                 </div>
@@ -37,7 +37,7 @@ if($taxonomy == true){
             }else{
                 ?>
                 <div class="uk-grid-small ap-custom-fields-style1" data-uk-grid>
-                    <div class="uk-width-expand" data-uk-leader><?php echo esc_html($acf_f['label']); ?></div>
+                    <div class="uk-width-expand field-label" data-uk-leader><?php echo esc_html($acf_f['label']); ?></div>
                     <div class="field-value">
                         <?php
                         $html   = apply_filters('advanced-product/field/value_html/type='.$acf_f['type'], '', $f_value, $acf_f, $field);
