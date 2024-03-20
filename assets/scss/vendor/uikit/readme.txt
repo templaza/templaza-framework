@@ -1,4 +1,4 @@
-UIkit - version 3.19.0
+UIkit - version 3.19.2
 
     UIkit is a lightweight and modular front-end framework for developing fast and powerful web interfaces.
 
