@@ -425,6 +425,7 @@ $designs    = array(
         'options' => array(
             'blog_media_padding',
             'blog_media_margin',
+            'blog-page-thumbnail-radius',
         ),
     ),
     // Single

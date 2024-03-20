@@ -280,10 +280,9 @@
 
         $products.wrap('<div class="swiper-container linked-products-carousel" style="opacity: 0;"></div>');
         $products.addClass('swiper-wrapper');
-        $products.find('li.product').addClass('swiper-slide');
+        $products.find('li.product').addClass('swiper-slide uk-width-auto');
 
         var $number = templaza_woo.$body.hasClass('product-full-width') ? 5 : 4;
-
         var options = {
             loop: false,
             on: {

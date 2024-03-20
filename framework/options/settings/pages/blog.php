@@ -86,6 +86,14 @@ Templaza_API::set_section('settings',
                 'required' => array('blog-page-thumbnail', '=' , true)
             ),
             array(
+                'id'       => 'blog-page-thumbnail-radius',
+                'type'     => 'spacing',
+                'mode'     => 'border-radius',
+                'allow_responsive'    => true,
+                'title'    => __('Thumbnail radius', 'templaza-framework'),
+                'default'  => '',
+            ),
+            array(
                 'id'       => 'blog-page-date',
                 'type'     => 'switch',
                 'title'    => __( 'Show Date', 'templaza-framework' ),

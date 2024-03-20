@@ -22,17 +22,18 @@ $logo_size   = isset($options['logo_size'])?$options['logo_size']:'';
 $logo_mobile_hide   = isset($options['mobile-logo-hide'])?filter_var($options['mobile-logo-hide'], FILTER_VALIDATE_BOOLEAN):false;
 $logo_mobile_size   = isset($options['mobi_logo_size'])?$options['mobi_logo_size']:'';
 
-if (!$logo_type) {
+if ($logo_type=='text') {
     $logo_text    = isset($options['logo-text'])?$options['logo-text']:$blog_title;
     $tag_line    = isset($options['tag-line'])?$options['tag-line']:$tag_line;
+    $class = ['templaza-logo', 'templaza-logo-' . $logo_type, ''];
 } else {
     // Logo file
     $default_logo       = isset($options['default-logo'])?$options['default-logo']:false;
     $mobile_logo        = isset($options['mobile-logo'])?$options['mobile-logo']:false;
     $sticky_header_logo= isset($options['sticky-logo'])?$options['sticky-logo']:false;
+    $class = ['templaza-logo', 'templaza-logo-' . $logo_type, 'uk-flex uk-flex-middle'];
 }
 
-$class = ['templaza-logo', 'templaza-logo-' . $logo_type, 'uk-flex uk-flex-middle'];
 $logo_css = '';
 if(!empty($logo_size)){
     if(isset($logo_size['width']) && !empty($logo_size['width']) && strlen($logo_size['width'])>3){
@@ -62,23 +63,18 @@ if($logo_mobile_css){
 ?>
 <!-- logo starts -->
 <!-- <div class="<?php /* echo implode(' ', $class); */ ?>"> -->
-<?php if (!$logo_type): ?>
+<?php if ($logo_type=='text'): ?>
    <!-- text logo starts -->
-   <?php
-   $mr = ($header_mode == 'stacked' && ($header_stacked_menu_mode == 'seperated' || $header_stacked_menu_mode == 'center')) ? '' : ' mr-0 mr-lg-4';
-   ?>
-   <div class="<?php echo implode(' ', $class); ?> flex-column<?php echo $mr; ?>">
+
+   <div class="<?php echo implode(' ', $class); ?> flex-column">
       <a class="site-title" href="<?php echo get_home_url(); ?>"><?php echo $logo_text; ?></a>
-      <p class="site-tagline"><?php echo $tag_line; ?></p>
+      <p class="site-tagline uk-margin-remove"><?php echo $tag_line; ?></p>
    </div>
    <!-- text logo ends -->
 <?php endif; ?>
-<?php if ($logo_type): ?>
+<?php if ($logo_type=='image'): ?>
    <!-- image logo starts -->
-   <?php
-   $mr = ($header_mode == 'stacked' && ($header_stacked_menu_mode == 'seperated' || $header_stacked_menu_mode == 'center')) ? '' : ' mr-0 mr-lg-4';
-   ?>
-   <a class="<?php echo implode(' ', $class); ?><?php echo $mr; ?>" href="<?php echo get_home_url(); ?>">
+   <a class="<?php echo implode(' ', $class); ?>" href="<?php echo get_home_url(); ?>">
       <?php
       $logo_url = Functions::get_theme_default_logo_url('logo');
       if(!empty($default_logo) && isset($default_logo['url']) && !empty($default_logo['url'])
