@@ -183,6 +183,14 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'title'      => __('Border', 'templaza-framework'),
                                     ),
                                     array(
+                                        'id'       => 'border_radius',
+                                        'type'     => 'spacing',
+                                        'mode'     => 'border-radius',
+                                        'allow_responsive'    => true,
+                                        'title'    => __('Border radius', 'templaza-framework'),
+                                        'default'  => '',
+                                    ),
+                                    array(
                                         'id'     => 'tab-custom_colors',
                                         'type'   => 'section',
                                         'indent' => true,

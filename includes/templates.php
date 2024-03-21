@@ -344,11 +344,13 @@ class Templates{
     {
         $styles             = [];
         $options            = Functions::get_theme_options();
-        $template_layout    = (isset($options['layout-theme']) && (bool) $options['layout-theme'])?'wide':'boxed';
+        $template_layout    = isset($options['layout-theme']) ?$options['layout-theme']:'';
+        var_dump($template_layout);
         if ($template_layout != 'boxed') {
             return false;
         }
         $layout_background  = isset($options['layout-background'])?$options['layout-background']:array();
+        var_dump($layout_background);
 
         if(count($layout_background)) {
             $layout_background_color        = isset($layout_background['background-color'])?$layout_background['background-color']:'';

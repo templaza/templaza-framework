@@ -706,6 +706,15 @@ class TemplazaFramework_ShortCode{
 
         }
 
+        if(isset($params['border_radius']) && !empty($params['border_radius'])){
+            $border_radius = $params['border_radius'];
+            $css['desktop']    .= CSS::border_radius($border_radius['border-radius-top-left'],$border_radius['border-radius-top-right'],
+                $border_radius['border-radius-bottom-left'],$border_radius['border-radius-bottom-right'],true);
+
+            unset($params['border_radius']);
+
+        }
+
         $margin_type    = isset($params['margin_type'])?$params['margin_type']:'custom';
         if($margin_type == 'custom' && isset($params['margin']) && !empty($params['margin'])){
 

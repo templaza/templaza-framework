@@ -374,6 +374,14 @@ $designs    = array(
     // Widget Sidebar Design
     array(
         'enable'    => true,
+        'class'     => '.templaza-layout.templaza-layout-boxed .templaza-wrapper',
+        'options' => array(
+            'layout-background',
+            'layout-shadow',
+        ),
+    ),
+    array(
+        'enable'    => true,
         'class'     => '.templaza-sidebar',
         'options' => array(
             'sidebar_bg',
@@ -498,6 +506,10 @@ if(count($designs)) {
                 unset($design['options'][$index]);
             }elseif($index = array_search('blog_single_shadow', $design['options'])){
                 $box_shadow = isset($options['blog_single_shadow'])?$options['blog_single_shadow']:'';
+                $wd_css_responsive['desktop'] .= CSS::box_shadow($box_shadow);
+                unset($design['options'][$index]);
+            }elseif($index = array_search('layout-shadow', $design['options'])){
+                $box_shadow = isset($options['layout-shadow'])?$options['layout-shadow']:'';
                 $wd_css_responsive['desktop'] .= CSS::box_shadow($box_shadow);
                 unset($design['options'][$index]);
             }

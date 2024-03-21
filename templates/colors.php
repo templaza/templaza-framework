@@ -232,12 +232,17 @@ Templates::add_inline_style($footer_css);
 
 <?php
 $body_modal_bg     = isset($options['body-modal-bg'])?$options['body-modal-bg']:'';
+$site_maxwidth     = isset($options['layout-maxwidth'])?$options['layout-maxwidth']:'';
 $body_modal_bg     = CSS::make_color_rgba_redux($body_modal_bg);
 // Body Coloring
 $body_styles = [];
+if (!empty($site_maxwidth)) {
+    $body_styles[] = '.templaza-layout.templaza-layout-boxed .templaza-wrapper{ max-width:' . $site_maxwidth . ';}';
+}
 if (!empty($body_css)) {
     $body_styles[] = 'body{ ' . $body_css . '}';
 }
+
 if (!empty($body_heading_color)) {
     $body_styles[] = 'h1,h2,h3,h4,h5,h6,
     .tribe-events-view.tribe-common .tribe-events-calendar-list__event-title, 

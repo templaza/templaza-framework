@@ -38,7 +38,7 @@ $container_class   .= !empty($footer_id)?' templaza-container-footer__'.$footer_
     Templates::load_my_header('header.mobilemenu');
     ?>
     <div class="templaza-content<?php echo (!empty($content_classes) ? ' ' . implode(' ', $content_classes) : '');?>">
-        <div class="templaza-layout templaza-layout-<?php echo $template_layout;?>" style="<?php echo Templates::get_layout_styles();?>">
+        <div class="templaza-layout templaza-layout-<?php echo $template_layout;?>">
             <div class="templaza-wrapper">
                 <?php
                 do_action('templaza-framework-header_open');
