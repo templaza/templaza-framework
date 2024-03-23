@@ -44,6 +44,17 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                 'title'  => esc_html__('General', 'templaza-framework'),
                                 'fields' => array(
                                     array(
+                                        'id'       => 'test',
+                                        'type'     => 'select',
+                                        'title'    => esc_html__('Test', 'templaza-framework'),
+                                        'options'  => array(
+                                            'default'         => esc_html__('Default', 'templaza-framework'),
+                                            'templaza-footer' => esc_html__('Footer', 'templaza-framework'),
+                                        ),
+                                        'select2'       => array( 'allowClear' => false ),
+                                        'default' => 'default'
+                                    ),
+                                    array(
                                         'id'       => 'section_type',
                                         'type'     => 'select',
                                         'title'    => esc_html__('Section Type', 'templaza-framework'),
@@ -156,123 +167,126 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                 'id'     => 'design-settings',
                                 'title'  => esc_html__('Design Settings', 'templaza-framework'),
                                 'fields' => array(
-                                    array(
-                                        'id'         => 'background',
-                                        'type'       => 'background',
-                                        'title'      => esc_html__('Background', 'templaza-framework'),
-                                    ),
+//                                    array(
+//                                        'id'         => 'background',
+//                                        'type'       => 'background',
+//                                        'title'      => esc_html__('Background', 'templaza-framework'),
+//                                    ),
 									array(
                                         'id'       => 'background_overlay',
                                         'type'     => 'color_rgba',
+                                        'after_field'   => 'background',
                                         'title'    => esc_html__('Background Overlay', 'templaza-framework'),
                                     ),
 									array(
                                         'id'       => 'background_overlay_top',
                                         'type'     => 'color_rgba',
+                                        'after_field'   => 'background',
                                         'title'    => esc_html__('Background Overlay Gradient Top', 'templaza-framework'),
                                     ),
-									array(
+                                    array(
                                         'id'       => 'background_overlay_bottom',
                                         'type'     => 'color_rgba',
+                                        'after_field'   => 'background',
                                         'title'    => esc_html__('Background Overlay Gradient Bottom', 'templaza-framework'),
                                     ),
-                                    array(
-                                        'id'         => 'border',
-                                        'type'       => 'border',
-                                        'color_alpha'=> 'true',
-                                        'title'      => __('Border', 'templaza-framework'),
-                                    ),
-                                    array(
-                                        'id'       => 'border_radius',
-                                        'type'     => 'spacing',
-                                        'mode'     => 'border-radius',
-                                        'allow_responsive'    => true,
-                                        'title'    => __('Border radius', 'templaza-framework'),
-                                        'default'  => '',
-                                    ),
-                                    array(
-                                        'id'     => 'tab-custom_colors',
-                                        'type'   => 'section',
-                                        'indent' => true,
-                                        'title'  => esc_html__('Custom Colors', 'templaza-framework'),
-                                    ),
-                                    array(
-                                        'id'       => 'text_color',
-                                        'type'     => 'color',
-                                        'title'    => esc_html__('Text Color', 'templaza-framework'),
-                                    ),
-                                    array(
-                                        'id'       => 'link_color',
-                                        'type'     => 'link_color',
-                                        'title'    => esc_html__('Link Color', 'templaza-framework'),
-                                    ),
-                                    array(
-                                        'id'     => 'tab-spacing',
-                                        'type'   => 'section',
-                                        'indent' => true,
-                                        'title'  => esc_html__('Spacing', 'templaza-framework'),
-                                    ),
-                                    array(
-                                        'id'     => 'margin',
-                                        'type'   => 'spacing',
-                                        'mode'   => 'margin',
-                                        'all'    => false,
-                                        'allow_responsive'  => true,
-                                        'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
-                                        'title'  => esc_html__('Margin', 'templaza-framework'),
-                                        'default'   => array(
-                                            'units' => 'px',
-                                        ),
-                                    ),
-                                    array(
-                                        'id'        => 'padding_type',
-                                        'type'      => 'select',
-                                        'title'     =>  esc_html__('Padding', 'templaza-framework'),
-                                        'subtitle'  =>  esc_html__('Set the vertical padding.', 'templaza-framework'),
-                                        'options' => array(
-                                            'default'   => esc_html__('Default', 'templaza-framework'),
-                                            'xsmall'    => esc_html__('XSmall', 'templaza-framework'),
-                                            'small'     => esc_html__('Small', 'templaza-framework'),
-                                            'large'     => esc_html__('Large', 'templaza-framework'),
-                                            'xlarge'    => esc_html__('XLarge', 'templaza-framework'),
-                                            'none'      => esc_html__('None', 'templaza-framework'),
-                                            'custom'    => esc_html__('Custom', 'templaza-framework'),
-                                        ),
-                                        'select2'       => array( 'allowClear' => false ),
-                                        'default' => 'custom',
-                                    ),
-                                    array(
-                                        'id'       => 'padding_remove_top',
-                                        'type'     => 'switch',
-                                        'title'    => esc_html__('Remove top padding', 'templaza-framework'),
-                                        'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
-//                                        'required' => array('padding_type', '!=', array('none','custom')),
-                                    ),
-                                    array(
-                                        'id'       => 'padding_remove_bottom',
-                                        'type'     => 'switch',
-                                        'title'    => esc_html__('Remove bottom padding', 'templaza-framework'),
-                                        'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
-//                                        'required' => array('padding_type', '!=', array('none','custom')),
-                                    ),
-                                    array(
-                                        'id'     => 'padding',
-                                        'type'   => 'spacing',
-                                        'mode'   => 'padding',
-                                        'all'    => false,
-                                        'allow_responsive'  => true,
-                                        'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
-                                        'title'  => esc_html__('Custom padding', 'templaza-framework'),
-                                        'default'   => array(
-                                            'units' => 'px',
-                                        ),
-                                        'required'  => array('padding_type', '=', 'custom'),
-                                    ),
-                                    array(
-                                        'id'     => 'tab-spacing-end',
-                                        'type'   => 'section',
-                                        'indent' => false, // Indent all options below until the next 'section' option is set.
-                                    ),
+//                                    array(
+//                                        'id'         => 'border',
+//                                        'type'       => 'border',
+//                                        'color_alpha'=> 'true',
+//                                        'title'      => __('Border', 'templaza-framework'),
+//                                    ),
+//                                    array(
+//                                        'id'       => 'border_radius',
+//                                        'type'     => 'spacing',
+//                                        'mode'     => 'border-radius',
+//                                        'allow_responsive'    => true,
+//                                        'title'    => __('Border radius', 'templaza-framework'),
+//                                        'default'  => '',
+//                                    ),
+//                                    array(
+//                                        'id'     => 'tab-custom_colors',
+//                                        'type'   => 'section',
+//                                        'indent' => true,
+//                                        'title'  => esc_html__('Custom Colors', 'templaza-framework'),
+//                                    ),
+//                                    array(
+//                                        'id'       => 'text_color',
+//                                        'type'     => 'color',
+//                                        'title'    => esc_html__('Text Color', 'templaza-framework'),
+//                                    ),
+//                                    array(
+//                                        'id'       => 'link_color',
+//                                        'type'     => 'link_color',
+//                                        'title'    => esc_html__('Link Color', 'templaza-framework'),
+//                                    ),
+//                                    array(
+//                                        'id'     => 'tab-spacing',
+//                                        'type'   => 'section',
+//                                        'indent' => true,
+//                                        'title'  => esc_html__('Spacing', 'templaza-framework'),
+//                                    ),
+//                                    array(
+//                                        'id'     => 'margin',
+//                                        'type'   => 'spacing',
+//                                        'mode'   => 'margin',
+//                                        'all'    => false,
+//                                        'allow_responsive'  => true,
+//                                        'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+//                                        'title'  => esc_html__('Margin', 'templaza-framework'),
+//                                        'default'   => array(
+//                                            'units' => 'px',
+//                                        ),
+//                                    ),
+//                                    array(
+//                                        'id'        => 'padding_type',
+//                                        'type'      => 'select',
+//                                        'title'     =>  esc_html__('Padding', 'templaza-framework'),
+//                                        'subtitle'  =>  esc_html__('Set the vertical padding.', 'templaza-framework'),
+//                                        'options' => array(
+//                                            'default'   => esc_html__('Default', 'templaza-framework'),
+//                                            'xsmall'    => esc_html__('XSmall', 'templaza-framework'),
+//                                            'small'     => esc_html__('Small', 'templaza-framework'),
+//                                            'large'     => esc_html__('Large', 'templaza-framework'),
+//                                            'xlarge'    => esc_html__('XLarge', 'templaza-framework'),
+//                                            'none'      => esc_html__('None', 'templaza-framework'),
+//                                            'custom'    => esc_html__('Custom', 'templaza-framework'),
+//                                        ),
+//                                        'select2'       => array( 'allowClear' => false ),
+//                                        'default' => 'custom',
+//                                    ),
+//                                    array(
+//                                        'id'       => 'padding_remove_top',
+//                                        'type'     => 'switch',
+//                                        'title'    => esc_html__('Remove top padding', 'templaza-framework'),
+//                                        'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
+////                                        'required' => array('padding_type', '!=', array('none','custom')),
+//                                    ),
+//                                    array(
+//                                        'id'       => 'padding_remove_bottom',
+//                                        'type'     => 'switch',
+//                                        'title'    => esc_html__('Remove bottom padding', 'templaza-framework'),
+//                                        'required' => array('padding_type', '=', array('default','xsmall','small','large','xlarge')),
+////                                        'required' => array('padding_type', '!=', array('none','custom')),
+//                                    ),
+//                                    array(
+//                                        'id'     => 'padding',
+//                                        'type'   => 'spacing',
+//                                        'mode'   => 'padding',
+//                                        'all'    => false,
+//                                        'allow_responsive'  => true,
+//                                        'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+//                                        'title'  => esc_html__('Custom padding', 'templaza-framework'),
+//                                        'default'   => array(
+//                                            'units' => 'px',
+//                                        ),
+//                                        'required'  => array('padding_type', '=', 'custom'),
+//                                    ),
+//                                    array(
+//                                        'id'     => 'tab-spacing-end',
+//                                        'type'   => 'section',
+//                                        'indent' => false, // Indent all options below until the next 'section' option is set.
+//                                    ),
                                 )
                             ),
                             // Responsive settings

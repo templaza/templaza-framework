@@ -373,19 +373,56 @@ class TemplazaFramework_ShortCode{
 
             if($tabs && count($tabs)){
                 $has_design_tab = false;
+
                 foreach($tabs as $i => &$tab){
                     if(isset($tab['id']) && $tab['id'] == 'design-settings'){
-                        $has_design_tab = $i;
-                        $field_diff = array_udiff($default_design['fields'], $tab['fields'], function($a, $b){
-                            if ($a['id']===$b['id'])
-                            {
-                                return 0;
-                            }
+                        $defDesignIds   = array_column($default_design['fields'], 'id');
 
-                            return ($a['id']>$b['id'])?1:-1;
-                        });
-                        $tab['fields']  += $field_diff;
-                        ksort($tab['fields']);
+                        $n_i    = 1;
+                        // Each design settings fields
+                        foreach ($tab['fields'] as $tfield){
+
+                            $def_index    = array_search($tfield['id'], $defDesignIds);
+                            if($def_index !== false){
+                                $default_design['fields'][$def_index]   = array_merge($default_design['fields'][$def_index],
+                                    $tfield);
+//                                $n_i    = 1;
+                            }else{
+                                if(isset($tfield['after_field']) && !empty($tfield['after_field'])){
+                                    $n_index = array_search( $tfield['after_field'],$defDesignIds);
+                                    if($n_index !== false){
+                                        $n_field_last  = array_splice($default_design['fields'], 0,
+                                            $n_index + $n_i, array($tfield));
+                                        $default_design['fields']   = array_merge($n_field_last,$default_design['fields']);
+                                        $n_i++;
+                                    }else{
+                                        array_push($default_design['fields'], $tfield);
+//                                        $n_i    = 1;
+                                    }
+                                }else{
+                                    array_push($default_design['fields'], $tfield);
+//                                    $n_i    = 1;
+                                }
+                            }
+                        }
+                        $tab['fields']  = $default_design['fields'];
+//                        if($element['id'] == 'section') {
+//                            var_dump($default_design);
+//                            die(__FILE__);
+//                        }
+
+                        $has_design_tab = $i;
+//                        $field_diff = array_udiff($default_design['fields'], $tab['fields'], function($a, $b){
+//                            if ($a['id']===$b['id'])
+//                            {
+//                                return 0;
+//                            }
+//
+//                            return ($a['id']>$b['id'])?1:-1;
+//                        });
+
+//                        $tab['fields']  += $field_diff;
+//                        ksort($tab['fields']);
                         break;
                     }
                 }
@@ -706,14 +743,15 @@ class TemplazaFramework_ShortCode{
 
         }
 
-        if(isset($params['border_radius']) && !empty($params['border_radius'])){
-            $border_radius = $params['border_radius'];
-            $css['desktop']    .= CSS::border_radius($border_radius['border-radius-top-left'],$border_radius['border-radius-top-right'],
-                $border_radius['border-radius-bottom-left'],$border_radius['border-radius-bottom-right'],true);
+//        if(isset($params['border_radius']) && !empty($params['border_radius'])){
+//            $border_radius = $params['border_radius'];
+//            var_dump($border_radius['border-radius-top-left']);
+//            $css['desktop']    .= CSS::border_radius($border_radius['border-radius-top-left'],$border_radius['border-radius-top-right'],
+//                $border_radius['border-radius-bottom-left'],$border_radius['border-radius-bottom-right'],true);
+//
+//            unset($params['border_radius']);
 
-            unset($params['border_radius']);
-
-        }
+//        }
 
         $margin_type    = isset($params['margin_type'])?$params['margin_type']:'custom';
         if($margin_type == 'custom' && isset($params['margin']) && !empty($params['margin'])){
