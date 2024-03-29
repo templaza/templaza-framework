@@ -11,6 +11,8 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
         protected $cache        = array();
         protected $metaboxes    = array();
 
+        protected $repeater_data;
+
         /**
          * Framework
          *
@@ -36,7 +38,7 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
             $this -> framework      = $framework;
             $this -> text_domain    = Functions::get_my_text_domain();
 
-            if($this -> framework) {
+            if($this -> framework && isset($this -> framework -> repeater_data)) {
                 $this->framework->repeater_data = array();
             }
 

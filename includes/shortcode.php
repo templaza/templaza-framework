@@ -16,6 +16,7 @@ class TemplazaFramework_ShortCode{
     protected $text_domain;
     protected $admin_template_settings;
 
+    protected $value;
     protected $parent;
     protected $field_parent;
 

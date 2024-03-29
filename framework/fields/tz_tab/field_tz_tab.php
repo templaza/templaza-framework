@@ -15,9 +15,14 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
      * @since       1.0.0
      */
     class ReduxFramework_TZ_Tab {
-        protected $instances = array();
+
+        protected $redux;
+        protected $value;
+        protected $field;
+        protected $parent;
 
         protected $cache    = array();
+        protected $instances = array();
 
         /**
          * Field Constructor.
@@ -44,7 +49,6 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
             if(!isset($this -> cache[$store_id])){
                 if(isset($field['tabs'])){
                     $has_media                          = true;
-                    $args   = $this -> parent -> args;
                     $opt_name                           = uniqid($field['id']).'__opt_name';
                     $redux_args['opt_name']             = $opt_name;
                     $redux_args['menu_type']            = 'hidden';
@@ -88,35 +92,6 @@ if ( ! class_exists( 'ReduxFramework_TZ_Tab' ) ) {
                     });
                     $redux  = \Redux::instance($opt_name );
 
-//                    foreach($field['tabs'] as $k => $tab){
-//                        if(isset($tab['fields']) && count($tab['fields'])){
-//                            foreach ($tab['fields'] as $_field) {
-//                                if(version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
-////                                    $redux->field_default_values($_field);
-//                                    $redux->check_dependencies($_field);
-//                                }else {
-////                                    $redux -> options_defaults_class -> field_default_values($redux->args['opt_name'], $_field);
-//                                    $redux -> required_class -> check_dependencies($_field);
-//                                }
-//
-////                                TemPlazaFramework\Helpers\FieldHelper::check_required_dependencies($field,
-////                                    array('id' => $opt_name), $redux);
-//                            }
-//                        }
-//                    }
-
-//                    if(!$this -> value) {
-//                        $redux -> options   =  $redux -> _default_values();
-//                    }
-
-
-//                    $redux-> _register_settings();
-
-
-//                    $enqueue    = new Enqueue($redux);
-//                    $enqueue -> init();
-
-//                    $this -> redux_args          = $redux_args;
                     $this -> redux          = $redux;
 
                     if($has_media){

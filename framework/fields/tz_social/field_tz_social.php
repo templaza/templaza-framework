@@ -17,6 +17,10 @@
 if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
     class ReduxFramework_TZ_Social {
 
+        public $field;
+        public $parent;
+
+        protected $value;
         protected $text_domain;
 
         /**

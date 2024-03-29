@@ -44,17 +44,6 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                 'title'  => esc_html__('General', 'templaza-framework'),
                                 'fields' => array(
                                     array(
-                                        'id'       => 'test',
-                                        'type'     => 'select',
-                                        'title'    => esc_html__('Test', 'templaza-framework'),
-                                        'options'  => array(
-                                            'default'         => esc_html__('Default', 'templaza-framework'),
-                                            'templaza-footer' => esc_html__('Footer', 'templaza-framework'),
-                                        ),
-                                        'select2'       => array( 'allowClear' => false ),
-                                        'default' => 'default'
-                                    ),
-                                    array(
                                         'id'       => 'section_type',
                                         'type'     => 'select',
                                         'title'    => esc_html__('Section Type', 'templaza-framework'),

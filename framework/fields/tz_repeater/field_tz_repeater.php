@@ -10,12 +10,13 @@ use TemPlazaFramework\Core\Fields;
 if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
     class ReduxFramework_TZ_Repeater extends Redux_Field
     {
+        protected $redux;
         protected $elements;
         protected $opt_name;
         protected $text_domain;
         protected $title_field;
-        protected $templates = array();
-        protected $ignore_fields = array();
+        protected $templates        = array();
+        protected $ignore_fields    = array();
 
         public function __construct( $field = array(), $value = '', $parent = null ) {
             parent::__construct(array(), null, $parent);
@@ -26,8 +27,8 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
             $this -> elements       = array();
             $this -> opt_name       = $field['id'].'__opt_name';
 
-            $fields = $field['fields'];
-            $opt_name                           = $this -> opt_name;
+            $fields                 = $field['fields'];
+            $opt_name               = $this -> opt_name;
 
             $this -> hooks();
 
@@ -144,7 +145,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Repeater' ) ) {
                 wp_enqueue_script(
                     'field-tz_repeater-js',
                     Functions::get_my_frame_url() . '/fields/tz_repeater/field_tz_repeater.js',
-                    array( 'jquery', 'jquery-ui-accordion',  'jquery-ui-sortable', 'redux-js'),
+                    array( 'jquery', 'jquery-ui-accordion',  'jquery-ui-sortable', 'redux-js', 'wp-util'),
                     time(),
                     'all'
                 );

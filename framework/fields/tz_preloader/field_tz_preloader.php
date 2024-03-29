@@ -17,6 +17,10 @@
 if ( ! class_exists( 'ReduxFramework_TZ_Preloader' ) ) {
     class ReduxFramework_TZ_Preloader {
 
+        public $field;
+        public $parent;
+
+        protected $value;
         protected $text_domain;
 
         /**

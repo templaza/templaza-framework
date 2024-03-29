@@ -10,6 +10,7 @@ use TemPlazaFramework\Core\Fields;
 if ( ! class_exists( 'ReduxFramework_TZ_Color_Repeater' ) ) {
     class ReduxFramework_TZ_Color_Repeater extends Redux_Field
     {
+        protected $redux;
         protected $elements;
         protected $opt_name;
         protected $text_domain;

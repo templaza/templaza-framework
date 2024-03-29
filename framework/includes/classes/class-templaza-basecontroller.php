@@ -20,7 +20,9 @@ if(!class_exists('TemPlazaFramework\Controller\BaseController')){
 
         protected $cache        = array();
         protected $layout       = 'default';
+        protected $methods      = array();
         protected $basePath     = '';
+        protected $properties     = array();
         protected $default_view = 'dashboard';
 
         /**
@@ -226,9 +228,14 @@ if(!class_exists('TemPlazaFramework\Controller\BaseController')){
 
         public function set($property, $value = null)
         {
-            $previous = isset($this->$property) ? $this->$property : null;
-            $this->$property = $value;
+            $previous   = isset($this -> {$property})?$this -> {$property}:null;
+            $previous   = !$previous && isset($this->properties[$property]) ? $this->properties[$property] : null;
 
+            if(isset($this->{$property})){
+                $this->{$property} = $value;
+            }else {
+                $this->properties[$property] = $value;
+            }
 
             return $previous;
         }
@@ -238,6 +245,9 @@ if(!class_exists('TemPlazaFramework\Controller\BaseController')){
             if (isset($this->$property))
             {
                 return $this->$property;
+            }elseif (isset($this->properties[$property]))
+            {
+                return $this->properties[$property];
             }
 
             return $default;

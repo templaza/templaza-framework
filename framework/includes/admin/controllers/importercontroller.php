@@ -20,12 +20,16 @@ use um\core\Validation;
 if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
     class ImporterController extends BaseController{
 
-        protected $pagehook         = TEMPLAZA_FRAMEWORK_NAME.'__admin-importer';
-        protected $imported_key;
-        protected $plugins          = array();
-        protected $theme_demo_datas;
-        protected $api  = TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN;
         protected $info;
+        protected $item;
+        protected $product_code;
+        protected $imported_key;
+        protected $theme_demo_datas;
+
+        protected $pagehook         = TEMPLAZA_FRAMEWORK_NAME.'__admin-importer';
+        protected $plugins          = array();
+        protected $api  = TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN;
+
 
         public function __construct(array $config = array())
         {
