@@ -17,7 +17,8 @@ $ap_gallery = get_field('ap_gallery', get_the_ID());
 $ap_tiny_mode = isset($templaza_options['ap_product-single-tiny-mode']) ? $templaza_options['ap_product-single-tiny-mode'] : 'carousel';
 $ap_tiny_height = isset($templaza_options['ap_product-single-tiny-custom_height']) ? $templaza_options['ap_product-single-tiny-custom_height'] : '';
 $ap_tiny_image = isset($templaza_options['ap_product-single-tiny-cover']) ? $templaza_options['ap_product-single-tiny-cover'] : 'cover';
-$ap_tiny_autoheight               = isset($templaza_options['ap_product-single-tiny-autoheight'])?filter_var($templaza_options['ap_product-single-tiny-autoheight'], FILTER_VALIDATE_BOOLEAN):true;
+$ap_tiny_autoheight  = isset($templaza_options['ap_product-single-tiny-autoheight'])?filter_var($templaza_options['ap_product-single-tiny-autoheight'], FILTER_VALIDATE_BOOLEAN):true;
+$ap_tiny_thumb  = isset($templaza_options['ap_product-slider-thumbnail'])?filter_var($templaza_options['ap_product-slider-thumbnail'], FILTER_VALIDATE_BOOLEAN):true;
 $no_cookie      =   0;
 if (isset($ap_video) && !empty($ap_video)) {
     if (wp_oembed_get($ap_video)) :
@@ -106,6 +107,7 @@ if(!empty($ap_gallery)){
         </div>
     </div>
 </div>
+<?php if($ap_tiny_thumb){ ?>
 <div class="tz-control-wrap uk-inline <?php echo esc_attr($tiny_cls);?>">
     <div class="tz-ap-thumbnails">
         <?php
@@ -145,24 +147,35 @@ if(!empty($ap_gallery)){
     </div>
 </div>
 <?php } ?>
+<?php } ?>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function(event) {
         var slider = tns({
             container: '.ap-tiny-slider',
-            items: 1,
+            items: 2,
             mode: '<?php echo esc_attr($ap_tiny_mode);?>',
+            <?php if($ap_tiny_thumb){ ?>
             navContainer: '.tz-ap-thumbnails',
+            nav: true,
             navAsThumbnails: true,
+            <?php } ?>
             animateIn: 'tns-fadeIn',
             animateOut: 'tns-fadeOut',
             speed: 1000,
             autoHeight:<?php if($ap_tiny_autoheight){ echo 'true';} else{ echo 'false';}?>,
             mouseDrag: true,
-            slideBy: 'page',
+            slideBy: 1,
+            startIndex: 1,
             center: true,
-            loop: false,
+            <?php if($ap_tiny_thumb==false){ ?>
+            nav: false,
+            <?php } ?>
+            loop: true,
+            <?php if($ap_tiny_thumb){ ?>
             controlsContainer:'.tz-slideshow-control',
+            <?php } ?>
         });
+        <?php if($ap_tiny_thumb){ ?>
         var slider_thumb = tns({
             container: '.tz-ap-thumbnails',
             items: 5,
@@ -182,5 +195,6 @@ if(!empty($ap_gallery)){
                 }
             }
         });
+        <?php } ?>
     })
 </script>

@@ -8,6 +8,7 @@ extract(shortcode_atts(array(
     'tz_class'               => '',
 	'hideon_single'          => '',
     'section_type'           => 'default',
+    'section_overflow'       => '',
     'layout_type'            => 'container',
     'height'                 => '',
     'vertical_align'         => '',
@@ -40,6 +41,9 @@ if(!empty($content)){
                 $_tz_class .= 'header-absolute ';
             }
         }
+    }
+    if($section_overflow == 'hidden'){
+        $_tz_class .=' uk-overflow-hidden ';
     }
     if(isset($tz_class)){
         $tz_class   = $_tz_class.$tz_class;

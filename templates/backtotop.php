@@ -31,9 +31,10 @@ $backtotop_icon_padding     = isset($options['backtotop-icon-padding'])?$options
 //}
 $backtotop_icon_bgcolor     = isset($options['backtotop-icon-bgcolor'])?$options['backtotop-icon-bgcolor']: '';
 $backtotop_icon_bgcolor = CSS::make_color_rgba_redux($backtotop_icon_bgcolor);
-//if(is_array($backtotop_icon_bgcolor) && isset($backtotop_icon_bgcolor['rgba'])) {
-//    $backtotop_icon_bgcolor    = $backtotop_icon_bgcolor['rgba'];
-//}
+
+$backtotop_icon_hover_bgcolor     = isset($options['backtotop-icon-hover-bgcolor'])?$options['backtotop-icon-hover-bgcolor']: '';
+$backtotop_icon_hover_bgcolor = CSS::make_color_rgba_redux($backtotop_icon_hover_bgcolor);
+
 
 $backtotop_icon_style       = isset($options['backtotop-icon-shape'])?$options['backtotop-icon-shape']: 'circle';
 $backtotop_on_mobile        = isset($options['backtotop-on-mobile'])?(bool) $options['backtotop-on-mobile']: true;
@@ -85,6 +86,9 @@ if(!empty($astyle)){
 }
 if(!empty($style)){
     Templates::add_inline_style('#templaza-backtotop > i{'.$style.'}');
+}
+if(!empty($backtotop_icon_hover_bgcolor)){
+    Templates::add_inline_style('#templaza-backtotop:hover{background:' . $backtotop_icon_hover_bgcolor . ';}');
 }
 
 $html .= '<a id="templaza-backtotop" class="' . implode(' ', $class) . '" href="javascript:void(0)"><i class="' . $backtotop_icon . '" ></i></a>';

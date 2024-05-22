@@ -110,6 +110,18 @@ if(!class_exists('TemplazaFramework_ShortCode_Latest_Posts')){
                     'default'  => '300',
                     'required' => array('latest_post_image_cover', '=' , true)
                 ),
+                array(
+                    'id'       => 'latest_post_image_transition',
+                    'type'     => 'select',
+                    'title'    => esc_html__('Thumb Transition', 'templaza-framework'),
+                    'options'  => array(
+                        '' => esc_html__('None', 'templaza-framework'),
+                        'uk-transition-scale-up' => esc_html__('Scale Up', 'templaza-framework'),
+                        'uk-transition-scale-down' => esc_html__('Scale Down', 'templaza-framework'),
+                        'ripple' => esc_html__('Ripple', 'templaza-framework'),
+                    ),
+                    'default'  => '3',
+                ),
 
                 array(
                     'id'       => 'latest_post_show_date',

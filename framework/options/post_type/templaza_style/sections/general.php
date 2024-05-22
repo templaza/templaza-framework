@@ -58,6 +58,19 @@ Templaza_API::set_section('templaza_style',
                 'title'    => __( 'Box Background', 'templaza-framework' ),
                 'required' => array('layout-theme', '!=', 'wide'),
             ),
+            array(
+                'id'       => 'layout-padding',
+                'type'   => 'spacing',
+                'mode'   => 'padding',
+                'all'    => false,
+                'allow_responsive'    => true,
+                'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                'title'    => __( 'Site Padding', 'templaza-framework' ),
+                'subtitle' => __( 'Padding wrap content.', 'templaza-framework' ),
+                'default' => array(
+                    'units' => 'px',
+                ),
+            ),
         )
     )
 );

@@ -259,7 +259,7 @@ if (!empty($body_link_color)) {
     $body_styles[] = 'body a{color: ' . $body_link_color . ';}';
 }
 if (!empty($body_link_hover_color)) {
-    $body_styles[] = 'body a:hove{color: ' . $body_link_hover_color . ';}';
+    $body_styles[] = 'body a:hover{color: ' . $body_link_hover_color . ';}';
 }
 if (!empty($body_modal_bg)) {
     $body_styles[] = '.uk-modal-dialog, #ap-product-modal .uk-container{background-color: ' . $body_modal_bg . ';}';
@@ -296,7 +296,7 @@ if (!empty($header_text_color)) {
    $header_styles[] = 'header{ color: ' . $header_text_color . ' !important;}';
 }
 if (!empty($header_heading_color)) {
-	$header_styles[] = 'header h1,header h2,header h3,header h4,header h5,header h6{ color: ' . $header_heading_color . ' !important;}';
+	$header_styles[] = 'header h1,header h2,header h3,header h4,header h5,header h6, header h1 a,header h2 a,header h3 a,header h4 a,header h5 a,header h6 a{ color: ' . $header_heading_color . ' !important;}';
 }
 
 if (!empty($header_link_color)) {
@@ -339,10 +339,11 @@ if (!empty($main_link_color)) {
 }
 if (!empty($main_link_hover_color)) {
    $main_menu_styles[] = '.templaza-nav .menu-item > a:hover, .templaza-nav .menu-item > a:focus{ color: ' . $main_link_hover_color . ' !important;}';
+   $main_menu_styles[] = '.templaza-nav .menu-item:hover > a{ color: ' . $main_link_hover_color . ' !important;}';
    $main_menu_styles[] = '.templaza-sidebar-menu .menu-item > a:hover, .templaza-sidebar-menu .menu-item > a:focus{ color: ' . $main_link_hover_color . ' !important;}';
 }
 if (!empty($main_link_active_color)) {
-   $main_menu_styles[] = '.templaza-nav .menu-item.current-menu-item > a{ color: ' . $main_link_active_color . ' !important;}';
+   $main_menu_styles[] = '.templaza-nav .menu-item.current-menu-item > a, .templaza-nav .menu-item.current-menu-ancestor > a{ color: ' . $main_link_active_color . ' !important;}';
    $main_menu_styles[] = '.templaza-sidebar-menu .menu-item.current-menu-item > a{ color: ' . $main_link_active_color . ' !important;}';
 }
 if (!empty($main_link_border_active_color)) {

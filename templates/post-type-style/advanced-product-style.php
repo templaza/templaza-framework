@@ -19,6 +19,13 @@ $ap_styles    = array(
     ),
     array(
         'enable'    => true,
+        'class'     => '.ap-single-style3 .ap-single-style3-wrap',
+        'options' => array(
+            'ap_product-single-style3-padding',
+        ),
+    ),
+    array(
+        'enable'    => true,
         'class'     => '.single .ap-single-box',
         'options' => array(
             'ap_product-box-padding',

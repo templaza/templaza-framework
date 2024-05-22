@@ -83,6 +83,15 @@ Templaza_API::set_section('settings',
 				'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
 				'title'  => esc_html__('Margin', 'templaza-framework'),
 			),
+            array(
+                'id'       => 'dropdown-menu-border-radius',
+                'type'     => 'spacing',
+                'mode'     => 'border-radius',
+                'allow_responsive'    => true,
+                'units'  => array('px', '%' ),
+                'title'    => esc_html__('Border radius', 'templaza-framework'),
+                'default'  => ''
+            ),
 		),
 	)
 );

@@ -185,6 +185,13 @@ Templaza_API::set_section('settings',
                 'required' => array('backtotop','=','1'),
             ),
             array(
+                'id'       => 'backtotop-icon-hover-bgcolor',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Icon background hover color', 'templaza-framework' ),
+                'subtitle' => __( 'Select a background hover.', 'templaza-framework' ),
+                'required' => array('backtotop','=','1'),
+            ),
+            array(
                 'id'       => 'backtotop-icon-shape', /* Need create custom field */
                 'type'     => 'select',
                 'title'    => __( 'Icon shape', 'templaza-framework' ),

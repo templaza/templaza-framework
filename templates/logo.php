@@ -78,7 +78,7 @@ if($logo_mobile_css){
       <?php
       $logo_url = Functions::get_theme_default_logo_url('logo');
       if(!empty($default_logo) && isset($default_logo['url']) && !empty($default_logo['url'])
-          && !Functions::is_external_url($default_logo['url'])){
+          ){
           $logo_url = $default_logo['url'];
       }
       if(!empty($logo_url)){
@@ -93,7 +93,7 @@ if($logo_mobile_css){
       if($logo_mobile_hide == false){
           $logo_mobile_url = Functions::get_theme_default_logo_url('logo_mobile');
           if(!empty($mobile_logo) && isset($mobile_logo['url']) && !empty($mobile_logo['url'])
-              && !Functions::is_external_url($mobile_logo['url'])){
+              ){
               $logo_mobile_url = $mobile_logo['url'];
           }
           if(empty($mobile_logo['url']) && !empty($default_logo) && !empty($default_logo['url'])){
@@ -111,7 +111,7 @@ if($logo_mobile_css){
       }
       $logo_url = Functions::get_theme_default_logo_url('logo_sticky');
       if(!empty($sticky_header_logo) && isset($sticky_header_logo['url']) && !empty($sticky_header_logo['url'])
-          && !Functions::is_external_url($sticky_header_logo['url'])){
+          ){
           $logo_url = $sticky_header_logo['url'];
       }
       if(!empty($logo_url)){

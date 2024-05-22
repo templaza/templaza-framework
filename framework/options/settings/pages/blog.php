@@ -15,6 +15,7 @@ $thumbnail_effects = array(
     'zoomslow-motion' => __('Zoom in slow-motion','templaza-framework'),
     'brighten-zoomin' => __('Brighten and Zoom-in','templaza-framework'),
     'blur-zoom' => __('Blur zoom','templaza-framework'),
+    'ripple' => __('Ripple','templaza-framework'),
 );
 // -> START Blog Section
 Templaza_API::set_section('settings',

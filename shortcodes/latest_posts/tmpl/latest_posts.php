@@ -2,6 +2,7 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
+use Advanced_Product\Helper\AP_Helper;
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 
@@ -15,6 +16,7 @@ extract(shortcode_atts(array(
     'latest_post_number'       => 6,
     'latest_post_image_cover'  => false,
     'latest_post_image_cover_height'  => 300,
+    'latest_post_image_transition'  => '',
     'latest_post_show_date'    => true,
     'latest_post_show_author'  => true,
     'latest_post_slider_item'  => '3',
@@ -63,6 +65,15 @@ if(isset($show_featured)){
         );
     }
 }
+$ripple_cl = $ripple_html =' ';
+if($latest_post_image_transition =='ripple'){
+    $ripple_html = '<div class="templaza-ripple-circles uk-position-center uk-transition-fade">
+                        <div class="circle1"></div>
+                        <div class="circle2"></div>
+                        <div class="circle3"></div>
+                    </div>';
+    $ripple_cl = ' templaza-thumb-ripple ';
+}
 
 if(!empty($latest_post_type) && isset($atts[$latest_post_type.'_category'])
     && !empty($atts[$latest_post_type.'_category'])){
@@ -102,19 +113,22 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
                     ?>
                     <div>
                         <div class="uk-card">
-                            <div class="uk-card-media-top">
+                            <div class="uk-card-media-top uk-transition-toggle <?php echo esc_attr($ripple_cl);?>">
                                 <?php if($latest_post_image_cover == true){
                                     ?>
                                 <div class="uk-cover-container">
+                                    <a href="<?php echo esc_url(get_permalink($post_item->ID));?>">
                                     <canvas height="<?php echo esc_attr($latest_post_image_cover_height);?>"></canvas>
-                                    <img src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?>" data-uk-cover>
+                                    <img class="uk-transition-opaque <?php echo esc_attr($latest_post_image_transition);?>" src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?>" data-uk-cover>
+                                    <?php echo $ripple_html; ?>
+                                    </a>
                                 </div>
                             <?php
                                 }else{
                                 ?>
                                 <a href="<?php echo esc_url(get_permalink($post_item->ID));?>">
-                                    <img src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?> "/>
-
+                                    <img class="uk-transition-opaque <?php echo esc_attr($latest_post_image_transition);?>" src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?> "/>
+                                    <?php echo $ripple_html; ?>
                                 </a>
                             <?php
                                 }
@@ -126,7 +140,28 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
                                     <?php echo esc_html(get_the_title($post_item->ID));?>
                                     </a>
                                 </h4>
-                                <?php if($latest_post_show_date == true || $latest_post_show_author == true){
+                                <?php
+                                if($latest_post_type == 'ap_product'){
+                                    $price = get_field('ap_price', $post_item->ID);
+                                    $product_type   = get_field('ap_product_type', $post_item->ID);
+                                    $price_notice_value = get_field('price-notice', $post_item->ID);
+                                ?>
+                                    <div class="ap-price-box">
+                                        <span class="ap-field-label"><?php esc_html_e('From','travelami')?></span>
+                                        <?php
+                                        $html = sprintf('<span class="ap-price"><b> %s</b> %s </span>',
+                                            esc_html__(' ', 'travelami'), AP_Helper::format_price($price));
+                                        echo wp_kses($html,'post');
+                                        if(!empty($price_notice_value) && $show_price_notice){
+                                            ?>
+                                            <span class="meta">
+                                                <?php echo esc_html($price_notice_value);?>
+                                            </span>
+                                        <?php } ?>
+                                    </div>
+                                <?php
+                                }else{
+                                if($latest_post_show_date == true || $latest_post_show_author == true){
                                 ?>
                                 <div class="uk-text-meta templaza-blog-item-info">
                                     <?php
@@ -146,6 +181,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
                                     ?>
                                 </div>
                                 <?php
+                                }
                                 }
                                 ?>
                             </div>

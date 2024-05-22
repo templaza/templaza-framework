@@ -61,11 +61,17 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'subtitle' => esc_html__('Enable to hide this section on Single Post', 'templaza-framework'),
                                         'default'  => false,
                                     ),
-//                                    array(
-//                                        'id'       => 'title',
-//                                        'type'     => 'text',
-//                                        'title'    => esc_html__('Section Title', 'templaza-framework'),
-//                                    ),
+									array(
+                                        'id'       => 'section_overflow',
+                                        'type'     => 'select',
+                                        'title'    => esc_html__('Overflow', 'templaza-framework'),
+                                        'options'  => array(
+                                            'default'         => esc_html__('Default', 'templaza-framework'),
+                                            'hidden' => esc_html__('Hidden', 'templaza-framework'),
+                                        ),
+                                        'select2'       => array( 'allowClear' => false ),
+                                        'default' => 'default'
+                                    ),
 
                                     array(
                                         'id'      => 'container_width',

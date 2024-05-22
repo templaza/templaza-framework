@@ -6,7 +6,10 @@
 	bottom: $tztheme-backtotop-bottom;
 	padding: $tztheme-backtotop-padding;
 	z-index: $tztheme-backtotop-zindex;
-
+	@include transition($tztheme-transition-all);
+	&:hover{
+		@include transition($tztheme-transition-all);
+	}
 	&.circle {
 		border-radius: 100%;
 	}
