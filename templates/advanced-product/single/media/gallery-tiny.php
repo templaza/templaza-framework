@@ -19,6 +19,7 @@ $ap_tiny_height = isset($templaza_options['ap_product-single-tiny-custom_height'
 $ap_tiny_image = isset($templaza_options['ap_product-single-tiny-cover']) ? $templaza_options['ap_product-single-tiny-cover'] : 'cover';
 $ap_tiny_autoheight  = isset($templaza_options['ap_product-single-tiny-autoheight'])?filter_var($templaza_options['ap_product-single-tiny-autoheight'], FILTER_VALIDATE_BOOLEAN):true;
 $ap_tiny_thumb  = isset($templaza_options['ap_product-slider-thumbnail'])?filter_var($templaza_options['ap_product-slider-thumbnail'], FILTER_VALIDATE_BOOLEAN):true;
+$ap_slider_number = isset($templaza_options['ap_product-slider-number']) ? $templaza_options['ap_product-slider-number'] : 1;
 $no_cookie      =   0;
 if (isset($ap_video) && !empty($ap_video)) {
     if (wp_oembed_get($ap_video)) :
@@ -152,7 +153,7 @@ if(!empty($ap_gallery)){
     document.addEventListener('DOMContentLoaded', function(event) {
         var slider = tns({
             container: '.ap-tiny-slider',
-            items: 2,
+            items: <?php echo esc_attr($ap_slider_number);?>,
             mode: '<?php echo esc_attr($ap_tiny_mode);?>',
             <?php if($ap_tiny_thumb){ ?>
             navContainer: '.tz-ap-thumbnails',
