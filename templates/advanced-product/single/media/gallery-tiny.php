@@ -21,6 +21,9 @@ $ap_tiny_autoheight  = isset($templaza_options['ap_product-single-tiny-autoheigh
 $ap_tiny_thumb  = isset($templaza_options['ap_product-slider-thumbnail'])?filter_var($templaza_options['ap_product-slider-thumbnail'], FILTER_VALIDATE_BOOLEAN):true;
 $ap_slider_number = isset($templaza_options['ap_product-slider-number']) ? $templaza_options['ap_product-slider-number'] : 1;
 $no_cookie      =   0;
+if($ap_slider_number >1){
+    $ap_tiny_mode = 'carousel';
+}
 if (isset($ap_video) && !empty($ap_video)) {
     if (wp_oembed_get($ap_video)) :
         $video = parse_url($ap_video);
@@ -157,7 +160,6 @@ if(!empty($ap_gallery)){
             mode: '<?php echo esc_attr($ap_tiny_mode);?>',
             <?php if($ap_tiny_thumb){ ?>
             navContainer: '.tz-ap-thumbnails',
-            nav: true,
             navAsThumbnails: true,
             <?php } ?>
             animateIn: 'tns-fadeIn',
@@ -172,9 +174,8 @@ if(!empty($ap_gallery)){
             nav: false,
             <?php } ?>
             loop: true,
-            <?php if($ap_tiny_thumb){ ?>
             controlsContainer:'.tz-slideshow-control',
-            <?php } ?>
+
         });
         <?php if($ap_tiny_thumb){ ?>
         var slider_thumb = tns({
