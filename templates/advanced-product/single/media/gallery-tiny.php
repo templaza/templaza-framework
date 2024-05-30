@@ -168,7 +168,6 @@ if(!empty($ap_gallery)){
             autoHeight:<?php if($ap_tiny_autoheight){ echo 'true';} else{ echo 'false';}?>,
             mouseDrag: true,
             slideBy: 1,
-            startIndex: 1,
             center: true,
             <?php if($ap_tiny_thumb==false){ ?>
             nav: false,
