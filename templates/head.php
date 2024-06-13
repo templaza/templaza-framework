@@ -32,21 +32,7 @@ if($enable_smooth_scroll) {
     wp_add_inline_script('templaza-js__smooth-scroll', $smoothashell);
 }
 
-// Add Favicon
-add_action('wp_head', function() use($options){
-    $favicon    = isset($options['favicon'])?$options['favicon']:array();
-    $favicon_url = Functions::get_theme_default_logo_url('favicon', '.ico');
-    if(!empty($favicon) && isset($favicon['url']) && !empty($favicon['url'])){
-        $favicon_url = $favicon['url'];
-    }
-
-    if(!empty($favicon_url)) {
-        echo '<link rel="shortcut icon" href="' .$favicon_url. '" />';
-    }
-}, 3);
-
 Templates::load_my_layout('head.menus');
-Templates::load_my_layout('head.custom');
 Templates::load_my_layout('head.preloader');
 Templates::load_my_layout('post-type-style.advanced-product-style');
 Templates::load_my_layout('post-type-style.woocommerce-style');
