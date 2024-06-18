@@ -82,7 +82,7 @@ if(isset($args['ap_class'])){
                     </span>
                 </div>
             </div>
-            <div class="uk-inline uk-position-relative">
+            <div class="uk-inline uk-position-relative uk-width-1-1">
                 <?php AP_Templates::load_my_layout('archive.badges'); ?>
                 <?php AP_Templates::load_my_layout('archive.media',true,false,array('compare_layout'    => $compare_layout)); ?>
             </div>
