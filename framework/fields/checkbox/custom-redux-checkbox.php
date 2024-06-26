@@ -9,6 +9,9 @@ if(!class_exists('Templaza_Custom_Redux_Checkbox')){
 
         protected $redux_field_type = 'checkbox';
         protected $tz_fields_object;
+        protected $args;
+        protected $text_domain;
+        protected $redux_framework;
 
         public function __tz_init($args = array(),  $field_object = null){
             $this -> args               = $args;

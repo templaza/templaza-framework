@@ -344,7 +344,7 @@ class Templates{
     {
         $styles             = [];
         $options            = Functions::get_theme_options();
-        $template_layout    = (isset($options['layout-theme']) && (bool) $options['layout-theme'])?'wide':'boxed';
+        $template_layout    = isset($options['layout-theme']) ?$options['layout-theme']:'';
         if ($template_layout != 'boxed') {
             return false;
         }

@@ -15,8 +15,8 @@ if($taxonomy == true){
         foreach ($all_tax as $key=>$tax){
             ?>
             <div class="ap-custom-fields uk-width-1-2 ap-custom-fields-style2">
-                <div class="ap-field-label"><?php echo esc_html($key); ?></div>
-                <div class="ap-field-value">
+                <div class="ap-field-label field-label"><?php echo esc_html($key); ?></div>
+                <div class="ap-field-value field-value">
                     <?php echo esc_html($tax); ?>
                 </div>
             </div>
@@ -46,7 +46,7 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                 }
                 ?>
                 <div class="ap-custom-fields ap-custom-field-file uk-width-1-1 ap-custom-fields-style2">
-                    <div class="ap-field-value">
+                    <div class="ap-field-value field-value">
                         <a href="<?php echo esc_url($file_url); ?>" download>
                             <?php
                             if( !empty($f_icon) || !empty($f_icon_image)){
@@ -77,8 +77,8 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
             }elseif($acf_f['type'] == 'text' || $acf_f['type'] == 'number'){
                 ?>
                 <div class="ap-custom-fields uk-width-1-2 ap-custom-fields-style2">
-                    <div class="ap-field-label"><?php echo esc_html($acf_f['label']); ?></div>
-                    <div class="ap-field-value">
+                    <div class="ap-field-label field-label"><?php echo esc_html($acf_f['label']); ?></div>
+                    <div class="ap-field-value field-value">
                         <?php
                         if($acf_f['prepend']){
                             ?><span class="custom-field-prepend"><?php echo esc_html($acf_f['prepend']);?></span> <?php
@@ -94,8 +94,8 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
             }else{
                 ?>
                 <div class="ap-custom-fields uk-width-1-2 ap-custom-fields-style2">
-                    <div class="ap-field-label"><?php echo esc_html($acf_f['label']); ?></div>
-                    <div class="ap-field-value">
+                    <div class="ap-field-label field-label"><?php echo esc_html($acf_f['label']); ?></div>
+                    <div class="ap-field-value field-value">
                         <?php the_field($acf_f['name'], $product_id); ?>
                     </div>
                 </div>

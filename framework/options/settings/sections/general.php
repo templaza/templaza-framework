@@ -217,6 +217,13 @@ Templaza_API::set_section('settings',
                 'required' => array('backtotop','=','1'),
             ),
             array(
+                'id'       => 'backtotop-icon-hover-bgcolor',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Icon background hover color', 'templaza-framework' ),
+                'subtitle' => __( 'Select a background hover.', 'templaza-framework' ),
+                'required' => array('backtotop','=','1'),
+            ),
+            array(
                 'id'       => 'backtotop-icon-shape', /* Need create custom field */
                 'type'     => 'select',
                 'title'    => __( 'Icon shape', 'templaza-framework' ),
@@ -261,10 +268,39 @@ Templaza_API::set_section('settings',
                 'default' => 'wide',
             ),
             array(
+                'id'       => 'layout-maxwidth',
+                'type'     => 'text',
+                'title'    => __('Box Max Width', 'templaza-framework'),
+                'default'  => '1500px',
+                'desc'     => __( 'Example: 1500px or 90%', 'templaza-framework' ),
+                'required' => array('layout-theme', '=', 'boxed'),
+            ),
+            array(
+                'id'       => 'layout-shadow',
+                'type'     => 'text',
+                'title'    => __('Box shadow', 'templaza-framework'),
+                'default'  => '',
+                'required' => array('layout-theme', '=', 'boxed'),
+                'desc'     => __( 'Example: 10px 10px 5px 0px rgba(0,0,0,0.75). You can generator <a href="https://cssgenerator.org/box-shadow-css-generator.html">Here</a> ', 'templaza-framework' ),
+            ),
+            array(
                 'id'       => 'layout-background',
                 'type'     => 'background',
-                'title'    => __( 'Background', 'templaza-framework' ),
+                'title'    => __( 'Box Background', 'templaza-framework' ),
                 'required' => array('layout-theme', '=', 'boxed'),
+            ),
+            array(
+                'id'       => 'layout-padding',
+                'type'   => 'spacing',
+                'mode'   => 'padding',
+                'all'    => false,
+                'allow_responsive'    => true,
+                'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                'title'    => __( 'Site Padding', 'templaza-framework' ),
+                'subtitle' => __( 'Padding wrap content.', 'templaza-framework' ),
+                'default' => array(
+                    'units' => 'px',
+                ),
             ),
         )
     )

@@ -15,6 +15,7 @@ $thumbnail_effects = array(
     'zoomslow-motion' => __('Zoom in slow-motion','templaza-framework'),
     'brighten-zoomin' => __('Brighten and Zoom-in','templaza-framework'),
     'blur-zoom' => __('Blur zoom','templaza-framework'),
+    'ripple' => __('Ripple','templaza-framework'),
 );
 // -> START Blog Section
 Templaza_API::set_section('settings',
@@ -84,6 +85,14 @@ Templaza_API::set_section('settings',
                 'options'  => $thumbnail_effects,
                 'default'  => 'none',
                 'required' => array('blog-page-thumbnail', '=' , true)
+            ),
+            array(
+                'id'       => 'blog-page-thumbnail-radius',
+                'type'     => 'spacing',
+                'mode'     => 'border-radius',
+                'allow_responsive'    => true,
+                'title'    => __('Thumbnail radius', 'templaza-framework'),
+                'default'  => '',
             ),
             array(
                 'id'       => 'blog-page-date',

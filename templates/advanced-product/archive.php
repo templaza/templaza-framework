@@ -29,6 +29,7 @@ $ap_switch_layout       = isset($templaza_options['ap_product-archive-layout-swi
 $ap_result       = isset($templaza_options['ap_product-archive-product-result'])?filter_var($templaza_options['ap_product-archive-product-result'], FILTER_VALIDATE_BOOLEAN):true;
 $ap_sortby       = isset($templaza_options['ap_product-archive-product-sortby'])?filter_var($templaza_options['ap_product-archive-product-sortby'], FILTER_VALIDATE_BOOLEAN):true;
 $ap_list_grid       = isset($templaza_options['ap_product-archive-product-list-grid'])?filter_var($templaza_options['ap_product-archive-product-list-grid'], FILTER_VALIDATE_BOOLEAN):true;
+$ap_cat_description       = isset($templaza_options['ap_product-cat-description'])?$templaza_options['ap_product-cat-description']:'top';
 
 if($ap_layout == 'masonry'){
     $grid_option = 'masonry: true';
@@ -40,6 +41,7 @@ if($ap_layout == 'masonry'){
 $post_count = $GLOBALS['wp_query']->found_posts;
 if(!is_post_type_archive('ap_product')){
     $cat_id         = get_queried_object()->term_id;
+    if($ap_cat_description == 'top'){
     ?>
     <div class="ap-archive-descirtion uk-margin-medium-bottom">
         <?php
@@ -47,6 +49,7 @@ if(!is_post_type_archive('ap_product')){
         ?>
     </div>
     <?php
+    }
 }
 if ( have_posts()) {
     ?>
@@ -120,5 +123,17 @@ if ( have_posts()) {
     ?>
 </div>
 <?php
+}
+if(!is_post_type_archive('ap_product')){
+    $cat_id         = get_queried_object()->term_id;
+    if($ap_cat_description == 'bottom'){
+        ?>
+        <div class="ap-archive-descirtion uk-margin-medium-bottom">
+            <?php
+            echo wp_kses_post(term_description($cat_id));
+            ?>
+        </div>
+        <?php
+    }
 }
 ?>

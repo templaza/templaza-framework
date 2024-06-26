@@ -100,9 +100,9 @@ $typographies = array(
         'id'        => 'typography-footer-widget-heading',
         'enable'    => (isset($options['typography-footer']) && $options['typography-footer'] =='custom'?true:false),
         'class'     => array(
-            'desktop'    => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3',
-            'tablet'     => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3',
-            'mobile'     => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3',
+            'desktop'    => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3, .templaza-footer h2, .templaza-footer h4',
+            'tablet'     => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3, .templaza-footer h2, .templaza-footer h4',
+            'mobile'     => '.templaza-footer .widgettitle, .templaza-footer .templaza-heading h3, .templaza-footer h2, .templaza-footer h4',
         )
     ),
     array(
@@ -374,6 +374,14 @@ $designs    = array(
     // Widget Sidebar Design
     array(
         'enable'    => true,
+        'class'     => '.templaza-layout.templaza-layout-boxed .templaza-wrapper',
+        'options' => array(
+            'layout-background',
+            'layout-shadow',
+        ),
+    ),
+    array(
+        'enable'    => true,
         'class'     => '.templaza-sidebar',
         'options' => array(
             'sidebar_bg',
@@ -425,6 +433,7 @@ $designs    = array(
         'options' => array(
             'blog_media_padding',
             'blog_media_margin',
+            'blog-page-thumbnail-radius',
         ),
     ),
     // Single
@@ -497,6 +506,10 @@ if(count($designs)) {
                 unset($design['options'][$index]);
             }elseif($index = array_search('blog_single_shadow', $design['options'])){
                 $box_shadow = isset($options['blog_single_shadow'])?$options['blog_single_shadow']:'';
+                $wd_css_responsive['desktop'] .= CSS::box_shadow($box_shadow);
+                unset($design['options'][$index]);
+            }elseif($index = array_search('layout-shadow', $design['options'])){
+                $box_shadow = isset($options['layout-shadow'])?$options['layout-shadow']:'';
                 $wd_css_responsive['desktop'] .= CSS::box_shadow($box_shadow);
                 unset($design['options'][$index]);
             }

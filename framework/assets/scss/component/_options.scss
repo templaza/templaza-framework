@@ -49,6 +49,19 @@
             color: $tz-menu-color !important;
           }
         }
+        &.hasSubSections.redux-section-hover{
+          a.redux-group-tab-link-a,
+          a.redux-group-tab-link-a:hover {
+            background: $tz-background-menu-hover !important;
+            color: $tz-menu-color !important;
+          }
+          .subsection{
+            background:#fff !important;
+            a.redux-group-tab-link-a{
+              background:transparent !important;
+            }
+          }
+        }
         .subsection{
           background: $tzbackground;
           padding-left: 20px;

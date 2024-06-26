@@ -57,7 +57,11 @@ if(!class_exists('Templaza_Custom_Redux_Color_Rgba')){
 
         public function custom_before_render_field(&$field, &$value){
             $this -> set_defaults();
-            $this -> value = wp_parse_args( $value, $this -> value );
+            $this->value = wp_parse_args($value, $this->value);
+
+            if(!is_array($value) && empty($value)) {
+                $this -> value  = array();
+            }
         }
 
         public function custom_render_field($_render, $field){

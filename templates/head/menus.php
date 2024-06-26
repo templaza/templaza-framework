@@ -42,6 +42,11 @@ $dropdown_menu_margin  = isset($options['dropdown-menu-margin'])?$options['dropd
 if(is_array($dropdown_menu_margin) && count($dropdown_menu_margin)) {
     $dropdown_menu_margin_css  = CSS::make_spacing_redux('margin', $dropdown_menu_margin, true);
 }
+$dropdown_menu_border_radius   = '';
+$dropdown_menu_radius  = isset($options['dropdown-menu-border-radius'])?$options['dropdown-menu-border-radius']:'';
+if(is_array($dropdown_menu_radius) && count($dropdown_menu_radius)) {
+    $dropdown_menu_border_radius  = CSS::make_spacing_redux('border-radius', $dropdown_menu_radius, true, 'px');
+}
 
 // Sticky menu
 $sticky_menu_padding_css  = '';
@@ -111,6 +116,16 @@ if (!empty($dropdown_menu_margin_css)) {
         }
     }else {
         $menu_styles[] = '.templaza-nav .sub-menu > .menu-item > a {' . $dropdown_menu_margin_css . '}';
+    }
+}
+if (!empty($dropdown_menu_border_radius)) {
+    if(is_array($dropdown_menu_border_radius)){
+        foreach($dropdown_menu_border_radius as $device => $style){
+            $style  = '.templaza-nav .sub-menu{' . $style . '}';
+            Templates::add_inline_style($style, $device);
+        }
+    }else {
+        $menu_styles[] = '.templaza-nav .sub-menu{' . $dropdown_menu_border_radius . '}';
     }
 }
 

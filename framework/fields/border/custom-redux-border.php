@@ -7,6 +7,10 @@ use TemPlazaFramework\Functions;
 if(!class_exists('Templaza_Custom_Redux_Border')){
     class Templaza_Custom_Redux_Border{
 
+        protected $args;
+        protected $text_domain;
+        protected $redux_framework;
+
         protected $redux_field_type = 'border';
 
         protected $tz_fields_object;

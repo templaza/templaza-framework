@@ -61,6 +61,31 @@ Templaza_API::set_section('templaza_style',
                 'title'       => __( 'Background Video', 'templaza-framework' ),
                 'required'  => array('404-background-setting', '=', array('','video')),
             ),
+            array(
+                'id'          => '404-background-overlay',
+                'type'        => 'color_rgba',
+                'title'       => __( 'Color Overlay', 'templaza-framework' ),
+            ),
+            array(
+                'id'          => '404-title-color',
+                'type'        => 'color_rgba',
+                'title'       => __( 'Title Color', 'templaza-framework' ),
+            ),
+            array(
+                'id'          => '404-text-color',
+                'type'        => 'color_rgba',
+                'title'       => __( 'Text Color', 'templaza-framework' ),
+            ),
+            array(
+                'id'          => '404-input-bg',
+                'type'        => 'color_rgba',
+                'title'       => __( 'Input Background Color', 'templaza-framework' ),
+            ),
+            array(
+                'id'          => '404-input-color',
+                'type'        => 'color_rgba',
+                'title'       => __( 'Input Color', 'templaza-framework' ),
+            ),
         )
     )
 );

@@ -24,10 +24,25 @@ $thumb_class_eff = '';
 if($thumbnail_eff == 'flash'){
     $thumb_class_eff = 'templaza-thumb-flash ';
 }
+if($thumbnail_eff == 'ripple'){
+    $thumb_class_eff = 'templaza-thumb-ripple';
+}
+
 ?>
-<div class="uk-card-media-top uk-position-relative uk-transition-toggle <?php echo esc_attr($thumb_class_eff);?>">
-    <a href="<?php the_permalink(); ?>">
+<div class="uk-card-media-top uk-position-relative uk-width-1-1 uk-transition-toggle <?php echo esc_attr($thumb_class_eff);?>">
+    <a class="uk-display-block" href="<?php the_permalink(); ?>">
         <?php the_post_thumbnail($thumbnail);?>
+        <?php
+        if($thumbnail_eff == 'ripple'){
+            ?>
+            <div class="templaza-ripple-circles uk-position-center uk-transition-fade">
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
+            </div>
+        <?php
+        }
+        ?>
     </a>
     <?php
     if($ap_loop_layout !='style3'){

@@ -59,6 +59,8 @@ class TemPlazaFrameWork{
         add_action( 'init', array( $this, 'tz_load_plugin_textdomain' ) );
         add_action('template_include', array($this, 'template_include'), 999999);
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 99999);
+        add_action('wp_head', array($this, 'wp_head'), 99999);
+        add_action('wp_footer', array($this, 'wp_footer'), 99999);
 
         add_filter('register_sidebar_defaults', array($this, 'modify_sidebar'), 9999);
 
@@ -71,6 +73,76 @@ class TemPlazaFrameWork{
 
         do_action( 'templaza-framework/plugin/hooks', $this );
     }
+
+    public function wp_head(){
+        $options        = Functions::get_theme_options();
+
+        // Add favicon
+        $favicon    = isset($options['favicon'])?$options['favicon']:array();
+        $favicon_url = Functions::get_theme_default_logo_url('favicon', '.ico');
+        if(!empty($favicon) && isset($favicon['url']) && !empty($favicon['url'])){
+            $favicon_url = $favicon['url'];
+        }
+
+        if(!empty($favicon_url)) {
+            echo '<link rel="shortcut icon" href="' .$favicon_url. '" />';
+        }
+
+        // Add custom css files
+        $customcssfiles = isset($options['customcss-files'])?$options['customcss-files']:'';
+        $customcssfiles = !empty($customcssfiles)?trim($customcssfiles):$customcssfiles;
+        if (!empty($customcssfiles)) {
+            $customcssfiles = explode("\n", $customcssfiles);
+            foreach ($customcssfiles as $customcssfile) {
+                if (!empty($customcssfile)) {
+                    echo "<link rel=\"stylesheet\" href=\"" .$customcssfile. "\"  type=\"text/css\" media=\"all\" />\n";
+                }
+            }
+        }
+
+        // Add custom js files
+        $customjsfiles = isset($options['customjs-files'])?$options['customjs-files']:'';
+        $customjsfiles = !empty($customjsfiles)?trim($customjsfiles):$customjsfiles;
+        if (!empty($customjsfiles)) {
+            $customjsfiles = explode("\n", $customjsfiles);
+            foreach ($customjsfiles as $customjsfile) {
+                if (!empty($customjsfile)) {
+                    echo "<script type=\"text/javascript\" src=\"".$customjsfile."\"></script>\n";
+                }
+            }
+        }
+
+        // Add tracking code
+        $tracking_code  = isset($options['trackingcode-editor'])?$options['trackingcode-editor']:'';
+        $tracking_code  = !empty($tracking_code)?trim($tracking_code):$tracking_code;
+        if(!empty($tracking_code)){
+            echo $tracking_code."\n";
+        }
+
+        // Add Custom CSS
+        $customcss_editor   = isset($options['customcss-editor'])?$options['customcss-editor']:'';
+        $customcss_editor   = !empty($customcss_editor)?trim($customcss_editor):$customcss_editor;
+        if(!empty($customcss_editor)){
+            echo "<style>$customcss_editor</style>\n";
+        }
+
+        $beforehead_editor  = isset($options['beforehead-editor'])?$options['beforehead-editor']:'';
+        $beforehead_editor  = !empty($beforehead_editor)?trim($beforehead_editor):$beforehead_editor;
+        if(!empty($beforehead_editor)){
+            echo $beforehead_editor."\n";
+        }
+    }
+
+    public function wp_footer() {
+        $options        = Functions::get_theme_options();
+
+        $beforebody_editor  = isset($options['beforebody-editor'])?$options['beforebody-editor']:'';
+        $beforebody_editor  = !empty($beforebody_editor)?trim($beforebody_editor):$beforebody_editor;
+        if(!empty($beforebody_editor)){
+            echo $beforebody_editor."\n";
+        }
+    }
+
     public function tz_load_plugin_textdomain() {
         load_plugin_textdomain( 'wordpress-importer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
         load_plugin_textdomain( 'templaza-framework', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );

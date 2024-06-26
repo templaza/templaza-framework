@@ -10,6 +10,7 @@ if ( ! class_exists( 'Redux_TZ_Presets' ) ) {
     class Redux_TZ_Presets extends Redux_Field
     {
         protected $redux;
+        protected $opt_name;
 
         private $preset_path;
         private $text_domain = 'templaza-framework';

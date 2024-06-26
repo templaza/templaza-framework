@@ -19,6 +19,13 @@ $ap_styles    = array(
     ),
     array(
         'enable'    => true,
+        'class'     => '.ap-single-style3 .ap-single-style3-wrap',
+        'options' => array(
+            'ap_product-single-style3-padding',
+        ),
+    ),
+    array(
+        'enable'    => true,
         'class'     => '.single .ap-single-box',
         'options' => array(
             'ap_product-box-padding',
@@ -40,6 +47,20 @@ $ap_styles    = array(
         'options' => array(
             'ap_product-side-box-padding',
             'ap_product-side-box-margin',
+            'ap_product-side-box-bg-color',
+        ),
+    ),
+    array(
+        'enable'    => true,
+        'class'     => '.single .ap-related-product .uk-slider-container',
+        'options' => array(
+            'ap_product-related-padding',
+        ),
+    ),
+    array(
+        'enable'    => true,
+        'class'     => '.templaza-ap-single .ap-content-group-scroll::before',
+        'options' => array(
             'ap_product-side-box-bg-color',
         ),
     ),

@@ -1,22 +1,16 @@
 .templaza-ap-single{
   &.ap-single-style3{
-    .ap-image-color{
-      background:$tztheme-quote-bg;
-      &.bg-transparent{
-        background:transparent;
+    .ap-group-content{
+      .ap-field-icon{
+        padding:10px;
+        border:1px solid $tztheme-border-color;
       }
-    }
-    .one_image{
-      img{
-        width:100%;
-        height:auto;
+      .field-value{
+        padding-left:20px;
+        .ap-field-value{
+          font-weight: 500;
+        }
       }
-      canvas{
-        display:none;
-      }
-    }
-    .ap-single-nav{
-     z-index: 999;
     }
     .ap-single-nav-scroll{
       margin:0;
@@ -49,6 +43,17 @@
       margin-bottom:80px;
       padding-bottom:80px;
       border-bottom:1px solid $tztheme-border-color;
+    }
+    &.ap-single-style4{
+      .ap-content-group-scroll{
+        display:block;
+        .uk-nav{
+          margin-bottom: 70px;
+        }
+      }
+      .ap-group{
+        border:none;
+      }
     }
   }
 }

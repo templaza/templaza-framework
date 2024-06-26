@@ -126,7 +126,7 @@ $header_menu_bg     = CSS::make_color_rgba_redux($header_stack_menu_bg);
 $header_logo_bg     = CSS::make_color_rgba_redux($header_stack_logo_bg);
 $header_stacked_top_bg     = CSS::make_color_rgba_redux($header_stack_top_bg);
 $header_stacked_top_color     = CSS::make_color_rgba_redux($header_stack_top_color);
-if($header_stack_divi == true) {
+
     $header_styles = [];
     if (!empty($header_menu_bg)) {
         $header_styles[] = '.templaza-stacked-menu-section,
@@ -204,7 +204,7 @@ if($header_stack_divi == true) {
             }
         }
     }
-}
+
 $social_profiles    = isset($gb_options['social'])?$gb_options['social']:'';
 
 if ($mode == 'left') {

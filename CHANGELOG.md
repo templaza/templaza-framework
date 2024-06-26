@@ -1,5 +1,34 @@
 # Changelog
 
+## Version 1.1.9 - June 26, 2024
+
+**Fix bugs:**
+
+- Fix style with Redux 4.4.13
+- Fix issue warning with php8.2
+- Fix issue with typography field
+- Fix issue border-radius in layout
+- Fix style3 custom field when has not image
+- Fix issue color rgba field with global color value
+- Fix issue with wp_head action & remove templates/head/custom.php file
+
+**Improvement**
+
+- Update UIkit v3.19.2
+- Update download & install child package theme
+- Update color for blog, sidebar, woo, advanced product
+- Remove start index adv single slider
+- Disables the flyout submenus for submenus on the redux's option panel
+
+**Added**
+
+- Add style3 single advanced product
+- Add border radius blog thumb, fix logo text
+- Add color for module breadcrumb and heading
+- Add option fix group title in single advanced product
+- Add option show description advanced product category
+- Add maxwidth for layout box, add border radius for section
+
 ## Version 1.1.8 - February 15, 2024
 
 **Fix bugs:**

@@ -19,7 +19,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }
 $price = get_field('ap_price', get_the_ID());
 $thumbnail       = isset($templaza_options['ap_product-thumbnail-size'])?$templaza_options['ap_product-thumbnail-size']:'large';
-
+$thumbnail_eff       = isset($templaza_options['ap_product-thumbnail-effect'])?$templaza_options['ap_product-thumbnail-effect']:'';
 if(isset($args['show_author'])){
     $ap_author = isset($args['show_author'])?filter_var($args['show_author'], FILTER_VALIDATE_BOOLEAN):false;
 }else{
@@ -30,20 +30,35 @@ if(isset($args['ap_class'])){
 }else{
     $ap_class = ' templazaFadeInUp';
 }
-
+$thumb_class_eff = '';
+if($thumbnail_eff == 'ripple'){
+    $thumb_class_eff = 'templaza-thumb-ripple';
+}
 while (have_posts()): the_post();
     ?>
     <div class="ap-item  ap-item-style5 ap-item-list <?php echo esc_attr($ap_class);?>">
         <div class="ap-inner">
-            <div class="uk-card uk-child-width-1-2@s" data-uk-grid>
+            <div class="uk-card uk-child-width-1-2@s uk-grid" data-uk-grid>
                 <div class="uk-card-media-left uk-cover-container uk-width-2-5@s uk-transition-toggle">
-                    <div class="uk-position-relative uk-height-1-1">
+                    <div class="uk-position-relative uk-height-1-1 ap-item-list-img uk-transition-toggle <?php echo esc_attr($thumb_class_eff);?>">
                         <?php AP_Templates::load_my_layout('archive.badges'); ?>
                         <?php the_post_thumbnail($thumbnail,['data-uk-cover' => '']);?>
+                        <?php
+                        if($thumbnail_eff == 'ripple'){
+                            ?>
+                            <div class="templaza-ripple-circles uk-position-center uk-transition-fade">
+                                <div class="circle1"></div>
+                                <div class="circle2"></div>
+                                <div class="circle3"></div>
+                            </div>
+                            <?php
+                        }
+                        ?>
                         <a class="uk-position-absolute uk-position-top-left uk-width-1-1 uk-height-1-1" href="<?php the_permalink(); ?>">
                         </a>
                         <canvas width="" height="300"></canvas>
                         <?php AP_Templates::load_my_layout('archive.btn-actions'); ?>
+
                     </div>
                 </div>
                 <div class="ap-info uk-width-3-5@s">

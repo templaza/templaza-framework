@@ -175,6 +175,17 @@
     }
   }
 }
+.templaza-logo-text{
+  .site-title{
+    font-size:26px;
+    text-transform:uppercase;
+    color:$tztheme-heading-color;
+    font-family: $tztheme-heading-font;
+  }
+  .site-tagline{
+    font-size:0.875em;
+  }
+}
 @media (min-width:1201px) {
   body.header-sidebar-left{
     margin-left: 0;

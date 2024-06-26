@@ -9,8 +9,13 @@ use TemPlazaFramework\Helpers\FieldHelper;
 if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
     class ReduxFramework_TZ_Layout
     {
-        protected $text_domain;
+        public $field;
+        public $parent;
+
+        protected $value;
         protected $elements;
+        protected $text_domain;
+
         protected $templates = array();
 
         function __construct( $field = array(), $value = '', $parent = null ) {

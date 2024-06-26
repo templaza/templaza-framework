@@ -20,12 +20,16 @@ use um\core\Validation;
 if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
     class ImporterController extends BaseController{
 
-        protected $pagehook         = TEMPLAZA_FRAMEWORK_NAME.'__admin-importer';
-        protected $imported_key;
-        protected $plugins          = array();
-        protected $theme_demo_datas;
-        protected $api  = TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN;
         protected $info;
+        protected $item;
+        protected $product_code;
+        protected $imported_key;
+        protected $theme_demo_datas;
+
+        protected $pagehook         = TEMPLAZA_FRAMEWORK_NAME.'__admin-importer';
+        protected $plugins          = array();
+        protected $api  = TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN;
+
 
         public function __construct(array $config = array())
         {
@@ -481,25 +485,16 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                 case 'package':
                                 case 'package_theme':
                                 case 'theme_package':
+
                                     $result = $this -> install_theme_package($folder_path, $file_name);
 
-//                                    $theme_pack = wp_get_theme($theme, $folder_path);
-//
-//                                    if($theme_pack && !is_wp_error($theme_pack)
-//                                        && $theme_pack -> get('Version')){
-//
-//                                        // Install theme downloaded
-//                                        $overwrite  = 'update-theme';
-//                                        $skin     = new \WP_Ajax_Upgrader_Skin();
-//                                        $upgrader = new \Theme_Upgrader($skin);
-//
-//                                        $result = $upgrader->install( $filePath, array( 'overwrite_package' => $overwrite ) );
-//
-//                                    }else{
-//                                        $result = false;
-//                                        $this->info->set_message(esc_html__('Can not install theme package!',
-//                                            'templaza-framework'), true);
-//                                    }
+                                    if($result){
+                                        update_option('_'.TEMPLAZA_FRAMEWORK.'_'.$theme.'_package_theme', array(
+                                            'package'           => $pack_type,
+                                            'parent_package'    => $produce,
+                                            'parent_theme'  => $theme
+                                        ));
+                                    }
 
                                     break;
                             }

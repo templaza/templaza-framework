@@ -21,6 +21,7 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 	 */
 	class Redux_Import_Export extends Redux_Field {
 
+	    protected $is_field;
 
 		/**
 		 * Redux_Import_Export constructor.

@@ -19,6 +19,7 @@ if(!class_exists('Templaza_Custom_Redux_Spacing')){
         protected $value_tmp;
         protected $redux_framework;
         protected $tz_fields_object;
+        protected $text_domain;
 //        protected $select2_config;
 
         public function __tz_init($args = array(),  $field_object = null){

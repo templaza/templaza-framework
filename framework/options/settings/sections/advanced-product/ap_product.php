@@ -199,6 +199,15 @@ Templaza_API::set_section('settings',
                 ),
                 'default'  => 'default',
                 'required' => array('ap_product-layout', '=' , array('grid','masonry'))
+            ),array(
+                'id'       => 'ap_product-cat-description',
+                'type'     => 'select',
+                'title'    => esc_html__('Show category description on', 'templaza-framework'),
+                'options'  => array(
+                    'top' => esc_html__('Top','templaza-framework'),
+                    'bottom' => esc_html__('Bottom','templaza-framework'),
+                ),
+                'default'  => 'top',
             ),
             array(
                 'id'       => 'ap_product-archive-layout-switch',
@@ -294,7 +303,7 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'multi'     => false,
                 'title'    => esc_html__( 'Choose taxonomy before title', 'templaza-framework' ),
                 'options'  => $all_tax,
-                'required' => array('ap_product-loop-layout', '=' , 'style6'),
+                'required' => array('ap_product-loop-layout', '=' , array('style6','style3')),
             ),
             array(
                 'id'       => 'ap_product-thumbnail-size',
@@ -310,14 +319,9 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'options'  => array(
                     '' => esc_html__('Default', 'templaza-framework'),
                     'flash' => esc_html__('Flash', 'templaza-framework'),
+                    'ripple' => esc_html__('Ripple', 'templaza-framework'),
                 ),
                 'default'  => '',
-            ),
-            array(
-                'id'       => 'ap_product-loop-bg-color',
-                'type'     => 'background',
-                'title'    => esc_html__( 'Product Loop Background', 'templaza-framework' ),
-                'subtitle' => esc_html__( 'Select the background for product loop item.', 'templaza-framework' ),
             ),
             array(
                 'id'     => 'ap_product-loop-padding',
@@ -381,8 +385,33 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'options'  => array(
                     'style1' => esc_html__('Style 1', 'templaza-framework'),
                     'style2' => esc_html__('Style 2', 'templaza-framework'),
+                    'style3' => esc_html__('Style 3', 'templaza-framework'),
+                    'style4' => esc_html__('Style 4 (tab)', 'templaza-framework'),
                 ),
                 'default'  => 'style1',
+            ),
+            array(
+                'id'       => 'ap_product-single-style3-width',
+                'type'     => 'select',
+                'title'    => esc_html__('Tour Content Width', 'templaza-framework'),
+                'options'  => array(
+                    'uk-container-large' => esc_html__('Large', 'templaza-framework'),
+                    'uk-container-small' => esc_html__('Small', 'templaza-framework'),
+                    'uk-container-xlarge' => esc_html__('Xlarge', 'templaza-framework'),
+                    'uk-container-expand' => esc_html__('None', 'templaza-framework'),
+                ),
+                'default'  => 'uk-container-large',
+                'required' => array('ap_product-single-layout', '=' , 'style3'),
+            ),
+            array(
+                'id'     => 'ap_product-single-style3-padding',
+                'type'   => 'spacing',
+                'mode'   => 'padding',
+                'all'    => false,
+                'allow_responsive'    => true,
+                'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
+                'title'  => esc_html__('Tour Content Padding', 'templaza-framework'),
+                'required' => array('ap_product-single-layout', '=' , 'style3'),
             ),
             array(
                 'id'       => 'ap_product-single-style2-top',
@@ -461,60 +490,13 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'title'    => esc_html__( 'Show Media', 'templaza-framework' ),
                 'default'  => true,
             ),
-            array(
-                'id'       => 'ap_product-single-slider',
-                'type'     => 'select',
-                'title'    => esc_html__('Single Slider', 'templaza-framework'),
-                'options'  => array(
-                    'gallery' => esc_html__('Fade Slide', 'templaza-framework'),
-                    'gallery-tiny' => esc_html__('Tiny Slider', 'templaza-framework'),
-                ),
-                'default'  => 'gallery-tiny',
-            ),
-            array(
-                'id'       => 'ap_product-single-tiny-mode',
-                'type'     => 'select',
-                'title'    => esc_html__('Slider Mode', 'templaza-framework'),
-                'options'  => array(
-                    'carousel' => esc_html__('Carousel', 'templaza-framework'),
-                    'gallery' => esc_html__('Gallery', 'templaza-framework'),
-                ),
-                'desc'     => esc_html__('Choose Gallery mode to fade in, fade out effect', 'templaza-framework'),
-                'default'  => 'carousel',
-                'required' => array('ap_product-single-slider', '=' , 'gallery-tiny'),
-            ),
-            array(
-                'id'       => 'ap_product-single-tiny-autoheight',
-                'type'     => 'switch',
-                'title'    => esc_html__( 'Slider Auto Height', 'templaza-framework' ),
-                'default'  => true,
-                'required' => array('ap_product-single-slider', '=' , 'gallery-tiny'),
-            ),
-            array(
-                'id'       => 'ap_product-single-tiny-custom_height',
-                'type'     => 'text',
-                'title'    => esc_html__( 'Slider Custom Height', 'templaza-framework' ),
-                'desc'     => esc_html__('Example: 500px or 50% or 50vh', 'templaza-framework'),
-                'required' => array('ap_product-single-tiny-autoheight', '=' , false),
-            ),
-            array(
-                'id'       => 'ap_product-single-tiny-cover',
-                'type'     => 'select',
-                'title'    => esc_html__('Slider Image Fit', 'templaza-framework'),
-                'options'  => array(
-                    'cover' => esc_html__('Cover', 'templaza-framework'),
-                    'auto' => esc_html__('Auto', 'templaza-framework'),
-                ),
-                'desc'     => esc_html__('Display image in slider box', 'templaza-framework'),
-                'default'  => 'cover',
-                'required' => array('ap_product-single-slider', '=' , 'gallery-tiny'),
-            ),
+
             array(
                 'id'       => 'ap_product-single-vendor',
                 'type'     => 'switch',
                 'title'    => esc_html__( 'Show Vendor', 'templaza-framework' ),
                 'default'  => true,
-                'required' => array('ap_product-single-layout', '=' , 'style1'),
+                'required' => array('ap_product-single-layout', '=' , array('style1','style3')),
             ),
             array(
                 'id'       => 'ap_product-single-vendor-count',
@@ -583,6 +565,14 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'title'    => esc_html__( 'Enable sticky group fields content when scroll', 'templaza-framework' ),
                 'default'  => false,
                 'required' => array('ap_product-single-group-content', '!=' , ''),
+            ),
+            array(
+                'id'       => 'ap_product-single-group-content-sticky-responsive',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Disable Sticky in viewport', 'templaza-framework' ),
+                'desc'     => esc_html__('Example: @m or 960 ', 'templaza-framework'),
+                'default'  => 1200,
+                'required' => array('ap_product-single-group-content-sticky', '=' , true),
             ),
             array(
                 'id'       => 'ap_product-single-group-content-sticky-offset',
@@ -662,12 +652,7 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
                 'title'  => esc_html__('Single Box Margin', 'templaza-framework'),
             ),
-            array(
-                'id'       => 'ap_product-side-box-bg-color',
-                'type'     => 'background',
-                'title'    => esc_html__( 'Single Side Box Background', 'templaza-framework' ),
-                'subtitle' => esc_html__( 'Select the background for single side box item.', 'templaza-framework' ),
-            ),
+
             array(
                 'id'     => 'ap_product-side-box-padding',
                 'type'   => 'spacing',
@@ -716,6 +701,80 @@ Templaza_API::set_subsection('settings','ap_product-page',
         )
     )
 );
+Templaza_API::set_subsection('settings','ap_product-page',
+    array(
+        'title'      => esc_html__( 'Single Slider', 'templaza-framework' ),
+        'id'         => 'ap_product-single-slider-options',
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'ap_product-single-slider',
+                'type'     => 'select',
+                'title'    => esc_html__('Single Slider', 'templaza-framework'),
+                'options'  => array(
+                    'gallery' => esc_html__('Fade Slide', 'templaza-framework'),
+                    'gallery-tiny' => esc_html__('Tiny Slider', 'templaza-framework'),
+                ),
+                'default'  => 'gallery-tiny',
+            ),
+            array(
+                'id'       => 'ap_product-single-tiny-mode',
+                'type'     => 'select',
+                'title'    => esc_html__('Slider Mode', 'templaza-framework'),
+                'options'  => array(
+                    'carousel' => esc_html__('Carousel', 'templaza-framework'),
+                    'gallery' => esc_html__('Gallery', 'templaza-framework'),
+                ),
+                'desc'     => esc_html__('Choose Gallery mode to fade in, fade out effect', 'templaza-framework'),
+                'default'  => 'carousel',
+                'required' => array('ap_product-single-slider', '=' , 'gallery-tiny'),
+            ),
+            array(
+                'id'       => 'ap_product-single-tiny-autoheight',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Slider Auto Height', 'templaza-framework' ),
+                'default'  => true,
+                'required' => array('ap_product-single-slider', '=' , 'gallery-tiny'),
+            ),
+            array(
+                'id'       => 'ap_product-single-tiny-custom_height',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Slider Custom Height', 'templaza-framework' ),
+                'desc'     => esc_html__('Example: 500px or 50vh', 'templaza-framework'),
+                'required' => array('ap_product-single-tiny-autoheight', '=' , false),
+            ),
+            array(
+                'id'       => 'ap_product-single-tiny-cover',
+                'type'     => 'select',
+                'title'    => esc_html__('Slider Image Fit', 'templaza-framework'),
+                'options'  => array(
+                    'cover' => esc_html__('Cover', 'templaza-framework'),
+                    'auto' => esc_html__('Auto', 'templaza-framework'),
+                ),
+                'desc'     => esc_html__('Display image in slider box', 'templaza-framework'),
+                'default'  => 'cover',
+                'required' => array('ap_product-single-slider', '=' , 'gallery-tiny'),
+            ),
+            array(
+                'id'       => 'ap_product-slider-number',
+                'type'     => 'spinner',
+                'title'    => esc_html__('Slider items', 'templaza-framework'),
+                'default'  => '1',
+                'min'      => '1',
+                'step'     => '1',
+                'max'      => '50',
+                'required' => array('ap_product-single-slider', '=' , 'gallery-tiny'),
+            ),
+            array(
+                'id'       => 'ap_product-slider-thumbnail',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Show Thumbnail', 'templaza-framework' ),
+                'default'  => true,
+            ),
+        )
+    )
+);
+
 Templaza_API::set_subsection('settings','ap_product-page',
     array(
         'title'      => esc_html__( 'Advanced Product Compare', 'templaza-framework' ),
@@ -811,6 +870,15 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'title'    => esc_html__( 'Show Dots', 'templaza-framework' ),
                 'default'  => true,
                 'required' => array('ap_product-related', '=' , true),
+            ),
+            array(
+                'id'     => 'ap_product-related-padding',
+                'type'   => 'spacing',
+                'mode'   => 'padding',
+                'all'    => false,
+                'allow_responsive'    => true,
+                'units'  => array( 'em', 'px', '%' ),
+                'title'  => esc_html__('Related Box Padding', 'templaza-framework'),
             ),
             array(
                 'id'       => 'ap_product-related-spec-limit',

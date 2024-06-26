@@ -981,6 +981,14 @@ Templaza_API::set_subsection('settings', 'shop-page',
                 'type'     => 'text',
                 'title'    => esc_html__( 'Login text', 'templaza-framework' ),
             ),
+            array(
+                'id'       => 'account-logo',
+                'type'     => 'media',
+                'url'      => true,
+                'title'    => __( 'Logo', 'templaza-framework' ),
+                'compiler' => 'true',
+                'subtitle' => __( 'Select an image for your logo in login modal.', 'templaza-framework' ),
+            ),
 
         )
     )

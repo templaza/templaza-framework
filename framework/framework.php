@@ -8,6 +8,7 @@ use TemPlazaFramework\Admin\Admin_Page_Function;
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Admin_Functions;
 use TemPlazaFramework\Core\Fields;
+use TemPlazaFramework\Helpers\HelperLicense;
 use TemPlazaFramework\Media;
 use TemPlazaFramework\Menu_Admin;
 use TemPlazaFramework\Post_TypeFunctions;
@@ -134,10 +135,175 @@ class Framework{
             $glb_args   = $this -> get_arguments();
             add_action('update_option_'.$glb_args['opt_name'], array($this, 'save_settings_to_file'),10,2);
 
+
+            add_filter('upgrader_source_selection', array($this, 'theme_redownload_child_package'), 10, 4);
+
             add_action('templaza-framework/admin_notices', array($this, 'admin_notices'));
         }
 
         do_action('templaza-framework/framework/hooks');
+    }
+
+    /**
+     * Re-download theme package if it has parent package
+     * */
+    public function theme_redownload_child_package($source, $remote_source, $upgrader, $hook_extra){
+        global $pagenow;
+
+        $action = isset($_GET['action'])?$_GET['action']:'';
+
+        if($pagenow != 'update.php' || $action != 'upload-theme'){
+            return $source;
+        }
+
+        $theme          = wp_get_theme() -> get_stylesheet();
+        $packageInfo    = get_option('_'.TEMPLAZA_FRAMEWORK.'_'.$theme.'_package_theme', array());
+
+        if(empty($packageInfo) || !isset($packageInfo['parent_theme'])){
+            return $source;
+        }
+
+        $parent_pack_theme   = $packageInfo['parent_theme'];
+
+        $parent_theme  = wp_get_theme($parent_pack_theme, $remote_source);
+
+        // Check parent theme exists with new package uploaded
+        if(!$parent_theme || is_wp_error($parent_theme) || !$parent_theme -> get('Version')){
+            return $source;
+        }
+
+        if(!HelperLicense::is_authorised($theme)){
+            return $source;
+        }
+
+        $purchase_code  = HelperLicense::get_purchase_code($theme);
+
+        try {
+
+            $step       = 1;
+            $filePath   = $this -> download_package_file($packageInfo['parent_package'],
+                $packageInfo['package'], $purchase_code, $step);
+
+            if(!$filePath){
+                return $source;
+            }
+
+            if(file_exists($filePath)) {
+
+                global $wp_filesystem;
+
+                if ( ! $wp_filesystem->wp_content_dir() ) {
+                    return $source;
+                }
+
+                $upgrade_folder = $wp_filesystem->wp_content_dir() . 'upgrade/';
+
+                // Clean up contents of upgrade directory beforehand.
+                $upgrade_files = $wp_filesystem->dirlist($upgrade_folder);
+                if (!empty($upgrade_files)) {
+                    foreach ($upgrade_files as $file) {
+                        $wp_filesystem->delete($upgrade_folder . $file['name'], true);
+                    }
+                }
+
+                // We need a working directory - strip off any .tmp or .zip suffixes.
+                $working_dir = $upgrade_folder . basename( basename( $filePath, '.tmp' ), '.zip' );
+
+                // Clean up working directory.
+                if ($wp_filesystem->is_dir($working_dir)) {
+                    $wp_filesystem->delete($working_dir, true);
+                }
+
+                // Unzip package to working directory.
+                $unzip_result = unzip_file($filePath, $working_dir);
+
+                if($unzip_result) {
+                    unlink($filePath);
+                    // Get new theme
+                    $new_theme  = wp_get_theme($theme, $working_dir);
+
+                    if(!$new_theme -> get('Version')){
+                        rmdir($working_dir);
+                        return $source;
+                    }
+
+                    // Rename working dir
+                    rename($working_dir, $remote_source);
+                }
+            }
+
+        }catch (\Exception $exception){
+        }
+
+        return $source;
+    }
+
+    protected function download_package_file($produce, $type, $purchase_code, &$step){
+
+        $postdata =array(
+            'task'          => 'download.package',
+            'produce'       => $produce,
+            'purchase_code' => $purchase_code,
+            'step'          => $step,
+            'type'          => $type,
+            'domain'        => get_site_url()
+        );
+        $url            = TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN.'/index.php?option=com_tz_membership';
+
+        try {
+
+            set_time_limit(0);
+
+            // Get package file from server with post data
+            $response = wp_remote_post(
+                $url,
+                array(
+                    'method' => 'POST',
+//                            'timeout'  => 300,
+                    'timeout' => 45,
+                    'body' => $postdata
+                )
+            );
+
+            if(is_wp_error($response)){
+                return false;
+            }
+
+            $upgrade_folder = wp_upload_dir();
+
+            $filePath   = $upgrade_folder['path'].'/'.$produce
+                .'_'.$type.'.zip';
+
+            $header = $response['headers']; // array of http header lines
+            $body   = $response['body']; // use the content
+
+            if($header['content-type'] == 'application/json'){
+                $body   = json_decode($body);
+                if($body -> code == 400 && $body -> success == false){
+                    return false;
+                }
+            }
+
+            if($step == 1 && file_exists($filePath)){
+                unlink($filePath);
+            }
+
+            // Put multiple parts of package files to one file
+            file_put_contents($filePath, $body, FILE_APPEND);
+
+            $file_part_count    = isset($header['files-part-count'])?(int) $header['files-part-count']:1;
+
+            if(!$file_part_count || $file_part_count <= $step){
+                return $filePath;
+            }
+
+            $step++;
+            return $this->download_package_file($produce, $type, $purchase_code, $step);
+
+        }catch (\Exception $exception){
+            return false;
+        }
+//        return false;
     }
 
     public function admin_notices(){
@@ -556,6 +722,7 @@ class Framework{
             'hide_reset'          => false,
             'hide_expand'         => true,
             'ajax_save'           => true,
+            'flyout_submenus'     => false, // Disables the flyout submenus for submenus on the option panel.
 
             'compiler'            => true,
             // Initiate the compiler hook

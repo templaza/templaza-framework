@@ -55,6 +55,18 @@ Templaza_API::set_section('settings',
                 'title'    => __( 'Link Hover Color', 'templaza-framework' ),
                 'subtitle' => __( 'Set the hover color of the text links.', 'templaza-framework' ),
             ),
+            array(
+                'id'       => 'body-border-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Border Color', 'templaza-framework' ),
+                'subtitle' => __( 'Set the border color of table....', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'body-modal-bg',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Background Modal color', 'templaza-framework' ),
+                'subtitle' => __( 'Set the background color of modal.', 'templaza-framework' ),
+            ),
         ),
     )
 );
@@ -201,6 +213,12 @@ Templaza_API::set_section('settings',
                 'type'     => 'color_rgba',
                 'title'    => __( 'Background Color', 'templaza-framework' ),
                 'subtitle' => __( 'Select the background color of the Sticky Header.', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'sticky-heading-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Sticky Heading Color', 'templaza-framework' ),
+                'subtitle' => __( 'Set colors for h1,h2,h3,h4,h5,h6', 'templaza-framework' ),
             ),
             array(
                 'id'       => 'sticky-menu-link-color',
@@ -352,6 +370,189 @@ Templaza_API::set_section('settings',
         ),
     )
 );
+// -> START Blog Color
+Templaza_API::set_section('settings',
+    array(
+        'title'      => __( 'Blog Color', 'templaza-framework' ),
+        'id'         => 'colors-blog',
+        'desc'       => __( 'Select colors for Blog', 'templaza-framework' ),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'blog-quote-bg-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Quote background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'blog-quote-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Quote color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'blog-border-color',
+                'type'     => 'color_rgba',
+                'default'     => '',
+                'title'    => __( 'Border color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'blog-meta-color',
+                'type'     => 'color_rgba',
+                'default'     => '',
+                'title'    => __( 'Meta color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'blog-meta-link-color',
+                'type'     => 'color_rgba',
+                'default'     => '',
+                'title'    => __( 'Meta link color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'blog-meta-link-hover-color',
+                'type'     => 'color_rgba',
+                'default'     => '',
+                'title'    => __( 'Meta link hover color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'blog-author-bg-color',
+                'type'     => 'color_rgba',
+                'default'     => '',
+                'title'    => __( 'Single block author background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'blog-author-color',
+                'type'     => 'color_rgba',
+                'default'     => '',
+                'title'    => __( 'Single block author color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'blog-input-cm-bg-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Comment input background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'form-input-cm-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Comment input color', 'templaza-framework' ),
+            ),
+        ),
+    )
+);
+// -> START Form Color
+Templaza_API::set_section('settings',
+    array(
+        'title'      => __( 'Form Color', 'templaza-framework' ),
+        'id'         => 'colors-form',
+        'desc'       => __( 'Select colors for Form', 'templaza-framework' ),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'form-input-bg-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Input background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'form-input-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Input color', 'templaza-framework' ),
+            ),
+
+        ),
+    )
+);
+// -> START Form Color
+Templaza_API::set_section('settings',
+    array(
+        'title'      => __( 'Sidebar Color', 'templaza-framework' ),
+        'id'         => 'colors-sidebar',
+        'desc'       => __( 'Select colors for Sidebar', 'templaza-framework' ),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'sidebar-bg-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Sidebar background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'sidebar-heading-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Widget Heading color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'sidebar-widget-content-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Widget content color', 'templaza-framework' ),
+                'default'   => array(
+                    'color'     => '',
+                    'alpha'     => 1
+                ),
+            ),
+            array(
+                'id'       => 'sidebar-widget-border-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Widget border color', 'templaza-framework' ),
+                'default'   => array(
+                    'color'     => '',
+                    'alpha'     => 1
+                ),
+            ),
+            array(
+                'id'       => 'sidebar-post-title-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Post title color', 'templaza-framework' ),
+                'default'   => array(
+                    'color'     => '',
+                    'alpha'     => 1
+                ),
+            ),
+            array(
+                'id'       => 'sidebar-post-title-hover-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Post title hover color', 'templaza-framework' ),
+                'default'   => array(
+                    'color'     => '',
+                    'alpha'     => 1
+                ),
+            ),
+            array(
+                'id'       => 'sidebar-tag-bg-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Tag background color', 'templaza-framework' ),
+                'default'   => array(
+                    'color'     => '',
+                    'alpha'     => 1
+                ),
+            ),
+            array(
+                'id'       => 'sidebar-tag-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Tag color', 'templaza-framework' ),
+                'default'   => array(
+                    'color'     => '',
+                    'alpha'     => 1
+                ),
+            ),
+            array(
+                'id'       => 'sidebar-tag-bg-hover-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Tag background hover color', 'templaza-framework' ),
+                'default'   => array(
+                    'color'     => '',
+                    'alpha'     => 1
+                ),
+            ),
+            array(
+                'id'       => 'sidebar-tag-hover-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Tag hover color', 'templaza-framework' ),
+                'default'   => array(
+                    'color'     => '',
+                    'alpha'     => 1
+                ),
+            ),
+
+        ),
+    )
+);
 // -> START Button Color
 Templaza_API::set_section('settings',
     array(
@@ -420,6 +621,16 @@ Templaza_API::set_section('settings',
         'subsection' => true,
         'fields'     => array(
             array(
+                'id'       => 'woo-catalog-title-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Catalog title color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'woo-catalog-meta-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Catalog meta color', 'templaza-framework' ),
+            ),
+            array(
                 'id'       => 'woo-catalog-icon-bg-color',
                 'type'     => 'color_rgba',
                 'title'    => __( 'Catalog icon background color', 'templaza-framework' ),
@@ -443,6 +654,265 @@ Templaza_API::set_section('settings',
                 'title'    => __( 'Catalog icon color hover', 'templaza-framework' ),
                 'subtitle' => __( 'Set color icon hover', 'templaza-framework' ),
             ),
+            array(
+                'id'       => 'woo-filter-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Filter item color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'woo-filter-hover-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Filter item hover color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'woo-modal-bg-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Modal background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'woo-single-quantity-background',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single quantity background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'woo-single-quantity-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single quantity color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'woo-single-sticky-cart-bg',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single sticky background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'woo-cart-link-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Cart link color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'woo-cart-link-hover-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Cart link hover color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'woo-checkout-side-bg-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Checkout sidebar background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'woo-checkout-side-border-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Checkout sidebar border color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'woo-checkout-label-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Checkout label color', 'templaza-framework' ),
+            ),
+        ),
+    )
+);
+// -> START WooCommerce Color
+Templaza_API::set_section('settings',
+    array(
+        'title'      => __( 'Advanced Product Color', 'templaza-framework' ),
+        'id'         => 'advanced-product-color',
+        'desc'       => __( 'Config color on Advanced product page', 'templaza-framework' ),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'ap_product-loop-bg-color',
+                'type'     => 'background',
+                'title'    => esc_html__( 'Item Background', 'templaza-framework' ),
+                'subtitle' => esc_html__( 'Select the background for product item.', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-archive-title-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Archive title color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-archive-title-hover-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Archive title hover color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-meta-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Archive meta color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-icon-bg',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Icon background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-icon-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Icon color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-icon-hover-bg',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Icon background hover color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-icon-hover-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Icon hover color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-icon-border-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Icon border color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-field-label-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Custom field label color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-field-value-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Custom field value color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-item-footer-border',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Footer item border color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-price-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Price color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-price-msrp-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'MSRP Price color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-filter-label-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Filter label color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-filter-input-border',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Filter input border color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-filter-input-bg',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Filter input background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-filter-input-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Filter input color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-filter-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Filter color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-filter-hover-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Filter link hover color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-list-grid-border',
+                'type'     => 'color_rgba',
+                'title'    => __( 'List/Grid border color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-list-grid-label',
+                'type'     => 'color_rgba',
+                'title'    => __( 'List/Grid label color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-list-grid-bg',
+                'type'     => 'color_rgba',
+                'title'    => __( 'List/Grid button background', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-list-grid-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'List/Grid button color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-list-grid-hover-bg',
+                'type'     => 'color_rgba',
+                'title'    => __( 'List/Grid button hover background', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-list-grid-hover-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'List/Grid button hover color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-price-bg',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Price background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-price-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Price color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap_product-side-box-bg-color',
+                'type'     => 'background',
+                'title'    => esc_html__( 'Single Side Box Background', 'templaza-framework' ),
+                'subtitle' => esc_html__( 'Select the background for single side box item.', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-side-box-title',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Side box title color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-side-box-field-label',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Side box field label color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-side-box-field-value',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Side box field value color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-side-box-border',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Side box border color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-side-box-author-bg',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Side box author background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-side-box-author-title',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Side box author title color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-side-box-author-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Side box author color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-side-box-input-bg',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Side box form input background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-side-box-input-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Side box form input color', 'templaza-framework' ),
+            ),
+
         ),
     )
 );

@@ -1,12 +1,16 @@
 <?php
 
 use Advanced_Product\AP_Functions;
-
+use TemPlazaFramework\Functions;
 defined('ADVANCED_PRODUCT') or exit();
-
+if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
+    $templaza_options = array();
+}else{
+    $templaza_options = Functions::get_theme_options();
+}
 $ap_video   = get_field('ap_video', get_the_ID());
 $ap_gallery = get_field('ap_gallery', get_the_ID());
-
+$ap_tiny_thumb  = isset($templaza_options['ap_product-slider-thumbnail'])?filter_var($templaza_options['ap_product-slider-thumbnail'], FILTER_VALIDATE_BOOLEAN):true;
 $no_cookie      =   0;
 if (isset($ap_video) && !empty($ap_video)) {
     if (wp_oembed_get($ap_video)) :
@@ -64,7 +68,7 @@ if(!empty($ap_gallery)){
         <a class="uk-position-center-right  uk-hidden-hover" href="#" data-uk-slidenav-next data-uk-slideshow-item="next"></a>
 
     </div>
-
+    <?php if($ap_tiny_thumb){ ?>
     <div class="uk-position-relative uk-margin-small-top uk-visible-toggle" data-uk-slider>
         <ul class="uk-slider-items  uk-child-width-1-5 uk-child-width-1-5@m uk-grid uk-grid-small">
             <?php
@@ -94,5 +98,6 @@ if(!empty($ap_gallery)){
         <a class="uk-position-center-left uk-hidden-hover" href="#" data-uk-slidenav-previous data-uk-slider-item="previous"></a>
         <a class="uk-position-center-right  uk-hidden-hover" href="#" data-uk-slidenav-next data-uk-slider-item="next"></a>
     </div>
+    <?php } ?>
 </div>
 <?php } ?>
