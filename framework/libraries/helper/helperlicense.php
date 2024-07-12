@@ -75,12 +75,12 @@ if(!class_exists('TemPlazaFramework\Helpers\HelperLicense')){
             }
 
             $purchase_date  = isset($license['purchase_date'])?strtotime($license['purchase_date']):0;
-            $support_until  = isset($license['support_until'])?strtotime($license['support_until']):0;
+            $support_until  = isset($license['supported_until'])?strtotime($license['supported_until']):0;
 
-            if($support_until < time() || $support_until < $purchase_date){
-                return false;
+            if($support_until < current_time('timestamp') || $support_until < $purchase_date){
+                return true;
             }
-            return true;
+            return false;
         }
 
         public static function get_option_name($theme){

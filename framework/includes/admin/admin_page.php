@@ -229,50 +229,67 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                 'server_time'   => time()
             );
 
-            $response   = $this -> __heartbeat_response();
-
-            if(is_wp_error($response)){
-                $result['message']  = $response -> get_error_message();
+            if(HelperLicense::has_expired($this -> theme_name)){
+                $authMsg    = '<strong>'.sprintf(__('Welcome to %s', 'templaza-framework'),  wp_get_theme()->get('Name')).'</strong>';
+                $authMsg   .= __(' - Your license under this domain is invalid. Please reactivate your license to verify your domain again.', 'templaza-framework');
+                if($themeConfig = $this -> theme_config_registered){
+                    if(isset($themeConfig['envato_url']) && $themeConfig['envato_url']){
+                        $authMsg    .= ' <a href="'.$themeConfig['envato_url'].'" target="_blank" rel="nofollow">';
+                    }
+                    $authMsg    .= __('Or purchase a new license for your domain', 'templaza-framework');
+                    if(isset($themeConfig['envato_url']) && $themeConfig['envato_url']){
+                        $authMsg    .= '</a>';
+                    }
+                }
+                $result['message']  = $authMsg;
             }else{
-
-                $data   = json_decode($response['body']);
-
-                $options        = array();
-                $option_name    = HelperLicense::get_option_name($this -> theme_name);
-
-                if($option_name) {
-                    $options = get_option($option_name, array());
-                }
-
-                if($response['response']['code'] == 200 && $data && $data ->purchase_code){
-                    if(count($options)) {
-                        $options['domain_valid'] = true;
-                        update_option($option_name, $options);
-
-                        $result['auth_check']  = true;
-                    }
-                }else{
-                    if(count($options)) {
-                        $options['domain_valid'] = false;
-                        update_option($option_name, $options);
-                        $result['auth_check']  = false;
-
-                        $authMsg    = '<strong>'.sprintf(__('Welcome to %s', 'templaza-framework'),  wp_get_theme()->get('Name')).'</strong>';
-                        $authMsg   .= __(' - Your license under this domain is invalid. Please reactivate your license to verify your domain again.', 'templaza-framework');
-                        if($themeConfig = $this -> theme_config_registered){
-                            if(isset($themeConfig['envato_url']) && $themeConfig['envato_url']){
-                                $authMsg    .= ' <a href="'.$themeConfig['envato_url'].'" target="_blank" rel="nofollow">';
-                            }
-                            $authMsg    .= __('Or purchase a new license for your domain', 'templaza-framework');
-                            if(isset($themeConfig['envato_url']) && $themeConfig['envato_url']){
-                                $authMsg    .= '</a>';
-                            }
-                        }
-
-                        $result['message']   = $authMsg;
-                    }
-                }
+                $result['auth_check']  = true;
             }
+
+//            $response   = $this -> __heartbeat_response();
+//
+//            if(is_wp_error($response)){
+//                $result['message']  = $response -> get_error_message();
+//            }else{
+//
+//                $data   = json_decode($response['body']);
+//
+//                $options        = array();
+//                $option_name    = HelperLicense::get_option_name($this -> theme_name);
+//
+//                if($option_name) {
+//                    $options = get_option($option_name, array());
+//                }
+//
+//                if($response['response']['code'] == 200 && $data && $data ->purchase_code){
+//                    if(count($options)) {
+//                        $options['domain_valid'] = true;
+//                        update_option($option_name, $options);
+//
+//                        $result['auth_check']  = true;
+//                    }
+//                }else{
+//                    if(count($options)) {
+//                        $options['domain_valid'] = false;
+//                        update_option($option_name, $options);
+//                        $result['auth_check']  = false;
+//
+//                        $authMsg    = '<strong>'.sprintf(__('Welcome to %s', 'templaza-framework'),  wp_get_theme()->get('Name')).'</strong>';
+//                        $authMsg   .= __(' - Your license under this domain is invalid. Please reactivate your license to verify your domain again.', 'templaza-framework');
+//                        if($themeConfig = $this -> theme_config_registered){
+//                            if(isset($themeConfig['envato_url']) && $themeConfig['envato_url']){
+//                                $authMsg    .= ' <a href="'.$themeConfig['envato_url'].'" target="_blank" rel="nofollow">';
+//                            }
+//                            $authMsg    .= __('Or purchase a new license for your domain', 'templaza-framework');
+//                            if(isset($themeConfig['envato_url']) && $themeConfig['envato_url']){
+//                                $authMsg    .= '</a>';
+//                            }
+//                        }
+//
+//                        $result['message']   = $authMsg;
+//                    }
+//                }
+//            }
 
             wp_send_json($result);
             exit();
