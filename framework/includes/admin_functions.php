@@ -184,7 +184,7 @@ if(!class_exists('TemPlazaFramework\Admin_Functions')){
                     'title'    => esc_html__( 'PHP Post Max Size', 'templaza-framework' ),
                     'value'    => ini_get( 'post_max_size' ),
                     'required' => '30',
-                    'pass'     => ( ini_get( 'post_max_size' ) >= 30 ) ? true : false,
+                    'pass'     => ( (int) ini_get( 'post_max_size' ) >= 30 ) ? true : false,
                     'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', 'templaza-framework' )
                 ),
                 'php_time_limit'     => array(
