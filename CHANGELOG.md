@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 1.2.0 - July 12, 2024
+
+**Fix bugs:**
+
+- Fix issue check post_max_size
+- Fix issue license notice invalid
+
 ## Version 1.1.9 - June 26, 2024
 
 **Fix bugs:**
