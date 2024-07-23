@@ -453,10 +453,27 @@ $blog_author_color     = isset($options['blog-author-color'])?$options['blog-aut
 $blog_author_color     = CSS::make_color_rgba_redux($blog_author_color);
 $blog_meta_link_hover_color     = isset($options['blog-meta-link-hover-color'])?$options['blog-meta-link-hover-color']:'';
 $blog_meta_link_hover_color     = CSS::make_color_rgba_redux($blog_meta_link_hover_color);
-$blog_author_bg_color     = isset($options['blog-author-bg-color'])?$options['blog-author-bg-color']:'';
-$blog_author_bg_color     = CSS::make_color_rgba_redux($blog_author_bg_color);
-$blog_author_color     = isset($options['blog-author-color'])?$options['blog-author-color']:'';
-$blog_author_color     = CSS::make_color_rgba_redux($blog_author_color);
+
+$blog_meta_color_single     = isset($options['blog-meta-color-single'])?$options['blog-meta-color-single']:'';
+$blog_meta_color_single     = CSS::make_color_rgba_redux($blog_meta_color_single);
+$blog_meta_link_color_single     = isset($options['blog-meta-link-color-single'])?$options['blog-meta-link-color-single']:'';
+$blog_meta_link_color_single     = CSS::make_color_rgba_redux($blog_meta_link_color_single);
+$blog_meta_link_hover_color_single     = isset($options['blog-meta-link-hover-color-single'])?$options['blog-meta-link-hover-color-single']:'';
+$blog_meta_link_hover_color_single     = CSS::make_color_rgba_redux($blog_meta_link_hover_color_single);
+
+$breadcrumb_link     = isset($options['breadcrumb-link'])?$options['breadcrumb-link']:'';
+$breadcrumb_link     = CSS::make_color_rgba_redux($breadcrumb_link);
+$breadcrumb_link_hover     = isset($options['breadcrumb-link-hover'])?$options['breadcrumb-link-hover']:'';
+$breadcrumb_link_hover     = CSS::make_color_rgba_redux($breadcrumb_link_hover);
+$breadcrumb_current     = isset($options['breadcrumb-current'])?$options['breadcrumb-current']:'';
+$breadcrumb_current     = CSS::make_color_rgba_redux($breadcrumb_current);
+
+$breadcrumb_link_single     = isset($options['breadcrumb-link-single'])?$options['breadcrumb-link-single']:'';
+$breadcrumb_link_single     = CSS::make_color_rgba_redux($breadcrumb_link_single);
+$breadcrumb_link_hover_single     = isset($options['breadcrumb-link-hover-single'])?$options['breadcrumb-link-hover-single']:'';
+$breadcrumb_link_hover_single     = CSS::make_color_rgba_redux($breadcrumb_link_hover_single);
+$breadcrumb_current_single     = isset($options['breadcrumb-current-single'])?$options['breadcrumb-current-single']:'';
+$breadcrumb_current_single     = CSS::make_color_rgba_redux($breadcrumb_current_single);
 
 $blog_cm_bg_color     = isset($options['blog-input-cm-bg-color'])?$options['blog-input-cm-bg-color']:'';
 $blog_cm_bg_color     = CSS::make_color_rgba_redux($blog_cm_bg_color);
@@ -506,22 +523,30 @@ if (!empty($blog_border_color)) {
     $blogs[]    = 'body .tribe-events .tribe-events-calendar-list__month-separator:after{background-color:' . $blog_border_color . ';}';
 }
 if (!empty($blog_meta_color)) {
-    $blogs[]    = '.templaza-archive .templaza-archive-item span {color:' . $blog_meta_color . ';}';
-}
-if (!empty($blog_meta_color)) {
-    $blogs[]    = '.templaza-archive .templaza-archive-item span {color:' . $blog_meta_color . ';}';
+    $blogs[]    = '.templaza-archive .templaza-archive-item span, .templaza-related-posts .templaza-post-meta span {color:' . $blog_meta_color . ';}';
 }
 if (!empty($blog_meta_link_color)) {
     $blogs[]    = '.templaza-archive .templaza-archive-item span a,
     .templaza-archive .templaza-archive-item span.category a,
     .templaza-archive .templaza-archive-item span.author a, 
+    .templaza-related-posts .templaza-post-meta span a,
     .templaza-archive .templaza-archive-item span.tag a{color:' . $blog_meta_link_color . ';}';
 }
 if (!empty($blog_meta_link_hover_color)) {
     $blogs[]    = '.templaza-archive .templaza-archive-item span a:hover, 
     .templaza-archive .templaza-archive-item span.category a:hover, 
     .templaza-archive .templaza-archive-item span.author a:hover, 
+    .templaza-related-posts .templaza-post-meta span a:hover,
     .templaza-archive .templaza-archive-item span.tag a:hover{color:' . $blog_meta_link_hover_color . ';}';
+}
+if (!empty($blog_meta_color_single)) {
+    $blogs[]    = 'div.templaza-single .templaza-blog-item-info span{color:' . $blog_meta_color . ';}';
+}
+if (!empty($blog_meta_link_color_single)) {
+    $blogs[]    = 'div.templaza-single .templaza-blog-item-info span a{color:' . $blog_meta_link_color_single . ';}';
+}
+if (!empty($blog_meta_link_hover_color_single)) {
+    $blogs[]    = 'div.templaza-single .templaza-blog-item-info span a:hover{color:' . $blog_meta_link_hover_color_single . ';}';
 }
 if (!empty($blog_author_bg_color)) {
     $blogs[]    = ' .templaza-single .templaza-single-box.templaza-single-author{background-color:' . $blog_author_bg_color . ';}';
@@ -534,6 +559,24 @@ if (!empty($blog_cm_bg_color)) {
 }
 if (!empty($blog_cm_color)) {
     $blogs[]    = 'form.comment-form textarea{color:' . $blog_cm_color . ';}';
+}
+if (!empty($breadcrumb_link)) {
+    $blogs[]    = '.templaza-breadcrumb ul li a{color:' . $breadcrumb_link . ';}';
+}
+if (!empty($breadcrumb_link_hover)) {
+    $blogs[]    = '.templaza-breadcrumb ul li a:hover{color:' . $breadcrumb_link_hover . ';}';
+}
+if (!empty($breadcrumb_current)) {
+    $blogs[]    = '.templaza-breadcrumb ul li.item-current span{color:' . $breadcrumb_current . ';}';
+}
+if (!empty($breadcrumb_link_single)) {
+    $blogs[]    = '.templaza-single .templaza-breadcrumb li a{color:' . $breadcrumb_link_single . ';}';
+}
+if (!empty($breadcrumb_link_hover_single)) {
+    $blogs[]    = '.templaza-single  .templaza-breadcrumb li a:hover{color:' . $breadcrumb_link_hover_single . ';}';
+}
+if (!empty($breadcrumb_current_single)) {
+    $blogs[]    = '.templaza-single  .templaza-breadcrumb li.item-current span{color:' . $breadcrumb_current_single . ';}';
 }
 if (!empty($sidebar_bg_color)) {
     $blogs[]    = 'div.templaza-sidebar,

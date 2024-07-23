@@ -370,6 +370,53 @@ Templaza_API::set_section('settings',
         ),
     )
 );
+// -> START Breadcrumb Color
+Templaza_API::set_section('settings',
+    array(
+        'title'      => __( 'Breadcrumb Color', 'templaza-framework' ),
+        'id'         => 'colors-breadcrumb',
+        'desc'       => __( 'Select colors for breadcrumb', 'templaza-framework' ),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'breadcrumb-link',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Breadcrumb link color', 'templaza-framework' ),
+                'subtitle' => __( 'Set the color of breadcrumb link', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'breadcrumb-link-hover',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Breadcrumb link hover color', 'templaza-framework' ),
+                'subtitle' => __( 'Set the hover color of breadcrumb link', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'breadcrumb-current',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Breadcrumb color current', 'templaza-framework' ),
+                'subtitle' => __( 'Set the color of current', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'breadcrumb-link-single',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single post breadcrumb link color', 'templaza-framework' ),
+                'subtitle' => __( 'Set the color of single post breadcrumb link', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'breadcrumb-link-hover-single',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single post breadcrumb link hover color', 'templaza-framework' ),
+                'subtitle' => __( 'Set the hover color of single post breadcrumb link', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'breadcrumb-current-single',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single post breadcrumb color current', 'templaza-framework' ),
+                'subtitle' => __( 'Set the color of single post current', 'templaza-framework' ),
+            ),
+        ),
+    )
+);
 // -> START Blog Color
 Templaza_API::set_section('settings',
     array(
@@ -423,6 +470,24 @@ Templaza_API::set_section('settings',
                 'type'     => 'color_rgba',
                 'default'     => '',
                 'title'    => __( 'Single block author color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'blog-meta-color-single',
+                'type'     => 'color_rgba',
+                'default'     => '',
+                'title'    => __( 'Single meta color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'blog-meta-link-color-single',
+                'type'     => 'color_rgba',
+                'default'     => '',
+                'title'    => __( 'Single meta link color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'blog-meta-link-hover-color-single',
+                'type'     => 'color_rgba',
+                'default'     => '',
+                'title'    => __( 'Single meta link hover color', 'templaza-framework' ),
             ),
             array(
                 'id'       => 'blog-input-cm-bg-color',
