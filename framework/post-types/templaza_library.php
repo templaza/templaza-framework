@@ -9,6 +9,7 @@ use TemPlazaFramework\Post_Type;
 if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
     class Templaza_Library extends Post_Type{
         public $setting_args;
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
 
         public function register()
         {
@@ -201,7 +202,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Library')){
         public function manage_custom_column($column, $post_id ){
             if($column == 'lib_type'){
                 $lib_type   = get_post_meta($post_id, '_templaza_library_type', true);
-                echo ucfirst($lib_type);
+                echo esc_html(ucfirst($lib_type));
             }
 
             return $column;

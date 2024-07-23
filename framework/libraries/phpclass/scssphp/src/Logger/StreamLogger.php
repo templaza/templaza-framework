@@ -26,6 +26,7 @@ class StreamLogger implements LoggerInterface
      * @param resource $stream          A stream resource
      * @param bool     $closeOnDestruct If true, takes ownership of the stream and close it on destruct to avoid leaks.
      */
+    // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fclose, WordPress.WP.AlternativeFunctions.file_system_operations_fwrite
     public function __construct($stream, $closeOnDestruct = false)
     {
         $this->stream = $stream;

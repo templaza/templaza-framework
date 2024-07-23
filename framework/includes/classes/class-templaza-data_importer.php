@@ -34,7 +34,7 @@ class Data_Importer{
             if(!$is_home){
                 return $post_exists;
             }
-
+            // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             $args   = array(
                 'post_type'     => $post['post_type'],
                 'numberposts'   => 1,
@@ -63,7 +63,7 @@ class Data_Importer{
                 .$postslist[0] -> post_name.'.json';
 
             if(file_exists($dest_file)){
-                unlink($dest_file);
+                wp_delete_file($dest_file);
             }
             copy($source_file, $dest_file);
 

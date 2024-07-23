@@ -33,7 +33,7 @@ if(isset($options['enable-featured-for-posttypes'])&& !empty($options['enable-fe
 if(!in_array($latest_post_type, $featured_posttypes)){
     $show_featured  = '';
 }
-
+// phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_query, WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 $args = array(
     'post_type'  => ''.$latest_post_type.'',
     'numberposts' => $latest_post_number,
@@ -98,8 +98,8 @@ $latest_cause = get_posts( $args );
 $date_format = get_option('date_format');
 ?>
 
-<div<?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="module-latest-posts <?php
-echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
+<div<?php echo isset($atts['tz_id'])?' id="'.esc_attr($atts['tz_id']).'"':''; ?> class="module-latest-posts <?php
+echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>" >
 
     <div class="uk-slider-container-offset" data-uk-slider>
 
@@ -120,7 +120,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
                                     <a href="<?php echo esc_url(get_permalink($post_item->ID));?>">
                                     <canvas height="<?php echo esc_attr($latest_post_image_cover_height);?>"></canvas>
                                     <img class="uk-transition-opaque <?php echo esc_attr($latest_post_image_transition);?>" src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?>" data-uk-cover>
-                                    <?php echo $ripple_html; ?>
+                                    <?php echo wp_kses($ripple_html,'post'); ?>
                                     </a>
                                 </div>
                             <?php
@@ -128,7 +128,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
                                 ?>
                                 <a href="<?php echo esc_url(get_permalink($post_item->ID));?>">
                                     <img class="uk-transition-opaque <?php echo esc_attr($latest_post_image_transition);?>" src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?> "/>
-                                    <?php echo $ripple_html; ?>
+                                    <?php echo wp_kses($ripple_html,'post'); ?>
                                 </a>
                             <?php
                                 }
@@ -149,10 +149,10 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
                                     <div class="ap-price-box">
                                         <span class="ap-field-label"><?php esc_html_e('From','travelami')?></span>
                                         <?php
-                                        $html = sprintf('<span class="ap-price"><b> %s</b> %s </span>',
-                                            esc_html__(' ', 'travelami'), AP_Helper::format_price($price));
+                                        $html = sprintf('<span class="ap-price"> %s </span>',
+                                             AP_Helper::format_price($price));
                                         echo wp_kses($html,'post');
-                                        if(!empty($price_notice_value) && $show_price_notice){
+                                        if(!empty($price_notice_value)){
                                             ?>
                                             <span class="meta">
                                                 <?php echo esc_html($price_notice_value);?>

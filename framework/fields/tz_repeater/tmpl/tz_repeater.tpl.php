@@ -9,7 +9,7 @@ if($redux = $this -> redux){
 
 ?>
 
-<script type="text/html" id="tmpl-tzfrm-field-tz_repeater-template__field-<?php echo $this->field['id']; ?>">
+<script type="text/html" id="tmpl-tzfrm-field-tz_repeater-template__field-<?php echo esc_attr($this->field['id']); ?>">
     <?php
     foreach ($redux -> sections as $k => $section) {
         echo '<div class="field-tz_repeater-accordion-group">';

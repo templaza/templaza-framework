@@ -42,7 +42,7 @@ class Util
     {
         $val = $value[1];
         $grace = new Range(-0.00001, 0.00001);
-
+        // phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped
         if (! \is_numeric($val)) {
             throw new RangeException("$name {$val} is not a number.");
         }

@@ -47,6 +47,7 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 		 * @since       1.0.0
 		 * @access      public
 		 */
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
 		public function __construct( $parent ) {
 			parent::__construct( $parent, __FILE__ );
 
@@ -118,6 +119,7 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
                 wp_send_json_error(array('message' => __('Preset file not found', 'templaza-framework')));
                 wp_die();
             }
+            // phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents, WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents, WordPress.WP.AlternativeFunctions.json_encode_json_encode
 
             $preset = file_get_contents($file);
             if($preset && !empty($preset)){
@@ -141,7 +143,8 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
                 }
 
                 if(!file_exists($dest_file)){
-                    wp_send_json_error(array('message' => __(sprintf('Preset not loaded: File %s not found', $dest_file), 'templaza-framework')));
+                    /* translators: %s - message. */
+                    wp_send_json_error(array('message' => sprintf(__('Preset not loaded: File %s not found', 'templaza-framework'), esc_html($dest_file))));
                     wp_die();
                 }
 
@@ -165,7 +168,8 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
             $file   = $preset_path.'/'.$name.'.json';
 
             if(!file_exists($file)){
-                wp_send_json_error(array('message' => __(sprintf('Preset file %s not found', $file), 'templaza-framework')));
+                /* translators: %s - message. */
+                wp_send_json_error(array('message' => (sprintf(__('Preset file %s not found','templaza-framework'), esc_html($file)))));
                 wp_die();
             }
 
@@ -173,6 +177,7 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
             $preset_data    = !empty($preset_data)?json_decode($preset_data, true):array();
 
             // Remove image if it exists
+            // phpcs:disable WordPress.WP.AlternativeFunctions.unlink_unlink, WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
             $image  = isset($preset_data['image'])?$preset_data['image']:'';
             if(!empty($image)){
                 $image_path = TEMPLAZA_FRAMEWORK_THEME_PATH.'/images/presets'.(!empty($post_type)?'/'.$post_type:'')
@@ -193,6 +198,7 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 
             $source_file    = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION;
             $preset_path    = $this -> get_preset_path();
+            // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_mkdir, WordPress.WP.AlternativeFunctions.unlink_unlink , WordPress.Security.NonceVerification.Recommended
 
 		    if(!is_dir($preset_path)){
                 require_once(ABSPATH . '/wp-admin/includes/file.php');

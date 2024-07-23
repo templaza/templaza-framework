@@ -24,6 +24,7 @@ class Templaza_Product_Brands {
 	 * @since 1.0.0
 	 * @return object
 	 */
+    // phpcs:disable WordPress.Security.NonceVerification.Missing, WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion,  WordPress.WP.EnqueuedResourceParameters.NotInFooter
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new self();

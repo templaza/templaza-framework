@@ -22,29 +22,6 @@ if ($background_setting) {
         $background_image   = isset($options['miscellaneous-background-image'])?$options['miscellaneous-background-image']:'';
         $css                = !empty($background_image)?CSS::background_redux($background_image):'';
 
-//        $img_background_color = isset($options['miscellaneous-background-image'])?$options['miscellaneous-background-image']:'';
-//        $img_background_color = empty($img_background_color) ? 'inherit' : $img_background_color;
-//        $styles[] = 'background-color:' . $img_background_color;
-//
-//        $background_image = $params->get('background_image', '');
-//        if (!empty($background_image)) {
-//            $styles[] = 'background-image: url(' . JURI::root() . Astroid\Helper\Media::getPath() . '/' . $background_image . ')';
-//            $background_repeat = $params->get('background_repeat', '');
-//            $background_repeat = empty($background_repeat) ? 'inherit' : $background_repeat;
-//            $styles[] = 'background-repeat:' . $background_repeat;
-//
-//            $background_size = $params->get('background_size', '');
-//            $background_size = empty($background_size) ? 'inherit' : $background_size;
-//            $styles[] = 'background-size:' . $background_size;
-//
-//            $background_attchment = $params->get('background_attchment', '');
-//            $background_attchment = empty($background_attchment) ? 'inherit' : $background_attchment;
-//            $styles[] = 'background-attachment:' . $background_attchment;
-//
-//            $background_position = $params->get('background_position', '');
-//            $background_position = empty($background_position) ? 'inherit' : $background_position;
-//            $styles[] = 'background-position:' . $background_position;
-//        }
     }
 
     if ($background_setting == "video") {
@@ -85,18 +62,18 @@ $comingsoon_date    = $date->format('c');
 
 Templates::add_inline_style('.comingsoon-wrap{'.$css.'}');
 ?>
-<div class="comingsoon-wrap" <?php echo implode(' ', $video); ?>>
+<div class="comingsoon-wrap" <?php echo esc_attr(implode(' ', $video)); ?>>
     <div class="uk-text-center">
         <div id="comingsoon">
             <div class="comingsoon-page-logo">
                 <?php if ($hascs_logo) { ?>
-                    <img class="comingsoon-logo m-auto" alt="logo" src="<?php echo $comingsoon_logo; ?>" />
+                    <img class="comingsoon-logo m-auto" alt="logo" src="<?php echo esc_url($comingsoon_logo); ?>" />
                 <?php } ?>
             </div>
 
             <?php if (!empty($coming_soon_content)) { ?>
                 <div class="comingsoon-content">
-                    <?php echo $coming_soon_content; ?>
+                    <?php echo wp_kses($coming_soon_content,'post'); ?>
                 </div>
             <?php } ?>
 
@@ -104,22 +81,22 @@ Templates::add_inline_style('.comingsoon-wrap{'.$css.'}');
                 <div class="uk-grid-small uk-child-width-auto uk-flex-center" data-uk-grid data-uk-countdown="date: <?php echo esc_attr($comingsoon_date); ?>">
                     <div>
                         <div class="uk-countdown-number uk-countdown-days"></div>
-                        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo __('Days','templaza-framework'); ?></div>
+                        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo esc_html__('Days','templaza-framework'); ?></div>
                     </div>
                     <div class="uk-countdown-separator">:</div>
                     <div>
                         <div class="uk-countdown-number uk-countdown-hours"></div>
-                        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo __('Hours','templaza-framework'); ?></div>
+                        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo esc_html__('Hours','templaza-framework'); ?></div>
                     </div>
                     <div class="uk-countdown-separator">:</div>
                     <div>
                         <div class="uk-countdown-number uk-countdown-minutes"></div>
-                        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo __('Minutes','templaza-framework'); ?></div>
+                        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo esc_html__('Minutes','templaza-framework'); ?></div>
                     </div>
                     <div class="uk-countdown-separator">:</div>
                     <div>
                         <div class="uk-countdown-number uk-countdown-seconds"></div>
-                        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo __('Seconds','templaza-framework'); ?></div>
+                        <div class="uk-countdown-label uk-margin-small uk-text-center uk-visible@s"><?php echo esc_html__('Seconds','templaza-framework'); ?></div>
                     </div>
                 </div>
             <?php } ?>

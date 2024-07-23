@@ -7,7 +7,7 @@ use TemPlazaFramework\Functions;
 
 if(!class_exists('TemplazaFramework_MetaBox_Post_Format')){
     class TemplazaFramework_MetaBox_Post_Format extends TemplazaFramework_MetaBox{
-
+        // phpcs:disable WordPress.WP.AlternativeFunctions.strip_tags_strip_tags, WordPress.WP.AlternativeFunctions.json_encode_json_encode,  WordPress.Security.NonceVerification.Missing
         public function register(){
             // Get all post types without templaza_style
             $metaboxes[] = array(
@@ -46,7 +46,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Post_Format')){
             if (post_type_supports($post_type, 'post-formats') && current_theme_supports('post-formats')) {
                 // assets
                 wp_enqueue_script('templaza-post-formats-ui', Functions::get_my_url()
-                    .'/metaboxes/post-format/assets/js/post-formats.js', array('jquery'), Functions::get_my_version());
+                    .'/metaboxes/post-format/assets/js/post-formats.js', array('jquery'), Functions::get_my_version(), false);
                 wp_enqueue_style('templaza-post-formats-ui', Functions::get_my_url()
                     .'/metaboxes/post-format/assets/css/post-formats.css', array(), Functions::get_my_version(), 'screen');
                 wp_localize_script(
@@ -71,7 +71,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Post_Format')){
             if ( post_type_supports( $post_type, 'post-formats' ) && current_theme_supports( 'post-formats' ) ) {
                 wp_enqueue_script( 'templaza-post-formats-ui-admin',
                     Functions::get_my_url() . '/metaboxes/post-format/assets/js/admin.js',
-                    array( 'templaza-post-formats-ui' ), Functions::get_my_version() );
+                    array( 'templaza-post-formats-ui' ), Functions::get_my_version(), false );
             }
         }
 

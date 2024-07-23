@@ -24,6 +24,7 @@ class Templaza_Product_Loop {
 	 * @since 1.0.0
 	 * @return object
 	 */
+    // phpcs:disable WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
@@ -962,7 +963,7 @@ class Templaza_Product_Loop {
 		if ( $length ) {
 			$short_description = wp_trim_words( $short_description, $length, '...');
 		}
-
+        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo sprintf( '<div class="woocommerce-product-details__short-description"> %s</div>', $short_description );
 	}
 

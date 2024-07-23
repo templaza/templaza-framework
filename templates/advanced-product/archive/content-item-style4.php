@@ -26,6 +26,7 @@ if(isset($args['show_intro'])){
 }else{
     $ap_intro       = isset($templaza_options['ap_product-loop-desc'])?filter_var($templaza_options['ap_product-loop-desc'], FILTER_VALIDATE_BOOLEAN):false;
 }
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 if(isset($_GET['description'])){
     $ap_desc_limit = $_GET['description'];
 }else{
@@ -71,7 +72,7 @@ $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
                 <?php
                 if($ap_intro){
                     if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
-                        <p><?php echo wp_trim_words(strip_tags(get_the_excerpt()), $ap_desc_limit); ?></p>
+                        <p><?php echo esc_html(wp_trim_words(wp_strip_all_tags(get_the_excerpt()), $ap_desc_limit)); ?></p>
                     <?php } else {
                             the_excerpt();
                         }

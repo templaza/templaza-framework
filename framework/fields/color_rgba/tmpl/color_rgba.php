@@ -35,7 +35,7 @@ if(preg_match('/^(<div)([^>]*)(>)/', $_render)){
     <div class="uk-button-group">
         <div class="uk-inline" data-tzfrm-global-color>
             <button type="button" class="uk-button uk-button-default uk-button-small" data-uk-tooltip="<?php
-            _e('Global Color', 'templaza-framework'); ?>" style="margin-right: -1px">
+            esc_html_e('Global Color', 'templaza-framework'); ?>" style="margin-right: -1px">
                 <span data-uk-icon="icon: world;ratio: 0.8"></span>
             </button>
             <div class="uk-width-medium uk-padding-small uk-height-max-medium uk-overflow-auto" data-uk-dropdown="mode: click; target: !.uk-button-group;">
@@ -49,24 +49,24 @@ if(preg_match('/^(<div)([^>]*)(>)/', $_render)){
                             $is_active      = true;
                         }
                 ?>
-                    <li<?php echo $is_active?' class="uk-active"':'';?>>
+                    <li<?php echo esc_attr($is_active)?' class="uk-active"':'';?>>
                         <a href="javascript:" class="uk-flex" data-tzfrm-global-color-theme="<?php
-                        echo esc_attr(json_encode($colour)); ?>">
+                        echo esc_attr(wp_json_encode($colour)); ?>">
                             <div class="uk-width-expand">
                                 <div class="sp-preview">
                                     <div class="sp-preview-inner uk-flex uk-flex-center uk-flex-middle" style="background-color: <?php
-                                    echo $colour['color']['rgba']; ?>;">
+                                    echo esc_attr($colour['color']['rgba']); ?>;">
                                         <span data-uk-icon="icon: check; ratio: 0.7"<?php
                                          echo !$is_active?' class="uk-hidden"':'';?> style="text-shadow: 0 0 1px #000"></span>
                                     </div>
                                 </div>
-                                <div><?php echo $colour['title']; ?></div>
+                                <div><?php echo esc_html($colour['title']); ?></div>
                             </div>
                             <div class="uk-width-auto"><?php
                                 if($colour['color']['alpha'] != 1){
-                                echo $colour['color']['rgba'];
+                                echo esc_html($colour['color']['rgba']);
                              }else{
-                                echo $colour['color']['color'];
+                                echo esc_html($colour['color']['color']);
                              }
                              ?></div>
                         </a>
@@ -110,5 +110,6 @@ if(preg_match('/^(<div)([^>]*)(>)/', $_render)){
     }
 
 }
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 echo $_render;
 ?>

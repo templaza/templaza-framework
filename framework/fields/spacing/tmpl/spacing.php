@@ -275,12 +275,12 @@ if($allow_responsive){
                                   >';
                     }
                     ?>
-                    <li><a href="#" data-uk-tooltip="<?php echo $item['title']; ?>" data-field-device="<?php
-                        echo $device; ?>">
+                    <li><a href="#" data-uk-tooltip="<?php echo esc_attr($item['title']); ?>" data-field-device="<?php
+                        echo esc_attr($device); ?>">
                             <?php if(isset($item['uk-icon']) && !empty($item['uk-icon'])){?>
-                                <span data-uk-icon="icon: <?php echo $item['uk-icon'];?>"></span>
+                                <span data-uk-icon="icon: <?php echo esc_attr($item['uk-icon']);?>"></span>
                             <?php }else{?>
-                            <i class="<?php echo $item['icon']; ?>"></i>
+                            <i class="<?php echo esc_attr($item['icon']); ?>"></i>
                             <?php } ?>
                         </a></li>
                 <?php } ?>
@@ -330,9 +330,9 @@ if($allow_responsive){
     } ?>
 
     <?php
-    echo $input_unit_html;
+    echo wp_kses($input_unit_html,'post');
 
-    echo $input_spacing_html;
+    echo wp_kses($input_spacing_html,'post');
     ?>
 
     <div class="uk-child-width-1-4 uk-grid-small" data-uk-grid>
@@ -354,7 +354,7 @@ if($allow_responsive){
                                 <input 
                                     type="text" 
                                     class="redux-spacing-all redux-spacing-input mini ' . esc_attr( $this->field['class'] ) . '" 
-                                    placeholder="' . $hints['all'] . '" 
+                                    placeholder="' . esc_attr($hints['all']) . '" 
                                     rel="' . esc_attr( $this->field['id'] ) . '-all" 
                                     value="' . esc_attr( $this->value['top'] ) . '"
                                 >
@@ -373,8 +373,8 @@ if($allow_responsive){
                                     </span>
                                     <input type="text" 
                                            class="redux-spacing-top redux-spacing-input mini ' . esc_attr( $this->field['class'] ) . '"
-                                           placeholder="' . $hints['top'] . '"
-                                           rel="' . esc_attr( $this->field['id'] ) .'-'.$position['top']. '"
+                                           placeholder="' . esc_attr($hints['top']) . '"
+                                           rel="' . esc_attr( $this->field['id'] ) .'-'.esc_attr($position['top']). '"
                                            value="' . esc_attr( $this->value['top'] ) . '"/>
                                 </div>';
             }
@@ -389,8 +389,8 @@ if($allow_responsive){
                                     </span>
                                     <input type="text" 
                                            class="redux-spacing-right redux-spacing-input mini ' . esc_attr( $this->field['class'] ) . '"
-                                           placeholder="' .$hints['right'] . '"
-                                           rel="' . esc_attr( $this->field['id'] ).'-'.$position['right'] . '"
+                                           placeholder="' .esc_attr($hints['right']) . '"
+                                           rel="' . esc_attr( $this->field['id'] ).'-'.esc_attr($position['right']) . '"
                                            value="' . esc_attr( $this->value['right'] ) . '"/>
                                 </div>';
             }
@@ -405,8 +405,8 @@ if($allow_responsive){
                                     </span>
                                     <input type="text" 
                                            class="redux-spacing-bottom redux-spacing-input mini ' . esc_attr( $this->field['class'] ) . '"
-                                           placeholder="' . $hints['bottom'] . '"
-                                           rel="' . esc_attr( $this->field['id'] ) .'-'.$position['bottom']. '"
+                                           placeholder="' . esc_attr($hints['bottom']) . '"
+                                           rel="' . esc_attr( $this->field['id'] ) .'-'.esc_attr($position['bottom']). '"
                                            value="' . esc_attr( $this->value['bottom'] ) . '">
                                 </div>';
             }
@@ -421,8 +421,8 @@ if($allow_responsive){
                                     </span>
                                     <input type="text" 
                                            class="redux-spacing-left redux-spacing-input mini ' . esc_attr( $this->field['class'] ) . '"
-                                           placeholder="' . $hints['left'] . '"
-                                           rel="' . esc_attr( $this->field['id'] ) .'-'.$position['left'] . '"
+                                           placeholder="' . esc_attr($hints['left']) . '"
+                                           rel="' . esc_attr( $this->field['id'] ) .'-'.esc_attr($position['left']) . '"
                                            value="' . esc_attr( $this->value['left'] ) . '"/>
                                 </div>';
             }

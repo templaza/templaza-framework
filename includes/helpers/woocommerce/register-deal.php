@@ -25,6 +25,7 @@ class Templaza_Product_Deal {
 	 * @since 1.0.0
 	 * @return object
 	 */
+    // phpcs:disable WordPress.Security.NonceVerification.Missing
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new self();
@@ -71,12 +72,13 @@ class Templaza_Product_Deal {
 		$sales_counts = get_post_meta( $thepostid, '_deal_sales_counts', true );
 		$sales_counts = intval( $sales_counts );
 		$min          = $sales_counts > 0 ? $sales_counts + 1 : 0;
+		// phpcs:disable  WordPress.Security.EscapeOutput.OutputNotEscaped
 		?>
 
         <p class="form-field _deal_quantity_field">
             <label for="_sale_quantity"><?php esc_html_e( 'Sale quantity', 'templaza-framework' ) ?></label>
-			<?php echo wc_help_tip( __( 'Set this quantity will make the product to be a deal. The sale will end when this quantity is sold out.', 'templaza-framework' ) ); ?>
-            <input type="number" min="<?php echo $min; ?>" class="short" name="_deal_quantity" id="_deal_quantity"
+			<?php echo wc_help_tip( esc_html__( 'Set this quantity will make the product to be a deal. The sale will end when this quantity is sold out.', 'templaza-framework' ) ); ?>
+            <input type="number" min="<?php echo esc_attr($min); ?>" class="short" name="_deal_quantity" id="_deal_quantity"
                    value="<?php echo esc_attr( $quantity ) ?>">
         </p>
 

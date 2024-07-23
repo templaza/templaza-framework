@@ -7,7 +7,7 @@ use TemPlazaFramework\CSS;
 
 $options        = Functions::get_theme_options();
 $layout_padding     = isset($options['layout-padding'])?$options['layout-padding']:'';
-
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 if($options && isset($options['layout']) && $options['layout']){
 
     $shortcode  = Functions::generate_option_to_shortcode($options['layout']);

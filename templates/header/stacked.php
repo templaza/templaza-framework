@@ -208,7 +208,7 @@ $header_stacked_top_color     = CSS::make_color_rgba_redux($header_stack_top_col
 $social_profiles    = isset($gb_options['social'])?$gb_options['social']:'';
 
 if ($mode == 'left') {
-    echo '<div class="uk-grid-match uk-flex uk-flex-between uk-grid-collapse uk-position-relative '.$header_icon.'">';
+    echo '<div class="uk-grid-match uk-flex uk-flex-between uk-grid-collapse uk-position-relative '.esc_attr($header_icon).'">';
     ?>
     <div class="uk-flex uk-hidden@m uk-flex-left uk-flex-middle">
         <div class="header-mobilemenu-trigger burger-menu-button " data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
@@ -453,7 +453,7 @@ if ($mode == 'left') {
                     <div class="uk-flex uk-flex-left uk-flex-middle">
                         <div class="header-search uk-position-relative header-icon">
                     <span>
-                        <?php echo $search_icon_html; ?>
+                        <?php echo wp_kses($search_icon_html,'post'); ?>
                     </span>
                             <form method="get" class="searchform " action="<?php echo esc_url( home_url( '/' ) ); ?>">
                                 <input type="text" class="field uk-input inputbox search-query uk-margin-remove-vertical" name="s" placeholder="<?php esc_attr_e( 'Search...', 'templaza-framework');?>" />
@@ -462,7 +462,7 @@ if ($mode == 'left') {
                         </div>
                     </div>
                 <?php } ?>
-                <div class="<?php echo implode(' ', $navWrapperClass)?>">
+                <div class="<?php echo esc_attr(implode(' ', $navWrapperClass))?>">
                     <?php
                     Menu::get_nav_menu(array(
                         'theme_location'              => $header_menu,
@@ -482,7 +482,7 @@ if ($mode == 'left') {
                         if($header_stack_cart && class_exists( 'woocommerce' )){ ?>
                             <div class="header-cart header-icon">
                                 <a href="<?php echo esc_url( wc_get_cart_url() ) ?>" data-toggle="<?php echo esc_attr($header_cart); ?>" data-target="cart-modal">
-                                    <?php echo $cart_icon_html; ?>
+                                    <?php echo wp_kses($cart_icon_html,'post'); ?>
                                     <span class="counter cart-counter"><?php echo esc_html(WC()->cart->get_cart_contents_count()); ?></span>
                                 </a>
                             </div>
@@ -492,7 +492,7 @@ if ($mode == 'left') {
                                 <a class="account-icon" href="<?php echo esc_url( wc_get_account_endpoint_url( 'dashboard' ) ) ?>"
                                    data-toggle="<?php echo esc_attr($login_modals);?>"
                                    data-target="account-modal">
-                                    <?php echo $account_icon_html; ?>
+                                    <?php echo wp_kses($account_icon_html,'post'); ?>
                                 </a>
                                 <?php if ( is_user_logged_in() ) : ?>
                                     <div class="account-links">
@@ -662,17 +662,17 @@ if ($mode == 'left') {
 
             // header block starts
             if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-                echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m block-sidebar header-block-item">';
+                echo '<div class="uk-flex uk-width-expand uk-flex-'.esc_attr($block1_position).' uk-flex-middle uk-visible@m block-sidebar header-block-item">';
                 dynamic_sidebar($block_1_sidebar);
                 echo '</div>';
             }
             if ($block_1_type == 'custom') {
-                echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m header-block-item">';
+                echo '<div class="uk-flex uk-width-expand uk-flex-'.esc_attr($block1_position).' uk-flex-middle uk-visible@m header-block-item">';
                 echo wp_kses($block_1_custom,'post');
                 echo '</div>';
             }
             if($block_1_type == 'social' || $block_1_type == 'contact'){
-                echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m header-block-item">';
+                echo '<div class="uk-flex uk-width-expand uk-flex-'.esc_attr($block1_position).' uk-flex-middle uk-visible@m header-block-item">';
                 Templates::load_my_layout('inc.'.$block_1_type);
                 echo '</div>';
             }

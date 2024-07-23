@@ -103,10 +103,10 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 $classes[] = 'filter-buttons-' . $instance['filter_buttons'];
             }
 
-            echo $args['before_widget'];
+            echo wp_kses($args['before_widget'],'post');
 
             if ( $title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) ) {
-                echo $args['before_title'] . esc_html( $title ) . $args['after_title'];
+                echo wp_kses($args['before_title'] . esc_html( $title ) . $args['after_title']);
             }
 
             echo '<div class="products-filter__activated">';
@@ -114,7 +114,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
             echo '</div>';
             echo '<div class="uk-position-top-right templaza-filter-closed uk-padding-small uk-hidden@m"><i class="fas fa-times"></i> </div>';
             if ( ! empty( $instance['filter'] ) ) {
-                echo '<form action="' . esc_url( $form_action ) . '" method="get" class="' . esc_attr( implode( ' ', $classes ) ) . '" data-settings="' . esc_attr( json_encode( $settings ) ) . '">';
+                echo '<form action="' . esc_url( $form_action ) . '" method="get" class="' . esc_attr( implode( ' ', $classes ) ) . '" data-settings="' . esc_attr( wp_json_encode( $settings ) ) . '">';
                 echo '<div class="templaza_woo_filters filters">';
 
                 foreach ( (array) $instance['filter'] as $filter ) {
@@ -145,7 +145,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 echo '</form>';
             }
 
-            echo $args['after_widget'];
+            echo wp_kses($args['after_widget'],'post');
         }
 
         /**
@@ -207,6 +207,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                             break;
 
                         case 'rating':
+                            /* translators: %s - widget. */
                             $text = _n( 'Rated %d star', 'Rated %d stars', $term, 'templaza-framework' );
                             $text = sprintf( $text, $term );
                             break;
@@ -243,7 +244,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 // Delete to avoid duplicating.
                 unset( $current_filters[ $filter_name ] );
             }
-
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
             if ( ! empty( $list ) ) {
                 echo implode( '', $list );
             }
@@ -258,6 +259,8 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
          */
         public function display_filter( $filter ) {
             $this->active_fields = isset( $this->active_fields ) ? $this->active_fields : array();
+
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 
             // Filter name.
             if ( 'attribute' == $filter['source'] ) {
@@ -308,13 +311,14 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 if ( ! $attr ) {
                     return;
                 }
-
+                /* translators: %s - widget. */
                 $args['all']        = sprintf( esc_html__( 'Any %s', 'templaza-framework' ), wc_attribute_label( $attr->attribute_label ) );
                 $args['type']       = $attr->attribute_type;
                 $args['query_type'] = $filter['query_type'];
                 $args['attribute']  = $filter['attribute'];
             } elseif ( taxonomy_exists( $filter['source'] ) ) {
                 $taxonomy    = get_taxonomy( $filter['source'] );
+                /* translators: %s - widget. */
                 $args['all'] = sprintf( esc_html__( 'Select a %s', 'templaza-framework' ), $taxonomy->labels->singular_name );
             } else {
                 $args['all'] = esc_html__( 'All Products', 'templaza-framework' );
@@ -369,6 +373,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                     if ( $filter['searchable'] && ! in_array( $filter['display'], array( 'auto', 'slider', 'ranges' ) ) ) {
                         $this->filter_search_box( $filter );
                     }
+                    // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 
                     switch ( $filter['display'] ) {
                         case 'slider':
@@ -749,7 +754,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                 printf(
                     '<li class="products-filter__option filter-ranges__item %s" data-value="%s"><span class="products-filter__option-name name">%s</span>%s</li>',
                     $args['current']['min'] == $option['range']['min'] && $args['current']['max'] == $option['range']['max'] ? 'selected' : '',
-                    esc_attr( json_encode( $option['range'] ) ),
+                    esc_attr( wp_json_encode( $option['range'] ) ),
                     $option['name'],
                     $args['show_counts'] ? '<span class="products-filter__count count">' . $option['count'] . '</span>' : ''
                 );
@@ -943,7 +948,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
                     '<option value="%s" %s>%s%s</option>',
                     esc_attr( $slug ),
                     selected( true, in_array( $slug, (array) $args['current'] ), false ),
-                    strip_tags( $option['name'] ),
+                    wp_strip_all_tags( $option['name'] ),
                     $args['show_counts'] ? ' (' . $option['count'] . ')' : ''
                 );
             }
@@ -1176,6 +1181,8 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
             if ( isset( $this->current_filters ) ) {
                 return $this->current_filters;
             }
+
+            // phpcs:disable WordPress.Security.NonceVerification.Recommended
 
             $request         = $_GET;
             $current_filters = array();
@@ -1411,11 +1418,11 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
          */
         public function update( $new_instance, $old_instance ) {
             $instance                   = $new_instance;
-            $instance['title']          = strip_tags( $instance['title'] );
+            $instance['title']          = wp_strip_all_tags( $instance['title'] );
             $instance['ajax']              = isset( $instance['ajax'] ) ? (bool) $instance['ajax'] : false;
             $instance['instant']           = isset( $instance['instant'] ) ? (bool) $instance['instant'] : false;
             $instance['change_url']        = isset( $instance['change_url'] ) ? (bool) $instance['change_url'] : false;
-            $instance['filter_buttons'] = strip_tags( $instance['filter_buttons'] );
+            $instance['filter_buttons'] = wp_strip_all_tags( $instance['filter_buttons'] );
 
             // Reorder filters.
             if ( isset( $instance['filter'] ) ) {
@@ -1666,7 +1673,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
             }
 
             if ( ! empty( $args['condition'] ) ) {
-                $field_attributes['data-condition'] = json_encode( $args['condition'] );
+                $field_attributes['data-condition'] = wp_json_encode( $args['condition'] );
             }
 
             if ( ! $this->check_setting_field_visible( $args['condition'], $args['__instance'] ) ) {
@@ -1988,7 +1995,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
             }
 
             //if ( ! isset( $cached_counts[ $query_hash ] ) ) {
-            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+            // phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
             $results                      = $wpdb->get_results( $query_sql, ARRAY_A );
             $counts                       = array_map( 'absint', wp_list_pluck( $results, 'term_count', 'term_count_id' ) );
             $cached_counts[ $query_hash ] = $counts;

@@ -40,6 +40,7 @@ if(!class_exists('TemPlazaFramework\Controller\BaseController')){
         protected $do_task;
 
         protected static $instance;
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
 
         public function __construct($config = array()){
             $this -> text_domain    = Functions::get_my_text_domain();
@@ -217,7 +218,8 @@ if(!class_exists('TemPlazaFramework\Controller\BaseController')){
             else
             {
                 $app    = Application::get_instance();
-                $app -> enqueue_message(sprintf(esc_html__('Action %s not found.'), $action), 'error');
+                /* translators: %s - Action. */
+                $app -> enqueue_message(sprintf(esc_html__('Action %s not found.'), esc_html($action)), 'error');
             }
 
             // Record the actual task being fired

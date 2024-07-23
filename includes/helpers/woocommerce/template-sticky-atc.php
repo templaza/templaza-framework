@@ -115,6 +115,8 @@ class Templaza_Woo_Sticky_ATC {
 			$thumbnail_src = wc_placeholder_img_src( 'gallery_thumbnail' );
 			$alt_text      = esc_html__( 'Awaiting product image', 'templaza-framework' );
 		}
+
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		?>
         <section id="templaza-sticky-add-to-cart" class="<?php echo esc_attr( $sticky_class ) ?>">
             <div class="uk-container uk-container-large">

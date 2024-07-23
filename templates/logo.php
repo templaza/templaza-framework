@@ -66,15 +66,15 @@ if($logo_mobile_css){
 <?php if ($logo_type=='text'): ?>
    <!-- text logo starts -->
 
-   <div class="<?php echo implode(' ', $class); ?> flex-column">
-      <a class="site-title" href="<?php echo get_home_url(); ?>"><?php echo $logo_text; ?></a>
-      <p class="site-tagline uk-margin-remove"><?php echo $tag_line; ?></p>
+   <div class="<?php echo esc_attr(implode(' ', $class)); ?> flex-column">
+      <a class="site-title" href="<?php echo esc_url(get_home_url()); ?>"><?php echo esc_html($logo_text); ?></a>
+      <p class="site-tagline uk-margin-remove"><?php echo esc_html($tag_line); ?></p>
    </div>
    <!-- text logo ends -->
 <?php endif; ?>
 <?php if ($logo_type=='image'): ?>
    <!-- image logo starts -->
-   <a class="<?php echo implode(' ', $class); ?>" href="<?php echo get_home_url(); ?>">
+   <a class="<?php echo esc_attr(implode(' ', $class)); ?>" href="<?php echo esc_url(get_home_url()); ?>">
       <?php
       $logo_url = Functions::get_theme_default_logo_url('logo');
       if(!empty($default_logo) && isset($default_logo['url']) && !empty($default_logo['url'])
@@ -87,8 +87,8 @@ if($logo_mobile_css){
               $log_svg  = ' data-uk-svg';
           }
           ?>
-         <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-default uk-preserve"<?php
-         echo $log_svg; ?>/>
+         <img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($blog_title); ?>" class="templaza-logo-default uk-preserve"<?php
+         echo esc_attr($log_svg); ?>/>
       <?php }
       if($logo_mobile_hide == false){
           $logo_mobile_url = Functions::get_theme_default_logo_url('logo_mobile');
@@ -105,8 +105,8 @@ if($logo_mobile_css){
                   $log_svg  = ' data-uk-svg';
               }
           ?>
-         <img src="<?php echo $logo_mobile_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-mobile uk-preserve"<?php
-         echo $log_svg; ?>/>
+         <img src="<?php echo esc_url($logo_mobile_url); ?>" alt="<?php echo esc_attr($blog_title); ?>" class="templaza-logo-mobile uk-preserve"<?php
+         echo esc_attr($log_svg); ?>/>
       <?php }
       }
       $logo_url = Functions::get_theme_default_logo_url('logo_sticky');
@@ -120,8 +120,8 @@ if($logo_mobile_css){
               $log_svg  = ' data-uk-svg';
           }
           ?>
-         <img src="<?php echo $logo_url; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-sticky uk-preserve"<?php
-         echo $log_svg; ?>/>
+         <img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($blog_title); ?>" class="templaza-logo-sticky uk-preserve"<?php
+         echo esc_attr($log_svg); ?>/>
       <?php } ?>
    </a>
    <!-- image logo ends -->

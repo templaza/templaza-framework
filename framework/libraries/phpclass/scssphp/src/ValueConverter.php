@@ -36,7 +36,7 @@ final class ValueConverter
     public static function parseValue($source)
     {
         $parser = new Parser(__CLASS__);
-
+        // phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped
         if (!$parser->parseValue($source, $value)) {
             throw new \InvalidArgumentException(sprintf('Invalid value source "%s".', $source));
         }
@@ -89,6 +89,7 @@ final class ValueConverter
         if (\is_string($value)) {
             return [Type::T_STRING, '"', [$value]];
         }
+        // phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped
 
         throw new \InvalidArgumentException(sprintf('Cannot convert the value of type "%s" to a Sass value.', gettype($value)));
     }

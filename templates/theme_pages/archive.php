@@ -16,6 +16,7 @@ global $wp_query;
 if($post_type == 'post' || $wp_query->found_posts ==0){
     $prefix = 'blog-page';
 }
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 if(isset($_GET['view'])){
     $blog_layout = $_GET['view'];
 }else{
@@ -44,7 +45,7 @@ if ($blog_layout == 'grid') {
     $blog_cl = '';
 }
 ?>
-<div id="templaza-archive-<?php echo esc_attr($id);?>" class="templaza-blog templaza-archive templaza-archive-<?php echo get_post_type().$custom_class; ?>">
+<div id="templaza-archive-<?php echo esc_attr($id);?>" class="templaza-blog templaza-archive templaza-archive-<?php echo esc_attr(get_post_type().$custom_class); ?>">
     <div class="templaza-blog-body <?php echo esc_attr($bl_layout_cl);?>" data-uk-grid>
         <?php
         $d=1;

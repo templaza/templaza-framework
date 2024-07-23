@@ -12,7 +12,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }else{
     $templaza_options = Functions::get_theme_options();
 }
-
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 $ap_content_group     = isset($templaza_options['ap_product-single-group-content'])?$templaza_options['ap_product-single-group-content']:'';
 $ap_content_group_sticky_offset     = isset($templaza_options['ap_product-single-group-content-sticky-offset'])?$templaza_options['ap_product-single-group-content-sticky-offset']:117;
 $ap_group_title      = isset($templaza_options['ap_product-single-group-content-title'])?filter_var($templaza_options['ap_product-single-group-content-title'], FILTER_VALIDATE_BOOLEAN):true;

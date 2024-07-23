@@ -21,6 +21,7 @@ class Templaza_Woo_Catalog {
 	 * @since 1.0.0
 	 * @return object
 	 */
+    // phpcs:disable WordPress.Security.NonceVerification.Recommended
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
@@ -245,7 +246,7 @@ class Templaza_Woo_Catalog {
 	 */
 	public function shop_content_open_wrapper() {
 		echo '<div id="templaza-shop-container" class="templaza-shop-container">';
-		echo '<div class="templaza-shop-filter uk-margin-bottom uk-flex uk-flex-right uk-hidden@m uk-text-right"><span class="shop-filter-btn"><i class="fas fa-sliders-h"></i> '.__('Filter','templaza-framework').'</span> </div>';
+		echo '<div class="templaza-shop-filter uk-margin-bottom uk-flex uk-flex-right uk-hidden@m uk-text-right"><span class="shop-filter-btn"><i class="fas fa-sliders-h"></i> '.esc_html__('Filter','templaza-framework').'</span> </div>';
 	}
 
 	/**
@@ -361,7 +362,7 @@ class Templaza_Woo_Catalog {
 				}
 			}
 		}
-
+        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 
 		if ( ! empty( $output ) ) {
 			echo sprintf( '<div id="catalog-header-banners" class="templaza-hide_on__mobile catalog-header-banners swiper-container"><ul class="list-images swiper-wrapper">%s</ul></div>', $output );

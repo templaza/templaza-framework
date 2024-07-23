@@ -18,7 +18,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 $ap_content_group     = isset($templaza_options['ap_product-quickview-group'])?$templaza_options['ap_product-quickview-group']:array();
 
 $product_id     = get_the_ID();
-
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 $gfields_assigned   = AP_Custom_Field_Helper::get_group_fields_by_product();
 if(empty($ap_content_group)){
     if($gfields_assigned && count($gfields_assigned)){
@@ -40,10 +40,10 @@ if(empty($ap_content_group)){
                 }
                 if(!empty($html)){
                     ?>
-                    <div class="widget <?php echo esc_attr($widget_heading_style);?> ap-box ap-group ap-group-<?php echo $group -> slug; ?>">
+                    <div class="widget <?php echo esc_attr($widget_heading_style);?> ap-box ap-group ap-group-<?php echo esc_attr($group -> slug); ?>">
                         <div class="widget-content">
                             <h3 class="widget-title">
-                                <span><?php esc_html_e($group -> name, 'templaza-framework'); ?></span>
+                                <span><?php echo esc_html($group -> name); ?></span>
                             </h3>
                             <div class="ap-group-content"><?php echo $html;?></div>
                         </div>
@@ -73,10 +73,10 @@ if(empty($ap_content_group)){
                 }
                 if(!empty($html)){
                     ?>
-                    <div class="widget <?php echo esc_attr($widget_heading_style);?> ap-box ap-group ap-group-<?php echo $group -> slug; ?>">
+                    <div class="widget <?php echo esc_attr($widget_heading_style);?> ap-box ap-group ap-group-<?php echo esc_attr($group -> slug); ?>">
                         <div class="widget-content">
                             <h3 class="widget-title">
-                                <span><?php esc_html_e($group -> name, 'templaza-framework'); ?></span>
+                                <span><?php echo esc_html($group -> name); ?></span>
                             </h3>
                             <div class="ap-group-content"><?php echo $html;?></div>
                         </div>

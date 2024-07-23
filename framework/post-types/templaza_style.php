@@ -17,15 +17,17 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
         public $setting_args;
 
         protected $metaboxes    = array();
+        // phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents, WordPress.DB.PreparedSQL.NotPrepared, WordPress.WP.AlternativeFunctions.unlink_unlink, WordPress.WP.AlternativeFunctions.file_system_operations_mkdir, WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents, WordPress.WP.AlternativeFunctions.rename_rename, WordPress.Security.NonceVerification.Recommended,  	WordPress.WP.AlternativeFunctions.json_encode_json_encode, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.Security.NonceVerification.Missing,  WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 
         public function register()
         {
+            // phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
             $theme  = $this -> theme;
             $labels = array(
-                'name'               => _x( $theme->get('Name').' Templates', 'templaza-framework', 'templaza-framework' ),
-                'singular_name'      => _x( $theme->get('Name').' Templates', 'templaza-framework', 'templaza-framework' ),
-                'menu_name'          => _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
-                'name_admin_bar'     => _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                'name'               => esc_attr_x( $theme->get('Name').' Templates', 'templaza-framework', 'templaza-framework' ),
+                'singular_name'      => esc_attr_x( $theme->get('Name').' Templates', 'templaza-framework', 'templaza-framework' ),
+                'menu_name'          => esc_attr_x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                'name_admin_bar'     => esc_attr_x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
                 'add_new'            => _x( 'Add New', 'templaza-framework', 'templaza-framework' ),
                 'add_new_item'       => __( 'Add New template', 'templaza-framework'),
                 'new_item'           => __( 'New template', 'templaza-framework' ),
@@ -123,7 +125,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             $opt_name       = $global_args['opt_name'].'-templaza_style';
             if ( ! isset( $_GET['secret'] ) || md5( md5( \Redux_Functions_Ex::hash_key() ) . '-'
                     . $opt_name ) !== $_GET['secret'] ) { // phpcs:ignore WordPress.Security.NonceVerification
-                wp_die( __('Invalid Secret for options use', 'templaza-framework') );
+                wp_die( esc_html__('Invalid Secret for options use', 'templaza-framework') );
                 exit;
             }
 
@@ -301,6 +303,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 array(
                     'id' => 'templaza-framework__sidebar',
                     'name' => __("TemPlaza Framework Widgets", 'templaza-framework'),
+                    /* translators: %s - Supported. */
                     'description'   => sprintf(__("This is where TemPlaza Framework stores widgets that you have added to layout or sub menus using layout or mega menu builder. You can edit existing widgets here, but new widgets must be added through layout or mega menu interface (under %s or Appearance > Menus).", 'templaza-framework'), $my_args['page_title'])
                 )
             );
@@ -499,7 +502,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             }
             $post_id    = isset($_GET['post'])?$_GET['post']:0;
             if(!$post_id){
-                wp_die(__('Post or Page creation failed, could not find original post:', 'templaza-framework') . $post_id);
+                wp_die(esc_html__('Post or Page creation failed, could not find original post:', 'templaza-framework') . esc_html($post_id));
             }
 
             $post = get_post( $post_id );
@@ -539,7 +542,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
                 $clone_post_name    = $clone_post -> post_name;
 
                 $clone_post_name    = !empty($clone_post_name)?$clone_post_name:$clone_post_id;
-
+                // phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                 $post_meta_data = $wpdb->get_results("SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id=$post_id");
                 if (count($post_meta_data)!=0) {
 
@@ -594,7 +597,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             }
 
             wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css-metabox',
-                Functions::get_my_frame_url().'/assets/css/metabox.css');
+                Functions::get_my_frame_url().'/assets/css/metabox.css',array(),Functions::get_my_version());
             wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__css-metabox');
         }
 

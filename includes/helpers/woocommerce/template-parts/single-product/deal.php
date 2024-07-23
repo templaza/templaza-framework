@@ -17,10 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="deal-sold-text"><?php echo wp_kses_post( $sold_items_text ) ?></div>
         <div class="deal-progress">
             <div class="deal-progress-bar">
-                <div class="progress-value" style="width: <?php echo $sold / $limit * 100 ?>%"></div>
+                <div class="progress-value" style="width: <?php echo esc_attr($sold / $limit * 100 )?>%"></div>
             </div>
-            <div class="deal-text"><span class="amount"><span class="sold"><?php echo $sold ?></span>/<span
-                            class="limit"><?php echo $limit ?></span></span> <?php echo ( $sold_text ) ?></div>
+            <div class="deal-text"><span class="amount"><span class="sold"><?php echo esc_html($sold) ?></span>/<span
+                            class="limit"><?php echo esc_html($limit) ?></span></span> <?php echo esc_html( $sold_text ) ?></div>
         </div>
     </div>
 </div>

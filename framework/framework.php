@@ -111,8 +111,8 @@ class Framework{
                 $theme  = $this -> theme;
 
                 add_menu_page(
-                    _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
-                    _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                    $theme->get('Name').esc_html__(' Options','templaza-framework'),
+                    $theme->get('Name').esc_html__(' Options','templaza-framework'),
                     'manage_options',
                     TEMPLAZA_FRAMEWORK,
                     '',
@@ -125,6 +125,8 @@ class Framework{
                 );
 
             }, 9);
+
+            // phpcs:disable WordPress.WP.AlternativeFunctions.unlink_unlink, WordPress.WP.AlternativeFunctions.file_system_operations_rmdir, WordPress.WP.AlternativeFunctions.rename_rename
 
             add_action('in_admin_header', array($this, 'remove_admin_notices'), 1000);
 //            add_filter(TEMPLAZA_FRAMEWORK.'_admin_nav_tabs', array($this, 'admin_nav_tabs'), 1000);
@@ -149,6 +151,7 @@ class Framework{
      * */
     public function theme_redownload_child_package($source, $remote_source, $upgrader, $hook_extra){
         global $pagenow;
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended,
 
         $action = isset($_GET['action'])?$_GET['action']:'';
 
@@ -289,6 +292,7 @@ class Framework{
             }
 
             // Put multiple parts of package files to one file
+            // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
             file_put_contents($filePath, $body, FILE_APPEND);
 
             $file_part_count    = isset($header['files-part-count'])?(int) $header['files-part-count']:1;
@@ -310,6 +314,7 @@ class Framework{
         global $pagenow, $page;
 
         $pass   = Admin_Functions::check_system_requirement();
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended
 
         if(!$pass){
             $slugs  = Menu_Admin::get_submenu_slugs();
@@ -337,7 +342,7 @@ class Framework{
      * (Function used for global_colors controller)
      * */
     public function ajax_save_global_colors(){
-
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
         $return_array   = array(
             'status'   => false
         );
@@ -351,6 +356,7 @@ class Framework{
                 $return_array['action'] = 'reload';
                 $values = json_decode($values['import_code']);
             }
+            // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_mkdir, WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents, WordPress.WP.AlternativeFunctions.json_encode_json_encode
 
             $folder = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION . '/global_colors';
             if(!is_dir($folder)){
@@ -439,7 +445,7 @@ class Framework{
         $opt_name   = TEMPLAZA_FRAMEWORK_PREFIX.'_global_colors';
         if ( ! isset( $_GET['secret'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['secret'] ) ),
                 'redux_io_' . $opt_name ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-            wp_die( __('Invalid Secret for options use', 'templaza-framework') );
+            wp_die( esc_html__('Invalid Secret for options use', 'templaza-framework') );
             exit;
         }
 
@@ -597,6 +603,7 @@ class Framework{
                 $opt_file   = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/settings/default.json';
             }
             if(file_exists($opt_file)){
+                // phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
                 $options    = file_get_contents($opt_file);
 
                 $options    = (!empty($options) && is_string($options))?json_decode($options, true):$options;
@@ -682,11 +689,13 @@ class Framework{
         $this->args = array(
             // TYPICAL -> Change these values as you need/desire
             'opt_name'            => Functions::get_theme_option_name(),            // This is where your data is stored in the database and also becomes your global variable name.
+            /* translators: %s - Settings. */
             'display_name'        => sprintf(__( '%s Settings',  'templaza-framework'), $theme->get('Name')),     // Name that appears at the top of your panel
             'display_version'     => $theme->get('Version'),  // Version that appears at the top of your panel
             'menu_type'           => 'submenu',                  //Specify if the admin menu should appear or not. Options: menu or submenu (Under appearance only)
             'allow_sub_menu'      => true,                    // Show the sections below the admin menu item or not
             'menu_title'          => __( 'Settings', 'templaza-framework'),
+            /* translators: %s - Settings. */
             'page_title'          => sprintf(__( '%s Settings',  'templaza-framework'), $theme->get('Name')),
 
             // You will need to generate a Google API key to use this feature.
@@ -738,9 +747,8 @@ class Framework{
             'system_info'         => false, // REMOVE
 
             'class'               => 'templaza-framework-options',
-
-            'footer_credit'         => __('Enjoyed '.$theme -> get('Name').'? Please leave us a ★★★★★ rating. We really appreciate your support'),
-//            'footer_text' => '<p>This text is displayed below the options panel. It isn\'t required, but more info is always better! The footer_text field accepts all HTML.</p>',
+            /* translators: %s - message. */
+            'footer_credit'         => sprintf(__('Enjoyed %s ? Please leave us a ★★★★★ rating. We really appreciate your support', 'templaza-framework'), esc_html($theme -> get('Name'))),
 
             // HINTS
             'hints' => array(
@@ -782,12 +790,12 @@ class Framework{
         wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_icon_js', Functions::get_my_url().'/assets/js/vendor/uikit-icons.min.js', array(), time(), true);
         wp_enqueue_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_icon_js');
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css-core',
-            Functions::get_my_frame_url().'/assets/vendors/core/core.css');
+            Functions::get_my_frame_url().'/assets/vendors/core/core.css',array(),Functions::get_my_version());
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css-fontawesome',
-            Functions::get_my_url().'/assets/vendors/fontawesome/css/all.min.css');
+            Functions::get_my_url().'/assets/vendors/fontawesome/css/all.min.css', array(), Functions::get_my_version());
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css',
             Functions::get_my_frame_url().'/assets/css/style.css',
-            array(TEMPLAZA_FRAMEWORK_NAME.'__css-fontawesome'));
+            array(TEMPLAZA_FRAMEWORK_NAME.'__css-fontawesome'), Functions::get_my_version());
     }
 
     protected function __load_config(){
@@ -808,13 +816,15 @@ class Framework{
                 $tzfrm_post_type_obj  = get_post_type_object($tzfrm_post_type);
                 $tzfrm_subsection   = array(
                     'id'    => $tzfrm_post_type.'-subsections',
-                    'title' => sprintf(__('%s Options', 'templaza-framework'),$tzfrm_post_type_obj -> label),
+                    /* translators: %s - message. */
+                    'title' => sprintf(__('%s Options', 'templaza-framework'),esc_html($tzfrm_post_type_obj -> label)),
                     'subsection' => true,
                     'fields'     => array(
                         array(
                             'id'    => $tzfrm_post_type.'-archive-style',
                             'type'  => 'select',
-                            'title' => sprintf(__('%s Archive Style', 'templaza-framework'), $tzfrm_post_type_obj -> label),
+                            /* translators: %s - Archive Style. */
+                            'title' => sprintf(__('%s Archive Style', 'templaza-framework'), esc_html($tzfrm_post_type_obj -> label)),
                             'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                             'data'     => 'callback',
                             'args'     => 'templaza_framework_get_templaza_style_by_slug',
@@ -822,7 +832,8 @@ class Framework{
                         array(
                             'id'    => $tzfrm_post_type.'-single-style',
                             'type'  => 'select',
-                            'title' => sprintf(__('%s Single Style', 'templaza-framework'), $tzfrm_post_type_obj -> label),
+                            /* translators: %s - Single Style. */
+                            'title' => sprintf(__('%s Single Style', 'templaza-framework'), esc_html($tzfrm_post_type_obj -> label)),
                             'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                             'data'     => 'callback',
                             'args'     => 'templaza_framework_get_templaza_style_by_slug',

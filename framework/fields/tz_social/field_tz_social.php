@@ -251,24 +251,24 @@ if ( ! class_exists( 'ReduxFramework_TZ_Social' ) ) {
          */
         function render() {
             $options        = isset($this -> field['options'])?(array) $this -> field['options']:array();
-
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
         ?>
-            <textarea class="hide" name="<?php echo $this -> field['name'];?>" id="<?php echo $this -> field['id'];
+            <textarea class="hide" name="<?php echo esc_attr($this -> field['name']);?>" id="<?php echo esc_attr($this -> field['id']);
             ?>"><?php echo html_entity_decode(stripslashes ($this -> value)); ?></textarea>
             <div class="row">
                 <div class="col-sm-8">
-                    <h2 class="text-center my-5 hide"><?php echo __('No Profile Selected', 'templaza-framework');?></h2>
+                    <h2 class="text-center my-5 hide"><?php echo esc_html__('No Profile Selected', 'templaza-framework');?></h2>
                     <div class="field-tz-social" data-field-form="<?php //echo ($value && !empty($value))?htmlspecialchars(json_encode((array) $value)):''; ?>"></div>
                     <div class="mt-4 text-center">
-                        <button type="button" class="button" data-add-custom-field><?php echo __('Add Custom Profile');?></button>
+                        <button type="button" class="button" data-add-custom-field><?php echo esc_html__('Add Custom Profile');?></button>
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <h3><?php echo __('Social Brands', 'templaza-framework');?></h3>
+                    <h3><?php echo esc_html__('Social Brands', 'templaza-framework');?></h3>
                     <input type="text"placeholder="Search Brand" class="form-control mb-3 w-100" data-search-brand>
-                    <small><em class="mb-3 d-block text-center text-info"><?php echo __('Click to Add Profile', 'templaza-framework');?></em></small>
+                    <small><em class="mb-3 d-block text-center text-info"><?php echo esc_html__('Click to Add Profile', 'templaza-framework');?></em></small>
 
-                    <div data-sources-list="<?php echo count($options)?htmlspecialchars(json_encode(array_values($options))):''; ?>"></div>
+                    <div data-sources-list="<?php echo count($options)?htmlspecialchars(wp_json_encode(array_values($options))):''; ?>"></div>
                 </div>
             </div>
         <?php

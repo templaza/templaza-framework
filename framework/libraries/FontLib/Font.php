@@ -24,6 +24,7 @@ class Font {
    * @return TrueType\File|null $file
    */
   public static function load($file) {
+      // phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped, WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.WP.AlternativeFunctions.file_system_operations_fopen, WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
       if(!file_exists($file)){
           throw new FontNotFoundException($file);
       }

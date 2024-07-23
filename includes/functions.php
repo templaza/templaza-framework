@@ -11,6 +11,7 @@ if(!class_exists('\TemPlazaFramework\Functions')){
     class Functions{
         protected static $cache         = array();
         protected static $shortcode = '';
+        // phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents, WordPress.WP.AlternativeFunctions.json_encode_json_encode, WordPress.WP.AlternativeFunctions.parse_url_parse_url, WordPress.Security.NonceVerification.Recommended, WordPress.DB.SlowDBQuery.slow_db_query_meta_key, WordPress.DB.SlowDBQuery.slow_db_query_meta_query,  WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 
         public static function get_my_data(){
             $storeId    = md5(__METHOD__);

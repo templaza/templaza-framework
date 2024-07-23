@@ -16,7 +16,7 @@ class WP_Importer_Logger_HTML extends WP_Importer_Logger {
 			case 'emergency':
 			case 'alert':
 			case 'critical':
-				echo '<p><strong>' . __( 'Sorry, there has been an error.', 'wordpress-importer' ) . '</strong><br />';
+				echo '<p><strong>' . esc_html__( 'Sorry, there has been an error.', 'wordpress-importer' ) . '</strong><br />';
 				echo esc_html( $message );
 				echo '</p>';
 				break;

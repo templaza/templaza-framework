@@ -10,22 +10,6 @@ require_once __DIR__.'/helper.php';
 if(!class_exists('TemplazaFramework_ShortCode_Latest_Posts')){
 	class TemplazaFramework_ShortCode_Latest_Posts extends TemplazaFramework_ShortCode {
 
-//	    public function __construct($field_parent = array(), $value = '', $parent = '')
-//        {
-////            $this -> hooks();
-//            parent::__construct($field_parent, $value, $parent);
-//        }
-//
-//        public function hooks(){
-//	        var_dump(__METHOD__);
-//	        add_action('templaza-framework/shortcode/'.$this -> get_shortcode_name().'/ajax/get_categories', array($this, 'ajax_get_categories'));
-//        }
-//
-//        public function ajax_get_categories(){
-//	        $post_type  = isset($_REQUEST['post_type'])?$_REQUEST['post_type']:'';
-//
-//	        var_dump($post_type); die(__METHOD__);
-//        }
 
         public function register(){
 

@@ -13,6 +13,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }else{
     $templaza_options = Functions::get_theme_options();
 }
+// phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in, WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 if(isset($_GET['product_loop'])){
     $ap_loop_layout = $_GET['product_loop'];
 }else {

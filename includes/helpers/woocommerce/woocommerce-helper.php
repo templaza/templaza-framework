@@ -106,6 +106,7 @@ class Templaza_Woo_Helper {
             }else{
                 $templaza_options = Functions::get_theme_options();
             }
+            // phpcs:disable WordPress.Security.NonceVerification.Recommended
 
             if(isset($_GET['product_loop'])){
                 $layout = $_GET['product_loop'];
@@ -195,7 +196,7 @@ class Templaza_Woo_Helper {
 
         $taxonomy = empty($taxonomy) ? 'product_cat' : $taxonomy;
         $terms = get_the_terms( $product->get_id(), $taxonomy );
-
+        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
         if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
             if( $show_thumbnail ) {
                 $thumbnail_id   = get_term_meta( $terms[0]->term_id, 'brand_thumbnail_id', true );
@@ -311,6 +312,7 @@ class Templaza_Woo_Helper {
         $product_ids = array();
 
         // Get products which are set as new.
+        // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_query
         $meta_query   = WC()->query->get_meta_query();
         $meta_query[] = array(
             'key'   => '_is_new',
@@ -347,7 +349,7 @@ class Templaza_Woo_Helper {
                     'post_type'      => 'product',
                     'fields'         => 'ids',
                     'date_query'     => array(
-                        'after' => date( 'Y-m-d', strtotime( '-' . $newness . ' days' ) ),
+                        'after' => gmdate( 'Y-m-d', strtotime( '-' . $newness . ' days' ) ),
                     ),
                 ) );
 

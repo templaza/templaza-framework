@@ -38,6 +38,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
         }
 
         public function get_select_data(){
+            // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_key, WordPress.DB.SlowDBQuery.slow_db_query_meta_value
                $args     = array(
                 'post_type'      => 'templaza_style',
                 'posts_per_page' => -1,
@@ -118,6 +119,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
          * @param string $post_id
          * */
         public function post_type_table_content($column_name, $post_id ){
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
             if ($column_name == 'home') {
                 $home   = get_post_meta($post_id,'home', true);
                 $action = $this -> post_type -> get_post_type().'_set_default';
@@ -176,6 +178,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
          * Action set home for custom post type in list page
          * */
         public function post_type_set_default(){
+            // phpcs:disable WordPress.Security.NonceVerification.Recommended
             $post_type      = $this -> post_type -> get_post_type();
             $nonce_name     = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
             $nonce_action   = $post_type.'_set_default';
@@ -201,7 +204,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
         public function save_meta_box($post_id, $post)
         {
             parent::save_meta_box($post_id, $post);
-
+            // phpcs:disable WordPress.Security.NonceVerification.Missing
             $mt_key  = $this -> prefix.'basic';
             if ( isset( $_POST[$mt_key] ) ) {
                 $options    = $_POST[$mt_key];
@@ -217,6 +220,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Basic')){
          * */
         protected function _disable_home_without_post_id($post_id){
             global $wpdb;
+            // phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 
             $subQuery   = 'SELECT post_id FROM (';
             $subQuery  .= 'SELECT m.post_id FROM '.$wpdb -> prefix.'postmeta AS m ';

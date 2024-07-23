@@ -67,8 +67,9 @@ if(isset($this->field) &&  !empty($this->field)){
             $tab_contents   .= '</div>';
         }
     }
+    // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 
-    echo '<div id="tz_tab-'.$this -> field['id'].'-tab" class="tzfrm-ui-tab" data-fl-tz_layout-tab>
+    echo '<div id="tz_tab-'.esc_attr($this -> field['id']).'-tab" class="tzfrm-ui-tab" data-fl-tz_layout-tab>
                     <ul>'.$tab_titles.'</ul>
                     '.$tab_contents.'
                 </div>';

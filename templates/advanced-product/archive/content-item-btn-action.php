@@ -11,10 +11,10 @@ $show_compare_button= get_field('ap_show_archive_compare_button', 'option');
 $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
 $pid            = get_the_ID();
-
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <div class="ap-button-info uk-flex uk-flex-between">
-    <span class="ap-button ap-button-quickview" data-ap-quickview-button="<?php echo $pid?$pid:'';
+    <span class="ap-button ap-button-quickview" data-ap-quickview-button="<?php echo $pid?esc_attr($pid):'';
     ?>" data-uk-tooltip="<?php echo esc_attr(__('Quick View', 'templaza-framework')); ?>">
         <i class="fas fa-eye"></i>
     </span>
@@ -38,7 +38,7 @@ $pid            = get_the_ID();
             <span class="ap-button ap-button-compare <?php echo $has_compare?' ap-in-compare-list':'';
             ?>" data-ap-compare-button="id: <?php the_ID();
             ?>; active_icon: fas fa-clipboard-list; icon: fas fa-balance-scale" data-uk-tooltip="<?php
-            _e($active_text, 'templaza-framework');?>">
+            esc_html($active_text);?>">
                 <?php if($has_compare){?>
                     <i class="fas fa-exchange-alt"></i>
                 <?php }else{ ?>

@@ -23,13 +23,13 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
                             ?>
                             <div class="" data-fl_tz_layout-filter="<?php echo esc_attr(strtolower($element['title']));  ?>" data-test="<?php
                             echo esc_attr(strtolower($element['title']));?>">
-                                <div data-element="<?php echo $element['id']; ?>" class="fl-layout-element-button">
+                                <div data-element="<?php echo esc_attr($element['id']); ?>" class="fl-layout-element-button">
                                     <div class="media uk-flex uk-flex-column uk-flex-middle px-1 py-4">
                                         <i class="fl_element-icon mx-0 <?php
-                                        echo $icon; ?>" data-fl-element-icon="<?php echo $icon; ?>"></i>
+                                        echo esc_attr($icon); ?>" data-fl-element-icon="<?php echo esc_attr($icon); ?>"></i>
                                         <div class="media-body uk-flex uk-flex-column uk-text-center uk-flex-middle mt-3">
-                                            <h6 class="mt-0 mb-2" data-fl-element-name><?php echo $element['title']; ?></h6>
-                                            <small><?php echo $element['desc']; ?></small>
+                                            <h6 class="mt-0 mb-2" data-fl-element-name><?php echo esc_html($element['title']); ?></h6>
+                                            <small><?php echo esc_html($element['desc']); ?></small>
                                         </div>
                                     </div>
                                 </div>

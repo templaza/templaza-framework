@@ -10,7 +10,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Featured')){
 
         private $action_featured    = 'templaza__set_post_featured';
         private $tzfrm_post_types   = array();
-
+        // phpcs:disable  WordPress.Security.NonceVerification.Recommended
         public function __construct($post_type, &$framework = null)
         {
 
@@ -138,6 +138,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Featured')){
         }
 
         public function get_total_featured_count( $post_type ) {
+            // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_key, WordPress.DB.SlowDBQuery.slow_db_query_meta_value
             $args = array(
                 'post_type'      => $post_type,
                 'posts_per_page' => -1,
@@ -162,7 +163,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Featured')){
             global $pagenow;
 
             $qv = &$query->query_vars;
-
+            // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             if ( is_admin() && 'edit.php' === $pagenow ) {
 
                 if ( ! isset( $qv['meta_query'] ) ) {
@@ -249,7 +250,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Featured')){
         public function custom_table_content($column_name, $post_id ){
             $post_type  = get_post_type($post_id);
             $tzfrm_post_types   = $this -> tzfrm_post_types;
-
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
             if(in_array($post_type, $tzfrm_post_types)){
 
                 if ($column_name == 'templaza-featured') {

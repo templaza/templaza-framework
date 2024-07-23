@@ -20,11 +20,16 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Footer')) {
         public function register()
         {
             $theme  = $this -> theme;
+            // phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
             $labels = array(
-                'name'               => _x( $theme->get('Name').' Footers', 'templaza-framework', 'templaza-framework' ),
-                'singular_name'      => _x( $theme->get('Name').' Footers', 'templaza-framework', 'templaza-framework' ),
-                'menu_name'          => _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
-                'name_admin_bar'     => _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                /* translators: %s - Footers. */
+                'name'               => sprintf(esc_attr_x( '%s'.' Footers', 'templaza-framework', 'templaza-framework' ),esc_html($theme->get('Name'))),
+                /* translators: %s - Footers. */
+                'singular_name'      => sprintf(esc_attr_x( '%s'.' Footers', 'templaza-framework', 'templaza-framework' ),esc_html($theme->get('Name'))),
+                /* translators: %s - Options. */
+                'menu_name'          => sprintf(esc_attr_x( '%s'.' Options', 'templaza-framework', 'templaza-framework' ),esc_html($theme->get('Name'))),
+                /* translators: %s - Options. */
+                'name_admin_bar'     => sprintf(esc_attr_x( '%s'.' Options', 'templaza-framework', 'templaza-framework' ),esc_html($theme->get('Name'))),
                 'add_new'            => _x( 'Add New', 'templaza-framework', 'templaza-framework' ),
                 'add_new_item'       => __( 'Add New footer', 'templaza-framework'),
                 'new_item'           => __( 'New footer', 'templaza-framework' ),
@@ -88,7 +93,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Footer')) {
                     && $pre_post -> post_name !== $data['post_name']){
                     $old_file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$pre_post -> post_name.'.json';
                     if(file_exists($old_file)){
-                        unlink($old_file);
+                        wp_delete_file($old_file);
                     }
                 }
             }

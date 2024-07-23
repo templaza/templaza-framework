@@ -357,6 +357,8 @@ class Compiler
      * @param array|null $cacheOptions
      * @phpstan-param array{cacheDir?: string, prefix?: string, forceRefresh?: string, checkImportResolutions?: bool}|null $cacheOptions
      */
+
+    // phpcs:disable WordPress.WP.AlternativeFunctions.json_encode_json_encode, WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents, WordPress.WP.AlternativeFunctions.rand_mt_rand
     public function __construct($cacheOptions = null)
     {
         $this->sourceNames = [];
@@ -502,6 +504,7 @@ class Compiler
             $this->currentDirectory = null;
             $this->rootDirectory = getcwd();
         }
+        // phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped, WordPress.Security.EscapeOutput.OutputNotEscaped
 
         try {
             $this->parser = $this->parserFactory($path);

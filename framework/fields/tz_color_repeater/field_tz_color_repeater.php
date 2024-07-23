@@ -181,7 +181,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Color_Repeater' ) ) {
                 wp_localize_script('field-'.$this -> type.'-js', 'field_'.$this -> type.'_obj', array(
                         'core_fields'       => $this -> core_fields,
                         'ignore_fields'     => $this -> ignore_fields,
-                        'new_item'          => esc_html__('New Item #%d', 'templaza-framework'),
+                        'new_item'          => esc_html__('New Item', 'templaza-framework'),
                         'ask_remove_option' => esc_html__(' You\'re about to delete a Global Color. Note that if it\'s being used anywhere on your site, it will inherit a default Color.', 'templaza-framework')
                 ));
             }

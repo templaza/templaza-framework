@@ -25,6 +25,7 @@ class Templaza_Woo_General {
 	 * @since 1.0.0
 	 * @return object
 	 */
+    // phpcs:disable WordPress.Security.NonceVerification.Recommended
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();

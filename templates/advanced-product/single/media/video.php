@@ -31,7 +31,7 @@ if(!empty($ap_video)){
     <div class="ap-single-video">
         <?php
         if (wp_oembed_get($ap_video)) :
-            $video = parse_url($ap_video);
+            $video = wp_parse_url($ap_video);
             $youtube_no_cookie = $no_cookie ? '-nocookie' : '';
             switch($video['host']) {
                 case 'youtu.be':

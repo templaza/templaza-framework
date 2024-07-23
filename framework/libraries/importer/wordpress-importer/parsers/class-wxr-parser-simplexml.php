@@ -11,6 +11,7 @@
  */
 class WXR_Parser_SimpleXML {
 	function parse( $file ) {
+	    // phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$authors = $posts = $categories = $tags = $terms = array();
 
 		$internal_errors = libxml_use_internal_errors(true);

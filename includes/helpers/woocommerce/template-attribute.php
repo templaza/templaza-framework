@@ -57,6 +57,7 @@ class Templaza_Woo_Attribute {
 	 * @since 1.0.0
 	 * @return object
 	 */
+    // phpcs:disable WordPress.Security.NonceVerification.Recommended
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
@@ -214,6 +215,7 @@ class Templaza_Woo_Attribute {
 		}
 
 		if( $output ) {
+		    // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo sprintf('<div class="product-variation-items">%s</div>', $output);
 		}
 	}

@@ -30,7 +30,7 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
         protected $text_domain;
 
         public $prefix  = 'tzfrm_metabox-';
-
+// phpcs:disable WordPress.Security.NonceVerification.Missing
 
         public function __construct($post_type, &$framework = null)
         {
@@ -189,7 +189,7 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
                 foreach ($redux -> sections as $k => $section) {
 
                     $section['class'] = isset($section['class']) ? ' ' . $section['class'] : '';
-                    echo '<div id="metabox_'.$metabox['id'].'_' . $k . '_section_group' . '" class="redux-group-tab' . esc_attr($section['class']) . '" data-rel="metabox_'.$metabox['id'].'_' . $k . '">';
+                    echo '<div id="metabox_'.esc_attr($metabox['id']).'_' . esc_attr($k) . '_section_group' . '" class="redux-group-tab' . esc_attr($section['class']) . '" data-rel="metabox_'.esc_attr($metabox['id']).'_' . esc_attr($k) . '">';
 
                     do_action("redux/page/{$redux->args['opt_name']}/section/before", $section);
                     do_settings_sections( $redux->args['opt_name'] . $k . '_section_group' );

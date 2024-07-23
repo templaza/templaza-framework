@@ -87,5 +87,5 @@ if($preloder_setting == "animations"){
 
 ?>
 <div id="templaza-preloader" class="uk-flex uk-flex-middle">
-	<?php echo $preloaderHTML; ?>
+	<?php echo wp_kses($preloaderHTML,'post'); ?>
 </div>

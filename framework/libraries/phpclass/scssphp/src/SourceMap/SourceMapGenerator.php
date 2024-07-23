@@ -37,6 +37,7 @@ class SourceMapGenerator
      * @var array
      * @phpstan-var array{sourceRoot: string, sourceMapFilename: string|null, sourceMapURL: string|null, sourceMapWriteTo: string|null, outputSourceFiles: bool, sourceMapRootpath: string, sourceMapBasepath: string}
      */
+    // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_file_put_content, WordPress.WP.AlternativeFunctions.json_encode_json_encode, WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
     protected $defaultOptions = [
         // an optional source root, useful for relocating source files
         // on a server or removing repeated values in the 'sources' entry.
@@ -150,7 +151,7 @@ class SourceMapGenerator
         $file = $this->options['sourceMapWriteTo'];
         assert($file !== null);
         $dir  = \dirname($file);
-
+// phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped, WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
         // directory does not exist
         if (! is_dir($dir)) {
             // FIXME: create the dir automatically?
@@ -160,6 +161,7 @@ class SourceMapGenerator
         }
 
         // FIXME: proper saving, with dir write check!
+
         if (file_put_contents($file, $content) === false) {
             throw new CompilerException(sprintf('Cannot save the source map to "%s"', $file));
         }

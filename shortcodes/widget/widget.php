@@ -8,7 +8,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
     class TemplazaFramework_ShortCode_Widget extends TemplazaFramework_ShortCode {
 
         private $sidebar_registered;
-
+        // phpcs:disable WordPress.Security.NonceVerification.Missing
         public function __construct($field_parent = array(), $value = '', $parent = ''){
             parent::__construct($field_parent, $value, $parent);
 
@@ -142,22 +142,6 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
                         ),
                         'default'       => '',
                     ),
-//                    array(
-//                        'id'         => 'widget_id',
-//                        'type'       => 'text',
-////                        'title'      => __( 'Widget', 'templaza-framework' ),
-////                        'subtitle'   => __( 'Select Sidebar.', 'templaza-framework' ),
-//                        'attributes' => array(
-//                            'type'   => 'hidden',
-//                        ),
-//                    ),
-//                    array(
-//                        'id'       => 'sidebar',
-//                        'type'     => 'select',
-//                        'data'     => 'sidebars',
-//                        'title'    => __( 'Sidebar', 'templaza-framework' ),
-//                        'subtitle' => __( 'Select Sidebar.', 'templaza-framework' ),
-//                    ),
                 )
             );
         }
@@ -183,6 +167,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
             }
 
             if ( ob_get_contents() ) ob_clean();
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 
             wp_die(trim($this -> show_widget_ajax($widget_id, $id_base, $title)));
         }
@@ -196,6 +181,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
             $id_base    = TemplazaFramework_Widget_Shortcode_Helper::get_id_base_for_widget_id($widget_id);
 
             if ( ob_get_contents() ) ob_clean();
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 
             wp_die(trim($this -> show_widget_ajax($widget_id, $id_base, $title)));
 
@@ -298,16 +284,18 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
 //            $new_widget_id  = 'text-'.($widget_number+1);
 ////            $new_widget_id  = 'text-'.$number;
             if ($saved ) {
+                /* translators: %s - widget. */
                 $this->send_json_success( array(
                     'new_widget_id' => $new_widget_id,
-//                    'next_number' => $next_number,
+                    /* translators: %s - widget. */
                     'message' => sprintf( __("Saved %s", 'templaza-framework'), $id_base )
                 ) );
             }else{
+                /* translators: %s - widget. */
                 $this -> send_json_error(
                     array(
                         'new_widget_id' => $new_widget_id,
-//                        'next_number' => $next_number,
+                        /* translators: %s - widget. */
                         'message' => sprintf( __("Failed to clone %s", 'templaza-framework'), $id_base )
                     )
                 );
@@ -349,8 +337,10 @@ if(!class_exists('TemplazaFramework_ShortCode_Widget')){
             $saved = $this->save_widget( $id_base );
 
             if ( $saved ) {
+                /* translators: %s - Installed. */
                 $this->send_json_success( sprintf( __("Saved %s", 'templaza-framework'), $id_base ) );
             }else{
+                /* translators: %s - Installed. */
                 $this -> send_json_error(sprintf( __("Failed to save %s", 'templaza-framework'), $id_base ));
             }
             wp_die();

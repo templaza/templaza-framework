@@ -7,11 +7,8 @@ Author: templaza-framework
 Version: 1.2.0
 Text Domain: templaza-framework
 Author URI: http://templaza.com
-Forum: https://www.templaza.com/Forums.html
-Ticket: https://www.templaza.com/tz_membership/addticket.html
-FanPage: https://www.facebook.com/templaza
-Twitter: https://twitter.com/templazavn
-Google+: https://plus.google.com/+Templaza
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
 
 use TemPlazaFramework\TemPlazaFrameWork;

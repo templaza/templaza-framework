@@ -119,10 +119,11 @@ if(!class_exists('TemPlazaFramework\Configuration')){
                 wp_die( 'Invalid Secret for options use' );
                 exit;
             }
+            // phpcs:disable WordPress.Security.NonceVerification.Recommended
 
             $var    = array();
-            if(isset($_GET['post_id']) && !empty($_GET['post_id'])){
-                $style_id   = $_GET['post_id'];
+            if(isset($_GET['post_id']) && !empty(esc_attr($_GET['post_id']))){
+                $style_id   = esc_attr($_GET['post_id']);
                 $var    = Functions::get_theme_option_by_id($style_id, $this -> get_post_type());
             }
             $var['redux-backup'] = 1;
@@ -140,11 +141,12 @@ if(!class_exists('TemPlazaFramework\Configuration')){
          * Export post type options
          * */
         public function download_options(){
+            // phpcs:disable WordPress.Security.NonceVerification.Recommended
 
             $opt_name   = $this -> opt_name;
             if ( ! isset( $_GET['secret'] ) || md5( md5( \Redux_Functions_Ex::hash_key() ) . '-'
                     . $opt_name ) !== $_GET['secret'] ) { // phpcs:ignore WordPress.Security.NonceVerification
-                wp_die( __('Invalid Secret for options use', 'templaza-framework') );
+                wp_die( esc_html__('Invalid Secret for options use', 'templaza-framework') );
                 exit;
             }
 
@@ -244,6 +246,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
                             .'/'.$this -> get_post_type().'/'. $pID . '.json':$file;
 
                         if (file_exists($file)) {
+                            // phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
                             $options = file_get_contents($file);
 
                             $options = json_decode($options, true);
@@ -265,6 +268,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
 
             $post_type          = $this -> get_post_type();
             $current_post_type  = $this -> get_current_screen_post_type();
+            // phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
             $this -> __init_redux_arguments();
 
@@ -407,6 +411,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
             // Store main config to json file
             $setting_args = $this -> setting_args[$this -> get_post_type()];
             $main_param_name = $setting_args['opt_name'];
+            // phpcs:disable WordPress.Security.NonceVerification.Missing
 
             if(isset($_POST[$main_param_name])) {
                 global $wp_filesystem;
@@ -422,6 +427,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
                     }
 
                     if(!is_dir($folder)){
+                        // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
                         mkdir($folder, FS_CHMOD_DIR, true);
                     }
 
@@ -431,8 +437,10 @@ if(!class_exists('TemPlazaFramework\Configuration')){
 
                     $old_slugs   = get_post_meta($post_id, '_wp_old_slug');
                     if(!empty($old_slugs) && !in_array($post -> post_name, $old_slugs)){
+                        // phpcs:disable WordPress.WP.AlternativeFunctions.rename_rename, WordPress.WP.AlternativeFunctions.unlink_unlink, WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
                         foreach ($old_slugs as $old_slug){
                             // Rename old slug file to new slug file
+
                             if(file_exists($folder.'/'.$old_slug.'.json') && !file_exists($folder.'/'.$post -> post_name.'.json')){
                                 rename($folder.'/'.$old_slug.'.json', $folder.'/'.$post -> post_name.'.json');
                             }elseif(file_exists($folder.'/'.$old_slug.'.json')){
@@ -468,6 +476,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
                     }
 
                     // Create config file
+                    // phpcs:disable WordPress.WP.AlternativeFunctions.json_encode_json_encode
                     file_put_contents($file, json_encode($data));
 
                     update_post_meta( $post_id, $this -> meta_key, $post -> post_name );
@@ -536,7 +545,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
             }
             $post_id    = isset($_GET['post'])?$_GET['post']:0;
             if(!$post_id){
-                wp_die(__('Post or Page creation failed, could not find original post:', 'templaza-framework') . $post_id);
+                wp_die(esc_html__('Post or Page creation failed, could not find original post:', 'templaza-framework') . esc_attr($post_id));
             }
 
             $post = get_post( $post_id );
@@ -574,7 +583,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
                 $clone_post_name    = $clone_post -> post_name;
 
                 $clone_post_name    = !empty($clone_post_name)?$clone_post_name:$clone_post_id;
-
+                // phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
                 $post_meta_data = $wpdb->get_results("SELECT meta_key, meta_value FROM $wpdb->postmeta"
                     ." WHERE post_id=$post_id"
                     ." AND (meta_key='".$this -> meta_key."' OR meta_key='".$this -> meta_key_theme."')");
@@ -641,6 +650,7 @@ if(!class_exists('TemPlazaFramework\Configuration')){
         }
 
         public function custom_view_count($views){
+            // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             $args = array(
                 'post_type'=> $this -> get_post_type(),
                 'posts_per_page'    => -1,

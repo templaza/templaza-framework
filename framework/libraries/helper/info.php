@@ -47,9 +47,9 @@ if(!class_exists('TemPlazaFramework\Helpers\Info')){
 
         public function output($reset = false){
             if(!count($this -> info)){
-                return json_encode(array());
+                return wp_json_encode(array());
             }
-            $info   = json_encode($this -> info);
+            $info   = wp_json_encode($this -> info);
 
             if($reset) {
                 $this->reset();

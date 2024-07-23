@@ -22,14 +22,14 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                     if( !empty($f_icon)){
                         if($f_icon['type'] == 'uikit-icon'){
                             ?>
-                            <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
+                            <i data-uk-icon="icon:<?php echo esc_attr($f_icon['icon']); ?>;"></i>
                             <?php
                         }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
                             echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
                                 array('data-uk-svg' => ''));
                         }else{
                             ?>
-                            <i class="<?php echo $f_icon['icon']; ?>"></i>
+                            <i class="<?php echo esc_attr($f_icon['icon']); ?>"></i>
                             <?php
                         }
                     }

@@ -26,7 +26,7 @@ if($ap_slider_number >1){
 }
 if (isset($ap_video) && !empty($ap_video)) {
     if (wp_oembed_get($ap_video)) :
-        $video = parse_url($ap_video);
+        $video = wp_parse_url($ap_video);
         $youtube_no_cookie = $no_cookie ? '-nocookie' : '';
         switch($video['host']) {
             case 'youtu.be':
@@ -94,7 +94,7 @@ if(!empty($ap_gallery)){
                 <?php
                 }else{
                   ?>
-                    <img src="<?php echo wp_get_attachment_url($image); ?>" alt="<?php echo get_post_meta($image, '_wp_attachment_image_alt', TRUE); ?>">
+                    <img src="<?php echo esc_url(wp_get_attachment_url($image)); ?>" alt="<?php echo esc_attr(get_post_meta($image, '_wp_attachment_image_alt', TRUE)); ?>">
                 <?php
                 }
                 ?>
@@ -133,7 +133,7 @@ if(!empty($ap_gallery)){
                     <?php
                 }else{
                     ?>
-                    <img src="<?php echo wp_get_attachment_url($image); ?>" alt="<?php echo get_post_meta($image, '_wp_attachment_image_alt', TRUE); ?>">
+                    <img src="<?php echo esc_url(wp_get_attachment_url($image)); ?>" alt="<?php echo esc_attr(get_post_meta($image, '_wp_attachment_image_alt', TRUE)); ?>">
                     <?php
                 }
                 ?>

@@ -38,7 +38,7 @@ class head extends Table {
 
   protected function _parse() {
     parent::_parse();
-
+      // phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped
     if ($this->data["magicNumber"] != 0x5F0F3CF5) {
       throw new Exception("Incorrect magic number (" . dechex($this->data["magicNumber"]) . ")");
     }

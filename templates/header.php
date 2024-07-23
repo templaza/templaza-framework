@@ -29,7 +29,7 @@ $container_class   .= !empty($header_id)?' templaza-container-header__'.$header_
 $container_class   .= !empty($footer_id)?' templaza-container-footer__'.$footer_id:'';
 ?>
 
-<div class="templaza-container<?php echo $container_class;?>">
+<div class="templaza-container<?php echo esc_attr($container_class);?>">
     <?php Templates::load_my_layout('preloader'); ?>
     <?php
     if($header && $mode != 'sidebar') {
@@ -37,8 +37,8 @@ $container_class   .= !empty($footer_id)?' templaza-container-footer__'.$footer_
     }
     Templates::load_my_header('header.mobilemenu');
     ?>
-    <div class="templaza-content<?php echo (!empty($content_classes) ? ' ' . implode(' ', $content_classes) : '');?>">
-        <div class="templaza-layout templaza-layout-<?php echo $template_layout;?>">
+    <div class="templaza-content<?php echo (!empty($content_classes) ? ' ' . esc_attr(implode(' ', $content_classes)) : '');?>">
+        <div class="templaza-layout templaza-layout-<?php echo esc_attr($template_layout);?>">
             <div class="templaza-wrapper">
                 <?php
                 do_action('templaza-framework-header_open');

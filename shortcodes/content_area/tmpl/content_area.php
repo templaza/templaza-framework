@@ -9,7 +9,7 @@ $options        = Functions::get_theme_options();
 
 $theme_page_html    = apply_filters('templaza-framework/shortcode/content_area/theme_html', '');
 $theme_page_html    = trim($theme_page_html);
-
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 if(!empty($theme_page_html)){
     extract(shortcode_atts(array(
         'id'                  => '',

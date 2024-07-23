@@ -72,7 +72,7 @@ if($background_setting_404){
 
         if (count($background_video_404) && !empty($background_video_404['url'])) {
             $attributes['data-templaza-video-bg'] = $background_video_404['url'];
-            wp_enqueue_script('tzfrm_templazavideobg', Functions::get_my_url().'/assets/js/vendor/jquery.templazavideobg.js');
+            wp_enqueue_script('tzfrm_templazavideobg', Functions::get_my_url().'/assets/js/vendor/jquery.templazavideobg.js', array(), Functions::get_my_version(), false);
         }
 
         $return = [];
@@ -107,17 +107,17 @@ if($background_setting_404){
             } elseif($error -> has_errors()) {
                 ?>
                 <div class="py-5">
-                    <h2 class="display-1"><?php echo $error -> get_error_code(); ?></h2>
-                    <h5 class="display-4"><?php echo htmlspecialchars($error -> get_error_message(), ENT_QUOTES, 'UTF-8'); ?></h5>
+                    <h2 class="display-1"><?php echo esc_html($error -> get_error_code()); ?></h2>
+                    <h5 class="display-4"><?php echo esc_html(htmlspecialchars($error -> get_error_message(), ENT_QUOTES, 'UTF-8')); ?></h5>
                 </div>
                 <?php
             }else{
             ?>
-                <h1 class="title-404"><?php echo __('404 ERROR!', 'templaza-framework'); ?></h1>
+                <h1 class="title-404"><?php echo esc_html__('404 ERROR!', 'templaza-framework'); ?></h1>
                 <p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try a search?', 'templaza-framework' ); ?></p>
                 <?php get_search_form(); ?>
             <?php
             }
             ?>
-            <a class="btn btn-backtohome" href="<?php echo get_home_url(); ?>" role="button"><?php echo $errorButton; ?></a>
+            <a class="btn btn-backtohome" href="<?php echo esc_url(get_home_url()); ?>" role="button"><?php echo esc_html($errorButton); ?></a>
     </div>

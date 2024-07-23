@@ -25,6 +25,7 @@ class Templaza_Woo_Quick_View {
 	 * @since 1.0.0
 	 * @return object
 	 */
+    // phpcs:disable WordPress.Security.NonceVerification.Missing
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
@@ -187,6 +188,7 @@ class Templaza_Woo_Quick_View {
 	 * @return void
 	 */
 	public function templaza_product_quick_view_more_info_button() {
+        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		printf(
 			'<a href="%s" class="product-more-infor">
 				<span class="product-more-infor__text">%s</span>%s

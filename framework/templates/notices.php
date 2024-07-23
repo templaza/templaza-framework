@@ -30,8 +30,9 @@ if($queues && count($queues)) {
                 $notice_type    = 'warning';
                 break;
         }
+        //phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
         ?>
-        <div class="uk-alert-<?php echo $notice_type; ?> uk-box-shadow-small uk-margin-bottom" data-uk-alert>
+        <div class="uk-alert-<?php echo esc_attr($notice_type); ?> uk-box-shadow-small uk-margin-bottom" data-uk-alert>
             <?php if($show_close_button){ ?>
             <a class="uk-alert-close" data-uk-close></a>
             <?php } ?>

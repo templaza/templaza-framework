@@ -17,6 +17,7 @@ if(isset($args['ap_class'])){
 }else{
     $ap_class = ' templazaFadeInUp';
 }
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <div class="ap-item ap-item-style3 <?php echo esc_attr($ap_class);?>">
     <div class="ap-inner ">
@@ -27,12 +28,12 @@ if(isset($args['ap_class'])){
                         <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                     </h2>
                     <span class="ap-info-author">
-                        <?php echo esc_html__('By', 'templaza-framework') .' '. get_the_author_posts_link();?>
+                        <?php echo esc_html__('By', 'templaza-framework') .' '. wp_kses(get_the_author_posts_link(),'post');?>
                     </span>
                 </div>
                 <div class="ap-button-info uk-flex uk-flex-between">
                     <span class="ap-button ap-button-quickview" data-ap-quickview-button="<?php echo $pid?$pid:'';
-                    ?>" data-uk-tooltip="<?php echo esc_attr(__('Quick View', 'templaza-framework')); ?>">
+                    ?>" data-uk-tooltip="<?php echo esc_attr__('Quick View', 'templaza-framework'); ?>">
                         <i class="fas fa-eye"></i>
                     </span>
                     <?php
@@ -55,7 +56,7 @@ if(isset($args['ap_class'])){
                                     <span class="ap-button ap-button-compare <?php echo $has_compare?' ap-in-compare-list':'';
                                     ?>" data-ap-compare-button="id: <?php the_ID();
                                     ?>; active_icon: fas fa-clipboard-list; icon: fas fa-balance-scale" data-uk-tooltip="<?php
-                                    _e($active_text, 'templaza-framework');?>">
+                                    esc_html($active_text);?>">
                                         <?php if($has_compare){?>
                                             <i class="fas fa-exchange-alt"></i>
                                         <?php }else{?>

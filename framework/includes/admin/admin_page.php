@@ -29,6 +29,7 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
         protected $main_slug            = TEMPLAZA_FRAMEWORK;
         protected $pageHooks            = array();
         protected $theme_demo_datas     = array();
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
 
         public function __construct($framework = null)
         {
@@ -154,8 +155,8 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
 
             wp_enqueue_script('tzinst-admin-js__hearbeat',
                 Functions::get_my_frame_url().'/assets/js/heartbeat.js',
-                array(), Functions::get_my_version());
-            wp_register_script( 'tzinst-admin-js__hearbeat', '' );
+                array(), Functions::get_my_version(),false);
+            wp_register_script( 'tzinst-admin-js__hearbeat', '' ,array(),Functions::get_my_version(), false);
             wp_localize_script('tzinst-admin-js__hearbeat', 'tzinst_heartbeat_ajax', array(
                 'page' => 'tzinst-dashboard',
                 'heartbeat_action' => 'tzinst-heartbeat',
@@ -230,7 +231,8 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
             );
 
             if(HelperLicense::has_expired($this -> theme_name)){
-                $authMsg    = '<strong>'.sprintf(__('Welcome to %s', 'templaza-framework'),  wp_get_theme()->get('Name')).'</strong>';
+                /* translators: %s - Welcome. */
+                $authMsg    = '<strong>'.sprintf(__('Welcome to %s', 'templaza-framework'),  esc_html(wp_get_theme()->get('Name'))).'</strong>';
                 $authMsg   .= __(' - Your license under this domain is invalid. Please reactivate your license to verify your domain again.', 'templaza-framework');
                 if($themeConfig = $this -> theme_config_registered){
                     if(isset($themeConfig['envato_url']) && $themeConfig['envato_url']){
@@ -299,7 +301,7 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
         public function enqueue_admin_scripts(){
             wp_enqueue_script('templaza-framework-installation',
                 Functions::get_my_frame_url().'/assets/js/installation.js',
-                array(), Functions::get_my_version());
+                array(), Functions::get_my_version(),false);
 
             wp_localize_script('templaza-framework-installation', 'templazaInstallationSettings', array(
                 'page' => $this -> _get_page(),

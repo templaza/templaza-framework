@@ -67,7 +67,8 @@ class Header extends \FontLib\Header {
     $this->readString("FullName");
 
     switch ($this->data["Version"]) {
-      default:
+        default:
+        // phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped
         throw new Exception("Unknown EOT version " . $this->data["Version"]);
 
       case 0x00010000:

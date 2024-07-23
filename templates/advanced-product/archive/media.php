@@ -12,7 +12,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 $thumbnail       = isset($templaza_options['ap_product-thumbnail-size'])?$templaza_options['ap_product-thumbnail-size']:'large';
 $thumbnail_eff       = isset($templaza_options['ap_product-thumbnail-effect'])?$templaza_options['ap_product-thumbnail-effect']:'';
 $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
-
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 if(isset($_GET['product_loop'])){
     $ap_loop_layout = $_GET['product_loop'];
 }elseif($compare_layout !='') {

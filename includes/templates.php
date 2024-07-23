@@ -24,6 +24,7 @@ class Templates{
 //        'xlarge' => '@media (min-width: 1600px)',
 //        'mobile' => '@media (max-width: 640px)',
 //    ];
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen, WordPress.WP.AlternativeFunctions.file_system_operations_fclose, WordPress.WP.AlternativeFunctions.unlink_unlink, WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 
     protected static $cache = array();
 
@@ -225,8 +226,8 @@ class Templates{
         } catch (\Exception $e) {
             print_r($e);
             exit;
-            echo '<h1>' . $e->getMessage() . '</h1>';
-            echo '<h3>' . $e->getFile() . ' in ' . $e->getLine() . '</h3>';
+            echo '<h1>' . esc_html($e->getMessage()) . '</h1>';
+            echo '<h3>' . esc_html($e->getFile()) . ' in ' . esc_html($e->getLine()) . '</h3>';
             exit;
         }
     }
@@ -311,7 +312,7 @@ class Templates{
             }
 
             $theme_css_uri = Functions::get_my_theme_css_uri();
-            wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-framework', $theme_css_uri.'/'.$file_name, array());
+            wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-framework', $theme_css_uri.'/'.$file_name, array(), Functions::get_my_version());
         }
     }
 

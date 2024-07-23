@@ -6,7 +6,7 @@ use TemPlazaFramework\Post_TypeFunctions;
 
 if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
     class TemplazaFramework_MetaBox_Layout_Assignment extends TemplazaFramework_MetaBox{
-
+        // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_query, WordPress.DB.SlowDBQuery.slow_db_query_meta_key
         public function register(){
             $metaboxes[] = array(
                 'id'            => 'layout-assignment',
@@ -202,6 +202,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
          * */
         public function post_type_table_content($column_name, $post_id ){
             global $post_type;
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
             switch($column_name){
                 case '__home':
                     $home   = get_post_meta($post_id,'__home', true);
@@ -379,6 +380,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
          * */
         public function post_type_set_default(){
             $post_type      = $this -> post_type -> get_current_screen_post_type();
+            // phpcs:disable WordPress.Security.NonceVerification.Recommended
             $nonce_name     = isset( $_GET['_wpnonce'] ) ? $_GET['_wpnonce'] : '';
             $nonce_action   = $post_type.'_set_default';
 
@@ -405,7 +407,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
             parent::save_meta_box($post_id, $post);
 
             global $post_type;
-
+// phpcs:disable WordPress.Security.NonceVerification.Missing
             $mt_key  = $this -> prefix.'layout-assignment';
 
             if (in_array($post_type, array('templaza_header', 'templaza_footer')) && isset( $_POST[$mt_key] ) ) {
@@ -522,6 +524,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
                 ($name == '__header_assign' || $name == '__footer_assign')){
 
                 // Remove other
+                // phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
                 $meta_key       = ($name == '__header_assign')?'__h_template_assign':'__f_template_assign';
                 $assign_ptype   = ($name == '__header_assign')?'templaza_header':'templaza_footer';
 

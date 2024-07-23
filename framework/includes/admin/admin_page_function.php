@@ -11,6 +11,7 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page_Function')){
 
     class Admin_Page_Function{
         protected static $cache    = array();
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended,
 
 //        public static function get_my_plugin_data(){
 //            $storeId    = md5(__METHOD__);
@@ -162,6 +163,7 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page_Function')){
             $dateNumber = ceil($dateNumber / 24 / 60 / 60);
 
             if($dateNumber < 1 || (!$year && !$month && !$week && !$day)){
+                /* translators: %s - day. */
                 return sprintf( _n( '%s day', '%s days', (int) 0, 'templaza-framework' ), (int) 0 );
             }
 
@@ -171,6 +173,7 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page_Function')){
                 $yearNumber = (int) ($dateNumber / 365);
                 if($yearNumber >= 1) {
                     $dateNumber -= (365 * $yearNumber);
+                    /* translators: %s - year. */
                     $str[]  = sprintf( _n( '%s year', '%s years', (int) $yearNumber, 'templaza-framework' ), (int) $yearNumber );
                 }
             }
@@ -179,6 +182,7 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page_Function')){
                 $monthNumber    = (int) ($dateNumber / 30);
                 if($monthNumber >= 1) {
                     $dateNumber -= $monthNumber * 30;
+                    /* translators: %s - month. */
                     $str[]  = sprintf( _n( '%s month', '%s months', (int) $monthNumber, 'templaza-framework' ), (int) $monthNumber );
                 }
             }
@@ -187,12 +191,14 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page_Function')){
                 $weekNumber    = (int) ($dateNumber / 7);
                 if($weekNumber >= 1) {
                     $dateNumber -= $weekNumber * 7;
+                    /* translators: %s - week. */
                     $str[]  = sprintf( _n( '%s week', '%s weeks', (int) $weekNumber, 'templaza-framework' ), (int) $weekNumber );
                 }
             }
             if($day){
                 $dayNumber    = (int) $dateNumber;
                 if($dayNumber >= 1) {
+                    /* translators: %s - day. */
                     $str[]  = sprintf( _n( '%s day', '%s days', (int) $dayNumber, 'templaza-framework' ), (int) $dayNumber );
                 }
             }

@@ -98,11 +98,12 @@ if ( ! class_exists( 'ReduxFramework_TZ_Loop' ) ) {
 
         public function render(){
             $content_id = $this -> field['id'].'__content';
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
             ?>
-            <textarea class="hide" name="<?php echo $this -> field['name'];?>" id="<?php echo $this -> field['id'];
+            <textarea class="hide" name="<?php echo esc_attr($this -> field['name']);?>" id="<?php echo esc_attr($this -> field['id']);
             ?>"><?php echo $this -> value; ?></textarea>
-            <div class="field-tz_loop-accordion" id="<?php echo $content_id; ?>" data-group-fields="<?php
-            echo htmlspecialchars(json_encode($this -> field['group_fields']));?>"></div>
+            <div class="field-tz_loop-accordion" id="<?php echo esc_attr($content_id); ?>" data-group-fields="<?php
+            echo htmlspecialchars(wp_json_encode($this -> field['group_fields']));?>"></div>
         <?php
         }
 

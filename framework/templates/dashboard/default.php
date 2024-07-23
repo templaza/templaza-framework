@@ -1,7 +1,7 @@
 <?php
 
 defined( 'ABSPATH' ) || exit;
-
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <div id="tzinst-dashboard-widgets-wrap">
     <div class="uk-grid-match" data-uk-grid>

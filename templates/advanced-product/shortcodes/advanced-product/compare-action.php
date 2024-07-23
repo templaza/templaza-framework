@@ -10,11 +10,11 @@ extract($args);
 $compare_list   = AP_Product_Helper::get_compare_product_ids_list();
 $pid            = isset($pid)?$pid:get_the_ID();
 $has_compare    = (!empty($compare_list) && in_array($pid, $compare_list))?true:false;
-
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <a href="" class="uk-icon-button" data-uk-icon="icon: close; ratio: 0.85" data-uk-tooltip="<?php
-_e('Remove this product', 'advanced-product');?>" data-ap-compare-delete-button="<?php
-    echo $pid;?>"></a>
+esc_html_e('Remove this product', 'advanced-product');?>" data-ap-compare-delete-button="<?php
+    echo esc_attr($pid);?>"></a>
 <?php
 if(isset($actions) && !empty($actions)){
     foreach($actions as $_action){

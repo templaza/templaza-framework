@@ -35,7 +35,7 @@
 
         //$active = ( ( is_numeric($this->parent->current_tab) && $this->parent->current_tab == $k ) || ( !is_numeric($this->parent->current_tab) && $this->parent->current_tab === $k )  ) ? ' style="display: block;"' : '';
         $section['class'] = isset( $section['class'] ) ? ' ' . $section['class'] : '';
-        echo '<div id="' . $k . '_section_group' . '" class="redux-group-tab' . esc_attr( $section['class'] ) . '" data-rel="' . $k . '">';
+        echo '<div id="' . esc_attr($k) . '_section_group' . '" class="redux-group-tab' . esc_attr( $section['class'] ) . '" data-rel="' . esc_attr($k) . '">';
         //echo '<div id="' . $k . '_nav-bar' . '"';
         /*
     if ( !empty( $section['tab'] ) ) {
@@ -64,6 +64,7 @@
 
         // Don't display in the
         $display = true;
+    // phpcs:disable WordPress.Security.NonceVerification.Recommended
         if ( isset( $_GET['page'] ) && $_GET['page'] == $this->parent->args['page_slug'] ) {
             if ( isset( $section['panel'] ) && $section['panel'] == "false" ) {
                 $display = false;

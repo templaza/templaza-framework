@@ -30,7 +30,7 @@ class AdobeFontMetrics {
 
   function write($file, $encoding = null) {
     $map_data = array();
-
+    // phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped, WordPress.WP.AlternativeFunctions.file_system_operations_fopen, WordPress.WP.AlternativeFunctions.file_system_operations_fwrite
     if ($encoding) {
       $encoding = preg_replace("/[^a-z0-9-_]/", "", $encoding);
       $map_file = dirname(__FILE__) . "/../maps/$encoding.map";

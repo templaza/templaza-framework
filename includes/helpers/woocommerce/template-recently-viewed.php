@@ -221,7 +221,7 @@ class Templaza_Woo_Recently_Viewed {
 		}
 
 		$header_class =  $button_html ? '' : 'no-button';
-
+        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		?>
         <section class="templaza-history-products <?php echo esc_attr( $addClass ) ?>" id="templaza-history-products"
                  data-col=<?php echo esc_attr( $recent_viewed_column ) ?>>

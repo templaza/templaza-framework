@@ -8,7 +8,7 @@ use TemPlazaFramework\Functions;
 $random_colors  = array('#ffcdd2', '#b2dfdb', '#ffcc80', '#e1bee7');
 
 $presets    = $this -> get_presets();
-
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 $secret     = wp_create_nonce( 'templaza_save_presets_' . $this -> field['id'] );
 $post_id    = (isset($_GET['post']) && !empty($_GET['post']))?$_GET['post']:'';
 
@@ -28,9 +28,9 @@ if(!isset($_GET['post']) || ((isset($_GET['post']) && !empty($_GET['post']) || $
     return;
 }else{
 ?>
-<div class="uk-child-width-1-3@m js-field-tz_presets" data-field-post-type="<?php echo get_post_type(); ?>"<?php echo !empty($post_id)?' data-field-post-id="'
-    .$post_id.'"':'';?><?php echo !isset($_GET['page']) && !empty($_GET['page'])?' data-field-page="'
-    .$_GET['page'].'"':'';?> data-uk-grid>
+<div class="uk-child-width-1-3@m js-field-tz_presets" data-field-post-type="<?php echo esc_attr(get_post_type()); ?>"<?php echo !empty($post_id)?' data-field-post-id="'
+    .esc_attr($post_id).'"':'';?><?php echo !isset($_GET['page']) && !empty($_GET['page'])?' data-field-page="'
+    .esc_attr($_GET['page']).'"':'';?> data-uk-grid>
     <?php if($presets && count($presets)){
         foreach($presets as $preset){
 
@@ -41,12 +41,12 @@ if(!isset($_GET['post']) || ((isset($_GET['post']) && !empty($_GET['post']) || $
                 $first_letter   .= substr($word, 0 , 1);
             }
 
-            $color_index    = rand(0, count($random_colors) - 1);
+            $color_index    = wp_rand(0, count($random_colors) - 1);
         ?>
     <div>
         <div class="uk-card uk-card-default uk-card-small uk-border-rounded">
             <button class="uk-drop-close uk-modal-close-default js-remove-preset" type="button" data-uk-close data-name="<?php
-            echo $preset['name']; ?>"></button>
+            echo esc_html($preset['name']); ?>"></button>
             <?php
             global $post_type;
 
@@ -61,22 +61,22 @@ if(!isset($_GET['post']) || ((isset($_GET['post']) && !empty($_GET['post']) || $
             ?>
             <div class="uk-card-media-top uk-text-center<?php echo !$has_image?' uk-height-small':'';
             ?> uk-flex uk-flex-middle uk-flex-center uk-heading-small uk-light" style="background-color: <?php
-            echo $random_colors[$color_index];?>;">
+            echo esc_attr($random_colors[$color_index]);?>;">
                 <?php
                 if($has_image){
                 ?>
-                    <img src="<?php echo $image_url; ?>" alt="<?php echo $preset['name']; ?>"/>
+                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($preset['name']); ?>"/>
                 <?php }else{?>
-                    <span><?php echo strtoupper($first_letter); ?></span>
+                    <span><?php echo esc_html(strtoupper($first_letter)); ?></span>
                 <?php } ?>
             </div>
             <div class="uk-card-body">
-                <h4 class="uk-card-title"><?php echo $preset['title'] ?></h4>
+                <h4 class="uk-card-title"><?php echo esc_html($preset['title']) ?></h4>
                 <?php if(!empty($preset['description'])){ ?>
-                <p><?php echo $preset['description']; ?></p>
+                <p><?php echo esc_html($preset['description']); ?></p>
                 <?php } ?>
                 <button type="button" class="uk-button uk-button-primary uk-margin-top uk-margin-bottom js-load-preset" data-name="<?php
-                echo $preset['name']; ?>"><?php echo __('Load Preset', 'templaza-framework');?></button>
+                echo esc_attr($preset['name']); ?>"><?php echo esc_html__('Load Preset', 'templaza-framework');?></button>
             </div>
         </div>
     </div>
@@ -85,7 +85,7 @@ if(!isset($_GET['post']) || ((isset($_GET['post']) && !empty($_GET['post']) || $
     <div class="uk-width-2-5@m">
         <div class="uk-card uk-card-default uk-card-small uk-border-rounded">
             <div class="uk-card-header">
-                <h4 class="uk-card-title"><?php echo __('Create Preset', 'templaza-framework');?></h4>
+                <h4 class="uk-card-title"><?php echo esc_html__('Create Preset', 'templaza-framework');?></h4>
             </div>
             <div class="uk-card-body uk-form-stacked">
                 <?php
@@ -133,8 +133,8 @@ if(!isset($_GET['post']) || ((isset($_GET['post']) && !empty($_GET['post']) || $
                 ?>
 
                 <button type="button" class="uk-button uk-button-primary uk-margin-top uk-margin-bottom js-save-preset" data-secret="<?php
-                echo $secret; ?>"><?php
-                    echo __('Save Preset', 'templaza-framework');?></button>
+                echo esc_attr($secret); ?>"><?php
+                    echo esc_html__('Save Preset', 'templaza-framework');?></button>
             </div>
         </div>
     </div>

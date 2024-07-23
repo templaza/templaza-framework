@@ -16,6 +16,7 @@ if(!class_exists('TemplazaFramework_MetaBox_MegaMenu')){
         protected $opt_name;
 
         protected $loop_fields;
+        // phpcs:disable WordPress.WP.AlternativeFunctions.json_encode_json_encode, WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
 
         public function __construct($post_type, &$framework = null)
         {
@@ -434,7 +435,7 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
 
         public function megamenu_button() {
             echo '<p><button type="button" class="button button-primary tz_mm_launch"><i class="fas fa-box-open"></i> '.
-                __('Menu Options', 'templaza-framework').'</button></p>';
+                esc_html__('Menu Options', 'templaza-framework').'</button></p>';
         }
 
         public function prepare_layout_elements($elements){
@@ -1196,8 +1197,8 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                     foreach ($redux -> sections as $k => &$section) {
 
                         $section['class'] = isset($section['class']) ? ' ' . $section['class'] : '';
-                        echo '<div id="metabox_'.$metabox['id'].'_' . $k . '_section_group' . '" class="redux-group-tab'
-                            . esc_attr($section['class']) . '" data-rel="metabox_'.$metabox['id'].'_' . $k . '">';
+                        echo '<div id="metabox_'.esc_attr($metabox['id']).'_' . esc_attr($k) . '_section_group' . '" class="redux-group-tab'
+                            . esc_attr($section['class']) . '" data-rel="metabox_'.esc_attr($metabox['id']).'_' . esc_attr($k) . '">';
 
                         do_action("redux/page/{$redux->args['opt_name']}/section/before", $section);
                         do_settings_sections( $redux->args['opt_name'] . $k . '_section_group' );

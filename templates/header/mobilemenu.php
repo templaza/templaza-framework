@@ -27,7 +27,7 @@ if ($header) {
     $navClass                   = ['templaza-mobile-menu'];
 //    $navWrapperClass                   = ['nav', 'navbar-nav', 'templaza-nav', 'd-none', 'd-lg-flex'];
     ?>
-    <div class="templaza-mobilemenu uk-hidden d-init dir-<?php echo $dir; ?>" data-class-prefix="templaza-mobilemenu"
+    <div class="templaza-mobilemenu uk-hidden d-init dir-<?php echo esc_attr($dir); ?>" data-class-prefix="templaza-mobilemenu"
          id="templaza-mobilemenu">
         <div class="burger-menu-button active">
             <button aria-label="Mobile Menu Toggle" type="button" class="button close-offcanvas offcanvas-close-btn">
