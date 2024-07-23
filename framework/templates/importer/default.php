@@ -134,10 +134,10 @@ if($items && count($items)){
                                         <button type="button" class="uk-button uk-button-primary js-tzinst-import">
                                             <span class="spinner-border spinner-border-sm uk-margin-small-right uk-hidden js-tzinst-importing-icon"></span>
                                             <span class="js-tzinst-installing"><?php
-                                                esc_html__('Install Demo Data', 'templaza-framework');
+                                                esc_html_e('Install Demo Data', 'templaza-framework');
                                             ?></span>
                                             <span class="js-tzinst-installed uk-hidden"><?php
-                                                esc_html__('Installed', 'templaza-framework');
+                                                esc_html_e('Installed', 'templaza-framework');
                                             ?></span>
                                         </button>
                                     </div>
