@@ -570,13 +570,13 @@ if (!empty($breadcrumb_current)) {
     $blogs[]    = '.templaza-breadcrumb ul li.item-current span{color:' . $breadcrumb_current . ';}';
 }
 if (!empty($breadcrumb_link_single)) {
-    $blogs[]    = '.templaza-single .templaza-breadcrumb li a{color:' . $breadcrumb_link_single . ';}';
+    $blogs[]    = '.single .templaza-breadcrumb li a{color:' . $breadcrumb_link_single . ';}';
 }
 if (!empty($breadcrumb_link_hover_single)) {
-    $blogs[]    = '.templaza-single  .templaza-breadcrumb li a:hover{color:' . $breadcrumb_link_hover_single . ';}';
+    $blogs[]    = '.single  .templaza-breadcrumb li a:hover{color:' . $breadcrumb_link_hover_single . ';}';
 }
 if (!empty($breadcrumb_current_single)) {
-    $blogs[]    = '.templaza-single  .templaza-breadcrumb li.item-current span{color:' . $breadcrumb_current_single . ';}';
+    $blogs[]    = '.single  .templaza-breadcrumb li.item-current span{color:' . $breadcrumb_current_single . ';}';
 }
 if (!empty($sidebar_bg_color)) {
     $blogs[]    = 'div.templaza-sidebar,
