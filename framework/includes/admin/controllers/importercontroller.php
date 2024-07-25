@@ -525,26 +525,12 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                 // Set front page (the page will be active of demo import version)
                                 if($pack && isset($pack['front_page']) && $pack['front_page']) {
                                     $frontTitle    = isset($pack['front_page_title'])?$pack['front_page_title']:$pack['title'];
-                                    $args = array(
-                                        'post_type' => 'page',
-                                        'post_status' => 'publish',
-                                        'posts_per_page' => 1,
-                                        'post_title' => $frontTitle
-                                    );
-                                    $query = new WP_Query($args);
-                                    if ($query->have_posts()) {
-                                        while ($query->have_posts()) {
-                                            $query->the_post();
-                                            $home_id = get_the_ID();
-                                            // Page found, you can access its properties here
-                                            update_option('show_on_front', 'page');
-                                            update_option('page_on_front',  $home_id); // Front Page
-                                        }
-                                    } else {
-                                        // Page not found
-                                    }
+                                    $homepage 	= get_page_by_title( $frontTitle );
 
-                                    wp_reset_postdata(); // Reset the query
+                                    if( isset($homepage->ID)) {
+                                        update_option('show_on_front', 'page');
+                                        update_option('page_on_front',  $homepage->ID); // Front Page
+                                    }
 
                                 }
 
