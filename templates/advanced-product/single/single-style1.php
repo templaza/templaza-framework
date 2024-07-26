@@ -14,7 +14,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }
 $widget_heading_style       = isset($templaza_options['widget_box_heading_style'])?$templaza_options['widget_box_heading_style']:'';
 $ap_offer_price           = isset($templaza_options['ap_product-office-price'])?$templaza_options['ap_product-office-price']:true;
-$ap_offer_price_label     = isset($templaza_options['ap_product-office-price-label'])?$templaza_options['ap_product-office-price-label']:'MAKE AN OFFER PRICE';
+$ap_offer_price_label     = isset($templaza_options['ap_product-office-price-label'])?$templaza_options['ap_product-office-price-label']:__('MAKE AN OFFER PRICE','templaza-framework');
 $ap_offer_price_form      = isset($templaza_options['ap_product-office-price-form'])?$templaza_options['ap_product-office-price-form']:'';
 $ap_offer_form_custom     = isset($templaza_options['ap_product-office-price-form-custom'])?$templaza_options['ap_product-office-price-form-custom']:'';
 $ap_offer_form_custom_url     = isset($templaza_options['ap_product-office-price-form-custom-url'])?$templaza_options['ap_product-office-price-form-custom-url']:'';
@@ -37,6 +37,8 @@ $ap_form_rental     = isset($templaza_options['ap_product-form-rental'])?$templa
 $ap_rental_label     = isset($templaza_options['ap_product-form-rental-label'])?$templaza_options['ap_product-form-rental-label']:'';
 $ap_rental_url     = isset($templaza_options['ap_product-form-rental-url'])?$templaza_options['ap_product-form-rental-url']:'';
 $ap_rental_custom     = isset($templaza_options['ap_product-form-rental-custom'])?$templaza_options['ap_product-form-rental-custom']:'';
+
+$product_type   = get_field('ap_product_type', get_the_ID());
 
 do_action('templaza_set_postviews',get_the_ID());
 $author_id = get_post_field( 'post_author', get_the_ID() );
@@ -66,17 +68,17 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                             <i class="fas fa-share-alt"></i>
                             <?php echo esc_html($ap_share_label);?>
                             <div class="ap-share-item  uk-transition-slide-bottom-small">
-                                <a class="facebook" title="<?php esc_attr_e('Share on Facebook','amanus');?>" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_the_permalink(get_the_ID())); ?>">
+                                <a class="facebook" title="<?php esc_attr_e('Share on Facebook','templaza-framework');?>" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_the_permalink(get_the_ID())); ?>">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a class="twitter" title="<?php esc_attr_e('Share on Twitter','amanus');?>" target="_blank" href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_the_permalink(get_the_ID())); ?>&text=<?php echo urlencode(get_the_title(get_the_ID())); ?>">
+                                <a class="twitter" title="<?php esc_attr_e('Share on Twitter','templaza-framework');?>" target="_blank" href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_the_permalink(get_the_ID())); ?>&text=<?php echo urlencode(get_the_title(get_the_ID())); ?>">
                                     <i class="fa-brands fa-x-twitter"></i>
                                 </a>
                                 <?php $templaza_pin_image = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID())); ?>
-                                <a class="pinterest" title="<?php esc_attr_e('Share on Pinterest','amanus');?>"  data-pin-do="skipLink" target="_blank" href="https://pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>&media=<?php echo esc_attr($templaza_pin_image); ?>&description=<?php echo urlencode(get_the_title(get_the_ID())); ?>">
+                                <a class="pinterest" title="<?php esc_attr_e('Share on Pinterest','templaza-framework');?>"  data-pin-do="skipLink" target="_blank" href="https://pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>&media=<?php echo esc_attr($templaza_pin_image); ?>&description=<?php echo urlencode(get_the_title(get_the_ID())); ?>">
                                     <i class="fab fa-pinterest"></i>
                                 </a>
-                                <a class="linkedin" title="<?php esc_attr_e('Share on Linkedin','amanus');?>"  target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url=<?php the_permalink(get_the_ID()); ?>">
+                                <a class="linkedin" title="<?php esc_attr_e('Share on Linkedin','templaza-framework');?>"  target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url=<?php the_permalink(get_the_ID()); ?>">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
                             </div>
@@ -92,7 +94,24 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                             AP_Templates::load_my_layout('single.price');
                             ?>
                         </div>
-                        <?php if($ap_offer_price){
+                        <?php
+                        if(in_array('rental',$product_type) && $ap_form_rental){
+                            if($ap_form_rental == 'custom_url'){
+                                $rental_action = esc_url($ap_rental_url);
+                            }else{
+                                $rental_action = '#rental';
+                            }
+                            ?>
+                            <div class=" hightlight-box uk-margin-left">
+                                <a class="highlight uk-flex uk-flex-between uk-flex-middle" href="<?php echo esc_attr($rental_action);?>">
+                                    <span>
+                                        <?php echo esc_html($ap_rental_label);?>
+                                    </span>
+                                </a>
+                            </div>
+                            <?php
+                        }else{
+                        if($ap_offer_price){
                             if($ap_offer_price_form == 'custom_url'){
                                 ?>
                                 <div class=" hightlight-box uk-margin-left">
@@ -115,7 +134,7 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                                 <?php
                             }
                             ?>
-                        <?php } ?>
+                        <?php } }?>
                     </div>
                     <?php
                     if($ap_show_vendor){
@@ -220,7 +239,24 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                         AP_Templates::load_my_layout('single.price');
                         ?>
                     </div>
-                    <?php if($ap_offer_price){ ?>
+                    <?php
+                    if(in_array('rental',$product_type) && $ap_form_rental){
+                        if($ap_form_rental == 'custom_url'){
+                            $rental_action = esc_url($ap_rental_url);
+                        }else{
+                            $rental_action = '#rental';
+                        }
+                        ?>
+                        <div class=" hightlight-box uk-margin-left">
+                            <a class="highlight uk-flex uk-flex-between uk-flex-middle" href="<?php echo esc_attr($rental_action);?>">
+                                <span>
+                                    <?php echo esc_html($ap_rental_label);?>
+                                </span>
+                            </a>
+                        </div>
+                        <?php
+                    }else{
+                    if($ap_offer_price){ ?>
                         <div class=" hightlight-box uk-margin-left">
                             <a class="highlight uk-flex uk-flex-between uk-flex-middle" href="#modal-center" data-uk-toggle>
                                 <span>
@@ -228,7 +264,7 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                                 </span>
                             </a>
                         </div>
-                    <?php } ?>
+                    <?php } }?>
                 </div>
                 <?php
                 AP_Templates::load_my_layout('single.custom-fields');
@@ -324,6 +360,30 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                     <?php
                     if(function_exists('wpforms')) {
                         echo do_shortcode('[wpforms id="' . $ap_offer_price_form . '"]');
+                    }
+                }
+                ?>
+            </div>
+
+        </div>
+    </div>
+<?php } ?>
+<?php if($ap_form_rental){ ?>
+    <div id="rental" class="uk-flex-top ap-modal" data-uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+
+            <button class="uk-modal-close-default" type="button" data-uk-close></button>
+
+            <div class="get-price">
+                <?php
+                if($ap_form_rental == 'custom'){
+                    echo do_shortcode($ap_rental_custom);
+                }else{
+                    if(function_exists('wpforms')) {
+                        ?>
+                        <h3 class="uk-modal-title"><?php echo esc_html(get_the_title($ap_form_rental)); ?></h3>
+                        <?php
+                        echo do_shortcode('[wpforms id="' . $ap_form_rental . '"]');
                     }
                 }
                 ?>
