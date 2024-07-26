@@ -15,7 +15,7 @@ if($allow_copy){
     </div>
 <?php } ?>
 <textarea class="hide" name="<?php echo esc_attr($this -> field['name']);?>" id="<?php echo esc_attr($this -> field['id']);
-?>"><?php echo wp_kses($this -> value,'post'); ?></textarea>
+?>"><?php echo $this -> value; ?></textarea>
 <div class="field-tz_layout-content"></div>
 
 <div>
