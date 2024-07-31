@@ -700,7 +700,7 @@ class Templaza_Single_Product {
         $extra = get_post_meta(get_the_ID(),'product-single-extra-content',true);
         if (  $extra ) {
             echo '<div class="single-product-extra-content">';
-            echo esc_html($extra);
+            echo wp_kses($extra,'post');
             echo '</div>';
         }
     }
