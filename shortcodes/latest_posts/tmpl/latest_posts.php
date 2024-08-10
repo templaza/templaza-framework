@@ -145,20 +145,57 @@ echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>" >
                                     $price = get_field('ap_price', $post_item->ID);
                                     $product_type   = get_field('ap_product_type', $post_item->ID);
                                     $price_notice_value = get_field('price-notice', $post_item->ID);
-                                ?>
-                                    <div class="ap-price-box">
-                                        <span class="ap-field-label"><?php esc_html_e('From','travelami')?></span>
-                                        <?php
-                                        $html = sprintf('<span class="ap-price"> %s </span>',
-                                             AP_Helper::format_price($price));
-                                        echo wp_kses($html,'post');
-                                        if(!empty($price_notice_value)){
-                                            ?>
-                                            <span class="meta">
+                                    $rental         = get_field('ap_rental_price', $post_item->ID);
+                                    $rental_value    = get_field('ap_rental_unit', $post_item->ID);
+                                    if($rental_value){
+                                        $field_rental = get_field_object('ap_rental_unit');
+                                        $rental_unit = $field_rental['choices'][ $rental_value ];
+                                    }
+                                    $price_sold     = get_field('ap_price_sold', $post_item->ID);
+                                    $price_contact  = get_field('ap_price_contact', $post_item->ID);
+                                    if ((!$product_type || in_array('sale', $product_type)) && !empty($price)) {
+                                        ?>
+                                        <div class="ap-price-box">
+                                            <span class="ap-field-label"><?php esc_html_e('From','templaza-framework')?></span>
+                                            <?php
+                                            $html = sprintf('<span class="ap-price"> %s </span>',
+                                                AP_Helper::format_price($price));
+                                            echo wp_kses($html,'post');
+                                            if(!empty($price_notice_value)){
+                                                ?>
+                                                <span class="meta">
                                                 <?php echo esc_html($price_notice_value);?>
                                             </span>
-                                        <?php } ?>
-                                    </div>
+                                            <?php } ?>
+                                        </div>
+                                        <?php
+                                    }
+                                    if (!empty($product_type) && in_array('rental', $product_type) && !empty($rental)) {
+                                        ?>
+                                        <div class="ap-price-box">
+                                            <span class="ap-field-label"><?php esc_html_e('Price','templaza-framework')?></span>
+                                            <span class="ap-price"> <?php echo esc_html(AP_Helper::format_price($rental)); ?></span>
+                                        </div>
+                                        <?php
+                                    }
+                                    if (!empty($product_type) && in_array('sold', $product_type) && !empty($price_sold)) {
+                                        ?>
+                                        <div class="ap-price-box">
+                                            <span class="ap-field-label"><?php esc_html_e('Status','templaza-framework')?></span>
+                                            <span class="ap-price"> <?php echo esc_html($price_sold); ?></span>
+                                        </div>
+                                        <?php
+                                    }
+                                    if (!empty($product_type) && in_array('contact', $product_type) && !empty($price_contact)) {
+                                        ?>
+                                        <div class="ap-price-box">
+                                            <span class="ap-field-label"><?php esc_html_e('Price','templaza-framework')?></span>
+                                            <span class="ap-price"> <?php echo esc_html($price_contact); ?></span>
+                                        </div>
+                                        <?php
+                                    }
+                                        ?>
+
                                 <?php
                                 }else{
                                 if($latest_post_show_date == true || $latest_post_show_author == true){
