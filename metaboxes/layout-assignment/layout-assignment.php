@@ -98,7 +98,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Layout_Assignment')){
                                 'title'    => esc_html__('Footer Assignment', 'templaza-framework'),
 //                                'subtitle' => __('This template style will be defined as the global default template style.', 'templaza-framework'),
                                 'data'     => 'callback',
-                                'args'     => 'templaza_framework_get_templaza_header_items_by_slug',
+                                'args'     => 'templaza_framework_get_templaza_footer_items_by_slug',
                             ),
                         ),
                     ),
