@@ -83,6 +83,8 @@ if ( have_posts()) {
                                 <option value="title_high"><?php echo esc_html__('Title: Z - A', 'templaza-framework')?></option>
                                 <option value="price_high"><?php echo esc_html__('Price: High To Low', 'templaza-framework')?></option>
                                 <option value="price_low"><?php echo esc_html__('Price: Low To High', 'templaza-framework')?></option>
+                                <option value="price_rental_high"><?php echo esc_html__('Price Rental: High To Low', 'templaza-framework')?></option>
+                                <option value="price_rental_low"><?php echo esc_html__('Price Rental: Low To High', 'templaza-framework')?></option>
                             </select>
                         </div>
                     </div>
