@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-03 10:42+0700\n"
+"POT-Creation-Date: 2024-09-13 14:03+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,7 +82,6 @@ msgstr ""
 #: shortcodes/row/row.php:67 shortcodes/row/row.php:91
 #: shortcodes/section/section.php:51 shortcodes/section/section.php:69
 #: shortcodes/section/section.php:81
-#: shortcodes/testimonials/testimonials.php:24
 msgid "Default"
 msgstr ""
 
@@ -1416,7 +1415,6 @@ msgstr ""
 #: framework/options/settings/sections/woocommerce/product-template-style.php:621
 #: framework/options/settings/sections/woocommerce/product.php:533
 #: shortcodes/navigation/navigation.php:55
-#: shortcodes/testimonials/testimonials.php:43
 msgid "Icon"
 msgstr ""
 
@@ -9247,7 +9245,7 @@ msgstr ""
 #: includes/shortcode.php:943
 #: templates/advanced-product/shortcodes/advanced-product/quickview-custom-fields-item.php:36
 #: templates/advanced-product/single/custom-fields-item-content-style2.php:112
-#: templates/advanced-product/single/custom-fields-item-content.php:64
+#: templates/advanced-product/single/custom-fields-item-content.php:96
 #: templates/advanced-product/single/custom-fields-item.php:33
 #: templates/advanced-product/single/single-style2.php:156
 #: templates/advanced-product/single/single-style2.php:219
@@ -10797,14 +10795,14 @@ msgstr ""
 #: shortcodes/latest_posts/tmpl/latest_posts.php:176
 #: shortcodes/latest_posts/tmpl/latest_posts.php:192
 #: shortcodes/wc_products/wc_products.php:66
-#: templates/advanced-product/archive/price.php:81
+#: templates/advanced-product/archive/price.php:79
 #: widgets/woo-filter/woo-filter.php:197
 #: widgets/woo-filter/woo-filter.php:1450
 msgid "Price"
 msgstr ""
 
 #: shortcodes/latest_posts/tmpl/latest_posts.php:184
-#: templates/advanced-product/archive/price.php:91
+#: templates/advanced-product/archive/price.php:89
 msgid "Status"
 msgstr ""
 
@@ -10842,7 +10840,6 @@ msgid "Menu Style"
 msgstr ""
 
 #: shortcodes/navigation/navigation.php:25
-#: shortcodes/testimonials/testimonials.php:25
 msgid "Inline"
 msgstr ""
 
@@ -10855,7 +10852,6 @@ msgid "With the \"section\" field you can add/edit Menu Items."
 msgstr ""
 
 #: shortcodes/navigation/navigation.php:38
-#: shortcodes/testimonials/testimonials.php:32
 msgid "Items"
 msgstr ""
 
@@ -10864,7 +10860,6 @@ msgid "Nav Item Title"
 msgstr ""
 
 #: shortcodes/navigation/navigation.php:44
-#: shortcodes/testimonials/testimonials.php:38
 msgid "What text use as a nav title."
 msgstr ""
 
@@ -10877,7 +10872,6 @@ msgid "What url use as a nav url."
 msgstr ""
 
 #: shortcodes/navigation/navigation.php:56
-#: shortcodes/testimonials/testimonials.php:44
 msgid ""
 "Place scalable vector icons anywhere in your content. See live preview here "
 "https://getuikit.com/docs/icon"
@@ -10888,17 +10882,14 @@ msgid "Enable it to indicate an active menu item."
 msgstr ""
 
 #: shortcodes/navigation/navigation.php:68
-#: shortcodes/testimonials/testimonials.php:50
 msgid "Link Open"
 msgstr ""
 
 #: shortcodes/navigation/navigation.php:70
-#: shortcodes/testimonials/testimonials.php:52
 msgid "Self"
 msgstr ""
 
 #: shortcodes/navigation/navigation.php:71
-#: shortcodes/testimonials/testimonials.php:53
 msgid "New Window"
 msgstr ""
 
@@ -11360,26 +11351,6 @@ msgstr ""
 msgid "Social Width Height"
 msgstr ""
 
-#: shortcodes/testimonials/testimonials.php:14
-msgid "Testimonials"
-msgstr ""
-
-#: shortcodes/testimonials/testimonials.php:15
-msgid "Testimonials Settings"
-msgstr ""
-
-#: shortcodes/testimonials/testimonials.php:16
-msgid "Insert an Testimonials"
-msgstr ""
-
-#: shortcodes/testimonials/testimonials.php:22
-msgid "Testimonials Style"
-msgstr ""
-
-#: shortcodes/testimonials/testimonials.php:37
-msgid "Item Title"
-msgstr ""
-
 #: shortcodes/text/text.php:56
 msgid "Text Block"
 msgstr ""
@@ -11781,6 +11752,14 @@ msgstr ""
 msgid "Price: Low To High"
 msgstr ""
 
+#: templates/advanced-product/archive.php:86
+msgid "Price Rental: High To Low"
+msgstr ""
+
+#: templates/advanced-product/archive.php:87
+msgid "Price Rental: Low To High"
+msgstr ""
+
 #: templates/advanced-product/archive/content-item-btn-action.php:62
 #: templates/advanced-product/archive/content-item-style3.php:80
 msgid "View Detail"
@@ -11813,15 +11792,15 @@ msgstr ""
 msgid "Total Price"
 msgstr ""
 
-#: templates/advanced-product/archive/price.php:66
+#: templates/advanced-product/archive/price.php:64
 msgid "MSRP: "
 msgstr ""
 
-#: templates/advanced-product/archive/price.php:100
+#: templates/advanced-product/archive/price.php:98
 msgid "Rental price"
 msgstr ""
 
-#: templates/advanced-product/archive/price.php:110
+#: templates/advanced-product/archive/price.php:108
 msgid " / "
 msgstr ""
 
@@ -11848,7 +11827,7 @@ msgstr ""
 
 #: templates/advanced-product/single/group-fields-content-style2.php:47
 #: templates/advanced-product/single/group-fields-content-style4.php:46
-#: templates/advanced-product/single/group-fields-content.php:57
+#: templates/advanced-product/single/group-fields-content.php:59
 msgid "Leave a Comment"
 msgstr ""
 
