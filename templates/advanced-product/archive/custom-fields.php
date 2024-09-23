@@ -51,14 +51,14 @@ if(!empty($fields)){
             <span>
             <?php
             if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
-                echo '<span class="ap-style1-icon">';
+                echo '<span class="ap-style1-icon" title="'.$f_attr['label'].'">';
                 if($f_icon['type'] == 'uikit-icon'){
                 ?>
                     <i data-uk-icon="icon:<?php echo esc_attr($f_icon['icon']); ?>;"></i>
                     <?php
                     }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
                         echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
-                            array('data-uk-svg' => ''));
+                            array('data-uk-svg' => '', 'alt' => $f_attr['label']));
                     }elseif(!empty($f_icon['icon'])){
                     ?>
                     <i class="<?php echo esc_attr($f_icon['icon']); ?>"></i>
@@ -83,6 +83,8 @@ if(!empty($fields)){
                     if($f_attr['append']){
                         ?><span class="custom-field-append"><?php echo esc_html($f_attr['append']);?></span> <?php
                     }
+                }elseif($f_attr['type'] == 'true_false'){
+
                 }else{
                     echo esc_html($f_value);
                 }

@@ -88,5 +88,4 @@ if(empty($ap_content_group)){
     }
 }
 $ap_content_group[]='pricing';
-
 ?>

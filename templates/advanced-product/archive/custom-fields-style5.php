@@ -57,7 +57,12 @@ if(!empty($fields)){
                         ?> </span>
                         <?php
                     }
-                    echo esc_html($f_attr['label']); esc_html_e(': ','templaza-framework')?></span>
+                    if($f_attr['type'] == 'true_false'){
+                        echo esc_html($f_attr['label']);
+                    }else{
+                        echo esc_html($f_attr['label']); esc_html_e(': ','templaza-framework');
+                    }
+                    ?></span>
                 <span class="ap-spec-value"><?php
                     $html   = apply_filters('advanced-product/field/value_html/type='.$f_attr['type'], '', $f_value, $f_attr, $field);
                     if(!empty($html)){
@@ -76,7 +81,10 @@ if(!empty($fields)){
                             if($f_attr['append']){
                                 ?><span class="custom-field-append"><?php echo esc_html($f_attr['append']);?></span> <?php
                             }
-                        }else{
+                        }elseif($f_attr['type'] == 'true_false'){
+
+                        }
+                        else{
                             echo esc_html($f_value);
                         }
                     }

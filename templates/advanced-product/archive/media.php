@@ -30,7 +30,7 @@ if($thumbnail_eff == 'ripple'){
 
 ?>
 <div class="uk-card-media-top uk-position-relative uk-width-1-1 uk-transition-toggle <?php echo esc_attr($thumb_class_eff);?>">
-    <a class="uk-display-block" href="<?php the_permalink(); ?>">
+    <a class="tz-img uk-display-block" href="<?php the_permalink(); ?>">
         <?php the_post_thumbnail($thumbnail);?>
         <?php
         if($thumbnail_eff == 'ripple'){
