@@ -73,6 +73,8 @@ class TemPlazaFrameWork{
         add_action( 'after_setup_theme', array($this, 'create_post_default') );
 
         do_action( 'templaza-framework/plugin/hooks', $this );
+        add_filter('user_contactmethods', array($this, 'templaza_modify_contact_methods'));
+        add_filter('upload_mimes', array($this, 'templaza_mime_types'));
     }
 
     public function wp_head(){
@@ -761,6 +763,27 @@ class TemPlazaFrameWork{
                 }
             }
         }
+    }
+    public function templaza_modify_contact_methods($profile_fields)
+    {
+        $profile_fields['phone'] = esc_html__('Phone','templaza-framework');
+        $profile_fields['job'] = esc_html__('Job','templaza-framework');
+        $profile_fields['facebook'] = esc_html__('Facebook URL','templaza-framework');
+        $profile_fields['twitter'] = esc_html__('Twitter URL','templaza-framework');
+        $profile_fields['instagram'] = esc_html__('Instagram URL','templaza-framework');
+        $profile_fields['dribbble'] = esc_html__('Dribbble URL','templaza-framework');
+        $profile_fields['linkedin'] = esc_html__('Linkedin URL','templaza-framework');
+        $profile_fields['pinterest'] = esc_html__('Pinterest URL','templaza-framework');
+        $profile_fields['youtube'] = esc_html__('Youtube URL','templaza-framework');
+        $profile_fields['vimeo'] = esc_html__('Vimeo URL','templaza-framework');
+        $profile_fields['flickr'] = esc_html__('Flickr URL','templaza-framework');
+        $profile_fields['tumblr'] = esc_html__('Tumblr URL','templaza-framework');
+        $profile_fields['whatsapp'] = esc_html__('WhatsApp URL','templaza-framework');
+        return $profile_fields;
+    }
+    public function templaza_mime_types( $mimes ){
+        $mimes['svg'] = 'image/svg+xml';
+        return $mimes;
     }
 
     protected function load_template(){

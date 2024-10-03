@@ -45,7 +45,7 @@ if(!empty($fields)){
                 ?>
                 <span class="ap-spec-value">
                     <?php
-                    if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
+                    if((!empty($f_icon['icon']) || !empty($f_icon_image)) && $show_icon){
                         echo '<span class="ap-style2-icon">';
                         if($f_icon['type'] == 'uikit-icon'){
                             ?>

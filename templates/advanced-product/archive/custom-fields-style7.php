@@ -40,7 +40,7 @@ if(!empty($fields)){
             ?>
             <div class="ap-spec-item uk-flex uk-flex-left" >
                 <?php
-                if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
+                if((!empty($f_icon['icon']) || !empty($f_icon_image)) && $show_icon){
                     echo '<div class="uk-width-auto ap-style7-icon">';
                     if($f_icon['type'] == 'uikit-icon'){
                         ?>

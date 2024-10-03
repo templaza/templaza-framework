@@ -156,7 +156,7 @@ if(!empty($ap_gallery)){
     document.addEventListener('DOMContentLoaded', function(event) {
         var slider = tns({
             container: '.ap-tiny-slider',
-            items: <?php echo esc_attr($ap_slider_number);?>,
+            items: 1,
             mode: '<?php echo esc_attr($ap_tiny_mode);?>',
             <?php if($ap_tiny_thumb){ ?>
             navContainer: '.tz-ap-thumbnails',
@@ -174,6 +174,11 @@ if(!empty($ap_gallery)){
             <?php } ?>
             loop: true,
             controlsContainer:'.tz-slideshow-control',
+            responsive: {
+                960: {
+                    items: <?php echo esc_attr($ap_slider_number);?>,
+                },
+            }
 
         });
         <?php if($ap_tiny_thumb){ ?>

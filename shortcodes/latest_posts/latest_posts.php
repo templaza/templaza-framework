@@ -53,6 +53,17 @@ if(!class_exists('TemplazaFramework_ShortCode_Latest_Posts')){
                     )
                 ),
                 array(
+                    'id'       => 'latest_post_layout',
+                    'type'     => 'select',
+                    'title'    => esc_html__('Layout display', 'templaza-framework'),
+                    'options'  => array(
+                        '' => esc_html__('Default', 'templaza-framework'),
+                        'archive' => esc_html__('Archive', 'templaza-framework'),
+                    ),
+                    'default'  => '',
+                    'required' => array('latest_post_type', '=' , 'ap_product')
+                ),
+                array(
                     'id'       => 'latest_post_order_by',
                     'type'     => 'select',
                     'title'    => esc_html__('Order By', 'templaza-framework'),
@@ -103,6 +114,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Latest_Posts')){
                         'uk-transition-scale-up' => esc_html__('Scale Up', 'templaza-framework'),
                         'uk-transition-scale-down' => esc_html__('Scale Down', 'templaza-framework'),
                         'ripple' => esc_html__('Ripple', 'templaza-framework'),
+                        'zoomin-roof' => esc_html__('Zoom in roof', 'templaza-framework'),
                     ),
                     'default'  => '3',
                 ),

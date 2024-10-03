@@ -50,7 +50,7 @@ if(!empty($fields)){
         <div class="ap-spec-item uk-display-inline-block" >
             <span>
             <?php
-            if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
+            if((!empty($f_icon['icon']) || !empty($f_icon_image)) && $show_icon){
                 echo '<span class="ap-style1-icon" title="'.$f_attr['label'].'">';
                 if($f_icon['type'] == 'uikit-icon'){
                 ?>
