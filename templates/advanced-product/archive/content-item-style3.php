@@ -12,6 +12,11 @@ $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:tr
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
 $pid            = get_the_ID();
 $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
+
+$show_quickview_button= get_field('ap_show_archive_quickview_button', 'option');
+$show_quickview_button= $show_quickview_button!==false?(bool)$show_quickview_button:true;
+$show_quickview_button= isset($args['show_archive_quickview_button'])?(bool)$args['show_archive_quickview_button']:$show_quickview_button;
+
 if(isset($args['ap_class'])){
     $ap_class = $args['ap_class'];
 }else{
@@ -32,11 +37,13 @@ if(isset($args['ap_class'])){
                     </span>
                 </div>
                 <div class="ap-button-info uk-flex uk-flex-between">
+                    <?php if($show_quickview_button) { ?>
                     <span class="ap-button ap-button-quickview" data-ap-quickview-button="<?php echo $pid?$pid:'';
                     ?>" data-uk-tooltip="<?php echo esc_attr__('Quick View', 'templaza-framework'); ?>">
                         <i class="fas fa-eye"></i>
                     </span>
                     <?php
+                    }
                     ob_start();
                     do_action('advanced-product/archive/compare/action', get_the_ID(), $args);
                     $action_html    = ob_get_contents();
