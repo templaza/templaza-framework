@@ -34,7 +34,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
                 $app -> enqueue_message(sprintf(esc_html__(
                     'Theme %1$s not Activated! To install any of the demo content sites below you must <a href="%2$s">Activate theme</a>',
                     'templaza-framework'), esc_html(wp_get_theme()->get('Name')),
-                    esc_url(admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK)) ), 'message');
+                    esc_url(admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK.'#tzinst-license')) ), 'message');
             }
 
 //            $this -> imported_key   = '_'.TEMPLAZA_FRAMEWORK.'_'.$this -> theme_name.'__demo_imported';
