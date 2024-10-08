@@ -45,7 +45,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             if(!HelperLicense::is_authorised($this -> theme_name)){
                 $app    = Application::get_instance();
                 /* translators: %s - Activated. */
-                $app -> enqueue_message(sprintf(esc_html__(
+                $app -> enqueue_message(sprintf(__(
                     'Theme %1$s not Activated! To install any of the demo content sites below you must <a href="%2$s">Activate theme</a>',
                     'templaza-framework'), esc_html(wp_get_theme()->get('Name')),
                     esc_url(admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK.'#tzinst-license')) ), 'message');
