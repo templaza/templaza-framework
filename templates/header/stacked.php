@@ -226,7 +226,7 @@ if ($mode == 'left') {
     <div class="uk-width-expand@m uk-visible@m templaza-stacked-left-right">
         <?php
         if($block_1_type !='blank' || $block_2_type !='blank'){
-            echo '<div class="templaza-stacked-left-top uk-grid-collapse uk-flex uk-flex-middle templaza-stacked-top-section" data-uk-grid>';
+            echo '<div class="templaza-stacked-left-top uk-width-1-1 uk-grid-collapse uk-flex uk-flex-middle templaza-stacked-top-section" data-uk-grid>';
         }
         if ($block_1_type != 'blank'): ?>
             <div class=" uk-text-left uk-visible@m uk-width-auto@m">

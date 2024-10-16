@@ -435,8 +435,25 @@ class TemPlazaFrameWork{
         if(class_exists( 'Advanced_Product\Advanced_Product' )){
             $this -> advanced_enqueue_scripts();
         }
+        $cursor_enable   = isset($options['enable-cursor-effects'])?filter_var($options['enable-cursor-effects'], FILTER_VALIDATE_BOOLEAN):false;
+        $cursor_eff   = isset($options['cursor-effects'])?$options['cursor-effects']:'';
+        if($cursor_enable){
+            $this -> effect_enqueue_scripts($cursor_eff);
+        }
 
         do_action('templaza-framework/plugin/enqueue_scripts', $this);
+    }
+    protected function effect_enqueue_scripts($cursor_eff){
+        wp_enqueue_script( 'gsap-js', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', array(), false, true );
+        // ScrollTrigger - with gsap.js passed as a dependency
+        wp_enqueue_script( 'gsap-st', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array('gsap-js'), false, true );
+
+        wp_register_style( 'templaza-cursor-'.$cursor_eff.'-style', Functions::get_my_url() . '/assets/css/cursor-effect/cursor-'.$cursor_eff.'.css', array(),TEMPLAZA_FRAMEWORK_VERSION );
+        wp_enqueue_style('templaza-cursor-'.$cursor_eff.'-style');
+
+        wp_register_script( 'templaza-cursor-'.$cursor_eff.'-script', Functions::get_my_url() . '/assets/js/cursor-effect/cursor-'.$cursor_eff.'.js', array('jquery'),TEMPLAZA_FRAMEWORK_VERSION,true );
+        wp_enqueue_script( 'templaza-cursor-'.$cursor_eff.'-script');
+
     }
     protected function advanced_enqueue_scripts(){
         wp_register_style( 'templaza-tiny-slider-style', Functions::get_my_url() . '/assets/css/tiny-slider.css', array(),TEMPLAZA_FRAMEWORK_VERSION );

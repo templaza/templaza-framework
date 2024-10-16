@@ -233,12 +233,11 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
             if(HelperLicense::has_expired($this -> theme_name)){
                 /* translators: %s - Welcome. */
                 $authMsg    = '<strong>'.sprintf(__('Welcome to %s', 'templaza-framework'),  esc_html(wp_get_theme()->get('Name'))).'</strong>';
-                $authMsg   .= __(' - Your license under this domain is invalid. Please reactivate your license to verify your domain again.', 'templaza-framework');
+                $authMsg   .= __(' - Your license support expired. Please extend the support or renew your license for the domain. ', 'templaza-framework');
                 if($themeConfig = $this -> theme_config_registered){
                     if(isset($themeConfig['envato_url']) && $themeConfig['envato_url']){
                         $authMsg    .= ' <a href="'.$themeConfig['envato_url'].'" target="_blank" rel="nofollow">';
                     }
-                    $authMsg    .= __('Or purchase a new license for your domain', 'templaza-framework');
                     if(isset($themeConfig['envato_url']) && $themeConfig['envato_url']){
                         $authMsg    .= '</a>';
                     }

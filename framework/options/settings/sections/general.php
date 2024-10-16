@@ -334,6 +334,63 @@ Templaza_API::set_section('settings',
         )
     )
 );
+// -> START Smooth Scroll
+Templaza_API::set_section('settings',
+    array(
+        'id'         => 'cursor-effects-settings',
+        'title'     => esc_html__('Cursor Effects','templaza-framework'),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'enable-cursor-effects',
+                'type'     => 'switch',
+                'title'    => __( 'Enable Cursor Effect', 'templaza-framework' ),
+                'default'  => '1',
+            ),
+            array(
+                'id'       => 'cursor-effects',
+                'type'     => 'select',
+                'title'    => __( 'Select Effect', 'templaza-framework' ),
+                'options'  => array(
+                    'effect1'  => __('Effect 1', 'templaza-framework'),
+                    'effect2'  => __('Effect 2', 'templaza-framework'),
+                    'effect3'  => __('Effect 3', 'templaza-framework'),
+                    'effect4'  => __('Effect 4', 'templaza-framework'),
+                    'effect5'  => __('Effect 5', 'templaza-framework'),
+                    'effect6'  => __('Effect 6', 'templaza-framework'),
+                    'effect7'  => __('Effect 7', 'templaza-framework'),
+                ),
+                'default'  => 'circle',
+                'select2'  => array('allowClear' => false),
+                'required' => array('enable-cursor-effects','=','1'),
+            ),
+            array(
+                'id'       => 'cursor-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Cursor Color', 'templaza-framework' ),
+                'required' => array('enable-cursor-effects','=','1'),
+            ),
+            array(
+                'id'       => 'cursor-color-2',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Cursor Border Color', 'templaza-framework' ),
+                'required' => array('cursor-effects','=','effect2'),
+            ),
+            array(
+                'id'       => 'cursor-color-width',
+                'type'     => 'slider',
+                'title'    => __( 'Cursor Border width', 'templaza-framework' ),
+                'min'      => '0',
+                'step'      => .1,
+                'max'      => '500',
+                'default'  => '1',
+                'resolution' => 0.1,
+                'display_value' => 'text',
+                'required' => array('cursor-effects','=',array('effect2','effect3','effect4','effect7')),
+            ),
+        )
+    )
+);
 
 // -> START Header
 Templaza_API::set_section('settings',

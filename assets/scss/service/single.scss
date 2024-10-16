@@ -1,8 +1,5 @@
 .templaza-single-service{
   .single-box{
-    background:$tz-basic-single-content_bg;
-    padding:$tz-basic-single-content_padding;
-    @include border-radius($tz-basic-blog-list-radius);
     &:not(:first-child){
       margin-top:40px;
     }
@@ -12,23 +9,19 @@
     .title{
       position:relative;
       a{
-        font-family: $tz-basic-heading-font;
-        font-weight: $tz-basic-heading-h3-weight;
+        font-family: $tztheme-heading-font;
         font-size:18px;
-        background:$tz-basic-body-background;
-        @include transition($tz-basic-transition);
         padding:20px 30px;
-        @include border-radius($tz-basic-button-radius);
-        color:$tz-basic-heading-color;
+        @include border-radius($tztheme-button_radius);
         &:hover{
-          background: $tz-basic-theme-color;
-          color:$tz-basic-button-color-hover;
+          background: $tztheme-global-color;
+          color:$tztheme-button_text_color_hover;
         }
       }
       &.uk-active{
         a{
-          background: $tz-basic-theme-color;
-          color:$tz-basic-button-color-hover;
+          background: $tztheme-global-color;
+          color:$tztheme-button_text_color_hover;
         }
       }
       i{
