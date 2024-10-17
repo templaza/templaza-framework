@@ -772,7 +772,7 @@ class TemPlazaFrameWork{
                     require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
                     require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
 //                    mkdir($dest_file, \FS_CHMOD_DIR, true);
-                    WP_Filesystem_Direct::mkdir($dest_file,755);
+                    \WP_Filesystem_Direct::mkdir($dest_file,755);
                 }
                 $dest_file     .= '/'.$postdata['post_name'].'.json';
                 if(file_exists($source_file) && !file_exists($dest_file)){
