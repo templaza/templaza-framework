@@ -30,6 +30,7 @@ $dropdown_animation_effect  = isset($options['dropdown-animation-effect'])?$opti
 $dropdown_animation_effect  = $dropdown_animation_type === 'none'?'':$dropdown_animation_effect;
 $dropdown_trigger           = isset($options['dropdown-trigger'])?$options['dropdown-trigger']:'hover';
 $header_item_align           = isset($options['header-menu-item-align'])?$options['header-menu-item-align']:'default';
+$header_item_text_align           = isset($options['header-menu-item-text-align'])?$options['header-menu-item-text-align']:'left';
 if($header_item_align == 'justify'){
     $navClass = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-flex-center', 'uk-flex-middle', 'uk-flex-between menu-justify'];
     $navClassLeft = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-flex-left', 'uk-flex-top', 'uk-padding-remove-left', 'uk-flex-between menu-justify'];
@@ -590,24 +591,28 @@ if ($mode == 'left') {
                     'container_class' => implode(' ', $navWrapperClass),
                     'menu_id'         => '',
                     'depth'           => $header_menu_level, // Level
+                    'menu_item_cl'           => 'menu-'.$header_item_text_align.'',
                     'templaza_is_header'          => true,
                     'templaza_megamenu_html_data' => $menu_datas
                 ));
                 ?>
                 <?php
                 echo '</div>';
-                if ($enable_offcanvas) {
+                if ($enable_offcanvas || $header_stack_cart || $header_stack_account || $header_stack_search) {
                     ?>
                     <div class="uk-flex uk-flex-right uk-flex-middle">
-                        <div class="header-offcanvas-trigger burger-menu-button <?php
-                        echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
-                        echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
-                            <button type="button" class="button">
-                       <span class="box">
-                          <span class="inner"></span>
-                       </span>
-                            </button>
-                        </div>
+                        <?php Templates::load_my_layout('inc.icon',true,false); ?>
+                        <?php if ($enable_offcanvas) { ?>
+                            <div class="header-offcanvas-trigger uk-position-relative burger-menu-button <?php
+                            echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
+                            echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
+                                <button type="button" class="button">
+                                   <span class="box">
+                                      <span class="inner"></span>
+                                   </span>
+                                </button>
+                            </div>
+                        <?php } ?>
                     </div>
                     <?php
                 }

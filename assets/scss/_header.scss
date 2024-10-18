@@ -179,6 +179,38 @@
       align-items:center;
     }
   }
+  &.templaza-stacked-seperated-header{
+    .menu-justify{
+      .menu-item{
+        text-align:left;
+        padding:0;
+        &.menu-center{
+          >a{
+            &.item-level-1{
+              text-align:center;
+            }
+          }
+        }
+        &.menu-left{
+          >a{
+            &.item-level-1{
+              text-align:left;
+            }
+          }
+        }
+        &.menu-right{
+          >a{
+            &.item-level-1{
+              text-align:right;
+            }
+          }
+        }
+      }
+      .menu-item-logo{
+        width:100%;
+      }
+    }
+  }
 }
 .templaza-logo-text{
   .site-title{

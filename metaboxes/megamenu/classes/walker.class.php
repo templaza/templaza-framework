@@ -131,8 +131,6 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                     $style .= 'width:' . $width . ';';
                 }
 
-//                $output .= '<div class="' . $class_names . '"' . (!empty($style) ? ' style="' . $style . '"' : '') . '><div class="container">';
-
                 $attributes = array(
                     'class' => $class_names,
                     'style' => $style
@@ -148,7 +146,6 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                 $attributes_container   = $this -> generate_attribute($attributes_container);
 
                 $output .= '<div'.$attributes.'>';
-//                $output .= '<div'.$attributes.'><div'.$attributes_container.'>';
             }
         }
 
@@ -170,7 +167,6 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
 
         protected function end_my_lvl(&$output, $item, $depth, $args){
             $output .= '</div>';
-//            $output .= '</div></div>';
         }
 
         /**
@@ -217,20 +213,6 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                 }
             }
 
-//            $hide_text  = isset($settings['hide_text'])?filter_var($settings['hide_text'], FILTER_VALIDATE_BOOLEAN):false;
-//            if (!$hide_text) {
-//                $highlight_style    = '';
-//                if(isset($settings['highlight_text_color']) && !empty($settings['highlight_text_color'])){
-//                    $highlight_style    .= 'color:'.$settings['highlight_text_color'].';';
-//                }
-//                if(isset($settings['highlight_text_bg_color']) && !empty($settings['highlight_text_bg_color'])){
-//                    $highlight_style    .= 'background-color:'.$settings['highlight_text_bg_color'].';';
-//                }
-//                if(!empty($highlight_style)){
-//                    Templates::add_inline_style('.menu-item-'.$item -> ID.' > a > .menu-highlight-label{'.$highlight_style.'}');
-//                }
-//            }
-
             if(isset($settings['background']) && !empty($settings['background'])){
                 Templates::add_inline_style('.menu-item-'.$item -> ID.' > .sub-menu{'.CSS::background_redux($settings['background'], true).'}');
             }
@@ -243,7 +225,6 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                     $classes[]  = $has_mega_class;
                     $id         = "megamenu-item-{$item->ID}";
                 }else{
-//                    $classes[]  = 'menu-item-' . $item->ID;
                     $id         = "megamenu-{$item->ID}";
                 }
             }
@@ -301,14 +282,6 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                 $atts['class']  .= ' has-children';
             }
 
-//            $attributes = '';
-//
-//            foreach ($atts as $attr => $value) {
-//                if (strlen($value)) {
-//                    $value = ('href' === $attr) ? esc_url($value) : esc_attr($value);
-//                    $attributes .= ' ' . $attr . '="' . $value . '"';
-//                }
-//            }
 
             $item_output    = '';
             if ($item->type != $this->my_menu_type) {
