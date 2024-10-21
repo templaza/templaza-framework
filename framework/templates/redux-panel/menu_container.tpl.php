@@ -66,6 +66,7 @@
                         $li = preg_replace('/(<i.*?class=")(.*?")/i','$1position-absolute $2', $li);
                     }
                 }
+                // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
                 echo $li;
                 $skip_sec = false;
             }

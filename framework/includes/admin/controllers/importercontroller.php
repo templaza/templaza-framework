@@ -34,7 +34,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
         public function __construct(array $config = array())
         {
             parent::__construct($config);
-
+            // phpcs:disable  WordPress.Security.NonceVerification.Missing
             if(isset($_POST['action']) && $_POST['action'] == 'tzinst_import_demo_data'
                 && !defined('WP_LOAD_IMPORTERS')) {
                 define('WP_LOAD_IMPORTERS', true);
@@ -44,10 +44,11 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
             if(!HelperLicense::is_authorised($this -> theme_name)){
                 $app    = Application::get_instance();
+                /* translators: %s - Activated. */
                 $app -> enqueue_message(sprintf(__(
-                    'Theme %s not Activated! To install any of the demo content sites below you must <a href="%s">Activate theme</a>',
-                    'templaza-framework'), wp_get_theme()->get('Name'),
-                    admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK) ), 'message');
+                    'Theme %1$s not Activated! To install any of the demo content sites below you must <a href="%2$s">Activate theme</a>',
+                    'templaza-framework'), esc_html(wp_get_theme()->get('Name')),
+                    esc_url(admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK.'#tzinst-license')) ), 'message');
             }
 
             $this -> imported_key   = '_'.TEMPLAZA_FRAMEWORK.'_'.$this -> theme_name.'__demo_imported';
@@ -132,18 +133,19 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                     'has_notices'   => true,
                     'is_automatic'  => true,
                     'strings'       => array(
-                        'updating'              => __( 'Updating Plugin: %s', 'templaza-framework' ),
-                        'plugin_updated'      => _n_noop( 'Plugin "%s" updated successfully.',
-                            'Plugins "%s" updated successfully.', 'templaza-framework' ),
-                        'plugin_activated'      => _n_noop( 'Plugin "%s" activated successfully.',
-                            'Plugins "%s" activated successfully.', 'templaza-framework' ),
+                        /* translators: %s - Plugin. */
+                        'updating'              => __( 'Updating Plugin: %s', 'templaza-framework' ),/* translators: %s - Plugin. */
+                        'plugin_updated'      => _n_noop( 'Plugin "%s" updated successfully.',/* translators: %s - Plugin. */
+                            'Plugins "%s" updated successfully.', 'templaza-framework' ),/* translators: %s - Plugin. */
+                        'plugin_activated'      => _n_noop( 'Plugin "%s" activated successfully.',/* translators: %s - Plugin. */
+                            'Plugins "%s" activated successfully.', 'templaza-framework' ),/* translators: %s - Plugin. */
                         'plugin_update_error'   => _n_noop('Can not update plugin "%s". Please check it again!',
-                            'Can not update plugins "%s". Please check it again!', 'templaza-framework'),
-                        'plugin_install_error'  => _n_noop('Can not install plugin "%s". Please check it again!',
-                            'Can not install plugins "%s". Please check it again!', 'templaza-framework'),
-                        'plugin_activate_error' => _n_noop( 'Can not activate plugin "%s".',
-                            'Can not activate plugins "%s".', 'templaza-framework' ),
-                        'complete'              => __( 'All plugins installed and activated successfully. %1$s',  'templaza-framework' ),
+                            'Can not update plugins "%s". Please check it again!', 'templaza-framework'),/* translators: %s - Plugin. */
+                        'plugin_install_error'  => _n_noop('Can not install plugin "%s". Please check it again!',/* translators: %s - Plugin. */
+                            'Can not install plugins "%s". Please check it again!', 'templaza-framework'),/* translators: %s - Plugin. */
+                        'plugin_activate_error' => _n_noop( 'Can not activate plugin "%s".',/* translators: %s - Plugin. */
+                            'Can not activate plugins "%s".', 'templaza-framework' ),/* translators: %s - Plugin. */
+                        'complete'              => __( 'All plugins installed and activated successfully. %1$s',  'templaza-framework' ),/* translators: %s - Plugin. */
                     )
                 );
                 if(isset($_GET['tgmpa-update']) && 'update-plugin' === $_GET['tgmpa-update']){
@@ -296,7 +298,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
         public function ajax_import_demo_data(){
             if ( current_user_can( 'switch_themes' ) ) {
-
+                // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
                 check_admin_referer( TEMPLAZA_FRAMEWORK_NAME.'-demo-ajax','security');
 
 //                if ( function_exists( 'ini_get' ) ) {
@@ -339,6 +341,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
                 \WP_Filesystem();
                 global $wp_filesystem;
+                // phpcs:disable WordPress.WP.AlternativeFunctions.unlink_unlink, WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 
                 $upgrade_folder = $wp_filesystem-> wp_content_dir() . 'uploads/tzinst-demo-datas';
 
@@ -372,7 +375,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                     );
 
                     if(is_wp_error($response)){
-                        $this -> info -> set_message(esc_html__($response -> get_error_message()), true);
+                        $this -> info -> set_message(esc_html($response -> get_error_message()), true);
                     }else{
                         $header = $response['headers']; // array of http header lines
                         $body = $response['body']; // use the content
@@ -380,7 +383,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                         if($header['content-type'] == 'application/json'){
                             $body   = json_decode($body);
                             if($body -> code == 400 && $body -> success == false){
-                                $this -> info -> set_message(__($body -> message), true);
+                                $this -> info -> set_message(esc_html($body -> message), true);
                                 echo $this -> info -> output(true);
                                 die();
                             }
@@ -396,8 +399,9 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                         $total_files_part   = (isset($header['files-part-count']) && $header['files-part-count'])?(int)$header['files-part-count']:1;
 
                         if($total_files_part > 1 && $step < $total_files_part){
+                            /* translators: %s - Download. */
                             $this -> info -> set_message(sprintf(esc_html__('Download file part %d completed',
-                                'templaza-framework'), $step), false);
+                                'templaza-framework'), esc_html($step)), false);
                         }else {
                             $folder_path = $upgrade_folder . '/' . $produce . '_' . $pack_type;
                             unzip_file($filePath, $folder_path);
@@ -527,6 +531,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                         update_option('show_on_front', 'page');
                                         update_option('page_on_front',  $homepage->ID); // Front Page
                                     }
+
                                 }
 
                                 // Set location for menu
@@ -586,8 +591,9 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                     update_option($this->imported_key, $options);
                                 }
                                 else{
+                                    /* translators: %s - Imported. */
                                     $this->info->set_message(sprintf(esc_html__('Imported %s successfully.',
-                                        'templaza-framework'), $demo_title), false);
+                                        'templaza-framework'), esc_html($demo_title)), false);
                                 }
 
                             }
@@ -596,16 +602,18 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                 if(isset($next_step['substeps']) && !empty($next_step['substeps'])) {
                                     $substeps   = $next_step['substeps'];
                                     $cur_substep    = array_shift($substeps);
+                                    /* translators: %s - Imported. */
                                     $this->info->set_message(sprintf(esc_html__('Imported substep: %s successfully.',
-                                        'templaza-framework'), $cur_substep), false);
+                                        'templaza-framework'), esc_html($cur_substep)), false);
                                 }else{
+                                    /* translators: %s - Imported. */
                                     $this->info->set_message(sprintf(esc_html__('Imported %s successfully.',
-                                        'templaza-framework'), $demo_title), false);
+                                        'templaza-framework'), esc_html($demo_title)), false);
                                 }
                             }
                         }catch (\Exception $e){
-                            $this -> info -> set_message(esc_html__('Error: '.$e -> getCode().' '
-                                .$e -> getMessage(), 'templaza-framework'), true);
+                            $this -> info -> set_message(esc_html__('Error: ','templaza-framework').$e -> getCode().' '
+                                .$e -> getMessage(), true);
                         }
                     }
                     else{
@@ -719,9 +727,9 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 if(!$_file){
                     $demo_title = isset($_POST['demo_title'])?$_POST['demo_title']:'';
                     $demo_title = !empty($demo_title)?$demo_title:$_POST['pack_type'];
-
+                    /* translators: %s - Not found. */
                     $this -> info -> set_message(sprintf(esc_html__('Not found compatible files of "%s". Please contact us to support it.',
-                        'templaza-framework'), $demo_title), true);
+                        'templaza-framework'), esc_html($demo_title)), true);
                     echo $this -> info -> output(true);
                     die();
                 }
@@ -755,6 +763,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                         'private',
                         'import-content'
                     );
+                    // phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 
                     $post_import_id   = (int) $wpdb->get_var( $wpdb->prepare( $query, $args ) );
 
@@ -789,8 +798,8 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                         $nextstep['import_id']  = $post_import_id;
 
                         $this->info->set('nextstep', $nextstep);
-
-                        $this->info->set_message(sprintf(esc_html__('Start Import %s.', 'templaza-framework'), $nextstep['demo_title']), false);
+                        /* translators: %s - Not found. */
+                        $this->info->set_message(sprintf(esc_html__('Start Import %s.', 'templaza-framework'), esc_html($nextstep['demo_title'])), false);
 
                         echo $this->info->output(true);
                         die();
@@ -830,8 +839,8 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                     $nextstep = $this-> info -> get('nextstep');
 
                     if(isset($nextstep['substeps']) && !empty($nextstep['substeps'])) {
-
-                        $this->info->set_message(sprintf(esc_html__('Imported %s successfully', 'templaza-framework'), $_file), false);
+                        /* translators: %s - Imported. */
+                        $this->info->set_message(sprintf(esc_html__('Imported %s successfully', 'templaza-framework'), esc_html($_file)), false);
 
                         echo $this->info->output(true);
                         die();
@@ -867,6 +876,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
         protected function prepare_image_url_from_file($file){
 //            $pattern = "/((https?|ftp|gopher|telnet|file|notes|ms-help):((\/\/)|(\\\\))+[\w\d:#@%\/;$()~_?\+-=\\\.&]*\.(jpg|jpeg|webp|ico|png|gif|tif|exf|svg|wfm))/ims";
+            // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen, WordPress.WP.AlternativeFunctions.file_system_operations_fread, WordPress.WP.AlternativeFunctions.file_system_operations_fwrite, WordPress.WP.AlternativeFunctions.file_system_operations_fclose
             $pattern = "/(((https?|ftp|gopher|telnet|file|notes|ms-help):((\/\/)|(\\\\))+[\w\d:#@%\/;$()~_?\+-=\\\.&]*)(\/wp-content\\\\\/uploads.*?)\.(jpg|jpeg|webp|ico|png|gif|tif|exf|svg|wfm))/ims";
             $fh = fopen($file, 'r');
 
@@ -908,10 +918,12 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
             }
 
             if($result && $result['success'] == true){
-                $this -> info -> set_message(sprintf(esc_html__('Data %s of Revolution Slider successfully.'), $_filename), false);
+                /* translators: %s - Data. */
+                $this -> info -> set_message(sprintf(esc_html__('Data %s of Revolution Slider successfully.'), esc_html($_filename)), false);
                 return $result['success'];
             }elseif($result && !$result['success'] && isset($result['error'])){
-                $this -> info -> set_message(sprintf(esc_html__('Error import data of Revolution Slider: %s'), $result['error']), true);
+                /* translators: %s - Error. */
+                $this -> info -> set_message(sprintf(esc_html__('Error import data of Revolution Slider: %s'), esc_html($result['error'])), true);
             }
             return false;
         }
@@ -926,6 +938,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 echo $this -> info ->output(true);
                 die();
             }
+            // phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents,
 
             if($file = $this->get_substeps($folder_path, $filename, $file_filter)){
                 list($_filename, $fileExt) = explode('.', $file);
@@ -1009,11 +1022,12 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
             $settings   = file_get_contents($folder_path.'/'.$file);
             $settings   = json_decode($settings);
+            // phpcs:disable WordPress.WP.DeprecatedFunctions.get_page_by_titleFound
 
             foreach ( $settings as $woo_page_name => $woo_page_title ) {
                 $woopage = get_page_by_title( $woo_page_title );
                 if ( isset( $woopage ) && $woopage->ID ) {
-                    update_option( $woo_page_name, $woopage->ID ); // Front Page.
+                    update_option( $woo_page_name, $woopage->ID );
                 }
             }
 

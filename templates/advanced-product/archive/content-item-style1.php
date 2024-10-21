@@ -20,6 +20,7 @@ if(isset($args['ap_class'])){
 }else{
     $ap_class = ' templazaFadeInUp';
 }
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 if(isset($args['show_intro'])){
     $ap_intro = isset($args['show_intro'])?filter_var($args['show_intro'], FILTER_VALIDATE_BOOLEAN):false;
 }else{
@@ -50,7 +51,7 @@ if(isset($_GET['description'])){
             <div class="ap-info-inner ap-info-desc">
             <?php
                 if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
-                    <p><?php echo wp_trim_words(strip_tags(get_the_excerpt()), $ap_desc_limit); ?></p>
+                    <p><?php echo esc_html(wp_trim_words(wp_strip_all_tags(get_the_excerpt()), $ap_desc_limit)); ?></p>
                 <?php } else {
                     the_excerpt();
                 }

@@ -295,6 +295,7 @@ class WXR_Parser_Regex {
 	function fopen( $filename, $mode = 'r' ) {
 		if ( $this->has_gzip )
 			return gzopen( $filename, $mode );
+        // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen
 		return fopen( $filename, $mode );
 	}
 
@@ -311,6 +312,7 @@ class WXR_Parser_Regex {
 	}
 
 	function fclose( $fp ) {
+        // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 		if ( $this->has_gzip )
 			return gzclose( $fp );
 		return fclose( $fp );

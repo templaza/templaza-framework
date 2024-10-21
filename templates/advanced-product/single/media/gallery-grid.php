@@ -7,7 +7,7 @@ $ap_gallery = get_field('ap_gallery', get_the_ID());
 $no_cookie      =   0;
 if (isset($ap_video) && !empty($ap_video)) {
     if (wp_oembed_get($ap_video)) :
-        $video = parse_url($ap_video);
+        $video = wp_parse_url($ap_video);
         $youtube_no_cookie = $no_cookie ? '-nocookie' : '';
         switch($video['host']) {
             case 'youtu.be':
@@ -106,7 +106,7 @@ if(!empty($ap_gallery)){
                             <a class="uk-inline uk-width-1-1 uk-height-1-1" href="<?php echo esc_url($image['url']); ?>" data-caption="<?php echo esc_attr($image['caption']); ?>">
                                 <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['title']); ?>" data-uk-cover>
                                 <canvas width="100%" height="350"></canvas>
-                                <span class="ap-image-color <?php echo esc_attr($bg);?> uk-flex uk-flex-center uk-flex-middle uk-position-top-left uk-width-1-1 uk-height-1-1"><?php esc_html_e('+','templaza-framework'); echo ($total_images-4);esc_html_e(' Photos >','templaza-framework');?></span>
+                                <span class="ap-image-color <?php echo esc_attr($bg);?> uk-flex uk-flex-center uk-flex-middle uk-position-top-left uk-width-1-1 uk-height-1-1"><?php esc_html_e('+','templaza-framework'); echo esc_html($total_images-4);esc_html_e(' Photos >','templaza-framework');?></span>
                             </a>
                         </div>
                     </div>

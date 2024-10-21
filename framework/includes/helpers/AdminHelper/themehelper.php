@@ -73,8 +73,7 @@ if(!class_exists('TemPlazaFramework\AdminHelper\ThemeHelper')) {
 
             if(is_wp_error($response)){
                 if(!$ignore_notice) {
-                    $app->enqueue_message(esc_html__($response->get_error_message(),
-                        'templaza-framework'), 'error');
+                    $app->enqueue_message(esc_html($response->get_error_message()), 'error');
                 }
 
                 return false;
@@ -82,7 +81,7 @@ if(!class_exists('TemPlazaFramework\AdminHelper\ThemeHelper')) {
 
             if(isset($response['response']['code']) && $response['response']['code'] != 200){
                 if(!$ignore_notice) {
-                    $app->enqueue_message(__('Could not connected to our server to get themes list',
+                    $app->enqueue_message(esc_html__('Could not connected to our server to get themes list',
                         'templaza-framework'), 'warning');
                 }
                 return false;

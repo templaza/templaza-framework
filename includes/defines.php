@@ -2,6 +2,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
+if(!defined('TEMPLAZA_FRAMEWORK_VERSION')){
+    define('TEMPLAZA_FRAMEWORK_VERSION', '1.2.0');
+}
 if(!defined('TEMPLAZA_FRAMEWORK_PATH')){
     define('TEMPLAZA_FRAMEWORK_PATH', dirname( dirname(__FILE__)));
 }

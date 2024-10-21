@@ -138,7 +138,7 @@ if ( ! class_exists( 'Redux_TZ_Select_Image', false ) ) {
                 // is mark as selected.  Since the for/each loop starts at one, we must
                 // subtract one from the saved array number.  We then pull the url
                 // out of the options array, and there we go.
-
+                // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
                 if ( '' === $this->value ) {
                     echo '<img src="#" class="redux-preview-image'
                         .(!empty($v['class'])?' '.$v['class']:'').'" style="visibility:hidden;" id="image_'

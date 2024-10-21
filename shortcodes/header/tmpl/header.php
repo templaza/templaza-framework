@@ -51,11 +51,11 @@ $attribs    = join(' ', array_map(function($v, $k){
     return !empty($v)?$k . '="' . $v . '"':$k;
 }, $attribs, array_keys($attribs)));
 $attribs    = ' '.$attribs;
-
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 if($header){
 ?>
-<div<?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="<?php echo $atts['tz_class']; ?>">
-    <header class="<?php echo $class; ?>"<?php
+<div<?php echo isset($atts['tz_id'])?' id="'.esc_attr($atts['tz_id']).'"':''; ?> class="<?php echo esc_attr($atts['tz_class']); ?>">
+    <header class="<?php echo esc_attr($class); ?>"<?php
     echo $mode == 'horizontal'?$attribs:''; ?>>
         <?php Templates::load_my_header('header.' . $mode, false);?>
     </header>

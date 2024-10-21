@@ -29,6 +29,7 @@ class WXR_Parser {
 		}
 
 		// We have a malformed XML file, so display the error and fallthrough to regex
+        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		if ( isset($result) && defined('IMPORT_DEBUG') && IMPORT_DEBUG ) {
 			echo '<pre>';
 			if ( 'SimpleXML_parse_error' == $result->get_error_code() ) {

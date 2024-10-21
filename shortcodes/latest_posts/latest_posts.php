@@ -10,22 +10,6 @@ require_once __DIR__.'/helper.php';
 if(!class_exists('TemplazaFramework_ShortCode_Latest_Posts')){
 	class TemplazaFramework_ShortCode_Latest_Posts extends TemplazaFramework_ShortCode {
 
-//	    public function __construct($field_parent = array(), $value = '', $parent = '')
-//        {
-////            $this -> hooks();
-//            parent::__construct($field_parent, $value, $parent);
-//        }
-//
-//        public function hooks(){
-//	        var_dump(__METHOD__);
-//	        add_action('templaza-framework/shortcode/'.$this -> get_shortcode_name().'/ajax/get_categories', array($this, 'ajax_get_categories'));
-//        }
-//
-//        public function ajax_get_categories(){
-//	        $post_type  = isset($_REQUEST['post_type'])?$_REQUEST['post_type']:'';
-//
-//	        var_dump($post_type); die(__METHOD__);
-//        }
 
         public function register(){
 
@@ -67,6 +51,17 @@ if(!class_exists('TemplazaFramework_ShortCode_Latest_Posts')){
                         0      => esc_html__('Hide', 'templaza-framework'),
                         1      => esc_html__('Featured Only', 'templaza-framework'),
                     )
+                ),
+                array(
+                    'id'       => 'latest_post_layout',
+                    'type'     => 'select',
+                    'title'    => esc_html__('Layout display', 'templaza-framework'),
+                    'options'  => array(
+                        '' => esc_html__('Default', 'templaza-framework'),
+                        'archive' => esc_html__('Archive', 'templaza-framework'),
+                    ),
+                    'default'  => '',
+                    'required' => array('latest_post_type', '=' , 'ap_product')
                 ),
                 array(
                     'id'       => 'latest_post_order_by',
@@ -119,6 +114,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Latest_Posts')){
                         'uk-transition-scale-up' => esc_html__('Scale Up', 'templaza-framework'),
                         'uk-transition-scale-down' => esc_html__('Scale Down', 'templaza-framework'),
                         'ripple' => esc_html__('Ripple', 'templaza-framework'),
+                        'zoomin-roof' => esc_html__('Zoom in roof', 'templaza-framework'),
                     ),
                     'default'  => '3',
                 ),

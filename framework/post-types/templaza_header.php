@@ -19,12 +19,13 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Header')) {
     {
         public function register()
         {
+            // phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralText
             $theme  = $this -> theme;
             $labels = array(
-                'name'               => _x( $theme->get('Name').' Headers', 'templaza-framework', 'templaza-framework' ),
-                'singular_name'      => _x( $theme->get('Name').' Headers', 'templaza-framework', 'templaza-framework' ),
-                'menu_name'          => _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
-                'name_admin_bar'     => _x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                'name'               => esc_attr_x( $theme->get('Name').' Headers', 'templaza-framework', 'templaza-framework' ),
+                'singular_name'      => esc_attr_x( $theme->get('Name').' Headers', 'templaza-framework', 'templaza-framework' ),
+                'menu_name'          => esc_attr_x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
+                'name_admin_bar'     => esc_attr_x( $theme->get('Name').' Options', 'templaza-framework', 'templaza-framework' ),
                 'add_new'            => _x( 'Add New', 'templaza-framework', 'templaza-framework' ),
                 'add_new_item'       => __( 'Add New header', 'templaza-framework'),
                 'new_item'           => __( 'New header', 'templaza-framework' ),
@@ -86,7 +87,7 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Header')) {
                     && $pre_post -> post_name !== $data['post_name']){
                     $old_file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$pre_post -> post_name.'.json';
                     if(file_exists($old_file)){
-                        unlink($old_file);
+                        wp_delete_file($old_file);
                     }
                 }
             }

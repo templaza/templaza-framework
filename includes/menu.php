@@ -14,10 +14,8 @@ class Menu{
             return '';
         }
 
-//        $options    = Functions::get_theme_options();
         $options    = Functions::get_header_options();
 
-//        $header  = isset($options['enable-header'])?(bool) $options['enable-header']:true;
         $mode    = isset($options['header-mode'])?$options['header-mode']:'horizontal';
         $header_stacked_menu_mode   = isset($options['header-stacked-menu-mode'])?$options['header-stacked-menu-mode']:'center';
 
@@ -40,15 +38,19 @@ class Menu{
                 $remember  = array();
                 $root_count  = 0;
                 foreach($items as $i => $item){
+                    $item -> classes[] = '';
                     if($item -> menu_item_parent == 0) {
                         $remember[$item -> ID]    = $i;
                         $root_count++;
+                        if($args->menu_item_cl){
+                            $item -> classes[]= $args->menu_item_cl;
+                        }
                     }
+
                 }
                 $count  = 0;
                 $split  = 0;
                 if($root_count % 2 != 0){
-//                    $options    = Functions::get_theme_options();
                     $options    = Functions::get_header_options();
                     $odd_position   = isset($options['header-odd-menu-items'])?$options['header-odd-menu-items']:'left';
                     if($odd_position == 'right'){
@@ -61,8 +63,10 @@ class Menu{
                             $split  = $j;
                             break;
                         }
+                        $item -> classes[]= ' menu-item-left ';
                         $count++;
                     }
+
                 }
                 $rolling_dummy_id = 999999999;
                 $max_id = (int) max(wp_list_pluck($items, 'db_id'));
@@ -75,7 +79,7 @@ class Menu{
                     'menu_order' => $split+1,
                     'depth' => 0,
                     'classes' => array(
-                        'menu-item-logo'
+                        'uk-flex uk-position-relative uk-flex-center menu-item-logo'
                     ),
                     'ID' => "{$item->ID}-{$i}-{$count}",
                     'db_id' => $rolling_dummy_id,

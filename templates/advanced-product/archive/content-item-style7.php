@@ -47,7 +47,7 @@ if(isset($args['ap_class'])){
                             <div class="ap-info-desc">
                                 <?php
                                 if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
-                                    <p><?php echo wp_trim_words(strip_tags(get_the_excerpt()), $ap_desc_limit); ?></p>
+                                    <p><?php echo esc_html(wp_trim_words(wp_strip_all_tags(get_the_excerpt()), $ap_desc_limit)); ?></p>
                                 <?php } else {
                                     the_excerpt();
                                 }

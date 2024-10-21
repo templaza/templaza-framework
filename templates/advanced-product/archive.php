@@ -12,6 +12,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }else{
     $templaza_options = Functions::get_theme_options();
 }
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 if(isset($_GET['columns'])){
     $ap_col = $ap_col_large = $ap_col_laptop = $_GET['columns'];
 }else{
@@ -82,6 +83,8 @@ if ( have_posts()) {
                                 <option value="title_high"><?php echo esc_html__('Title: Z - A', 'templaza-framework')?></option>
                                 <option value="price_high"><?php echo esc_html__('Price: High To Low', 'templaza-framework')?></option>
                                 <option value="price_low"><?php echo esc_html__('Price: Low To High', 'templaza-framework')?></option>
+                                <option value="price_rental_high"><?php echo esc_html__('Price Rental: High To Low', 'templaza-framework')?></option>
+                                <option value="price_rental_low"><?php echo esc_html__('Price Rental: Low To High', 'templaza-framework')?></option>
                             </select>
                         </div>
                     </div>
@@ -89,7 +92,7 @@ if ( have_posts()) {
                 }
                 if($ap_list_grid){
                     ?>
-                    <div class="ap-switcher-wrap uk-flex uk-flex-right uk-text-right" data-uk-switcher data-ap-archive-view="<?php echo $grid_view;?>">
+                    <div class="ap-switcher-wrap uk-flex uk-flex-right uk-text-right" data-uk-switcher data-ap-archive-view="<?php echo esc_attr($grid_view);?>">
                         <span class="switcher_btn grid<?php echo $grid_view == 'grid'?' uk-active':'';?>" data-uk-icon="grid" data-ap-archive-view-item="grid"></span>
                         <span class="switcher_btn uk-visible@s list<?php echo $grid_view == 'list'?' uk-active':'';?>" data-uk-icon="list" data-ap-archive-view-item="list"></span>
                     </div>

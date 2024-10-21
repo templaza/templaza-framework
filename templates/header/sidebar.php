@@ -35,7 +35,7 @@ $header_menu_level          = isset($options['header-menu-level'])?(int) $option
     </div>
     <?php if (!empty($sidebar_logo) && $sidebar_logo['url']) { ?>
         <div class="templaza-sidebar-collapsed-logo">
-            <img src="<?php echo $sidebar_logo['url']; ?>" alt="<?php echo $blog_title; ?>" class="templaza-logo-sidebar" />
+            <img src="<?php echo esc_url($sidebar_logo['url']); ?>" alt="<?php echo esc_attr($blog_title); ?>" class="templaza-logo-sidebar" />
         </div>
     <?php } ?>
     <div class="templaza-sidebar-logo">
@@ -72,7 +72,7 @@ $header_menu_level          = isset($options['header-menu-level'])?(int) $option
             if ($block_1_type == 'custom')
             {
                 echo '<div class="header-block-item">';
-                echo $block_1_custom;
+                echo wp_kses($block_1_custom,'post');
                 echo '</div>';
             }
             ?>

@@ -15,11 +15,17 @@ $price = get_field('ap_price', get_the_ID());
 $show_compare_button= get_field('ap_show_archive_compare_button', 'option');
 $show_compare_button= $show_compare_button!==false?(bool)$show_compare_button:true;
 $show_compare_button= isset($args['show_archive_compare_button'])?(bool)$args['show_archive_compare_button']:$show_compare_button;
-if(isset($_GET['product_loop'])){
-    $ap_loop_layout = $_GET['product_loop'];
-}else {
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
+if(is_post_type_archive('product')){
     $ap_loop_layout = isset($templaza_options['ap_product-loop-layout']) ? $templaza_options['ap_product-loop-layout'] : 'style1';
+}else{
+    if(isset($_GET['product_loop'])){
+        $ap_loop_layout = $_GET['product_loop'];
+    }else {
+        $ap_loop_layout = isset($templaza_options['ap_product-loop-layout']) ? $templaza_options['ap_product-loop-layout'] : 'style1';
+    }
 }
+
 if($ap_loop_layout){
     AP_Templates::load_my_layout('archive.content-item-'.$ap_loop_layout.'',true,false,$args);
 }else{

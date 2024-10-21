@@ -30,10 +30,11 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
 
             if(!HelperLicense::is_authorised($this -> theme_name)){
                 $app    = Application::get_instance();
+                /* translators: %s - install. */
                 $app -> enqueue_message(sprintf(__(
-                    'Theme %s not Activated! To install any of the demo content sites below you must <a href="%s">Activate theme</a>',
-                    'templaza-framework'), wp_get_theme()->get('Name'),
-                    admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK) ), 'message');
+                    'Theme %1$s not Activated! To install any of the demo content sites below you must <a href="%2$s">Activate theme</a>',
+                    'templaza-framework'), esc_html(wp_get_theme()->get('Name')),
+                    esc_url(admin_url('admin.php?page='.TEMPLAZA_FRAMEWORK.'#tzinst-license')) ), 'message');
             }
 
 //            $this -> imported_key   = '_'.TEMPLAZA_FRAMEWORK.'_'.$this -> theme_name.'__demo_imported';
@@ -56,6 +57,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
             if ( !current_user_can( 'switch_themes' ) ) {
                 return;
             }
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 
             check_admin_referer(TEMPLAZA_FRAMEWORK_NAME . '-theme-install-ajax', 'security');
 
@@ -84,6 +86,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
             $upgrade_folder = $wp_filesystem-> wp_content_dir() . 'uploads/tzinst-theme-install';
 
             $filePath   = $upgrade_folder.'/'.$produce.'_'.$pack.'.zip';
+            // phpcs:disable WordPress.WP.AlternativeFunctions.unlink_unlink
 
             if($step == 1 && file_exists($filePath)){
                 unlink($filePath);
@@ -120,9 +123,9 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
             );
 
             if(is_wp_error($response)){
-                $app -> enqueue_message(esc_html__($response -> get_error_message()), 'error');
+                $app -> enqueue_message($response -> get_error_message(), 'error');
 
-                $this -> info -> set_message(esc_html__($response -> get_error_message()), true);
+                $this -> info -> set_message($response -> get_error_message(), true);
                 $this -> info -> set('redirect', $redirect);
             }else {
 
@@ -132,9 +135,9 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
                 if ($header['content-type'] == 'application/json') {
                     $body = json_decode($body);
                     if ($body->code == 400 && $body->success == false) {
-                        $app -> enqueue_message(__($body->message), 'error');
+                        $app -> enqueue_message(esc_html($body->message), 'error');
 
-                        $this->info->set_message(__($body->message), true);
+                        $this->info->set_message(esc_html($body->message), true);
                         $this -> info -> set('redirect', $redirect);
 
                         echo $this->info->output(true);
@@ -149,11 +152,13 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
                 $total_files_part   = (isset($header['files-part-count']) && $header['files-part-count'])?(int)$header['files-part-count']:1;
 
                 // Put multiple parts of package files to one file
+                // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
                 file_put_contents($filePath, $body, FILE_APPEND);
 
                 if($total_files_part > 1 && $step < $total_files_part){
+                    /* translators: %s - Download. */
                     $this -> info -> set_message(sprintf(esc_html__('Download file part %d completed',
-                        'templaza-framework'), $step), false);
+                        'templaza-framework'), esc_html($step)), false);
 
                     if($total_files_part > 1) {
                         $next_step  = array(
@@ -218,7 +223,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ThemeController')){
         public function enqueue_admin_scripts(){
             wp_enqueue_script('templaza-framework-theme-install',
                 Functions::get_my_frame_url().'/assets/js/theme-install.js',
-                array(), Functions::get_my_version());
+                array(), Functions::get_my_version(), false);
 
             wp_localize_script('templaza-framework-theme-install','tzinst_theme_install',array(
                 'theme_install_nonce' => esc_attr( wp_create_nonce( TEMPLAZA_FRAMEWORK_NAME.'-theme-install-ajax' ) ),

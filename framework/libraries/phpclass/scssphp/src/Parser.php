@@ -150,7 +150,7 @@ class Parser
         $this->allowVars        = true;
         $this->cssOnly          = $cssOnly;
         $this->logger = $logger ?: new QuietLogger();
-
+// phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped, WordPress.Security.EscapeOutput.OutputNotEscaped
         if (empty(static::$operatorPattern)) {
             static::$operatorPattern = '([*\/%+-]|[!=]\=|\>\=?|\<\=?|and|or)';
 

@@ -1,0 +1,27 @@
+
+.cursor {
+	display: none;
+}
+
+
+@media (any-pointer:fine) {
+	.cursor {
+		position: fixed;
+		top: 0;
+		left: 0;
+		display: block;
+		pointer-events: none;
+		z-index: 10000;
+	}
+
+	.cursor__inner {
+		fill: none;
+		stroke: #104ed6;
+		stroke-width: 1px;
+	}
+
+	.no-js .cursor {
+		display: none;
+	}
+
+}

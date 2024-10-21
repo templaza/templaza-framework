@@ -36,6 +36,7 @@ class BinaryStream {
   const modeRead      = "rb";
   const modeWrite     = "wb";
   const modeReadWrite = "rb+";
+  // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fwrite, WordPress.WP.AlternativeFunctions.file_system_operations_fopen, WordPress.WP.AlternativeFunctions.file_system_operations_fclose, WordPress.WP.AlternativeFunctions.file_system_operations_fread
 
   static function backtrace() {
     var_dump(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));

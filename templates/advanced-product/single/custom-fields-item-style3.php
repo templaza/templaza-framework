@@ -51,14 +51,14 @@ if($taxonomy == true){
                                     <?php
                                     if($f_icon['type'] == 'uikit-icon'){
                                         ?>
-                                        <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
+                                        <i data-uk-icon="icon:<?php echo esc_attr($f_icon['icon']); ?>;"></i>
                                         <?php
                                     }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
                                         echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
                                             array('data-uk-svg' => ''));
                                     }elseif(!empty($f_icon['icon'])){
                                         ?>
-                                        <i class="<?php echo $f_icon['icon']; ?>"></i>
+                                        <i class="<?php echo esc_attr($f_icon['icon']); ?>"></i>
                                         <?php
                                     }
                                     ?>

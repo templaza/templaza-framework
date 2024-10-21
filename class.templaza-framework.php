@@ -63,6 +63,7 @@ class TemPlazaFrameWork{
         add_action('wp_footer', array($this, 'wp_footer'), 99999);
 
         add_filter('register_sidebar_defaults', array($this, 'modify_sidebar'), 9999);
+        add_filter('wp_kses_allowed_html', array($this, 'wpkses_post_tags'), 10, 2);
 
         // Register widgets
         add_action( 'widgets_init', array( $this, 'register_widgets' ) );
@@ -72,6 +73,8 @@ class TemPlazaFrameWork{
         add_action( 'after_setup_theme', array($this, 'create_post_default') );
 
         do_action( 'templaza-framework/plugin/hooks', $this );
+        add_filter('user_contactmethods', array($this, 'templaza_modify_contact_methods'));
+        add_filter('upload_mimes', array($this, 'templaza_mime_types'));
     }
 
     public function wp_head(){
@@ -85,17 +88,18 @@ class TemPlazaFrameWork{
         }
 
         if(!empty($favicon_url)) {
-            echo '<link rel="shortcut icon" href="' .$favicon_url. '" />';
+            echo '<link rel="shortcut icon" href="' .esc_url($favicon_url). '" />';
         }
 
         // Add custom css files
+        // phpcs:disable WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet, WordPress.WP.EnqueuedResources.NonEnqueuedScript
         $customcssfiles = isset($options['customcss-files'])?$options['customcss-files']:'';
         $customcssfiles = !empty($customcssfiles)?trim($customcssfiles):$customcssfiles;
         if (!empty($customcssfiles)) {
             $customcssfiles = explode("\n", $customcssfiles);
             foreach ($customcssfiles as $customcssfile) {
                 if (!empty($customcssfile)) {
-                    echo "<link rel=\"stylesheet\" href=\"" .$customcssfile. "\"  type=\"text/css\" media=\"all\" />\n";
+                    echo "<link rel=\"stylesheet\" href=\"" .esc_url($customcssfile). "\"  type=\"text/css\" media=\"all\" />\n";
                 }
             }
         }
@@ -107,11 +111,11 @@ class TemPlazaFrameWork{
             $customjsfiles = explode("\n", $customjsfiles);
             foreach ($customjsfiles as $customjsfile) {
                 if (!empty($customjsfile)) {
-                    echo "<script type=\"text/javascript\" src=\"".$customjsfile."\"></script>\n";
+                    echo "<script type=\"text/javascript\" src=\"".esc_url($customjsfile)."\"></script>\n";
                 }
             }
         }
-
+        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
         // Add tracking code
         $tracking_code  = isset($options['trackingcode-editor'])?$options['trackingcode-editor']:'';
         $tracking_code  = !empty($tracking_code)?trim($tracking_code):$tracking_code;
@@ -285,6 +289,73 @@ class TemPlazaFrameWork{
     }
 
 
+    public function wpkses_post_tags( $tags, $context ) {
+        if ( 'post' === $context ) {
+            $tags['iframe'] = array(
+                'src'             => true,
+                'height'          => true,
+                'width'           => true,
+                'frameborder'     => true,
+                'allowfullscreen' => true,
+                'data-uk-responsive' => true,
+                'data-uk-video' => true,
+            );
+            $tags['form'] = array(
+                'action'         => true,
+                'class'          => true,
+                'id'             => true,
+                'accept'         => true,
+                'accept-charset' => true,
+                'enctype'        => true,
+                'method'         => true,
+                'name'           => true,
+                'data-formid'    => true,
+                'target'         => true,
+                'novalidate'     => true,
+                'data-token'     => true,
+            );
+            $tags['input'] = array(
+                'class' => true,
+                'id'    => true,
+                'name'  => true,
+                'value' => true,
+                'type'  => true,
+                'placeholder'  => true,
+                'step'  => true,
+                'min'  => true,
+                'max'  => true,
+                'title'  => true,
+                'size'  => true,
+                'inputmode'  => true,
+                'autocomplete'  => true,
+                'checked'  => true,
+            );
+            $tags['select'] = array(
+                'class' => true,
+                'id'    => true,
+                'name'  => true,
+                'value' => true,
+                'type'  => true,
+                'placeholder'  => true,
+                'data-placeholder'  => true,
+                'title'  => true,
+                'size'  => true,
+                'data-allow-clear'  => true,
+                'data-name'  => true,
+            );
+            $tags['option'] = array(
+                'class' => true,
+                'id'    => true,
+                'name'  => true,
+                'value' => true,
+                'type'  => true,
+                'data'  => true,
+                'selected'  => true,
+            );
+        }
+
+        return $tags;
+    }
     public function enqueue_scripts(){
         if(!current_theme_supports('templaza-framework')){
             return;
@@ -299,11 +370,11 @@ class TemPlazaFrameWork{
         $preloader_css  = Templates::get_style('preloader', 'preloader');
         $widget_css     = Templates::get_style('widget', 'widget');
 
-        wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-preloader', $theme_css_uri.'/'.$preloader_css);
-        wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-widget', $theme_css_uri.'/'.$widget_css);
+        wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-preloader', $theme_css_uri.'/'.$preloader_css, array(), TEMPLAZA_FRAMEWORK_VERSION);
+        wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-widget', $theme_css_uri.'/'.$widget_css, array(), TEMPLAZA_FRAMEWORK_VERSION);
 
         if($google_link = Fonts::make_google_web_font_link()){
-            wp_enqueue_style('templaza-google-font', $google_link);
+            wp_enqueue_style('templaza-google-font', $google_link, array(),TEMPLAZA_FRAMEWORK_VERSION);
         }
 
         $options    = Functions::get_global_settings();
@@ -364,12 +435,29 @@ class TemPlazaFrameWork{
         if(class_exists( 'Advanced_Product\Advanced_Product' )){
             $this -> advanced_enqueue_scripts();
         }
+        $cursor_enable   = isset($options['enable-cursor-effects'])?filter_var($options['enable-cursor-effects'], FILTER_VALIDATE_BOOLEAN):false;
+        $cursor_eff   = isset($options['cursor-effects'])?$options['cursor-effects']:'';
+        if($cursor_enable){
+            $this -> effect_enqueue_scripts($cursor_eff);
+        }
 
         do_action('templaza-framework/plugin/enqueue_scripts', $this);
     }
+    protected function effect_enqueue_scripts($cursor_eff){
+        wp_enqueue_script( 'gsap-js', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', array(), false, true );
+        // ScrollTrigger - with gsap.js passed as a dependency
+        wp_enqueue_script( 'gsap-st', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array('gsap-js'), false, true );
+
+        wp_register_style( 'templaza-cursor-'.$cursor_eff.'-style', Functions::get_my_url() . '/assets/css/cursor-effect/cursor-'.$cursor_eff.'.css', array(),TEMPLAZA_FRAMEWORK_VERSION );
+        wp_enqueue_style('templaza-cursor-'.$cursor_eff.'-style');
+
+        wp_register_script( 'templaza-cursor-'.$cursor_eff.'-script', Functions::get_my_url() . '/assets/js/cursor-effect/cursor-'.$cursor_eff.'.js', array('jquery'),TEMPLAZA_FRAMEWORK_VERSION,true );
+        wp_enqueue_script( 'templaza-cursor-'.$cursor_eff.'-script');
+
+    }
     protected function advanced_enqueue_scripts(){
-        wp_register_style( 'templaza-tiny-slider-style', Functions::get_my_url() . '/assets/css/tiny-slider.css', false );
-        wp_register_script( 'templaza-tiny-slider-script', Functions::get_my_url() . '/assets/js/vendor/tiny-slider.js', array('jquery'),false,true );
+        wp_register_style( 'templaza-tiny-slider-style', Functions::get_my_url() . '/assets/css/tiny-slider.css', array(),TEMPLAZA_FRAMEWORK_VERSION );
+        wp_register_script( 'templaza-tiny-slider-script', Functions::get_my_url() . '/assets/js/vendor/tiny-slider.js', array('jquery'),TEMPLAZA_FRAMEWORK_VERSION,true );
     }
 
     protected function woo_enqueue_scripts(){
@@ -377,9 +465,9 @@ class TemPlazaFrameWork{
         wp_register_script( 'templaza-woo-notify', Functions::get_my_url(). '/assets/js/woo/notify.min.js', array(), '1.0.0', true );
         wp_register_script( 'templaza-woo-swiper', Functions::get_my_url() . '/assets/js/woo/swiper.min.js', array( 'jquery' ), '5.3.8', true );
 
-        wp_register_script( 'templaza-woo-viewport', Functions::get_my_url() . '/assets/js/woo/isInViewport.min.js', array('jquery'),false,true );
+        wp_register_script( 'templaza-woo-viewport', Functions::get_my_url() . '/assets/js/woo/isInViewport.min.js', array('jquery'),TEMPLAZA_FRAMEWORK_VERSION,true );
         wp_enqueue_script( 'templaza-woo-viewport' );
-        wp_register_script( 'templaza-woo-catalog', Functions::get_my_url() . '/assets/js/woo/woo-catalog.js', array('jquery'),false,true );
+        wp_register_script( 'templaza-woo-catalog', Functions::get_my_url() . '/assets/js/woo/woo-catalog.js', array('jquery'),TEMPLAZA_FRAMEWORK_VERSION,true );
         wp_enqueue_script( 'templaza-woo-catalog' );
 
         $admin_url = admin_url('admin-ajax.php');
@@ -392,7 +480,7 @@ class TemPlazaFrameWork{
             'templaza-woo-swiper',
             'templaza-woo-notify',
             'imagesloaded',
-        ), false, true );
+        ), TEMPLAZA_FRAMEWORK_VERSION, true );
 
         $templaza_data = array(
             'direction'            => is_rtl() ? 'true' : 'false',
@@ -622,7 +710,7 @@ class TemPlazaFrameWork{
      * */
     public function create_post_default(){
         $post_types = array('templaza_header', 'templaza_footer');
-
+        // phpcs:disable  WordPress.DB.SlowDBQuery.slow_db_query_meta_query
         foreach ($post_types as $ptype) {
             // Check data exists
             $args = array(
@@ -647,11 +735,10 @@ class TemPlazaFrameWork{
                 }
                 continue;
             }
-
             // Create post default
             $author = (int) get_current_user_id();
 
-            $now    = date('Y-m-d H:i:s');
+            $now    = gmdate('Y-m-d H:i:s');
             $postdata = array(
                 'post_author'   => $author,
                 'post_date'     => $now,
@@ -663,6 +750,7 @@ class TemPlazaFrameWork{
             );
 
             $post_id = wp_insert_post( $postdata, true );
+
 
             if($post_id){
                 // Assign post type to current theme
@@ -679,8 +767,12 @@ class TemPlazaFrameWork{
 
                 $dest_file      = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$ptype;
                 if(!is_dir($dest_file)){
+
                     require_once(ABSPATH . '/wp-admin/includes/file.php');
-                    mkdir($dest_file, \FS_CHMOD_DIR, true);
+                    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+                    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+//                    mkdir($dest_file, \FS_CHMOD_DIR, true);
+                    \WP_Filesystem_Direct::mkdir($dest_file,755);
                 }
                 $dest_file     .= '/'.$postdata['post_name'].'.json';
                 if(file_exists($source_file) && !file_exists($dest_file)){
@@ -688,6 +780,27 @@ class TemPlazaFrameWork{
                 }
             }
         }
+    }
+    public function templaza_modify_contact_methods($profile_fields)
+    {
+        $profile_fields['phone'] = esc_html__('Phone','templaza-framework');
+        $profile_fields['job'] = esc_html__('Job','templaza-framework');
+        $profile_fields['facebook'] = esc_html__('Facebook URL','templaza-framework');
+        $profile_fields['twitter'] = esc_html__('Twitter URL','templaza-framework');
+        $profile_fields['instagram'] = esc_html__('Instagram URL','templaza-framework');
+        $profile_fields['dribbble'] = esc_html__('Dribbble URL','templaza-framework');
+        $profile_fields['linkedin'] = esc_html__('Linkedin URL','templaza-framework');
+        $profile_fields['pinterest'] = esc_html__('Pinterest URL','templaza-framework');
+        $profile_fields['youtube'] = esc_html__('Youtube URL','templaza-framework');
+        $profile_fields['vimeo'] = esc_html__('Vimeo URL','templaza-framework');
+        $profile_fields['flickr'] = esc_html__('Flickr URL','templaza-framework');
+        $profile_fields['tumblr'] = esc_html__('Tumblr URL','templaza-framework');
+        $profile_fields['whatsapp'] = esc_html__('WhatsApp URL','templaza-framework');
+        return $profile_fields;
+    }
+    public function templaza_mime_types( $mimes ){
+        $mimes['svg'] = 'image/svg+xml';
+        return $mimes;
     }
 
     protected function load_template(){

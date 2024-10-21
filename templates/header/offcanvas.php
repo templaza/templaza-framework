@@ -38,7 +38,7 @@ if (!$header || !$enable_offcanvas) {
 			<?php
             if ($offcanvas_sidebar && is_active_sidebar($offcanvas_sidebar)){
                 echo '<div id="templaza-offcanvas-sidebar" class="templaza-sidebar">';
-                    echo '<aside id="widget-area-'.uniqid().'" class="widget-area">';
+                    echo '<aside id="widget-area-'.esc_attr(uniqid()).'" class="widget-area">';
                         dynamic_sidebar($offcanvas_sidebar);
                     echo '</aside>';
                 echo '</div>';

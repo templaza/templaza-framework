@@ -30,6 +30,7 @@ $dropdown_animation_effect  = isset($options['dropdown-animation-effect'])?$opti
 $dropdown_animation_effect  = $dropdown_animation_type === 'none'?'':$dropdown_animation_effect;
 $dropdown_trigger           = isset($options['dropdown-trigger'])?$options['dropdown-trigger']:'hover';
 $header_item_align           = isset($options['header-menu-item-align'])?$options['header-menu-item-align']:'default';
+$header_item_text_align           = isset($options['header-menu-item-text-align'])?$options['header-menu-item-text-align']:'left';
 if($header_item_align == 'justify'){
     $navClass = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-flex-center', 'uk-flex-middle', 'uk-flex-between menu-justify'];
     $navClassLeft = ['nav', 'navbar-nav', 'templaza-nav', 'uk-flex', 'uk-flex-left', 'uk-flex-top', 'uk-padding-remove-left', 'uk-flex-between menu-justify'];
@@ -208,7 +209,7 @@ $header_stacked_top_color     = CSS::make_color_rgba_redux($header_stack_top_col
 $social_profiles    = isset($gb_options['social'])?$gb_options['social']:'';
 
 if ($mode == 'left') {
-    echo '<div class="uk-grid-match uk-flex uk-flex-between uk-grid-collapse uk-position-relative '.$header_icon.'">';
+    echo '<div class="uk-grid-match uk-flex uk-flex-between uk-grid-collapse uk-position-relative '.esc_attr($header_icon).'">';
     ?>
     <div class="uk-flex uk-hidden@m uk-flex-left uk-flex-middle">
         <div class="header-mobilemenu-trigger burger-menu-button " data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
@@ -226,7 +227,7 @@ if ($mode == 'left') {
     <div class="uk-width-expand@m uk-visible@m templaza-stacked-left-right">
         <?php
         if($block_1_type !='blank' || $block_2_type !='blank'){
-            echo '<div class="templaza-stacked-left-top uk-grid-collapse uk-flex uk-flex-middle templaza-stacked-top-section" data-uk-grid>';
+            echo '<div class="templaza-stacked-left-top uk-width-1-1 uk-grid-collapse uk-flex uk-flex-middle templaza-stacked-top-section" data-uk-grid>';
         }
         if ($block_1_type != 'blank'): ?>
             <div class=" uk-text-left uk-visible@m uk-width-auto@m">
@@ -453,7 +454,7 @@ if ($mode == 'left') {
                     <div class="uk-flex uk-flex-left uk-flex-middle">
                         <div class="header-search uk-position-relative header-icon">
                     <span>
-                        <?php echo $search_icon_html; ?>
+                        <?php echo wp_kses($search_icon_html,'post'); ?>
                     </span>
                             <form method="get" class="searchform " action="<?php echo esc_url( home_url( '/' ) ); ?>">
                                 <input type="text" class="field uk-input inputbox search-query uk-margin-remove-vertical" name="s" placeholder="<?php esc_attr_e( 'Search...', 'templaza-framework');?>" />
@@ -462,7 +463,7 @@ if ($mode == 'left') {
                         </div>
                     </div>
                 <?php } ?>
-                <div class="<?php echo implode(' ', $navWrapperClass)?>">
+                <div class="<?php echo esc_attr(implode(' ', $navWrapperClass))?>">
                     <?php
                     Menu::get_nav_menu(array(
                         'theme_location'              => $header_menu,
@@ -482,7 +483,7 @@ if ($mode == 'left') {
                         if($header_stack_cart && class_exists( 'woocommerce' )){ ?>
                             <div class="header-cart header-icon">
                                 <a href="<?php echo esc_url( wc_get_cart_url() ) ?>" data-toggle="<?php echo esc_attr($header_cart); ?>" data-target="cart-modal">
-                                    <?php echo $cart_icon_html; ?>
+                                    <?php echo wp_kses($cart_icon_html,'post'); ?>
                                     <span class="counter cart-counter"><?php echo esc_html(WC()->cart->get_cart_contents_count()); ?></span>
                                 </a>
                             </div>
@@ -492,7 +493,7 @@ if ($mode == 'left') {
                                 <a class="account-icon" href="<?php echo esc_url( wc_get_account_endpoint_url( 'dashboard' ) ) ?>"
                                    data-toggle="<?php echo esc_attr($login_modals);?>"
                                    data-target="account-modal">
-                                    <?php echo $account_icon_html; ?>
+                                    <?php echo wp_kses($account_icon_html,'post'); ?>
                                 </a>
                                 <?php if ( is_user_logged_in() ) : ?>
                                     <div class="account-links">
@@ -590,24 +591,28 @@ if ($mode == 'left') {
                     'container_class' => implode(' ', $navWrapperClass),
                     'menu_id'         => '',
                     'depth'           => $header_menu_level, // Level
+                    'menu_item_cl'           => 'menu-'.$header_item_text_align.'',
                     'templaza_is_header'          => true,
                     'templaza_megamenu_html_data' => $menu_datas
                 ));
                 ?>
                 <?php
                 echo '</div>';
-                if ($enable_offcanvas) {
+                if ($enable_offcanvas || $header_stack_cart || $header_stack_account || $header_stack_search) {
                     ?>
                     <div class="uk-flex uk-flex-right uk-flex-middle">
-                        <div class="header-offcanvas-trigger burger-menu-button <?php
-                        echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
-                        echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
-                            <button type="button" class="button">
-                       <span class="box">
-                          <span class="inner"></span>
-                       </span>
-                            </button>
-                        </div>
+                        <?php Templates::load_my_layout('inc.icon',true,false); ?>
+                        <?php if ($enable_offcanvas) { ?>
+                            <div class="header-offcanvas-trigger uk-position-relative burger-menu-button <?php
+                            echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
+                            echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
+                                <button type="button" class="button">
+                                   <span class="box">
+                                      <span class="inner"></span>
+                                   </span>
+                                </button>
+                            </div>
+                        <?php } ?>
                     </div>
                     <?php
                 }
@@ -662,17 +667,17 @@ if ($mode == 'left') {
 
             // header block starts
             if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-                echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m block-sidebar header-block-item">';
+                echo '<div class="uk-flex uk-width-expand uk-flex-'.esc_attr($block1_position).' uk-flex-middle uk-visible@m block-sidebar header-block-item">';
                 dynamic_sidebar($block_1_sidebar);
                 echo '</div>';
             }
             if ($block_1_type == 'custom') {
-                echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m header-block-item">';
+                echo '<div class="uk-flex uk-width-expand uk-flex-'.esc_attr($block1_position).' uk-flex-middle uk-visible@m header-block-item">';
                 echo wp_kses($block_1_custom,'post');
                 echo '</div>';
             }
             if($block_1_type == 'social' || $block_1_type == 'contact'){
-                echo '<div class="uk-flex uk-width-expand uk-flex-'.$block1_position.' uk-flex-middle uk-visible@m header-block-item">';
+                echo '<div class="uk-flex uk-width-expand uk-flex-'.esc_attr($block1_position).' uk-flex-middle uk-visible@m header-block-item">';
                 Templates::load_my_layout('inc.'.$block_1_type);
                 echo '</div>';
             }

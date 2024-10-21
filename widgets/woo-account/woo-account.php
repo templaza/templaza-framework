@@ -37,9 +37,9 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Account') && is_plugin_active( 'w
         /* function widget */
         public function  widget($args,$instance){
             extract($args);
-            echo $args['before_widget'];
+            echo wp_kses($args['before_widget'],'post');
             if ( ! empty( $instance['title'] ) )
-                echo $args['before_title'] . $instance['title'] . $args['after_title'];
+                echo wp_kses($args['before_title'] . $instance['title'] . $args['after_title']);
 
             $instance = wp_parse_args( $instance, $this->defaults );
             if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
@@ -71,7 +71,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Account') && is_plugin_active( 'w
                 <?php endif; ?>
             </div>
             <?php
-            echo $args['after_widget'];
+            echo wp_kses($args['after_widget'],'post');
         }
         /* function form */
         public function form($instance) {

@@ -168,6 +168,22 @@ Templaza_API::set_section('templaza_header',
                 ),
             ),
             array(
+                'id'       => 'header-menu-item-text-align',
+                'type'     => 'select',
+                'title'    => __( 'Menu item text align', 'templaza-framework' ),
+                'options'  => array(
+                    'left'     => __('Left', 'templaza-framework'),
+                    'center'   => __('Center', 'templaza-framework'),
+                    'right'   => __('Right', 'templaza-framework'),
+                    'default'   => __('Default', 'templaza-framework'),
+                ),
+                'select2'       => array( 'allowClear' => false ),
+                'default'  => 'left',
+                'required' => array(
+                    array('header-menu-item-align', '=', 'justify')
+                ),
+            ),
+            array(
                 'id'       => 'header-block-1-type',
                 'type'     => 'select',
                 'title'    => __( 'Header Block 1', 'templaza-framework' ),

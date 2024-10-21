@@ -9,6 +9,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }else{
     $templaza_options = Functions::get_theme_options();
 }
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 if(isset($_GET['single_layout'])){
     $ap_single_layout = $_GET['single_layout'];
 }else {

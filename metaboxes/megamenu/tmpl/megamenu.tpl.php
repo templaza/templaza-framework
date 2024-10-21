@@ -9,12 +9,6 @@ $redux  = $this -> redux;
 if($redux){
     $enqueue = new Enqueue($redux);
     $enqueue->init();
-//    if(\version_compare(\Redux_Core::$version, '4.3.7', '<=')) {
-//        $enqueue = new Enqueue($redux);
-//        $enqueue->init();
-//    }else{
-//        $redux -> enqueue_class -> init();
-//    }
 ?>
 
 <script type="text/html" id="tmpl-templaza-metabox-megamenu-template">
@@ -27,9 +21,7 @@ if($redux){
             }else{
                 $redux -> render_class -> generate_panel();
             }
-//            foreach($redux -> sections as $k => $tab){
-//
-//            }
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
             $content = ob_get_contents();
             ob_end_clean();
 

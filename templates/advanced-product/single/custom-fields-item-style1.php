@@ -33,13 +33,22 @@ if($taxonomy == true){
         $f_icon_image   = isset($acf_f['icon_image']) && !empty($acf_f['icon_image'])?$acf_f['icon_image']:'';
         if(!empty($f_value)){
             if($acf_f['type'] == 'taxonomy' && $taxonomy == false){
-
+                $html   = apply_filters('advanced-product/field/value_html/type='.$acf_f['type'], '', $f_value, $acf_f, $field);
+                ?>
+                <div class="uk-grid-small ap-custom-fields-style1" data-uk-grid>
+                    <div class="uk-width-expand field-label" data-uk-leader><?php echo esc_html($acf_f['label']); ?></div>
+                    <div class="field-value">
+                        <?php echo $html;?>
+                    </div>
+                </div>
+                <?php
             }else{
                 ?>
                 <div class="uk-grid-small ap-custom-fields-style1" data-uk-grid>
                     <div class="uk-width-expand field-label" data-uk-leader><?php echo esc_html($acf_f['label']); ?></div>
                     <div class="field-value">
                         <?php
+                        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
                         $html   = apply_filters('advanced-product/field/value_html/type='.$acf_f['type'], '', $f_value, $acf_f, $field);
                         if(!empty($html)){
                             echo $html;
@@ -61,14 +70,14 @@ if($taxonomy == true){
                                         <?php
                                         if($f_icon['type'] == 'uikit-icon'){
                                             ?>
-                                            <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
+                                            <i data-uk-icon="icon:<?php echo esc_attr($f_icon['icon']); ?>;"></i>
                                             <?php
                                         }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
                                             echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
                                                 array('data-uk-svg' => ''));
                                         }elseif(!empty($f_icon['icon'])){
                                             ?>
-                                            <i class="<?php echo $f_icon['icon']; ?>"></i>
+                                            <i class="<?php echo esc_attr($f_icon['icon']); ?>"></i>
                                             <?php
                                         }
                                         ?>

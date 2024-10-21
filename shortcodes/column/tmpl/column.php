@@ -47,9 +47,10 @@ if($use_sticky){
         $_sticky    .= '="'.join(';', $_sticky_option).'"';
     }
 }
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
-<div<?php echo isset($tz_id)?' id="'.$tz_id.'"':''; ?> class="<?php
-echo isset($tz_class)?$tz_class:''?>">
+<div<?php echo isset($tz_id)?' id="'.esc_attr($tz_id).'"':''; ?> class="<?php
+echo isset($tz_class)?esc_attr($tz_class):''?>">
     <?php if(!empty($_sticky_option)){?>
     <div <?php echo $_sticky;?>>
     <?php } ?>

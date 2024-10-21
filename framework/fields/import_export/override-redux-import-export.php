@@ -32,6 +32,7 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 		 *
 		 * @throws ReflectionException .
 		 */
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended
 		public function __construct( $field, $value, $parent ) {
 			parent::__construct( $field, $value, $parent );
 
@@ -148,7 +149,7 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 					class="button-primary"
                     data-secret="<?php echo esc_attr( $secret ); ?>"
                     <?php
-                    echo (isset($_GET['post']) && !empty($_GET['post']))?' data-post-id="'.$_GET['post'].'"':''?>
+                    echo (isset($_GET['post']) && !empty($_GET['post']))?' data-post-id="'.esc_attr($_GET['post']).'"':''?>
 					value="<?php esc_html_e( 'Import', 'redux-framework' ); ?>">
 				<span>
 					<?php // phpcs:ignore WordPress.NamingConventions.ValidHookName ?>
@@ -178,7 +179,7 @@ if ( ! class_exists( 'Redux_Import_Export', false ) ) {
 						data-secret="<?php echo esc_attr( $secret ); ?>"
 						data-copy="<?php esc_attr_e( 'Copy to Clipboard', 'redux-framework' ); ?>"
 						data-copied="<?php esc_attr_e( 'Copied!', 'redux-framework' ); ?>"<?php
-                echo (isset($_GET['post']) && !empty($_GET['post']))?' data-post-id="'.$_GET['post'].'"':''?>>
+                echo (isset($_GET['post']) && !empty($_GET['post']))?' data-post-id="'.esc_attr($_GET['post']).'"':''?>>
 					<?php esc_html_e( 'Copy to Clipboard', 'redux-framework' ); ?>
 				</button>
 				<a href="<?php echo esc_url( $link ); ?>" id="redux-export-code-dl" class="button-primary">

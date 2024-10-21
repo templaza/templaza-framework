@@ -6,7 +6,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 Templaza_API::set_section('templaza_style', array(
         'title' => __( 'Colors', 'templaza-framework'),
         'id'    => 'colors',
-        'desc'  => __( '', 'templaza-framework' ),
+        'desc'  => __('Color Settings', 'templaza-framework' ),
         'icon'  => 'el el-brush'
     )
 );

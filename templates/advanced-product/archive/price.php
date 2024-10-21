@@ -15,7 +15,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }
 $sold_text     = isset($templaza_options['ap_product-sold-label'])?$templaza_options['ap_product-sold-label']:'';
 $contact_text     = isset($templaza_options['ap_product-contact-label'])?$templaza_options['ap_product-contact-label']:'';
-
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 
 $msrp           = get_field('ap_price_msrp', get_the_ID());
 $price          = get_field('ap_price', get_the_ID());
@@ -52,19 +52,18 @@ if(isset($_GET['product_loop'])){
 }else {
     $ap_loop_layout = isset($templaza_options['ap_product-loop-layout']) ? $templaza_options['ap_product-loop-layout'] : 'style1';
 }
-$f_value            = get_field('unit-price', get_the_ID());
+$f_value = get_field('unit-price', get_the_ID());
 if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $show_price) {
     ?>
     <div class="ap-price-box">
         <span class="ap-field-label"><?php esc_html_e('Total Price','templaza-framework')?></span>
+        <span class="ap-price"> <?php echo esc_html(AP_Helper::format_price($price)); ?></span>
         <?php
-        $html = sprintf('<span class="ap-price"><b> %s</b> %s </span>',
-            esc_html__(' ', 'templaza-framework'), AP_Helper::format_price($price));
         if (!empty($msrp) && $show_price_msrp) {
-            $html .= sprintf('<span class="ap-price-msrp"><span> %s </span>  %s </span>',
-                esc_html__('MSRP: ', 'templaza-framework'), AP_Helper::format_price($msrp));
+            ?>
+            <span class="ap-price-msrp"><span> <?php esc_html_e('MSRP: ', 'templaza-framework');?> </span>  <?php echo esc_html(AP_Helper::format_price($msrp)); ?> </span>
+            <?php
         }
-        echo wp_kses($html,'post');
         if(!empty($price_notice_value) && $show_price_notice){
         ?>
         <span class="meta">

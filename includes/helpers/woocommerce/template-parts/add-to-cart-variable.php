@@ -19,7 +19,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
           action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>"
           method="post" enctype='multipart/form-data'
           data-product_id="<?php echo absint( $product->get_id() ); ?>"
-          data-product_variations="<?php echo wc_esc_json($variations_json); // WPCS: XSS ok. ?>">
+          data-product_variations="<?php echo esc_attr(wc_esc_json($variations_json)); // WPCS: XSS ok. ?>">
 		<?php do_action( 'woocommerce_before_variations_form' ); ?>
 
 		<?php if ( empty( $available_variations ) && false !== $available_variations ) : ?>
@@ -30,7 +30,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 				<?php foreach ( $attributes as $attribute_name => $options ) : ?>
                     <tr>
                         <td class="label"><label
-                                    for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></label>
+                                    for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"><?php echo esc_html(wc_attribute_label( $attribute_name )); // WPCS: XSS ok. ?></label>
                         </td>
                         <td class="value">
 							<?php

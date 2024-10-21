@@ -9,7 +9,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
     $custom_class   = isset($atts['custom-container-class'])?' '.$atts['custom-container-class']:'';
 
     ?>
-    <div id="templaza-page-<?php echo $id; ?>" class="templaza-page templaza-page-<?php echo get_post_type().$custom_class;?>">
+    <div id="templaza-page-<?php echo esc_attr($id); ?>" class="templaza-page templaza-page-<?php echo esc_attr(get_post_type().$custom_class);?>">
         <?php
 
         // Start the Loop.

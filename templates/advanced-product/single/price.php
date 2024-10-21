@@ -45,8 +45,8 @@ if($price_contact == ''){
 if ((!$product_type || in_array('sale', $product_type)) && !empty($price)) {
 
     $html = '<p class="uk-background-primary uk-padding-small uk-light ap-pricing">';
-    $html .= sprintf('<span class="ap-price uk-h3"><b> %s</b> %s </span>',
-        esc_html__(' ', 'templaza-framework'), AP_Helper::format_price($price));
+    $html .= sprintf('<span class="ap-price uk-h3"> %s </span>',
+        AP_Helper::format_price($price));
     if (!empty($msrp)/* && $show_price_msrp*/) {
         $html .= sprintf('<span class="ap-price-msrp"> %s  %s </span>',
             esc_html__('MSRP:', 'templaza-framework'), AP_Helper::format_price($msrp));

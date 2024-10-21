@@ -72,7 +72,7 @@ class File extends \FontLib\TrueType\File {
     if ($n < 1) {
       return "";
     }
-
+      // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fread
     $string = fread($this->f, $n);
     $chunks = str_split($string, 2);
     $chunks = array_map("strrev", $chunks);

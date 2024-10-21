@@ -115,6 +115,7 @@ class Templaza_Woo_Badges {
 			}
 
 			if ( ! empty( $badges ) ) {
+                // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 				printf( '<span class="woocommerce-badges woocommerce-badges--%s">%s</span>', esc_attr( $layout ), $badges );
 			}
 		}

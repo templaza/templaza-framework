@@ -11,6 +11,7 @@
     $expanded = ! empty( $this->parent->args['class'] ) ? ' ' . esc_attr( $this->parent->args['class'] ) : '';
     $expanded.= ( $this->parent->args['open_expanded'] ) ? ' fully-expanded' : '';
     $nonce    = wp_create_nonce( "redux_ajax_nonce" . $this->parent->args['opt_name'] );
+    // phpcs:disable WordPress.Security.NonceVerification.Recommended
 ?>
 <div class="templaza-framework">
     <div class="redux-container<?php echo esc_attr( $expanded ); ?> border-0 shadow-none">
@@ -22,16 +23,16 @@
               id="redux-form-wrapper" class="main-wrapper ml-0">
             <?php // $this->parent->args['opt_name'] is sanitized in the Framework class, no need to re-sanitize it. ?>
             <input type="hidden" id="redux-compiler-hook"
-                name="<?php echo $this->parent->args['opt_name']; ?>[compiler]"
+                name="<?php echo esc_attr($this->parent->args['opt_name']); ?>[compiler]"
                 value=""/>
             <?php // $this->parent->args['opt_name'] is sanitized in the Framework class, no need to re-sanitize it. ?>
             <input type="hidden" id="currentSection"
-                name="<?php echo $this->parent->args['opt_name']; ?>[redux-section]"
+                name="<?php echo esc_attr($this->parent->args['opt_name']); ?>[redux-section]"
                 value=""/>
             <?php // $this->parent->args['opt_name'] is sanitized in the Framework class, no need to re-sanitize it. ?>
             <?php if ( ! empty( $this->parent->no_panel ) ) { ?>
                 <input type="hidden"
-                    name="<?php echo $this->parent->args['opt_name']; ?>[redux-no_panel]"
+                    name="<?php echo esc_attr($this->parent->args['opt_name']); ?>[redux-no_panel]"
                     value="<?php echo esc_attr(implode( '|', $this->parent->no_panel )); ?>"
                 />
             <?php } ?>
@@ -45,7 +46,7 @@
             <?php // $this->parent->args['opt_name'] is sanitized in the Framework class, no need to re-sanitize it. ?>
             <input type="hidden"
                    id="last_tab"
-                   name="<?php echo $this->parent->args['opt_name']; ?>[last_tab]"
+                   name="<?php echo esc_attr($this->parent->args['opt_name']); ?>[last_tab]"
                    value="<?php echo esc_attr( $this->parent->options['last_tab'] ); ?>"
             />
 

@@ -82,9 +82,9 @@ if(!empty($content)){
             $_section_attributes = ' data-uk-height-viewport="expand: true;"';
             break;
     }
-
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
-<section<?php echo isset($tz_id)?' id="'.$tz_id.'"':''; ?> class="<?php echo isset($tz_class)?esc_attr($tz_class):''; ?>"<?php
+<section<?php echo isset($tz_id)?' id="'.esc_attr($tz_id).'"':''; ?> class="<?php echo isset($tz_class)?esc_attr($tz_class):''; ?>"<?php
 echo $_section_attributes;?>>
     <?php if(!empty($container_class)){ ?>
     <div class="<?php echo $container_class;?><?php

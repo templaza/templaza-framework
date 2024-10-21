@@ -1,0 +1,30 @@
+body {
+    --cursor-stroke: #F45D56;
+}
+
+.cursor {
+	display: none;
+}
+
+
+@media (any-pointer:fine) {
+	.cursor {
+		position: fixed;
+		top: 0;
+		left: 0;
+		display: block;
+		pointer-events: none;
+		z-index: 10000;
+	}
+
+	.cursor__inner {
+		fill: none;
+		stroke: var(--cursor-stroke);
+		stroke-width: 3px;
+	}
+
+	.no-js .cursor {
+		display: none;
+	}
+
+}

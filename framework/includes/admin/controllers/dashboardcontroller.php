@@ -52,6 +52,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
                 'admin_ajax_url'        => \admin_url('admin-ajax.php'),
                 'admin_url'             => \admin_url('admin.php'),
                 'strings'               =>  array(
+                    /* translators: %s - Theme Activation. */
                     'theme_active_title'    => sprintf(__('%s &ndash; Theme Activation', 'templaza-framework'),(isset($config['productname']) && !empty($config['productname']))?$config['productname']:'' ),
                     'delete_question'       => __('Are you sure you want to delete template activation?', 'templaza-framework'),
                     'browser_warning'       => __('Your browser is blocking popups, activation process cannot continue!', 'templaza-framework'),
@@ -85,6 +86,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
             $theme          = $this -> theme_name;
             $option_name    = HelperLicense::get_option_name($theme);
             $options        = \get_option($option_name);
+            // phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
 
             if($options && $options['secret_key'] == $_GET['key']) {
                 $data = array(
@@ -100,9 +102,10 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
                 update_option($option_name, $data);
 
                 $app    = Application::get_instance();
-                $app -> enqueue_message(__('Congratulations! '.$_POST['buyer']
-                    .' has been successfully activated and now you can get latest updates of the theme.',
-                    'templaza-framework'), 'success');
+                /* translators: %s - Congratulations. */
+                $app -> enqueue_message(sprintf(esc_html__('Congratulations! %s
+                    has been successfully activated and now you can get latest updates of the theme.',
+                    'templaza-framework'),esc_html($_POST['buyer'])), 'success');
                 echo '<script>window.close();</script>';
                 wp_die();
             }
@@ -112,6 +115,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
             if(get_option(HelperLicense::get_option_name($this -> theme_name))){
                 delete_option(HelperLicense::get_option_name($this -> theme_name));
             }
+            // phpcs:disable WordPress.WP.AlternativeFunctions.json_encode_json_encode
             $app    = new Application();
             $app -> enqueue_message(__('The license deleted!', 'templaza-framework'), 'success');
             echo json_encode(array('success' => true, 'redirect' => admin_url('admin.php?page='

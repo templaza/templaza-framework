@@ -40,7 +40,7 @@ if($enable_login_url && $register_url !=''){
     $register = wp_registration_url();
 }
 ?>
-<div<?php echo !empty($tz_id)?' id="'.esc_attr__($tz_id).'"':''; ?> class="<?php echo esc_attr__($tz_class); ?>">
+<div<?php echo !empty($tz_id)?' id="'.esc_attr($tz_id).'"':''; ?> class="<?php echo esc_attr($tz_class); ?>">
 <nav class="uk-navbar-container uk-navbar-transparent tz-navbar-login" data-uk-navbar>
     <div class="uk-navbar-right">
         <ul class="uk-navbar-nav">
@@ -66,7 +66,7 @@ if($enable_login_url && $register_url !=''){
                                 <a href="<?php echo esc_url(get_edit_profile_url($current_user->ID))?>">
                                     <?php echo esc_html($edit_profile_text);?>
                                 </a></li>
-                            <li><a href="<?php echo wp_logout_url( get_permalink() ); ?>">
+                            <li><a href="<?php echo esc_url(wp_logout_url( get_permalink() )); ?>">
                                     <?php echo esc_html($logout_text);?>
                                 </a></li>
                         </ul>

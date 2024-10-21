@@ -64,7 +64,7 @@ if(!empty($contact_location) || !empty($contact_email)  || !empty($contact_phone
         <?php if($contact_phone_icon){ ?>
             <i class="contact-icon <?php echo esc_attr($contact_phone_icon);?>"></i>
         <?php } ?>
-        <a href="tel:<?php echo str_replace(array( '(', ')',' ' ),'', esc_attr($contact_phone));?>"><?php
+        <a href="tel:<?php echo esc_attr(str_replace(array( '(', ')',' ' ),'', esc_attr($contact_phone)));?>"><?php
             echo esc_attr($contact_phone);?></a>
         </span>
         <?php

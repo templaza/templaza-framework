@@ -13,19 +13,19 @@ if(isset($this -> item) && isset($this -> item['plugins']) && count($this -> ite
     ?>
     <?php $uniqid  = uniqid();?>
     <div class="border-bottom border-gray uk-margin-top uk-margin-bottom uk-padding-small uk-padding-remove-horizontal tzinst-plugin__install">
-        <h5 class="mb-3"><?php echo __('The following plugins are required to import content:', 'templaza-framework'); ?></h5>
+        <h5 class="mb-3"><?php echo esc_html__('The following plugins are required to import content:', 'templaza-framework'); ?></h5>
         <?php if($this -> item['plugins'] && count($this -> item['plugins'])){?>
-            <div class="uk-grid-small" uk-grid>
+            <div class="uk-grid-small" data-uk-grid>
                 <div class="uk-width-expand uk-text-muted" uk-leader="fill: .">
-                    <label class="uk-text-secondary"><input class="uk-checkbox" type="checkbox" data-checkbox-plugin-all> <?php echo __("All Plugins"); ?></label>
+                    <label class="uk-text-secondary"><input class="uk-checkbox" type="checkbox" data-checkbox-plugin-all> <?php echo esc_html__("All Plugins","templaza-framework"); ?></label>
                 </div>
                 <div class="tzinst-plugin__actions">
                     <a href="javascript:" class="js-tzinst-plugin__install-all text-danger uk-hidden"><?php
-                        echo __('Install Selected', 'templaza-framework'); ?></a>
+                        echo esc_html__('Install Selected', 'templaza-framework'); ?></a>
                     <a href="javascript:" class="js-tzinst-plugin__update-all text-info uk-hidden"><?php
-                        echo __('Update Selected', 'templaza-framework'); ?></a>
+                        echo esc_html__('Update Selected', 'templaza-framework'); ?></a>
                     <a href="javascript:" class="js-tzinst-plugin__activate-all text-primary uk-hidden"><?php
-                        echo __('Activate Selected', 'templaza-framework'); ?></a>
+                        echo esc_html__('Activate Selected', 'templaza-framework'); ?></a>
                 </div>
             </div>
             <div class="items uk-padding-small uk-padding-remove-horizontal uk-overflow-auto uk-height-max-medium">
@@ -40,12 +40,12 @@ if(isset($this -> item) && isset($this -> item['plugins']) && count($this -> ite
                     ?>
                     <div class="uk-grid-small uk-text-small" data-plugin-item uk-grid>
                         <div class="uk-width-expand uk-text-muted uk-text-small" uk-leader="fill: .">
-                            <label class="<?php echo !empty($disabled_text)?$disabled_text:'uk-text-secondary';?>"><input class="uk-checkbox" type="checkbox"<?php
-                                echo $disabled; ?>> <?php echo $plugin['name']; ?></label>
+                            <label class="<?php echo !empty($disabled_text)?esc_attr($disabled_text):'uk-text-secondary';?>"><input class="uk-checkbox" type="checkbox"<?php
+                                echo esc_attr($disabled); ?>> <?php echo esc_html($plugin['name']); ?></label>
                             <?php
                             if($canUpdate){
                                 ?>
-                                <span class="uk-label uk-label-danger uk-text-small uk-text-capitalize"><?php echo __('New version', 'templaza-framework'); ?></span>
+                                <span class="uk-label uk-label-danger uk-text-small uk-text-capitalize"><?php echo esc_html__('New version', 'templaza-framework'); ?></span>
                             <?php } ?>
                         </div>
                         <div>
@@ -66,15 +66,15 @@ if(isset($this -> item) && isset($this -> item['plugins']) && count($this -> ite
                             }
                             ?>
                             <a href="javascript:"
-                                <?php echo $disabled;?>
-                               class="js-tzinst-plugin__install<?php echo $btnClass;?>"
+                                <?php echo esc_attr($disabled);?>
+                               class="js-tzinst-plugin__install<?php echo esc_attr($btnClass);?>"
                                data-plugin="<?php echo esc_attr($plugin_slug); ?>"
                                data-nonce="<?php echo esc_attr(wp_create_nonce(TEMPLAZA_FRAMEWORK_NAME.'-action')); ?>"
                                data-plugin_name="<?php echo esc_attr($plugin['name']);?>"
                                data-tgmpa_nonce="<?php echo esc_attr( wp_create_nonce( 'tgmpa-install' ) ); ?>"
                                data-tgmpa-update_nonce="<?php echo esc_attr( wp_create_nonce( 'tgmpa-update' ) ); ?>"
                                data-tgmpa-activate_nonce="<?php echo esc_attr( wp_create_nonce( 'tgmpa-activate' ) ); ?>"><?php
-                                echo __($btnText, 'templaza-framework'); ?></a>
+                                echo esc_html($btnText); ?></a>
                         </div>
                     </div>
                 <?php } ?>

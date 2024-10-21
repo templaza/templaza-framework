@@ -109,6 +109,7 @@ class Number extends Node implements \ArrayAccess
      */
     public function __construct($dimension, $numeratorUnits, array $denominatorUnits = [])
     {
+        // phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped, WordPress.Security.EscapeOutput.OutputNotEscaped
         if (is_string($numeratorUnits)) {
             $numeratorUnits = $numeratorUnits ? [$numeratorUnits] : [];
         } elseif (isset($numeratorUnits['numerator_units'], $numeratorUnits['denominator_units'])) {

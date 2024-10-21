@@ -6,7 +6,6 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 Templaza_API::set_section('settings', array(
         'title' => __( 'Blog Options', 'templaza-framework'),
         'id'    => 'blog-options',
-        'desc'  => __( '', 'templaza-framework' ),
         'icon'  => 'el el-list-alt'
     )
 );

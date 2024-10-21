@@ -5,6 +5,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 use Advanced_Product\Helper\AP_Helper;
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
+use Advanced_Product\AP_Templates;
 
 extract(shortcode_atts(array(
     'tz_id'                    => '',
@@ -14,6 +15,7 @@ extract(shortcode_atts(array(
     'latest_post_order_by'     => 'date',
     'latest_post_order'        => 'DESC',
     'latest_post_number'       => 6,
+    'latest_post_layout'       => '',
     'latest_post_image_cover'  => false,
     'latest_post_image_cover_height'  => 300,
     'latest_post_image_transition'  => '',
@@ -33,7 +35,7 @@ if(isset($options['enable-featured-for-posttypes'])&& !empty($options['enable-fe
 if(!in_array($latest_post_type, $featured_posttypes)){
     $show_featured  = '';
 }
-
+// phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_query, WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 $args = array(
     'post_type'  => ''.$latest_post_type.'',
     'numberposts' => $latest_post_number,
@@ -65,7 +67,10 @@ if(isset($show_featured)){
         );
     }
 }
-$ripple_cl = $ripple_html =' ';
+$ripple_cl = $ripple_html = $img_eff = ' ';
+if($latest_post_image_transition =='zoomin-roof'){
+    $img_eff = ' zoomin-roof';
+}
 if($latest_post_image_transition =='ripple'){
     $ripple_html = '<div class="templaza-ripple-circles uk-position-center uk-transition-fade">
                         <div class="circle1"></div>
@@ -95,11 +100,60 @@ if(!empty($latest_post_type) && isset($atts[$latest_post_type.'_category'])
 }
 
 $latest_cause = get_posts( $args );
-$date_format = get_option('date_format');
-?>
 
-<div<?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="module-latest-posts <?php
-echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
+$date_format = get_option('date_format');
+if($latest_post_type == 'ap_product' && $latest_post_layout == 'archive'){
+    $query_args = array(
+        'post_type'         => 'ap_product',
+        'post_status'       => 'publish',
+        'posts_per_page'    => $latest_post_number,
+    );
+
+    $query_args['orderby'] = $latest_post_order_by;
+    $query_args['order'] = $latest_post_order;
+
+    $ap_posts = new WP_Query($query_args);
+?>
+    <div<?php echo isset($atts['tz_id'])?' id="'.esc_attr($atts['tz_id']).'"':''; ?> class="module-latest-posts <?php
+    echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>" >
+
+        <div class="uk-slider-container-offset" data-uk-slider>
+
+            <div class="uk-position-relative uk-visible-toggle" tabindex="-1">
+
+                <div class="uk-slider-items uk-grid-medium uk-child-width-1-<?php echo esc_attr($latest_post_slider_item);?>@s " data-uk-grid>
+                    <?php
+                    while ($ap_posts -> have_posts()) {
+                        $ap_posts -> the_post();
+                        if(is_plugin_active('advanced-product/advanced-product.php')){
+                            AP_Templates::load_my_layout('archive.content-item',true,false,$args);
+                        }
+                    }
+                    wp_reset_postdata();
+                    ?>
+                </div>
+                <?php if($latest_post_show_nav == true){
+                    ?>
+                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" data-uk-slidenav-previous data-uk-slider-item="previous"></a>
+                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" data-uk-slidenav-next data-uk-slider-item="next"></a>
+                    <?php
+                }
+                ?>
+            </div>
+            <?php if($latest_post_show_dot == true){
+                ?>
+                <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+                <?php
+            }
+            ?>
+
+        </div>
+    </div>
+<?php
+}else{
+?>
+<div<?php echo isset($atts['tz_id'])?' id="'.esc_attr($atts['tz_id']).'"':''; ?> class="module-latest-posts <?php
+echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>" >
 
     <div class="uk-slider-container-offset" data-uk-slider>
 
@@ -113,22 +167,22 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
                     ?>
                     <div>
                         <div class="uk-card">
-                            <div class="uk-card-media-top uk-transition-toggle <?php echo esc_attr($ripple_cl);?>">
+                            <div class="uk-card-media-top uk-transition-toggle <?php echo esc_attr($ripple_cl.$img_eff);?>">
                                 <?php if($latest_post_image_cover == true){
                                     ?>
                                 <div class="uk-cover-container">
-                                    <a href="<?php echo esc_url(get_permalink($post_item->ID));?>">
+                                    <a class="tz-img uk-display-block" href="<?php echo esc_url(get_permalink($post_item->ID));?>">
                                     <canvas height="<?php echo esc_attr($latest_post_image_cover_height);?>"></canvas>
                                     <img class="uk-transition-opaque <?php echo esc_attr($latest_post_image_transition);?>" src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?>" data-uk-cover>
-                                    <?php echo $ripple_html; ?>
+                                    <?php echo wp_kses($ripple_html,'post'); ?>
                                     </a>
                                 </div>
                             <?php
                                 }else{
                                 ?>
-                                <a href="<?php echo esc_url(get_permalink($post_item->ID));?>">
+                                <a class="tz-img  uk-display-block" href="<?php echo esc_url(get_permalink($post_item->ID));?>">
                                     <img class="uk-transition-opaque <?php echo esc_attr($latest_post_image_transition);?>" src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?> "/>
-                                    <?php echo $ripple_html; ?>
+                                    <?php echo wp_kses($ripple_html,'post'); ?>
                                 </a>
                             <?php
                                 }
@@ -145,20 +199,57 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
                                     $price = get_field('ap_price', $post_item->ID);
                                     $product_type   = get_field('ap_product_type', $post_item->ID);
                                     $price_notice_value = get_field('price-notice', $post_item->ID);
-                                ?>
-                                    <div class="ap-price-box">
-                                        <span class="ap-field-label"><?php esc_html_e('From','travelami')?></span>
-                                        <?php
-                                        $html = sprintf('<span class="ap-price"><b> %s</b> %s </span>',
-                                            esc_html__(' ', 'travelami'), AP_Helper::format_price($price));
-                                        echo wp_kses($html,'post');
-                                        if(!empty($price_notice_value) && $show_price_notice){
-                                            ?>
-                                            <span class="meta">
+                                    $rental         = get_field('ap_rental_price', $post_item->ID);
+                                    $rental_value    = get_field('ap_rental_unit', $post_item->ID);
+                                    if($rental_value){
+                                        $field_rental = get_field_object('ap_rental_unit');
+                                        $rental_unit = $field_rental['choices'][ $rental_value ];
+                                    }
+                                    $price_sold     = get_field('ap_price_sold', $post_item->ID);
+                                    $price_contact  = get_field('ap_price_contact', $post_item->ID);
+                                    if ((!$product_type || in_array('sale', $product_type)) && !empty($price)) {
+                                        ?>
+                                        <div class="ap-price-box">
+                                            <span class="ap-field-label"><?php esc_html_e('From','templaza-framework')?></span>
+                                            <?php
+                                            $html = sprintf('<span class="ap-price"> %s </span>',
+                                                AP_Helper::format_price($price));
+                                            echo wp_kses($html,'post');
+                                            if(!empty($price_notice_value)){
+                                                ?>
+                                                <span class="meta">
                                                 <?php echo esc_html($price_notice_value);?>
                                             </span>
-                                        <?php } ?>
-                                    </div>
+                                            <?php } ?>
+                                        </div>
+                                        <?php
+                                    }
+                                    if (!empty($product_type) && in_array('rental', $product_type) && !empty($rental)) {
+                                        ?>
+                                        <div class="ap-price-box">
+                                            <span class="ap-field-label"><?php esc_html_e('Price','templaza-framework')?></span>
+                                            <span class="ap-price"> <?php echo esc_html(AP_Helper::format_price($rental)); ?></span>
+                                        </div>
+                                        <?php
+                                    }
+                                    if (!empty($product_type) && in_array('sold', $product_type) && !empty($price_sold)) {
+                                        ?>
+                                        <div class="ap-price-box">
+                                            <span class="ap-field-label"><?php esc_html_e('Status','templaza-framework')?></span>
+                                            <span class="ap-price"> <?php echo esc_html($price_sold); ?></span>
+                                        </div>
+                                        <?php
+                                    }
+                                    if (!empty($product_type) && in_array('contact', $product_type) && !empty($price_contact)) {
+                                        ?>
+                                        <div class="ap-price-box">
+                                            <span class="ap-field-label"><?php esc_html_e('Price','templaza-framework')?></span>
+                                            <span class="ap-price"> <?php echo esc_html($price_contact); ?></span>
+                                        </div>
+                                        <?php
+                                    }
+                                        ?>
+
                                 <?php
                                 }else{
                                 if($latest_post_show_date == true || $latest_post_show_author == true){
@@ -211,3 +302,5 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>" >
 
     </div>
 </div>
+<?php
+}

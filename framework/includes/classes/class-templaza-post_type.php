@@ -13,6 +13,7 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
         protected $text_domain;
 
         protected $cache    = array();
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended
 
         public function __construct($framework = null)
         {

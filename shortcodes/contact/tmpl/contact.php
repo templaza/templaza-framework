@@ -32,8 +32,8 @@ if ($enable_contact) {
 
 if(!empty($contact_location) || !empty($contact_email)  || !empty($contact_phone ) || !empty($contact_phone)){
 ?>
-<div<?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="<?php
-echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
+<div<?php echo isset($atts['tz_id'])?' id="'.esc_attr($atts['tz_id']).'"':''; ?> class="<?php
+echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>">
     <?php
     if(!empty($contact_location)){
         ?>
@@ -60,7 +60,7 @@ echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>">
         <?php if($contact_phone_icon){ ?>
             <i class="contact-icon <?php echo esc_attr($contact_phone_icon);?>"></i>
         <?php } ?>
-        <a href="tel:<?php echo str_replace(array( '(', ')',' ' ),'', esc_attr($contact_phone));?>"><?php
+        <a href="tel:<?php echo esc_attr(str_replace(array( '(', ')',' ' ),'', esc_attr($contact_phone)));?>"><?php
             echo esc_attr($contact_phone);?></a>
         </span>
         <?php

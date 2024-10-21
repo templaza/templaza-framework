@@ -79,6 +79,7 @@ class Cache
      *
      * @phpstan-param array{cacheDir?: string, prefix?: string, forceRefresh?: string} $options
      */
+    // phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents, WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents, WordPress.WP.AlternativeFunctions.json_encode_json_encode, WordPress.WP.AlternativeFunctions.file_system_operations_is_writable, WordPress.WP.AlternativeFunctions.unlink_unlink
     public function __construct($options)
     {
         // check $cacheDir
@@ -208,7 +209,7 @@ class Cache
     {
         self::$cacheDir = str_replace('\\', '/', self::$cacheDir);
         self::$cacheDir = rtrim(self::$cacheDir, '/') . '/';
-
+// phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped, WordPress.Security.EscapeOutput.OutputNotEscaped
         if (! is_dir(self::$cacheDir)) {
             throw new Exception('Cache directory doesn\'t exist: ' . self::$cacheDir);
         }

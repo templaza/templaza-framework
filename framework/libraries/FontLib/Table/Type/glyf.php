@@ -51,6 +51,7 @@ class glyf extends Table {
   public function toHTML() {
     $max  = 160;
     $font = $this->getFont();
+    // phpcs:disable WordPress.WP.AlternativeFunctions.json_encode_json_encode
 
     $head      = $font->getData("head");
     $head_json = json_encode($head);

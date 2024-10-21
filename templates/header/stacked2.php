@@ -77,7 +77,7 @@ $data_attribs   = ' '.$data_attribs;
         if ($enable_offcanvas) {
            ?>
            <div class="uk-flex uk-flex-right uk-flex-middle">
-              <div class="header-offcanvas-trigger burger-menu-button <?php echo $offcanvas_togglevisibility; ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>">
+              <div class="header-offcanvas-trigger burger-menu-button <?php echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
                  <button type="button" class="button">
                     <span class="box">
                        <span class="inner"></span>
@@ -90,8 +90,8 @@ $data_attribs   = ' '.$data_attribs;
         echo '</div>';
         // header nav starts -->
         ?>
-        <div class="uk-flex uk-width uk-flex-center uk-flex-middle templaza-center-menu-wrap uk-visible@m pt-3"<?php echo $data_attribs;?>>
-            <div class="<?php echo implode(' ', $navWrapperClass)?>">
+        <div class="uk-flex uk-width uk-flex-center uk-flex-middle templaza-center-menu-wrap uk-visible@m pt-3"<?php echo wp_kses($data_attribs,'post');?>>
+            <div class="<?php echo esc_attr(implode(' ', $navWrapperClass))?>">
                <?php
                Menu::get_nav_menu(array(
                    'theme_location'              => $header_menu,
@@ -116,7 +116,7 @@ $data_attribs   = ' '.$data_attribs;
          }
         if ($block_1_type == 'custom') {
            echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item py-3">';
-           echo $block_1_custom;
+           echo wp_kses($block_1_custom,'post');
            echo '</div>';
         }
 
@@ -133,12 +133,12 @@ $data_attribs   = ' '.$data_attribs;
          }
         if ($block_1_type == 'custom') {
             echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item py-3">';
-           echo $block_1_custom;
+           echo wp_kses($block_1_custom,'post');
            echo '</div>';
         }
         // header nav starts
         ?>
-        <div class="header-stacked-inner uk-flex uk-width uk-flex-center uk-flex-middle"<?php echo $data_attribs;?>>
+        <div class="header-stacked-inner uk-flex uk-width uk-flex-center uk-flex-middle"<?php echo wp_kses($data_attribs,'post');?>>
 <!--           --><?php //if (!empty($header_mobile_menu)) { ?>
               <div class="uk-flex uk-flex-left uk-flex-middle uk-hidden@m">
                  <div class="header-mobilemenu-trigger d-lg-none burger-menu-button" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
@@ -169,8 +169,8 @@ $data_attribs   = ' '.$data_attribs;
               ?>
               <div class="uk-flex uk-flex-right uk-flex-middle">
                  <div class="header-offcanvas-trigger burger-menu-button <?php
-                 echo $offcanvas_togglevisibility; ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
-                 echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>">
+                 echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php
+                 echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
                     <button type="button" class="button">
                        <span class="box">
                           <span class="inner"></span>
@@ -192,7 +192,7 @@ $data_attribs   = ' '.$data_attribs;
          }
         if ($block_2_type == 'custom') {
            echo '<div class="uk-flex uk-width uk-flex-center uk-visible@m header-block-item py-3">';
-           echo $block_2_custom;
+           echo wp_kses($block_2_custom,'post');
            echo '</div>';
         }
         // header block ends
@@ -224,7 +224,7 @@ $data_attribs   = ' '.$data_attribs;
          }
         if ($block_1_type == 'custom') {
            echo '<div class="uk-flex uk-width uk-flex-right uk-flex-middle uk-visible@m header-block-item py-3">';
-           echo $block_1_custom;
+           echo wp_kses($block_1_custom,'post');
            echo '</div>';
         }
         // header block ends
@@ -232,9 +232,9 @@ $data_attribs   = ' '.$data_attribs;
         if ($enable_offcanvas) {
            ?>
            <div class="uk-flex uk-flex-right uk-flex-middle">
-              <div class="header-offcanvas-trigger burger-menu-button <?php echo $offcanvas_togglevisibility;
-              ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo $offcanvas_animation;
-              ?>" data-direction="<?php echo $offcanvas_direction; ?>">
+              <div class="header-offcanvas-trigger burger-menu-button <?php echo esc_attr($offcanvas_togglevisibility);
+              ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo esc_attr($offcanvas_animation);
+              ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
                  <button type="button" class="button">
                     <span class="box">
                        <span class="inner"></span>
@@ -248,8 +248,8 @@ $data_attribs   = ' '.$data_attribs;
         // header nav starts -->
         echo '<div class="uk-flex uk-width uk-visible@m templaza-divi-menu-wrap">';
         ?>
-        <div class="uk-flex uk-flex-left uk-flex-1 uk-flex-middle pt-3"<?php echo $data_attribs;?>>
-            <div class="<?php echo implode(' ', $navWrapperClass)?>">
+        <div class="uk-flex uk-flex-left uk-flex-1 uk-flex-middle pt-3"<?php echo wp_kses($data_attribs,'post');?>>
+            <div class="<?php echo esc_attr(implode(' ', $navWrapperClass))?>">
                 <?php
                 // header nav starts
                 Menu::get_nav_menu(array(
@@ -275,7 +275,7 @@ $data_attribs   = ' '.$data_attribs;
          }
         if ($block_2_type == 'custom') {
            echo '<div class="header-block-item  uk-flex uk-flex-right uk-flex-middled py-3">';
-           echo $block_2_custom;
+           echo wp_kses($block_2_custom,'post');
            echo '</div>';
         }
         echo '</div>';

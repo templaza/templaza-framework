@@ -443,11 +443,12 @@ class TemplazaFramework_ShortCode{
     }
 
     public function admin_template_setting(){
+        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
         if($el = $this -> get_element()){
             $params = isset($el['params'])?$el['params']:null;
             if($params){
                 ?>
-                <script type="text/html" id="tmpl-field-tz_layout-settings-<?php echo $el['id']; ?>">
+                <script type="text/html" id="tmpl-field-tz_layout-settings-<?php echo esc_attr($el['id']); ?>">
                     <?php if(!isset($this -> admin_template_settings[$this -> get_shortcode_name()])
                         || empty($this -> admin_template_settings[$this -> get_shortcode_name()])){
                         $this ->_init_admin_template_settings();
@@ -469,7 +470,7 @@ class TemplazaFramework_ShortCode{
                 ob_start();
                 ?>
                 <div class="fl_ui-panel-tab-content-container" data-fl-setting-title="<?php
-                echo isset($el['param_title'])?$el['param_title']:'';?>">
+                echo isset($el['param_title'])?esc_attr($el['param_title']):'';?>">
                     <table class="form-table">
                         <?php
                         if(class_exists('reduxCoreEnqueue')) {

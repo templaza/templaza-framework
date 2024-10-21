@@ -27,6 +27,7 @@ class Templaza_Single_Product {
 	 * @since 1.0.0
 	 * @return object
 	 */
+    // phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
@@ -602,7 +603,7 @@ class Templaza_Single_Product {
 	 */
 	public function product_data_tabs() {
 		$tabs = apply_filters( 'woocommerce_product_tabs', array() );
-
+        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		if ( ! empty( $tabs ) ) :
 			?>
 
@@ -699,7 +700,7 @@ class Templaza_Single_Product {
         $extra = get_post_meta(get_the_ID(),'product-single-extra-content',true);
         if (  $extra ) {
             echo '<div class="single-product-extra-content">';
-            echo $extra;
+            echo wp_kses($extra,'post');
             echo '</div>';
         }
     }

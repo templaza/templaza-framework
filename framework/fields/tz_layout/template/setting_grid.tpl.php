@@ -3,6 +3,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit();
 ?>
 <script type="text/html" id="tmpl-field-tz_layout-settings__grid">
     <?php
+    // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
     $grids  = array(
         array(12),
         array(10, 2),

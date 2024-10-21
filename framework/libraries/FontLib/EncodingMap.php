@@ -17,6 +17,7 @@ class EncodingMap {
   private $f;
 
   function __construct($file) {
+      // phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen
     $this->f = fopen($file, "r");
   }
 

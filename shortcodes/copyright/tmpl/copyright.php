@@ -11,7 +11,7 @@ $enable_footer         = isset($options['enable-footer'])?filter_var($options['e
 if ($enable_footer) {
     $footer_copyright         = isset($options['footer-copyright'])?$options['footer-copyright']:'';
     // values to find & replace
-    $year       = date('Y');
+    $year       = gmdate('Y');
     $site_title = get_bloginfo('name');
     $find       = array('{year}', '{sitetitle}');
     $replace    = array($year, $site_title);
@@ -20,6 +20,6 @@ if ($enable_footer) {
 }
 if(isset($footertext)){
 ?>
-<div<?php echo isset($atts['tz_id'])?' id="'.$atts['tz_id'].'"':''; ?> class="<?php
-echo isset($atts['tz_class'])?trim($atts['tz_class']):''; ?>"><?php echo $footertext; ?></div>
+<div<?php echo isset($atts['tz_id'])?' id="'.esc_attr($atts['tz_id']).'"':''; ?> class="<?php
+echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>"><?php echo wp_kses($footertext,'post'); ?></div>
 <?php } ?>

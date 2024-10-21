@@ -20,7 +20,7 @@ $action_html    = ob_get_contents();
 ob_end_clean();
 
 $action_html    = !empty($action_html)?trim($action_html):'';
-
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 if($show_compare_button || $show_quickview_button || (isset($actions) && !empty($actions)) || !empty($action_html)){ ?>
     <div class="uk-position-bottom-right ap-archive-btn-action uk-transition-fade">
         <?php if($show_compare_button){
@@ -32,7 +32,7 @@ if($show_compare_button || $show_quickview_button || (isset($actions) && !empty(
             <a href="javascript:" class="uk-icon-button<?php echo $has_compare?' ap-in-compare-list':'';
             ?>" data-ap-compare-button="id: <?php the_ID();
             ?>; active_icon: fas fa-clipboard-list; icon: fas fa-balance-scale" data-uk-tooltip="<?php
-            _e($active_text, 'templaza-framework');?>">
+            esc_html($active_text);?>">
                 <?php if($has_compare){?>
                     <i class="fas fa-clipboard-list js-ap-icon"></i>
                 <?php }else{?>

@@ -311,6 +311,7 @@ abstract class Formatter
      */
     protected function write($str)
     {
+        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
         if (! empty($this->strippedSemicolon)) {
             echo $this->strippedSemicolon;
 

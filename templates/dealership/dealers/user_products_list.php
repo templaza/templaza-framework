@@ -43,12 +43,12 @@ if($endpoint){
                             <div class=" uk-flex-top uk-grid" data-uk-grid="">
                                 <?php if(!empty($avatar)){?>
                                     <div class="uk-width-1-4@s">
-                                        <img class="dealer-image" src="<?php echo $avatar; ?>" width="300" height="300" alt="">
+                                        <img class="dealer-image" src="<?php echo esc_url($avatar); ?>" width="300" height="300" alt="">
                                     </div>
                                 <?php } ?>
                                 <div class="uk-width-expand">
                                     <h3 class="uk-card-title uk-margin-remove-bottom">
-                                        <?php echo $author -> get('display_name');?>
+                                        <?php echo esc_html($author -> get('display_name'));?>
                                     </h3>
                                     <?php
                                     if($ap_show_vendor_number){
@@ -56,9 +56,11 @@ if($endpoint){
                                     <p class="uk-text-meta uk-margin-remove-top">
                                         <?php
                                         if(ProductHelper::get_total_by_user_id($author -> ID) == 1){
-                                            echo sprintf(__('%s Product', 'dealership'), ProductHelper::get_total_by_user_id($author -> ID));
+                                            /* translators: %s - widget. */
+                                            echo sprintf(esc_html__('%s Product', 'templaza-framework'), esc_html(ProductHelper::get_total_by_user_id($author -> ID)));
                                         }else{
-                                            echo sprintf(__('%s Products', 'dealership'), ProductHelper::get_total_by_user_id($author -> ID));
+                                            /* translators: %s - widget. */
+                                            echo sprintf(esc_html__('%s Products', 'templaza-framework'), esc_html(ProductHelper::get_total_by_user_id($author -> ID)));
                                         }
                                         ?>
                                     </p>
@@ -66,18 +68,18 @@ if($endpoint){
                                     }
                                     ?>
                                     <?php if(!empty($author_desc)){ ?>
-                                        <div class="description uk-margin-bottom"><?php echo $author_desc; ?></div>
+                                        <div class="description uk-margin-bottom"><?php echo esc_html($author_desc); ?></div>
                                     <?php }?>
                                     <div class="uk-grid-small uk-child-width-1-3 " data-uk-grid>
                                         <div>
-                                            <label class="uk-text-default uk-text-bold uk-margin-small"><?php echo __('Email', 'dealership'); ?></label>
-                                            <div class="uk-text-small"><?php echo $author -> user_email; ?></div>
+                                            <label class="uk-text-default uk-text-bold uk-margin-small"><?php echo esc_html__('Email', 'templaza-framework'); ?></label>
+                                            <div class="uk-text-small"><?php echo esc_html($author -> user_email); ?></div>
                                         </div>
                                         <?php if($author -> user_url) { ?>
                                         <div>
-                                            <label class="uk-text-default uk-text-bold uk-margin-small"><?php echo __('Website', 'dealership'); ?></label>
-                                            <div class="uk-text-small"><a target="_blank" href="<?php echo $author -> user_url; ?>"><?php
-                                                    echo $author -> user_url; ?></a></div>
+                                            <label class="uk-text-default uk-text-bold uk-margin-small"><?php echo esc_html__('Website', 'templaza-framework'); ?></label>
+                                            <div class="uk-text-small"><a target="_blank" href="<?php echo esc_url($author -> user_url); ?>"><?php
+                                                    echo esc_html($author -> user_url); ?></a></div>
                                         </div>
                                         <?php } ?>
                                     </div>
@@ -111,7 +113,7 @@ if($endpoint){
                             ?>
                             <div class="uk-width-1-1">
                                 <div class="uk-card uk-card-default uk-padding">
-                                    <p><?php _e('Products is coming.', 'dealership');?></p>
+                                    <p><?php esc_html_e('Products is coming.', 'templaza-framework');?></p>
                                 </div>
                             </div>
                             <?php
@@ -172,7 +174,7 @@ if($endpoint){
     }else{
         ?>
         <div class="uk-alert-primary" data-uk-alert>
-            <p><?php _e('No matching results.', 'dealership');?></p>
+            <p><?php esc_html_e('No matching results.', 'templaza-framework');?></p>
         </div>
     <?php }
 }

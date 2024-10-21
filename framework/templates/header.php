@@ -11,12 +11,12 @@ $theme  = wp_get_theme();
         <div class="logo uk-width-auto@m uk-text-left@m uk-text-center">
             <h1 class="title uk-margin-small-bottom"><?php
 			    if (file_exists(get_template_directory().'/assets/images/logo-admin.png')) {
-				    echo '<img src="'.get_template_directory_uri().'/assets/images/logo-admin.png'.'" alt="'.$theme->get('Name').'" />';
+				    echo '<img src="'.esc_url(get_template_directory_uri().'/assets/images/logo-admin.png').'" alt="'.esc_attr($theme->get('Name')).'" />';
 			    } else {
-				    echo  wp_get_theme()->get('Name')? $theme->get('Name') .__(' theme dashboard', 'templaza-framework'):__('TemPlaza Framework', 'templaza-framework');
+				    echo  esc_html(wp_get_theme()->get('Name'))? esc_html($theme->get('Name')) .esc_html__(' theme dashboard', 'templaza-framework'):esc_html__('TemPlaza Framework', 'templaza-framework');
 			    } ?></h1>
             <div class="uk-text-meta">
-                <span class="desc-meta"><?php echo sprintf(__("Version %s", 'templaza-framework'),$theme->get('Version')); ?></span>
+                <span class="desc-meta"><?php /* translators: %s - Version. */ echo sprintf(esc_html__("Version %s", 'templaza-framework'),esc_html($theme->get('Version'))); ?></span>
             </div>
         </div>
 	    <?php

@@ -41,7 +41,6 @@ if($show_badges && is_array($product_type)){
             }
         }
 
-
     }else{
         if(in_array('sale', $product_type)){
             $label = $sale_label;

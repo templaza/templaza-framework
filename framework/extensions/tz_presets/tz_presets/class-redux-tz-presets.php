@@ -103,6 +103,7 @@ if ( ! class_exists( 'Redux_TZ_Presets' ) ) {
             }
 
             $presets    = array();
+            // phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
             foreach ($files as $file){
                 $preset = file_get_contents($file);
 

@@ -27,7 +27,7 @@ class WXR_Parser_XML {
 	function parse( $file ) {
 		$this->wxr_version = $this->in_post = $this->cdata = $this->data = $this->sub_data = $this->in_tag = $this->in_sub_tag = false;
 		$this->authors = $this->posts = $this->term = $this->category = $this->tag = array();
-
+        // phpcs:disable WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$xml = xml_parser_create( 'UTF-8' );
 		xml_parser_set_option( $xml, XML_OPTION_SKIP_WHITE, 1 );
 		xml_parser_set_option( $xml, XML_OPTION_CASE_FOLDING, 0 );

@@ -15,7 +15,7 @@ $fields     = AP_Custom_Field_Helper::get_custom_fields_display_flag_by_product_
 
 // Get custom fields with no group
 $fields_no_group    = AP_Custom_Field_Helper::get_custom_fields_without_group_display_flag_by_product_id('show_in_listing', get_the_ID());
-
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 if(is_array($fields_no_group) && !empty($fields_no_group)){
     $fields = !empty($fields)?array_merge($fields_no_group, $fields):$fields_no_group;
 }
@@ -50,18 +50,18 @@ if(!empty($fields)){
         <div class="ap-spec-item uk-display-inline-block" >
             <span>
             <?php
-            if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
-                echo '<span class="ap-style1-icon">';
+            if((!empty($f_icon['icon']) || !empty($f_icon_image)) && $show_icon){
+                echo '<span class="ap-style1-icon" title="'.$f_attr['label'].'">';
                 if($f_icon['type'] == 'uikit-icon'){
                 ?>
-                    <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
+                    <i data-uk-icon="icon:<?php echo esc_attr($f_icon['icon']); ?>;"></i>
                     <?php
                     }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
                         echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
-                            array('data-uk-svg' => ''));
+                            array('data-uk-svg' => '', 'alt' => $f_attr['label']));
                     }elseif(!empty($f_icon['icon'])){
                     ?>
-                    <i class="<?php echo $f_icon['icon']; ?>"></i>
+                    <i class="<?php echo esc_attr($f_icon['icon']); ?>"></i>
                     <?php
                     }
                 echo '</span>';
@@ -83,6 +83,8 @@ if(!empty($fields)){
                     if($f_attr['append']){
                         ?><span class="custom-field-append"><?php echo esc_html($f_attr['append']);?></span> <?php
                     }
+                }elseif($f_attr['type'] == 'true_false'){
+
                 }else{
                     echo esc_html($f_value);
                 }

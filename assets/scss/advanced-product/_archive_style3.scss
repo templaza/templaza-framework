@@ -169,7 +169,7 @@
   bottom:0;
   right:80px;
   color:$tztheme-button_text_color;
-  @include transition($tz-basic-transition);
+  @include transition($tztheme-transition-all);
   z-index: 9999;
   .uk-button{
     border:none;
@@ -190,7 +190,7 @@
     cursor: pointer;
     height: 20px;
     line-height: 20px;
-    @include transition($tz-basic-transition);
+    @include transition($tztheme-transition-all);
     padding:0 2px 5px 5px;
     .fa-plus{
       display:none;

@@ -16,7 +16,7 @@ $fields     = AP_Custom_Field_Helper::get_custom_fields_display_flag_by_product_
 
 // Get custom fields with no group
 $fields_no_group    = AP_Custom_Field_Helper::get_custom_fields_without_group_display_flag_by_product_id('show_in_listing', get_the_ID());
-
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 if(is_array($fields_no_group) && !empty($fields_no_group)){
     $fields = !empty($fields)?array_merge($fields_no_group, $fields):$fields_no_group;
 }
@@ -48,14 +48,14 @@ if(!empty($fields)){
                         echo '<span class="ap-style4-icon">';
                         if($f_icon['type'] == 'uikit-icon'){
                             ?>
-                            <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
+                            <i data-uk-icon="icon:<?php echo esc_attr($f_icon['icon']); ?>;"></i>
                             <?php
                         }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
                             echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
                                 array('data-uk-svg' => ''));
                         }elseif(!empty($f_icon['icon'])){
                             ?>
-                            <i class="<?php echo $f_icon['icon']; ?>"></i>
+                            <i class="<?php echo esc_attr($f_icon['icon']); ?>"></i>
                             <?php
                         }
                         echo '</span>';

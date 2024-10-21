@@ -20,7 +20,7 @@ $fields_no_group    = AP_Custom_Field_Helper::get_custom_fields_without_group_di
 if(is_array($fields_no_group) && !empty($fields_no_group)){
     $fields = !empty($fields)?array_merge($fields_no_group, $fields):$fields_no_group;
 }
-
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
 $ap_product_related_spec      = isset($templaza_options['ap_product-related-spec-limit'])?$templaza_options['ap_product-related-spec-limit']:3;
 
 if(!empty($fields)){
@@ -45,18 +45,18 @@ if(!empty($fields)){
                 ?>
                 <span class="ap-spec-value">
                     <?php
-                    if((!empty($f_icon) || !empty($f_icon_image)) && $show_icon){
+                    if((!empty($f_icon['icon']) || !empty($f_icon_image)) && $show_icon){
                         echo '<span class="ap-style2-icon">';
                         if($f_icon['type'] == 'uikit-icon'){
                             ?>
-                            <i data-uk-icon="icon:<?php echo $f_icon['icon']; ?>;"></i>
+                            <i data-uk-icon="icon:<?php echo esc_attr($f_icon['icon']); ?>;"></i>
                             <?php
                         }else if((empty($f_icon['type']) || empty($f_icon['icon'])) && !empty($f_icon_image)){
                             echo wp_get_attachment_image($f_icon_image, 'thumbnail', '',
                                 array('data-uk-svg' => ''));
                         }elseif(!empty($f_icon['icon'])){
                             ?>
-                            <i class="<?php echo $f_icon['icon']; ?>"></i>
+                            <i class="<?php echo esc_attr($f_icon['icon']); ?>"></i>
                             <?php
                         }
                         echo '</span>';

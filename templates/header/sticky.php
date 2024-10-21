@@ -111,8 +111,8 @@ if (count($header_sticky_designs)) {
 }
 ?>
 <?php /* header starts*/ ?>
-<div id="templaza-sticky-header" class="<?php echo implode(' ', $class); ?> uk-hidden">
-    <div class="templaza-sticky-inner  <?php echo esc_attr($sticky_width);?>" <?php echo $attribs;?>>
+<div id="templaza-sticky-header" class="<?php echo esc_attr(implode(' ', $class)); ?> uk-hidden">
+    <div class="templaza-sticky-inner  <?php echo esc_attr($sticky_width);?>" <?php echo wp_kses($attribs,'post');?>>
         <div class="uk-width uk-flex uk-flex-row uk-flex-between uk-flex-middle">
     <!--        --><?php //if (!empty($header_mobile_menu)) { ?>
                 <div class="uk-flex uk-flex-left uk-hidden@m uk-flex-middle">
@@ -188,7 +188,7 @@ if (count($header_sticky_designs)) {
                         <?php
                         Templates::load_my_layout('inc.icon',true,false);
                         ?>
-                        <div class="header-offcanvas-trigger burger-menu-button <?php echo $offcanvas_togglevisibility; ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>">
+                        <div class="header-offcanvas-trigger burger-menu-button <?php echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>">
                             <button type="button" class="button">
                          <span class="box">
                             <span class="inner"></span>

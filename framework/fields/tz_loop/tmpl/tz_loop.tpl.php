@@ -10,7 +10,7 @@ if($redux = $this -> redux){
 
 ?>
 
-<script type="text/html" id="tmpl-tzfrm-field-tz_loop-template__field-<?php echo $this->field['id']; ?>">
+<script type="text/html" id="tmpl-tzfrm-field-tz_loop-template__field-<?php echo esc_attr($this->field['id']); ?>">
     <?php
     $has_group  = (isset($this -> field['group_fields']) && count($this -> field['group_fields']))?true:false;
     foreach ($redux -> sections as $k => $section) {

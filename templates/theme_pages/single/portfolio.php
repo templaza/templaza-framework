@@ -21,7 +21,7 @@ $gallery_size       = $options[$prefix.'-gallery-size'];
                 <div class="templaza-blog-item-info templaza-post-meta uk-article-meta uk-text-center uk-margin-large-bottom">
                     <span><?php echo esc_html(get_the_date()); ?></span>
                     <span class="author">
-                    <?php echo get_the_author_posts_link();?>
+                    <?php echo wp_kses(get_the_author_posts_link(),'post');?>
                     </span>
                     <span class="category">
                         <?php
@@ -121,7 +121,7 @@ $gallery_size       = $options[$prefix.'-gallery-size'];
 	            <?php
 	            $alita_portfolio_embed = get_post_meta( get_the_ID(),'oembed', true );
 	            if ($alita_portfolio_embed ) {
-                    $video = parse_url($alita_portfolio_embed);
+                    $video = wp_parse_url($alita_portfolio_embed);
                     switch($video['host']) {
                         case 'youtu.be':
                             $id = trim($video['path'],'/');

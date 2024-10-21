@@ -31,7 +31,7 @@ if(!empty($social_profiles)){
     }
 ?>
 
-<ul class=" tz-header-social uk-child-width-auto uk-grid <?php echo $social_gap; ?> " data-uk-grid>
+<ul class=" tz-header-social uk-child-width-auto uk-grid <?php echo esc_attr($social_gap); ?> " data-uk-grid>
    <?php
    foreach ($social_profiles as $social_profile) {
        $social_profile_link = $social_profile->link;
@@ -51,9 +51,9 @@ if(!empty($social_profiles)){
                 break;
           }
       }
-      echo '<li><a style="' . ($style == 'inherit' ? '' : 'color:'.$social_profile->color .' !important;')
-          . '" href="' . $social_profile_link . '" target="_blank" rel="noopener"><i class="'
-          . $social_profile->icon . '"></i></a></li>';
+      echo '<li><a style="' . ($style == 'inherit' ? '' : 'color:'.esc_attr($social_profile->color) .' !important;')
+          . '" href="' . esc_url($social_profile_link) . '" target="_blank" rel="noopener"><i class="'
+          . esc_attr($social_profile->icon) . '"></i></a></li>';
    }
    ?>
 </ul>

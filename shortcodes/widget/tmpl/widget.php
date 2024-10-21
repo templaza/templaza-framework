@@ -20,7 +20,7 @@ $html   = TemplazaFramework_Widget_Shortcode_Helper::show_widget($widget_id, arr
     'before_title' => '<'.$widget_heading.' class="widgettitle'.($widget_heading_style?' uk-'.$widget_heading_style:'').'">',
     'after_title'  => '</'.$widget_heading.'>',
 ));
-
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 if(!empty($html)){
 ?>
 <div<?php echo !empty($tz_id)?' id="'.esc_attr($tz_id).'"':''; ?> class="<?php

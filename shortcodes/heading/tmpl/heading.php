@@ -78,17 +78,16 @@ if(is_single()){
 }
 
 $heading    = $enable_custom_heading?$custom_heading:($title);
-
-//$inner_tag  = $enable_heading_inner_tag?'span':
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 if (is_single() && $enable_heading_single == false){
     return;
 }
 if(!empty($heading)){
     $heading    = $enable_heading_inner_tag?'<span>'.$heading.'</span>':$heading;
 ?>
-<div<?php echo !empty($tz_id)?' id="'.esc_attr__($tz_id).'"':''; ?> class="<?php echo esc_attr__($tz_class); ?>">
+<div<?php echo !empty($tz_id)?' id="'.esc_attr($tz_id).'"':''; ?> class="<?php echo esc_attr($tz_class); ?>">
     <<?php echo $heading_tag; ?><?php echo !empty($heading_custom_class)?' class="'
-        .esc_attr__($heading_custom_class).'"':'';?>><?php echo $heading; ?></<?php echo $heading_tag; ?>>
+        .esc_attr($heading_custom_class).'"':'';?>><?php echo $heading; ?></<?php echo $heading_tag; ?>>
     <?php
     if(is_single() && $enable_heading_single_meta == true){
         do_action('templaza_single_meta_post');

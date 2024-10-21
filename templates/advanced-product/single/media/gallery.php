@@ -14,7 +14,7 @@ $ap_tiny_thumb  = isset($templaza_options['ap_product-slider-thumbnail'])?filter
 $no_cookie      =   0;
 if (isset($ap_video) && !empty($ap_video)) {
     if (wp_oembed_get($ap_video)) :
-        $video = parse_url($ap_video);
+        $video = wp_parse_url($ap_video);
         $youtube_no_cookie = $no_cookie ? '-nocookie' : '';
         switch($video['host']) {
             case 'youtu.be':

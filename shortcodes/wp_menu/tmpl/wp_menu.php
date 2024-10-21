@@ -41,7 +41,7 @@ if ($nav_menu){
 ?>
 <div<?php echo !empty($tz_id)?' id="'.esc_attr($tz_id).'"':''; ?> class="<?php
     echo !empty($tz_class)?esc_attr($tz_class):''; ?>">
-    <aside id="widget-area-<?php echo $id; ?>" class="widget-area">
+    <aside id="widget-area-<?php echo esc_attr($id); ?>" class="widget-area">
     <?php
         the_widget( $type, $atts, $args );
     ?>

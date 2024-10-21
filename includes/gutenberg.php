@@ -42,6 +42,7 @@ class TemplazaFramework_GutenbergBlock{
             'render_callback' => array($this, 'render')
         );
         $title              = str_replace('_', ' ', $this -> get_name());
+        /* translators: %s - Installed. */
         $def_args['title']  = sprintf(__('Templaza: %s'), ucwords($title));
 
         return $def_args;

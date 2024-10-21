@@ -200,7 +200,7 @@ if(!empty($unit) && is_array($unit)){
                             class="uk-float-left uk-width-expand redux-typography-multi-style ' . esc_attr( $this -> field['class'] ) . '"
                             original-title="' . esc_html__( 'Load Other Font Weight &amp; Style', 'templaza-framework' ) . '"
                             id="' . esc_attr( $this -> field['id'] ) . '_multi_styles"
-                            data-value="' . esc_attr( json_encode($this -> value['font-multi-styles']) ) . '"' . esc_attr( $select2_data ) . '>';
+                            data-value="' . esc_attr( wp_json_encode($this -> value['font-multi-styles']) ) . '"' . esc_attr( $select2_data ) . '>';
 
         echo '</select></div>';
     }
@@ -381,6 +381,7 @@ if(!empty($unit) && is_array($unit)){
         && is_array($this -> field['units']['font-size'])){
         $font_size_units    = array_merge($this -> field['units']['font-size'], $font_size_units);
     }
+    // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
     if ( true === $this -> field['font-size'] ) {
         echo '<div class="input_wrapper font-size redux-container-typography">';
         echo '<div data-uk-grid>';

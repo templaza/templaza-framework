@@ -6,9 +6,10 @@ use \TemPlazaFramework\Functions;
 $plugin = Functions::get_my_data();
 
 if($sysinfo = $this -> get_system_info()){
+    // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
 <div id="system-information" class="system-information uk-card uk-card-default uk-card-body rounded-3">
-    <h2><?php echo __('System Information', 'templaza-framework'); ?></h2>
+    <h2><?php echo esc_html__('System Information', 'templaza-framework'); ?></h2>
     <table class="uk-table uk-table-divider">
         <tbody>
         <?php foreach ($sysinfo as $sys){?>

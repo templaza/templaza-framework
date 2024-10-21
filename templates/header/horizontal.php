@@ -232,7 +232,7 @@ if (count($header_stack_designs)) {
             ?>
             <?php
             if ($enable_offcanvas) { ?>
-                <div class="header-offcanvas-trigger burger-menu-button <?php echo $offcanvas_togglevisibility; ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo $offcanvas_animation; ?>" data-direction="<?php echo $offcanvas_direction; ?>" >
+                <div class="header-offcanvas-trigger burger-menu-button <?php echo esc_attr($offcanvas_togglevisibility); ?>" data-offcanvas="#templaza-offcanvas" data-effect="<?php echo esc_attr($offcanvas_animation); ?>" data-direction="<?php echo esc_attr($offcanvas_direction); ?>" >
                     <button type="button" class="button">
                          <span class="box">
                             <span class="inner"></span>
@@ -252,7 +252,7 @@ if (count($header_stack_designs)) {
                     }
                     if ($block_1_type == 'custom') {
                         echo '<div class="header-block-item">';
-                        echo $block_1_custom;
+                        echo wp_kses($block_1_custom,'post');
                         echo '</div>';
                     }
                     ?>

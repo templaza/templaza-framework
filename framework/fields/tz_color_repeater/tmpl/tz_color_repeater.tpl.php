@@ -6,12 +6,12 @@ use TemPlazaFramework\Functions;
 
 if($redux = $this -> redux){
 ?>
-<script type="text/html" id="tmpl-tzfrm-field-<?php echo $this -> type; ?>-template__field-<?php echo $this->field['id']; ?>">
+<script type="text/html" id="tmpl-tzfrm-field-<?php echo esc_attr($this -> type); ?>-template__field-<?php echo esc_attr($this->field['id']); ?>">
     <?php
     foreach ($redux -> sections as $k => $section) {
         ?>
         <div class="uk-card uk-card-body uk-card-default uk-box-shadow-small uk-card-small uk-margin-bottom uk-flex uk-flex-middle field-<?php
-            echo $this -> type; ?>__item">
+            echo esc_attr($this -> type); ?>__item">
             <?php
             $section['class'] = isset($section['class']) ? ' ' . $section['class'] : '';
 

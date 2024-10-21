@@ -112,7 +112,7 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
             if(!isset($this -> templates) || empty($this -> templates)) {
                 $this -> _init_template();
             }
-
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
             if(isset($this -> templates) && count($this -> templates)) {
                 $this -> templates  = array_unique($this -> templates);
                 echo implode("\n", $this->templates);

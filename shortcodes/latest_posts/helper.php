@@ -120,6 +120,7 @@ if(!class_exists('TemPlazaFramework\Shortcode\Helper\Latest_PostsHelper')){
             $cats = array();
 
             $args  = array(
+                'taxonomy'   => $term,
                 'pad_counts'   => 1,
                 'hierarchical' => 1,
                 'hide_empty'   => false,
@@ -127,7 +128,7 @@ if(!class_exists('TemPlazaFramework\Shortcode\Helper\Latest_PostsHelper')){
                 'menu_order'   => false
             );
 
-            $terms = get_terms( $term, $args );
+            $terms = get_terms( $args );
             if ( is_wp_error( $terms ) ) {
             } else {
                 if ( empty( $terms ) ) {

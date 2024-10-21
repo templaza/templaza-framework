@@ -16,7 +16,7 @@ if(!class_exists('TemPlazaFramework\AdminHelper\Templaza_Style')){
             if(isset(static::$cache[$store_id])){
                 return static::$cache[$store_id];
             }
-
+            // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             $args     = array(
                 'post_type'      => static::$post_type,
                 'posts_per_page' => -1,

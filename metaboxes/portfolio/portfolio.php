@@ -6,7 +6,7 @@ use TemPlazaFramework\Post_TypeFunctions;
 
 if(!class_exists('TemplazaFramework_MetaBox_Portfolio')){
     class TemplazaFramework_MetaBox_Portfolio extends TemplazaFramework_MetaBox{
-
+        // phpcs:disable WordPress.DB.SlowDBQuery.slow_db_query_meta_key
         public function register(){
             // Get all post types without templaza_style
             $metaboxes[] = array(
@@ -53,10 +53,6 @@ if(!class_exists('TemplazaFramework_MetaBox_Portfolio')){
                 if(method_exists($this,'post_type_table_head')) {
                     add_filter('manage_'.$post_type.'_posts_columns', array($this, 'post_type_table_head'));
                 }
-//                // Duplicate post action
-//                add_action("templaza-framework/post-type/{$post_type}/duplicate", array($this, 'post_duplicate'), 11, 2);
-//                // Set home for post type
-//                add_action( 'admin_action_'.$post_type.'_set_default', array($this, 'post_type_set_default') );
             }
 
         }
@@ -81,6 +77,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Portfolio')){
          * @param string $post_id
          * */
         public function post_type_table_content($column_name, $post_id ){
+            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
             if ($column_name == 'home') {
                 $home   = get_post_meta($post_id,'home', true);
                 $action = $this -> post_type -> get_post_type().'_set_default';

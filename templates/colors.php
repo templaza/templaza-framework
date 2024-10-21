@@ -159,17 +159,6 @@ $mobile_active_background_color = CSS::make_color_rgba_redux($mobile_active_back
 $contact_icon_color     = isset($options['contact-icon-color'])?$options['contact-icon-color']:'';
 $contact_icon_color     = CSS::make_color_rgba_redux($contact_icon_color);
 
-//$icon_color = $template->params->get('icon_color', '');
-
-// Chưa có options cần xem xét
-//$social_icon_color = $template->params->get('social_icon_color', '');
-//$social_icon_color_hover = $template->params->get('social_icon_color_hover', '');
-
-//Extensions
-//$hikacart_icon_color = $template->params->get('hikacart_icon_color', '');
-//$login_icon_color = $template->params->get('login_icon_color', '');
-//$menu_icon_color = $template->params->get('dropdownmenu_icon_color', '');
-
 $button_css             = '';
 $button_color           = isset($options['button-color'])?$options['button-color']:'';
 $button_color_hover     = isset($options['button-color-hover'])?$options['button-color-hover']:'';
@@ -228,9 +217,54 @@ $footer_css             = !empty($footer_link_color_hover)?'color:'.$footer_link
 $footer_css             = !empty($footer_css)?'.templaza-footer a:hover{'.$footer_css.'}':'';
 Templates::add_inline_style($footer_css);
 
-?>
+$cursor_css             = [];
+$cursor_enable   = isset($options['enable-cursor-effects'])?filter_var($options['enable-cursor-effects'], FILTER_VALIDATE_BOOLEAN):false;
+if($cursor_enable){
+    $cursor_eff   = isset($options['cursor-effects'])?$options['cursor-effects']:'';
+    $cursor_color     = isset($options['cursor-color'])?$options['cursor-color']:'';
+    $cursor_color     = CSS::make_color_rgba_redux($cursor_color);
+    switch ($cursor_eff) {
+        case "effect1":
+            $cursor_css[] = '.cursor-effect1 .cursor__inner{fill:'.$cursor_color.'}';
+            break;
+        case "effect2":
+            $cursor_border_color     = isset($options['cursor-color-2'])?$options['cursor-color-2']:'';
+            $cursor_border_color     = CSS::make_color_rgba_redux($cursor_border_color);
+            $cursor_border_width     = isset($options['cursor-color-width'])?$options['cursor-color-width']:'1';
+            $cursor_css[] = '.cursor-effect2.cursor--1 .cursor__inner{fill:'.$cursor_color.'}';
+            $cursor_css[] = '.cursor-effect2.cursor--2 .cursor__inner{stroke:'.$cursor_border_color.'}';
+            $cursor_css[] = '.cursor-effect2.cursor--2 .cursor__inner{stroke-width:'.$cursor_border_width.'px}';
+            break;
+        case "effect3":
+            $cursor_border_width     = isset($options['cursor-color-width'])?$options['cursor-color-width']:'1';
+            $cursor_css[] = '.cursor-effect3 .cursor__inner{stroke:'.$cursor_color.'}';
+            $cursor_css[] = '.cursor-effect3 .cursor__inner{stroke-width:'.$cursor_border_width.'px}';
+            break;
+        case "effect4":
+            $cursor_border_width     = isset($options['cursor-color-width'])?$options['cursor-color-width']:'1';
+            $cursor_css[] = '.cursor-effect4 .cursor__inner{stroke:'.$cursor_color.'}';
+            $cursor_css[] = '.cursor-effect4 .cursor__inner{stroke-width:'.$cursor_border_width.'px}';
+            break;
+        case "effect5":
+            $cursor_css[] = '.cursor-effect5 .cursor__inner{stroke:'.$cursor_color.'}';
+            break;
+        case "effect6":
+            $cursor_css[] = '.cursor-effect6 .cursor__inner{fill:'.$cursor_color.'}';
+            break;
+        case "effect7":
+            $cursor_border_width     = isset($options['cursor-color-width'])?$options['cursor-color-width']:'1.2';
+            $cursor_css[] = '.cursor-effect7 .cursor__inner{stroke:'.$cursor_color.'}';
+            $cursor_css[] = '.cursor-effect7 .cursor__inner{stroke-width:'.$cursor_border_width.'px}';
+            break;
+        default:
 
-<?php
+    }
+
+    Templates::add_inline_style(implode('', $cursor_css));
+}
+
+
+
 $body_modal_bg     = isset($options['body-modal-bg'])?$options['body-modal-bg']:'';
 $site_maxwidth     = isset($options['layout-maxwidth'])?$options['layout-maxwidth']:'';
 $body_modal_bg     = CSS::make_color_rgba_redux($body_modal_bg);
@@ -453,10 +487,27 @@ $blog_author_color     = isset($options['blog-author-color'])?$options['blog-aut
 $blog_author_color     = CSS::make_color_rgba_redux($blog_author_color);
 $blog_meta_link_hover_color     = isset($options['blog-meta-link-hover-color'])?$options['blog-meta-link-hover-color']:'';
 $blog_meta_link_hover_color     = CSS::make_color_rgba_redux($blog_meta_link_hover_color);
-$blog_author_bg_color     = isset($options['blog-author-bg-color'])?$options['blog-author-bg-color']:'';
-$blog_author_bg_color     = CSS::make_color_rgba_redux($blog_author_bg_color);
-$blog_author_color     = isset($options['blog-author-color'])?$options['blog-author-color']:'';
-$blog_author_color     = CSS::make_color_rgba_redux($blog_author_color);
+
+$blog_meta_color_single     = isset($options['blog-meta-color-single'])?$options['blog-meta-color-single']:'';
+$blog_meta_color_single     = CSS::make_color_rgba_redux($blog_meta_color_single);
+$blog_meta_link_color_single     = isset($options['blog-meta-link-color-single'])?$options['blog-meta-link-color-single']:'';
+$blog_meta_link_color_single     = CSS::make_color_rgba_redux($blog_meta_link_color_single);
+$blog_meta_link_hover_color_single     = isset($options['blog-meta-link-hover-color-single'])?$options['blog-meta-link-hover-color-single']:'';
+$blog_meta_link_hover_color_single     = CSS::make_color_rgba_redux($blog_meta_link_hover_color_single);
+
+$breadcrumb_link     = isset($options['breadcrumb-link'])?$options['breadcrumb-link']:'';
+$breadcrumb_link     = CSS::make_color_rgba_redux($breadcrumb_link);
+$breadcrumb_link_hover     = isset($options['breadcrumb-link-hover'])?$options['breadcrumb-link-hover']:'';
+$breadcrumb_link_hover     = CSS::make_color_rgba_redux($breadcrumb_link_hover);
+$breadcrumb_current     = isset($options['breadcrumb-current'])?$options['breadcrumb-current']:'';
+$breadcrumb_current     = CSS::make_color_rgba_redux($breadcrumb_current);
+
+$breadcrumb_link_single     = isset($options['breadcrumb-link-single'])?$options['breadcrumb-link-single']:'';
+$breadcrumb_link_single     = CSS::make_color_rgba_redux($breadcrumb_link_single);
+$breadcrumb_link_hover_single     = isset($options['breadcrumb-link-hover-single'])?$options['breadcrumb-link-hover-single']:'';
+$breadcrumb_link_hover_single     = CSS::make_color_rgba_redux($breadcrumb_link_hover_single);
+$breadcrumb_current_single     = isset($options['breadcrumb-current-single'])?$options['breadcrumb-current-single']:'';
+$breadcrumb_current_single     = CSS::make_color_rgba_redux($breadcrumb_current_single);
 
 $blog_cm_bg_color     = isset($options['blog-input-cm-bg-color'])?$options['blog-input-cm-bg-color']:'';
 $blog_cm_bg_color     = CSS::make_color_rgba_redux($blog_cm_bg_color);
@@ -506,22 +557,30 @@ if (!empty($blog_border_color)) {
     $blogs[]    = 'body .tribe-events .tribe-events-calendar-list__month-separator:after{background-color:' . $blog_border_color . ';}';
 }
 if (!empty($blog_meta_color)) {
-    $blogs[]    = '.templaza-archive .templaza-archive-item span {color:' . $blog_meta_color . ';}';
-}
-if (!empty($blog_meta_color)) {
-    $blogs[]    = '.templaza-archive .templaza-archive-item span {color:' . $blog_meta_color . ';}';
+    $blogs[]    = '.templaza-archive .templaza-archive-item span, .templaza-related-posts .templaza-post-meta span {color:' . $blog_meta_color . ';}';
 }
 if (!empty($blog_meta_link_color)) {
     $blogs[]    = '.templaza-archive .templaza-archive-item span a,
     .templaza-archive .templaza-archive-item span.category a,
     .templaza-archive .templaza-archive-item span.author a, 
+    .templaza-related-posts .templaza-post-meta span a,
     .templaza-archive .templaza-archive-item span.tag a{color:' . $blog_meta_link_color . ';}';
 }
 if (!empty($blog_meta_link_hover_color)) {
     $blogs[]    = '.templaza-archive .templaza-archive-item span a:hover, 
     .templaza-archive .templaza-archive-item span.category a:hover, 
     .templaza-archive .templaza-archive-item span.author a:hover, 
+    .templaza-related-posts .templaza-post-meta span a:hover,
     .templaza-archive .templaza-archive-item span.tag a:hover{color:' . $blog_meta_link_hover_color . ';}';
+}
+if (!empty($blog_meta_color_single)) {
+    $blogs[]    = 'div.templaza-single .templaza-blog-item-info span{color:' . $blog_meta_color . ';}';
+}
+if (!empty($blog_meta_link_color_single)) {
+    $blogs[]    = 'div.templaza-single .templaza-blog-item-info span a{color:' . $blog_meta_link_color_single . ';}';
+}
+if (!empty($blog_meta_link_hover_color_single)) {
+    $blogs[]    = 'div.templaza-single .templaza-blog-item-info span a:hover{color:' . $blog_meta_link_hover_color_single . ';}';
 }
 if (!empty($blog_author_bg_color)) {
     $blogs[]    = ' .templaza-single .templaza-single-box.templaza-single-author{background-color:' . $blog_author_bg_color . ';}';
@@ -534,6 +593,24 @@ if (!empty($blog_cm_bg_color)) {
 }
 if (!empty($blog_cm_color)) {
     $blogs[]    = 'form.comment-form textarea{color:' . $blog_cm_color . ';}';
+}
+if (!empty($breadcrumb_link)) {
+    $blogs[]    = '.templaza-breadcrumb ul li a{color:' . $breadcrumb_link . ';}';
+}
+if (!empty($breadcrumb_link_hover)) {
+    $blogs[]    = '.templaza-breadcrumb ul li a:hover{color:' . $breadcrumb_link_hover . ';}';
+}
+if (!empty($breadcrumb_current)) {
+    $blogs[]    = '.templaza-breadcrumb ul li.item-current span{color:' . $breadcrumb_current . ';}';
+}
+if (!empty($breadcrumb_link_single)) {
+    $blogs[]    = '.single .templaza-breadcrumb li a{color:' . $breadcrumb_link_single . ';}';
+}
+if (!empty($breadcrumb_link_hover_single)) {
+    $blogs[]    = '.single  .templaza-breadcrumb li a:hover{color:' . $breadcrumb_link_hover_single . ';}';
+}
+if (!empty($breadcrumb_current_single)) {
+    $blogs[]    = '.single  .templaza-breadcrumb li.item-current span{color:' . $breadcrumb_current_single . ';}';
 }
 if (!empty($sidebar_bg_color)) {
     $blogs[]    = 'div.templaza-sidebar,

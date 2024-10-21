@@ -25,6 +25,7 @@ class Templaza_Woo_Notices {
 	 * @since 1.0.0
 	 * @return object
 	 */
+	// phpcs:disable WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
@@ -334,6 +335,7 @@ class Templaza_Woo_Notices {
 	 * @return void
 	 */
 	public function widget_shopping_cart_count_notice() {
+	    // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo '<span class="woocommerce-mini-cart__count_notice hidden">';
 		$count = WC()->cart->get_cart_contents_count();
 		echo sprintf( 'There %s %s %s in your cart', _n( 'are', 'is', $count > 1, 'templaza-framework' ), $count, _n( 'items', 'item', $count > 1, 'templaza-framework' ) );

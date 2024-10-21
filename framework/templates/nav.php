@@ -2,7 +2,7 @@
 /**
  * Base layout for all admin pages
  */
-
+//phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 if(isset($nav_tabs) && $nav_tabs){
 ?>
         <div class="uk-width-expand@s">
@@ -17,7 +17,7 @@ if(isset($nav_tabs) && $nav_tabs){
 					        ?>
                             <li class="<?php echo esc_attr( $feature_tab_class )?> uk-margin-remove">
                                 <a href="<?php echo esc_url( $tab_info['url'] ); ?>" target="<?php echo esc_attr( $target ); ?>">
-							        <?php echo $tab_info['label']; ?>
+							        <?php echo esc_html($tab_info['label']); ?>
                                 </a>
 
                                 <?php

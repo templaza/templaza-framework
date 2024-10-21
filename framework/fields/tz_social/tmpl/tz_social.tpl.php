@@ -3,7 +3,7 @@
 defined('TEMPLAZA_FRAMEWORK') or exit;
 ?>
 
-<script type="text/html" id="tmpl-tzfrm-field-tz_social__<?php echo $this -> field['id'];?>-source">
+<script type="text/html" id="tmpl-tzfrm-field-tz_social__<?php echo esc_attr($this -> field['id']);?>-source">
     <#
     var data_source = JSON.stringify(data);
     #>
@@ -11,10 +11,10 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
         <div class="border radius p-2 ng-binding"><i class="{{{data.icon}}}"></i> {{{data.title}}}</div>
     </div>
 </script>
-<script type="text/html" id="tmpl-tzfrm-field-tz_social__<?php echo $this -> field['id'];?>-form">
+<script type="text/html" id="tmpl-tzfrm-field-tz_social__<?php echo esc_attr($this -> field['id']);?>-form">
     <div class="card mb-2 tz-social-item">
         <#
-        var title = (typeof data.title !== "undefined" && data.title.trim().length)?data.title:"<?php echo __('Custom social profile', 'templaza-framework');?>";
+        var title = (typeof data.title !== "undefined" && data.title.trim().length)?data.title:"<?php echo esc_html__('Custom social profile', 'templaza-framework');?>";
         #>
         <div class="card-header">
             <span><i class="<# if (data.icon){ #>{{{data.icon}}}<# }else if (data.icon_class){ #>{{{data.icon_class}}}<# } #>" style="<# if (data.color){ #>color: {{{data.color}}}<# } #>"></i> {{{title}}}</span>
@@ -24,7 +24,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
         <div class="card-body">
             <div class="row mb-2">
                 <div class="col-sm-4">
-                    <label><?php echo __('Link', 'templaza-framework');?></label>
+                    <label><?php echo esc_html__('Link', 'templaza-framework');?></label>
                 </div>
                 <div class="col-sm-8">
                     <#
@@ -39,7 +39,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
             <# if (data.icons && data.icons.length > 1){ #>
             <div class="row mb-2">
                 <div class="col-sm-4">
-                    <label><?php echo __('Icon', 'templaza-framework');?></label>
+                    <label><?php echo esc_html__('Icon', 'templaza-framework');?></label>
                 </div>
                 <div class="col-sm-8">
                     <ul class="list-inline m-0">
@@ -52,7 +52,7 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
             <# }else if(data.icon.length == 0 || (data.icon.length > 0 && data.icons.length == 0)){ #>
             <div class="row mt-2">
                 <div class="col-sm-4">
-                    <label><?php echo __('Icon Class', 'templaza-framework'); ?></label>
+                    <label><?php echo esc_html__('Icon Class', 'templaza-framework'); ?></label>
                 </div>
                 <div class="col-sm-8">
                     <input type="text" class="form-control w-100" autocomplete="off" data-input="icon" value="{{{data.icon}}}" placeholder="fab fa-youtube"/>
@@ -60,21 +60,21 @@ defined('TEMPLAZA_FRAMEWORK') or exit;
             </div>
             <div class="mt-2 row">
                 <div class="col-sm-4">
-                    <label><?php echo __('Color', 'templaza-framework'); ?></label>
+                    <label><?php echo esc_html__('Color', 'templaza-framework'); ?></label>
                 </div>
                 <div class="col-sm-8">
                     <div class="redux-color-rgba-container " data-id="color" data-show-input="1"
                          data-show-initial="" data-show-alpha="1" data-show-palette="" data-show-palette-only="" data-show-selection-palette="" data-max-palette-size="10" data-allow-empty="1" data-clickout-fires-change="" data-choose-text="Choose" data-cancel-text="Cancel" data-input-text="Select Color" data-show-buttons="1" data-palette="null">
 
-                        <input type="text" data-input="color" data-block-id="<?php echo $this -> field['id'];
+                        <input type="text" data-input="color" data-block-id="<?php echo esc_attr($this -> field['id']);
                         ?>-tz_social-{{{data.random_id}}}" class="form-control redux-color-rgba" autocomplete="off" id="<?php
-                        echo $this -> field['id']; ?>-tz_social-color" data-current-color="{{{data.color}}}" data-color="{{{data.color}}}"/>
+                        echo esc_attr($this -> field['id']); ?>-tz_social-color" data-current-color="{{{data.color}}}" data-color="{{{data.color}}}"/>
                         <input type="hidden" class="redux-hidden-alpha" data-id="<?php
-                        echo $this -> field['id'].'-tz_social'; ?>-{{{data.random_id}}}-alpha" id="<?php
-                        echo $this -> field['id'].'-tz_social'; ?>-{{{data.random_id}}}-alpha" value="">
+                        echo esc_attr($this -> field['id'].'-tz_social'); ?>-{{{data.random_id}}}-alpha" id="<?php
+                        echo esc_attr($this -> field['id'].'-tz_social'); ?>-{{{data.random_id}}}-alpha" value="">
                         <input type="hidden" class="redux-hidden-alpha" data-id="<?php
-                        echo $this -> field['id'].'-tz_social'; ?>-{{{data.random_id}}}-rgba" id="<?php
-                        echo $this -> field['id'].'-tz_social'; ?>-{{{data.random_id}}}-rgba" value=""/>
+                        echo esc_attr($this -> field['id'].'-tz_social'); ?>-{{{data.random_id}}}-rgba" id="<?php
+                        echo esc_attr($this -> field['id'].'-tz_social'); ?>-{{{data.random_id}}}-rgba" value=""/>
                     </div>
                 </div>
             </div>

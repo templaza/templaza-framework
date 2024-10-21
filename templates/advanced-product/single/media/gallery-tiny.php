@@ -26,7 +26,7 @@ if($ap_slider_number >1){
 }
 if (isset($ap_video) && !empty($ap_video)) {
     if (wp_oembed_get($ap_video)) :
-        $video = parse_url($ap_video);
+        $video = wp_parse_url($ap_video);
         $youtube_no_cookie = $no_cookie ? '-nocookie' : '';
         switch($video['host']) {
             case 'youtu.be':
@@ -94,7 +94,7 @@ if(!empty($ap_gallery)){
                 <?php
                 }else{
                   ?>
-                    <img src="<?php echo wp_get_attachment_url($image); ?>" alt="<?php echo get_post_meta($image, '_wp_attachment_image_alt', TRUE); ?>">
+                    <img src="<?php echo esc_url(wp_get_attachment_url($image)); ?>" alt="<?php echo esc_attr(get_post_meta($image, '_wp_attachment_image_alt', TRUE)); ?>">
                 <?php
                 }
                 ?>
@@ -133,7 +133,7 @@ if(!empty($ap_gallery)){
                     <?php
                 }else{
                     ?>
-                    <img src="<?php echo wp_get_attachment_url($image); ?>" alt="<?php echo get_post_meta($image, '_wp_attachment_image_alt', TRUE); ?>">
+                    <img src="<?php echo esc_url(wp_get_attachment_url($image)); ?>" alt="<?php echo esc_attr(get_post_meta($image, '_wp_attachment_image_alt', TRUE)); ?>">
                     <?php
                 }
                 ?>
@@ -156,7 +156,7 @@ if(!empty($ap_gallery)){
     document.addEventListener('DOMContentLoaded', function(event) {
         var slider = tns({
             container: '.ap-tiny-slider',
-            items: <?php echo esc_attr($ap_slider_number);?>,
+            items: 1,
             mode: '<?php echo esc_attr($ap_tiny_mode);?>',
             <?php if($ap_tiny_thumb){ ?>
             navContainer: '.tz-ap-thumbnails',
@@ -174,6 +174,11 @@ if(!empty($ap_gallery)){
             <?php } ?>
             loop: true,
             controlsContainer:'.tz-slideshow-control',
+            responsive: {
+                960: {
+                    items: <?php echo esc_attr($ap_slider_number);?>,
+                },
+            }
 
         });
         <?php if($ap_tiny_thumb){ ?>
