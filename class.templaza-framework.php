@@ -393,7 +393,7 @@ class TemPlazaFrameWork{
         if($dev_mode){
 //            $cur_sass_name = Templates::get_sass_name_hash();
             if(!isset($transient['sass_code']) || (isset($transient['sass_code']) && !empty($transient['sass_code'])
-                && $cur_sass_name != $transient['sass_code'])){
+                    && $cur_sass_name != $transient['sass_code'])){
                 $transient['sass_code']    = $cur_sass_name;
                 Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.css', false);
                 Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.min.css', true);
@@ -713,70 +713,68 @@ class TemPlazaFrameWork{
         // phpcs:disable  WordPress.DB.SlowDBQuery.slow_db_query_meta_query
         foreach ($post_types as $ptype) {
             // Check data exists
-            $args = array(
-                'post_type'     => $ptype,
-                'post_status'   => 'publish',
-                'meta_query'    => array(
-                    array(
-                        'key'   => '__home',
-                        'value' => 1
+            if(post_type_exists( $ptype )){
+                $args = array(
+                    'post_type'     => $ptype,
+                    'post_status'   => 'publish',
+                    'meta_query'    => array(
+                        array(
+                            'key'   => '__home',
+                            'value' => 1
+                        )
                     )
-                )
-            );
+                );
 
-            $pexists    = \get_posts($args);
-            if(is_wp_error($pexists) || !empty($pexists)){
-                if(!empty($pexists)){
-                    $mkey       = '_' . $ptype . '__theme';
-                    $hthemes    = get_post_meta($pexists[0] -> ID, $mkey);
-                    if(!$hthemes || !in_array(get_template(), $hthemes)) {
-                        add_post_meta($pexists[0]->ID, $mkey, get_template());
+                $pexists    = \get_posts($args);
+                if(is_wp_error($pexists) || !empty($pexists)){
+                    if(!empty($pexists)){
+                        $mkey       = '_' . $ptype . '__theme';
+                        $hthemes    = get_post_meta($pexists[0] -> ID, $mkey);
+                        if(!$hthemes || !in_array(get_template(), $hthemes)) {
+                            add_post_meta($pexists[0]->ID, $mkey, get_template());
+                        }
                     }
+                    continue;
                 }
-                continue;
-            }
-            // Create post default
-            $author = (int) get_current_user_id();
+                // Create post default
+                $author = (int) get_current_user_id();
 
-            $now    = gmdate('Y-m-d H:i:s');
-            $postdata = array(
-                'post_author'   => $author,
-                'post_date'     => $now,
-                'post_date_gmt' => $now,
-                'post_title'    => esc_html__('Default', 'templaza-framework'),
-                'post_status'   => 'publish',
-                'post_name'     => 'default',
-                'post_type'     => $ptype,
-            );
+                $now    = gmdate('Y-m-d H:i:s');
+                $postdata = array(
+                    'post_author'   => $author,
+                    'post_date'     => $now,
+                    'post_date_gmt' => $now,
+                    'post_title'    => esc_html__('Default', 'templaza-framework'),
+                    'post_status'   => 'publish',
+                    'post_name'     => 'default',
+                    'post_type'     => $ptype,
+                );
 
-            $post_id = wp_insert_post( $postdata, true );
+                $post_id = wp_insert_post( $postdata, true );
 
 
-            if($post_id){
-                // Assign post type to current theme
-                update_post_meta($post_id, '_' . $ptype, $postdata['post_name']);
-                update_post_meta($post_id, '_' . $ptype . '__theme', get_template());
-                update_post_meta($post_id, '__home', 1);
+                if(isset($post_id)){
+                    // Assign post type to current theme
+                    update_post_meta($post_id, '_' . $ptype, $postdata['post_name']);
+                    update_post_meta($post_id, '_' . $ptype . '__theme', get_template());
+                    update_post_meta($post_id, '__home', 1);
 
-                // Copy json file
-                $source_file    = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/'.$ptype.'/'.$postdata['post_name'].'.json';
+                    // Copy json file
+                    $source_file    = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/'.$ptype.'/'.$postdata['post_name'].'.json';
 
-                if(!file_exists($source_file)) {
-                    $source_file = TEMPLAZA_FRAMEWORK_CORE_PATH . '/data-import/' . $ptype . '.json';
-                }
+                    if(!file_exists($source_file)) {
+                        $source_file = TEMPLAZA_FRAMEWORK_CORE_PATH . '/data-import/' . $ptype . '.json';
+                    }
 
-                $dest_file      = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$ptype;
-                if(!is_dir($dest_file)){
-
-                    require_once(ABSPATH . '/wp-admin/includes/file.php');
-                    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
-                    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
-//                    mkdir($dest_file, \FS_CHMOD_DIR, true);
-                    \WP_Filesystem_Direct::mkdir($dest_file,755);
-                }
-                $dest_file     .= '/'.$postdata['post_name'].'.json';
-                if(file_exists($source_file) && !file_exists($dest_file)){
-                    copy($source_file, $dest_file);
+                    $dest_file      = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$ptype;
+                    if(!is_dir($dest_file)){
+                        require_once(ABSPATH . '/wp-admin/includes/file.php');
+                        mkdir($dest_file, 755, true);
+                    }
+                    $dest_file     .= '/'.$postdata['post_name'].'.json';
+                    if(file_exists($source_file) && !file_exists($dest_file)){
+                        copy($source_file, $dest_file);
+                    }
                 }
             }
         }

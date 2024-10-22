@@ -104,7 +104,7 @@ Templaza_API::set_section('settings',
                 'id'       => 'blog-page-author',
                 'type'     => 'switch',
                 'title'    => __( 'Show Author', 'templaza-framework' ),
-                'subtitle' => __( 'Show/hide title.', 'templaza-framework' ),
+                'subtitle' => __( 'Show/hide Author.', 'templaza-framework' ),
             ),
             array(
                 'id'       => 'blog-page-comment-count',
