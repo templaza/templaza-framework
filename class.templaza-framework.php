@@ -767,12 +767,8 @@ class TemPlazaFrameWork{
 
                 $dest_file      = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$ptype;
                 if(!is_dir($dest_file)){
-
                     require_once(ABSPATH . '/wp-admin/includes/file.php');
-                    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
-                    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
-//                    mkdir($dest_file, \FS_CHMOD_DIR, true);
-                    \WP_Filesystem_Direct::mkdir($dest_file,755);
+                    mkdir($dest_file, 755, true);
                 }
                 $dest_file     .= '/'.$postdata['post_name'].'.json';
                 if(file_exists($source_file) && !file_exists($dest_file)){
