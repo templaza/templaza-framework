@@ -713,7 +713,7 @@ class TemPlazaFrameWork{
         // phpcs:disable  WordPress.DB.SlowDBQuery.slow_db_query_meta_query
         foreach ($post_types as $ptype) {
             // Check data exists
-            if(post_type_exists( $ptype )){
+//            if(post_type_exists( $ptype )){
                 $args = array(
                     'post_type'     => $ptype,
                     'post_status'   => 'publish',
@@ -776,7 +776,7 @@ class TemPlazaFrameWork{
                         copy($source_file, $dest_file);
                     }
                 }
-            }
+//            }
         }
     }
     public function templaza_modify_contact_methods($profile_fields)

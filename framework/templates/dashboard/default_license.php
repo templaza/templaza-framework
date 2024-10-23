@@ -8,7 +8,7 @@ $config = $this -> theme_config_registered;
 
 $license    = HelperLicense::get_license($this -> theme_name);
 
-if($license && isset($license['purchase_code']) && $license['purchase_code']){
+if($license && isset($license['purchase_code']) && $license['purchase_code']&& $license['purchase_code'] !='developer'){
 ?>
     <h2><?php echo esc_html__('License Information', 'templaza-framework'); ?></h2>
     <div class="uk-grid-small uk-padding-small uk-padding-remove-horizontal" data-uk-grid>
@@ -39,7 +39,29 @@ if($license && isset($license['purchase_code']) && $license['purchase_code']){
                 echo esc_html__('Delete', 'templaza-framework'); ?></a>
         </div>
     </div>
-<?php }else{ ?>
+<?php }elseif($license && isset($license['purchase_code']) && $license['purchase_code']&& $license['purchase_code'] =='developer'){
+    ?>
+    <h2><?php echo esc_html__('License Information', 'templaza-framework'); ?></h2>
+    <div class="uk-grid-small uk-padding-small uk-padding-remove-horizontal" data-uk-grid>
+        <div class="uk-width-1-4@m uk-width-1-1"><?php echo esc_html__('Buyer:', 'templaza-framework');?></div>
+        <div class="uk-width-3-4@m uk-width-1-1"><?php echo esc_html__('TemPlaza', 'templaza-framework'); ?></div>
+        <div class="uk-width-1-4@m uk-width-1-1"><?php echo esc_html__('Domain:', 'templaza-framework');?></div>
+        <div class="uk-width-3-4@m uk-width-1-1"><?php echo esc_html__('templaza.com', 'templaza-framework'); ?></div>
+        <div class="uk-width-1-4@m uk-width-1-1"><?php echo esc_html__('Purchase Code:', 'templaza-framework');?></div>
+        <div class="uk-width-3-4@m uk-width-1-1"><?php echo esc_html__('TemPlaza Developer', 'templaza-framework'); ?></div>
+        <div class="uk-width-1-4@m uk-width-1-1"><?php echo esc_html__('License Type:', 'templaza-framework');?></div>
+        <div class="uk-width-3-4@m uk-width-1-1"><?php echo esc_html__('Developer', 'templaza-framework'); ?></div>
+
+        <div class="uk-width-1-1 uk-margin-medium-top">
+            <a href="javascript:" class="uk-button uk-button-primary uk-border-pill delete-template-activation" data-tzinst-reactivate-license><?php
+                echo esc_html__('Reactivate your license', 'templaza-framework'); ?></a>
+            <a href="javascript:" class="uk-button uk-button-danger uk-border-pill delete-template-activation uk-margin-small-left" data-tzinst-delete-license><?php
+                echo esc_html__('Delete', 'templaza-framework'); ?></a>
+        </div>
+    </div>
+    <?php
+}
+else{ ?>
     <h2><?php
         echo esc_html__('Theme Activation', 'templaza-framework'); ?></h2>
     <p><?php echo esc_html__('Theme activation process is automatic, you don\'t need to enter purchase code manually. Follow these steps to activate the theme', 'templaza-framework'); ?></p>
