@@ -49,3 +49,14 @@
     }
   }
 }
+.megamenu-sub-menu{
+  .tz-image-el{
+    &.uk-transition-toggle{
+      box-shadow:0 1px 10px rgba(0,0,0,0.1);
+      .templaza-ripple-circles{
+        width:250px;
+        height:250px;
+      }
+    }
+  }
+}
