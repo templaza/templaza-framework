@@ -68,9 +68,7 @@ class TemPlazaFrameWork{
         // Register widgets
         add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
-        register_activation_hook( TEMPLAZA_FRAMEWORK_PATH.'/templaza-framework.php', array($this, 'create_post_default') );
-        add_action( 'upgrader_process_complete', array($this, 'create_post_default') );
-        add_action( 'after_setup_theme', array($this, 'create_post_default') );
+        add_action( 'admin_init', array($this, 'create_post_default') );
 
         do_action( 'templaza-framework/plugin/hooks', $this );
         add_filter('user_contactmethods', array($this, 'templaza_modify_contact_methods'));
@@ -713,70 +711,69 @@ class TemPlazaFrameWork{
         // phpcs:disable  WordPress.DB.SlowDBQuery.slow_db_query_meta_query
         foreach ($post_types as $ptype) {
             // Check data exists
-//            if(post_type_exists( $ptype )){
-                $args = array(
-                    'post_type'     => $ptype,
-                    'post_status'   => 'publish',
-                    'meta_query'    => array(
-                        array(
-                            'key'   => '__home',
-                            'value' => 1
-                        )
+            $args = array(
+                'post_type'     => $ptype,
+                'post_status'   => 'publish',
+                'meta_query'    => array(
+                    array(
+                        'key'   => '__home',
+                        'value' => 1
                     )
-                );
+                )
+            );
 
-                $pexists    = \get_posts($args);
-                if(is_wp_error($pexists) || !empty($pexists)){
-                    if(!empty($pexists)){
-                        $mkey       = '_' . $ptype . '__theme';
-                        $hthemes    = get_post_meta($pexists[0] -> ID, $mkey);
-                        if(!$hthemes || !in_array(get_template(), $hthemes)) {
-                            add_post_meta($pexists[0]->ID, $mkey, get_template());
-                        }
-                    }
-                    continue;
-                }
-                // Create post default
-                $author = (int) get_current_user_id();
-
-                $now    = gmdate('Y-m-d H:i:s');
-                $postdata = array(
-                    'post_author'   => $author,
-                    'post_date'     => $now,
-                    'post_date_gmt' => $now,
-                    'post_title'    => esc_html__('Default', 'templaza-framework'),
-                    'post_status'   => 'publish',
-                    'post_name'     => 'default',
-                    'post_type'     => $ptype,
-                );
-
-                $post_id = wp_insert_post( $postdata, true );
-
-
-                if(isset($post_id)){
-                    // Assign post type to current theme
-                    update_post_meta($post_id, '_' . $ptype, $postdata['post_name']);
-                    update_post_meta($post_id, '_' . $ptype . '__theme', get_template());
-                    update_post_meta($post_id, '__home', 1);
-
-                    // Copy json file
-                    $source_file    = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/'.$ptype.'/'.$postdata['post_name'].'.json';
-
-                    if(!file_exists($source_file)) {
-                        $source_file = TEMPLAZA_FRAMEWORK_CORE_PATH . '/data-import/' . $ptype . '.json';
-                    }
-
-                    $dest_file      = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$ptype;
-                    if(!is_dir($dest_file)){
-                        require_once(ABSPATH . '/wp-admin/includes/file.php');
-                        mkdir($dest_file, 755, true);
-                    }
-                    $dest_file     .= '/'.$postdata['post_name'].'.json';
-                    if(file_exists($source_file) && !file_exists($dest_file)){
-                        copy($source_file, $dest_file);
+            $pexists    = \get_posts($args);
+            if(is_wp_error($pexists) || !empty($pexists)){
+                if(!empty($pexists)){
+                    $mkey       = '_' . $ptype . '__theme';
+                    $hthemes    = get_post_meta($pexists[0] -> ID, $mkey);
+                    if(!$hthemes || !in_array(get_template(), $hthemes)) {
+                        add_post_meta($pexists[0]->ID, $mkey, get_template());
                     }
                 }
-//            }
+                continue;
+            }
+            // Create post default
+            $author = (int) get_current_user_id();
+
+            $now    = gmdate('Y-m-d H:i:s');
+            $postdata = array(
+                'post_author'     => $author,
+                'post_date'     => $now,
+                'post_date_gmt' => $now,
+                'post_title'    => esc_html__('Default', 'templaza-framework'),
+                'post_status'   => 'publish',
+                'post_name'     => 'default',
+                'post_type'     => $ptype,
+                'meta_input' => array(
+                    '_'.$ptype.'' => 'default',
+                    '_'.$ptype.'__theme' => get_template(),
+                    '__home' => 1
+                )
+            );
+
+            $post_id = wp_insert_post( $postdata, false,false );
+
+
+            if(isset($post_id)){
+
+                // Copy json file
+                $source_file    = TEMPLAZA_FRAMEWORK_THEME_PATH_THEME_OPTION.'/'.$ptype.'/'.$postdata['post_name'].'.json';
+
+                if(!file_exists($source_file)) {
+                    $source_file = TEMPLAZA_FRAMEWORK_CORE_PATH . '/data-import/' . $ptype . '.json';
+                }
+
+                $dest_file      = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/'.$ptype;
+                if(!is_dir($dest_file)){
+                    require_once(ABSPATH . '/wp-admin/includes/file.php');
+                    mkdir($dest_file, 755, true);
+                }
+                $dest_file     .= '/'.$postdata['post_name'].'.json';
+                if(file_exists($source_file) && !file_exists($dest_file)){
+                    copy($source_file, $dest_file);
+                }
+            }
         }
     }
     public function templaza_modify_contact_methods($profile_fields)
