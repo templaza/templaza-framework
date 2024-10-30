@@ -194,13 +194,25 @@ $woo_icon_bg_color_hover  = CSS::make_color_rgba_redux($woo_icon_bg_color_hover)
 
 $woo_css             = !empty($woo_icon_color)?'color:'.$woo_icon_color.';':'';
 $woo_css            .= !empty($woo_icon_bg_color)?'background-color:'.$woo_icon_bg_color.';':'';
-$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .product-loop__buttons .tz-loop-button{'.$woo_css.'}':'';
+$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .product-loop__buttons .tz-loop-button, ul.products li.product .product-thumbnail .product-loop__buttons .yith-wcwl-add-to-wishlist-button{'.$woo_css.'}':'';
 Templates::add_inline_style($woo_css);
 $woo_css             = '';
 $woo_css            .= !empty($woo_icon_color_hover)?'color:'.$woo_icon_color_hover.';':'';
 $woo_css            .= !empty($woo_icon_bg_color_hover)?'background-color:'.$woo_icon_bg_color_hover.';':'';
-$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .product-loop__buttons .tz-loop-button:hover{'.$woo_css.'}':'';
+$woo_css             = !empty($woo_css)?'ul.products li.product .product-thumbnail .product-loop__buttons .tz-loop-button:hover, ul.products li.product .product-thumbnail .product-loop__buttons .yith-wcwl-add-to-wishlist-button:hover{'.$woo_css.'}':'';
+
 Templates::add_inline_style($woo_css);
+
+$woo_icon_css = '';
+$woo_icon_css             = !empty($woo_icon_color)?'color:'.$woo_icon_color.';':'';
+$woo_icon_css             = !empty($woo_icon_css)?'ul.products li.product .product-thumbnail .product-loop__buttons .yith-wcwl-add-to-wishlist-button svg{'.$woo_icon_css.'}':'';
+
+Templates::add_inline_style($woo_icon_css);
+
+$woo_icon_css             = !empty($woo_icon_color_hover)?'color:'.$woo_icon_color_hover.';':'';
+$woo_icon_css             = !empty($woo_icon_css)?'ul.products li.product .product-thumbnail .product-loop__buttons .yith-wcwl-add-to-wishlist-button:hover svg{'.$woo_icon_css.'}':'';
+
+Templates::add_inline_style($woo_icon_css);
 
 $footer_css             = '';
 $footer_link_color      = isset($options['footer-link-color'])?$options['footer-link-color']:'';

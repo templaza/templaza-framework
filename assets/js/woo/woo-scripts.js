@@ -904,7 +904,7 @@
 
 	// add wishlist
 	templaza_woo.addWishlist = function () {
-		templaza_woo.$body.on('click', 'a.add_to_wishlist', function () {
+		templaza_woo.$body.on('click', 'a.yith-wcwl-add-to-wishlist-button', function () {
 			$(this).addClass('loading');
 		});
 
