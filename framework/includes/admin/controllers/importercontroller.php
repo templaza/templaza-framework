@@ -324,7 +324,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 $purchase_code  = HelperLicense::get_purchase_code($theme);
 
                 $step           = isset($_POST['step'])?$_POST['step']:1;
-                $url            = $this -> api.'/index.php?option=com_tz_membership';
+                $url            = $this -> api.'/index.php?option=com_tz_membership&t='.time();
                 $page           = $_POST['page'];
                 $pack_type      = $_POST['pack_type'];
                 $action         = $_POST['action'];

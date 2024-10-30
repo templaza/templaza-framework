@@ -47,17 +47,6 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
                 if(method_exists($this, 'register')) {
                     $post_type_args = $this -> register();
 
-//                    add_filter(TEMPLAZA_FRAMEWORK.'_admin_nav_tabs', function($nav_tabs) use($post_type_args) {
-//                        $show_ui        = isset($post_type_args['show_ui'])?$post_type_args['show_ui']:true;
-//                        $show_menu_in   = isset($post_type_args['show_in_menu'])?$post_type_args['show_in_menu']:'';
-//                        if($show_ui && $show_menu_in == TEMPLAZA_FRAMEWORK) {
-//                            $nav_tabs[] = array(
-//                                'label' => $post_type_args['labels']['all_items'],
-//                                'url' => 'edit.php?post_type=' . $this->get_post_type(),
-//                            );
-//                        }
-//                        return $nav_tabs;
-//                    });
                     \register_post_type($this->get_post_type(), $post_type_args);
 
                     if($this -> my_post_type_exists()){

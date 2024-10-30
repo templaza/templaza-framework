@@ -40,35 +40,34 @@ if(!class_exists('TemPlazaFramework\Helpers\HelperLicense')){
                 return false;
             }
 
-            $purchase_date = strtotime($license['purchase_date']);
-//            if($purchase_date <= time()) {
-                // Check support date valid
-//                $support_until = strtotime($license['support_until']);
-//            if ($support_until < time() || $support_until < $purchase_date) {
             return $license['purchase_code'];
-//            }
-//            }
-//            return false;
+
         }
 
         public static function is_authorised($theme)
         {
             $theme      = strtolower($theme);
             $license    = self::get_license($theme);
+            /* mode developer */
+            if($license && isset($license['purchase_code']) && $license['purchase_code']=='developer'){
+                return true;
+            }
 
             if($license && isset($license['purchase_code']) && $license['purchase_code']){
                 return true;
             }
 
-//            if(!self::has_expired($theme)){
-//                return true;
-//            }
             return false;
         }
 
         public static function has_expired($theme){
             $theme          = strtolower($theme);
             $license        = self::get_license($theme);
+
+            /* mode developer */
+            if($license && isset($license['purchase_code']) && $license['purchase_code']=='developer'){
+                return false;
+            }
 
             if(!$license || ($license && isset($license['purchase_code']) && !$license['purchase_code'])){
                 return true;
@@ -77,9 +76,15 @@ if(!class_exists('TemPlazaFramework\Helpers\HelperLicense')){
             $purchase_date  = isset($license['purchase_date'])?strtotime($license['purchase_date']):0;
             $support_until  = isset($license['supported_until'])?strtotime($license['supported_until']):0;
 
-            if($support_until < current_time('timestamp') || $support_until < $purchase_date){
-                return true;
+            /* mode developer */
+            if($license && isset($license['purchase_code']) && $license['purchase_code']=='developer'){
+                return false;
+            }else{
+                if($support_until < current_time('timestamp') || $support_until < $purchase_date){
+                    return true;
+                }
             }
+
             return false;
         }
 

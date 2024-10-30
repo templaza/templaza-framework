@@ -42,6 +42,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
                     'api'                   => TEMPLAZA_FRAMEWORK_INSTALLATION_API_DOMAIN,
                     // Envato Itemid
                     'envatoid'              => (isset($config['envatoid']) && !empty($config['envatoid']))?$config['envatoid']:0,
+                    'mode'              => (isset($config['mode']) && !empty($config['mode']))?$config['mode']:0,
                     // Theme name on TemPlaza
                     'productname'           => (isset($config['productname']) && !empty($config['productname']))?$config['productname']:'',
                     'url'                   => \get_home_url(),
@@ -69,9 +70,16 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\DashboardController')){
             if(isset($this -> theme_config_registered) && !empty($this -> theme_config_registered)){
                 $license    = HelperLicense::get_license($this -> theme_name);
                 $key        = HelperLicense::get_secret_key($this -> theme_name);
+                if(isset($this -> theme_config_registered['purchase_code']) && $this -> theme_config_registered['purchase_code']=='developer'){
+                    $license['purchase_code'] = $this -> theme_config_registered['purchase_code'];
+                    update_option(HelperLicense::get_option_name($this->theme_name), array('secret_key' => $key,'purchase_code'=>$license['purchase_code']));
+                }
+
                 if(!$license || ($license && (!isset($license['purchase_code']) ||
                             (isset($license['purchase_code']) && !$license['purchase_code'])))) {
-                    update_option(HelperLicense::get_option_name($this->theme_name), array('secret_key' => $key));
+
+                        update_option(HelperLicense::get_option_name($this->theme_name), array('secret_key' => $key));
+
                 }
             }
 

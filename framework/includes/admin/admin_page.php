@@ -128,6 +128,7 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                     $options        = get_option($option_name, array());
 
                     $options['secret_key']  = HelperLicense::generate_secret_key($this -> theme_name);
+
                     update_option($option_name, $options);
                 }
 
