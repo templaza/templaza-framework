@@ -728,6 +728,10 @@ ul.products {
       transform: none;
     }
   }
+  li.product .product-thumbnail .tz-loop-button svg{
+    margin:0;
+    width:18px;
+  }
 }
 .single-product div.product .templaza-wishlist-button{
   width:60px;
@@ -747,5 +751,12 @@ ul.products {
     .yith-wcwl-add-to-wishlist-button svg.yith-wcwl-icon-svg{
       width:18px;
     }
+  }
+}
+body.single-product div.product .templaza-wishlist-button .tz-loop-button{
+  display:flex;
+  padding:0 15px;
+  svg{
+    margin:0;
   }
 }
