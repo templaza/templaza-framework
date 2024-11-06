@@ -69,7 +69,7 @@ if($header_stack_search || $header_stack_cart || $header_stack_account){
 if($header_stack_search){ ?>
     <div class="header-search uk-position-relative header-icon">
         <span>
-            <?php echo wp_kses($search_icon_html,'post'); ?>
+            <?php echo $search_icon_html; ?>
         </span>
         <form method="get" class="searchform " action="<?php echo esc_url( home_url( '/' ) ); ?>">
             <input type="text" class="field uk-input inputbox search-query uk-margin-remove-vertical" name="s" placeholder="<?php esc_attr_e( 'Search...', 'baressco');?>" />
@@ -80,7 +80,7 @@ if($header_stack_search){ ?>
 <?php if($header_stack_cart && class_exists( 'woocommerce' )){ ?>
     <div class="header-cart header-icon">
         <a href="<?php echo esc_url( wc_get_cart_url() ) ?>" data-toggle="<?php echo esc_attr($header_cart); ?>" data-target="cart-modal">
-            <?php echo wp_kses($cart_icon_html,'post'); ?>
+            <?php echo $cart_icon_html; ?>
             <span class="counter cart-counter"><?php echo esc_html(WC()->cart->get_cart_contents_count()); ?></span>
         </a>
     </div>
@@ -90,7 +90,7 @@ if($header_stack_search){ ?>
         <a class="account-icon" href="<?php echo esc_url( wc_get_account_endpoint_url( 'dashboard' ) ) ?>"
            data-toggle="<?php echo esc_attr($login_modals);?>"
            data-target="account-modal">
-            <?php echo wp_kses($account_icon_html,'post'); ?>
+            <?php echo $account_icon_html; ?>
         </a>
         <?php if ( is_user_logged_in() ) : ?>
             <div class="account-links">
