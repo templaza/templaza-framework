@@ -122,7 +122,7 @@ if($endpoint){
                     </div>
                 </div>
                 <div class="uk-width-1-4@m ap-templaza-sidebar">
-                    <div class="dealer-info-sidebar-box" data-uk-sticky="end: !.dealer-page; offset: 100">
+                    <div class="dealer-info-sidebar-box" data-uk-sticky="end: !.dealer-page; offset: 100; media: @m">
                         <?php
                         $map_location   = get_field('_dls_map_location', 'user_'.$author -> ID);
                         if(!empty($map_location)){

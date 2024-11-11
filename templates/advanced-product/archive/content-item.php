@@ -21,11 +21,16 @@ if(is_post_type_archive('product')){
 }else{
     if(isset($_GET['product_loop'])){
         $ap_loop_layout = $_GET['product_loop'];
+    }elseif($args['product_loop']) {
+        if($args['product_loop'] == 'archive'){
+            $ap_loop_layout = isset($templaza_options['ap_product-loop-layout']) ? $templaza_options['ap_product-loop-layout'] : 'style1';
+        }else{
+            $ap_loop_layout = $args['product_loop'];
+        }
     }else {
         $ap_loop_layout = isset($templaza_options['ap_product-loop-layout']) ? $templaza_options['ap_product-loop-layout'] : 'style1';
     }
 }
-
 if($ap_loop_layout){
     AP_Templates::load_my_layout('archive.content-item-'.$ap_loop_layout.'',true,false,$args);
 }else{
