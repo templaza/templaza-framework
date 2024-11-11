@@ -345,7 +345,7 @@ Templaza_API::set_section('settings',
                 'id'       => 'enable-cursor-effects',
                 'type'     => 'switch',
                 'title'    => __( 'Enable Cursor Effect', 'templaza-framework' ),
-                'default'  => '1',
+                'default'  => '0',
             ),
             array(
                 'id'       => 'cursor-effects',
