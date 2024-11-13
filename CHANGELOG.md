@@ -1,5 +1,31 @@
 # Changelog
 
+## Version 1.2.2 - November 13, 2024
+
+**Fix bugs:**
+
+- Fix cursor enable and not choose value,
+- Remove static user box in dealership page in mobile
+- Fix change color svg icon in header
+- Fix show wishlist icon
+
+## Version 1.2.1 - October 12, 2024
+
+**Fix bugs:**
+
+- Fix add meta cap
+- Fix error active plugin with tgmpa
+- Fix html display in theme dashboard
+- Fix quickview in archive advanced product
+- Fix custom field display in archive advanced product
+
+**Added**
+
+- Add options for image module
+- Add justify config for header stacked
+- Add 7 styles cursor effect
+
+
 ## Version 1.2.0 - July 12, 2024
 
 **Fix bugs:**
