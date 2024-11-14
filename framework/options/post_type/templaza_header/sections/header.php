@@ -341,6 +341,35 @@ Templaza_API::set_section('templaza_header',
                     array('header-mode', '=', array('stacked','horizontal')) ),
             ),
             array(
+                'id'       => 'stacked-divided-top-margin',
+                'type'     => 'spacing',
+                'mode'     => 'margin',
+                'allow_responsive'    => true,
+                'title'    => esc_html__('Logo Section Margin', 'templaza-framework'),
+                'default'  => '',
+                'required' => array(
+                    array('header-mode', '=', array('stacked','horizontal')) ),
+            ),
+            array(
+                'id'       => 'menu-section-border',
+                'type'     => 'border',
+                'title'    => esc_html__('Menu wrap Border', 'templaza-framework'),
+                'default'  => '',
+                'color_alpha'  => true,
+                'required' => array(
+                    array('header-mode', '=', array('horizontal')) ),
+            ),
+            array(
+                'id'       => 'menu-section-margin',
+                'type'     => 'spacing',
+                'mode'     => 'margin',
+                'allow_responsive'    => true,
+                'title'    => esc_html__('Menu wrap Margin', 'templaza-framework'),
+                'default'  => '',
+                'required' => array(
+                    array('header-mode', '=', array('horizontal')) ),
+            ),
+            array(
                 'id'       => 'stacked-divided-header-top-padding',
                 'type'     => 'spacing',
                 'allow_responsive'    => true,
