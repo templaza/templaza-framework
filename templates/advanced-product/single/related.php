@@ -94,7 +94,7 @@ if($ap_product_related){
                                         <div class="ap-info">
                                             <div class="ap-info-inner ap-info-top">
                                                 <h2 class="ap-title">
-                                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?>hhhh</a>
+                                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                                 </h2>
                                                 <?php AP_Templates::load_my_layout('archive.price');?>
                                             </div>
