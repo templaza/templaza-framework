@@ -43,8 +43,12 @@ Automatic updates should work smoothly, but we still recommend you back up your 
 
 == Changelog ==
 
-= 1.2.1 2024-07-03 =
-- Initial release.
+= 1.2.2 2024-13-11 =
+- Fix bugs:
+    - Fix cursor enable and not choose value,
+    - Remove static user box in dealership page in mobile
+    - Fix change color svg icon in header
+    - Fix show wishlist icon
 
 == Upgrade Notice ==
 Always try to keep your plugin update so that you can get the improved and additional features added to this plugin till the moment.

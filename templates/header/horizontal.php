@@ -104,7 +104,16 @@ $header_stack_designs = array(
         'class' => '.header-horizontal-logo',
         'options' => array(
             'stacked-divided-top-padding',
+            'stacked-divided-top-margin',
             'logo-section-border',
+        ),
+    ),
+    array(
+        'enable' => true,
+        'class' => '.header-menu-horizontal-left',
+        'options' => array(
+            'menu-section-margin',
+            'menu-section-border',
         ),
     ),
 );
@@ -148,20 +157,6 @@ if (count($header_stack_designs)) {
     <div class="header-left-section header-horizontal-logo uk-flex uk-flex-between uk-flex-middle">
         <?php Templates::load_my_layout('logo'); ?>
         <?php
-        if ($mode == 'left') {
-            // header nav starts
-            Menu::get_nav_menu(array(
-                'theme_location'  => $header_menu,
-                'menu_class'      => implode(' ', $navClass),
-                'container_class' => implode(' ', $navWrapperClass),
-                'menu_id'         => '',
-                'depth'           => $header_menu_level, // Level
-                'templaza_megamenu_html_data' => $menu_datas
-            ));
-            // header nav ends
-        }
-        ?>
-        <?php
         if ($mode == 'right' && is_active_sidebar($block_2_sidebar)){
             echo '<div class="header-block-item uk-visible@m header-block-2-horizontal">';
             echo '<div class="sidebar">';
@@ -203,10 +198,24 @@ if (count($header_stack_designs)) {
         echo '</div>';
     }
     ?>
-    <?php if ($block_1_type != 'blank' || $mode == 'right' ||  $mode == 'justify' ||  $mode == 'center' || $enable_offcanvas): ?>
+    <?php if ($block_1_type != 'blank' || $mode == 'left' || $mode == 'right' ||  $mode == 'justify' ||  $mode == 'center' || $enable_offcanvas): ?>
 
-        <div class="header-right-section uk-flex uk-flex-right uk-flex-middle">
+        <div class="header-right-section uk-flex uk-flex-right uk-flex-middle uk-width-auto <?php if($mode == 'left'){ echo ' uk-width-1-1@m'; }?>">
             <?php
+            if ($mode == 'left') {
+                echo '<div class="uk-flex uk-flex-left uk-width-expand header-menu-horizontal-left uk-flex-middle uk-visible@m">';
+                // header nav starts
+                Menu::get_nav_menu(array(
+                    'theme_location'  => $header_menu,
+                    'menu_class'      => implode(' ', $navClass),
+                    'container_class' => 'uk-margin-small-left uk-width-1-1 uk-margin-small-right uk-visible@m',
+                    'menu_id'         => '',
+                    'depth'           => $header_menu_level, // Level
+                    'templaza_megamenu_html_data' => $menu_datas
+                ));
+                // header nav ends
+                echo '</div>';
+            }
             if ($mode == 'right') {
                 // header nav starts
                 Menu::get_nav_menu(array(
