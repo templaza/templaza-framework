@@ -28,6 +28,20 @@ if(isset($_GET['customfield_layout'])){
 $ap_comment           = isset($templaza_options['ap_product-single-comment'])?$templaza_options['ap_product-single-comment']:true;
 $product_id = get_the_ID();
 $gfields_assigned   = AP_Custom_Field_Helper::get_group_fields_by_product();
+
+$default_lang = apply_filters('wpml_default_language', NULL );
+$current_lang = apply_filters( 'wpml_current_language', NULL );
+if($default_lang != $current_lang){
+    foreach ($ap_content_group as $group_item){
+        $category = get_term_by('slug', $group_item, 'ap_group_field');
+        $term_id = $category->term_id;
+        $group_field_la = AP_Functions::get_translated_term($term_id, 'ap_group_field', ICL_LANGUAGE_CODE);
+        $group_field_la_title = get_term_by('name', $group_field_la, 'ap_group_field');
+
+        $ap_content_group[]=$group_field_la_title->slug;
+    }
+}
+
 if($gfields_assigned && count($gfields_assigned)){
     ?>
     <div class="ap-group-scroll-wrap">
