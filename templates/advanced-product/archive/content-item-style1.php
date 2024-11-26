@@ -34,7 +34,7 @@ if(isset($_GET['description'])){
 ?>
 <div class="ap-item ap-item-style1 <?php echo esc_attr($ap_class);?>">
     <div class="ap-inner ">
-        <div class="uk-inline uk-position-relative">
+        <div class="uk-inline uk-position-relative uk-width-1-1">
             <?php AP_Templates::load_my_layout('archive.badges'); ?>
             <?php AP_Templates::load_my_layout('archive.media',true,false,array('compare_layout'    => $compare_layout)); ?>
         </div>
