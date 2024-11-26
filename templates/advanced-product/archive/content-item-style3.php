@@ -5,6 +5,7 @@ defined('ADVANCED_PRODUCT') or exit();
 use Advanced_Product\AP_Templates;
 use Advanced_Product\AP_Functions;
 use Advanced_Product\Helper\AP_Product_Helper;
+use TemPlazaFramework\Functions;
 $price = get_field('ap_price', get_the_ID());
 $ap_category = wp_get_object_terms( get_the_ID(), 'ap_category', array( 'fields' => 'names' ) );
 $show_compare_button= get_field('ap_show_archive_compare_button', 'option');
@@ -16,6 +17,17 @@ $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
 $show_quickview_button= get_field('ap_show_archive_quickview_button', 'option');
 $show_quickview_button= $show_quickview_button!==false?(bool)$show_quickview_button:true;
 $show_quickview_button= isset($args['show_archive_quickview_button'])?(bool)$args['show_archive_quickview_button']:$show_quickview_button;
+
+if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
+    $templaza_options = array();
+}else{
+    $templaza_options = Functions::get_theme_options();
+}
+if(isset($args['show_author'])){
+    $ap_author = isset($args['show_author'])?filter_var($args['show_author'], FILTER_VALIDATE_BOOLEAN):false;
+}else{
+    $ap_author       = isset($templaza_options['ap_product-loop-author'])?filter_var($templaza_options['ap_product-loop-author'], FILTER_VALIDATE_BOOLEAN):false;
+}
 
 if(isset($args['ap_class'])){
     $ap_class = $args['ap_class'];
@@ -32,9 +44,16 @@ if(isset($args['ap_class'])){
                     <h2 class="ap-title">
                         <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                     </h2>
-                    <span class="ap-info-author">
-                        <?php echo esc_html__('By', 'templaza-framework') .' '. wp_kses(get_the_author_posts_link(),'post');?>
-                    </span>
+                    <?php
+                    if($ap_author){
+                     ?>
+                        <span class="ap-info-author">
+                            <?php echo esc_html__('By', 'templaza-framework') .' '. wp_kses(get_the_author_posts_link(),'post');?>
+                        </span>
+                        <?php
+                    }
+                    ?>
+
                 </div>
                 <div class="ap-button-info uk-flex uk-flex-between">
                     <?php if($show_quickview_button) { ?>

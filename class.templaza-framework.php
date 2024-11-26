@@ -56,7 +56,7 @@ class TemPlazaFrameWork{
         add_action('init', array($this, 'init'), 99999);
 
         add_action('init', array($this, 'frontend_init'), 99999);
-        add_action( 'init', array( $this, 'tz_load_plugin_textdomain' ) );
+        add_action( 'plugins_loaded', array( $this, 'tz_load_plugin_textdomain' ) );
         add_action('template_include', array($this, 'template_include'), 999999);
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 99999);
         add_action('wp_head', array($this, 'wp_head'), 99999);
