@@ -31,7 +31,8 @@ $ap_result       = isset($templaza_options['ap_product-archive-product-result'])
 $ap_sortby       = isset($templaza_options['ap_product-archive-product-sortby'])?filter_var($templaza_options['ap_product-archive-product-sortby'], FILTER_VALIDATE_BOOLEAN):true;
 $ap_list_grid       = isset($templaza_options['ap_product-archive-product-list-grid'])?filter_var($templaza_options['ap_product-archive-product-list-grid'], FILTER_VALIDATE_BOOLEAN):true;
 $ap_cat_description       = isset($templaza_options['ap_product-cat-description'])?$templaza_options['ap_product-cat-description']:'top';
-
+$ap_sortby_full = array('date_high','date_low','title_low','title_high','price_high','price_low','price_rental_high','price_rental_low');
+$ap_sortby_hidden       = isset($templaza_options['ap_product-archive-product-sortby-hidden'])?$templaza_options['ap_product-archive-product-sortby-hidden']:array();
 if($ap_layout == 'masonry'){
     $grid_option = 'masonry: true';
 }elseif($ap_layout == 'list' || $grid_view =='list'){
@@ -77,14 +78,52 @@ if ( have_posts()) {
                         <label class="uk-width-auto"><?php echo esc_html__('Sort By', 'templaza-framework')?></label>
                         <div class="uk-form-controls">
                             <select name="ap-archive-sort">
-                                <option value="date_high"><?php echo esc_html__('Date: Newest First', 'templaza-framework')?></option>
-                                <option value="date_low"><?php echo esc_html__('Date: Oldest First', 'templaza-framework')?></option>
-                                <option value="title_low"><?php echo esc_html__('Title: A - Z', 'templaza-framework')?></option>
-                                <option value="title_high"><?php echo esc_html__('Title: Z - A', 'templaza-framework')?></option>
-                                <option value="price_high"><?php echo esc_html__('Price: High To Low', 'templaza-framework')?></option>
-                                <option value="price_low"><?php echo esc_html__('Price: Low To High', 'templaza-framework')?></option>
-                                <option value="price_rental_high"><?php echo esc_html__('Price Rental: High To Low', 'templaza-framework')?></option>
-                                <option value="price_rental_low"><?php echo esc_html__('Price Rental: Low To High', 'templaza-framework')?></option>
+                                <?php
+                                foreach ($ap_sortby_full as $sortby_item){
+                                    if(!in_array($sortby_item,$ap_sortby_hidden)){
+                                        if($sortby_item=='date_high'){
+                                            ?>
+                                            <option value="date_high"><?php echo esc_html__('Date: Newest First', 'templaza-framework')?></option>
+                                            <?php
+                                        }
+                                        if($sortby_item=='date_low'){
+                                            ?>
+                                            <option value="date_low"><?php echo esc_html__('Date: Oldest First', 'templaza-framework')?></option>
+                                            <?php
+                                        }
+                                        if($sortby_item=='title_low'){
+                                            ?>
+                                            <option value="title_low"><?php echo esc_html__('Title: A - Z', 'templaza-framework')?></option>
+                                            <?php
+                                        }
+                                        if($sortby_item=='title_high'){
+                                            ?>
+                                            <option value="title_high"><?php echo esc_html__('Title: Z - A', 'templaza-framework')?></option>
+                                            <?php
+                                        }
+                                        if($sortby_item=='price_high'){
+                                            ?>
+                                            <option value="price_high"><?php echo esc_html__('Price: High To Low', 'templaza-framework')?></option>
+                                            <?php
+                                        }
+                                        if($sortby_item=='price_low'){
+                                            ?>
+                                            <option value="price_low"><?php echo esc_html__('Price: Low To High', 'templaza-framework')?></option>
+                                            <?php
+                                        }
+                                        if($sortby_item=='price_rental_high'){
+                                            ?>
+                                            <option value="price_rental_high"><?php echo esc_html__('Price Rental: High To Low', 'templaza-framework')?></option>
+                                            <?php
+                                        }
+                                        if($sortby_item=='price_rental_low'){
+                                            ?>
+                                            <option value="price_rental_low"><?php echo esc_html__('Price Rental: Low To High', 'templaza-framework')?></option>
+                                            <?php
+                                        }
+                                    }
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>
