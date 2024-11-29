@@ -11,11 +11,8 @@ use TemPlazaFramework\Templates;
 class TemplazaFramework_Widget extends WP_Widget {
 
     protected $cache;
-    protected $text_domain;
 
     public function __construct(){
-
-        $this -> text_domain    = Functions::get_my_text_domain();
 
         $wdargs     = $this -> register();
 

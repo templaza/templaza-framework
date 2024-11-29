@@ -23,7 +23,6 @@ defined( 'ABSPATH' ) || exit;
 
 class Framework{
 
-    protected $text_domain;
     protected $post_types   = array();
 
     public $theme;
@@ -33,9 +32,7 @@ class Framework{
 
     public function __construct()
     {
-        if (!$this->text_domain) {
-            $this->text_domain = Functions::get_my_text_domain();
-        }
+
         // Just for demo purposes. Not needed per say.
         if (!$this->theme) {
             $this->theme = wp_get_theme();

@@ -21,7 +21,6 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
         protected $page_slug;
         protected $controller;
         protected $theme_name;
-        protected $text_domain;
         protected $theme_config_registered;
 
         protected $framework    = null;
@@ -35,7 +34,6 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
         {
             global $pagenow;
 
-            $this -> text_domain        = Functions::get_my_text_domain();
             $this -> page_slug          = TEMPLAZA_FRAMEWORK;
             $this -> theme_name         = get_template();
             $this -> framework          = $framework;

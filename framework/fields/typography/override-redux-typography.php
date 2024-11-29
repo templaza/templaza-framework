@@ -70,8 +70,6 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 		 */
 		private $user_fonts = true;
 
-        protected $text_domain;
-
 		/**
 		 * Redux_Field constructor.
 		 *
@@ -83,7 +81,6 @@ if ( ! class_exists( 'Redux_Typography', false ) ) {
 			$this->parent = $parent;
 			$this->field  = $field;
 			$this->value  = $value;
-            $this -> text_domain    = \TemPlazaFramework\Functions::get_my_text_domain();
 
 			$this->set_defaults();
 

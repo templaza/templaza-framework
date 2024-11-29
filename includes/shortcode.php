@@ -13,7 +13,6 @@ class TemplazaFramework_ShortCode{
     public $default_settings;
 
     protected $element;
-    protected $text_domain;
     protected $admin_template_settings;
 
     protected $value;
@@ -25,7 +24,6 @@ class TemplazaFramework_ShortCode{
         $this->field_parent = $field_parent;
         $this->value = $value;
 
-        $this -> text_domain    = Functions::get_my_text_domain();
 
         if(is_admin()) {
 

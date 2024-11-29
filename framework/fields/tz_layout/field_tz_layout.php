@@ -14,13 +14,11 @@ if ( ! class_exists( 'ReduxFramework_TZ_Layout' ) ) {
 
         protected $value;
         protected $elements;
-        protected $text_domain;
 
         protected $templates = array();
 
         function __construct( $field = array(), $value = '', $parent = null ) {
 
-            $this -> text_domain    = Functions::get_my_text_domain();
 
             $field['title'] = isset($field['title'])?$field['title']:'';
 

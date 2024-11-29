@@ -82,10 +82,6 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page_Function')){
             return false;
         }
 
-        public static function get_text_domain_name(){
-            $text_domain = Functions::get_my_text_domain();
-            return $text_domain;
-        }
 
         public static function get_page_type(){
             if(!isset($_GET['page']) || (isset($_GET['page']) && !$_GET['page'])){

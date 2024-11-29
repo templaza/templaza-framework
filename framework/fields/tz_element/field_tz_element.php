@@ -38,7 +38,6 @@ if ( !class_exists ( 'ReduxFramework_TZ_Element' ) ) {
      * @since       1.0.0
      */
     class ReduxFramework_TZ_Element {
-        private $text_domain;
 
         /**
          * Field Constructor.
@@ -53,8 +52,6 @@ if ( !class_exists ( 'ReduxFramework_TZ_Element' ) ) {
             $this->parent = $parent;
             $this->field = $field;
             $this->value = $value;
-
-            $this -> text_domain    = Functions::get_my_text_domain();
 
             if(isset($this -> field['fields']) && count($this -> field['fields'])){
                 $fields = $this -> field['fields'];

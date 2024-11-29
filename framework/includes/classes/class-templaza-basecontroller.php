@@ -15,7 +15,6 @@ if(!class_exists('TemPlazaFramework\Controller\BaseController')){
 
         protected $name;
         protected $theme_name;
-        protected $text_domain;
         protected $theme_config_registered;
 
         protected $cache        = array();
@@ -43,7 +42,6 @@ if(!class_exists('TemPlazaFramework\Controller\BaseController')){
         // phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
 
         public function __construct($config = array()){
-            $this -> text_domain    = Functions::get_my_text_domain();
             if(isset($config['theme_name'])) {
                 $this -> theme_name = $config['theme_name'];
             }
