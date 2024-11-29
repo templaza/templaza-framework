@@ -8,13 +8,12 @@ if(!class_exists('TemPlazaFramework\Admin\Application')){
 
     class Application extends Admin_Page_Function {
 
-        protected $text_domain;
         protected $_message_queue   = array();
         protected static $instance;
 
         public function __construct()
         {
-            $this -> text_domain    = self::get_text_domain_name();
+
         }
 
         public static function get_instance(){

@@ -8,7 +8,6 @@ if(!class_exists('Templaza_Custom_Redux_Border')){
     class Templaza_Custom_Redux_Border{
 
         protected $args;
-        protected $text_domain;
         protected $redux_framework;
 
         protected $redux_field_type = 'border';
@@ -18,7 +17,6 @@ if(!class_exists('Templaza_Custom_Redux_Border')){
         public function __tz_init($args = array(),  $field_object = null){
             $this -> args               = $args;
             $this -> tz_fields_object   = $field_object;
-            $this -> text_domain        = Functions::get_my_text_domain();
 
             if(isset($args['opt_name']) && $args['opt_name']){
                 $this -> redux_framework    = \Redux::instance($args['opt_name']);

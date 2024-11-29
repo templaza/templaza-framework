@@ -13,7 +13,6 @@ if ( ! class_exists( 'ReduxFramework_TZ_Color_Repeater' ) ) {
         protected $redux;
         protected $elements;
         protected $opt_name;
-        protected $text_domain;
 
         protected $type             = 'tz_color_repeater';
         protected $field_style      = 'inline';
@@ -24,7 +23,6 @@ if ( ! class_exists( 'ReduxFramework_TZ_Color_Repeater' ) ) {
 
         public function __construct( $field = array(), $value = '', $parent = null ) {
             parent::__construct(array(), null, $parent);
-            $this -> text_domain    = Functions::get_my_text_domain();
             $this->parent           = $parent;
             $this->field            = $field;
             $this->value            = $value;

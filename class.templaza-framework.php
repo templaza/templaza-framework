@@ -11,8 +11,6 @@ use TemPlazaFramework\Templates;
 
 class TemPlazaFrameWork{
 
-    public $text_domain;
-
     private $widgets;
     protected $theme_options;
     protected $theme_support;
@@ -31,13 +29,11 @@ class TemPlazaFrameWork{
 
         $instance   = new TemPlazaFrameWork();
 
-        $instance -> text_domain    = Functions::get_my_text_domain();
-
         $instance -> hooks();
 
         $instance -> load_gutenberg_blocks();
 
-        if(is_plugin_active( 'woocommerce/woocommerce.php' )) {
+        if(class_exists( 'woocommerce' )){
             require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-product-brand.php';
             require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-deal.php';
             require_once TEMPLAZA_FRAMEWORK_INCLUDES_PATH . '/helpers/woocommerce/register-variation.php';

@@ -18,7 +18,6 @@ if(!class_exists('Templaza_Custom_Redux_Background')){
         protected $field;
         protected $value;
         protected $parent;
-        protected $text_domain;
         protected $user_fonts = true;
         protected $redux_framework;
         protected $typography_preview = array();
@@ -28,7 +27,6 @@ if(!class_exists('Templaza_Custom_Redux_Background')){
         public function __tz_init($args = array(),  $field_object = null){
             $this -> args               = $args;
             $this -> tz_fields_object   = $field_object;
-            $this -> text_domain        = Functions::get_my_text_domain();
 
             if(isset($args['opt_name']) && $args['opt_name']){
                 $this -> redux_framework    = \Redux::instance($args['opt_name']);

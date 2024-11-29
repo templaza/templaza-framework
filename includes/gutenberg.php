@@ -8,11 +8,8 @@ use TemPlazaFramework\Functions;
 
 class TemplazaFramework_GutenbergBlock{
 
-    protected $text_domain;
-
     public function __construct()
     {
-        $this -> text_domain    = Functions::get_my_text_domain();
         $this -> hooks();
     }
 

@@ -10,7 +10,6 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
     class Post_Type{
         protected $theme;
         protected $framework;
-        protected $text_domain;
 
         protected $cache    = array();
         // phpcs:disable WordPress.Security.NonceVerification.Recommended
@@ -19,7 +18,6 @@ if(!class_exists('TemPlazaFramework\Post_Type')){
         {
             $this -> framework  = $framework;
             $this -> theme      = \wp_get_theme();
-            $this -> text_domain= Functions::get_my_text_domain();
 
             if(method_exists($this, 'hooks')){
                 $this -> hooks();

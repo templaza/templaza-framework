@@ -36,7 +36,6 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
         private $preset_path;
         private $preset_opt_name;
 		public $is_field = false;
-		private $text_domain = 'templaza-framework';
 
 		/**
 		 * Class Constructor. Defines the args for the extions class
@@ -51,7 +50,6 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 		public function __construct( $parent ) {
 			parent::__construct( $parent, __FILE__ );
 
-            $this -> text_domain        = Functions::get_my_text_domain();
             $this -> preset_opt_name    = 'presets__opt_name';
             $this -> preset_path        = TEMPLAZA_FRAMEWORK_THEME_PATH.'/presets';
 

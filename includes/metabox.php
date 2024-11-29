@@ -27,7 +27,6 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
          */
         protected $post_type;
 
-        protected $text_domain;
 
         public $prefix  = 'tzfrm_metabox-';
 // phpcs:disable WordPress.Security.NonceVerification.Missing
@@ -36,7 +35,6 @@ if(!class_exists('TemplazaFramework_MetaBox')) {
         {
             $this -> post_type      = $post_type;
             $this -> framework      = $framework;
-            $this -> text_domain    = Functions::get_my_text_domain();
 
             if($this -> framework && isset($this -> framework -> repeater_data)) {
                 $this->framework->repeater_data = array();
