@@ -26,7 +26,6 @@ if ( ! class_exists( 'Redux_Extension_TZ_Presets', false ) ) {
 		 *
 		 * @var string
 		 */
-		public static $version = '1.0';
 
 		/**
 		 * Is field bit.
