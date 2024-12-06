@@ -106,7 +106,7 @@ if(!class_exists('TemplazaFramework_Widget_Woo_Filter') && is_plugin_active( 'wo
             echo wp_kses($args['before_widget'],'post');
 
             if ( $title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) ) {
-                echo wp_kses($args['before_title'] . esc_html( $title ) . $args['after_title']);
+                echo wp_kses($args['before_title'] . esc_html( $title ) . $args['after_title'],'post');
             }
 
             echo '<div class="products-filter__activated">';
