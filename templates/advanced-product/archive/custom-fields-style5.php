@@ -81,6 +81,15 @@ if(!empty($fields)){
                             if($f_attr['append']){
                                 ?><span class="custom-field-append"><?php echo esc_html($f_attr['append']);?></span> <?php
                             }
+                        }elseif($f_attr['type'] == 'date_picker'){
+                            $date_val = date_create(get_field($f_attr['name']));
+                            if($f_attr['display_format']){
+                                $unixtimestamp = strtotime( get_field( $f_attr['name'] ) );
+                                echo date_i18n( $f_attr['display_format'], $unixtimestamp );
+                            }else{
+                                $unixtimestamp = strtotime( get_field( $f_attr['name'] ) );
+                                echo date_i18n( get_option('date_format'), $unixtimestamp );
+                            }
                         }elseif($f_attr['type'] == 'true_false'){
 
                         }

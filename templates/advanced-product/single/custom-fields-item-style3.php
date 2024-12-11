@@ -87,6 +87,24 @@ if($taxonomy == true){
                         </div>
                     </div>
                     <?php
+                }elseif($acf_f['type'] == 'date_picker'){
+                    ?>
+                    <div class="uk-grid-collapse ap-custom-fields-style3" data-uk-grid>
+                        <div class="uk-width-2-5 ap-field-label field-label"><?php echo esc_html($acf_f['label']); ?></div>
+                        <div class="field-value uk-width-3-5 uk-text-right ap-field-value">
+                            <?php
+                            $date_val = date_create(get_field($acf_f['name'],$product_id));
+                            if($acf_f['display_format']){
+                                $unixtimestamp = strtotime( get_field( $acf_f['name'] ) );
+                                echo date_i18n( $acf_f['display_format'], $unixtimestamp );
+                            }else{
+                                $unixtimestamp = strtotime( get_field( $acf_f['name'] ) );
+                                echo date_i18n( get_option('date_format'), $unixtimestamp );
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <?php
                 }else{
                     ?>
                     <div class="uk-grid-collapse ap-custom-fields-style3" data-uk-grid>

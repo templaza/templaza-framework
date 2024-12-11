@@ -91,6 +91,24 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                     </div>
                 </div>
                 <?php
+            }elseif($acf_f['type'] == 'date_picker'){
+                ?>
+                <div class="ap-custom-fields uk-width-1-2 ap-custom-fields-style2">
+                    <div class="ap-field-label field-label"><?php echo esc_html($acf_f['label']); ?></div>
+                    <div class="ap-field-value field-value">
+                        <?php
+                        $date_val = date_create(get_field($acf_f['name'],$product_id));
+                        if($acf_f['display_format']){
+                            $unixtimestamp = strtotime( get_field( $acf_f['name'] ) );
+                            echo date_i18n( $acf_f['display_format'], $unixtimestamp );
+                        }else{
+                            $unixtimestamp = strtotime( get_field( $acf_f['name'] ) );
+                            echo date_i18n( get_option('date_format'), $unixtimestamp );
+                        }
+                        ?>
+                    </div>
+                </div>
+                <?php
             }else{
                 ?>
                 <div class="ap-custom-fields uk-width-1-2 ap-custom-fields-style2">
