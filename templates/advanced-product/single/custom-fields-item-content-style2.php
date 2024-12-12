@@ -14,7 +14,6 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
     $f_icon     = isset($acf_f['icon'])?$acf_f['icon']:'';
     $f_icon_image   = isset($acf_f['icon_image']) && !empty($acf_f['icon_image'])?$acf_f['icon_image']:'';
     if(!empty($f_value)){
-
         if($acf_f['type'] =='true_false'){
         ?>
             <div class="uk-width-1-2 uk-width-1-4@s">
@@ -115,21 +114,23 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                             $term_arr = get_field($acf_f['name'], $product_id);
                             if(!empty($term_arr) && is_array($term_arr)){
                                 foreach ($term_arr as $term_id){
-                                    $term = get_term( $term_id, $acf_f['name'] );
+                                    $term = get_term( $term_id, $acf_f['taxonomy'] );
                                     if($term){
                                         ?>
-                                            <a href="<?php echo esc_url(get_term_link( $term_id,$acf_f['name']  ));?>"><?php echo esc_html($term->name);?></a>
+                                            <a href="<?php echo esc_url(get_term_link( $term_id,$acf_f['taxonomy']));?>"><?php echo esc_html($term->name);?></a>
                                         <?php
                                     }
                                 }
                             }
 
                         }elseif($acf_f['type'] == 'date_picker'){
-                            $date_val = get_field($acf_f['name'], $product_id);
+                            $date_val = date_create(get_field($acf_f['name'], $product_id));
                             if($acf_f['display_format']){
-                                echo esc_html(gmdate($acf_f['display_format'], strtotime($date_val)));
+                                $unixtimestamp = strtotime( get_field( $acf_f['name'] ) );
+                                echo date_i18n( $acf_f['display_format'], $unixtimestamp );
                             }else{
-                                echo esc_html(the_field($acf_f['name'], $product_id));
+                                $unixtimestamp = strtotime( get_field( $acf_f['name'] ) );
+                                echo date_i18n( get_option('date_format'), $unixtimestamp );
                             }
                         }else{
                             ?><?php echo esc_html(the_field($acf_f['name'], $product_id)); ?>

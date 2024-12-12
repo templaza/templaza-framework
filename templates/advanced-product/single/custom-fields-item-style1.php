@@ -95,6 +95,15 @@ if($taxonomy == true){
                                 if($acf_f['append']){
                                     ?><span class="custom-field-append"><?php echo esc_html($acf_f['append']);?></span> <?php
                                 }
+                            }elseif($acf_f['type'] == 'date_picker'){
+                                $date_val = date_create(get_field($acf_f['name'],$product_id));
+                                if($acf_f['display_format']){
+                                    $unixtimestamp = strtotime( get_field( $acf_f['name'] ) );
+                                    echo date_i18n( $acf_f['display_format'], $unixtimestamp );
+                                }else{
+                                    $unixtimestamp = strtotime( get_field( $acf_f['name'] ) );
+                                    echo date_i18n( get_option('date_format'), $unixtimestamp );
+                                }
                             }else{
                                 echo esc_html(the_field($acf_f['name'], $product_id));
                             }

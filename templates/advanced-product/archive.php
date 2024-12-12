@@ -33,9 +33,12 @@ $ap_list_grid       = isset($templaza_options['ap_product-archive-product-list-g
 $ap_cat_description       = isset($templaza_options['ap_product-cat-description'])?$templaza_options['ap_product-cat-description']:'top';
 $ap_sortby_full = array('date_high','date_low','title_low','title_high','price_high','price_low','price_rental_high','price_rental_low');
 $ap_sortby_hidden       = isset($templaza_options['ap_product-archive-product-sortby-hidden'])?$templaza_options['ap_product-archive-product-sortby-hidden']:array();
+$grid_option = '';
+
 if($ap_layout == 'masonry'){
     $grid_option = 'masonry: true';
-}elseif($ap_layout == 'list' || $grid_view =='list'){
+}
+if($ap_layout == 'list' || $grid_view =='list'){
     $ap_col_laptop = $ap_col_large = $ap_col = $ap_col_tablet = $ap_col_mobile = '1';
 }else{
     $grid_option = '';

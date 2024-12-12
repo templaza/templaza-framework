@@ -28,6 +28,7 @@ if(isset($args['show_intro'])){
 }
 // phpcs:disable WordPress.Security.NonceVerification.Recommended
 if(isset($_GET['description'])){
+    $ap_intro = true;
     $ap_desc_limit = $_GET['description'];
 }else{
     $ap_desc_limit       = isset($templaza_options['ap_product-loop-desc-limit'])?$templaza_options['ap_product-loop-desc-limit']:100;
