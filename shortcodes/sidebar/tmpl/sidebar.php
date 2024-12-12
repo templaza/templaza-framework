@@ -2,10 +2,6 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
-use TemPlazaFramework\Functions;
-use TemPlazaFramework\Templates;
-
-$options    = Functions::get_theme_options();
 $sidebar    = isset($atts['sidebar'])?$atts['sidebar']:'';
 if ($sidebar && is_active_sidebar($sidebar)){
     ?>

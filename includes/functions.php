@@ -79,7 +79,6 @@ if(!class_exists('\TemPlazaFramework\Functions')){
             if(isset(self::$cache[$store_id])){
                 return self::$cache[$store_id];
             }
-//            $options = get_option($opt_name, array());
 
             $options        = array();
             $setting_file   = TEMPLAZA_FRAMEWORK_THEME_PATH_TEMPLATE_OPTION.'/settings/setting.json';
@@ -103,11 +102,12 @@ if(!class_exists('\TemPlazaFramework\Functions')){
         }
 
         public static function get_theme_options($post_type = ''){
-
             $store_id   = __METHOD__;
             $store_id  .= ':'.$post_type;
+
             $global_options     = self::get_global_settings();
             $template_options   = self::_get_theme_options($post_type);
+
 
             $store_id  .= serialize($global_options);
             $store_id  .= serialize($template_options);
@@ -118,7 +118,6 @@ if(!class_exists('\TemPlazaFramework\Functions')){
             }
 
             $theme_options      = self::merge_array($template_options, $global_options);
-//            $theme_options      = self::merge_array($global_options, $template_options);
 
             if($theme_options && count($theme_options)){
                 self::$cache[$store_id] = $theme_options;
@@ -129,7 +128,7 @@ if(!class_exists('\TemPlazaFramework\Functions')){
         }
         protected static function _get_theme_options($post_type = ''){
             $the_ID = \get_the_ID();
-            global $wp;
+            global $wp, $wp_taxonomies;
 
             if(is_single() || is_archive()){
                 if(is_archive() && \get_page_by_path($wp -> request)){
@@ -139,8 +138,15 @@ if(!class_exists('\TemPlazaFramework\Functions')){
                         return static::get_theme_options_by_post_type_ID($page -> ID);
                     }
                 }
-                $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
-                $post_type  = !empty($post_type)?$post_type: get_query_var( 'post_type' );
+                if($the_ID){
+                    $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
+                    $post_type  = !empty($post_type)?$post_type: get_query_var( 'post_type' );
+                }else{
+                    $queried_object = get_queried_object()->taxonomy;
+                    if($queried_object){
+                        $post_type = ( isset( $wp_taxonomies[$queried_object] ) ) ? $wp_taxonomies[$queried_object]->object_type[0] : array();
+                    }
+                }
 
                 if(!empty($post_type)){
                     $key    = null;
@@ -174,7 +180,6 @@ if(!class_exists('\TemPlazaFramework\Functions')){
             }
 
             $style_id   = get_post_meta($id, 'templaza-style', true);
-
             // Is slug
             if($style_id && !is_numeric($style_id)) {
                 // Get style id by style slug
@@ -335,6 +340,7 @@ if(!class_exists('\TemPlazaFramework\Functions')){
                     if (file_exists($shortcode_file)) {
                         require $shortcode_file;
                     }
+
 
                     $shortcode_class = 'TemplazaFramework_Shortcode_' . $item['type'];
                     $shortcode_storeId = md5($shortcode_class);
@@ -735,26 +741,34 @@ if(!class_exists('\TemPlazaFramework\Functions')){
 
         public static function get_template_id(){
 //            $store_id   = __METHOD__;
-
             $result_id   = false;
 
             $the_ID = \get_the_ID();
-            global $wp;
-
+            global $wp, $wp_taxonomies;
             if(is_single() || is_archive()){
                 if(is_archive() && \get_page_by_path($wp -> request)){
                     // Get page
                     $page   = \get_page_by_path($wp -> request);
                     if($page -> ID){
-
                         $result_id   = get_post_meta($page -> ID, 'templaza-style', true);
-
-//                        $result_id  = $page -> ID;
-//                        return $page -> ID;
+                    }else{
+                        $queried_object = get_queried_object()->taxonomy;
+                        if($queried_object){
+                            $post_type = ( isset( $wp_taxonomies[$queried_object] ) ) ? $wp_taxonomies[$queried_object]->object_type[0] : array();
+                            $result_id   = get_post_meta($post_type, 'templaza-style', true);
+                        }
                     }
                 }
-                $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
-                $post_type  = !empty($post_type)?$post_type: get_query_var( 'post_type' );
+                if($the_ID){
+                    $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
+                    $post_type  = !empty($post_type)?$post_type: get_query_var( 'post_type' );
+                }else{
+                    $queried_object = get_queried_object()->taxonomy;
+                    if($queried_object){
+                        $post_type = ( isset( $wp_taxonomies[$queried_object] ) ) ? $wp_taxonomies[$queried_object]->object_type[0] : array();
+                    }
+                }
+
                 if(!empty($post_type)){
                     $key    = null;
                     if(is_single()){
@@ -776,12 +790,11 @@ if(!class_exists('\TemPlazaFramework\Functions')){
                 }
             }
 
-
             if(!$result_id){
 
-//                $result_id    = get_post_meta($the_ID, '_templaza_style', true);
                 $result_id   = get_post_meta($the_ID, 'templaza-style', true);
             }
+
             // Is slug
             if($result_id && is_numeric($result_id)) {
                 // Get style id by style slug
@@ -795,14 +808,7 @@ if(!class_exists('\TemPlazaFramework\Functions')){
                     $result_id = $posts[0]->post_name;
                 }
 
-
             }
-
-//            // Get home id
-//            if(empty($result_id)){
-//                // Get default
-//            }
-
             return $result_id;
         }
 
@@ -922,7 +928,7 @@ if(!class_exists('\TemPlazaFramework\Functions')){
 
             $opt_key    = self::get_theme_option_name().'__layout';
             $shortcode  = $post && !empty($post -> post_content)?$post -> post_content:'';
-
+die();
             // Generate layout from option
             if(empty($shortcode)){
                 $shortcode  = self::generate_option_to_shortcode($options['layout']);
@@ -946,7 +952,7 @@ if(!class_exists('\TemPlazaFramework\Functions')){
             $result_id   = false;
 
             $the_ID = \get_the_ID();
-            global $wp;
+            global $wp, $wp_taxonomies;
 
 
             $store_id   = __METHOD__;
@@ -961,12 +967,27 @@ if(!class_exists('\TemPlazaFramework\Functions')){
                 if(is_archive() && \get_page_by_path($wp -> request)){
                     // Get page
                     $page   = \get_page_by_path($wp -> request);
+
                     if($page -> ID){
                         $result_id   = get_post_meta($page -> ID, 'templaza-style', true);
+                    }else{
+                        $queried_object = get_queried_object()->taxonomy;
+                        if($queried_object){
+                            $post_type = ( isset( $wp_taxonomies[$queried_object] ) ) ? $wp_taxonomies[$queried_object]->object_type[0] : array();
+                            $result_id   = get_post_meta($post_type, 'templaza-style', true);
+                        }
                     }
                 }
-                $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
-                $post_type  = !empty($post_type)?$post_type: get_query_var( 'post_type' );
+
+                if($the_ID){
+                    $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
+                    $post_type  = !empty($post_type)?$post_type: get_query_var( 'post_type' );
+                }else{
+                    $queried_object = get_queried_object()->taxonomy;
+                    if($queried_object){
+                        $post_type = ( isset( $wp_taxonomies[$queried_object] ) ) ? $wp_taxonomies[$queried_object]->object_type[0] : array();
+                    }
+                }
                 if(!empty($post_type)){
                     $key    = null;
                     if(is_single()){
@@ -1129,7 +1150,7 @@ if(!class_exists('\TemPlazaFramework\Functions')){
             if(!$post_type || !$meta_key_assigned){
                 return false;
             }
-
+die('3');
             $template_id  = static::get_template_id();
 
             $store_id   = __METHOD__;
@@ -1195,7 +1216,6 @@ if(!class_exists('\TemPlazaFramework\Functions')){
          * Get post type id
          * */
         protected static function __get_post_type_file_name($post_type = '', $meta_key_assigned = ''){
-
             $template_id  = static::get_template_id();
 
             $store_id   = __METHOD__;
@@ -1271,7 +1291,6 @@ if(!class_exists('\TemPlazaFramework\Functions')){
          * @return array Post type options
          * */
         protected static function __get_post_type_options($post_type = '', $meta_key_assigned = ''){
-
             $template_id  = static::get_template_id();
 
             $store_id   = __METHOD__;
