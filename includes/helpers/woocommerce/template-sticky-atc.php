@@ -40,8 +40,16 @@ class Templaza_Woo_Sticky_ATC {
 	 * @return void
 	 */
 	public function __construct() {
+        if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
+            $templaza_options = array();
+        }else{
+            $templaza_options = Functions::get_theme_options();
+        }
+        $single_cat_sticky           = isset($templaza_options['templaza-shop-single-cart-sticky'])?filter_var($templaza_options['templaza-shop-single-cart-sticky'], FILTER_VALIDATE_BOOLEAN):true;
 		// Sticky add to cart
-        add_action( 'wp_footer', array( $this, 'sticky_single_add_to_cart' ) );
+        if($single_cat_sticky){
+            add_action( 'wp_footer', array( $this, 'sticky_single_add_to_cart' ) );
+        }
 
 		add_filter( 'templaza_get_back_to_top', array( $this, 'get_back_to_top' ) );
 	}
