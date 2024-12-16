@@ -69,6 +69,14 @@ class TemPlazaFrameWork{
         do_action( 'templaza-framework/plugin/hooks', $this );
         add_filter('user_contactmethods', array($this, 'templaza_modify_contact_methods'));
         add_filter('upload_mimes', array($this, 'templaza_mime_types'));
+        add_filter('allowed_options', array($this,'templaza_add_new_option_color'), 10, 1);
+    }
+
+
+    public function templaza_add_new_option_color($allowed_options) {
+
+        $allowed_options['tzfrm_global_colors_group'] = true;
+        return $allowed_options;
     }
 
     public function wp_head(){
