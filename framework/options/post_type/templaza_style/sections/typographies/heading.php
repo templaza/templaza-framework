@@ -360,3 +360,57 @@ Templaza_API::set_section('templaza_style',
         )
     )
 );
+
+// -> START Quote
+Templaza_API::set_section('templaza_style',
+    array(
+        'title'      => __( 'Quote Typography', 'templaza-framework' ),
+        'id'         => 'typography-quotes',
+        'desc'       => __( 'These settings control the typography for quote.', 'templaza-framework' ),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'typography-quote',
+                'type'     => 'button_set',
+                'title'    => __( 'Typography Properties', 'templaza-framework' ),
+                'subtitle' => __( ' Choose typography properties for this section. If <code>inherit</code> selected then property will inherit its value from body typography properties.', 'templaza-framework' ),
+                'options'  => array(
+                    'default'       => __('Default', 'templaza-framework'),
+                    'custom'      => __('Custom', 'templaza-framework'),
+                ),
+                'placeholder'   => esc_html__('Inherit', 'templaza-framework'),
+                'select2'       => array( 'allowClear' => true ),
+                'default'       => '',
+            ),
+            array(
+                'id'        => 'typography-quote-option',
+                'type'      => 'typography',
+                'title'     => __( 'Quote Font', 'templaza-framework' ),
+                'subtitle'  => __( 'Specify the quote font properties.', 'templaza-framework' ),
+                'required'  => array('typography-quote', '=', 'custom'),
+                'color'          => true,
+                'text-align'     => false,
+                'preview'        => true, // Disable the previewer
+                'word-spacing'   => false,
+                'letter-spacing' => true,
+                'text-transform' => true,
+                'font-backup'    => true,
+                'allow_responsive'        => true,
+                'allow_empty_line_height' => true,
+                'google'                  => true,
+                'units'                   => array(
+                    'font-size'   => 'px',
+                    'line-height' => 'em',
+                ),
+                'default'        => array(
+                    'color'          => '#000',
+                    'font-weight'    => '500',
+                    'letter-spacing' => '0',
+                    'text-transform' => 'none',
+                    'font-family'    => 'Arial, Helvetica, sans-serif',
+                    'font-backup'    => 'Arial, Helvetica, sans-serif',
+                ),
+            ),
+        )
+    )
+);
