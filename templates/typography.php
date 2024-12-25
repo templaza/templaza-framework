@@ -70,6 +70,15 @@ $typographies = array(
         )
     ),
     array(
+        'id'        => 'typography-quote-option',
+        'enable'    => (isset($options['typography-quote']) && $options['typography-quote'] =='custom'?true:false),
+        'class'     => array(
+            'desktop' => 'blockquote',
+            'tablet'  => 'blockquote',
+            'mobile'  => 'blockquote'
+        )
+    ),
+    array(
         'id'        => 'typography-menu-option',
         'enable'    => (isset($options['typography-menu']) && $options['typography-menu'] =='custom'?true:false),
         'class'     => array(

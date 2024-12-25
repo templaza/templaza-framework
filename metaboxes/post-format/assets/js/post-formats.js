@@ -72,7 +72,7 @@ jQuery(function($) {
 
 			quote: function() {
 				$('#titlewrap, #vp-pfui-format-link-url, #vp-pfui-format-video-fields, #vp-pfui-format-audio-fields, #vp-pfui-format-gallery-preview').hide();
-				$('#vp-pfui-format-quote-fields').show().find(':input:first').focus();
+				$('.vp-pfui-format-quote-fields-cl').show();
 				$('#postimagediv-placeholder').replaceWith($('#postimagediv'));
 			},
 

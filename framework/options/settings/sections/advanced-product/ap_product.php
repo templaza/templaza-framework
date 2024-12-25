@@ -247,6 +247,14 @@ Templaza_API::set_section('settings',
                 'multi'     => true,
                 'required' => array('ap_product-archive-product-sortby', '=' , true)
             ),
+	        array(
+		        'id'       => 'ap_product-autocomplete-taxonomy-show',
+		        'type'     => 'select',
+		        'sortable' => true,
+		        'multi'     => true,
+		        'title'    => esc_html__( 'Choose taxonomy display under title autocomplete', 'templaza-framework' ),
+		        'options'  => $arr_taxs,
+	        ),
             array(
                 'id'       => 'ap_product-archive-product-list-grid',
                 'type'     => 'switch',
