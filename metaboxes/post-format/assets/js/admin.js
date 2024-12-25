@@ -1,5 +1,8 @@
 jQuery( function ( $ ) {
 	'use strict';
+	$(document).ready(function(){
+		console.log($('.editor-post-panel__row-control').html());
+	})
 	$(window).load(function(){
 		$('#post-format-selector-0').on('change', function(e) {
 			var format = $(this).val();

@@ -8,8 +8,7 @@ if(!class_exists('TemplazaFramework_Gutenberg_Advanced_Products_Filter')) {
     class TemplazaFramework_Gutenberg_Advanced_Products_Filter extends TemplazaFramework_GutenbergBlock{
         public function __construct()
         {
-            if(!class_exists('Advanced_Product\Helper\AP_Custom_Field_Helper')
-                && is_plugin_active('advanced-product/advanced-product.php')){
+            if(!class_exists('Advanced_Product\Helper\AP_Custom_Field_Helper')){
                 if(file_exists(plugin_dir_path(TEMPLAZA_FRAMEWORK_PATH).'advanced-product/includes/autoloader.php')) {
                     require_once(plugin_dir_path(TEMPLAZA_FRAMEWORK_PATH) . 'advanced-product/includes/autoloader.php');
                 }

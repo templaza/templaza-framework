@@ -1,5 +1,6 @@
 .templaza-sidebar{
-  .advanced-product-search-form{
+  .advanced-product-search-form
+  {
     label.search-label{
       border-bottom: 1px solid $tztheme-border-color;
       margin: 0 0 35px;
@@ -17,6 +18,7 @@
     }
   }
 }
+
 .advanced-product-search-form{
   .ap-search-item{
     margin-bottom: 30px;
@@ -233,5 +235,22 @@ html .ui-button.ui-state-disabled:active{
 .elementor-widget-uipro-uiadvanced-products-filter{
   .templaza-filter-closed{
     display:none;
+  }
+}
+#advanced-search-results{
+  .ui-autocomplete{
+    padding:10px 15px;
+    border:1px solid $tztheme-border-color;
+    li{
+      a{
+        display:block;
+        font-size:0.9em;
+        &.ui-state-active{
+          background:none;
+          color:$tztheme-global-color;
+          border:none;
+        }
+      }
+    }
   }
 }

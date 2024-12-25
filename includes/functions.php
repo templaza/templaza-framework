@@ -142,10 +142,12 @@ if(!class_exists('\TemPlazaFramework\Functions')){
                     $post_type  = !empty($post_type)?$post_type: get_post_type($the_ID);
                     $post_type  = !empty($post_type)?$post_type: get_query_var( 'post_type' );
                 }else{
-                    $queried_object = get_queried_object()->taxonomy;
-                    if($queried_object){
-                        $post_type = ( isset( $wp_taxonomies[$queried_object] ) ) ? $wp_taxonomies[$queried_object]->object_type[0] : array();
-                    }
+					if (isset(get_queried_object()->taxonomy)){
+						$queried_object = get_queried_object()->taxonomy;
+						if($queried_object){
+							$post_type = ( isset( $wp_taxonomies[$queried_object] ) ) ? $wp_taxonomies[$queried_object]->object_type[0] : array();
+						}
+					}
                 }
 
                 if(!empty($post_type)){
