@@ -172,8 +172,8 @@ if(!class_exists('TemPlazaFramework\Admin_Functions')){
                 'php_memory_limit'   => array(
                     'title'    => esc_html__( 'PHP Memory Limit', 'templaza-framework'),
                     'value'    => size_format( wp_convert_hr_to_bytes( @ini_get( 'memory_limit' ) ) ),
-                    'required' => '128',
-                    'pass'     => ( wp_convert_hr_to_bytes( @ini_get( 'memory_limit' ) ) >= (128 * 1024 * 1024) ) ? true : false,
+                    'required' => '512',
+                    'pass'     => ( wp_convert_hr_to_bytes( @ini_get( 'memory_limit' ) ) >= (512 * 1024 * 1024) ) ? true : false,
                     /* translators: %s - current value. */
                     'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', 'templaza-framework' )
                 ),

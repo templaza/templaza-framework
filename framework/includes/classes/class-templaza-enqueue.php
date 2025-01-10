@@ -57,14 +57,14 @@ class Enqueue extends \Redux_Enqueue{
 
         $this->localize_data['font_weights'] = $this->args['font_weights'];
 
-        $this->localize_data['required'] = $core->required;
-        $this->repeater_data['fonts']    = $core->fonts;
+        $this->localize_data['required'] = \Redux_Core::$required;
+        $this->repeater_data['fonts']    = \Redux_Core::$fonts;
         if ( ! isset( $this->repeater_data['opt_names'] ) ) {
             $this->repeater_data['opt_names'] = array();
         }
         $this->repeater_data['opt_names'][]    = $core->args['opt_name'];
         $this->repeater_data['folds']          = array();
-        $this->localize_data['required_child'] = $core->required_child;
+        $this->localize_data['required_child'] = \Redux_Core::$required_child;
         $this->localize_data['fields']         = $core->fields;
 
         if ( isset( $core->font_groups['google'] ) ) {
@@ -83,7 +83,7 @@ class Enqueue extends \Redux_Enqueue{
             $this->repeater_data['typekitfonts'] = $core->font_groups['typekitfonts'];
         }
 
-        $this->localize_data['folds'] = $core->folds;
+        $this->localize_data['folds'] = \Redux_Core::$folds;
 
         // Make sure the children are all hidden properly.
         foreach ( $core->fields as $key => $value ) {
@@ -97,7 +97,7 @@ class Enqueue extends \Redux_Enqueue{
             }
         }
 
-        $this->localize_data['fields_hidden'] = $core->fields_hidden;
+        $this->localize_data['fields_hidden'] = \Redux_Core::$fields_hidden;
         $this->localize_data['options']       = $core->options;
         $this->localize_data['defaults']      = $core->options_defaults;
 
