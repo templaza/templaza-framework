@@ -42,7 +42,7 @@ class Menu{
                     if($item -> menu_item_parent == 0) {
                         $remember[$item -> ID]    = $i;
                         $root_count++;
-                        if($args->menu_item_cl){
+                        if(isset($args->menu_item_cl)){
                             $item -> classes[]= $args->menu_item_cl;
                         }
                     }

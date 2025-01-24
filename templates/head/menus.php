@@ -69,31 +69,31 @@ $menu_styles    = [];
 if (!empty($main_menu_padding_css)) {
     if(is_array($main_menu_padding_css)){
         foreach($main_menu_padding_css as $device => $style){
-            $style  = '.templaza-nav > .menu-item > a {' . $style . '}';
+            $style  = '.templaza-nav > .menu-item > a, .templaza-nav .parent-menu-item > .menu-item > a {' . $style . '}';
             Templates::add_inline_style($style, $device);
         }
     }else {
-        $menu_styles[] = '.templaza-nav > .menu-item > a {' . $main_menu_padding_css . '}';
+        $menu_styles[] = '.templaza-nav > .menu-item > a, .templaza-nav .parent-menu-item > .menu-item > a {' . $main_menu_padding_css . '}';
     }
 }
 if (!empty($main_menu_margin_css)) {
     if(is_array($main_menu_margin_css)){
         foreach($main_menu_margin_css as $device => $style){
-            $style  = '.templaza-nav > .menu-item > a {' . $style . '}';
+            $style  = '.templaza-nav > .menu-item > a, .templaza-nav .parent-menu-item > .menu-item > a {' . $style . '}';
             Templates::add_inline_style($style, $device);
         }
     }else {
-        $menu_styles[] = '.templaza-nav > .menu-item > a {' . $main_menu_margin_css . '}';
+        $menu_styles[] = '.templaza-nav > .menu-item > a , .templaza-nav .parent-menu-item > .menu-item > a{' . $main_menu_margin_css . '}';
     }
 }
 if (!empty($main_menu_border_css)) {
     if(is_array($main_menu_border_css)){
         foreach($main_menu_border_css as $device => $style){
-            $style  = '.templaza-nav > .menu-item > a {' . $style . '}';
+            $style  = '.templaza-nav > .menu-item > a, .templaza-nav .parent-menu-item > .menu-item > a {' . $style . '}';
             Templates::add_inline_style($style, $device);
         }
     }else {
-        $menu_styles[] = '.templaza-nav > .menu-item > a {' . $main_menu_border_css . '}';
+        $menu_styles[] = '.templaza-nav > .menu-item > a, .templaza-nav .parent-menu-item > .menu-item > a {' . $main_menu_border_css . '}';
     }
 }
 

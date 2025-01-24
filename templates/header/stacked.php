@@ -572,7 +572,7 @@ if ($mode == 'left') {
             }
             // header nav starts
             ?>
-            <div class="templaza-stacked-menu-section header-stacked-inner uk-flex uk-width uk-flex-center uk-flex-middle"<?php echo wp_kses($data_attribs,'post');?>>
+            <div class="templaza-stacked-menu-section uk-position-relative header-stacked-inner uk-flex uk-width uk-flex-center uk-flex-middle"<?php echo wp_kses($data_attribs,'post');?>>
                 <div class="uk-flex uk-flex-left uk-flex-middle uk-hidden@m">
                     <div class="header-mobilemenu-trigger d-lg-none burger-menu-button" data-offcanvas="#templaza-mobilemenu" data-effect="mobilemenu-slide">
                         <button class="button" type="button"><span class="box"><span class="inner"></span></span></button>
@@ -585,11 +585,23 @@ if ($mode == 'left') {
                 echo '</div>';
                 ?>
                 <?php
+                if($header_stack_search){ ?>
+                    <div class="header-search uk-position-relative header-icon uk-flex uk-flex-middle">
+                        <span>
+                            <?php echo $search_icon_html; ?>
+                        </span>
+                        <form method="get" class="searchform " action="<?php echo esc_url( home_url( '/' ) ); ?>">
+                            <input type="text" class="field uk-input inputbox search-query uk-margin-remove-vertical" name="s" placeholder="<?php esc_attr_e( 'Search...', 'templaza-framework');?>" />
+                            <button type="submit" class="submit searchsubmit has-button-icon uk-position-right" name="submit" data-uk-icon="search"></button>
+                        </form>
+                    </div>
+                <?php }
                 Menu::get_nav_menu(array(
                     'theme_location'  => $header_menu,
                     'menu_class'      => implode(' ', $navClass),
                     'container_class' => implode(' ', $navWrapperClass),
-                    'menu_id'         => '',
+                    'items_wrap'      => '<div data-uk-navbar class="%2$s"><div class="uk-navbar-center" data-uk-height-match> %3$s</ul></div></div>',
+                    'menu_id'         => 'tz-menu-logo',
                     'depth'           => $header_menu_level, // Level
                     'menu_item_cl'           => 'menu-'.$header_item_text_align.'',
                     'templaza_is_header'          => true,
@@ -600,7 +612,7 @@ if ($mode == 'left') {
                 echo '</div>';
                 if ($enable_offcanvas || $header_stack_cart || $header_stack_account || $header_stack_search) {
                     ?>
-                    <div class="uk-flex uk-flex-right uk-flex-middle">
+                    <div class="uk-flex uk-flex-right uk-flex-middle uk-position-center-right">
                         <?php Templates::load_my_layout('inc.icon',true,false); ?>
                         <?php if ($enable_offcanvas) { ?>
                             <div class="header-offcanvas-trigger uk-position-relative burger-menu-button <?php

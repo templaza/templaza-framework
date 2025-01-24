@@ -210,6 +210,27 @@
         width:100%;
       }
     }
+    .searchform{
+      right:auto;
+      left:0;
+      border-radius:$tztheme-input-border-radius;
+      .submit{
+        border:none;
+        color:$tztheme-heading-color;
+        svg{
+          fill:$tztheme-heading-color;
+        }
+        &:hover{
+          color:$tztheme-global-color;
+          svg{
+            fill:$tztheme-global-color;
+          }
+        }
+      }
+    }
+    .header-search{
+      padding:0;
+    }
   }
 }
 .templaza-logo-text{

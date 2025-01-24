@@ -184,6 +184,14 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
          */
         function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)
         {
+            if(isset($args->menu_id) &&  $args->menu_id == 'tz-menu-logo'){
+                if ($depth === 0) {
+                    // get current menu items
+                    if ($item->menu_order == 1) {
+                        $output .= '<ul class="left-logo parent-menu-item uk-navbar-center-left uk-navbar-left">';
+                    }
+                }
+            }
             $this -> is_megamenu    = false;
             if(isset($item -> templaza_megamenu_layout) && !empty($item -> templaza_megamenu_layout)) {
                 $this -> is_megamenu = true;
@@ -297,7 +305,7 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
 
                         if (!preg_match('/(.*?)\[' . $this->menu_shorcode_tag . '.*?\]/ims', $item->templaza_megamenu_html, $match)) {
                             if(isset($item -> templaza_allow_el) && $item -> templaza_allow_el) {
-                                $output .= '<li data-position="' . $direction . '" class="' . $class . '" >';
+                                $output .= '</ul><div data-position="' . $direction . '" class="' . $class . '" >';
                             }
                             $output .= $item->templaza_megamenu_html;
                         }
@@ -306,6 +314,7 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
                             $item->templaza_megamenu_html, $match)) {
                             $output .= $match[1];
                         }
+
                     }
                 }else{
                     $has_lvl = $this->has_my_menu_type($item);
@@ -592,11 +601,12 @@ if( ! class_exists( 'TemplazaFramework_Mega_Menu_Walker' ) ) {
             if($this -> is_header_menu){
                 if ($item->type == $this->my_menu_type) {
                     if(isset($item -> templaza_allow_el) && $item -> templaza_allow_el) {
-                        parent::end_el($output, $item, $depth, $args);
+                        $output .= '</div><ul class="right-logo parent-menu-item uk-navbar-center-right">';
                     }else{
                         if (preg_match('/\[' . $this->menu_shorcode_tag . '.*?\][\n|\s|\r]*?(.*>?)$/ism',
                             $item->templaza_megamenu_html, $match)) {
                             $output .= $match[1];
+
                         }
                     }
                 }else{
