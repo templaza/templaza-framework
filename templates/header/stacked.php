@@ -207,7 +207,6 @@ $header_stacked_top_color     = CSS::make_color_rgba_redux($header_stack_top_col
     }
 
 $social_profiles    = isset($gb_options['social'])?$gb_options['social']:'';
-
 if ($mode == 'left') {
     echo '<div class="uk-grid-match uk-flex uk-flex-between uk-grid-collapse uk-position-relative '.esc_attr($header_icon).'">';
     ?>
@@ -596,17 +595,27 @@ if ($mode == 'left') {
                         </form>
                     </div>
                 <?php }
-                Menu::get_nav_menu(array(
-                    'theme_location'  => $header_menu,
-                    'menu_class'      => implode(' ', $navClass),
-                    'container_class' => implode(' ', $navWrapperClass),
-                    'items_wrap'      => '<div data-uk-navbar class="%2$s"><div class="uk-navbar-center" data-uk-height-match> %3$s</ul></div></div>',
-                    'menu_id'         => 'tz-menu-logo',
-                    'depth'           => $header_menu_level, // Level
-                    'menu_item_cl'           => 'menu-'.$header_item_text_align.'',
-                    'templaza_is_header'          => true,
-                    'templaza_megamenu_html_data' => $menu_datas
-                ));
+                if(has_nav_menu($header_menu)) {
+                    Menu::get_nav_menu(array(
+                        'theme_location' => $header_menu,
+                        'menu_class' => implode(' ', $navClass),
+                        'container_class' => implode(' ', $navWrapperClass),
+                        'items_wrap' => '<div data-uk-navbar class="%2$s"><div class="uk-navbar-center" data-uk-height-match> %3$s</ul></div></div>',
+                        'menu_id' => 'tz-menu-logo',
+                        'depth' => $header_menu_level, // Level
+                        'menu_item_cl' => 'menu-' . $header_item_text_align . '',
+                        'templaza_is_header' => true,
+                        'templaza_megamenu_html_data' => $menu_datas
+                    ));
+                }else{
+                    ?>
+                    <div class="uk-width-1-1 uk-flex uk-flex-center uk-padding-small uk-text-center">
+                <?php
+                    Templates::load_my_layout('logo', true, false);
+                    ?>
+                    </div>
+                <?php
+                }
                 ?>
                 <?php
                 echo '</div>';
