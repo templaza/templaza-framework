@@ -68,7 +68,7 @@ if($ap_quote){
 </div>
 <?php
 }
-$cursor_enable   = isset($options['enable-cursor-effects'])?filter_var($options['enable-cursor-effects'], FILTER_VALIDATE_BOOLEAN):false;
+$cursor_enable   = isset($templaza_options['enable-cursor-effects'])?filter_var($templaza_options['enable-cursor-effects'], FILTER_VALIDATE_BOOLEAN):false;
 $cursor_eff   = isset($templaza_options['cursor-effects'])?$templaza_options['cursor-effects']:'';
 if($cursor_enable && $cursor_eff){
     switch ($cursor_eff) {

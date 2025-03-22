@@ -56,13 +56,26 @@ if(!empty($ap_gallery)){
                 <?php
             }
             foreach ($ap_gallery as $image) {
-                ?>
-                <li>
-                    <a  class="uk-height-1-1 uk-width-1-1 uk-cover-container uk-display-block uk-position-relative" href="<?php echo esc_url($image['url']); ?>" data-caption="<?php echo esc_attr($image['caption']); ?>">
-                    <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['title']); ?>" data-uk-cover>
-                    </a>
-                </li>
-            <?php } ?>
+                if(is_array($image) && isset($image['url'])){
+                    ?>
+                    <li>
+                        <a  class="uk-height-1-1 uk-width-1-1 uk-cover-container uk-display-block uk-position-relative" href="<?php echo esc_url($image['url']); ?>" data-caption="<?php echo esc_attr($image['caption']); ?>">
+                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['title']); ?>" data-uk-cover>
+                        </a>
+                    </li>
+                <?php }else{
+                    $img_url = wp_get_attachment_url( $image );
+                    if($img_url){
+                        ?>
+                        <li>
+                            <a  class="uk-height-1-1 uk-width-1-1 uk-cover-container uk-display-block uk-position-relative" href="<?php echo esc_url($img_url); ?>" >
+                                <img src="<?php echo esc_url($img_url); ?>" alt="" data-uk-cover>
+                            </a>
+                        </li>
+                    <?php }
+
+                }
+            }?>
         </ul>
         <a class="uk-position-center-left uk-hidden-hover" href="#" data-uk-slidenav-previous data-uk-slideshow-item="previous"></a>
         <a class="uk-position-center-right  uk-hidden-hover" href="#" data-uk-slidenav-next data-uk-slideshow-item="next"></a>
@@ -85,13 +98,24 @@ if(!empty($ap_gallery)){
                 $d++;
             }
             foreach ($ap_gallery as $image) {
-                ?>
-                <li data-uk-slideshow-item="<?php echo esc_attr($d);?>" >
-                    <a href="#" data-uk-cover-container class="uk-display-block uk-position-relative">
-                        <img data-uk-cover src="<?php echo esc_url($image['sizes']['medium']); ?>" width="180" alt="<?php echo esc_attr($image['title']); ?>">
-                    </a>
-                </li>
-            <?php
+                if(is_array($image) && isset($image['url'])){
+                    ?>
+                    <li data-uk-slideshow-item="<?php echo esc_attr($d);?>">
+                        <a  class="uk-height-1-1 uk-width-1-1 uk-cover-container uk-display-block uk-position-relative" href="<?php echo esc_url($image['url']); ?>" data-caption="<?php echo esc_attr($image['caption']); ?>">
+                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['title']); ?>" data-uk-cover>
+                        </a>
+                    </li>
+                <?php }else{
+                    $img_url = wp_get_attachment_url( $image );
+                    if($img_url){
+                        ?>
+                        <li data-uk-slideshow-item="<?php echo esc_attr($d);?>">
+                            <a  class="uk-height-1-1 uk-width-1-1 uk-cover-container uk-display-block uk-position-relative" href="<?php echo esc_url($img_url); ?>" >
+                                <img src="<?php echo esc_url($img_url); ?>" alt="" data-uk-cover>
+                            </a>
+                        </li>
+                    <?php }
+                }
             $d++;
             } ?>
         </ul>

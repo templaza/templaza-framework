@@ -60,6 +60,12 @@ if($preloder_setting == "animations"){
 		case 'donut':
 			$preloaderHTML = '<div class="donut"></div>';
 			break;
+		case 'charging':
+			$preloaderHTML = '<div id="preloader" class="preloader">
+    <div class="percentage">0%</div>
+    <div class="progress"></div>
+</div>';
+			break;
 		case 'triple-spinner':
 			$preloaderHTML = '<div class="triple-spinner"></div>';
 			break;
@@ -84,8 +90,12 @@ if($preloder_setting == "animations"){
 	$preloaderHTML = '<div class="'.$preloader_fontawesome.'" style="font-size:'.$preloader_size.'px; color: '.$preloader_color.'; display: flex;justify-content: center;margin: 0 auto;"></div>';
 	$preloaderStyles = '';
 }
-
+if($preloader_animation == 'charging'){
+    echo wp_kses($preloaderHTML,'post');
+}else{
 ?>
 <div id="templaza-preloader" class="uk-flex uk-flex-middle">
-	<?php echo wp_kses($preloaderHTML,'post'); ?>
+    <?php echo wp_kses($preloaderHTML,'post'); ?>
 </div>
+<?php
+}

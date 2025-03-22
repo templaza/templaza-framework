@@ -126,7 +126,6 @@
                   switch ($(this).data('position')) {
                      case 'left':
                         var offsetleft = $(this).offset().left;
-                        var _rightoverflow = $(window).innerWidth() - offsetleft - _content.outerWidth();
                         break;
                      case 'right':
                         var offsetleft = $(this).offset().left - (_content.outerWidth() - $(this).outerWidth());
@@ -139,7 +138,7 @@
                   }
 
                   if ((offsetleft + _content.outerWidth()) > _rightoverflow) {
-                     var _left = 0;
+                     var _left = _content.outerWidth() - (_rightoverflow - offsetleft);
                      if ($(this).data('position') == 'center' || $(this).data('position') == 'edge' || $(this).data('position') == 'full') {
                         _left = _left + ((_content.outerWidth() / 2) - ($(this).outerWidth() / 2));
                      }

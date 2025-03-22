@@ -91,6 +91,10 @@ if ( ! class_exists( 'ReduxFramework_TZ_Preloader' ) ) {
                         'title' => __('Donut', 'templaza-framework'),
                         'html'  => '<div class="donut"></div>',
                     ),
+                    'charging' => array(
+                        'title' => __('Charging', 'templaza-framework'),
+                        'html'  => '<div class="charging-load"></div>',
+                    ),
                     'triple-spinner' => array(
                         'title' => __('Triple Spinner', 'templaza-framework'),
                         'html'  => '<div class="triple-spinner"></div>',

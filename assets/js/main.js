@@ -184,8 +184,7 @@
     };
 
     var initPreloader = function () {
-        // $("#templaza-preloader").addClass('d-none');
-        $("#templaza-preloader").addClass('uk-hidden');
+        // $("#templaza-preloader").addClass('uk-hidden');
     };
 
     // Events

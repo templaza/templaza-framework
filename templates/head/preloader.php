@@ -2,6 +2,7 @@
 
 defined('TEMPLAZA_FRAMEWORK') or exit();
 
+use \TemPlazaFramework\CSS;
 use TemPlazaFramework\Functions;
 use TemPlazaFramework\Templates;
 
@@ -47,6 +48,9 @@ if(is_array($preloader_color_3) && isset($preloader_color_3['rgba'])) {
 }
 
 $preloader_bgcolor      = isset($options['preloader-bgcolor'])?$options['preloader-bgcolor']:'';
+$preloader_bgcolor = CSS::make_color_rgba_redux($preloader_bgcolor);
+$preloader_process_bgcolor      = isset($options['preloader-process-bgcolor'])?$options['preloader-process-bgcolor']:'';
+$preloader_process_bgcolor = CSS::make_color_rgba_redux($preloader_process_bgcolor);
 if(is_array($preloader_bgcolor) && isset($preloader_bgcolor['rgba'])) {
     if($preloader_bgcolor['alpha'] == 1){
         $preloader_bgcolor  = $preloader_bgcolor['color'];
@@ -56,12 +60,12 @@ if(is_array($preloader_bgcolor) && isset($preloader_bgcolor['rgba'])) {
 }
 
 $preloader_image        = isset($options['preloader-image'])?$options['preloader-image']:'';
-
 Templates::add_inline_style('#templaza-preloader {'.($preloader_size?'--tztheme-preloader-size: '.$preloader_size.';':'')
     .($preloader_color?'--tztheme-preloader-color: '.$preloader_color.';':'')
     .($preloader_color_2?'--tztheme-preloader-color-2: '.$preloader_color_2.';':'')
     .($preloader_color_3?'--tztheme-preloader-color-3: '.$preloader_color_3.';':'')
     .($preloader_bgcolor?'--tztheme-preloader-bgcolor: '.$preloader_bgcolor.';':'')
+    .($preloader_process_bgcolor?'--tztheme-preloader-process-bgcolor: '.$preloader_process_bgcolor.';':'')
     .($preloader_image && !empty($preloader_image['background-image'])?'--tztheme-preloader-image: url('.$preloader_image['background-image'].');':'')
     .($preloader_image && !empty($preloader_image['background-repeat'])?'--tztheme-preloader-bg-repeat: '.$preloader_image['background-repeat'].';':'')
     .($preloader_image && !empty($preloader_image['background-size'])?'--tztheme-preloader-bg-size: '.$preloader_image['background-size'].';':'')

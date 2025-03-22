@@ -15,7 +15,7 @@ wp_enqueue_script( 'templaza-js__uikit-icons', Functions::get_my_url().'/assets/
 wp_enqueue_script( 'templaza-js__megamenu', Functions::get_my_url().'/assets/js/vendor/jquery.templazamegamenu.js', array( 'jquery' ),'',true  );
 wp_enqueue_script( 'templaza-js__mobilemenu', Functions::get_my_url().'/assets/js/vendor/jquery.templazamobilemenu.js', array( 'jquery' ),'',true  );
 wp_enqueue_script( 'templaza-js__offcanvas', Functions::get_my_url().'/assets/js/vendor/jquery.offcanvas.js', array( 'jquery' ),'',true  );
-wp_enqueue_script( 'templaza-js__main', Functions::get_my_url().'/assets/js/main.js', array( 'jquery' ),'',true  );
+wp_enqueue_script( 'templaza-js__main', Functions::get_my_url().'/assets/js/main.js', array( 'jquery' ),time(),true  );
 
 // Let's add the Smooth Scroll is enabled.
 $enable_smooth_scroll         = isset($options['enable-smooth-scroll'])?(bool) $options['enable-smooth-scroll']:true;
