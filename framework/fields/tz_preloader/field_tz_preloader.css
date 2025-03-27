@@ -1004,6 +1004,10 @@
   -webkit-animation: rotate-right 5s infinite linear;
 }
 
+.tz-preloader-select .charging-load {
+  content: "100%";
+}
+
 @-webkit-keyframes rotate-left {
   0% {
     -webkit-transform: rotate(0deg);

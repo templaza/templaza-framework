@@ -27,3 +27,15 @@
 	right: auto;
 	left: $tztheme-backtotop-right;
 }
+.templaza-backtotop{
+	#templaza-backtotop{
+		position:inherit;
+		right:0;
+		bottom:0;
+		justify-content: center;
+		align-items: center;
+		&.uk-flex{
+			display:flex !important;
+		}
+	}
+}

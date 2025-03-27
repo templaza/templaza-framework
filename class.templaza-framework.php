@@ -392,7 +392,7 @@ class TemPlazaFrameWork{
         $cur_sass_name  = Templates::get_sass_name_hash();
         $no_transient   = (!isset($transient['sass_code']) || (isset($transient['sass_code'])
                 && $transient['sass_code'] != $cur_sass_name));
-
+        $ver_time = '';
         if($dev_mode){
 //            $cur_sass_name = Templates::get_sass_name_hash();
             if(!isset($transient['sass_code']) || (isset($transient['sass_code']) && !empty($transient['sass_code'])
@@ -402,6 +402,7 @@ class TemPlazaFrameWork{
                 Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.min.css', true);
                 update_option($trans_name, $transient);
             }
+            $ver_time = time();
         }
 
         if((!file_exists($css_path.'/style.min.css') || !file_exists($css_path.'/style.css'))
@@ -424,7 +425,7 @@ class TemPlazaFrameWork{
 
         if(file_exists($css_path.'/'.$style_file)) {
             wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME . '__tzfrm',
-                get_template_directory_uri() . '/assets/css/'.$style_file, array(), $theme->get('Version'));
+                get_template_directory_uri() . '/assets/css/'.$style_file, array(), $theme->get('Version').$ver_time);
         }
 
         $inline_css = Templates::get_inline_styles();
