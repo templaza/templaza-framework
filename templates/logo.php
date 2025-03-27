@@ -62,7 +62,6 @@ if($logo_mobile_css){
 }
 ?>
 <!-- logo starts -->
-<!-- <div class="<?php /* echo implode(' ', $class); */ ?>"> -->
 <?php if ($logo_type=='text'): ?>
    <!-- text logo starts -->
 
@@ -126,5 +125,4 @@ if($logo_mobile_css){
    </a>
    <!-- image logo ends -->
 <?php endif; ?>
-<!-- </div> -->
 <!-- logo ends -->

@@ -1,0 +1,51 @@
+.charging-load, .charging-load::before, .charging-load::after {
+    grid-area: 1 / 1;
+}
+#content-scroll{
+    position:relative;
+    z-index: 10;
+}
+.preloader {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    background: #000;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preloader .percentage {
+    color: #f00;
+    font-size: 100px;
+    z-index: 10;
+    font-weight:700;
+}
+.preloader .progress {
+    background: #191B1D;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+.preloader .percentage.processing1 {
+    animation-name: color-change;
+    animation-duration: 1.5s;
+}
+@keyframes color-change {
+    from { color: #f00; }
+    to { color: #fa9416; }
+}
+.preloader .percentage.processing2 {
+    color: #1FCC42;
+    animation-name: color-change2;
+    animation-duration: 2.5s;
+}
+@keyframes color-change2 {
+    from { color: #fa9416; }
+    to { color: #1FCC42; }
+}
+.preloader .percentage.processing3 {
+    color: #1FCC42 !important;
+}

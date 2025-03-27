@@ -114,6 +114,12 @@ Templaza_API::set_section('settings',
                 'required' => array('preloader','=','1'),
             ),
             array(
+                'id'       => 'preloader-process-bgcolor',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Process background color', 'templaza-framework' ),
+                'required' => array('preloader','=','1'),
+            ),
+            array(
                 'id'       => 'preloader-size',
                 'type'     => 'slider',
                 'title'    => __( 'Preloader size', 'templaza-framework' ),

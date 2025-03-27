@@ -168,7 +168,9 @@ echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>" >
                     <div>
                         <div class="uk-card">
                             <div class="uk-card-media-top uk-transition-toggle <?php echo esc_attr($ripple_cl.$img_eff);?>">
-                                <?php if($latest_post_image_cover == true){
+                                <?php
+                                if(get_the_post_thumbnail_url($post_item->ID)){
+                                    if($latest_post_image_cover == true){
                                     ?>
                                 <div class="uk-cover-container">
                                     <a class="tz-img uk-display-block" href="<?php echo esc_url(get_permalink($post_item->ID));?>">
@@ -179,6 +181,7 @@ echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>" >
                                 </div>
                             <?php
                                 }else{
+
                                 ?>
                                 <a class="tz-img  uk-display-block" href="<?php echo esc_url(get_permalink($post_item->ID));?>">
                                     <img class="uk-transition-opaque <?php echo esc_attr($latest_post_image_transition);?>" src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?> "/>
@@ -186,6 +189,7 @@ echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>" >
                                 </a>
                             <?php
                                 }
+                            }
                             ?>
                             </div>
                             <div class="module-latest-info uk-margin-top">

@@ -335,7 +335,7 @@ if($allow_responsive){
     echo wp_kses($input_spacing_html,'post');
     ?>
 
-    <div class="uk-child-width-1-4 uk-grid-small" data-uk-grid>
+    <div class="uk-child-width-1-5 uk-grid-small" data-uk-grid>
         <?php
         if ( true === $this->field['all'] ) {
             $this->field['top']    = true;
@@ -347,7 +347,7 @@ if($allow_responsive){
             $this->value['left']   = $this->value['top'];
             $this->value['right']  = $this->value['top'];
 
-            echo '<div class="field-spacing-input input-prepend">
+            echo '<div class="field-spacing-input uk-margin-remove input-prepend">
                                 <span class="add-on">
                                     <i class="el el-fullscreen icon-large"></i>
                                 </span>

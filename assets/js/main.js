@@ -35,7 +35,11 @@
     var initBackToTop = function () {
         $(window).scroll(function () {
             if ($(this).scrollTop() >= 200) {        // If page is scrolled more than 200px
-                $('#templaza-backtotop').fadeIn(200);    // Fade in the arrow
+                if($('#templaza-backtotop').hasClass('templaza-backtotop-element')){
+                    $('#templaza-backtotop').fadeIn(200).addClass('uk-flex');
+                }else{
+                    $('#templaza-backtotop').fadeIn(200);    // Fade in the arrow
+                }
             } else {
                 $('#templaza-backtotop').fadeOut(200);   // Else fade out the arrow
             }
@@ -184,7 +188,6 @@
     };
 
     var initPreloader = function () {
-        // $("#templaza-preloader").addClass('d-none');
         $("#templaza-preloader").addClass('uk-hidden');
     };
 

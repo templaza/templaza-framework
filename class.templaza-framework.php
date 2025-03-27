@@ -373,6 +373,7 @@ class TemPlazaFrameWork{
         $widget_css     = Templates::get_style('widget', 'widget');
 
         wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-preloader', $theme_css_uri.'/'.$preloader_css, array(), TEMPLAZA_FRAMEWORK_VERSION);
+        wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-preloader-custom', Functions::get_my_url() . '/assets/css/custom.css', array(), TEMPLAZA_FRAMEWORK_VERSION);
         wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-widget', $theme_css_uri.'/'.$widget_css, array(), TEMPLAZA_FRAMEWORK_VERSION);
 
         if($google_link = Fonts::make_google_web_font_link()){
@@ -391,7 +392,7 @@ class TemPlazaFrameWork{
         $cur_sass_name  = Templates::get_sass_name_hash();
         $no_transient   = (!isset($transient['sass_code']) || (isset($transient['sass_code'])
                 && $transient['sass_code'] != $cur_sass_name));
-
+        $ver_time = '';
         if($dev_mode){
 //            $cur_sass_name = Templates::get_sass_name_hash();
             if(!isset($transient['sass_code']) || (isset($transient['sass_code']) && !empty($transient['sass_code'])
@@ -401,6 +402,7 @@ class TemPlazaFrameWork{
                 Templates::compileSass($scss_path, $css_path, 'style.scss', 'style.min.css', true);
                 update_option($trans_name, $transient);
             }
+            $ver_time = time();
         }
 
         if((!file_exists($css_path.'/style.min.css') || !file_exists($css_path.'/style.css'))
@@ -423,7 +425,7 @@ class TemPlazaFrameWork{
 
         if(file_exists($css_path.'/'.$style_file)) {
             wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME . '__tzfrm',
-                get_template_directory_uri() . '/assets/css/'.$style_file, array(), $theme->get('Version'));
+                get_template_directory_uri() . '/assets/css/'.$style_file, array(), $theme->get('Version').$ver_time);
         }
 
         $inline_css = Templates::get_inline_styles();
@@ -449,6 +451,8 @@ class TemPlazaFrameWork{
         wp_enqueue_script( 'gsap-js', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', array(), false, true );
         // ScrollTrigger - with gsap.js passed as a dependency
         wp_enqueue_script( 'gsap-st', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array('gsap-js'), false, true );
+        wp_enqueue_script( 'gsap-scroll', 'https://unpkg.com/smooth-scrollbar@8.8.4/dist/smooth-scrollbar.js', array('gsap-js'), false, true );
+        wp_enqueue_script( 'templaza-preloader-script', Functions::get_my_url() . '/assets/js/preloader.js', array('jquery'), false, true );
         if($cursor_eff){
             wp_register_style( 'templaza-cursor-'.$cursor_eff.'-style', Functions::get_my_url() . '/assets/css/cursor-effect/cursor-'.$cursor_eff.'.css', array(),TEMPLAZA_FRAMEWORK_VERSION );
             wp_enqueue_style('templaza-cursor-'.$cursor_eff.'-style');

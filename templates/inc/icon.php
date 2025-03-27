@@ -14,6 +14,8 @@ $search_icon_type           = isset($options['search-icon-type'])?$options['sear
 $account_icon_type          = isset($options['account-icon-type'])?$options['account-icon-type']:'default';
 $cart_icon_type             = isset($options['cart-icon-type'])?$options['cart-icon-type']:'default';
 $enable_offcanvas           = isset($options['enable-offcanvas'])?filter_var($options['enable-offcanvas'],FILTER_VALIDATE_BOOLEAN):false;
+$mode           = isset($options['header-stacked-menu-mode'])?$options['header-stacked-menu-mode']:'center';
+
 $search_icon_html = '<i class="fas fa-search"></i>';
 $account_icon_html = '<i class="fas fa-user"></i>';
 $cart_icon_html = '<i class="fas fa-shopping-cart"></i>';
@@ -66,13 +68,13 @@ if($header_stack_search || $header_stack_cart || $header_stack_account){
     <div class="header-icon-wrap uk-flex <?php echo esc_attr($canvas_cl);?>" >
     <?php
 
-if($header_stack_search){ ?>
+if($header_stack_search && $mode !='seperated'){ ?>
     <div class="header-search uk-position-relative header-icon">
         <span>
             <?php echo $search_icon_html; ?>
         </span>
         <form method="get" class="searchform " action="<?php echo esc_url( home_url( '/' ) ); ?>">
-            <input type="text" class="field uk-input inputbox search-query uk-margin-remove-vertical" name="s" placeholder="<?php esc_attr_e( 'Search...', 'baressco');?>" />
+            <input type="text" class="field uk-input inputbox search-query uk-margin-remove-vertical" name="s" placeholder="<?php esc_attr_e( 'Search...', 'templaza-framework');?>" />
             <button type="submit" class="submit searchsubmit has-button-icon uk-position-right" name="submit" data-uk-icon="search"></button>
         </form>
     </div>

@@ -2,12 +2,14 @@
 @import "spinkit/animation";
 
 // Preloader
-$tztheme-preloader-bg-color:                  var(--tztheme-preloader-bgcolor, 'transparent') !default;
+$tztheme-preloader-bg-color:                  var(--tztheme-preloader-bgcolor) !default;
 $tztheme-preloader-image:                     var(--tztheme-preloader-image, '') !default;
 $tztheme-preloader-bg-size:                   var(--tztheme-preloader-bg-size, auto) !default;
 $tztheme-preloader-bg-repeat:                 var(--tztheme-preloader-bg-repeat, repeat) !default;
 $tztheme-preloader-bg-position:               var(--tztheme-preloader-bg-position, '0% 0%') !default;
 $tztheme-preloader-bg-attachment:             var(--tztheme-preloader-bg-attachment, scroll) !default;
+$tztheme-preloader-color:                     var(--tztheme-preloader-color) !default;
+$tztheme-preloader-process-bg-color:                     var(--tztheme-preloader-process-bgcolor) !default;
 
 #templaza-preloader{
   position:fixed;
@@ -29,4 +31,13 @@ $tztheme-preloader-bg-attachment:             var(--tztheme-preloader-bg-attachm
     background-position: $tztheme-preloader-bg-position;
     background-attachment: $tztheme-preloader-bg-attachment;
   }
+}
+.preloader{
+  background: $tztheme-preloader-bg-color;
+}
+.preloader .percentage {
+color:$tztheme-preloader-color;
+}
+.preloader .progress {
+  background: $tztheme-preloader-process-bg-color;
 }
