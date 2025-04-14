@@ -173,7 +173,9 @@ if(!empty($ap_gallery)){
             <?php if($ap_tiny_thumb==false){ ?>
             nav: false,
             <?php } ?>
-            loop: <?php echo $ap_tiny_loop; ?>,
+            <?php if($ap_tiny_loop==false){ ?>
+            loop: false,
+            <?php } ?>
             controlsContainer:'.tz-slideshow-control',
             responsive: {
                 960: {
