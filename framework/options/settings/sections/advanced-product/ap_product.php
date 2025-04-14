@@ -792,6 +792,13 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'required' => array('ap_product-single-slider', '=' , 'gallery-tiny'),
             ),
             array(
+                'id'       => 'ap_product-slider-loop',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Slider Loop', 'templaza-framework' ),
+                'default'  => true,
+                'desc'     => esc_html__('Off when slider has video', 'templaza-framework'),
+            ),
+            array(
                 'id'       => 'ap_product-slider-thumbnail',
                 'type'     => 'switch',
                 'title'    => esc_html__( 'Show Thumbnail', 'templaza-framework' ),

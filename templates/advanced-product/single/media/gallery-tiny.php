@@ -19,6 +19,7 @@ $ap_tiny_height = isset($templaza_options['ap_product-single-tiny-custom_height'
 $ap_tiny_image = isset($templaza_options['ap_product-single-tiny-cover']) ? $templaza_options['ap_product-single-tiny-cover'] : 'cover';
 $ap_tiny_autoheight  = isset($templaza_options['ap_product-single-tiny-autoheight'])?filter_var($templaza_options['ap_product-single-tiny-autoheight'], FILTER_VALIDATE_BOOLEAN):true;
 $ap_tiny_thumb  = isset($templaza_options['ap_product-slider-thumbnail'])?filter_var($templaza_options['ap_product-slider-thumbnail'], FILTER_VALIDATE_BOOLEAN):true;
+$ap_tiny_loop  = isset($templaza_options['ap_product-slider-loop'])?filter_var($templaza_options['ap_product-slider-loop'], FILTER_VALIDATE_BOOLEAN):true;
 $ap_slider_number = isset($templaza_options['ap_product-slider-number']) ? $templaza_options['ap_product-slider-number'] : 1;
 $no_cookie      =   0;
 if($ap_slider_number >1){
@@ -172,7 +173,7 @@ if(!empty($ap_gallery)){
             <?php if($ap_tiny_thumb==false){ ?>
             nav: false,
             <?php } ?>
-            loop: true,
+            loop: <?php echo $ap_tiny_loop; ?>,
             controlsContainer:'.tz-slideshow-control',
             responsive: {
                 960: {
