@@ -13888,6 +13888,13 @@ body.templaza-offcanvas-opened .templaza-offcanvas-open {
 
 .templaza-backtotop #templaza-backtotop {
   position: inherit;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+}
+.templaza-backtotop #templaza-backtotop.uk-flex {
+  display: flex !important;
 }
 
 .title {
