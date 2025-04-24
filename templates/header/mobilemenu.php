@@ -40,11 +40,8 @@ if ($header) {
         Menu::get_nav_menu(array(
             'theme_location'  => $header_mobile_menu,
             'menu_class'      => implode(' ', $navClass),
-//            'container_class' => implode(' ', $navWrapperClass),
             'menu_id'         => '',
             'depth'           => $header_mobile_menu_level, // Level
-//            'is_mobilemenu'   => true,
-//            'templaza_megamenu_html_data' => $menu_datas
         )); ?>
     </div>
     <?php

@@ -380,11 +380,11 @@ if (!empty($header_iconsize)) {
 // Main Menu Coloring
 $main_menu_styles = [];
 if (!empty($main_link_color)) {
-   $main_menu_styles[] = '.templaza-nav .menu-item > a{ color: ' . $main_link_color . ' !important;}';
+   $main_menu_styles[] = '.templaza-nav .menu-item > a, .overlay-menu .menu-item .menu-indicator{ color: ' . $main_link_color . ' !important;}';
    $main_menu_styles[] = '.templaza-sidebar-menu .menu-item > a{ color: ' . $main_link_color . ' !important;}';
 }
 if (!empty($main_link_hover_color)) {
-   $main_menu_styles[] = '.templaza-nav .menu-item > a:hover, .templaza-nav .menu-item > a:focus{ color: ' . $main_link_hover_color . ' !important;}';
+   $main_menu_styles[] = '.templaza-nav .menu-item > a:hover, .templaza-nav .menu-item > a:focus, .overlay-menu .menu-item:hover .menu-indicator{ color: ' . $main_link_hover_color . ' !important;}';
    $main_menu_styles[] = '.templaza-nav .menu-item:hover > a{ color: ' . $main_link_hover_color . ' !important;}';
    $main_menu_styles[] = '.templaza-sidebar-menu .menu-item > a:hover, .templaza-sidebar-menu .menu-item > a:focus{ color: ' . $main_link_hover_color . ' !important;}';
 }

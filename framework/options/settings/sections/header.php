@@ -53,6 +53,12 @@ Templaza_API::set_section('settings',
                         'class' => 'w-px-150 h-px-103',
                         'img'   => Functions::get_my_frame_url().'/options/patterns/sidebar-1.svg',
                     ),
+                    'headeranimation' => array(
+                        'alt'   => __('Header Animation', 'templaza-framework'),
+                        'title' => __('Header Animation', 'templaza-framework'),
+                        'class' => 'w-px-150 h-px-103',
+                        'img'   => Functions::get_my_frame_url().'/options/patterns/sidebar-1.svg',
+                    ),
                 ),
             ),
             array(

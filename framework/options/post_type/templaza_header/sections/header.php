@@ -37,9 +37,38 @@ Templaza_API::set_section('templaza_header',
                         'class' => 'w-px-150 h-px-103',
                         'img'   => Functions::get_my_frame_url().'/options/patterns/sidebar-1.svg',
                     ),
+                    'headeranimation' => array(
+                        'alt'   => __('Header Animation', 'templaza-framework'),
+                        'title' => __('Header Animation', 'templaza-framework'),
+                        'class' => 'w-px-150 h-px-103',
+                        'img'   => Functions::get_my_frame_url().'/options/patterns/sidebar-1.svg',
+                    ),
                 ),
             ),
             array(
+                'id'    => 'header-animation-menu-mode',
+                'type'  => 'image_select',
+                'title'    => __('Animation Menu Mode', 'templaza-framework'),
+                'subtitle' => __( 'Select your animation menu mode. Select between left, right or center menu.', 'templaza-framework' ),
+                'options'  => array(
+                    'left' => array(
+                        'alt'   => __('Left', 'templaza-framework'),
+                        'title' => __('Left', 'templaza-framework'),
+                        'class' => 'w-px-150 h-px-103',
+                        'img'   => Functions::get_my_frame_url().'/options/patterns/horizontal-left.svg',
+                    ),
+                    'center' => array(
+                        'alt'   => __('Center', 'templaza-framework'),
+                        'title' => __('Center', 'templaza-framework'),
+                        'class' => 'w-px-150 h-px-103',
+                        'img'   => Functions::get_my_frame_url().'/options/patterns/horizontal-center.svg',
+                    ),
+                ),
+                'default'  => 'left',
+                'required' => array(
+                    array('header-mode', '=', 'headeranimation')
+                ),
+            ),array(
                 'id'    => 'header-horizontal-menu-mode',
                 'type'  => 'image_select',
                 'title'    => __('Horizontal Menu Mode', 'templaza-framework'),
@@ -438,6 +467,16 @@ Templaza_API::set_section('templaza_header',
                 ),
                 'default'       => 'top',
                 'required' => array('header-stacked-menu-mode', '=' , 'divided')
+            ),
+            array(
+                'id'       => 'headeranimation-padding',
+                'type'     => 'spacing',
+                'allow_responsive'    => true,
+                'title'    => esc_html__('Header Padding', 'templaza-framework'),
+                'mode'  => 'padding',
+                'units'          => array('px', 'em'),
+                'required' => array(
+                    array('header-mode', '=', 'headeranimation') ),
             ),
             array(
                 'id'       => 'header-menu',
