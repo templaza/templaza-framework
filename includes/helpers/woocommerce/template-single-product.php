@@ -214,7 +214,7 @@ class Templaza_Single_Product {
         }
 		wp_enqueue_script( 'templaza-single-product', Functions::get_my_url() . '/assets/js/woo/single-product.js', array(
 			'templaza-woo-scripts',
-		), false, true );
+		), time(), true );
 
         $related_product_navi = isset($templaza_options['templaza-shop-related-nav'])?$templaza_options['templaza-shop-related-nav']:'scrollbar';
         $templaza_product_data = array(
@@ -244,8 +244,10 @@ class Templaza_Single_Product {
             $templaza_options = Functions::get_theme_options();
         }
         $image_zoom      = isset($templaza_options['templaza-shop-single-image-zoom'])?filter_var($templaza_options['templaza-shop-single-image-zoom'], FILTER_VALIDATE_BOOLEAN):true;
+        $image_number_v4      = isset($templaza_options['templaza-shop-single-slider-number'])?($templaza_options['templaza-shop-single-slider-number']):1;
 		$data['product_gallery_slider'] = self::product_gallery_is_slider();
 		$data['product_image_zoom']     = intval( $image_zoom );
+		$data['product_slider_number_v4']     = intval( $image_number_v4 );
 
 		return $data;
 	}
