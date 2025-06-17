@@ -15,7 +15,7 @@ $(document).ready(function() {
     }, 0.5);
     headerAnimation.from($('.overlay-menu nav li:not(.overlay-menu nav ul li ul li)'), {
         'clearProps': 'all',
-        delay: 1.3,
+        delay: 1,
         ease: "Expo.easeInOut",
     }, 0.5);
     $('header .burger-menu, .overlay-menu .close').on('click', function(){
@@ -30,13 +30,12 @@ $(document).ready(function() {
         overlay_animation.pause();
         overlay_animation.to( $(this).closest('ul').children('li').children('a'), { stagger:.1, autoAlpha:0, y:-50,  'pointer-events': 'none',  ease: Power3.easeOut  } )
         overlay_animation.to( $(this).closest('ul').children('li').children('span'), { stagger:.1, autoAlpha:0, y:-50,  'pointer-events': 'none',  ease: Power3.easeOut  } )
-        overlay_animation.to($(this).next('ul'),{ 'z-index':'10', 'pointer-events': 'all' }),
+        overlay_animation.to($(this).next('ul'),{ 'z-index':'10', 'pointer-events': 'all' })
         overlay_animation.from($(this).next('ul').children('li').children('a'), {stagger:.1, autoAlpha:0, y:30,  ease: Power3.easeOut });
 
         this.animation = overlay_animation;
 
         $(".overlay-menu .back, .overlay-menu .close").on('click', function() {
-
             overlay_animation.reverse();
         });
 

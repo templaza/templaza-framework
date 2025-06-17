@@ -21,7 +21,6 @@ $offcanvas_togglevisibility = isset($options['offcanvas-togglevisibility'])?$opt
 $sidebar_logo               = isset($options['sidebar-logo'])?$options['sidebar-logo']:false;
 $class                      = ['templaza-header', 'templaza-sidebar-header', 'sidebar-dir-' . $mode, 'uk-height-1-1', 'has-sidebar'];
 $navClass                   = ['nav', 'templaza-nav', 'uk-nav-sub', 'uk-padding-remove-left'];
-//$navWrapperClass            = ['align-self-center', 'px-2', 'd-none', 'd-lg-block'];
 
 $header_menu                = isset($options['header-menu'])?$options['header-menu']:'header';
 $header_mobile_menu         = isset($options['header-mobile-menu'])?$options['header-mobile-menu']:'header';
@@ -41,7 +40,7 @@ $header_animation_designs = array(
         ),
     ),
 );
-$navClass                   = ['templaza-mobile-menu','nav', 'templaza-nav'];
+$navClass    = ['templaza-mobile-menu','nav', 'templaza-nav'];
 if (count($header_animation_designs)) {
     $styles = array();
 
@@ -102,49 +101,3 @@ if($mode=='center'){
 <?php
 }
 ?>
-<div class="overlay-menu">
-    <div class="close">
-        <span></span>
-        <span></span>
-    </div>
-    <div class="row overlay-wrap" data-uk-grid>
-        <div class="uk-width-2-3@m left-area">
-            <nav>
-                <?php
-                Menu::get_nav_menu(array(
-                    'theme_location'  => $header_menu,
-                    'menu_class'      => implode(' ', $navClass),
-                    'menu_id'         => '',
-                    'depth'           => $header_menu_level, // Level
-                ));
-                ?>
-            </nav>
-        </div>
-        <?php if ($block_1_type != 'blank'): ?>
-            <div class="uk-width-1-3@m right-area templaza-sidebar">
-                <?php
-                if ($block_1_type == 'social' || $block_1_type == 'contact') {
-                    ?>
-                    <div class="header-block-item block-sidebar">
-                        <?php Templates::load_my_layout('inc.' . $block_1_type);?>
-                    </div>
-                    <?php
-                }
-
-                if ($block_1_type == 'sidebar' && is_active_sidebar($block_1_sidebar)){
-                    echo '<div class="header-block-item block-sidebar">';
-                    dynamic_sidebar($block_1_sidebar);
-                    echo '</div>';
-                }
-                if ($block_1_type == 'custom')
-                {
-                    echo '<div class="header-block-item">';
-                    echo wp_kses($block_1_custom,'post');
-                    echo '</div>';
-                }
-                ?>
-            </div>
-        <?php endif; ?>
-
-    </div>
-</div>
