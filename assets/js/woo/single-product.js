@@ -154,11 +154,6 @@
         if (!$product.length) {
             return;
         }
-        slider_num = 2;
-        if(templazaData.product_slider_number_v4){
-            var slider_num = templazaData.product_slider_number_v4;
-        }
-        console.log(slider_num);
 
         var $gallery = $('.woocommerce-product-gallery'),
             $galleryWrap = $gallery.find('.woocommerce-product-gallery__wrapper');
@@ -197,7 +192,7 @@
                         slidesPerGroup: 1
                     },
                     481: {
-                        slidesPerView: slider_num,
+                        slidesPerView: 1,
                         slidesPerGroup: 1
                     },
                 }

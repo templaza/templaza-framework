@@ -305,6 +305,9 @@
 }
 /* OVERLAY MENU */
 
+.tz-loaded .overlay-menu{
+ opacity:1;
+}
 .overlay-menu{
   position: fixed;
   width: 100vw;
@@ -312,14 +315,14 @@
   top:0;
   left: 0;
   text-align: center;
-  opacity: 1;
-  z-index: 102;
+  opacity: 0;
+  z-index: 99999;
   overflow: hidden;
 
   .close{
     position: absolute;
-    right: 60px;
-    top: 55px;
+    right: 55px;
+    top: 86px;
     cursor: pointer;
     opacity: .75;
     z-index: 10;
@@ -328,19 +331,13 @@
     -moz-transition: all ease .3s;
     -ms-transition: all ease .3s;
     -o-transition: all ease .3s;
+    background:url(../images/closed.png) center no-repeat;
+    width:20px;
+    height:20px;
     &:hover{
       opacity: 1;
     }
-    span{
-      background-color: #fff;
-      width:20px;
-      height:2px;
-      transform: rotate(45deg);
-      position:absolute;
-      &:nth-child(2){
-        transform: rotate(-45deg);
-      }
-    }
+
   }
   .left-area, .right-area{
     display: flex;

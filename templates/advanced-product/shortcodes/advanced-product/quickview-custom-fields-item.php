@@ -48,25 +48,7 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                 }
                 elseif($acf_f['type'] == 'true_false'){
 
-                }elseif($acf_f['type'] == 'text' || $acf_f['type'] == 'number'){
-                    if($acf_f['prepend']){
-                        ?><span class="custom-field-prepend"><?php echo esc_html($acf_f['prepend']);?></span> <?php
-                    }
-                    echo esc_html(the_field($acf_f['name'], $product_id));
-                    if($acf_f['append']){
-                        ?><span class="custom-field-append"><?php echo esc_html($acf_f['append']);?></span> <?php
-                    }
-                }elseif($acf_f['type'] == 'date_picker'){
-                    $date_val = date_create(get_field($acf_f['name'],$product_id));
-                    if($acf_f['display_format']){
-                        $unixtimestamp = strtotime( get_field( $acf_f['name'] ) );
-                        echo date_i18n( $acf_f['display_format'], $unixtimestamp );
-                    }else{
-                        $unixtimestamp = strtotime( get_field( $acf_f['name'] ) );
-                        echo date_i18n( get_option('date_format'), $unixtimestamp );
-                    }
-                }
-                else{
+                }else{
                     echo \the_field($acf_f['name'], $product_id);
                 }
             } ?>

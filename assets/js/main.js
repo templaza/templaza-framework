@@ -27,6 +27,10 @@
             // $('#templaza-header').toggleClass('expanded');
         });
     };
+    var initHeaderAnimationMenu = function () {
+        $( ".overlay-menu" ).appendTo( "body" );
+
+    };
     var initDisplay = function () {
         setTimeout(function () {
             $('.d-init').removeClass(['d-none','uk-hidden']);
@@ -44,7 +48,7 @@
                 $('#templaza-backtotop').fadeOut(200);   // Else fade out the arrow
             }
         });
-        $('#templaza-backtotop').click(function () {      // When arrow is clicked
+        $('.templaza-b2t_btn').click(function () {      // When arrow is clicked
             $('body,html').animate({
                 scrollTop: 0                       // Scroll to top of body
             }, 500);
@@ -148,6 +152,10 @@
         bindAnimation();
     };
 
+    var initbodyClass = function () {
+        $('body').addClass('tz-loaded');
+    };
+
     var initProgressBar = function () {
         $('.progress-bar-viewport-animation').each(function () {
             var _this = $(this);
@@ -197,6 +205,7 @@
         initMobileMenu();
         initBackToTop();
         initHeader();
+        initHeaderAnimationMenu();
         // initTooltip();
         deviceBreakpoint(false);
     };
@@ -206,6 +215,7 @@
         deviceBreakpoint(false);
         initPreloader();
         initProgressBar();
+        initbodyClass();
         windowloaded = true;
     };
 

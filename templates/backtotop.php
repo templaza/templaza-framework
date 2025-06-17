@@ -91,6 +91,6 @@ if(!empty($backtotop_icon_hover_bgcolor)){
     Templates::add_inline_style('#templaza-backtotop:hover{background:' . $backtotop_icon_hover_bgcolor . ';}');
 }
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
-$html .= '<a id="templaza-backtotop" class="' . implode(' ', $class) . '" href="javascript:void(0)"><i class="' . $backtotop_icon . '" ></i></a>';
+$html .= '<a id="templaza-backtotop" class=" templaza-b2t_btn ' . implode(' ', $class) . '" href="javascript:void(0)"><i class="' . $backtotop_icon . '" ></i></a>';
 echo $html;
 ?>
