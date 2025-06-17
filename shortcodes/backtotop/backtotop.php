@@ -19,6 +19,12 @@ if(!class_exists('TemplazaFramework_ShortCode_Backtotop')){
                 'admin_label' => true,
                 'params'      => array(
                     array(
+                        'id'       => 'image',
+                        'type'     => 'media',
+                        'title'    => esc_html__('Select Icon', 'templaza-framework'),
+                        'url'      => true,
+                    ),
+                    array(
                         'id'     => 'backtotop-padding',
                         'type'   => 'spacing',
                         'mode'   => 'padding',

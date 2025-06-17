@@ -683,7 +683,7 @@ class TemplazaFramework_ShortCode{
             if(!empty($overlay_color_gradient_top) || !empty($overlay_color_gradient_top)){
                 $params['tz_class'] .=' tz_background_overlay ';
                 $css_overlay_gradient   = '';
-                $css_overlay_gradient   .= '.'.$custom_css_name.'::before {background:linear-gradient(0deg, '.$overlay_color_gradient_bottom.' 0%, '.$overlay_color_gradient_top.' 100%);}';
+                $css_overlay_gradient   .= '.'.$custom_css_name.'::before {background:linear-gradient(0deg, '.$overlay_color_gradient_bottom.' 30%, '.$overlay_color_gradient_top.' 100%);}';
                 if(!empty($css_overlay_gradient)){
                     Templates::add_inline_style($css_overlay_gradient);
                 }

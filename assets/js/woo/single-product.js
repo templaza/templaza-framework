@@ -192,7 +192,7 @@
                         slidesPerGroup: 1
                     },
                     481: {
-                        slidesPerView: 2,
+                        slidesPerView: 1,
                         slidesPerGroup: 1
                     },
                 }
