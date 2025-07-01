@@ -380,16 +380,16 @@ if (!empty($header_iconsize)) {
 // Main Menu Coloring
 $main_menu_styles = [];
 if (!empty($main_link_color)) {
-   $main_menu_styles[] = '.templaza-nav .menu-item > a, .overlay-menu .menu-item .menu-indicator{ color: ' . $main_link_color . ' !important;}';
+   $main_menu_styles[] = '.templaza-nav .menu-item > a,.overlay-menu .templaza-mobilemenu-container .menu-headeranimation .menu-item > a, .overlay-menu .menu-headeranimation .menu-item .menu-indicator{ color: ' . $main_link_color . ' !important;}';
    $main_menu_styles[] = '.templaza-sidebar-menu .menu-item > a{ color: ' . $main_link_color . ' !important;}';
 }
 if (!empty($main_link_hover_color)) {
-   $main_menu_styles[] = '.templaza-nav .menu-item > a:hover, .templaza-nav .menu-item > a:focus, .overlay-menu .menu-item:hover .menu-indicator{ color: ' . $main_link_hover_color . ' !important;}';
+   $main_menu_styles[] = '.templaza-nav .menu-item > a:hover, .templaza-nav .menu-item > a:focus,.overlay-menu .templaza-mobilemenu-container .menu-headeranimation .menu-item > a:hover, .overlay-menu .menu-headeranimation .menu-item:hover .menu-indicator{ color: ' . $main_link_hover_color . ' !important;}';
    $main_menu_styles[] = '.templaza-nav .menu-item:hover > a{ color: ' . $main_link_hover_color . ' !important;}';
    $main_menu_styles[] = '.templaza-sidebar-menu .menu-item > a:hover, .templaza-sidebar-menu .menu-item > a:focus{ color: ' . $main_link_hover_color . ' !important;}';
 }
 if (!empty($main_link_active_color)) {
-   $main_menu_styles[] = '.templaza-nav .menu-item.current-menu-item > a, .templaza-nav .menu-item.current-menu-ancestor > a{ color: ' . $main_link_active_color . ' !important;}';
+   $main_menu_styles[] = '.templaza-nav .menu-item.current-menu-item > a, .overlay-menu .templaza-mobilemenu-container .menu-headeranimation .menu-item.current-menu-item > a, .templaza-nav .menu-item.current-menu-ancestor > a, .overlay-menu .menu-headeranimation .menu-item.current-menu-item .menu-indicator, .overlay-menu .menu-headeranimation .menu-item.current-menu-item .menu-indicator i.fas{ color: ' . $main_link_active_color . ' !important;}';
    $main_menu_styles[] = '.templaza-sidebar-menu .menu-item.current-menu-item > a{ color: ' . $main_link_active_color . ' !important;}';
 }
 if (!empty($main_link_border_active_color)) {

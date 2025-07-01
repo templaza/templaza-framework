@@ -32,7 +32,7 @@ if($show_compare_button || $show_quickview_button || (isset($actions) && !empty(
             <a href="javascript:" class="uk-icon-button<?php echo $has_compare?' ap-in-compare-list':'';
             ?>" data-ap-compare-button="id: <?php the_ID();
             ?>; active_icon: fas fa-clipboard-list; icon: fas fa-balance-scale" data-uk-tooltip="<?php
-            esc_html($active_text);?>">
+            echo esc_html($active_text);?>">
                 <?php if($has_compare){?>
                     <i class="fas fa-clipboard-list js-ap-icon"></i>
                 <?php }else{?>

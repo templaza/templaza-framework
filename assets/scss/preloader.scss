@@ -41,3 +41,57 @@ color:$tztheme-preloader-color;
 .preloader .progress {
   background: $tztheme-preloader-process-bg-color;
 }
+.templaza-loading-body{
+  .templaza-loading-inner{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #232537;
+    display: flex  ;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: transform .5s linear, -webkit-transform .5s linear;
+    .preloader-inner{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -khtml-transform: translate(-50%,-50%);
+      -moz-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+      -o-transform: translate(-50%,-50%);
+      transform: translate(-50%, -50%);
+      .loading-img-rotate{
+
+      }
+    }
+    &.hide{
+      -webkit-transform: scaleX(0);
+      transform: scaleX(0);
+      -webkit-transform-origin:left center ;
+      transform-origin: left center ;
+      transition-delay: .2s;
+    }
+  }
+}
+.preloader-border{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: -24px;
+  &:before{
+    content: "";
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border-radius: 50%;
+    border: 2px dotted #E1932D;
+    animation: spinner 4.5s infinite linear;
+    position: absolute;
+    margin-top: -2px;
+    margin-left: -2px;
+  }
+}

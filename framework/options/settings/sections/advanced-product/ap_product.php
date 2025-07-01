@@ -586,6 +586,14 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'options'  => $arr_groups,
             ),
             array(
+                'id'       => 'ap_product-single-group-exclude',
+                'type'     => 'select',
+                'sortable' => true,
+                'multi'     => true,
+                'title'    => esc_html__( 'Choose Group Fields title hide in Navigation', 'templaza-framework' ),
+                'options'  => $arr_groups,
+            ),
+            array(
                 'id'       => 'ap_product-single-group-content-sticky',
                 'type'     => 'switch',
                 'title'    => esc_html__( 'Enable sticky group fields content when scroll', 'templaza-framework' ),
@@ -610,6 +618,7 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'max'      => '500',
                 'required' => array('ap_product-single-group-content-sticky', '=' , true),
             ),
+
             array(
                 'id'       => 'ap_product-single-group-content-title',
                 'type'     => 'switch',

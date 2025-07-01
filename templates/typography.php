@@ -91,8 +91,8 @@ $typographies = array(
         'id'        => 'typography-submenu-option',
         'enable'    => (isset($options['typography-submenu']) && $options['typography-submenu'] =='custom'?true:false),
         'class'     => array(
-            'desktop'    => '.templaza-nav .sub-menu > li, .nav-submenu, .header-account .account-links ul li a',
-            'tablet'     => '.templaza-nav .sub-menu > li, .nav-submenu, .header-account .account-links ul li a',
+            'desktop'    => '.templaza-nav .sub-menu > li, .overlay-menu .templaza-nav .sub-menu > li > a, .nav-submenu, .header-account .account-links ul li a',
+            'tablet'     => '.templaza-nav .sub-menu > li, .overlay-menu .templaza-nav .sub-menu > li > a, .nav-submenu, .header-account .account-links ul li a',
             'mobile'     => '.templaza-nav .nav-submenu-container .nav-submenu > li, .nav-submenu, .header-account .account-links ul li a',
         )
     ),

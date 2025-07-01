@@ -185,6 +185,23 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'after_field'   => 'background',
                                         'title'    => esc_html__('Background Overlay Gradient Bottom', 'templaza-framework'),
                                     ),
+                                    array(
+                                        'id'       => 'decorative_background',
+                                        'type'     => 'select',
+                                        'title'    => esc_html__('Decorative Background', 'templaza-framework'),
+                                        'options'  => array(
+                                            ''        => esc_html__("None", 'templaza-framework'),
+                                            'physics' => esc_html__('Physics', 'templaza-framework' ),
+                                            'quantum' => esc_html__('Quantum', 'templaza-framework') ,
+                                            'hawking' => esc_html__('Hawking', 'templaza-framework') ,
+                                        ),
+                                    ),
+                                    array(
+                                        'id'       => 'background_effect',
+                                        'type'     => 'switch',
+                                        'title'    => esc_html__('Background hover motion', 'templaza-framework'),
+                                        'default'  => false,
+                                    ),
 //                                    array(
 //                                        'id'         => 'border',
 //                                        'type'       => 'border',

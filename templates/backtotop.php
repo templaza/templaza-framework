@@ -20,6 +20,7 @@ $astyle = '';
 $class = [];
 $html = '';
 $backtotop_icon             = isset($options['backtotop-icon'])?$options['backtotop-icon']:'fas fa-arrow-up';
+$backtotop_image             = isset($options['backtotop-image'])?$options['backtotop-image']:'';
 $backtotop_icon_size        = isset($options['backtotop-icon-size'])?(int) $options['backtotop-icon-size']:20;
 $backtotop_icon_color       = isset($options['backtotop-icon-color'])?$options['backtotop-icon-color']: '#000';
 $backtotop_icon_color       = CSS::make_color_rgba_redux($backtotop_icon_color);
@@ -91,6 +92,13 @@ if(!empty($backtotop_icon_hover_bgcolor)){
     Templates::add_inline_style('#templaza-backtotop:hover{background:' . $backtotop_icon_hover_bgcolor . ';}');
 }
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
-$html .= '<a id="templaza-backtotop" class=" templaza-b2t_btn ' . implode(' ', $class) . '" href="javascript:void(0)"><i class="' . $backtotop_icon . '" ></i></a>';
+
+if(isset($backtotop_image['url'])){
+    $html .= '<a id="templaza-backtotop" class=" templaza-b2t_btn ' . implode(' ', $class) . '" href="javascript:void(0)"><img src="' . esc_url($backtotop_image['url']) . '" /></a>';
+}else{
+    $html .= '<a id="templaza-backtotop" class=" templaza-b2t_btn ' . implode(' ', $class) . '" href="javascript:void(0)"><i class="' . $backtotop_icon . '" ></i></a>';
+}
+
+
 echo $html;
 ?>

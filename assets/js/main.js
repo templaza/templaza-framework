@@ -27,10 +27,6 @@
             // $('#templaza-header').toggleClass('expanded');
         });
     };
-    var initHeaderAnimationMenu = function () {
-        $( ".overlay-menu" ).appendTo( "body" );
-
-    };
     var initDisplay = function () {
         setTimeout(function () {
             $('.d-init').removeClass(['d-none','uk-hidden']);
@@ -205,7 +201,6 @@
         initMobileMenu();
         initBackToTop();
         initHeader();
-        initHeaderAnimationMenu();
         // initTooltip();
         deviceBreakpoint(false);
     };

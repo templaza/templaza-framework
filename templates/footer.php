@@ -23,7 +23,7 @@ $header_menu_level          = isset($header_options['header-menu-level'])?(int) 
 $block_1_type               = isset($header_options['header-block-1-type'])?$header_options['header-block-1-type']:'blank';
 $block_1_custom             = isset($header_options['header-block-1-custom'])?$header_options['header-block-1-custom']:'';
 $block_1_sidebar            = isset($header_options['header-block-1-sidebar'])?$header_options['header-block-1-sidebar']:'';
-$navClass                   = ['templaza-mobile-menu','nav', 'templaza-nav'];
+$navClass                   = ['templaza-mobile-menu','nav', 'templaza-nav', 'menu-headeranimation'];
 ?>
 
             </div><!-- Wrapper -->

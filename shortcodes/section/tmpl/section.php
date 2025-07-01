@@ -19,6 +19,8 @@ extract(shortcode_atts(array(
     'custom_container_class' => '',
     'container_width_expand' => '',
     'padding_remove_horizontal' => '',
+    'background_effect' => '',
+    'decorative_background' => '',
 ), $atts));
 if(is_single()==true && $hideon_single ==1) {
     return;
@@ -45,11 +47,15 @@ if(!empty($content)){
     if($section_overflow == 'hidden'){
         $_tz_class .=' uk-overflow-hidden ';
     }
+    if($background_effect){
+        $_tz_class .=' bg-image-motion ';
+    }
     if(isset($tz_class)){
         $tz_class   = $_tz_class.$tz_class;
     }else{
         $tz_class   = $_tz_class;
     }
+
 
     $_gutter            = '';
     $container_class    = 'uk-container';
@@ -82,9 +88,10 @@ if(!empty($content)){
             $_section_attributes = ' data-uk-height-viewport="expand: true;"';
             break;
     }
+
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
-<section<?php echo isset($tz_id)?' id="'.esc_attr($tz_id).'"':''; ?> class="<?php echo isset($tz_class)?esc_attr($tz_class):''; ?>"<?php
+<section  <?php echo isset($tz_id)?' id="'.esc_attr($tz_id).'"':''; ?> class="<?php echo isset($tz_class)?esc_attr($tz_class):''; ?>"<?php
 echo $_section_attributes;?>>
     <?php if(!empty($container_class)){ ?>
     <div class="<?php echo $container_class;?><?php
@@ -92,6 +99,17 @@ echo $_section_attributes;?>>
     <?php }?>
     <?php echo $content; ?>
     <?php if(!empty($container_class)){ ?>
-    </div><?php } ?>
+    </div><?php }
+if($background_effect){
+    echo '<div class="light-overlay"></div>';
+}
+if($decorative_background !='' && $decorative_background !='None' ){
+?>
+    <div class="background-banner uk-position-center-right">
+        <canvas class="as-animation-background" data-type="<?php echo esc_attr($decorative_background);?>" data-color1="#666666" data-color2="#666666"></canvas>
+    </div>
+<?php
+}
+?>
 </section>
 <?php } }?>
