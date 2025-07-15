@@ -13,7 +13,7 @@ wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-fontawesome', $plugi
 wp_enqueue_script( 'templaza-js__uikit', Functions::get_my_url().'/assets/js/vendor/uikit.min.js', array( 'jquery' ),'',true );
 wp_enqueue_script( 'templaza-js__uikit-icons', Functions::get_my_url().'/assets/js/vendor/uikit-icons.min.js', array( 'jquery' ),'',true  );
 wp_enqueue_script( 'templaza-js__megamenu', Functions::get_my_url().'/assets/js/vendor/jquery.templazamegamenu.js', array( 'jquery' ),'',true  );
-wp_enqueue_script( 'templaza-js__mobilemenu', Functions::get_my_url().'/assets/js/vendor/jquery.templazamobilemenu.js', array( 'jquery' ),'',true  );
+wp_enqueue_script( 'templaza-js__mobilemenu', Functions::get_my_url().'/assets/js/vendor/jquery.templazamobilemenu.js', array( 'jquery' ),time(),true  );
 wp_enqueue_script( 'templaza-js__offcanvas', Functions::get_my_url().'/assets/js/vendor/jquery.offcanvas.js', array( 'jquery' ),'',true  );
 wp_enqueue_script( 'templaza-js__main', Functions::get_my_url().'/assets/js/main.js', array( 'jquery' ),time(),true  );
 

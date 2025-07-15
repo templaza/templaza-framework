@@ -34,65 +34,61 @@ $thumb_class_eff = '';
 if($thumbnail_eff == 'ripple'){
     $thumb_class_eff = 'templaza-thumb-ripple';
 }
-while (have_posts()): the_post();
-    ?>
-    <div class="ap-item  ap-item-style5 ap-item-list <?php echo esc_attr($ap_class);?>">
-        <div class="ap-inner">
-            <div class="uk-card uk-child-width-1-2@s uk-grid" data-uk-grid>
-                <div class="uk-card-media-left uk-cover-container uk-width-2-5@s uk-transition-toggle">
-                    <div class="uk-position-relative uk-height-1-1 ap-item-list-img uk-transition-toggle <?php echo esc_attr($thumb_class_eff);?>">
-                        <?php AP_Templates::load_my_layout('archive.badges'); ?>
-                        <?php the_post_thumbnail($thumbnail,['data-uk-cover' => '']);?>
-                        <?php
-                        if($thumbnail_eff == 'ripple'){
-                            ?>
-                            <div class="templaza-ripple-circles uk-position-center uk-transition-fade">
-                                <div class="circle1"></div>
-                                <div class="circle2"></div>
-                                <div class="circle3"></div>
-                            </div>
-                            <?php
-                        }
+?>
+<div class="ap-item  ap-item-style5 ap-item-list <?php echo esc_attr($ap_class);?>">
+    <div class="ap-inner">
+        <div class="uk-card uk-child-width-1-2@s uk-grid" data-uk-grid>
+            <div class="uk-card-media-left uk-cover-container uk-width-2-5@s uk-transition-toggle">
+                <div class="uk-position-relative uk-height-1-1 ap-item-list-img uk-transition-toggle <?php echo esc_attr($thumb_class_eff);?>">
+                    <?php AP_Templates::load_my_layout('archive.badges'); ?>
+                    <?php the_post_thumbnail($thumbnail,['data-uk-cover' => '']);?>
+                    <?php
+                    if($thumbnail_eff == 'ripple'){
                         ?>
-                        <a class="uk-position-absolute uk-position-top-left uk-width-1-1 uk-height-1-1" href="<?php the_permalink(); ?>">
-                        </a>
-                        <canvas width="" height="300"></canvas>
-                        <?php AP_Templates::load_my_layout('archive.btn-actions'); ?>
-
-                    </div>
-                </div>
-                <div class="ap-info uk-width-3-5@s">
-                    <div class="ap-info-inner ap-info-top">
-                        <h2 class="ap-title">
-                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                        </h2>
-                    </div>
-                    <div class="ap-info-inner ap-info-desc">
-                        <?php if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
-                            <p><?php echo esc_html(wp_trim_words(wp_strip_all_tags(get_the_excerpt()), $ap_desc_limit)); ?></p>
-                        <?php } else {
-                            the_excerpt();
-                        }
-                        ?>
-                        <?php
-                        if($ap_author){
-                            AP_Templates::load_my_layout('archive.author.style1');
-                        }
-                        ?>
-                    </div>
-                    <div class="ap-info-inner ap">
-                        <?php AP_Templates::load_my_layout('archive.custom-fields-style5'); ?>
-                    </div>
-                    <div class="ap-info-inner  ap-info-bottom uk-flex uk-flex-between uk-flex-middle">
-                        <?php AP_Templates::load_my_layout('archive.price');?>
-                        <div class="ap-readmore-box">
-                            <a href="<?php the_permalink(); ?>" class="templaza-btn"><?php esc_html_e('View more','templaza-framework');?></a>
+                        <div class="templaza-ripple-circles uk-position-center uk-transition-fade">
+                            <div class="circle1"></div>
+                            <div class="circle2"></div>
+                            <div class="circle3"></div>
                         </div>
+                        <?php
+                    }
+                    ?>
+                    <a class="uk-position-absolute uk-position-top-left uk-width-1-1 uk-height-1-1" href="<?php the_permalink(); ?>">
+                    </a>
+                    <canvas width="" height="300"></canvas>
+                    <?php AP_Templates::load_my_layout('archive.btn-actions'); ?>
+
+                </div>
+            </div>
+            <div class="ap-info uk-width-3-5@s">
+                <div class="ap-info-inner ap-info-top">
+                    <h2 class="ap-title">
+                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                    </h2>
+                </div>
+                <div class="ap-info-inner ap-info-desc">
+                    <?php if (isset($ap_desc_limit) && $ap_desc_limit !='') { ?>
+                        <p><?php echo esc_html(wp_trim_words(wp_strip_all_tags(get_the_excerpt()), $ap_desc_limit)); ?></p>
+                    <?php } else {
+                        the_excerpt();
+                    }
+                    ?>
+                    <?php
+                    if($ap_author){
+                        AP_Templates::load_my_layout('archive.author.style1');
+                    }
+                    ?>
+                </div>
+                <div class="ap-info-inner ap">
+                    <?php AP_Templates::load_my_layout('archive.custom-fields-style5'); ?>
+                </div>
+                <div class="ap-info-inner  ap-info-bottom uk-flex uk-flex-between uk-flex-middle">
+                    <?php AP_Templates::load_my_layout('archive.price');?>
+                    <div class="ap-readmore-box">
+                        <a href="<?php the_permalink(); ?>" class="templaza-btn"><?php esc_html_e('View more','templaza-framework');?></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<?php
-endwhile;
-?>
+</div>

@@ -20,32 +20,9 @@ $preloader_size         = isset($options['preloader-size']) && $options['preload
 $preloader_color        = isset($options['preloader-color'])?$options['preloader-color']:'';
 $preloader_color_2      = isset($options['preloader-color-2'])?$options['preloader-color-2']:'';
 $preloader_color_3      = isset($options['preloader-color-3'])?$options['preloader-color-3']:'';
-
-if(is_array($preloader_color) && isset($preloader_color['rgba'])) {
-    if($preloader_color['alpha'] == 1){
-        $preloader_color  = $preloader_color['color'];
-    }else {
-        $preloader_color  = $preloader_color['rgba'];
-    }
-}
-
-$preloader_color    = !empty($preloader_color)?$preloader_color:'#000';
-
-if(is_array($preloader_color_2) && isset($preloader_color_2['rgba'])) {
-    if($preloader_color_2['alpha'] == 1){
-        $preloader_color_2  = $preloader_color_2['color'];
-    }else {
-        $preloader_color_2  = $preloader_color_2['rgba'];
-    }
-}
-
-if(is_array($preloader_color_3) && isset($preloader_color_3['rgba'])) {
-    if($preloader_color_3['alpha'] == 1){
-        $preloader_color_3  = $preloader_color_3['color'];
-    }else {
-        $preloader_color_3  = $preloader_color_3['rgba'];
-    }
-}
+$preloader_color = CSS::make_color_rgba_redux($preloader_color);
+$preloader_color_2 = CSS::make_color_rgba_redux($preloader_color_2);
+$preloader_color_3 = CSS::make_color_rgba_redux($preloader_color_3);
 
 $preloader_bgcolor      = isset($options['preloader-bgcolor'])?$options['preloader-bgcolor']:'';
 $preloader_bgcolor = CSS::make_color_rgba_redux($preloader_bgcolor);

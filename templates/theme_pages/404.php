@@ -62,7 +62,7 @@ if($background_setting_404){
         if(count($background_404)){
             $styles .= CSS::background($background_404['background-color'], $background_404['background-image'],
                 $background_404['background-repeat'], $background_404['background-attachment'],
-                $background_404['background-position'], $background_404['background-size']);
+                $background_404['background-position'], $background_404['background-size'],'','','',true);
         }
     }
 

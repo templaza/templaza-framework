@@ -101,21 +101,21 @@ if (!empty($main_menu_border_css)) {
 if (!empty($dropdown_menu_padding_css)) {
     if(is_array($dropdown_menu_padding_css)){
         foreach($dropdown_menu_padding_css as $device => $style){
-            $style  = '.templaza-nav .sub-menu > .menu-item > a {' . $style . '}';
+            $style  = '.templaza-nav .sub-menu > .menu-item > a, .overlay-menu .templaza-nav .sub-menu > li > a {' . $style . '}';
             Templates::add_inline_style($style, $device);
         }
     }else {
-        $menu_styles[] = '.templaza-nav .sub-menu > .menu-item > a {' . $dropdown_menu_padding_css . '}';
+        $menu_styles[] = '.templaza-nav .sub-menu > .menu-item > a, .overlay-menu .templaza-nav .sub-menu > li > a {' . $dropdown_menu_padding_css . '}';
     }
 }
 if (!empty($dropdown_menu_margin_css)) {
     if(is_array($dropdown_menu_margin_css)){
         foreach($dropdown_menu_margin_css as $device => $style){
-            $style  = '.templaza-nav .sub-menu > .menu-item > a {' . $style . '}';
+            $style  = '.templaza-nav .sub-menu > .menu-item > a , .overlay-menu .templaza-nav .sub-menu > li > a{' . $style . '}';
             Templates::add_inline_style($style, $device);
         }
     }else {
-        $menu_styles[] = '.templaza-nav .sub-menu > .menu-item > a {' . $dropdown_menu_margin_css . '}';
+        $menu_styles[] = '.templaza-nav .sub-menu > .menu-item > a, .overlay-menu .templaza-nav .sub-menu > li > a {' . $dropdown_menu_margin_css . '}';
     }
 }
 if (!empty($dropdown_menu_border_radius)) {

@@ -11,7 +11,7 @@ class CSS{
     protected static $cache = array();
 
     public static function background($color='', $image='', $repeat='', $attachment='', $position='', $size='',
-                                      $origin='', $clip='', $important = false){
+                                      $origin='', $clip='',$featured='', $important = false){
         $store_id   = __METHOD__;
         $store_id  .= ':'.$color;
         $store_id  .= ':'.$image;
@@ -21,6 +21,7 @@ class CSS{
         $store_id  .= ':'.$size;
         $store_id  .= ':'.$origin;
         $store_id  .= ':'.$clip;
+        $store_id  .= ':'.$featured;
         $store_id  .= ':'.$important;
         $store_id   = md5($store_id);
 
@@ -30,6 +31,10 @@ class CSS{
 
         if(!$color && !$image){
             return '';
+        }
+        $id = get_the_ID();
+        if($featured && get_the_post_thumbnail_url($id)){
+            $image = get_the_post_thumbnail_url($id);
         }
 
         $important  = $important?' !important':'';

@@ -440,8 +440,15 @@ class TemPlazaFrameWork{
         if(class_exists( 'Advanced_Product\Advanced_Product' )){
             $this -> advanced_enqueue_scripts();
         }
-        wp_register_script( 'gsap-js', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', array(), false, true );
-        wp_register_script( 'gsap-st', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array('gsap-js'), false, true );
+        wp_register_script( 'gsap-js', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js', array(), false, true );
+        wp_register_script( 'gsap-st', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js', array('gsap-js'), false, true );
+        wp_register_script( 'gsap-smooth', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js', array('gsap-st'), false, true );
+        wp_register_script( 'gsap-SplitText', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js', array('gsap-smooth'), false, true );
+        wp_enqueue_script( 'gsap-js');
+        wp_enqueue_script( 'gsap-st');
+        wp_enqueue_script( 'gsap-smooth');
+        wp_enqueue_script( 'gsap-SplitText');
+
         $cursor_enable   = isset($options['enable-cursor-effects'])?filter_var($options['enable-cursor-effects'], FILTER_VALIDATE_BOOLEAN):false;
 
         $cursor_eff   = isset($options['cursor-effects'])?$options['cursor-effects']:'';
@@ -449,7 +456,6 @@ class TemPlazaFrameWork{
         if($cursor_enable){
             wp_enqueue_script( 'gsap-js');
             wp_enqueue_script( 'gsap-st');
-            wp_enqueue_script( 'gsap-scroll', 'https://unpkg.com/smooth-scrollbar@8.8.4/dist/smooth-scrollbar.js', array('gsap-js'), false, true );
             if($cursor_eff){
                 wp_register_style( 'templaza-cursor-'.$cursor_eff.'-style', Functions::get_my_url() . '/assets/css/cursor-effect/cursor-'.$cursor_eff.'.css', array(),TEMPLAZA_FRAMEWORK_VERSION );
                 wp_enqueue_style('templaza-cursor-'.$cursor_eff.'-style');
@@ -469,7 +475,7 @@ class TemPlazaFrameWork{
             wp_enqueue_script( 'templaza-preloader-script', Functions::get_my_url() . '/assets/js/preloader.js', array('jquery'), false, true );
         }
         if($header_mode =='headeranimation'){
-            wp_enqueue_script( 'templaza-headeranimation-script', Functions::get_my_url() . '/assets/js/headeranimation.js', array('jquery'), time(), true );
+            wp_enqueue_script( 'templaza-headeranimation-script', Functions::get_my_url() . '/assets/js/headeranimation.js', array('gsap-js'), time(), true );
         }
 
         do_action('templaza-framework/plugin/enqueue_scripts', $this);

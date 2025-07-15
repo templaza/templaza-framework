@@ -406,7 +406,7 @@ class Templates{
                     if(array_key_exists('background-color', $option)) {
                         $css['desktop']    .= CSS::background($option['background-color'], $option['background-image'],
                             $option['background-repeat'], $option['background-attachment'],
-                            $option['background-position'],$option['background-size']);
+                            $option['background-position'],$option['background-size'],'','','',true);
                     }
                     // Border
                     $border_top     = '';

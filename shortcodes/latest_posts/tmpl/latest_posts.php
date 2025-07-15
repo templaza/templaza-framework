@@ -175,7 +175,7 @@ echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>" >
                                 <div class="uk-cover-container">
                                     <a class="tz-img uk-display-block" href="<?php echo esc_url(get_permalink($post_item->ID));?>">
                                     <canvas height="<?php echo esc_attr($latest_post_image_cover_height);?>"></canvas>
-                                    <img class="uk-transition-opaque <?php echo esc_attr($latest_post_image_transition);?>" src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?>" data-uk-cover>
+                                    <img class="uk-transition-opaque <?php echo esc_attr($latest_post_image_transition);?>" src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID,'large'));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?>" data-uk-cover>
                                     <?php echo wp_kses($ripple_html,'post'); ?>
                                     </a>
                                 </div>
@@ -184,7 +184,7 @@ echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>" >
 
                                 ?>
                                 <a class="tz-img  uk-display-block" href="<?php echo esc_url(get_permalink($post_item->ID));?>">
-                                    <img class="uk-transition-opaque <?php echo esc_attr($latest_post_image_transition);?>" src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?> "/>
+                                    <img class="uk-transition-opaque <?php echo esc_attr($latest_post_image_transition);?>" src="<?php echo esc_url(get_the_post_thumbnail_url($post_item->ID,'large'));?>" alt="<?php echo esc_attr(get_the_title($post_item->ID));?> "/>
                                     <?php echo wp_kses($ripple_html,'post'); ?>
                                 </a>
                             <?php

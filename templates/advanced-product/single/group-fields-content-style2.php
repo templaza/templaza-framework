@@ -24,6 +24,8 @@ if(isset($_GET['customfield_layout'])){
 $ap_comment           = isset($templaza_options['ap_product-single-comment'])?$templaza_options['ap_product-single-comment']:true;
 $ap_group_sticky_responsive           = isset($templaza_options['ap_product-single-group-content-sticky-responsive'])?$templaza_options['ap_product-single-group-content-sticky-responsive']:1200;
 $product_id = get_the_ID();
+
+$ap_content_group_exclude = isset($templaza_options['ap_product-single-group-exclude'])?$templaza_options['ap_product-single-group-exclude']:array();
 $gfields_assigned   = AP_Custom_Field_Helper::get_group_fields_by_product();
 if($gfields_assigned && count($gfields_assigned)){
     ?>
@@ -32,7 +34,7 @@ if($gfields_assigned && count($gfields_assigned)){
         <ul class="uk-nav uk-nav-default uk-flex uk-width-1-1" data-uk-scrollspy-nav="closest: li; offset:80; scroll: true">
         <?php
         foreach ($gfields_assigned as $group) {
-            if($group->slug !='pricing'){
+            if($group->slug !='pricing' && in_array($group->slug, $ap_content_group) && !in_array($group->slug, $ap_content_group_exclude)){
                 ?>
                 <li class="uk-margin-remove">
                     <a class="ap-scroll-item" href="#<?php echo esc_attr($group -> slug); ?>">

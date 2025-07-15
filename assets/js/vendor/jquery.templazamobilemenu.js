@@ -34,15 +34,18 @@
                   $(this).children('span').after(_indicator);
                }
                // For Sub menu Open
-               _indicator.bind('click', function () {
+               _indicator.on('click', function () {
                   $(this).next('.dropdown-menus').toggleClass('menu_open');
+                  $(this).parent().addClass('parent_active');
                });
                // Add Button In Sub Menu For Main Menu
                $(this).children('ul').prepend(_indicatorBackItem);
                // For sub Menu Close
-               _indicatorBack.bind('click', function () {
+               _indicatorBack.on('click', function () {
                   $(this).parent().parent('.dropdown-menus').removeClass('menu_open');
+                  $(this).parent().removeClass('parent_active');
                });
+
             }
          });
       });
