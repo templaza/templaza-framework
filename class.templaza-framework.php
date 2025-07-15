@@ -475,7 +475,7 @@ class TemPlazaFrameWork{
             wp_enqueue_script( 'templaza-preloader-script', Functions::get_my_url() . '/assets/js/preloader.js', array('jquery'), false, true );
         }
         if($header_mode =='headeranimation'){
-            wp_enqueue_script( 'templaza-headeranimation-script', Functions::get_my_url() . '/assets/js/headeranimation.js', array('jquery'), time(), true );
+            wp_enqueue_script( 'templaza-headeranimation-script', Functions::get_my_url() . '/assets/js/headeranimation.js', array('gsap-js'), time(), true );
         }
 
         do_action('templaza-framework/plugin/enqueue_scripts', $this);
