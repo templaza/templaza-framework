@@ -636,9 +636,22 @@
     .header-horizontal-logo, .header-menu-horizontal-left{
       border:none !important;
     }
+    &.templaza-stacked-center-balance-header{
+      .header-icon-wrap{
+        position:relative;
+      }
+      .header-center-balance-icon{
+        position: relative !important;
+      }
+    }
   }
   .templaza-logo{
     margin-left:0;
   }
-
+  .bg-image-motion{
+    &.templaza-section{
+      background-size:cover;
+    }
+  }
 }
+

@@ -50,6 +50,12 @@ if(!empty($content)){
     if($background_effect){
         $_tz_class .=' bg-image-motion ';
     }
+    if($vertical_align && $vertical_align=='middle'){
+        $_tz_class .=' uk-flex-middle ';
+    }
+    if($vertical_align && $vertical_align=='bottom'){
+        $_tz_class .=' uk-flex-bottom ';
+    }
     if(isset($tz_class)){
         $tz_class   = $_tz_class.$tz_class;
     }else{

@@ -156,7 +156,7 @@ if ( have_posts()) {
  " data-uk-grid="<?php echo esc_attr($grid_option);?>">
     <?php
     if($grid_view == 'list'){
-        AP_Templates::load_my_layout('archive.content-item-list');
+        AP_Templates::load_my_layout('archive.content-list');
     }else{
         AP_Templates::load_my_layout('archive.content');
     }

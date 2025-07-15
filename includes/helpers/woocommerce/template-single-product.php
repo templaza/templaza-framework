@@ -214,7 +214,7 @@ class Templaza_Single_Product {
         }
 		wp_enqueue_script( 'templaza-single-product', Functions::get_my_url() . '/assets/js/woo/single-product.js', array(
 			'templaza-woo-scripts',
-		), time(), true );
+		), false, true );
 
         $related_product_navi = isset($templaza_options['templaza-shop-related-nav'])?$templaza_options['templaza-shop-related-nav']:'scrollbar';
         $templaza_product_data = array(

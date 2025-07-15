@@ -34,7 +34,7 @@ $body_background_image  = isset($options['body-background-image'])?$options['bod
 if(is_array($body_background_image) && !empty($body_background_image['background-image'])) {
     $body_css   .= CSS::background('', $body_background_image['background-image'],
         $body_background_image['background-repeat'], $body_background_image['background-attachment'],
-        $body_background_image['background-position'], $body_background_image['background-size'] );
+        $body_background_image['background-position'], $body_background_image['background-size'],'','','',true );
 }
 
 // Header

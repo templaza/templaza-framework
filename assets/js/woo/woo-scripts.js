@@ -4,27 +4,14 @@
 	var templaza_woo = templaza_woo || {};
 	templaza_woo.init = function () {
 		templaza_woo.$body = $(document.body),
-			templaza_woo.$window = $(window),
-			templaza_woo.$header = $('#site-header');
+			templaza_woo.$window = $(window)
 
 		// Common
 		this.toggleModals();
 		this.toggleOffPopup();
-		// Header
-		// this.stickyHeader();
-		// this.instanceSearch();
-		// this.focusSearchField();
-		// this.menuSideBar();
 		this.scrollSection();
 
 		this.miniCartQuantity();
-		// this.closeTopbar();
-
-		// Blog
-		// this.blogFilterAjax();
-		// this.blogLoadingAjax();
-		// this.postFound();
-		// this.postsRelated();
 
 		// Product Loop
 		this.addWishlist();
@@ -62,12 +49,9 @@
 		this.loginPanel();
 		this.loginPanelAuthenticate();
 
-		// this.newsletterPopup();
 		this.recentlyViewedProducts();
 
 		// Mobile
-		// this.footerDropdown();
-		// this.historyBack();
 
 		// Style
 		// this.inlineStyle();
@@ -122,14 +106,6 @@
 		var widthScrollBar = window.innerWidth - document.documentElement.clientWidth;
 		$(document.body).css({'padding-right': widthScrollBar, 'overflow': 'hidden'});
 
-		if ($(document.body).hasClass('header-transparent')) {
-			templaza_woo.$header.css({'right': widthScrollBar});
-		}
-
-		if ($(document.body).hasClass('header-sticky')) {
-			$(document.body).find('#site-header.minimized').css({'right': widthScrollBar, 'transition' : 'none'});
-		}
-
 		return true;
 	}
 
@@ -160,8 +136,6 @@
 		}
 
 		$(document.body).removeAttr('style');
-		templaza_woo.$header.removeAttr('style');
-
 		$(document.body).removeClass('modal-opened').trigger('templaza_modal_closed', [target]);
 	}
 
@@ -229,189 +203,6 @@
 		}
 
 		$(document.body).removeClass('offpopup-opened').trigger('templaza_off_popup_closed', [target]);
-	}
-
-	/**
-	 * Product instance search
-	 */
-	templaza_woo.instanceSearch = function () {
-		if (templazaData.header_ajax_search != '1') {
-			return;
-		}
-
-		var $modal = $('#search-modal, .header-search');
-
-		$modal.on('change', '.product-cat-dd', function () {
-			var value = $(this).find('option:selected').text().trim();
-			$modal.find('.product-cat-label .label').html(value);
-		});
-
-		$modal.find('.products-search').on('submit', function () {
-			if ($(this).find('.product-cat-dd').val() == '0') {
-				$(this).find('.product-cat-dd').removeAttr('name');
-			}
-		});
-
-		var xhr = null,
-			searchCache = {},
-			$form = $modal.find('form');
-
-		$modal.on('keyup', '.search-field', function (e) {
-			var valid = false;
-
-			if (typeof e.which == 'undefined') {
-				valid = true;
-			} else if (typeof e.which == 'number' && e.which > 0) {
-				valid = !e.ctrlKey && !e.metaKey && !e.altKey;
-			}
-
-			if (!valid) {
-				return;
-			}
-
-			if (xhr) {
-				xhr.abort();
-			}
-
-			$modal.find('.result-list-found, .result-list-not-found').html('');
-			$modal.find('.result-title').addClass('not-found');
-
-			var $currentForm = $(this).closest('.form-search'),
-				$search = $currentForm.find('input.search-field');
-
-			if ($search.val().length < 2) {
-				$currentForm.removeClass('searching searched actived found-products found-no-product invalid-length');
-			}
-
-			search($currentForm);
-		}).on('change', '.product-cat-dd', function () {
-			if (xhr) {
-				xhr.abort();
-			}
-
-			$modal.find('.result-list-found').html('');
-			$modal.find('.result-title').addClass('not-found');
-			var $currentForm = $(this).closest('.form-search');
-
-			search($currentForm);
-		}).on('focus', '.product-cat-dd', function () {
-			if (xhr) {
-				xhr.abort();
-			}
-
-			$modal.find('.product-cat-label').addClass('border-color-dark');
-		}).on('focusout', '.product-cat-dd', function () {
-			if (xhr) {
-				xhr.abort();
-			}
-
-			$modal.find('.product-cat-label').removeClass('border-color-dark');
-		}).on('focusout', '.search-field', function () {
-			var $currentForm = $(this).closest('.form-search'),
-				$search = $currentForm.find('input.search-field');
-
-			if ($search.val().length < 2) {
-				$currentForm.removeClass('searching searched actived found-products found-no-product invalid-length');
-			}
-		});
-
-		$modal.on('click', '.close-search-results', function (e) {
-			e.preventDefault();
-			$modal.find('.search-field').val('');
-			$modal.find('.form-search').removeClass('searching searched actived found-products found-no-product invalid-length');
-			$modal.find('.result-title').addClass('not-found');
-
-			$modal.find('.result-list-found').html('');
-		});
-
-		$(document).on('click', function (e) {
-			if ($('#search-modal').find('.form-search').hasClass('actived')) {
-				return;
-			}
-			var target = e.target;
-
-			if ($(target).closest('.products-search').length < 1) {
-				$form.removeClass('searching actived found-products found-no-product invalid-length');
-			}
-		});
-
-		/**
-		 * Private function for search
-		 */
-		function search($currentForm) {
-			var $search = $currentForm.find('input.search-field'),
-				keyword = $search.val(),
-				cat = 0,
-				$results = $currentForm.find('.search-results');
-
-			if ($modal.hasClass('ra-search-form')) {
-				$results = $modal.find('.search-results');
-			}
-
-			if ($currentForm.find('.product-cat-dd').length > 0) {
-				cat = $currentForm.find('.product-cat-dd').val();
-			}
-
-
-			if (keyword.trim().length < 2) {
-				$currentForm.removeClass('searching found-products found-no-product').addClass('invalid-length');
-				return;
-			}
-
-			$currentForm.removeClass('found-products found-no-product').addClass('searching');
-
-			var keycat = keyword + cat,
-				url = $form.attr('action') + '?' + $form.serialize();
-
-			if (keycat in searchCache) {
-				var result = searchCache[keycat];
-
-				$currentForm.removeClass('searching');
-				$currentForm.addClass('found-products');
-				$results.html(result.products);
-
-
-				$(document.body).trigger('templaza_ajax_search_request_success', [$results]);
-
-				$currentForm.removeClass('invalid-length');
-				$currentForm.addClass('searched actived');
-			} else {
-				var data = {
-						'term': keyword,
-						'cat': cat,
-						'ajax_search_number': templazaData.header_search_number,
-						'search_type': templazaData.search_content_type
-					},
-					ajax_url = templazaData.ajax_url.toString().replace('%%endpoint%%', 'templaza_instance_search_form');
-
-				xhr = $.post(
-					ajax_url,
-					data,
-					function (response) {
-						var $products = response.data;
-
-						$currentForm.removeClass('searching');
-						$currentForm.addClass('found-products');
-						$results.html($products);
-						$currentForm.removeClass('invalid-length');
-
-
-						$(document.body).trigger('templaza_ajax_search_request_success', [$results]);
-
-						// Cache
-						searchCache[keycat] = {
-							found: true,
-							products: $products
-						};
-
-						$results.find('.view-more a').attr('href', url);
-
-						$currentForm.addClass('searched actived');
-					}
-				);
-			}
-		}
-
 	}
 
 	templaza_woo.getOptionsDropdown = function () {
@@ -636,268 +427,6 @@
 					slidesPerView: 4,
 					slidesPerGroup: 4
 				}
-			}
-		});
-	};
-
-	// Filter Ajax
-	templaza_woo.blogFilterAjax = function () {
-
-		templaza_woo.$body.find('#templaza-posts__taxs-list').on('click', 'a', function (e) {
-			e.preventDefault();
-			var btn = $(this),
-				url = btn.attr('href');
-
-			templaza_woo.$body.trigger('templaza_blog_filter_ajax', url, $(this));
-
-			templaza_woo.$body.on('templaza_ajax_filter_request_success', function (e, btn) {
-				$(this).addClass('selected');
-				templaza_woo.postFound();
-			});
-		});
-
-		templaza_woo.$body.on('templaza_blog_filter_ajax', function (e, url) {
-
-			var $container = $('.templaza-posts__wrapper'),
-				$categories = $('#templaza-posts__taxs-list');
-
-			$('.templaza-posts__loading').addClass('show');
-
-			if ('?' == url.slice(-1)) {
-				url = url.slice(0, -1);
-			}
-
-			url = url.replace(/%2C/g, ',');
-
-			history.pushState(null, null, url);
-
-			if (templaza_woo.ajaxXHR) {
-				templaza_woo.ajaxXHR.abort();
-			}
-
-			templaza_woo.ajaxXHR = $.get(url, function (res) {
-				$container.replaceWith($(res).find('.templaza-posts__wrapper'));
-				$categories.html($(res).find('#templaza-posts__taxs-list').html());
-
-				$('.templaza-posts__loading').removeClass('show');
-				$('.templaza-posts__wrapper .blog-wrapper').addClass('animated TemplazaFadeInUp');
-
-				templaza_woo.$body.trigger('templaza_ajax_filter_request_success', [res, url]);
-
-			}, 'html');
-
-
-		});
-	};
-
-	templaza_woo.blogLoadingAjax = function () {
-
-		templaza_woo.$body.on('click', '#templaza-blog-previous-ajax a', function (e) {
-			e.preventDefault();
-
-			var $found = $('.templaza-posts__found');
-
-			if ($(this).data('requestRunning')) {
-				return;
-			}
-
-			$(this).data('requestRunning', true);
-
-			var $posts = $(this).closest('#primary'),
-				$postList = $posts.find('.templaza-posts__list'),
-				currentPosts = $postList.children('.blog-wrapper').length,
-				$pagination = $(this).parents('.load-navigation');
-
-			$pagination.addClass('loading');
-
-			$.get(
-				$(this).attr('href'),
-				function (response) {
-					var content = $(response).find('.templaza-posts__list').children('.blog-wrapper'),
-						numberPosts = content.length + currentPosts,
-						$pagination_html = $(response).find('.load-navigation').html();
-					$pagination.addClass('loading');
-
-					$pagination.html($pagination_html);
-					$postList.append(content);
-					$pagination.find('a').data('requestRunning', false);
-					// Add animation class
-					for (var index = 0; index < content.length; index++) {
-						$(content[index]).css('animation-delay', index * 100 + 'ms');
-					}
-					content.addClass('TemplazaFadeInUp');
-					$found.find('.current-post').html(' ' + numberPosts);
-					$pagination.removeClass('loading');
-
-					templaza_woo.postFound();
-				}
-			);
-		});
-
-	};
-
-	templaza_woo.postFound = function (el) {
-		var $found = $('.templaza-posts__found-inner'),
-			$foundEls = $found.find('.count-bar'),
-			$current = $found.find('.current-post').html(),
-			$total = $found.find('.found-post').html(),
-			pecent = ($current / $total) * 100;
-
-		$foundEls.css('width', pecent + '%');
-	}
-
-	templaza_woo.postsRelated = function () {
-		var $selector = $('.templaza-posts__related'),
-			$el = $selector.find('.templaza-post__related-content'),
-			$col = $el.data('columns'),
-			options = {
-				loop: false,
-				autoplay: false,
-				speed: 800,
-				watchOverflow: true,
-				spaceBetween: 30,
-				pagination: {
-					el: $selector.find('.swiper-pagination'),
-					type: 'bullets',
-					clickable: true
-				},
-				breakpoints: {
-					0: {
-						slidesPerView: 1,
-						slidesPerGroup: 1
-					},
-
-					380: {
-						slidesPerView: 2,
-						slidesPerGroup: 2
-					},
-
-					992: {
-						slidesPerView: 3,
-						slidesPerGroup: 3
-					},
-
-					1025: {
-						slidesPerView: parseInt($col),
-						slidesPerGroup: parseInt($col)
-					},
-				}
-			};
-
-		$selector.find('.blog-wrapper').addClass('swiper-slide');
-
-		new Swiper($el, options);
-	};
-
-	// Toggle Menu Sidebar
-	templaza_woo.menuSideBar = function () {
-		var $menuSidebar = $('#primary-menu.has-arrow, #topbar, #hamburger-modal, #mobile-menu-modal, #mobile-category-menu-modal, .header-v6 .main-navigation'),
-			$menuClick = $('#hamburger-modal, #mobile-menu-modal, #mobile-category-menu-modal, .header-v6 #primary-menu');
-		$menuSidebar.find('.nav-menu .menu-item-has-children').removeClass('active');
-		$menuSidebar.find('.nav-menu .menu-item-has-children > a').prepend('<span class="toggle-menu-children"><span class="templaza-svg-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span></span>');
-		$menuClick.find('.click-item li.menu-item-has-children > a').on('click', function (e) {
-			e.preventDefault();
-			$(this).closest('li').siblings().find('ul.sub-menu, ul.dropdown-submenu').slideUp();
-			$(this).closest('li').siblings().removeClass('active');
-
-			$(this).closest('li').children('ul.sub-menu, ul.dropdown-submenu').slideToggle();
-			$(this).closest('li').toggleClass('active');
-			return false;
-		});
-
-		$menuClick.find('.click-icon li.menu-item-has-children > a > .toggle-menu-children').on('click', function (e) {
-			e.preventDefault();
-			$(this).closest('li').siblings().find('ul.sub-menu, ul.dropdown-submenu').slideUp();
-			$(this).closest('li').siblings().removeClass('active');
-
-			$(this).closest('li').children('ul.sub-menu, ul.dropdown-submenu').slideToggle();
-			$(this).closest('li').toggleClass('active');
-
-			return false;
-		});
-
-		// Active menu header layout 7
-		$('.header-v7 .main-navigation').find('li.menu-item > a').on('click', function (e) {
-			e.preventDefault();
-			$(this).closest('li').siblings().removeClass('active');
-			$(this).closest('li').toggleClass('active');
-		});
-	};
-
-	/**
-	 * Close the topbar
-	 */
-	templaza_woo.closeTopbar = function () {
-		$(document.body).on('click', '.templaza-topbar__close', function (event) {
-			event.preventDefault();
-
-			$('#topbar, #topbar-mobile').slideUp();
-		});
-	};
-
-	// Sticky Header
-	templaza_woo.stickyHeader = function () {
-
-		if (!templaza_woo.$body.hasClass('header-sticky')) {
-			return;
-		}
-
-		var isHeaderTransparent = templaza_woo.$body.hasClass('header-transparent'),
-			$headerMinimized = $('#site-header-minimized'),
-			heightHeaderMain = templaza_woo.$header.find('.header-contents').hasClass('header-main') ? templaza_woo.$header.find('.header-main').outerHeight() : 0,
-			heightHeaderBottom = templaza_woo.$header.find('.header-contents').hasClass('header-bottom') ? templaza_woo.$header.find('.header-bottom').outerHeight() : 0,
-			heightHeaderMobile = templaza_woo.$header.find('.header-contents').hasClass('header-mobile') ? templaza_woo.$header.find('.header-mobile').outerHeight() : 0,
-			heightHeaderMinimized = heightHeaderMain + heightHeaderBottom;
-
-			if( templaza_woo.$header.hasClass('header-bottom-no-sticky') ) {
-				heightHeaderMinimized = heightHeaderMain;
-			} else if(templaza_woo.$header.hasClass('header-main-no-sticky') ) {
-				heightHeaderMinimized = heightHeaderBottom;
-			}
-
-			if( templaza_woo.$body.hasClass('header-v6') ) {
-				heightHeaderMinimized = heightHeaderBottom;
-			}
-
-			if( isHeaderTransparent ) {
-				templaza_woo.$header.addClass('has-transparent');
-			}
-
-		templaza_woo.$window.on('scroll', function () {
-			var scroll = templaza_woo.$window.scrollTop(),
-				scrollTop = templaza_woo.$header.outerHeight(true),
-				hBody = templaza_woo.$body.outerHeight(true);
-
-			if (hBody <= scrollTop + templaza_woo.$window.height()) {
-				return;
-			}
-
-			if (scroll > scrollTop) {
-
-				templaza_woo.$header.addClass('minimized');
-				$('#templaza-header-minimized').addClass('minimized');
-				templaza_woo.$body.addClass('sticky-minimized');
-
-				if (isHeaderTransparent) {
-					templaza_woo.$body.removeClass('header-transparent');
-				}
-
-				if (templaza_woo.$window.width() > 992) {
-					$headerMinimized.css('height', heightHeaderMinimized);
-				} else {
-					$headerMinimized.css('height', heightHeaderMobile);
-				}
-
-			} else {
-				templaza_woo.$header.removeClass('minimized');
-				$('#templaza-header-minimized').removeClass('minimized');
-				templaza_woo.$body.removeClass('sticky-minimized');
-
-				if (isHeaderTransparent) {
-					templaza_woo.$body.addClass('header-transparent');
-				}
-
-				$headerMinimized.removeAttr('style');
 			}
 		});
 	};
@@ -1374,6 +903,7 @@
 
 			templaza_woo.productLoopHoverSlider();
 			templaza_woo.productLoopHoverZoom();
+			$(document).trigger( 'yith_wcwl_reload_fragments' );
 		});
 	};
 
@@ -1663,7 +1193,7 @@
 
 		});
 
-		$(document.body).on('added_to_cart', function () {
+		$(document.body).on('wc_fragments_loaded', function () {
 			if ($product_item_id && $product_id) {
 				getProductPopupContent($product_id, $product_item_id);
 				$product_item_id = 0;
@@ -1682,12 +1212,12 @@
 
 		function getProductPopupContent($product_id, $product_item_id) {
 			var $item_ids = $product_item_id.split(',');
-			for (var i = 0; i < $item_ids.length; ++i) {
-				$product.find('.mini-cart-item-' + $item_ids[i]).addClass('active');
-			}
 
-			$product.find('.woocommerce-mini-cart-item').not('.active').remove();
-			$product.find('.woocommerce-mini-cart-item').find('.woocommerce-cart-item__qty, .remove_from_cart_button').remove();
+			for (var i = 0; i < $item_ids.length; ++i) {
+				$modal.find('.mini-cart-item-' + $item_ids[i]).addClass('active');
+			}
+			$modal.find('.woocommerce-mini-cart-item').not('.active').remove();
+			$modal.find('.woocommerce-mini-cart-item').find('.woocommerce-cart-item__qty, .remove_from_cart_button').remove();
 
 			templaza_woo.openModal($modal);
 			$modal.addClass('loaded');
@@ -1813,78 +1343,6 @@
 			});
 		}
 	}
-
-	/**
-	 * Newsletter popup.
-	 */
-	templaza_woo.newsletterPopup = function () {
-		if (!templazaData.popup) {
-			return;
-		}
-		var $modal = $('#newsletter-popup-modal'),
-			days = parseInt(templazaData.popup_frequency),
-			delay = parseInt(templazaData.popup_visible_delay);
-
-		if (!$modal.length) {
-			return;
-		}
-
-		if (document.cookie.match(/^(.*;)?\s*templaza_newsletter_popup_prevent\s*=\s*[^;]+(.*)?$/)) {
-			return;
-		}
-
-		if (days > 0 && document.cookie.match(/^(.*;)?\s*templaza_newsletter_popup\s*=\s*[^;]+(.*)?$/)) {
-			return;
-		}
-
-		delay = Math.max(delay, 0);
-		delay = 'delay' === templazaData.popup_visible ? delay : 0;
-
-		function closeNewsLetter(days, $check) {
-			var date = new Date(),
-				value = date.getTime();
-
-			if ($check) {
-				date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
-				document.cookie = 'templaza_newsletter_popup_prevent=' + value + ';expires=' + date.toGMTString() + ';path=/';
-
-			} else {
-				document.cookie = 'templaza_newsletter_popup_prevent=' + value + ';expires=' + date.toGMTString() + ';path=/';
-
-				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-				document.cookie = 'templaza_newsletter_popup=' + value + ';expires=' + date.toGMTString() + ';path=/';
-			}
-		}
-
-		setTimeout(function () {
-			templaza_woo.openModal($modal);
-		}, delay * 1000);
-
-		// Prevent this Pop-up
-		$modal.on('click', '.n-close', function (e) {
-			e.preventDefault();
-			$(this).addClass('active');
-
-			setTimeout(function () {
-				closeNewsLetter(days, true);
-				templaza_woo.closeModal($modal);
-			}, 800);
-
-		});
-
-		$(document.body).on('templaza_modal_closed', function (event, modal) {
-			if (!$(modal).closest('.templaza-modal').hasClass('newsletter-popup-modal')) {
-				return;
-			}
-
-			if ($(modal).find('.n-close').hasClass('active')) {
-				return;
-			}
-
-			closeNewsLetter(days, false);
-		});
-	};
-
 
 	// Recently Viewed Products
 	templaza_woo.recentlyViewedProducts = function () {
@@ -2025,35 +1483,6 @@
 		}
 	};
 
-	// Footer Dropdown
-	templaza_woo.footerDropdown = function () {
-		$('.footer-widgets .widget').find('.widget-title').append('<span class="templaza-svg-icon"><svg aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>');
-		var $dropdown = $('.footer-widgets .widget'),
-			$title = $dropdown.find('.widget-title');
-
-		templaza_woo.$window.on('resize', function () {
-			if (templaza_woo.$window.width() < 768) {
-				$title.next('div').addClass('clicked');
-				$title.parent().addClass('dropdown');
-			} else {
-				$title.next('div').removeClass('clicked');
-				$title.next('div').removeAttr('style');
-				$title.parent().removeClass('dropdown');
-			}
-
-		}).trigger('resize');
-
-		$dropdown.on('click', '.widget-title', function (e) {
-			e.preventDefault();
-			if (!$title.parent().hasClass('dropdown')) {
-				return;
-			}
-			$(this).next('.clicked').stop().slideToggle();
-			$(this).toggleClass('active');
-			return false;
-		});
-	};
-
 	// Scroll Section
 	templaza_woo.scrollSection = function () {
 		var baseURI = $('#templaza-base-url').data('url');
@@ -2071,60 +1500,6 @@
 			}
 		});
 
-	};
-
-	templaza_woo.inlineStyle = function() {
-		templaza_woo.$window.on('resize', function () {
-			if (templaza_woo.$window.width() < 601) {
-				$('#wpadminbar').css('z-index', '999');
-			} else {
-				$('#wpadminbar').removeAttr('style');
-			}
-		}).trigger('resize');
-	}
-
-	  /**
-     * History Back
-     */
-	templaza_woo.historyBack = function () {
-        templaza_woo.$header.find('.templaza-history-back').on('click', function (e) {
-            if (document.referrer != '') {
-                e.preventDefault();
-
-                window.history.go(-1);
-                $(window).on('popstate', function (e) {
-                    window.location.reload(true);
-                });
-            }
-
-        });
-    };
-
-	/**
-	 * Open quick links when focus on search field
-	 */
-	 templaza_woo.focusSearchField = function() {
-		$( '.header-search .search-field' ).on( 'focus', function() {
-			var $quicklinks = $( this ).closest( '.header-search' ).find( '.quick-links' );
-
-			if ( !$quicklinks.length ) {
-				return;
-			}
-
-			$quicklinks.addClass( 'open' );
-			$( this ).addClass( 'focused' );
-		} );
-
-		$( document.body ).on( 'click', 'div', function( event ) {
-			var $target = $( event.target );
-
-			if ( $target.is( '.header-search' ) || $target.closest( '.header-search' ).length ) {
-				return;
-			}
-
-			$( '.quick-links', '.header-search' ).removeClass( 'open' );
-			$( '.search-field', '.header-search' ).removeClass( 'focused' );
-		} );
 	};
 
 	/**

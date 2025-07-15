@@ -129,7 +129,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                             'section' => esc_html__("Viewport (Minus the following section)", 'templaza-framework'),
                                             'expand'  => esc_html__("Expand", 'templaza-framework'),
                                         ),
-                                        'select2'       => array( 'allowClear' => false ),
+                                        'select2'       => array( 'allowClear' => true ),
                                     ),
                                     array(
                                         'id'       => 'vertical_align',
@@ -167,6 +167,13 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
 //                                        'type'       => 'background',
 //                                        'title'      => esc_html__('Background', 'templaza-framework'),
 //                                    ),
+                                    array(
+                                        'id'       => 'background_featured',
+                                        'type'     => 'switch',
+                                        'after_field'   => 'background',
+                                        'title'    => esc_html__('Get background from page featured image', 'templaza-framework'),
+                                        'default'  => false,
+                                    ),
 									array(
                                         'id'       => 'background_overlay',
                                         'type'     => 'color_rgba',

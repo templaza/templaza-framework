@@ -720,15 +720,17 @@ class TemplazaFramework_ShortCode{
     }
 
     public function custom_css(&$params, &$element){
+
         $css = array('desktop' => '', 'tablet' => '', 'mobile' => '');
 
 
 
         if(isset($params['background'])){
+            $featured = $params['background_featured'];
             $background = $params['background'];
             $css['desktop']    .= CSS::background($background['background-color'], $background['background-image'],
                 $background['background-repeat'], $background['background-attachment'],
-                $background['background-position'], $background['background-size'], '', '', true);
+                $background['background-position'], $background['background-size'], '', '',$featured, true);
 
             unset($params['background']);
         }
