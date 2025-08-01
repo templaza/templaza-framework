@@ -35,7 +35,7 @@ echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>">
         <?php
         if($image){
             ?>
-        <img src="<?php echo esc_url($image->url);?>"/>
+        <img alt="<?php esc_attr_e('icon','templaza-framework');?>" src="<?php echo esc_url($image->url);?>"/>
         <?php
         }else{
             ?>
