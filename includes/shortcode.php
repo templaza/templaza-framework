@@ -726,7 +726,11 @@ class TemplazaFramework_ShortCode{
 
 
         if(isset($params['background'])){
-            $featured = $params['background_featured'];
+            if(isset($params['background_featured'])){
+                $featured = $params['background_featured'];
+            }else{
+                $featured ='';
+            }
             $background = $params['background'];
             $css['desktop']    .= CSS::background($background['background-color'], $background['background-image'],
                 $background['background-repeat'], $background['background-attachment'],

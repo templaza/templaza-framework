@@ -417,6 +417,38 @@ Templaza_API::set_section('settings',
         ),
     )
 );
+// -> START Pagination Color
+Templaza_API::set_section('settings',
+    array(
+        'title'      => __( 'Pagination Color', 'templaza-framework' ),
+        'id'         => 'colors-pagination',
+        'desc'       => __( 'Select colors for pagination', 'templaza-framework' ),
+        'subsection' => true,
+        'fields'     => array(
+            array(
+                'id'       => 'pagination-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Pagination link color', 'templaza-framework' ),
+                'subtitle' => __( 'Set the color of Pagination link', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'pagination-bg-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Pagination background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'pagination-color-hover',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Pagination hover color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'pagination-bg-color-hover',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Pagination background hover color', 'templaza-framework' ),
+            ),
+        ),
+    )
+);
 // -> START Blog Color
 Templaza_API::set_section('settings',
     array(
@@ -925,6 +957,21 @@ Templaza_API::set_section('settings',
                 'id'       => 'ap-single-price-color',
                 'type'     => 'color_rgba',
                 'title'    => __( 'Single Price color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-acc-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Accordion background color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-sticky-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Sticky color', 'templaza-framework' ),
+            ),
+            array(
+                'id'       => 'ap-single-sticky-bg-color',
+                'type'     => 'color_rgba',
+                'title'    => __( 'Single Sticky background color', 'templaza-framework' ),
             ),
             array(
                 'id'       => 'ap_product-side-box-bg-color',

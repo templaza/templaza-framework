@@ -521,6 +521,15 @@ $breadcrumb_link_hover_single     = CSS::make_color_rgba_redux($breadcrumb_link_
 $breadcrumb_current_single     = isset($options['breadcrumb-current-single'])?$options['breadcrumb-current-single']:'';
 $breadcrumb_current_single     = CSS::make_color_rgba_redux($breadcrumb_current_single);
 
+$pagination_color     = isset($options['pagination-color'])?$options['pagination-color']:'';
+$pagination_color     = CSS::make_color_rgba_redux($pagination_color);
+$pagination_bg_color     = isset($options['pagination-bg-color'])?$options['pagination-bg-color']:'';
+$pagination_bg_color     = CSS::make_color_rgba_redux($pagination_bg_color);
+$pagination_color_hover     = isset($options['pagination-color-hover'])?$options['pagination-color-hover']:'';
+$pagination_color_hover     = CSS::make_color_rgba_redux($pagination_color_hover);
+$pagination_bg_color_hover     = isset($options['pagination-bg-color-hover'])?$options['pagination-bg-color-hover']:'';
+$pagination_bg_color_hover     = CSS::make_color_rgba_redux($pagination_bg_color_hover);
+
 $blog_cm_bg_color     = isset($options['blog-input-cm-bg-color'])?$options['blog-input-cm-bg-color']:'';
 $blog_cm_bg_color     = CSS::make_color_rgba_redux($blog_cm_bg_color);
 $blog_cm_color     = isset($options['form-input-cm-color'])?$options['form-input-cm-color']:'';
@@ -595,7 +604,7 @@ if (!empty($blog_meta_link_hover_color_single)) {
     $blogs[]    = 'div.templaza-single .templaza-blog-item-info span a:hover{color:' . $blog_meta_link_hover_color_single . ';}';
 }
 if (!empty($blog_author_bg_color)) {
-    $blogs[]    = ' .templaza-single .templaza-single-box.templaza-single-author{background-color:' . $blog_author_bg_color . ';}';
+    $blogs[]    = ' .templaza-single .templaza-single-author{background-color:' . $blog_author_bg_color . ';}';
 }
 if (!empty($blog_author_color)) {
     $blogs[]    = '.templaza-archive-item span.tag a:hover{color:' . $blog_author_color . ';}';
@@ -623,6 +632,32 @@ if (!empty($breadcrumb_link_hover_single)) {
 }
 if (!empty($breadcrumb_current_single)) {
     $blogs[]    = '.single  .templaza-breadcrumb li.item-current span{color:' . $breadcrumb_current_single . ';}';
+}
+if (!empty($pagination_color)) {
+    $blogs[]    = '.navigation .nav-links .page-numbers,
+    .woocommerce-pagination ul.page-numbers a, .woocommerce-pagination ul.page-numbers span{color:' . $pagination_color . ';}';
+}
+if (!empty($pagination_bg_color)) {
+    $blogs[]    = '.navigation .nav-links .page-numbers,
+    .woocommerce-pagination ul.page-numbers a, .woocommerce-pagination ul.page-numbers span{background-color:' . $pagination_bg_color . ';}';
+}
+if (!empty($pagination_color_hover)) {
+    $blogs[]    = '
+    .navigation .nav-links .page-numbers:hover,
+     .navigation .nav-links .page-numbers.current,
+     .woocommerce-pagination ul.page-numbers a:hover, 
+     .woocommerce-pagination ul.page-numbers a.current, 
+     .woocommerce-pagination ul.page-numbers span:hover, 
+     .woocommerce-pagination ul.page-numbers span.current{color:' . $pagination_color_hover . ';}';
+}
+if (!empty($pagination_bg_color_hover)) {
+    $blogs[]    = '
+    .navigation .nav-links .page-numbers:hover, 
+    .navigation .nav-links .page-numbers.current,
+    .woocommerce-pagination ul.page-numbers a:hover, 
+    .woocommerce-pagination ul.page-numbers a.current, 
+    .woocommerce-pagination ul.page-numbers span:hover, 
+    .woocommerce-pagination ul.page-numbers span.current{background-color:' . $pagination_bg_color_hover . ';}';
 }
 if (!empty($sidebar_bg_color)) {
     $blogs[]    = 'div.templaza-sidebar,
