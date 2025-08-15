@@ -207,6 +207,14 @@ if(!class_exists('TemPlazaFramework\Admin_Functions')){
                     /* translators: %s - current value. */
                     'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please adjust this value to %s in order to meet the theme requirements. ', 'templaza-framework' )
                 ),
+                'php_zip_extension' => array(
+                    'title'    => esc_html__( 'PHP Zip Extension', 'templaza-framework' ),
+                    'value'    => extension_loaded('zip') ? 'true' : 'false',
+                    'required' => '1',
+                    'pass'     => ( extension_loaded('zip') ) ? true : false,
+                    /* translators: %s - current value. */
+                    'notice'   => esc_html__( 'The current value is insufficient to properly support the theme. Please enable PHP Zip Extension to import demo data. ', 'templaza-framework' )
+                ),
                 'max_upload_size'    => array(
                     'title'    => esc_html__( 'Max Upload Size', 'templaza-framework' ),
                     'value'    => size_format( wp_max_upload_size() ),
