@@ -40,7 +40,7 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
         }elseif($acf_f['type']=='wysiwyg'){
             ?>
             <div class="uk-width-1-1 ap-content-full">
-                <?php echo esc_html(the_field($acf_f['name'], $product_id)); ?>
+                <?php echo get_field($acf_f['name'], $product_id,false); ?>
             </div>
             <?php
         }elseif($acf_f['type']=='gallery'){
