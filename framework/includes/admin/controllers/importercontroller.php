@@ -569,6 +569,9 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
                                     // Remove package import file
                                     $wp_filesystem->delete($filePath);
+                                    $old_url = $pack['demo_url'];
+                                    $new_url = get_home_url();
+                                    $this->tz_domain_replace( $old_url, $new_url );
 
                                     $this->info->set_message(esc_html__('Imported demo content successfully.', 'templaza-framework'), false);
 
@@ -627,6 +630,80 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 die();
             }
         }
+
+
+        public function tz_domain_replace( $old_url, $new_url ) {
+            global $wpdb;
+            // ================== //
+            $old_url_escaped = str_replace('/', '\\/', $old_url);
+            $new_url_escaped = str_replace('/', '\\/', $new_url);
+
+            // ===== 1. wp_posts (post_content) =====
+            $posts = $wpdb->get_results( "SELECT ID, post_content FROM {$wpdb->posts}", ARRAY_A );
+            foreach ( $posts as $post ) {
+                $new_content = str_replace(
+                    [$old_url, $old_url_escaped],
+                    [$new_url, $new_url_escaped],
+                    $post['post_content']
+                );
+                if ( $new_content !== $post['post_content'] ) {
+                    $wpdb->update(
+                        $wpdb->posts,
+                        ['post_content' => $new_content],
+                        ['ID' => $post['ID']]
+                    );
+                }
+            }
+
+            // ===== 2. wp_postmeta (Elementor data) =====
+            $metas = $wpdb->get_results( "SELECT meta_id, meta_value FROM {$wpdb->postmeta}", ARRAY_A );
+            foreach ( $metas as $meta ) {
+                $value = $meta['meta_value'];
+
+                if ( is_serialized( $value ) ) {
+                    $data = unserialize( $value );
+                    $data_new = $this->tz_recursive_replace( $old_url, $new_url, $data );
+                    $data_new = $this->tz_recursive_replace( $old_url_escaped, $new_url_escaped, $data_new );
+                    if ( $data !== $data_new ) {
+                        $wpdb->update(
+                            $wpdb->postmeta,
+                            ['meta_value' => serialize( $data_new )],
+                            ['meta_id' => $meta['meta_id']]
+                        );
+                    }
+                } elseif ( is_string( $value ) ) {
+                    $new_value = str_replace(
+                        [$old_url, $old_url_escaped],
+                        [$new_url, $new_url_escaped],
+                        $value
+                    );
+                    if ( $new_value !== $value ) {
+                        $wpdb->update(
+                            $wpdb->postmeta,
+                            ['meta_value' => $new_value],
+                            ['meta_id' => $meta['meta_id']]
+                        );
+                    }
+                }
+            }
+        }
+
+
+        public function tz_recursive_replace( $search, $replace, $data ) {
+            if ( is_array( $data ) ) {
+                foreach ( $data as $key => $value ) {
+                    $data[$key] = $this->tz_recursive_replace( $search, $replace, $value );
+                }
+            } elseif ( is_object( $data ) ) {
+                foreach ( $data as $key => $value ) {
+                    $data->$key = $this->tz_recursive_replace( $search, $replace, $value );
+                }
+            } elseif ( is_string( $data ) ) {
+                $data = str_replace( $search, $replace, $data );
+            }
+            return $data;
+        }
+
 
         /* Check system requirement */
         public function system_requirement_notice(){
