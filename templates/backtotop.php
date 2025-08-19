@@ -92,8 +92,7 @@ if(!empty($backtotop_icon_hover_bgcolor)){
     Templates::add_inline_style('#templaza-backtotop:hover{background:' . $backtotop_icon_hover_bgcolor . ';}');
 }
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
-
-if(isset($backtotop_image['url'])){
+if(isset($backtotop_image['url']) && $backtotop_image['url'] !=''){
     $html .= '<a id="templaza-backtotop" class=" templaza-b2t_btn ' . implode(' ', $class) . '" href="javascript:void(0)"><img alt="'.esc_attr__('icon','templaza-framework').'" src="' . esc_url($backtotop_image['url']) . '" /></a>';
 }else{
     $html .= '<a id="templaza-backtotop" class=" templaza-b2t_btn ' . implode(' ', $class) . '" href="javascript:void(0)"><i class="' . $backtotop_icon . '" ></i></a>';
