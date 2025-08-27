@@ -12,10 +12,20 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
     $templaza_options = Functions::get_theme_options();
 }
 $fields     = AP_Custom_Field_Helper::get_custom_fields_display_flag_by_product_id('show_in_listing',get_the_ID());
-
+$product_id = get_the_ID();
 // Get custom fields with no group
 $fields_no_group    = AP_Custom_Field_Helper::get_custom_fields_without_group_display_flag_by_product_id('show_in_listing', get_the_ID());
 // phpcs:disable WordPress.Security.NonceVerification.Recommended
+
+$unique = [];
+foreach ($fields_no_group as $post) {
+    $key = $post->post_excerpt;
+    if (!isset($unique[$key])) {
+        $unique[$key] = $post;
+    } else {
+    }
+}
+
 if(is_array($fields_no_group) && !empty($fields_no_group)){
     $fields = !empty($fields)?array_merge($fields_no_group, $fields):$fields_no_group;
 }
@@ -36,7 +46,7 @@ if(!empty($fields)){
     <?php $d=0; foreach($fields as $field){
         if($d < $max){
         $f_attr             = AP_Custom_Field_Helper::get_custom_field_option_by_id($field -> ID);
-        $f_value            = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name']):null;
+        $f_value            = (!empty($f_attr) && isset($f_attr['name']))?get_field($f_attr['name'],$product_id):null;
         $f_icon         = isset($f_attr['icon'])?$f_attr['icon']:'';
         if(isset($_GET['show_icon'])){
             $show_icon = $_GET['show_icon'];
