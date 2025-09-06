@@ -48,15 +48,15 @@ class TemPlazaFrameWork{
 
     public function hooks(){
 
-        add_action('after_setup_theme', array($this, 'default_menu_locations'), 99999);
-        add_action('init', array($this, 'init'), 99999);
+        add_action('after_setup_theme', array($this, 'default_menu_locations'), 999);
+        add_action('init', array($this, 'init'), 999);
 
-        add_action('init', array($this, 'frontend_init'), 99999);
+        add_action('init', array($this, 'frontend_init'), 999);
         add_action( 'plugins_loaded', array( $this, 'tz_load_plugin_textdomain' ) );
-        add_action('template_include', array($this, 'template_include'), 999999);
-        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 99999);
-        add_action('wp_head', array($this, 'wp_head'), 99999);
-        add_action('wp_footer', array($this, 'wp_footer'), 99999);
+        add_action('template_include', array($this, 'template_include'), 9999);
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 999);
+        add_action('wp_head', array($this, 'wp_head'), 999);
+        add_action('wp_footer', array($this, 'wp_footer'), 999);
 
         add_filter('register_sidebar_defaults', array($this, 'modify_sidebar'), 9999);
         add_filter('wp_kses_allowed_html', array($this, 'wpkses_post_tags'), 10, 2);
@@ -440,10 +440,10 @@ class TemPlazaFrameWork{
         if(class_exists( 'Advanced_Product\Advanced_Product' )){
             $this -> advanced_enqueue_scripts();
         }
-        wp_register_script( 'gsap-js', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js', array(), false, true );
-        wp_register_script( 'gsap-st', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js', array('gsap-js'), false, true );
-        wp_register_script( 'gsap-smooth', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js', array('gsap-st'), false, true );
-        wp_register_script( 'gsap-SplitText', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js', array('gsap-smooth'), false, true );
+        wp_register_script( 'gsap-js', Functions::get_my_url().'/assets/js/vendor/gsap.min.js', array(), '3.13.0', true );
+        wp_register_script( 'gsap-st', Functions::get_my_url().'/assets/js/vendor/ScrollTrigger.min.js', array('gsap-js'), '3.13.0', true );
+        wp_register_script( 'gsap-smooth', Functions::get_my_url().'/assets/js/vendor/ScrollSmoother.min.js', array('gsap-st'), '3.13.0', true );
+        wp_register_script( 'gsap-SplitText', Functions::get_my_url().'/assets/js/vendor/SplitText.min.js', array('gsap-smooth'), '3.13.0', true );
         wp_enqueue_script( 'gsap-js');
         wp_enqueue_script( 'gsap-st');
         wp_enqueue_script( 'gsap-smooth');
@@ -471,8 +471,8 @@ class TemPlazaFrameWork{
         if($preloader && $preloader_animation =='charging'){
             wp_enqueue_script( 'gsap-js');
             wp_enqueue_script( 'gsap-st');
-            wp_enqueue_script( 'gsap-scroll', 'https://unpkg.com/smooth-scrollbar@8.8.4/dist/smooth-scrollbar.js', array('gsap-js'), false, true );
-            wp_enqueue_script( 'templaza-preloader-script', Functions::get_my_url() . '/assets/js/preloader.js', array('jquery'), false, true );
+            wp_enqueue_script( 'gsap-scroll', Functions::get_my_url().'/assets/js/vendor/smooth-scrollbar.js', array('gsap-js'), '3.13.0', true );
+            wp_enqueue_script( 'templaza-preloader-script', Functions::get_my_url() . '/assets/js/preloader.js', array('jquery'), '3.13.0', true );
         }
         if($header_mode =='headeranimation'){
             wp_enqueue_script( 'templaza-headeranimation-script', Functions::get_my_url() . '/assets/js/headeranimation.js', array('gsap-js'), time(), true );
