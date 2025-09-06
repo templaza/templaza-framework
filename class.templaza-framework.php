@@ -747,6 +747,12 @@ class TemPlazaFrameWork{
      * Create post default
      * */
     public function create_post_default(){
+
+        $default_theme_value = get_option( 'default_'.get_template().'' );
+        if ( !empty($default_theme_value) ) {
+            return $default_theme_value;
+        }
+
         $post_types = array('templaza_header', 'templaza_footer');
         // phpcs:disable  WordPress.DB.SlowDBQuery.slow_db_query_meta_query
         foreach ($post_types as $ptype) {
@@ -754,22 +760,23 @@ class TemPlazaFrameWork{
             $args = array(
                 'post_type'     => $ptype,
                 'post_status'   => 'publish',
+                'numberposts' => -1,
                 'meta_query'    => array(
                     array(
                         'key'   => '__home',
-                        'value' => 1
+                        'value' => 1,
+                        'compare' => '='
                     )
                 )
             );
 
-            $pexists    = \get_posts($args);
-            if(is_wp_error($pexists) || !empty($pexists)){
-                if(!empty($pexists)){
-                    $mkey       = '_' . $ptype . '__theme';
-                    $hthemes    = get_post_meta($pexists[0] -> ID, $mkey);
-                    if(!$hthemes || !in_array(get_template(), $hthemes)) {
-                        add_post_meta($pexists[0]->ID, $mkey, get_template());
-                    }
+            $pexists    = get_posts($args);
+            if(!empty($pexists)){
+                add_option( 'default_'.get_template().'', 1, '', 'yes' );
+                $mkey       = '_' . $ptype . '__theme';
+                $hthemes    = get_post_meta($pexists[0] -> ID, $mkey);
+                if(!$hthemes || !in_array(get_template(), $hthemes)) {
+                    add_post_meta($pexists[0]->ID, $mkey, get_template());
                 }
                 continue;
             }
