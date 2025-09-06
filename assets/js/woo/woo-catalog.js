@@ -5,22 +5,9 @@
         templaza_woo.$body = $(document.body),
             templaza_woo.$window = $(window);
 
-        // Catalog
-        // this.catalogBanner();
-        // this.catalogToolBarV1();
-        // this.catalogToolBarV2();
-        // this.catalogToolBarV3();
-        // this.productsTools();
-        // this.productCategoriesCarousel();
-        // this.catalogCollapseWidget();
+
         this.productsLoading();
         this.productsInfinite();
-        // this.productsFilterActivated();
-
-        // this.scrollFilterSidebar();
-        // this.changeCatalogElementsFiltered();
-
-        // this.stickySidebar();
         this.filter_btn();
     };
     templaza_woo.productsLoading = function () {

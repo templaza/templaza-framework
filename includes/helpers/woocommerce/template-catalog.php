@@ -211,8 +211,8 @@ class Templaza_Woo_Catalog {
 		}
 
 		wp_enqueue_script( 'templaza-product-catalog', Functions::get_my_url() . '/assets/js/woo/woo-catalog.js', array(
-			'templaza-framework',
-		), '20211209', true );
+			'jquery',
+		), false, true );
 
 		$templaza_catalog_data = array(
 			'filtered_price' => array(
