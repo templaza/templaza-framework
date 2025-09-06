@@ -424,9 +424,9 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                     return TEMPLAZA_FRAMEWORK_METABOXES_PATH.'/'.$this -> get_meta_box_name().'/tmpl/redux-panel/menu-container.tpl.php';
                 });
             }else {
-                add_filter('wp_nav_menu_args', array($this, 'modify_nav_menu_args'), 99999);
-                add_filter('wp_nav_menu_objects', array($this, 'setup_menu_items'), 99999, 2);
-                add_filter( 'wp_nav_menu_objects', array( $this, 'add_widgets_to_menu' ), 99999, 2 );
+                add_filter('wp_nav_menu_args', array($this, 'modify_nav_menu_args'), 999);
+                add_filter('wp_nav_menu_objects', array($this, 'setup_menu_items'), 999, 2);
+                add_filter( 'wp_nav_menu_objects', array( $this, 'add_widgets_to_menu' ), 999, 2 );
                 add_filter( 'templaza-framework/metabox/megamenu/nav_menu_objects_after', array( $this, 'set_descriptions_if_enabled' ), 8, 2 );
             }
 
@@ -498,7 +498,7 @@ Flyout Menu: When used in the flyout menu, the image will be shown full screen w
                 return $items;
             }
 
-            $rolling_dummy_id = 999999999;
+            $rolling_dummy_id = 9999999;
             $items_to_move  = array();
 
             $items      = apply_filters( "templaza-framework/metabox/megamenu/nav_menu_objects_before", $items, $args );

@@ -52,7 +52,7 @@ if ( !class_exists('Puc_v4p11_DebugBar_Extension', false) ):
 				'puc-debug-bar-js-v4',
 				$this->getLibraryUrl("/js/debug-bar.js"),
 				array('jquery'),
-				'20201209'
+				'20201209',true
 			);
 		}
 
