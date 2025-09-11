@@ -66,7 +66,7 @@ if(isset($args['ap_class'])){
                 </div>
                 <div class="ap-info-btn">
                     <div class="ap-readmore-box">
-                        <a href="<?php the_permalink(); ?>" class="templaza-btn uk-flex"><?php esc_html_e('View more','templaza-framework');?></a>
+                        <a href="<?php the_permalink($pid); ?>" class="templaza-btn uk-flex"><?php esc_html_e('View more','templaza-framework');?></a>
                     </div>
                 </div>
             </div>

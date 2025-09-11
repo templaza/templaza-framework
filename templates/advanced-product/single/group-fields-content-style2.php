@@ -27,6 +27,7 @@ $product_id = get_the_ID();
 
 $ap_content_group_exclude = isset($templaza_options['ap_product-single-group-exclude'])?$templaza_options['ap_product-single-group-exclude']:array();
 $gfields_assigned   = AP_Custom_Field_Helper::get_group_fields_by_product();
+
 if($gfields_assigned && count($gfields_assigned)){
     ?>
     <div class="ap-group-scroll-wrap">

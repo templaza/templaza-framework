@@ -81,7 +81,7 @@ if($ap_tax_before !=''){
                 <div class="ap-info-inner ap-info-button">
                     <div class="ap-readmore-box">
                         <span class="readmore-label"><?php esc_html_e('View more','templaza-framework');?></span>
-                        <a href="<?php the_permalink(); ?>" class="ap-view-detail"></a>
+                        <a href="<?php the_permalink($pid); ?>" class="ap-view-detail"></a>
                         <span class="before-price"><?php esc_html_e('(','templaza-framework');?></span><?php AP_Templates::load_my_layout('archive.price');?><span class="after-price"><?php esc_html_e(')','templaza-framework');?></span>
                     </div>
                 </div>
