@@ -781,7 +781,7 @@ class Framework{
 
     public function enqueue(){
         wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'__js', Functions::get_my_frame_url().'/assets/js/core.js',
-            array('redux-js'), Functions::get_my_version(), true);
+            array('jquery'), Functions::get_my_version(), true);
         wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_js', Functions::get_my_url().'/assets/js/vendor/uikit.min.js', array(), Functions::get_my_version(), true);
         wp_enqueue_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_js');
         wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_icon_js', Functions::get_my_url().'/assets/js/vendor/uikit-icons.min.js', array(), Functions::get_my_version(), true);

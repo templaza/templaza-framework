@@ -103,7 +103,7 @@ if(isset($args['ap_class'])){
                     <?php do_action('advanced-product/archive/after_content');?>
 
                     <span class="ap-button ap-button-viewmore">
-                        <a href="<?php the_permalink(); ?>" data-uk-tooltip="<?php echo esc_attr(__('View Detail', 'templaza-framework')); ?>">
+                        <a href="<?php the_permalink($pid); ?>" data-uk-tooltip="<?php echo esc_attr(__('View Detail', 'templaza-framework')); ?>">
                         <i class="fas fa-plus"></i>
                         </a>
                     </span>
@@ -119,7 +119,7 @@ if(isset($args['ap_class'])){
             <div class="ap-info-inner ap-info-bottom uk-flex uk-flex-between uk-flex-middle">
                 <?php AP_Templates::load_my_layout('archive.price');?>
                 <div class="ap-readmore-box">
-                    <a href="<?php the_permalink(); ?>" class="templaza-btn"><?php esc_html_e('View more','templaza-framework');?></a>
+                    <a href="<?php the_permalink($pid); ?>" class="templaza-btn"><?php esc_html_e('View more','templaza-framework');?></a>
                 </div>
             </div>
         </div>
