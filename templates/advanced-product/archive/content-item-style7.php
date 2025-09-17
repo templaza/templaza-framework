@@ -58,7 +58,7 @@ if(isset($args['ap_class'])){
                         ?>
                     </div>
                     <div class="ap-info-price">
-                        <?php AP_Templates::load_my_layout('archive.price');?>
+                        <?php AP_Templates::load_my_layout('archive.price',true,false,array('pid'    => $pid));?>
                     </div>
                 </div>
                 <div class="ap-info-inner ap-info-fields">

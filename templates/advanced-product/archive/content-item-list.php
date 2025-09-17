@@ -18,6 +18,7 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
     $templaza_options = Functions::get_theme_options();
 }
 $price = get_field('ap_price', get_the_ID());
+$pid            = get_the_ID();
 $thumbnail       = isset($templaza_options['ap_product-thumbnail-size'])?$templaza_options['ap_product-thumbnail-size']:'large';
 $thumbnail_eff       = isset($templaza_options['ap_product-thumbnail-effect'])?$templaza_options['ap_product-thumbnail-effect']:'';
 if(isset($args['show_author'])){
@@ -83,7 +84,7 @@ if($thumbnail_eff == 'ripple'){
                     <?php AP_Templates::load_my_layout('archive.custom-fields-style5'); ?>
                 </div>
                 <div class="ap-info-inner  ap-info-bottom uk-flex uk-flex-between uk-flex-middle">
-                    <?php AP_Templates::load_my_layout('archive.price');?>
+                    <?php AP_Templates::load_my_layout('archive.price',true,false,array('pid'    => $pid));?>
                     <div class="ap-readmore-box">
                         <a href="<?php the_permalink(); ?>" class="templaza-btn"><?php esc_html_e('View more','templaza-framework');?></a>
                     </div>

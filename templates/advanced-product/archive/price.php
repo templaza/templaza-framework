@@ -16,21 +16,25 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 $sold_text     = isset($templaza_options['ap_product-sold-label'])?$templaza_options['ap_product-sold-label']:'';
 $contact_text     = isset($templaza_options['ap_product-contact-label'])?$templaza_options['ap_product-contact-label']:'';
 // phpcs:disable WordPress.Security.NonceVerification.Recommended
+$pid  = isset($args['pid'])?$args['pid']:'';
+if($pid =='') {
+    $pid = get_the_ID();
+}
 
-$msrp           = get_field('ap_price_msrp', get_the_ID());
-$price          = get_field('ap_price', get_the_ID());
-$rental         = get_field('ap_rental_price', get_the_ID());
-$rental_value    = get_field('ap_rental_unit', get_the_ID());
+$msrp           = get_field('ap_price_msrp', $pid);
+$price          = get_field('ap_price', $pid);
+$rental         = get_field('ap_rental_price', $pid);
+$rental_value    = get_field('ap_rental_unit', $pid);
 if($rental_value){
     $field_rental = get_field_object('ap_rental_unit');
     $rental_unit = $field_rental['choices'][ $rental_value ];
 }
 
-$price_contact  = get_field('ap_price_contact', get_the_ID());
-$product_type   = get_field('ap_product_type', get_the_ID());
-$price_notice_value = get_field('price-notice', get_the_ID());
-$price_sold = get_field('ap_price_sold', get_the_ID());
-$price_contact = get_field('ap_price_contact', get_the_ID());
+$price_contact  = get_field('ap_price_contact', $pid);
+$product_type   = get_field('ap_product_type', $pid);
+$price_notice_value = get_field('price-notice', $pid);
+$price_sold = get_field('ap_price_sold', $pid);
+$price_contact = get_field('ap_price_contact', $pid);
 
 $show_price         = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price');
 $show_price_msrp    = AP_Custom_Field_Helper::get_field_display_flag_by_field_name('show_in_listing', 'ap_price_msrp');
@@ -52,7 +56,7 @@ if(isset($_GET['product_loop'])){
 }else {
     $ap_loop_layout = isset($templaza_options['ap_product-loop-layout']) ? $templaza_options['ap_product-loop-layout'] : 'style1';
 }
-$f_value = get_field('unit-price', get_the_ID());
+$f_value = get_field('unit-price', $pid);
 if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $show_price) {
     ?>
     <div class="ap-price-box">

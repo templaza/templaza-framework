@@ -55,7 +55,7 @@ $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
                 if(isset($price) && $price !='' || $rental !='' || $price_contact !='' || $price_sold !=''){
                   ?>
                     <div class="uk-position-bottom-left uk-padding-small tz-theme-bg-color ap-price-wrap">
-                        <?php AP_Templates::load_my_layout('archive.price');?>
+                        <?php AP_Templates::load_my_layout('archive.price',true,false,array('pid'    => $pid));?>
                     </div>
                 <?php
                 }
