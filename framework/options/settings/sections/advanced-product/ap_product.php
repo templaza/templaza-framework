@@ -73,7 +73,7 @@ if(is_plugin_active( 'advanced-product/advanced-product.php' )) {
         'hide_empty' => false,
     ) );
     $gfields_assigned   = AP_Custom_Field_Helper::get_group_fields_by_product();
-    if($terms && count($terms)) {
+    if(! is_wp_error( $terms ) && ! empty( $terms )) {
         foreach ($terms as $group) {
             $arr_groups[$group->slug] = $group->name;
         }

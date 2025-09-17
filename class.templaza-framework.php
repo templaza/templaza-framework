@@ -395,7 +395,6 @@ class TemPlazaFrameWork{
                 && $transient['sass_code'] != $cur_sass_name));
         $ver_time = '';
         if($dev_mode){
-//            $cur_sass_name = Templates::get_sass_name_hash();
             if(!isset($transient['sass_code']) || (isset($transient['sass_code']) && !empty($transient['sass_code'])
                     && $cur_sass_name != $transient['sass_code'])){
                 $transient['sass_code']    = $cur_sass_name;

@@ -15,6 +15,8 @@ if ( !class_exists( 'TemPlazaFramework\TemPlazaFramework' )){
 }
 $compare_layout  = isset($args['compare_layout'])?$args['compare_layout']:'';
 $price = get_field('ap_price', get_the_ID());
+
+$pid            = get_the_ID();
 if(isset($args['ap_class'])){
     $ap_class = $args['ap_class'];
 }else{
@@ -43,7 +45,7 @@ if(isset($_GET['description'])){
                 <h2 class="ap-title">
                     <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                 </h2>
-                <?php AP_Templates::load_my_layout('archive.price');?>
+                <?php AP_Templates::load_my_layout('archive.price',true,false,array('pid'    => $pid));?>
             </div>
             <?php
             if($ap_intro){
