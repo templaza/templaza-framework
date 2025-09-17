@@ -10,12 +10,12 @@ $plugin_uri = Functions::get_my_url();
 // phpcs:disable WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion, WordPress.WP.EnqueuedResourceParameters.MissingVersion
 wp_enqueue_style(TEMPLAZA_FRAMEWORK_THEME_DIR_NAME.'__tzfrm-fontawesome', $plugin_uri.'/assets/vendors/fontawesome/css/all.min.css',);
 
-wp_enqueue_script( 'templaza-js__uikit', Functions::get_my_url().'/assets/js/vendor/uikit.min.js', array( 'jquery' ),'',true );
-wp_enqueue_script( 'templaza-js__uikit-icons', Functions::get_my_url().'/assets/js/vendor/uikit-icons.min.js', array( 'jquery' ),'',true  );
-wp_enqueue_script( 'templaza-js__megamenu', Functions::get_my_url().'/assets/js/vendor/jquery.templazamegamenu.js', array( 'jquery' ),'',true  );
-wp_enqueue_script( 'templaza-js__mobilemenu', Functions::get_my_url().'/assets/js/vendor/jquery.templazamobilemenu.js', array( 'jquery' ),time(),true  );
-wp_enqueue_script( 'templaza-js__offcanvas', Functions::get_my_url().'/assets/js/vendor/jquery.offcanvas.js', array( 'jquery' ),'',true  );
-wp_enqueue_script( 'templaza-js__main', Functions::get_my_url().'/assets/js/main.js', array( 'jquery' ),time(),true  );
+wp_enqueue_script( 'templaza-js__uikit', Functions::get_my_url().'/assets/js/vendor/uikit.min.js', array( 'jquery' ),TEMPLAZA_FRAMEWORK_VERSION,true );
+wp_enqueue_script( 'templaza-js__uikit-icons', Functions::get_my_url().'/assets/js/vendor/uikit-icons.min.js', array( 'jquery' ),TEMPLAZA_FRAMEWORK_VERSION,true  );
+wp_enqueue_script( 'templaza-js__megamenu', Functions::get_my_url().'/assets/js/vendor/jquery.templazamegamenu.js', array( 'jquery' ),TEMPLAZA_FRAMEWORK_VERSION,true  );
+wp_enqueue_script( 'templaza-js__mobilemenu', Functions::get_my_url().'/assets/js/vendor/jquery.templazamobilemenu.js', array( 'jquery' ),TEMPLAZA_FRAMEWORK_VERSION,true  );
+wp_enqueue_script( 'templaza-js__offcanvas', Functions::get_my_url().'/assets/js/vendor/jquery.offcanvas.js', array( 'jquery' ),TEMPLAZA_FRAMEWORK_VERSION,true  );
+wp_enqueue_script( 'templaza-js__main', Functions::get_my_url().'/assets/js/main.js', array( 'jquery' ),TEMPLAZA_FRAMEWORK_VERSION,true  );
 
 // Let's add the Smooth Scroll is enabled.
 $enable_smooth_scroll         = isset($options['enable-smooth-scroll'])?(bool) $options['enable-smooth-scroll']:true;

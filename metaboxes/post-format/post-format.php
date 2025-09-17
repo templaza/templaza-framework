@@ -71,7 +71,7 @@ if(!class_exists('TemplazaFramework_MetaBox_Post_Format')){
             if ( post_type_supports( $post_type, 'post-formats' ) && current_theme_supports( 'post-formats' ) ) {
                 wp_enqueue_script( 'templaza-post-formats-ui-admin',
                     Functions::get_my_url() . '/metaboxes/post-format/assets/js/admin.js',
-                    array( 'templaza-post-formats-ui' ), Functions::get_my_version().time(), false );
+                    array( 'templaza-post-formats-ui' ), Functions::get_my_version(), false );
             }
         }
 
