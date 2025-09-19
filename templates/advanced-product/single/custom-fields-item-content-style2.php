@@ -71,7 +71,7 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                 <div class="uk-flex uk-flex-middle">
                     <div class=" uk-width-auto ap-field-icon">
                         <?php
-                        if( !empty($f_icon) || !empty($f_icon_image)){
+                        if( !empty(array_filter($f_icon)) || !empty($f_icon_image)){
                             ?>
                             <span>
                                 <?php
@@ -90,6 +90,26 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                                 ?>
                                 </span>
                             <?php
+                        }
+                        if($acf_f['type'] =='ap_icon'){
+                            if( !empty(array_filter($f_value))){
+                                ?>
+                                <span>
+                                    <?php
+                                    if($f_value['type']=='uikit-icon'){
+                                        ?>
+                                        <i data-uk-icon="icon:<?php echo esc_attr($f_value['icon']); ?>;"></i>
+                                        <?php
+                                    }else{
+                                        ?>
+                                        <i class="<?php echo esc_attr($f_value['icon']); ?>"></i>
+                                        <?php
+                                    }
+                                    ?>
+
+                                </span>
+                                <?php
+                            }
                         }
                         ?>
                     </div>
@@ -132,6 +152,8 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                                 $unixtimestamp = strtotime( get_field( $acf_f['name'] ) );
                                 echo date_i18n( get_option('date_format'), $unixtimestamp );
                             }
+                        }elseif($acf_f['type'] == 'ap_icon'){
+
                         }else{
                             ?><?php echo esc_html(the_field($acf_f['name'], $product_id)); ?>
                         <?php } ?>
