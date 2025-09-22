@@ -171,7 +171,7 @@ if(!class_exists('TemplazaFramework_ShortCode_Section')){
                                         'id'       => 'background_featured',
                                         'type'     => 'switch',
                                         'after_field'   => 'background',
-                                        'title'    => esc_html__('Get background from page featured image', 'templaza-framework'),
+                                        'title'    => esc_html__('Get background from page featured image, or archive breadcrumb image', 'templaza-framework'),
                                         'default'  => false,
                                     ),
 									array(

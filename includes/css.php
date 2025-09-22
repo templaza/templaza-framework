@@ -33,9 +33,21 @@ class CSS{
             return '';
         }
         $id = get_the_ID();
-        if($featured && get_the_post_thumbnail_url($id)){
-            $image = get_the_post_thumbnail_url($id);
+        $term_id='';
+        if($featured && is_page()){
+            if(get_the_post_thumbnail_url($id)){
+                $image = get_the_post_thumbnail_url($id);
+            }
         }
+        if($featured && is_tax()){
+            $term = get_queried_object();
+            $term_id = $term->term_id;
+            $att_id = get_field('breadcrumb_image','term_'.$term_id);
+            if($att_id){
+                $image = wp_get_attachment_url($att_id);
+            }
+        }
+
 
         $important  = $important?' !important':'';
 
