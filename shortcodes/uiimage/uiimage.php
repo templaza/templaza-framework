@@ -33,6 +33,21 @@ if(!class_exists('TemplazaFramework_ShortCode_UIImage')){
                         'title'    => esc_html__('Image Url', 'templaza-framework'),
                     ),
                     array(
+                        'id'       => 'image_target',
+                        'type'     => 'select',
+                        'title'    => esc_html__('Target', 'templaza-framework'),
+                        'options'  => array(
+                            '' => __('None', 'templaza-framework'),
+                            '_blank' => __('Blank', 'templaza-framework'),
+                            '_self' => __('Self', 'templaza-framework'),
+                            '_parent' => __('Parent', 'templaza-framework'),
+                            '_top	' => __('Top', 'templaza-framework'),
+                        ),
+                        'default'  => '',
+                        'required' => array('image_custom_height', '!=' , '')
+                    ),
+
+                    array(
                         'id'       => 'image_radius',
                         'type'     => 'spacing',
                         'mode'     => 'border-radius',
