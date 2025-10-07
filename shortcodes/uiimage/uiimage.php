@@ -44,7 +44,6 @@ if(!class_exists('TemplazaFramework_ShortCode_UIImage')){
                             '_top	' => __('Top', 'templaza-framework'),
                         ),
                         'default'  => '',
-                        'required' => array('image_custom_height', '!=' , '')
                     ),
 
                     array(
