@@ -492,8 +492,6 @@ class TemPlazaFrameWork{
 
         wp_register_script( 'templaza-woo-viewport', Functions::get_my_url() . '/assets/js/woo/isInViewport.min.js', array('jquery'),TEMPLAZA_FRAMEWORK_VERSION,true );
         wp_enqueue_script( 'templaza-woo-viewport' );
-        wp_register_script( 'templaza-woo-catalog', Functions::get_my_url() . '/assets/js/woo/woo-catalog.js', array('jquery'),TEMPLAZA_FRAMEWORK_VERSION,true );
-        wp_enqueue_script( 'templaza-woo-catalog' );
 
         $admin_url = admin_url('admin-ajax.php');
         $templaza_ajax_url = array('url' => $admin_url);

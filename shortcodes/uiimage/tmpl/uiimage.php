@@ -12,6 +12,7 @@ extract(shortcode_atts(array(
 	'tz_class'              => '',
 	'image'                 => '',
 	'image_url'             => '',
+	'image_target'          => '',
 	'image_radius'          => '',
 	'image_custom_height'   => '',
 	'image_height'          => '',
@@ -50,7 +51,7 @@ if(!empty($image)){
 				$svg    =    $ext == 'svg' ? 'uk-svg' : '';
 				echo '<div id="'.esc_attr($tz_id).'" class="'.esc_attr($tz_class).'"><div class="tz-image-el uk-cover-container '.$toggle.$ripple_cl.'" >';
 				if(isset($image_url) && $image_url !=''){
-                echo '<a class="tz-img  uk-display-block" target="_blank" href="'.esc_url($image_url).'">';
+                echo '<a class="tz-img  uk-display-block" target="'.$image_target.'" href="'.esc_url($image_url).'">';
                 }
 				if ($svg) {
 					echo '<img class="uk-preserve '.$image_transition.' " data-uk-img="data-src:'.esc_url($image_large).'" src="'.esc_url($image_large).'" alt="'.esc_attr('Logo').'" data-uk-svg>';
