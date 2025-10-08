@@ -38,6 +38,10 @@
 			"type": "boolean",
 			"default": true
 		},
+		"enable_autocomplete": {
+			"type": "boolean",
+			"default": true
+		},
 		"limit_height": {
 			"type": "boolean",
 			"default": true

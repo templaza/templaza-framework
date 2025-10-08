@@ -17113,7 +17113,7 @@ function Edit(_ref) {
   } else {
     formData.append('action', "advanced_product_filter_form_gutenberg");
   }
-  const shortcode = '[advanced-product-form include="' + (typeof attributes.ap_custom_fields === "object" ? attributes.ap_custom_fields.join(',') : attributes.ap_custom_fields) + '" enable_keyword="' + (attributes.enable_keyword ? 1 : 0) + '" submit_text="' + attributes.submit_text + '" limit_height="' + (attributes.limit_height ? 1 : 0) + '" instant="' + (attributes.instant ? 1 : 0) + '" update_url="' + (attributes.update_url ? 1 : 0) + '" column="' + (attributes.column ? attributes.column : 1) + '" column_large="' + (attributes.column_large ? attributes.column_large : 1) + '" column_laptop="' + (attributes.column_laptop ? attributes.column_laptop : 1) + '" column_tablet="' + (attributes.column_tablet ? attributes.column_tablet : 1) + '" column_mobile="' + (attributes.column_mobile ? attributes.column_mobile : 1) + '"' + (typeof attributes.max_height !== "undefined" && attributes.max_height.length ? ' max_height="' + attributes.max_height + '"' : '') + ']';
+  const shortcode = '[advanced-product-form include="' + (typeof attributes.ap_custom_fields === "object" ? attributes.ap_custom_fields.join(',') : attributes.ap_custom_fields) + '" enable_keyword="' + (attributes.enable_keyword ? 1 : 0) + '" enable_autocomplete="' + (attributes.enable_autocomplete ? 1 : 0) + '" submit_text="' + attributes.submit_text + '" limit_height="' + (attributes.limit_height ? 1 : 0) + '" instant="' + (attributes.instant ? 1 : 0) + '" update_url="' + (attributes.update_url ? 1 : 0) + '" column="' + (attributes.column ? attributes.column : 1) + '" column_large="' + (attributes.column_large ? attributes.column_large : 1) + '" column_laptop="' + (attributes.column_laptop ? attributes.column_laptop : 1) + '" column_tablet="' + (attributes.column_tablet ? attributes.column_tablet : 1) + '" column_mobile="' + (attributes.column_mobile ? attributes.column_mobile : 1) + '"' + (typeof attributes.max_height !== "undefined" && attributes.max_height.length ? ' max_height="' + attributes.max_height + '"' : '') + ']';
   formData.append("shortcode", shortcode.toString());
   fetch(ajaxurl, {
     method: "POST",
@@ -17185,6 +17185,15 @@ function Edit(_ref) {
     onChange: val => {
       setAttributes({
         enable_keyword: val
+      });
+    }
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enable autocomplete', 'templaza-framework'),
+    help: attributes.enable_autocomplete ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enable autocomplete.', 'templaza-framework') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Disabled autocomplete.', 'templaza-framework'),
+    checked: attributes.enable_autocomplete,
+    onChange: val => {
+      setAttributes({
+          enable_autocomplete: val
       });
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
