@@ -121,7 +121,7 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 
 	const shortcode	= '[advanced-product-form include="'+
 		(typeof attributes.ap_custom_fields === "object"?attributes.ap_custom_fields.join(','):attributes.ap_custom_fields)
-		+'" enable_keyword="'+(attributes.enable_keyword?1:0)+'" submit_text="'+attributes.submit_text
+		+'" enable_keyword="'+(attributes.enable_keyword?1:0)+'"  enable_autocomplete="'+(attributes.enable_autocomplete?1:0)+'" submit_text="'+attributes.submit_text
 		+'" limit_height="'+(attributes.limit_height?1:0)
 		+'" instant="'+(attributes.instant?1:0)+'" update_url="'+(attributes.update_url?1:0)
 		+'" column="'+(attributes.column?attributes.column:1)
@@ -211,6 +211,14 @@ export default function Edit( { attributes, setAttributes, isSelected, clientId 
 									'templaza-framework') : __('Disabled filter by keyword.', 'templaza-framework') }
 								checked={ attributes.enable_keyword }
 								onChange={ (val) => {setAttributes({enable_keyword: val})}}
+							/>
+
+							<ToggleControl
+								label={__('Enable autocomplete', 'templaza-framework')}
+								help={ attributes.enable_autocomplete ? __('Enable autocomplete.',
+									'templaza-framework') : __('Disabled autocomplete.', 'templaza-framework') }
+								checked={ attributes.enable_autocomplete }
+								onChange={ (val) => {setAttributes({enable_autocomplete: val})}}
 							/>
 
 							<ToggleControl

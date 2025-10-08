@@ -111,6 +111,22 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                                 <?php
                             }
                         }
+                        if($acf_f['type'] =='image'){
+                            if( !empty(array_filter($f_value))){
+                                ?>
+                                <span>
+                                <?php
+                                if($f_value['url']){
+                                    ?>
+                                    <img src="<?php echo esc_url($f_value['url']); ?>"/>
+                                    <?php
+                                }
+                                ?>
+                            </span>
+                                <?php
+                            }
+                        }
+
                         ?>
                     </div>
                     <div class=" uk-width-expand uk-text-left field-value">
@@ -152,7 +168,7 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                                 $unixtimestamp = strtotime( get_field( $acf_f['name'] ) );
                                 echo date_i18n( get_option('date_format'), $unixtimestamp );
                             }
-                        }elseif($acf_f['type'] == 'ap_icon'){
+                        }elseif($acf_f['type'] == 'ap_icon' || $acf_f['type'] == 'image'){
 
                         }else{
                             ?><?php echo esc_html(the_field($acf_f['name'], $product_id)); ?>
