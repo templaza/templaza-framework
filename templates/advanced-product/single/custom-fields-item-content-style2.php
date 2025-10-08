@@ -112,7 +112,7 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                             }
                         }
                         if($acf_f['type'] =='image'){
-                            if( !empty(array_filter($f_value))){
+                            if( is_array($f_value) && !empty(array_filter($f_value))){
                                 ?>
                                 <span>
                                 <?php
@@ -124,6 +124,18 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                                 ?>
                             </span>
                                 <?php
+                            }elseif(filter_var($f_value, FILTER_VALIDATE_URL)){
+                                ?>
+                                <span>
+                                    <img src="<?php echo esc_url($f_value); ?>"/>
+                                </span>
+                                <?php
+                            }else{
+                                ?>
+                                <span>
+                                    <img src="<?php echo esc_url(wp_get_attachment_url( $f_value )); ?>"/>
+                                </span>
+                                    <?php
                             }
                         }
 
