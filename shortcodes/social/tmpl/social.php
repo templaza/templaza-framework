@@ -43,9 +43,9 @@ echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>" data-uk-
                 break;
           }
       }
-      echo '<li><a style="color:' . ($style == 'inherit' ? 'inherit;' : esc_attr($social_profile->color) .' !important;')
+      echo '<li><a  style="color:' . ($style == 'inherit' ? 'inherit;' : esc_attr($social_profile->color) .' !important;')
           . '" href="' . esc_url($social_profile_link) . '" target="_blank" rel="noopener"><i class="'
-          . esc_attr($social_profile->icon) . '"></i></a></li>';
+          . esc_attr($social_profile->icon) . '" aria-label="'.esc_attr($social_profile->title).'" ></i></a></li>';
    }
    ?>
 </ul>

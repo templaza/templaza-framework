@@ -630,6 +630,7 @@ class TemPlazaFrameWork{
             if(!is_file($theme_file)){
                 // Check file exists in sub folder
 
+
                 if( !get_post_type()){
                     global $wp_query, $wp_taxonomies;
                     $queried_object = get_queried_object()->taxonomy;
