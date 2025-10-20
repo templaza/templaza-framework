@@ -142,6 +142,7 @@ if ( have_posts()) {
                 }
                 ?>
             </div>
+            <div class="active-filters"></div>
         </div>
     <?php
     }
