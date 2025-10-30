@@ -9,6 +9,8 @@ $field  = isset($args['field'])?$args['field']:'';
 $product_id  = isset($args['product_id'])?$args['product_id']:'';
 $taxonomy  = isset($args['ap_taxonomy'])?$args['ap_taxonomy']:'';
 $ap_taxonomy_show  = isset($args['ap_taxonomy_show'])?$args['ap_taxonomy_show']:array();
+$fieldap = get_field_object('ap_branch');
+
 if($taxonomy == true){
     $all_tax = AP_Custom_Field_Helper::get_al_taxonomy_by_product_id($product_id,$ap_taxonomy_show);
     if($all_tax){

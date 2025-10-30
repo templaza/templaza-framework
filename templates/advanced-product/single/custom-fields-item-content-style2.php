@@ -164,9 +164,12 @@ if (!empty($field) && ($acf_f = AP_Custom_Field_Helper::get_custom_field_option_
                                 foreach ($term_arr as $term_id){
                                     $term = get_term( $term_id, $acf_f['taxonomy'] );
                                     if($term){
-                                        ?>
-                                            <a href="<?php echo esc_url(get_term_link( $term_id,$acf_f['taxonomy']));?>"><?php echo esc_html($term->name);?></a>
-                                        <?php
+                                        $term_link_t = get_term_link( $term_id, $acf_f['taxonomy'] );
+                                        if ( ! is_wp_error( $term_link_t ) ) {
+                                            ?>
+                                            <a href="<?php echo esc_url($term_link_t);?>"><?php echo esc_html($term->name);?></a>
+                                            <?php
+                                        }
                                     }
                                 }
                             }

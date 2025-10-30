@@ -25,6 +25,13 @@ $widget_heading_style       = isset($templaza_options['widget_box_heading_style'
 $ap_group_accordion       = isset($templaza_options['ap_product-single-group-field-acc'])?$templaza_options['ap_product-single-group-field-acc']:false;
 $product_id     = get_the_ID();
 $gfields_assigned   = AP_Custom_Field_Helper::get_group_fields_by_product();
+$ap_branch = get_field_object('ap_branch');
+$ap_category = get_field_object('ap_category');
+$ap_branch_id = $ap_branch['field_group'];
+$ap_category_id = $ap_category['field_group'];
+
+$ap_branch_show_group = get_post_meta($ap_branch_id,'show_in_group',true);
+$ap_category_show_group = get_post_meta($ap_category_id,'show_in_group',true);
 
 $default_lang = apply_filters('wpml_default_language', NULL );
 $current_lang = apply_filters( 'wpml_current_language', NULL );
@@ -46,6 +53,13 @@ if($gfields_assigned && count($gfields_assigned)){
     foreach ($gfields_assigned as $group) {
         if(in_array($group->slug, $ap_content_group) == false){
             if($ap_taxonomy_group == $group->slug){
+
+                if($ap_category_show_group== $group->slug){
+                    $ap_taxonomy_show = array_merge(array('ap_category'),$ap_taxonomy_show);
+                }
+                if($ap_branch_show_group== $group->slug){
+                    $ap_taxonomy_show = array_merge(array('ap_branch'),$ap_taxonomy_show);
+                }
                 ob_start();
                 AP_Templates::load_my_layout('single.custom-fields-item-'.$ap_single_customfield_layout.'', true, false, array(
                     'field'         => '',
@@ -141,7 +155,6 @@ if($gfields_assigned && count($gfields_assigned)){
         }
     }
 }
-
 if($fields_wgs = AP_Custom_Field_Helper::get_fields_without_group_field()){
     if($ap_taxonomy_group){
         $tax_val = false;
@@ -150,11 +163,14 @@ if($fields_wgs = AP_Custom_Field_Helper::get_fields_without_group_field()){
     }
     ob_start();
     foreach ($fields_wgs as $field) {
-        AP_Templates::load_my_layout('single.custom-fields-item-'.$ap_single_customfield_layout.'', true, false, array(
-            'field'         => $field,
-            'product_id'    => $product_id,
-            'ap_taxonomy'    => $tax_val
-        ));
+        $field_name = $field->post_excerpt;
+        if (!in_array($field->post_excerpt, $ap_taxonomy_show)) {
+            AP_Templates::load_my_layout('single.custom-fields-item-' . $ap_single_customfield_layout . '', true, false, array(
+                'field' => $field,
+                'product_id' => $product_id,
+                'ap_taxonomy' => $tax_val
+            ));
+        }
     }
     $html   = ob_get_contents();
     ob_end_clean();
