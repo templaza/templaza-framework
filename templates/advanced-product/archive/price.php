@@ -25,10 +25,6 @@ $msrp           = get_field('ap_price_msrp', $pid);
 $price          = get_field('ap_price', $pid);
 $rental         = get_field('ap_rental_price', $pid);
 $rental_value    = get_field('ap_rental_unit', $pid);
-if($rental_value){
-    $field_rental = get_field_object('ap_rental_unit');
-    $rental_unit = $field_rental['choices'][ $rental_value ];
-}
 
 $price_contact  = get_field('ap_price_contact', $pid);
 $product_type   = get_field('ap_product_type', $pid);
@@ -57,6 +53,7 @@ if(isset($_GET['product_loop'])){
     $ap_loop_layout = isset($templaza_options['ap_product-loop-layout']) ? $templaza_options['ap_product-loop-layout'] : 'style1';
 }
 $f_value = get_field('unit-price', $pid);
+
 if ((!$product_type || in_array('sale', $product_type)) && !empty($price) && $show_price) {
     ?>
     <div class="ap-price-box">
