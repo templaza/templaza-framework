@@ -74,9 +74,18 @@ if(!empty($fields)){
                             echo wp_kses($html,'post');
                         }elseif(is_array($f_value)){
                             $f_value    = array_values($f_value);
-                            ?>
-                            <?php echo esc_html(join(',', $f_value)); ?>
-                            <?php
+                            if($f_attr['type']=='taxonomy'){
+                                $names = array();
+                                foreach ($f_value as $tax_item){
+                                    $term = get_term( $tax_item,$f_attr['name'] );
+                                    if ($term && !is_wp_error($term)) {
+                                        $names[] = $term->name;
+                                    }
+                                }
+                                echo implode(', ', $names);
+                            }else{
+                                echo esc_html(join(',', $f_value));
+                            }
                         }else{
                             if($f_attr['type'] == 'text' || $f_attr['type'] == 'number'){
                                 if($f_attr['prepend']){

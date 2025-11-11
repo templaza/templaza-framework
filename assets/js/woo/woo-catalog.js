@@ -80,7 +80,7 @@
         if($('#templaza-shop-container').length){
             if($(window).width()<1200){
                 templaza_woo.$body.on('click', '.shop-filter-btn', function (e) {
-                    $('.products-filter-widget').parents('.templaza-column').toggleClass('sidebar-fixed');
+                    $('.products-filter-widget').parents('.templaza-column').addClass('sidebar-fixed');
                     $('.products-filter-widget').parents('section').addClass('fix-index');
                 });
                 templaza_woo.$body.on('click', '.templaza-filter-closed', function (e) {
