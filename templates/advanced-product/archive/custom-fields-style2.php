@@ -75,7 +75,7 @@ if(!empty($fields)){
                             if($f_attr['type']=='taxonomy'){
                                 $names = array();
                                 foreach ($f_value as $tax_item){
-                                    $term = get_term( $tax_item,$f_attr['name'] );
+                                    $term = get_term( $tax_item,$f_attr['taxonomy'] );
                                     if ($term && !is_wp_error($term)) {
                                         $names[] = $term->name;
                                     }
