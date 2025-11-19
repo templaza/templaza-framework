@@ -34,16 +34,9 @@ if($taxonomy == true){
         $f_icon     = isset($acf_f['icon'])?$acf_f['icon']:'';
         $f_icon_image   = isset($acf_f['icon_image']) && !empty($acf_f['icon_image'])?$acf_f['icon_image']:'';
         if(!empty($f_value)){
+
             if($acf_f['type'] == 'taxonomy' && $taxonomy == false){
-                $html   = apply_filters('advanced-product/field/value_html/type='.$acf_f['type'], '', $f_value, $acf_f, $field);
-                ?>
-                <div class="uk-grid-small ap-custom-fields-style1" data-uk-grid>
-                    <div class="uk-width-expand field-label" data-uk-leader><?php echo esc_html($acf_f['label']); ?></div>
-                    <div class="field-value">
-                        <?php echo $html;?>
-                    </div>
-                </div>
-                <?php
+
             }else{
                 ?>
                 <div class="uk-grid-small ap-custom-fields-style1" data-uk-grid>
