@@ -59,7 +59,7 @@ if($show_badges && is_array($product_type)){
             $cl = 'sale-rent';
         }
     }
-
+    if($label){
     ?>
     <div class="ap-ribbon <?php echo esc_attr($cl. ' '.$badge_style);?>">
     <span class="ap-ribbon-content">
@@ -69,4 +69,5 @@ if($show_badges && is_array($product_type)){
     </span>
     </div>
 <?php
+    }
 }
