@@ -633,16 +633,23 @@ class TemPlazaFrameWork{
 
                 if( !get_post_type()){
                     global $wp_query, $wp_taxonomies;
-                    $queried_object = get_queried_object()->taxonomy;
+                    if (is_tax()) {
+                        $queried_object = get_queried_object()->taxonomy;
 
-                    if($queried_object){
-                        $post_type = ( isset( $wp_taxonomies[$queried_object] ) ) ? $wp_taxonomies[$queried_object]->object_type[0] : array();
+                        if ($queried_object) {
+                            $post_type = (isset($wp_taxonomies[$queried_object])) ? $wp_taxonomies[$queried_object]->object_type[0] : array();
+                        }
                     }
+
                 }else{
                     $post_type = get_post_type();
                 }
+                if(isset($post_type)){
+                    $path       = Templates::load_my_layout('theme_pages.'.$theme_file.'.'.$post_type, false);
+                }else{
+                    $path = '';
+                }
 
-                $path       = Templates::load_my_layout('theme_pages.'.$theme_file.'.'.$post_type, false);
                 if(!$path){
                     $path   = Templates::load_my_layout('theme_pages.'.$theme_file, false);
                 }
