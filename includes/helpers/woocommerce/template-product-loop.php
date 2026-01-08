@@ -1155,18 +1155,15 @@ class Templaza_Product_Loop {
 	 */
 	public function product_variable_add_to_cart_text( $text ) {
 		global $product;
-        if ( ! $product || ! is_a( $product, 'WC_Product' ) ) {
-            return $text;
-        }
-		if ( ! $product->is_type( 'variable' ) ) {
+	
+		if ( ! isset( $product ) || ! is_a( $product, 'WC_Product' ) || ! $product->is_type( 'variable' ) ) {
 			return $text;
 		}
-
+	
 		if ( $product->is_purchasable() ) {
 			$text = esc_html__( 'Add to cart', 'templaza-framework' );
-
 		}
-
+	
 		return $text;
 	}
 
