@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) || exit;
 if(!class_exists('TemPlazaFramework\Helpers\Http')){
 
     class Http{
-        public function post($url, $post_data,  array $headers = null){
+        public function post($url, $post_data,  ?array $headers = null){
             $post_data  = http_build_query($post_data);
 
             $opts = array('http' =>

@@ -205,10 +205,6 @@ echo isset($atts['tz_class'])?esc_attr(trim($atts['tz_class'])):''; ?>" >
                                     $price_notice_value = get_field('price-notice', $post_item->ID);
                                     $rental         = get_field('ap_rental_price', $post_item->ID);
                                     $rental_value    = get_field('ap_rental_unit', $post_item->ID);
-                                    if($rental_value){
-                                        $field_rental = get_field_object('ap_rental_unit');
-                                        $rental_unit = $field_rental['choices'][ $rental_value ];
-                                    }
                                     $price_sold     = get_field('ap_price_sold', $post_item->ID);
                                     $price_contact  = get_field('ap_price_contact', $post_item->ID);
                                     if ((!$product_type || in_array('sale', $product_type)) && !empty($price)) {
