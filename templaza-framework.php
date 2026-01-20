@@ -4,7 +4,7 @@ Plugin Name: Templaza Framework
 Plugin URI: https://github.com/templaza/templaza-framework
 Description: Templaza Framework plugin help you manage or install... demo data of themes.
 Author: templaza-framework
-Version: 1.5.1
+Version: 1.5.2
 Text Domain: templaza-framework
 Author URI: https://templaza.com
 License: GPLv2 or later

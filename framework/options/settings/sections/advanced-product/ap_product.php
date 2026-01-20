@@ -419,7 +419,7 @@ Templaza_API::set_subsection('settings','ap_product-page',
             array(
                 'id'       => 'ap_product-single-style3-width',
                 'type'     => 'select',
-                'title'    => esc_html__('Tour Content Width', 'templaza-framework'),
+                'title'    => esc_html__('Single Content Width', 'templaza-framework'),
                 'options'  => array(
                     'uk-container-large' => esc_html__('Large', 'templaza-framework'),
                     'uk-container-small' => esc_html__('Small', 'templaza-framework'),
@@ -436,7 +436,7 @@ Templaza_API::set_subsection('settings','ap_product-page',
                 'all'    => false,
                 'allow_responsive'    => true,
                 'units'  => array( 'em', 'px', '%' ),      // You can specify a unit value. Possible: px, em, %
-                'title'  => esc_html__('Tour Content Padding', 'templaza-framework'),
+                'title'  => esc_html__('Single Content Padding', 'templaza-framework'),
                 'required' => array('ap_product-single-layout', '=' , 'style3'),
             ),
             array(
