@@ -86,7 +86,7 @@ if($thumbnail_eff == 'ripple'){
                 <div class="ap-info-inner  ap-info-bottom uk-flex uk-flex-between uk-flex-middle">
                     <?php AP_Templates::load_my_layout('archive.price',true,false,array('pid'    => $pid));?>
                     <div class="ap-readmore-box">
-                        <a href="<?php the_permalink(); ?>" class="templaza-btn"><?php esc_html_e('View more','templaza-framework');?></a>
+                        <a href="<?php the_permalink($pid); ?>" class="templaza-btn"><?php esc_html_e('View more','templaza-framework');?></a>
                     </div>
                 </div>
             </div>
