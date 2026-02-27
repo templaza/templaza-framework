@@ -90,12 +90,49 @@
         });
 
         // Fix issue redux image select field with required
-        var _image_select   = $.redux.getSelector( undefined, 'image_select' );
-        _image_select.find( '.redux-image-select label img, .redux-image-select label .tiles' )
-            .each(function(){
-                var __el = $( this ).closest( 'label' ).find( 'input[type="radio"]' );
-                $.redux.getOptName(__el);
-                // $.redux.check_dependencies(__el);
-        });
+        if (typeof $.redux !== "undefined") {
+            var _image_select   = $.redux.getSelector( undefined, 'image_select' );
+            _image_select.find( '.redux-image-select label img, .redux-image-select label .tiles' )
+                .each(function(){
+                    var __el = $( this ).closest( 'label' ).find( 'input[type="radio"]' );
+                    $.redux.getOptName(__el);
+                    // $.redux.check_dependencies(__el);
+                });
+        }
+
+        $('.templaza-support-email-btn').on('click',function(){
+            var object  = $('.support-object').val();
+            var content = $('.support-content').val();
+            if (!object || !content) {
+                $('.templaza-support-email .uk-alert-success').addClass('uk-hidden');
+                $('.templaza-support-email .uk-alert-danger').removeClass('uk-hidden');
+                $('.templaza-support-email .uk-alert-danger p').html('Please fill in all fields.');
+                return;
+            }
+
+            $.ajax({
+                url: templaza_ajax.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'templaza_send_support_email',
+                    support_object: object,
+                    support_content: content
+                },
+                success: function (response) {
+                    $('.templaza-support-email .uk-alert-danger').addClass('uk-hidden');
+                    $('.templaza-support-email .uk-alert-success').removeClass('uk-hidden');
+                    $('.templaza-support-email .uk-alert-success p').html(response.data.message);
+                    if (response.success) {
+                        $('.support-object').val('');
+                        $('.support-content').val('');
+                    }
+                },
+                error: function () {
+                    $('.templaza-support-email .uk-alert-success').addClass('uk-hidden');
+                    $('.templaza-support-email .uk-alert-danger').removeClass('uk-hidden');
+                    $('.templaza-support-email .uk-alert-danger p').html('Something went wrong!');
+                }
+            });
+        })
     });
 })(jQuery, window);

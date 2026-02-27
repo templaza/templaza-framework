@@ -332,7 +332,7 @@ if(!class_exists('TemPlazaFramework\Admin\Admin_Page')){
                 ));
             }
             Menu_Admin::add_submenu_section('support', array(
-                'label' => esc_html__('Support', 'templaza-framework'),
+                'label' => esc_html__('Help Desk', 'templaza-framework'),
                 'description' => '',
                 'add_admin_menu' => true,
                 'callback' => array($this, 'render')
