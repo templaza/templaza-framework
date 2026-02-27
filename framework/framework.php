@@ -95,6 +95,8 @@ class Framework{
         add_action('wp_ajax_nopriv_redux_link_options-tzfrm_global_colors', array($this, 'import_global_colors_options'));
         add_action( 'wp_ajax_redux_download_options-tzfrm_global_colors', array($this, 'ajax_download_option_global_colors'));
         add_action( 'wp_ajax_nopriv_redux_download_options-tzfrm_global_colors', array($this, 'ajax_download_option_global_colors'));
+        add_action( 'wp_ajax_templaza_send_support_email', array($this, 'templaza_send_support_email'));
+        add_action( 'wp_ajax_nopriv_templaza_send_support_email', array($this, 'templaza_send_support_email'));
 
 //        add_action('admin_menu', array($this, 'register_admin_menu'), 12);
 
@@ -486,6 +488,56 @@ class Framework{
             exit;
         }
     }
+    /**
+     * Support send email
+     * */
+    public function templaza_send_support_email(){
+        $cus_subject = isset($_POST['support_object']) ? sanitize_text_field($_POST['support_object']) : '';
+        $message = isset($_POST['support_content']) ? sanitize_textarea_field($_POST['support_content']) : '';
+
+        if (empty($cus_subject) || empty($message)) {
+            wp_send_json_error(array(
+                'message' => 'Please fill in all fields.'
+            ));
+        }
+        $theme = wp_get_theme();
+        $theme_name = strtolower($theme->get( 'Name' ));
+        $license    = HelperLicense::get_license($theme_name);
+
+        $subject = 'Custom Services - '.$theme->get( 'Name' ).' Theme - '.$cus_subject.'';
+        $current_user = wp_get_current_user();
+        $user_email   = $current_user->user_email;
+        $to = 'support@templaza.com';
+
+        $headers = array(
+            'Content-Type: text/html; charset=UTF-8',
+            'Cc: ' . $user_email
+        );
+
+        $body  = '<h3>Custom Services</h3>';
+        $body  .= '<h3>License Information</h3>';
+        $body .= '<p><strong>Buyer:</strong> ' . esc_html($license['buyer']) . '</p>';
+        $body .= '<p><strong>Domain:</strong> ' . esc_html($license['domain']) . '</p>';
+        $body .= '<p><strong>Purchase Code:</strong> ' . esc_html($license['purchase_code']) . '</p>';
+        $body .= '<p><strong>License Type:</strong> ' . esc_html($license['license_type']) . '</p>';
+        $body .= '<p><strong>Support Expire Date:</strong> ' . esc_html($license['supported_until']) . '</p>';
+        $body  .= '<h3>Message:</h3>';
+        $body .= '<p>' . nl2br(esc_html($message)) . '</p>';
+
+        $sent = wp_mail($to, $subject, $body, $headers);
+
+        if ($sent) {
+            wp_send_json_success(array(
+                'message' => 'Your message sent successfully!'
+            ));
+        } else {
+            wp_send_json_error(array(
+                'message' => 'Failed to send email.'
+            ));
+        }
+
+        wp_die();
+    }
 
     public function save_settings_to_file($old_value, $options){
         $glb_args   = $this -> get_arguments();
@@ -781,7 +833,7 @@ class Framework{
 
     public function enqueue(){
         wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'__js', Functions::get_my_frame_url().'/assets/js/core.js',
-            array('jquery'), Functions::get_my_version(), true);
+            array('jquery'), Functions::get_my_version().time(), true);
         wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_js', Functions::get_my_url().'/assets/js/vendor/uikit.min.js', array(), Functions::get_my_version(), true);
         wp_enqueue_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_js');
         wp_register_script(TEMPLAZA_FRAMEWORK_NAME.'_uikit_icon_js', Functions::get_my_url().'/assets/js/vendor/uikit-icons.min.js', array(), Functions::get_my_version(), true);
@@ -793,6 +845,14 @@ class Framework{
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css',
             Functions::get_my_frame_url().'/assets/css/style.css',
             array(TEMPLAZA_FRAMEWORK_NAME.'__css-fontawesome'), Functions::get_my_version());
+
+        wp_localize_script(
+            TEMPLAZA_FRAMEWORK_NAME.'__js',
+            'templaza_ajax',
+            array(
+                'ajax_url' => admin_url('admin-ajax.php')
+            )
+        );
     }
 
     protected function __load_config(){
