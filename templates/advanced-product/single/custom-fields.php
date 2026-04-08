@@ -45,7 +45,6 @@ if($default_lang != $current_lang){
         $ap_content_group[]=$group_field_la_title->slug;
     }
 }
-
 $ap_content_group[]='pricing';
 $term_list = wp_get_post_terms( $product_id);
 $d=1;
@@ -53,7 +52,6 @@ if($gfields_assigned && count($gfields_assigned)){
     foreach ($gfields_assigned as $group) {
         if(in_array($group->slug, $ap_content_group) == false){
             if($ap_taxonomy_group == $group->slug){
-
                 if($ap_category_show_group== $group->slug){
                     $ap_taxonomy_show = array_merge(array('ap_category'),$ap_taxonomy_show);
                 }
@@ -94,7 +92,6 @@ if($gfields_assigned && count($gfields_assigned)){
             }else{
                 $acc_open = ' uk-open';
             }
-            if(!empty($html)){
                 if($ap_group_accordion){
                     ?>
                     <div  data-uk-accordion="multiple: true" class="ap-single-side-box ap-specs ap-box ap-group ap-group-<?php echo esc_attr($group -> slug); ?>">
@@ -151,7 +148,7 @@ if($gfields_assigned && count($gfields_assigned)){
             <?php
                 }
                 $d++;
-            }
+
         }
     }
 }
