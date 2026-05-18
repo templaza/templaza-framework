@@ -352,14 +352,14 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                         unlink($filePath);
                     }
 
-                    if (file_exists($upgrade_folder.DIRECTORY_SEPARATOR.md5($produce.$purchase_code.$pack_type).'.json')) {
-                        $cloud_tmp = file_get_contents($upgrade_folder.DIRECTORY_SEPARATOR.md5($produce.$purchase_code.$pack_type).'.json');
+                    if (file_exists($upgrade_folder.DIRECTORY_SEPARATOR.md5($produce.$purchase_code).'.json')) {
+                        $cloud_tmp = file_get_contents($upgrade_folder.DIRECTORY_SEPARATOR.md5($produce.$purchase_code).'.json');
                         $cloud_package = json_decode($cloud_tmp, true);
                         $url        = $cloud_package['cloud_url'].'/index.php?option=com_tz_membership';
                         $postdata = array(
                             'task'          => 'download.package',
                             'produce'       => $cloud_package['product'],
-                            'type'          => $cloud_package['type'],
+                            'type'          => $pack_type,
                             'cloud_package' => 1,
                             'cloud_key'     => $cloud_package['cloud_key'],
                             'step'          => $step,
@@ -395,12 +395,12 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                         $body = $response['body']; // use the content
                         if (!empty($header['Cloud-Package'])) {
                             $cloud_package = json_decode($body, true);
-                            file_put_contents($upgrade_folder.DIRECTORY_SEPARATOR.md5($produce.$purchase_code.$pack_type).'.json', $body);
+                            file_put_contents($upgrade_folder.DIRECTORY_SEPARATOR.md5($produce.$purchase_code).'.json', $body);
                             $url        = $cloud_package['cloud_url'].'/index.php?option=com_tz_membership';
                             $postdata = array(
                                 'task'          => 'download.package',
                                 'produce'       => $cloud_package['product'],
-                                'type'          => $cloud_package['type'],
+                                'type'          => $pack_type,
                                 'cloud_package' => 1,
                                 'cloud_key'     => $cloud_package['cloud_key'],
                                 'step'          => $step,
