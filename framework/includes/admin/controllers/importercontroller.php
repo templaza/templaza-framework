@@ -324,7 +324,6 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 $purchase_code  = HelperLicense::get_purchase_code($theme);
 
                 $step           = isset($_POST['step'])?$_POST['step']:1;
-                $url            = $this -> api.'/index.php?option=com_tz_membership&t='.time();
                 $page           = $_POST['page'];
                 $pack_type      = $_POST['pack_type'];
                 $action         = $_POST['action'];
@@ -353,14 +352,29 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                         unlink($filePath);
                     }
 
-                    $postdata =array(
-                        'task'          => 'download.package',
-                        'produce'       => $produce,
-                        'purchase_code' => $purchase_code,
-                        'step'          => $step,
-                        'type'          => $pack_type,
-                        'domain'        => get_site_url()
-                    );
+                    if (file_exists($upgrade_folder.DIRECTORY_SEPARATOR.md5($produce.$purchase_code.$pack_type).'.json')) {
+                        $cloud_tmp = file_get_contents($upgrade_folder.DIRECTORY_SEPARATOR.md5($produce.$purchase_code.$pack_type).'.json');
+                        $cloud_package = json_decode($cloud_tmp, true);
+                        $url        = $cloud_package['cloud_url'].'/index.php?option=com_tz_membership';
+                        $postdata = array(
+                            'task'          => 'download.package',
+                            'produce'       => $cloud_package['product'],
+                            'type'          => $cloud_package['type'],
+                            'cloud_package' => 1,
+                            'cloud_key'     => $cloud_package['cloud_key'],
+                            'step'          => $step,
+                        );
+                    } else {
+                        $url  = $this -> api.'/index.php?option=com_tz_membership&t='.time();
+                        $postdata =array(
+                            'task'          => 'download.package',
+                            'produce'       => $produce,
+                            'purchase_code' => $purchase_code,
+                            'step'          => $step,
+                            'type'          => $pack_type,
+                            'domain'        => get_site_url()
+                        );
+                    }
 
 //                    $url   = 'http://joomla.templaza.com/templazaplus/index.php?option=com_tz_membership';
                     // Get package file from server with post data
@@ -379,7 +393,32 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                     }else{
                         $header = $response['headers']; // array of http header lines
                         $body = $response['body']; // use the content
-
+                        if (!empty($header['Cloud-Package'])) {
+                            $cloud_package = json_decode($body, true);
+                            file_put_contents($upgrade_folder.DIRECTORY_SEPARATOR.md5($produce.$purchase_code.$pack_type).'.json', $body);
+                            $url        = $cloud_package['cloud_url'].'/index.php?option=com_tz_membership';
+                            $postdata = array(
+                                'task'          => 'download.package',
+                                'produce'       => $cloud_package['product'],
+                                'type'          => $cloud_package['type'],
+                                'cloud_package' => 1,
+                                'cloud_key'     => $cloud_package['cloud_key'],
+                                'step'          => $step,
+                            );
+                            $response = wp_remote_post(
+                                $url,
+                                array(
+                                    'method' => 'POST',
+                                    'timeout' => 45,
+                                    'body' => $postdata
+                                )
+                            );
+                            if (is_wp_error($response)) {
+                                $this -> info -> set_message(esc_html($response -> get_error_message()), true);
+                            }
+                            $header = $response['headers']; // array of http header lines
+                            $body = $response['body'];
+                        }
                         if($header['content-type'] == 'application/json'){
                             $body   = json_decode($body);
                             if($body -> code == 400 && $body -> success == false){
@@ -444,9 +483,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
 
                     // Extract file and import
                     if(file_exists($filePath)){
-
                         try {
-
                             set_time_limit( 0 );
 
 //                            $next_step  = $this -> info -> get('nextstep');
@@ -565,10 +602,13 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                                 if($itmImportLast < 2){
 
                                     // Remove package import folder when import successfully.
-                                    $wp_filesystem->delete($folder_path, true, 'd');
+                                    $wp_filesystem->delete($folder_path, true);
+//
+//                                    // Remove package import file
+//                                    $wp_filesystem->delete($filePath);
 
-                                    // Remove package import file
-                                    $wp_filesystem->delete($filePath);
+                                    // Remove cloud key
+                                    $wp_filesystem->delete($upgrade_folder,true);
                                     $old_url = $pack['demo_url'];
                                     $new_url = get_home_url();
                                     $this->tz_domain_replace( $old_url, $new_url );
