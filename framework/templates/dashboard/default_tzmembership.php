@@ -63,13 +63,16 @@ if($license && isset($license['purchase_code']) && $license['purchase_code']&& $
 }
 else{ ?>
     <h2><?php
-        echo esc_html__('Themeforest License ', 'templaza-framework'); ?></h2>
-    <p><?php echo esc_html__('Theme activation from Themeforest process is automatic, you don\'t need to enter purchase code manually. Follow these steps to activate the theme', 'templaza-framework'); ?></p>
+        echo esc_html__('TemPlaza License ', 'templaza-framework'); ?></h2>
+    <p><?php echo esc_html__('Theme activation from TemPlaza process is automatic, you don\'t need to enter purchase code manually. Follow these steps to activate the theme', 'templaza-framework'); ?></p>
 
-    <a href="javascript:" class="uk-button uk-button-danger uk-border-pill" data-tzinst-active-license><?php
-        echo esc_html__('Active Product', 'templaza-framework'); ?></a>
+
     <div class="uk-grid-small uk-margin-medium-top" data-uk-grid>
+
         <div class="uk-width-1-2@m uk-width-1-1">
+            <form>
+                <input class="uk-input uk-form-large" placeholder="License Key" type="text">
+            </form>
             <span class="uk-border-circle uk-badge step-num wx-46 hx-46">1</span>
             <span><?php echo esc_html__('Click Activate Product button', 'templaza-framework'); ?></span>
         </div>
@@ -85,7 +88,10 @@ else{ ?>
             <span class="uk-border-circle uk-badge uk-label-success step-num wx-46 hx-46"><span class="dashicons dashicons-yes"></span></span>
             <span><?php echo esc_html__('Product is activated and you can get latest updates!', 'templaza-framework'); ?></span>
         </div>
+        <a href="javascript:" class="uk-button uk-button-danger uk-border-pill" data-tzinst-active-license-templaza><?php
+            echo esc_html__('Active Product', 'templaza-framework'); ?></a>
     </div>
+
 <?php
 }
 ?>

@@ -1,0 +1,10 @@
+.templaza-framework__body #tzinst-license .uk-subnav-pill> li > a{
+    background-color:#fff;
+}
+.templaza-framework__body #tzinst-license .uk-subnav-pill> li.uk-active> a{
+    background-color:#1e87f0;
+}
+.templaza-framework__body #tzinst-license .uk-subnav-pill> li > a:focus{
+    box-shadow:none;
+    border-radius:0;
+}
