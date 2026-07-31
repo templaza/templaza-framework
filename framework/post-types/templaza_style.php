@@ -599,6 +599,10 @@ if(!class_exists('TemPlazaFramework\Post_Type\Templaza_Style')){
             wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css-metabox',
                 Functions::get_my_frame_url().'/assets/css/metabox.css',array(),Functions::get_my_version());
             wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__css-metabox');
+
+            wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css-custom',
+                Functions::get_my_frame_url().'/assets/css/custom.css',array(),Functions::get_my_version().time());
+            wp_enqueue_style(TEMPLAZA_FRAMEWORK_NAME.'__css-custom');
         }
 
         /**

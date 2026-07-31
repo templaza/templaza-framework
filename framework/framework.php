@@ -845,6 +845,9 @@ class Framework{
         wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css',
             Functions::get_my_frame_url().'/assets/css/style.css',
             array(TEMPLAZA_FRAMEWORK_NAME.'__css-fontawesome'), Functions::get_my_version());
+        wp_register_style(TEMPLAZA_FRAMEWORK_NAME.'__css',
+            Functions::get_my_frame_url().'/assets/css/update.css',
+            array(TEMPLAZA_FRAMEWORK_NAME.'__css-update'), Functions::get_my_version().time());
 
         wp_localize_script(
             TEMPLAZA_FRAMEWORK_NAME.'__js',

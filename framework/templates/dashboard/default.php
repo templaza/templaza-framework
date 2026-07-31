@@ -10,7 +10,19 @@ defined( 'ABSPATH' ) || exit;
         </div>
         <?php if(isset($this -> theme_config_registered) && !empty($this -> theme_config_registered)){ ?>
             <div id="tzinst-license" class="uk-width-1-1">
-                <div class="uk-card uk-card-default uk-card-body rounded-3"><?php echo $this -> load_template('license');?></div>
+
+                <ul class="uk-subnav uk-subnav-pill uk-margin-remove" data-uk-switcher="animation: uk-animation-fade">
+                    <li class="uk-padding-remove uk-margin-remove"><a style="padding:15px !important;" class="uk-padding-small" href="#"><?php echo esc_html__('Active License From Themeforest', 'templaza-framework'); ?></a></li>
+                    <li class="uk-padding-remove uk-margin-remove"><a style="padding:15px !important;" class="uk-padding-small" href="#"><?php echo esc_html__('Active License From TemPlaza', 'templaza-framework'); ?></a></li>
+                </ul>
+                <div class="uk-switcher">
+                    <div>
+                        <div class="uk-card uk-card-default uk-card-body rounded-3"><?php echo $this -> load_template('license');?></div>
+                    </div>
+                    <div>
+                        <div class="uk-card uk-card-default uk-card-body rounded-3"><?php echo $this -> load_template('tzmembership');?></div>
+                    </div>
+                </div>
             </div>
         <?php } ?>
         <div class="uk-width-1-1">

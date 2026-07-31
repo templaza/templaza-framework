@@ -44,9 +44,10 @@ if($ap_layout == 'list' || $grid_view =='list'){
     $grid_option = '';
 }
 $post_count = $GLOBALS['wp_query']->found_posts;
+
 if(!is_post_type_archive('ap_product')){
     $cat_id         = get_queried_object()->term_id;
-    if($ap_cat_description == 'top'){
+    if($ap_cat_description == 'top' && term_description($cat_id) !=''){
     ?>
     <div class="ap-archive-descirtion uk-margin-medium-bottom">
         <?php
