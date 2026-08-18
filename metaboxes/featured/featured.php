@@ -221,7 +221,6 @@ if(!class_exists('TemplazaFramework_MetaBox_Featured')){
             global $post_type;
 
             $tzfrm_post_types   = $this -> tzfrm_post_types;
-            var_dump($post_type.'00000'.$tzfrm_post_types);
 
             if(in_array($post_type, $tzfrm_post_types)) {
                 $columns['templaza-featured'] = esc_html__('Templaza Featured', 'templaza-framework');
