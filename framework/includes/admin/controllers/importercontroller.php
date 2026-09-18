@@ -336,7 +336,11 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                 $pack_main      = isset($_POST['pack_main'])?$_POST['pack_main']:'';
                 $security       = $_POST['security'];
                 $action_import  = isset($_POST['action_import'])?$_POST['action_import']:null;
-
+                $license_type = '';
+                $license    = HelperLicense::get_license($theme);
+                if($license['license_type']=='tz_membership'){
+                    $license_type = 'tz_membership';
+                }
 
                 \WP_Filesystem();
                 global $wp_filesystem;
@@ -366,13 +370,15 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                         );
                     } else {
                         $url  = $this -> api.'/index.php?option=com_tz_membership&t='.time();
+
                         $postdata =array(
                             'task'          => 'download.package',
                             'produce'       => $produce,
                             'purchase_code' => $purchase_code,
                             'step'          => $step,
+                            'license_type'  => $license_type,
                             'type'          => $pack_type,
-                            'domain'        => get_site_url()
+                            'domain'        => 'templazanet.com'
                         );
                     }
 

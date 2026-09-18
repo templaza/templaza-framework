@@ -8,7 +8,12 @@ use TemPlazaFramework\Helpers\HelperLicense;
 use TemPlazaFramework\Admin\Admin_Page_Function;
 
 $items  = method_exists($this, 'get_theme_demo_datas')?$this -> get_theme_demo_datas():array();
-
+$license    = HelperLicense::get_license($this -> theme_name);
+if($license['license_type']=='tz_membership'){
+ $license_ac = '';
+}else{
+    $license_ac = 'no-license';
+}
 if($items && count($items)){
     $optImported    = get_option($this -> imported_key, array());
     if(isset($optImported['pack']) && !is_array($optImported['pack'])){
@@ -16,7 +21,7 @@ if($items && count($items)){
     }
     $pass       = Admin_Functions::check_system_requirement();
     ?>
-    <div class="tzinst-demo-import<?php echo !HelperLicense::is_authorised($this -> theme_name)?' no-license':''?>">
+    <div class="tzinst-demo-import<?php echo !HelperLicense::is_authorised($this -> theme_name)?' ':''?>">
         <div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-3@l" data-uk-grid>
             <?php foreach($items as $code => $item){
                 $theme_name             = isset($item['slug'])?$item['slug']:$code;

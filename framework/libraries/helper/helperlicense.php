@@ -52,6 +52,9 @@ if(!class_exists('TemPlazaFramework\Helpers\HelperLicense')){
             if($license && isset($license['purchase_code']) && $license['purchase_code']=='developer'){
                 return true;
             }
+            if($license && isset($license['purchase_code']) && $license['license_type']=='tz_membership'){
+                return true;
+            }
 
             if($license && isset($license['purchase_code']) && $license['purchase_code']){
                 return true;
@@ -66,6 +69,9 @@ if(!class_exists('TemPlazaFramework\Helpers\HelperLicense')){
 
             /* mode developer */
             if($license && isset($license['purchase_code']) && $license['purchase_code']=='developer'){
+                return false;
+            }
+            if($license && isset($license['purchase_code']) && $license['license_type']=='tz_membership'){
                 return false;
             }
 

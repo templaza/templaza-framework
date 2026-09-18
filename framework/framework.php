@@ -97,6 +97,8 @@ class Framework{
         add_action( 'wp_ajax_nopriv_redux_download_options-tzfrm_global_colors', array($this, 'ajax_download_option_global_colors'));
         add_action( 'wp_ajax_templaza_send_support_email', array($this, 'templaza_send_support_email'));
         add_action( 'wp_ajax_nopriv_templaza_send_support_email', array($this, 'templaza_send_support_email'));
+        add_action( 'wp_ajax_save_license_from_templaza', array($this, 'save_license_from_templaza'));
+        add_action( 'wp_ajax_nopriv_save_license_from_templaza', array($this, 'save_license_from_templaza'));
 
 //        add_action('admin_menu', array($this, 'register_admin_menu'), 12);
 
@@ -527,6 +529,70 @@ class Framework{
         $sent = wp_mail($to, $subject, $body, $headers);
 
         if ($sent) {
+            wp_send_json_success(array(
+                'message' => 'Your message sent successfully!'
+            ));
+        } else {
+            wp_send_json_error(array(
+                'message' => 'Failed to send email.'
+            ));
+        }
+
+        wp_die();
+    }
+
+    /**
+     * Save license from templaza
+     * */
+    public function save_license_from_templaza(){
+        $license_key = isset($_POST['license_key']) ? sanitize_text_field($_POST['license_key']) : '';
+        $tz_domain = isset($_POST['domain']) ? sanitize_text_field($_POST['domain']) : '';
+
+        if (empty($license_key)) {
+            wp_send_json_error(array(
+                'message' => 'Please enter license key.'
+            ));
+        }
+
+        if ($license_key) {
+            $options['purchase_code']  = $license_key;
+            $options['license_type']  = 'tz_membership';
+
+            $theme = wp_get_theme();
+            $theme_name = strtolower($theme->get( 'Name' ));
+            $option_name    = HelperLicense::get_option_name($theme_name);
+
+            $api_url  = 'https://www.templaza.com/index.php?option=com_tz_membership&task=download.activate';
+            $response = wp_remote_post($api_url, array(
+                'timeout' => 20,
+                'body' => array(
+                    'key' => $license_key,
+                    'domain'      => $tz_domain,
+                )
+            ));
+
+            if (is_wp_error($response)) {
+
+                echo 'API Error';
+
+            } else {
+
+                $body = wp_remote_retrieve_body($response);
+
+                $data = json_decode($body, true);
+
+                if (!empty($data['success'])) {
+                    var_dump($data);
+
+                    echo 'License valid and saved';
+
+                } else {
+
+                    echo 'License invalid';
+                }
+            }
+
+            update_option($option_name, $options);
             wp_send_json_success(array(
                 'message' => 'Your message sent successfully!'
             ));
