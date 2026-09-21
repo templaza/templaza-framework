@@ -24,10 +24,6 @@ if($license && isset($license['purchase_code']) && $license['purchase_code'] && 
         <div class="uk-width-1-4@m uk-width-1-1"><?php echo esc_html__('Purchase Code:', 'templaza-framework');?></div>
         <div class="uk-width-3-4@m uk-width-1-1"><?php echo esc_html($license['purchase_code']); ?></div>
         <?php } ?>
-        <?php if(isset($license['license_type'])){ ?>
-        <div class="uk-width-1-4@m uk-width-1-1"><?php echo esc_html__('License Type:', 'templaza-framework');?></div>
-        <div class="uk-width-3-4@m uk-width-1-1"><?php echo esc_html($license['license_type']); ?></div>
-        <?php } ?>
         <?php if(isset($license['supported_until'])){ ?>
         <div class="uk-width-1-4@m uk-width-1-1"><?php echo esc_html__('Support Expire Date:', 'templaza-framework');?></div>
         <div class="uk-width-3-4@m uk-width-1-1"><?php echo esc_html($license['supported_until']); ?>
@@ -44,9 +40,8 @@ if($license && isset($license['purchase_code']) && $license['purchase_code'] && 
         </div>
         <?php } ?>
         <div class="uk-width-1-1 uk-margin-medium-top">
-            <a href="javascript:" class="uk-button uk-button-primary uk-border-pill delete-template-activation" data-tzinst-reactivate-license><?php
-                echo esc_html__('Reactivate your license', 'templaza-framework'); ?></a>
-            <a href="javascript:" class="uk-button uk-button-danger uk-border-pill delete-template-activation uk-margin-small-left" data-tzinst-delete-license><?php
+
+            <a href="javascript:" class="uk-button uk-button-danger uk-border-pill delete-template-activation " data-tzinst-delete-license><?php
                 echo esc_html__('Delete', 'templaza-framework'); ?></a>
         </div>
     </div>
@@ -64,9 +59,7 @@ if($license && isset($license['purchase_code']) && $license['purchase_code'] && 
         <div class="uk-width-3-4@m uk-width-1-1"><?php echo esc_html__('Developer', 'templaza-framework'); ?></div>
 
         <div class="uk-width-1-1 uk-margin-medium-top">
-            <a href="javascript:" class="uk-button uk-button-primary uk-border-pill delete-template-activation" data-tzinst-reactivate-license><?php
-                echo esc_html__('Reactivate your license', 'templaza-framework'); ?></a>
-            <a href="javascript:" class="uk-button uk-button-danger uk-border-pill delete-template-activation uk-margin-small-left" data-tzinst-delete-license><?php
+            <a href="javascript:" class="uk-button uk-button-danger uk-border-pill delete-template-activation " data-tzinst-delete-license><?php
                 echo esc_html__('Delete', 'templaza-framework'); ?></a>
         </div>
     </div>
@@ -97,16 +90,15 @@ else{ ?>
             <span class="uk-border-circle uk-badge step-num wx-46 hx-46">3</span>
             <span><?php echo esc_html__('Click Domain Verified and add your domain', 'templaza-framework'); ?></span>
         </div>
+        <div class="uk-width-1-1 ">
         <a href="javascript:" class="uk-button uk-button-danger uk-border-pill btn-active-license-templaza" data-tzinst-active-license-templaza><?php
             echo esc_html__('Active Product', 'templaza-framework'); ?></a>
-        <br>
-        <div class="uk-alert-success uk-hidden" data-uk-alert>
-            <a href class="uk-alert-close" data-uk-close></a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
         </div>
-        <div class="uk-alert-danger uk-hidden" data-uk-alert>
-            <a href class="uk-alert-close" data-uk-close></a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+        <div class="uk-alert-success uk-border-pill uk-hidden" data-uk-alert>
+            <p>Congratulations! TemPlaza has been successfully activated and now you can get latest updates of the theme.</p>
+        </div>
+        <div class="uk-alert-danger uk-border-pill uk-hidden" data-uk-alert>
+            <p>License is not active. Please check your license key or registered domain.</p>
         </div>
 
     </div>

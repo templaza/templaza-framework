@@ -638,7 +638,6 @@
         }
         $('.btn-active-license-templaza').on('click',function(){
             var tz_license  = $('.templaza_license').val();
-            var tz_domain = 'templazanet.com';
             $.ajax({
                 url: tzinst_license_ajax.admin_ajax_url,
                 type: 'POST',
@@ -646,20 +645,23 @@
                     action: 'save_license_from_templaza',
                     license_type: 'tz_membership',
                     license_key: tz_license,
-                    domain:tz_domain
                 },
                 success: function (response) {
-                    $('#tzinst-license .uk-alert-success').removeClass('uk-hidden');
-                    $('#tzinst-license .uk-alert-success p').html(response.data.message);
                     if (response.success) {
-                        $('.support-object').val('');
-                        $('.support-content').val('');
+                        $('#tzinst-license .uk-alert-success').removeClass('uk-hidden');
+                        $('#tzinst-license .uk-alert-success p').html(response.data.message);
+                        window.location.reload();
+                    }else{
+                        $('#tzinst-license .uk-alert-success').addClass('uk-hidden');
+                        $('#tzinst-license .uk-alert-danger').removeClass('uk-hidden');
+                        $('#tzinst-license .uk-alert-danger p').html(response.data.message);
                     }
+
                 },
                 error: function () {
                     $('#tzinst-license .uk-alert-success').addClass('uk-hidden');
                     $('#tzinst-license .uk-alert-danger').removeClass('uk-hidden');
-                    $('#tzinst-license .uk-alert-danger p').html('Something went wrong!');
+                    $('#tzinst-license .uk-alert-danger p').html('Invalid license key.');
                 }
             });
         })

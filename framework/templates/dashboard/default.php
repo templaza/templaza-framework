@@ -2,6 +2,12 @@
 
 defined( 'ABSPATH' ) || exit;
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+use TemPlazaFramework\Helpers\HelperLicense;
+$license    = HelperLicense::get_license($this -> theme_name);
+$active_class = '';
+if($license['license_type']=='tz_membership'){
+    $active_class = 'uk-active';
+}
 ?>
 <div id="tzinst-dashboard-widgets-wrap">
     <div class="uk-grid-match" data-uk-grid>
@@ -13,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 
                 <ul class="uk-subnav uk-subnav-pill uk-margin-remove" data-uk-switcher="animation: uk-animation-fade">
                     <li class="uk-padding-remove uk-margin-remove"><a style="padding:15px !important;" class="uk-padding-small" href="#"><?php echo esc_html__('Active License From Themeforest', 'templaza-framework'); ?></a></li>
-                    <li class="uk-padding-remove uk-margin-remove"><a style="padding:15px !important;" class="uk-padding-small" href="#"><?php echo esc_html__('Active License From TemPlaza', 'templaza-framework'); ?></a></li>
+                    <li class="uk-padding-remove uk-margin-remove <?php echo $active_class;?>"><a style="padding:15px !important;" class="uk-padding-small" href="#"><?php echo esc_html__('Active License From TemPlaza', 'templaza-framework'); ?></a></li>
                 </ul>
                 <div class="uk-switcher">
                     <div>

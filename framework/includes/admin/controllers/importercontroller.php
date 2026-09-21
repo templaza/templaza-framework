@@ -370,6 +370,8 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                         );
                     } else {
                         $url  = $this -> api.'/index.php?option=com_tz_membership&t='.time();
+                        $tz_domain = wp_parse_url( get_site_url(), PHP_URL_HOST );
+                        $tz_domain = preg_replace('/^www\./', '', $tz_domain);
 
                         $postdata =array(
                             'task'          => 'download.package',
@@ -378,7 +380,7 @@ if(!class_exists('TemPlazaFramework\Admin\Controller\ImporterController')){
                             'step'          => $step,
                             'license_type'  => $license_type,
                             'type'          => $pack_type,
-                            'domain'        => 'templazanet.com'
+                            'domain'        => $tz_domain
                         );
                     }
 

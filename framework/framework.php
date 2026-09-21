@@ -546,8 +546,8 @@ class Framework{
      * */
     public function save_license_from_templaza(){
         $license_key = isset($_POST['license_key']) ? sanitize_text_field($_POST['license_key']) : '';
-        $tz_domain = isset($_POST['domain']) ? sanitize_text_field($_POST['domain']) : '';
-
+        $tz_domain = wp_parse_url( get_site_url(), PHP_URL_HOST );
+        $tz_domain = preg_replace('/^www\./', '', $tz_domain);
         if (empty($license_key)) {
             wp_send_json_error(array(
                 'message' => 'Please enter license key.'
@@ -557,6 +557,7 @@ class Framework{
         if ($license_key) {
             $options['purchase_code']  = $license_key;
             $options['license_type']  = 'tz_membership';
+            $options['domain']  = $tz_domain;
 
             $theme = wp_get_theme();
             $theme_name = strtolower($theme->get( 'Name' ));
@@ -572,9 +573,7 @@ class Framework{
             ));
 
             if (is_wp_error($response)) {
-
                 echo 'API Error';
-
             } else {
 
                 $body = wp_remote_retrieve_body($response);
@@ -582,24 +581,23 @@ class Framework{
                 $data = json_decode($body, true);
 
                 if (!empty($data['success'])) {
-                    var_dump($data);
+                    $expireDate = (new \DateTime($data['data']['created_date']))
+                        ->modify('+' . (int)$data['data']['to_date'] . ' days')
+                        ->format('Y-m-d');
 
-                    echo 'License valid and saved';
+                    $options['supported_until']  = $expireDate;
 
-                } else {
+                    update_option($option_name, $options);
+                    wp_send_json_success(array(
+                        'message' => 'Congratulations! TemPlaza has been successfully activated and now you can get latest updates of the theme.'
+                    ));
 
-                    echo 'License invalid';
+                }else{
+                    wp_send_json_error(array(
+                        'message' => 'License is not active. Please check your license key or registered domain.'
+                    ));
                 }
             }
-
-            update_option($option_name, $options);
-            wp_send_json_success(array(
-                'message' => 'Your message sent successfully!'
-            ));
-        } else {
-            wp_send_json_error(array(
-                'message' => 'Failed to send email.'
-            ));
         }
 
         wp_die();
