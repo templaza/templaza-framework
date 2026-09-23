@@ -8,7 +8,7 @@ $config = $this -> theme_config_registered;
 
 $license    = HelperLicense::get_license($this -> theme_name);
 
-if($license && isset($license['purchase_code']) && $license['purchase_code']&& $license['purchase_code'] !='developer'){
+if($license && isset($license['purchase_code']) && $license['purchase_code'] && $license['license_type']!='tz_membership' && $license['purchase_code'] !='developer'){
 ?>
     <h2><?php echo esc_html__('License Information', 'templaza-framework'); ?></h2>
     <div class="uk-grid-small uk-padding-small uk-padding-remove-horizontal" data-uk-grid>
@@ -39,7 +39,7 @@ if($license && isset($license['purchase_code']) && $license['purchase_code']&& $
                 echo esc_html__('Delete', 'templaza-framework'); ?></a>
         </div>
     </div>
-<?php }elseif($license && isset($license['purchase_code']) && $license['purchase_code']&& $license['purchase_code'] =='developer'){
+<?php }elseif($license && isset($license['purchase_code']) && $license['purchase_code'] && $license['license_type']!='tz_membership' && $license['purchase_code'] =='developer'){
     ?>
     <h2><?php echo esc_html__('License Information', 'templaza-framework'); ?></h2>
     <div class="uk-grid-small uk-padding-small uk-padding-remove-horizontal" data-uk-grid>

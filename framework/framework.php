@@ -97,6 +97,8 @@ class Framework{
         add_action( 'wp_ajax_nopriv_redux_download_options-tzfrm_global_colors', array($this, 'ajax_download_option_global_colors'));
         add_action( 'wp_ajax_templaza_send_support_email', array($this, 'templaza_send_support_email'));
         add_action( 'wp_ajax_nopriv_templaza_send_support_email', array($this, 'templaza_send_support_email'));
+        add_action( 'wp_ajax_save_license_from_templaza', array($this, 'save_license_from_templaza'));
+        add_action( 'wp_ajax_nopriv_save_license_from_templaza', array($this, 'save_license_from_templaza'));
 
 //        add_action('admin_menu', array($this, 'register_admin_menu'), 12);
 
@@ -534,6 +536,68 @@ class Framework{
             wp_send_json_error(array(
                 'message' => 'Failed to send email.'
             ));
+        }
+
+        wp_die();
+    }
+
+    /**
+     * Save license from templaza
+     * */
+    public function save_license_from_templaza(){
+        $license_key = isset($_POST['license_key']) ? sanitize_text_field($_POST['license_key']) : '';
+        $tz_domain = wp_parse_url( get_site_url(), PHP_URL_HOST );
+        $tz_domain = preg_replace('/^www\./', '', $tz_domain);
+        if (empty($license_key)) {
+            wp_send_json_error(array(
+                'message' => 'Please enter license key.'
+            ));
+        }
+
+        if ($license_key) {
+            $options['purchase_code']  = $license_key;
+            $options['license_type']  = 'tz_membership';
+            $options['domain']  = $tz_domain;
+
+            $theme = wp_get_theme();
+            $theme_name = strtolower($theme->get( 'Name' ));
+            $option_name    = HelperLicense::get_option_name($theme_name);
+
+            $api_url  = 'https://www.templaza.com/index.php?option=com_tz_membership&task=download.activate';
+            $response = wp_remote_post($api_url, array(
+                'timeout' => 20,
+                'body' => array(
+                    'key' => $license_key,
+                    'domain'      => $tz_domain,
+                )
+            ));
+
+            if (is_wp_error($response)) {
+                echo 'API Error';
+            } else {
+
+                $body = wp_remote_retrieve_body($response);
+
+                $data = json_decode($body, true);
+
+                if (!empty($data['success'])) {
+                    $expireDate = (new \DateTime($data['data']['created_date']))
+                        ->modify('+' . (int)$data['data']['to_date'] . ' days')
+                        ->format('Y-m-d');
+
+                    $options['supported_until']  = $expireDate;
+
+                    update_option($option_name, $options);
+                    wp_send_json_success(array(
+                        'message' => 'Congratulations! TemPlaza has been successfully activated and now you can get latest updates of the theme.'
+                    ));
+
+                }else{
+                    wp_send_json_error(array(
+                        'message' => 'License is not active. Please check your license key or registered domain.'
+                    ));
+                }
+            }
         }
 
         wp_die();
