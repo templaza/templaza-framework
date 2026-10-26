@@ -18,6 +18,6 @@
 
 ## Changelogs:
 
-Go read the entire changelog at [this link](https://github.com/templaza/templaza-framework/blob/master/CHANGELOG.md).
+Go read the entire changelog at [this link](https://github.com/templaza/templaza-framework/releases).
 
 Looking for older versions of TemPlaza Framework? Check the [releases](https://github.com/templaza/templaza-framework/releases).
