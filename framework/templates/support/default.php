@@ -26,7 +26,7 @@ $theme  = wp_get_theme();
 <div class="uk-card uk-card-body uk-card-default rounded-3">
 	<h2><?php echo esc_html($theme->get('Name')); ?> Theme Support</h2>
 	<p>Need help with your WordPress theme? Our support team offers dedicated assistance for theme setup, configuration, bug fixes, and general technical inquiries, ensuring a smooth and hassle-free experience. Feel free to contact us.</p>
-	<a href="https://www.templaza.com/forums.html" target="_blank" class="uk-button uk-button-default uk-button-large uk-margin-top uk-border-pill uk-width-1-1"><?php echo esc_html__('Ask a question', 'templaza-framework'); ?></a>
+	<a href="https://templaza.com/tickets.html" target="_blank" class="uk-button uk-button-default uk-button-large uk-margin-top uk-border-pill uk-width-1-1"><?php echo esc_html__('Ask a question', 'templaza-framework'); ?></a>
 </div>
 <?php
 if (file_exists(get_template_directory().'/templaza-framework/templates/support/default.php')) {

@@ -59,9 +59,9 @@ $theme  = wp_get_theme();
                                 <h5 class="setup-step-heading uk-margin-small"><?php echo esc_html__('Useful Links', 'templaza-framework'); ?></h5>
                                 <dl class="uk-description-list uk-margin-remove-bottom">
                                     <dt><?php echo esc_html__('Author:', 'templaza-framework'); ?></dt>
-                                    <dd><a class="uk-link-text" href="https://www.templaza.com/"><?php echo esc_html__('TemPlaza.com', 'templaza-framework'); ?></a></dd>
+                                    <dd><a class="uk-link-text" href="https://templaza.com/"><?php echo esc_html__('TemPlaza.com', 'templaza-framework'); ?></a></dd>
                                     <dt><?php echo esc_html__('Forum Support:', 'templaza-framework'); ?></dt>
-                                    <dd><a class="uk-link-text" href="https://www.templaza.com/forums.html"><?php echo esc_html__('Ask a question.', 'templaza-framework'); ?></a></dd>
+                                    <dd><a class="uk-link-text" href="https://templaza.com/tickets.html"><?php echo esc_html__('Ask a question.', 'templaza-framework'); ?></a></dd>
                                     <dt><?php echo esc_html__('Online Document:', 'templaza-framework'); ?></dt>
                                     <dd><a class="uk-link-text" href="https://docs.templaza.com/themes/<?php echo esc_attr(strtolower($theme -> get('Name'))); ?>"><?php /* translators: %s - Supported. */ echo sprintf(esc_html__('Check %s Documentation.'), esc_html($theme -> get('Name'))); ?></a></dd>
                                 </dl>

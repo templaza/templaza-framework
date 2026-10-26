@@ -68,7 +68,7 @@ if($license && isset($license['purchase_code']) && $license['purchase_code'] && 
 else{ ?>
     <h2><?php
         echo esc_html__('TemPlaza License ', 'templaza-framework'); ?></h2>
-    <p><?php echo __('Enter your license key from templaza.com. <a href="https://www.templaza.com/license-manager.html" target="_blank">How to get your license key from TemPlaza</a> ', 'templaza-framework'); ?></p>
+    <p><?php echo __('Enter your license key from templaza.com. <a href="https://templaza.com/license-manager.html" target="_blank">How to get your license key from TemPlaza</a> ', 'templaza-framework'); ?></p>
 
     <div class="uk-grid-small uk-margin-small-top" data-uk-grid>
 

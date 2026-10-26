@@ -563,7 +563,7 @@ class Framework{
             $theme_name = strtolower($theme->get( 'Name' ));
             $option_name    = HelperLicense::get_option_name($theme_name);
 
-            $api_url  = 'https://www.templaza.com/index.php?option=com_tz_membership&task=download.activate';
+            $api_url  = 'https://templaza.com/index.php?option=com_tz_membership&task=download.activate';
             $response = wp_remote_post($api_url, array(
                 'timeout' => 20,
                 'body' => array(
