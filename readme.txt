@@ -1,6 +1,6 @@
 === TemPlaza Framework ===
 Contributors:  templaza, tuyennv, duongtv
-Donate link: https://www.templaza.com/
+Donate link: https://templaza.com/
 Tags: theme framework, theme options
 Requires at least: 5.5
 Tested up to: 6.7
