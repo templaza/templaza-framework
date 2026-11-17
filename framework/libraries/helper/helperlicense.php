@@ -48,19 +48,13 @@ if(!class_exists('TemPlazaFramework\Helpers\HelperLicense')){
         {
             $theme      = strtolower($theme);
             $license    = self::get_license($theme);
-            /* mode developer */
-            if($license && isset($license['purchase_code']) && $license['purchase_code']=='developer'){
-                return true;
-            }
-            if($license && isset($license['purchase_code']) && $license['license_type']=='tz_membership'){
-                return true;
+            if (!$license || !isset($license['purchase_code'])) {
+                return false;
             }
 
-            if($license && isset($license['purchase_code']) && $license['purchase_code']){
-                return true;
-            }
-
-            return false;
+            return $license['purchase_code'] == 'developer'
+                || (isset($license['license_type']) && $license['license_type'] == 'tz_membership')
+                || (bool) $license['purchase_code'];
         }
 
         public static function has_expired($theme){
@@ -71,7 +65,7 @@ if(!class_exists('TemPlazaFramework\Helpers\HelperLicense')){
             if($license && isset($license['purchase_code']) && $license['purchase_code']=='developer'){
                 return false;
             }
-            if($license && isset($license['purchase_code']) && $license['license_type']=='tz_membership'){
+            if($license && isset($license['purchase_code']) && isset($license['license_type']) && $license['license_type']=='tz_membership'){
                 return false;
             }
 
