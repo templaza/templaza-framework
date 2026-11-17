@@ -633,7 +633,6 @@ class CSS{
         if(isset(static::$cache[$store_id])){
             return static::$cache[$store_id];
         }
-
         if(empty($border)){
             return '';
         }
@@ -642,6 +641,15 @@ class CSS{
             return $border;
         }
 
-        return self::border($border['border-top'], $border['border-right'], $border['border-bottom'],$border['border-left'],$border['border-style'],$border['border-color'],$important);
+        $tmp_border = [
+            'border-top' => $border['border-top'] ?? '',
+            'border-right' => $border['border-right'] ?? '',
+            'border-bottom' => $border['border-bottom'] ?? '',
+            'border-left' => $border['border-left'] ?? '',
+            'border-style' => $border['border-style'] ?? '',
+            'border-color' => $border['border-color'] ?? ''
+        ];
+
+        return self::border($tmp_border['border-top'], $tmp_border['border-right'], $tmp_border['border-bottom'],$tmp_border['border-left'],$tmp_border['border-style'],$tmp_border['border-color'],$important);
     }
 }
