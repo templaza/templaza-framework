@@ -199,7 +199,7 @@ class Fonts{
                     $google_font_subset = static::$_google_fonts[$font_family]['subset'];
                 }
 
-                $_font_style    = $font_option['font-weight'] . $font_option['font-style'];
+                $_font_style    = ($font_option['font-weight']??'') . ($font_option['font-style']??'');
                 if(!count($google_font_style) || (count($google_font_style) && !in_array($_font_style, $google_font_style))){
                     $google_font_style[]    = $_font_style;
                 }
