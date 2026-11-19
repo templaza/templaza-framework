@@ -170,7 +170,7 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                                             <?php
                                         }
                                         if($ap_vendor_contact =='custom'){
-                                            echo do_shortcode($ap_vendor_contact);
+                                            echo do_shortcode($ap_vendor_contact_custom);
                                         }else{
                                             ?>
                                             <div class="ap-group-content">
@@ -226,7 +226,7 @@ $ap_count = count_user_posts( $author_id,'ap_product' );
                                     <?php
                                 }
                                 if($ap_vendor_contact =='custom'){
-                                    echo do_shortcode($ap_vendor_contact);
+                                    echo do_shortcode($ap_vendor_contact_custom);
                                 }else{
                                     ?>
                                     <div class="ap-group-content">
